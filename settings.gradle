@@ -1,6 +1,12 @@
 include (
+        'aws',
         'api',
+        'csp',
+        'core',
+        'common',
+        'security',
         'service'
+
 )
 
 def mappings = [

@@ -1,11 +1,54 @@
-
-
-plugins {
-    id "io.spring.dependency-management" version "0.6.1.RELEASE"
+/**
+ * Buildscript Plugins Section
+ *
+ * @author haswell
+ */
+buildscript {
+    apply from: 'gradle/buildscript.gradle', to: buildscript
 }
 
+ext {
+    repoKey = getRepoKey()
+}
+
+
+/**
+ * Subproject configurations
+ */
 
 subprojects {
+    version = rootProject.version
+
     apply plugin: 'java'
-    apply plugin: 'idea'
+    apply plugin: 'nebula.optional-base'
+    apply plugin: 'nebula.provided-base'
+
+    apply from: "$rootDir/gradle/dependencies.gradle"
+    apply from: "$rootDir/gradle/idea.gradle"
+    apply from: "$rootDir/gradle/jacoco.gradle"
+    apply from: "$rootDir/gradle/publishing.gradle"
+
 }
+
+/**
+ * Build BOM pom
+ */
+
+apply from: 'gradle/bom.gradle'
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = gradleWrapperVersion
+}
+
+def getRepoKey() {
+    if (version =~ /(?i)FINAL/) {
+        return 'libs-release-local'
+    } else if (version =~ /(?i)BUILD|DEV/) {
+        return 'libs-dev-local'
+    } else {
+        return 'libs-snapshot-local'
+    }
+}
+
+defaultTasks "installBillOfMaterials", "clean", "build", "install"
