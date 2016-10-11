@@ -1,0 +1,24 @@
+include (
+        'api',
+        'service'
+)
+
+def mappings = [
+        'api': [
+                'common',
+                'core',
+                'csp',
+                'aws',
+                'security'
+        ],
+        'service': ['security']
+]
+
+
+mappings.each {
+    rootDir,
+    projectList ->
+    projectList.each { name ->
+        project(":$name").projectDir = new File(settingsDir, "$rootDir/$name")
+    }
+}
