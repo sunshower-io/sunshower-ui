@@ -22,7 +22,7 @@ import static org.hamcrest.CoreMatchers.*;
 public class CredentialAuthenticationServiceTest {
 
     @Inject
-    CredentialAuthenticationService credentialService;
+    private CredentialAuthenticationService credentialService;
 
     @Deployment
     public static JavaArchive createDeployment() {
@@ -33,9 +33,8 @@ public class CredentialAuthenticationServiceTest {
 
 
     @Test
-    public void ensureAuthenticatingWithUsernameAndPasswordProducesToken() {
+    public void ensureServiceIsInjected() {
         assertThat(credentialService, is(not(nullValue())));
-
     }
 
 
