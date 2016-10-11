@@ -17,13 +17,15 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom "io.hasli.maelstrom:bom-imported:${version}"
+        mavenBom "io.hasli:bom-imported:${version}"
     }
 }
 
 allprojects {
 
+
     plugins.withType(JavaPlugin) {
+
 
         task testJar(type:Jar) {
             classifier 'test'
@@ -38,6 +40,15 @@ allprojects {
 
         artifacts {
             tests testJar
+        }
+        dependencies {
+            compile('org.jboss.weld:weld-core')
+            compile('org.jboss.spec:jboss-javaee-7.0')
+
+            testCompile('org.junit.jupiter:junit-jupiter-engine')
+            testCompile('org.junit.vintage:junit-vintage-engine')
+            testCompile('org.jboss.arquillian.junit:arquillian-junit-container')
+            testCompile('org.jboss.arquillian.container:arquillian-weld-ee-embedded-1.1')
         }
     }
 

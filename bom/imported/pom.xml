@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>io.hasli.maelstrom</groupId>
+        <groupId>io.hasli</groupId>
         <artifactId>bom</artifactId>
         <version>1.00.000.000-SNAPSHOT</version>
         <relativePath>../</relativePath>
@@ -17,9 +17,8 @@
     <url>http://www.hasli.io</url>
 
     <properties>
-
-        <junit.version>4.12</junit.version>
         <hamcrest.version>1.3</hamcrest.version>
+        <weld.version>2.4.0.Final</weld.version>
         <jaxrs-api.version>2.0.1</jaxrs-api.version>
         <jeromq.version>0.3.6-SNAPSHOT</jeromq.version>
         <jsr-330.version>1</jsr-330.version>
@@ -30,13 +29,33 @@
         <arcus.version>1.00.000.000-SNAPSHOT</arcus.version>
         <!--<spring.version>4.3.0.BUILD-SNAPSHOT</spring.version>-->
         <spring.version>5.0.0.M2</spring.version>
-        <barometer.version>1.00.000.000-SNAPSHOT</barometer.version>
+        <javaee-spec.version>1.0.3.Final</javaee-spec.version>
+        <junit.jupiter.version>5.0.0-M2</junit.jupiter.version>
+        <junit.vintage.version>4.12.0-M2</junit.vintage.version>
+        <arquillian.version>1.1.11.Final</arquillian.version>
+        <junit.platform.version>1.0.0-M2</junit.platform.version>
+        <arquillian-weld.version>1.0.0.CR9</arquillian-weld.version>
         <projectreactor.version>2.0.8.RELEASE</projectreactor.version>
         <projectreactor-bus.version>2.0.8.RELEASE</projectreactor-bus.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <type>pom</type>
+                <scope>import</scope>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>${arquillian.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.arquillian.container</groupId>
+                <artifactId>arquillian-weld-ee-embedded-1.1</artifactId>
+                <version>${arquillian-weld.version}</version>
+                <scope>test</scope>
+            </dependency>
 
 
             <dependency>
@@ -95,10 +114,23 @@
             </dependency>
 
             <dependency>
+                <groupId>org.jboss.weld</groupId>
+                <artifactId>weld-core</artifactId>
+                <version>${weld.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
                 <version>${spring.version}</version>
                 <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.spec</groupId>
+                <artifactId>jboss-javaee-7.0</artifactId>
+                <version>${javaee-spec.version}</version>
             </dependency>
 
             <!--
@@ -106,11 +138,19 @@
             -->
 
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit.jupiter.version}</version>
                 <scope>test</scope>
             </dependency>
+
+            <dependency>
+                <groupId>org.junit.vintage</groupId>
+                <artifactId>junit-vintage-engine</artifactId>
+                <version>${junit.vintage.version}</version>
+                <scope>test</scope>
+            </dependency>
+
 
             <dependency>
                 <groupId>org.spockframework</groupId>
