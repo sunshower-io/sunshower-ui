@@ -1,0 +1,60 @@
+template
+    require(from = '../../widgets/file/file-dialog')
+    require(from = '../../widgets/commit/commit-dialog')
+    require(from = '../../widgets/history-view/history-dialog')
+
+    commit-dialog(
+        view-model.ref="commitDialog",
+        nodes.bind="nodes"
+    )
+
+    history-dialog(
+        view-model.ref="historyDialog",
+        block-opened.delegate="blockOpened($event)",
+        revision-opened.delegate="revisionOpened($event)"
+    )
+
+
+    file-dialog(
+        view-model.ref="fileDialog",
+        file-selected.delegate="openFile($event)")
+
+
+
+    section.content-banner
+        ul.breadcrumb
+            li
+                a(href='#') Network
+            li
+                a(href='#') ${node.id}
+            li
+                a(href='#') configuration
+    nav.navbar.navbar-toolbar(role='navigation')
+        .container-fluid
+            .btn-toolbar(role='toolbar')
+                .btn-group
+                    a.btn.btn-default.dropdown-toggle(data-toggle='dropdown', href='#')
+                        | File
+                    ul.dropdown-menu
+                        li
+                            a(href='#', click.delegate='fileDialog.showDialog()') Open
+                        li
+                            a(href='#', click.delegate='saveAll()') Save
+                .btn-group
+                    a.btn.btn-default.dropdown-toggle(data-toggle='dropdown', href='#')
+                        | Edit
+                    ul.dropdown-menu
+                        li
+                            a(href='#') Undo
+                        li
+                            a(href='#') Redo
+                .btn-group
+                    a.btn.btn-default.dropdown-toggle(data-toggle='dropdown', href='#')
+                        | History
+                    ul.dropdown-menu
+                        li
+                            a(href='#', click.delegate='showCommitDialog()') Commit
+                        li
+                            a(href='#', click.delegate='historyDialog.showDialog()') History
+    section.content(style='padding:0px; overflow:hidden;').light
+        div(style='position:relative; height:100%;', ref='editorContent')

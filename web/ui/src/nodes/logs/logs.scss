@@ -1,0 +1,12 @@
+@import '../../../assets/styles/variables';
+textarea.log {
+  position:absolute;
+  bottom:16px;
+  width:98%;
+  left:16px;
+  top:106px;
+
+  background:$darkGray;
+  color:$lightestGrey;
+
+}

@@ -1,15 +1,17 @@
 package io.io.hasli.service.security;
 
-import javax.inject.Inject;
+import org.junit.Test;
 
-import io.hasli.service.security.CredentialAuthenticationService;
+import javax.annotation.sql.DataSourceDefinition;
+import javax.inject.Inject;
+import org.junit.runner.RunWith;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import io.hasli.service.security.CredentialAuthenticationService;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;

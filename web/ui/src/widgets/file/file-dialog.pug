@@ -1,0 +1,13 @@
+template
+    div.openFile.modal.fade(style='display:none', tabindex='-1', role='dialog', ref='dialog')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', click.delegate="hideDialog()", aria-label='Close')
+                        span(aria-hidden='true') ×
+                    h4.modal-title Open File
+                .modal-body
+                    div(style='min-height:400px;', ref='tree')
+                .modal-footer
+                    button.btn.btn-default(type='button', click.delegate='hideDialog()') Close
+                    button.btn.btn-primary(type='button', click.delegate='openFile()') Open File

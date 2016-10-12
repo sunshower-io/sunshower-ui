@@ -1,0 +1,17 @@
+template
+    require(from='./history-view')
+    div.modal.fade(style='display:none', tabindex='-1', role='dialog', ref='dialog')
+        .modal-dialog(style='width:90%;')
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                    h4.modal-title History
+                .modal-body(style="height:100%;")
+                    history-view.display(
+                    style.bind="tableStyle",
+                    view-model.ref="historyView"
+                )
+                .modal-footer
+                    button.btn.btn-default(type='button', data-dismiss='modal') Cancel
+                    button.btn.btn-primary(type='button', click.delegate='openFile()') Open

@@ -1,0 +1,28 @@
+template
+
+    require(from="./selector/selector")
+    require(from="widgets/blockchain-list/blockchain-list")
+    require(from="widgets/timeline/timeline")
+    section.content-banner
+        ul.breadcrumb
+            li
+                a(href='#') Network
+            li
+                a(href='#') ${node.id}
+            li
+                a(href='#') blockchain
+
+    section.content
+        div.section-header.large
+            span.ion-link
+            | Blockchain
+            chart-selector(
+                show-list.delegate="showList()",
+                show-timeline.delegate="showTimeline()"
+            )
+
+
+
+
+        timeline(blocks.bind="blocks", visible.bind="blockchainHistoryVisible")
+        blockchain-list(blocks.bind="blocks", visible.bind="blockchainListVisible")

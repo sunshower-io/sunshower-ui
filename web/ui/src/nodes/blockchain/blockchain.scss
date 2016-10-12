@@ -1,0 +1,28 @@
+@import "../../../assets/styles/_colors";
+
+.graph-tool-menu > .btn-group { border: 1px solid $lightestGrey !important; }
+
+div.dataTables_paginate a { border-color: $lightestGrey !important; }
+
+div.search-filter div.dataTables_filter {
+    background-color: $lightestGrey;
+    input { background-color: inherit; }
+}
+
+table.dataTable {
+    thead {
+        background-color: $darkGrey;
+        color: $lightestGrey !important;
+        th { border-bottom:0; }
+        
+        .sorting:after, .sorting_asc:after, .sorting_desc:after {
+            color: $lightestGrey !important;
+        }
+    }
+    
+    tbody { color: $lightestGrey; }
+    td { border-top:1px solid $lightestGrey !important; }
+    .even { background-color: $mediumGrey !important; }
+
+    .dataTables_empty { color: $orange; }
+}

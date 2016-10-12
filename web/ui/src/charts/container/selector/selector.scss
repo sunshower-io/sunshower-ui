@@ -1,0 +1,64 @@
+div.metrics-selector {
+  min-width:350px;
+  min-height:220px;
+  border:0;
+}
+
+
+
+div.selector-apply {
+  height:25px;
+  button {
+    background-color:#2D2E30 !important;
+    float:right;
+  }
+}
+div.metrics-selector-container {
+  min-height: 200px;
+  float: left;
+}
+
+div.selected-metrics {
+  float: right;
+  color: #D2D2D2;
+  min-height: 200px;
+  width: 200px;
+  overflow-x: hidden;
+
+  ul {
+    list-style-type: none;
+    width:200px;
+    * {
+      cursor: pointer !important;
+    }
+
+    li {
+      height:25px;
+      line-height:25px;
+      vertical-align:middle;
+
+
+      .color-holder {
+        margin-top:12px;
+        cursor: pointer;
+        margin-right:8px;
+        float:left;
+        width:25px;
+        height:2px;
+        border:0;
+        background-color:blue;
+      }
+      span {
+        max-width:150px;
+      }
+    }
+  }
+
+}
+
+.color {
+  opacity:0;
+  border:0;
+  width:25px !important;
+  display:inline !important;
+}

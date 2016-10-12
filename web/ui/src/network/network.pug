@@ -1,0 +1,5 @@
+template
+    require(from='./nav-bar.html')
+    nav-bar(router.bind='router', toggle-menu.call='toggleMenu()')
+    .page-content-wrapper
+        router-view

@@ -1,0 +1,79 @@
+@import "../../../assets/styles/_colors";
+
+
+.graph {
+  height:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  overflow:auto;
+    cursor:pointer;
+}
+
+.graph-tool-menu {
+
+
+  height:32px;
+  line-height:32px;
+  box-sizing: border-box;
+  z-index: 9999;
+  position:absolute;
+  right:75px;
+  top:20px;
+
+  button {
+    width:40px;
+    height:40px;
+  }
+
+
+  div.narrow { margin-left:-2px;
+    > a.dropdown-item {
+    display:block;
+    width:36px;
+    text-align:center;
+}
+  }
+  a.dropdown-item:hover {
+    opacity:0.8;
+    background-color:#020202;
+    border-radius:4px;
+
+  }
+
+  div.wide {
+    margin-left:-46px;
+    min-width:120px;
+    > a.dropdown-item {
+      position:relative;
+      width:auto;
+      display:block;
+
+      span.color-block {
+        display:inline-block;
+        width:8px;
+        height:8px;
+        margin: 0 8px;
+      }
+    }
+  }
+
+  > .btn-group {
+    border:1px solid #47484B;
+    border-radius:4px;
+  }
+
+  .dropdown-menu {
+    min-width:16px;
+    background-color:#47484B;
+    opacity:1;
+    padding:4px;
+      margin:0;
+  }
+
+  button {
+    //border:1px solid black !important;
+  }
+}

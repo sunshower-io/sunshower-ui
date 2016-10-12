@@ -42,8 +42,8 @@ allprojects {
             tests testJar
         }
         dependencies {
-            compile('org.jboss.weld:weld-core')
-            compile('org.jboss.spec:jboss-javaee-7.0')
+            testCompile('org.jboss.weld:weld-core')
+            testCompile('org.jboss.spec:jboss-javaee-7.0')
 
             testCompile('org.junit.jupiter:junit-jupiter-engine')
             testCompile('org.junit.vintage:junit-vintage-engine')

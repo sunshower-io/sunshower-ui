@@ -1,0 +1,38 @@
+.chart-header-container{
+  //background: #C0BBB7;
+  width:100%;
+  display:block;
+  height:30px;
+  line-height:30px;
+  vertical-align: middle;
+  cursor:move;
+}
+
+.widget-move {
+  cursor:move;
+  background-color: transparent !important;
+  color: #18991e;
+}
+
+.chart-icon-color {
+    color: #606060;
+}
+
+.caret {
+    color: #606060;
+}
+
+.right {
+
+  width:50px;
+  border-left-color:#252525;
+
+  height:30px;
+  padding-left:20px;
+  float:right;
+  display:inline-block;
+  margin-right:8px;
+  .dropdown {
+
+  }
+}

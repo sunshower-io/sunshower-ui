@@ -1,0 +1,7 @@
+@import "../../../assets/styles/_colors";
+
+.timeline-wrapper h2 { font-family: inherit; font-size:1em; }
+
+.timeline-series { color: $blue; 
+    dt {font-size:1em;}
+}

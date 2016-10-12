@@ -1,0 +1,15 @@
+template
+    .node-info-container(ref='element')
+        .node-content
+            .node-highlight
+            .node-info
+                div
+                    span.title ${options.data.id}
+                .ion-android-checkbox-outline
+                    span Alive
+                div(class='${osTypeStyle}')
+                    span ${options.data.classes}
+                .ion-ios-home
+                    span ${options.data.ipAddresses}
+        .node-open(click.delegate='openNode()')
+            .ion-android-open

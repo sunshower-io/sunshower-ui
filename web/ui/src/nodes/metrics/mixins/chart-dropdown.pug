@@ -1,0 +1,23 @@
+mixin dropdown(index)
+    ul.nav.navbar-nav.navbar-right
+        li.dropdown
+            a.widget-icon.dropdown-toggle(id="drop#{index}" href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='true')
+                i.fa.fa-cog.chart-icon-color
+            ul#menu1.dropdown-menu(aria-labelledby='drop#{index}')
+                li
+                    a(href='') Setting 1
+                li
+                    a(href='') Setting 2
+        li.dropdown
+            a.widget-icon.dropdown-toggle(id="drop#{index}" href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='true')
+                i.fa.fa-bar-chart-o.chart-icon-color
+            ul#menu2.dropdown-menu(aria-labelledby='drop#{index}')
+                li
+                    a(href='') Line Chart
+                li
+                    a(href='') Bar Chart
+                li
+                    a(href='') Pie Chart
+        li
+            a.widget-move
+                i.fa.fa-arrows-alt.chart-icon-color

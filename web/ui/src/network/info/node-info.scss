@@ -1,0 +1,49 @@
+
+.node-info-container {
+  padding: 4px;
+  display: flex;
+  border: none;
+  box-sizing: border-box;
+  z-index: 10000;
+  font-size: 6pt;
+  div.node-open {
+    pointer-events: visiblePainted;
+    flex-grow:1;
+    width:15px;
+    background-color:#292929;
+    opacity:1;
+    padding:4px;
+    border-bottom-right-radius: 4px !important;
+    &:hover {
+      background-color:#606060;
+    }
+  }
+
+  div.node-content{
+    display:flex;
+    pointer-events: none;
+
+    div.node-highlight {
+      width: 30px;
+      height: 30px;
+      border-radius: 100% 0% 0% 100% !important;
+      background-color: #333;
+      opacity: 0.8;
+    }
+    div.node-info {
+      flex-grow: 1;
+      padding: 4px;
+      background-color: #333;
+      opacity: 0.8;
+
+    }
+    div span {
+      margin-left: 4px;
+    }
+    span.title {
+      font-weight: 300;
+      margin-left: 0px;
+      font-weight: 600;
+    }
+  }
+}

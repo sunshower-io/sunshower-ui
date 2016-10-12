@@ -1,0 +1,50 @@
+@import "../../../assets/styles/variables";
+.grid {
+    .gutter-size {
+        width:16px;
+    }
+    .grid-item {
+        max-width:45%;
+        margin:16px;
+        border:0;
+        display:block;
+        padding:0px;
+        box-sizing: border-box;
+    }
+}
+
+
+
+div.menu-large {
+    position:absolute;
+    clear:both;
+    left:auto;
+    max-height:400px;
+    max-width:500px;
+    //width:400px;
+    //height:400px;
+    //margin-left:-360px;
+    padding:8px;
+
+    div {
+        width:100px;
+        height:100px;
+        display:inline-block;
+        line-height:100px;
+        vertical-align:middle;
+        text-align:center;
+        font-size:50px;
+        cursor:pointer;
+    }
+    div:hover {
+
+        background-color: $darkGrey;
+    }
+}
+
+
+.chart-border {
+    border: 1px solid #C0BBB7;
+}
+
+.page-content-wrapper .selector-apply .btn { color: $brightBlue; }
