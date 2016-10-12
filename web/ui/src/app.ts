@@ -12,22 +12,21 @@ export class App {
     }
 
     configureRouter(config:RouterConfiguration, router:Router) {
-        config.title = 'Stormchaser';
+        config.title = 'Hasli.io';
+        // config.map([{
+        //     route: '',
+        //     name: 'login',
+        //     title: 'login',
+        //     moduleId: 'home/login'
+        // }])
         config.map([{
-            route: '', 
-            redirect: 'network'
-        }, {
-            route: 'network',
-            name: 'network',
-            moduleId: 'network/network',
-            nav: true,
-            title: 'Network'
-        }, {
-            route: 'node',
-            name: 'node',
-            title: 'Node',
-            moduleId: 'nodes/node'
-        }]);
+                route: ['', 'login'],
+                name: 'login',
+                moduleId: 'home/login/login',
+                nav: true,
+                title: 'login'
+            }
+        ]);
         this.router = router;
     }
 

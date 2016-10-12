@@ -1,9 +1,0 @@
-template(bindable="visible, blocks", show.bind="visible")
-    div#timeline.timeline-container
-        div.timeline-wrapper(repeat.for="block of blocks")
-            h2.timeline-time ${block.revision.date}
-                dl.timeline-series
-                    dt.timeline-event ${block.revision.id} (${block.type})
-                    dt.timeline-event-content
-                        p(repeat.for="node of block.nodes") ${node.id}
-
