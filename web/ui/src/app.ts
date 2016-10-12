@@ -32,7 +32,7 @@ export class App {
 
 
     toggleMenu():void {
-        $('#wrapper').toggleClass('toggled');
+        // $('#wrapper').toggleClass('toggled');
     }
 
 }
