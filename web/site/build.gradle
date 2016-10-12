@@ -1,0 +1,18 @@
+apply plugin: 'war'
+
+configurations {
+    web
+}
+
+dependencies {
+    web project(":ui")
+}
+
+task extractUi(type: Copy) {
+    into file("${project.buildDir}/tmp/war/webapp")
+    from {
+        configurations.web.asFileTree.each {
+            from(zipTree(it))
+        }
+    }
+}

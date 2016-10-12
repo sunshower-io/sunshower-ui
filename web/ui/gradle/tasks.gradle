@@ -1,29 +1,34 @@
 
+
 task cleanProject(
-        type: Exec,
-        dependsOn: 'clean'
+        type: Exec
 ) {
     commandLine 'gulp',  'clean'
 }
 
 
-task buildProject(type: Exec, dependsOn: 'build') {
+task buildProject(type: Exec) {
     commandLine 'gulp', 'build'
 }
 
 
 task buildAll(dependsOn: [
-        'cleanProject',
         'buildProject',
         'buildDistribution'
 ])
 
-task buildDistribution(type: Zip, dependsOn: 'build') {
+task buildDistribution(type: Zip) {
     baseName = 'ui'
     from(fileTree("dist")) {
         into "${project.buildDir}/distributions"
     }
+
 }
 
 
 defaultTasks 'buildAll'
+
+
+clean.dependsOn cleanProject
+
+build.dependsOn buildAll
