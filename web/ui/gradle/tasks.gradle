@@ -1,7 +1,29 @@
 
-task buildDistribution(type: Zip, dependsOn: build) {
+task cleanProject(
+        type: Exec,
+        dependsOn: 'clean'
+) {
+    commandLine 'gulp',  'clean'
+}
+
+
+task buildProject(type: Exec, dependsOn: 'build') {
+    commandLine 'gulp', 'build'
+}
+
+
+task buildAll(dependsOn: [
+        'cleanProject',
+        'buildProject',
+        'buildDistribution'
+])
+
+task buildDistribution(type: Zip, dependsOn: 'build') {
     baseName = 'ui'
     from(fileTree("dist")) {
         into "${project.buildDir}/distributions"
     }
 }
+
+
+defaultTasks 'buildAll'
