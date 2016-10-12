@@ -4,5 +4,6 @@ apply from: "gradle/tasks.gradle"
 
 
 artifacts {
-    archives buildDistribution
+    archives builtBy:buildDistribution, type:'zip', classifier:'zip', file: buildDistribution.archivePath
 }
+

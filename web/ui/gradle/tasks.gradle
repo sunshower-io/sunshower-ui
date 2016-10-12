@@ -1,3 +1,14 @@
+//apply plugin: 'java'
+//
+//
+//configurations {
+//    web
+//}
+//
+//
+//sourceSets {
+//    web.java.srcDirs = ["${project.rootDir}/dist"]
+//}
 
 
 task cleanProject(
@@ -18,10 +29,10 @@ task buildAll(dependsOn: [
 ])
 
 task buildDistribution(type: Zip) {
+
     baseName = 'ui'
-    from(fileTree("dist")) {
-        into "${project.buildDir}/distributions"
-    }
+    into ('ui')
+    from fileTree('dist')
 
 }
 
