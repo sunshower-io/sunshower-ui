@@ -22,7 +22,6 @@ module.exports = function(config) {
           }
         },
         transpiler: 'typescript',
-        
         typescriptOptions : {
           "module": "amd",
           "emitDecoratorMetadata": true,
@@ -30,16 +29,16 @@ module.exports = function(config) {
         }
       },
       serveFiles: [
-        'src/**/*.ts',
+        'src/**/*.*',
         'jspm_packages/**/*.js'
       ]
     },
     files: [
       'test/unit/setup.ts',
-      'test/unit/**/*.spec.ts',
-      'test/unit/*.spec.ts'
+      'test/unit/*.ts'
     ],
     exclude: [],
+    preprocessors: { },
     reporters: ['progress'],
     port: 9876,
     colors: true,

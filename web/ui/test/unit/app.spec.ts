@@ -26,32 +26,18 @@ describe('the App module', () => {
   });
 
   it('configures the router title', () => {
-    expect(sut.router.title).toEqual('Stormchaser');
+    expect(sut.router.title).toEqual('Aurelia');
   });
 
-  it('should have a network route', () => {
-    expect(sut.router.routes).toContain({ 
-      route: 'network', 
-      name: 'network',  
-      moduleId: 'network/network', 
-      nav: true, 
-      title:'Network' });
+  it('should have a welcome route', () => {
+    expect(sut.router.routes).toContain({ route: ['','welcome'], name: 'welcome',  moduleId: 'welcome', nav: true, title:'Welcome' });
   });
 
-  it('should have a node route', () => {
-     expect(sut.router.routes).toContain({ 
-       route: 'node', 
-       name: 'node', 
-       moduleId: 'nodes/node', 
-       title:'Node' 
-     });
+  it('should have a users route', () => {
+     expect(sut.router.routes).toContain({ route: 'users', name: 'users', moduleId: 'users', nav: true, title:'Github Users' });
   });
 
-  it('should have a redirect route', () => {
-    expect(sut.router.routes)
-        .toContain({ 
-          route: '', 
-          redirect: 'network'
-        });
+  it('should have a child router route', () => {
+    expect(sut.router.routes).toContain({ route: 'child-router', name: 'child-router', moduleId: 'child-router', nav: true, title:'Child Router' });
   });
 });

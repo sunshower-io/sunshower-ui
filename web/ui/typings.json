@@ -32,11 +32,7 @@
     "selenium-webdriver": "registry:dt/selenium-webdriver#2.44.0+20160317120654"
   },
   "globalDependencies": {
-    "es6-shim": "registry:dt/es6-shim#0.31.2+20160602141504",
-    "jquery": "registry:dt/jquery#1.10.0+20160929162922",
-    "node": "registry:dt/node#6.0.0+20161010101523",
     "url": "github:aurelia/fetch-client/doc/url.d.ts#bbe0777ef710d889a05759a65fa2c9c3865fc618",
-    "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20161004182750",
-    "whatwg-streams": "registry:dt/whatwg-streams#0.0.0+20160829180742"
+    "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20160524142046"
   }
 }

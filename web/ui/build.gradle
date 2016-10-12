@@ -1,9 +1,0 @@
-
-
-apply from: "gradle/tasks.gradle"
-
-
-artifacts {
-    archives builtBy:buildDistribution, type:'zip', classifier:'zip', file: buildDistribution.archivePath
-}
-

@@ -1,38 +1,16 @@
-import * as $ from 'jquery';
-import {Router, RouterConfiguration} from 'aurelia-router'
+import {Router, RouterConfiguration} from 'aurelia-router';
 
 export class App {
+  public router: Router;
 
+  public configureRouter(config: RouterConfiguration, router: Router) {
+    config.title = 'Aurelia';
+    config.map([
+      { route: ['', 'welcome'], name: 'welcome',      moduleId: 'welcome',      nav: true, title: 'Welcome' },
+      { route: 'users',         name: 'users',        moduleId: 'users',        nav: true, title: 'Github Users' },
+      { route: 'child-router',  name: 'child-router', moduleId: 'child-router', nav: true, title: 'Child Router' }
+    ]);
 
-    router:Router;
-
-    constructor() {
-
-
-    }
-
-    configureRouter(config:RouterConfiguration, router:Router) {
-        config.title = 'Hasli.io';
-        // config.map([{
-        //     route: '',
-        //     name: 'login',
-        //     title: 'login',
-        //     moduleId: 'home/login'
-        // }])
-        config.map([{
-                route: ['', 'login'],
-                name: 'login',
-                moduleId: 'home/login/login',
-                nav: true,
-                title: 'login'
-            }
-        ]);
-        this.router = router;
-    }
-
-
-    toggleMenu():void {
-        // $('#wrapper').toggleClass('toggled');
-    }
-
+    this.router = router;
+  }
 }
