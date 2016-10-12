@@ -7,8 +7,8 @@ include(
         'security',
         'service',
         'web',
-        'ui'
-
+        'ui',
+        'site'
 )
 
 def mappings = [
@@ -20,7 +20,7 @@ def mappings = [
                 'security'
         ],
         'service': ['security'],
-        'web'    : ['ui', 'service']
+        'web'    : ['ui', 'service', 'site']
 ]
 
 

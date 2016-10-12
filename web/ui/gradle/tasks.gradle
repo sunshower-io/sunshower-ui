@@ -1,0 +1,7 @@
+
+task buildDistribution(type: Zip, dependsOn: build) {
+    baseName = 'ui'
+    from(fileTree("dist")) {
+        into "${project.buildDir}/distributions"
+    }
+}
