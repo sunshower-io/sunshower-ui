@@ -13,6 +13,11 @@ module.exports = {
   doc: './doc',
   e2eSpecsSrc: 'test/e2e/src/**/*.ts',
   e2eSpecsDist: 'test/e2e/dist/',
+  pug: appRoot + '**/*.pug',
+  scss: [
+    './assets/styles/**/*.scss',
+    './src/**/*/*.scss'
+  ],
   dtsSrc: [
     './typings/**/*.d.ts',
     './custom_typings/**/*.d.ts'
