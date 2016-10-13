@@ -9,6 +9,9 @@ include(
         'web',
         'ui',
         'site',
+        'api:security',
+        'api:core',
+        'service:security'
 )
 
 def mappings = [
