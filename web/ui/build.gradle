@@ -1,13 +1,22 @@
 apply plugin: 'maven-publish'
 apply from: 'gradle/tasks.gradle'
 
+configurations {
+    uiPackage
+}
+
+artifacts {
+    uiPackage assembleAll
+}
+
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
             artifact assembleAll {
-//                classifier "sources"
+                classifier "package"
             }
         }
     }
 }
+

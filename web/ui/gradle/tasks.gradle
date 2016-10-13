@@ -13,6 +13,7 @@ task bundle(type:Exec) {
 task assembleAll(type:Zip, dependsOn: ['cleanAll', 'bundle']) {
     from(fileTree('export'))
     into "assembly"
+    classifier = "package"
 }
 
 clean.dependsOn cleanAll

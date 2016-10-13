@@ -1,18 +1,36 @@
 apply plugin: 'war'
 
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
 configurations {
     web
 }
 
 dependencies {
-    web project(":ui")
+    web project(path:":ui", configuration:'uiPackage')
 }
 
-task extractUi(type: Copy) {
-    into file("${project.buildDir}/tmp/war/webapp")
+
+war {
+    from "${project.buildDir}/src"
+}
+
+task extractUi(type:Copy) {
+    includeEmptyDirs = false
+
+    into "${project.buildDir}/src"
     from {
-        configurations.web.asFileTree.each {
-            from(zipTree(it))
+        configurations.web.collect {
+            zipTree(it)
         }
     }
+    eachFile {
+        it.path = it.path - "assembly/"
+    }
 }
+
+
+processResources.dependsOn extractUi
