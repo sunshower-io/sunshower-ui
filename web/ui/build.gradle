@@ -1,0 +1,13 @@
+apply plugin: 'maven-publish'
+apply from: 'gradle/tasks.gradle'
+
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact assembleAll {
+//                classifier "sources"
+            }
+        }
+    }
+}

@@ -1,0 +1,19 @@
+apply plugin: 'java'
+
+task cleanAll(type:Delete) {
+    delete 'dist', 'export'
+}
+
+task bundle(type:Exec) {
+    commandLine 'gulp', 'export'
+}
+
+
+
+task assembleAll(type:Zip, dependsOn: ['cleanAll', 'bundle']) {
+    from(fileTree('export'))
+    into "assembly"
+}
+
+clean.dependsOn cleanAll
+build.dependsOn assembleAll
