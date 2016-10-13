@@ -1,3 +1,5 @@
+import 'jquery'
+import 'semantic-ui'
 import {Router, RouterConfiguration} from 'aurelia-router';
 
 export class App {
