@@ -22,7 +22,7 @@ dependencyManagement {
 }
 
 allprojects {
-
+    apply plugin: 'nebula.optional-base'
 
     plugins.withType(JavaPlugin) {
 
@@ -44,7 +44,6 @@ allprojects {
 
         dependencies {
             testCompile('org.jboss.weld:weld-core')
-            testCompile('org.jboss.spec:jboss-javaee-7.0')
 
             testCompile('org.junit.jupiter:junit-jupiter-engine')
             testCompile('org.junit.vintage:junit-vintage-engine')

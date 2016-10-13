@@ -1,5 +1,6 @@
 package io.io.hasli.service.security;
 
+import io.hasli.service.security.FrapService;
 import org.junit.Test;
 
 import javax.annotation.sql.DataSourceDefinition;
@@ -26,9 +27,11 @@ public class CredentialAuthenticationServiceTest {
     @Inject
     private CredentialAuthenticationService credentialService;
 
+
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
+                .addClass(FrapService.class)
                 .addClass(CredentialAuthenticationService.class)
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
@@ -36,6 +39,7 @@ public class CredentialAuthenticationServiceTest {
 
     @Test
     public void ensureServiceIsInjected() {
+        System.out.println(credentialService.sayHello("Frap"));
         assertThat(credentialService, is(not(nullValue())));
     }
 

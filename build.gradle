@@ -28,7 +28,13 @@ subprojects {
     apply from: "$rootDir/gradle/jacoco.gradle"
     apply from: "$rootDir/gradle/publishing.gradle"
 
+    dependencies {
+        provided('org.jboss.spec:jboss-javaee-7.0')
+    }
 }
+
+
+
 
 /**
  * Build BOM pom
