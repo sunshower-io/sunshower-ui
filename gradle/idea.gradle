@@ -2,6 +2,6 @@ apply plugin: 'idea'
 
 idea {
     module {
-        name = "hasli-${project.name}"
+        name = "${file(project.projectDir).parentFile.name}-${project.name}"
     }
 }
