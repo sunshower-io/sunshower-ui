@@ -14,6 +14,12 @@ export class App {
                 moduleId: 'home/home',
                 nav: true,
                 title: 'home'
+            }, {
+                route: 'login',
+                name: 'login',
+                moduleId: 'login/login',
+                nav: true,
+                title: 'login'
             },
         ]);
 
