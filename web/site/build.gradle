@@ -19,6 +19,7 @@ war {
 }
 
 task extractUi(type:Copy) {
+    dependsOn configurations.web
     includeEmptyDirs = false
 
     into "${project.buildDir}/src"
@@ -33,4 +34,4 @@ task extractUi(type:Copy) {
 }
 
 
-processResources.dependsOn extractUi
+compileJava.dependsOn extractUi
