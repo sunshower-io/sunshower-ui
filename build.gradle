@@ -30,6 +30,7 @@ subprojects {
 
     dependencies {
         provided('org.jboss.spec:jboss-javaee-7.0')
+        provided('org.springframework:spring-context')
     }
 }
 
