@@ -58,6 +58,24 @@ public class CredentialAuthenticationServiceTest {
     }
 
     @Test
+    @WithMockUser(username = "admin", roles = {"admin"})
+    public void ensureMethodIsProtectedByRolesAllowed() {
+        testSecureService.sayHelloRolesAllowed();
+    }
+
+
+    @Test
+    @WithMockUser(username = "admin", roles = {"frap"})
+    public void ensureMethodIsProtectedByRolesAllowed_denied() {
+        try {
+            testSecureService.sayHelloRolesAllowed();
+            fail("Expected authorization rejection");
+        } catch(AccessDeniedException ex) {
+
+        }
+    }
+
+    @Test
     @WithMockUser(
             username = "admin",
             roles = {"notadmin"}

@@ -11,11 +11,11 @@ import org.springframework.context.annotation.Configuration;
 public class BootstrapConfiguration {
 
     public BootstrapConfiguration() {
-        System.out.println("COOOOOOL");
     }
+
+
     @Bean
     public CredentialAuthenticationService credentialAuthenticationService() {
-        System.out.println("BEANS COOOOOOL");
         return new CredentialAuthenticationService();
     }
 
