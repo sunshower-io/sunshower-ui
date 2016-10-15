@@ -1,1 +1,1 @@
-Dependencies: org.springframework.context, org.springframework.beans, org.springframework.core, org.springframework.expression
+Dependencies: org.springframework.context, org.springframework.beans, org.springframework.core, org.springframework.expression, org.springframework.web
