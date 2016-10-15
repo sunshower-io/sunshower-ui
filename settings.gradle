@@ -7,7 +7,7 @@ include(
         'common',
         'security',
         'service',
-        'web:webapp',
+        'web:hasli.io',
         'web:service',
         'web:site',
         'web:ui',

@@ -52,7 +52,6 @@ allprojects {
             testCompile('org.junit.jupiter:junit-jupiter-engine')
             testCompile('org.junit.vintage:junit-vintage-engine')
             testCompile('org.jboss.arquillian.junit:arquillian-junit-container')
-//            testCompile('org.jboss.arquillian.container:arquillian-weld-ee-embedded-1.1')
         }
     }
 
