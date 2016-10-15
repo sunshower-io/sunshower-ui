@@ -7,13 +7,16 @@ include(
         'common',
         'security',
         'service',
-        'web',
-        'site',
+        'web:webapp',
+        'web:service',
+        'web:site',
+        'web:ui',
         'api:security',
         'api:core',
         'service:security',
         'integration:api',
         'integration:spring',
+
 )
 
 def mappings = [
@@ -25,7 +28,7 @@ def mappings = [
                 'security'
         ],
         'service': ['security'],
-        'web'    : ['ui', 'service', 'site'],
+//        'web'    : ['ui', 'service', 'site', 'webapp'],
 //        'integration' : ['api', 'spring']
 ]
 

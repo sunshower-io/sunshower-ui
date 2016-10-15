@@ -1,0 +1,28 @@
+apply plugin: 'ear'
+
+
+dependencies {
+    deploy project(path: ':web:site', configuration: 'archives')
+    deploy project(':web:service')
+}
+
+ear {
+    rename { deployment ->
+        return stripVersion(deployment)
+    }
+
+}
+
+String stripVersion(String input) {
+    int fstIndexOf = input.indexOf('-');
+    int lastIndexOf = input.lastIndexOf('.');
+
+
+    if(fstIndexOf > -1 && lastIndexOf > -1) {
+        final String extension = input.substring(lastIndexOf, input.length());
+        final String fileName = input.substring(0, fstIndexOf);
+        return fileName + extension;
+    } else {
+        return input;
+    }
+}

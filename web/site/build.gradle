@@ -1,4 +1,5 @@
 apply plugin: 'war'
+apply plugin: 'java'
 
 repositories {
     mavenCentral()
@@ -10,7 +11,7 @@ configurations {
 }
 
 dependencies {
-    web project(path:":ui", configuration:'uiPackage')
+    web project(path:":web:ui", configuration:'uiPackage')
 }
 
 
