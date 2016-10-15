@@ -1,4 +1,5 @@
 
 dependencies {
+    compile project(":api:core")
     testCompile('org.jboss.arquillian.container:arquillian-weld-ee-embedded-1.1')
 }

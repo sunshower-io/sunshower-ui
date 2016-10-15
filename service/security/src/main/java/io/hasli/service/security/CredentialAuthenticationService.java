@@ -1,10 +1,10 @@
 package io.hasli.service.security;
 
+import io.hasli.model.core.auth.User;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -14,14 +14,16 @@ import javax.ws.rs.core.MediaType;
 
 @Service
 @Path("security")
-@Produces(MediaType.TEXT_PLAIN)
+@Produces(MediaType.APPLICATION_XML)
 public class CredentialAuthenticationService {
 
     @GET
-    @Path("/")
-    public String authenticate(
-    ) {
-        return "Hello";
+    @Path("/authenticate")
+    public User authenticate() {
+        User u = new User();
+        u.setPassword("frap");
+        u.setUsername("adap");
+        return u;
     }
 
 }
