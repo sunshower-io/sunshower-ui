@@ -31,6 +31,19 @@ subprojects {
     dependencies {
         provided('org.jboss.spec:jboss-javaee-7.0')
         provided('org.springframework:spring-context')
+        [
+                'core',
+                'config',
+                'acl',
+                'crypto',
+                'aspects',
+                'ldap'
+        ].each {
+            provided("org.springframework.security:spring-security-$it")
+        }
+
+        testCompile("org.springframework:spring-test")
+        testCompile("org.springframework.security:spring-security-test")
     }
 }
 

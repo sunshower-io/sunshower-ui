@@ -1,6 +1,9 @@
 package io.hasli.service.security;
 
+import io.hasli.core.security.CredentialService;
 import io.hasli.model.core.auth.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.GET;
@@ -15,7 +18,7 @@ import javax.ws.rs.core.MediaType;
 @Service
 @Path("security")
 @Produces(MediaType.APPLICATION_XML)
-public class CredentialAuthenticationService {
+public class CredentialAuthenticationService implements CredentialService {
 
     @GET
     @Path("/authenticate")
@@ -26,4 +29,11 @@ public class CredentialAuthenticationService {
         return u;
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User u = new User();
+        u.setPassword("frap");
+        u.setUsername(username);
+        return u;
+    }
 }

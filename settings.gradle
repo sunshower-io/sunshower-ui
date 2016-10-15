@@ -5,14 +5,13 @@ include(
         'csp',
         'core',
         'common',
-        'security',
         'service',
         'web:hasli.io',
         'web:service',
         'web:site',
         'web:ui',
-        'api:security',
         'api:core',
+        'api:security',
         'service:security',
         'integration:api',
         'integration:spring',
@@ -20,14 +19,14 @@ include(
 )
 
 def mappings = [
-        'api'    : [
-                'common',
-                'core',
-                'csp',
-                'aws',
-                'security'
-        ],
-        'service': ['security'],
+//        'api'    : [
+//                'common',
+//                'core',
+//                'csp',
+//                'aws',
+//                'security'
+//        ],
+//        'service': ['security'],
 //        'web'    : ['ui', 'service', 'site', 'webapp'],
 //        'integration' : ['api', 'spring']
 ]

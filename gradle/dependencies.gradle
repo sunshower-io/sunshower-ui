@@ -24,6 +24,7 @@ dependencyManagement {
     }
 }
 
+
 allprojects {
     apply plugin: 'nebula.optional-base'
 
@@ -56,3 +57,5 @@ allprojects {
     }
 
 }
+
+

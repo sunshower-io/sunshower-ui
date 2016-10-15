@@ -1,17 +1,22 @@
 package io.hasli.model.core.auth;
 
 import io.hasli.model.core.entity.AbstractEntity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.security.Principal;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.UUID;
 
 @XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.NONE)
-public class User extends AbstractEntity<UUID> {
+public class User extends AbstractEntity<UUID> implements UserDetails {
 
     private Details details;
 
@@ -46,8 +51,33 @@ public class User extends AbstractEntity<UUID> {
         return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singleton(new Authority("admin"));
     }
 
     public String getPassword() {
