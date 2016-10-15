@@ -1,1 +1,9 @@
 apply plugin: 'war'
+
+dependencies {
+    compile group: 'org.jboss.resteasy', name: 'resteasy-spring', version: '3.0.19.Final'
+    compile group: 'org.springframework', name: 'spring-web', version: '4.1.4.RELEASE'
+    compile group: 'org.springframework', name: 'spring-webmvc', version: '4.1.4.RELEASE'
+
+    provided project(":service:security")
+}

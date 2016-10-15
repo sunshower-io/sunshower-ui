@@ -8,8 +8,12 @@
     <!--</module>-->
     <module>
         <web>
-            <web-uri>site.war</web-uri>
-            <context-root>hasli/web</context-root>
+            <web-uri>service.war</web-uri>
+            <context-root>hasli</context-root>
         </web>
+        <!--<web>-->
+            <!--<web-uri>site.war</web-uri>-->
+            <!--<context-root>hasli/web</context-root>-->
+        <!--</web>-->
     </module>
 </application>

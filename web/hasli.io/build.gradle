@@ -2,8 +2,9 @@ apply plugin: 'ear'
 
 
 dependencies {
-    deploy project(path: ':web:site', configuration: 'archives')
-    deploy project(':web:service')
+//    deploy project(path: ':web:site', configuration: 'archives')
+    earlib project(":service:security")
+    deploy project(path:':web:service', configuration:'archives')
 }
 
 ear {
