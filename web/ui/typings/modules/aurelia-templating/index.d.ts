@@ -1959,9 +1959,9 @@ export function elementConfig(target?: any): any;
 /**
 * Decorator: Provides the ability to add resources to the related View
 * Same as: <require from="..."></require>
-* @param resource Either: strings with moduleIds, Objects with 'src' and optionally 'as' properties or one of the classes of the module to be included.
+* @param resources Either: strings with moduleIds, Objects with 'src' and optionally 'as' properties or one of the classes of the module to be included.
 */
-export function viewResources(...resource: any[]): any;
+export function viewResources(...resources: any[]): any;
 
 /**
 * A facade of the templating engine capabilties which provides a more user friendly API for common use cases.

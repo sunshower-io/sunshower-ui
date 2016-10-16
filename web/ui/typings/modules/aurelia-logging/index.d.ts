@@ -100,7 +100,7 @@ export function getLogger(id: string): Logger;
 export function addAppender(appender: Appender): void;
 
 /**
-* Sets the level of logging for the application loggers.
+* Sets the level of logging for ALL the application loggers.
 *
 * @param level Matches a value of logLevel specifying the level of logging.
 */
@@ -115,6 +115,11 @@ export class Logger {
     * The id that the logger was created with.
     */
   id: string;
+  
+  /**
+     * The logging severity level for this logger
+     */
+  level: number;
   
   /**
     * You cannot instantiate the logger directly - you must use the getLogger method instead.
@@ -152,5 +157,12 @@ export class Logger {
      * @param rest The data to log.
      */
   error(message: string, ...rest: any[]): void;
+  
+  /**
+     * Sets the level of logging this logger
+     *
+     * @param level Matches a value of logLevel specifying the level of logging.
+     */
+  setLevel(level: LogLevel): void;
 }
 }

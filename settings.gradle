@@ -15,6 +15,10 @@ include(
         'service:security',
         'integration:api',
         'integration:spring',
+        'system-tests',
+        'system-tests:common',
+        'system-tests:security',
+        'system-tests:web',
 
 )
 

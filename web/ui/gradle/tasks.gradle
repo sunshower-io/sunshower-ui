@@ -1,5 +1,22 @@
 apply plugin: 'java'
 
+
+task installGulp(type:Exec) {
+    commandLine 'npm', 'install', 'gulp'
+}
+
+task installJspm(type:Exec) {
+    commandLine 'npm', 'install', 'jspm'
+}
+
+task installNpmDeps(type:Exec) {
+    commandLine 'npm', 'install', '-y'
+}
+
+task installJspmDeps(type:Exec) {
+    commandLine 'jspm', 'install', '-y'
+}
+
 task cleanAll(type:Delete) {
     delete 'dist', 'export'
 }
@@ -9,8 +26,19 @@ task bundle(type:Exec) {
 }
 
 
+task installEnvironment(dependsOn:[
+        'installGulp',
+        'installJspm',
+        'installNpmDeps',
+        'installJspmDeps'
+])
 
-task assembleAll(type:Zip, dependsOn: ['cleanAll', 'bundle']) {
+
+task assembleAll(type:Zip, dependsOn: [
+        'cleanAll',
+        'bundle',
+        'installEnvironment'
+]) {
     from(fileTree('export'))
     into "assembly"
     classifier = "package"

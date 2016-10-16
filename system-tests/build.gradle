@@ -1,0 +1,40 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+dependencies {
+    wildfly 'io.hasli.wildfly:wildfly-dist'
+}
+
+
+task copyWildfly(type: Copy) {
+    from configurations.wildfly
+    into "${project.buildDir}/wildfly"
+    rename {fn -> "wildfly.zip"}
+
+    destinationDir = file("${project.buildDir}/wildfly")
+}
+
+task explodeWildfly(type:Copy, dependsOn: 'copyWildfly') {
+    from zipTree("${project.buildDir}/wildfly/wildfly.zip")
+    into "${project.buildDir}/wildfly-home"
+}
+
+
+
+allprojects {
+    apply plugin: 'java'
+    test {
+        environment 'wildfly.home', "${project.buildDir}/wildfly/wildfly.zip"
+        systemProperty 'wildfly.home', "${project.buildDir}/wildfly/wildfly.zip"
+    }
+}
+
+
+task setEnv(type:Test) {
+    environment 'wildfly.home', "${project.buildDir}/wildfly/wildfly.zip"
+    systemProperty 'wildfly.home', "${project.buildDir}/wildfly/wildfly.zip"
+}
+
+
+
+
+test.dependsOn explodeWildfly

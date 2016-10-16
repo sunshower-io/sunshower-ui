@@ -8,6 +8,8 @@ def repos = [
 
 ]
 
+
+
 repositories {
     mavenLocal()
     mavenCentral()
@@ -22,6 +24,10 @@ dependencyManagement {
         mavenBom "io.hasli:bom-imported:${version}"
         mavenBom "org.apache.deltaspike.distribution:distributions-bom:${deltaspikeVersion}"
     }
+}
+
+configurations {
+    wildfly
 }
 
 
