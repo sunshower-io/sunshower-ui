@@ -5,7 +5,11 @@ import io.hasli.model.core.auth.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -16,16 +20,22 @@ import javax.ws.rs.core.MediaType;
  */
 
 @Service
-@Path("security")
-@Produces(MediaType.APPLICATION_XML)
+@Transactional
 public class CredentialAuthenticationService implements CredentialService {
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
 
     @GET
     @Path("/authenticate")
     public User authenticate() {
+        System.out.println("ENTITYMANAGER" + entityManager);
+
         User u = new User();
         u.setPassword("frap");
         u.setUsername("adap");
+        entityManager.merge(u);
         return u;
     }
 

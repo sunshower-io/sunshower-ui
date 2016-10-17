@@ -3,7 +3,7 @@ package io.hasli.persist.core;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.activation.DataSource;
+import javax.sql.DataSource;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
@@ -15,7 +15,11 @@ public class DataSourceConfiguration {
 
     @Bean
     public DataSource createHasliDatasource() throws NamingException {
-        return InitialContext.doLookup("java:components/HasliCoreDataSource");
+        DataSource result = InitialContext.doLookup("java:jboss/datasources/ExampleDS");
+        for(int i = 0; i < 100; i++) {
+            System.out.println("GOT A ");
+        }
+        return result;
     }
 
 }

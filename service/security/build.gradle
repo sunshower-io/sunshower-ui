@@ -1,7 +1,7 @@
 apply plugin: 'java'
 dependencies {
-    compile project(":api:core")
-    compile project(":api:security")
+    compile project(":api:core-api")
+    compile project(":api:security-api")
 
     testCompile('org.jboss.arquillian.container:arquillian-weld-ee-embedded-1.1')
 }

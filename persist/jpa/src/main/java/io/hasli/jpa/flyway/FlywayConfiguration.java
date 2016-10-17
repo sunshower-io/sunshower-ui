@@ -1,5 +1,6 @@
 package io.hasli.jpa.flyway;
 
+import io.hasli.persistence.Dialect;
 import org.flywaydb.core.Flyway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,11 +16,14 @@ public class FlywayConfiguration {
 
     @Singleton
     @Bean(initMethod = "migrate")
-    public Flyway createMigrations(DataSource dataSource) {
+    public Flyway createMigrations(DataSource dataSource, Dialect dialect) {
+        for(int i = 0; i < 100; i ++) {
+            System.out.println("MIGRATE" + dialect);
+        }
         final Flyway flyway = new Flyway();
         flyway.setDataSource(dataSource);
         flyway.setLocations("classpath:h2");
-
+        flyway.migrate();
         return flyway;
     }
 }

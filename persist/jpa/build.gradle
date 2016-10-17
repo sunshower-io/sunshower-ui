@@ -1,6 +1,6 @@
 dependencies {
-    compile project(':api:core')
-    compile project(':api:common')
+    compile project(':api:core-api')
+    compile project(':api:common-api')
     compile project(':persist:api')
     compile 'org.flywaydb:flyway-core'
 }

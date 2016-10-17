@@ -14,13 +14,25 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.io.File;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 
 /**
  * Created by haswell on 10/16/16.
  */
 @RunWith(Arquillian.class)
 public class AuthenticationTest {
+
+//    @PersistenceContext
+//    private EntityManager entityManager;
+
 
 
     @Deployment
@@ -45,6 +57,10 @@ public class AuthenticationTest {
     @Test
     public void ensureTestRuns() {
         System.out.println("Done");
-
     }
+
+//    @Test
+//    public void ensureEntityManagerIsInjected() {
+//        assertThat(entityManager, is(not(nullValue())));
+//    }
 }

@@ -17,8 +17,8 @@ configurations {
 
 dependencies {
     earlib project(":service:security")
-    site  project(path:':web:site')
-    deploy project(path: ':web:site', configuration: 'archives')
+//    site  project(path:':web:site')
+//    deploy project(path: ':web:site', configuration: 'archives')
     deploy project(path:':web:service', configuration:'archives')
 }
 

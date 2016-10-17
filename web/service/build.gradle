@@ -5,7 +5,9 @@ dependencies {
     provided group: 'org.springframework', name: 'spring-web', version: '4.1.4.RELEASE'
     provided group: 'org.springframework', name: 'spring-webmvc', version: '4.1.4.RELEASE'
 
-    provided project(":service:security")
+    compile project(":persist:hibernate")
+    compile project(":service:security")
+
 }
 
 
