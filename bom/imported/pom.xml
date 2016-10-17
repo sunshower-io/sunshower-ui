@@ -45,6 +45,7 @@
         <hasli-wildfly.version>1.00.000.000-SNAPSHOT</hasli-wildfly.version>
         <h2.version>1.4.192</h2.version>
         <hibernate-jpa-2.1-api.version>1.0.0.Final</hibernate-jpa-2.1-api.version>
+        <flyway-core.version>4.0.3</flyway-core.version>
     </properties>
 
     <dependencyManagement>
@@ -108,7 +109,11 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
-
+            <dependency>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-core</artifactId>
+                <version>${flyway-core.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.spockframework</groupId>
