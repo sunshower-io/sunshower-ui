@@ -32,8 +32,8 @@ subprojects {
         provided('org.jboss.spec:jboss-javaee-7.0')
 
         [
-            'orm',
-            'context'
+                'orm',
+                'context'
         ].each{
             compile("org.springframework:spring-$it")
         }
@@ -52,6 +52,30 @@ subprojects {
 
         testCompile("org.springframework:spring-test")
         testCompile("org.springframework.security:spring-security-test")
+    }
+
+    test {
+        exclude '**/*Spec.class'
+        exclude '**/*IntegrationTest.class*'
+        exclude 'io/hasli/st/**'
+    }
+
+    task integrationTest(type: Test) {
+        description = 'Runs integration tests.'
+        group = 'verification'
+        include '**/*IT.class'
+        include '**/*IntegrationTest.class'
+        reports.html.destination = file("$reports.html.destination/integration")
+        reports.junitXml.destination = file("$reports.junitXml.destination/integration")
+    }
+
+    task systemTest(type: Test) {
+        description = 'Runs system-tests.'
+        group = 'verification'
+        include 'io/hasli/st/**'
+        reports.html.destination = file("$reports.html.destination/system")
+        reports.junitXml.destination = file("$reports.junitXml.destination/system")
+
     }
 }
 
