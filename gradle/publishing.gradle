@@ -10,27 +10,32 @@ publishing {
 }
 
 artifactory {
-    contextUrl = artifactory_contextUrl
-    publish {
-        repository {
-            repoKey = repoKey
-            username = "${artifactory_user}" // The publisher user name
-            password = "${artifactory_password}" // The publisher password
-            maven = true
+
+    if (System.properties.getProperty('artifactory_user') != null &&
+        System.properties.getProperty('artifactory_password'))
+    {
+        contextUrl = artifactory_contextUrl
+        publish {
+            repository {
+                repoKey = repoKey
+                username = "${artifactory_user}" // The publisher user name
+                password = "${artifactory_password}" // The publisher password
+                maven = true
+            }
+            defaults {
+                publications('mavenJava')
+                publishArtifacts = true
+                properties = ['qa.level': 'basic', 'dev.team': 'core']
+                publishPom = true
+            }
         }
-        defaults {
-            publications('mavenJava')
-            publishArtifacts = true
-            properties = ['qa.level': 'basic', 'dev.team' : 'core']
-            publishPom = true
-        }
-    }
-    resolve {
-        repository {
-            repoKey = 'libs-release'
-        }
-        repository {
-            repoKey = 'libs-snapshot'
+        resolve {
+            repository {
+                repoKey = 'libs-release'
+            }
+            repository {
+                repoKey = 'libs-snapshot'
+            }
         }
     }
 }
