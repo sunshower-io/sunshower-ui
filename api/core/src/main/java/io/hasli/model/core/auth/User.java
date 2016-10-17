@@ -5,6 +5,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -14,10 +16,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.UUID;
 
+@Entity
 @XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.NONE)
 public class User extends AbstractEntity<UUID> implements UserDetails {
 
+    @Transient
     private Details details;
 
     @XmlAttribute
@@ -27,7 +31,7 @@ public class User extends AbstractEntity<UUID> implements UserDetails {
     private String password;
 
     public User() {
-        super(null);
+        super(UUID.randomUUID());
     }
 
     public User(UUID uuid) {

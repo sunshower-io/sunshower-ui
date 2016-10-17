@@ -1,11 +1,9 @@
 package io.hasli.model.core.auth;
 
-import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.persist.hibernate.HibernateTestCase;
 import org.junit.Test;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.annotation.Rollback;
 
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -26,5 +24,10 @@ public class UserPersistenceTest extends HibernateTestCase {
     @Test
     public void ensureEntityManagerIsInjected() {
         assertThat(entityManager, is(not(nullValue())));
+    }
+
+    @Test
+    public void ensureSavingPersonWorks() {
+        entityManager.persist(new User());
     }
 }

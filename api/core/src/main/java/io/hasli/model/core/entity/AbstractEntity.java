@@ -1,11 +1,17 @@
 package io.hasli.model.core.entity;
 
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
 /**
  * Created by haswell on 10/12/16.
  */
-public abstract class AbstractEntity<ID extends Serializable> implements Persistable<ID> {
+@MappedSuperclass
+public abstract class AbstractEntity<ID extends Serializable> 
+        implements Persistable<ID> {
+    
+    @Id
     private ID id;
 
     protected AbstractEntity(ID id) {
