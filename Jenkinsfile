@@ -16,7 +16,6 @@ if (env.BRANCH_NAME == "master") {
     BUILD = "${env.BUILD_NUMBER}.${convertBranchName(env.BRANCH_NAME)}"
 }
 
-
 node('docker-registry') {
 
     stage 'Checkout source'
@@ -28,7 +27,7 @@ node('docker-registry') {
         sh "chmod +x gradlew"
 
         stage 'Gradle build'
-        sh "docker run --name=$VERSION.$BUILD -v `pwd:/usr/src/` hasli.io/build:$VERSION.$BUILD /usr/src/gradlew installBillOfMaterials clean build"
+        sh "docker run --name=$VERSION.$BUILD -v `pwd`:/usr/src/ hasli.io/build:$VERSION.$BUILD /usr/src/gradlew installBillOfMaterials clean build"
         sh "docker rm $VERSION.$BUILD"
     }
 }
