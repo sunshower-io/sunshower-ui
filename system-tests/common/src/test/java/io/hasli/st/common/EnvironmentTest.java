@@ -12,10 +12,9 @@ import static org.junit.Assert.assertThat;
  */
 public class EnvironmentTest {
 
-
     @Test
     public void ensureEnvironmentIsConfigured() {
-        String path = System.getProperty("wildfly.home");
+        String path = System.getProperty("wildflyHome");
         assertThat(path, is(not(nullValue())));
     }
 

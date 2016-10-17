@@ -1,0 +1,8 @@
+
+dependencies {
+    compile project(':api:common')
+    compile project(':persist:api')
+    compile 'com.zaxxer:HikariCP'
+
+    testCompile('com.h2database:h2')
+}

@@ -53,6 +53,8 @@ allprojects {
 //        }
 
         dependencies {
+
+
             testCompile('org.jboss.weld:weld-core')
             testCompile('org.mockito:mockito-core')
 

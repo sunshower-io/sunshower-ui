@@ -35,9 +35,7 @@ task installEnvironment(dependsOn:[
 
 
 task assembleAll(type:Zip, dependsOn: [
-        'cleanAll',
-        'bundle',
-        'installEnvironment'
+        'bundle'
 ]) {
     from(fileTree('export'))
     into "assembly"

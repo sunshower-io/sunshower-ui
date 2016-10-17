@@ -18,23 +18,26 @@ task explodeWildfly(type:Copy, dependsOn: 'copyWildfly') {
     into "${project.buildDir}/wildfly-home"
 }
 
+test.dependsOn ':web:hasli.io:ear'
 
 
-allprojects {
+subprojects {
     apply plugin: 'java'
     test {
-        environment 'wildfly.home', "${project.buildDir}/wildfly/wildfly.zip"
-        systemProperty 'wildfly.home', "${project.buildDir}/wildfly/wildfly.zip"
+        environment 'wildflyHome', "${project.buildDir}/wildfly/wildfly.zip"
+        systemProperty 'wildflyHome', "${project.buildDir}/wildfly/wildfly.zip"
+    }
+    dependencies {
+        testCompile "org.wildfly.arquillian:wildfly-arquillian-container-managed:1.1.0.Final"
+        compile group: 'org.jboss.shrinkwrap.resolver', name: 'shrinkwrap-resolver-api'
+        compile group: 'org.jboss.shrinkwrap.resolver', name: 'shrinkwrap-resolver-api-maven'
+        compile group: 'org.jboss.shrinkwrap.resolver', name: 'shrinkwrap-resolver-spi-maven'
+        compile group: 'org.jboss.shrinkwrap.resolver', name: 'shrinkwrap-resolver-impl-maven'
+        compile group: 'org.jboss.shrinkwrap.resolver', name: 'shrinkwrap-resolver-impl-maven-archive'
+        compile group: 'org.jboss.shrinkwrap.resolver', name: 'shrinkwrap-resolver-api-gradle-embedded-archive'
+        compile group: 'org.jboss.shrinkwrap.resolver', name: 'shrinkwrap-resolver-impl-gradle-embedded-archive'
     }
 }
-
-
-task setEnv(type:Test) {
-    environment 'wildfly.home', "${project.buildDir}/wildfly/wildfly.zip"
-    systemProperty 'wildfly.home', "${project.buildDir}/wildfly/wildfly.zip"
-}
-
-
 
 
 test.dependsOn explodeWildfly

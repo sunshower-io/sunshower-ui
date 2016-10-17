@@ -30,6 +30,14 @@ subprojects {
 
     dependencies {
         provided('org.jboss.spec:jboss-javaee-7.0')
+
+        [
+            'orm',
+            'context'
+        ].each{
+            provided("org.springframework:spring-$it")
+        }
+
         provided('org.springframework:spring-context')
         [
                 'core',
@@ -68,4 +76,4 @@ def getRepoKey() {
     }
 }
 
-defaultTasks "installBillOfMaterials", "clean", "build", "install"
+defaultTasks "installBillOfMaterials", "clean", "build"
