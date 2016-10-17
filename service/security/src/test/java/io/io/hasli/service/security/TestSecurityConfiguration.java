@@ -1,5 +1,6 @@
 package io.io.hasli.service.security;
 
+import io.hasli.core.security.CredentialService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,6 +9,11 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class TestSecurityConfiguration {
+
+    @Bean
+    public CredentialService credentialService() {
+        return new TestCredentialService();
+    }
 
     @Bean
     public TestSecureService testService() {

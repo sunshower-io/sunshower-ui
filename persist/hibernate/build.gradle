@@ -3,10 +3,8 @@ dependencies {
     compile project(':api:common-api')
     compile project(':persist:jpa')
     compile project(':persist:persist-core')
-//    compile project(':persist:core')
     testCompile "com.h2database:h2"
-//
-//    provided('org.flywaydb:flyway-core')
+    provided 'com.zaxxer:HikariCP'
     compile('org.hibernate:hibernate-core')
     compile('org.hibernate:hibernate-entitymanager')
     compile('org.hibernate.javax.persistence:hibernate-jpa-2.1-api')
