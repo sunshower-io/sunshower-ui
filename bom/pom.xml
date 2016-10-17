@@ -73,6 +73,14 @@
             <name>bintray</name>
             <url>http://jcenter.bintray.com</url>
         </repository>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>ext</id>
+            <name>release-local</name>
+            <url>http://repo.hasli.io/artifactory/ext-release-local</url>
+        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
