@@ -1,7 +1,15 @@
 <?xml version="1.0"?>
 <jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.2"
                             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <sub-deployment name="service.war">
+        <exclusions>
+            <module name="org.jboss.resteasy.resteasy-jackson-provider" />
+            <module name="org.jboss.resteasy.resteasy-jettison-provider" />
+        </exclusions>
+    </sub-deployment>
     <deployment>
+
+
         <dependencies>
 
             <module
@@ -55,6 +63,10 @@
             />
 
 
+            <module
+                    export="true"
+                    name="org.eclipse.moxy"
+            />
 
             <module
                     export="true"

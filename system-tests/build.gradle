@@ -13,7 +13,7 @@ task copyWildfly(type: Copy) << {
     destinationDir = file("${project.buildDir}/wildfly")
 }
 
-task explodeWildfly(type:Copy, dependsOn: 'copyWildfly') << {
+task explodeWildfly(type:Copy, dependsOn: 'copyWildfly')  << {
     from zipTree("${project.buildDir}/wildfly/wildfly.zip")
     into "${project.buildDir}/wildfly-home"
 }
@@ -23,7 +23,7 @@ test.dependsOn ':web:hasli.io:ear'
 
 subprojects {
     apply plugin: 'java'
-    test {
+    systemTest {
         environment 'wildflyHome', "${project.buildDir}/wildfly/wildfly.zip"
         systemProperty 'wildflyHome', "${project.buildDir}/wildfly/wildfly.zip"
     }

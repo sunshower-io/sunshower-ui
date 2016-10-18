@@ -49,6 +49,7 @@ subprojects {
         ].each {
             provided("org.springframework.security:spring-security-$it")
         }
+        provided group: 'org.eclipse.persistence', name: 'org.eclipse.persistence.moxy'
 
         testCompile("org.springframework:spring-test")
         testCompile("org.springframework.security:spring-security-test")

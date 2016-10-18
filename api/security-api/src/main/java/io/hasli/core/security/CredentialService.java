@@ -12,7 +12,7 @@ import javax.ws.rs.core.MediaType;
  * Created by haswell on 10/15/16.
  */
 @Path("security")
-@Produces(MediaType.APPLICATION_XML)
+@Produces(MediaType.APPLICATION_JSON)
 public interface CredentialService extends UserDetailsService {
 
     @GET
