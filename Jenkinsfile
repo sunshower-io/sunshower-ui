@@ -25,7 +25,7 @@ node('docker-registry') {
 
         stage 'Gradle build'
         try {
-            sh "docker run --name=$VERSION.$BUILD -v `pwd`:/usr/src/ hasli.io/build:$VERSION.$BUILD /usr/src/gradlew installBillOfMaterials clean build"
+            sh "docker run --name=$VERSION.$BUILD -v `pwd`:/usr/src/ hasli.io/build:$VERSION.$BUILD /usr/src/gradlew installBillOfMaterials && /usr/src/gradlew clean build"
         } catch (Exception e) {
             error "Failed: ${e}"
             throw (e)
