@@ -47,10 +47,27 @@
         <h2.version>1.4.192</h2.version>
         <hibernate-jpa-2.1-api.version>1.0.0.Final</hibernate-jpa-2.1-api.version>
         <flyway-core.version>4.0.3</flyway-core.version>
+        <resteasy.version>3.0.19.Final</resteasy.version>
+        <jaxrs.api>2.0</jaxrs.api>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+
+
+
+            <dependency>
+                <groupId>javax.ws.rs</groupId>
+                <artifactId>javax.ws.rs-api</artifactId>
+                <version>${jaxrs.api}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-client</artifactId>
+                <version>${resteasy.version}</version>
+            </dependency>
+
+
             <dependency>
                 <groupId>org.eclipse.persistence</groupId>
                 <artifactId>org.eclipse.persistence.moxy</artifactId>
@@ -195,6 +212,12 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-orm</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
                 <version>${spring.version}</version>
             </dependency>
 

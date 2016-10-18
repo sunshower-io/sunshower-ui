@@ -9,6 +9,27 @@ publishing {
     }
 }
 
+allprojects {
+//    apply plugin: 'java'
+//
+//    configurations {
+//        testArtifacts.extendsFrom testRuntime
+//    }
+//
+//    task testJar(type:Jar) {
+//        classifier 'tests'
+//        from sourceSets.test.output
+//    }
+
+
+//
+//    artifacts {
+//        testArtifacts "testArtifact$project.name"
+//    }
+
+}
+
+
 artifactory {
 
     if (System.properties.getProperty('artifactory_user') != null &&
