@@ -1,6 +1,8 @@
 FROM openjdk:8-jdk
 
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils && \
+    apt-get install -y \
+    build-essential && \
     rm -rf /var/lib/apt/lists/*
 
 # Install and setup Maven
@@ -19,11 +21,9 @@ ENV M2_HOME "/usr/share/maven"
 VOLUME "$USER_HOME_DIR/.m2"
 
 # Install Node.js
-ARG NODE_VERSION="4.6.0"
-
 RUN curl -sL https://deb.nodesource.com/setup_4.x | bash - && \
     apt-get install -y nodejs
 
 WORKDIR /usr/src
 
-cmd ["/bin/bash"]
+CMD ["/bin/bash"]
