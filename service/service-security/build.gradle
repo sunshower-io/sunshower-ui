@@ -6,10 +6,10 @@ dependencies {
     compile project(":api:security-api")
     compile project(':persist:persist-hibernate')
 
-    testCompile project(
-            configuration: 'test',
-            path: ":persist:persist-hibernate"
-    )
+//    testCompile project(
+//            configuration: 'test',
+//            path: ":persist:persist-hibernate"
+//    )
 
     provided 'org.springframework:spring-web'
 
