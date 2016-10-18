@@ -9,6 +9,24 @@ publishing {
     }
 }
 
+allprojects {
+    configurations {
+        testArtifacts.extendsFrom testRuntime
+    }
+
+    task(name: "testArtifact$project.name", type:Jar) {
+
+    }
+
+
+//
+//    artifacts {
+//        testArtifacts "testArtifact$project.name"
+//    }
+
+}
+
+
 artifactory {
     contextUrl = artifactory_contextUrl
     publish {

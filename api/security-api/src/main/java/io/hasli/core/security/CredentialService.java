@@ -15,7 +15,4 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public interface CredentialService extends UserDetailsService {
 
-    @GET
-    @Path("/authenticate")
-    User authenticate();
 }

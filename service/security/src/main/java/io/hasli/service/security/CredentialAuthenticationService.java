@@ -27,18 +27,6 @@ public class CredentialAuthenticationService implements CredentialService {
     private EntityManager entityManager;
 
 
-    @GET
-    @Path("/authenticate")
-    public User authenticate() {
-        System.out.println("ENTITYMANAGER" + entityManager);
-
-        User u = new User();
-        u.setPassword("frap");
-        u.setUsername("adap");
-        entityManager.merge(u);
-        return u;
-    }
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User u = new User();
