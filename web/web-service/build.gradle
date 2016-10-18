@@ -11,8 +11,7 @@ dependencies {
     provided 'org.flywaydb:flyway-core'
 
 
-    compile project(":service:service-security")
-    compile project(":persist:persist-hibernate")
+    compile project(":service-security")
+    compile project(":persist-hibernate")
 
 }
-

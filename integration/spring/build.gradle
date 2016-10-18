@@ -1,7 +1,7 @@
 
 apply plugin: 'war'
 dependencies {
-    compile project(":integration:api")
+    compile project(":integration-api")
     testCompile("org.mockito:mockito-core")
 //    compile 'org.apache.deltaspike.core:deltaspike-core-api'
 //    compile 'org.apache.deltaspike.core:deltaspike-core-impl'

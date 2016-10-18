@@ -11,7 +11,7 @@ configurations {
 }
 
 dependencies {
-    web project(path:":web:web-ui", configuration:'uiPackage')
+    web project(path:":web-ui", configuration:'uiPackage')
 }
 
 

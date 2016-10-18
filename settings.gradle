@@ -1,46 +1,69 @@
 include(
         'aws',
         'hal',
-        'service',
-        'web:hasli.io',
-        'web:web-ui',
-        'web:web-site',
-        'web:web-service',
-        'api:vault-api',
-        'api:core-api',
-        'api:audit-api',
-        'api:common-api',
-        'api:security-api',
-        'service:service-security',
-        'integration:integration-api',
-        'integration:integration-spring',
-        'persist',
-        'persist:persist-api',
-        'persist:persist-core',
-        'persist:persist-jpa',
-        'persist:persist-hibernate',
-        'test:test-common',
-        'test:test-persist',
-        'test:test-serialization',
-        'test:test-service',
-        'system-tests',
-        'system-tests:st-common',
-        'system-tests:st-security',
-        'system-tests:st-web',
-
+        'audit-api',
+        'common-api',
+        'core-api',
+        'security-api',
+        'vault-api',
+        'integration-api',
+        'integration-spring',
+        'persist-api',
+        'persist-core',
+        'persist-jpa',
+        'persist-hibernate',
+        'service-security',
+        'st-common',
+        'st-security',
+        'st-web',
+        'test-common',
+        'test-persist',
+        'test-serialization',
+        'test-service',
+        'hasli.io',
+        'web-service',
+        'web-site',
+        'web-ui'
 )
 
 def mappings = [
-//        'api'    : [
-//                'common',
-//                'core',
-//                'csp',
-//                'aws',
-//                'security'
-//        ],
-//        'service': ['security'],
-//        'web'    : ['ui', 'service', 'site', 'webapp'],
-//        'integration' : ['api', 'spring']
+        'api' : [
+                'audit-api',
+                'common-api',
+                'core-api',
+                'security-api',
+                'vault-api'
+        ],
+        'integration' : [
+                'integration-api',
+                'integration-spring'
+        ],
+        'persist' : [
+                'persist-api',
+                'persist-core',
+                'persist-jpa',
+                'persist-hibernate'
+        ],
+        'service' : [
+                'service-security'
+        ],
+        'system-tests' : [
+                'st-common',
+                'st-security',
+                'st-web'
+        ],
+        'test' : [
+                'test-common',
+                'test-persist',
+                'test-serialization',
+                'test-service'
+        ],
+        'web' : [
+                'hasli.io',
+                'web-service',
+                'web-site',
+                'web-ui'
+        ]
 ]
 
 

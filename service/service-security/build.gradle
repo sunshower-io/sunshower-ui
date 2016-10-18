@@ -2,9 +2,9 @@ apply plugin: 'java'
 dependencies {
     provided 'com.zaxxer:HikariCP'
 
-    compile project(":api:core-api")
-    compile project(":api:security-api")
-    compile project(':persist:persist-hibernate')
+    compile project(":core-api")
+    compile project(":security-api")
+    compile project(':persist-hibernate')
 
 //    testCompile project(
 //            configuration: 'test',

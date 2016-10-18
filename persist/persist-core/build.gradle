@@ -1,7 +1,7 @@
 
 dependencies {
-    compile project(':api:common-api')
-    compile project(':persist:persist-api')
+    compile project(':common-api')
+    compile project(':persist-api')
 
 
     provided 'com.zaxxer:HikariCP'
