@@ -21,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
         PropertyConfigurationSourceConfiguration.class,
         ConfigurationSourceDataSourceConfiguration.class
 })
-@Transactional
 public abstract class HibernateTestCase {
 
 

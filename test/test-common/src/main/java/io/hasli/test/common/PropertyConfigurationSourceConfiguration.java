@@ -4,11 +4,11 @@ import io.hasli.common.configuration.ConfigurationSource;
 import io.hasli.common.configuration.MapConfigurationSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.*;
+import java.net.URISyntaxException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,50 +23,41 @@ public class PropertyConfigurationSourceConfiguration {
             PropertyConfigurationSourceConfiguration.class.getName());
 
     @Bean
-    public ConfigurationSource configurationSource() {
+    public ConfigurationSource configurationSource() throws URISyntaxException, IOException {
 
-        final File file = new File(ClassLoader
-                .getSystemResource("properties").getFile()
-        );
 
-        return new MapConfigurationSource(loadProperties(file));
+        return new MapConfigurationSource(loadProperties(PropertyConfigurationSourceConfiguration
+                .class.getClassLoader()));
     }
 
-    private Map<String, String> loadProperties(File file) {
-        if (!file.exists()) {
-            throw new IllegalArgumentException(String.format(
-                    "Error: file '%s' does not exist", file.getAbsolutePath()));
-        }
+    private Map<String, String> loadProperties(ClassLoader cl) throws URISyntaxException, IOException {
+        final PathMatchingResourcePatternResolver resolver =
+                new PathMatchingResourcePatternResolver(ClassLoader.getSystemClassLoader());
+        final Resource[] resources = resolver.getResources("classpath*:/properties/**/*.properties");
+        final Map<String, String> results = new HashMap<>();
+        System.out.println("RESOURCES: " + resources.length);
+        for(Resource resource : resources) {
 
-        if (!file.isDirectory()) {
-            throw new IllegalArgumentException(String.format(
-                    "Error: file '%s' is not a directory", file.getAbsolutePath()));
-        }
-
-        Map<String, String> results = new HashMap<>();
-        Arrays.stream(Objects.requireNonNull(file).listFiles(f ->
-                f.getName().endsWith(".properties")))
-                .forEach(f -> {
-                    try (InputStream fis = new BufferedInputStream(new FileInputStream(f))) {
-                        logger.log(Level.INFO,
-                                "Reading property file: {0}", f.getAbsolutePath()
-                        );
-                        final Properties properties = new Properties();
-                        properties.load(fis);
-                        for(Enumeration<Object> keys =
-                            properties.keys(); keys.hasMoreElements();) {
-                            final String key = Objects.toString(keys.nextElement());
-                            results.put(key, properties.getProperty(key));
-                        }
-                    } catch (Exception ex) {
-                        logger.log(Level.WARNING,
-                                "Failed to load property file {0}.  Reason:{1}",
-                                new Object[]{
-                                        file.getAbsolutePath(),
-                                        ex.getMessage(),
+            try (InputStream fis = resource.getInputStream()) {
+                logger.log(Level.INFO,
+                        "Reading property file: {0}", resource
+                );
+                final Properties properties = new Properties();
+                properties.load(fis);
+                for(Enumeration<Object> keys =
+                    properties.keys(); keys.hasMoreElements();) {
+                    final String key = Objects.toString(keys.nextElement());
+                    results.put(key, properties.getProperty(key));
+                }
+            } catch (Exception ex) {
+                logger.log(Level.WARNING,
+                        "Failed to load property file {0}.  Reason:{1}",
+                        new Object[]{
+                                resource,
+                                ex.getMessage(),
                         });
-                    }
-                });
+            }
+        }
         return results;
 
     }
