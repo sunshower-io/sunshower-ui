@@ -20,7 +20,15 @@ export class App {
                 moduleId: 'login/login',
                 nav: true,
                 title: 'login'
-            },
+            }, {
+
+                route: 'signup',
+                name: 'signup',
+                moduleId: 'signup/signup',
+                nav: true,
+                title: 'signup'
+            }
+
         ]);
 
         this.router = router;

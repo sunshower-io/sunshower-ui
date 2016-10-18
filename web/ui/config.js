@@ -218,7 +218,14 @@ System.config({
       "semantic-ui"
     ],
     "main.js": [
+      "aurelia-fetch-client",
       "jquery"
+    ],
+    "signup/signup.js": [
+      "aurelia-fetch-client",
+      "aurelia-dependency-injection",
+      "aurelia-framework",
+      "../model/core/security/user"
     ]
   },
   bundles: {
@@ -229,7 +236,10 @@ System.config({
       "home/home.js",
       "login/login.html!github:systemjs/plugin-text@0.0.8.js",
       "login/login.js",
-      "main.js"
+      "main.js",
+      "model/core/security/user.js",
+      "signup/signup.html!github:systemjs/plugin-text@0.0.8.js",
+      "signup/signup.js"
     ],
     "aurelia.js": [
       "github:Semantic-Org/Semantic-UI@2.2.4.js",

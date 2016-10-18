@@ -5,7 +5,8 @@ dependencies {
     compile project(':persist:persist-core')
     testCompile "com.h2database:h2"
     provided 'com.zaxxer:HikariCP'
-    compile('org.hibernate:hibernate-core')
-    compile('org.hibernate:hibernate-entitymanager')
+    provided 'org.flywaydb:flyway-core'
+    provided('org.hibernate:hibernate-core')
+    provided('org.hibernate:hibernate-entitymanager')
     compile('org.hibernate.javax.persistence:hibernate-jpa-2.1-api')
 }

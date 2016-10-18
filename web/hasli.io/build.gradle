@@ -18,8 +18,14 @@ configurations {
 dependencies {
     earlib project(":service:security")
 //    site  project(path:':web:site')
-//    deploy project(path: ':web:site', configuration: 'archives')
+    deploy project(path: ':web:site', configuration: 'archives')
     deploy project(path:':web:service', configuration:'archives')
+}
+
+jar {
+    manifest {
+        attributes("FRAP": "DAP")
+    }
 }
 
 ear {
@@ -30,6 +36,9 @@ ear {
 
 
 String stripVersion(String input) {
+    if(input.endsWith(".xml") || input.endsWith(".MF")) {
+        return input
+    }
     int fstIndexOf = input.indexOf('-');
     int lastIndexOf = input.lastIndexOf('.');
     if(fstIndexOf > -1 && lastIndexOf > -1) {
