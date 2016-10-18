@@ -10,12 +10,15 @@ publishing {
 }
 
 allprojects {
+    apply plugin: 'java'
+
     configurations {
         testArtifacts.extendsFrom testRuntime
     }
 
-    task(name: "testArtifact$project.name", type:Jar) {
-
+    task testJar(type:Jar) {
+        classifier 'tests'
+        from sourceSets.test.output
     }
 
 
