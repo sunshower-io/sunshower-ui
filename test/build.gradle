@@ -1,0 +1,7 @@
+
+subprojects {
+    dependencies {
+        compile('org.junit.jupiter:junit-jupiter-engine')
+        compile('org.junit.vintage:junit-vintage-engine')
+    }
+}
