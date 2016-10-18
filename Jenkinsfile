@@ -4,7 +4,7 @@ def majorVersion   = "1"
 def minorVersion   = "0"
 def buildNumber
 def buildSuffix    = "Final"
-def version        = "$MAJOR_VERSION.$MINOR_VERSION"
+def version        = "$majorVersion.$minorVersion"
 def registry       = "10.0.4.51:5000"
 def runSystemTests = false
 def gradleTasks    = []
