@@ -1,10 +1,6 @@
-
 dependencies {
+    compile project(':api:core-api')
     compile project(':api:common-api')
     compile project(':persist:persist-api')
-
-
-    provided 'com.zaxxer:HikariCP'
-
-    testCompile('com.h2database:h2')
+    provided 'org.flywaydb:flyway-core'
 }

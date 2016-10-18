@@ -1,0 +1,18 @@
+apply plugin: 'war'
+
+dependencies {
+    provided 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'
+    provided group: 'org.jboss.resteasy', name: 'resteasy-spring', version: '3.0.19.Final'
+    provided group: 'org.springframework', name: 'spring-web', version: '4.1.4.RELEASE'
+    provided group: 'org.springframework', name: 'spring-webmvc', version: '4.1.4.RELEASE'
+    provided group: 'org.eclipse.persistence', name: 'org.eclipse.persistence.moxy'
+
+    provided 'com.zaxxer:HikariCP'
+    provided 'org.flywaydb:flyway-core'
+
+
+    compile project(":service:service-security")
+    compile project(":persist:persist-hibernate")
+
+}
+
