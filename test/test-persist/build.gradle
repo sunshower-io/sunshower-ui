@@ -1,6 +1,8 @@
 dependencies {
     compile "com.h2database:h2"
     compile project(":test:test-common")
+    compile project(":persist:persist-core")
+    compile project(":persist:persist-jpa")
     compile("org.springframework:spring-test")
     compile("org.springframework.security:spring-security-test")
 }

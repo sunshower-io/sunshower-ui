@@ -5,6 +5,7 @@ import io.hasli.persist.core.ConfigurationSourceDataSourceConfiguration;
 import io.hasli.persist.core.DatabaseConfiguration;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.test.common.PropertyConfigurationSourceConfiguration;
+import io.hasli.test.persist.HibernateTestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -23,16 +24,11 @@ import static org.junit.Assert.assertThat;
  * Created by haswell on 10/17/16.
  */
 
-@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {
-        FlywayConfiguration.class,
-        DatabaseConfiguration.class,
         HibernateConfiguration.class,
-        PropertyConfigurationSourceConfiguration.class,
-        ConfigurationSourceDataSourceConfiguration.class
 })
 @Transactional
-public class UserPersistenceTest {
+public class UserPersistenceTest extends HibernateTestCase {
 
     @PersistenceContext
     private EntityManager entityManager;
