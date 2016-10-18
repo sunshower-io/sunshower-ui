@@ -4,6 +4,8 @@ dependencies {
     compile("org.flywaydb:flyway-core")
     compile project(":persist:persist-core")
     compile project(":persist:persist-jpa")
+    compile("org.hibernate:hibernate-core")
+    compile("org.hibernate:hibernate-entitymanager")
     compile("org.springframework:spring-test")
     compile("org.springframework.security:spring-security-test")
 }
