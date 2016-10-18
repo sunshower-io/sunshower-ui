@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.2"
+                            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <deployment>
+        <dependencies>
+
+            <module
+                    export="true"
+                    name="org.springframework.orm"
+            />
+            <module
+                    export="true"
+                    name="org.springframework.web"
+            />
+
+
+            <module
+                    export="true"
+                    name="org.springframework.beans"
+            />
+
+
+            <module
+                    export="true"
+                    name="org.springframework.context"
+            />
+
+
+
+            <module
+                    export="true"
+                    name="org.flywaydb"
+            />
+
+
+
+            <module
+                    export="true"
+                    name="org.springframework.aop"
+            />
+
+            <module
+                    export="true"
+                    name="org.springframework.tx"
+            />
+
+            <module
+                    export="true"
+                    name="org.springframework.security"
+            />
+
+            <module
+                    export="true"
+                    name="org.springframework.core"
+            />
+
+
+
+            <module
+                    export="true"
+                    name="javax.persistence.api"
+            />
+
+            <module name="org.hibernate" export="true" />
+
+
+        </dependencies>
+    </deployment>
+</jboss-deployment-structure>

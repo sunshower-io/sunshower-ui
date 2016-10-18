@@ -22,6 +22,12 @@ dependencies {
     deploy project(path:':web:service', configuration:'archives')
 }
 
+jar {
+    manifest {
+        attributes("FRAP": "DAP")
+    }
+}
+
 ear {
     rename { deployment ->
         return stripVersion(deployment)
@@ -30,6 +36,9 @@ ear {
 
 
 String stripVersion(String input) {
+    if(input.endsWith(".xml") || input.endsWith(".MF")) {
+        return input
+    }
     int fstIndexOf = input.indexOf('-');
     int lastIndexOf = input.lastIndexOf('.');
     if(fstIndexOf > -1 && lastIndexOf > -1) {
