@@ -2,11 +2,11 @@ apply plugin: 'java'
 
 
 task installGulp(type:Exec) {
-    commandLine 'npm', 'install', 'gulp'
+    commandLine 'npm', 'install', 'gulp', '-g'
 }
 
 task installJspm(type:Exec) {
-    commandLine 'npm', 'install', 'jspm'
+    commandLine 'npm', 'install', 'jspm', '-g'
 }
 
 task installNpmDeps(type:Exec) {
