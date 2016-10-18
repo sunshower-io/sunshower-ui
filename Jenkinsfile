@@ -1,14 +1,11 @@
 #!/usr/bin/env groovy
 
-def MAJOR_VERSION = "1"
-def MINOR_VERSION = "0"
+def MAJOR_VERSION  = "1"
+def MINOR_VERSION  = "0"
 def BUILD
-def VERSION       = "$MAJOR_VERSION.$MINOR_VERSION"
-def registry      = "10.0.4.51:5000"
-
-
-def runIntegrationTests = false
-def runSystemTests      = false
+def VERSION        = "$MAJOR_VERSION.$MINOR_VERSION"
+def registry       = "10.0.4.51:5000"
+def runSystemTests = false
 
 if (env.BRANCH_NAME == "master") {
     BUILD = env.BUILD_NUMBER
@@ -27,8 +24,15 @@ node('docker-registry') {
         sh "chmod +x gradlew"
 
         stage 'Gradle build'
-        sh "docker run --name=$VERSION.$BUILD -v `pwd`:/usr/src/ hasli.io/build:$VERSION.$BUILD /usr/src/gradlew installBillOfMaterials clean build"
-        sh "docker rm $VERSION.$BUILD"
+        try {
+            sh "docker run --name=$VERSION.$BUILD -v `pwd`:/usr/src/ hasli.io/build:$VERSION.$BUILD /usr/src/gradlew installBillOfMaterials clean build"
+        } catch (Exception e) {
+            error "Failed: ${e}"
+            throw (e)
+        } finally {
+            junit allowEmptyResults: true, keepLongStdio: true, testResults: '**/build/test-results/*.xml'
+            sh "docker rm $VERSION.$BUILD"
+        }
     }
 }
 
