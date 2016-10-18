@@ -30,9 +30,6 @@ import static org.junit.Assert.assertThat;
 @RunWith(Arquillian.class)
 public class AuthenticationTest {
 
-//    @PersistenceContext
-//    private EntityManager entityManager;
-
 
 
     @Deployment
