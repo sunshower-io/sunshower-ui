@@ -2,10 +2,7 @@ package io.hasli.service.signup;
 
 import io.hasli.model.core.auth.User;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -25,12 +22,12 @@ public interface SignupService {
 
 
 
-    @GET
-    @Path("user")
-    public User signup(User input);
+    @POST
+    @Path("signup")
+    User signup(User input);
 
     @GET
     @Path("list")
-    public List<User> list();
+    List<User> list();
 
 }

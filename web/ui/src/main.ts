@@ -1,16 +1,29 @@
 import 'jquery'
 import {Aurelia} from 'aurelia-framework';
+import {HttpClient} from 'aurelia-fetch-client';
+
 
 export function configure(aurelia: Aurelia) {
-  aurelia.use
-    .standardConfiguration()
-    .developmentLogging();
+    aurelia.use
+        .standardConfiguration()
+        .developmentLogging();
 
-  // Uncomment the line below to enable animation.
-  // aurelia.use.plugin('aurelia-animator-css');
+    let container = aurelia.container;
 
-  // Anyone wanting to use HTMLImports to load views, will need to install the following plugin.
-  // aurelia.use.plugin('aurelia-html-import-template-loader')
+    let http = new HttpClient();
+    http.configure(config => {
+        config
+            .useStandardConfiguration()
+            .withBaseUrl('/hasli/api/v1/')
+            .withDefaults({
+                headers: {
+                    // 'Authorization': tokenVariable // <---- your magic here
+                }
+            })
+    });
 
-  aurelia.start().then(() => aurelia.setRoot());
+    container.registerInstance(HttpClient, http);
+
+
+    aurelia.start().then(() => aurelia.setRoot());
 }

@@ -12,10 +12,10 @@
             <context-root>hasli/api</context-root>
         </web>
     </module>
-    <!--<module>-->
-        <!--<web>-->
-            <!--<web-uri>site.war</web-uri>-->
-            <!--<context-root>hasli/web</context-root>-->
-        <!--</web>-->
-    <!--</module>-->
+    <module>
+        <web>
+            <web-uri>site.war</web-uri>
+            <context-root>hasli/web</context-root>
+        </web>
+    </module>
 </application>

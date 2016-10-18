@@ -30,6 +30,9 @@ public class User extends AbstractEntity<UUID> implements UserDetails {
     private String username;
 
     @XmlAttribute
+    private String emailAddress;
+
+    @XmlAttribute
     private String password;
 
     public User() {
