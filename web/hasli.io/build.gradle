@@ -16,10 +16,10 @@ configurations {
 
 
 dependencies {
-    earlib project(":service-security")
+    earlib project(":service:service-security")
 //    site  project(path:':web:site')
-    deploy project(path: ':web-site', configuration: 'archives')
-    deploy project(path:':web-service', configuration:'archives')
+    deploy project(path: ':web:web-site', configuration: 'archives')
+    deploy project(path:':web:web-service', configuration:'archives')
 }
 
 jar {

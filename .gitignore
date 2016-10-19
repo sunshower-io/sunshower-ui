@@ -3,6 +3,8 @@
 
 bom/publish.properties
 **/export
+**/target
+**/pom.xml.versionsBackup
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

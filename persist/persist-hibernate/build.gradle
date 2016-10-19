@@ -1,8 +1,8 @@
 dependencies {
-    compile project(':core-api')
-    compile project(':common-api')
-    compile project(':persist-jpa')
-    compile project(':persist-core')
+    compile project(':api:core-api')
+    compile project(':api:common-api')
+    compile project(':persist:persist-jpa')
+    compile project(':persist:persist-core')
 
 
     provided 'com.zaxxer:HikariCP'
@@ -11,5 +11,5 @@ dependencies {
     provided('org.hibernate:hibernate-entitymanager')
     compile('org.hibernate.javax.persistence:hibernate-jpa-2.1-api')
 
-    testCompile project(":test-persist")
+    testCompile project(":test:test-persist")
 }

@@ -11,9 +11,9 @@ publishing {
 
 
 artifactory {
-
-    if (System.properties.getProperty('artifactory_user') != null &&
-        System.properties.getProperty('artifactory_password'))
+    if (project.hasProperty('artifactory_user') &&
+        project.hasProperty('artifactory_password') &&
+        project.hasProperty('artifactory_contextUrl'))
     {
         contextUrl = artifactory_contextUrl
         publish {

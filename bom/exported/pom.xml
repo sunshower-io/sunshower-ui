@@ -5,12 +5,12 @@
     <parent>
         <groupId>io.hasli</groupId>
         <artifactId>bom</artifactId>
-        <version>1.00.000.000-SNAPSHOT</version>
+        <version>1.0.0.Final</version>
         <relativePath>../</relativePath>
     </parent>
     <groupId>io.hasli</groupId>
     <artifactId>bom-exported</artifactId>
-    <version>1.00.000.000-SNAPSHOT</version>
+    <version>1.0.0.Final</version>
     <packaging>pom</packaging>
 
     <name>Hasli.io Exported Bill-Of-Materials</name>
