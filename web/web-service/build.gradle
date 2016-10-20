@@ -15,4 +15,3 @@ dependencies {
     compile project(":persist:persist-hibernate")
 
 }
-

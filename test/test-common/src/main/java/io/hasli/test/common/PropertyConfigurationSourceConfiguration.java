@@ -1,4 +1,4 @@
-package io.hasli.persist.hibernate;
+package io.hasli.test.common;
 
 import io.hasli.common.configuration.ConfigurationSource;
 import io.hasli.common.configuration.MapConfigurationSource;

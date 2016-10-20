@@ -8,7 +8,7 @@ dependencies {
 
 //    testCompile project(
 //            configuration: 'test',
-//            path: ":persist:perhibernate"
+//            path: ":persist:persist-hibernate"
 //    )
 
     provided 'org.springframework:spring-web'

@@ -3,10 +3,13 @@ dependencies {
     compile project(':api:common-api')
     compile project(':persist:persist-jpa')
     compile project(':persist:persist-core')
-    testCompile "com.h2database:h2"
+
+
     provided 'com.zaxxer:HikariCP'
     provided 'org.flywaydb:flyway-core'
     provided('org.hibernate:hibernate-core')
     provided('org.hibernate:hibernate-entitymanager')
     compile('org.hibernate.javax.persistence:hibernate-jpa-2.1-api')
+
+    testCompile project(":test:test-persist")
 }
