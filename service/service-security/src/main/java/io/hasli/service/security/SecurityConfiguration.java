@@ -1,6 +1,8 @@
 package io.hasli.service.security;
 
 import io.hasli.core.security.CredentialService;
+import io.hasli.core.security.UserService;
+import io.hasli.service.security.user.DefaultUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -32,8 +34,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+    public UserService userService() {
+        return new DefaultUserService();
+    }
+
+    @Bean
     @Singleton
     public CredentialService credentialService() {
         return new CredentialAuthenticationService();
     }
+
 }

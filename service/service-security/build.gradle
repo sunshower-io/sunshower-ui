@@ -3,6 +3,8 @@ dependencies {
     provided 'com.zaxxer:HikariCP'
 
     compile project(":api:core-api")
+    compile project(":api:vault-api")
+    compile project(":api:vault-api")
     compile project(":api:security-api")
     compile project(":test:test-persist")
     compile project(':persist:persist-hibernate')

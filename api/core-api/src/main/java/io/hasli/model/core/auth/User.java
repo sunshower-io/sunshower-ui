@@ -30,6 +30,12 @@ public class User extends AbstractEntity<UUID> implements UserDetails {
     private String username;
 
     @XmlAttribute
+    private String firstname;
+
+    @XmlAttribute
+    private String lastname;
+
+    @XmlAttribute
     private String emailAddress;
 
     @XmlAttribute
@@ -37,6 +43,12 @@ public class User extends AbstractEntity<UUID> implements UserDetails {
 
     public User() {
         super(UUID.randomUUID());
+    }
+
+    public User(UUID id, final String username, final String password) {
+        super(id);
+        this.username = username;
+        this.password = password;
     }
 
     public User(UUID uuid) {
