@@ -47,7 +47,7 @@ node('docker-registry') {
 
         stage 'Gradle Build / Test'
         try {
-            sh "docker run --name=$version.$buildNumber -v `pwd`:/usr/src/ hasli.io/build:$version.$buildNumber /usr/src/gradlew ${gradleTasks.join(" ")}"
+            sh "docker run --name=$version.$buildNumber -v `pwd`:/usr/src/ -v ~/.gradle/gradle.properties:/root/.gradle/gradle.properties hasli.io/build:$version.$buildNumber /usr/src/gradlew ${gradleTasks.join(" ")}"
         } catch (Exception e) {
             error "Failed: ${e}"
             throw (e)
