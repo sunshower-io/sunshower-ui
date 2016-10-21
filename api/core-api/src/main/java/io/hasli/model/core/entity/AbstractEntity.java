@@ -1,5 +1,7 @@
 package io.hasli.model.core.entity;
 
+import io.hasli.model.core.auth.User;
+
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
@@ -7,25 +9,18 @@ import java.io.Serializable;
 /**
  * Created by haswell on 10/12/16.
  */
-@MappedSuperclass
-public abstract class AbstractEntity<ID extends Serializable> 
+public abstract class AbstractEntity<ID extends Serializable>
         implements Persistable<ID> {
     
-    @Id
-    private ID id;
 
     protected AbstractEntity(ID id) {
         setId(id);
     }
 
-    protected void setId(ID id) {
-        this.id = id;
-    }
 
-    @Override
-    public ID getId() {
-        return id;
-    }
+    public abstract ID getId();
+
+    protected abstract void setId(ID id);
 
     protected abstract void setDefaults();
 
@@ -34,4 +29,6 @@ public abstract class AbstractEntity<ID extends Serializable>
 
     @Override
     public abstract String toString();
+
+
 }

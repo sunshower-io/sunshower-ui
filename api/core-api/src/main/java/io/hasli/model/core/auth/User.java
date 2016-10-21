@@ -2,19 +2,16 @@ package io.hasli.model.core.auth;
 
 import io.hasli.model.core.entity.AbstractEntity;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.security.Principal;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -22,6 +19,9 @@ import java.util.UUID;
 @XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.NONE)
 public class User extends AbstractEntity<UUID> implements UserDetails {
+
+    @Id
+    private UUID id;
 
     @Transient
     private Details details;
@@ -41,6 +41,24 @@ public class User extends AbstractEntity<UUID> implements UserDetails {
     @XmlAttribute
     private String password;
 
+    @ManyToMany(
+            cascade = CascadeType.ALL
+    )
+    @JoinTable(
+            name = "users_to_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id",
+                    referencedColumnName = "id"
+            )
+    )
+    private Set<Role> roles;
+
+
+
     public User() {
         super(UUID.randomUUID());
     }
@@ -53,6 +71,16 @@ public class User extends AbstractEntity<UUID> implements UserDetails {
 
     public User(UUID uuid) {
         super(uuid);
+    }
+
+    @Override
+    public UUID getId() {
+        return id;
+    }
+
+    @Override
+    protected void setId(UUID uuid) {
+        this.id = uuid;
     }
 
     @Override
@@ -98,7 +126,7 @@ public class User extends AbstractEntity<UUID> implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new Authority("admin"));
+        return roles;
     }
 
     public String getPassword() {
@@ -117,5 +145,14 @@ public class User extends AbstractEntity<UUID> implements UserDetails {
     @Override
     public String toString() {
         return null;
+    }
+
+    public User addRole(Role role) {
+        role.addUser(this);
+        if(this.roles == null) {
+            this.roles = new LinkedHashSet<>();
+        }
+        this.roles.add(role);
+        return this;
     }
 }

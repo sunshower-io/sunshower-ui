@@ -22,15 +22,10 @@ import javax.inject.Singleton;
 )
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Inject
-    private CredentialService credentialService;
-
-
 
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(credentialService);
     }
 
     @Bean
@@ -38,10 +33,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new DefaultUserService();
     }
 
-    @Bean
-    @Singleton
-    public CredentialService credentialService() {
-        return new CredentialAuthenticationService();
-    }
 
 }

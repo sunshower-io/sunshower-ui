@@ -46,15 +46,24 @@ public class MessageAuthenticationCode {
     }
 
     public String id(String token) {
-        final Base64.Decoder decoder = Base64.getDecoder();
-        final String[] parts = token.split(":");
-        final byte[] id = decoder.decode(parts[0]);
-        final byte[] encrypted = decoder.decode(parts[1]);
-        final byte[] hashedBytes = createKey(id);
-        if(!Arrays.equals(encrypted, hashedBytes)) {
-            throw new InvalidTokenException("Error: provided signature did not match.");
+        if(token != null) {
+            final Base64.Decoder decoder = Base64.getDecoder();
+            final String[] parts = token.split(":");
+            if(parts.length == 2) {
+                final byte[] id = decoder.decode(parts[0]);
+                final byte[] encrypted = decoder.decode(parts[1]);
+                final byte[] hashedBytes = createKey(id);
+                if(Arrays.equals(encrypted, hashedBytes)) {
+                    return new String(id);
+                } else {
+                    throw new InvalidTokenException("Error: provided signature did not match.");
+                }
+            } else {
+                throw new InvalidTokenException("Invalid token format: '" + token + "'");
+            }
         }
-        return new String(id);
+        throw new InvalidTokenException("Token must not be null");
+
     }
 
 
