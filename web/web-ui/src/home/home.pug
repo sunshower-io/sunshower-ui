@@ -1,18 +1,23 @@
 template
-    .ui.card
-        .content
-            .right.floated.meta 14h
-            img.ui.avatar.image(src='/images/avatar/large/elliot.jpg')
-            |  Elliot
-        .image
-            img
-        .content
-            span.right.floated
-                i.heart.outline.like.icon
-                |       17 likes
-            i.comment.icon
-            |     3 comments
-        .extra.content
-            .ui.large.transparent.left.icon.input
-                i.heart.outline.icon
-                input(type='text', placeholder='Add Comment...')
+    .ui.sub.header Selection
+    select.ui.fluid.normal.dropdown(multiple='', name='skills')
+        option(value='') Skills
+        option(value='angular') Angular
+        option(value='css') CSS
+        option(value='design') Graphic Design
+        option(value='ember') Ember
+        option(value='html') HTML
+        option(value='ia') Information Architecture
+        option(value='javascript') Javascript
+        option(value='mech') Mechanical Engineering
+        option(value='meteor') Meteor
+        option(value='node') NodeJS
+        option(value='plumbing') Plumbing
+        option(value='python') Python
+        option(value='rails') Rails
+        option(value='react') React
+        option(value='repair') Kitchen Repair
+        option(value='ruby') Ruby
+        option(value='ui') UI Design
+        option(value='ux') User Experience
+

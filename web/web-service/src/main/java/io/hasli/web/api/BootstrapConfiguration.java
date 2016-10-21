@@ -7,7 +7,7 @@ import io.hasli.model.core.auth.User;
 import io.hasli.persist.core.DataSourceConfiguration;
 import io.hasli.persist.core.DatabaseConfiguration;
 import io.hasli.persist.hibernate.HibernateConfiguration;
-import io.hasli.service.security.CredentialAuthenticationService;
+//import io.hasli.service.security.CredentialAuthenticationService;
 import io.hasli.service.security.DefaultSignupService;
 import io.hasli.service.signup.SignupService;
 import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
@@ -47,11 +47,11 @@ public class BootstrapConfiguration {
     }
 
 
-    @Bean
-    public CredentialAuthenticationService credentialAuthenticationService() {
-        return new CredentialAuthenticationService();
-    }
-
+//    @Bean
+//    public CredentialAuthenticationService credentialAuthenticationService() {
+//        return new CredentialAuthenticationService();
+//    }
+//
 
     @Bean
     public MOXyJsonProvider moxyProvider() {

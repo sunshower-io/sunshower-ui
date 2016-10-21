@@ -19,7 +19,8 @@ module.exports = {
     './src/**/*/*.scss'
   ],
   dtsSrc: [
+     './tsd/**/*.d.ts',
     './typings/**/*.d.ts',
     './custom_typings/**/*.d.ts'
   ]
-}
+};

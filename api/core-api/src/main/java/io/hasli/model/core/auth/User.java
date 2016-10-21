@@ -137,14 +137,34 @@ public class User extends AbstractEntity<UUID> implements UserDetails {
         this.password = password;
     }
 
+
     @Override
-    public boolean equals(Object obj) {
-        return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+
+        User user = (User) o;
+
+        return id != null ? id.equals(user.id) : user.id == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
     public String toString() {
-        return null;
+        return "User{" +
+                "id=" + id +
+                ", details=" + details +
+                ", username='" + username + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 
     public User addRole(Role role) {

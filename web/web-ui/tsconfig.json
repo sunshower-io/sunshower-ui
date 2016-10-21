@@ -7,6 +7,7 @@
     "target": "es5",
     "module": "amd",
     "declaration": false,
+    "noEmitOnError": false,
     "noImplicitAny": false,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -19,9 +20,12 @@
     }
   },
   "filesGlob": [
+    "!./typings/globals/angular-protractor/**",
     "./src/**/*.ts",
     "./test/**/*.ts",
+    "!./node-modules/**",
     "./typings/index.d.ts",
+    "./tsd/**/*.d.ts",
     "./custom_typings/**/*.d.ts",
     "./jspm_packages/**/*.d.ts"
   ],

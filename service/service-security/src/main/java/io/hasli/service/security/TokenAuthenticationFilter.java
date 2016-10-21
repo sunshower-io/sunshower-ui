@@ -27,7 +27,7 @@ public class TokenAuthenticationFilter implements
         ContainerResponseFilter,
         ContainerRequestFilter {
 
-    private static final String HEADER_KEY = "X-AUTH-TOKEN";
+    public static final String HEADER_KEY = "X-AUTH-TOKEN";
 
     @Inject
     private KeyProvider keyProvider;
@@ -55,8 +55,9 @@ public class TokenAuthenticationFilter implements
                                 null,
                                 user.getAuthorities()
                         ));
+                System.out.println("USER: " + user.getAuthorities());
             } catch(InvalidTokenException ex) {
-
+                ex.printStackTrace();
             }
         }
 
