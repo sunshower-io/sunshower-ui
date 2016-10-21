@@ -111,7 +111,6 @@ public class Role extends AbstractEntity<UUID>
 
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -119,13 +118,13 @@ public class Role extends AbstractEntity<UUID>
 
         Role role = (Role) o;
 
-        return id != null ? id.equals(role.id) : role.id == null;
+        return authority != null ? authority.equals(role.authority) : role.authority == null;
 
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return authority != null ? authority.hashCode() : 0;
     }
 
     @Override

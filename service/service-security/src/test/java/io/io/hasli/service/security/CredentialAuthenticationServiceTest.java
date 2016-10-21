@@ -8,11 +8,9 @@ import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.service.security.TokenAuthenticationFilter;
 import io.hasli.service.security.crypto.MessageAuthenticationCode;
 import io.hasli.test.persist.HibernateTestCase;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.inject.Inject;
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -54,10 +52,11 @@ import static org.mockito.BDDMockito.given;
 
 @TestExecutionListeners(listeners = {
         ServletTestExecutionListener.class,
-        DependencyInjectionTestExecutionListener.class,
-        DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class,
-        WithSecurityContextTestExecutionListener.class}
+        DirtiesContextTestExecutionListener.class,
+        DependencyInjectionTestExecutionListener.class,
+        WithSecurityContextTestExecutionListener.class
+}
 )
 public class CredentialAuthenticationServiceTest extends HibernateTestCase {
 
@@ -78,10 +77,8 @@ public class CredentialAuthenticationServiceTest extends HibernateTestCase {
     private EntityManager entityManager;
 
     @Test
-    @Ignore
     @Transactional
     public void ensureSayHelloAdminWorks() throws IOException {
-
         final User user = new User();
         final Role adminRole = new Role("admin", "coolbeans");
         user.addRole(adminRole);
@@ -94,19 +91,45 @@ public class CredentialAuthenticationServiceTest extends HibernateTestCase {
                 TokenAuthenticationFilter.HEADER_KEY))
                 .willReturn(token);
         tokenAuthenticationFilter.filter(context);
-
-
         testSecureService.sayHelloAdmin();
     }
 
+
     @Test
-    @WithMockUser(username = "admin", roles = {"user", "admin"})
+    @Transactional
+    public void ensureSayHelloAdminWorksOnRolesAllowedWorks() throws IOException {
+        final User user = new User();
+        final Role adminRole = new Role("ROLE_ADMIN", "coolbeans");
+        user.addRole(adminRole);
+        entityManager.persist(user);
+        UUID id = user.getId();
+        String token = messageAuthenticationCode.token(id.toString());
+
+        final ContainerRequestContext context = Mockito.mock(ContainerRequestContext.class);
+        given(context.getHeaderString(
+                TokenAuthenticationFilter.HEADER_KEY))
+                .willReturn(token);
+        tokenAuthenticationFilter.filter(context);
+        testSecureService.sayHelloRolesAllowed();
+    }
+
+    @Test
+    @WithMockUser(
+            username = "admin",
+            roles = {
+                    "user",
+                    "admin",
+            }
+    )
     public void ensureMethodIsProtected() {
         testSecureService.sayHelloAdmin();
     }
 
     @Test
-    @WithMockUser(username = "admin", roles = {"admin"})
+    @WithMockUser(
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
+    )
     public void ensureMethodIsProtectedByRolesAllowed() {
         testSecureService.sayHelloRolesAllowed();
     }

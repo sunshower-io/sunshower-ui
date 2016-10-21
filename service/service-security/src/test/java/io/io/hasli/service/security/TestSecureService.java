@@ -12,17 +12,17 @@ import javax.annotation.security.RolesAllowed;
 @Service
 public class TestSecureService {
 
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("hasAuthority('admin') || hasRole('admin')")
     public String sayHelloAdmin() {
         return "hello";
     }
 
-    @PreAuthorize("hasRole('user')")
+    @PreAuthorize("hasAuthority('user')")
     public String sayHelloUser() {
         return "World";
     }
 
-    @RolesAllowed("admin")
+    @RolesAllowed("ROLE_ADMIN")
     public String sayHelloRolesAllowed() {
         return "Frap";
     }

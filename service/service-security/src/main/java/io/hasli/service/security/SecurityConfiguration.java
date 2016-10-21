@@ -8,6 +8,8 @@ import io.hasli.service.security.user.DefaultUserService;
 import io.hasli.vault.api.KeyProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.vote.RoleHierarchyVoter;
+import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -25,6 +27,7 @@ import javax.inject.Singleton;
         jsr250Enabled = true
 )
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
 
 
     @Inject
@@ -57,5 +60,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new MessageAuthenticationCode(
                 MessageAuthenticationCode.Algorithm.SHA256, keyProvider.getKey());
     }
+
 
 }
