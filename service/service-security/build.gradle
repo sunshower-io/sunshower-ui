@@ -6,7 +6,6 @@ dependencies {
     compile project(":api:vault-api")
     compile project(":api:vault-api")
     compile project(":api:security-api")
-    compile project(":test:test-persist")
     compile project(':persist:persist-hibernate')
 
 //    testCompile project(
@@ -18,6 +17,7 @@ dependencies {
     provided 'org.springframework:spring-web'
 
     testCompile('org.jboss.resteasy:tjws')
+    testCompile project(":test:test-persist")
     testCompile('org.jboss.resteasy:resteasy-jaxrs')
     testCompile('org.jboss.resteasy:resteasy-spring')
     testCompile('org.jboss.resteasy:resteasy-client')

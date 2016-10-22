@@ -1,7 +1,6 @@
 package io.hasli.service.security;
 
 import io.hasli.core.security.AuthenticationService;
-import io.hasli.core.security.CredentialService;
 import io.hasli.core.security.UserService;
 import io.hasli.core.security.crypto.EncryptionService;
 import io.hasli.service.security.crypto.InstanceSecureKeyGenerator;
@@ -11,13 +10,10 @@ import io.hasli.service.security.jaxrs.ExceptionMappings;
 import io.hasli.service.security.user.DefaultUserService;
 import io.hasli.service.signup.SignupService;
 import io.hasli.vault.api.KeyProvider;
-import org.hibernate.resource.transaction.backend.jta.internal.synchronization.ExceptionMapper;
 import org.jasypt.util.text.BasicTextEncryptor;
 import org.jasypt.util.text.TextEncryptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.access.vote.RoleHierarchyVoter;
-import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;

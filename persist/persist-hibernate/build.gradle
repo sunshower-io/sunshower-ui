@@ -9,7 +9,7 @@ dependencies {
     provided 'org.flywaydb:flyway-core'
     provided('org.hibernate:hibernate-core')
     provided('org.hibernate:hibernate-entitymanager')
-    compile('org.hibernate.javax.persistence:hibernate-jpa-2.1-api')
+    provided('org.hibernate.javax.persistence:hibernate-jpa-2.1-api')
 
     testCompile project(":test:test-persist")
 }
