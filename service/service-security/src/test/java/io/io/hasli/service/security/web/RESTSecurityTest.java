@@ -164,6 +164,56 @@ public class RESTSecurityTest extends HibernateTestCase {
 
     }
 
+
+    @Test
+    public void ensureMultipleClientsCantAccessSimultaneously() {
+
+
+        final Client client =
+                ClientBuilder.newClient();
+        ResteasyClient rclient = (ResteasyClient)  client;
+        rclient.register(MOXyJsonProvider.class);
+        final ResteasyWebTarget target =
+                (ResteasyWebTarget) client.target("http://127.0.0.1:9191/");
+
+
+        final Client nonauthClient =
+                ClientBuilder.newClient();
+        rclient.register(MOXyJsonProvider.class);
+        final ResteasyWebTarget nonauthTarget =
+                (ResteasyWebTarget) nonauthClient.target("http://127.0.0.1:9191/");
+
+        final SignupService service =
+                target.proxy(SignupService.class);
+
+        final SignupService nonauthService = nonauthTarget.proxy(SignupService.class);
+
+        final AuthenticationService authenticationService =
+                target.proxy(AuthenticationService.class);
+
+        User u = new User();
+        u.setUsername("testuser4");
+        u.setPassword("password");
+        service.signup(u);
+
+        Token token = authenticationService.authenticate(u);
+
+        client.register(new TokenRequestFilter(token));
+
+
+
+        List<User> users = service.list();
+        assertTrue(users.size() > 0);
+
+        try {
+            nonauthService.list();
+            fail("Shouldn't have been allowed in");
+        } catch(ClientErrorException ex)  {
+            assertThat(ex.getResponse().getStatusInfo(), is(Response.Status.FORBIDDEN));
+        }
+
+    }
+
     public static class TokenRequestFilter implements ClientRequestFilter {
 
         final Token token;
