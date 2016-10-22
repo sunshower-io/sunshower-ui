@@ -14,7 +14,17 @@ dependencies {
 //            path: ":persist:persist-hibernate"
 //    )
 
+    compile "org.jasypt:jasypt"
     provided 'org.springframework:spring-web'
 
-    testCompile('org.jboss.arquillian.container:arquillian-weld-ee-embedded-1.1')
+    testCompile('org.jboss.resteasy:tjws')
+    testCompile('org.jboss.resteasy:resteasy-jaxrs')
+    testCompile('org.jboss.resteasy:resteasy-spring')
+
+    testCompile(
+        group: 'org.jboss.spec.javax.servlet',
+        name: 'jboss-servlet-api_3.0_spec',
+        version: '1.0.2.Final')
+
+
 }

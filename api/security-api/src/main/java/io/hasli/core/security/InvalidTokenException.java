@@ -1,9 +1,11 @@
-package io.hasli.vault.api;
+package io.hasli.core.security;
+
+import java.lang.*;
 
 /**
  * Created by haswell on 10/20/16.
  */
-public class InvalidTokenException extends RuntimeException {
+public class InvalidTokenException extends SecurityException {
 
     public InvalidTokenException() {
     }

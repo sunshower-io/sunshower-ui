@@ -1,6 +1,6 @@
 package io.hasli.service.security.crypto;
 
-import io.hasli.vault.api.InvalidTokenException;
+import io.hasli.core.security.InvalidTokenException;
 import io.hasli.vault.api.KeyProvider;
 import org.junit.Test;
 import org.junit.runner.RunWith;

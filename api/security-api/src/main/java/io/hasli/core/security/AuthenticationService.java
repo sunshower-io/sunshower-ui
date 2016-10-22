@@ -19,15 +19,9 @@ import javax.ws.rs.core.MediaType;
 })
 public interface AuthenticationService {
 
-    @GET
-    @Path("current")
-    User currentUser();
-
-
     @POST
     @Path("authenticate")
     Token authenticate(User user);
-
 
 
 }

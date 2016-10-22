@@ -56,8 +56,7 @@ import static org.mockito.BDDMockito.given;
         DirtiesContextTestExecutionListener.class,
         DependencyInjectionTestExecutionListener.class,
         WithSecurityContextTestExecutionListener.class
-}
-)
+})
 public class CredentialAuthenticationServiceTest extends HibernateTestCase {
 
     @Inject

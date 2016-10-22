@@ -3,7 +3,7 @@ package io.hasli.service.security;
 import io.hasli.core.security.UserService;
 import io.hasli.model.core.auth.User;
 import io.hasli.service.security.crypto.MessageAuthenticationCode;
-import io.hasli.vault.api.InvalidTokenException;
+import io.hasli.core.security.InvalidTokenException;
 import io.hasli.vault.api.KeyProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -55,7 +55,6 @@ public class TokenAuthenticationFilter implements
                                 null,
                                 user.getAuthorities()
                         ));
-                System.out.println("USER: " + user.getAuthorities());
             } catch(InvalidTokenException ex) {
                 ex.printStackTrace();
             }

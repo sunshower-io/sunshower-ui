@@ -3,6 +3,7 @@ package io.hasli.model.core.auth;
 import io.hasli.model.core.entity.AbstractEntity;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -11,6 +12,7 @@ import java.util.UUID;
  * Created by haswell on 10/20/16.
  */
 @Entity
+@XmlRootElement
 public class Permission extends AbstractEntity<UUID> {
 
     @Id

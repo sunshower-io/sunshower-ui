@@ -1,6 +1,8 @@
 package io.hasli.st.security;
 
 import io.hasli.model.core.auth.Details;
+import io.hasli.model.core.auth.Permission;
+import io.hasli.model.core.auth.Role;
 import io.hasli.model.core.auth.User;
 import io.hasli.model.core.entity.AbstractEntity;
 import io.hasli.service.signup.SignupService;
@@ -16,6 +18,7 @@ import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -78,6 +81,9 @@ public class SignupServiceTest {
                 .addPackage(AbstractEntity.class.getPackage())
                 .addClass(User.class)
                 .addClass(UserDetails.class)
+                .addClass(Role.class)
+                .addClass(Permission.class)
+                .addClass(GrantedAuthority.class)
                 .addClass(Details.class)
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 

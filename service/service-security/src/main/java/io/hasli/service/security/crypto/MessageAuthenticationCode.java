@@ -1,6 +1,6 @@
 package io.hasli.service.security.crypto;
 
-import io.hasli.vault.api.InvalidTokenException;
+import io.hasli.core.security.InvalidTokenException;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;

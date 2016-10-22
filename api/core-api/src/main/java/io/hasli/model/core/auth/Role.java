@@ -4,6 +4,7 @@ import io.hasli.model.core.entity.AbstractEntity;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -12,6 +13,7 @@ import java.util.UUID;
  * Created by haswell on 10/20/16.
  */
 @Entity
+@XmlRootElement
 public class Role extends AbstractEntity<UUID>
         implements GrantedAuthority, Comparable<Role> {
 

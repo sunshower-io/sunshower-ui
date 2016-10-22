@@ -49,18 +49,36 @@
         <flyway-core.version>4.0.3</flyway-core.version>
         <resteasy.version>3.0.19.Final</resteasy.version>
         <jaxrs.api>2.0</jaxrs.api>
+        <jasypt.version>1.9.2</jasypt.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
 
-
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-spring</artifactId>
+                <version>${resteasy.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-jaxrs</artifactId>
+                <version>${resteasy.version}</version>
+            </dependency>
 
             <dependency>
-                <groupId>javax.ws.rs</groupId>
-                <artifactId>javax.ws.rs-api</artifactId>
-                <version>${jaxrs.api}</version>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>tjws</artifactId>
+                <version>${resteasy.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.jboss.spec.javax.servlet</groupId>
+                <artifactId>jboss-servlet-api_3.0_spec</artifactId>
+                <version>1.0.2.Final-redhat-2</version>
+            </dependency>
+
+
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-client</artifactId>
@@ -139,10 +157,11 @@
             </dependency>
 
             <dependency>
-                <groupId>org.spockframework</groupId>
-                <artifactId>spock-spring</artifactId>
-                <version>${spock.version}</version>
+                <groupId>org.jasypt</groupId>
+                <artifactId>jasypt</artifactId>
+                <version>${jasypt.version}</version>
             </dependency>
+
 
             <dependency>
                 <groupId>org.hibernate</groupId>
