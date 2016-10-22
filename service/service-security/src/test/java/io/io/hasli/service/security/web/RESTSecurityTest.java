@@ -1,9 +1,12 @@
 package io.io.hasli.service.security.web;
 
+import io.hasli.core.security.AuthenticationService;
+import io.hasli.model.core.auth.Token;
 import io.hasli.model.core.auth.User;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.service.security.DefaultSignupService;
 import io.hasli.service.security.SecurityConfiguration;
+import io.hasli.service.security.TokenAuthenticationFilter;
 import io.hasli.service.security.jaxrs.ExceptionMappings;
 import io.hasli.service.signup.SignupService;
 import io.hasli.test.persist.HibernateTestCase;
@@ -37,11 +40,16 @@ import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.Path;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.ClientRequestContext;
+import javax.ws.rs.client.ClientRequestFilter;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
@@ -123,6 +131,52 @@ public class RESTSecurityTest extends HibernateTestCase {
         }
     }
 
+
+    @Test
+    public void ensureAttemptingToAccessSecuredEndpointAfterAuthenticationSucceeds() {
+
+        final Client client =
+                ClientBuilder.newClient();
+        ResteasyClient rclient = (ResteasyClient)  client;
+        rclient.register(MOXyJsonProvider.class);
+        final ResteasyWebTarget target =
+                (ResteasyWebTarget) client.target("http://127.0.0.1:9191/");
+
+        final SignupService service =
+                target.proxy(SignupService.class);
+
+        final AuthenticationService authenticationService =
+                target.proxy(AuthenticationService.class);
+
+        User u = new User();
+        u.setUsername("testuser3");
+        u.setPassword("password");
+        service.signup(u);
+
+        Token token = authenticationService.authenticate(u);
+
+        client.register(new TokenRequestFilter(token));
+
+
+
+        List<User> users = service.list();
+        assertTrue(users.size() > 0);
+
+    }
+
+    public static class TokenRequestFilter implements ClientRequestFilter {
+
+        final Token token;
+        public TokenRequestFilter(Token token) {
+            this.token = token;
+        }
+
+        @Override
+        public void filter(ClientRequestContext requestContext) throws IOException {
+            requestContext.getHeaders().putSingle(
+                    TokenAuthenticationFilter.HEADER_KEY, token.getToken());
+        }
+    }
 
 
 }

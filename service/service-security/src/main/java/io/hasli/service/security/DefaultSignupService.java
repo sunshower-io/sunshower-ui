@@ -42,7 +42,10 @@ public class DefaultSignupService implements SignupService {
     @Override
     @PreAuthorize("hasAuthority('admin')")
     public List<User> list() {
-        return entityManager.createQuery("select u from User u").getResultList();
+        return entityManager.createQuery(
+                "select u from User u",
+                User.class
+        ).getResultList();
     }
 
 }

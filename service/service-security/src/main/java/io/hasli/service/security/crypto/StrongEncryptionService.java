@@ -75,7 +75,11 @@ public class StrongEncryptionService implements EncryptionService {
         final UUID id = UUID.fromString(encrypter.decrypt(parts[0]));
         final String password = encrypter.decrypt(parts[1]);
 
-        final User user = entityManager.find(User.class, id);
+        final User user = entityManager.createQuery(
+                "select u from User u " +
+                "left join fetch u.roles as r " +
+                "where u.id = :id", User.class)
+                .setParameter("id", id).getSingleResult();
         if(password.equals(user.getPassword())) {
             return user;
         }
