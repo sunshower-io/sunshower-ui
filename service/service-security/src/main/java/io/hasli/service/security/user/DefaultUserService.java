@@ -31,20 +31,10 @@ public class DefaultUserService implements UserService, UserDetailsService {
     }
 
     @Override
-    public Token createToken(User user) {
-        return null;
-    }
-
-    @Override
     public User findByUsername(String username) {
         return entityManager.createQuery("select u from User u " +
                         "where u.username = :name", User.class)
                 .setParameter("name", username).getSingleResult();
-    }
-
-    @Override
-    public User findByToken(String accessToken) {
-        return null;
     }
 
     @Override

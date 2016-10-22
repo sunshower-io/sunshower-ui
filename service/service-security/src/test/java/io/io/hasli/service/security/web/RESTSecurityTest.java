@@ -4,6 +4,7 @@ import io.hasli.model.core.auth.User;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.service.security.DefaultSignupService;
 import io.hasli.service.security.SecurityConfiguration;
+import io.hasli.service.security.jaxrs.ExceptionMappings;
 import io.hasli.service.signup.SignupService;
 import io.hasli.test.persist.HibernateTestCase;
 import io.io.hasli.service.security.TestSecurityConfiguration;
@@ -32,10 +33,16 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.Path;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.Response;
 import java.util.Map;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 /**
  * Created by haswell on 10/21/16.
@@ -91,6 +98,7 @@ public class RESTSecurityTest extends HibernateTestCase {
 
     @Test
     public void ensureAttemptingToAccessSecuredEndpointFails() throws InterruptedException {
+
         final Client client =
                 ClientBuilder.newClient();
         ResteasyClient rclient = (ResteasyClient)  client;
@@ -103,10 +111,16 @@ public class RESTSecurityTest extends HibernateTestCase {
 
         User u = new User();
         u.setUsername("josiah");
+        u.setPassword("password");
         service.signup(u);
 
 
-        service.list();
+        try {
+            service.list();
+            fail("Expected exception");
+        } catch(ClientErrorException ex) {
+            assertThat(ex.getResponse().getStatusInfo(), is(Response.Status.FORBIDDEN));
+        }
     }
 
 

@@ -20,6 +20,7 @@ dependencies {
     testCompile('org.jboss.resteasy:tjws')
     testCompile('org.jboss.resteasy:resteasy-jaxrs')
     testCompile('org.jboss.resteasy:resteasy-spring')
+    testCompile('org.jboss.resteasy:resteasy-client')
 
     testCompile(
         group: 'org.jboss.spec.javax.servlet',

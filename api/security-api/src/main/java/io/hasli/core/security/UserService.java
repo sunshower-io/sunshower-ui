@@ -8,9 +8,7 @@ import java.util.UUID;
 public interface UserService {
     User get(UUID id);
 
-    Token createToken(User user);
 
     User findByUsername(String username);
 
-    User findByToken(String accessToken);
 }

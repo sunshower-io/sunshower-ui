@@ -1,6 +1,7 @@
 package io.io.hasli.service.security;
 
 import io.hasli.core.security.CredentialService;
+import io.hasli.core.security.crypto.EncryptionService;
 import io.hasli.model.core.auth.Role;
 import io.hasli.model.core.auth.User;
 import io.hasli.persist.hibernate.HibernateConfiguration;
@@ -72,6 +73,9 @@ public class CredentialAuthenticationServiceTest extends HibernateTestCase {
     private MessageAuthenticationCode messageAuthenticationCode;
 
 
+    @Inject
+    private EncryptionService encryptionService;
+
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -79,11 +83,12 @@ public class CredentialAuthenticationServiceTest extends HibernateTestCase {
     @Transactional
     public void ensureSayHelloAdminWorks() throws IOException {
         final User user = new User();
+        user.setPassword("frap");
         final Role adminRole = new Role("admin", "coolbeans");
         user.addRole(adminRole);
         entityManager.persist(user);
         UUID id = user.getId();
-        String token = messageAuthenticationCode.token(id.toString());
+        String token = encryptionService.createToken(user);
 
         final ContainerRequestContext context = Mockito.mock(ContainerRequestContext.class);
         given(context.getHeaderString(
@@ -98,11 +103,12 @@ public class CredentialAuthenticationServiceTest extends HibernateTestCase {
     @Transactional
     public void ensureSayHelloAdminWorksOnRolesAllowedWorks() throws IOException {
         final User user = new User();
+        user.setPassword("frap");
         final Role adminRole = new Role("ROLE_ADMIN", "coolbeans");
         user.addRole(adminRole);
         entityManager.persist(user);
         UUID id = user.getId();
-        String token = messageAuthenticationCode.token(id.toString());
+        String token = encryptionService.createToken(user);
 
         final ContainerRequestContext context = Mockito.mock(ContainerRequestContext.class);
         given(context.getHeaderString(

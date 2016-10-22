@@ -7,9 +7,13 @@ import io.hasli.core.security.crypto.EncryptionService;
 import io.hasli.service.security.crypto.InstanceSecureKeyGenerator;
 import io.hasli.service.security.crypto.MessageAuthenticationCode;
 import io.hasli.service.security.crypto.StrongEncryptionService;
+import io.hasli.service.security.jaxrs.ExceptionMappings;
 import io.hasli.service.security.user.DefaultUserService;
 import io.hasli.service.signup.SignupService;
 import io.hasli.vault.api.KeyProvider;
+import org.hibernate.resource.transaction.backend.jta.internal.synchronization.ExceptionMapper;
+import org.jasypt.util.text.BasicTextEncryptor;
+import org.jasypt.util.text.TextEncryptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.vote.RoleHierarchyVoter;
@@ -87,5 +91,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new DefaultAuthenticationService();
     }
 
+    @Bean
+    public TextEncryptor textEncryptor(KeyProvider keyProvider) {
+        final BasicTextEncryptor result = new BasicTextEncryptor();
+        result.setPassword(keyProvider.getKey());
+        return result;
+    }
+
+
+    @Bean
+    public ExceptionMappings exceptionMappings() {
+        return new ExceptionMappings();
+    }
 
 }

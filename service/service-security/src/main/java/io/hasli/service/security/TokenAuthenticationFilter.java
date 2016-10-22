@@ -1,6 +1,7 @@
 package io.hasli.service.security;
 
 import io.hasli.core.security.UserService;
+import io.hasli.core.security.crypto.EncryptionService;
 import io.hasli.model.core.auth.User;
 import io.hasli.service.security.crypto.MessageAuthenticationCode;
 import io.hasli.core.security.InvalidTokenException;
@@ -38,6 +39,9 @@ public class TokenAuthenticationFilter implements
     @Inject
     private MessageAuthenticationCode authenticationCodeProvider;
 
+    @Inject
+    private EncryptionService encryptionService;
+
 
     @Override
     public void filter(
@@ -46,9 +50,7 @@ public class TokenAuthenticationFilter implements
         final String token = requestContext.getHeaderString(HEADER_KEY);
         if(token != null) {
             try {
-                final String userId = authenticationCodeProvider.id(token);
-                final UUID uuid = UUID.fromString(userId);
-                final User user = userService.get(uuid);
+                final User user = encryptionService.findByToken(token);
                 SecurityContextHolder.getContext().setAuthentication(
                         new UsernamePasswordAuthenticationToken(
                                 user,

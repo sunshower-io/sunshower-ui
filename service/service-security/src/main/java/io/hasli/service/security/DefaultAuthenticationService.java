@@ -38,6 +38,7 @@ public class DefaultAuthenticationService implements AuthenticationService {
                 return new Token(token, new Date());
             }
         } catch(UsernameNotFoundException ex) {
+            ex.printStackTrace();
             //add logging
         }
         throw new InvalidCredentialException("Username or password combination is invalid");
