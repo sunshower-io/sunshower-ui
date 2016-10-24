@@ -2,6 +2,7 @@ package io.hasli.service.security;
 
 import io.hasli.core.security.AuthenticationService;
 import io.hasli.core.security.InvalidCredentialException;
+import io.hasli.core.security.InvalidTokenException;
 import io.hasli.core.security.UserService;
 import io.hasli.core.security.crypto.EncryptionService;
 import io.hasli.model.core.auth.Token;
@@ -27,6 +28,8 @@ public class DefaultAuthenticationService implements AuthenticationService {
     private EncryptionService encryptionService;
 
 
+
+
     @Override
     public Token authenticate(User user) {
         final String username = user.getUsername();
@@ -38,10 +41,14 @@ public class DefaultAuthenticationService implements AuthenticationService {
                 return new Token(token, new Date());
             }
         } catch(UsernameNotFoundException ex) {
-            ex.printStackTrace();
-            //add logging
         }
         throw new InvalidCredentialException("Username or password combination is invalid");
+    }
+
+    @Override
+    public Token validate(Token token) {
+        encryptionService.findByToken(token.getToken());
+        return token;
     }
 
 

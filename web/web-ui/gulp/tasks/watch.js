@@ -1,5 +1,9 @@
-var gulp = require('gulp');
-var paths = require('../paths');
+var gulp = require('gulp'),
+    suiwatch = require('../sui/watch'),
+    suibuild = require('../sui/build'),
+    paths = require('../paths');
+
+
 var browserSync = require('browser-sync');
 
 // outputs changes to files to the console
@@ -11,11 +15,11 @@ function reportChange(event) {
 // to js, html, and css files and call the
 // reportChange method. Also, by depending on the
 // serve task, it will instantiate a browserSync session
-gulp.task('watch', ['serve'], function() {
+gulp.task('watch', ['serve', 'watch-less'], function() {
   gulp.watch(paths.source, ['build-system', browserSync.reload]).on('change', reportChange);
   gulp.watch(paths.html, ['build-html', browserSync.reload]).on('change', reportChange);
   gulp.watch(paths.css, ['build-css', browserSync.reload]).on('change', reportChange);
   gulp.watch(paths.pug, ['build-pug', browserSync.reload]).on('change', reportChange);
-  gulp.watch(paths.scss, ['sass', browserSync.reload]).on('change', reportChange);
+  gulp.watch(paths.less, ['less', browserSync.reload]).on('change', reportChange);
   gulp.watch(paths.style, browserSync.reload).on('change', reportChange);
 });

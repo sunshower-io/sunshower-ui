@@ -5,7 +5,6 @@ enum StorageType {
     Cookie
 }
 
-
 export function createStorage() : Map<string, string> {
     if(typeof(Storage) == undefined) {
         return new CookieStorage();
@@ -79,7 +78,7 @@ export class CookieStorage implements Map<string, string> {
         d.setDate(d.getDate() - 1);
         let value = "";
         document.cookie = name + "=" + value + expires + "; path=/acc/html";
-        let value = this.items[name];
+        value = this.items[name];
         delete this.items[name];
         return value;
     }

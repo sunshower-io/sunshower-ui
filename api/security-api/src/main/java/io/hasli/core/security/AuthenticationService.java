@@ -24,4 +24,9 @@ public interface AuthenticationService {
     Token authenticate(User user);
 
 
+    @POST
+    @Path("validate")
+    Token validate(Token token);
+
+
 }

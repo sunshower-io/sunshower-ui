@@ -1,6 +1,7 @@
 import 'jquery'
 import {Aurelia} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
+import {LocalStorage, createStorage} from "src/storage/local/local-storage";
 
 
 export function configure(aurelia: Aurelia) {
@@ -23,8 +24,14 @@ export function configure(aurelia: Aurelia) {
             })
     });
 
-    container.registerInstance(HttpClient, http);
 
+
+    container.registerInstance(
+        LocalStorage,
+        createStorage()
+    );
+
+    container.registerInstance(HttpClient, http);
 
     aurelia.start().then(() => aurelia.setRoot());
 }

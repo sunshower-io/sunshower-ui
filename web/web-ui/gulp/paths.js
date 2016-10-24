@@ -14,9 +14,11 @@ module.exports = {
   e2eSpecsSrc: 'test/e2e/src/**/*.ts',
   e2eSpecsDist: 'test/e2e/dist/',
   pug: appRoot + '**/*.pug',
-  scss: [
-    './assets/styles/**/*.scss',
-    './src/**/*/*.scss'
+  less: [
+      './assets/theme.config'
+    // './assets/**/*.config',
+    // './assets/**/*.less',
+    // './src/**/*/*.less'
   ],
   dtsSrc: [
      './tsd/**/*.d.ts',
