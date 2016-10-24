@@ -1,7 +1,7 @@
 import 'jquery'
 import {Aurelia} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
-import {LocalStorage, createStorage} from "src/storage/local/local-storage";
+import {LocalStorage, createStorage} from "./storage/local/local-storage";
 
 
 export function configure(aurelia: Aurelia) {
