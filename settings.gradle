@@ -27,27 +27,4 @@ include(
         'system-tests:st-common',
         'system-tests:st-security',
         'system-tests:st-web',
-
 )
-
-def mappings = [
-//        'api'    : [
-//                'common',
-//                'core',
-//                'csp',
-//                'aws',
-//                'security'
-//        ],
-//        'service': ['security'],
-//        'web'    : ['ui', 'service', 'site', 'webapp'],
-//        'integration' : ['api', 'spring']
-]
-
-
-mappings.each {
-    rootDir,
-    projectList ->
-        projectList.each { name ->
-            project(":$name").projectDir = new File(settingsDir, "$rootDir/$name")
-        }
-}

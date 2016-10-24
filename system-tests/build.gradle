@@ -1,5 +1,8 @@
 apply plugin: 'java'
 apply plugin: 'idea'
+
+artifactoryPublish.skip=true
+
 dependencies {
     wildfly 'io.hasli.wildfly:wildfly-dist'
 }
@@ -23,6 +26,9 @@ test.dependsOn ':web:hasli.io:ear'
 
 subprojects {
     apply plugin: 'java'
+
+    group='io.hasli.st'
+
     systemTest {
         environment 'wildflyHome', "${project.buildDir}/wildfly/wildfly.zip"
         systemProperty 'wildflyHome', "${project.buildDir}/wildfly/wildfly.zip"

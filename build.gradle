@@ -27,6 +27,7 @@ subprojects {
     apply from: "$rootDir/gradle/jacoco.gradle"
     apply from: "$rootDir/gradle/publishing.gradle"
     apply from: "$rootDir/gradle/tasks.gradle"
+    apply from: "$rootDir/gradle/test.gradle"
 
     dependencies {
         provided('org.jboss.spec:jboss-javaee-7.0')
@@ -55,29 +56,7 @@ subprojects {
         testCompile("org.springframework.security:spring-security-test")
     }
 
-    test {
-        exclude '**/*Spec.class'
-        exclude '**/*IntegrationTest.class*'
-        exclude 'io/hasli/st/**'
-    }
 
-    task integrationTest(type: Test) {
-        description = 'Runs integration tests.'
-        group = 'verification'
-        include '**/*IT.class'
-        include '**/*IntegrationTest.class'
-        reports.html.destination = file("$reports.html.destination/integration")
-        reports.junitXml.destination = file("$reports.junitXml.destination/integration")
-    }
-
-    task systemTest(type: Test) {
-        description = 'Runs system-tests.'
-        group = 'verification'
-        include 'io/hasli/st/**'
-        reports.html.destination = file("$reports.html.destination/system")
-        reports.junitXml.destination = file("$reports.junitXml.destination/system")
-
-    }
 }
 
 /**
