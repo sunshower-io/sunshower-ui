@@ -10,12 +10,22 @@ template
                     .field
                         .ui.left.icon.input
                             i.user.icon
-                            input(type='text', name='email', placeholder='E-mail address')
+                            input(
+                                type='text',
+                                name='username',
+                                placeholder='Username',
+                                value.bind='user.username'
+                            )
                     .field
                         .ui.left.icon.input
                             i.lock.icon
-                            input(type='password', name='password', placeholder='Password')
-                    .ui.fluid.large.teal.submit.button Login
+                            input(
+                                type='password',
+                                name='password',
+                                placeholder='Password',
+                                value.bind='user.password'
+                            )
+                    .ui.fluid.large.teal.submit.button(click.delegate="submit()") Login
                 .ui.error.message
             .ui.message
                 | New?
