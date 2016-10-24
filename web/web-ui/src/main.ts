@@ -18,7 +18,7 @@ export function configure(aurelia: Aurelia) {
             .withDefaults({
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type:': 'application/json'
+                    'Content-Type': 'application/json'
                 }
             })
     });

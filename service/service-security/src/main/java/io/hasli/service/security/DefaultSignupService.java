@@ -32,7 +32,6 @@ public class DefaultSignupService implements SignupService {
                 "admin",
                 "Default administrator role"
         );
-
         user.setPassword(encryptionService
                 .encrypt(user.getPassword()));
         user.addRole(admin);

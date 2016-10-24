@@ -68,6 +68,9 @@
                     name="org.eclipse.moxy"
             />
 
+            <module export="true"
+                    name="javax.servlet.api" />
+
             <module
                     export="true"
                     name="javax.persistence.api"

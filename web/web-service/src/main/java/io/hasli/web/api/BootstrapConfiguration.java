@@ -9,6 +9,7 @@ import io.hasli.persist.core.DatabaseConfiguration;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 //import io.hasli.service.security.CredentialAuthenticationService;
 import io.hasli.service.security.DefaultSignupService;
+import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.service.signup.SignupService;
 import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
 import org.flywaydb.core.Flyway;
@@ -32,6 +33,7 @@ import java.util.Map;
         DataSourceConfiguration.class,
         DatabaseConfiguration.class,
         HibernateConfiguration.class,
+        SecurityConfiguration.class,
 })
 public class BootstrapConfiguration {
 
@@ -41,17 +43,6 @@ public class BootstrapConfiguration {
     public BootstrapConfiguration() {
     }
 
-    @Bean
-    public SignupService createSignupService() {
-        return new DefaultSignupService();
-    }
-
-
-//    @Bean
-//    public CredentialAuthenticationService credentialAuthenticationService() {
-//        return new CredentialAuthenticationService();
-//    }
-//
 
     @Bean
     public MOXyJsonProvider moxyProvider() {
