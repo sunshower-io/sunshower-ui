@@ -21,8 +21,9 @@ export class Signup {
     submit() : void {
         this.client.fetch('signup/signup', {
             method: 'post',
-            body: json(this.user)
-        })
+            body: JSON.stringify(this.user)
+        });
+        console.log(JSON.stringify(this.user))
     }
 
 

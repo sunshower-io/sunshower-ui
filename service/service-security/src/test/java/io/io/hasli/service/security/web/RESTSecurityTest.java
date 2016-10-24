@@ -201,9 +201,9 @@ public class RESTSecurityTest extends HibernateTestCase {
         client.register(new TokenRequestFilter(token));
 
 
+        service.list();
 
-        List<User> users = service.list();
-        assertTrue(users.size() > 0);
+
 
         try {
             nonauthService.list();

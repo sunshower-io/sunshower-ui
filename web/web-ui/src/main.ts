@@ -17,7 +17,8 @@ export function configure(aurelia: Aurelia) {
             .withBaseUrl('/hasli/api/v1/')
             .withDefaults({
                 headers: {
-                    // 'Authorization': tokenVariable // <---- your magic here
+                    'Accept': 'application/json',
+                    'Content-Type:': 'application/json'
                 }
             })
     });
