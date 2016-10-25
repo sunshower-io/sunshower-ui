@@ -4,6 +4,7 @@ import io.hasli.jpa.flyway.FlywayConfiguration;
 import io.hasli.persist.core.ConfigurationSourceDataSourceConfiguration;
 import io.hasli.persist.core.DatabaseConfiguration;
 import io.hasli.test.common.PropertyConfigurationSourceConfiguration;
+import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
