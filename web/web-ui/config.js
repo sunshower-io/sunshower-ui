@@ -212,6 +212,37 @@ System.config({
       "indexof": "npm:indexof@0.0.1"
     }
   },
+  depCache: {
+    "app.js": [
+      "jquery",
+      "semantic-ui"
+    ],
+    "home/home.js": [
+      "jquery"
+    ],
+    "login/login.js": [
+      "aurelia-framework",
+      "aurelia-fetch-client",
+      "aurelia-dependency-injection",
+      "../model/core/security/user",
+      "../storage/local/local-storage",
+      "src/model/core/security/token"
+    ],
+    "main.js": [
+      "aurelia-fetch-client",
+      "./storage/local/local-storage",
+      "jquery"
+    ],
+    "signup/signup.js": [
+      "aurelia-fetch-client",
+      "aurelia-dependency-injection",
+      "aurelia-framework",
+      "../model/core/security/user"
+    ],
+    "storage/local/local-storage.js": [
+      "../../core/exceptions/type-errors"
+    ]
+  },
   bundles: {
     "app-build.js": [
       "app.html!github:systemjs/plugin-text@0.0.8.js",
@@ -318,37 +349,6 @@ System.config({
       "npm:aurelia-templating@1.1.1/aurelia-templating.js",
       "npm:jquery@2.2.4.js",
       "npm:jquery@2.2.4/dist/jquery.js"
-    ]
-  },
-  depCache: {
-    "app.js": [
-      "jquery",
-      "semantic-ui"
-    ],
-    "home/home.js": [
-      "jquery"
-    ],
-    "login/login.js": [
-      "aurelia-framework",
-      "aurelia-fetch-client",
-      "aurelia-dependency-injection",
-      "../model/core/security/user",
-      "../storage/local/local-storage",
-      "src/model/core/security/token"
-    ],
-    "main.js": [
-      "aurelia-fetch-client",
-      "./storage/local/local-storage",
-      "jquery"
-    ],
-    "signup/signup.js": [
-      "aurelia-fetch-client",
-      "aurelia-dependency-injection",
-      "aurelia-framework",
-      "../model/core/security/user"
-    ],
-    "storage/local/local-storage.js": [
-      "../../core/exceptions/type-errors"
     ]
   }
 });
