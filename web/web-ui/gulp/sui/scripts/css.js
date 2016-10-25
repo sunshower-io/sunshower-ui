@@ -59,7 +59,7 @@ module.exports = function(callback) {
     uncompressedStream
   ;
 
-  console.info('Building CSS');
+  console.info('Building CSS', source);
 
   if( !install.isSetup() ) {
     console.error('Cannot build files. Run "gulp install" to set-up Semantic');
