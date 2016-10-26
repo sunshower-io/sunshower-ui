@@ -3,6 +3,7 @@ package io.hasli.logging;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.ThreadContext;
 
 /**
  * Created by haswell on 10/26/16.
@@ -15,6 +16,11 @@ public class Logs {
 
     private Logs(Configuration cfg) {
         this.configuration = cfg;
+        decorate(configuration);
+    }
+
+    private void decorate(Configuration cfg) {
+        ThreadContext.put("ROOT", cfg.getRoot());
     }
 
 

@@ -43,8 +43,8 @@
                      (other than the value 'special' which had its own route above).
                      The value dynamically determines the name of the log file. -->
                 <Route>
-                    <RollingFile name="Rolling-${ctx:REGION}" fileName="logs/${ctx:REGION}.log"
-                                 filePattern="./logs/${date:yyyy-MM}/${ctx:REGION}-other-%d{yyyy-MM-dd}-%i.log.gz">
+                    <RollingFile name="Rolling-${ctx:REGION}" fileName="${ctx:ROOT}/${ctx:REGION}.log"
+                                 filePattern="./${ctx:ROOT}/${date:yyyy-MM}/${ctx:REGION}-other-%d{yyyy-MM-dd}-%i.log.gz">
                         <PatternLayout>
                             <pattern>%d{ISO8601} [%t] %p %c{3} - %m%n</pattern>
                         </PatternLayout>

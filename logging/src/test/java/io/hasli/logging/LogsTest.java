@@ -14,7 +14,7 @@ public class LogsTest {
 
     @Test
     public void ensureLoggingWorksForSingleAppender() {
-        Logger logger = Logs.getInstance(null).getLogger(LogsTest.class);
+        Logger logger = Logs.getInstance(Configuration.newConfiguration().setRoot("./build/frap")).getLogger(LogsTest.class);
         for(int i = 0; i < 100; i++) {
 
             logger.error("sup");
