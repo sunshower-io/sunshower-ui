@@ -30,6 +30,8 @@ subprojects {
     apply from: "$rootDir/gradle/test.gradle"
 
     dependencies {
+        provided('org.apache.logging.log4j:log4j-api')
+        provided('org.apache.logging.log4j:log4j-core')
         provided('org.jboss.spec:jboss-javaee-7.0')
 
         [

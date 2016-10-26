@@ -45,6 +45,12 @@ public class ExceptionMappings implements ExceptionMapper<Throwable> {
 
     @Override
     public Response toResponse(Throwable exception) {
+        final ExceptionResponse exceptionResponse = mappings.get(exception.getClass());
+        if(exception == null) {
+            return Response.status(
+                    Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(exception.getMessage()).build();
+        }
         return mappings.get(exception.getClass()).create(exception);
     }
 

@@ -15,6 +15,9 @@ import io.hasli.service.security.jaxrs.ExceptionMappings;
 import io.hasli.service.signup.SignupService;
 import io.hasli.test.persist.HibernateTestCase;
 import io.io.hasli.service.security.TestSecurityConfiguration;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
@@ -74,6 +77,11 @@ import static org.junit.Assert.fail;
 
 @WebAppConfiguration
 public class RESTSecurityTest extends HibernateTestCase {
+
+
+    static Logger logger = LogManager.getLogger(RESTSecurityTest.class);
+
+
 
     @Remote
     private SignupService signupService;

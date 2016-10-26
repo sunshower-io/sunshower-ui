@@ -51,6 +51,7 @@
         <resteasy.version>3.0.19.Final</resteasy.version>
         <jaxrs.api>2.0</jaxrs.api>
         <jasypt.version>1.9.2</jasypt.version>
+        <log4j.version>2.7</log4j.version>
         <barometer.version>1.00.000.000-SNAPSHOT</barometer.version>
     </properties>
 
@@ -58,10 +59,25 @@
         <dependencies>
 
             <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-spring</artifactId>
                 <version>${resteasy.version}</version>
             </dependency>
+
+
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-jaxrs</artifactId>
