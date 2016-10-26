@@ -1,8 +1,10 @@
 package io.hasli.service.security;
 
+import io.hasli.core.ApplicationService;
 import io.hasli.core.security.AuthenticationService;
 import io.hasli.core.security.UserService;
 import io.hasli.core.security.crypto.EncryptionService;
+import io.hasli.service.application.DefaultApplicationService;
 import io.hasli.service.security.crypto.InstanceSecureKeyGenerator;
 import io.hasli.service.security.crypto.MessageAuthenticationCode;
 import io.hasli.service.security.crypto.StrongEncryptionService;
@@ -100,4 +102,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new ExceptionMappings();
     }
 
+
+    @Bean
+    public ApplicationService applicationService() {
+        return new DefaultApplicationService();
+    }
 }

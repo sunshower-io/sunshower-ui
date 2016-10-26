@@ -5,10 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -41,6 +38,8 @@ public class User extends AbstractEntity<UUID> implements UserDetails {
     @XmlAttribute
     private String password;
 
+    @XmlElement
+    @XmlElementWrapper(name = "roles")
     @ManyToMany(
             cascade = CascadeType.ALL
     )
@@ -94,6 +93,38 @@ public class User extends AbstractEntity<UUID> implements UserDetails {
 
     public void setDetails(Details details) {
         this.details = details;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public String getUsername() {

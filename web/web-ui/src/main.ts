@@ -3,7 +3,7 @@ import 'fetch';
 import {Aurelia} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
 import {LocalStorage, createStorage} from "./storage/local/local-storage";
-import {TokenHolder} from "src/model/core/security";
+import {TokenHolder} from "./model/core/security/index";
 
 
 export function configure(aurelia: Aurelia) {
@@ -37,9 +37,6 @@ export function configure(aurelia: Aurelia) {
 
     container.registerInstance(HttpClient, http);
 
-    // TODO: Handle authentication logic
-    // if authenticated, go directly to home
-    // else go to login/signup page
+
     aurelia.start().then(() => aurelia.setRoot('auth/auth'));
-    // aurelia.start().then(() => aurelia.setRoot());
 }

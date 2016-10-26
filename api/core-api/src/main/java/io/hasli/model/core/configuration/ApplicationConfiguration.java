@@ -9,7 +9,7 @@ import java.util.Set;
  * Created by haswell on 10/26/16.
  */
 
-@Entity
+//@Entity
 @XmlRootElement(name = "configuration")
 public class ApplicationConfiguration {
 

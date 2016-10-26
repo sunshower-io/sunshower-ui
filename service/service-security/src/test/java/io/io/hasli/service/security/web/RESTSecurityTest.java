@@ -75,7 +75,6 @@ import static org.junit.Assert.fail;
                 TestSecurityConfiguration.class,
                 RESTSecurityTest.class,
         })
-
 @WebAppConfiguration
 public class RESTSecurityTest extends HibernateTestCase {
 

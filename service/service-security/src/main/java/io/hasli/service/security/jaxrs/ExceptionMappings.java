@@ -4,6 +4,7 @@ import io.hasli.core.security.InvalidCredentialException;
 import io.hasli.core.security.InvalidTokenException;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 
+import javax.persistence.NoResultException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
@@ -20,10 +21,6 @@ import java.util.Map;
 @Provider
 public class ExceptionMappings implements ExceptionMapper<Throwable> {
 
-
-
-
-
     static final Map<Class<? extends Throwable>, ExceptionResponse> mappings = new HashMap<>();
 
     static {
@@ -36,6 +33,10 @@ public class ExceptionMappings implements ExceptionMapper<Throwable> {
         register(
                 InvalidTokenException.class,
                 new AuthenticationFailedResponse());
+
+        register(
+                NoResultException.class,
+                new NoSuchElementException());
     }
 
 
@@ -60,6 +61,15 @@ public class ExceptionMappings implements ExceptionMapper<Throwable> {
 
     public interface ExceptionResponse {
         Response create(Throwable throwable);
+    }
+}
+
+
+class NoSuchElementException implements ExceptionMappings.ExceptionResponse {
+    @Override
+    public Response create(Throwable throwable) {
+        return Response.status(Response.Status.NOT_FOUND)
+                .entity(throwable.getMessage()).build();
     }
 }
 

@@ -5,15 +5,15 @@ create table "USER" (
   id                    binary(16) primary key,
   firstname             varchar(64),
   lastname              varchar(64),
-  username              varchar(128),
+  username              varchar(128) unique not null,
   password              varchar(128),
-  emailAddress          varchar(128)
+  emailAddress          varchar(128) unique not null,
 );
 
 
 create table ROLE (
   id                  binary(16) primary key,
-  authority           varchar(32),
+  authority           varchar(32) unique not null,
   description         varchar(128),
   parent_id           binary(16)
 );
@@ -45,3 +45,27 @@ create table ROLES_TO_PERMISSIONS (
   foreign key (permission_id)   references    PERMISSION(id)
 
 );
+
+create table VERSION (
+  id                  integer identity primary key,
+  major               integer,
+  minor               integer,
+  minor_minor         integer,
+  extension           varchar(32),
+);
+
+create table APPLICATION (
+  id                binary(16) primary key,
+  enabled           boolean,
+  instance_id       varchar(32),
+  location          varchar(32),
+  started_on        timestamp,
+  last_shutdown     timestamp,
+
+  version_id        integer,
+
+  foreign key(version_id)       references VERSION(id)
+
+);
+
+
