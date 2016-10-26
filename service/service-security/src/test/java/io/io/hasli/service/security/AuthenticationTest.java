@@ -3,6 +3,7 @@ package io.io.hasli.service.security;
 import io.hasli.core.security.AuthenticationService;
 import io.hasli.core.security.InvalidCredentialException;
 import io.hasli.core.security.crypto.EncryptionService;
+import io.hasli.model.core.auth.Authentication;
 import io.hasli.model.core.auth.Token;
 import io.hasli.model.core.auth.User;
 import io.hasli.persist.hibernate.HibernateConfiguration;
@@ -87,7 +88,7 @@ public class AuthenticationTest extends HibernateTestCase {
 
         User u = service.signup(user);
         assertThat(u.getPassword(), is(not("password1234")));
-        Token token = authenticationService.authenticate(user2);
+        Authentication token = authenticationService.authenticate(user2);
         assertThat(token, is(not(nullValue())));
     }
 

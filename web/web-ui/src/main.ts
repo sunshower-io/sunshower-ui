@@ -3,6 +3,7 @@ import 'fetch';
 import {Aurelia} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
 import {LocalStorage, createStorage} from "./storage/local/local-storage";
+import {TokenHolder} from "src/model/core/security";
 
 
 export function configure(aurelia: Aurelia) {
@@ -12,7 +13,10 @@ export function configure(aurelia: Aurelia) {
 
     let container = aurelia.container;
 
-    let http = new HttpClient();
+    let http = new HttpClient(),
+        storage = createStorage(),
+        tokenHolder = new TokenHolder(http, storage);
+
     http.configure(config => {
         config
             .useStandardConfiguration()
@@ -20,7 +24,7 @@ export function configure(aurelia: Aurelia) {
             .withDefaults({
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 }
             })
     });

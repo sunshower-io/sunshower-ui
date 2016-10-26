@@ -59,6 +59,14 @@
         <dependencies>
 
             <dependency>
+                <groupId>io.hasli.barometer</groupId>
+                <artifactId>bom-imported</artifactId>
+                <version>${barometer.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-api</artifactId>
                 <version>${log4j.version}</version>
@@ -98,8 +106,8 @@
 
             <dependency>
                 <groupId>org.jboss.spec.javax.servlet</groupId>
-                <artifactId>jboss-servlet-api_3.0_spec</artifactId>
-                <version>1.0.2.Final-redhat-2</version>
+                <artifactId>jboss-servlet-api_3.1_spec</artifactId>
+                <version>1.0.0.Final</version>
             </dependency>
 
 

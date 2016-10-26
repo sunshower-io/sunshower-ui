@@ -5,6 +5,7 @@ import io.hasli.barometer.rpc.Remote;
 import io.hasli.barometer.rs.module.JAXRS;
 import io.hasli.barometer.spring.BarometerRunner;
 import io.hasli.core.security.AuthenticationService;
+import io.hasli.model.core.auth.Authentication;
 import io.hasli.model.core.auth.Token;
 import io.hasli.model.core.auth.User;
 import io.hasli.persist.hibernate.HibernateConfiguration;
@@ -148,9 +149,9 @@ public class RESTSecurityTest extends HibernateTestCase {
         u.setPassword("password");
         service.signup(u);
 
-        Token token = authenticationService.authenticate(u);
+        Authentication token = authenticationService.authenticate(u);
 
-        client.register(new TokenRequestFilter(token));
+        client.register(new TokenRequestFilter(token.getToken()));
 
 
         List<User> users = service.list();
@@ -190,9 +191,9 @@ public class RESTSecurityTest extends HibernateTestCase {
         u.setPassword("password");
         signupService.signup(u);
 
-        Token token = authenticationService.authenticate(u);
+        Authentication token = authenticationService.authenticate(u);
 
-        client.register(new TokenRequestFilter(token));
+        client.register(new TokenRequestFilter(token.getToken()));
 
 
         System.out.println(service.list());

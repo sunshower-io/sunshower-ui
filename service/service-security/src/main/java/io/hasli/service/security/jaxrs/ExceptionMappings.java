@@ -23,6 +23,7 @@ public class ExceptionMappings implements ExceptionMapper<Throwable> {
 
 
 
+
     static final Map<Class<? extends Throwable>, ExceptionResponse> mappings = new HashMap<>();
 
     static {
@@ -45,8 +46,11 @@ public class ExceptionMappings implements ExceptionMapper<Throwable> {
 
     @Override
     public Response toResponse(Throwable exception) {
+        System.out.println("GOT A" + exception);
+        exception.printStackTrace();
+
         final ExceptionResponse exceptionResponse = mappings.get(exception.getClass());
-        if(exception == null) {
+        if(exceptionResponse == null) {
             return Response.status(
                     Response.Status.INTERNAL_SERVER_ERROR)
                     .entity(exception.getMessage()).build();

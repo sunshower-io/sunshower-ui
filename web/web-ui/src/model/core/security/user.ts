@@ -1,3 +1,6 @@
+import {Token} from './';
+
+
 export class User {
 
     id:string;
@@ -12,4 +15,6 @@ export class User {
 
     email:string;
 
+
+    token:Token;
 }

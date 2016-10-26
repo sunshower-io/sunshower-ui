@@ -2,9 +2,12 @@
 <jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.2"
                             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <sub-deployment name="web-service.war">
+        <!--<exclude-subsystems>-->
+        <!--<subsystem name="jaxrs" />-->
+        <!--</exclude-subsystems>-->
         <exclusions>
-            <module name="org.jboss.resteasy.resteasy-jackson-provider" />
-            <module name="org.jboss.resteasy.resteasy-jettison-provider" />
+            <module name="org.jboss.resteasy.resteasy-jackson-provider"/>
+            <module name="org.jboss.resteasy.resteasy-jettison-provider"/>
         </exclusions>
     </sub-deployment>
     <deployment>
@@ -34,12 +37,10 @@
             />
 
 
-
             <module
                     export="true"
                     name="org.flywaydb"
             />
-
 
 
             <module
@@ -69,14 +70,14 @@
             />
 
             <module export="true"
-                    name="javax.servlet.api" />
+                    name="javax.servlet.api"/>
 
             <module
                     export="true"
                     name="javax.persistence.api"
             />
 
-            <module name="org.hibernate" export="true" />
+            <module name="org.hibernate" export="true"/>
 
 
         </dependencies>

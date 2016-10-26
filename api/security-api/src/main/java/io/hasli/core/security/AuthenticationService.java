@@ -1,4 +1,5 @@
 package io.hasli.core.security;
+import io.hasli.model.core.auth.Authentication;
 import io.hasli.model.core.auth.Token;
 import io.hasli.model.core.auth.User;
 
@@ -21,12 +22,12 @@ public interface AuthenticationService {
 
     @POST
     @Path("authenticate")
-    Token authenticate(User user);
+    Authentication authenticate(User user);
 
 
     @POST
     @Path("validate")
-    Token validate(Token token);
+    Authentication validate(Token token);
 
 
 }

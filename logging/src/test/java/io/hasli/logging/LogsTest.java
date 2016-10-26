@@ -1,10 +1,8 @@
 package io.hasli.logging;
 
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.ThreadContext;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 
 /**
  * Created by haswell on 10/26/16.
@@ -14,7 +12,9 @@ public class LogsTest {
 
     @Test
     public void ensureLoggingWorksForSingleAppender() {
-        Logger logger = Logs.getInstance(Configuration.newConfiguration().setRoot("./build/frap")).getLogger(LogsTest.class);
+        Logger logger = Logs.getInstance(Configuration
+                .newConfiguration().setRoot("./build/frap"))
+                .getLogger(LogsTest.class);
         for(int i = 0; i < 100; i++) {
 
             logger.error("sup");

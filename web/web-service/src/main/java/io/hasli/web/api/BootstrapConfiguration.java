@@ -45,8 +45,8 @@ public class BootstrapConfiguration {
 
 
     @Bean
-    public MOXyJsonProvider moxyProvider() {
-        return new MOXyJsonProvider();
+    public MoxyProvider moxyProvider() {
+        return new MoxyProvider();
     }
 
 
