@@ -39,6 +39,7 @@
         <arquillian-weld.version>1.0.0.CR9</arquillian-weld.version>
         <projectreactor.version>2.0.8.RELEASE</projectreactor.version>
         <moxy.version>2.6.4</moxy.version>
+        <barometer.version>1.00.000.000-SNAPSHOT</barometer.version>
         <shrinkwrap-resolvers.version>2.2.4</shrinkwrap-resolvers.version>
         <spring-security.version>4.1.3.RELEASE</spring-security.version>
         <version.shrinkwrap.resolvers>2.2.4</version.shrinkwrap.resolvers>
@@ -50,6 +51,7 @@
         <resteasy.version>3.0.19.Final</resteasy.version>
         <jaxrs.api>2.0</jaxrs.api>
         <jasypt.version>1.9.2</jasypt.version>
+        <barometer.version>1.00.000.000-SNAPSHOT</barometer.version>
     </properties>
 
     <dependencyManagement>
@@ -64,6 +66,12 @@
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-jaxrs</artifactId>
                 <version>${resteasy.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.hasli.barometer</groupId>
+                <artifactId>jaxrs</artifactId>
+                <version>${barometer.version}</version>
             </dependency>
 
             <dependency>

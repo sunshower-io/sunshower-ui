@@ -1,5 +1,3 @@
-import 'jquery';
-
 
 export class Home {
 

@@ -1,5 +1,9 @@
 package io.io.hasli.service.security.web;
 
+import io.hasli.barometer.Enable;
+import io.hasli.barometer.rpc.Remote;
+import io.hasli.barometer.rs.module.JAXRS;
+import io.hasli.barometer.spring.BarometerRunner;
 import io.hasli.core.security.AuthenticationService;
 import io.hasli.model.core.auth.Token;
 import io.hasli.model.core.auth.User;
@@ -35,6 +39,7 @@ import org.springframework.test.context.web.ServletTestExecutionListener;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.Path;
@@ -55,78 +60,60 @@ import static org.junit.Assert.fail;
 /**
  * Created by haswell on 10/21/16.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+
+@Enable(JAXRS.class)
+@RunWith(BarometerRunner.class)
 @ContextConfiguration(
         classes = {
+                JAXRS.class,
                 SecurityConfiguration.class,
                 HibernateConfiguration.class,
                 TestSecurityConfiguration.class,
                 RESTSecurityTest.class,
         })
 
-@Configuration
-@TestExecutionListeners(listeners = {
-        ServletTestExecutionListener.class,
-        TransactionalTestExecutionListener.class,
-        DirtiesContextTestExecutionListener.class,
-        DependencyInjectionTestExecutionListener.class,
-        WithSecurityContextTestExecutionListener.class
-})
 @WebAppConfiguration
 public class RESTSecurityTest extends HibernateTestCase {
 
+    @Remote
+    private SignupService signupService;
+
+
+    @Remote
+    private AuthenticationService authenticationService;
+
+
     @Inject
-    private ApplicationContext context;
+    @Named("bind-address")
+    private String address;
 
-    private TJWSEmbeddedJaxrsServer server;
+    @Inject
+    @Named("jax-rs-port")
+    private Integer port;
 
-    @Bean
-    @Singleton
-    public TJWSEmbeddedJaxrsServer embeddedJaxrsServer() {
-        final TJWSEmbeddedJaxrsServer server = new TJWSEmbeddedJaxrsServer();
-        server.setPort(9191);
-        server
-                .getDeployment()
-                .getActualProviderClasses()
-                .add(MOXyJsonProvider.class);
-        server.start();
-        return server;
-    }
-
-    @Bean
-    public SpringBeanProcessor springBeanProcessor(TJWSEmbeddedJaxrsServer server) {
-        SpringBeanProcessor processor = new SpringBeanProcessor(
-                server.getDeployment().getDispatcher(),
-                server.getDeployment().getRegistry(),
-                server.getDeployment().getProviderFactory());
-
-        return processor;
+    @Test
+    public void ensureAttemptingToAccessValidateThrowsException() throws InterruptedException {
+        try {
+            authenticationService.validate(new Token("frap", null));
+            fail("Expected exception");
+        } catch (ClientErrorException ex) {
+            assertThat(ex.getResponse().getStatusInfo(), is(Response.Status.FORBIDDEN));
+        }
     }
 
 
     @Test
     public void ensureAttemptingToAccessSecuredEndpointFails() throws InterruptedException {
-
-        final Client client =
-                ClientBuilder.newClient();
-        ResteasyClient rclient = (ResteasyClient)  client;
-        rclient.register(MOXyJsonProvider.class);
-        final ResteasyWebTarget target =
-                (ResteasyWebTarget) client.target("http://127.0.0.1:9191/");
-
-        final SignupService service =
-                target.proxy(SignupService.class);
-
         User u = new User();
         u.setUsername("josiah");
         u.setPassword("password");
-        service.signup(u);
+        signupService.signup(u);
 
 
         try {
-            service.list();
+            signupService.list();
             fail("Expected exception");
-        } catch(ClientErrorException ex) {
+        } catch (ClientErrorException ex) {
             assertThat(ex.getResponse().getStatusInfo(), is(Response.Status.FORBIDDEN));
         }
     }
@@ -134,13 +121,13 @@ public class RESTSecurityTest extends HibernateTestCase {
 
     @Test
     public void ensureAttemptingToAccessSecuredEndpointAfterAuthenticationSucceeds() {
-
+        String addr = String.format("http://%s:%d", address, port);
         final Client client =
                 ClientBuilder.newClient();
-        ResteasyClient rclient = (ResteasyClient)  client;
+        ResteasyClient rclient = (ResteasyClient) client;
         rclient.register(MOXyJsonProvider.class);
         final ResteasyWebTarget target =
-                (ResteasyWebTarget) client.target("http://127.0.0.1:9191/");
+                (ResteasyWebTarget) client.target(addr);
 
         final SignupService service =
                 target.proxy(SignupService.class);
@@ -158,7 +145,6 @@ public class RESTSecurityTest extends HibernateTestCase {
         client.register(new TokenRequestFilter(token));
 
 
-
         List<User> users = service.list();
         assertTrue(users.size() > 0);
 
@@ -171,17 +157,17 @@ public class RESTSecurityTest extends HibernateTestCase {
 
         final Client client =
                 ClientBuilder.newClient();
-        ResteasyClient rclient = (ResteasyClient)  client;
+        ResteasyClient rclient = (ResteasyClient) client;
         rclient.register(MOXyJsonProvider.class);
         final ResteasyWebTarget target =
-                (ResteasyWebTarget) client.target("http://127.0.0.1:9191/");
+                (ResteasyWebTarget) client.target(String.format("http://%s:%d", address, port));
 
 
         final Client nonauthClient =
                 ClientBuilder.newClient();
         rclient.register(MOXyJsonProvider.class);
         final ResteasyWebTarget nonauthTarget =
-                (ResteasyWebTarget) nonauthClient.target("http://127.0.0.1:9191/");
+                (ResteasyWebTarget) nonauthClient.target(String.format("http://%s:%d", address, port));
 
         final SignupService service =
                 target.proxy(SignupService.class);
@@ -194,21 +180,20 @@ public class RESTSecurityTest extends HibernateTestCase {
         User u = new User();
         u.setUsername("testuser4");
         u.setPassword("password");
-        service.signup(u);
+        signupService.signup(u);
 
         Token token = authenticationService.authenticate(u);
 
         client.register(new TokenRequestFilter(token));
 
 
-        service.list();
-
+        System.out.println(service.list());
 
 
         try {
             nonauthService.list();
             fail("Shouldn't have been allowed in");
-        } catch(ClientErrorException ex)  {
+        } catch (ClientErrorException ex) {
             assertThat(ex.getResponse().getStatusInfo(), is(Response.Status.FORBIDDEN));
         }
 
@@ -217,6 +202,7 @@ public class RESTSecurityTest extends HibernateTestCase {
     public static class TokenRequestFilter implements ClientRequestFilter {
 
         final Token token;
+
         public TokenRequestFilter(Token token) {
             this.token = token;
         }

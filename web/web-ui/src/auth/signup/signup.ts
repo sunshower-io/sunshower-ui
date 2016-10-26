@@ -1,35 +1,32 @@
 import {HttpClient, json} from 'aurelia-fetch-client';
 import {inject} from "aurelia-dependency-injection";
 import {bindable} from "aurelia-framework";
-import {User} from "../model/core/security/index";
-import {Router} from "aurelia-router";
+import {User} from "../../model/core/security/user";
+import {Auth} from "../auth";
 
-
-@inject(HttpClient, Router)
+@inject(HttpClient, Auth)
 export class Signup {
 
-
-
+    private client: HttpClient;
+    private auth: Auth;
 
     @bindable
-    private user:User = new User();
+    private user: User = new User();
 
-    constructor(
-        private client:HttpClient,
-        private router:Router) {
+    constructor(client: HttpClient, auth: Auth) {
+        this.client = client;
+        this.auth = auth;
     }
 
-
-    submit() : void {
+    signup(): void {
+        this.auth.setAppRoot();
         this.client.fetch('signup/signup', {
             method: 'post',
             body: JSON.stringify(this.user)
         }).then(response => response.json())
             .then(data => {
-                this.router.navigate('home');
+                console.log(data);
             });
     }
-
-
 
 }
