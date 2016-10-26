@@ -59,25 +59,10 @@ subprojects {
 
 }
 
-/**
- * Build BOM pom
- */
-
-apply from: 'gradle/bom.gradle'
-
-
 task wrapper(type: Wrapper) {
     gradleVersion = gradleWrapperVersion
 }
 
-def getRepoKey() {
-    if (version =~ /(?i)FINAL/) {
-        return 'libs-release-local'
-    } else if (version =~ /(?i)BUILD|DEV/) {
-        return 'libs-dev-local'
-    } else {
-        return 'libs-snapshot-local'
-    }
-}
+apply from: "$rootDir/gradle/bom.gradle"
 
 defaultTasks "installBillOfMaterials", "clean", "build"
