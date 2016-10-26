@@ -1,4 +1,5 @@
 import 'jquery'
+import 'fetch';
 import {Aurelia} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
 import {LocalStorage, createStorage} from "./storage/local/local-storage";
@@ -24,8 +25,6 @@ export function configure(aurelia: Aurelia) {
             })
     });
 
-
-
     container.registerInstance(
         LocalStorage,
         createStorage()
@@ -33,5 +32,9 @@ export function configure(aurelia: Aurelia) {
 
     container.registerInstance(HttpClient, http);
 
-    aurelia.start().then(() => aurelia.setRoot());
+    // TODO: Handle authentication logic
+    // if authenticated, go directly to home
+    // else go to login/signup page
+    aurelia.start().then(() => aurelia.setRoot('auth/auth'));
+    // aurelia.start().then(() => aurelia.setRoot());
 }

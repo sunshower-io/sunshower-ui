@@ -2,14 +2,14 @@ export class User {
 
     id:string;
 
+    firstname:string;
+
     lastname:string;
 
     username:string;
 
-    firstname:string;
-
     password:string;
 
-    emailAddress:string;
+    email:string;
 
 }
