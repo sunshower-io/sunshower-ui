@@ -11,6 +11,6 @@ template(bindable="router")
             img(src="styles/themes/hasli/assets/images/icons/alert.svg").item
             profile-dropdown.item
     .ui.secondary.pointing.menu.visible
-        a.item(repeat.for='row of router.navigation', class="${row.isActive ? 'active blue' : ''}" href.bind='row.href')
+        a.item(repeat.for='row of router.navigation', class="${row.isActive ? 'active' : ''}" href.bind='row.href')
             | ${row.title}
         img.right.floated(src="styles/themes/hasli/assets/images/icons/pulse.svg").item
