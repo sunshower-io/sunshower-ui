@@ -7,10 +7,6 @@ buildscript {
     apply from: 'gradle/buildscript.gradle', to: buildscript
 }
 
-ext {
-    repoKey = getRepoKey()
-}
-
 
 /**
  * Subproject configurations
