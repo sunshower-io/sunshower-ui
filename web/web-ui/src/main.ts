@@ -31,6 +31,7 @@ export function configure(aurelia: Aurelia) {
         createStorage()
     );
 
+
     container.registerInstance(HttpClient, http);
 
     aurelia.start().then(() => aurelia.setRoot());

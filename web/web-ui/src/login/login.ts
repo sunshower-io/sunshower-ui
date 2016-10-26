@@ -4,35 +4,41 @@
 import {bindable} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
 import {inject} from "aurelia-dependency-injection";
-import {User} from "../model/core/security/user";
-import {LocalStorage} from "../storage/local/local-storage";
-import {Token} from "src/model/core/security/token";
+import {TokenHolder, User, Token} from "../model/core/security/index";
+import {Router} from "aurelia-router";
 
 
-@inject(HttpClient, LocalStorage)
+
+
+@inject(HttpClient, TokenHolder, Router)
 export class Login {
 
     @bindable
     private user:User = new User();
 
+    @bindable
+    private remember:boolean;
+
 
 
     constructor(
         private client: HttpClient,
-        private storage:LocalStorage
+        private storage:TokenHolder,
+        private router:Router
     ) {
+        console.log("Storage", storage);
 
     }
 
     activate() : void {
-        let token = this.storage.get("X-AUTH-TOKEN");
+        let token = this.storage.get();
         if(token) {
             this.client.fetch('authenticate/validate', {
                 method:'post',
-                body: JSON.stringify(new Token(token, null))
+                body: JSON.stringify(new Token(token.token, null))
             }).then(response => response.json())
                 .then(data => {
-                    alert("Logged in =)");
+                    this.router.navigate('home');
                 })
         }
     }
@@ -43,7 +49,9 @@ export class Login {
             body: JSON.stringify(this.user)
         }).then(response => response.json())
             .then(data => {
-                this.storage.put("X-AUTH-TOKEN", data.token);
+                this.storage.set(data, this.remember);
+                this.router.navigate('home');
+                console.log("DONE");
         })
     }
 
