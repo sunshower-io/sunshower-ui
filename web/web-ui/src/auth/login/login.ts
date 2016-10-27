@@ -3,20 +3,25 @@ import {HttpClient} from "aurelia-fetch-client";
 import {inject} from "aurelia-dependency-injection";
 import {User} from "../../model/core/security/user";
 import {LocalStorage} from "../../storage/local/local-storage";
-import {Token} from "../../model/core/security/token";
+import {Token, TokenHolder} from "../../model/core/security/token";
 import {Aurelia} from "aurelia-framework";
 import {Auth} from "../auth";
 
-@inject(Aurelia, HttpClient, LocalStorage, Auth)
+@inject(Aurelia, HttpClient, TokenHolder, LocalStorage, Auth)
 export class Login {
 
 
     @bindable
+    private remember:boolean;
+
+    @bindable
     private user: User = new User();
+
 
     constructor(
         private aurelia: Aurelia,
         private client: HttpClient,
+        private holder: TokenHolder,
         private storage: LocalStorage,
         private auth: Auth
     ) {
@@ -33,6 +38,7 @@ export class Login {
                 body: JSON.stringify(new Token(token, null))
             }).then(response => response.json())
                 .then(data => {
+                    this.holder.set(data, true);
                     this.auth.setAppRoot();
                 })
         }
@@ -44,7 +50,8 @@ export class Login {
             body: JSON.stringify(this.user)
         }).then(response => response.json())
             .then(data => {
-                this.storage.put("X-AUTH-TOKEN", data.token);
+                this.holder.set(data, this.remember);
+                this.storage.put("X-AUTH-TOKEN", data.token.token);
             });
 
         this.auth.setAppRoot();
