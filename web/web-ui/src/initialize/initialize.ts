@@ -37,7 +37,7 @@ export class Initialize {
             body: JSON.stringify(this.application)
         }).then(data => data.json())
             .then(data => {
-                window.location.reload();
+                window.location.reload(true);
             });
 
     }

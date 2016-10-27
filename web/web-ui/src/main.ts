@@ -46,8 +46,7 @@ export function configure(aurelia: Aurelia) {
         LocalStorage,
         createStorage()
     );
-    //
-    // container.registerInstance(HttpClient, http);
+    container.registerInstance(HttpClient, http);
 
     http.fetch('initialize/active')
         .then(data => data.json())

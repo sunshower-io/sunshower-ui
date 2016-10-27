@@ -21,7 +21,6 @@ export class App {
         config.map([
             {
                 route: ['', 'home'],
-                redirect: 'dashboard',
                 name: 'home',
                 moduleId: 'home/home',
                 nav: false,
