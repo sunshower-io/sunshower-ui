@@ -1,10 +1,12 @@
 package io.hasli.service.application;
 
 import io.hasli.core.ApplicationService;
+import io.hasli.core.security.RoleService;
 import io.hasli.model.core.Application;
 import io.hasli.model.core.ApplicationInitializationException;
 import io.hasli.model.core.auth.Role;
 import io.hasli.model.core.auth.User;
+import io.hasli.service.signup.SignupService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,12 @@ public class DefaultApplicationService implements ApplicationService {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Inject
+    private RoleService roleService;
+
+    @Inject
+    private SignupService signupService;
 
 
     @Override
@@ -79,9 +87,8 @@ public class DefaultApplicationService implements ApplicationService {
                 "Has access to full application"
         );
 
-
-        user.addRole(role);
-        entityManager.merge(user);
+        user.addRole(roleService.findOrCreate(role));
+        signupService.signup(user);
         return true;
     }
 

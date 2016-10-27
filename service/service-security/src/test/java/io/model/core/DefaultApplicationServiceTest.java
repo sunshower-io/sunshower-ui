@@ -84,9 +84,7 @@ public class DefaultApplicationServiceTest extends HibernateTestCase {
 
         Set<User> admins = applicationService.getAdministrators();
         User admin = admins.iterator().next();
-        assertThat(admin.getAuthorities().size(), is(1));
-        Role r = (Role) admin.getAuthorities().iterator().next();
-        assertThat(r.getAuthority(), is("system-administrator"));
+        assertThat(admin.getAuthorities().size(), is(2));
 
     }
 }

@@ -1,5 +1,6 @@
 package io.hasli.service.security;
 
+import io.hasli.core.security.RoleService;
 import io.hasli.core.security.crypto.EncryptionService;
 import io.hasli.model.core.auth.Role;
 import io.hasli.model.core.auth.User;
@@ -27,26 +28,17 @@ public class DefaultSignupService implements SignupService {
     @Inject
     private EncryptionService encryptionService;
 
+    @Inject
+    private RoleService roleService;
+
     @Override
     public User signup(User user) {
-        List<Role> roles = entityManager.createQuery(
-                "select r from Role as r where " +
-                        "r.authority = 'admin'", Role.class)
-                .getResultList();
-
-        final Role admin;
-        if(roles.size() == 1) {
-            admin = roles.get(0);
-        } else {
-            admin = new Role(
-                    "admin",
-                    "Default administrator role"
-            );
-        }
+        final Role role = roleService.findOrCreate(
+                new Role("admin", "Site Administrator Role"));
 
         user.setPassword(encryptionService
                 .encrypt(user.getPassword()));
-        user.addRole(admin);
+        user.addRole(role);
         return entityManager.merge(user);
     }
 

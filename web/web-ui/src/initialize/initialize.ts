@@ -1,14 +1,18 @@
 import {Application} from '../model/core/application';
 import {User} from '../model/core/security/index';
-import {inject} from "aurelia-framework";
+import {inject, Aurelia} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
+import {Router} from "aurelia-router";
 
 
-@inject(HttpClient)
+@inject(HttpClient, Aurelia, Router)
 export class Initialize {
 
 
-    constructor(private client:HttpClient) {
+    constructor(
+        private client:HttpClient,
+        private aurelia:Aurelia,
+        private router:any ) {
 
     }
 
@@ -27,15 +31,13 @@ export class Initialize {
     }
 
     submit() {
-        let payload = {
-            application:this.application
-        };
-        console.log("GOT", JSON.stringify(payload));
+        this.aurelia.setRoot('app');
         this.client.fetch('initialize', {
             method:'post',
             body: JSON.stringify(this.application)
         }).then(data => data.json())
             .then(data => {
+                window.location.reload();
             });
 
     }

@@ -16,9 +16,6 @@ public class DataSourceConfiguration {
     @Bean
     public DataSource createHasliDatasource() throws NamingException {
         DataSource result = InitialContext.doLookup("java:jboss/datasources/ExampleDS");
-        for(int i = 0; i < 100; i++) {
-            System.out.println("GOT A ");
-        }
         return result;
     }
 

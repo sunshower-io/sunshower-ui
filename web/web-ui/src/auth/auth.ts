@@ -36,6 +36,7 @@ export class Auth {
     public setAppRoot(): void {
         this.router.navigate('/', { replace: true, trigger: false });
         this.aurelia.setRoot('app');
+        this.aurelia.setRoot('app');
     }
 
 }

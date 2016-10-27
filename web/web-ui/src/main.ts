@@ -43,7 +43,7 @@ export function configure(aurelia: Aurelia) {
             if(!data.value) {
                 aurelia.start().then(() => aurelia.setRoot('initialize/initialize'))
             } else {
-                console.log("Got one!");
+                aurelia.start().then(() => aurelia.setRoot('auth/auth'));
             }
         });
 

@@ -33,7 +33,6 @@ export class Login {
                 body: JSON.stringify(new Token(token, null))
             }).then(response => response.json())
                 .then(data => {
-                    alert("Logged in =)");
                     this.auth.setAppRoot();
                 })
         }
