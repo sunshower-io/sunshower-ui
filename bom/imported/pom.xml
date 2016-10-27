@@ -96,6 +96,7 @@
                 <groupId>io.hasli.barometer</groupId>
                 <artifactId>jaxrs</artifactId>
                 <version>${barometer.version}</version>
+                <scope>test</scope>
             </dependency>
 
             <dependency>
