@@ -29,8 +29,14 @@ export class AuthenticationContextHolder {
 
 
 
+    public clear() : void {
+        AuthenticationContextHolder.context = null;
+        this.storage.remove('X-AUTH-TOKEN');
+    }
+
 
     public token() :string {
+
         if(AuthenticationContextHolder.context) {
             let ctx = AuthenticationContextHolder.context;
             if(ctx.token) {

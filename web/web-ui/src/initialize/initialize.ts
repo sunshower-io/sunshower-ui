@@ -39,6 +39,5 @@ export class Initialize {
             .then(data => {
                 window.location.reload(true);
             });
-
     }
 }

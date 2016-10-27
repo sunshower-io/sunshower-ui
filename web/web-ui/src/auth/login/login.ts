@@ -19,7 +19,7 @@ export class Login {
 
 
     @bindable
-    private remember: boolean;
+    private remember: boolean = true;
 
     @bindable
     private user: User = new User();
@@ -60,7 +60,12 @@ export class Login {
             body: JSON.stringify(this.user)
         }).then(response => response.json())
             .then(data => {
-                this.setParam("token", data.token.token);
+                if(this.remember) {
+                    this.storage.put('X-AUTH-TOKEN', data.token.token);
+                    window.location.reload(true);
+                } else {
+                    this.setParam("token", data.token.token);
+                }
             });
     }
 

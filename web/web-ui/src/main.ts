@@ -54,8 +54,7 @@ export function configure(aurelia: Aurelia) {
             if(!data.value) {
                 aurelia.start().then(() => aurelia.setRoot('initialize/initialize'))
             } else {
-                let token = param('token'),
-                    remember = param('remember');
+                let token = storage.get('X-AUTH-TOKEN') || param('token');
                 tokenHolder.validate(token).then(context => {
                     container.registerInstance(User, context.user);
                     container.registerInstance(AuthenticationContext, context);
@@ -71,8 +70,8 @@ export function configure(aurelia: Aurelia) {
                                 }
                             })
                     });
+                    tokenHolder.set(context, false);
                     container.registerInstance(HttpClient, authenticatedClient);
-                    tokenHolder.set(context, "true" && remember === "true");
                     aurelia.start().then(() => aurelia.setRoot('app'));
                 }).catch(a => {
                     container.registerInstance(HttpClient, http);
