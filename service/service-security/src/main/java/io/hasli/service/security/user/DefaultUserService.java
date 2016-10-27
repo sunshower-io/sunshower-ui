@@ -33,7 +33,8 @@ public class DefaultUserService implements UserService, UserDetailsService {
     @Override
     public User findByUsername(String username) {
         return entityManager.createQuery("select u from User u " +
-                        "where u.username = :name", User.class)
+                    "left join fetch u.roles " +
+                    "where u.username = :name", User.class)
                 .setParameter("name", username).getSingleResult();
     }
 

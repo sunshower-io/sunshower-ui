@@ -55,6 +55,7 @@ public class DefaultUserServiceTest extends HibernateTestCase {
     public void ensureFindByUsernameFindsUserByExactMatch() {
         UUID id  = UUID.randomUUID();
         final User user = new User(id, "josiah2", "coolbeans");
+        user.setEmailAddress("joe@email.com3242");
         entityManager.persist(user);
 
         User saved = userService.findByUsername("josiah2");

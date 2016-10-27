@@ -12,7 +12,6 @@ import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.test.persist.HibernateTestCase;
 import io.io.hasli.service.security.TestSecurityConfiguration;
 import io.io.hasli.service.security.web.RESTSecurityTest;
-import org.hamcrest.Matcher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

@@ -115,6 +115,7 @@ public class RESTSecurityTest extends HibernateTestCase {
         User u = new User();
         u.setUsername("josiah");
         u.setPassword("password");
+        u.setEmailAddress("joe16@email.com");
         signupService.signup(u);
 
 
@@ -146,6 +147,7 @@ public class RESTSecurityTest extends HibernateTestCase {
         User u = new User();
         u.setUsername("testuser3");
         u.setPassword("password");
+        u.setEmailAddress("joe2@email.com");
         service.signup(u);
 
         Authentication token = authenticationService.authenticate(u);
@@ -188,6 +190,7 @@ public class RESTSecurityTest extends HibernateTestCase {
         User u = new User();
         u.setUsername("testuser4");
         u.setPassword("password");
+        u.setEmailAddress("joe5@email.com");
         signupService.signup(u);
 
         Authentication token = authenticationService.authenticate(u);

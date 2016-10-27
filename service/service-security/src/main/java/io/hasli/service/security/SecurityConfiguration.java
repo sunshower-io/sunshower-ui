@@ -2,6 +2,7 @@ package io.hasli.service.security;
 
 import io.hasli.core.ApplicationService;
 import io.hasli.core.security.AuthenticationService;
+import io.hasli.core.security.RoleService;
 import io.hasli.core.security.UserService;
 import io.hasli.core.security.crypto.EncryptionService;
 import io.hasli.service.application.DefaultApplicationService;
@@ -56,6 +57,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new TokenAuthenticationFilter();
     }
 
+    @Bean
+    public RoleService roleService() {
+        return new DefaultRoleService();
+    }
 
     @Bean
     public KeyProvider keyProvider() {

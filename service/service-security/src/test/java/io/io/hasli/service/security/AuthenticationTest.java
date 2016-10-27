@@ -68,7 +68,7 @@ public class AuthenticationTest extends HibernateTestCase {
         final User user = new User();
         user.setUsername("Josiah1");
         user.setPassword("password1234");
-
+        user.setEmailAddress("josiah@whatever1");
         User u = service.signup(user);
         assertThat(u.getPassword(), is(not("password1234")));
     }
@@ -81,10 +81,12 @@ public class AuthenticationTest extends HibernateTestCase {
         final User user = new User();
         user.setUsername("Josiah2");
         user.setPassword("password1234");
+        user.setEmailAddress("josiah@whatever1");
 
         final User user2 = new User();
         user2.setUsername("Josiah2");
         user2.setPassword("password1234");
+        user.setEmailAddress("josiah@whatever5");
 
         User u = service.signup(user);
         assertThat(u.getPassword(), is(not("password1234")));
@@ -99,10 +101,12 @@ public class AuthenticationTest extends HibernateTestCase {
         final User user = new User();
         user.setUsername("Josiah3");
         user.setPassword("password1");
+        user.setEmailAddress("josiah@whatever");
         service.signup(user);
         User fake = new User();
         fake.setUsername("Josiah3");
         fake.setPassword("password");
+        user.setEmailAddress("josiah@whatever2");
         authenticationService.authenticate(fake);
     }
 
@@ -112,6 +116,7 @@ public class AuthenticationTest extends HibernateTestCase {
     public void ensureCreatingTokenWorks() {
         final User user = new User();
         user.setUsername("Josiah4");
+        user.setEmailAddress("josiah@whatever3");
         user.setPassword("password1");
         final User signedup = service.signup(user);
 

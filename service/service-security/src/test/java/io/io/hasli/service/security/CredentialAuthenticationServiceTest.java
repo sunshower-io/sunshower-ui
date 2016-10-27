@@ -1,6 +1,7 @@
 package io.io.hasli.service.security;
 
 import io.hasli.core.security.CredentialService;
+import io.hasli.core.security.RoleService;
 import io.hasli.core.security.crypto.EncryptionService;
 import io.hasli.model.core.auth.Role;
 import io.hasli.model.core.auth.User;
@@ -22,6 +23,7 @@ import org.mockito.Mockito;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -58,6 +60,7 @@ import static org.mockito.BDDMockito.given;
         DependencyInjectionTestExecutionListener.class,
         WithSecurityContextTestExecutionListener.class
 })
+@Rollback
 public class CredentialAuthenticationServiceTest extends HibernateTestCase {
 
     @Inject
@@ -79,12 +82,17 @@ public class CredentialAuthenticationServiceTest extends HibernateTestCase {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Inject
+    private RoleService roleService;
+
     @Test
     @Transactional
     public void ensureSayHelloAdminWorks() throws IOException {
         final User user = new User();
         user.setPassword("frap");
-        final Role adminRole = new Role("admin", "coolbeans");
+        user.setUsername("joe@email.com3242");
+        user.setEmailAddress("joe@email.com3242");
+        final Role adminRole = roleService.findOrCreate(new Role("admin", "coolbeans"));
         user.addRole(adminRole);
         entityManager.persist(user);
         UUID id = user.getId();
@@ -103,8 +111,10 @@ public class CredentialAuthenticationServiceTest extends HibernateTestCase {
     @Transactional
     public void ensureSayHelloAdminWorksOnRolesAllowedWorks() throws IOException {
         final User user = new User();
+        user.setUsername("joe@email.com3242");
         user.setPassword("frap");
-        final Role adminRole = new Role("ROLE_ADMIN", "coolbeans");
+        user.setEmailAddress("joe@email.com3242");
+        final Role adminRole = roleService.findOrCreate(new Role("ROLE_ADMIN", "coolbeans"));
         user.addRole(adminRole);
         entityManager.persist(user);
         UUID id = user.getId();

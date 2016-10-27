@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by haswell on 10/17/16.
@@ -28,10 +29,21 @@ public class DefaultSignupService implements SignupService {
 
     @Override
     public User signup(User user) {
-        final Role admin = new Role(
-                "admin",
-                "Default administrator role"
-        );
+        List<Role> roles = entityManager.createQuery(
+                "select r from Role as r where " +
+                        "r.authority = 'admin'", Role.class)
+                .getResultList();
+
+        final Role admin;
+        if(roles.size() == 1) {
+            admin = roles.get(0);
+        } else {
+            admin = new Role(
+                    "admin",
+                    "Default administrator role"
+            );
+        }
+
         user.setPassword(encryptionService
                 .encrypt(user.getPassword()));
         user.addRole(admin);
@@ -42,7 +54,7 @@ public class DefaultSignupService implements SignupService {
     @PreAuthorize("hasAuthority('admin')")
     public List<User> list() {
         return entityManager.createQuery(
-                "select u from User u",
+                "select u from User u left join fetch u.roles ",
                 User.class
         ).getResultList();
     }
