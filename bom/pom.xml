@@ -77,6 +77,14 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
+            <id>release</id>
+            <name>libs-release</name>
+            <url>http://repo.hasli.io/artifactory/libs-release</url>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
             <id>ext</id>
             <name>release-local</name>
             <url>http://repo.hasli.io/artifactory/ext-release-local</url>
