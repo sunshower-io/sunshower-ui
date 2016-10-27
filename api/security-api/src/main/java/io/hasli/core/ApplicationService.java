@@ -13,11 +13,11 @@ import java.util.Set;
 @Path("initialize")
 @Produces({
         MediaType.APPLICATION_JSON,
-        MediaType.APPLICATION_JSON
+        MediaType.APPLICATION_XML
 })
 @Consumes({
         MediaType.APPLICATION_JSON,
-        MediaType.APPLICATION_JSON
+        MediaType.APPLICATION_XML
 })
 public interface ApplicationService {
 
@@ -28,6 +28,7 @@ public interface ApplicationService {
 
 
     @GET
+    @Path("active")
     Boolean isInitialized();
 
     @POST

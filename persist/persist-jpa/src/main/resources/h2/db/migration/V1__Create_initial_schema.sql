@@ -57,6 +57,7 @@ create table VERSION (
 create table APPLICATION (
   id                binary(16) primary key,
   enabled           boolean,
+  "name"            varchar(128),
   instance_id       varchar(32),
   location          varchar(32),
   started_on        timestamp,

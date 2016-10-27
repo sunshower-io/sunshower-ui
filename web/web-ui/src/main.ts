@@ -37,6 +37,17 @@ export function configure(aurelia: Aurelia) {
 
     container.registerInstance(HttpClient, http);
 
+    http.fetch('initialize/active')
+        .then(data => data.json())
+        .then(data => {
+            if(!data.value) {
+                aurelia.start().then(() => aurelia.setRoot('initialize/initialize'))
+            } else {
+                console.log("Got one!");
+            }
+        });
 
-    aurelia.start().then(() => aurelia.setRoot('auth/auth'));
+    // alert("Starting");
+
+    // aurelia.start().then(() => aurelia.setRoot('auth/auth'));
 }

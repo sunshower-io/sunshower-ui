@@ -10,7 +10,8 @@ import java.util.*;
  * Created by haswell on 10/26/16.
  */
 @Entity
-@XmlRootElement
+@XmlRootElement(name = "application")
+@XmlAccessorType(XmlAccessType.NONE)
 public class Application {
 
     @Id
@@ -25,6 +26,11 @@ public class Application {
 
     @XmlElement
     private String location;
+
+
+    @XmlElement
+    @Column(name = "`name`")
+    private String name;
 
     @XmlAttribute
     @Column(name = "started_on")
@@ -44,9 +50,6 @@ public class Application {
 
 
     @XmlElement
-    @XmlElementWrapper(
-            name = "administrators"
-    )
     @Transient
     private List<User> administrators =
             new ArrayList<>();
@@ -61,12 +64,22 @@ public class Application {
         this.administrators.add(u);
     }
 
+
+
     public UUID getId() {
         return id;
     }
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Boolean getEnabled() {
