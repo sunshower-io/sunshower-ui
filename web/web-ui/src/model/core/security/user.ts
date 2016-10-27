@@ -1,5 +1,9 @@
 import {Token} from './';
 
+export class AuthenticationContext {
+    user:User;
+    token:Token;
+}
 
 export class User {
 

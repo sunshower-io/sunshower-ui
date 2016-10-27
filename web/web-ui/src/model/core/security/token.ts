@@ -1,7 +1,7 @@
 import {inject} from "aurelia-framework";
 import {LocalStorage, Map} from "../../../storage/local/local-storage";
 import {HttpClient} from "aurelia-fetch-client";
-import {User} from "src/model/core/security";
+import {User, AuthenticationContext} from "src/model/core/security";
 
 export const HEADER = "X-AUTH-TOKEN";
 
@@ -15,9 +15,9 @@ export class Token {
 }
 
 @inject(HttpClient, LocalStorage)
-export class TokenHolder {
+export class AuthenticationContextHolder {
 
-    private static token: User;
+    private static context: AuthenticationContext;
 
 
     constructor(
@@ -29,41 +29,50 @@ export class TokenHolder {
 
 
 
-    public validate() : User {
-        if(TokenHolder.token) {
-            this.client.fetch('authenticate/validate', {
-                method: 'post',
-                body: JSON.stringify(TokenHolder.token.token)
-            }).then(response => response.json())
-                .then(data => {
-                    TokenHolder.token = data;
-                })
+
+    public token() :string {
+        if(AuthenticationContextHolder.context) {
+            let ctx = AuthenticationContextHolder.context;
+            if(ctx.token) {
+                return ctx.token.token;
+            }
         }
-        return TokenHolder.token;
+        return null;
     }
 
-    public get(): User {
-        if (TokenHolder.token) {
-            return TokenHolder.token;
+    public validate(token?:string) : Promise<AuthenticationContext> {
+        let t = token || this.token();
+        if(t) {
+            let tok = new Token(t, new Date());
+            return this.client.fetch('authenticate/validate', {
+                method: 'post',
+                body: JSON.stringify(tok)
+            }).then(response => response.json());
+        } else {
+            return Promise.reject("No token");
+        }
+    }
+
+    public get(): AuthenticationContext {
+        if (AuthenticationContextHolder.context) {
+            return  AuthenticationContextHolder.context;
         } else if (this.storage.get(HEADER)) {
             this.client.fetch('authentication/validate', {
                 method:'post',
                 body: JSON.stringify(this.storage.get(HEADER))
             }).then(response => response.json())
                 .then(data => {
-                    TokenHolder.token = data;
+                    AuthenticationContextHolder.context = data;
                 });
-            return TokenHolder.token;
+            return AuthenticationContextHolder.context;
         }
         return undefined;
     }
 
-    public set(t: User, remember: boolean) {
-        TokenHolder.token = t;
+    public set(t: AuthenticationContext, remember: boolean) {
+        AuthenticationContextHolder.context = t;
         if (remember) {
-
-
-            this.storage.put(HEADER, t.token.token);
+            this.storage.put(HEADER, this.token());
         }
     }
 }
