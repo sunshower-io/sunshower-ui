@@ -66,6 +66,8 @@ public class DefaultRESTApplicationServiceTest extends HibernateTestCase {
         assertThat(admin.getAuthorities().size(), is(1));
         Role r = (Role) admin.getAuthorities().iterator().next();
         assertThat(r.getAuthority(), is("system-administrator"));
+
+        assertThat(applicationService.isInitialized(), is(true));
     }
 
 
