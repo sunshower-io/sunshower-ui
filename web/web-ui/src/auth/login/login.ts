@@ -65,9 +65,9 @@ export class Login {
     }
 
 
-    setParam(n:string, value:string) {
+    setParam(name:string, v:string) {
         let location = window.location.href,
-            name = encodeURIComponent(n),
+            value = encodeURIComponent(v),
             pattern = new RegExp(`[&\\?]${name}=`);
         if (pattern.test(location)) {
             pattern = new RegExp(`[&\\?]${name}=\\d+`);

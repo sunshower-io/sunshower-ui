@@ -56,7 +56,7 @@ export function configure(aurelia: Aurelia) {
                 aurelia.start().then(() => aurelia.setRoot('initialize/initialize'))
             } else {
                 let token = param('token'),
-                    remember = decodeURIComponent(param('remember'));
+                    remember = param('remember');
                 tokenHolder.validate(token).then(context => {
                     container.registerInstance(User, context.user);
                     container.registerInstance(AuthenticationContext, context);
