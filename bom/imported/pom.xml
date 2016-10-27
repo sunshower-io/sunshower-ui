@@ -27,7 +27,7 @@
         <spock.version>1.0-groovy-2.4</spock.version>
         <mockito.version>2.0.44-beta</mockito.version>
         <msgpack-core.version>0.8.4</msgpack-core.version>
-        <arcus.version>1.00.000.000-SNAPSHOT</arcus.version>
+        <arcus.version>1.0.5.Final</arcus.version>
         <hikari-cp.version>2.5.1</hikari-cp.version>
         <!--<spring.version>4.3.0.BUILD-SNAPSHOT</spring.version>-->
         <spring.version>4.3.3.RELEASE</spring.version>
@@ -39,7 +39,7 @@
         <arquillian-weld.version>1.0.0.CR9</arquillian-weld.version>
         <projectreactor.version>2.0.8.RELEASE</projectreactor.version>
         <moxy.version>2.6.4</moxy.version>
-        <barometer.version>1.00.000.000-SNAPSHOT</barometer.version>
+        <barometer.version>1.0.6.Final</barometer.version>
         <shrinkwrap-resolvers.version>2.2.4</shrinkwrap-resolvers.version>
         <spring-security.version>4.1.3.RELEASE</spring-security.version>
         <version.shrinkwrap.resolvers>2.2.4</version.shrinkwrap.resolvers>
@@ -52,7 +52,6 @@
         <jaxrs.api>2.0</jaxrs.api>
         <jasypt.version>1.9.2</jasypt.version>
         <log4j.version>2.7</log4j.version>
-        <barometer.version>1.00.000.000-SNAPSHOT</barometer.version>
     </properties>
 
     <dependencyManagement>
@@ -93,7 +92,7 @@
             </dependency>
 
             <dependency>
-                <groupId>io.hasli.barometer</groupId>
+                <groupId>io.hasli.barometer.modules</groupId>
                 <artifactId>jaxrs</artifactId>
                 <version>${barometer.version}</version>
                 <scope>test</scope>
@@ -248,7 +247,7 @@
 
 
             <dependency>
-                <groupId>io.hasli.barometer</groupId>
+                <groupId>io.hasli.barometer.providers</groupId>
                 <artifactId>spring</artifactId>
                 <version>${barometer.version}</version>
                 <scope>test</scope>

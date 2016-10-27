@@ -9,6 +9,6 @@ subprojects {
     group='io.hasli.api'
 
     dependencies {
-        testCompile('io.hasli.barometer:jaxrs')
+        testCompile('io.hasli.barometer.modules:jaxrs')
     }
 }
