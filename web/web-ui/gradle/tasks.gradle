@@ -34,7 +34,15 @@ task installEnvironment(dependsOn:[
 ])
 
 
+task copyStyles(type:Copy, dependsOn:'bundle') {
+    from(fileTree("styles")) {
+        include "**/*"
+    }
+    into("export/styles")
+}
+
 task assembleAll(type:Zip, dependsOn: [
+        'copyStyles',
         'bundle'
 ]) {
     from(fileTree('export'))
