@@ -7,10 +7,6 @@ buildscript {
     apply from: 'gradle/buildscript.gradle', to: buildscript
 }
 
-ext {
-    repoKey = getRepoKey()
-}
-
 
 /**
  * Subproject configurations
@@ -30,6 +26,8 @@ subprojects {
     apply from: "$rootDir/gradle/test.gradle"
 
     dependencies {
+        provided('org.apache.logging.log4j:log4j-api')
+        provided('org.apache.logging.log4j:log4j-core')
         provided('org.jboss.spec:jboss-javaee-7.0')
 
         [
@@ -59,25 +57,10 @@ subprojects {
 
 }
 
-/**
- * Build BOM pom
- */
-
-apply from: 'gradle/bom.gradle'
-
-
 task wrapper(type: Wrapper) {
     gradleVersion = gradleWrapperVersion
 }
 
-def getRepoKey() {
-    if (version =~ /(?i)FINAL/) {
-        return 'libs-release-local'
-    } else if (version =~ /(?i)BUILD|DEV/) {
-        return 'libs-dev-local'
-    } else {
-        return 'libs-snapshot-local'
-    }
-}
+apply from: "$rootDir/gradle/bom.gradle"
 
 defaultTasks "installBillOfMaterials", "clean", "build"

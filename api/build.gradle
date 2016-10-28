@@ -1,5 +1,14 @@
 artifactoryPublish.skip=true
 
 subprojects {
+
+    repositories {
+        mavenCentral()
+    }
+
     group='io.hasli.api'
+
+    dependencies {
+        testCompile('io.hasli.barometer.modules:jaxrs')
+    }
 }

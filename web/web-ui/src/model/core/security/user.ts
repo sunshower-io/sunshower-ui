@@ -1,15 +1,23 @@
+import {Token} from './';
+
+export class AuthenticationContext {
+    user:User;
+    token:Token;
+}
+
 export class User {
 
     id:string;
+
+    firstname:string;
 
     lastname:string;
 
     username:string;
 
-    firstname:string;
-
     password:string;
 
-    emailAddress:string;
+    token:Token;
 
+    emailAddress:string;
 }

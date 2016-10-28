@@ -2,6 +2,7 @@ include(
         'aws',
         'hal',
         'service',
+        'logging',
         'web:hasli.io',
         'web:web-ui',
         'web:web-site',

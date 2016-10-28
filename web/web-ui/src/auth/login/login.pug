@@ -1,0 +1,26 @@
+template
+    .ui.one.column.center.aligned.grid
+        .column.seven.wide
+            h2.center.aligned.header
+                | Enter credentials
+            .ui.hidden.divider
+            .ui.small.form
+                .field
+                    label.pull-left Username
+                    input(type='text', placeholder='Enter your username', value.bind='user.username')
+                .field
+                    label.pull-left Password
+                    input(type='password', placeholder='Enter your password', value.bind='user.password')
+                .five.wide.field
+                    input.ui.button.large.fluid.green(type='submit', value='sign in', click.delegate="login()")
+                .inline.field
+                    .ui.checkbox.pull-left
+                        input(type='checkbox', value.bind='remember')
+                        label Remember me
+            .ui.hidden.divider
+            .ui.hidden.divider
+            .ui.error.message.left(show.bind="credentialsInvalid" style="margin-top:10px")
+                p Username/password combination was not recognized
+
+                //(show.bind="credentialsInvalid")
+

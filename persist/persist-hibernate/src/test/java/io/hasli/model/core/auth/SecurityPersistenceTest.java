@@ -24,6 +24,7 @@ public class SecurityPersistenceTest extends HibernateTestCase {
         User user = new User();
         user.setUsername("josiah");
         user.setPassword("test");
+        user.setEmailAddress("josiah@whatever");
         entityManager.persist(user);
         entityManager.flush();
     }
@@ -34,6 +35,7 @@ public class SecurityPersistenceTest extends HibernateTestCase {
         user.setUsername("Josiah");
         user.setPassword("Haswell");
         user.addRole(new Role("admin"));
+        user.setEmailAddress("josiah@whatever");
         entityManager.persist(user);
         entityManager.flush();
     }
@@ -47,6 +49,7 @@ public class SecurityPersistenceTest extends HibernateTestCase {
         user.setPassword("Haswell");
         user.addRole(new Role("admin")
                 .addPermission(new Permission("cool")));
+        user.setEmailAddress("josiah@whatever");
         entityManager.persist(user);
         entityManager.flush();
     }

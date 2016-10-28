@@ -1,0 +1,14 @@
+//
+   Created by dustinlish on 10/21/16.
+
+template
+    .ui.pointing.dropdown
+        .text ${user.username}
+        i.dropdown.icon
+        .menu
+            .item Profile
+            .item Settings
+            .item Help
+            .divider
+            .item(click.delegate="logout()") Sign out
+

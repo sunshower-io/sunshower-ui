@@ -20,10 +20,10 @@ war {
 }
 
 task extractUi(type:Copy) {
-    dependsOn configurations.web
-    includeEmptyDirs = false
-
     doLast {
+        dependsOn configurations.web
+        includeEmptyDirs = false
+
         into "${project.buildDir}/src"
         from {
             configurations.web.collect {

@@ -4,6 +4,7 @@ import io.hasli.core.security.AuthenticationService;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.service.signup.SignupService;
 import io.io.hasli.service.security.TestSecurityConfiguration;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener;
@@ -22,6 +23,7 @@ import static org.junit.Assert.*;
 /**
  * Created by haswell on 10/24/16.
  */
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
         classes = {

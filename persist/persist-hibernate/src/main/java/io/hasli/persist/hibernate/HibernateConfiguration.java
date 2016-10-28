@@ -44,7 +44,10 @@ public class HibernateConfiguration {
                 new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource);
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        entityManagerFactoryBean.setPackagesToScan("io.hasli.model.core.auth");
+        entityManagerFactoryBean.setPackagesToScan(
+                "io.hasli.model.core.auth",
+                "io.hasli.model.core"
+        );
 
         java.util.Properties jpaProperties = new java.util.Properties();
 

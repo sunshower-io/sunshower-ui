@@ -5,6 +5,7 @@ import io.hasli.core.security.InvalidCredentialException;
 import io.hasli.core.security.InvalidTokenException;
 import io.hasli.core.security.UserService;
 import io.hasli.core.security.crypto.EncryptionService;
+import io.hasli.model.core.auth.Authentication;
 import io.hasli.model.core.auth.Token;
 import io.hasli.model.core.auth.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,24 +32,25 @@ public class DefaultAuthenticationService implements AuthenticationService {
 
 
     @Override
-    public Token authenticate(User user) {
+    public Authentication authenticate(User user) {
         final String username = user.getUsername();
         final String password = user.getPassword();
         try {
             final User u = userService.findByUsername(username);
             if(encryptionService.matches(password, u.getPassword())) {
                 final String token = encryptionService.createToken(u);
-                return new Token(token, new Date());
+                return new Authentication(u, new Token(token, new Date()));
             }
         } catch(UsernameNotFoundException ex) {
+
         }
         throw new InvalidCredentialException("Username or password combination is invalid");
     }
 
     @Override
-    public Token validate(Token token) {
-        encryptionService.findByToken(token.getToken());
-        return token;
+    public Authentication validate(Token token) {
+        final User user = encryptionService.findByToken(token.getToken());
+        return new Authentication(user, token);
     }
 
 
