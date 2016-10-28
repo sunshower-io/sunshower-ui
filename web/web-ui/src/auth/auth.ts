@@ -33,7 +33,5 @@ export class Auth {
         config.mapUnknownRoutes('auth/login/login');
         this.router = router;
     }
-
-
 }
 

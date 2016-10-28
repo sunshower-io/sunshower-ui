@@ -1,0 +1,46 @@
+def appname = "hasli.io"
+
+def zipName = "${appname}-1.00.000.000-SNAPSHOT.ear"
+
+println("Resolving Wildfly...")
+
+deploy
+    hash: "QmT4vkfQu9F7fB4MExZympLngtkCH7gyUgoTSDMsDV4qek",
+    to: "$cwd/wildfly", cleanup:true;
+
+println("Successfully resolved Wildfly.  Unpacking")
+
+explode
+    from: "$cwd/wildfly/hasli-wildfly-1.00.000.000-SNAPSHOT.zip",
+    into: "$cwd/wildfly", mode:755;
+
+println("Successfully unpacked Wildfly.  Resolving Java")
+
+deploy
+    hash: "QmZb14mEMqaYoW5fxh3DxhSF8iNCwyvLdrxKBbDnQj48Tc",
+    to: "$cwd/jdk18", cleanup:true;
+
+println("Successfully resolved Java. Unpacking")
+
+explode
+    from: "$cwd/jdk18/jdk1.8.zip",
+    into: "$cwd/jdk18", mode:755;
+
+println("Successfully unpacked Java.  Setting JAVA_HOME for children")
+
+setenv
+    key:"JAVA_HOME",
+    value:"$cwd/jdk18/jdk1.8.0_101/";
+
+println("Starting Wildfly")
+exec
+    cmd: "sh $cwd/wildfly/hasli-wildfly/bin/standalone.sh -b 0.0.0.0",
+    timeout:5;
+
+println("Successfully started Wildfly. Deploying Hasli.io")
+
+
+
+exec
+    cmd: "sh $cwd/wildfly/hasli-wildfly/bin/jboss-cli.sh --connect --command='deploy --force $cwd/$zipName'" ,
+    timeout:5;
