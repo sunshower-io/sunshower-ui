@@ -2,6 +2,7 @@ package io.hasli.service.security.jaxrs;
 
 import io.hasli.core.security.InvalidCredentialException;
 import io.hasli.core.security.InvalidTokenException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 
 import javax.persistence.NoResultException;
@@ -37,6 +38,9 @@ public class ExceptionMappings implements ExceptionMapper<Throwable> {
         register(
                 NoResultException.class,
                 new NoSuchElementException());
+
+        register(DataIntegrityViolationException.class,
+                new ConstraintViolationException());
     }
 
 
@@ -47,11 +51,11 @@ public class ExceptionMappings implements ExceptionMapper<Throwable> {
 
     @Override
     public Response toResponse(Throwable exception) {
-        System.out.println("GOT A" + exception);
-        exception.printStackTrace();
-
         final ExceptionResponse exceptionResponse = mappings.get(exception.getClass());
         if(exceptionResponse == null) {
+            System.out.println("GOT A" + exception);
+            exception.printStackTrace();
+
             return Response.status(
                     Response.Status.INTERNAL_SERVER_ERROR)
                     .entity(exception.getMessage()).build();
@@ -64,6 +68,15 @@ public class ExceptionMappings implements ExceptionMapper<Throwable> {
     }
 }
 
+
+class ConstraintViolationException implements ExceptionMappings.ExceptionResponse {
+
+    @Override
+    public Response create(Throwable throwable) {
+        return Response.status(Response.Status.CONFLICT)
+                .entity(throwable.getMessage()).build();
+    }
+}
 
 class NoSuchElementException implements ExceptionMappings.ExceptionResponse {
     @Override

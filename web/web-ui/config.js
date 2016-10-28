@@ -375,7 +375,8 @@ System.config({
       "aurelia-dependency-injection",
       "aurelia-framework",
       "../../model/core/security/user",
-      "../auth"
+      "../auth",
+      "aurelia-router"
     ],
     "common/elements/profile-dropdown.js": [
       "../../model/core/security/user",
