@@ -19,7 +19,6 @@ export class Signup {
     }
 
     signup(): void {
-        this.auth.setAppRoot();
         this.client.fetch('signup/signup', {
             method: 'post',
             body: JSON.stringify(this.user)

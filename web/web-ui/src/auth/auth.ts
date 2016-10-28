@@ -30,14 +30,10 @@ export class Auth {
             }
         ]);
 
+        config.mapUnknownRoutes('auth/login/login');
         this.router = router;
     }
 
-    public setAppRoot(): void {
-        this.router.navigate('/', { replace: true, trigger: false });
-        this.aurelia.setRoot('app');
-        this.aurelia.setRoot('app');
-    }
 
 }
 

@@ -17,5 +17,10 @@ template
                     .ui.checkbox.pull-left
                         input(type='checkbox', value.bind='remember')
                         label Remember me
+            .ui.hidden.divider
+            .ui.hidden.divider
+            .ui.error.message.left(show.bind="credentialsInvalid" style="margin-top:10px")
+                p Username/password combination was not recognized
 
+                //(show.bind="credentialsInvalid")
 

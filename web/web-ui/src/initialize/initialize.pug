@@ -1,19 +1,19 @@
 template
     .ui.one.column.center.aligned.grid(style="margin-top:25px")
         .column.ten.wide
-            .center.aligned.ui.message
-                    .header
+            .center.aligned.ui
+                    h1
                         | Welcome to Hasli Meteorology!
                     p
                         | Meteorology has not been configured yet.  Let's take a moment to do that!
 
             .ui.hidden.divider
-            .center.aligned.ui.message
-                .header
+            .center.aligned.ui
+                h2
                     | General information
                 p
                     | Just a few questions about your installation
-            .ui.small.form
+            .ui.small.form.message
 
                 .field
                     label.pull-left Installation Name
@@ -32,8 +32,8 @@ template
                     )
 
             .ui.hidden.divider
-            .center.aligned.ui.message
-                .header
+            .center.aligned.ui
+                h2
                     | Administrative users
                 p
                     | We need at least one administrative user.  These users will have access to all
@@ -42,8 +42,8 @@ template
                     | We recommend keeping as few administrators as possible, for security reasons.
 
             div(repeat.for="administrator of application.administrators")
-                .h3 ${current.username || 'Username'}
-                .div.ui.small.form(style="margin-bottom:10px;")
+                .div.ui.small.form.message(style="margin-bottom:10px;")
+                    h3 ${current.username || 'Username'}
                     .field
                         label.pull-left Username
                     input(
@@ -85,10 +85,12 @@ template
 
             .five.wide.field
                 input.ui.button.large.fluid.green(
+                    style="margin-top:10px",
                     type='button',
-                    value='add',
+                    value='Add Administrator',
                     click.delegate="addUser()")
                 input.ui.button.large.fluid.blue(
+                    style="margin-top:10px;"
                     type='button',
                     value='Ok!',
                     show.bind="current"

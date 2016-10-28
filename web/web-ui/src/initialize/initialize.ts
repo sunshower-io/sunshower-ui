@@ -20,14 +20,17 @@ export class Initialize {
 
     application:Application = new Application();
 
+    attached() {
+        this.current = new User();
+        this.application.administrators.push(this.current);
+    }
+
 
 
     addUser() {
         if(!this.application.administrators) {
             this.application.administrators = [];
         }
-        this.current = new User();
-        this.application.administrators.push(this.current);
     }
 
     submit() {

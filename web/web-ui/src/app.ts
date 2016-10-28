@@ -18,6 +18,7 @@ export class App {
     public configureRouter(config: RouterConfiguration, router: Router) {
         config.title = 'Aurelia';
         config.addPipelineStep('authorize', new SecurityStep(this.tokenHolder));
+
         config.map([
             {
                 route: ['', 'home'],

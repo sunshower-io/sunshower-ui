@@ -22,6 +22,9 @@ export class Login {
     private remember: boolean = true;
 
     @bindable
+    private credentialsInvalid: boolean = false;
+
+    @bindable
     private user: User = new User();
 
 
@@ -66,6 +69,9 @@ export class Login {
                 } else {
                     this.setParam("token", data.token.token);
                 }
+            }).catch(e => {
+                this.credentialsInvalid = true;
+                console.log("GOT ONE");
             });
     }
 

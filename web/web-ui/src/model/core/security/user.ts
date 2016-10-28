@@ -17,8 +17,7 @@ export class User {
 
     password:string;
 
-    email:string;
-
-
     token:Token;
+
+    emailAddress:string;
 }
