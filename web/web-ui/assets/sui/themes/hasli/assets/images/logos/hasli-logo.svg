@@ -3,7 +3,7 @@
     <defs></defs>
     <g id="Hasli-Logo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Logo">
-            <text id="HASLI.IO" font-family="AvenirNext-Regular, Avenir Next" font-size="18" font-weight="normal" letter-spacing="0.31764707" fill="#BCC1D8">
+            <text id="HASLI.IO" font-family="Open Sans, Helvetica Neue, Arial" font-size="18" font-weight="normal" letter-spacing="0.31764707" fill="#BCC1D8">
                 <tspan x="37" y="22">HASLI.IO</tspan>
             </text>
             <path d="M12.9471192,1.09979818 C14.4326762,-0.369684648 16.8474812,-0.363510888 18.3267969,1.09979818 L30.1620876,12.8070279 C31.6476446,14.2765107 31.6414033,16.6651869 30.1620876,18.1284959 L18.3267969,29.8357256 C16.8412399,31.3052085 14.4264349,31.2990347 12.9471192,29.8357256 L1.11182846,18.1284959 C-0.373728491,16.6590131 -0.3674872,14.270337 1.11182846,12.8070279 L12.9471192,1.09979818 Z" id="Combined-Shape" fill="#239AE8"></path>
