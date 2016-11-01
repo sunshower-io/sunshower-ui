@@ -5,15 +5,23 @@ import io.hasli.model.core.entity.AbstractEntity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by haswell on 10/28/16.
  */
-@MappedSuperclass
-public abstract class Metadata<T extends Serializable> extends AbstractEntity<T> {
+
+@Entity
+@Inheritance(
+    strategy = InheritanceType.TABLE_PER_CLASS
+)
+public abstract class Metadata extends AbstractEntity<UUID> {
 
 
-    protected Metadata(T t) {
+    @Id
+    private UUID id;
+
+    protected Metadata(UUID t) {
         super(t);
     }
 

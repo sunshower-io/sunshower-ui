@@ -70,3 +70,24 @@ create table APPLICATION (
 );
 
 
+create table CREDENTIAL_METADATA (
+  id            binary(16) primary key,
+  key           varchar(32),
+  value         varchar(128)
+);
+
+
+create table CREDENTIAL_SECRET (
+  id              binary(16) primary key,
+  name            varchar(32),
+  secret          varchar(8192),
+  description     varchar(512),
+  created         timestamp,
+  updated         timestamp default CURRENT_TIMESTAMP,
+  modifier_id     binary(16),
+  metadata_id     binary(16),
+
+  foreign key (modifier_id) references "USER"(id),
+  foreign key (metadata_id) references CREDENTIAL_METADATA(id),
+);
+

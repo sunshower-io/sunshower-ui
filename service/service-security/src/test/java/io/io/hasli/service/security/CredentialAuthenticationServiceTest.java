@@ -21,6 +21,8 @@ import org.junit.runner.RunWith;
 
 import org.mockito.Mockito;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener;
 import org.springframework.test.annotation.Rollback;
@@ -84,6 +86,31 @@ public class CredentialAuthenticationServiceTest extends HibernateTestCase {
 
     @Inject
     private RoleService roleService;
+
+    @Inject
+    private UserDetails user;
+
+    @Inject
+    private Authentication authentication;
+
+    @Test
+    @WithMockUser(
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
+    )
+    public void ensureAuthenticationIsInjected() {
+        assertThat(authentication, is(not(nullValue())));
+    }
+
+    @Test
+    @WithMockUser(
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
+    )
+    public void ensureUserIsInjected() {
+        assertThat(user, is(not(nullValue())));
+        assertThat(user.getUsername(), is("admin"));
+    }
 
     @Test
     @Transactional

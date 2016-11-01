@@ -46,7 +46,9 @@ public class HibernateConfiguration {
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         entityManagerFactoryBean.setPackagesToScan(
                 "io.hasli.model.core.auth",
-                "io.hasli.model.core"
+                "io.hasli.model.core",
+                "io.hasli.vault.api",
+                "io.hasli.vault.api.secrets"
         );
 
         java.util.Properties jpaProperties = new java.util.Properties();
