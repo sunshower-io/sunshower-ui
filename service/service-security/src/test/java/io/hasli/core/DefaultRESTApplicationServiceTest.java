@@ -9,6 +9,7 @@ import io.hasli.model.core.auth.Role;
 import io.hasli.model.core.auth.User;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.service.security.SecurityConfiguration;
+import io.hasli.test.persist.EnableJPA;
 import io.hasli.test.persist.HibernateTestCase;
 import io.io.hasli.service.security.TestSecurityConfiguration;
 import io.io.hasli.service.security.web.RESTSecurityTest;
@@ -27,6 +28,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by haswell on 10/26/16.
  */
+@EnableJPA
 @Enable(JAXRS.class)
 @RunWith(BarometerRunner.class)
 @ContextConfiguration(
@@ -38,7 +40,7 @@ import static org.junit.Assert.assertThat;
                 RESTSecurityTest.class,
         })
 @WebAppConfiguration
-public class DefaultRESTApplicationServiceTest extends HibernateTestCase {
+public class DefaultRESTApplicationServiceTest {
 
     @Remote
     private ApplicationService applicationService;

@@ -1,5 +1,6 @@
 package io.io.hasli.service.security;
 
+import io.hasli.barometer.spring.BarometerRunner;
 import io.hasli.core.security.CredentialService;
 import io.hasli.core.security.RoleService;
 import io.hasli.core.security.crypto.EncryptionService;
@@ -9,6 +10,7 @@ import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.service.security.TokenAuthenticationFilter;
 import io.hasli.service.security.crypto.MessageAuthenticationCode;
+import io.hasli.test.persist.EnableJPA;
 import io.hasli.test.persist.HibernateTestCase;
 import org.junit.Test;
 
@@ -46,7 +48,8 @@ import static org.mockito.BDDMockito.given;
 /**
  * Created by haswell on 10/11/16.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@EnableJPA
+@RunWith(BarometerRunner.class)
 @ContextConfiguration(
         classes = {
                 SecurityConfiguration.class,
@@ -63,7 +66,7 @@ import static org.mockito.BDDMockito.given;
         WithSecurityContextTestExecutionListener.class
 })
 @Rollback
-public class CredentialAuthenticationServiceTest extends HibernateTestCase {
+public class CredentialAuthenticationServiceTest {
 
     @Inject
     private CredentialService credentialService;

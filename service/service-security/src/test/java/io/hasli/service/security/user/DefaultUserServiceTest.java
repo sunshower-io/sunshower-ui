@@ -1,12 +1,15 @@
 package io.hasli.service.security.user;
 
+import io.hasli.barometer.spring.BarometerRunner;
 import io.hasli.core.security.UserService;
 import io.hasli.model.core.auth.User;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.persistence.Dialect;
 import io.hasli.service.security.SecurityConfiguration;
+import io.hasli.test.persist.EnableJPA;
 import io.hasli.test.persist.HibernateTestCase;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +35,9 @@ import static org.junit.Assert.assertThat;
         HibernateConfiguration.class,
         SecurityConfiguration.class,
 })
-public class DefaultUserServiceTest extends HibernateTestCase {
+@EnableJPA
+@RunWith(BarometerRunner.class)
+public class DefaultUserServiceTest {
     
     @Inject
     private Dialect dialect;

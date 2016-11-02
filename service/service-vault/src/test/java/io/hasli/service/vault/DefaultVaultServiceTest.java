@@ -1,8 +1,10 @@
 package io.hasli.service.vault;
 
+import io.hasli.barometer.spring.BarometerRunner;
 import io.hasli.model.core.auth.User;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.service.security.SecurityConfiguration;
+import io.hasli.test.persist.EnableJPA;
 import io.hasli.test.persist.HibernateTestCase;
 import io.hasli.vault.api.Secret;
 import io.hasli.vault.api.VaultService;
@@ -32,7 +34,7 @@ import static org.hamcrest.CoreMatchers.*;
 /**
  * Created by haswell on 11/1/16.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(BarometerRunner.class)
 @ContextConfiguration(
         classes = {
                 HibernateConfiguration.class,
@@ -40,6 +42,7 @@ import static org.hamcrest.CoreMatchers.*;
                 SecurityConfiguration.class,
         })
 
+@EnableJPA
 @TestExecutionListeners(listeners = {
         ServletTestExecutionListener.class,
         TransactionalTestExecutionListener.class,
@@ -48,7 +51,7 @@ import static org.hamcrest.CoreMatchers.*;
         WithSecurityContextTestExecutionListener.class
 })
 @Transactional
-public class DefaultVaultServiceTest extends HibernateTestCase {
+public class DefaultVaultServiceTest {
 
     @Inject
     private VaultService vaultService;

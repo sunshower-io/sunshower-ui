@@ -21,6 +21,7 @@ include(
         'persist:persist-core',
         'persist:persist-jpa',
         'persist:persist-hibernate',
+        'test:test-ws',
         'test:test-common',
         'test:test-persist',
         'test:test-serialization',

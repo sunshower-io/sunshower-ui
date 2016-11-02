@@ -9,6 +9,7 @@ import io.hasli.model.core.auth.User;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.service.signup.SignupService;
+import io.hasli.test.persist.EnableJPA;
 import io.hasli.test.persist.HibernateTestCase;
 import io.hasli.vault.api.VaultService;
 
@@ -25,6 +26,7 @@ import javax.ws.rs.client.ClientRequestFilter;
 /**
  * Created by haswell on 11/1/16.
  */
+@EnableJPA
 @Enable(JAXRS.class)
 @RunWith(BarometerRunner.class)
 @ContextConfiguration(
@@ -35,10 +37,7 @@ import javax.ws.rs.client.ClientRequestFilter;
                 HibernateConfiguration.class,
         })
 @WebAppConfiguration
-@AuthenticationContext(
-        provider = HasliAuthenticationProvider.class
-)
-public class DefaultServiceRestTest extends HibernateTestCase {
+public class DefaultServiceRestTest {
 
     @Remote
     private VaultService vaultService;
@@ -59,10 +58,6 @@ public class DefaultServiceRestTest extends HibernateTestCase {
         user.setUsername("Josiah");
         user.setPassword("joe");
         signupService.signup(user);
-
-
-
-
     }
 
 
