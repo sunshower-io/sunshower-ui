@@ -38,25 +38,66 @@ if (env.BRANCH_NAME == "master") {
 
 node('docker-registry') {
 
-    stage 'Checkout'
-    checkout scm
+    stage('Checkout') {
+        checkout scm
+    }
 
     timeout(time: 60, unit: 'MINUTES') {
-        stage 'Build Container'
-        sh "docker build -t hasli.io/build:$version.$buildNumber ."
-        sh "chmod +x gradlew"
-
-        stage 'Gradle Build / Test'
-        try {
-            sh "docker run --name=$version.$buildNumber -v `pwd`:/usr/src/ -v ~/.gradle/gradle.properties:/root/.gradle/gradle.properties -v ~/.jspm:/root/.jspm hasli.io/build:$version.$buildNumber sh -c '/usr/src/gradlew ${bomTask} && /usr/src/gradlew ${gradleTasks.join(" ")}'"
-        } catch (Exception e) {
-            error "Failed: ${e}"
-            throw (e)
-        } finally {
-            junit allowEmptyResults: true, keepLongStdio: true, testResults: '**/build/test-results/**/*.xml'
-            sh "docker rm $version.$buildNumber"
+        stage('Build Container') {
+            sh "docker build -t hasli.io/build:$version.$buildNumber ."
+            sh "chmod +x gradlew"
         }
+
+        stage('Gradle Build / Test') {
+			try {
+				dockerRun(
+					"hasli.io/build:$version.$buildNumber",
+					"$version.$buildNumber",
+                	"-v `pwd`:/usr/src/ -v ~/.gradle/gradle.properties:/root/.gradle/gradle.properties -v ~/.jspm:/root/.jspm", 
+					"sh -c '/usr/src/gradlew ${bomTask} && /usr/src/gradlew ${gradleTasks.join(" ")}'")
+            } catch (Exception e) {
+                error "Failed: ${e}"
+            } finally {
+                junit allowEmptyResults: true, keepLongStdio: true, testResults: '**/build/test-results/**/*.xml'
+            }
+        }
+
+        if (env.BRANCH_NAME =~ /(?i)^pr-/) {
+            def name = "staging-${version}.${buildNumber}"
+            stage('Deploy to Staging') {
+                sh "docker build -t hasli.io/ui:$version.$buildNumber ./web/"
+                dockerRun(
+						"hasli.io/ui:$version.$buildNumber",
+						name,
+						"-d -P",
+						"")
+            }
+
+			stage('Deployment Summary') {
+                sh "printf 'IP Address: ' && docker inspect -f '{{.NetworkSettings.IPAddress}}' $name"
+                sh "printf 'Ports: ' && docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' $name"
+			}
+        }
+
+
+		if (env.BRANCH_NAME == "master") {
+			stage('Deploy to Production') {
+			}
+		}
+
     }
+
+}
+
+def dockerRun(image, name, args, cmd) {
+	try {
+		sh "docker run --name=$name $args $image $cmd"
+	} catch (Exception e) {
+		error "Failed: ${e}"
+		throw (e)
+	} finally {
+		sh "docker rm $name"
+	}
 }
 
 def convertBranchName(String name) {
