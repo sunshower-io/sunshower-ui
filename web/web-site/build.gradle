@@ -20,7 +20,6 @@ war {
 }
 
 task extractUi(type:Copy) {
-    doLast {
         dependsOn configurations.web
         includeEmptyDirs = false
 
@@ -33,7 +32,6 @@ task extractUi(type:Copy) {
         eachFile {
             it.path = it.path - "assembly/"
         }
-    }
 }
 
 
