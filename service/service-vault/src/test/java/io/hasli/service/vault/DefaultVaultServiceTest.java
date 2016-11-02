@@ -80,6 +80,7 @@ public class DefaultVaultServiceTest extends HibernateTestCase {
 
         CredentialSecret secret = new CredentialSecret();
         secret.setModifier(user);
+        secret.set("hello", "world");
 
         vaultService.save(secret);
 
@@ -89,10 +90,7 @@ public class DefaultVaultServiceTest extends HibernateTestCase {
 
         CredentialSecret s = entityManager.find(CredentialSecret.class, id);
         assertThat(s.getModifier(), is(not(nullValue())));
-
-
-
+        assertThat(s.getMetadata(), is(not(nullValue())));
+        assertThat(s.getMetadata().get("hello"), is("world"));
     }
-
-
 }

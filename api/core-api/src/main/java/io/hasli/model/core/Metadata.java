@@ -4,6 +4,7 @@ import io.hasli.model.core.entity.AbstractEntity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -21,8 +22,10 @@ public abstract class Metadata extends AbstractEntity<UUID> {
     @Id
     private UUID id;
 
+
     protected Metadata(UUID t) {
         super(t);
+        data = new HashMap<>();
     }
 
 

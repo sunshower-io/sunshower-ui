@@ -18,7 +18,7 @@ public class SecretMetadata extends Metadata {
     @Id
     private UUID id;
 
-    @OneToOne
+    @OneToOne(mappedBy = "metadata")
     private Secret secret;
 
     public SecretMetadata() {

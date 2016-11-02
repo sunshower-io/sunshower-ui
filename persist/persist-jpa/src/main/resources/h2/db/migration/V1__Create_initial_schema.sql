@@ -88,6 +88,13 @@ create table CREDENTIAL_SECRET (
   metadata_id     binary(16),
 
   foreign key (modifier_id) references "USER"(id),
-  foreign key (metadata_id) references CREDENTIAL_METADATA(id),
+  foreign key (metadata_id) references CREDENTIAL_METADATA(id)
 );
 
+
+create table METADAtA_VALUE (
+
+  id      binary(16) primary key,
+  key     varchar(128),
+  value   varchar(128)
+);

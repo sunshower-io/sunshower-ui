@@ -19,6 +19,13 @@ public abstract class Secret extends AbstractEntity<UUID> implements Persistable
     @Id
     private UUID id;
 
+    @OneToOne(
+            orphanRemoval = true,
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(name = "metadata_id")
+    private Metadata metadata;
+
     public Secret() {
         super(UUID.randomUUID());
     }
@@ -33,8 +40,17 @@ public abstract class Secret extends AbstractEntity<UUID> implements Persistable
         this.id = uuid;
     }
 
-    public abstract Metadata getMetadata();
 
+    public Metadata getMetadata() {
+        if(metadata == null) {
+            metadata = new SecretMetadata();
+        }
+        return metadata;
+    }
+
+    public void setMetadata(Metadata metadata) {
+        this.metadata = metadata;
+    }
 
     public void set(String key, String value) {
         getMetadata().set(key, value);

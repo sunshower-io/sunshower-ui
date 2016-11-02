@@ -3,6 +3,7 @@ package io.hasli.vault.api.secrets;
 import io.hasli.model.core.Metadata;
 import io.hasli.model.core.auth.User;
 import io.hasli.vault.api.Secret;
+import io.hasli.vault.api.SecretMetadata;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -39,11 +40,6 @@ public class CredentialSecret extends Secret {
     private User modifier;
 
 
-    @OneToOne(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private Metadata metadata;
 
 
     public CredentialSecret(UUID id) {
@@ -128,11 +124,4 @@ public class CredentialSecret extends Secret {
         this.modifier = modifier;
     }
 
-    public Metadata getMetadata() {
-        return metadata;
-    }
-
-    public void setMetadata(Metadata metadata) {
-        this.metadata = metadata;
-    }
 }
