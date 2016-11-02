@@ -2,18 +2,19 @@
 
 def majorVersion   = "1"
 def minorVersion   = "0"
-def buildNumber
+def buildNumber    
 def buildSuffix    = "Final"
 def version        = "$majorVersion.$minorVersion"
 def registry       = "10.0.4.51:5000"
 def runSystemTests = false
+def bomTask      
 def gradleTasks    = []
 
 // TODO: enable integrationTests by default
 if (env.BRANCH_NAME == "master") {
     buildNumber = env.BUILD_NUMBER
+    bomTask = "releaseBom"
     gradleTasks = [
-        "releaseBom",
         "installEnvironment",
         "clean",
         "build",
@@ -22,8 +23,8 @@ if (env.BRANCH_NAME == "master") {
     ]
 } else {
     buildNumber = "${env.BUILD_NUMBER}.${convertBranchName(env.BRANCH_NAME)}"
+    bomTask = "installBillOfMaterials"
     gradleTasks = [
-        "installBillOfMaterials",
         "installEnvironment",
         "clean",
         "build"
@@ -47,7 +48,7 @@ node('docker-registry') {
 
         stage 'Gradle Build / Test'
         try {
-            sh "docker run --name=$version.$buildNumber -v `pwd`:/usr/src/ -v ~/.gradle/gradle.properties:/root/.gradle/gradle.properties -v ~/.jspm:/root/.jspm hasli.io/build:$version.$buildNumber /usr/src/gradlew ${gradleTasks.join(" ")}"
+            sh "docker run --name=$version.$buildNumber -v `pwd`:/usr/src/ -v ~/.gradle/gradle.properties:/root/.gradle/gradle.properties -v ~/.jspm:/root/.jspm hasli.io/build:$version.$buildNumber sh -c '/usr/src/gradlew ${bomTask} && /usr/src/gradlew ${gradleTasks.join(" ")}'"
         } catch (Exception e) {
             error "Failed: ${e}"
             throw (e)
