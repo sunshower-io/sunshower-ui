@@ -1,0 +1,5 @@
+
+dependencies {
+    compile 'io.hasli.barometer.modules:jaxrs'
+    compile 'org.springframework.security:spring-security-test'
+}

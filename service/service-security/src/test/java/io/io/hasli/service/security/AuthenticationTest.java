@@ -1,5 +1,6 @@
 package io.io.hasli.service.security;
 
+import io.hasli.barometer.spring.BarometerRunner;
 import io.hasli.core.security.AuthenticationService;
 import io.hasli.core.security.InvalidCredentialException;
 import io.hasli.core.security.crypto.EncryptionService;
@@ -9,6 +10,7 @@ import io.hasli.model.core.auth.User;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.service.signup.SignupService;
+import io.hasli.test.persist.EnableJPA;
 import io.hasli.test.persist.HibernateTestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +33,8 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by haswell on 10/22/16.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@EnableJPA
+@RunWith(BarometerRunner.class)
 @ContextConfiguration(
         classes = {
                 SecurityConfiguration.class,

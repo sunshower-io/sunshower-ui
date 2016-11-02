@@ -1,5 +1,6 @@
 package io.io.hasli.service.security;
 
+import io.hasli.barometer.spring.BarometerRunner;
 import io.hasli.core.security.CredentialService;
 import io.hasli.core.security.RoleService;
 import io.hasli.core.security.crypto.EncryptionService;
@@ -9,6 +10,7 @@ import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.service.security.TokenAuthenticationFilter;
 import io.hasli.service.security.crypto.MessageAuthenticationCode;
+import io.hasli.test.persist.EnableJPA;
 import io.hasli.test.persist.HibernateTestCase;
 import org.junit.Test;
 
@@ -21,6 +23,8 @@ import org.junit.runner.RunWith;
 
 import org.mockito.Mockito;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener;
 import org.springframework.test.annotation.Rollback;
@@ -44,7 +48,8 @@ import static org.mockito.BDDMockito.given;
 /**
  * Created by haswell on 10/11/16.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@EnableJPA
+@RunWith(BarometerRunner.class)
 @ContextConfiguration(
         classes = {
                 SecurityConfiguration.class,
@@ -61,7 +66,7 @@ import static org.mockito.BDDMockito.given;
         WithSecurityContextTestExecutionListener.class
 })
 @Rollback
-public class CredentialAuthenticationServiceTest extends HibernateTestCase {
+public class CredentialAuthenticationServiceTest {
 
     @Inject
     private CredentialService credentialService;
@@ -84,6 +89,31 @@ public class CredentialAuthenticationServiceTest extends HibernateTestCase {
 
     @Inject
     private RoleService roleService;
+
+    @Inject
+    private UserDetails user;
+
+    @Inject
+    private Authentication authentication;
+
+    @Test
+    @WithMockUser(
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
+    )
+    public void ensureAuthenticationIsInjected() {
+        assertThat(authentication, is(not(nullValue())));
+    }
+
+    @Test
+    @WithMockUser(
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
+    )
+    public void ensureUserIsInjected() {
+        assertThat(user, is(not(nullValue())));
+        assertThat(user.getUsername(), is("admin"));
+    }
 
     @Test
     @Transactional

@@ -2,10 +2,10 @@ def appname = "hasli.io"
 
 def zipName = "${appname}-1.00.000.000-SNAPSHOT.ear"
 
-println("Resolving Wildfly...")
+println("Resolving Wildfly at \"$wildflyHash\"...")
 
 deploy
-    hash: "QmT4vkfQu9F7fB4MExZympLngtkCH7gyUgoTSDMsDV4qek",
+    hash: "$wildflyHash",
     to: "$cwd/wildfly", cleanup:true;
 
 println("Successfully resolved Wildfly.  Unpacking")
@@ -14,10 +14,10 @@ explode
     from: "$cwd/wildfly/hasli-wildfly-1.00.000.000-SNAPSHOT.zip",
     into: "$cwd/wildfly", mode:755;
 
-println("Successfully unpacked Wildfly.  Resolving Java")
+println("Successfully unpacked Wildfly.  Resolving Java at \"$jdkHash\"")
 
 deploy
-    hash: "QmZb14mEMqaYoW5fxh3DxhSF8iNCwyvLdrxKBbDnQj48Tc",
+    hash: "$jdkHash",
     to: "$cwd/jdk18", cleanup:true;
 
 println("Successfully resolved Java. Unpacking")

@@ -20,14 +20,15 @@ import javax.ws.rs.core.MediaType;
 })
 public interface AuthenticationService {
 
-    @POST
-    @Path("authenticate")
-    Authentication authenticate(User user);
 
 
     @POST
     @Path("validate")
     Authentication validate(Token token);
+
+    @POST
+    @Path("authenticate")
+    Authentication authenticate(User user);
 
 
 }

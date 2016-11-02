@@ -1,11 +1,13 @@
 package io.model.core;
 
+import io.hasli.barometer.spring.BarometerRunner;
 import io.hasli.core.ApplicationService;
 import io.hasli.model.core.Application;
 import io.hasli.model.core.auth.Role;
 import io.hasli.model.core.auth.User;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.service.security.SecurityConfiguration;
+import io.hasli.test.persist.EnableJPA;
 import io.hasli.test.persist.HibernateTestCase;
 import io.io.hasli.service.security.TestSecurityConfiguration;
 import org.junit.Test;
@@ -29,7 +31,8 @@ import static org.junit.Assert.assertTrue;
  * Created by haswell on 10/26/16.
  */
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@EnableJPA
+@RunWith(BarometerRunner.class)
 @ContextConfiguration(
         classes = {
                 SecurityConfiguration.class,
@@ -37,7 +40,7 @@ import static org.junit.Assert.assertTrue;
                 TestSecurityConfiguration.class
         })
 @Transactional
-public class DefaultApplicationServiceTest extends HibernateTestCase {
+public class DefaultApplicationServiceTest {
 
     @PersistenceContext
     private EntityManager entityManager;

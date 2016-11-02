@@ -71,6 +71,8 @@ export class App {
             }
         ]);
 
+        config.mapUnknownRoutes('home/home');
+
         this.router = router;
     }
 }
