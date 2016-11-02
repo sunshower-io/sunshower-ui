@@ -1,0 +1,31 @@
+FROM hasli.io/build:latest
+
+ARG WILDFLY_VERSION=10.1.0.Final
+
+RUN apt-get update && apt-get -y upgrade && apt-get install -y \
+	unzip \
+	git \
+	wget \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir /opt/wildfly \
+    && cd /opt/wildfly \
+    && wget http://repo.hasli.io/artifactory/packages/hasli/wildfly/release/latest/hasli-wildfly-$WILDFLY_VERSION.zip \
+    && unzip hasli-wildfly-$WILDFLY_VERSION.zip \
+    && mv hasli-wildfly*/* /opt/wildfly/ \
+    && rm -rf hasli-wildfly*
+
+ENV JBOSS_HOME /opt/wildfly
+
+EXPOSE 8080
+
+ADD ./resources/standalone.xml /opt/wildfly/standalone/configuration/standalone.xml
+
+WORKDIR /opt/
+
+CMD chmod +x /usr/src/gradlew  \
+	&& cd /usr/src/ \
+    && ./gradlew installBillOfMaterials \
+	&& ./gradlew installEnvironment clean build -x test \ 
+    && cp /usr/src/web/hasli.io/build/libs/hasli*.ear /opt/wildfly/standalone/deployments/ \
+	&& /opt/wildfly/bin/standalone.sh -b 0.0.0.0
