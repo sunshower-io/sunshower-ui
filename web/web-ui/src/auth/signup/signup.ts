@@ -3,19 +3,25 @@ import {inject} from "aurelia-dependency-injection";
 import {bindable} from "aurelia-framework";
 import {User} from "../../model/core/security/user";
 import {Auth} from "../auth";
+import {Router} from "aurelia-router";
 
-@inject(HttpClient, Auth)
+@inject(HttpClient, Auth, Router)
 export class Signup {
 
-    private client: HttpClient;
-    private auth: Auth;
+
+
 
     @bindable
     private user: User = new User();
 
-    constructor(client: HttpClient, auth: Auth) {
-        this.client = client;
-        this.auth = auth;
+    @bindable
+    private showError:boolean = false;
+
+    constructor(
+        private client: HttpClient,
+        private auth: Auth,
+        private router:Router
+    ) {
     }
 
     signup(): void {
@@ -23,9 +29,12 @@ export class Signup {
             method: 'post',
             body: JSON.stringify(this.user)
         }).then(response => response.json())
-            .then(data => {
-                console.log(data);
-            });
+        .then(data => {
+            this.router.navigateToRoute('login');
+        }).catch(er => {
+            console.log("ERROR", er);
+            this.showError = true;
+        });
     }
 
 }

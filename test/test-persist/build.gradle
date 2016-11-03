@@ -4,6 +4,7 @@ dependencies {
     compile("org.flywaydb:flyway-core")
     compile project(":persist:persist-core")
     compile project(":persist:persist-jpa")
+    compile 'io.hasli.barometer.modules:jaxrs'
     compile("org.hibernate:hibernate-core")
     compile("org.springframework:spring-test")
     compile("org.hibernate:hibernate-entitymanager")

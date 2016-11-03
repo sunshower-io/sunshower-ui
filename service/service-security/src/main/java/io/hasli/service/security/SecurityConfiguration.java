@@ -5,6 +5,7 @@ import io.hasli.core.security.AuthenticationService;
 import io.hasli.core.security.RoleService;
 import io.hasli.core.security.UserService;
 import io.hasli.core.security.crypto.EncryptionService;
+import io.hasli.model.core.auth.User;
 import io.hasli.service.application.DefaultApplicationService;
 import io.hasli.service.security.crypto.InstanceSecureKeyGenerator;
 import io.hasli.service.security.crypto.MessageAuthenticationCode;
@@ -20,6 +21,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -41,6 +44,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Inject
     private UserService userService;
+
+    @Bean
+    public UserDetails userFacade() {
+        return new UserFacade();
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

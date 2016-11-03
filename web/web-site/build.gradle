@@ -20,19 +20,17 @@ war {
 }
 
 task extractUi(type:Copy) {
-    doLast {
-        dependsOn configurations.web
-        includeEmptyDirs = false
+    dependsOn configurations.web
+    includeEmptyDirs = false
 
-        into "${project.buildDir}/src"
-        from {
-            configurations.web.collect {
-                zipTree(it)
-            }
+    into "${project.buildDir}/src"
+    from {
+        configurations.web.collect {
+            zipTree(it)
         }
-        eachFile {
-            it.path = it.path - "assembly/"
-        }
+    }
+    eachFile {
+        it.path = it.path - "assembly/"
     }
 }
 

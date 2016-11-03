@@ -47,6 +47,9 @@ public class StrongEncryptionService implements EncryptionService {
 
     @Override
     public String encrypt(String password) {
+        if(password == null) {
+            throw new IllegalArgumentException("Expected password to encrypt to not be null");
+        }
         return encoder.encode(password);
     }
 

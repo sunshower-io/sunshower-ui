@@ -1,15 +1,18 @@
 package io.hasli.model.core.auth;
 
+import io.hasli.barometer.spring.BarometerRunner;
 import io.hasli.jpa.flyway.FlywayConfiguration;
 import io.hasli.persist.core.ConfigurationSourceDataSourceConfiguration;
 import io.hasli.persist.core.DatabaseConfiguration;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.test.common.PropertyConfigurationSourceConfiguration;
+import io.hasli.test.persist.EnableJPA;
 import io.hasli.test.persist.HibernateTestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -23,12 +26,13 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by haswell on 10/17/16.
  */
-
+@EnableJPA
+@RunWith(BarometerRunner.class)
 @ContextConfiguration(classes = {
         HibernateConfiguration.class,
 })
 @Transactional
-public class UserPersistenceTest extends HibernateTestCase {
+public class UserPersistenceTest {
 
     @PersistenceContext
     private EntityManager entityManager;
