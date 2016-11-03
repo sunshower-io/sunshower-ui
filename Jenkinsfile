@@ -84,10 +84,10 @@ node('docker-registry') {
                 }
             } else {
                 sh "docker build --build-arg HASLI_VERSION=$majorVersion.$minorVersion.$buildNumber.$buildSuffix -t hasli.io/ui:$version.$buildNumber ./web/"
-                sh "docker tag hasli.io/ui:$version.$buildNumber $registry/hasli/ui:$version.$buildNumber"
-                sh "docker tag hasli.io/ui:$version.$buildNumber $registry/hasli/ui:latest"
-                sh "docker push $registry/hasli/ui:$version.$buildNumber"
-                sh "docker push $registry/hasli/ui:latest"
+                sh "docker tag hasli.io/ui:$version.$buildNumber $registry/hasli.io/ui:$version.$buildNumber"
+                sh "docker tag hasli.io/ui:$version.$buildNumber $registry/hasli.io/ui:latest"
+                sh "docker push $registry/hasli.io/ui:$version.$buildNumber"
+                sh "docker push $registry/hasli.io/ui:latest"
             }
 
         }
@@ -99,7 +99,10 @@ node('docker-registry') {
 if (env.BRANCH_NAME == "master") {
     node('webserver') {
         stage('Deploy to Production') {
-            sh "docker ps --filter status=running --format '{{.ID}}' | xargs docker stop"
+            try {
+                sh "docker ps --filter status=running --format '{{.ID}}' | xargs docker stop"
+            } catch (Exception e) { // do nothing }
+
 
             sh "docker pull $registry/hasli.io/ui:$version.$buildNumber"
 
