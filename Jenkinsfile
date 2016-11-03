@@ -99,16 +99,12 @@ node('docker-registry') {
 if (env.BRANCH_NAME == "master") {
     node('webserver') {
         stage('Deploy to Production') {
-            def running = "docker ps --filter status=running --format '{{.ID}}'".execute().text.trim()
-
-            if (!running.isEmpty()) {
-                sh "docker stop \$(docker ps -a -q)"
-            }
+            sh "docker ps --filter status=running --format '{{.ID}}' | xargs docker stop"
 
             sh "docker pull $registry/hasli.io/ui:$version.$buildNumber"
 
             dockerRun(
-                    "hasli.io/ui:$version.$buildNumber",
+                    "$registry/hasli.io/ui:$version.$buildNumber",
                     "hasli.io",
                     "-d -p 8080:8080",
                     "",
