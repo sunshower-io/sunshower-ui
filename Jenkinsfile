@@ -107,7 +107,7 @@ if (env.BRANCH_NAME == "master") {
 
             dockerRun(
                     "$registry/hasli.io/ui:$version.$buildNumber",
-                    "hasli.io",
+                    "hasli.io.$version.$buildNumber",
                     "-d -p 8080:8080",
                     "",
                     false)
