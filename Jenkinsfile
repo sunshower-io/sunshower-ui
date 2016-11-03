@@ -67,10 +67,9 @@ node('docker-registry') {
             def staging = env.BRANCH_NAME != "master"
             def name = staging ? "staging-$version.$buildNumber" : "${version}.${buildNumber}"
 
-            sh "docker build -t hasli.io/ui:$version.$buildNumber ./web/"
-
             if (staging) {
                 stage('Deploy to Staging') {
+                    sh "docker build -t hasli.io/ui:$version.$buildNumber ./web/"
                     dockerRun(
                             "hasli.io/ui:$version.$buildNumber",
                             name,
@@ -84,6 +83,7 @@ node('docker-registry') {
                     sh "printf 'Ports: ' && docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' $name"
                 }
             } else {
+                sh "docker build --build-arg HASLI_VERSION=$majorVersion.$minorVersion.$buildNumber.$buildSuffix -t hasli.io/ui:$version.$buildNumber ./web/"
                 sh "docker tag hasli.io/ui:$version.$buildNumber $registry/hasli/ui:$version.$buildNumber"
                 sh "docker tag hasli.io/ui:$version.$buildNumber $registry/hasli/ui:latest"
                 sh "docker push $registry/hasli/ui:$version.$buildNumber"
