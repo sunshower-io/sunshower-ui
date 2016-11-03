@@ -54,7 +54,8 @@ node('docker-registry') {
 					"hasli.io/build:$version.$buildNumber",
 					"$version.$buildNumber",
                 	"-v `pwd`:/usr/src/ -v ~/.gradle/gradle.properties:/root/.gradle/gradle.properties -v ~/.jspm:/root/.jspm", 
-					"sh -c '/usr/src/gradlew ${bomTask} && /usr/src/gradlew ${gradleTasks.join(" ")}'")
+					"sh -c '/usr/src/gradlew ${bomTask} && /usr/src/gradlew ${gradleTasks.join(" ")}'",
+                    true)
             } catch (Exception e) {
                 error "Failed: ${e}"
             } finally {
@@ -74,7 +75,8 @@ node('docker-registry') {
                             "hasli.io/ui:$version.$buildNumber",
                             name,
                             "-d -P",
-                            "")
+                            "",
+                            false)
                 }
 
                 stage('Deployment Summary') {
@@ -109,19 +111,22 @@ if (env.BRANCH_NAME == "master") {
                     "hasli.io/ui:$version.$buildNumber",
                     "hasli.io",
                     "-d -p 8080:8080",
-                    "")
+                    "",
+                    false)
         }
     }
 }
 
-def dockerRun(String image, String name, String args, String cmd) {
+def dockerRun(String image, String name, String args, String cmd, boolean rm) {
 	try {
 		sh "docker run --name=$name $args $image $cmd"
 	} catch (Exception e) {
 		error "Failed: ${e}"
 		throw (e)
 	} finally {
-		sh "docker rm $name"
+        if (rm) {
+		    sh "docker rm $name"
+        }
 	}
 }
 

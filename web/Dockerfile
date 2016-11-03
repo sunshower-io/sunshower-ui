@@ -11,7 +11,7 @@ RUN apt-get update && apt-get -y upgrade && apt-get install -y \
 
 RUN mkdir /opt/wildfly \
     && cd /opt/wildfly \
-    && wget http://repo.hasli.io/artifactory/packages/hasli/wildfly/release/latest/hasli-wildfly-$WILDFLY_VERSION.zip \
+    && wget -q http://repo.hasli.io/artifactory/packages/hasli/wildfly/release/latest/hasli-wildfly-$WILDFLY_VERSION.zip \
     && unzip hasli-wildfly-$WILDFLY_VERSION.zip \
     && mv hasli-wildfly*/* /opt/wildfly/ \
     && rm -rf hasli-wildfly*
