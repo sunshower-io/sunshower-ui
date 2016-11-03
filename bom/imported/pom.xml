@@ -39,7 +39,7 @@
         <arquillian-weld.version>1.0.0.CR9</arquillian-weld.version>
         <projectreactor.version>2.0.8.RELEASE</projectreactor.version>
         <moxy.version>2.6.4</moxy.version>
-        <barometer.version>1.0.9.Final</barometer.version>
+        <barometer.version>1.0.10.Final</barometer.version>
         <shrinkwrap-resolvers.version>2.2.4</shrinkwrap-resolvers.version>
         <spring-security.version>4.1.3.RELEASE</spring-security.version>
         <version.shrinkwrap.resolvers>2.2.4</version.shrinkwrap.resolvers>

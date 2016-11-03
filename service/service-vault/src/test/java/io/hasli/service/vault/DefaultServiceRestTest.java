@@ -135,6 +135,4 @@ public class DefaultServiceRestTest {
         assertThat(u.getRoles().size(), is(not(0)));
     }
 
-
-
 }
