@@ -1,14 +1,12 @@
 package io.io.hasli.service.security.web;
 
 import io.hasli.barometer.Enable;
-import io.hasli.barometer.Listeners;
 import io.hasli.barometer.Select;
 import io.hasli.barometer.jaxrs.ClientContext;
 import io.hasli.barometer.rpc.Remote;
 import io.hasli.barometer.rs.module.JAXRS;
 import io.hasli.barometer.spring.BarometerRunner;
 import io.hasli.core.security.AuthenticationService;
-import io.hasli.model.core.auth.Authentication;
 import io.hasli.model.core.auth.Token;
 import io.hasli.model.core.auth.User;
 import io.hasli.persist.hibernate.HibernateConfiguration;
@@ -19,9 +17,6 @@ import io.hasli.test.security.EnableSecurity;
 import io.io.hasli.service.security.TestSecurityConfiguration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -65,10 +60,10 @@ public class RESTSecurityTest {
     private SignupService signupService;
 
     @Remote
+    @Select("authenticated")
     @ClientContext(
             provider = AuthenticationDecorator.class
     )
-    @Select("authenticated")
     private SignupService authenticatedSignupService;
 
     @Remote
@@ -114,8 +109,7 @@ public class RESTSecurityTest {
 
     @Test
     @WithMockUser(
-            username = "testuser3",
-            password = "password"
+            username = "testuser"
     )
     public void ensureAttemptingToAccessSecuredEndpointAfterAuthenticationSucceeds() {
         List<User> users = authenticatedSignupService.list();
@@ -126,7 +120,7 @@ public class RESTSecurityTest {
 
     @Test
     @WithMockUser(
-            username = "testuser4"
+            username = "testuser"
     )
     public void ensureMultipleClientsCantAccessSimultaneously() {
         System.out.println(authenticatedSignupService.list());
