@@ -62,34 +62,59 @@ node('docker-registry') {
             }
         }
 
-        if (env.BRANCH_NAME =~ /(?i)^pr-/) {
-            def name = "staging-${version}.${buildNumber}"
-            stage('Deploy to Staging') {
-                sh "docker build -t hasli.io/ui:$version.$buildNumber ./web/"
-                dockerRun(
-						"hasli.io/ui:$version.$buildNumber",
-						name,
-						"-d -P",
-						"")
+        if (env.BRANCH_NAME =~ /(?i)^pr-/ || env.BRANCH_NAME == "master") {
+            def staging = env.BRANCH_NAME != "master"
+            def name = staging ? "staging-$version.$buildNumber" : "${version}.${buildNumber}"
+
+            sh "docker build -t hasli.io/ui:$version.$buildNumber ./web/"
+
+            if (staging) {
+                stage('Deploy to Staging') {
+                    dockerRun(
+                            "hasli.io/ui:$version.$buildNumber",
+                            name,
+                            "-d -P",
+                            "")
+                }
+
+                stage('Deployment Summary') {
+                    sh "printf 'IP Address: ' && docker inspect -f '{{.NetworkSettings.IPAddress}}' $name"
+                    sh "printf 'Ports: ' && docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' $name"
+                }
+            } else {
+                sh "docker tag hasli.io/ui:$version.$buildNumber $registry/hasli/ui:$version.$buildNumber"
+                sh "docker tag hasli.io/ui:$version.$buildNumber $registry/hasli/ui:latest"
+                sh "docker push $registry/hasli/ui:$version.$buildNumber"
+                sh "docker push $registry/hasli/ui:latest"
             }
 
-			stage('Deployment Summary') {
-                sh "printf 'IP Address: ' && docker inspect -f '{{.NetworkSettings.IPAddress}}' $name"
-                sh "printf 'Ports: ' && docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' $name"
-			}
         }
-
-
-		if (env.BRANCH_NAME == "master") {
-			stage('Deploy to Production') {
-			}
-		}
 
     }
 
 }
 
-def dockerRun(image, name, args, cmd) {
+if (env.BRANCH_NAME == "master") {
+    node('webserver') {
+        stage('Deploy to Production') {
+            def running = "docker ps --filter status=running --format '{{.ID}}'".execute().text.trim()
+
+            if (!running.isEmpty()) {
+                sh "docker stop \$(docker ps -a -q)"
+            }
+
+            sh "docker pull $registry/hasli.io/ui:$version.$buildNumber"
+
+            dockerRun(
+                    "hasli.io/ui:$version.$buildNumber",
+                    "hasli.io",
+                    "-d -p 8080:8080",
+                    "")
+        }
+    }
+}
+
+def dockerRun(String image, String name, String args, String cmd) {
 	try {
 		sh "docker run --name=$name $args $image $cmd"
 	} catch (Exception e) {
