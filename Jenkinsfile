@@ -101,8 +101,7 @@ if (env.BRANCH_NAME == "master") {
         stage('Deploy to Production') {
             try {
                 sh "docker ps --filter status=running --format '{{.ID}}' | xargs docker stop"
-            } catch (Exception e) { // do nothing }
-
+            } catch (Exception e) { }
 
             sh "docker pull $registry/hasli.io/ui:$version.$buildNumber"
 
