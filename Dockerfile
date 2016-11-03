@@ -21,7 +21,7 @@ ENV M2_HOME "/usr/share/maven"
 VOLUME "$USER_HOME_DIR/.m2"
 
 # Install Node.js
-RUN curl -sL https://deb.nodesource.com/setup_4.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - && \
     apt-get install -y nodejs
 
 WORKDIR /usr/src
