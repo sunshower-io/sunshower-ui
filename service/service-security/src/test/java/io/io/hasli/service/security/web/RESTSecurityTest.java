@@ -14,6 +14,7 @@ import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.service.signup.SignupService;
 import io.hasli.test.persist.EnableJPA;
 import io.hasli.test.security.EnableSecurity;
+import io.hasli.test.security.rs.AuthenticationDecorator;
 import io.io.hasli.service.security.TestSecurityConfiguration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

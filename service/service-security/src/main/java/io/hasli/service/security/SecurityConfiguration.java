@@ -10,6 +10,7 @@ import io.hasli.service.application.DefaultApplicationService;
 import io.hasli.service.security.crypto.InstanceSecureKeyGenerator;
 import io.hasli.service.security.crypto.MessageAuthenticationCode;
 import io.hasli.service.security.crypto.StrongEncryptionService;
+import io.hasli.service.security.jaxrs.AuthenticationContextProvider;
 import io.hasli.service.security.jaxrs.ExceptionMappings;
 import io.hasli.service.security.user.DefaultUserService;
 import io.hasli.service.signup.SignupService;
@@ -18,7 +19,9 @@ import org.jasypt.util.text.BasicTextEncryptor;
 import org.jasypt.util.text.TextEncryptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
@@ -46,8 +49,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private UserService userService;
 
     @Bean
-    public UserDetails userFacade() {
+    public UserFacade userFacade() {
         return new UserFacade();
+    }
+
+    @Bean
+    public AuthenticationContextProvider authenticationProvider() {
+        return new AuthenticationContextProvider();
     }
 
     @Override

@@ -1,6 +1,8 @@
 package io.hasli.service.vault;
 
+import io.hasli.core.security.UserService;
 import io.hasli.model.core.auth.User;
+import io.hasli.service.security.UserFacade;
 import io.hasli.vault.api.Secret;
 import io.hasli.vault.api.VaultService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -10,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.ws.rs.core.Context;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,7 +25,11 @@ import java.util.UUID;
 public class DefaultVaultService implements VaultService {
 
     @Inject
-    private UserDetails user;
+    private UserFacade user;
+
+
+    @Inject
+    private UserService userService;
 
 
     @PersistenceContext
@@ -30,6 +37,8 @@ public class DefaultVaultService implements VaultService {
 
 
     public Secret save(Secret secret) {
+        User u = userService.findByUsername(user.getUsername());
+        secret.setModifier(u);
         entityManager.persist(secret);
         entityManager.flush();
         return secret;

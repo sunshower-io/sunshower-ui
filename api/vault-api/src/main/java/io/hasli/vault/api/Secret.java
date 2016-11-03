@@ -1,10 +1,16 @@
 package io.hasli.vault.api;
 
 import io.hasli.model.core.Metadata;
+import io.hasli.model.core.auth.User;
 import io.hasli.model.core.entity.AbstractEntity;
 import io.hasli.model.core.entity.Persistable;
+import io.hasli.vault.api.secrets.CredentialSecret;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.UUID;
 
 /**
@@ -14,6 +20,8 @@ import java.util.UUID;
 @Inheritance(
     strategy = InheritanceType.TABLE_PER_CLASS
 )
+//// TODO: 11/2/16 I hate XmlSeeAlso as it limits extensibility.  Remove
+@XmlSeeAlso({CredentialSecret.class})
 public abstract class Secret extends AbstractEntity<UUID> implements Persistable<UUID> {
 
     @Id
@@ -23,6 +31,7 @@ public abstract class Secret extends AbstractEntity<UUID> implements Persistable
             orphanRemoval = true,
             cascade = CascadeType.ALL
     )
+    @XmlElement
     @JoinColumn(name = "metadata_id")
     private Metadata metadata;
 
@@ -47,6 +56,11 @@ public abstract class Secret extends AbstractEntity<UUID> implements Persistable
         }
         return metadata;
     }
+
+    public abstract void setModifier(User u);
+
+    public abstract User getModifier();
+
 
     public void setMetadata(Metadata metadata) {
         this.metadata = metadata;

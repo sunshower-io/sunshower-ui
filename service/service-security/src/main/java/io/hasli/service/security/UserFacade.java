@@ -1,17 +1,18 @@
 package io.hasli.service.security;
 
-import io.hasli.model.core.auth.User;
+import java.util.Collection;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
 
 /**
  * Created by haswell on 11/1/16.
  */
 public class UserFacade implements UserDetails, Authentication{
+
+
 
 
 

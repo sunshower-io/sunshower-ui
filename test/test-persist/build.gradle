@@ -1,6 +1,7 @@
 dependencies {
     compile "com.h2database:h2"
     compile project(":test:test-common")
+    compile project(":test:test-service")
     compile("org.flywaydb:flyway-core")
     compile project(":persist:persist-core")
     compile project(":persist:persist-jpa")

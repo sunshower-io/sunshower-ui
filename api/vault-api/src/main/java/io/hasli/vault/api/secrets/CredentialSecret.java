@@ -4,6 +4,7 @@ import io.hasli.model.core.Metadata;
 import io.hasli.model.core.auth.User;
 import io.hasli.vault.api.Secret;
 import io.hasli.vault.api.SecretMetadata;
+import org.eclipse.persistence.oxm.annotations.XmlDiscriminatorNode;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @Entity
 @XmlRootElement
 @Table(name = "CREDENTIAL_SECRET")
+@XmlDiscriminatorNode("credential")
 public class CredentialSecret extends Secret {
 
     @Id
@@ -23,6 +25,9 @@ public class CredentialSecret extends Secret {
 
     @Basic
     private String name;
+
+    @Basic
+    private String credential;
 
     @Basic
     private String secret;
@@ -41,19 +46,18 @@ public class CredentialSecret extends Secret {
 
 
 
+    public CredentialSecret() {
+        this.id = UUID.randomUUID();
+    }
 
     public CredentialSecret(UUID id) {
         this.id = id;
     }
 
+
     @Override
     public UUID getId() {
         return id;
-    }
-
-    @Override
-    protected void setId(UUID uuid) {
-
     }
 
     @Override
@@ -71,9 +75,6 @@ public class CredentialSecret extends Secret {
         return null;
     }
 
-    public CredentialSecret() {
-        this(UUID.randomUUID());
-    }
 
 
     public String getName() {
@@ -124,4 +125,11 @@ public class CredentialSecret extends Secret {
         this.modifier = modifier;
     }
 
+    public String getCredential() {
+        return credential;
+    }
+
+    public void setCredential(String credential) {
+        this.credential = credential;
+    }
 }

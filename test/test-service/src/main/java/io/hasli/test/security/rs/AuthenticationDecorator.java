@@ -1,4 +1,4 @@
-package io.io.hasli.service.security.web;
+package io.hasli.test.security.rs;
 
 import io.hasli.barometer.jaxrs.ClientDecorator;
 import io.hasli.barometer.jaxrs.RestContext;
