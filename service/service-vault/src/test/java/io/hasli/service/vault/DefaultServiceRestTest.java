@@ -129,7 +129,7 @@ public class DefaultServiceRestTest {
         final CredentialSecret s = (CredentialSecret)
                 authenticatedVaultService.save(secret);
         System.out.println(authenticatedVaultService.list(Secret.class));
-        assertThat(authenticatedVaultService.list(Secret.class).size(), is(1));
+        assertThat(authenticatedVaultService.list(Secret.class).size(), is(not(0)));
         List<Secret> secrets = authenticatedVaultService.list(Secret.class);
         User u = secrets.get(0).getModifier();
         assertThat(u.getRoles().size(), is(not(0)));

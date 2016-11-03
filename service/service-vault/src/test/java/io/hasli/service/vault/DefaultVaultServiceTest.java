@@ -4,13 +4,16 @@ import io.hasli.barometer.spring.BarometerRunner;
 import io.hasli.model.core.auth.User;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.service.security.SecurityConfiguration;
+import io.hasli.service.signup.SignupService;
 import io.hasli.test.persist.EnableJPA;
 import io.hasli.test.persist.HibernateTestCase;
 import io.hasli.vault.api.Secret;
 import io.hasli.vault.api.VaultService;
 import io.hasli.vault.api.secrets.CredentialSecret;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
@@ -59,6 +62,21 @@ public class DefaultVaultServiceTest {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Inject
+    private SignupService signupService;
+
+
+    @Before
+    public void setUp() {
+        final User user = new User();
+        user.setUsername("josiah");
+        user.setPassword("password");
+        user.setEmailAddress("wasdfasdf@gmail.com");
+        signupService.signup(user);
+
+
+    }
+
 
     @Test
     public void ensureVaultServiceIsInjected() {
@@ -66,6 +84,7 @@ public class DefaultVaultServiceTest {
     }
 
     @Test
+    @WithMockUser(username = "josiah", password = "password", authorities = "admin")
     public void ensureVaultServiceCanPersistSecret() {
         Secret secret = new CredentialSecret();
         vaultService.save(secret);
@@ -73,6 +92,7 @@ public class DefaultVaultServiceTest {
 
     @Test
     @Rollback
+    @WithMockUser(username = "josiah", password = "password", authorities = "admin")
     public void ensureSecretCanBePersistedWithAllProperties() {
         User user = new User();
         user.setUsername("Josiah");
