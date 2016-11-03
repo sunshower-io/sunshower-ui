@@ -13,7 +13,7 @@ def gradleTasks    = []
 // TODO: enable integrationTests by default
 if (env.BRANCH_NAME == "master") {
     buildNumber = env.BUILD_NUMBER
-    bomTask = "releaseBom"
+    bomTask = "releaseBom -Pversion=$majorVersion.$minorVersion.$buildNumber.$buildSuffix"
     gradleTasks = [
         "installEnvironment",
         "clean",
