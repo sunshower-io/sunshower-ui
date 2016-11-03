@@ -70,12 +70,20 @@ public class CredentialSecret extends Secret {
         return false;
     }
 
+
     @Override
     public String toString() {
-        return null;
+        return "CredentialSecret{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", credential='" + credential + '\'' +
+                ", secret='" + secret + '\'' +
+                ", description='" + description + '\'' +
+                ", created=" + created +
+                ", updated=" + updated +
+                ", modifier=" + modifier +
+                '}';
     }
-
-
 
     public String getName() {
         return name;

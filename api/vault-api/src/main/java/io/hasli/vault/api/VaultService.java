@@ -19,17 +19,17 @@ import java.util.UUID;
         MediaType.APPLICATION_JSON,
         MediaType.APPLICATION_XML
 })
+@PreAuthorize("hasAuthority('admin')")
 public interface VaultService {
 
     @POST
     @Path("/")
-    @PreAuthorize("hasAuthority('admin')")
     Secret save(Secret secret);
 
 
     @GET
-    @Path("/list")
-    <T extends Secret> List<T> list(Class<T> type);
+    @Path("{type}/list")
+    List<Secret> list(@PathParam("type") Class<Secret> type);
 
     @GET
     @Path("/{id}")

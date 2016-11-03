@@ -2,25 +2,19 @@ package io.hasli.web.api;
 
 import io.hasli.common.configuration.ConfigurationSource;
 import io.hasli.common.configuration.MapConfigurationSource;
+import io.hasli.common.rs.MoxyProvider;
 import io.hasli.jpa.flyway.FlywayConfiguration;
-import io.hasli.model.core.auth.User;
 import io.hasli.persist.core.DataSourceConfiguration;
 import io.hasli.persist.core.DatabaseConfiguration;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 //import io.hasli.service.security.CredentialAuthenticationService;
-import io.hasli.service.security.DefaultSignupService;
 import io.hasli.service.security.SecurityConfiguration;
-import io.hasli.service.signup.SignupService;
-import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
 import org.flywaydb.core.Flyway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.ws.rs.ext.Provider;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -2,6 +2,7 @@ package io.hasli.test.security.rs;
 
 import io.hasli.barometer.jaxrs.ClientDecorator;
 import io.hasli.barometer.jaxrs.RestContext;
+import io.hasli.common.rs.ClassParameterProviderFactory;
 import io.hasli.core.security.AuthenticationService;
 import io.hasli.model.core.auth.Role;
 import io.hasli.model.core.auth.User;
@@ -20,6 +21,7 @@ public class AuthenticationDecorator implements ClientDecorator {
 
     @Override
     public void decorate(RestContext restContext) {
+        restContext.getClient().register(new ClassParameterProviderFactory());
         UsernamePasswordAuthenticationToken authentication =
                 (UsernamePasswordAuthenticationToken)
                         TestSecurityContextHolder.getContext().getAuthentication();

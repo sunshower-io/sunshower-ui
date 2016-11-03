@@ -1,4 +1,4 @@
-package io.hasli.web.api;
+package io.hasli.common.rs;
 
 import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
 

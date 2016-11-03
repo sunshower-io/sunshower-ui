@@ -31,6 +31,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.ClientRequestFilter;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 /**
  * Created by haswell on 11/1/16.
@@ -47,6 +48,8 @@ import javax.ws.rs.core.Response;
         })
 @WebAppConfiguration
 public class DefaultServiceRestTest {
+
+
 
     @Remote
     private VaultService vaultService;
@@ -109,7 +112,27 @@ public class DefaultServiceRestTest {
 
         User u = s.getModifier();
         assertThat(u, is(not(nullValue())));
+        assertThat(u.getUsername(), is("user2"));
+        System.out.println(u.getPassword());
+    }
 
+    @Test
+    @WithMockUser("user3")
+    public void ensureSavingCredentialWithUserAndListingItByTypeProducesCorrectResults_Credential_Secret() {
+
+        CredentialSecret secret = new CredentialSecret();
+        secret.setName("test-secret2");
+        secret.setSecret("frap");
+        secret.setDescription("just a normal secret!");
+        secret.setCredential("frap-adap");
+
+        final CredentialSecret s = (CredentialSecret)
+                authenticatedVaultService.save(secret);
+        System.out.println(authenticatedVaultService.list(Secret.class));
+        assertThat(authenticatedVaultService.list(Secret.class).size(), is(1));
+        List<Secret> secrets = authenticatedVaultService.list(Secret.class);
+        User u = secrets.get(0).getModifier();
+        assertThat(u.getRoles().size(), is(not(0)));
     }
 
 

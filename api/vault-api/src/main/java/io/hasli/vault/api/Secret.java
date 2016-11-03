@@ -73,4 +73,12 @@ public abstract class Secret extends AbstractEntity<UUID> implements Persistable
     public String get(String key) {
         return getMetadata().get(key);
     }
+
+    @Override
+    public String toString() {
+        return "Secret{" +
+                "id=" + id +
+                ", metadata=" + metadata +
+                '}';
+    }
 }

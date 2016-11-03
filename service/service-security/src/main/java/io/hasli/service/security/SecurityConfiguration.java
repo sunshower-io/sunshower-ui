@@ -1,16 +1,17 @@
 package io.hasli.service.security;
 
+import io.hasli.common.rs.MoxyProvider;
 import io.hasli.core.ApplicationService;
 import io.hasli.core.security.AuthenticationService;
 import io.hasli.core.security.RoleService;
 import io.hasli.core.security.UserService;
 import io.hasli.core.security.crypto.EncryptionService;
-import io.hasli.model.core.auth.User;
 import io.hasli.service.application.DefaultApplicationService;
 import io.hasli.service.security.crypto.InstanceSecureKeyGenerator;
 import io.hasli.service.security.crypto.MessageAuthenticationCode;
 import io.hasli.service.security.crypto.StrongEncryptionService;
 import io.hasli.service.security.jaxrs.AuthenticationContextProvider;
+import io.hasli.common.rs.ClassParameterProviderFactory;
 import io.hasli.service.security.jaxrs.ExceptionMappings;
 import io.hasli.service.security.user.DefaultUserService;
 import io.hasli.service.signup.SignupService;
@@ -19,13 +20,9 @@ import org.jasypt.util.text.BasicTextEncryptor;
 import org.jasypt.util.text.TextEncryptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -48,9 +45,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Inject
     private UserService userService;
 
+
+    @Bean
+    public MoxyProvider moxyProvider() {
+        return new MoxyProvider();
+    }
+
     @Bean
     public UserFacade userFacade() {
         return new UserFacade();
+    }
+
+    @Bean
+    public ClassParameterProviderFactory classParameterProviderFactory() {
+        return new ClassParameterProviderFactory();
     }
 
     @Bean

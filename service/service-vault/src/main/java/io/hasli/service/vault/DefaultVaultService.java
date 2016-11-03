@@ -50,9 +50,11 @@ public class DefaultVaultService implements VaultService {
     }
 
     @Override
-    public <T extends Secret> List<T> list(Class<T> type) {
+    public  List<Secret> list(Class<Secret> type) {
         final String query = String.format(
-                "select s from %s as s",
+                "select s from %s as s " +
+                        "left join fetch s.modifier m " +
+                        "left join fetch m.roles r",
                 type.getName()
         );
         return entityManager.createQuery(query, type).getResultList();
