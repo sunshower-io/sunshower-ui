@@ -1,7 +1,6 @@
-package io.io.hasli.service.security.web;
+package io.hasli.test.security.rs;
 
 import io.hasli.model.core.auth.Token;
-import io.hasli.service.security.TokenAuthenticationFilter;
 
 import javax.ws.rs.client.ClientRequestContext;
 import javax.ws.rs.client.ClientRequestFilter;
@@ -21,6 +20,6 @@ public class TokenRequestFilter implements ClientRequestFilter {
     @Override
     public void filter(ClientRequestContext requestContext) throws IOException {
         requestContext.getHeaders().putSingle(
-                TokenAuthenticationFilter.HEADER_KEY, token.getToken());
+                "X-AUTH-TOKEN", token.getToken());
     }
 }

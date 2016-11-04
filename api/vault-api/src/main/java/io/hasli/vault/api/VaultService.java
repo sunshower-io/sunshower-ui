@@ -1,5 +1,7 @@
 package io.hasli.vault.api;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.UUID;
         MediaType.APPLICATION_JSON,
         MediaType.APPLICATION_XML
 })
+@PreAuthorize("hasAuthority('admin')")
 public interface VaultService {
 
     @POST
@@ -24,13 +27,13 @@ public interface VaultService {
     Secret save(Secret secret);
 
 
+    @GET
+    @Path("{type}/list")
+    List<Secret> list(@PathParam("type") Class<Secret> type);
 
     @GET
     @Path("/{id}")
     <T extends Secret> T get(Class<T> type, @PathParam("id") UUID id);
 
-    @GET
-    @Path("/list")
-    <T extends Secret> List<T> list(Class<T> type);
 
 }
