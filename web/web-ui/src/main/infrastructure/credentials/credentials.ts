@@ -31,6 +31,7 @@ export class Credentials {
         this.client.fetch(`secrets/vault/${Secrets.Credential}/list`)
             .then(response => response.json())
             .then(r => {
+                console.log("test", r);
                 this.credentials = r;
                 this.newCredential = false;
             });
