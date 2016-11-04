@@ -1,0 +1,9 @@
+template
+    require(from="common/elements/page-header.html")
+    require(from="./nav-bar.html")
+    .page.header
+        .ui.container
+            page-header(router.bind="router")
+    .page.content
+        nav-bar(router.bind="router")
+        router-view

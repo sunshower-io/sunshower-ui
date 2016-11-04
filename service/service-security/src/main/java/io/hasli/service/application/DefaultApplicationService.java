@@ -2,6 +2,7 @@ package io.hasli.service.application;
 
 import io.hasli.core.ApplicationService;
 import io.hasli.core.security.RoleService;
+import io.hasli.core.security.crypto.EncryptionService;
 import io.hasli.model.core.Application;
 import io.hasli.model.core.ApplicationInitializationException;
 import io.hasli.model.core.auth.Role;
@@ -33,6 +34,9 @@ public class DefaultApplicationService implements ApplicationService {
     @Inject
     private SignupService signupService;
 
+
+    @Inject
+    private EncryptionService encryptionService;
 
     @Override
     public Application instance() {
@@ -88,7 +92,14 @@ public class DefaultApplicationService implements ApplicationService {
         );
 
         user.addRole(roleService.findOrCreate(role));
-        signupService.signup(user);
+
+
+        final Role userRole = roleService.findOrCreate(
+                new Role("admin", "Site Administrator Role"));
+        user.addRole(userRole);
+
+        user.setPassword(encryptionService.encrypt(user.getPassword()));
+        entityManager.merge(user);
         return true;
     }
 

@@ -87,7 +87,7 @@ public class User extends AbstractEntity<UUID> implements UserDetails {
 
     }
 
-    public Details getDetails() {
+    public Object getDetails() {
         return details;
     }
 

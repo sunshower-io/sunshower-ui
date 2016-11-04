@@ -33,6 +33,9 @@ public class DefaultSignupService implements SignupService {
 
     @Override
     public User signup(User user) {
+        if(user.getRoles() != null) {
+            user.getRoles().clear();
+        }
         final Role role = roleService.findOrCreate(
                 new Role("admin", "Site Administrator Role"));
 

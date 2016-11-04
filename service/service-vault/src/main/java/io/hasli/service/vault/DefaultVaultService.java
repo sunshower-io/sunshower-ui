@@ -1,10 +1,10 @@
 package io.hasli.service.vault;
 
+import io.hasli.core.security.UserService;
 import io.hasli.model.core.auth.User;
+import io.hasli.service.security.UserFacade;
 import io.hasli.vault.api.Secret;
 import io.hasli.vault.api.VaultService;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
@@ -22,7 +22,11 @@ import java.util.UUID;
 public class DefaultVaultService implements VaultService {
 
     @Inject
-    private UserDetails user;
+    private UserFacade user;
+
+
+    @Inject
+    private UserService userService;
 
 
     @PersistenceContext
@@ -30,6 +34,8 @@ public class DefaultVaultService implements VaultService {
 
 
     public Secret save(Secret secret) {
+        User u = userService.findByUsername(user.getUsername());
+        secret.setModifier(u);
         entityManager.persist(secret);
         entityManager.flush();
         return secret;
@@ -41,9 +47,11 @@ public class DefaultVaultService implements VaultService {
     }
 
     @Override
-    public <T extends Secret> List<T> list(Class<T> type) {
+    public  List<Secret> list(Class<Secret> type) {
         final String query = String.format(
-                "select s from %s as s",
+                "select distinct(s) from %s as s " +
+                        "left join fetch s.modifier m " +
+                        "left join fetch m.roles r",
                 type.getName()
         );
         return entityManager.createQuery(query, type).getResultList();

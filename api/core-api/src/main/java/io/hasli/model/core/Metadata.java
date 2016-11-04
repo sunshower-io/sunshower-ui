@@ -3,7 +3,9 @@ package io.hasli.model.core;
 import io.hasli.model.core.entity.AbstractEntity;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -16,10 +18,12 @@ import java.util.UUID;
 @Inheritance(
     strategy = InheritanceType.TABLE_PER_CLASS
 )
+@XmlRootElement
 public abstract class Metadata extends AbstractEntity<UUID> {
 
 
     @Id
+    @XmlAttribute
     private UUID id;
 
 
@@ -29,6 +33,7 @@ public abstract class Metadata extends AbstractEntity<UUID> {
     }
 
 
+    @XmlElement
     @ElementCollection(
             targetClass = String.class
     )

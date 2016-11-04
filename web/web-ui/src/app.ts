@@ -21,57 +21,35 @@ export class App {
 
         config.map([
             {
-                route: ['', 'home'],
-                name: 'home',
-                moduleId: 'home/home',
-                nav: false,
-                title: 'home'
-            }, {
-                route: 'dashboard',
-                name: 'Dashboard',
-                moduleId: 'dashboard/dashboard',
-                nav: true,
-                title: 'Dashboard'
-            }, {
-                route: 'applications',
-                name: 'Applications',
-                moduleId: 'applications/applications',
-                nav: true,
-                title: 'Applications'
-            }, {
-                route: 'infrastructure',
-                name: 'Infrastructure',
-                moduleId: 'infrastructure/infrastructure',
-                nav: true,
-                title: 'Infrastructure'
-            }, {
-                route: 'storage',
-                name: 'Storage',
-                moduleId: 'storage/storage',
-                nav: true,
-                title: 'Storage'
-            }, {
-                route: 'manage',
-                name: 'Manage',
-                moduleId: 'manage/manage',
-                nav: true,
-                title: 'Manage'
-            }, {
-                route: 'reports',
-                name: 'Reports',
-                moduleId: 'reports/reports',
-                nav: true,
-                title: 'Reports'
-            }, {
-                route: 'logs',
-                name: 'Logs',
-                moduleId: 'logs/logs',
-                nav: true,
-                title: 'Logs'
-            }
-        ]);
+                route: '',
+                redirect: 'main',
 
-        config.mapUnknownRoutes('home/home');
+            },
+            {
+                route: 'main',
+                nav: true,
+                moduleId: './main/main',
+                title: 'main',
+                name: 'main'
+            },
+            {
+                route: 'settings',
+                nav: true,
+                moduleId: 'settings/settings',
+                title: 'settings',
+                name: 'settings'
+            },
+            {
+                route: 'profile',
+                nav: true,
+                moduleId: 'profile/profile',
+                title: 'profile',
+                name: 'profile'
+            },
+        ]);
+        config.mapUnknownRoutes('main/main');
+        // this.router.navigateToRoute("#/main");
+
 
         this.router = router;
     }

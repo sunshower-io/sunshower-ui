@@ -4,11 +4,13 @@ import io.hasli.model.core.auth.User;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 
 /**
  * Created by haswell on 10/12/16.
  */
+@XmlTransient
 public abstract class AbstractEntity<ID extends Serializable>
         implements Persistable<ID> {
     

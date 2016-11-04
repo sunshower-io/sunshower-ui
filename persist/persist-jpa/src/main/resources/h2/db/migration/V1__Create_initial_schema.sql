@@ -82,6 +82,7 @@ create table CREDENTIAL_SECRET (
   name            varchar(32),
   secret          varchar(8192),
   description     varchar(512),
+  credential      varchar(1024),
   created         timestamp,
   updated         timestamp default CURRENT_TIMESTAMP,
   modifier_id     binary(16),

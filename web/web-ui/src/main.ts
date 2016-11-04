@@ -7,10 +7,10 @@ import {AuthenticationContextHolder, User, AuthenticationContext} from "./model/
 
 export function param(name) {
     return decodeURIComponent((new RegExp(
-        '[?|&]' +
-        name +
-        '=' +
-        '([^&;]+?)(&|#|;|$)')
+            '[?|&]' +
+            name +
+            '=' +
+            '([^&;]+?)(&|#|;|$)')
             .exec(location.search) ||
         [null, ''])[1].replace(/\+/g, '%20')) || null;
 }
@@ -46,18 +46,19 @@ export function configure(aurelia: Aurelia) {
         LocalStorage,
         createStorage()
     );
-    container.registerInstance(HttpClient, http);
 
     http.fetch('initialize/active')
         .then(data => data.json())
         .then(data => {
             if(!data.value) {
+                container.registerInstance(HttpClient, http);
                 aurelia.start().then(() => aurelia.setRoot('initialize/initialize'))
             } else {
                 let token = storage.get('X-AUTH-TOKEN') || param('token');
                 tokenHolder.validate(token).then(context => {
                     container.registerInstance(User, context.user);
                     container.registerInstance(AuthenticationContext, context);
+                    http.defaults.headers['X-AUTH-TOKEN'] = token;
                     let authenticatedClient = new HttpClient();
                     authenticatedClient.configure(config => {
                         config
@@ -67,6 +68,7 @@ export function configure(aurelia: Aurelia) {
                                 headers: {
                                     'Accept': 'application/json',
                                     'Content-Type': 'application/json',
+                                    'X-AUTH-TOKEN' : token
                                 }
                             })
                     });
