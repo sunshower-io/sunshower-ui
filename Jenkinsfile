@@ -83,7 +83,7 @@ node('docker-registry') {
                     sh "printf 'Ports: ' && docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' $name"
                 }
             } else {
-                sh "docker build --build-arg HASLI_VERSION=$majorVersion.$minorVersion.$buildNumber.$buildSuffix -t hasli.io/ui:$version.$buildNumber ./web/"
+                sh "docker build --build-arg HASLI_VERSION=$majorVersion.$minorVersion.$buildNumber.$buildSuffix -t hasli.io/ui:$version.$buildNumber ./web/ --no-cache"
                 sh "docker tag hasli.io/ui:$version.$buildNumber $registry/hasli.io/ui:$version.$buildNumber"
                 sh "docker tag hasli.io/ui:$version.$buildNumber $registry/hasli.io/ui:latest"
                 sh "docker push $registry/hasli.io/ui:$version.$buildNumber"
@@ -107,7 +107,7 @@ if (env.BRANCH_NAME == "master") {
 
             dockerRun(
                     "$registry/hasli.io/ui:$version.$buildNumber",
-                    "hasli.io",
+                    "hasli.io.$version.$buildNumber",
                     "-d -p 8080:8080",
                     "",
                     false)
