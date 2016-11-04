@@ -6,8 +6,8 @@ template
         .text ${user.username}
         i.dropdown.icon
         .menu
-            .item Profile
-            .item Settings
+            .item(click.delegate="router.navigateToRoute('profile')") Profile
+            .item(click.delegate="router.navigateToRoute('settings')") Settings
             .item Help
             .divider
             .item(click.delegate="logout()") Sign out

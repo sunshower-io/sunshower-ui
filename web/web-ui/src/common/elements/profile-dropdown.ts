@@ -20,6 +20,11 @@ export class ProfileDropdown {
         $('.ui.dropdown').dropdown();
     }
 
+
+    profile() {
+        this.router.navigateToRoute('profile');
+    }
+
     logout() {
         this.authHolder.clear();
         window.location.reload();

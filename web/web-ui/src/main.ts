@@ -7,10 +7,10 @@ import {AuthenticationContextHolder, User, AuthenticationContext} from "./model/
 
 export function param(name) {
     return decodeURIComponent((new RegExp(
-        '[?|&]' +
-        name +
-        '=' +
-        '([^&;]+?)(&|#|;|$)')
+            '[?|&]' +
+            name +
+            '=' +
+            '([^&;]+?)(&|#|;|$)')
             .exec(location.search) ||
         [null, ''])[1].replace(/\+/g, '%20')) || null;
 }
