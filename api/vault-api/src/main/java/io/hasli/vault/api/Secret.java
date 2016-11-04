@@ -5,12 +5,11 @@ import io.hasli.model.core.auth.User;
 import io.hasli.model.core.entity.AbstractEntity;
 import io.hasli.model.core.entity.Persistable;
 import io.hasli.vault.api.secrets.CredentialSecret;
+import org.eclipse.persistence.oxm.annotations.XmlDiscriminatorNode;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.UUID;
 
 /**
@@ -22,6 +21,7 @@ import java.util.UUID;
 )
 //// TODO: 11/2/16 I hate XmlSeeAlso as it limits extensibility.  Remove
 @XmlSeeAlso({CredentialSecret.class})
+@XmlDiscriminatorNode("@type")
 public abstract class Secret extends AbstractEntity<UUID> implements Persistable<UUID> {
 
     @Id

@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 public class CredentialSecretTest extends SerializationTestCase {
 
     public CredentialSecretTest() {
-        super(SerializationAware.Format.JSON, CredentialSecret.class);
+        super(SerializationAware.Format.JSON, CredentialSecret.class, Secret.class);
     }
 
     @Test

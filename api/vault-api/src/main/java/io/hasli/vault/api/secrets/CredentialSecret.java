@@ -1,10 +1,8 @@
 package io.hasli.vault.api.secrets;
 
-import io.hasli.model.core.Metadata;
 import io.hasli.model.core.auth.User;
 import io.hasli.vault.api.Secret;
-import io.hasli.vault.api.SecretMetadata;
-import org.eclipse.persistence.oxm.annotations.XmlDiscriminatorNode;
+import org.eclipse.persistence.oxm.annotations.XmlDiscriminatorValue;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,7 +15,9 @@ import java.util.UUID;
 @Entity
 @XmlRootElement
 @Table(name = "CREDENTIAL_SECRET")
-@XmlDiscriminatorNode("credential")
+@XmlDiscriminatorValue(
+        "io.hasli.vault.api.secrets.CredentialSecret"
+)
 public class CredentialSecret extends Secret {
 
     @Id

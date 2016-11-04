@@ -46,7 +46,7 @@ export function configure(aurelia: Aurelia) {
         LocalStorage,
         createStorage()
     );
-    container.registerInstance(HttpClient, http);
+    // container.registerInstance(HttpClient, http);
 
     http.fetch('initialize/active')
         .then(data => data.json())
@@ -67,6 +67,7 @@ export function configure(aurelia: Aurelia) {
                                 headers: {
                                     'Accept': 'application/json',
                                     'Content-Type': 'application/json',
+                                    'X-AUTH-TOKEN' : token
                                 }
                             })
                     });

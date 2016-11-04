@@ -5,14 +5,11 @@ import io.hasli.model.core.auth.User;
 import io.hasli.service.security.UserFacade;
 import io.hasli.vault.api.Secret;
 import io.hasli.vault.api.VaultService;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.ws.rs.core.Context;
 import java.util.List;
 import java.util.UUID;
 

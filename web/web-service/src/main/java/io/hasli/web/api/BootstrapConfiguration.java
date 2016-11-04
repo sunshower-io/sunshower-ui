@@ -9,6 +9,7 @@ import io.hasli.persist.core.DatabaseConfiguration;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 //import io.hasli.service.security.CredentialAuthenticationService;
 import io.hasli.service.security.SecurityConfiguration;
+import io.hasli.service.vault.VaultConfiguration;
 import org.flywaydb.core.Flyway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +29,8 @@ import java.util.Map;
         DatabaseConfiguration.class,
         HibernateConfiguration.class,
         SecurityConfiguration.class,
+        VaultConfiguration.class,
+
 })
 public class BootstrapConfiguration {
 
