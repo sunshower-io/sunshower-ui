@@ -46,18 +46,19 @@ export function configure(aurelia: Aurelia) {
         LocalStorage,
         createStorage()
     );
-    // container.registerInstance(HttpClient, http);
 
     http.fetch('initialize/active')
         .then(data => data.json())
         .then(data => {
             if(!data.value) {
+                container.registerInstance(HttpClient, http);
                 aurelia.start().then(() => aurelia.setRoot('initialize/initialize'))
             } else {
                 let token = storage.get('X-AUTH-TOKEN') || param('token');
                 tokenHolder.validate(token).then(context => {
                     container.registerInstance(User, context.user);
                     container.registerInstance(AuthenticationContext, context);
+                    http.defaults.headers['X-AUTH-TOKEN'] = token;
                     let authenticatedClient = new HttpClient();
                     authenticatedClient.configure(config => {
                         config
