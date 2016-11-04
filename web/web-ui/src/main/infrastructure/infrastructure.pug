@@ -1,3 +1,10 @@
 template
-    .ui.hidden.divider
-    h2 Infrastructure
+
+    .ui.grid
+        .four.wide.column
+            .ui.vertical.fluid.tabular.menu
+                a.item(repeat.for='row of router.navigation', class="${row.isActive ? 'active' : ''}" href.bind='row.href')
+                    | ${row.title}
+        .twelve.wide.stretched.column
+            .ui.segment
+                router-view
