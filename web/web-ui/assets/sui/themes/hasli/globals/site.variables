@@ -9,8 +9,8 @@
 @fontName          : 'Open Sans';
 @fontSmoothing     : antialiased;
 
-@headerFont        : @fontName, 'Helvetica Neue', Arial, Helvetica, sans-serif;
-@pageFont          : @fontName, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@headerFont        : @fontName, 'Muli', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@pageFont          : @fontName, 'Muli', 'Helvetica Neue', Arial, Helvetica, sans-serif;
 
 @googleFontName    : @fontName;
 @importGoogleFonts : true;
@@ -25,10 +25,10 @@
 --------------------*/
 
 /* This is the single variable that controls them all */
-@emSize   : 14px;
+@emSize   : 13px;
 
 /* The size of page text  */
-@fontSize : 14px;
+@fontSize : 13px;
 
 
 /*-------------------
@@ -41,7 +41,7 @@
 @relativeBorderRadius: @relative4px;
 @absoluteBorderRadius: @4px;
 
-@defaultBorderRadius: 0;
+@defaultBorderRadius: 50px;
 
 /*-------------------
     Brand Colors
@@ -203,7 +203,7 @@
 @pink             : #E03997;
 @brown            : #A5673F;
 @grey             : #767676;
-@black            : #1B1C1D;
+@black            : #333333;
 
 /*---  Light Colors  ---*/
 @lightRed         : #FF695E;
