@@ -1,3 +1,54 @@
 template
     .ui.hidden.divider
-    h2 Applications
+    .ui.container
+        .ui.fluid.styled.accordion
+            .title
+                .ehh
+                    img.minus--icon(src='styles/themes/hasli/assets/images/icons/minus-circle.svg')
+                    img.plus--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
+                    |     Dustin's Awesome App
+            .content
+                .ui.container
+                    .ui.top.attached.tabular.menu
+                        a.tab.item.active(data-tab='first') First
+                        a.tab.item(data-tab='second') Second
+                        a.tab.item(data-tab='third') Third
+                    .ui.bottom.attached.tab.segment.active(data-tab='first')
+                        | First
+                    .ui.bottom.attached.tab.segment(data-tab='second')
+                        | Second
+                    .ui.bottom.attached.tab.segment(data-tab='third')
+                        | Third
+        .ui.fluid.styled.accordion
+            .title
+                img(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
+                |     Dustin's Awesome App
+            .content
+                .ui.container
+                    .ui.top.attached.tabular.menu
+                        a.tab.item.active(data-tab='first') First
+                        a.tab.item(data-tab='second') Second
+                        a.tab.item(data-tab='third') Third
+                    .ui.bottom.attached.tab.segment.active(data-tab='first')
+                        | First
+                    .ui.bottom.attached.tab.segment(data-tab='second')
+                        | Second
+                    .ui.bottom.attached.tab.segment(data-tab='third')
+                        | Third
+        .ui.fluid.styled.accordion
+            .title
+                img(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
+                |     Dustin's Awesome App
+            .content
+                .ui.container
+                    .ui.top.attached.tabular.menu
+                        a.tab.item.active(data-tab='first') First
+                        a.tab.item(data-tab='second') Second
+                        a.tab.item(data-tab='third') Third
+                    .ui.bottom.attached.tab.segment.active(data-tab='first')
+                        | First
+                    .ui.bottom.attached.tab.segment(data-tab='second')
+                        | Second
+                    .ui.bottom.attached.tab.segment(data-tab='third')
+                        | Third
+
