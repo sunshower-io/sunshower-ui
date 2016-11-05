@@ -25,10 +25,10 @@
 --------------------*/
 
 /* This is the single variable that controls them all */
-@emSize   : 13px;
+@emSize   : 12px;
 
 /* The size of page text  */
-@fontSize : 13px;
+@fontSize : 12px;
 
 
 /*-------------------
@@ -41,7 +41,7 @@
 @relativeBorderRadius: @relative4px;
 @absoluteBorderRadius: @4px;
 
-@defaultBorderRadius: 50px;
+@defaultBorderRadius: 0.2307em;
 
 /*-------------------
     Brand Colors

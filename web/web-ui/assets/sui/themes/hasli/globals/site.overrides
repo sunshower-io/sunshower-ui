@@ -16,3 +16,32 @@
   border-bottom: 1px solid #E5E5E5;
   padding: 5px 0px;
 }
+
+
+img.transparent {
+  opacity:0;
+}
+
+img:hover {
+    -webkit-animation-name: rotateThis;
+    -webkit-animation-duration:2s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function:ease-in-out;
+}
+
+@-webkit-keyframes rotateThis {
+    0% { -webkit-transform: rotate(0deg); }
+    10% { -webkit-transform: rotate(0deg); }
+    100% {-webkit-transform: rotate(360deg); }
+}
+
+.plus--icon {
+  position: relative;
+  -webkit-transition: opacity 1s ease-in-out;
+}
+
+.minus--icon {
+  position: absolute;
+}
+
+

@@ -15,7 +15,7 @@
 @border: none;
 @boxShadow: none;
 @padding: 0em;
-@borderRadius: @defaultBorderRadius;
+@borderRadius: 50px;
 
 /* Bar */
 @barPosition: relative;
