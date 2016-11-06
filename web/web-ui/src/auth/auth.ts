@@ -20,7 +20,8 @@ export class Auth {
                 name: 'login',
                 moduleId: 'auth/login/login',
                 nav: true,
-                title: 'Login'
+                title: 'Login',
+                isActive: true
             }, {
                 route: 'signup',
                 name: 'signup',

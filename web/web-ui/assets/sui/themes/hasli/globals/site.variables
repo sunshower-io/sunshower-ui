@@ -47,10 +47,10 @@
     Brand Colors
 --------------------*/
 
-@primaryColor        : @blue;
+@primaryColor        : #4F7E81;
 @secondaryColor      : @black;
 
-@lightPrimaryColor   : @lightBlue;
+@lightPrimaryColor   : #69989b;
 @lightSecondaryColor : @lightBlack;
 
 /*--------------
@@ -183,7 +183,7 @@
 @mobileBreakpoint            : 320px;
 @tabletBreakpoint            : 768px;
 @computerBreakpoint          : 992px;
-@largeMonitorBreakpoint      : 1200px;
+@largeMonitorBreakpoint      : 1400px;
 @widescreenMonitorBreakpoint : 1920px;
 
 /*-------------------
@@ -300,9 +300,8 @@
 @subtleGradient: linear-gradient(transparent, @transparentBlack);
 
 /* Differentiating Layers */
-@subtleShadow:
-  0px 1px 2px 0 @borderColor
-;
+@subtleShadow: 0;
+
 @floatingShadow:
   0px 2px 4px 0px rgba(34, 36, 38, 0.12),
   0px 2px 10px 0px rgba(34, 36, 38, 0.15)

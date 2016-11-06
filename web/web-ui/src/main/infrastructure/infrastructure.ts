@@ -16,14 +16,14 @@ export class Infrastructure {
                 name: 'credentials',
                 moduleId: './credentials/credentials',
                 nav: true,
-                title: 'credentials'
+                title: 'Credentials'
             },
             {
                 route: 'projects',
                 name: 'projects',
                 moduleId: './projects/projects',
                 nav: true,
-                title: 'projects'
+                title: 'Projects'
             }
         ]);
         this.router = router;

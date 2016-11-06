@@ -1,11 +1,12 @@
 template
-    .ui.grid
-        .three.wide.column
-            .ui.vertical.tabular.menu(style="width:auto; min-width:100px;")
-                a.item(repeat.for='row of router.navigation', class="${row.isActive ? 'active' : ''}" href.bind='row.href')
-                    | ${row.title}
-        .thirteen.wide.stretched.column
-            router-view
+    .ui.container
+        h1 Infrastructure
+    .ui.tabular.menu
+        .ui.container
+            a.item(repeat.for='row of router.navigation', class="${row.isActive ? 'active' : ''}" href.bind='row.href')
+                | ${row.title}
+    .ui.container
+        router-view
 
 
     //.ui.four.column.wide

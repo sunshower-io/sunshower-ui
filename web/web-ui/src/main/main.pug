@@ -1,4 +1,5 @@
 template
     require(from="./nav-bar.html")
     nav-bar(router.bind="router")
-    router-view
+    .hasli-content(style="padding-top:1em;")
+        router-view

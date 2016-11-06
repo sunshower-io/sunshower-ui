@@ -2,19 +2,19 @@ apply plugin: 'java'
 
 
 task installGulp(type:Exec) {
-    commandLine 'npm', 'install', 'gulp', '-g'
+    commandLine 'cmd', '/c', 'npm', 'install', 'gulp', '-g'
 }
 
 task installJspm(type:Exec) {
-    commandLine 'npm', 'install', 'jspm', '-g'
+    commandLine 'cmd', '/c', 'npm', 'install', 'jspm', '-g'
 }
 
 task installNpmDeps(type:Exec) {
-    commandLine 'npm', 'install', '-y'
+    commandLine 'cmd', '/c', 'npm', 'install', '-y'
 }
 
 task installJspmDeps(type:Exec) {
-    commandLine 'jspm', 'install', '-y'
+    commandLine 'cmd', '/c', 'jspm', 'install', '-y'
 }
 
 task cleanAll(type:Delete) {
@@ -22,7 +22,7 @@ task cleanAll(type:Delete) {
 }
 
 task bundle(type:Exec) {
-    commandLine 'gulp', 'export'
+    commandLine 'cmd', '/c', 'gulp', 'export'
 }
 
 
