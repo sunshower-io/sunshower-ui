@@ -34,4 +34,8 @@ include(
         'system-tests:st-common',
         'system-tests:st-security',
         'system-tests:st-web',
+        'search:search-api',
+        'search:search-core',
+        'search:search-common',
+        'search:search-es',
 )

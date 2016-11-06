@@ -52,10 +52,23 @@
         <jaxrs.api>2.0</jaxrs.api>
         <jasypt.version>1.9.2</jasypt.version>
         <log4j.version>2.7</log4j.version>
+        <aws-sdk.version>1.11.51</aws-sdk.version>
+        <elastic-search.version>5.0.0</elastic-search.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk</artifactId>
+                <version>${aws-sdk.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>${elastic-search.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>io.hasli.barometer</groupId>
