@@ -1,3 +1,4 @@
 /*******************************
         Global Overrides
 *******************************/
+.ui.menu.primary a {text-transform: uppercase;}
