@@ -9,7 +9,7 @@ def isWindows()  {
 
 task installGulp(type:Exec) {
     if(isWindows()) {
-        commandLine 'cmd', '/c' 'npm', 'install', 'gulp', '-g'
+        commandLine 'cmd', '/c', 'npm', 'install', 'gulp', '-g'
     } else {
         commandLine 'npm', 'install', 'gulp', '-g'
     }
