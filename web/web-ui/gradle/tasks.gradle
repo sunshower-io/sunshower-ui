@@ -1,20 +1,44 @@
+
+import org.apache.tools.ant.taskdefs.condition.Os;
+
 apply plugin: 'java'
 
+def isWindows()  {
+     return (Os.isFamily(Os.FAMILY_WINDOWS))
+}
 
 task installGulp(type:Exec) {
-    commandLine 'npm', 'install', 'gulp', '-g'
+    if(isWindows()) {
+        commandLine 'cmd', '/c' 'npm', 'install', 'gulp', '-g'
+    } else {
+        commandLine 'npm', 'install', 'gulp', '-g'
+    }
 }
 
 task installJspm(type:Exec) {
-    commandLine 'npm', 'install', 'jspm', '-g'
+    if(isWindows()) {
+        commandLine 'cmd', 'c', 'npm', 'install', 'jspm', '-g'
+    } else {
+        commandLine 'npm', 'install', 'jspm', '-g'
+    }
 }
 
 task installNpmDeps(type:Exec) {
-    commandLine 'npm', 'install', '-y'
+    if(isWindows()) {
+
+        commandLine 'cmd', '/c', 'npm', 'install', '-y'
+    } else {
+        commandLine 'npm', 'install', '-y'
+    }
 }
 
 task installJspmDeps(type:Exec) {
-    commandLine 'jspm', 'install', '-y'
+    if(isWindows()) {
+        commandLine 'cmd', '/c', 'jspm', 'install', '-y'
+    } else {
+        commandLine 'jspm', 'install', '-y'
+
+    }
 }
 
 task cleanAll(type:Delete) {
@@ -22,7 +46,11 @@ task cleanAll(type:Delete) {
 }
 
 task bundle(type:Exec) {
-    commandLine 'gulp', 'export'
+    if(isWindows()) {
+        commandLine 'cmd', '/c', 'gulp', 'export'
+    } else {
+        commandLine 'gulp', 'export'
+    }
 }
 
 
