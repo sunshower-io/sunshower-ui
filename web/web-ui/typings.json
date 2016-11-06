@@ -30,6 +30,7 @@
     "selenium-webdriver": "registry:dt/selenium-webdriver#2.44.0+20160317120654"
   },
   "globalDependencies": {
+    "es6-promise": "registry:dt/es6-promise#0.0.0+20160614011821",
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
     "url": "github:aurelia/fetch-client/doc/url.d.ts#bbe0777ef710d889a05759a65fa2c9c3865fc618",
     "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20160524142046"
