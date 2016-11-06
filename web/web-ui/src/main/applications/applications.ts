@@ -3,22 +3,20 @@ import 'jquery';
 export class Applications {
 
     attached() {
-        $('.ui.accordion')
-            .accordion();
+        $('.ui.accordion').accordion();
 
-        $('.tabular.menu .tab.item')
+        $('.tabular.menu .item')
             .tab();
 
-        $('.plus--icon').click(function(){
-            console.log("plus icon clicked");
-            // $(this)
-            //     .transition('fade');
-            // $("img.plus--icon").toggleClass("transparent");
-            // $("img.minus--icon").toggleClass("transparent");
+        $('.ui.accordion .title').click(function(){
+            if ($(this).hasClass('active')) {
+                $(this).find('.toggle--icon')
+                    .attr('src', 'styles/themes/hasli/assets/images/icons/plus-circle.svg');
+            } else {
+                $(this).find('.toggle--icon')
+                    .attr('src', 'styles/themes/hasli/assets/images/icons/minus-circle.svg');
+            }
         });
-
-
-
     }
 
 }
