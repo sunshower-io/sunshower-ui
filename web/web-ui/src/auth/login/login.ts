@@ -71,7 +71,6 @@ export class Login {
                 }
             }).catch(e => {
                 this.credentialsInvalid = true;
-                console.log("GOT ONE");
             });
     }
 
