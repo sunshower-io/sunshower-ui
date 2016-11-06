@@ -36,6 +36,7 @@ create table PERMISSION (
 );
 
 
+
 create table ROLES_TO_PERMISSIONS (
   id                binary(16),
   role_id           binary(16),
@@ -69,13 +70,18 @@ create table APPLICATION (
 
 );
 
+create table METADATA_VALUE (
+  id        binary(16) primary key,
+  key       varchar(128),
+  value     varchar(256)
+);
+
+
 
 create table CREDENTIAL_METADATA (
   id            binary(16) primary key,
-  key           varchar(32),
-  value         varchar(128)
+  metadata_id   binary(16) references METADATA_VALUE(id)
 );
-
 
 create table CREDENTIAL_SECRET (
   id              binary(16) primary key,
@@ -93,9 +99,69 @@ create table CREDENTIAL_SECRET (
 );
 
 
-create table METADAtA_VALUE (
+create table INSTANCE_DESCRIPTOR_METADATA (
+  id                 binary(16) primary key,
+  instance_id        binary(16)
+);
 
+
+create table INSTANCE_METADATA_VALUE (
   id      binary(16) primary key,
   key     varchar(128),
   value   varchar(128)
+);
+
+
+create table CLOUD_PROVIDER (
+  id            binary(16) primary key,
+  icon          varchar(256),
+  name          varchar(128),
+  description   varchar(256),
+);
+
+
+
+create table COST_PROFILE (
+    id        binary(16) primary key,
+);
+
+create table MEMORY_PROFILE (
+    id        binary(16) primary key,
+);
+
+create table NETWORK_PROFILE (
+    id        binary(16) primary key,
+);
+
+
+create table COMPUTE_PROFILE (
+    id        binary(16) primary key,
+);
+
+
+create table INSTANCE_DESCRIPTOR (
+  id                  binary(16) primary key,
+  key                 varchar(64),
+  name                varchar(128),
+  description         varchar(256),
+  provider_id         binary(16),
+  metadata_id         binary(16),
+
+  cost_profile_id     binary(16),
+  memory_profile_id   binary(16),
+  network_profile_id  binary(16),
+  compute_profile_id  binary(16),
+
+
+  foreign key (provider_id)           references CLOUD_PROVIDER(id),
+
+  foreign key (metadata_id)           references INSTANCE_DESCRIPTOR_METADATA(id),
+
+  foreign key(cost_profile_id)        references COST_PROFILE(id),
+
+  foreign key (memory_profile_id)     references MEMORY_PROFILE(id),
+
+  foreign key (network_profile_id)    references NETWORK_PROFILE(id),
+
+  foreign key (compute_profile_id)    references COMPUTE_PROFILE(id)
 );

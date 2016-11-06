@@ -1,0 +1,6 @@
+
+dependencies {
+    compile "com.amazonaws:aws-java-sdk"
+    compile project(":search:search-api")
+    compile("org.elasticsearch:elasticsearch")
+}
