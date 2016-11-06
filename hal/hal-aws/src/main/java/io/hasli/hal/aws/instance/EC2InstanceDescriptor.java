@@ -10,10 +10,6 @@ import java.util.List;
 @XmlRootElement
 public class EC2InstanceDescriptor {
 
-    @XmlElement(name = "instance_type")
-    private String name;
-
-
     @XmlElement(
             name = "enhanced_networking"
     )
@@ -72,11 +68,11 @@ public class EC2InstanceDescriptor {
     private float ebsMaxBandwidth;
 
     public String getName() {
-        return name;
+        return instanceType;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.instanceType= name;
     }
 
     public boolean isEnhancedNetworking() {
