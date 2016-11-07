@@ -12,10 +12,13 @@ import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.service.vault.VaultConfiguration;
 import io.hasli.test.persist.EnableJPA;
+import io.hasli.test.security.rs.MoxyOverrideProvider;
 import org.eclipse.persistence.internal.helper.ConversionManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 
 import javax.inject.Inject;
@@ -43,8 +46,18 @@ import static org.hamcrest.CoreMatchers.*;
         SecurityConfiguration.class,
         DefaultNodeConfigurationService.class,
         HibernateConfiguration.class,
+        DefaultNodeConfigurationServiceTest.class,
 })
+@Configuration
 public abstract class DefaultNodeConfigurationServiceTest {
+
+
+    @Bean
+    public MoxyOverrideProvider overrideProvider() {
+        return new MoxyOverrideProvider();
+
+    }
+
 
     static {
         ConversionManager.setDefaultManager(DefaultConversionManager.getInstance());
