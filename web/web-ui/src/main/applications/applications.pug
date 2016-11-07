@@ -3,11 +3,9 @@ template
     .ui.container
         .ui.internally.celled.relaxed.grid
             .row
-                .ui.fluid.styled.accordion
+                .ui.fluid.styled.accordion.no--boxshadow
                     .title
-                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
-                        |     Dustin's Awesome App
-                        .ui.right.floated.mini.horizontal.list
+                        .ui.right.floated.small.horizontal.list
                             .item
                                 .content Version: 1.0.0
                             .item
@@ -15,8 +13,236 @@ template
                             .item
                                 .content # of Instances: 5
                             .item
-                                .ui.primary.mini.basic.button
+                                .ui.primary.small.basic.button
                                     | Deploy
+                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
+                        |     Dustin's Awesome App
+                    .content
+                        .ui.container
+                            .ui.top.attached.tabular.menu
+                                a.tab.item.active(data-tab='summary') Summary
+                                a.tab.item(data-tab='files') Files
+                                a.tab.item(data-tab='containers') Containers
+                                a.tab.item(data-tab='revisions') Revisions
+                                a.tab.item(data-tab='advanced') Advanced
+                            .ui.bottom.attached.tab.segment.active(data-tab='summary')
+                                .ui.basic.segment
+                                    .ui.grid
+                                        .three.column.row
+                                            .four.wide.column
+                                                .ui.list
+                                                    .item CPU: 4
+                                                    .item Memory: 4gb
+                                                    .item OS: Ubuntu 16.04
+                                                    .item IP: 51.42.31.12
+                                            .four.wide.column
+                                                .ui.list
+                                                    .item CPU: 4
+                                                    .item Memory: 4gb
+                                                    .item OS: Ubuntu 16.04
+                                                    .item IP: 51.42.31.12
+                                            .four.wide.column
+                                                .ui.list
+                                                    .item CPU: 4
+                                                    .item Memory: 4gb
+                                                    .item OS: Ubuntu 16.04
+                                                    .item IP: 51.42.31.12
+                                    .row
+                                        .column
+                                            img(src='styles/themes/hasli/assets/images/sample-chart2.svg')
+                            .ui.bottom.attached.tab.segment(data-tab='files')
+                                .ui.basic.segment
+                                    h4.ui.left.floated.header
+                                        | All Files
+                                    .ui.right.floated.horizontal.list
+                                        .item
+                                            a.content + CREATE NEW DIRECTORY
+                                        .item
+                                            a.content + CREATE NEW FILE
+                                table.ui.bottom.attached.files.single.line.unstackable.selectable.table
+                                    tbody
+                                        tr
+                                            td.single.line.five.wide
+                                                i.blue.folder.icon
+                                                a(href='#')
+                                                    | dist
+                                            td Build 2.0.7
+                                            td.right.aligned.collapsing 5 days ago
+                                        tr
+                                            td
+                                                i.blue.folder.icon
+                                                a(href='#')
+                                                    | examples
+                                            td Update homepage.html
+                                            td.right.aligned 5 days ago
+                                        tr
+                                            td
+                                                i.blue.folder.icon
+                                                a(href='#')
+                                                    | src
+                                            td Clean up logic in onComplete
+                                            td.right.aligned 5 days ago
+                                        tr
+                                            td
+                                                i.blue.folder.icon
+                                                a(href='#')
+                                                    | docs
+                                            td Initial commit
+                                            td.right.aligned 5 days ago
+                                        tr
+                                            td
+                                                i.blue.folder.icon
+                                                a(href='#')
+                                                    | tasks
+                                            td Updated browser prefix config
+                                            td.right.aligned 5 days ago
+                                        tr
+                                            td
+                                                i.blue.folder.icon
+                                                a(href='#')
+                                                    | test
+                                            td  Restructure test/ for meteor #1607
+                                            td.right.aligned 10 months ago
+                                        tr
+                                            td
+                                                i.grey.file.outline.icon
+                                                a(href='#')
+                                                    | .csscomb.json
+                                            td Iteration on regex for comment replacement
+                                            td.right.aligned 10 months ago
+                                        tr
+                                            td
+                                                i.grey.file.outline.icon
+                                                a(href='#')
+                                                    | .csslintrc
+                                            td Add csslintrc
+                                            td.right.aligned 5 months ago
+                                        tr
+                                            td
+                                                i.grey.file.outline.icon
+                                                a(href='#')
+                                                    | CONTRIBUTING.md
+                                            td Update CONTRIBUTING.md
+                                            td.right.aligned 8 months ago
+                                        tr
+                                            td
+                                                i.grey.file.outline.icon
+                                                a(href='#')
+                                                    | LICENSE.md
+                                            td Remove execute permission
+                                            td.right.aligned 7 days ago
+                                        tr
+                                            td
+                                                i.grey.file.outline.icon
+                                                a(href='#')
+                                                    | README.md
+                                            td Update README.md
+                                            td.right.aligned 7 days ago
+                                        tr
+                                            td
+                                                i.grey.file.outline.icon
+                                                a(href='#')
+                                                    | RELEASE-NOTES.md
+                                            td Fix date
+                                            td.right.aligned 7 days ago
+                                        tr
+                                            td
+                                                i.grey.file.outline.icon
+                                                a(href='#')
+                                                    | bower.json
+                                            td main: semantic.css => semantic.less
+                                            td.right.aligned 3 months ago
+                                        tr
+                                            td
+                                                i.grey.file.outline.icon
+                                                a(href='#')
+                                                    | composer.json
+                                            td #1853 Fix some composer.json fields
+                                            td.right.aligned 5 months ago
+                                        tr
+                                            td
+                                                i.grey.file.outline.icon
+                                                a(href='#')
+                                                    | gulpfile.js
+                                            td Update gulpfile
+                                            td.right.aligned 4 months ago
+                                        tr
+                                            td
+                                                i.grey.file.outline.icon
+                                                a(href='#')
+                                                    | karma.conf.js
+                                            td Remove execute permission.
+                                            td.right.aligned 8 months ago
+                                        tr
+                                            td
+                                                i.grey.file.outline.icon
+                                                a(href='#')
+                                                    | logo.png
+                                            td Remove execute permission.
+                                            td.right.aligned 8 months ago
+                                        tr
+                                            td
+                                                i.grey.file.outline.icon
+                                                a(href='#')
+                                                    | package.json
+                                            td Build 2.0.7
+                                            td.right.aligned 5 days ago
+                                        tr
+                                            td
+                                                i.grey.file.outline.icon
+                                                a(href='#')
+                                                    | semantic.json.example
+                                            td Fix admin flag set in example json! #2453
+                                            td.right.aligned 28 days ago
+                            .ui.bottom.attached.tab.segment(data-tab='containers')
+                                .ui.basic.segment
+                                    h4.ui.left.floated.header
+                                        | All Files
+                                    .ui.right.floated.horizontal.list
+                                        .item
+                                            a.content + CREATE NEW DIRECTORY
+                                        .item
+                                            a.content + CREATE NEW FILE
+                                .fluid.styled.accordion
+                                    .title
+                                        i.dropdown.icon
+                                        .ui.tiny.image
+                                            img(src='styles/themes/hasli/assets/images/logos/nodejs-logo.svg')
+                                    .content
+                                        | Level 1A-A Contents
+                                .fluid.styled.accordion
+                                    .title
+                                        i.dropdown.icon
+                                        .ui.tiny.image
+                                            img(src='styles/themes/hasli/assets/images/logos/mysql-logo.svg')
+                                    .content
+                                        | Level 1A-A Contents
+                                .fluid.styled.accordion
+                                    .title
+                                        i.dropdown.icon
+                                        .ui.tiny.image
+                                            img(src='styles/themes/hasli/assets/images/logos/redis-logo.svg')
+                                    .content
+                                        | Level 1A-A Contents
+                            .ui.bottom.attached.tab.segment(data-tab='revisions')
+                                | Revisions
+                            .ui.bottom.attached.tab.segment(data-tab='advanced')
+                                | Advanced
+            .row
+                .ui.fluid.styled.accordion.no--boxshadow
+                    .title
+                        .ui.right.floated.small.horizontal.list
+                            .item
+                                .content Version: 1.0.0
+                            .item
+                                .content Containers: 3
+                            .item
+                                .content # of Instances: 5
+                            .item
+                                .ui.primary.small.basic.button
+                                    | Deploy
+                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
+                        |     Dustin's Awesome App
                     .content
                         .ui.container
                             .ui.top.attached.tabular.menu
@@ -36,11 +262,9 @@ template
                             .ui.bottom.attached.tab.segment(data-tab='advanced')
                                 | Advanced
             .row
-                .ui.fluid.styled.accordion
+                .ui.fluid.styled.accordion.no--boxshadow
                     .title
-                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
-                        |     Dustin's Awesome App
-                        .ui.right.floated.mini.horizontal.list
+                        .ui.right.floated.small.horizontal.list
                             .item
                                 .content Version: 1.0.0
                             .item
@@ -48,8 +272,10 @@ template
                             .item
                                 .content # of Instances: 5
                             .item
-                                .ui.primary.mini.basic.button
+                                .ui.primary.small.basic.button
                                     | Deploy
+                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
+                        |     Dustin's Awesome App
                     .content
                         .ui.container
                             .ui.top.attached.tabular.menu
@@ -69,11 +295,9 @@ template
                             .ui.bottom.attached.tab.segment(data-tab='advanced')
                                 | Advanced
             .row
-                .ui.fluid.styled.accordion
+                .ui.fluid.styled.accordion.no--boxshadow
                     .title
-                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
-                        |     Dustin's Awesome App
-                        .ui.right.floated.mini.horizontal.list
+                        .ui.right.floated.small.horizontal.list
                             .item
                                 .content Version: 1.0.0
                             .item
@@ -81,8 +305,10 @@ template
                             .item
                                 .content # of Instances: 5
                             .item
-                                .ui.primary.mini.basic.button
+                                .ui.primary.small.basic.button
                                     | Deploy
+                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
+                        |     Dustin's Awesome App
                     .content
                         .ui.container
                             .ui.top.attached.tabular.menu
@@ -102,11 +328,9 @@ template
                             .ui.bottom.attached.tab.segment(data-tab='advanced')
                                 | Advanced
             .row
-                .ui.fluid.styled.accordion
+                .ui.fluid.styled.accordion.no--boxshadow
                     .title
-                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
-                        |     Dustin's Awesome App
-                        .ui.right.floated.mini.horizontal.list
+                        .ui.right.floated.small.horizontal.list
                             .item
                                 .content Version: 1.0.0
                             .item
@@ -114,8 +338,10 @@ template
                             .item
                                 .content # of Instances: 5
                             .item
-                                .ui.primary.mini.basic.button
+                                .ui.primary.small.basic.button
                                     | Deploy
+                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
+                        |     Dustin's Awesome App
                     .content
                         .ui.container
                             .ui.top.attached.tabular.menu
@@ -135,11 +361,9 @@ template
                             .ui.bottom.attached.tab.segment(data-tab='advanced')
                                 | Advanced
             .row
-                .ui.fluid.styled.accordion
+                .ui.fluid.styled.accordion.no--boxshadow
                     .title
-                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
-                        |     Dustin's Awesome App
-                        .ui.right.floated.mini.horizontal.list
+                        .ui.right.floated.small.horizontal.list
                             .item
                                 .content Version: 1.0.0
                             .item
@@ -147,8 +371,10 @@ template
                             .item
                                 .content # of Instances: 5
                             .item
-                                .ui.primary.mini.basic.button
+                                .ui.primary.small.basic.button
                                     | Deploy
+                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
+                        |     Dustin's Awesome App
                     .content
                         .ui.container
                             .ui.top.attached.tabular.menu
@@ -168,11 +394,9 @@ template
                             .ui.bottom.attached.tab.segment(data-tab='advanced')
                                 | Advanced
             .row
-                .ui.fluid.styled.accordion
+                .ui.fluid.styled.accordion.no--boxshadow
                     .title
-                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
-                        |     Dustin's Awesome App
-                        .ui.right.floated.mini.horizontal.list
+                        .ui.right.floated.small.horizontal.list
                             .item
                                 .content Version: 1.0.0
                             .item
@@ -180,8 +404,10 @@ template
                             .item
                                 .content # of Instances: 5
                             .item
-                                .ui.primary.mini.basic.button
+                                .ui.primary.small.basic.button
                                     | Deploy
+                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
+                        |     Dustin's Awesome App
                     .content
                         .ui.container
                             .ui.top.attached.tabular.menu
@@ -201,11 +427,9 @@ template
                             .ui.bottom.attached.tab.segment(data-tab='advanced')
                                 | Advanced
             .row
-                .ui.fluid.styled.accordion
+                .ui.fluid.styled.accordion.no--boxshadow
                     .title
-                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
-                        |     Dustin's Awesome App
-                        .ui.right.floated.mini.horizontal.list
+                        .ui.right.floated.small.horizontal.list
                             .item
                                 .content Version: 1.0.0
                             .item
@@ -213,41 +437,10 @@ template
                             .item
                                 .content # of Instances: 5
                             .item
-                                .ui.primary.mini.basic.button
+                                .ui.primary.small.basic.button
                                     | Deploy
-                    .content
-                        .ui.container
-                            .ui.top.attached.tabular.menu
-                                a.tab.item.active(data-tab='summary') Summary
-                                a.tab.item(data-tab='files') Files
-                                a.tab.item(data-tab='containers') Containers
-                                a.tab.item(data-tab='revisions') Revisions
-                                a.tab.item(data-tab='advanced') Advanced
-                            .ui.bottom.attached.tab.segment.active(data-tab='summary')
-                                | Summary
-                            .ui.bottom.attached.tab.segment(data-tab='files')
-                                | Files
-                            .ui.bottom.attached.tab.segment(data-tab='containers')
-                                | Containers
-                            .ui.bottom.attached.tab.segment(data-tab='revisions')
-                                | Revisions
-                            .ui.bottom.attached.tab.segment(data-tab='advanced')
-                                | Advanced
-            .row
-                .ui.fluid.styled.accordion
-                    .title
                         img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
                         |     Dustin's Awesome App
-                        .ui.right.floated.mini.horizontal.list
-                            .item
-                                .content Version: 1.0.0
-                            .item
-                                .content Containers: 3
-                            .item
-                                .content # of Instances: 5
-                            .item
-                                .ui.primary.mini.basic.button
-                                    | Deploy
                     .content
                         .ui.container
                             .ui.top.attached.tabular.menu

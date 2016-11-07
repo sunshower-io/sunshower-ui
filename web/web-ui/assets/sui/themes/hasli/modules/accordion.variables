@@ -60,10 +60,11 @@
 @styledBorderRadius: 0px;
 
 
-@styledBoxShadow: none;
-/*@subtleShadow,
-  0px 0px 0px 1px @borderColor;
-*/
+//@styledBoxShadow: none;
+@styledBoxShadow:
+        @subtleShadow,
+        0px 0px 0px 1px @borderColor
+;
 
 /* Content */
 @styledContentMargin: 0em;

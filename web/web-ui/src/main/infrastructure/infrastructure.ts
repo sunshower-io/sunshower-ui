@@ -5,7 +5,7 @@ import {
     RouterConfiguration
 } from "aurelia-router";
 
-import {Form} from 'form/form'
+import {Form} from '../../form/form'
 import {inject} from "aurelia-dependency-injection";
 
 @inject(Form)
@@ -21,7 +21,6 @@ export class Infrastructure {
 
     create() {
         console.log('create button clicked');
-        this.form.show();
     }
     // public router:Router;
     //

@@ -22,9 +22,16 @@ img.transparent {
   opacity:0;
 }
 
+
+/* used for plus/minus icone toggle */
 .toggle--icon {
   position: relative;
   -webkit-transition: opacity .1s ease-in-out;
   top: 5px;
   right: 10px;
+}
+
+/* removes accordion box shadow */
+.no--boxshadow {
+  box-shadow: none !important;
 }
