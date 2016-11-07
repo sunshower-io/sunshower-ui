@@ -8,6 +8,9 @@ export class Applications {
         $('.tabular.menu .item')
             .tab();
 
+        $('.ui.checkbox')
+            .checkbox();
+
         $('.ui.accordion .title').click(function(){
             if ($(this).hasClass('active')) {
                 $(this).find('.toggle--icon')

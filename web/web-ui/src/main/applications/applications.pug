@@ -209,25 +209,75 @@ template
                                         .ui.tiny.image
                                             img(src='styles/themes/hasli/assets/images/logos/nodejs-logo.svg')
                                     .content
-                                        | Level 1A-A Contents
+                                        .ui.pointing.secondary.menu
+                                            a.active.item(data-tab="general")
+                                                | General
+                                            a.item(data-tab="ports")
+                                                | Ports
+                                            a.item(data-tab="volumes")
+                                                | Volumes
+                                            a.item(data-tab="advanced")
+                                                | Advanced
+                                        .ui.active.tab.segment(data-tab='general')
+                                        .ui.tab.segment(data-tab='ports')
+                                        .ui.tab.segment(data-tab='volumes')
+                                        .ui.tab.segment(data-tab='advanced')
                                 .fluid.styled.accordion
                                     .title
                                         i.dropdown.icon
                                         .ui.tiny.image
                                             img(src='styles/themes/hasli/assets/images/logos/mysql-logo.svg')
                                     .content
-                                        | Level 1A-A Contents
+                                        .ui.secondary.pointing.menu
+                                            a.active.item
+                                                | General
+                                            a.item
+                                                | Ports
+                                            a.item
+                                                | Volumes
+                                            a.item
+                                                | Advanced
                                 .fluid.styled.accordion
                                     .title
                                         i.dropdown.icon
                                         .ui.tiny.image
                                             img(src='styles/themes/hasli/assets/images/logos/redis-logo.svg')
                                     .content
-                                        | Level 1A-A Contents
+                                        .ui.secondary.pointing.menu
+                                            a.active.item
+                                                | General
+                                            a.item
+                                                | Ports
+                                            a.item
+                                                | Volumes
+                                            a.item
+                                                | Advanced
                             .ui.bottom.attached.tab.segment(data-tab='revisions')
-                                | Revisions
+                                .ui.left.floated.header
+                                    | Recent Activity
+                                a.pull-right
+                                    | show all
+                                img(src='styles/themes/hasli/assets/images/recent-activity.svg')
                             .ui.bottom.attached.tab.segment(data-tab='advanced')
-                                | Advanced
+                                .ui.form
+                                    h4.ui.dividing.header General Information
+                                    .field
+                                        .ui.checkbox
+                                            input.hidden(type='checkbox', tabindex='0')
+                                            label Some Advanced Setting 1
+                                    .field
+                                        .ui.checkbox
+                                            input.hidden(type='checkbox', tabindex='0')
+                                            label Some Advanced Setting 1
+                                    h4.ui.dividing.header Some Additional Advanced Stuff
+                                    .field
+                                        .ui.checkbox
+                                            input.hidden(type='checkbox', tabindex='0')
+                                            label Some Advanced Setting 1
+                                    .field
+                                        .ui.checkbox
+                                            input.hidden(type='checkbox', tabindex='0')
+                                            label Some Advanced Setting 1
             .row
                 .ui.fluid.styled.accordion.no--boxshadow
                     .title
