@@ -1,15 +1,11 @@
 template
-    router-view
     .ui.container
         .ui.grid.padded
             .ui.column.two.wide.menu.vertical.labeled.icon
                 .item Manage
-                .item
-                    i.icon.privacy
-                    | Keyrings
-                .item
-                    i.icon.sitemap
-                    | Networks
+                .item(repeat.for='row of router.navigation', class="${row.isActive ? 'active' : ''}" href.bind='row.href')
+                    i.icon(class="${row.settings.icon}")
+                    | ${row.title}
                 .item
                     i.icon.fork
                     | Clusters
@@ -31,65 +27,6 @@ template
                 .item
                     i.icon.download
                     | Backups
-                .item.active
-                    i.icon.settings
-                    | Node Configurations
             .ui.column.fourteen.wide
-                h2 Node Configuration
-                //show if they wanted a new one
-                .ui.three.top.attached.steps()
-                    .step
-                        i.disk.outline.icon
-                        .content
-                            .title Hardware
-                            .description Specify CPU, Memory, etc.
-                    .active.step
-                        i.linux.icon
-                        .content
-                            .title Operating System
-                            .description Choose Operating System
-                    .disabled.step
-                        i.code.icon
-                        .content
-                            .title Software
-                            .description Some meaningful description
-                .ui.attached.segment
-                    //show if hardware
-                    form.ui.form(style="display:none;")
-                    //show if they wanted a new one
-                    form.ui.form()
-                        .ui.relaxed.divided.list
-                            .item
-                                i.large.windows.middle.aligned.icon
-                                .content
-                                    .header Windows x86
-                                    .description Something
-                            .item
-                                i.large.windows.middle.aligned.icon
-                                .content
-                                    .header Windows x64
-                                    .description Something
-                            .item
-                                i.large.linux.middle.aligned.icon
-                                .content
-                                    .header Linux
-                                    .description Something
-                    //show if software
-                    form.ui.form(style="display:none;")
-                .ui.three.bottom.attached.steps
-                    .step
-                        i.disk.outline.icon
-                        .content
-                            .title Hardware
-                            .description Specify CPU, Memory, etc.
-                    .active.step
-                        i.linux.icon
-                        .content
-                            .title Operating System
-                            .description Choose Operating System
-                    .disabled.step
-                        i.code.icon
-                        .content
-                            .title Software
-                            .description Some meaningful description
+                router-view
 
