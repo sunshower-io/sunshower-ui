@@ -1,16 +1,190 @@
 template
-    .ui.grid
-        .three.wide.column
-            .ui.vertical.tabular.menu(style="width:auto; min-width:100px;")
-                a.item(repeat.for='row of router.navigation', class="${row.isActive ? 'active' : ''}" href.bind='row.href')
-                    | ${row.title}
-        .thirteen.wide.stretched.column
-            router-view
-
-
-    //.ui.four.column.wide
-    //    .ui.menu.vertical.fluid.tabular
-    //        a.item(repeat.for='row of router.navigation', class="${row.isActive ? 'active' : ''}" href.bind='row.href')
-    //            | ${row.title}
-    //.ui.twelve.stretched.column.wide
-    //    router-view
+    require(from="form/form")
+    form
+    .ui.internally.celled.grid
+        .row
+            .three.wide.fluid.column
+                .ui.fluid.text.vertical.menu
+                    .item
+                        .header Products
+                        .menu
+                            a.item Enterprise
+                            a.item Consumer
+                    .item
+                        .header CMS Solutions
+                        .menu
+                            a.item Rails
+                            a.item Python
+                            a.item PHP
+                    .item
+                        .header Hosting
+                        .menu
+                            a.item Shared
+                            a.item Dedicated
+                    .item
+                        .header Support
+                        .menu
+                            a.item E-mail Support
+                            a.item FAQs
+            .thirteen.wide.column
+                .ui.hidden.divider
+                .ui.container
+                    .ui.header
+                        | INSTANCES
+                    .ui.secondary.menu
+                        .item
+                            .ui.icon.green.input
+                                input(type='text', placeholder='Search...')
+                                i.search.icon
+                        .item
+                            .ui.selection.dropdown
+                                | Dropdown
+                                i.dropdown.icon
+                                .menu
+                                    .item Choice 1
+                                    .item Choice 2
+                                    .item Choice 3
+                        .item
+                            .ui.action.input
+                                input(type='text', placeholder='Navigate to...')
+                                .ui.primary.button Go
+                        .right.floated.item
+                            .ui.primary.mini.button(type='button', click.trigger='create()')
+                                | + CREATE
+                    .ui.divided.items
+                        .item
+                            .ui.tiny.image
+                                img(src='styles/themes/hasli/assets/images/logos/aws-logo.svg')
+                            .content
+                                a.header AWS EC2 - Ubuntu 16.04-1
+                                .ui.right.floated.tiny.basic.green.button
+                                    | Edit
+                                .meta
+                                    .ui.label Cluster1
+                                    .ui.label
+                                        i.globe.icon
+                                        |  Additional Languages
+                                .description
+                                .extra
+                                    .ui.grid
+                                        .three.column.row
+                                            .four.wide.column
+                                                .ui.list
+                                                    .item CPU: 4
+                                                    .item Memory: 4gb
+                                                    .item OS: Ubuntu 16.04
+                                                    .item IP: 51.42.31.12
+                                            .four.wide.column
+                                                .ui.list
+                                                    .item CPU: 4
+                                                    .item Memory: 4gb
+                                                    .item OS: Ubuntu 16.04
+                                                    .item IP: 51.42.31.12
+                                            .four.wide.column
+                                                .ui.list
+                                                    .item CPU: 4
+                                                    .item Memory: 4gb
+                                                    .item OS: Ubuntu 16.04
+                                                    .item IP: 51.42.31.12
+                        .item
+                            .ui.tiny.image
+                                img(src='styles/themes/hasli/assets/images/logos/aws-logo.svg')
+                            .content
+                                a.header AWS EC2 - Ubuntu 16.04-1
+                                .ui.right.floated.tiny.basic.green.button
+                                    | Edit
+                                .meta
+                                    .ui.label Cluster1
+                                    .ui.label
+                                        i.globe.icon
+                                        |  Additional Languages
+                                .description
+                                .extra
+                                    .ui.grid
+                                        .three.column.row
+                                            .four.wide.column
+                                                .ui.list
+                                                    .item CPU: 4
+                                                    .item Memory: 4gb
+                                                    .item OS: Ubuntu 16.04
+                                                    .item IP: 51.42.31.12
+                                            .four.wide.column
+                                                .ui.list
+                                                    .item CPU: 4
+                                                    .item Memory: 4gb
+                                                    .item OS: Ubuntu 16.04
+                                                    .item IP: 51.42.31.12
+                                            .four.wide.column
+                                                .ui.list
+                                                    .item CPU: 4
+                                                    .item Memory: 4gb
+                                                    .item OS: Ubuntu 16.04
+                                                    .item IP: 51.42.31.12
+                        .item
+                            .ui.tiny.image
+                                img(src='styles/themes/hasli/assets/images/logos/azure-logo.png')
+                            .content
+                                a.header AWS EC2 - Ubuntu 16.04-1
+                                .ui.right.floated.tiny.basic.green.button
+                                    | Edit
+                                .meta
+                                    .ui.label Cluster1
+                                    .ui.label
+                                        i.globe.icon
+                                        |  Additional Languages
+                                .description
+                                .extra
+                                    .ui.grid
+                                        .three.column.row
+                                            .four.wide.column
+                                                .ui.list
+                                                    .item CPU: 4
+                                                    .item Memory: 4gb
+                                                    .item OS: Ubuntu 16.04
+                                                    .item IP: 51.42.31.12
+                                            .four.wide.column
+                                                .ui.list
+                                                    .item CPU: 4
+                                                    .item Memory: 4gb
+                                                    .item OS: Ubuntu 16.04
+                                                    .item IP: 51.42.31.12
+                                            .four.wide.column
+                                                .ui.list
+                                                    .item CPU: 4
+                                                    .item Memory: 4gb
+                                                    .item OS: Ubuntu 16.04
+                                                    .item IP: 51.42.31.12
+                        .item
+                            .ui.tiny.image
+                                img(src='styles/themes/hasli/assets/images/logos/vmware-logo.svg')
+                            .content
+                                a.header AWS EC2 - Ubuntu 16.04-1
+                                .ui.right.floated.tiny.basic.green.button
+                                    | Edit
+                                .meta
+                                    .ui.label Cluster1
+                                    .ui.label
+                                        i.globe.icon
+                                        |  Additional Languages
+                                .description
+                                .extra
+                                    .ui.grid
+                                        .three.column.row
+                                            .four.wide.column
+                                                .ui.list
+                                                    .item CPU: 4
+                                                    .item Memory: 4gb
+                                                    .item OS: Ubuntu 16.04
+                                                    .item IP: 51.42.31.12
+                                            .four.wide.column
+                                                .ui.list
+                                                    .item CPU: 4
+                                                    .item Memory: 4gb
+                                                    .item OS: Ubuntu 16.04
+                                                    .item IP: 51.42.31.12
+                                            .four.wide.column
+                                                .ui.list
+                                                    .item CPU: 4
+                                                    .item Memory: 4gb
+                                                    .item OS: Ubuntu 16.04
+                                                    .item IP: 51.42.31.12

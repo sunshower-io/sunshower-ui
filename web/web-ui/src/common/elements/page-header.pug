@@ -1,0 +1,14 @@
+template(bindable="router")
+    require(from="common/elements/profile-dropdown")
+    .ui.secondary.menu.small
+        .ui.image.small
+            img(src="styles/themes/hasli/assets/images/logos/hasli-logo.svg").header.item
+        .right.menu
+            .item
+                .ui.search.mini
+                    .ui.icon.input
+                        input.eight.wide.prompt(type='text', placeholder='Search...')
+                        i.search.icon
+                    .results
+            img(src="styles/themes/hasli/assets/images/icons/alert.svg").item
+            profile-dropdown.item

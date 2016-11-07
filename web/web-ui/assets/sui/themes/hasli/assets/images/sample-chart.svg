@@ -1,0 +1,19 @@
+
+<svg width="128px" height="74px" viewBox="-1 0 128 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0.899348298" y="19.4098361" width="127.081825" height="54.5901639"></rect>
+    </defs>
+    <g id="Group-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-1.000000, 0.000000)">
+        <text id="200-Mb" font-family="AvenirNext-Medium, Avenir Next" font-size="12" font-weight="400" fill="#71848B">
+            <tspan x="4.29406859" y="12">200 Mb</tspan>
+        </text>
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <g id="mask"></g>
+        <polyline id="Path-35" fill-opacity="0.15" fill="#63ABFF" mask="url(#mask-2)" points="-0.163646295 66.0712188 10.6628925 61.9421931 18.3254633 67.7828943 28.918439 63.0491478 41.3491704 64.5563236 49.046437 56.7545996 54.2949239 57.5258263 62.5957086 52.6409387 66.3807122 55.2121462 71.3901056 52.5514819 76.7484984 59.0547257 81.6306324 42.2558087 87.499991 39.4148752 95.6735163 26.8068772 101.889946 48.3998696 106.185915 39.4148752 111.671568 43.5163374 116.426442 35.6238012 127.744818 33.1298519 127.744818 140 -21.4839891 140 -28 72.4939585"></polyline>
+        <polyline id="line-chart" stroke="#63ABFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill-opacity="0" fill="#D8D8D8" mask="url(#mask-2)" points="-0.190369268 65.9542983 10.7661805 61.9737091 18.0891406 67.9297478 28.303903 62.8813213 41.0581422 64.7062335 48.7453537 56.8735275 53.9869843 57.6478169 62.2769256 52.7435305 66.0569848 55.3249487 71.0598343 52.6537184 76.4112273 59.1827877 81.2869837 42.3171592 87.148675 39.4649438 95.3115231 26.8068772 101.519832 48.4856193 105.81019 39.4649438 111.288676 43.5826937 116.037339 35.6588148 127.340929 33.1549616"></polyline>
+    </g>
+</svg>

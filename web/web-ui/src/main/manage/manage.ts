@@ -1,4 +1,7 @@
 
 export class Manage {
 
+    attached() {
+    }
+
 }
