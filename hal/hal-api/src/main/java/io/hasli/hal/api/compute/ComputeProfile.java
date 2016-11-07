@@ -14,7 +14,7 @@ public class ComputeProfile extends DistributableEntity {
 
 
     @Basic
-    private int coreCount;
+    private int cores;
 
 
 }
