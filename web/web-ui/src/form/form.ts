@@ -8,6 +8,10 @@ export class Form {
     }
 
     attached() {
+
+    }
+
+    show() {
         $('.ui.modal')
             .modal('show');
 

@@ -1,91 +1,268 @@
 template
     .ui.hidden.divider
     .ui.container
-        .ui.fluid.styled.accordion
-            .title
-                img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
-                |     Dustin's Awesome App
-                .ui.mini.horizontal.right.floated.list
-                    .item
-                        .content Version: 1.0.0
-                    .item
-                        .content Containers: 3
-                    .item
-                        .content # of Instances: 5
-            .content
-                .ui.fluid.container
-                    .ui.top.attached.tabular.menu
-                        a.tab.item.active(data-tab='summary') Summary
-                        a.tab.item(data-tab='files') Files
-                        a.tab.item(data-tab='containers') Containers
-                        a.tab.item(data-tab='revisions') Revisions
-                        a.tab.item(data-tab='advanced') Advanced
-                    .ui.bottom.attached.tab.segment.active(data-tab='summary')
-                        | Summary
-                    .ui.bottom.attached.tab.segment(data-tab='files')
-                        | Files
-                    .ui.bottom.attached.tab.segment(data-tab='containers')
-                        | Containers
-                    .ui.bottom.attached.tab.segment(data-tab='revisions')
-                        | Revisions
-                    .ui.bottom.attached.tab.segment(data-tab='advanced')
-                        | Advanced
-        .ui.fluid.styled.accordion
-            .title
-                img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
-                |     Dustin's Awesome App
-                .ui.mini.horizontal.right.floated.list
-                    .item
-                        .content Version: 1.0.0
-                    .item
-                        .content Containers: 3
-                    .item
-                        .content # of Instances: 5
-            .content
-                .ui.container
-                    .ui.top.attached.tabular.menu
-                        a.tab.item.active(data-tab='summary') Summary
-                        a.tab.item(data-tab='files') Files
-                        a.tab.item(data-tab='containers') Containers
-                        a.tab.item(data-tab='revisions') Revisions
-                        a.tab.item(data-tab='advanced') Advanced
-                    .ui.bottom.attached.tab.segment.active(data-tab='summary')
-                        | Summary
-                    .ui.bottom.attached.tab.segment(data-tab='files')
-                        | Files
-                    .ui.bottom.attached.tab.segment(data-tab='containers')
-                        | Containers
-                    .ui.bottom.attached.tab.segment(data-tab='revisions')
-                        | Revisions
-                    .ui.bottom.attached.tab.segment(data-tab='advanced')
-                        | Advanced
-        .ui.fluid.styled.accordion
-            .title
-                img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
-                |     Dustin's Awesome App
-                .ui.mini.horizontal.right.floated.list
-                    .item
-                        .content Version: 1.0.0
-                    .item
-                        .content Containers: 3
-                    .item
-                        .content # of Instances: 5
-            .content
-                .ui.container
-                    .ui.top.attached.tabular.menu
-                        a.tab.item.active(data-tab='summary') Summary
-                        a.tab.item(data-tab='files') Files
-                        a.tab.item(data-tab='containers') Containers
-                        a.tab.item(data-tab='revisions') Revisions
-                        a.tab.item(data-tab='advanced') Advanced
-                    .ui.bottom.attached.tab.segment.active(data-tab='summary')
-                        | Summary
-                    .ui.bottom.attached.tab.segment(data-tab='files')
-                        | Files
-                    .ui.bottom.attached.tab.segment(data-tab='containers')
-                        | Containers
-                    .ui.bottom.attached.tab.segment(data-tab='revisions')
-                        | Revisions
-                    .ui.bottom.attached.tab.segment(data-tab='advanced')
-                        | Advanced
-
+        .ui.internally.celled.relaxed.grid
+            .row
+                .ui.fluid.styled.accordion
+                    .title
+                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
+                        |     Dustin's Awesome App
+                        .ui.right.floated.mini.horizontal.list
+                            .item
+                                .content Version: 1.0.0
+                            .item
+                                .content Containers: 3
+                            .item
+                                .content # of Instances: 5
+                            .item
+                                .ui.primary.mini.basic.button
+                                    | Deploy
+                    .content
+                        .ui.container
+                            .ui.top.attached.tabular.menu
+                                a.tab.item.active(data-tab='summary') Summary
+                                a.tab.item(data-tab='files') Files
+                                a.tab.item(data-tab='containers') Containers
+                                a.tab.item(data-tab='revisions') Revisions
+                                a.tab.item(data-tab='advanced') Advanced
+                            .ui.bottom.attached.tab.segment.active(data-tab='summary')
+                                | Summary
+                            .ui.bottom.attached.tab.segment(data-tab='files')
+                                | Files
+                            .ui.bottom.attached.tab.segment(data-tab='containers')
+                                | Containers
+                            .ui.bottom.attached.tab.segment(data-tab='revisions')
+                                | Revisions
+                            .ui.bottom.attached.tab.segment(data-tab='advanced')
+                                | Advanced
+            .row
+                .ui.fluid.styled.accordion
+                    .title
+                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
+                        |     Dustin's Awesome App
+                        .ui.right.floated.mini.horizontal.list
+                            .item
+                                .content Version: 1.0.0
+                            .item
+                                .content Containers: 3
+                            .item
+                                .content # of Instances: 5
+                            .item
+                                .ui.primary.mini.basic.button
+                                    | Deploy
+                    .content
+                        .ui.container
+                            .ui.top.attached.tabular.menu
+                                a.tab.item.active(data-tab='summary') Summary
+                                a.tab.item(data-tab='files') Files
+                                a.tab.item(data-tab='containers') Containers
+                                a.tab.item(data-tab='revisions') Revisions
+                                a.tab.item(data-tab='advanced') Advanced
+                            .ui.bottom.attached.tab.segment.active(data-tab='summary')
+                                | Summary
+                            .ui.bottom.attached.tab.segment(data-tab='files')
+                                | Files
+                            .ui.bottom.attached.tab.segment(data-tab='containers')
+                                | Containers
+                            .ui.bottom.attached.tab.segment(data-tab='revisions')
+                                | Revisions
+                            .ui.bottom.attached.tab.segment(data-tab='advanced')
+                                | Advanced
+            .row
+                .ui.fluid.styled.accordion
+                    .title
+                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
+                        |     Dustin's Awesome App
+                        .ui.right.floated.mini.horizontal.list
+                            .item
+                                .content Version: 1.0.0
+                            .item
+                                .content Containers: 3
+                            .item
+                                .content # of Instances: 5
+                            .item
+                                .ui.primary.mini.basic.button
+                                    | Deploy
+                    .content
+                        .ui.container
+                            .ui.top.attached.tabular.menu
+                                a.tab.item.active(data-tab='summary') Summary
+                                a.tab.item(data-tab='files') Files
+                                a.tab.item(data-tab='containers') Containers
+                                a.tab.item(data-tab='revisions') Revisions
+                                a.tab.item(data-tab='advanced') Advanced
+                            .ui.bottom.attached.tab.segment.active(data-tab='summary')
+                                | Summary
+                            .ui.bottom.attached.tab.segment(data-tab='files')
+                                | Files
+                            .ui.bottom.attached.tab.segment(data-tab='containers')
+                                | Containers
+                            .ui.bottom.attached.tab.segment(data-tab='revisions')
+                                | Revisions
+                            .ui.bottom.attached.tab.segment(data-tab='advanced')
+                                | Advanced
+            .row
+                .ui.fluid.styled.accordion
+                    .title
+                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
+                        |     Dustin's Awesome App
+                        .ui.right.floated.mini.horizontal.list
+                            .item
+                                .content Version: 1.0.0
+                            .item
+                                .content Containers: 3
+                            .item
+                                .content # of Instances: 5
+                            .item
+                                .ui.primary.mini.basic.button
+                                    | Deploy
+                    .content
+                        .ui.container
+                            .ui.top.attached.tabular.menu
+                                a.tab.item.active(data-tab='summary') Summary
+                                a.tab.item(data-tab='files') Files
+                                a.tab.item(data-tab='containers') Containers
+                                a.tab.item(data-tab='revisions') Revisions
+                                a.tab.item(data-tab='advanced') Advanced
+                            .ui.bottom.attached.tab.segment.active(data-tab='summary')
+                                | Summary
+                            .ui.bottom.attached.tab.segment(data-tab='files')
+                                | Files
+                            .ui.bottom.attached.tab.segment(data-tab='containers')
+                                | Containers
+                            .ui.bottom.attached.tab.segment(data-tab='revisions')
+                                | Revisions
+                            .ui.bottom.attached.tab.segment(data-tab='advanced')
+                                | Advanced
+            .row
+                .ui.fluid.styled.accordion
+                    .title
+                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
+                        |     Dustin's Awesome App
+                        .ui.right.floated.mini.horizontal.list
+                            .item
+                                .content Version: 1.0.0
+                            .item
+                                .content Containers: 3
+                            .item
+                                .content # of Instances: 5
+                            .item
+                                .ui.primary.mini.basic.button
+                                    | Deploy
+                    .content
+                        .ui.container
+                            .ui.top.attached.tabular.menu
+                                a.tab.item.active(data-tab='summary') Summary
+                                a.tab.item(data-tab='files') Files
+                                a.tab.item(data-tab='containers') Containers
+                                a.tab.item(data-tab='revisions') Revisions
+                                a.tab.item(data-tab='advanced') Advanced
+                            .ui.bottom.attached.tab.segment.active(data-tab='summary')
+                                | Summary
+                            .ui.bottom.attached.tab.segment(data-tab='files')
+                                | Files
+                            .ui.bottom.attached.tab.segment(data-tab='containers')
+                                | Containers
+                            .ui.bottom.attached.tab.segment(data-tab='revisions')
+                                | Revisions
+                            .ui.bottom.attached.tab.segment(data-tab='advanced')
+                                | Advanced
+            .row
+                .ui.fluid.styled.accordion
+                    .title
+                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
+                        |     Dustin's Awesome App
+                        .ui.right.floated.mini.horizontal.list
+                            .item
+                                .content Version: 1.0.0
+                            .item
+                                .content Containers: 3
+                            .item
+                                .content # of Instances: 5
+                            .item
+                                .ui.primary.mini.basic.button
+                                    | Deploy
+                    .content
+                        .ui.container
+                            .ui.top.attached.tabular.menu
+                                a.tab.item.active(data-tab='summary') Summary
+                                a.tab.item(data-tab='files') Files
+                                a.tab.item(data-tab='containers') Containers
+                                a.tab.item(data-tab='revisions') Revisions
+                                a.tab.item(data-tab='advanced') Advanced
+                            .ui.bottom.attached.tab.segment.active(data-tab='summary')
+                                | Summary
+                            .ui.bottom.attached.tab.segment(data-tab='files')
+                                | Files
+                            .ui.bottom.attached.tab.segment(data-tab='containers')
+                                | Containers
+                            .ui.bottom.attached.tab.segment(data-tab='revisions')
+                                | Revisions
+                            .ui.bottom.attached.tab.segment(data-tab='advanced')
+                                | Advanced
+            .row
+                .ui.fluid.styled.accordion
+                    .title
+                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
+                        |     Dustin's Awesome App
+                        .ui.right.floated.mini.horizontal.list
+                            .item
+                                .content Version: 1.0.0
+                            .item
+                                .content Containers: 3
+                            .item
+                                .content # of Instances: 5
+                            .item
+                                .ui.primary.mini.basic.button
+                                    | Deploy
+                    .content
+                        .ui.container
+                            .ui.top.attached.tabular.menu
+                                a.tab.item.active(data-tab='summary') Summary
+                                a.tab.item(data-tab='files') Files
+                                a.tab.item(data-tab='containers') Containers
+                                a.tab.item(data-tab='revisions') Revisions
+                                a.tab.item(data-tab='advanced') Advanced
+                            .ui.bottom.attached.tab.segment.active(data-tab='summary')
+                                | Summary
+                            .ui.bottom.attached.tab.segment(data-tab='files')
+                                | Files
+                            .ui.bottom.attached.tab.segment(data-tab='containers')
+                                | Containers
+                            .ui.bottom.attached.tab.segment(data-tab='revisions')
+                                | Revisions
+                            .ui.bottom.attached.tab.segment(data-tab='advanced')
+                                | Advanced
+            .row
+                .ui.fluid.styled.accordion
+                    .title
+                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
+                        |     Dustin's Awesome App
+                        .ui.right.floated.mini.horizontal.list
+                            .item
+                                .content Version: 1.0.0
+                            .item
+                                .content Containers: 3
+                            .item
+                                .content # of Instances: 5
+                            .item
+                                .ui.primary.mini.basic.button
+                                    | Deploy
+                    .content
+                        .ui.container
+                            .ui.top.attached.tabular.menu
+                                a.tab.item.active(data-tab='summary') Summary
+                                a.tab.item(data-tab='files') Files
+                                a.tab.item(data-tab='containers') Containers
+                                a.tab.item(data-tab='revisions') Revisions
+                                a.tab.item(data-tab='advanced') Advanced
+                            .ui.bottom.attached.tab.segment.active(data-tab='summary')
+                                | Summary
+                            .ui.bottom.attached.tab.segment(data-tab='files')
+                                | Files
+                            .ui.bottom.attached.tab.segment(data-tab='containers')
+                                | Containers
+                            .ui.bottom.attached.tab.segment(data-tab='revisions')
+                                | Revisions
+                            .ui.bottom.attached.tab.segment(data-tab='advanced')
+                                | Advanced
