@@ -47,7 +47,7 @@
     Brand Colors
 --------------------*/
 
-@primaryColor        : @blue;
+@primaryColor        : #239AE8;
 @secondaryColor      : @black;
 
 @lightPrimaryColor   : @lightBlue;
@@ -442,7 +442,7 @@
 @borderColor               : rgba(34, 36, 38, 0.15);
 @strongBorderColor         : rgba(34, 36, 38, 0.22);
 @internalBorderColor       : rgba(34, 36, 38, 0.1);
-@selectedBorderColor       : rgba(34, 36, 38, 0.35);
+@selectedBorderColor       : rgba(0, 212, 106, 100);
 @strongSelectedBorderColor : rgba(34, 36, 38, 0.5);
 @disabledBorderColor       : rgba(34, 36, 38, 0.5);
 
