@@ -209,19 +209,72 @@ template
                                         .ui.tiny.image
                                             img(src='styles/themes/hasli/assets/images/logos/nodejs-logo.svg')
                                     .content
-                                        .ui.pointing.secondary.menu
-                                            a.active.item(data-tab="general")
-                                                | General
-                                            a.item(data-tab="ports")
-                                                | Ports
-                                            a.item(data-tab="volumes")
-                                                | Volumes
-                                            a.item(data-tab="advanced")
-                                                | Advanced
-                                        .ui.active.tab.segment(data-tab='general')
-                                        .ui.tab.segment(data-tab='ports')
-                                        .ui.tab.segment(data-tab='volumes')
-                                        .ui.tab.segment(data-tab='advanced')
+                                        .ui.container
+                                            .ui.pointing.secondary.tabular.menu
+                                                a.active.item(data-tab="general")
+                                                    | General
+                                                a.item(data-tab="ports")
+                                                    | Ports
+                                                a.item(data-tab="volumes")
+                                                    | Volumes
+                                                a.item(data-tab="container-advanced")
+                                                    | Advanced
+                                            .ui.active.tab(data-tab='general')
+                                                .ui.basic.segment
+                                                    .ui.grid
+                                                        .two.column.row
+                                                            .four.wide.column
+                                                                h5.ui.header
+                                                                | KEY
+                                                            .ten.wide.column
+                                                                h5.ui.header
+                                                                | VALUE
+                                                        .three.column.row
+                                                            .four.wide.column
+                                                                .ui.transparent.input
+                                                                    input(type="text" value="PATH")
+                                                                .ui.divider
+                                                            .ten.wide.column
+                                                                .ui.transparent.input
+                                                                    input(type="text" value="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/nodejs/bin")
+                                                                .ui.divider
+                                                            .one.wide.column
+                                                                img(src='styles/themes/hasli/assets/images/icons/x-circle.svg')
+                                                        .three.column.row
+                                                            .four.wide.column
+                                                                .ui.transparent.input
+                                                                    input(type="text" placeholder="key")
+                                                                .ui.divider
+                                                            .ten.wide.column
+                                                                .ui.transparent.input
+                                                                    input(type="text" placeholder="value")
+                                                                .ui.divider
+                                                            .one.wide.column
+                                                                img(src='styles/themes/hasli/assets/images/icons/plus-green-circle.svg')
+                                            .ui.tab(data-tab='ports')
+                                                .ui.basic.segment
+                                                    .ui.grid
+                                                        .three.column.row
+                                                            .four.wide.column
+                                                                .ui.list
+                                                                    .item CPU: 4
+                                                                    .item Memory: 4gb
+                                                                    .item OS: Ubuntu 16.04
+                                                                    .item IP: 51.42.31.12
+                                                            .four.wide.column
+                                                                .ui.list
+                                                                    .item CPU: 4
+                                                                    .item Memory: 4gb
+                                                                    .item OS: Ubuntu 16.04
+                                                                    .item IP: 51.42.31.12
+                                                            .four.wide.column
+                                                                .ui.list
+                                                                    .item CPU: 4
+                                                                    .item Memory: 4gb
+                                                                    .item OS: Ubuntu 16.04
+                                                                    .item IP: 51.42.31.12
+                                            .ui.tab(data-tab='volumes')
+                                            .ui.tab(data-tab='container-advanced')
                                 .fluid.styled.accordion
                                     .title
                                         i.dropdown.icon
