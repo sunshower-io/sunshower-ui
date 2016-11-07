@@ -7,7 +7,9 @@ import io.hasli.hal.api.memory.MemoryProfile;
 import io.hasli.hal.api.network.NetworkProfile;
 import io.hasli.hal.api.security.SecurityGroup;
 import io.hasli.hal.api.software.SoftwareProfile;
+import io.hasli.hal.api.storage.StorageProfile;
 import io.hasli.model.core.DistributableEntity;
+import org.eclipse.persistence.oxm.annotations.XmlDiscriminatorValue;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElement;
@@ -25,6 +27,7 @@ import java.util.Set;
 @Entity
 @XmlRootElement
 @Table(name = "NODE_CONFIGURATION")
+@XmlDiscriminatorValue("io.hasli.hal.api.instance.NodeConfiguration")
 public class NodeConfiguration extends DistributableEntity {
 
 
@@ -81,9 +84,20 @@ public class NodeConfiguration extends DistributableEntity {
             cascade = CascadeType.ALL
     )
     @JoinColumn(
+            name = "storage_profile_id"
+    )
+    private StorageProfile storageProfile;
+
+
+    @OneToOne(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
         name = "operating_system_id"
     )
     private OperatingSystem operatingSystem;
+
+
 
     @OneToMany(
             cascade = CascadeType.ALL
@@ -146,6 +160,14 @@ public class NodeConfiguration extends DistributableEntity {
         return softwareProfile;
     }
 
+    public StorageProfile getStorageProfile() {
+        return storageProfile;
+    }
+
+    public void setStorageProfile(StorageProfile storageProfile) {
+        this.storageProfile = storageProfile;
+    }
+
     public void setSoftwareProfile(SoftwareProfile softwareProfile) {
         this.softwareProfile = softwareProfile;
     }
@@ -165,4 +187,5 @@ public class NodeConfiguration extends DistributableEntity {
     public void setSecurityGroups(Set<SecurityGroup> securityGroups) {
         this.securityGroups = securityGroups;
     }
+
 }

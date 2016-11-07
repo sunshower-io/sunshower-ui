@@ -6,6 +6,7 @@ import io.hasli.hal.api.cost.CostProfile;
 import io.hasli.hal.api.memory.MemoryProfile;
 import io.hasli.hal.api.network.NetworkProfile;
 import io.hasli.hal.api.software.SoftwareProfile;
+import io.hasli.hal.api.storage.StorageProfile;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.test.persist.EnableJPA;
 import org.junit.Test;
@@ -39,6 +40,7 @@ public class NodeConfigurationTest {
         nodeConfiguration.setCostProfile(new CostProfile());
         nodeConfiguration.setNetworkProfile(new NetworkProfile());
         nodeConfiguration.setSoftwareProfile(new SoftwareProfile());
+        nodeConfiguration.setStorageProfile(new StorageProfile());
         entityManager.persist(nodeConfiguration);
         entityManager.flush();
     }
