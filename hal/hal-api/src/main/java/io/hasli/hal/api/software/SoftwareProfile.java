@@ -1,4 +1,4 @@
-package io.hasli.hal.api.network;
+package io.hasli.hal.api.software;
 
 import io.hasli.model.core.DistributableEntity;
 
@@ -7,10 +7,11 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Created by haswell on 11/5/16.
+ * Created by haswell on 11/6/16.
  */
 @Entity
 @XmlRootElement
-@Table(name = "NETWORK_PROFILE")
-public class NetworkProfile extends DistributableEntity {
+@Table(name = "software_profile")
+public class SoftwareProfile extends DistributableEntity {
+
 }
