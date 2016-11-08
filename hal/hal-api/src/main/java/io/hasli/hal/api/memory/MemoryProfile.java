@@ -2,6 +2,7 @@ package io.hasli.hal.api.memory;
 
 import io.hasli.hal.api.units.ByteUnit;
 import io.hasli.model.core.DistributableEntity;
+import io.hasli.search.api.Index;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -23,6 +24,11 @@ public class MemoryProfile extends DistributableEntity {
     @Enumerated
     private ByteUnit unit;
 
+
+    @Index
+    public long getBytes() {
+        return this.unit.value(capacity);
+    }
 
     public Long getCapacity() {
         return capacity;

@@ -49,6 +49,7 @@ public class InstanceDescriptor extends DistributableEntity {
     )
     private CostProfile costProfile;
 
+    @Index
     @OneToOne
     @JoinColumn(
             name = "memory_profile_id"
@@ -61,6 +62,7 @@ public class InstanceDescriptor extends DistributableEntity {
     )
     private NetworkProfile networkProfile;
 
+    @Index
     @OneToOne
     @JoinColumn(
         name = "compute_profile_id"

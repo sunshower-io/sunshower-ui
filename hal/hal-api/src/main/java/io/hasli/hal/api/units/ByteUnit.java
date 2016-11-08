@@ -14,6 +14,10 @@ public enum ByteUnit {
     ;
 
 
+    public long value(long value)  {
+        return value * magnitude;
+    }
+
     private final long magnitude;
 
     private ByteUnit(long magnitude) {

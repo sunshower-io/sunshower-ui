@@ -23,6 +23,13 @@ public class HasliFieldScannerTest {
         private String firstName;
     }
 
+    static class Doc2 {
+        @Index
+        public long getValue() {
+            return 1 + 2 + 43;
+        }
+    }
+
 
     private Scanner scanner;
     @Before
@@ -49,6 +56,14 @@ public class HasliFieldScannerTest {
         assertThat(scan.getFields().size(), is(1));
         Field next = (Field) scan.getFields().iterator().next();
         assertThat("Josiah", is(next.getValue()));
+    }
+
+    @Test
+    public void ensureGetterAnnotationProducesExpectedResults() {
+        final Doc2 doc2 = new Doc2();
+        Document scan = scanner.scan(Doc2.class, doc2);
+        Field field = (Field) scan.getFields().iterator().next();
+        assertThat(field.getValue(), is(46l));
     }
 
 }
