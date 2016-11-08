@@ -1,10 +1,11 @@
 template
     .ui.hidden.divider
+        h1.ui.header
+            | My Applications
     .ui.internally.celled.grid
         .row
             .column
-                h1.ui.header
-                    | My Applications
+                .ui.hidden.divider
                 .ui.internally.celled.grid
                     .row
                         .ui.fluid.styled.accordion.no--boxshadow
@@ -13,7 +14,7 @@ template
                                     .clickable.item
                                         .content Version: 1.0.0
                                     .clickable.item
-                                        .content Containers: 3
+                                        .content Applications: 3
                                     .clickable.item
                                         .content # of Instances: 5
                                     .item
@@ -26,34 +27,26 @@ template
                                     .ui.top.attached.tabular.menu
                                         a.tab.item.active(data-tab='summary') Summary
                                         a.tab.item(data-tab='files') Files
-                                        a.tab.item(data-tab='containers') Containers
+                                        a.tab.item(data-tab='applications') Applications
                                         a.tab.item(data-tab='revisions') Revisions
                                         a.tab.item(data-tab='advanced') Advanced
                                     .ui.bottom.attached.tab.segment.active(data-tab='summary')
                                         .ui.basic.segment
                                             .ui.grid
-                                                .three.column.row
+                                                .two.column.row
                                                     .four.wide.column
+                                                        h5.ui.header
+                                                            | Minimum System Requirements
                                                         .ui.list
                                                             .item CPU: 4
                                                             .item Memory: 4gb
                                                             .item OS: Ubuntu 16.04
-                                                            .item IP: 51.42.31.12
-                                                    .four.wide.column
-                                                        .ui.list
-                                                            .item CPU: 4
-                                                            .item Memory: 4gb
-                                                            .item OS: Ubuntu 16.04
-                                                            .item IP: 51.42.31.12
-                                                    .four.wide.column
-                                                        .ui.list
-                                                            .item CPU: 4
-                                                            .item Memory: 4gb
-                                                            .item OS: Ubuntu 16.04
-                                                            .item IP: 51.42.31.12
-                                            .row
-                                                .column
-                                                    img(src='styles/themes/hasli/assets/images/sample-chart2.svg')
+                                                            .item Storage: 10gb
+                                                    .twelve.wide.column
+                                                        h5.ui.header
+                                                            | Running Instances
+                                                        .ui.image
+                                                            img(src='styles/themes/hasli/assets/images/sample-chart2.svg')
                                     .ui.bottom.attached.tab.segment(data-tab='files')
                                         .ui.basic.segment
                                             h4.ui.left.floated.header
@@ -198,7 +191,7 @@ template
                                                             | semantic.json.example
                                                     td Fix admin flag set in example json! #2453
                                                     td.right.aligned 28 days ago
-                                    .ui.bottom.attached.tab.segment(data-tab='containers')
+                                    .ui.bottom.attached.tab.segment(data-tab='applications')
                                         .ui.basic.segment
                                             h4.ui.left.floated.header
                                                 | All Files
@@ -226,22 +219,31 @@ template
                                                     .ui.active.tab(data-tab='general')
                                                         .ui.basic.segment
                                                             .ui.grid
+                                                                .row
+                                                                    .fourteen.wide.column
+                                                                        h5.ui.header
+                                                                            | Name
                                                                 .two.column.row
                                                                     .four.wide.column
+                                                                        .ui.transparent.input
+                                                                            input(type="text" value="nodejs")
+                                                                        .ui.fitted.divider
+                                                                    .two.wide.column
+                                                                        .ui.small.basic.primary.button
+                                                                            | Save
+                                                                .row
+                                                                    .fourteen.wide.column
                                                                         h5.ui.header
-                                                                        | KEY
-                                                                    .ten.wide.column
-                                                                        h5.ui.header
-                                                                        | VALUE
+                                                                            | Environment Variables
                                                                 .three.column.row
                                                                     .four.wide.column
                                                                         .ui.transparent.input
                                                                             input(type="text" value="PATH")
-                                                                        .ui.divider
+                                                                        .ui.fitted.divider
                                                                     .ten.wide.column
                                                                         .ui.transparent.input
                                                                             input(type="text" value="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/nodejs/bin")
-                                                                        .ui.divider
+                                                                        .ui.fitted.divider
                                                                     .one.wide.column
                                                                         img(src='styles/themes/hasli/assets/images/icons/x-circle.svg')
                                                                 .three.column.row
@@ -255,30 +257,80 @@ template
                                                                         .ui.divider
                                                                     .one.wide.column
                                                                         img(src='styles/themes/hasli/assets/images/icons/plus-green-circle.svg')
+                                                                .row
+                                                                    .column
+                                                                        .ui.small.basic.primary.button
+                                                                            | Delete Application
                                                     .ui.tab(data-tab='ports')
                                                         .ui.basic.segment
                                                             .ui.grid
+                                                                .row
+                                                                    .fourteen.wide.column
+                                                                        h5.ui.header
+                                                                            | Port Settings
                                                                 .three.column.row
                                                                     .four.wide.column
-                                                                        .ui.list
-                                                                            .item CPU: 4
-                                                                            .item Memory: 4gb
-                                                                            .item OS: Ubuntu 16.04
-                                                                            .item IP: 51.42.31.12
+                                                                        .ui.transparent.input
+                                                                            input(type="text" value="9000")
+                                                                        .ui.fitted.divider
+                                                                    .ten.wide.column
+                                                                        .ui.transparent.input
+                                                                            input(type="text" value="10.238.0.53:8080")
+                                                                        .ui.fitted.divider
+                                                                    .one.wide.column
+                                                                        img(src='styles/themes/hasli/assets/images/icons/x-circle.svg')
+                                                                .three.column.row
                                                                     .four.wide.column
-                                                                        .ui.list
-                                                                            .item CPU: 4
-                                                                            .item Memory: 4gb
-                                                                            .item OS: Ubuntu 16.04
-                                                                            .item IP: 51.42.31.12
-                                                                    .four.wide.column
-                                                                        .ui.list
-                                                                            .item CPU: 4
-                                                                            .item Memory: 4gb
-                                                                            .item OS: Ubuntu 16.04
-                                                                            .item IP: 51.42.31.12
+                                                                        .ui.transparent.input
+                                                                            input(type="text" placeholder="port")
+                                                                        .ui.divider
+                                                                    .ten.wide.column
+                                                                        .ui.transparent.input
+                                                                            input(type="text" placeholder="ip:port")
+                                                                        .ui.divider
+                                                                    .one.wide.column
+                                                                        img(src='styles/themes/hasli/assets/images/icons/plus-green-circle.svg')
                                                     .ui.tab(data-tab='volumes')
+                                                        .ui.basic.segment
+                                                            .ui.grid
+                                                                .row
+                                                                    .fourteen.wide.column
+                                                                        h5.ui.header
+                                                                            | Volumes
+                                                                .three.column.row
+                                                                    .four.wide.column
+                                                                        .ui.transparent.input
+                                                                            input(type="text" value="/usr/src")
+                                                                        .ui.fitted.divider
+                                                                    .ten.wide.column
+                                                                        .ui.transparent.input
+                                                                            input(type="text" value="/root/")
+                                                                        .ui.fitted.divider
+                                                                    .one.wide.column
+                                                                        img(src='styles/themes/hasli/assets/images/icons/x-circle.svg')
+                                                                .three.column.row
+                                                                    .four.wide.column
+                                                                        .ui.transparent.input
+                                                                            input(type="text" placeholder="local folder")
+                                                                        .ui.divider
+                                                                    .ten.wide.column
+                                                                        .ui.transparent.input
+                                                                            input(type="text" placeholder="docker folder")
+                                                                        .ui.divider
+                                                                    .one.wide.column
+                                                                        img(src='styles/themes/hasli/assets/images/icons/plus-green-circle.svg')
                                                     .ui.tab(data-tab='container-advanced')
+                                                        .ui.form
+                                                            h4.ui.dividing.header General Information
+                                                            .field
+                                                                .ui.checkbox
+                                                                    input.hidden(type='checkbox', tabindex='0')
+                                                                    label Some Advanced Setting 1
+                                                            .field
+                                                                .ui.checkbox
+                                                                    input.hidden(type='checkbox', tabindex='0')
+                                                                    label Some Advanced Setting 1
+                                                            button.ui.basic.primary.button(type='submit') Save
                                         .fluid.styled.accordion
                                             .title
                                                 i.dropdown.icon
@@ -342,7 +394,7 @@ template
                                     .item
                                         .content Version: 1.0.0
                                     .item
-                                        .content Containers: 3
+                                        .content Applications: 3
                                     .item
                                         .content # of Instances: 5
                                     .item
@@ -355,15 +407,15 @@ template
                                     .ui.top.attached.tabular.menu
                                         a.tab.item.active(data-tab='summary') Summary
                                         a.tab.item(data-tab='files') Files
-                                        a.tab.item(data-tab='containers') Containers
+                                        a.tab.item(data-tab='applications') Applications
                                         a.tab.item(data-tab='revisions') Revisions
                                         a.tab.item(data-tab='advanced') Advanced
                                     .ui.bottom.attached.tab.segment.active(data-tab='summary')
                                         | Summary
                                     .ui.bottom.attached.tab.segment(data-tab='files')
                                         | Files
-                                    .ui.bottom.attached.tab.segment(data-tab='containers')
-                                        | Containers
+                                    .ui.bottom.attached.tab.segment(data-tab='applications')
+                                        | Applications
                                     .ui.bottom.attached.tab.segment(data-tab='revisions')
                                         | Revisions
                                     .ui.bottom.attached.tab.segment(data-tab='advanced')
@@ -375,7 +427,7 @@ template
                                     .item
                                         .content Version: 1.0.0
                                     .item
-                                        .content Containers: 3
+                                        .content Applications: 3
                                     .item
                                         .content # of Instances: 5
                                     .item
@@ -388,15 +440,15 @@ template
                                     .ui.top.attached.tabular.menu
                                         a.tab.item.active(data-tab='summary') Summary
                                         a.tab.item(data-tab='files') Files
-                                        a.tab.item(data-tab='containers') Containers
+                                        a.tab.item(data-tab='applications') Applications
                                         a.tab.item(data-tab='revisions') Revisions
                                         a.tab.item(data-tab='advanced') Advanced
                                     .ui.bottom.attached.tab.segment.active(data-tab='summary')
                                         | Summary
                                     .ui.bottom.attached.tab.segment(data-tab='files')
                                         | Files
-                                    .ui.bottom.attached.tab.segment(data-tab='containers')
-                                        | Containers
+                                    .ui.bottom.attached.tab.segment(data-tab='applications')
+                                        | Applications
                                     .ui.bottom.attached.tab.segment(data-tab='revisions')
                                         | Revisions
                                     .ui.bottom.attached.tab.segment(data-tab='advanced')
@@ -408,7 +460,7 @@ template
                                     .item
                                         .content Version: 1.0.0
                                     .item
-                                        .content Containers: 3
+                                        .content Applications: 3
                                     .item
                                         .content # of Instances: 5
                                     .item
@@ -421,15 +473,15 @@ template
                                     .ui.top.attached.tabular.menu
                                         a.tab.item.active(data-tab='summary') Summary
                                         a.tab.item(data-tab='files') Files
-                                        a.tab.item(data-tab='containers') Containers
+                                        a.tab.item(data-tab='applications') Applications
                                         a.tab.item(data-tab='revisions') Revisions
                                         a.tab.item(data-tab='advanced') Advanced
                                     .ui.bottom.attached.tab.segment.active(data-tab='summary')
                                         | Summary
                                     .ui.bottom.attached.tab.segment(data-tab='files')
                                         | Files
-                                    .ui.bottom.attached.tab.segment(data-tab='containers')
-                                        | Containers
+                                    .ui.bottom.attached.tab.segment(data-tab='applications')
+                                        | Applications
                                     .ui.bottom.attached.tab.segment(data-tab='revisions')
                                         | Revisions
                                     .ui.bottom.attached.tab.segment(data-tab='advanced')
@@ -441,7 +493,7 @@ template
                                     .item
                                         .content Version: 1.0.0
                                     .item
-                                        .content Containers: 3
+                                        .content Applications: 3
                                     .item
                                         .content # of Instances: 5
                                     .item
@@ -454,15 +506,15 @@ template
                                     .ui.top.attached.tabular.menu
                                         a.tab.item.active(data-tab='summary') Summary
                                         a.tab.item(data-tab='files') Files
-                                        a.tab.item(data-tab='containers') Containers
+                                        a.tab.item(data-tab='applications') Applications
                                         a.tab.item(data-tab='revisions') Revisions
                                         a.tab.item(data-tab='advanced') Advanced
                                     .ui.bottom.attached.tab.segment.active(data-tab='summary')
                                         | Summary
                                     .ui.bottom.attached.tab.segment(data-tab='files')
                                         | Files
-                                    .ui.bottom.attached.tab.segment(data-tab='containers')
-                                        | Containers
+                                    .ui.bottom.attached.tab.segment(data-tab='applications')
+                                        | Applications
                                     .ui.bottom.attached.tab.segment(data-tab='revisions')
                                         | Revisions
                                     .ui.bottom.attached.tab.segment(data-tab='advanced')
@@ -474,7 +526,7 @@ template
                                     .item
                                         .content Version: 1.0.0
                                     .item
-                                        .content Containers: 3
+                                        .content Applications: 3
                                     .item
                                         .content # of Instances: 5
                                     .item
@@ -487,15 +539,15 @@ template
                                     .ui.top.attached.tabular.menu
                                         a.tab.item.active(data-tab='summary') Summary
                                         a.tab.item(data-tab='files') Files
-                                        a.tab.item(data-tab='containers') Containers
+                                        a.tab.item(data-tab='applications') Applications
                                         a.tab.item(data-tab='revisions') Revisions
                                         a.tab.item(data-tab='advanced') Advanced
                                     .ui.bottom.attached.tab.segment.active(data-tab='summary')
                                         | Summary
                                     .ui.bottom.attached.tab.segment(data-tab='files')
                                         | Files
-                                    .ui.bottom.attached.tab.segment(data-tab='containers')
-                                        | Containers
+                                    .ui.bottom.attached.tab.segment(data-tab='applications')
+                                        | Applications
                                     .ui.bottom.attached.tab.segment(data-tab='revisions')
                                         | Revisions
                                     .ui.bottom.attached.tab.segment(data-tab='advanced')
@@ -507,7 +559,7 @@ template
                                     .item
                                         .content Version: 1.0.0
                                     .item
-                                        .content Containers: 3
+                                        .content Applications: 3
                                     .item
                                         .content # of Instances: 5
                                     .item
@@ -520,15 +572,15 @@ template
                                     .ui.top.attached.tabular.menu
                                         a.tab.item.active(data-tab='summary') Summary
                                         a.tab.item(data-tab='files') Files
-                                        a.tab.item(data-tab='containers') Containers
+                                        a.tab.item(data-tab='applications') Applications
                                         a.tab.item(data-tab='revisions') Revisions
                                         a.tab.item(data-tab='advanced') Advanced
                                     .ui.bottom.attached.tab.segment.active(data-tab='summary')
                                         | Summary
                                     .ui.bottom.attached.tab.segment(data-tab='files')
                                         | Files
-                                    .ui.bottom.attached.tab.segment(data-tab='containers')
-                                        | Containers
+                                    .ui.bottom.attached.tab.segment(data-tab='applications')
+                                        | Applications
                                     .ui.bottom.attached.tab.segment(data-tab='revisions')
                                         | Revisions
                                     .ui.bottom.attached.tab.segment(data-tab='advanced')
@@ -540,7 +592,7 @@ template
                                     .item
                                         .content Version: 1.0.0
                                     .item
-                                        .content Containers: 3
+                                        .content Applications: 3
                                     .item
                                         .content # of Instances: 5
                                     .item
@@ -553,15 +605,15 @@ template
                                     .ui.top.attached.tabular.menu
                                         a.tab.item.active(data-tab='summary') Summary
                                         a.tab.item(data-tab='files') Files
-                                        a.tab.item(data-tab='containers') Containers
+                                        a.tab.item(data-tab='applications') Applications
                                         a.tab.item(data-tab='revisions') Revisions
                                         a.tab.item(data-tab='advanced') Advanced
                                     .ui.bottom.attached.tab.segment.active(data-tab='summary')
                                         | Summary
                                     .ui.bottom.attached.tab.segment(data-tab='files')
                                         | Files
-                                    .ui.bottom.attached.tab.segment(data-tab='containers')
-                                        | Containers
+                                    .ui.bottom.attached.tab.segment(data-tab='applications')
+                                        | Applications
                                     .ui.bottom.attached.tab.segment(data-tab='revisions')
                                         | Revisions
                                     .ui.bottom.attached.tab.segment(data-tab='advanced')

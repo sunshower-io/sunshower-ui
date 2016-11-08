@@ -1,8 +1,11 @@
 template(bindable="router")
     require(from="common/elements/profile-dropdown")
-    .ui.secondary.menu.small
+    .ui.secondary.inverted.menu.small
         .ui.image.small
             img(src="styles/themes/hasli/assets/images/logos/hasli-logo.svg").header.item
+        a.item(repeat.for='row of router.navigation', class="${row.isActive ? 'active' : ''}" href.bind='row.href')
+            | ${row.title}
+        img.right.floated(src="styles/themes/hasli/assets/images/icons/pulse.svg").item
         .right.menu
             .item
                 .ui.search.mini
