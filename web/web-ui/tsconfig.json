@@ -4,7 +4,7 @@
     "rootDir": "src",
     "outDir": "dist",
     "sourceMap": true,
-    "target": "es6",
+    "target": "es5",
     "module": "amd",
     "declaration": false,
     "noEmitOnError": false,
@@ -13,7 +13,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
-    "lib": ["es6", "dom"],
+    "lib": ["es2015", "dom"],
     "baseUrl": "./",
     "paths": {
       "src/*": ["src/*"]
