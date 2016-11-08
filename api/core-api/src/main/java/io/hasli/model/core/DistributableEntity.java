@@ -3,17 +3,11 @@ package io.hasli.model.core;
 import io.hasli.model.core.entity.AbstractEntity;
 import org.eclipse.persistence.oxm.annotations.XmlDiscriminatorNode;
 
-<<<<<<< HEAD
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-=======
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
->>>>>>> provisioning
 import java.util.UUID;
 
 /**

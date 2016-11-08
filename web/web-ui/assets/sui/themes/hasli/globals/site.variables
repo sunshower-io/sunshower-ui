@@ -9,8 +9,8 @@
 @fontName          : 'Open Sans';
 @fontSmoothing     : antialiased;
 
-@headerFont        : @fontName, 'Helvetica Neue', Arial, Helvetica, sans-serif;
-@pageFont          : @fontName, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@headerFont        : @fontName, 'Muli', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@pageFont          : @fontName, 'Muli', 'Helvetica Neue', Arial, Helvetica, sans-serif;
 
 @googleFontName    : @fontName;
 @importGoogleFonts : true;
@@ -25,10 +25,10 @@
 --------------------*/
 
 /* This is the single variable that controls them all */
-@emSize   : 14px;
+@emSize   : 12px;
 
 /* The size of page text  */
-@fontSize : 14px;
+@fontSize : 12px;
 
 
 /*-------------------
@@ -41,16 +41,16 @@
 @relativeBorderRadius: @relative4px;
 @absoluteBorderRadius: @4px;
 
-@defaultBorderRadius: 0;
+@defaultBorderRadius: 0.2307em;
 
 /*-------------------
     Brand Colors
 --------------------*/
 
-@primaryColor        : #4F7E81;
+@primaryColor        : #239AE8;
 @secondaryColor      : @black;
 
-@lightPrimaryColor   : #69989b;
+@lightPrimaryColor   : @lightBlue;
 @lightSecondaryColor : @lightBlack;
 
 /*--------------
@@ -183,7 +183,7 @@
 @mobileBreakpoint            : 320px;
 @tabletBreakpoint            : 768px;
 @computerBreakpoint          : 992px;
-@largeMonitorBreakpoint      : 1400px;
+@largeMonitorBreakpoint      : 1200px;
 @widescreenMonitorBreakpoint : 1920px;
 
 /*-------------------
@@ -195,15 +195,15 @@
 @orange           : #F2711C;
 @yellow           : #FBBD08;
 @olive            : #B5CC18;
-@green            : #21BA45;
+@green            : #00D46A;
 @teal             : #00B5AD;
-@blue             : #2185D0;
+@blue             : #80A6CD;
 @violet           : #6435C9;
 @purple           : #A333C8;
 @pink             : #E03997;
 @brown            : #A5673F;
 @grey             : #767676;
-@black            : #1B1C1D;
+@black            : #333333;
 
 /*---  Light Colors  ---*/
 @lightRed         : #FF695E;
@@ -300,8 +300,9 @@
 @subtleGradient: linear-gradient(transparent, @transparentBlack);
 
 /* Differentiating Layers */
-@subtleShadow: 0;
-
+@subtleShadow:
+  0px 1px 2px 0 @borderColor
+;
 @floatingShadow:
   0px 2px 4px 0px rgba(34, 36, 38, 0.12),
   0px 2px 10px 0px rgba(34, 36, 38, 0.15)
@@ -441,7 +442,7 @@
 @borderColor               : rgba(34, 36, 38, 0.15);
 @strongBorderColor         : rgba(34, 36, 38, 0.22);
 @internalBorderColor       : rgba(34, 36, 38, 0.1);
-@selectedBorderColor       : rgba(34, 36, 38, 0.35);
+@selectedBorderColor       : rgba(0, 212, 106, 100);
 @strongSelectedBorderColor : rgba(34, 36, 38, 0.5);
 @disabledBorderColor       : rgba(34, 36, 38, 0.5);
 

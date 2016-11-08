@@ -1,4 +1,37 @@
 /*******************************
         Global Overrides
 *******************************/
-.ui.menu.primary a {text-transform: uppercase;}
+
+@text-colors: blue, green, orange, pink, purple, red, teal, yellow, black, grey, white;
+.text {
+    .-(@i: length(@text-colors)) when (@i > 0) {
+        @c: extract(@text-colors, @i);
+        &.@{c} { color: @@c }
+        .-((@i - 1));
+    }.-;
+}
+
+.page.header {
+  background-color: #313E47;
+  border-bottom: 1px solid #E5E5E5;
+  padding: 5px 0px;
+}
+
+
+img.transparent {
+  opacity:0;
+}
+
+
+/* used for plus/minus icone toggle */
+.toggle--icon {
+  position: relative;
+  -webkit-transition: opacity .1s ease-in-out;
+  top: 5px;
+  right: 10px;
+}
+
+/* removes accordion box shadow */
+.no--boxshadow {
+  box-shadow: none !important;
+}
