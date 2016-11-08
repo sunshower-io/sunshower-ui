@@ -3,9 +3,17 @@ package io.hasli.model.core;
 import io.hasli.model.core.entity.AbstractEntity;
 import org.eclipse.persistence.oxm.annotations.XmlDiscriminatorNode;
 
+<<<<<<< HEAD
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+=======
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+>>>>>>> provisioning
 import java.util.UUID;
 
 /**
@@ -15,14 +23,15 @@ import java.util.UUID;
  */
 @MappedSuperclass
 @XmlDiscriminatorNode("type")
+@XmlAccessorType(XmlAccessType.NONE)
 public class DistributableEntity extends AbstractEntity<UUID> {
 
     @Id
+    @XmlAttribute
     private UUID id;
 
     public DistributableEntity() {
         super(UUID.randomUUID());
-
     }
 
 

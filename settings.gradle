@@ -16,6 +16,7 @@ include(
         'api:audit-api',
         'api:common-api',
         'api:security-api',
+        'service:service-hal',
         'service:service-vault',
         'service:service-security',
         'integration:integration-api',

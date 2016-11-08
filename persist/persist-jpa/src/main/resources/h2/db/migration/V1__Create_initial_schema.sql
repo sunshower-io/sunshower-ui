@@ -127,10 +127,13 @@ create table COST_PROFILE (
 
 create table MEMORY_PROFILE (
     id        binary(16) primary key,
+    capacity  integer,
+    unit      tinyint
 );
 
 create table NETWORK_PROFILE (
     id        binary(16) primary key,
+
 );
 
 
@@ -145,6 +148,11 @@ create table SOFTWARE_PROFILE (
     cores   int
 );
 
+create table STORAGE_PROFILE (
+    id        binary(16) primary key,
+    unit      tinyint,
+    capacity  integer,
+);
 
 create table INSTANCE_DESCRIPTOR (
   id                  binary(16) primary key,
@@ -192,6 +200,7 @@ create table  NODE_CONFIGURATION (
   compute_profile_id  binary(16),
   software_profile_id binary(16),
   operating_system_id binary(16),
+  storage_profile_id  binary(16),
 
 
   foreign key (provider_id)           references CLOUD_PROVIDER(id),
@@ -205,6 +214,8 @@ create table  NODE_CONFIGURATION (
   foreign key (network_profile_id)    references NETWORK_PROFILE(id),
 
   foreign key (compute_profile_id)    references COMPUTE_PROFILE(id),
+
+  foreign key (storage_profile_id)    references STORAGE_PROFILE(id),
 
   foreign key (software_profile_id)   references SOFTWARE_PROFILE(id),
 

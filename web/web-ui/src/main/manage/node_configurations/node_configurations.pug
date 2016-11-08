@@ -1,0 +1,268 @@
+template
+    h2 Node Configuration
+    .ui.hidden.divider
+    .ui.segment
+        h3 My Configurations
+        .ui.relaxed.divided.list
+            //TODO bind this based on configs
+            .item
+                .content
+                    //TODO hide if they wanted a new one
+                    button.button.ui.primary.fluid(style="display:none;") Add a new configuration
+                    //TODO show if they wanted a new one
+                    div
+                        //TODO extract out steps so we're not repeating ourselves below
+                        .ui.four.top.attached.steps
+                            .step
+                                i.disk.outline.icon
+                                .content
+                                    .title Hardware
+                                    .description Specify CPUs, Memory, and Storage
+                            .step
+                                i.linux.icon
+                                .content
+                                    .title Operating System
+                                    .description Choose Operating System
+                            .step
+                                i.code.icon
+                                .content
+                                    .title Software
+                                    .description Choose applications to include
+                            .active.step
+                                i.icon.lock
+                                .content
+                                    .title Security
+                                    .description Set credentials and security groups
+                        .ui.attached.segment
+                            .ui.hidden.divider
+                            //TODO show if hardware
+                            form.ui.form(style="display:none")
+                                .field
+                                    label CPUs
+                                    input(type='number', placeholder='Number of CPUs')
+                                .field
+                                    label Memory
+                                    .fields
+                                        .eight.wide.field
+                                            input(type='number', placeholder='Number')
+                                        .eight.wide.field
+                                            select
+                                                option B
+                                                option KB
+                                                option MB
+                                                option(selected='selected') GB
+                                                option TB
+                                                option EiB
+                                .field
+                                    label Storage
+                                    .fields
+                                        .eight.wide.field
+                                            input(type='number', placeholder='Number')
+                                        .eight.wide.field
+                                            select
+                                                option B
+                                                option KB
+                                                option MB
+                                                option(selected='selected') GB
+                                                option TB
+                                                option EiB
+                                .field
+                                    //TODO bind something to this button
+                                    button.ui.button
+                                        | Select Hardware
+                                        i.icon.chevron.right.primary
+                            //TODO show if os
+                            form.ui.form(style="display:none;")
+                                .ui.relaxed.divided.list
+                                    .item(repeat.for="os of operatingSystems")
+                                        //TODO bind something to this button
+                                        button.ui.right.floated.button.primary
+                                            | Select OS
+                                            i.icon.chevron.right
+                                        i.large.middle.aligned.icon(class="${os.icon}")
+                                        .content
+                                            .header ${os.name}
+                                            .description ${os.description}
+                            //TODO show if software
+                            form.ui.form(style="display:none;")
+                                .ui.two.column.relaxed.grid(style='position:relative')
+                                    .ui.vertical.divider
+                                        | or
+                                    .column
+                                        .ui.icon.input.visible.fluid
+                                            i.search.icon
+                                            input(type='text', placeholder='Search for an application')
+                                    .column
+                                        button.ui.button.fluid.primary
+                                            | Finish Selecting Software
+                                            i.icon.chevron.right
+                                h4 Selected Applications
+                                .ui.relaxed.divided.list
+                                    .item
+                                        button.ui.right.floated.button.secondary
+                                            | Remove ${''}
+                                            i.icon.remove
+                                        .content
+                                            .header Application Name
+                                            .description A Description, if relevant
+                                    .item
+                                        button.ui.right.floated.button.secondary
+                                            | Remove ${''}
+                                            i.icon.remove
+                                        .content
+                                            .header Application Name
+                                            .description A Description, if relevant
+                            //TODO show if security
+                            form.ui.form
+                                h4 Credentials
+                                .ui.two.column.relaxed.grid(style='position:relative')
+                                    .ui.vertical.divider
+                                        | or
+                                    .column
+                                        .ui.icon.input.visible.fluid
+                                            i.search.icon
+                                            input(type='text', placeholder='Search for a credential')
+                                    .column
+                                        button.ui.button.fluid.primary(click.delegate="addCredential()")
+                                            | Add a new one
+                                .ui.segment(show.bind="newCredential")
+                                    form.ui.form
+                                        .field
+                                            label Credential Name
+                                            input(
+                                            type='text',
+                                            name='credential-name',
+                                            placeholder='Credential Name',
+                                            value.bind="secret.name"
+                                            )
+                                        .field
+                                            label Key Id
+                                            input(
+                                            type='text',
+                                            name='key-id',
+                                            placeholder='key-id',
+                                            value.bind="secret.credential"
+                                            )
+                                        .field
+                                            label Key
+                                            input(
+                                            type='text',
+                                            name='key', placeholder='key',
+                                            value.bind="secret.secret"
+                                            )
+                                        button.ui.button.primary(type='submit', click.delegate="saveCredential()") Save Credential
+                                .ui.relaxed.divided.list
+                                    //TODO list out all
+                                    .item
+                                        button.ui.right.floated.button.secondary
+                                            | Remove ${''}
+                                            i.icon.remove
+                                        .content
+                                            .header Credential Name
+                                            .description Whatever else is relevant
+                                .ui.hidden.divider
+                                h4 Security Groups
+                                .ui.two.column.relaxed.grid(style='position:relative')
+                                    .ui.vertical.divider
+                                        | or
+                                    .column
+                                        .ui.icon.input.visible.fluid
+                                            i.search.icon
+                                            input(type='text', placeholder='Search for a security group')
+                                    .column
+                                        button.ui.button.fluid.primary
+                                            | Add a new one
+                                .ui.segment()
+                                    //TODO bind
+                                    form.ui.form
+                                        .field
+                                            label Security Group Name
+                                            input(type='text', placeholder='Security Group Name')
+                                        .field
+                                            label Description
+                                                input(type='text', placeholder='Description')
+                                        table.ui.celled.table
+                                            thead
+                                                tr
+                                                    th Direction
+                                                    th Type
+                                                    th Protocol
+                                                    th Port Range
+                                                    th Source
+                                                    th
+                                            tbody
+                                                //TODO rule form; need to be able to add many
+                                                tr
+                                                    td
+                                                        select
+                                                            option Inbound
+                                                            option Outbound
+                                                    td
+                                                        select
+                                                            option Custom TCP
+                                                    td
+                                                        input(value='TCP', disabled='true')
+                                                    td
+                                                        input(value='0')
+                                                    td
+                                                        .fields
+                                                            .eight.wide.field
+                                                                select
+                                                            .eight.wide.field
+                                                                input
+                                                    td
+                                                        button.ui.button.secondary
+                                                            i.icon.remove
+                                                tr
+                                                    td(colspan=6)
+                                                        button.ui.button.primary Add Rule
+
+                                        button.ui.button.primary Save Security Group
+                                .ui.relaxed.divided.list
+                                    .item
+                                        button.ui.right.floated.button.secondary
+                                            | Remove ${''}
+                                            i.icon.remove
+                                        .content
+                                            .header Security Group Name
+                                            .description Whatever else is relevant
+                                .ui.hidden.divider
+                                button.ui.button.primary.fluid
+                                    | Save Configuration
+                            .ui.hidden.divider
+                        .ui.four.bottom.attached.steps
+                            .step
+                                i.disk.outline.icon
+                                .content
+                                    .title Hardware
+                                    .description Specify CPUs, Memory, and Storage
+                            .step
+                                i.linux.icon
+                                .content
+                                    .title Operating System
+                                    .description Choose Operating System
+                            .step
+                                i.code.icon
+                                .content
+                                    .title Software
+                                    .description Choose applications to include
+                            .active.step
+                                i.icon.lock
+                                .content
+                                    .title Security
+                                    .description Set credentials and security groups
+            .item
+                button.ui.right.floated.button.primary
+                    | Deploy
+                //TODO only show if it has instances
+                button.ui.right.floated.button.primary
+                    | View Instances
+                .content
+                    .header What should we title a configuration?
+                    .content All the specifications of the configuration
+    .ui.hidden.divider
+    .ui.segment
+        h3 Amazon Configurations
+        .ui.icon.input.visible.fluid
+            i.search.icon
+            input(type='text', placeholder='Search AMIs')

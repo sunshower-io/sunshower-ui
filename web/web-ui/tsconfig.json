@@ -4,7 +4,7 @@
     "rootDir": "src",
     "outDir": "dist",
     "sourceMap": true,
-    "target": "es5",
+    "target": "es6",
     "module": "amd",
     "declaration": false,
     "noEmitOnError": false,
@@ -13,7 +13,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
-    "lib": ["es2015", "dom"],
+    "lib": ["es6", "dom"],
     "baseUrl": "./",
     "paths": {
       "src/*": ["src/*"]
@@ -23,7 +23,7 @@
     "!./typings/globals/angular-protractor/**",
     "./src/**/*.ts",
     "./test/**/*.ts",
-    "!./node-modules/**",
+    "!./node_modules/**/*.d.ts",
     "./typings/index.d.ts",
     "./tsd/**/*.d.ts",
     "./custom_typings/**/*.d.ts",

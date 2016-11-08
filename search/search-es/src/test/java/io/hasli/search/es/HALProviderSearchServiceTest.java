@@ -7,7 +7,10 @@ import com.amazonaws.services.ec2.AmazonEC2Client;
 import com.amazonaws.services.ec2.model.DescribeImagesRequest;
 import com.amazonaws.services.ec2.model.DescribeImagesResult;
 import com.amazonaws.services.ec2.model.Image;
+<<<<<<< HEAD
 import org.junit.Ignore;
+=======
+>>>>>>> provisioning
 import org.junit.Test;
 
 import java.util.List;
