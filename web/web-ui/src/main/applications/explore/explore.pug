@@ -7,12 +7,15 @@ template
         h1.ui.header
             | Explore Official Applications
     .ui.hidden.divider
-    .ui.grid
-        .row
+    .ui.container.grid
+        .two.column.row
             .column
                 .ui.icon.green.input
                     input(type='text', placeholder='Search...')
                     i.search.icon
+            .right.aligned.column
+                .ui.basic.primary.button
+                    | + CREATE
         .three.column.row
             .column
                 .ui.cards

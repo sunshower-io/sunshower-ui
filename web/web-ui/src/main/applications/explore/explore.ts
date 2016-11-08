@@ -4,4 +4,7 @@
 
 export class Explore {
 
+    attached() {
+        // on add click, change button to red remove
+    }
 }
