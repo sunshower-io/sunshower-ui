@@ -6,7 +6,7 @@ template
         | Application Instances
     .ui.hidden.divider
     .ui.container
-        .ui.secondary.menu
+        .ui.text.menu
             .item
                 .ui.icon.green.input
                     input(type='text', placeholder='Search...')
@@ -22,9 +22,9 @@ template
             .item
                 .ui.action.input
                     input(type='text', placeholder='Navigate to...')
-                    .ui.primary.button Go
+                    .ui.basic.primary.button Go
             .right.floated.item
-                .ui.primary.mini.button(type='button', click.trigger='create()')
+                .ui.primary.basic.mini.button(type='button', click.trigger='create()')
                     | + CREATE
         .ui.divided.items
             .item
