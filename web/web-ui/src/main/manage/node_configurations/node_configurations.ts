@@ -13,15 +13,35 @@ export class NodeConfigurations {
     private newCredential = false;
 
     @bindable
+    private newSecurityGroup = false;
+
+    @bindable
+    private newNodeConfiguration = false;
+
+    @bindable
+    private activeStep = 1;
+
+    @bindable
     private secret:CredentialSecret;
 
     @bindable
     private operatingSystems: Array <OperatingSystem>;
 
+    @bindable
+    private steps: Array <Object>;
+
     constructor (private client:HttpClient, private user:User) {
         this.operatingSystems = [];
         this.operatingSystems.push(new OperatingSystem("Windows", "windows", 'this is a description of the Windows OS'));
         this.operatingSystems.push(new OperatingSystem("Linux", "linux", 'this is a description of the Linux OS'));
+
+
+        this.steps = [];
+        this.steps.push({step: 1, icon: 'disk outline', title: 'Hardware', description: 'Specify CPUs, Memory and Disk Space'});
+        this.steps.push({step: 2, icon: 'linux', title: 'Operating System', description: 'Choose Operating System'});
+        this.steps.push({step: 3, icon: 'code', title: 'Software', description: 'Choose applications to include'});
+        this.steps.push({step: 4, icon: 'lock', title: 'Security', description: 'Set credentials and security groups'});
+
     }
 
     attached() {
@@ -37,6 +57,34 @@ export class NodeConfigurations {
                 this.newCredential = false;
             });
 
+    }
+
+    addNodeConfiguration() {
+        this.newNodeConfiguration = true;
+    }
+
+    changeNodeConfigurationStep(newStepNumber) {
+        this.activeStep = newStepNumber;
+    }
+
+    saveNodeConfiguration() {
+        this.newNodeConfiguration = false;
+        this.activeStep = 1;
+    }
+
+    cancelNodeConfiguration() {
+        this.newNodeConfiguration = false;
+        this.newCredential = false;
+        this.newSecurityGroup = false;
+        this.activeStep = 1;
+    }
+
+    addSecurityGroup() {
+        this.newSecurityGroup = true;
+    }
+
+    saveSecurityGroup() {
+        this.newSecurityGroup = false;
     }
 
     addCredential() {
