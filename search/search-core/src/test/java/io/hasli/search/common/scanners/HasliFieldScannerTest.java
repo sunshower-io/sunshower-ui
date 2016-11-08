@@ -36,7 +36,7 @@ public class HasliFieldScannerTest {
         doc1.firstName = "Josiah";
         Document scan = scanner.scan(Doc1.class, doc1);
         assertThat(scan.getFields().size(), is(1));
-        Field next = scan.getFields().iterator().next();
+        Field next = (Field) scan.getFields().iterator().next();
         assertEquals(next.getType(), String.class);
 
     }
@@ -47,7 +47,7 @@ public class HasliFieldScannerTest {
         doc1.firstName = "Josiah";
         Document scan = scanner.scan(Doc1.class, doc1);
         assertThat(scan.getFields().size(), is(1));
-        Field next = scan.getFields().iterator().next();
+        Field next = (Field) scan.getFields().iterator().next();
         assertThat("Josiah", is(next.getValue()));
     }
 
