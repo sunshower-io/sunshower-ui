@@ -6,18 +6,15 @@ import io.hasli.hal.api.instance.InstanceDescriptor;
 import io.hasli.search.api.Document;
 import io.hasli.search.api.Scanner;
 import io.hasli.search.common.scanners.HasliFieldScanner;
-import io.hasli.search.es.luc.LifecycleAwareDirectoryReader;
+import io.hasli.search.es.luc.DefaultQueryExtractor;
 import io.hasli.search.es.luc.LuceneFieldMappings;
 import io.hasli.search.service.IndexingService;
 import io.hasli.search.service.SearchService;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.index.DirectoryReader;
-import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
-import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.Query;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.RAMDirectory;
 import org.junit.Test;
@@ -28,11 +25,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
 import java.io.IOException;
-import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 /**
  * Created by haswell on 11/5/16.
@@ -87,20 +83,8 @@ public class HALProviderSearchServiceTest {
     }
 
     @Bean
-    public SearchService searchService() {
-        return new HALProviderSearchService();
-    }
-
-    @Bean(
-            destroyMethod = "close"
-    )
-    public DirectoryReader reader(Directory directory) throws IOException {
-        return DirectoryReader.open(directory);
-    }
-
-    @Bean
-    public IndexSearcher indexSearcher(DirectoryReader directoryReader) {
-        return new IndexSearcher(directoryReader);
+    public SearchService searchService(Directory directory) throws IOException {
+        return new HALProviderSearchService(directory);
     }
 
 
@@ -112,6 +96,7 @@ public class HALProviderSearchServiceTest {
 
 
     @Test
+    @SuppressWarnings("unchecked")
     public void ensureListingAndIndexingAMIsWorks() {
         InstanceDescriptor descriptor =
                 new InstanceDescriptor();
@@ -120,11 +105,9 @@ public class HALProviderSearchServiceTest {
 
         indexingService.index(descriptor);
 
-        Set<Document> documents = searchService.search(descriptor);
-
-//        assertThat(documents.size(), is(1));
-
-
+        Set<Document> documents = searchService.search(
+                descriptor, new DefaultQueryExtractor());
+        assertThat(documents.size(), is(1));
     }
 
 

@@ -42,16 +42,21 @@ public class HALProviderIndexService implements IndexingService {
             final org.apache.lucene.document.Document indexedDocument =
                     new org.apache.lucene.document.Document();
             final Document document = scanner.scan(object);
-            for (Field field : document.getFields()) {
-                final FieldMapper<org.apache.lucene.document.Field> mapper =
-                        this.fieldMappings.resolve(field.getType());
-                final org.apache.lucene.document.Field mappedField = mapper.map(field);
-                indexedDocument.add(mappedField);
+            for (Object o : document.getFields()) {
+                index(indexedDocument, (Field) o);
             }
             indexWriter.addDocument(indexedDocument);
         } catch(Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    private void index(org.apache.lucene.document.Document indexedDocument, Field o) {
+        final Field field = o;
+        final FieldMapper<org.apache.lucene.document.Field> mapper =
+                this.fieldMappings.resolve(field.getType());
+        final org.apache.lucene.document.Field mappedField = mapper.map(field);
+        indexedDocument.add(mappedField);
     }
 
     @Override
@@ -65,11 +70,8 @@ public class HALProviderIndexService implements IndexingService {
                 final org.apache.lucene.document.Document indexedDocument =
                         new org.apache.lucene.document.Document();
                 final Document document = scanner.scan(object);
-                for (Field field : document.getFields()) {
-                    final FieldMapper<org.apache.lucene.document.Field> mapper =
-                            this.fieldMappings.resolve(field.getType());
-                    final org.apache.lucene.document.Field mappedField = mapper.map(field);
-                    indexedDocument.add(mappedField);
+                for (Object o : document.getFields()) {
+                    index(indexedDocument, (Field) o);
                 }
                 indexWriter.addDocument(indexedDocument);
             }

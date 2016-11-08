@@ -7,13 +7,15 @@ import io.hasli.hal.api.network.NetworkProfile;
 import io.hasli.hal.api.providers.Provider;
 import io.hasli.model.core.DistributableEntity;
 import io.hasli.model.core.Metadata;
-import io.hasli.model.core.entity.AbstractEntity;
-import io.hasli.model.core.entity.Persistable;
+import io.hasli.search.api.Index;
 
-import javax.inject.Named;
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Basic;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.UUID;
 
 
 /**
@@ -24,7 +26,9 @@ import java.util.UUID;
 @Table(name = "INSTANCE_DESCRIPTOR")
 public class InstanceDescriptor extends DistributableEntity {
 
+
     @Basic
+    @Index
     private String name;
 
     @Basic

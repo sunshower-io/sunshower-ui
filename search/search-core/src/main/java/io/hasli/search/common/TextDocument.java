@@ -3,6 +3,7 @@ package io.hasli.search.common;
 import io.hasli.search.api.Document;
 import io.hasli.search.api.Field;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,6 +20,11 @@ public class TextDocument implements Document {
 
     public void addField(Field field) {
         this.fields.add(field);
+    }
+
+    @Override
+    public Serializable getId() {
+        return null;
     }
 
     @Override

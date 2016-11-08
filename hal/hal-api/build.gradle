@@ -5,6 +5,7 @@ dependencies {
     compile project(":api:common-api")
 
     compile project(":persist:persist-hibernate")
+    compile project(":search:search-api")
 
     testCompile 'io.hasli.barometer.modules:jaxrs'
 
