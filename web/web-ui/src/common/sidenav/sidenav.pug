@@ -1,10 +1,11 @@
 template
-    .ui.three.fluid.column
-        .ui.secondary.vertical.pointing.menu(style="height:400px; padding-top:25px")
-            a.item hello
-                i.gamepad.icon
-            a.item world
-                i.video.camera.icon
-            a.item cool
-                i.video.play.icon
-
+    .sidenav(style="height:100%")
+        .ui.secondary.vertical.pointing.menu.sidenav(style="height:100%")
+            a.item.sidenav-collapse(ref="collapse")
+                i.angle.double.left.icon.disabled.large
+            a.item
+                | Home
+            a.item
+                | Messages
+            a.item.active
+                | Friends
