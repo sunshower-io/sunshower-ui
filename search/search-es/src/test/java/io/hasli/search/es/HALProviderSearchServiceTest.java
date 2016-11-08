@@ -2,15 +2,24 @@ package io.hasli.search.es;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.ec2.AmazonEC2AsyncClient;
-import com.amazonaws.services.ec2.AmazonEC2Client;
-import com.amazonaws.services.ec2.model.DescribeImagesRequest;
-import com.amazonaws.services.ec2.model.DescribeImagesResult;
-import com.amazonaws.services.ec2.model.Image;
-import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.node.Node;
-import org.elasticsearch.node.NodeValidationException;
-import org.junit.Ignore;
+import io.hasli.hal.api.instance.InstanceDescriptor;
+import io.hasli.search.api.Document;
+import io.hasli.search.api.Scanner;
+import io.hasli.search.common.scanners.HasliFieldScanner;
+import io.hasli.search.es.luc.LifecycleAwareDirectoryReader;
+import io.hasli.search.es.luc.LuceneFieldMappings;
+import io.hasli.search.service.IndexingService;
+import io.hasli.search.service.SearchService;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.search.BooleanQuery;
+import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.Query;
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.RAMDirectory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.annotation.Bean;
@@ -18,47 +27,110 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
+import java.io.IOException;
 import java.util.List;
+import java.util.Set;
+
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+
 /**
  * Created by haswell on 11/5/16.
  */
-@ContextConfiguration(classes = HALProviderSearchServiceTest.class)
+@ContextConfiguration(
+        classes =
+                HALProviderSearchServiceTest.class
+)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class HALProviderSearchServiceTest {
 
+
     @Bean
-    public Node elasticSearchNode() throws NodeValidationException {
-
-        final Settings settings = Settings.builder()
-                .put("path.home", "/tmp/hasli-es")
-                .build();
-        Node node = new Node(settings);
-        return node.start();
-//        final Settings.Builder settingsBuilder = Settings.builder();
-//
-////        settingsBuilder.put("node.name", ElasticSearchConfig.NODE_NAME);
-////        settingsBuilder.put("path.data", ElasticSearchConfig.DATA_PATH);
-////        settingsBuilder.put("http.enabled", false);
-////
-////        Settings settings = settingsBuilder.build();
-////
-////        node = NodeBuilder.nodeBuilder()
-////                .settings(settings)
-////                .clusterName(ElasticSearchConfig.CLUSTER_NAME)
-////                .data(true).local(true).node();
-////        return node;
-
+    public Analyzer analyzer() {
+        return new StandardAnalyzer();
     }
 
+    @Bean
+    public Directory directory() {
+        return new RAMDirectory();
+    }
+
+
+    @Bean
+    public IndexWriterConfig indexWriter(
+            Analyzer analyzer,
+            Directory directory
+    ) throws IOException {
+        IndexWriterConfig configuration =
+                new IndexWriterConfig(analyzer);
+        return configuration;
+    }
+
+
+    @Bean
+    public Scanner scanner() {
+        return new HasliFieldScanner();
+    }
+
+    @Bean
+    public IndexingService indexingService(
+            Directory directory,
+            Scanner scanner,
+            IndexWriterConfig configuration
+    ) {
+        return new HALProviderIndexService(
+            scanner,
+            directory,
+            configuration,
+            new LuceneFieldMappings()
+        );
+    }
+
+    @Bean
+    public SearchService searchService() {
+        return new HALProviderSearchService();
+    }
+
+    @Bean(
+            destroyMethod = "close"
+    )
+    public DirectoryReader reader(Directory directory) throws IOException {
+        return DirectoryReader.open(directory);
+    }
+
+    @Bean
+    public IndexSearcher indexSearcher(DirectoryReader directoryReader) {
+        return new IndexSearcher(directoryReader);
+    }
+
+
     @Inject
-    private Node node;
+    private SearchService searchService;
+
+    @Inject
+    private IndexingService indexingService;
 
 
     @Test
     public void ensureListingAndIndexingAMIsWorks() {
+        InstanceDescriptor descriptor =
+                new InstanceDescriptor();
+
+        descriptor.setName("test");
+
+        indexingService.index(descriptor);
+
+        Set<Document> documents = searchService.search(descriptor);
+
+//        assertThat(documents.size(), is(1));
 
 
     }
+
+
+
+
+
 
 
     private AWSCredentials getCredentials() {
