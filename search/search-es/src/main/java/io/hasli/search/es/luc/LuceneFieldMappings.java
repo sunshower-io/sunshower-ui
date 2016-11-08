@@ -3,6 +3,7 @@ package io.hasli.search.es.luc;
 import io.hasli.search.api.FieldMapper;
 import io.hasli.search.api.FieldMappings;
 import org.apache.lucene.document.Field;
+import org.apache.lucene.document.LongPoint;
 import org.apache.lucene.document.TextField;
 
 import java.util.HashMap;
@@ -17,6 +18,9 @@ public class LuceneFieldMappings implements FieldMappings<Field> {
 
     static {
         register(String.class, new TextFieldMapper());
+        final LongFieldMapper longFieldMapper = new LongFieldMapper();
+        register(Long.class, longFieldMapper);
+        register(long.class, longFieldMapper);
     }
 
     @Override
@@ -41,6 +45,14 @@ public class LuceneFieldMappings implements FieldMappings<Field> {
                     (String) field.getValue(),
                     Field.Store.YES
             );
+        }
+    }
+
+    static class LongFieldMapper implements FieldMapper<Field> {
+
+        @Override
+        public Field map(io.hasli.search.api.Field field) {
+            return new LongPoint(field.getName(), (long) field.getValue());
         }
     }
 }

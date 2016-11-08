@@ -3,6 +3,8 @@ package io.hasli.search.es;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import io.hasli.hal.api.instance.InstanceDescriptor;
+import io.hasli.hal.api.memory.MemoryProfile;
+import io.hasli.hal.api.units.ByteUnit;
 import io.hasli.search.api.Document;
 import io.hasli.search.api.Scanner;
 import io.hasli.search.common.scanners.HasliFieldScanner;
@@ -102,6 +104,11 @@ public class HALProviderSearchServiceTest {
                 new InstanceDescriptor();
 
         descriptor.setName("test");
+
+        final MemoryProfile memoryProfile = new MemoryProfile();
+        memoryProfile.setCapacity(100l);
+        memoryProfile.setUnit(ByteUnit.Gigabyte);
+        descriptor.setMemoryProfile(memoryProfile);
 
         indexingService.index(descriptor);
 

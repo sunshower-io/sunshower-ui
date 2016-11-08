@@ -5,6 +5,7 @@ import io.hasli.hal.api.cost.CostProfile;
 import io.hasli.hal.api.memory.MemoryProfile;
 import io.hasli.hal.api.network.NetworkProfile;
 import io.hasli.hal.api.providers.Provider;
+import io.hasli.hal.api.storage.StorageProfile;
 import io.hasli.model.core.DistributableEntity;
 import io.hasli.model.core.Metadata;
 import io.hasli.search.api.Index;
@@ -28,7 +29,6 @@ public class InstanceDescriptor extends DistributableEntity {
 
 
     @Basic
-    @Index
     private String name;
 
     @Basic
@@ -48,6 +48,11 @@ public class InstanceDescriptor extends DistributableEntity {
             name = "cost_profile_id"
     )
     private CostProfile costProfile;
+
+    @Index
+    @OneToOne
+    @JoinColumn(name = "storage_profile_id")
+    private StorageProfile storageProfile;
 
     @Index
     @OneToOne
@@ -140,5 +145,13 @@ public class InstanceDescriptor extends DistributableEntity {
 
     public void setComputeProfile(ComputeProfile computeProfile) {
         this.computeProfile = computeProfile;
+    }
+
+    public StorageProfile getStorageProfile() {
+        return storageProfile;
+    }
+
+    public void setStorageProfile(StorageProfile storageProfile) {
+        this.storageProfile = storageProfile;
     }
 }

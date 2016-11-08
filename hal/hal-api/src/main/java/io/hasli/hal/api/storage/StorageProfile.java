@@ -2,8 +2,13 @@ package io.hasli.hal.api.storage;
 
 import io.hasli.hal.api.units.ByteUnit;
 import io.hasli.model.core.DistributableEntity;
+import io.hasli.search.api.Index;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -21,6 +26,11 @@ public class StorageProfile extends DistributableEntity {
     @Enumerated(EnumType.ORDINAL)
     private ByteUnit unit;
 
+
+    @Index
+    public long getBytes() {
+        return unit.value(capacity);
+    }
 
     public Long getCapacity() {
         return capacity;
