@@ -7,6 +7,7 @@ import com.amazonaws.services.ec2.AmazonEC2Client;
 import com.amazonaws.services.ec2.model.DescribeImagesRequest;
 import com.amazonaws.services.ec2.model.DescribeImagesResult;
 import com.amazonaws.services.ec2.model.Image;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import static org.junit.Assert.*;
 /**
  * Created by haswell on 11/5/16.
  */
+@Ignore
 public class HALProviderSearchServiceTest {
 
 
