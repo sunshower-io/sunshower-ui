@@ -4,7 +4,7 @@ import {User} from '../../../model/core/security/user';
 import {CredentialSecret, Secrets} from "../../../model/core/secret/credentials";
 import {bindable, inject} from 'aurelia-framework'
 
-@inject(User)
+@inject(HttpClient, User)
 export class NodeConfigurations {
 
     private credentials = [];

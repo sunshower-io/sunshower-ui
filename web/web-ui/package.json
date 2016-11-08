@@ -30,6 +30,7 @@
     "aurelia-tools": "^0.2.4",
     "better-console": "^0.2.4",
     "browser-sync": "^2.13.0",
+    "concat": "0.0.1-security",
     "conventional-changelog": "1.1.0",
     "del": "^2.2.1",
     "es6-module-loader": "^0.17.11",
