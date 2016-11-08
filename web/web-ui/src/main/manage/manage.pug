@@ -1,7 +1,9 @@
 template
-    sidenav(router="router")
-    .ui.container(style="width:400px; height:500px")
-        router-view
+    .ui.grid
+        .ui.three.wide.column
+            sidenav(router="router")
+        .ui.thirteen.wide.column
+            router-view
     //.ui.container
     //    .ui.grid.padded
     //        .ui.column.two.wide.menu.vertical.labeled.icon

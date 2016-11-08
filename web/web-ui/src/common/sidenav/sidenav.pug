@@ -1,6 +1,7 @@
 template
     .sidenav
         .ui.secondary.vertical.pointing.menu.sidenav-container(ref="menu")
+            .item ${router.title}
             a.item.sidenav-collapse(ref="collapse", click.delegate="toggle()")
                 i.angle.double.left.icon.disabled.large(ref="icon")
             a.item(
