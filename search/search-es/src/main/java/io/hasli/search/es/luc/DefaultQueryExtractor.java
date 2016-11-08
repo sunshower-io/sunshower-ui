@@ -4,11 +4,13 @@ import io.hasli.hal.api.compute.ComputeProfile;
 import io.hasli.hal.api.instance.InstanceDescriptor;
 import io.hasli.hal.api.memory.MemoryProfile;
 import io.hasli.hal.api.storage.StorageProfile;
+import io.hasli.hal.api.units.ByteUnit;
 import io.hasli.search.api.QueryExtractor;
 import org.apache.lucene.document.IntPoint;
 import org.apache.lucene.document.LongPoint;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.*;
+import org.eclipse.persistence.internal.libraries.asm.ByteVector;
 
 /**
  * Created by haswell on 11/8/16.
@@ -45,7 +47,9 @@ public class DefaultQueryExtractor implements QueryExtractor<Query, InstanceDesc
 
             Query query = LongPoint.newRangeQuery(
                     "MemoryProfile#getBytes",
-                    bytes - 1000, bytes + 1000);
+                    bytes - ByteUnit.Megabyte.value(10000),
+                    bytes + ByteUnit.Megabyte.value(10000)
+            );
             builder.add(query, BooleanClause.Occur.SHOULD);
         }
     }

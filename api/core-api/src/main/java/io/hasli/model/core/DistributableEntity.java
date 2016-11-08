@@ -22,6 +22,7 @@ public class DistributableEntity extends AbstractEntity<UUID> {
 
     @Id
     @XmlAttribute
+    @io.hasli.search.api.Index
     private UUID id;
 
     public DistributableEntity() {

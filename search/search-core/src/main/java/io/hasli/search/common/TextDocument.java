@@ -6,15 +6,22 @@ import io.hasli.search.api.Field;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Created by haswell on 11/8/16.
  */
 public class TextDocument implements Document {
 
+    private final UUID id;
     private final Set<Field> fields;
 
     public TextDocument() {
+        this(null);
+    }
+
+    public TextDocument(UUID id) {
+        this.id = id;
         fields = new HashSet<>();
     }
 
@@ -24,7 +31,7 @@ public class TextDocument implements Document {
 
     @Override
     public Serializable getId() {
-        return null;
+        return id;
     }
 
     @Override

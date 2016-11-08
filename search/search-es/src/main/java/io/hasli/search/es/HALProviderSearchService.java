@@ -32,7 +32,7 @@ public class HALProviderSearchService implements SearchService<Query> {
 
         try(final DirectoryReader reader = DirectoryReader.open(directory)) {
             final IndexSearcher searcher = new IndexSearcher(reader);
-            return new HALDocuments(searcher.search(extractor.query(exemplar), 100));
+            return new HALDocuments(searcher, searcher.search(extractor.query(exemplar), 100));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

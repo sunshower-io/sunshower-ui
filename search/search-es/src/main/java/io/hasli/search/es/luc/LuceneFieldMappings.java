@@ -8,6 +8,7 @@ import org.apache.lucene.document.TextField;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by haswell on 11/8/16.
@@ -21,6 +22,7 @@ public class LuceneFieldMappings implements FieldMappings<Field> {
         final LongFieldMapper longFieldMapper = new LongFieldMapper();
         register(Long.class, longFieldMapper);
         register(long.class, longFieldMapper);
+        register(UUID.class, new UUIDFieldMapper());
     }
 
     @Override
@@ -54,5 +56,17 @@ public class LuceneFieldMappings implements FieldMappings<Field> {
         public Field map(io.hasli.search.api.Field field) {
             return new LongPoint(field.getName(), (long) field.getValue());
         }
+    }
+
+    static class UUIDFieldMapper implements FieldMapper<Field> {
+        @Override
+        public Field map(io.hasli.search.api.Field field) {
+            return new TextField(
+                    field.getName(),
+                    field.getValue().toString(),
+                    Field.Store.YES
+            );
+        }
+
     }
 }

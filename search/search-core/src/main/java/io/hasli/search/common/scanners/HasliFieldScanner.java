@@ -9,6 +9,7 @@ import io.hasli.search.common.TextField;
 import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Created by haswell on 11/8/16.
@@ -121,6 +122,8 @@ public class HasliFieldScanner implements Scanner {
                 || type == Boolean.class
                 || type == boolean.class
                 || type == float.class
-                || type == Float.class;
+                || type == Float.class
+                || type == UUID.class
+                ;
     }
 }
