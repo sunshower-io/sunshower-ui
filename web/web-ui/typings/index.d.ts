@@ -1,6 +1,9 @@
 /// <reference path="globals/jasmine/index.d.ts" />
+/// <reference path="globals/jquery.pnotify/index.d.ts" />
 /// <reference path="globals/jquery/index.d.ts" />
 /// <reference path="globals/selenium-webdriver/index.d.ts" />
+
+/// <reference path="globals/jquery.pnotify/index.d.ts" />
 /// <reference path="globals/url/index.d.ts" />
 /// <reference path="globals/whatwg-fetch/index.d.ts" />
 /// <reference path="modules/aurelia-binding/index.d.ts" />

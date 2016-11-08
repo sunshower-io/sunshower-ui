@@ -104,6 +104,7 @@
       "fetch": "github:github/fetch@^1.0.0",
       "font-awesome": "npm:font-awesome@4.6.3",
       "jquery": "npm:jquery@^2.2.4",
+      "pnotify": "npm:pnotify@^3.0.0",
       "semantic-ui": "github:Semantic-Org/Semantic-UI@^2.2.4",
       "text": "github:systemjs/plugin-text@^0.0.8"
     },
@@ -111,6 +112,9 @@
     "overrides": {
       "github:Semantic-Org/Semantic-UI@2.2.4": {
         "shim": {}
+      },
+      "npm:pnotify@3.0.0": {
+        "format": "global"
       }
     }
   }

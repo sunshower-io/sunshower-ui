@@ -4,6 +4,9 @@ import {User} from '../../../model/core/security/user';
 import {CredentialSecret, Secrets} from "../../../model/core/secret/credentials";
 import {bindable, inject} from 'aurelia-framework'
 
+import * as $ from 'jquery';
+import 'pnotify';
+
 @inject(HttpClient, User)
 export class NodeConfigurations {
 
@@ -41,7 +44,6 @@ export class NodeConfigurations {
         this.steps.push({step: 2, icon: 'linux', title: 'Operating System', description: 'Choose Operating System'});
         this.steps.push({step: 3, icon: 'code', title: 'Software', description: 'Choose applications to include'});
         this.steps.push({step: 4, icon: 'lock', title: 'Security', description: 'Set credentials and security groups'});
-
     }
 
     attached() {
@@ -60,6 +62,7 @@ export class NodeConfigurations {
     }
 
     addNodeConfiguration() {
+        this.showPNotify("frap", "adap");
         this.newNodeConfiguration = true;
     }
 
@@ -70,6 +73,8 @@ export class NodeConfigurations {
     saveNodeConfiguration() {
         this.newNodeConfiguration = false;
         this.activeStep = 1;
+        this.showPNotify('boop', 'the woop');
+
     }
 
     cancelNodeConfiguration() {
@@ -77,6 +82,7 @@ export class NodeConfigurations {
         this.newCredential = false;
         this.newSecurityGroup = false;
         this.activeStep = 1;
+        this.showPNotify('Node Configuration Cancelled', '');
     }
 
     addSecurityGroup() {
@@ -85,6 +91,7 @@ export class NodeConfigurations {
 
     saveSecurityGroup() {
         this.newSecurityGroup = false;
+        //TODO pnotify
     }
 
     addCredential() {
@@ -103,6 +110,32 @@ export class NodeConfigurations {
             .then(data => {
                 this.fetch();
             });
+        //TODO pnotify
+    }
+
+
+    p:PNotify;
+
+    showPNotify(title, text) {
+
+
+
+        var notice = new PNotify({
+            title: "Frap",
+
+            text: text,
+            buttons: {
+                closer: false,
+                sticker: false
+            }
+        });
+        //
+        // notice.open();
+
+        console.log("Pnotify");
+        // notice.get().click(function() {
+        //     notice.remove();
+        // });
 
     }
 
