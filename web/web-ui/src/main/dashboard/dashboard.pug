@@ -1,4 +1,6 @@
 template
+    require(from='main/dashboard/wizard')
+    wizard
     .ui.hidden.divider
     .ui.container
         .ui.text.menu
@@ -6,8 +8,10 @@ template
                 | Dashboard
             .right.menu
                 .ui.right.aligned.item
-                    img(src='styles/themes/hasli/assets/images/icons/list-layout-icon.svg')
-                    img(src='styles/themes/hasli/assets/images/icons/block-layout-icon.svg')
+                    a.ui.image(href='http://google.com')
+                        img(src='styles/themes/hasli/assets/images/icons/list-layout-icon.svg')
+                    a.ui.image(href='http://google.com')
+                        img(src='styles/themes/hasli/assets/images/icons/block-layout-icon.svg')
         .ui.divider
         .ui.container.grid
             .two.column.row
@@ -16,12 +20,12 @@ template
                         input(type='text', placeholder='Search...')
                         i.search.icon
                 .right.aligned.seven.wide.column
-                    .ui.basic.primary.button
+                    .ui.basic.primary.button(type='button', click.trigger='create()')
                         | + CREATE
             .three.column.row
                 .column
                     .ui.cards
-                        .card
+                        .centered.card
                             .content
                                 i.right.floated.grey.ellipsis.horizontal.icon
                                 .header
@@ -37,7 +41,7 @@ template
                                     .ui.basic.blue.button Deploy
                 .column
                     .ui.cards
-                        .card
+                        .centered.card
                             .content
                                 i.right.floated.grey.ellipsis.horizontal.icon
                                 .header
@@ -53,7 +57,7 @@ template
                                     .ui.basic.blue.button Deploy
                 .column
                     .ui.cards
-                        .card
+                        .centered.card
                             .content
                                 i.right.floated.grey.ellipsis.horizontal.icon
                                 .header
@@ -70,7 +74,7 @@ template
             .three.column.row
                 .column
                     .ui.cards
-                        .card
+                        .centered.card
                             .content
                                 i.right.floated.grey.ellipsis.horizontal.icon
                                 .header
@@ -86,7 +90,7 @@ template
                                     .ui.basic.blue.button Deploy
                 .column
                     .ui.cards
-                        .card
+                        .centered.card
                             .content
                                 i.right.floated.grey.ellipsis.horizontal.icon
                                 .header
@@ -102,7 +106,7 @@ template
                                     .ui.basic.blue.button Deploy
                 .column
                     .ui.cards
-                        .card
+                        .centered.card
                             .content
                                 i.right.floated.grey.ellipsis.horizontal.icon
                                 .header
@@ -119,7 +123,7 @@ template
             .three.column.row
                 .column
                     .ui.cards
-                        .card
+                        .centered.card
                             .content
                                 i.right.floated.grey.ellipsis.horizontal.icon
                                 .header
@@ -135,7 +139,7 @@ template
                                     .ui.basic.blue.button Deploy
                 .column
                     .ui.cards
-                        .card
+                        .centered.card
                             .content
                                 i.right.floated.grey.ellipsis.horizontal.icon
                                 .header
