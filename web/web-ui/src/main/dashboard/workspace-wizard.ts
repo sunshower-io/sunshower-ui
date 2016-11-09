@@ -2,12 +2,20 @@
  * Created by dustinlish on 11/8/16.
  */
 
-export class Wizard {
+export class WorkspaceWizard {
 
     attached() {
         $('.coupled.modal')
             .modal({
-                allowMultiple: false
+                allowMultiple: false,
+                closable  : false,
+                onDeny    : function(){
+                    window.alert('Wait not yet!');
+                    return false;
+                },
+                onApprove : function() {
+                    window.alert('Approved!');
+                }
             });
 
         $('.ui.accordion')
@@ -20,7 +28,7 @@ export class Wizard {
             .checkbox();
     }
 
-    progressStep(from, to) {
+    step(to) {
         $(`.${to}.modal`)
             .modal('show');
     }
@@ -37,6 +45,10 @@ export class Wizard {
 
     submit() {
         this.hide();
+    }
+
+    createApplication() {
+
     }
 
 }

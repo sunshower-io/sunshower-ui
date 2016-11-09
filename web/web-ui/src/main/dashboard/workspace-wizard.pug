@@ -5,7 +5,7 @@ template
     .ui.small.first.coupled.modal.transition
         i.close.icon
         .ui.center.aligned.header
-            | CREATE NEW APPLICATION
+            | CREATE NEW WORKSPACE
         .content
             .ui.form
                 .field
@@ -19,7 +19,7 @@ template
                     .field
                         input(type='text', placeholder='tag')
         .actions
-            .ui.right.primary.button(type='button', click.trigger='progressStep("first", "second")')
+            .ui.right.primary.button(type='button', click.delegate='step("second")')
                 | Next
     .ui.large.second.coupled.modal.transition
         i.close.icon
@@ -43,13 +43,16 @@ template
                                                 a.item MongoDb
                                                     .ui.mini.right.floated.image
                                                         img(src='styles/themes/hasli/assets/images/icons/x-red-icon.svg')
-                    .thirteen.wide.column
+                    .thirteen.wide.column.form--scroll
                         .ui.container.grid
                             .two.column.row
                                 .column
                                     .ui.icon.green.input
                                         input(type='text', placeholder='Search...')
                                         i.search.icon
+                                .right.aligned.column
+                                    .ui.basic.primary.button(type='button', click.delegate='step("create")')
+                                        | CREATE NEW APPLICATION
                             .three.column.row
                                 .column
                                     .ui.cards
@@ -188,10 +191,56 @@ template
                                                 .ui.two.buttons
                                                     .ui.basic.green.button Add
                                                     .ui.basic.blue.button View
+                            .three.column.row
+                                .column
+                                    .ui.cards
+                                        .card
+                                            .content
+                                                img.right.floated.mini.ui.image(src='styles/themes/hasli/assets/images/logos/redis-logo.svg')
+                                                .header
+                                                    | Redis
+                                                .meta
+                                                    | Hasli, Docker
+                                                .description
+                                                    | Fusce vehicula dolor arcu, sit amet blandit dolor mollis nec. Donec viverra eleif.
+                                            .extra.content
+                                                .ui.two.buttons
+                                                    .ui.basic.green.button Add
+                                                    .ui.basic.blue.button Deploy
+                                .column
+                                    .ui.cards
+                                        .card
+                                            .content
+                                                img.right.floated.mini.ui.image(src='styles/themes/hasli/assets/images/logos/sql-server-icon.svg')
+                                                .header
+                                                    | Sql Server
+                                                .meta
+                                                    | Hasli
+                                                .description
+                                                    | Fusce vehicula dolor arcu, sit amet blandit dolor mollis nec. Donec viverra eleif.
+                                            .extra.content
+                                                .ui.two.buttons
+                                                    .ui.basic.green.button Add
+                                                    .ui.basic.blue.button Deploy
+                                .column
+                                    .ui.cards
+                                        .card
+                                            .content
+                                                img.right.floated.mini.ui.image(src='styles/themes/hasli/assets/images/logos/wildfly-icon.svg')
+                                                .header
+                                                    | Wildfly
+                                                .meta
+                                                    | Hasli, Docker
+                                                .description
+                                                    | Fusce vehicula dolor arcu, sit amet blandit dolor mollis nec. Donec viverra eleif.
+                                            .extra.content
+                                                .ui.two.buttons
+                                                    .ui.basic.green.button Add
+                                                    .ui.basic.blue.button Deploy
         .actions
-            .ui.right.icon.primary.button(type='button', click.trigger='progressStep("second", "first")')
+            .ui.right.icon.primary.button(type='button', click.delegate='step("first")')
                 | Previous
-            .ui.right.icon.primary.button(type='button', click.trigger='progressStep("second", "third")')
+            .ui.right.icon.primary.button(type='button', click.delegate='step("third")')
                 | Next
     .ui.large.third.coupled.modal.transition
         i.close.icon
@@ -397,9 +446,9 @@ template
                                                 td Fix admin flag set in example json! #2453
                                                 td.right.aligned 28 days ago
         .actions
-            .ui.right.icon.primary.button(type='button', click.trigger='progressStep("third", "second")')
+            .ui.right.icon.primary.button(type='button', click.delegate='step("second")')
                 | Previous
-            .ui.right.icon.primary.button(type='button', click.trigger='progressStep("third", "fourth")')
+            .ui.right.icon.primary.button(type='button', click.delegate='step("fourth")')
                 | Next
     .ui.large.fourth.coupled.modal.transition
         i.close.icon
@@ -690,9 +739,9 @@ template
                                                                 label Some Advanced Setting 1
                                                         button.ui.basic.primary.button(type='submit') Save
         .actions
-            .ui.right.icon.primary.button(type='button', click.trigger='progressStep("fourth", "third")')
+            .ui.right.icon.primary.button(type='button', click.delegate='step("third")')
                 | Previous
-            .ui.right.icon.primary.button(type='button', click.trigger='progressStep("fourth", "fifth")')
+            .ui.right.icon.primary.button(type='button', click.delegate='step("fifth")')
                 | Next
     .ui.small.fifth.coupled.modal.transition
         i.close.icon
@@ -818,11 +867,11 @@ template
                             input.hidden(type='checkbox', name='gift', tabindex='0')
                             label Do not include a receipt in the package
         .actions
-            .ui.right.basic.primary.button(type='button', click.trigger='progressStep("fifth", "finish")')
+            .ui.right.basic.primary.button(type='button', click.delegate='step("finish")')
                 | Skip
-            .ui.right.icon.primary.button(type='button', click.trigger='progressStep("fifth", "fourth")')
+            .ui.right.icon.primary.button(type='button', click.delegate='step("fourth")')
                 | Previous
-            .ui.right.primary.button(type='button', click.trigger='progressStep("fifth", "finish")')
+            .ui.right.primary.button(type='button', click.delegate='step("finish")')
                 | Next
     .ui.small.finish.coupled.modal.transition
         i.close.icon
@@ -948,5 +997,25 @@ template
                             input.hidden(type='checkbox', name='gift', tabindex='0')
                             label Do not include a receipt in the package
         .actions
-            .ui.right.green.button(type='button', click.trigger='submit()')
+            .ui.right.green.button(type='button', click.delegate='submit()')
                 | Create
+    .ui.small.create.coupled.modal.transition
+        i.close.icon
+        .ui.center.aligned.header
+            | CREATE NEW APPLICATION
+        .content
+            .ui.basic.segment
+                h3.ui.left.floated.header
+                    | Upload Application
+            .ui.center.aligned.basic.segment(style='border-style:dashed; border-width:1px; border-color: #979797;')
+                img(src='styles/themes/hasli/assets/images/icons/plus-green-icon.svg')
+                .content
+                    .sub.header Drag and drop your files here or
+                .ui.hidden.divider
+                .ui.small.basic.primary.button
+                    | Browse
+        .actions
+            .ui.right.primary.button(type='button', click.delegate='step("second")')
+                | Cancel
+            .ui.right.primary.button(type='button', click.delegate='step("second")')
+                | Done
