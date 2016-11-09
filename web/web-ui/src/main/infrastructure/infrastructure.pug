@@ -26,12 +26,12 @@ template
                         .menu
                             a.item E-mail Support
                             a.item FAQs
-            .thirteen.wide.column
+            .twelve.wide.column
                 .ui.hidden.divider
+                h1.ui.header
+                    | Instances
                 .ui.container
-                    .ui.header
-                        | INSTANCES
-                    .ui.secondary.menu
+                    .ui.text.menu
                         .item
                             .ui.icon.green.input
                                 input(type='text', placeholder='Search...')
@@ -47,9 +47,9 @@ template
                         .item
                             .ui.action.input
                                 input(type='text', placeholder='Navigate to...')
-                                .ui.primary.button Go
+                                .ui.basic.primary.basic.button Go
                         .right.floated.item
-                            .ui.primary.mini.button(type='button', click.trigger='create()')
+                            .ui.basic.primary.mini.button(type='button', click.trigger='create()')
                                 | + CREATE
                     .ui.divided.items
                         .item

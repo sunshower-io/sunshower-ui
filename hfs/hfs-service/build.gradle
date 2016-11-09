@@ -1,0 +1,4 @@
+
+dependencies {
+    compile project(":hfs:hfs-api")
+}

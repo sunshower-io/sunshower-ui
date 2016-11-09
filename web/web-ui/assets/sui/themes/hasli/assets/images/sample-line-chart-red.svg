@@ -1,0 +1,34 @@
+
+<svg width="342px" height="130px" viewBox="2 -1 342 130" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41 (35326) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="line-chart" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(2.257947, -1.000000)">
+        <g id="chart">
+            <g id="lines" transform="translate(42.979829, 0.000000)" fill="#EFEFEF">
+                <rect id="line" x="296.665647" y="0" width="0.634402892" height="127.609756"></rect>
+                <rect id="line" x="237.961491" y="2" width="0.634402892" height="127.609756"></rect>
+                <rect id="line" x="176.112469" y="0" width="0.634402892" height="127.609756"></rect>
+                <rect id="line" x="117.408313" y="2" width="0.634402892" height="127.609756"></rect>
+                <rect id="line" x="58.7041563" y="2" width="0.634402892" height="127.609756"></rect>
+                <rect id="line" x="0" y="2" width="0.634402892" height="127.609756"></rect>
+            </g>
+            <g id="y-values" transform="translate(0.000000, 1.000000)" font-size="12" font-family="AvenirNext-Medium, Avenir Next" line-spacing="24" fill="#666666" font-weight="400">
+                <text id="0">
+                    <tspan x="25.5885052" y="117">0</tspan>
+                </text>
+                <text id="30">
+                    <tspan x="18.4485052" y="68.7804878">30</tspan>
+                </text>
+                <text id="50">
+                    <tspan x="18.4485052" y="12">50</tspan>
+                </text>
+            </g>
+        </g>
+        <g id="data" transform="translate(42.490387, 35.780488)" stroke-opacity="0.506567029" stroke="#D0011B" stroke-width="2">
+            <g id="path" transform="translate(0.260852, 0.341463)">
+                <path d="M0,27.5121951 C8.87527388,27.512194 15.8415779,42.731705 27.9823594,42.7317073 C40.1231409,42.7317096 46.9521563,77.2682918 55.9647189,77.2682927 C64.9772814,77.2682936 71.5502948,34.5365879 83.9470783,34.5365854 C96.3438618,34.5365828 102.677671,12.2318672 111.929438,12.231867 C121.181204,12.2318668 127.666116,73.7560978 139.911797,73.7560976 C152.157478,73.7560973 159.031499,35.1219503 167.894157,35.1219512 C176.756814,35.1219521 192.521122,47.7073191 198.363837,47.7073171 C204.206552,47.7073151 214.263854,0 226.346196,0 C238.428539,0 242.187797,8.19512195 254.017641,8.19512195 C265.847484,8.19512195 282,17.5609756 282,17.5609756"></path>
+            </g>
+        </g>
+    </g>
+</svg>
