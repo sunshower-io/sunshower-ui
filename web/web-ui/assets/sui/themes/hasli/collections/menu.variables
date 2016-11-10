@@ -30,7 +30,7 @@
   color @defaultDuration @defaultEasing
 ;
 @itemFontWeight: normal;
-@itemTextColor: @textColor;
+@itemTextColor: #767C89;
 
 /* Divider */
 @dividerSize: 1px;
@@ -244,22 +244,23 @@
 
 /* Pointing */
 @secondaryPointingBorderWidth: 2px;
-@secondaryPointingBorderColor: @borderColor;
+//@secondaryPointingBorderColor: @borderColor;
+@secondaryPointingBorderColor: none;
 @secondaryPointingItemVerticalPadding: @relativeTiny;
-@secondaryPointingItemHorizontalPadding: @relativeLarge;
+@secondaryPointingItemHorizontalPadding: @relativeMassive;
 
-@secondaryPointingHoverTextColor: @textColor;
+@secondaryPointingHoverTextColor: #F7F7FA;
 
-@secondaryPointingActiveBorderColor: @black;
-@secondaryPointingActiveTextColor: @selectedTextColor;
-@secondaryPointingActiveFontWeight: bold;
+@secondaryPointingActiveBorderColor: #239AE8;
+@secondaryPointingActiveTextColor: #F7F7FA;
+@secondaryPointingActiveFontWeight: Medium;
 
 @secondaryPointingActiveDropdownBorderColor: transparent;
 
 @secondaryPointingActiveHoverBorderColor: @secondaryPointingActiveBorderColor;
 @secondaryPointingActiveHoverTextColor: @secondaryPointingActiveTextColor;
 
-@secondaryPointingHeaderColor: @darkTextColor;
+@secondaryPointingHeaderColor: #F7F7FA;
 @secondaryVerticalPointingItemMargin: 0em -@secondaryPointingBorderWidth 0em 0em;
 
 

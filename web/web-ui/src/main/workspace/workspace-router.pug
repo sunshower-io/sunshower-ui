@@ -1,11 +1,18 @@
 
-template
-    require(from='./workspace-side-menu.html')
-    .ui.hidden.divider
-    .ui.internally.celled.grid
-        .row
-            .three.wide.fluid.column
-                .ui.basic.segment
-                    workspace-side-menu(router.bind="router")
-            .twelve.wide.column
-                router-view
+template(bindable="router")
+    .page.header.transition
+        .ui.hidden.divider
+        .ui.container
+            .ui.small.secondary.pointing.menu
+                template(repeat.for='row of router.navigation')
+                    a.item(if.bind='!row.settings.parent && !row.settings.child', class="${row.isActive ? 'active' : ''}", href.bind='row.href')
+                        | ${row.title}
+                    .item(if.bind='row.settings.parent', class="${row.isActive ? 'active' : ''}", href.bind='row.href')
+                        .ui.dropdown(if.bind='row.settings.parent')
+                            .text ${row.title}
+                            i.dropdown.icon
+                            .menu
+                                a.item(repeat.for='child of row.settings.childRoutes', class="${row.isActive ? 'active' : ''}", href.bind='child.href')
+                                    | ${child.title}
+    .ui.container
+        router-view

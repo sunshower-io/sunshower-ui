@@ -1,11 +1,8 @@
 template(bindable="router")
     require(from="common/elements/profile-dropdown")
-    .ui.secondary.inverted.menu.small
+    .ui.secondary.menu
         .ui.image.small
-            img(src="styles/themes/hasli/assets/images/logos/hasli-logo.svg").header.item
-        a.item(repeat.for='row of router.navigation', class="${row.isActive ? 'active' : ''}" href.bind='row.href')
-            | ${row.title}
-        img.right.floated(src="styles/themes/hasli/assets/images/icons/pulse.svg").item
+            img.item.header(src="styles/themes/hasli/assets/images/logos/hasli-logo.svg")
         .right.menu
             .item
                 .ui.search.mini
@@ -13,5 +10,21 @@ template(bindable="router")
                         input.eight.wide.prompt(type='text', placeholder='Search...')
                         i.search.icon
                     .results
-            img(src="styles/themes/hasli/assets/images/icons/alert.svg").item
+            a.item
+                i.large.grid.layout.icon
+                .ui.popup.transition.hidden(style="top: 554px; left: 1px; bottom: auto; right: auto; width: 400px;")
+                    h4.ui.grey.center.aligned.header GLOBAL SETTINGS
+                    .ui.hidden.divider
+                    .ui.labeled.icon.fluid.three.item.menu
+                        template(repeat.for='row of router.navigation', class="${row.isActive ? 'active' : ''}")
+                            a.item(if.bind="$even", href.bind='row.href')
+                                i(class="${row.settings.icon}")
+                                | ${row.title}
+                    .ui.labeled.icon.fluid.three.item.menu
+                        template(repeat.for='row of router.navigation', class="${row.isActive ? 'active' : ''}", href.bind='row.href')
+                            a.item(if.bind="$odd", href.bind='row.href')
+                                i(class="${row.settings.icon}")
+                                | ${row.title}
+            img.item(src="styles/themes/hasli/assets/images/icons/pulse.svg")
+            img.item(src="styles/themes/hasli/assets/images/icons/alert.svg")
             profile-dropdown.item

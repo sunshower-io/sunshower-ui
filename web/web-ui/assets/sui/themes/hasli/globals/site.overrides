@@ -12,9 +12,9 @@
 }
 
 .page.header {
-  background-color: #313E47;
-  border-bottom: 1px solid #E5E5E5;
-  padding: 5px 0px;
+  background-color: #171B26;
+  //border-bottom: 1px solid #E5E5E5;
+  padding: 2px 0px;
 }
 
 
