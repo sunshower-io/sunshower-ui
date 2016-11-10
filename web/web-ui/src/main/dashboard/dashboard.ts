@@ -14,9 +14,12 @@ export class Dashboard {
         this.wizard = wizard;
     }
 
-    create() {
-        console.log('create button clicked');
+    public create() {
         this.wizard.show();
+    }
+
+    open() {
+        location.assign("#/main/workspace")
     }
 
 }

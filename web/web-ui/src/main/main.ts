@@ -63,6 +63,12 @@ export class App {
                 moduleId: 'main/logs/logs',
                 nav: true,
                 title: 'Logs'
+            }, {
+                route: 'workspace',
+                name: 'Workspace',
+                moduleId: 'main/workspace/workspace',
+                nav: false,
+                title: 'Workspace'
             }
         ]);
 

@@ -37,7 +37,8 @@ template
                                         img(src='styles/themes/hasli/assets/images/sample-line-chart-blue.svg')
                             .extra.content
                                 .ui.two.buttons
-                                    .ui.basic.green.button Open
+                                    .ui.basic.green.button(type='button', click.trigger="open()")
+                                        | Open
                                     .ui.basic.blue.button Deploy
                 .column
                     .ui.cards
