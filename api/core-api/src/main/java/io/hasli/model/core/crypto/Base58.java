@@ -1,4 +1,4 @@
-package io.hasli.hfs.crypto;
+package io.hasli.model.core.crypto;
 
 import java.math.BigInteger;
 

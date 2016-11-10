@@ -1,0 +1,21 @@
+{
+  "Values": {
+    "data-directory": "/home/haswell/dev/src/github.com/hasli-projects/hasli/agent/http/../build",
+    "id": "Qmak9goZF3yvr7hdvVGTxZWawT3crgQMgoLprxipFiUziM"
+  },
+  "ports": {
+    "dns": 8600,
+    "http": 5001,
+    "https": -1,
+    "rpc": 8400,
+    "lan": 8301,
+    "wan": 8302,
+    "server": 8300,
+    "management": 9162,
+    "deployment": 9163,
+    "broadcast": 9164
+  },
+  "bootstrap": {
+    "nodes": []
+  }
+}

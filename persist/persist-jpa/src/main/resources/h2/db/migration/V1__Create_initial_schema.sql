@@ -166,6 +166,7 @@ create table INSTANCE_DESCRIPTOR (
   memory_profile_id   binary(16),
   network_profile_id  binary(16),
   compute_profile_id  binary(16),
+  storage_profile_id  binary(16),
 
 
   foreign key (provider_id)           references CLOUD_PROVIDER(id),
@@ -178,7 +179,9 @@ create table INSTANCE_DESCRIPTOR (
 
   foreign key (network_profile_id)    references NETWORK_PROFILE(id),
 
-  foreign key (compute_profile_id)    references COMPUTE_PROFILE(id)
+  foreign key (compute_profile_id)    references COMPUTE_PROFILE(id),
+
+  foreign key (storage_profile_id)    references STORAGE_PROFILE(id)
 );
 
 create table OPERATING_SYSTEM (
@@ -224,3 +227,7 @@ create table  NODE_CONFIGURATION (
 );
 
 
+create table APPLICATION_DESCRIPTOR (
+  id            binary(40) primary key,
+  type          tinyint
+);

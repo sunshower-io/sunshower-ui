@@ -21,6 +21,31 @@ public interface NamedStreamable {
         return bout.toByteArray();
     }
 
+
+    class StreamWrapper implements NamedStreamable {
+        final InputStream inputStream;
+
+        public StreamWrapper(InputStream inputStream) {
+            this.inputStream = inputStream;
+        }
+
+
+        @Override
+        public InputStream getInputStream() throws IOException {
+            return inputStream;
+        }
+
+        @Override
+        public Optional<String> getName() {
+            return Optional.empty();
+        }
+
+        @Override
+        public boolean isDirectory() {
+            return false;
+        }
+    }
+
     class FileWrapper implements NamedStreamable {
         private final File source;
         private final String pathPrefix;
@@ -54,6 +79,9 @@ public interface NamedStreamable {
             }
         }
     }
+
+
+
 
     class ByteArrayWrapper implements NamedStreamable {
         private final Optional<String> name;

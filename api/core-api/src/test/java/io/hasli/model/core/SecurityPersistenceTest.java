@@ -1,6 +1,9 @@
-package io.hasli.model.core.auth;
+package io.hasli.model.core;
 
 import io.hasli.barometer.spring.BarometerRunner;
+import io.hasli.model.core.auth.Permission;
+import io.hasli.model.core.auth.Role;
+import io.hasli.model.core.auth.User;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.test.persist.EnableJPA;
 import io.hasli.test.persist.HibernateTestCase;

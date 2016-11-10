@@ -1,6 +1,7 @@
 package io.hasli.hfs.addr;
 
-import io.hasli.hfs.crypto.Multihash;
+
+import io.hasli.model.core.crypto.Multihash;
 
 import java.io.*;
 import java.net.*;

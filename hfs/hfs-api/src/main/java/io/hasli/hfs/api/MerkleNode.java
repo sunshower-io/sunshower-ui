@@ -1,6 +1,7 @@
-package io.hasli.hfs.service;
+package io.hasli.hfs.api;
 
-import io.hasli.hfs.crypto.Multihash;
+
+import io.hasli.model.core.crypto.Multihash;
 
 import java.util.*;
 import java.util.stream.*;
@@ -30,12 +31,21 @@ public class MerkleNode {
         this.data = data;
     }
 
+
+    public long getSize() {
+        return this.size.orElse(0);
+    }
+
+    public String getHash() {
+        return this.hash.toBase58();
+    }
+
     @Override
     public boolean equals(Object b) {
         if (!(b instanceof MerkleNode))
             return false;
         MerkleNode other = (MerkleNode) b;
-        return hash.equals(other.hash); // ignore name hash says it all
+        return hash.equals(other.hash);
     }
 
     @Override

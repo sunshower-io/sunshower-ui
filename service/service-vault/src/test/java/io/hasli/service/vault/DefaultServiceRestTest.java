@@ -102,7 +102,8 @@ public class DefaultServiceRestTest {
         secret.setSecret("frap");
         secret.setDescription("just a normal secret!");
         secret.setCredential("frap-adap");
-        authenticatedVaultService.save(secret);
+        secret = (CredentialSecret) authenticatedVaultService.save(secret);
+        assertThat(secret.getName(), is("test-secret"));
     }
 
     @Test

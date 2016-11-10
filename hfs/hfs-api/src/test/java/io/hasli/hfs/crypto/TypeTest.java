@@ -1,8 +1,7 @@
 package io.hasli.hfs.crypto;
 
-import static org.junit.Assert.*;
 
-
+import io.hasli.model.core.crypto.Base58;
 import org.junit.*;
 
 import java.util.*;

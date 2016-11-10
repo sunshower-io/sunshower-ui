@@ -1,3 +1,5 @@
 dependencies {
+    provided 'com.zaxxer:HikariCP'
     compile project(":search:search-api")
+    compile project(":test:test-persist")
 }

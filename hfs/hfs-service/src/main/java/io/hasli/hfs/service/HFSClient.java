@@ -1,7 +1,9 @@
 package io.hasli.hfs.service;
 
 import io.hasli.hfs.addr.MultiAddress;
-import io.hasli.hfs.crypto.Multihash;
+import io.hasli.hfs.api.JSONParser;
+import io.hasli.hfs.api.MerkleNode;
+import io.hasli.model.core.crypto.Multihash;
 
 import java.io.*;
 import java.net.*;

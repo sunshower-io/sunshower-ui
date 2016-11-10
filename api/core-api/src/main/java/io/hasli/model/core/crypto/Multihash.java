@@ -1,13 +1,15 @@
-package io.hasli.hfs.crypto;
+package io.hasli.model.core.crypto;
 
 /**
  * Created by haswell on 11/8/16.
  */
 
+import javax.persistence.*;
 import java.io.*;
 import java.util.*;
 
-public class Multihash {
+@Embeddable
+public class Multihash implements Serializable {
     public enum Type {
         SHA1(0x11, 20),
         SHA_2_256(0x12, 32),
@@ -37,8 +39,28 @@ public class Multihash {
         }
     }
 
-    public final Type type;
-    private final byte[] hash;
+    @Column(
+        name = "type",
+        nullable = false,
+        insertable = false,
+        updatable = false
+    )
+    @Enumerated
+    private Type type;
+
+
+    @Column(
+            name = "id",
+            nullable = false,
+            insertable = false,
+            updatable = false
+    )
+    private byte[] hash;
+
+    public Multihash() {
+
+    }
+
 
     public Multihash(Type type, byte[] hash) {
         if (hash.length > 127)
@@ -52,6 +74,11 @@ public class Multihash {
     public Multihash(byte[] multihash) {
         this(Type.lookup(multihash[0] & 0xff), Arrays.copyOfRange(multihash, 2, multihash.length));
     }
+
+    public Type getType() {
+        return type;
+    }
+
 
     public byte[] toBytes() {
         byte[] res = new byte[hash.length + 2];
