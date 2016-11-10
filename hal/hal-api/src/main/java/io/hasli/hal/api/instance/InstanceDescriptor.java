@@ -10,12 +10,8 @@ import io.hasli.model.core.DistributableEntity;
 import io.hasli.model.core.Metadata;
 import io.hasli.search.api.Index;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.OneToOne;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Basic;
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
@@ -37,38 +33,61 @@ public class InstanceDescriptor extends DistributableEntity {
     @Basic
     private String description;
 
-    @ManyToOne
+    @Transient
     private Provider provider;
 
-    @OneToOne
+//    @OneToOne
+    @Transient
     private Metadata metadata;
 
-    @OneToOne
+    @XmlElement
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     @JoinColumn(
             name = "cost_profile_id"
     )
     private CostProfile costProfile;
 
     @Index
-    @OneToOne
+    @XmlElement
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     @JoinColumn(name = "storage_profile_id")
     private StorageProfile storageProfile;
 
     @Index
-    @OneToOne
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @XmlElement
     @JoinColumn(
             name = "memory_profile_id"
     )
     private MemoryProfile memoryProfile;
 
-    @OneToOne
+
+
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @XmlElement
     @JoinColumn(
         name = "network_profile_id"
     )
     private NetworkProfile networkProfile;
 
     @Index
-    @OneToOne
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @XmlElement
     @JoinColumn(
         name = "compute_profile_id"
     )

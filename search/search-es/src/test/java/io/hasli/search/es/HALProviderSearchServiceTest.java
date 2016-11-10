@@ -2,56 +2,57 @@ package io.hasli.search.es;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
+import io.hasli.barometer.Enable;
+import io.hasli.barometer.rpc.Remote;
+import io.hasli.barometer.rs.module.JAXRS;
+import io.hasli.barometer.spring.BarometerRunner;
 import io.hasli.hal.api.instance.InstanceDescriptor;
 import io.hasli.hal.api.memory.MemoryProfile;
 import io.hasli.hal.api.units.ByteUnit;
-import io.hasli.hal.aws.instance.EC2InstanceDescriptor;
-import io.hasli.hal.aws.instance.EC2InstanceDescriptors;
 import io.hasli.search.api.Document;
-import io.hasli.search.api.Scanner;
-import io.hasli.search.common.scanners.HasliFieldScanner;
 import io.hasli.search.es.luc.DefaultQueryExtractor;
-import io.hasli.search.es.luc.LuceneFieldMappings;
 import io.hasli.search.service.IndexingService;
 import io.hasli.search.service.SearchService;
-import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.index.DirectoryReader;
-import org.apache.lucene.index.IndexWriterConfig;
-import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.store.Directory;
-import org.apache.lucene.store.RAMDirectory;
-import org.eclipse.persistence.internal.oxm.schema.model.List;
-import org.eclipse.persistence.jaxb.JAXBContextFactory;
+import io.hasli.search.service.compute.ComputeSearchService;
+import io.hasli.test.persist.EnableJPA;
+import io.hasli.test.security.rs.MoxyOverrideProvider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Scope;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.stream.StreamSource;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by haswell on 11/5/16.
  */
 @ContextConfiguration(
-        classes =
-                SearchConfiguration.class
+        classes ={
+                SearchConfiguration.class,
+                HALProviderSearchServiceTest.class
+        }
 )
-@RunWith(SpringJUnit4ClassRunner.class)
+@Enable(JAXRS.class)
+@EnableJPA
+@Transactional
+@EnableTransactionManagement
+@RunWith(BarometerRunner.class)
 public class HALProviderSearchServiceTest {
+
+    @Bean
+    public MoxyOverrideProvider overrideProvider() {
+        return new MoxyOverrideProvider();
+    }
 
 
     @Inject
@@ -60,6 +61,14 @@ public class HALProviderSearchServiceTest {
     @Inject
     private IndexingService indexingService;
 
+    @Inject
+    private ComputeSearchService computeSearchService;
+
+    @Remote
+    private ComputeSearchService remoteComputeSearchService;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Test
     @SuppressWarnings("unchecked")
@@ -85,11 +94,7 @@ public class HALProviderSearchServiceTest {
 
     @Test
     public void ensureReadingAWSJSonWorks() {
-        Set<InstanceDescriptor> descriptors = readAwsCurrent();
-
-        indexingService.index(descriptors);
-
-
+        computeSearchService.index();
         InstanceDescriptor memory = new InstanceDescriptor();
         MemoryProfile profile = new MemoryProfile();
         profile.setCapacity(1l);
@@ -98,51 +103,44 @@ public class HALProviderSearchServiceTest {
         memory.setMemoryProfile(profile);
         Set<Document> search = searchService.search(memory,
                 new DefaultQueryExtractor());
-        assertThat(search.size(), is(18));
+//        assertThat(search.size(), is(18));
+        assertTrue(search.size() > 0);
+    }
+
+    @Test
+    public void ensureFindingByIdWorks() {
+
+        computeSearchService.index();
+        InstanceDescriptor memory = new InstanceDescriptor();
+        MemoryProfile profile = new MemoryProfile();
+        profile.setCapacity(1l);
+        profile.setUnit(ByteUnit.Gigabyte);
+        memory.setMemoryProfile(profile);
+        entityManager.persist(memory);
+        List<InstanceDescriptor> search =
+                computeSearchService.search(memory.getId());
+        assertTrue(search.size() > 0);
     }
 
 
 
-    private Set<InstanceDescriptor> readAwsCurrent() {
-        try {
 
-            final Map<String, String> properties = new HashMap<>();
+    @Test
+    public void ensureFindingByIdWorks_remote() {
 
+        remoteComputeSearchService.index();
+        InstanceDescriptor memory = new InstanceDescriptor();
+        MemoryProfile profile = new MemoryProfile();
+        profile.setCapacity(1l);
+        profile.setUnit(ByteUnit.Gigabyte);
+        memory.setMemoryProfile(profile);
+        remoteComputeSearchService.save(memory);
 
-            JAXBContext context = JAXBContextFactory
-                    .createContext(
-                            new Class[]{
-                                    List.class,
-                                    EC2InstanceDescriptor.class,
-                                    EC2InstanceDescriptors.class
-                            }, null);
+        List<InstanceDescriptor> search =
+                remoteComputeSearchService.search(memory.getId());
+        assertTrue(search.size() > 0);
 
-
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-            unmarshaller.setProperty("eclipselink.media-type", "application/json");
-            unmarshaller.setProperty("eclipselink.json.include-root", false);
-            StreamSource source = new StreamSource(ClassLoader.getSystemResourceAsStream("ec2-instances.json"));
-
-            EC2InstanceDescriptors descriptors = unmarshaller.unmarshal(
-                    source, EC2InstanceDescriptors.class).getValue();
-
-            final Set<InstanceDescriptor> instanceDescriptors =
-                    new HashSet<>(descriptors.getDescriptors().size());
-            for (EC2InstanceDescriptor descriptor : descriptors.getDescriptors()) {
-                final MemoryProfile memoryProfile = new MemoryProfile();
-                memoryProfile.setUnit(ByteUnit.Megabyte);
-                memoryProfile.setCapacity(((long) descriptor.getMemory()) * 1000);
-                final InstanceDescriptor d = new InstanceDescriptor();
-                d.setMemoryProfile(memoryProfile);
-                instanceDescriptors.add(d);
-            }
-            return instanceDescriptors;
-        } catch(Exception ex) {
-
-        }
-        return null;
     }
-
 
     private AWSCredentials getCredentials() {
         return new BasicAWSCredentials(

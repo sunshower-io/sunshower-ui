@@ -5,6 +5,11 @@ dependencies {
     compile project(":search:search-core")
     compile 'org.apache.lucene:lucene-core'
 
+    provided 'com.zaxxer:HikariCP'
     compile project(':hal:hal-api')
+
+    testCompile project(":test:test-service")
+    testCompile project(":test:test-persist")
+    testCompile('io.hasli.barometer.modules:jaxrs')
 //    compile("org.elasticsearch:elasticsearch")
 }

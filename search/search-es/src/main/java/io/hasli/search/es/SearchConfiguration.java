@@ -5,6 +5,7 @@ import io.hasli.search.common.scanners.HasliFieldScanner;
 import io.hasli.search.es.luc.LuceneFieldMappings;
 import io.hasli.search.service.IndexingService;
 import io.hasli.search.service.SearchService;
+import io.hasli.search.service.compute.ComputeSearchService;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.store.Directory;
@@ -53,6 +54,11 @@ public class SearchConfiguration {
     @Bean
     public SearchService searchService(Directory directory) throws IOException {
         return new HALProviderSearchService(directory);
+    }
+
+    @Bean
+    public ComputeSearchService computeSearchService() {
+        return new DefaultComputeSearchService();
     }
 
 
