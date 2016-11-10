@@ -45,6 +45,7 @@ export class WorkspaceWizard {
 
     submit() {
         this.hide();
+        location.assign('#/main/workspace')
     }
 
     createApplication() {

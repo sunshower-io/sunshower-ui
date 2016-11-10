@@ -20,13 +20,12 @@ export class App {
                 moduleId: 'main/home/home',
                 nav: false,
                 title: 'home'
-            }
-            , {
-                route: 'dashboard',
-                name: 'Dashboard',
-                moduleId: 'main/dashboard/dashboard',
+            }, {
+                route: 'workspaces',
+                name: 'Workspaces',
+                moduleId: 'main/workspace/workspaces',
                 nav: true,
-                title: 'Dashboard'
+                title: 'Workspaces'
             }, {
                 route: 'applications',
                 name: 'Applications',
@@ -57,18 +56,6 @@ export class App {
                 moduleId: 'main/reports/reports',
                 nav: true,
                 title: 'Reports'
-            }, {
-                route: 'logs',
-                name: 'Logs',
-                moduleId: 'main/logs/logs',
-                nav: true,
-                title: 'Logs'
-            }, {
-                route: 'workspace',
-                name: 'Workspace',
-                moduleId: 'main/workspace/workspace',
-                nav: false,
-                title: 'Workspace'
             }
         ]);
 

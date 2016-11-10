@@ -3,10 +3,10 @@
  */
 
 import {inject} from "aurelia-dependency-injection";
-import {WorkspaceWizard} from "./workspace-wizard";
+import {WorkspaceWizard} from "./wizards/workspace-wizard";
 
 @inject(WorkspaceWizard)
-export class Dashboard {
+export class Workspaces {
 
     private wizard: WorkspaceWizard;
 

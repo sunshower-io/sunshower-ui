@@ -2,7 +2,7 @@ import 'jquery';
 import {RouterConfiguration} from "aurelia-router";
 import {Router} from "aurelia-router";
 
-export class Workspace {
+export class WorkspaceView {
 
     public router: Router;
 
