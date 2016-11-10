@@ -207,27 +207,36 @@ create table  NODE_CONFIGURATION (
 
 
   foreign key (provider_id)           references CLOUD_PROVIDER(id),
-
   foreign key (metadata_id)           references INSTANCE_DESCRIPTOR_METADATA(id),
-
   foreign key(cost_profile_id)        references COST_PROFILE(id),
-
   foreign key (memory_profile_id)     references MEMORY_PROFILE(id),
-
   foreign key (network_profile_id)    references NETWORK_PROFILE(id),
-
   foreign key (compute_profile_id)    references COMPUTE_PROFILE(id),
-
   foreign key (storage_profile_id)    references STORAGE_PROFILE(id),
-
   foreign key (software_profile_id)   references SOFTWARE_PROFILE(id),
-
   foreign key (operating_system_id)   references SOFTWARE_PROFILE(id)
 
 );
 
+create table APPLICATION_DETAILS (
+  id                      binary(32) primary key,
+  type                    tinyint,
+);
 
 create table APPLICATION_DESCRIPTOR (
-  id            binary(40) primary key,
-  type          tinyint
+  id                      binary(32) primary key,
+  type                    tinyint,
+  name                    varchar(32),
+  description             varchar(1024),
+  version                 varchar(128),
+
+
+  image                   binary(32),
+  haslifile               binary(32),
+  application_details_id  binary(32),
+
+
+  foreign key (application_details_id)  references APPLICATION_DETAILS(id)
 );
+
+

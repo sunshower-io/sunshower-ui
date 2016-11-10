@@ -35,13 +35,18 @@ public class ApplicationDescriptorTest {
                 Multihash.fromBase58("QmNTpDwQHPN4wYUrA4f9xMHZyFVmEzh2PA9HFQa34NUf9q")
         );
 
-        byte[] data = Multihash.fromBase58("QmNTpDwQHPN4wYUrA4f9xMHZyFVmEzh2PA9HFQa34NUf9q").toBytes();
+
+        Multihash mh = Multihash.fromBase58("QmNTpDwQHPN4wYUrA4f9xMHZyFVmEzh2PA9HFQa34NUf9j");
+
+        descriptor.setImage(mh);
 
         entityManager.persist(descriptor);
         entityManager.flush();
-        List<Multihash> resultList = entityManager.createQuery("select e.id from ApplicationDescriptor e").getResultList();
-        for(Multihash d : resultList) {
-            new Multihash(d.toBytes());
+        List<Object[]> resultList = entityManager.createQuery("select e.image, e.id from ApplicationDescriptor e").getResultList();
+        for(Object[] d : resultList) {
+            System.out.println("F" + d[0].toString());
+            System.out.println("G" + d[1].toString());
+//            System.out.println(new Multihash(d.toBytes()).toString());
         }
 
 

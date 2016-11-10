@@ -1,6 +1,7 @@
 package io.hasli.model.core.deployment;
 
 import io.hasli.model.core.crypto.Multihash;
+import io.hasli.model.core.entity.AbstractEntity;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -11,54 +12,122 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @Table(name = "APPLICATION_DESCRIPTOR")
-public class ApplicationDescriptor  {
+public class ApplicationDescriptor extends AbstractEntity<Multihash> {
 
     @EmbeddedId
+    @AttributeOverride(
+            name = "hash",
+            column =
+            @Column(name = "id")
+    )
     private Multihash id;
 
-
-    @Column(name = "image")
+    @Embedded
+    @AttributeOverride(
+            name = "hash",
+            column =
+            @Column(name = "image")
+    )
     private Multihash image;
 
-    @Column(name = "haslifile")
+    @Embedded
+    @AttributeOverride(
+            name = "hash",
+            column =
+            @Column(name = "haslifile")
+    )
     private Multihash deploymentFile;
 
-
-    @Column(name = "readme")
+    @Embedded
+    @AttributeOverride(
+            name = "hash",
+            column =
+            @Column(name = "haslifile")
+    )
     private Multihash readme;
 
-//    @OneToOne(
-//            cascade = CascadeType.ALL,
-//            orphanRemoval = true
-//    )
-//    @JoinColumn(
-//            name = "application_details_id"
-//    )
-    @Transient
-    private ApplicationDetails details;
+    @Basic
+    private String name;
+
+    @Basic
+    private String version;
+
+    @Basic
+    private String description;
 
 
-//    public ApplicationDescriptor() {
-//        super(null);
-//    }
-//
-    public ApplicationDescriptor(Multihash multihash) {
-        setId(multihash);
+
+
+    public ApplicationDescriptor() {
+        super(null);
     }
 
-//    @Override
+    public ApplicationDescriptor(Multihash multihash) {
+        super(multihash);
+    }
+
+    @Override
     public Multihash getId() {
         return id;
     }
 
-//    @Override
+    @Override
     protected void setId(Multihash multihash) {
         this.id = multihash;
     }
 
-//    @Override
+    @Override
     protected void setDefaults() {
 
+    }
+
+
+    public Multihash getImage() {
+        return image;
+    }
+
+    public void setImage(Multihash image) {
+        this.image = image;
+    }
+
+    public Multihash getDeploymentFile() {
+        return deploymentFile;
+    }
+
+    public void setDeploymentFile(Multihash deploymentFile) {
+        this.deploymentFile = deploymentFile;
+    }
+
+    public Multihash getReadme() {
+        return readme;
+    }
+
+    public void setReadme(Multihash readme) {
+        this.readme = readme;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

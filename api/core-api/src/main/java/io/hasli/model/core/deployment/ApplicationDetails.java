@@ -1,11 +1,13 @@
 package io.hasli.model.core.deployment;
 
+import io.hasli.model.core.Metadata;
 import io.hasli.model.core.crypto.Multihash;
 import io.hasli.model.core.entity.AbstractEntity;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.UUID;
 
 /**
  * Created by haswell on 11/9/16.
@@ -24,6 +26,7 @@ public class ApplicationDetails extends AbstractEntity<Multihash> {
 
     @Column
     private String version;
+
 
     public ApplicationDetails() {
         super(null);

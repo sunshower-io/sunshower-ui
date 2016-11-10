@@ -40,7 +40,6 @@ public class Multihash implements Serializable {
     }
 
     @Column(
-        name = "type",
         nullable = false,
         insertable = false,
         updatable = false
@@ -50,7 +49,6 @@ public class Multihash implements Serializable {
 
 
     @Column(
-            name = "id",
             nullable = false,
             insertable = false,
             updatable = false
