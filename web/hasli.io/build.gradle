@@ -16,9 +16,11 @@ configurations {
 
 
 dependencies {
+    earlib project(":search:search-es")
+    earlib project(":hfs:hfs-service")
     earlib project(":service:service-vault")
     earlib project(":service:service-security")
-    deploy project(path: ':web:web-site', configuration: 'archives')
+//    deploy project(path: ':web:web-site', configuration: 'archives')
     deploy project(path: ':web:web-service', configuration:'archives')
 }
 

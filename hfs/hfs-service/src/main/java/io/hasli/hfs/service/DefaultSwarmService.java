@@ -23,6 +23,11 @@ public class DefaultSwarmService implements SwarmService {
 
     private AgentConfiguration configuration;
 
+    public DefaultSwarmService() {
+        this.configuration = new AgentConfiguration();
+        this.client = new HFSClient(configuration.getAgentAddress());
+    }
+
 
     @Override
     public AgentConfiguration getConfiguration() {

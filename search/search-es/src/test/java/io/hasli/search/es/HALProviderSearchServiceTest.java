@@ -48,46 +48,10 @@ import static org.junit.Assert.assertThat;
  */
 @ContextConfiguration(
         classes =
-                HALProviderSearchServiceTest.class
+                SearchConfiguration.class
 )
 @RunWith(SpringJUnit4ClassRunner.class)
 public class HALProviderSearchServiceTest {
-
-
-    @Bean
-    public Analyzer analyzer() {
-        return new StandardAnalyzer();
-    }
-
-    @Bean
-    public Directory directory() {
-        return new RAMDirectory();
-    }
-
-
-    @Bean
-    public Scanner scanner() {
-        return new HasliFieldScanner();
-    }
-
-    @Bean
-    public IndexingService indexingService(
-            Directory directory,
-            Scanner scanner,
-            Analyzer analyzer
-    ) {
-        return new HALProviderIndexService(
-            scanner,
-            directory,
-            analyzer,
-            new LuceneFieldMappings()
-        );
-    }
-
-    @Bean
-    public SearchService searchService(Directory directory) throws IOException {
-        return new HALProviderSearchService(directory);
-    }
 
 
     @Inject
