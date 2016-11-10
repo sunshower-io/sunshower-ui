@@ -24,7 +24,7 @@ export class WorkspaceView {
                 name: 'applications',
                 moduleId: 'main/workspace/applications/applications',
                 nav: true,
-                title: 'App Library',
+                title: 'Applications',
                 settings: {
                     parent: false,
                     child: false

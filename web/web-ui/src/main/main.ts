@@ -44,7 +44,7 @@ export class App {
                 name: 'Applications',
                 moduleId: 'main/applications/applications',
                 nav: true,
-                title: 'Applications',
+                title: 'App Library',
                 settings: {
                     icon: 'cubes icon'
                 }
