@@ -17,16 +17,22 @@
   padding: 2px 0px;
 }
 
-h1:first-child, h2:first-child {
-  margin-top: 50px;
+.nav--color {
+  a:active {
+    background-color: blue;
+  }
+  a:hover {
+    color: red;
+  }
 }
+
 
 img.transparent {
   opacity:0;
 }
 
 
-/* used for plus/minus icon toggle */
+/* used for plus/minus icone toggle */
 .toggle--icon {
   position: relative;
   -webkit-transition: opacity .1s ease-in-out;

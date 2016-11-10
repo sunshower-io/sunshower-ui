@@ -30,7 +30,7 @@
   color @defaultDuration @defaultEasing
 ;
 @itemFontWeight: normal;
-@itemTextColor: #767C89;
+@itemTextColor: @textColor;
 
 /* Divider */
 @dividerSize: 1px;
@@ -249,10 +249,10 @@
 @secondaryPointingItemVerticalPadding: @relativeTiny;
 @secondaryPointingItemHorizontalPadding: @relativeMassive;
 
-@secondaryPointingHoverTextColor: #F7F7FA;
+@secondaryPointingHoverTextColor: @textColor;
 
 @secondaryPointingActiveBorderColor: #239AE8;
-@secondaryPointingActiveTextColor: #F7F7FA;
+@secondaryPointingActiveTextColor: @selectedTextColor;
 @secondaryPointingActiveFontWeight: Medium;
 
 @secondaryPointingActiveDropdownBorderColor: transparent;
@@ -260,12 +260,12 @@
 @secondaryPointingActiveHoverBorderColor: @secondaryPointingActiveBorderColor;
 @secondaryPointingActiveHoverTextColor: @secondaryPointingActiveTextColor;
 
-@secondaryPointingHeaderColor: #F7F7FA;
+@secondaryPointingHeaderColor: @darkTextColor;
 @secondaryVerticalPointingItemMargin: 0em -@secondaryPointingBorderWidth 0em 0em;
 
 
 /* Inverted Secondary */
-@secondaryInvertedColor: @invertedLightTextColor;
+@secondaryInvertedColor: #767C89;
 
 @secondaryInvertedHoverBackground: @transparentWhite;
 @secondaryInvertedHoverColor: @invertedSelectedTextColor;
@@ -274,11 +274,11 @@
 @secondaryInvertedActiveColor: @invertedSelectedTextColor;
 
 /* Inverted Pointing */
-@secondaryPointingInvertedBorderColor: @whiteBorderColor;
+@secondaryPointingInvertedBorderColor: none;
 @secondaryPointingInvertedItemTextColor: @invertedTextColor;
-@secondaryPointingInvertedItemHeaderColor: @white;
+@secondaryPointingInvertedItemHeaderColor: #767C89;
 @secondaryPointingInvertedItemHoverTextColor: @selectedTextColor;
-@secondaryPointingInvertedActiveBorderColor: @white;
+@secondaryPointingInvertedActiveBorderColor: @secondaryPointingActiveBorderColor;
 @secondaryPointingInvertedActiveColor: @invertedSelectedTextColor;
 
 

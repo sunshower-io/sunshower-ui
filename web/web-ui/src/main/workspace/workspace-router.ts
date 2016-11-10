@@ -24,7 +24,7 @@ export class WorkspaceView {
                 name: 'applications',
                 moduleId: 'main/workspace/applications/applications',
                 nav: true,
-                title: 'App Library',
+                title: 'Applications',
                 settings: {
                     parent: false,
                     child: false
@@ -91,6 +91,16 @@ export class WorkspaceView {
                 moduleId: 'main/workspace/builder/builder',
                 nav: true,
                 title: 'Template Builder',
+                settings: {
+                    parent: false,
+                    child: false
+                }
+            }, {
+                route: 'activity',
+                name: 'activity',
+                moduleId: 'main/workspace/activity/activity',
+                nav: true,
+                title: 'Activity',
                 settings: {
                     parent: false,
                     child: false
