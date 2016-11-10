@@ -6,6 +6,7 @@ import io.hasli.search.api.Index;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Index
@@ -15,6 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ComputeProfile extends DistributableEntity {
 
     @Basic
+    @XmlAttribute
     private int cores;
 
 

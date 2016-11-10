@@ -1,0 +1,57 @@
+template
+    h1 node configs
+    .ui.basic.green.button(click.delegate="addConfiguration()") Add Configuration
+
+    form(show.bind="formShowing")
+        .ui.form
+            .field
+                label Name
+                input(
+                    type="text",
+                    placeholder="Configuration Name",
+                    value.bind="configuration.name"
+                )
+
+            .field
+                label CPUs
+                input(type='number', placeholder='Number of CPUs')
+            .field
+                label Memory
+                .fields
+                    .eight.wide.field
+                        input(
+                            type='number',
+                            placeholder='Number',
+                            value.bind="memoryProfile.capacity"
+                        )
+                    .eight.wide.field
+                        select
+                            option B
+                            option KB
+                            option MB
+                            option(selected='selected') GB
+                            option TB
+                            option EiB
+            .field
+                label Storage
+                .fields
+                    .eight.wide.field
+                        input(
+                            type='number',
+                            placeholder='Number',
+                            value.bind="storageProfile.capacity"
+                        )
+                    .eight.wide.field
+                        select
+                            option B
+                            option KB
+                            option MB
+                            option(selected='selected') GB
+                            option TB
+                            option EiB
+            .ui.basic.green.button(click.delegate="saveConfiguration()") Save
+            .ui.basic.green.button(click.delegate="cool()") Save
+
+    .ui
+        ul
+            li(repeat.for="cfg of configurations") ${cfg.name}

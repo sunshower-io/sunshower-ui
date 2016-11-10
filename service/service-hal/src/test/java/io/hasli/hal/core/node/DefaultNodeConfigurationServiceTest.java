@@ -6,8 +6,11 @@ import io.hasli.barometer.rpc.Remote;
 import io.hasli.barometer.rs.module.JAXRS;
 import io.hasli.barometer.spring.BarometerRunner;
 import io.hasli.common.rs.DefaultConversionManager;
+import io.hasli.hal.api.compute.ComputeProfile;
 import io.hasli.hal.api.instance.NodeConfiguration;
 import io.hasli.hal.api.instance.NodeConfigurationService;
+import io.hasli.hal.api.memory.MemoryProfile;
+import io.hasli.hal.api.storage.StorageProfile;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.service.vault.VaultConfiguration;
@@ -71,11 +74,34 @@ public abstract class DefaultNodeConfigurationServiceTest {
 
     @Test
     public void ensureSavingSimpleNodeConfigurationWorks() {
-        service().save(new NodeConfiguration());
-//        assertThat(uuid, is(not(nullValue())));
-
+        UUID uuid = service().save(new NodeConfiguration());
+        assertThat(uuid, is(not(nullValue())));
     }
 
+    @Test
+    public void ensureSavingComplexNodeConfigurationWorks() {
+        NodeConfiguration configuration = new NodeConfiguration();
+        ComputeProfile profile = new ComputeProfile();
+        profile.setCores(5);
+
+        StorageProfile storageProfile = new StorageProfile();
+        storageProfile.setCapacity(500l);
+
+        MemoryProfile memoryProfile = new MemoryProfile();
+        memoryProfile.setCapacity(500l);
+
+        configuration.setComputeProfile(profile);
+        configuration.setMemoryProfile(memoryProfile);
+        configuration.setStorageProfile(storageProfile);
+
+
+        UUID uuid = service().save(configuration);
+        assertThat(uuid, is(not(nullValue())));
+
+        NodeConfiguration cfg = service().get(uuid);
+        assertThat(cfg.getComputeProfile().getCores(), is(5));
+        service().list();
+    }
 
     protected abstract NodeConfigurationService service();
 

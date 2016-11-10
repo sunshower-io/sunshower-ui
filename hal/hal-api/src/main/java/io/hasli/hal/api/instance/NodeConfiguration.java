@@ -53,6 +53,7 @@ public class NodeConfiguration extends DistributableEntity {
     @JoinColumn(
         name = "memory_profile_id"
     )
+    @XmlElement
     private MemoryProfile memoryProfile;
 
     @OneToOne(
@@ -61,6 +62,7 @@ public class NodeConfiguration extends DistributableEntity {
     @JoinColumn(
         name = "network_profile_id"
     )
+    @XmlElement
     private NetworkProfile networkProfile;
 
 
@@ -70,6 +72,7 @@ public class NodeConfiguration extends DistributableEntity {
     @JoinColumn(
         name = "compute_profile_id"
     )
+    @XmlElement
     private ComputeProfile computeProfile;
 
     @OneToOne(
@@ -86,6 +89,7 @@ public class NodeConfiguration extends DistributableEntity {
     @JoinColumn(
             name = "storage_profile_id"
     )
+    @XmlElement
     private StorageProfile storageProfile;
 
 

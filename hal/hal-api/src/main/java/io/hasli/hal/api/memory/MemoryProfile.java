@@ -8,6 +8,7 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -19,11 +20,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class MemoryProfile extends DistributableEntity {
 
     @Basic
+    @XmlAttribute
     private Long capacity;
 
     @Enumerated
+    @XmlAttribute
     private ByteUnit unit;
 
+
+    public MemoryProfile() {
+        this.unit = ByteUnit.Megabyte;
+    }
 
     @Index
     public long getBytes() {

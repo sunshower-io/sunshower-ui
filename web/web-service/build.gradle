@@ -14,6 +14,7 @@ dependencies {
     provided project(":hfs:hfs-service")
     provided project(":search:search-es")
     provided project(":service:service-vault")
+    provided project(":service:service-hal")
     provided project(":service:service-security")
     provided project(":persist:persist-hibernate")
 

@@ -7,3 +7,33 @@ export class OperatingSystem {
 
     }
 }
+
+
+export class NodeConfiguration {
+
+    public name:string;
+
+    public description:string;
+
+    public memoryProfile:MemoryProfile;
+
+    public storageProfile:StorageProfile;
+
+    public computeProfile:ComputeProfile;
+
+}
+
+export class MemoryProfile {
+    capacity:number;
+}
+
+export class StorageProfile {
+    capacity:number;
+}
+
+export class ComputeProfile {
+
+    cores:number;
+
+}
+

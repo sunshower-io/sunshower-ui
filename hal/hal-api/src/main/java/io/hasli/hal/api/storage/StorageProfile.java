@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -21,10 +22,16 @@ public class StorageProfile extends DistributableEntity {
 
 
     @Basic
+    @XmlAttribute
     private Long capacity;
 
+    @XmlAttribute
     @Enumerated(EnumType.ORDINAL)
     private ByteUnit unit;
+
+    public StorageProfile() {
+        this.unit = ByteUnit.Megabyte;
+    }
 
 
     @Index
