@@ -1,0 +1,26 @@
+template
+    h1 Select Node Configuration
+    .ui.card.fluid
+        .content
+            .header Node Configurations
+            .ui.relaxed.divided.list
+               .item(repeat.for="cfg of configurations")
+                   .content
+                       .header  ${cfg.name} #[a(click.delegate="openDeployment(cfg.id)") deploy]
+
+    .ui.card.fluid(show.bind="showDeploymentPanel")
+        .content
+            .header Deploying ${toDeploy.name} (${toDeploy.id})
+        .content
+            .header Compute Profile
+            span CPUs ${toDeploy.computeProfile.cores}
+        .content
+            .header Storage Profile
+            span Disk Space ${toDeploy.storageProfile.capacity} ${toDeploy.storageProfile.unit}
+        .content
+            .header Memory Profile
+            span Memory ${toDeploy.memoryProfile.capacity} ${toDeploy.memoryProfile.unit}
+
+        .extra.content
+            .header #[a(click.delegate="searchInstances(toDeploy.id)") Search for instances]
+

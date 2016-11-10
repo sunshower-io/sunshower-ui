@@ -1,4 +1,7 @@
 template
-    .ui.hidden.divider
-    h2 manage
+    .ui.grid
+        .ui.three.wide.column
+            sidenav(router="router")
+        .ui.thirteen.wide.column
+            router-view
 

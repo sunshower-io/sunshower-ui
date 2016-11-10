@@ -11,9 +11,19 @@ export class Manage {
     public configureRouter(config: RouterConfiguration, router: Router) {
         config.title = "Manage";
         config.map([
-
             {
-                route: ['', 'nodeconfigs'],
+                route: ['', 'deploy'],
+                name: 'deploy',
+                moduleId: 'main/manage/deploy/deploy',
+                nav: true,
+                title: "Deploy",
+                settings: {
+                    icon: 'settings',
+                    isActive: true
+                }
+            },
+            {
+                route: 'nodeconfigs',
                 name: 'nodeconfigs',
                 moduleId: 'main/manage/nodeconfigs/nodeconfigs',
                 nav: true,
@@ -22,22 +32,13 @@ export class Manage {
                     icon: 'settings',
                     isActive: true
                 }
-            },
-            {
+            }, {
                 route: 'keyrings',
                 name: 'keyrings',
                 moduleId: 'main/manage/keyrings/keyrings',
                 nav: true,
                 title: "Keyrings"
-            },
-            // {
-            //     route: ['', 'node_configurations'],
-            //     name: 'node_configurations',
-            //     moduleId: 'main/manage/node_configurations/node_configurations',
-            //     nav: true,
-            //     title: 'Node Configurations',
-            // },
-            {
+            }, {
                 route: 'networks',
                 name: 'networks',
                 moduleId: 'main/manage/networks/networks',
