@@ -7,15 +7,7 @@ export class WorkspaceWizard {
     attached() {
         $('.coupled.modal')
             .modal({
-                allowMultiple: false,
-                closable  : false,
-                onDeny    : function(){
-                    window.alert('Wait not yet!');
-                    return false;
-                },
-                onApprove : function() {
-                    window.alert('Approved!');
-                }
+                allowMultiple: false
             });
 
         $('.ui.accordion')
@@ -45,7 +37,7 @@ export class WorkspaceWizard {
 
     submit() {
         this.hide();
-        location.assign('#/main/workspace')
+        location.assign('#/main/workspaces/workspace')
     }
 
     createApplication() {

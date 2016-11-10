@@ -19,7 +19,7 @@ export class Workspaces {
     }
 
     open() {
-        location.assign("#/main/workspace")
+        location.assign("#/main/workspaces/workspace")
     }
 
 }

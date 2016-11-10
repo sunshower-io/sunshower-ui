@@ -27,6 +27,12 @@ export class App {
                 nav: true,
                 title: 'Workspaces'
             }, {
+                route: 'workspaces/workspace',
+                name: 'Workspace',
+                moduleId: 'main/workspace/workspace-router',
+                nav: false,
+                title: 'Workspace'
+            }, {
                 route: 'applications',
                 name: 'Applications',
                 moduleId: 'main/applications/applications',
