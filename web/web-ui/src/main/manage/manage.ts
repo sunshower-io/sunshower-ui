@@ -11,8 +11,20 @@ export class Manage {
     public configureRouter(config: RouterConfiguration, router: Router) {
         config.title = "Manage";
         config.map([
+
             {
-                route: ['', 'deploy'],
+                route: ['', 'applications'],
+                name: 'applications',
+                moduleId: 'main/manage/applications/applications',
+                nav: true,
+                title: "Applications",
+                settings: {
+                    icon: 'settings',
+                    isActive: true
+                }
+            },
+            {
+                route: 'deploy',
                 name: 'deploy',
                 moduleId: 'main/manage/deploy/deploy',
                 nav: true,
