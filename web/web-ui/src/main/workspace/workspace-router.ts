@@ -96,6 +96,16 @@ export class WorkspaceView {
                     child: false
                 }
             }, {
+                route: 'activity',
+                name: 'activity',
+                moduleId: 'main/workspace/activity/activity',
+                nav: true,
+                title: 'Activity',
+                settings: {
+                    parent: false,
+                    child: false
+                }
+            }, {
                 route: 'reports',
                 name: 'reports',
                 moduleId: 'main/workspace/reports/reports',
