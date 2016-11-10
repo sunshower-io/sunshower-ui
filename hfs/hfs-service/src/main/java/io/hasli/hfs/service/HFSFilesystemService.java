@@ -1,6 +1,5 @@
 package io.hasli.hfs.service;
 
-import com.sun.xml.internal.ws.util.MetadataUtil;
 import io.hasli.hfs.api.FilesystemService;
 import io.hasli.hfs.api.ObjectDescriptor;
 import io.hasli.hfs.api.SwarmService;
@@ -10,10 +9,7 @@ import io.hasli.model.core.deployment.ApplicationDescriptor;
 import org.apache.commons.io.input.TeeInputStream;
 
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.*;
 import java.util.concurrent.ExecutorService;
@@ -47,6 +43,14 @@ public class HFSFilesystemService implements FilesystemService {
     }
 
 
+    @Override
+    public byte[] image(String id) {
+        return this.swarmService.cat(Multihash.fromBase58(id));
+    }
+
+
+
+
     @Inject
     private ExecutorService executorService;
 
@@ -70,12 +74,6 @@ public class HFSFilesystemService implements FilesystemService {
         public void run() {
             ObjectDescriptor save = this.swarmService.save(inputStream);
             this.descriptor.setId(Multihash.fromBase58(save.getAddress()));
-//            try {
-//                inputStream.close();
-//                outputStream.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
         }
     }
 

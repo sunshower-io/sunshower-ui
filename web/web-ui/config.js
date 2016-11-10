@@ -349,8 +349,6 @@ System.config({
       "main/applications/library/library.js",
       "main/applications/templates/templates.html!github:systemjs/plugin-text@0.0.8.js",
       "main/applications/templates/templates.js",
-      "main/dashboard/dashboard.html!github:systemjs/plugin-text@0.0.8.js",
-      "main/dashboard/dashboard.js",
       "main/home/home.html!github:systemjs/plugin-text@0.0.8.js",
       "main/home/home.js",
       "main/infrastructure/credentials/credentials.html!github:systemjs/plugin-text@0.0.8.js",
@@ -359,8 +357,6 @@ System.config({
       "main/infrastructure/infrastructure.js",
       "main/infrastructure/projects/projects.html!github:systemjs/plugin-text@0.0.8.js",
       "main/infrastructure/projects/projects.js",
-      "main/logs/logs.html!github:systemjs/plugin-text@0.0.8.js",
-      "main/logs/logs.js",
       "main/main.html!github:systemjs/plugin-text@0.0.8.js",
       "main/main.js",
       "main/manage/keyrings/keyrings.html!github:systemjs/plugin-text@0.0.8.js",
@@ -376,6 +372,17 @@ System.config({
       "main/reports/reports.js",
       "main/storage/storage.html!github:systemjs/plugin-text@0.0.8.js",
       "main/storage/storage.js",
+      "main/workspace/applications/my-apps.html!github:systemjs/plugin-text@0.0.8.js",
+      "main/workspace/applications/my-apps.js",
+      "main/workspace/builder/builder.html!github:systemjs/plugin-text@0.0.8.js",
+      "main/workspace/builder/builder.js",
+      "main/workspace/wizards/workspace-wizard.html!github:systemjs/plugin-text@0.0.8.js",
+      "main/workspace/wizards/workspace-wizard.js",
+      "main/workspace/workspace-router.html!github:systemjs/plugin-text@0.0.8.js",
+      "main/workspace/workspace-router.js",
+      "main/workspace/workspace-side-menu.html!github:systemjs/plugin-text@0.0.8.js",
+      "main/workspace/workspaces.html!github:systemjs/plugin-text@0.0.8.js",
+      "main/workspace/workspaces.js",
       "model/core/application.js",
       "model/core/secret/credentials.js",
       "model/core/security/context.js",
@@ -449,10 +456,6 @@ System.config({
     "main/applications/applications.js": [
       "jquery"
     ],
-    "main/dashboard/dashboard.js": [
-      "aurelia-dependency-injection",
-      "../../model/core/security/index"
-    ],
     "main/infrastructure/credentials/credentials.js": [
       "aurelia-framework",
       "aurelia-fetch-client",
@@ -476,6 +479,13 @@ System.config({
       "../../../model/core/secret/credentials",
       "aurelia-framework",
       "pnotify"
+    ],
+    "main/workspace/workspace-router.js": [
+      "jquery"
+    ],
+    "main/workspace/workspaces.js": [
+      "aurelia-dependency-injection",
+      "./wizards/workspace-wizard"
     ],
     "model/core/security/index.js": [
       "./user",

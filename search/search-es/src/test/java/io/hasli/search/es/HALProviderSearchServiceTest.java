@@ -26,6 +26,7 @@ import org.eclipse.persistence.jaxb.JAXBContextFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -65,17 +66,6 @@ public class HALProviderSearchServiceTest {
 
 
     @Bean
-    public IndexWriterConfig indexWriter(
-            Analyzer analyzer,
-            Directory directory
-    ) throws IOException {
-        IndexWriterConfig configuration =
-                new IndexWriterConfig(analyzer);
-        return configuration;
-    }
-
-
-    @Bean
     public Scanner scanner() {
         return new HasliFieldScanner();
     }
@@ -84,12 +74,12 @@ public class HALProviderSearchServiceTest {
     public IndexingService indexingService(
             Directory directory,
             Scanner scanner,
-            IndexWriterConfig configuration
+            Analyzer analyzer
     ) {
         return new HALProviderIndexService(
             scanner,
             directory,
-            configuration,
+            analyzer,
             new LuceneFieldMappings()
         );
     }

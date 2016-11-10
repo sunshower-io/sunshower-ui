@@ -2,10 +2,7 @@ package io.hasli.hfs.api;
 
 import io.hasli.model.core.deployment.ApplicationDescriptor;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.InputStream;
 
@@ -29,6 +26,8 @@ public interface FilesystemService {
 
 
 
+
+
     @POST
     @Path("/application")
     @Consumes(MediaType.APPLICATION_OCTET_STREAM)
@@ -37,6 +36,14 @@ public interface FilesystemService {
             MediaType.APPLICATION_XML
     })
     ApplicationDescriptor uploadApplication(InputStream request);
+
+    @GET
+    @Path("image/{id}")
+    @Produces("image/svg+xml")
+    byte[] image(@PathParam("id") String id);
+
+
+
 
 
 }

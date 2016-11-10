@@ -4,6 +4,7 @@ import io.hasli.search.api.*;
 import io.hasli.search.api.Document;
 import io.hasli.search.api.Field;
 import io.hasli.search.service.IndexingService;
+import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
@@ -14,8 +15,8 @@ import org.apache.lucene.store.Directory;
 public class HALProviderIndexService implements IndexingService {
 
     private final Scanner scanner;
+    private final Analyzer analyzer;
     private final Directory directory;
-    private final IndexWriterConfig indexWriterConfiguration;
 
     private final FieldMappings<org.apache.lucene.document.Field> fieldMappings;
 
@@ -23,13 +24,13 @@ public class HALProviderIndexService implements IndexingService {
     public HALProviderIndexService(
             final Scanner scanner,
             final Directory directory,
-            final IndexWriterConfig indexWriterConfiguration,
+            final Analyzer analyzer,
             final FieldMappings<org.apache.lucene.document.Field> fieldMappings
     ) {
         this.scanner = scanner;
+        this.analyzer = analyzer;
         this.directory = directory;
         this.fieldMappings = fieldMappings;
-        this.indexWriterConfiguration = indexWriterConfiguration;
     }
 
     @Override
@@ -37,7 +38,7 @@ public class HALProviderIndexService implements IndexingService {
         try(final IndexWriter indexWriter =
                         new IndexWriter(
                                 directory,
-                                indexWriterConfiguration
+                                new IndexWriterConfig(analyzer)
                         )) {
             final org.apache.lucene.document.Document indexedDocument =
                     new org.apache.lucene.document.Document();
@@ -64,7 +65,7 @@ public class HALProviderIndexService implements IndexingService {
         try(final IndexWriter indexWriter =
                     new IndexWriter(
                             directory,
-                            indexWriterConfiguration
+                            new IndexWriterConfig(analyzer)
                     )) {
             for(T object : objects) {
                 final org.apache.lucene.document.Document indexedDocument =

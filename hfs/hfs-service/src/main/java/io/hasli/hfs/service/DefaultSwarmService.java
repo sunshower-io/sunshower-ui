@@ -18,9 +18,10 @@ import java.util.stream.Collectors;
  */
 public class DefaultSwarmService implements SwarmService {
 
-    private AgentConfiguration configuration;
 
     private HFSClient client;
+
+    private AgentConfiguration configuration;
 
 
     @Override
@@ -65,6 +66,16 @@ public class DefaultSwarmService implements SwarmService {
         try {
             return new ObjectDescriptor(this.client.add(
                     new NamedStreamable.StreamWrapper(inputStream, true)));
+        } catch (IOException e) {
+            throw new FilesystemException(e);
+        }
+    }
+
+
+    @Override
+    public byte[] cat(Multihash multihash) {
+        try {
+            return this.client.cat(multihash);
         } catch (IOException e) {
             throw new FilesystemException(e);
         }

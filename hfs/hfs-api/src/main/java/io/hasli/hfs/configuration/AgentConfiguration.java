@@ -36,7 +36,8 @@ public class AgentConfiguration {
         return new MultiAddress(String.format("/ip4/%s/%s/%s",
                 get("agent-ip", "127.0.0.1"),
                 get("agent-protocol", "tcp"),
-                this.ports.getHttp()
+                this.ports.getHttp() == 0 ? 5001 : this.ports.getHttp()
+
         ));
     }
 

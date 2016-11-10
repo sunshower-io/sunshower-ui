@@ -19,6 +19,7 @@ public interface SwarmService {
 
     ObjectDescriptor save(File file);
 
+    byte[] cat(Multihash id);
 
 
     InputStream stream(Multihash multihash);
@@ -30,4 +31,6 @@ public interface SwarmService {
     List<ObjectDescriptor> save(List<File> files);
 
     ObjectDescriptor save(InputStream inputStream);
+
+
 }
