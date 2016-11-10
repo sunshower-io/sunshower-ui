@@ -14,17 +14,18 @@ export class App {
     public configureRouter(config: RouterConfiguration, router: Router) {
         config.title = 'Aurelia';
         config.map([
+            // {
+            //     route: ['', 'home'],
+            //     name: 'home',
+            //     moduleId: 'main/home/home',
+            //     nav: false,
+            //     title: 'home',
+            //     settings: {
+            //         icon: ''
+            //     }
+            // },
             {
-                route: ['', 'home'],
-                name: 'home',
-                moduleId: 'main/home/home',
-                nav: false,
-                title: 'home',
-                settings: {
-                    icon: ''
-                }
-            }, {
-                route: 'workspaces',
+                route: ['', 'workspaces'],
                 name: 'Workspaces',
                 moduleId: 'main/workspace/workspaces',
                 nav: true,
