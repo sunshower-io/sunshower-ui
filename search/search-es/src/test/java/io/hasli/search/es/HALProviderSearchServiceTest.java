@@ -7,6 +7,7 @@ import io.hasli.barometer.rpc.Remote;
 import io.hasli.barometer.rs.module.JAXRS;
 import io.hasli.barometer.spring.BarometerRunner;
 import io.hasli.hal.api.instance.InstanceDescriptor;
+import io.hasli.hal.api.instance.NodeConfiguration;
 import io.hasli.hal.api.memory.MemoryProfile;
 import io.hasli.hal.api.units.ByteUnit;
 import io.hasli.search.api.Document;
@@ -111,7 +112,7 @@ public class HALProviderSearchServiceTest {
     public void ensureFindingByIdWorks() {
 
         computeSearchService.index();
-        InstanceDescriptor memory = new InstanceDescriptor();
+        NodeConfiguration memory = new NodeConfiguration();
         MemoryProfile profile = new MemoryProfile();
         profile.setCapacity(1l);
         profile.setUnit(ByteUnit.Gigabyte);
@@ -129,7 +130,7 @@ public class HALProviderSearchServiceTest {
     public void ensureFindingByIdWorks_remote() {
 
         remoteComputeSearchService.index();
-        InstanceDescriptor memory = new InstanceDescriptor();
+        NodeConfiguration memory = new NodeConfiguration();
         MemoryProfile profile = new MemoryProfile();
         profile.setCapacity(1l);
         profile.setUnit(ByteUnit.Gigabyte);

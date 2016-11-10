@@ -18,24 +18,6 @@ public class AWSSystemServiceTest {
     @Test
     public void ensureDeployingSimpleInstanceWorks() {
 
-//        final AmazonEC2Client client =
-//                new AmazonEC2Client(getCredentials());
-//
-//        client.setRegion(Region.getRegion(Regions.US_WEST_2));
-//
-//        final RunInstancesRequest instancesRequest =
-//                new RunInstancesRequest();
-//
-//
-//
-//        instancesRequest.withImageId("ami-fa91319a")
-//                .withInstanceType("t2.small")
-//                .withMinCount(1)
-//                .withMaxCount(1)
-//                .withKeyName("default")
-//                .withSecurityGroups("default");
-//
-//        client.runInstances(instancesRequest);
 
     }
 

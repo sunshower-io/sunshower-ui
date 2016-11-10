@@ -1,6 +1,7 @@
 package io.hasli.search.service.compute;
 
 import io.hasli.hal.api.instance.InstanceDescriptor;
+import io.hasli.hal.api.instance.NodeConfiguration;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -28,7 +29,7 @@ public interface ComputeSearchService {
 
     @POST
     @Path("/")
-    UUID save(InstanceDescriptor descriptor);
+    UUID save(NodeConfiguration descriptor);
 
     @GET
     @Path("{id}")

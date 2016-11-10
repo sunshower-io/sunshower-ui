@@ -1,26 +1,61 @@
 template
     h1 Select Node Configuration
-    .ui.card.fluid
-        .content
-            .header Node Configurations
-            .ui.relaxed.divided.list
-               .item(repeat.for="cfg of configurations")
-                   .content
-                       .header  ${cfg.name} #[a(click.delegate="openDeployment(cfg.id)") deploy]
+    .nodeconfig(style="height:100%; max-height:800px; overflow:auto")
+        .ui.card.fluid
+            .content
+                .header Node Configurations
+                .ui.relaxed.divided.list
+                   .item(repeat.for="cfg of configurations")
+                       .content
+                           .header  ${cfg.name} #[a(click.delegate="openDeployment(cfg.id)") deploy]
 
-    .ui.card.fluid(show.bind="showDeploymentPanel")
-        .content
-            .header Deploying ${toDeploy.name} (${toDeploy.id})
-        .content
-            .header Compute Profile
-            span CPUs ${toDeploy.computeProfile.cores}
-        .content
-            .header Storage Profile
-            span Disk Space ${toDeploy.storageProfile.capacity} ${toDeploy.storageProfile.unit}
-        .content
-            .header Memory Profile
-            span Memory ${toDeploy.memoryProfile.capacity} ${toDeploy.memoryProfile.unit}
+        .ui.card.fluid(show.bind="showDeploymentPanel")
+            .content
+                .header Deploying ${toDeploy.name} (${toDeploy.id})
+            .content
+                .header Compute Profile
+                span CPUs ${toDeploy.computeProfile.cores}
+            .content
+                .header Storage Profile
+                span Disk Space ${toDeploy.storageProfile.capacity} ${toDeploy.storageProfile.unit}
+            .content
+                .header Memory Profile
+                span Memory ${toDeploy.memoryProfile.capacity} ${toDeploy.memoryProfile.unit}
 
-        .extra.content
-            .header #[a(click.delegate="searchInstances(toDeploy.id)") Search for instances]
+            .extra.content
+                .header #[a(click.delegate="searchInstances(toDeploy.id)") Search for instances]
 
+        .ui.card.fluid(show.bind="matchingConfigurations != null" )
+            .content
+                .header Matching Configurations
+                .ui.relaxed.divided.list(style="max-height:200px; overflow-y:auto")
+                    .item(repeat.for = "cfg of matchingConfigurations")
+                        .content
+                            .header ${cfg.name}
+                            .ui.checkbox
+                                input(type="checkbox", click.delegate="showOperatingSystems()")
+                                label Select
+        .ui.card.fluid(show.bind="selectOsVisible" )
+            .content
+                .header Available Operating Systems
+                .ui.relaxed.divided.list(style="max-height:200px; overflow-y:auto")
+                    .item(repeat.for = "os of operatingSystems")
+                        .content
+                            .header ${os.name}
+                            .ui.checkbox
+                                input(type="checkbox", click.delegate="showAvailableCredentials()")
+                                label Select
+        .ui.card.fluid(show.bind="selectCredentialVisible" )
+            .content
+                .header Existing Credentials
+                .ui.relaxed.divided.list(style="max-height:200px; overflow-y:auto")
+                    .item(repeat.for = "credential of credentials")
+                        .content
+                            .header ${credential.name}
+                            .ui.checkbox
+                                input(type="checkbox", click.delegate="selectCredential()")
+                                label Select
+        .ui.card.fluid(show.bind="submitVisible" )
+            .content
+                .header Go
+                .ui.basic.green.button(click.delegate="deploy()") Deploy

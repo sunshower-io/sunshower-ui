@@ -11,6 +11,7 @@ import io.hasli.model.core.Metadata;
 import io.hasli.search.api.Index;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -25,19 +26,24 @@ public class InstanceDescriptor extends DistributableEntity {
 
 
     @Basic
+    @XmlAttribute
     private String name;
 
     @Basic
+    @XmlAttribute
     private String key;
 
     @Basic
+    @XmlAttribute
     private String description;
 
     @Transient
+    @XmlElement
     private Provider provider;
 
 //    @OneToOne
     @Transient
+    @XmlElement
     private Metadata metadata;
 
     @XmlElement

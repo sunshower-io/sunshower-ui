@@ -1,6 +1,7 @@
 package io.hasli.search.es;
 
 import io.hasli.hal.api.instance.InstanceDescriptor;
+import io.hasli.hal.api.instance.NodeConfiguration;
 import io.hasli.hal.api.memory.MemoryProfile;
 import io.hasli.hal.api.units.ByteUnit;
 import io.hasli.hal.aws.instance.EC2InstanceDescriptor;
@@ -21,6 +22,7 @@ import javax.persistence.PersistenceContext;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -51,19 +53,25 @@ public class DefaultComputeSearchService implements ComputeSearchService {
     }
 
     @Override
-    public UUID save(InstanceDescriptor descriptor) {
+    public UUID save(NodeConfiguration descriptor) {
         this.entityManager.persist(descriptor);
         return descriptor.getId();
     }
 
     @Override
     public List<InstanceDescriptor> search(UUID id) {
-        InstanceDescriptor descriptor =
-                this.entityManager.find(InstanceDescriptor.class, id);
+        NodeConfiguration configuration =
+                this.entityManager.find(NodeConfiguration.class, id);
+
+        InstanceDescriptor descriptor = new InstanceDescriptor();
+        descriptor.setMemoryProfile(configuration.getMemoryProfile());
+        descriptor.setComputeProfile(configuration.getComputeProfile());
+        descriptor.setStorageProfile(configuration.getStorageProfile());
+
         Set<Serializable> search = searchService.search(descriptor,
                 new DefaultQueryExtractor())
                 .stream()
-                .map(s -> s.getId())
+                .map(Document::getId)
                 .collect(Collectors.toSet());
         return entityManager.createQuery("select instance " +
                 "from InstanceDescriptor instance " +
@@ -88,7 +96,8 @@ public class DefaultComputeSearchService implements ComputeSearchService {
             Unmarshaller unmarshaller = context.createUnmarshaller();
             unmarshaller.setProperty("eclipselink.media-type", "application/json");
             unmarshaller.setProperty("eclipselink.json.include-root", false);
-            StreamSource source = new StreamSource(ClassLoader.getSystemResourceAsStream("ec2-instances.json"));
+            InputStream is = DefaultComputeSearchService.class.getResourceAsStream("/ec2-instances.json");
+            StreamSource source = new StreamSource(is);
 
             EC2InstanceDescriptors descriptors = unmarshaller.unmarshal(
                     source, EC2InstanceDescriptors.class).getValue();
@@ -100,12 +109,15 @@ public class DefaultComputeSearchService implements ComputeSearchService {
                 memoryProfile.setUnit(ByteUnit.Megabyte);
                 memoryProfile.setCapacity(((long) descriptor.getMemory()) * 1000);
                 final InstanceDescriptor d = new InstanceDescriptor();
+                d.setName(descriptor.getName());
+                d.setDescription(descriptor.getPrettyName());
+                d.setKey(descriptor.getInstanceType());
                 d.setMemoryProfile(memoryProfile);
                 instanceDescriptors.add(d);
             }
             return instanceDescriptors;
         } catch (Exception ex) {
-
+            ex.printStackTrace();
         }
         return null;
     }

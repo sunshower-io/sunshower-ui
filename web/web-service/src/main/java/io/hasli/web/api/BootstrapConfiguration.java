@@ -4,6 +4,7 @@ import io.hasli.common.configuration.ConfigurationSource;
 import io.hasli.common.configuration.MapConfigurationSource;
 import io.hasli.common.rs.MoxyProvider;
 import io.hasli.hal.api.instance.NodeConfigurationService;
+import io.hasli.hal.aws.AwsComputeService;
 import io.hasli.hal.core.node.DefaultNodeConfigurationService;
 import io.hasli.hfs.service.HFSConfiguration;
 import io.hasli.jpa.flyway.FlywayConfiguration;
@@ -43,6 +44,11 @@ public class BootstrapConfiguration {
     private Flyway flyway;
 
     public BootstrapConfiguration() {
+    }
+
+    @Bean
+    public AwsComputeService awsComputeService() {
+        return new AwsComputeService();
     }
 
 

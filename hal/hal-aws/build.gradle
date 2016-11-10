@@ -1,4 +1,6 @@
 
 dependencies {
     compile "com.amazonaws:aws-java-sdk"
+
+    compile project(":api:vault-api")
 }
