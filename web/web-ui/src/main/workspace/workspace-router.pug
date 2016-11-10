@@ -7,7 +7,7 @@ template(bindable="router")
                 template(repeat.for='row of router.navigation')
                     a.item(if.bind='!row.settings.parent && !row.settings.child', class="${row.isActive ? 'active' : ''}", href.bind='row.href', style='margin: 0 0 -4px')
                         .text ${row.title}
-                    .item(if.bind='row.settings.parent', class="${row.isActive ? 'active' : ''}", href.bind='row.href')
+                    .item(if.bind='row.settings.parent', class="${row.isActive ? 'active' : ''}", href.bind='row.href', style='margin: 0 0 -4px')
                         .ui.dropdown(if.bind='row.settings.parent', style='color: #636876;')
                             .text ${row.title}
                             i.dropdown.icon
