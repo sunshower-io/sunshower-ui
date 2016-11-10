@@ -25,6 +25,7 @@ dependencies {
 
     testCompile('org.jboss.resteasy:tjws')
     testCompile project(":test:test-persist")
+    testCompile project(":test:test-service")
     testCompile('org.jboss.resteasy:resteasy-jaxrs')
     testCompile('org.jboss.resteasy:resteasy-spring')
     testCompile('org.jboss.resteasy:resteasy-client')

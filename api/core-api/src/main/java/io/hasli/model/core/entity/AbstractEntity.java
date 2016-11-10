@@ -19,6 +19,8 @@ public abstract class AbstractEntity<ID extends Serializable>
         setId(id);
     }
 
+    protected AbstractEntity() {}
+
 
     public abstract ID getId();
 

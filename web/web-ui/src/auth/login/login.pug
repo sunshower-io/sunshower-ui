@@ -1,11 +1,8 @@
 template
-    .ui.hidden.divider
-    .ui.hidden.divider
-    .ui.hidden.divider
-    .ui.one.column.center.aligned.grid
-        .column.seven.wide
+    .ui.center.aligned.grid
+        .column.five.wide
             h2.center.aligned.header
-                | Enter Credentials
+                | Enter credentials
             .ui.hidden.divider
             .ui.small.form
                 .field
@@ -14,15 +11,14 @@ template
                 .field
                     label.pull-left Password
                     input(type='password', placeholder='Enter your password', value.bind='user.password')
+
+                .ui.error.message.left(show.bind="credentialsInvalid" style="margin-top:10px")
+                    p Username/password combination was not recognized
+
+                input.ui.field.button.fluid.primary(type='submit', value='Sign In', click.delegate="login()")
                 .field
-                    input.ui.button.large.fluid.green(type='submit', value='sign in', click.delegate="login()")
-                .inline.field
                     .ui.checkbox.pull-left
                         input(type='checkbox', value.bind='remember')
                         label Remember me
-            .ui.hidden.divider
-            .ui.hidden.divider
-            .ui.error.message.left(show.bind="credentialsInvalid" style="margin-top:10px")
-                p Username/password combination was not recognized
 
-                //(show.bind="credentialsInvalid")
+

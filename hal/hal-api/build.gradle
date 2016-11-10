@@ -1,0 +1,14 @@
+dependencies {
+
+    provided 'com.zaxxer:HikariCP'
+    compile project(":api:core-api")
+    compile project(":api:common-api")
+
+    compile project(":persist:persist-hibernate")
+    compile project(":search:search-api")
+
+    testCompile 'io.hasli.barometer.modules:jaxrs'
+
+    testCompile project(':test:test-service')
+    testCompile project(':test:test-persist')
+}

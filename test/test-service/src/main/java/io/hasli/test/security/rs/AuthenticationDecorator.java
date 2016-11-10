@@ -7,6 +7,8 @@ import io.hasli.core.security.AuthenticationService;
 import io.hasli.model.core.auth.Role;
 import io.hasli.model.core.auth.User;
 import io.hasli.service.signup.SignupService;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
+import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataWriter;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.test.context.TestSecurityContextHolder;
 
@@ -21,7 +23,9 @@ public class AuthenticationDecorator implements ClientDecorator {
 
     @Override
     public void decorate(RestContext restContext) {
+        restContext.getClient().register(MultipartFormDataWriter.class);
         restContext.getClient().register(new ClassParameterProviderFactory());
+//        restContext.getClient().register(new MoxyOverrideProvider());
         UsernamePasswordAuthenticationToken authentication =
                 (UsernamePasswordAuthenticationToken)
                         TestSecurityContextHolder.getContext().getAuthentication();

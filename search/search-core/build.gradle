@@ -1,0 +1,4 @@
+dependencies {
+    compile project(":hal:hal-aws")
+    compile project(':search:search-api')
+}

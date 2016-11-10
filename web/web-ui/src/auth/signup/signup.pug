@@ -10,11 +10,11 @@ template
             .ui.small.form
                 .two.fields
                     .field
-                        label.pull-left First name
-                        input(type='text', placeholder='Enter your firstname', value.bind='user.firstname')
+                        label.pull-left First Name
+                        input(type='text', placeholder='Enter your First Name', value.bind='user.firstname')
                     .field
-                        label.pull-left Last name
-                        input(type='text', placeholder='Enter your lastname', value.bind='user.lastname')
+                        label.pull-left Last Name
+                        input(type='text', placeholder='Enter your Last Name', value.bind='user.lastname')
                 .two.fields
                     .field
                         label.pull-left Username
@@ -28,12 +28,8 @@ template
                         input(type='password', placeholder='Enter your password', value.bind='user.password')
                     .field
                         label.pull-left Confirm Password
-                        input(type='password', placeholder='Renter your password', value.bind='user.password')
-                .field
-                    input.ui.button.large.fluid.green(type='submit', value='sign up', click.delegate="signup()")
-            .ui.hidden.divider
-            .ui.hidden.divider
-                .ui.error.message.left(
-                    show.bind="showError" style="margin-top:10px")
+                        input(type='password', placeholder='Re-enter your password', value.bind='user.password')
+                .ui.error.message.left(show.bind="showError" style="margin-top:10px")
                     p Username or email already exists
+                input.ui.field.button.fluid.primary(type='submit', value='Sign Up', click.delegate="signup()")
 

@@ -4,8 +4,8 @@ def repos = [
         'http://repo.spring.io/snapshot',
         "https://repo.spring.io/libs-milestone",
         "$artifactory_contextUrl/libs-release",
-        "$artifactory_contextUrl/libs-snapshot"
-
+        "$artifactory_contextUrl/libs-snapshot",
+        "https://oss.sonatype.org/content/repositories/snapshots"
 ]
 
 

@@ -20,6 +20,9 @@ module.exports = {
     // './assets/**/*.less',
     // './src/**/*/*.less'
   ],
+  inlineLess: [
+      './src/**/*.less'
+  ],
   dtsSrc: [
      './tsd/**/*.d.ts',
     './typings/**/*.d.ts',
