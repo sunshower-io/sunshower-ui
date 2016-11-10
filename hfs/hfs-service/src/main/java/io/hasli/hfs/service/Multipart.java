@@ -91,7 +91,9 @@ public class Multipart {
         while ((r = inputStream.read(buffer)) != -1)
             out.write(buffer, 0, r);
         out.flush();
-        inputStream.close();
+        if(uploadFile.close()) {
+            inputStream.close();
+        }
 
         writer.append(LINE_FEED);
         writer.flush();

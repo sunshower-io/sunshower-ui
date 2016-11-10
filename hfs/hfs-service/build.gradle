@@ -10,6 +10,7 @@ dependencies {
     compile project(":api:security-api")
     compile project(":service:service-security")
     compile project(':persist:persist-hibernate')
+    compile "commons-io:commons-io"
 
 //    testCompile project(
 //            configuration: 'test',
@@ -22,6 +23,8 @@ dependencies {
     provided project(":service:service-security")
 
     testCompile('io.hasli.barometer.modules:jaxrs')
+    testCompile project(":test:test-service")
+
 
 
     testCompile('org.jboss.resteasy:tjws')

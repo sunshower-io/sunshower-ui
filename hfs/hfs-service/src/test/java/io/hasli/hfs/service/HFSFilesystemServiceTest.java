@@ -8,10 +8,10 @@ import io.hasli.hfs.agent.AgentService;
 import io.hasli.hfs.api.FilesystemService;
 import io.hasli.hfs.api.ObjectDescriptor;
 import io.hasli.hfs.configuration.AgentConfiguration;
+import io.hasli.model.core.deployment.ApplicationDescriptor;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.test.persist.EnableJPA;
-import io.hasli.test.security.EnableSecurity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -30,7 +30,6 @@ import static org.junit.Assert.assertThat;
  */
 
 @EnableJPA
-@EnableSecurity
 @Enable(JAXRS.class)
 @RunWith(BarometerRunner.class)
 @ContextConfiguration(
@@ -76,8 +75,17 @@ public class HFSFilesystemServiceTest {
                         ClassLoader.getSystemResourceAsStream(
                                 "hasli.properties.json"));
         agentService.save(configuration);
-        ObjectDescriptor descriptor = service.uploadFile(createSaveRequest("hello, world"));
-        System.out.println(descriptor.getAddress());
+        ApplicationDescriptor descriptor = service.uploadApplication(
+                ClassLoader.getSystemResourceAsStream("packages/temp.zip")
+        );
+        System.out.println(descriptor);
+    }
+
+
+    @Test
+    public void ensureUploadOfApplicationProducesExpectedResults() {
+
+
     }
 
 

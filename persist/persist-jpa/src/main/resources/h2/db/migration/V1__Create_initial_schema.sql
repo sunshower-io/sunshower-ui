@@ -233,6 +233,7 @@ create table APPLICATION_DESCRIPTOR (
 
   image                   binary(32),
   haslifile               binary(32),
+  readme                  binary(32),
   application_details_id  binary(32),
 
 

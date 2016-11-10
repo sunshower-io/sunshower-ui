@@ -5,10 +5,14 @@ package io.hasli.model.core.crypto;
  */
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.*;
 import java.util.*;
 
 @Embeddable
+@XmlRootElement
 public class Multihash implements Serializable {
     public enum Type {
         SHA1(0x11, 20),
@@ -40,19 +44,19 @@ public class Multihash implements Serializable {
     }
 
     @Column(
-        nullable = false,
         insertable = false,
         updatable = false
     )
     @Enumerated
+    @XmlAttribute
     private Type type;
 
 
     @Column(
-            nullable = false,
             insertable = false,
             updatable = false
     )
+    @XmlElement
     private byte[] hash;
 
     public Multihash() {
@@ -121,6 +125,10 @@ public class Multihash implements Serializable {
         for (byte b : toBytes())
             res.append(String.format("%x", b & 0xff));
         return res.toString();
+    }
+
+    public static Multihash fromString(String s) {
+        return fromBase58(s);
     }
 
     public String toBase58() {

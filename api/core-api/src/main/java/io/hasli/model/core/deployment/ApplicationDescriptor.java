@@ -2,19 +2,22 @@ package io.hasli.model.core.deployment;
 
 import io.hasli.model.core.crypto.Multihash;
 import io.hasli.model.core.entity.AbstractEntity;
+import org.eclipse.persistence.oxm.annotations.XmlDiscriminatorNode;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 /**
  * Created by haswell on 11/9/16.
  */
 @Entity
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
 @Table(name = "APPLICATION_DESCRIPTOR")
 public class ApplicationDescriptor extends AbstractEntity<Multihash> {
 
     @EmbeddedId
+    @XmlElement
     @AttributeOverride(
             name = "hash",
             column =
@@ -23,6 +26,7 @@ public class ApplicationDescriptor extends AbstractEntity<Multihash> {
     private Multihash id;
 
     @Embedded
+    @XmlElement
     @AttributeOverride(
             name = "hash",
             column =
@@ -31,6 +35,7 @@ public class ApplicationDescriptor extends AbstractEntity<Multihash> {
     private Multihash image;
 
     @Embedded
+    @XmlElement
     @AttributeOverride(
             name = "hash",
             column =
@@ -39,27 +44,31 @@ public class ApplicationDescriptor extends AbstractEntity<Multihash> {
     private Multihash deploymentFile;
 
     @Embedded
+    @XmlElement
     @AttributeOverride(
             name = "hash",
             column =
-            @Column(name = "haslifile")
+            @Column(name = "readme")
     )
     private Multihash readme;
 
     @Basic
+    @XmlElement
     private String name;
 
     @Basic
+    @XmlElement
     private String version;
 
     @Basic
+    @XmlElement
     private String description;
 
 
 
 
     public ApplicationDescriptor() {
-        super(null);
+
     }
 
     public ApplicationDescriptor(Multihash multihash) {
@@ -72,7 +81,7 @@ public class ApplicationDescriptor extends AbstractEntity<Multihash> {
     }
 
     @Override
-    protected void setId(Multihash multihash) {
+    public void setId(Multihash multihash) {
         this.id = multihash;
     }
 
@@ -132,19 +141,23 @@ public class ApplicationDescriptor extends AbstractEntity<Multihash> {
 
     @Override
     public String toString() {
-        return null;
+        return "ApplicationDescriptor{" +
+                "id=" + id +
+                ", image=" + image +
+                ", deploymentFile=" + deploymentFile +
+                ", readme=" + readme +
+                ", name='" + name + '\'' +
+                ", version='" + version + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ApplicationDescriptor)) return false;
-
         ApplicationDescriptor that = (ApplicationDescriptor) o;
-
         return id != null ? id.equals(that.id) : that.id == null;
-
     }
 
     @Override

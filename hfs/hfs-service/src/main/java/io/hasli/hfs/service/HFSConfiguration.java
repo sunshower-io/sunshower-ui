@@ -8,6 +8,9 @@ import io.hasli.hfs.service.HFSFilesystemService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ForkJoinPool;
+
 /**
  * Created by haswell on 11/8/16.
  */
@@ -19,6 +22,11 @@ public class HFSConfiguration {
         return new DefaultSwarmService();
     }
 
+
+    @Bean
+    public ExecutorService executorService() {
+        return new ForkJoinPool();
+    }
 
     @Bean
     public AgentService agentService() {

@@ -58,11 +58,13 @@ public class DefaultSwarmService implements SwarmService {
         }
     }
 
+
+    static final Object lock = new Object();
     @Override
     public ObjectDescriptor save(InputStream inputStream) {
         try {
             return new ObjectDescriptor(this.client.add(
-                    new NamedStreamable.StreamWrapper(inputStream)));
+                    new NamedStreamable.StreamWrapper(inputStream, true)));
         } catch (IOException e) {
             throw new FilesystemException(e);
         }
