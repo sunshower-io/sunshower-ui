@@ -9,22 +9,26 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 import java.util.stream.*;
+
 /**
  * Created by haswell on 11/8/16.
  */
+@SuppressWarnings("unchecked")
 public class HFSClient {
 
-    public static final String MIN_VERSION = "0.4.3";
-    public enum PinType {all, direct, indirect, recursive}
-    public List<String> ObjectTemplates = Arrays.asList("unixfs-dir");
-    public List<String> ObjectPatchTypes = Arrays.asList("add-link", "rm-link", "set-data", "append-data");
+    private static final String MIN_VERSION = "0.4.3";
 
-    public final String host;
-    public final int port;
+    private enum PinType {all, direct, indirect, recursive}
+
+    private List<String> ObjectTemplates = Arrays.asList("unixfs-dir");
+    private List<String> ObjectPatchTypes = Arrays.asList("add-link", "rm-link", "set-data", "append-data");
+
+    private final String host;
+    private final int port;
     private final String version;
-    public final Pin pin = new Pin();
+    final Pin pin = new Pin();
     public final Repo repo = new Repo();
-    public final IPFSObject object = new IPFSObject();
+    public final HFSObject object = new HFSObject();
     public final Swarm swarm = new Swarm();
     public final Bootstrap bootstrap = new Bootstrap();
     public final Block block = new Block();
@@ -60,7 +64,7 @@ public class HFSClient {
             if (parts[0].compareTo(minParts[0]) < 0
                     || parts[1].compareTo(minParts[1]) < 0
                     || parts[2].compareTo(minParts[2]) < 0)
-                throw new IllegalStateException("You need to use a more recent version of IPFS! >= " + MIN_VERSION);
+                throw new IllegalStateException("You need to use a more recent version of HFS! >= " + MIN_VERSION);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -77,13 +81,14 @@ public class HFSClient {
     }
 
     public List<MerkleNode> add(List<NamedStreamable> files) throws IOException {
-        Multipart m = new Multipart("http://" + host + ":" + port + version+"add?stream-channels=true", "UTF-8");
-        for (NamedStreamable file: files) {
+        Multipart m = new Multipart("http://" + host + ":" + port + version + "add?stream-channels=true", "UTF-8");
+        for (NamedStreamable file : files) {
             if (file.isDirectory()) {
-                m.addSubtree("", ((NamedStreamable.FileWrapper)file).getFile());
+                m.addSubtree("", ((NamedStreamable.FileWrapper) file).getFile());
             } else
                 m.addFilePart("file", file);
-        };
+        }
+        ;
         String res = m.finish();
         return JSONParser.parseStream(res).stream()
                 .map(x -> MerkleNode.fromJSON((Map<String, Object>) x))
@@ -112,17 +117,17 @@ public class HFSClient {
     }
 
     public Map refs(Multihash hash, boolean recursive) throws IOException {
-        return retrieveMap("refs?arg=" + hash +"&r="+recursive);
+        return retrieveMap("refs?arg=" + hash + "&r=" + recursive);
     }
 
     public Map resolve(String scheme, Multihash hash, boolean recursive) throws IOException {
-        return retrieveMap("resolve?arg=/" + scheme+"/"+hash +"&r="+recursive);
+        return retrieveMap("resolve?arg=/" + scheme + "/" + hash + "&r=" + recursive);
     }
 
 
     public String dns(String domain) throws IOException {
         Map res = retrieveMap("dns?arg=" + domain);
-        return (String)res.get("Path");
+        return (String) res.get("Path");
     }
 
     public Map mount(java.io.File ipfsRoot, java.io.File ipnsRoot) throws IOException {
@@ -130,8 +135,8 @@ public class HFSClient {
             ipfsRoot.mkdirs();
         if (ipnsRoot != null && !ipnsRoot.exists())
             ipnsRoot.mkdirs();
-        return (Map)retrieveAndParse("mount?arg=" + (ipfsRoot != null ? ipfsRoot.getPath() : "/ipfs" ) + "&arg=" +
-                (ipnsRoot != null ? ipnsRoot.getPath() : "/ipns" ));
+        return (Map) retrieveAndParse("mount?arg=" + (ipfsRoot != null ? ipfsRoot.getPath() : "/ipfs") + "&arg=" +
+                (ipnsRoot != null ? ipnsRoot.getPath() : "/ipns"));
     }
 
     // level 2 commands
@@ -149,9 +154,9 @@ public class HFSClient {
      */
     public class Pin {
         public List<Multihash> add(Multihash hash) throws IOException {
-            return ((List<Object>)((Map)retrieveAndParse("pin/add?stream-channels=true&arg=" + hash)).get("Pins"))
+            return ((List<Object>) ((Map) retrieveAndParse("pin/add?stream-channels=true&arg=" + hash)).get("Pins"))
                     .stream()
-                    .map(x -> Multihash.fromBase58((String)x))
+                    .map(x -> Multihash.fromBase58((String) x))
                     .collect(Collectors.toList());
         }
 
@@ -160,9 +165,9 @@ public class HFSClient {
         }
 
         public Map<Multihash, Object> ls(PinType type) throws IOException {
-            return ((Map<String, Object>)(((Map)retrieveAndParse("pin/ls?stream-channels=true&t="+type.name())).get("Keys"))).entrySet()
+            return ((Map<String, Object>) (((Map) retrieveAndParse("pin/ls?stream-channels=true&t=" + type.name())).get("Keys"))).entrySet()
                     .stream()
-                    .collect(Collectors.toMap(x -> Multihash.fromBase58(x.getKey()), x-> x.getValue()));
+                    .collect(Collectors.toMap(x -> Multihash.fromBase58(x.getKey()), x -> x.getValue()));
         }
 
         public List<Multihash> rm(Multihash hash) throws IOException {
@@ -191,7 +196,7 @@ public class HFSClient {
         }
 
         public List<MerkleNode> put(List<byte[]> data) throws IOException {
-            Multipart m = new Multipart("http://" + host + ":" + port + version+"block/put?stream-channels=true", "UTF-8");
+            Multipart m = new Multipart("http://" + host + ":" + port + version + "block/put?stream-channels=true", "UTF-8");
             for (byte[] f : data)
                 m.addFilePart("file", new NamedStreamable.ByteArrayWrapper(f));
             String res = m.finish();
@@ -205,9 +210,9 @@ public class HFSClient {
 
     /* 'ipfs object' is a plumbing command used to manipulate DAG objects directly. {Object} is a subset of {Block}
      */
-    public class IPFSObject {
+    public class HFSObject {
         public List<MerkleNode> put(List<byte[]> data) throws IOException {
-            Multipart m = new Multipart("http://" + host + ":" + port + version+"object/put?stream-channels=true", "UTF-8");
+            Multipart m = new Multipart("http://" + host + ":" + port + version + "object/put?stream-channels=true", "UTF-8");
             for (byte[] f : data)
                 m.addFilePart("file", new NamedStreamable.ByteArrayWrapper(f));
             String res = m.finish();
@@ -217,7 +222,7 @@ public class HFSClient {
         public List<MerkleNode> put(String encoding, List<byte[]> data) throws IOException {
             if (!"json".equals(encoding) && !"protobuf".equals(encoding))
                 throw new IllegalArgumentException("Encoding must be json or protobuf");
-            Multipart m = new Multipart("http://" + host + ":" + port + version+"object/put?stream-channels=true&encoding="+encoding, "UTF-8");
+            Multipart m = new Multipart("http://" + host + ":" + port + version + "object/put?stream-channels=true&encoding=" + encoding, "UTF-8");
             for (byte[] f : data)
                 m.addFilePart("file", new NamedStreamable.ByteArrayWrapper(f));
             String res = m.finish();
@@ -245,15 +250,15 @@ public class HFSClient {
 
         public MerkleNode _new(Optional<String> template) throws IOException {
             if (template.isPresent() && !ObjectTemplates.contains(template.get()))
-                throw new IllegalStateException("Unrecognised template: "+template.get());
-            Map json = retrieveMap("object/new?stream-channels=true"+(template.isPresent() ? "&arg=" + template.get() : ""));
+                throw new IllegalStateException("Unrecognised template: " + template.get());
+            Map json = retrieveMap("object/new?stream-channels=true" + (template.isPresent() ? "&arg=" + template.get() : ""));
             return MerkleNode.fromJSON(json);
         }
 
         public MerkleNode patch(Multihash base, String command, Optional<byte[]> data, Optional<String> name, Optional<Multihash> target) throws IOException {
             if (!ObjectPatchTypes.contains(command))
-                throw new IllegalStateException("Illegal Object.patch command type: "+command);
-            String targetPath = "object/patch/"+command+"?arg=" + base.toBase58();
+                throw new IllegalStateException("Illegal Object.patch command type: " + command);
+            String targetPath = "object/patch/" + command + "?arg=" + base.toBase58();
             if (name.isPresent())
                 targetPath += "&arg=" + name.get();
             if (target.isPresent())
@@ -271,7 +276,7 @@ public class HFSClient {
                 case "append-data":
                     if (!data.isPresent())
                         throw new IllegalStateException("set-data requires data!");
-                    Multipart m = new Multipart("http://" + host + ":" + port + version+"object/patch/"+command+"?arg="+base.toBase58()+"&stream-channels=true", "UTF-8");
+                    Multipart m = new Multipart("http://" + host + ":" + port + version + "object/patch/" + command + "?arg=" + base.toBase58() + "&stream-channels=true", "UTF-8");
                     m.addFilePart("file", new NamedStreamable.ByteArrayWrapper(data.get()));
                     String res = m.finish();
                     return MerkleNode.fromJSON(JSONParser.parse(res));
@@ -288,12 +293,12 @@ public class HFSClient {
         }
 
         public Map publish(Optional<String> id, Multihash hash) throws IOException {
-            return retrieveMap("name/publish?arg=" + (id.isPresent() ? id+"&arg=" : "") + "/ipfs/"+hash);
+            return retrieveMap("name/publish?arg=" + (id.isPresent() ? id + "&arg=" : "") + "/ipfs/" + hash);
         }
 
         public String resolve(Multihash hash) throws IOException {
             Map res = (Map) retrieveAndParse("name/resolve?arg=" + hash);
-            return (String)res.get("Path");
+            return (String) res.get("Path");
         }
     }
 
@@ -315,7 +320,7 @@ public class HFSClient {
         }
 
         public Map put(String key, String value) throws IOException {
-            return retrieveMap("dht/put?arg=" + key + "&arg="+value);
+            return retrieveMap("dht/put?arg=" + key + "&arg=" + value);
         }
     }
 
@@ -328,7 +333,7 @@ public class HFSClient {
     // Network commands
 
     public List<MultiAddress> bootstrap() throws IOException {
-        return ((List<String>)retrieveMap("bootstrap/").get("Peers")).stream().map(x -> new MultiAddress(x)).collect(Collectors.toList());
+        return ((List<String>) retrieveMap("bootstrap/").get("Peers")).stream().map(MultiAddress::new).collect(Collectors.toList());
     }
 
     public class Bootstrap {
@@ -337,7 +342,7 @@ public class HFSClient {
         }
 
         public List<MultiAddress> add(MultiAddress addr) throws IOException {
-            return ((List<String>)retrieveMap("bootstrap/add?arg="+addr).get("Peers")).stream().map(x -> new MultiAddress(x)).collect(Collectors.toList());
+            return ((List<String>) retrieveMap("bootstrap/add?arg=" + addr).get("Peers")).stream().map(x -> new MultiAddress(x)).collect(Collectors.toList());
         }
 
         public List<MultiAddress> rm(MultiAddress addr) throws IOException {
@@ -345,7 +350,7 @@ public class HFSClient {
         }
 
         public List<MultiAddress> rm(MultiAddress addr, boolean all) throws IOException {
-            return ((List<String>)retrieveMap("bootstrap/rm?"+(all ? "all=true&":"")+"arg="+addr).get("Peers")).stream().map(x -> new MultiAddress(x)).collect(Collectors.toList());
+            return ((List<String>) retrieveMap("bootstrap/rm?" + (all ? "all=true&" : "") + "arg=" + addr).get("Peers")).stream().map(x -> new MultiAddress(x)).collect(Collectors.toList());
         }
     }
 
@@ -356,21 +361,21 @@ public class HFSClient {
     public class Swarm {
         public List<MultiAddress> peers() throws IOException {
             Map m = retrieveMap("swarm/peers?stream-channels=true");
-            return ((List<Object>)m.get("Strings")).stream().map(x -> new MultiAddress((String)x)).collect(Collectors.toList());
+            return ((List<Object>) m.get("Strings")).stream().map(x -> new MultiAddress((String) x)).collect(Collectors.toList());
         }
 
         public Map addrs() throws IOException {
             Map m = retrieveMap("swarm/addrs?stream-channels=true");
-            return (Map<String, Object>)m.get("Addrs");
+            return (Map<String, Object>) m.get("Addrs");
         }
 
         public Map connect(String multiAddr) throws IOException {
-            Map m = retrieveMap("swarm/connect?arg="+multiAddr);
+            Map m = retrieveMap("swarm/connect?arg=" + multiAddr);
             return m;
         }
 
         public Map disconnect(String multiAddr) throws IOException {
-            Map m = retrieveMap("swarm/disconnect?arg="+multiAddr);
+            Map m = retrieveMap("swarm/disconnect?arg=" + multiAddr);
             return m;
         }
     }
@@ -397,8 +402,8 @@ public class HFSClient {
 
     // Tools
     public String version() throws IOException {
-        Map m = (Map)retrieveAndParse("version");
-        return (String)m.get("Version");
+        Map m = (Map) retrieveAndParse("version");
+        return (String) m.get("Version");
     }
 
     public Map commands() throws IOException {
@@ -411,18 +416,21 @@ public class HFSClient {
 
     public class Config {
         public Map show() throws IOException {
-            return (Map)retrieveAndParse("config/show");
+            return (Map) retrieveAndParse("config/show");
         }
 
         public void replace(NamedStreamable file) throws IOException {
-            Multipart m = new Multipart("http://" + host + ":" + port + version+"config/replace?stream-channels=true", "UTF-8");
+            Multipart m = new Multipart(
+                    "http://" + host + ":" + port + version +
+                            "config/replace?stream-channels=true", "UTF-8"
+            );
             m.addFilePart("file", file);
             String res = m.finish();
         }
 
         public String get(String key) throws IOException {
-            Map m = (Map)retrieveAndParse("config?arg="+key);
-            return (String)m.get("Value");
+            Map m = (Map) retrieveAndParse("config?arg=" + key);
+            return (String) m.get("Value");
         }
 
         public Map set(String key, String value) throws IOException {
@@ -445,7 +453,7 @@ public class HFSClient {
     }
 
     private Map retrieveMap(String path) throws IOException {
-        return (Map)retrieveAndParse(path);
+        return (Map) retrieveAndParse(path);
     }
 
     private Object retrieveAndParse(String path) throws IOException {
@@ -473,9 +481,14 @@ public class HFSClient {
                 resp.write(buf, 0, r);
             return resp.toByteArray();
         } catch (ConnectException e) {
-            throw new RuntimeException("Couldn't connect to IPFS daemon at "+target+"\n Is IPFS running?");
+            throw new RuntimeException(
+                    "Couldn't connect to HFS daemon at " + target + "\n Is HFS running?"
+            );
         } catch (IOException e) {
-            throw new RuntimeException("IOException contacting IPFS daemon.\nTrailer: " + conn.getHeaderFields().get("Trailer"), e);
+            throw new RuntimeException(
+                    "IOException contacting HFS daemon.\nTrailer: " +
+                            conn.getHeaderFields().get("Trailer"), e
+            );
         }
     }
 
@@ -499,7 +512,7 @@ public class HFSClient {
 
     private static byte[] post(URL target, byte[] body, Map<String, String> headers) throws IOException {
         HttpURLConnection conn = (HttpURLConnection) target.openConnection();
-        for (String key: headers.keySet())
+        for (String key : headers.keySet())
             conn.setRequestProperty(key, headers.get(key));
         conn.setDoOutput(true);
         conn.setRequestMethod("POST");
@@ -513,7 +526,7 @@ public class HFSClient {
         ByteArrayOutputStream resp = new ByteArrayOutputStream();
         byte[] buf = new byte[4096];
         int r;
-        while ((r=in.read(buf)) >= 0)
+        while ((r = in.read(buf)) >= 0)
             resp.write(buf, 0, r);
         return resp.toByteArray();
     }

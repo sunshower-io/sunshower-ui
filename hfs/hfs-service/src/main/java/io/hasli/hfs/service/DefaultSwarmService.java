@@ -25,6 +25,8 @@ public class DefaultSwarmService implements SwarmService {
 
     public DefaultSwarmService() {
         this.configuration = new AgentConfiguration();
+
+
         this.client = new HFSClient(configuration.getAgentAddress());
     }
 

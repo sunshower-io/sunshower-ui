@@ -33,6 +33,27 @@ public class AgentConfiguration {
 
 
     public MultiAddress getAgentAddress() {
+        final String bindAddress = System.getenv("HASLI_BIND_ADDRESS");
+        if (bindAddress != null && !bindAddress.trim().isEmpty()) {
+            final String[] components = bindAddress.split(":");
+            final int port;
+            if (components.length == 2) {
+                port = Integer.parseInt(components[1]);
+            } else {
+                port = 5001;
+            }
+            final String ip = components[0];
+            return new MultiAddress(
+                    String.format(
+                            "/ip4/%s/%s/%s",
+                            ip,
+                            get("agent-protocol", "tcp"),
+                            port
+            ));
+
+        }
+
+
         return new MultiAddress(String.format("/ip4/%s/%s/%s",
                 get("agent-ip", "127.0.0.1"),
                 get("agent-protocol", "tcp"),
