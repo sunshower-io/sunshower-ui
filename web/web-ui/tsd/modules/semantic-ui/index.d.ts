@@ -273,7 +273,7 @@ interface JQuery {
     site      (params?:any):void;//check
     state     (params?:any):void;
     sticky    (params?:any):void;
-    tab       (params?: any): void;
+    tab       (params: TabSettings): void;
     transition(params?: any): void;
     transition(behavior: string, ...args: any[]): void;
     transition(transition?: string, duration?: string|number, callback?: () => void): void;

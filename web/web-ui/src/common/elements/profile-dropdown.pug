@@ -2,9 +2,9 @@
    Created by dustinlish on 10/21/16.
 
 template
-    .ui.pointing.dropdown.white
-        span.white.text ${user.username}
-        i.inverted.white.dropdown.icon
+    .ui.pointing.dropdown
+        .text ${user.username}
+        i.dropdown.icon
         .menu
             .item(click.delegate="router.navigateToRoute('profile')") Profile
             .item(click.delegate="router.navigateToRoute('settings')") Settings

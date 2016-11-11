@@ -3,15 +3,11 @@ package io.hasli.web.api;
 import io.hasli.common.configuration.ConfigurationSource;
 import io.hasli.common.configuration.MapConfigurationSource;
 import io.hasli.common.rs.MoxyProvider;
-import io.hasli.hal.api.instance.NodeConfigurationService;
-import io.hasli.hal.aws.AwsComputeService;
-import io.hasli.hal.core.node.DefaultNodeConfigurationService;
-import io.hasli.hfs.service.HFSConfiguration;
 import io.hasli.jpa.flyway.FlywayConfiguration;
 import io.hasli.persist.core.DataSourceConfiguration;
 import io.hasli.persist.core.DatabaseConfiguration;
 import io.hasli.persist.hibernate.HibernateConfiguration;
-import io.hasli.search.es.SearchConfiguration;
+//import io.hasli.service.security.CredentialAuthenticationService;
 import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.service.vault.VaultConfiguration;
 import org.flywaydb.core.Flyway;
@@ -34,8 +30,6 @@ import java.util.Map;
         HibernateConfiguration.class,
         SecurityConfiguration.class,
         VaultConfiguration.class,
-        SearchConfiguration.class,
-        HFSConfiguration.class
 
 })
 public class BootstrapConfiguration {
@@ -44,11 +38,6 @@ public class BootstrapConfiguration {
     private Flyway flyway;
 
     public BootstrapConfiguration() {
-    }
-
-    @Bean
-    public AwsComputeService awsComputeService() {
-        return new AwsComputeService();
     }
 
 
@@ -70,11 +59,6 @@ public class BootstrapConfiguration {
         return new MapConfigurationSource(values);
     }
 
-
-    @Bean
-    public NodeConfigurationService nodeConfigurationService() {
-        return new DefaultNodeConfigurationService();
-    }
 
 
 }

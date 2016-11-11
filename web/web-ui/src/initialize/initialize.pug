@@ -1,6 +1,6 @@
 template
-    .ui.center.aligned.container(style="margin-top:1em; margin-bottom:1em;")
-        div
+    .ui.one.column.center.aligned.grid(style="margin-top:25px")
+        .column.ten.wide
             .center.aligned.ui
                     h1
                         | Welcome to Hasli Meteorology!
@@ -27,7 +27,7 @@ template
                     label.pull-left Installation Location (e.g. meteorology.hasli.io)
                     input(
                         type='text',
-                        placeholder='Installation Location (e.g. meteorology.hasli.io)',
+                        placeholder='Installation Name',
                         value.bind='application.location'
                     )
 
@@ -41,56 +41,58 @@ template
                     | administrative users may change aspects of Meteorology, but they cannot see non-public user's data
                     | We recommend keeping as few administrators as possible, for security reasons.
 
-            .ui.small.form.message(repeat.for="administrator of application.administrators", style="margin-bottom:10px;")
-                h3 ${current.username || 'Username'}
-                .field
-                    label.pull-left Username
+            div(repeat.for="administrator of application.administrators")
+                .div.ui.small.form.message(style="margin-bottom:10px;")
+                    h3 ${current.username || 'Username'}
+                    .field
+                        label.pull-left Username
                     input(
                         type='text',
                         placeholder='Username',
                         value.bind='current.username'
                     )
-                .field
-                    label.pull-left First Name
+
+                    .field
+                        label.pull-left First Name
                     input(
                         type='text',
                         placeholder='First Name',
                         value.bind='current.firstname'
                     )
-                .field
-                    label.pull-left Last Name
+                    .field
+                        label.pull-left Last Name
                     input(
                         type='text',
                         placeholder='Last Name',
                         value.bind='current.lastname'
                     )
 
-                .field
-                    label.pull-left E-Mail
+                    .field
+                        label.pull-left E-Mail
                     input(
                         type='text',
                         placeholder='E-Mail',
                         value.bind='current.emailAddress'
                     )
 
-                .field
-                    label.pull-left Password
+                    .field
+                        label.pull-left Password
                     input(
                         type='password',
                         placeholder='Password',
                         value.bind='current.password'
                     )
 
-            .ui.grid.stackable.equal.width
-                input.ui.button.secondary.column(
+            .five.wide.field
+                input.ui.button.large.fluid.green(
                     style="margin-top:10px",
                     type='button',
-                    value='Add Another Administrator',
+                    value='Add Administrator',
                     click.delegate="addUser()")
-                input.ui.button.primary.column(
+                input.ui.button.large.fluid.red(
                     style="margin-top:10px;"
                     type='button',
-                    value='Save and Continue',
+                    value='Ok!',
                     show.bind="current"
                     click.delegate="submit()"
                 )

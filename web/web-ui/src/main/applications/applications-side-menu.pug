@@ -1,4 +1,0 @@
-template(bindable="router")
-    .ui.fluid.text.vertical.menu
-        a.item(repeat.for='row of router.navigation', class="${row.isActive ? 'active' : ''}" href.bind='row.href')
-            | ${row.title}

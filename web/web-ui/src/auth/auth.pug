@@ -1,6 +1,4 @@
 template
     require(from="auth/auth-nav.html")
-    .ui.fluid.container
-        auth-nav(router.bind="router")
-    .ui.container
-        router-view
+    auth-nav(router.bind="router")
+    router-view

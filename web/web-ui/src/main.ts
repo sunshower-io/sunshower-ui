@@ -18,7 +18,6 @@ export function param(name) {
 export function configure(aurelia: Aurelia) {
     aurelia.use
         .standardConfiguration()
-        .globalResources('common/sidenav/sidenav')
         .developmentLogging();
 
     let container = aurelia.container,

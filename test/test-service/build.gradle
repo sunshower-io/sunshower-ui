@@ -4,6 +4,5 @@ dependencies {
     compile project(":api:common-api")
     compile project(":api:security-api")
     compile 'io.hasli.barometer.modules:jaxrs'
-    compile "org.jboss.resteasy:resteasy-multipart-provider"
     compile 'org.springframework.security:spring-security-test'
 }
