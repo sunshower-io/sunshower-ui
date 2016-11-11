@@ -5,43 +5,27 @@ import {
     RouterConfiguration
 } from "aurelia-router";
 
-import {Form} from '../../form/form'
-import {inject} from "aurelia-dependency-injection";
 
-@inject(Form)
 export class Infrastructure {
+    public router:Router;
 
-    constructor(private form: Form) {
-        this.form = form;
+    public configureRouter(config:RouterConfiguration, router:Router) {
+        config.map([
+            {
+                route: ['', 'credentials'],
+                name: 'credentials',
+                moduleId: './credentials/credentials',
+                nav: true,
+                title: 'credentials'
+            },
+            {
+                route: 'projects',
+                name: 'projects',
+                moduleId: './projects/projects',
+                nav: true,
+                title: 'projects'
+            }
+        ]);
+        this.router = router;
     }
-
-    attached() {
-        $('.ui.selection.dropdown').dropdown();
-    }
-
-    create() {
-        console.log('create button clicked');
-        this.form.show();
-    }
-    // public router:Router;
-    //
-    // public configureRouter(config:RouterConfiguration, router:Router) {
-    //     config.map([
-    //         // {
-    //         //     route: ['', 'credentials'],
-    //         //     name: 'credentials',
-    //         //     moduleId: './credentials/credentials',
-    //         //     nav: true,
-    //         //     title: 'credentials'
-    //         // },
-    //         // {
-    //         //     route: 'projects',
-    //         //     name: 'projects',
-    //         //     moduleId: './projects/projects',
-    //         //     nav: true,
-    //         //     title: 'projects'
-    //         // }
-    //     ]);
-    //     this.router = router;
-    // }
 }

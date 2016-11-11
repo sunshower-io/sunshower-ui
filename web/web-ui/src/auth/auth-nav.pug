@@ -1,13 +1,13 @@
 template(bindable="router")
-    .page.header
-        .ui.hidden.divider
-        .ui.hidden.divider
-        .ui.middle.aligned.center.aligned.grid
-            .column.five.wide
-                .ui.image
-                    img(src="./styles/themes/hasli/assets/images/logos/hasli-logo.svg").image
-                .ui.hidden.divider
-                .ui.fitted.divider
-                .ui.two.item.secondary.pointing.inverted.menu
-                    a.item(repeat.for='row of router.navigation', class="${row.isActive ? 'active' : ''}" href.bind='row.href', style='margin: 0 0 -4px;')
-                        | ${row.title}
+    .ui.hidden.divider
+    .ui.hidden.divider
+    .ui.middle.aligned.center.aligned.grid
+        .column.five.wide
+            .ui.image
+                img(src="./styles/themes/hasli/assets/images/logos/hasli-logo.svg").image
+            .ui.hidden.divider
+            .ui.fitted.divider
+            .ui.two.item.secondary.pointing.menu
+                a.item(repeat.for='row of router.navigation', class="${row.isActive ? 'active green' : ''}" href.bind='row.href')
+                    | ${row.title}
+            .ui.hidden.divider

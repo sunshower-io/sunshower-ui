@@ -9,7 +9,7 @@
 @zIndex: 1900;
 @background: @white;
 
-@maxWidth: 500px;
+@maxWidth: 250px;
 @borderColor: @solidBorderColor;
 @borderWidth: 1px;
 @boxShadow: @floatingShadow;

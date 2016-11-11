@@ -23,7 +23,7 @@
     "!./typings/globals/angular-protractor/**",
     "./src/**/*.ts",
     "./test/**/*.ts",
-    "!./node_modules/**/*.d.ts",
+    "!./node-modules/**",
     "./typings/index.d.ts",
     "./tsd/**/*.d.ts",
     "./custom_typings/**/*.d.ts",
