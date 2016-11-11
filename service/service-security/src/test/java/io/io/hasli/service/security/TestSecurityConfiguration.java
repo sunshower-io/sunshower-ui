@@ -1,6 +1,7 @@
 package io.io.hasli.service.security;
 
 import io.hasli.core.security.CredentialService;
+import io.hasli.test.security.rs.MoxyOverrideProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,6 +10,12 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class TestSecurityConfiguration {
+
+    @Bean
+    public MoxyOverrideProvider overrideProvider() {
+        return new MoxyOverrideProvider();
+
+    }
 
     @Bean
     public CredentialService credentialService() {

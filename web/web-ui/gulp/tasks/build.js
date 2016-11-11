@@ -10,6 +10,8 @@ var browserSync = require('browser-sync');
 var typescript = require('gulp-typescript');
 var htmlmin = require('gulp-htmlmin');
 var pug = require('gulp-pug');
+var concat = require('gulp-concat');
+var less = require('gulp-less');
 
 // transpiles changed es6 files to SystemJS format
 // the plumber() call prevents 'pipe breaking' caused
@@ -40,11 +42,15 @@ gulp.task('build-html', function() {
 });
 
 // copies changed css files to the output directory
-gulp.task('build-css', function() {
-  return gulp.src(paths.css)
-    .pipe(changed(paths.output, {extension: '.css'}))
-    .pipe(gulp.dest(paths.output))
-    .pipe(browserSync.stream());
+gulp.task('build-less', function() {
+  return gulp.src(paths.inlineLess)
+      .pipe(less())
+      .pipe(concat('styles.min.css'))
+      .pipe(gulp.dest('styles'));
+    // .pipe(changed(paths.output, {extension: '.css'}))
+
+    // .pipe(gulp.dest(paths.output))
+    // .pipe(browserSync.stream());
 });
 
 

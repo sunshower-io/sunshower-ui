@@ -45,7 +45,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Inject
     private UserService userService;
 
-
     @Bean
     public MoxyProvider moxyProvider() {
         return new MoxyProvider();

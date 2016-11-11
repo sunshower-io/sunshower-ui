@@ -1,3 +1,59 @@
 /*******************************
         Global Overrides
 *******************************/
+
+@text-colors: blue, green, orange, pink, purple, red, teal, yellow, black, grey, white;
+.text {
+    .-(@i: length(@text-colors)) when (@i > 0) {
+        @c: extract(@text-colors, @i);
+        &.@{c} { color: @@c }
+        .-((@i - 1));
+    }.-;
+}
+
+.page.header {
+  background-color: #171B26;
+  //border-bottom: 1px solid #E5E5E5;
+  padding: 2px 0px;
+}
+
+.nav--color {
+  a:active {
+    background-color: blue;
+  }
+  a:hover {
+    color: red;
+  }
+}
+
+
+img.transparent {
+  opacity:0;
+}
+
+
+/* used for plus/minus icone toggle */
+.toggle--icon {
+  position: relative;
+  -webkit-transition: opacity .1s ease-in-out;
+  top: 5px;
+  right: 10px;
+}
+
+/* removes accordion box shadow */
+.no--boxshadow {
+  box-shadow: none !important;
+}
+
+.grid--lines {
+  background: transparent linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent);
+  height:100%;
+  background-size:50px 50px;
+}
+
+
+/* Application Explore height */
+.form--scroll {
+  height: 630px;
+  overflow: scroll;
+}

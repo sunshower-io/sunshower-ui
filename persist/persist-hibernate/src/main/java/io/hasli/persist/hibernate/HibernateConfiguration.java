@@ -48,7 +48,16 @@ public class HibernateConfiguration {
                 "io.hasli.model.core.auth",
                 "io.hasli.model.core",
                 "io.hasli.vault.api",
-                "io.hasli.vault.api.secrets"
+                "io.hasli.hal.api",
+                "io.hasli.vault.api.secrets",
+                "io.hasli.hal.api.instance",
+                "io.hasli.hal.api.compute",
+                "io.hasli.hal.api.memory",
+                "io.hasli.hal.api.cost",
+                "io.hasli.hal.api.network",
+                "io.hasli.hal.api.providers",
+                "io.hasli.hal.api.security",
+                "io.hasli.hal.api.software"
         );
 
         java.util.Properties jpaProperties = new java.util.Properties();
