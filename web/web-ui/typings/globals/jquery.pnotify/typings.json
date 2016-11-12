@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/462850812b7b471d6d8d01223accb3ca282b8731/jquery.pnotify/jquery.pnotify.d.ts",
+    "raw": "registry:dt/jquery.pnotify#3.0.0+20160928134922",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/462850812b7b471d6d8d01223accb3ca282b8731/jquery.pnotify/jquery.pnotify.d.ts"
+  }
+}
