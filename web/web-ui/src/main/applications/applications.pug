@@ -1,3 +1,10 @@
 template
+    require(from='./applications-side-menu.html')
     .ui.hidden.divider
-    h2 Applications
+    .ui.internally.celled.grid
+        .row
+            .three.wide.fluid.column
+                .ui.basic.segment
+                    applications-side-menu(router.bind="router")
+            .twelve.wide.column
+                router-view

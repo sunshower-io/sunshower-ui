@@ -1,4 +1,7 @@
 template
-    require(from="./nav-bar.html")
-    nav-bar(router.bind="router")
-    router-view
+    require(from="common/elements/page-header.html")
+    .page.header
+        .ui.container
+            page-header(router.bind="router")
+    .page.content
+        router-view

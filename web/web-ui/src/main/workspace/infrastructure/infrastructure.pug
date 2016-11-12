@@ -1,0 +1,10 @@
+//
+   Created by dustinlish on 11/9/16.
+
+template(bindable="router")
+    .ui.compact.labeled.icon.secondary.pointing.menu
+        a.item(repeat.for='row of router.navigation', class="${row.isActive ? 'active' : ''}", href.bind='row.href')
+            i.ui.icon(class="${row.settings}")
+            | ${row.title}
+    .ui.container
+        router-view

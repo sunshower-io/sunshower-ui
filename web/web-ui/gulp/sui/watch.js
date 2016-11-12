@@ -82,8 +82,8 @@ gulp.task('watch-less', function() {
     .watch([
       source.config,
       source.definitions   + '/**/*.less',
-      source.site          + '/**/*.{overrides,variables}',
-      source.themes        + '/**/*.{overrides,variables}'
+      source.site          + '/**/*.{overrides,variables,less}',
+      source.themes        + '/**/*.{overrides,variables,less}'
     ], function(file) {
 
       var

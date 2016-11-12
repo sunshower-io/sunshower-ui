@@ -20,6 +20,9 @@ gulp.task('watch', ['serve', 'watch-less', 'build-assets'], function() {
   gulp.watch(paths.html, ['build-html', browserSync.reload]).on('change', reportChange);
   gulp.watch(paths.css, ['build-css', browserSync.reload]).on('change', reportChange);
   gulp.watch(paths.pug, ['build-pug', browserSync.reload]).on('change', reportChange);
+
+  gulp.watch(paths.inlineLess,
+      ['build-less', browserSync.reload]).on('change', reportChange);
   gulp.watch(paths.less, ['less', browserSync.reload]).on('change', reportChange);
   gulp.watch(paths.style, browserSync.reload).on('change', reportChange);
 });
