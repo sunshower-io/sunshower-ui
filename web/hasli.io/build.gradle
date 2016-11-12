@@ -16,8 +16,8 @@ configurations {
 
 
 dependencies {
-    earlib project(":search:search-es")
-    earlib project(":hfs:hfs-service")
+    earlib "io.hasli.search:search-es"
+    earlib "io.hasli.hfs:hfs-service"
     earlib project(":service:service-vault")
     earlib project(":service:service-hal")
     earlib project(":service:service-security")

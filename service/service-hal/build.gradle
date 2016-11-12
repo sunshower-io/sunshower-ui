@@ -1,12 +1,11 @@
 dependencies {
-    compile project(":hal:hal-api")
+    compile "io.hasli.hal:hal-api"
     provided 'com.zaxxer:HikariCP'
 
     provided project(':logging')
-    compile project(":api:core-api")
-    compile project(":api:vault-api")
-    compile project(":api:vault-api")
-    compile project(":api:security-api")
+    compile "io.hasli.api:core-api"
+    compile "io.hasli.api:vault-api"
+    compile "io.hasli.api:security-api"
     compile project(":service:service-vault")
     compile project(':persist:persist-hibernate')
     compile project(":service:service-security")
@@ -22,8 +21,8 @@ dependencies {
     testCompile('io.hasli.barometer.modules:jaxrs')
 
     testCompile('org.jboss.resteasy:tjws')
-    testCompile project(":test:test-persist")
-    testCompile project(":test:test-service")
+    testCompile "io.hasli.test:test-persist"
+    testCompile "io.hasli.test:test-service"
     testCompile('org.jboss.resteasy:resteasy-jaxrs')
     testCompile('org.jboss.resteasy:resteasy-spring')
     testCompile('org.jboss.resteasy:resteasy-client')

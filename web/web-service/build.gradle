@@ -11,8 +11,8 @@ dependencies {
     provided 'org.flywaydb:flyway-core'
 
 
-    provided project(":hfs:hfs-service")
-    provided project(":search:search-es")
+    provided "io.hasli.hfs:hfs-service"
+    provided "io.hasli.search:search-es"
     provided project(":service:service-vault")
     provided project(":service:service-hal")
     provided project(":service:service-security")
