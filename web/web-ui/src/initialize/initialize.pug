@@ -43,43 +43,54 @@ template
 
             .ui.small.form.message(repeat.for="administrator of application.administrators", style="margin-bottom:10px;")
                 h3 ${current.username || 'Username'}
-                .field
-                    label.pull-left Username
-                    input(
+                .two.fields
+                    .field
+                        label.pull-left First Name
+                        input(
+                            type='text',
+                            placeholder='First Name',
+                            value.bind='current.firstname'
+                        )
+                    .field
+                        label.pull-left Last Name
+                        input(
+                            type='text',
+                            placeholder='Last Name',
+                            value.bind='current.lastname'
+                        )
+
+                .two.fields
+                    .field
+                        label.pull-left Username
+                        input(
                         type='text',
                         placeholder='Username',
                         value.bind='current.username'
-                    )
-                .field
-                    label.pull-left First Name
-                    input(
-                        type='text',
-                        placeholder='First Name',
-                        value.bind='current.firstname'
-                    )
-                .field
-                    label.pull-left Last Name
-                    input(
-                        type='text',
-                        placeholder='Last Name',
-                        value.bind='current.lastname'
-                    )
+                        )
 
-                .field
-                    label.pull-left E-Mail
-                    input(
-                        type='text',
-                        placeholder='E-Mail',
-                        value.bind='current.emailAddress'
-                    )
+                    .field
+                        label.pull-left E-Mail
+                        input(
+                            type='text',
+                            placeholder='E-Mail',
+                            value.bind='current.emailAddress'
+                        )
 
-                .field
-                    label.pull-left Password
-                    input(
+                .two.fields
+                    .field
+                        label.pull-left Password
+                        input(
+                            type='password',
+                            placeholder='Password',
+                            value.bind='current.password'
+                        )
+                    .field
+                        label.pull-left Confirm Password
+                        input(
                         type='password',
-                        placeholder='Password',
+                        placeholder='Confirm Password',
                         value.bind='current.password'
-                    )
+                        )
 
             .ui.grid.stackable.equal.width
                 input.ui.button.secondary.column(
