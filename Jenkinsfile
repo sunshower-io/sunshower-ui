@@ -8,7 +8,7 @@ def version        = "$majorVersion.$minorVersion"
 def registry       = "10.0.4.51:5000"
 def hasliImage     = "hasli.io/ui"
 def agentVersion   = "latest"
-def agentImage     = "$registry/hasli/agent:latest"
+def agentImage     = "$registry/hasli/agent:$agentVersion"
 def runSystemTests = false
 def bomTask      
 def gradleTasks    = []
@@ -30,7 +30,8 @@ if (env.BRANCH_NAME == "master") {
     gradleTasks = [
         "installEnvironment",
         "clean",
-        "build"
+        "build",
+        "-x test"
     ]
 
     // TODO: enable system-tests for PRs or on demand
@@ -72,12 +73,10 @@ node('docker-registry') {
 
             if (staging) {
                 stage('Deploy to Staging') {
-                    // setup staging environment
                     sh "sed -i.bak 's/^HASLI_NAME=.*/HASLI_NAME=$name-wildfly/' ./web/.env"
                     sh "sed -i.bak 's/^HASLI_VERSION=.*/HASLI_VERSION=$version.$buildNumber/' ./web/.env"
-                    sh "sed -i.bak 's/^HASLI_IMAGE=.*/HASLI_IMAGE=$hasliImage:$version.buildNumber/' ./web/.env"
+                    sh "sed -i.bak 's/^HASLI_IMAGE=.*/HASLI_IMAGE=$hasliImage:$version.$buildNumber/' ./web/.env"
                     sh "sed -i.bak 's/^AGENT_NAME=.*/AGENT_NAME=$name-agent/' ./web/.env"
-
 
                     sh "docker pull $agentImage"
                     sh "docker build -t $hasliImage:$version.$buildNumber ./web/"
