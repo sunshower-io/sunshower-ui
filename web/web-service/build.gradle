@@ -16,7 +16,7 @@ dependencies {
     provided "io.hasli.service:service-vault"
     provided "io.hasli.service:service-hal"
     provided "io.hasli.service:service-security"
-    provided ":persist:persist-hibernate"
+    provided "io.hasli.persist:persist-hibernate"
 
 }
 
