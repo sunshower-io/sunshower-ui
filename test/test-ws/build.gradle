@@ -1,4 +1,0 @@
-dependencies {
-    compile project(':api:common-api')
-    compile 'io.hasli.barometer.modules:jaxrs'
-}

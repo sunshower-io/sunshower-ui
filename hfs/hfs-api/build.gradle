@@ -1,6 +1,0 @@
-
-dependencies {
-    compile project(":api:core-api")
-    compile project(":api:common-api")
-    compile "org.jboss.resteasy:resteasy-multipart-provider"
-}
