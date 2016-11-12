@@ -13,10 +13,10 @@ dependencies {
 
     provided "io.hasli.hfs:hfs-service"
     provided "io.hasli.search:search-es"
-    provided project(":service:service-vault")
-    provided project(":service:service-hal")
-    provided project(":service:service-security")
-    provided project(":persist:persist-hibernate")
+    provided "io.hasli.service:service-vault"
+    provided "io.hasli.service:service-hal"
+    provided "io.hasli.service:service-security"
+    provided "io.hasli.persist:persist-hibernate"
 
 }
 
