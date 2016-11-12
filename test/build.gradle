@@ -1,8 +1,8 @@
-artifactoryPublish.skip=true
+artifactoryPublish.skip = true
 
 subprojects {
 
-    group='io.hasli.test'
+    group = 'io.hasli.test'
 
     dependencies {
         compile('org.junit.jupiter:junit-jupiter-engine')

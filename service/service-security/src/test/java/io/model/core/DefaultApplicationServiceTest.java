@@ -59,7 +59,6 @@ public class DefaultApplicationServiceTest {
 
 
     @Test
-    @Ignore("Failing on MacOS when running entire test suite")
     public void ensureApplicationCanBeInitializedCorrectly() {
         Application app = new Application();
         final User u = new User();
@@ -75,7 +74,6 @@ public class DefaultApplicationServiceTest {
     }
 
     @Test
-    @Ignore("Failing on MacOS when running entire test suite")
     public void ensureInitializedApplicationHasCorrectUsers() {
 
         Application app = new Application();
