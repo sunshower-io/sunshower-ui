@@ -11,6 +11,10 @@ import io.hasli.core.api.Stoppable;
  */
 public interface ConfigurationSource extends Startable, Stoppable {
 
+    default String sayHello() {
+        return "cool";
+    }
+
     String get(ValueHolder v, boolean fail);
 
     String get(String key, boolean fail);
