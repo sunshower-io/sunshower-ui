@@ -7,7 +7,7 @@
 /* Title */
 @titleFont: @headerFont;
 @titlePadding: 0.5em 0em;
-@titleFontSize: 1em;
+@titleFontSize: 13px;
 @titleColor: @textColor;
 
 /* Icon */
@@ -23,7 +23,7 @@
   transform @defaultDuration @defaultEasing,
   opacity @defaultDuration @defaultEasing
 ;
-@iconVerticalAlign: baseline;
+@iconVerticalAlign: middle;
 @iconTransform: none;
 
 /* Child Accordion */
@@ -57,10 +57,13 @@
 /* Styled */
 @styledWidth: 600px;
 @styledBackground: @white;
-@styledBorderRadius: @defaultBorderRadius;
+@styledBorderRadius: 0px;
+
+
+//@styledBoxShadow: none;
 @styledBoxShadow:
-  @subtleShadow,
-  0px 0px 0px 1px @borderColor
+        @subtleShadow,
+        0px 0px 0px 1px @borderColor
 ;
 
 /* Content */

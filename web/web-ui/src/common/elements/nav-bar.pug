@@ -1,6 +1,6 @@
 template(bindable="router")
     require(from="common/elements/profile-dropdown")
-    .ui.secondary.menu.stackable
+    .ui.secondary.menu.stackable.container
         .ui.item
             img(src="styles/themes/hasli/assets/images/logos/hasli-logo.svg").ui.small.image
         .menu.right
@@ -8,4 +8,5 @@ template(bindable="router")
                 .ui.icon.input.visible
                     i.search.icon
                     input(type='text', placeholder='Search...')
+
                 profile-dropdown.item.ui

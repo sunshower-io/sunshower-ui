@@ -14,4 +14,5 @@ import javax.ws.rs.ext.Provider;
 @Produces({MediaType.APPLICATION_JSON, MediaType.WILDCARD, "application/x-javascript"})
 @Consumes({MediaType.APPLICATION_JSON, MediaType.WILDCARD})
 public class MoxyProvider extends MOXyJsonProvider {
+
 }

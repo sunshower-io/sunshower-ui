@@ -6,15 +6,16 @@ import io.hasli.barometer.jaxrs.ClientContext;
 import io.hasli.barometer.rpc.Remote;
 import io.hasli.barometer.rs.module.JAXRS;
 import io.hasli.barometer.spring.BarometerRunner;
-import io.hasli.core.security.UserService;
+import io.hasli.common.rs.MoxyProvider;
 import io.hasli.model.core.auth.User;
 import io.hasli.persist.hibernate.HibernateConfiguration;
+import io.hasli.service.security.DefaultSignupService;
 import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.service.signup.SignupService;
 import io.hasli.test.persist.EnableJPA;
-import io.hasli.test.persist.HibernateTestCase;
 import io.hasli.test.security.EnableSecurity;
 import io.hasli.test.security.rs.AuthenticationDecorator;
+import io.hasli.test.security.rs.MoxyOverrideProvider;
 import io.hasli.vault.api.Secret;
 import io.hasli.vault.api.VaultService;
 
@@ -24,12 +25,13 @@ import static org.hamcrest.CoreMatchers.*;
 import io.hasli.vault.api.secrets.CredentialSecret;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.ws.rs.ClientErrorException;
-import javax.ws.rs.client.ClientRequestFilter;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
@@ -45,10 +47,15 @@ import java.util.List;
                 VaultConfiguration.class,
                 SecurityConfiguration.class,
                 HibernateConfiguration.class,
+                DefaultServiceRestTest.class,
         })
 @WebAppConfiguration
 public class DefaultServiceRestTest {
 
+    @Bean
+    public MoxyOverrideProvider provider() {
+        return new MoxyOverrideProvider();
+    }
 
 
     @Remote
@@ -95,7 +102,8 @@ public class DefaultServiceRestTest {
         secret.setSecret("frap");
         secret.setDescription("just a normal secret!");
         secret.setCredential("frap-adap");
-        authenticatedVaultService.save(secret);
+        secret = (CredentialSecret) authenticatedVaultService.save(secret);
+        assertThat(secret.getName(), is("test-secret"));
     }
 
     @Test

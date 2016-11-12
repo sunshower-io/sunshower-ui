@@ -1,0 +1,119 @@
+//
+   Created by dustinlish on 11/3/16.
+template
+    .ui.small.modal
+        i.close.icon
+        .header
+            | Amazon Web Services
+        .content
+            .ui.form
+                h4.ui.dividing.header Shipping Information
+                .field
+                    label Name
+                    .two.fields
+                        .field
+                            input(type='text', name='shipping[first-name]', placeholder='First Name')
+                        .field
+                            input(type='text', name='shipping[last-name]', placeholder='Last Name')
+                .field
+                    label Billing Address
+                    .fields
+                        .twelve.wide.field
+                            input(type='text', name='shipping[address]', placeholder='Street Address')
+                        .four.wide.field
+                            input(type='text', name='shipping[address-2]', placeholder='Apt #')
+                .two.fields
+                    .field
+                        label State
+                        select.ui.fluid.dropdown
+                            option(value='') State
+                            option(value='AL') Alabama
+                            option(value='AK') Alaska
+                            option(value='AZ') Arizona
+                            option(value='AR') Arkansas
+                            option(value='CA') California
+                            option(value='CO') Colorado
+                    .field
+                        label Country
+                        .ui.fluid.search.selection.dropdown
+                            input(type='hidden', name='country')
+                            i.dropdown.icon
+                            .default.text Select Country
+                            .menu
+                                .item(data-value='af')
+                                    i.af.flag
+                                    | Afghanistan
+                                .item(data-value='ax')
+                                    i.ax.flag
+                                    | Aland Islands
+                                .item(data-value='al')
+                                    i.al.flag
+                                    | Albania
+                h4.ui.dividing.header Billing Information
+                .field
+                    label Card Type
+                    .ui.selection.dropdown
+                        input(type='hidden', name='card[type]')
+                        .default.text Type
+                        i.dropdown.icon
+                        .menu
+                            .item(data-value='visa')
+                                i.visa.icon
+                                |           Visa
+                            .item(data-value='amex')
+                                i.amex.icon
+                                |           American Express
+                            .item(data-value='discover')
+                                i.discover.icon
+                                |           Discover
+                .fields
+                    .seven.wide.field
+                        label Card Number
+                        input(type='text', name='card[number]', maxlength='16', placeholder='Card #')
+                    .three.wide.field
+                        label CVC
+                        input(type='text', name='card[cvc]', maxlength='3', placeholder='CVC')
+                    .six.wide.field
+                        label Expiration
+                        .two.fields
+                            .field
+                                select.ui.fluid.search.dropdown(name='card[expire-month]')
+                                    option(value='') Month
+                                    option(value='1') January
+                                    option(value='2') February
+                                    option(value='3') March
+                                    option(value='4') April
+                                    option(value='5') May
+                                    option(value='6') June
+                                    option(value='7') July
+                                    option(value='8') August
+                                    option(value='9') September
+                                    option(value='10') October
+                                    option(value='11') November
+                                    option(value='12') December
+                            .field
+                                input(type='text', name='card[expire-year]', maxlength='4', placeholder='Year')
+                h4.ui.dividing.header Receipt
+                .field
+                    label Send Receipt To:
+                    .ui.fluid.multiple.search.selection.dropdown
+                        input(type='hidden', name='receipt')
+                        i.dropdown.icon
+                        .default.text Saved Contacts
+                        .menu
+                            .item(data-value='jenny', data-text='Jenny')
+                            .item(data-value='elliot', data-text='Elliot')
+                            .item(data-value='stevie', data-text='Stevie')
+                            .item(data-value='christian', data-text='Christian')
+                .ui.segment
+                    .field
+                        .ui.toggle.checkbox
+                            input.hidden(type='checkbox', name='gift', tabindex='0')
+                            label Do not include a receipt in the package
+                .ui.button(tabindex='0') Submit Order
+
+
+        .actions
+            .ui.positive.right.labeled.icon.button
+                | Next
+                i.checkmark.icon

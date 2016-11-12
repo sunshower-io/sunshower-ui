@@ -1,0 +1,149 @@
+
+<svg width="1068px" height="517px" viewBox="359 469 1068 517" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="18" cy="27" r="18"></circle>
+        <circle id="path-3" cx="18" cy="27" r="18"></circle>
+        <circle id="path-5" cx="18" cy="27" r="18"></circle>
+        <circle id="path-7" cx="18" cy="27" r="18"></circle>
+        <circle id="path-9" cx="18" cy="27" r="18"></circle>
+    </defs>
+    <g id="Recent-activity" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(359.000000, 469.000000)">
+        <g id="activity">
+            <g id="navgiation" transform="translate(441.000000, 498.000000)">
+                <path d="M13.2875342,14.4890763 L7.19362895,8.58207632 L1.09771316,14.4890763 C0.705660526,14.8800763 0.705660526,15.5120763 1.09771316,15.9030763 C1.49077105,16.2940763 2.12710263,16.2940763 2.52016053,15.9030763 L7.19362895,11.2540763 L11.8660921,15.9030763 C12.25915,16.2940763 12.8944763,16.2940763 13.2875342,15.9030763 C13.4835605,15.7080763 13.5820763,15.4520763 13.5820763,15.1960763 C13.5820763,14.9400763 13.4835605,14.6840763 13.2875342,14.4890763 Z M13.2875342,8.48907632 L7.19362895,2.58207632 L1.09771316,8.48907632 C0.705660526,8.88007632 0.705660526,9.51207632 1.09771316,9.90307632 C1.49077105,10.2940763 2.12710263,10.2940763 2.52016053,9.90307632 L7.19362895,5.25407632 L11.8660921,9.90307632 C12.25915,10.2940763 12.8944763,10.2940763 13.2875342,9.90307632 C13.4835605,9.70807632 13.5820763,9.45207632 13.5820763,9.19607632 C13.5820763,8.94007632 13.4835605,8.68407632 13.2875342,8.48907632 Z" id="Combined-Shape" fill="#C0C4CA" transform="translate(7.192875, 9.389201) rotate(270.000000) translate(-7.192875, -9.389201) "></path>
+                <text id="Newer" font-family="Open Sans" font-size="12" font-weight="400" fill="#999999">
+                    <tspan x="21" y="14">Newer</tspan>
+                </text>
+                <path d="M142.901784,14.4890763 L136.807879,8.58207632 L130.711963,14.4890763 C130.319911,14.8800763 130.319911,15.5120763 130.711963,15.9030763 C131.105021,16.2940763 131.741353,16.2940763 132.134411,15.9030763 L136.807879,11.2540763 L141.480342,15.9030763 C141.8734,16.2940763 142.508726,16.2940763 142.901784,15.9030763 C143.097811,15.7080763 143.196326,15.4520763 143.196326,15.1960763 C143.196326,14.9400763 143.097811,14.6840763 142.901784,14.4890763 Z M142.901784,8.48907632 L136.807879,2.58207632 L130.711963,8.48907632 C130.319911,8.88007632 130.319911,9.51207632 130.711963,9.90307632 C131.105021,10.2940763 131.741353,10.2940763 132.134411,9.90307632 L136.807879,5.25407632 L141.480342,9.90307632 C141.8734,10.2940763 142.508726,10.2940763 142.901784,9.90307632 C143.097811,9.70807632 143.196326,9.45207632 143.196326,9.19607632 C143.196326,8.94007632 143.097811,8.68407632 142.901784,8.48907632 Z" id="Combined-Shape" fill="#4990E2" transform="translate(136.807125, 9.389201) rotate(90.000000) translate(-136.807125, -9.389201) "></path>
+                <text id="Older" font-family="Open Sans" font-size="12" font-weight="400" fill="#4990E2">
+                    <tspan x="85" y="14">Older</tspan>
+                </text>
+            </g>
+            <g id="show-all-column" transform="translate(1006.000000, 0.000000)">
+                <text id="Show-all" font-family="AvenirNext-Medium, Avenir Next" font-size="12" font-weight="400" fill="#71848B">
+                    <tspan x="0.472" y="12">SHOW ALL</tspan>
+                </text>
+                <g id="time" transform="translate(7.000000, 54.000000)">
+                    <rect id="Rectangle-6" fill="#F4F4F4" x="0" y="0" width="49" height="20" rx="10"></rect>
+                    <text id="12min." font-family="AvenirNext-Medium, Avenir Next" font-size="12" font-weight="400" fill="#71848B">
+                        <tspan x="5.864" y="14">12min.</tspan>
+                    </text>
+                </g>
+                <g id="time" transform="translate(7.000000, 145.000000)">
+                    <rect id="Rectangle-6" fill="#F4F4F4" x="0" y="0" width="49" height="20" rx="10"></rect>
+                    <text id="26min." font-family="AvenirNext-Medium, Avenir Next" font-size="12" font-weight="400" fill="#71848B">
+                        <tspan x="5.864" y="14">26min.</tspan>
+                    </text>
+                </g>
+                <g id="time" transform="translate(7.000000, 236.000000)">
+                    <rect id="Rectangle-6" fill="#F4F4F4" x="0" y="0" width="49" height="20" rx="10"></rect>
+                    <text id="34min." font-family="AvenirNext-Medium, Avenir Next" font-size="12" font-weight="400" fill="#71848B">
+                        <tspan x="5.864" y="14">34min.</tspan>
+                    </text>
+                </g>
+                <g id="time" transform="translate(7.000000, 328.000000)">
+                    <rect id="Rectangle-6" fill="#F4F4F4" x="0" y="0" width="49" height="20" rx="10"></rect>
+                    <text id="34min." font-family="AvenirNext-Medium, Avenir Next" font-size="12" font-weight="400" fill="#71848B">
+                        <tspan x="5.864" y="14">34min.</tspan>
+                    </text>
+                </g>
+                <g id="time" transform="translate(7.000000, 419.000000)">
+                    <rect id="Rectangle-6" fill="#F4F4F4" x="0" y="0" width="49" height="20" rx="10"></rect>
+                    <text id="34min." font-family="AvenirNext-Medium, Avenir Next" font-size="12" font-weight="400" fill="#71848B">
+                        <tspan x="5.864" y="14">34min.</tspan>
+                    </text>
+                </g>
+            </g>
+            <g id="row1" transform="translate(111.000000, 38.000000)">
+                <text id="Dustin-Lish-added-fi" font-family="AvenirNext-Bold, Avenir Next" font-size="14" font-weight="bold" line-spacing="27" fill="#6F727F">
+                    <tspan x="70" y="14">Dustin Lish</tspan>
+                    <tspan x="144.27" y="14" font-family="AvenirNext-Regular, Avenir Next" font-weight="normal"> added file ‘Haslifile’ </tspan>
+                    <tspan x="70" y="41" font-family="AvenirNext-Regular, Avenir Next" font-weight="normal">d41d8cd98f00b204e9800998ecf8427e</tspan>
+                </text>
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Circle" fill="#CDCDD3" xlink:href="#path-1"></use>
+                <text id="DL" mask="url(#mask-2)" font-family="AvenirNext-Medium, Avenir Next" font-size="12" font-weight="400" fill="#FFFFFF">
+                    <tspan x="10.368" y="30">DL</tspan>
+                </text>
+            </g>
+            <g id="row1-copy" transform="translate(111.000000, 129.000000)">
+                <text id="Dustin-Lish-added-fi" font-family="AvenirNext-Bold, Avenir Next" font-size="14" font-weight="bold" line-spacing="27" fill="#6F727F">
+                    <tspan x="70" y="14">Dustin Lish</tspan>
+                    <tspan x="144.27" y="14" font-family="AvenirNext-Regular, Avenir Next" font-weight="normal"> added file ‘agent.cfg’</tspan>
+                    <tspan x="70" y="41" font-family="AvenirNext-Regular, Avenir Next" font-weight="normal">d41d8cd98f00b204e9800998ecf8427e</tspan>
+                </text>
+                <mask id="mask-4" fill="white">
+                    <use xlink:href="#path-3"></use>
+                </mask>
+                <use id="Circle" fill="#CDCDD3" xlink:href="#path-3"></use>
+                <text id="DL" mask="url(#mask-4)" font-family="AvenirNext-Medium, Avenir Next" font-size="12" font-weight="400" fill="#FFFFFF">
+                    <tspan x="10.368" y="30">DL</tspan>
+                </text>
+            </g>
+            <g id="row1-copy-2" transform="translate(111.000000, 220.000000)">
+                <text id="Dustin-Lish-deleted" font-family="AvenirNext-Bold, Avenir Next" font-size="14" font-weight="bold" line-spacing="27" fill="#6F727F">
+                    <tspan x="70" y="14">Dustin Lish</tspan>
+                    <tspan x="144.27" y="14" font-family="AvenirNext-Regular, Avenir Next" font-weight="normal"> deleted file ‘README.md’ </tspan>
+                    <tspan x="70" y="41" font-family="AvenirNext-Regular, Avenir Next" font-weight="normal">d41d8cd98f00b204e9800998ecf8429e</tspan>
+                </text>
+                <mask id="mask-6" fill="white">
+                    <use xlink:href="#path-5"></use>
+                </mask>
+                <use id="Circle" fill="#CDCDD3" xlink:href="#path-5"></use>
+                <text id="DL" mask="url(#mask-6)" font-family="AvenirNext-Medium, Avenir Next" font-size="12" font-weight="400" fill="#FFFFFF">
+                    <tspan x="10.368" y="30">DL</tspan>
+                </text>
+            </g>
+            <g id="row1-copy-3" transform="translate(111.000000, 311.000000)">
+                <text id="Dustin-Lish-modified" font-family="AvenirNext-Bold, Avenir Next" font-size="14" font-weight="bold" line-spacing="27" fill="#6F727F">
+                    <tspan x="70" y="14">Dustin Lish</tspan>
+                    <tspan x="144.27" y="14" font-family="AvenirNext-Regular, Avenir Next" font-weight="normal"> modified file ‘somefile.js’ </tspan>
+                    <tspan x="70" y="41" font-family="AvenirNext-Regular, Avenir Next" font-weight="normal">d41d8cd98f00b204e9800998ecf8430e</tspan>
+                </text>
+                <mask id="mask-8" fill="white">
+                    <use xlink:href="#path-7"></use>
+                </mask>
+                <use id="Circle" fill="#CDCDD3" xlink:href="#path-7"></use>
+                <text id="DL" mask="url(#mask-8)" font-family="AvenirNext-Medium, Avenir Next" font-size="12" font-weight="400" fill="#FFFFFF">
+                    <tspan x="10.368" y="30">DL</tspan>
+                </text>
+            </g>
+            <g id="row1-copy-4" transform="translate(111.000000, 402.000000)">
+                <text id="Dustin-Lish-deleted" font-family="AvenirNext-Bold, Avenir Next" font-size="14" font-weight="bold" line-spacing="27" fill="#6F727F">
+                    <tspan x="70" y="14">Dustin Lish</tspan>
+                    <tspan x="144.27" y="14" font-family="AvenirNext-Regular, Avenir Next" font-weight="normal"> deleted file ‘old.java’ from /hfns/hasli/repo/app/</tspan>
+                    <tspan x="70" y="41" font-family="AvenirNext-Regular, Avenir Next" font-weight="normal">d41d8cd98f00b204e9800998ecf8430e</tspan>
+                </text>
+                <mask id="mask-10" fill="white">
+                    <use xlink:href="#path-9"></use>
+                </mask>
+                <use id="Circle" fill="#CDCDD3" xlink:href="#path-9"></use>
+                <text id="DL" mask="url(#mask-10)" font-family="AvenirNext-Medium, Avenir Next" font-size="12" font-weight="400" fill="#FFFFFF">
+                    <tspan x="10.368" y="30">DL</tspan>
+                </text>
+            </g>
+            <g id="Bar" transform="translate(34.000000, 59.000000)">
+                <circle id="Oval-3" stroke="#25CD6B" stroke-width="2" cx="5.5" cy="4.5" r="4.5"></circle>
+                <g id="Group-2" transform="translate(1.000000, 92.000000)" stroke-width="2" stroke="#25CD6B">
+                    <circle id="Oval-3" cx="4.5" cy="4.5" r="4.5"></circle>
+                </g>
+                <g id="Group-2" transform="translate(0.000000, 184.000000)" stroke-width="2">
+                    <circle id="Oval-3" stroke="#FF3D72" cx="5.5" cy="4.5" r="4.5"></circle>
+                    <circle id="Oval-3-Copy" stroke="#F6A623" cx="5.5" cy="95.5" r="4.5"></circle>
+                    <circle id="Oval-3-Copy-2" stroke="#FF3D72" cx="4.5" cy="186.5" r="4.5"></circle>
+                </g>
+                <path d="M5.5,10.5 L5.5,90.5199966" id="Line" stroke="#26323A" stroke-linecap="square"></path>
+                <path d="M5.5,102.5 L5.5,182.519997" id="Line" stroke="#26323A" stroke-linecap="square"></path>
+                <path d="M5.5,194.5 L5.5,273.519997" id="Line" stroke="#26323A" stroke-linecap="square"></path>
+                <path d="M5,285.5 L5,364.519997" id="Line-Copy" stroke="#26323A" stroke-linecap="square"></path>
+            </g>
+            <text id="Aug-29,-2016" font-family="Open Sans" font-size="12" font-weight="400" fill="#6F727F">
+                <tspan x="0" y="14">Aug 29, 2016</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
