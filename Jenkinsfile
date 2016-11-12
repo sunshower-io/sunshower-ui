@@ -6,6 +6,9 @@ def buildNumber
 def buildSuffix    = "Final"
 def version        = "$majorVersion.$minorVersion"
 def registry       = "10.0.4.51:5000"
+def hasliImage     = "hasli.io/ui"
+def agentVersion   = "latest"
+def agentImage     = "$registry/hasli/agent:latest"
 def runSystemTests = false
 def bomTask      
 def gradleTasks    = []
@@ -69,13 +72,16 @@ node('docker-registry') {
 
             if (staging) {
                 stage('Deploy to Staging') {
-                    sh "docker build -t hasli.io/ui:$version.$buildNumber ./web/"
-                    dockerRun(
-                            "hasli.io/ui:$version.$buildNumber",
-                            name,
-                            "-d -P",
-                            "",
-                            false)
+                    // setup staging environment
+                    sh "sed -i.bak 's/^HASLI_NAME=.*/HASLI_NAME=$name-wildfly/' ./web/.env"
+                    sh "sed -i.bak 's/^HASLI_VERSION=.*/HASLI_VERSION=$version.$buildNumber/' ./web/.env"
+                    sh "sed -i.bak 's/^HASLI_IMAGE=.*/HASLI_IMAGE=$hasliImage:$version.buildNumber/' ./web/.env"
+                    sh "sed -i.bak 's/^AGENT_NAME=.*/AGENT_NAME=$name-agent/' ./web/.env"
+
+
+                    sh "docker pull $agentImage"
+                    sh "docker build -t $hasliImage:$version.$buildNumber ./web/"
+                    sh "cd web && docker-compose up -d"
                 }
 
                 stage('Deployment Summary') {
@@ -83,11 +89,11 @@ node('docker-registry') {
                     sh "printf 'Ports: ' && docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' $name"
                 }
             } else {
-                sh "docker build --build-arg HASLI_VERSION=$majorVersion.$minorVersion.$buildNumber.$buildSuffix -t hasli.io/ui:$version.$buildNumber ./web/ --no-cache"
-                sh "docker tag hasli.io/ui:$version.$buildNumber $registry/hasli.io/ui:$version.$buildNumber"
-                sh "docker tag hasli.io/ui:$version.$buildNumber $registry/hasli.io/ui:latest"
-                sh "docker push $registry/hasli.io/ui:$version.$buildNumber"
-                sh "docker push $registry/hasli.io/ui:latest"
+                sh "docker build --build-arg HASLI_VERSION=$majorVersion.$minorVersion.$buildNumber.$buildSuffix -t $hasliImage:$version.$buildNumber ./web/ --no-cache"
+                sh "docker tag $hasliImage:$version.$buildNumber $registry/$hasliImage:$version.$buildNumber"
+                sh "docker tag $hasliImage:$version.$buildNumber $registry/$hasliImage:latest"
+                sh "docker push $registry/$hasliImage:$version.$buildNumber"
+                sh "docker push $registry/$hasliImage:latest"
             }
 
         }
@@ -100,17 +106,13 @@ if (env.BRANCH_NAME == "master") {
     node('webserver') {
         stage('Deploy to Production') {
             try {
-                sh "docker ps --filter status=running --format '{{.ID}}' | xargs docker stop"
+                sh "docker stop \$(docker ps -a -q) && docker rm \$(docker ps -a -q)"
             } catch (Exception e) { }
 
-            sh "docker pull $registry/hasli.io/ui:$version.$buildNumber"
+            sh "docker pull $registry/$hasliImage:latest"
+            sh "docker pull $agentImage"
 
-            dockerRun(
-                    "$registry/hasli.io/ui:$version.$buildNumber",
-                    "hasli.io.$version.$buildNumber",
-                    "-d -p 8080:8080",
-                    "",
-                    false)
+            sh "cd web && docker-compose up -d"
         }
     }
 }
