@@ -24,10 +24,10 @@ public class DefaultSwarmService implements SwarmService {
     private AgentConfiguration configuration;
 
     public DefaultSwarmService() {
-        this.configuration = new AgentConfiguration();
-
-
-        this.client = new HFSClient(configuration.getAgentAddress());
+        if(dontInitialize()) {
+            this.configuration = new AgentConfiguration();
+            this.client = new HFSClient(configuration.getAgentAddress());
+        }
     }
 
 
@@ -109,5 +109,10 @@ public class DefaultSwarmService implements SwarmService {
     @Override
     public List<ObjectDescriptor> list(Multihash hash) {
         return Collections.emptyList();
+    }
+
+
+    private boolean dontInitialize() {
+        return System.getenv("HASLI_SWARM_DELAY_INITIALIZATION") != null;
     }
 }
