@@ -1,5 +1,0 @@
-dependencies {
-    provided 'com.zaxxer:HikariCP'
-    compile "io.hasli.search:search-api"
-    testCompile 'io.hasli.test:test-persist'
-}

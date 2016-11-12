@@ -61,12 +61,37 @@
         <hasli-search.version>1.0.24.Final</hasli-search.version>
         <hasli-hal.version>1.0.23.Final</hasli-hal.version>
         <hasli-hfs.version>1.0.3.Final</hasli-hfs.version>
+	<hasli-api.version>1.0.23.Final</hasli-api.version>
     </properties>
 
     <dependencyManagement>
 
 
         <dependencies>
+
+            <dependency>
+                <groupId>io.hasli.api</groupId>
+                <artifactId>security-api</artifactId>
+                <version>${hasli-api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.hasli.api</groupId>
+                <artifactId>vault-api</artifactId>
+                <version>${hasli-api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.hasli.api</groupId>
+                <artifactId>core-api</artifactId>
+                <version>${hasli-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.hasli.api</groupId>
+                <artifactId>common-api</artifactId>
+                <version>${hasli-api.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>io.hasli.hfs</groupId>
                 <artifactId>hfs-service</artifactId>

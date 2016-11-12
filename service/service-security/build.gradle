@@ -3,10 +3,9 @@ dependencies {
     provided 'com.zaxxer:HikariCP'
 
     provided project(':logging')
-    compile project(":api:core-api")
-    compile project(":api:vault-api")
-    compile project(":api:vault-api")
-    compile project(":api:security-api")
+    compile "io.hasli.api:core-api"
+    compile "io.hasli.api:vault-api"
+    compile "io.hasli.api:security-api"
     compile project(':persist:persist-hibernate')
 
 //    testCompile project(
