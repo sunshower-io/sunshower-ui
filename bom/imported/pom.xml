@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>io.hasli</groupId>
+        <groupId>io.hasli.site</groupId>
         <artifactId>bom</artifactId>
         <version>1.00.000.000-SNAPSHOT</version>
         <relativePath>../</relativePath>
     </parent>
-    <groupId>io.hasli</groupId>
+    <groupId>io.hasli.site</groupId>
     <artifactId>bom-imported</artifactId>
     <version>1.00.000.000-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -57,12 +57,50 @@
         <aws-sdk.version>1.11.51</aws-sdk.version>
         <lucene.version>6.2.1</lucene.version>
         <elastic-search.version>5.0.0</elastic-search.version>
+        <hasli-test.version>1.0.20.Final</hasli-test.version>
+        <hasli-search.version>1.0.24.Final</hasli-search.version>
+        <hasli-hal.version>1.0.23.Final</hasli-hal.version>
+        <hasli-hfs.version>1.0.3.Final</hasli-hfs.version>
     </properties>
 
     <dependencyManagement>
 
 
         <dependencies>
+            <dependency>
+                <groupId>io.hasli.hfs</groupId>
+                <artifactId>hfs-service</artifactId>
+                <version>${hasli-hfs.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.hasli.search</groupId>
+                <artifactId>search-api</artifactId>
+                <version>${hasli-search.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.hasli.search</groupId>
+                <artifactId>search-es</artifactId>
+                <version>${hasli-search.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.hasli.search</groupId>
+                <artifactId>search-api</artifactId>
+                <version>${hasli-search.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.hasli.hal</groupId>
+                <artifactId>hal-api</artifactId>
+                <version>${hasli-hal.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.hasli.hal</groupId>
+                <artifactId>service-hal</artifactId>
+                <version>${hasli-hal.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>commons-io</groupId>
@@ -76,7 +114,18 @@
             </dependency>
 
 
+            <dependency>
+                <groupId>io.hasli.test</groupId>
+                <artifactId>test-persist</artifactId>
+                <version>${hasli-test.version}</version>
+            </dependency>
 
+
+            <dependency>
+                <groupId>io.hasli.test</groupId>
+                <artifactId>test-service</artifactId>
+                <version>${hasli-test.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.amazonaws</groupId>
                 <artifactId>aws-java-sdk</artifactId>
