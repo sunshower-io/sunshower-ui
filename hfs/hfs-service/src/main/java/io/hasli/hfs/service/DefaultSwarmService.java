@@ -24,7 +24,7 @@ public class DefaultSwarmService implements SwarmService {
     private AgentConfiguration configuration;
 
     public DefaultSwarmService() {
-        if(dontInitialize()) {
+        if(initializeEagerly()) {
             this.configuration = new AgentConfiguration();
             this.client = new HFSClient(configuration.getAgentAddress());
         }
@@ -111,8 +111,7 @@ public class DefaultSwarmService implements SwarmService {
         return Collections.emptyList();
     }
 
-
-    private boolean dontInitialize() {
-        return System.getenv("HASLI_SWARM_DELAY_INITIALIZATION") != null;
+    private boolean initializeEagerly() {
+        return System.getenv("HASL_SWARM_INTIALIZE_EAGERLY") != null;
     }
 }
