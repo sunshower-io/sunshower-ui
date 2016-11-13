@@ -2,4 +2,38 @@
    Created by dustinlish on 11/9/16.
 
 template
-    h2 Builder
+    .ui.internally.celled.grid
+        .row
+            .two.wide.column
+                h2.ui.header column1
+                img
+            .twelve.wide.column
+                h2.ui.header column2
+                p
+            .two.wide.column
+                h2.ui.header column3
+                img
+        .row
+            .two.wide.column
+                img
+            .twelve.wide.column
+                p
+            .two.wide.column
+                .ui.divided.items
+                    .item
+                        .ui.mini.image
+                            img(src='styles/themes/hasli/assets/images/logos/nodejs-icon.svg')
+                        .middle.aligned.content
+                            | Node.js
+                    .item
+                        .ui.mini.image
+                            img(src='styles/themes/hasli/assets/images/logos/hasli-icon.svg')
+                        .middle.aligned.content
+                            | Hasli Agent
+                    .item
+                        .ui.mini.image
+                            img(src='styles/themes/hasli/assets/images/logos/postgres-icon.svg')
+                        .middle.aligned.content
+                            | Postgres
+
+
