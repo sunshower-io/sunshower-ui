@@ -104,6 +104,8 @@ node('docker-registry') {
 if (env.BRANCH_NAME == "master") {
     node('webserver') {
         stage('Deploy to Production') {
+            checkout scm
+
             try {
                 sh "docker stop \$(docker ps -a -q) && docker rm \$(docker ps -a -q)"
             } catch (Exception e) { }
