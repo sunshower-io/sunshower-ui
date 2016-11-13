@@ -84,8 +84,8 @@ node('docker-registry') {
                 }
 
                 stage('Deployment Summary') {
-                    sh "printf 'IP Address: ' && docker inspect -f '{{.NetworkSettings.IPAddress}}' $name"
-                    sh "printf 'Ports: ' && docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' $name"
+                    sh "printf 'IP Address: ' && docker inspect -f '{{.NetworkSettings.IPAddress}}' $name-wildfly"
+                    sh "printf 'Ports: ' && docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' $name-wildfly"
                 }
             } else {
                 sh "docker build --build-arg HASLI_VERSION=$majorVersion.$minorVersion.$buildNumber.$buildSuffix -t $hasliImage:$version.$buildNumber ./web/ --no-cache"
