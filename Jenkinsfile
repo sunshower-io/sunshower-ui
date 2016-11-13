@@ -75,7 +75,7 @@ node('docker-registry') {
                 stage('Deploy to Staging') {
                     sh "sed -i.bak 's/^HASLI_NAME=.*/HASLI_NAME=$name-wildfly/' ./web/.env"
                     sh "sed -i.bak 's/^HASLI_VERSION=.*/HASLI_VERSION=$version.$buildNumber/' ./web/.env"
-                    sh "sed -i.bak 's/^HASLI_IMAGE=.*/HASLI_IMAGE=hasli.io\\/ui:$version.$buildNumber/' ./web/.env"
+                    sh "sed -i.bak 's/^HASLI_IMAGE=.*/HASLI_IMAGE=hasli.io\\/ui/' ./web/.env"
                     sh "sed -i.bak 's/^AGENT_NAME=.*/AGENT_NAME=$name-agent/' ./web/.env"
 
                     sh "docker pull $agentImage"
