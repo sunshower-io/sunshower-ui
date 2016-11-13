@@ -6,6 +6,9 @@ def buildNumber
 def buildSuffix    = "Final"
 def version        = "$majorVersion.$minorVersion"
 def registry       = "10.0.4.51:5000"
+def hasliImage     = "hasli.io/ui"
+def agentVersion   = "latest"
+def agentImage     = "$registry/hasli/agent:$agentVersion"
 def runSystemTests = false
 def bomTask      
 def gradleTasks    = []
@@ -27,7 +30,8 @@ if (env.BRANCH_NAME == "master") {
     gradleTasks = [
         "installEnvironment",
         "clean",
-        "build"
+        "build",
+        "-x test"
     ]
 
     // TODO: enable system-tests for PRs or on demand
@@ -69,25 +73,26 @@ node('docker-registry') {
 
             if (staging) {
                 stage('Deploy to Staging') {
-                    sh "docker build -t hasli.io/ui:$version.$buildNumber ./web/"
-                    dockerRun(
-                            "hasli.io/ui:$version.$buildNumber",
-                            name,
-                            "-d -P",
-                            "",
-                            false)
+                    sh "sed -i.bak 's/^HASLI_NAME=.*/HASLI_NAME=$name-wildfly/' ./web/.env"
+                    sh "sed -i.bak 's/^HASLI_VERSION=.*/HASLI_VERSION=$version.$buildNumber/' ./web/.env"
+                    sh "sed -i.bak 's/^HASLI_IMAGE=.*/HASLI_IMAGE=hasli.io\\/ui/' ./web/.env"
+                    sh "sed -i.bak 's/^AGENT_NAME=.*/AGENT_NAME=$name-agent/' ./web/.env"
+
+                    sh "docker pull $agentImage"
+                    sh "docker build -t $hasliImage:$version.$buildNumber ./web/"
+                    sh "cd web && docker-compose -f docker-compose-staging.yml up -d"
                 }
 
                 stage('Deployment Summary') {
-                    sh "printf 'IP Address: ' && docker inspect -f '{{.NetworkSettings.IPAddress}}' $name"
-                    sh "printf 'Ports: ' && docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' $name"
+                    sh "printf 'IP Address: ' && docker inspect -f '{{.NetworkSettings.IPAddress}}' $name-wildfly"
+                    sh "printf 'Ports: ' && docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' $name-wildfly"
                 }
             } else {
-                sh "docker build --build-arg HASLI_VERSION=$majorVersion.$minorVersion.$buildNumber.$buildSuffix -t hasli.io/ui:$version.$buildNumber ./web/ --no-cache"
-                sh "docker tag hasli.io/ui:$version.$buildNumber $registry/hasli.io/ui:$version.$buildNumber"
-                sh "docker tag hasli.io/ui:$version.$buildNumber $registry/hasli.io/ui:latest"
-                sh "docker push $registry/hasli.io/ui:$version.$buildNumber"
-                sh "docker push $registry/hasli.io/ui:latest"
+                sh "docker build --build-arg HASLI_VERSION=$majorVersion.$minorVersion.$buildNumber.$buildSuffix -t $hasliImage:$version.$buildNumber ./web/ --no-cache"
+                sh "docker tag $hasliImage:$version.$buildNumber $registry/$hasliImage:$version.$buildNumber"
+                sh "docker tag $hasliImage:$version.$buildNumber $registry/$hasliImage:latest"
+                sh "docker push $registry/$hasliImage:$version.$buildNumber"
+                sh "docker push $registry/$hasliImage:latest"
             }
 
         }
@@ -99,18 +104,16 @@ node('docker-registry') {
 if (env.BRANCH_NAME == "master") {
     node('webserver') {
         stage('Deploy to Production') {
+            checkout scm
+
             try {
-                sh "docker ps --filter status=running --format '{{.ID}}' | xargs docker stop"
+                sh "docker stop \$(docker ps -a -q) && docker rm \$(docker ps -a -q)"
             } catch (Exception e) { }
 
-            sh "docker pull $registry/hasli.io/ui:$version.$buildNumber"
+            sh "docker pull $registry/$hasliImage:latest"
+            sh "docker pull $agentImage"
 
-            dockerRun(
-                    "$registry/hasli.io/ui:$version.$buildNumber",
-                    "hasli.io.$version.$buildNumber",
-                    "-d -p 8080:8080",
-                    "",
-                    false)
+            sh "cd web && docker-compose up -d"
         }
     }
 }
@@ -127,6 +130,7 @@ def dockerRun(String image, String name, String args, String cmd, boolean rm) {
         }
 	}
 }
+
 
 def convertBranchName(String name) {
     return name.replaceAll('/', '_')
