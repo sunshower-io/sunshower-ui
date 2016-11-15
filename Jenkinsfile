@@ -84,7 +84,20 @@ node('docker-registry') {
                 }
 
                 stage('Deployment Summary') {
-                    sh "printf 'IP Address: ' && docker inspect -f '{{.NetworkSettings.IPAddress}}' $name-wildfly"
+                    def portMapping = sh 
+                        returnStdout: true, 
+                        script: "docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' staging-1.0.1.PR-24-wildfly"
+                    def port = portMapping.trim().split(/\s->\s/)[1]    
+
+                    step([
+                            $class: 'GitHubPRCommentPublisher', 
+                            comment: [
+                                content: "Build \n${BUILD_NUMBER}\n ${BUILD_RESULT}\n Staged deployment can be viewed at: 10.0.4.51:$port\nPort Mapping: $portMapping"
+                            ], 
+                            errorHandler: [buildStatus: <object of type hudson.model.Result>], statusVerifier: [buildStatus: <object of type hudson.model.Result>]
+                    ])
+
+                    sh "printf 'IP Address: ' && docker inspect -f '{{.NetworkSettings.Networks.web_default.IPAddress}}' $name-wildfly"
                     sh "printf 'Ports: ' && docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' $name-wildfly"
                 }
             } else {
