@@ -91,8 +91,7 @@ node('docker-registry') {
                             $class: 'GitHubPRCommentPublisher', 
                             comment: [
                                 content: "Build \n${BUILD_NUMBER}\n ${BUILD_RESULT}\n Staged deployment can be viewed at: 10.0.4.51:$port\nPort Mapping: $portMapping"
-                            ], 
-                            errorHandler: [buildStatus: <object of type hudson.model.Result>], statusVerifier: [buildStatus: <object of type hudson.model.Result>]
+                            ]
                     ])
 
                     sh "printf 'IP Address: ' && docker inspect -f '{{.NetworkSettings.Networks.web_default.IPAddress}}' $name-wildfly"
