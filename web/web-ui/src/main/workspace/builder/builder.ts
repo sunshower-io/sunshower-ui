@@ -16,18 +16,26 @@ export class Builder {
                 exclusive: false,
                 closable: false
             });
+
         this.sidebar
             .sidebar('toggle');
 
-
-        // $('body').css('overflow', 'hidden');
+        $('.menu .grid.layout.icon')
+            .popup({
+                on         : 'click',
+                inline     : true,
+                hoverable  : true,
+                position   : 'bottom center',
+                delay: {
+                    hide: 100
+                }
+            });
 
     }
 
     detached() {
         this.sidebar
             .sidebar('hide');
-        // $('body').css('overflow', 'auto');
     }
 
     toggle(menu) {
