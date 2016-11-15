@@ -84,9 +84,7 @@ node('docker-registry') {
                 }
 
                 stage('Deployment Summary') {
-                    def portMapping = sh 
-                        returnStdout: true, 
-                        script: "docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' staging-1.0.1.PR-24-wildfly"
+                    def portMapping = sh returnStdout: true, script: "docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' staging-1.0.1.PR-24-wildfly"
                     def port = portMapping.trim().split(/\s->\s/)[1]    
 
                     step([
