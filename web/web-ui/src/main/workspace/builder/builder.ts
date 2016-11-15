@@ -3,18 +3,20 @@
  */
 export class Builder {
 
+    private sidebar;
 
     attached() {
         $('.ui.dropdown')
             .dropdown();
 
-        $('.side.menus .ui.sidebar')
+        this.sidebar = $('.side.menus .ui.sidebar')
             .sidebar({
                 dimPage: false,
                 transition: 'overlay',
                 exclusive: false,
                 closable: false
-            })
+            });
+        this.sidebar
             .sidebar('toggle');
 
 
@@ -23,6 +25,8 @@ export class Builder {
     }
 
     detached() {
+        this.sidebar
+            .sidebar('hide');
         // $('body').css('overflow', 'auto');
     }
 
