@@ -84,8 +84,15 @@ node('docker-registry') {
                 }
 
                 stage('Deployment Summary') {
-                    sh "printf 'IP Address: ' && docker inspect -f '{{.NetworkSettings.IPAddress}}' $name-wildfly"
-                    sh "printf 'Ports: ' && docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' $name-wildfly"
+                    def portMapping = sh returnStdout: true, script: "docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' $name-wildfly"
+                    portMapping = portMapping.trim()
+                    def port = portMapping.split(/\s->\s/)[1]    
+                    def pr = env.BRANCH_NAME.split("-")[1].trim()
+                    def pat = readFile('/root/.pat').trim()
+
+                    sh "curl -H \"Content-Type: application/json\" -u dlish:$pat -X POST -d '{\"body\": \"${JOB_NAME}, build #${env.BUILD_NUMBER} - Deployment can be viewed at: [10.0.4.51:$port](http://10.0.4.51:$port/hasli/web/)\"}' https://api.github.com/repos/hasli-projects/hasli.io/issues/$pr/comments"
+
+                    echo "Port Mapping: $portMapping"
                 }
             } else {
                 sh "docker build --build-arg HASLI_VERSION=$majorVersion.$minorVersion.$buildNumber.$buildSuffix -t $hasliImage:$version.$buildNumber ./web/ --no-cache"
