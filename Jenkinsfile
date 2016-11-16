@@ -90,7 +90,7 @@ node('docker-registry') {
                     step([
                             $class: 'GitHubPRCommentPublisher', 
                             comment: [
-                                content: "Build \n${BUILD_NUMBER}\n ${result}\n Staged deployment can be viewed at: 10.0.4.51:$port\nPort Mapping: $portMapping"
+                                content: "Build \n${BUILD_NUMBER}\nStaged deployment can be viewed at: 10.0.4.51:$port\nPort Mapping: $portMapping"
                             ]
                     ])
 
