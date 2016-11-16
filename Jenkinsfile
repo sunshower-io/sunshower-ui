@@ -89,7 +89,7 @@ node('docker-registry') {
                     def pr = env.BRANCH_NAME.split("-")[1].trim()
                     def pat = readFile('/root/.pat').trim()
 
-                    sh "curl -H \"Content-Type: application/json\" -u dlish:$pat -X POST -d '{\"body\": \"BUILD: ${JOB_NAME} - ${env.BUILD_NUMBER}\nStaged deployment can be viewed at: 10.0.4.51:$port\nPort Mapping: $portMapping\"}' https://api.github.com/repos/hasli-projects/hasli.io/issues/$pr/comments"
+                    sh "curl -H \"Content-Type: application/json\" -u dlish:$pat -X POST -d '{\"body\": \"BUILD: ${JOB_NAME}:${env.BUILD_NUMBER} - Deployment can be viewed at 10.0.4.51:$port - Port Mapping: $portMapping\"}' https://api.github.com/repos/hasli-projects/hasli.io/issues/$pr/comments"
 
                     echo "Port Mapping: $portMapping"
                 }
