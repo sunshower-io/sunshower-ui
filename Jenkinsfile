@@ -86,16 +86,12 @@ node('docker-registry') {
                 stage('Deployment Summary') {
                     def portMapping = sh returnStdout: true, script: "docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' $name-wildfly"
                     def port = portMapping.trim().split(/\s->\s/)[1]    
+                    def pr = env.BRANCH_NAME.split("-")[1].trim()
+                    def pat = readFile('/root/.pat').trim()
 
-                    step([
-                            $class: 'GitHubPRCommentPublisher', 
-                            comment: [
-                                content: "Build \n${BUILD_NUMBER}\nStaged deployment can be viewed at: 10.0.4.51:$port\nPort Mapping: $portMapping"
-                            ]
-                    ])
+                    sh "curl -H \"Content-Type: application/json\" -u dlish:$pat -X POST -d '{\"body\": \"BUILD: ${JOB_NAME} - ${env.BUILD_NUMBER}\nStaged deployment can be viewed at: 10.0.4.51:$port\nPort Mapping: $portMapping\"}' https://api.github.com/repos/hasli-projects/hasli.io/issues/$pr/comments"
 
-                    sh "printf 'IP Address: ' && docker inspect -f '{{.NetworkSettings.Networks.web_default.IPAddress}}' $name-wildfly"
-                    sh "printf 'Ports: ' && docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' $name-wildfly"
+                    echo "Port Mapping: $portMapping"
                 }
             } else {
                 sh "docker build --build-arg HASLI_VERSION=$majorVersion.$minorVersion.$buildNumber.$buildSuffix -t $hasliImage:$version.$buildNumber ./web/ --no-cache"
