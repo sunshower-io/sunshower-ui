@@ -85,7 +85,8 @@ node('docker-registry') {
 
                 stage('Deployment Summary') {
                     def portMapping = sh returnStdout: true, script: "docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' $name-wildfly"
-                    def port = portMapping.trim().split(/\s->\s/)[1]    
+                    portMapping = portMapping.trim()
+                    def port = portMapping.split(/\s->\s/)[1]    
                     def pr = env.BRANCH_NAME.split("-")[1].trim()
                     def pat = readFile('/root/.pat').trim()
 
