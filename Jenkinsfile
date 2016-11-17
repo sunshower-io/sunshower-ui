@@ -80,7 +80,7 @@ node('docker-registry') {
 
                     sh "docker pull $agentImage"
                     sh "docker build -t $hasliImage:$version.$buildNumber ./web/"
-                    sh "cd web && docker-compose -f docker-compose-staging.yml up -d"
+                    sh "cd web && docker-compose -f docker-compose-staging.yml -p $name up -d"
                 }
 
                 stage('Deployment Summary') {
