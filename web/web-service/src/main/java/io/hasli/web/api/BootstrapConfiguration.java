@@ -8,10 +8,12 @@ import io.hasli.hal.aws.AwsComputeService;
 import io.hasli.hal.core.node.DefaultNodeConfigurationService;
 import io.hasli.hfs.service.HFSConfiguration;
 import io.hasli.jpa.flyway.FlywayConfiguration;
+import io.hasli.model.core.PersistenceConfiguration;
 import io.hasli.persist.core.DataSourceConfiguration;
 import io.hasli.persist.core.DatabaseConfiguration;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.search.es.SearchConfiguration;
+import io.hasli.security.api.SecurityPersistenceConfiguration;
 import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.service.vault.VaultConfiguration;
 import org.flywaydb.core.Flyway;
@@ -20,6 +22,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,13 +38,15 @@ import java.util.Map;
         SecurityConfiguration.class,
         VaultConfiguration.class,
         SearchConfiguration.class,
-        HFSConfiguration.class
-
+        HFSConfiguration.class,
+        PersistenceConfiguration.class,
+        SecurityPersistenceConfiguration.class
 })
 public class BootstrapConfiguration {
 
     @Inject
-    private Flyway flyway;
+    @Named("createMigrations")
+    private String flyway;
 
     public BootstrapConfiguration() {
     }
