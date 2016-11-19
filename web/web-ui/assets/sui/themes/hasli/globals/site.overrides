@@ -57,3 +57,29 @@ img.transparent {
   height: 630px;
   overflow: scroll;
 }
+
+.flex {
+  display: flex !important;
+}
+
+.right--menu, .left--menu {
+  top: 182px !important;
+  width: 300px !important;
+  margin-top: 0px;
+  overflow: scroll;
+  height: 100% !important;
+  border-top: none;
+}
+
+/* Builder */
+.left--menu {
+  left: 0px !important;
+}
+
+.right--menu {
+  right: 0px !important;
+}
+
+.no--padding {
+  padding: 0px !important;
+}

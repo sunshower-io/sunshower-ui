@@ -90,7 +90,7 @@ export class WorkspaceView {
                 name: 'builder',
                 moduleId: 'main/workspace/builder/builder',
                 nav: true,
-                title: 'Template Builder',
+                title: 'Workbench',
                 settings: {
                     parent: false,
                     child: false

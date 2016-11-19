@@ -268,8 +268,8 @@ interface JQuery {
     rating    (params?:any):void;
     search    (params?:any):void;
     shape     (params?:any):void;
-    sidebar   (behavior: string, ...args: any[]): void;
-    sidebar   (params?: any): void;
+    sidebar   (behavior: string, ...args: any[]): JQuery;
+    sidebar   (params?: any): JQuery;
     site      (params?:any):void;//check
     state     (params?:any):void;
     sticky    (params?:any):void;
