@@ -541,6 +541,10 @@ System.config({
       "../../../storage/local/local-storage",
       "aurelia-fetch-client"
     ],
+    "settings/settings.js": [
+      "aurelia-framework",
+      "aurelia-fetch-client"
+    ],
     "storage/local/local-storage.js": [
       "../../core/exceptions/type-errors"
     ]

@@ -1,2 +1,9 @@
 template
-    h1 settings
+    .ui.celled.list
+        a.item(repeat.for="signup of pendingSignups")
+            button.ui.right.floated.button.basic.secondary(click.delegate="activateUser(signup.requestId)")
+                | Activate
+            i.user.icon
+            .content
+                .header ${signup.user.username} (${signup.user.emailAddress})
+                div Requested: ${signup.requested} Expires: ${signup.expires}
