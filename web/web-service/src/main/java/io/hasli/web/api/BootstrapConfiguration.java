@@ -3,23 +3,34 @@ package io.hasli.web.api;
 import io.hasli.common.configuration.ConfigurationSource;
 import io.hasli.common.configuration.MapConfigurationSource;
 import io.hasli.common.rs.MoxyProvider;
+import io.hasli.core.ApplicationService;
 import io.hasli.hal.api.instance.NodeConfigurationService;
 import io.hasli.hal.aws.AwsComputeService;
 import io.hasli.hal.core.node.DefaultNodeConfigurationService;
 import io.hasli.hfs.service.HFSConfiguration;
 import io.hasli.jpa.flyway.FlywayConfiguration;
+import io.hasli.model.core.Application;
+import io.hasli.model.core.PersistenceConfiguration;
+import io.hasli.model.core.Version;
+import io.hasli.model.core.auth.User;
 import io.hasli.persist.core.DataSourceConfiguration;
 import io.hasli.persist.core.DatabaseConfiguration;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.search.es.SearchConfiguration;
+import io.hasli.security.api.SecurityPersistenceConfiguration;
 import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.service.vault.VaultConfiguration;
 import org.flywaydb.core.Flyway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.inject.Named;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,16 +46,20 @@ import java.util.Map;
         SecurityConfiguration.class,
         VaultConfiguration.class,
         SearchConfiguration.class,
-        HFSConfiguration.class
-
+        HFSConfiguration.class,
+        PersistenceConfiguration.class,
+        SecurityPersistenceConfiguration.class
 })
 public class BootstrapConfiguration {
 
     @Inject
-    private Flyway flyway;
+    @Named("createMigrations")
+    private String flyway;
+
 
     public BootstrapConfiguration() {
     }
+
 
     @Bean
     public AwsComputeService awsComputeService() {
@@ -76,5 +91,24 @@ public class BootstrapConfiguration {
         return new DefaultNodeConfigurationService();
     }
 
+
+    @EventListener
+    public void initializeApplication(ContextRefreshedEvent event) {
+        final ApplicationService applicationService =
+                event.getApplicationContext()
+                        .getBean(ApplicationService.class);
+        final Application application = new Application();
+        application.setName("hasli.io");
+        application.setEnabled(true);
+        application.setLocation("https://site.hasli.io");
+
+        final User administrator = new User();
+        administrator.setEnabled(true);
+        administrator.setUsername("administrator");
+        administrator.setEmailAddress("administrator@hasli.io");
+        administrator.setPassword("t3sti9");
+        application.setAdministrators(Collections.singletonList(administrator));
+        applicationService.initialize(application);
+    }
 
 }
