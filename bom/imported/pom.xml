@@ -32,6 +32,7 @@
         <arcus.version>1.0.5.Final</arcus.version>
         <hikari-cp.version>2.5.1</hikari-cp.version>
         <!--<spring.version>4.3.0.BUILD-SNAPSHOT</spring.version>-->
+        <snapshot-version>1.00.000.000-SNAPSHOT</snapshot-version>
         <spring.version>4.3.3.RELEASE</spring.version>
         <javaee-spec.version>1.0.3.Final</javaee-spec.version>
         <junit.jupiter.version>5.0.0-M2</junit.jupiter.version>
@@ -59,10 +60,10 @@
         <elastic-search.version>5.0.0</elastic-search.version>
         <hasli-test.version>1.0.20.Final</hasli-test.version>
         <hasli-search.version>1.0.24.Final</hasli-search.version>
-        <hasli-hal.version>1.0.23.Final</hasli-hal.version>
+        <hasli-hal.version>${snapshot-version}</hasli-hal.version>
         <hasli-hfs.version>1.0.3.Final</hasli-hfs.version>
-        <hasli-api.version>1.0.31.Final</hasli-api.version>
-        <hasli-service.version>1.0.29.Final</hasli-service.version>
+        <hasli-api.version>${snapshot-version}</hasli-api.version>
+        <hasli-service.version>${snapshot-version}</hasli-service.version>
     </properties>
 
     <dependencyManagement>
@@ -71,44 +72,35 @@
         <dependencies>
 
             <dependency>
-                <groupId>io.hasli.service</groupId>
-                <artifactId>service-security</artifactId>
-                <version>${hasli-service.version}</version>
+                <groupId>io.hasli.hal</groupId>
+                <artifactId>bom-exported</artifactId>
+                <version>${hasli-hal.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>io.hasli.service</groupId>
+                <artifactId>bom-exported</artifactId>
+                <version>${hasli-service.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
 
             <dependency>
                 <groupId>io.hasli.service</groupId>
                 <artifactId>service-hal</artifactId>
                 <version>${hasli-service.version}</version>
             </dependency>
-            <dependency>
-                <groupId>io.hasli.service</groupId>
-                <artifactId>service-vault</artifactId>
-                <version>${hasli-service.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>io.hasli.api</groupId>
-                <artifactId>security-api</artifactId>
+                <artifactId>bom-exported</artifactId>
                 <version>${hasli-api.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
-            <dependency>
-                <groupId>io.hasli.api</groupId>
-                <artifactId>vault-api</artifactId>
-                <version>${hasli-api.version}</version>
-            </dependency>
 
-            <dependency>
-                <groupId>io.hasli.api</groupId>
-                <artifactId>core-api</artifactId>
-                <version>${hasli-api.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.hasli.api</groupId>
-                <artifactId>common-api</artifactId>
-                <version>${hasli-api.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>io.hasli.hfs</groupId>
@@ -135,15 +127,12 @@
 
             <dependency>
                 <groupId>io.hasli.hal</groupId>
-                <artifactId>hal-api</artifactId>
+                <artifactId>bom-exported</artifactId>
                 <version>${hasli-hal.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
-            <dependency>
-                <groupId>io.hasli.hal</groupId>
-                <artifactId>service-hal</artifactId>
-                <version>${hasli-hal.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>commons-io</groupId>

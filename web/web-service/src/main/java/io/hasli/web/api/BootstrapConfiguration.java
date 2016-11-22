@@ -7,6 +7,7 @@ import io.hasli.core.ApplicationService;
 import io.hasli.hal.api.instance.NodeConfigurationService;
 import io.hasli.hal.aws.AwsComputeService;
 import io.hasli.hal.core.node.DefaultNodeConfigurationService;
+import io.hasli.hal.docker.DockerConfiguration;
 import io.hasli.hfs.service.HFSConfiguration;
 import io.hasli.jpa.flyway.FlywayConfiguration;
 import io.hasli.model.core.Application;
@@ -47,8 +48,9 @@ import java.util.Map;
         VaultConfiguration.class,
         SearchConfiguration.class,
         HFSConfiguration.class,
+        DockerConfiguration.class,
         PersistenceConfiguration.class,
-        SecurityPersistenceConfiguration.class
+        SecurityPersistenceConfiguration.class,
 })
 public class BootstrapConfiguration {
 

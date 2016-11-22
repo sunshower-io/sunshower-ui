@@ -11,15 +11,19 @@ publishing {
 
 configurations {
     site
+
+    earlib.exclude group: 'dom4j'
 }
 
 
 
 dependencies {
+    earlib "io.hasli.api:schemata"
     earlib "io.hasli.search:search-es"
     earlib "io.hasli.hfs:hfs-service"
     earlib "io.hasli.service:service-vault"
     earlib "io.hasli.service:service-hal"
+    earlib "io.hasli.hal:hal-docker"
     earlib "io.hasli.service:service-security"
     deploy project(path: ':web:web-site', configuration: 'archives')
     deploy project(path: ':web:web-service', configuration:'archives')
