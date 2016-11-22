@@ -74,6 +74,13 @@ export class App {
                 settings: {
                     icon: 'line chart icon'
                 }
+            }, {
+                route: 'settings',
+                name: 'Settings',
+                moduleId: 'main/settings/settings',
+                nav: false,
+                title: 'Settings',
+                settings: {}
             }
         ]);
 

@@ -7,16 +7,17 @@ import {Next} from "aurelia-router";
 import {AuthenticationContextHolder} from "./model/core/security/index";
 import {inject} from "aurelia-framework";
 import {RedirectToRoute} from "aurelia-router";
+import {Settings} from './main/settings/settings'
 
-@inject(AuthenticationContextHolder)
+@inject(AuthenticationContextHolder, Settings)
 export class App {
     public router: Router;
 
-    constructor(private tokenHolder:AuthenticationContextHolder) {
+    constructor(private tokenHolder:AuthenticationContextHolder, private settings:Settings) {
     }
 
     public configureRouter(config: RouterConfiguration, router: Router) {
-        config.title = 'Aurelia';
+        config.title = 'Hasli.io';
         config.addPipelineStep('authorize', new SecurityStep(this.tokenHolder));
 
         config.map([
@@ -31,27 +32,13 @@ export class App {
                 moduleId: './main/main',
                 title: 'main',
                 name: 'main'
-            },
-            {
-                route: 'settings',
-                nav: true,
-                moduleId: 'settings/settings',
-                title: 'settings',
-                name: 'settings'
-            },
-            {
-                route: 'profile',
-                nav: true,
-                moduleId: 'profile/profile',
-                title: 'profile',
-                name: 'profile'
-            },
+            }
         ]);
         config.mapUnknownRoutes('main/main');
-        // this.router.navigateToRoute("#/main");
 
 
         this.router = router;
+
     }
 }
 
