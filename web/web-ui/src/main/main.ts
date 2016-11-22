@@ -8,22 +8,12 @@ import {inject} from "aurelia-framework";
 export class App {
     public router: Router;
 
-    constructor(private tokenHolder:AuthenticationContextHolder) {
+    constructor(private tokenHolder: AuthenticationContextHolder) {
     }
 
     public configureRouter(config: RouterConfiguration, router: Router) {
         config.title = 'Aurelia';
         config.map([
-            // {
-            //     route: ['', 'home'],
-            //     name: 'home',
-            //     moduleId: 'main/home/home',
-            //     nav: false,
-            //     title: 'home',
-            //     settings: {
-            //         icon: ''
-            //     }
-            // },
             {
                 route: ['', 'workspaces'],
                 name: 'Workspaces',
@@ -95,10 +85,10 @@ export class App {
     attached() {
         $('.menu .grid.layout.icon')
             .popup({
-                on         : 'click',
-                inline     : true,
-                hoverable  : true,
-                position   : 'bottom center',
+                on: 'click',
+                inline: true,
+                hoverable: true,
+                position: 'bottom center',
                 delay: {
                     hide: 100
                 }
