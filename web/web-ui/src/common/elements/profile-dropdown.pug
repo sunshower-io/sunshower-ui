@@ -4,7 +4,8 @@
 template(bindable="router")
     //TODO change this from being a dropdown so the span doesn't change to whatever the route is
     .ui.pointing.dropdown.white
-        span.white.text ${user.username}
+        span(style="color:white") ${user.username}
+        //had to remove span.white.text because .text was causing the text to change upon selection of an option
         i.inverted.white.dropdown.icon
         .menu
             .item(click.delegate="router.navigate('#/main/settings/profile')") Profile

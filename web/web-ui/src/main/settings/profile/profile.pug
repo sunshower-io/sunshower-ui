@@ -1,11 +1,11 @@
 template
     //start main/settings/profile
     .ui.container
-        .ui.padded.two.four.column.grid
+        .ui.padded.two.column.grid
             h1 Profile
             .row
                 .column
-                    h2 Name
+                    h2 ${user.firstname} ${user.lastname}
                     p(show.bind="expiredUser")
                         i.icon.delete.calendar
                         | Expired
@@ -17,7 +17,7 @@ template
                         | ${user.username}
                     p
                         i.icon.mail.outline
-                        | ${user.emailaddress}
+                        | ${user.emailAddress}
                     p ${user.details}
                 .column
                     h3 Roles
@@ -26,8 +26,8 @@ template
             .ui.two.buttons(show.bind="(!editingUser && !editingPassword)")
                 .ui.button.basic.primary(click.delegate="editUser()") Edit
                 .ui.button.basic.secondary(click.delegate="editPassword()") Change Password
+        .ui.divider.fluid(show.bind="!(!editingUser && !editingPassword)")
         form.ui.form.two.column.padded.grid(show.bind="editingUser")
-            .ui.divider.fluid
             .row
                 .column
                     .field
@@ -46,14 +46,13 @@ template
                         label
                             i.icon.mail.outline
                             | Email Address
-                        input(type='text', placeholder='${user.emailaddress}', value.bind='user.emailaddress')
+                        input(type='text', placeholder='${user.emailAddress}', value.bind='user.emailAddress')
                 .column
                     .field
                         label Details
                         textarea(placeholder='${user.details}', value.bind='user.details')
             .ui.button.basic.primary.fluid(click.delegate="saveUser()") Save
         form.ui.form.two.column.padded.grid(show.bind="editingPassword")
-            .ui.divider.fluid
             .row
                 .column
                     label Old Password
@@ -66,4 +65,4 @@ template
                     label Confirm Password
                     input(type='password')
             .ui.button.basic.primary.fluid(click.delegate="savePassword()") Save
-            //end main/settings/profile
+    //end main/settings/profile

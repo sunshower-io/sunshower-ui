@@ -30,7 +30,7 @@ export class App {
                 route: 'main',
                 nav: true,
                 moduleId: './main/main',
-                title: 'main',
+                title: 'Main',
                 name: 'main'
             }
         ]);

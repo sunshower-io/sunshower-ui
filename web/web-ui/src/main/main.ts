@@ -12,7 +12,7 @@ export class App {
     }
 
     public configureRouter(config: RouterConfiguration, router: Router) {
-        config.title = 'Aurelia';
+        config.title = '';
         config.map([
             {
                 route: ['', 'workspaces'],

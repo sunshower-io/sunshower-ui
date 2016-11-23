@@ -9,7 +9,7 @@ export class Settings {
 
 
     public configureRouter(config: RouterConfiguration, router: Router) {
-        config.title = "Settings";
+        config.title = "";
         config.map([
             {
                 route: ['', 'admin'],
