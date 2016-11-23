@@ -16,23 +16,28 @@ export class RightMenu {
     }
 
     addImage(imageId: string) {
-        let event = this.createEvent(imageId);
+        let event = this.createEvent(imageId, 'image-dragged');
+        this.element.dispatchEvent(event);
+    }
+
+    editImage(imageId: string) {
+        let event = this.createEvent(imageId, 'image-edited');
         this.element.dispatchEvent(event);
     }
 
 
-    public createEvent(id:string) : Event {
+    public createEvent(id:string, eventName:string) : Event {
         var event:Event;
 
         if((<any>window).CustomEvent) {
-            event = new CustomEvent('image-dragged', {
+            event = new CustomEvent(eventName, {
                 detail: {
                     value: id,
                 },
                 bubbles:true
             });
         } else {
-            event = (<any>document).createCustomEvent('image-dragged');
+            event = (<any>document).createCustomEvent(eventName);
             (<any>event).initCustomEvent('change', true, true, {
                 detail: {
                     value: id,

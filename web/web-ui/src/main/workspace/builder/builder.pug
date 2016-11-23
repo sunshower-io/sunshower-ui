@@ -1,6 +1,7 @@
 template
     require(from="main/workspace/builder/sidemenus/left-menu")
     require(from="main/workspace/builder/sidemenus/right-menu")
+    require(from="main/workspace/builder/sidemenus/modal")
     .ui.grid.workbench-container
         .row
             .twelve.wide.centered.column
@@ -67,4 +68,5 @@ template
                 ref="rightSidebar",
                 style="border-left:1px solid gray",
             )
-                right-menu(image-dragged.delegate="onImageAdded($event)")
+                right-menu(image-dragged.delegate="onImageAdded($event)", image-edited.delegate="editImage($event)")
+                modal

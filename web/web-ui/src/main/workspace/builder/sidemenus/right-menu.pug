@@ -5,6 +5,7 @@ template
             repeat.for="descriptor of elements",
             draggable="true",
             dragend.delegate="addImage(descriptor.pid)"
+            click.delegate="editImage(descriptor.pid)"
         ).item.flex
                 .ui.mini.image
                     img(src='${descriptor.logo_url.large}')

@@ -37,6 +37,10 @@ export class Builder {
         this.configureSidebars();
     }
 
+    private editImage(event) {
+        console.log(event)
+    }
+
     private configureWorkspace(): void {
         let cy = cytoscape({
             container: this.graph,
@@ -86,6 +90,17 @@ export class Builder {
         }])
     }
 
+    onImageEdited(e:Event) : void {
+        let value = (<any>e).detail.value;
+
+        this.client.fetch(`docker/images/${value}`)
+            .then(r => r.json())
+            .then(r => this.edit(r));
+    }
+
+    edit(imageDescriptor: ImageDescriptor) {
+
+    }
 
     toggleRight() {
         this.rightVisible = this.toggle(
