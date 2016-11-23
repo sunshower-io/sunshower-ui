@@ -2,7 +2,7 @@ template(bindable="router")
     require(from="common/elements/profile-dropdown")
     .ui.secondary.menu
         .ui.image.small
-            img.item.header(src="styles/themes/hasli/assets/images/logos/hasli-logo.svg")
+            img.item.header(src="styles/themes/hasli/assets/images/logos/hasli-logo.svg", click.delegate="router.navigate('#/main')")
         .right.menu
             a.item
                 i.large.grey.grid.layout.icon

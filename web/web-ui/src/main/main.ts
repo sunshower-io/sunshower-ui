@@ -12,7 +12,7 @@ export class App {
     }
 
     public configureRouter(config: RouterConfiguration, router: Router) {
-        config.title = 'Aurelia';
+        config.title = '';
         config.map([
             {
                 route: ['', 'workspaces'],
@@ -74,6 +74,13 @@ export class App {
                 settings: {
                     icon: 'line chart icon'
                 }
+            }, {
+                route: 'settings',
+                name: 'Settings',
+                moduleId: 'main/settings/settings',
+                nav: false,
+                title: 'Settings',
+                settings: {}
             }
         ]);
 
