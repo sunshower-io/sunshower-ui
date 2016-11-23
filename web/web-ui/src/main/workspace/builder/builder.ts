@@ -3,6 +3,7 @@
  */
 
 import * as cytoscape from 'cytoscape';
+import * as gridGuide from 'cytoscape-grid-guide'
 import {bindable} from 'aurelia-framework';
 
 
@@ -14,6 +15,7 @@ export class Builder {
     private states: {[key: number]: string} = {};
 
 
+    private graphInstance:any;
     private graph: HTMLElement;
 
     private leftSidebar: HTMLElement;
@@ -36,7 +38,7 @@ export class Builder {
         let cy = cytoscape({
             container: this.graph,
             ready: (e) => {
-                // gridGuide(cytoscape);
+                gridGuide(cytoscape);
             },
             elements: [
                 {data: {id: 'a'}},
@@ -48,6 +50,15 @@ export class Builder {
                         target: 'b'
                     }
                 }]
+        });
+        this.graphInstance = cy;
+        (<any>window).cy = cy;
+
+        cy.gridGuide({
+            snapToGrid:true,
+            discreteDrag:true,
+            guidelines:true,
+            panGrid:true
         });
     }
 
@@ -100,6 +111,13 @@ export class Builder {
             $(ele).show();
         }
         this.expanded += expanded;
+
+        this.graphInstance.gridGuide({
+            snapToGrid:true,
+            discreteDrag:true,
+            guidelines:true,
+            panGrid:true
+        });
         return visible;
     }
 

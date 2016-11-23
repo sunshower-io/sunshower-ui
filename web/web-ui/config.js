@@ -31,6 +31,7 @@ System.config({
     "bootstrap": "github:twbs/bootstrap@3.3.7",
     "css": "github:systemjs/plugin-css@0.1.31",
     "cytoscape": "npm:cytoscape@2.7.11",
+    "cytoscape-grid-guide": "npm:cytoscape-grid-guide@1.0.3",
     "dropzone": "github:enyo/dropzone@4.3.0",
     "enyo/dropzone": "github:enyo/dropzone@4.3.0",
     "fetch": "github:github/fetch@1.0.0",
@@ -201,6 +202,12 @@ System.config({
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "ieee754": "npm:ieee754@1.1.8",
       "isarray": "npm:isarray@1.0.0",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:cytoscape-grid-guide@1.0.3": {
+      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:cytoscape@2.7.11": {
