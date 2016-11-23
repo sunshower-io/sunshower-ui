@@ -63,5 +63,8 @@ template
             .three.wide.column.tall(ref="leftSidebar", style="border-right:1px solid gray")
                 left-menu
             .ten.wide.column.tall(ref="graph")
-            .three.wide.column.tall(ref="rightSidebar", style="border-left:1px solid gray")
-                right-menu
+            .three.wide.column.tall(
+                ref="rightSidebar",
+                style="border-left:1px solid gray",
+            )
+                right-menu(image-dragged.delegate="onImageAdded($event)")

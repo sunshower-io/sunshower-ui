@@ -1,32 +1,48 @@
 import {HttpClient} from "aurelia-fetch-client";
 import {inject} from "aurelia-framework";
 
-class Image {
-    large_2x:string;
-    large:string;
-    small:string;
-    small_2x:string;
-}
+import {ImageDescriptor} from '../../../../model/hal/image'
 
-class ImageDescriptor {
-    id:string;
-
-    name:string;
-
-    logo_url:Image;
-
-}
 
 @inject(HttpClient)
 export class RightMenu {
 
-    private elements:ImageDescriptor[];
+    private element:HTMLElement;
 
-    constructor(private client:HttpClient) {
+    private elements: ImageDescriptor[];
+
+    constructor(private client: HttpClient) {
 
     }
 
-    public attached() :  void {
+    addImage(imageId: string) {
+        let event = this.createEvent(imageId);
+        this.element.dispatchEvent(event);
+    }
+
+
+    public createEvent(id:string) : Event {
+        var event:Event;
+
+        if((<any>window).CustomEvent) {
+            event = new CustomEvent('image-dragged', {
+                detail: {
+                    value: id,
+                },
+                bubbles:true
+            });
+        } else {
+            event = (<any>document).createCustomEvent('image-dragged');
+            (<any>event).initCustomEvent('change', true, true, {
+                detail: {
+                    value: id,
+                }
+            });
+        }
+        return event;
+    }
+
+    public attached(): void {
         this.client.fetch('docker/images')
             .then(response => response.json())
             .then(elements => {
@@ -35,4 +51,7 @@ export class RightMenu {
             });
 
     }
+
+
+
 }

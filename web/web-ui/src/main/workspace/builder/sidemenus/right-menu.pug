@@ -1,8 +1,11 @@
 template
-    .item
+    .item(ref="element")
         h4.ui.header Applications
-        .ui.divided.items(repeat.for="descriptor of elements")
-            .item.flex
+        .ui.divided.items(
+            repeat.for="descriptor of elements",
+            draggable="true",
+            dragend.delegate="addImage(descriptor.pid)"
+        ).item.flex
                 .ui.mini.image
                     img(src='${descriptor.logo_url.large}')
                 .middle.aligned.content

@@ -4,9 +4,12 @@
 
 import * as cytoscape from 'cytoscape';
 import * as gridGuide from 'cytoscape-grid-guide'
-import {bindable} from 'aurelia-framework';
+import {inject} from 'aurelia-framework';
+import {ImageDescriptor} from '../../../model/hal/image'
+import {HttpClient} from "aurelia-fetch-client";
 
 
+@inject(HttpClient)
 export class Builder {
 
     private leftVisible: boolean = true;
@@ -22,7 +25,7 @@ export class Builder {
 
     private rightSidebar: HTMLElement;
 
-    constructor() {
+    constructor(private client:HttpClient) {
         this.states[2] = "ten";
         this.states[0] = "sixteen";
         this.states[1] = "thirteen";
@@ -40,16 +43,7 @@ export class Builder {
             ready: (e) => {
                 gridGuide(cytoscape);
             },
-            elements: [
-                {data: {id: 'a'}},
-                {data: {id: 'b'}},
-                {
-                    data: {
-                        id: 'ab',
-                        source: 'a',
-                        target: 'b'
-                    }
-                }]
+            elements: [],
         });
         this.graphInstance = cy;
         (<any>window).cy = cy;
@@ -69,6 +63,28 @@ export class Builder {
             'right'
         );
     };
+
+    onImageAdded(e:Event) : void {
+        let value = (<any>e).detail.value;
+
+        this.client.fetch(`docker/images/${value}`)
+            .then(r => r.json())
+            .then(r => this.add(r));
+    }
+
+    add(imageDescriptor: ImageDescriptor) {
+        console.log(imageDescriptor.logo_url.large)
+
+        this.graphInstance.add([{
+            group: 'nodes',
+            data: {
+                id: imageDescriptor.id,
+            },
+            css: {
+                // "background-image": 'url(https://upload.wikimedia.org/wikipedia/en/6/63/Basho-logo-small.gif)'
+            }
+        }])
+    }
 
 
     toggleRight() {
