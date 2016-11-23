@@ -1,10 +1,9 @@
 template
-    .ui.vertical.sticky.right.sidebar.menu.fixed.right--menu.no--boxshadow
-        .item
-            h4.ui.header Applications
-            .ui.divided.items(repeat.for="descriptor of elements")
-                .item.flex
-                    .ui.mini.image
-                        img(src='${descriptor.logo_url.large}')
-                    .middle.aligned.content
-                        | ${descriptor.name}
+    .item
+        h4.ui.header Applications
+        .ui.divided.items(repeat.for="descriptor of elements")
+            .item.flex
+                .ui.mini.image
+                    img(src='${descriptor.logo_url.large}')
+                .middle.aligned.content
+                    | ${descriptor.name}
