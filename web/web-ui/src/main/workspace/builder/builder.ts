@@ -81,7 +81,10 @@ export class Builder {
                 id: imageDescriptor.id,
             },
             css: {
-                // "background-image": 'url(https://upload.wikimedia.org/wikipedia/en/6/63/Basho-logo-small.gif)'
+                "background-image": `/hasli/api/v1/storage/s3/images/${imageDescriptor.logo_url.large}`,
+                "background-width":"36px",
+                "background-height":"36px",
+
             }
         }])
     }

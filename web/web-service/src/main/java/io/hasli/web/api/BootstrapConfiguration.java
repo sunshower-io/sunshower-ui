@@ -19,6 +19,7 @@ import io.hasli.persist.core.DatabaseConfiguration;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.search.es.SearchConfiguration;
 import io.hasli.security.api.SecurityPersistenceConfiguration;
+import io.hasli.service.csp.configuration.CSPServiceConfiguration;
 import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.service.vault.VaultConfiguration;
 import org.flywaydb.core.Flyway;
@@ -40,6 +41,7 @@ import java.util.Map;
  */
 @Configuration
 @Import({
+        CSPServiceConfiguration.class,
         FlywayConfiguration.class,
         DataSourceConfiguration.class,
         DatabaseConfiguration.class,
