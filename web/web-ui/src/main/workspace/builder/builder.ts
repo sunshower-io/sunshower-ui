@@ -40,11 +40,13 @@ export class Builder {
     private configureWorkspace(): void {
         let cy = cytoscape({
             container: this.graph,
+            boxSelectionEnabled:true,
             ready: (e) => {
                 gridGuide(cytoscape);
             },
-            elements: [],
+            elements: []
         });
+
         this.graphInstance = cy;
         (<any>window).cy = cy;
 
