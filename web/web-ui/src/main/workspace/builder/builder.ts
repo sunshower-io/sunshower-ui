@@ -66,19 +66,30 @@ export class Builder {
         );
     };
 
+    onItemDropped(e:Event) :void {
+        console.log(e);
+    }
+
     onImageAdded(e:Event) : void {
         let value = (<any>e).detail.value;
 
         this.client.fetch(`docker/images/${value}`)
             .then(r => r.json())
-            .then(r => this.add(r));
+            .then(r => this.add(r, e));
     }
 
-    add(imageDescriptor: ImageDescriptor) {
+    add(imageDescriptor: ImageDescriptor, e:any) {
         console.log(imageDescriptor.logo_url.large)
+
+        let rawPosition = e.detail.location,
+            graphPosition = $(this.graph).offset(),
+            x = rawPosition.x - graphPosition.left,
+            y = rawPosition.y - graphPosition.top,
+            position = {x:x, y:y};
 
         this.graphInstance.add([{
             group: 'nodes',
+            renderedPosition: position,
             data: {
                 id: imageDescriptor.id,
             },
