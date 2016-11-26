@@ -1,16 +1,7 @@
 template
+    require(from="./controls")
+    require(from="./applications")
     .top-half
+        controls
     .bottom-half
-        .ui.secondary.pointing.menu
-            a.active.item Applications
-        .ui(ref="element", style="height:calc(100% - 24px);")
-            div.ui.relaxed.divided.list(style="overflow-y:auto; height:100%; padding:8px")
-                .item(
-                    repeat.for="descriptor of elements",
-                    draggable="true",
-                    dragend.delegate="addImage(descriptor.pid)"
-                )
-                    .ui.mini.image
-                        img(src='/hasli/api/v1/storage/s3/images/${descriptor.logo_url.large}')
-                    .middle.aligned.content
-                        | ${descriptor.name}
+        applications
