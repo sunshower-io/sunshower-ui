@@ -2,12 +2,8 @@ template
     .ui.secondary.pointing.menu
         a.active.item Controls
 
-    .ui.horizontal.list(style="max-height:calc(100% - 50px); overflow-y:auto")
-        .item(style="padding-left:0.5rem !important; margin-left:0.5rem !important")
+    .ui.horizontal.list.controls(style="max-height:calc(100% - 50px); overflow-y:auto")
+        .ui.item.button.icon(click.delegate="addGroup()")
             i.ui.object.group.icon
-            .content
-               | Group
-        .item(style="padding-left:0.5rem !important; margin-left:0.5rem !important")
+        .ui.item.button.icon(clic.delegate="removeGroup()")
             i.ui.object.ungroup.icon
-            .content
-               | Ungroup

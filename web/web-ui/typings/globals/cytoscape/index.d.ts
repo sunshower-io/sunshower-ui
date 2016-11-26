@@ -2049,6 +2049,8 @@ declare module Cy {
 
 
         gridGuide(options?:any);
+        nodeResize(options?:any);
+
 
 
         toolbar();
@@ -2952,14 +2954,15 @@ declare module Cy {
     }
 
     interface BoundingBoxOptions {
+        includeShadows?: boolean,
         /**
          * A boolean indicating whether to include nodes in the bounding box.
          */
-        includeNodes: boolean;
+        includeNodes?: boolean;
         /**
          * A boolean indicating whether to include edges in the bounding box.
          */
-        includeEdges: boolean;
+        includeEdges?: boolean;
         /**
          * A boolean indicating whether to include labels in the bounding box.
          */

@@ -103,10 +103,13 @@
       "bootstrap": "github:twbs/bootstrap@^3.3.6",
       "cytoscape": "npm:cytoscape@^2.7.11",
       "cytoscape-grid-guide": "npm:cytoscape-grid-guide@^1.0.3",
+      "cytoscape-node-resize:n": "npm:cytoscape-node-resize@^1.0.10",
+      "edge-editiation": "github:frankiex/cytoscape.js-edge-editation@master",
       "enyo/dropzone": "github:enyo/dropzone@^4.3.0",
       "fetch": "github:github/fetch@^1.0.0",
       "font-awesome": "npm:font-awesome@4.6.3",
       "jquery": "npm:jquery@^2.2.4",
+      "ocanvas": "npm:ocanvas@^2.8.6",
       "pnotify": "github:sciactive/pnotify@^3.0.0",
       "semantic-ui": "github:Semantic-Org/Semantic-UI@^2.2.4",
       "text": "github:systemjs/plugin-text@^0.0.8"
