@@ -44,16 +44,18 @@ export class Builder {
             ready: (e) => {
                 gridGuide(cytoscape);
             },
-            elements: [],
-            style: (<any>cytoscape).stylesheet()
-                .selector('node:selected').css({
-                    'background-color': 'black',
-                    'line-color': 'red',
-                    'target-arrow-color': 'black',
-                    'source-arrow-color': 'black',
 
-                })
+            style: (<any>cytoscape).stylesheet()
+                .selector('node:selected')
+                .style({
+                    "font-weight": "bold",
+                    "border-style": "dashed",
+                    "background-blacken": 0.1,
+                    "border-opacity": 1,
+                }),
+            elements: [],
         });
+
 
         this.graphInstance = cy;
         (<any>window).cy = cy;
