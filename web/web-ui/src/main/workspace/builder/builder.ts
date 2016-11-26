@@ -44,7 +44,15 @@ export class Builder {
             ready: (e) => {
                 gridGuide(cytoscape);
             },
-            elements: []
+            elements: [],
+            style: (<any>cytoscape).stylesheet()
+                .selector('node:selected').css({
+                    'background-color': 'black',
+                    'line-color': 'red',
+                    'target-arrow-color': 'black',
+                    'source-arrow-color': 'black',
+
+                })
         });
 
         this.graphInstance = cy;
@@ -85,7 +93,12 @@ export class Builder {
             graphPosition = $(this.graph).offset(),
             x = rawPosition.x - graphPosition.left,
             y = rawPosition.y - graphPosition.top,
-            position = {x:x, y:y};
+            position = {x:x, y:y},
+            contents = this.computeWidth(imageDescriptor.name),
+            width = contents[0],
+            label = contents[1];
+
+
 
         this.graphInstance.add([{
             group: 'nodes',
@@ -93,10 +106,37 @@ export class Builder {
             data: {
                 id: imageDescriptor.id,
             },
-            css: {
-                // "background-image": 'url(https://upload.wikimedia.org/wikipedia/en/6/63/Basho-logo-small.gif)'
+            style : {
+                shape: 'rectangle',
+                width:width,
+                height:"42",
+                "background-image": `/hasli/api/v1/storage/s3/images/${imageDescriptor.logo_url.large}`,
+                "background-width":"16px",
+                "background-height":"16px",
+                "background-color" : "white",
+                "background-position-x": "8px",
+                "border-color":"#a0a0a0",
+                "border-width": "1px",
+                "border-style": "solid",
+                'shadow-blur': 10,
+                'shadow-color': '#000000',
+                'shadow-offset-x': 0,
+                'shadow-offset-y': 0,
+                'shadow-opacity': 0.9,
+                "text-valign": "center",
+                "text-halign": "center",
+                "label": label,
+                "font-size": "1em",
+                "font-family": "Open Sans",
             }
         }])
+    }
+
+
+    computeWidth(value:string) : [number, string] {
+        let len = value.length,
+            substring = value.substring(0, 10);
+        return [140, substring]
     }
 
 
