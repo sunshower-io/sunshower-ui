@@ -2,12 +2,14 @@
  * Created by dustinlish on 11/9/16.
  */
 
-import * as cytoscape from 'cytoscape';
 import * as gridGuide from 'cytoscape-grid-guide'
-import {inject} from 'aurelia-framework';
+import {inject, bindable} from 'aurelia-framework';
 import {ImageDescriptor} from '../../../model/hal/image'
 import {HttpClient} from "aurelia-fetch-client";
+import * as ocanvas from 'ocanvas';
 
+import * as nodeResize from 'cytoscape-node-resize';
+import * as cytoscape from 'cytoscape';
 
 @inject(HttpClient)
 export class Builder {
@@ -18,12 +20,14 @@ export class Builder {
     private states: {[key: number]: string} = {};
 
 
+    @bindable
     private graphInstance:any;
     private graph: HTMLElement;
 
     private leftSidebar: HTMLElement;
 
     private rightSidebar: HTMLElement;
+
 
     constructor(private client:HttpClient) {
         this.states[2] = "ten";
@@ -43,6 +47,7 @@ export class Builder {
             boxSelectionEnabled:true,
             ready: (e) => {
                 gridGuide(cytoscape);
+                nodeResize(cytoscape, $, ocanvas);
             },
 
             style: (<any>cytoscape).stylesheet()
@@ -59,6 +64,16 @@ export class Builder {
 
         this.graphInstance = cy;
         (<any>window).cy = cy;
+        (<any>window).cytoscape = cy;
+
+        cy.nodeResize({
+            boundingRectangleLineColor: '#828282',
+            inactiveGrappleStroke: '0',
+            isNoResizeMode: (node) => {
+                return !node.data('resizable');
+            }
+        });
+
 
         cy.gridGuide({
             snapToGrid:true,
@@ -107,6 +122,7 @@ export class Builder {
             renderedPosition: position,
             data: {
                 id: imageDescriptor.id,
+                resizable:false,
             },
             style : {
                 shape: 'rectangle',

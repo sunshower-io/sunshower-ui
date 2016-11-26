@@ -32,11 +32,14 @@ System.config({
     "css": "github:systemjs/plugin-css@0.1.31",
     "cytoscape": "npm:cytoscape@2.7.11",
     "cytoscape-grid-guide": "npm:cytoscape-grid-guide@1.0.3",
+    "cytoscape-node-resize": "npm:cytoscape-node-resize@1.0.10",
     "dropzone": "github:enyo/dropzone@4.3.0",
+    "edge-editiation": "github:frankiex/cytoscape.js-edge-editation@master",
     "enyo/dropzone": "github:enyo/dropzone@4.3.0",
     "fetch": "github:github/fetch@1.0.0",
     "font-awesome": "npm:font-awesome@4.6.3",
     "jquery": "npm:jquery@2.2.4",
+    "ocanvas": "npm:ocanvas@2.8.6",
     "pnotify": "github:sciactive/pnotify@3.0.0",
     "semantic-ui": "github:Semantic-Org/Semantic-UI@2.2.4",
     "text": "github:systemjs/plugin-text@0.0.8",
@@ -210,6 +213,13 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
+    "npm:cytoscape-node-resize@1.0.10": {
+      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "cytoscape": "npm:cytoscape@2.7.11"
+    },
     "npm:cytoscape@2.7.11": {
       "os": "github:jspm/nodelibs-os@0.1.0",
       "path": "github:jspm/nodelibs-path@0.1.0",
@@ -221,6 +231,13 @@ System.config({
     },
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"
+    },
+    "npm:ocanvas@2.8.6": {
+      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.2"
     },
     "npm:os-browserify@0.1.2": {
       "os": "github:jspm/nodelibs-os@0.1.0"
