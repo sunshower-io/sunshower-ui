@@ -19,6 +19,7 @@ import io.hasli.persist.core.DatabaseConfiguration;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.search.es.SearchConfiguration;
 import io.hasli.security.api.SecurityPersistenceConfiguration;
+import io.hasli.service.CoreServiceConfiguration;
 import io.hasli.service.csp.configuration.CSPServiceConfiguration;
 import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.service.vault.VaultConfiguration;
@@ -53,6 +54,7 @@ import java.util.Map;
         DockerConfiguration.class,
         PersistenceConfiguration.class,
         SecurityPersistenceConfiguration.class,
+        CoreServiceConfiguration.class
 })
 public class BootstrapConfiguration {
 

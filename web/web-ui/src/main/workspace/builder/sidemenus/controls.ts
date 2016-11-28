@@ -1,6 +1,7 @@
 import {bindable} from 'aurelia-framework'
 import {createEvent} from '../../../../utils/events';
 import * as cytoscape from 'cytoscape';
+import {Overlay} from "./group-menu/overlay";
 
 
 export class Controls {
@@ -9,6 +10,23 @@ export class Controls {
 
     @bindable
     private graph:any;
+
+
+    private overlay:Overlay;
+    private activated:boolean = false;
+
+    layoutMenu(parent:any, children:any[]) {
+        this.graph.startBatch();
+        let prendered = parent.renderedPosition();
+        for(var child of children) {
+            let tchild = <any>child;
+            tchild.renderedPosition({
+                x:prendered.x,
+                y:prendered.y,
+            })
+        }
+        this.graph.endBatch();
+    }
 
 
     addGroup() : void {
@@ -24,6 +42,7 @@ export class Controls {
     private createGroupNode() {
 
     }
+    i:number = 0;
 
     private group(selected: Cy.CollectionElements) {
         let bbcoords = selected.renderedBoundingBox({
@@ -32,58 +51,52 @@ export class Controls {
             includeLabels: false,
             includeShadows:true,
         });
-        let node = {
+        this.i++;
+
+        let
+        parentId = 'parent' + this.i,
+        nodeContainer = {
             renderedPosition: {
                 x: bbcoords.x1 + bbcoords.w / 2,
                 y: bbcoords.y1 + bbcoords.h / 2
             },
-            group: 'nodes',
+
             data: {
-                id: 'parent',
-                resizable:true,
+                container: true,
+                id: parentId,
             },
+
             style: {
-                shape: 'rectangle',
-                width: bbcoords.w + 10,
-                height: bbcoords.h + 10,
+                width: bbcoords.w + 16,
+                height: bbcoords.h,
+                "padding-left" : 8,
+                "padding-top" : 8,
+                "padding-right" : 8,
+                "padding-bottom":8,
+                "background-color": 'white',
+                'background-opacity' : 1,
                 'border-color': '#929292',
                 'border-width': 1,
-                'background-opacity' : 0,
             }
         };
-
-
-        this.graph.add(node);
-        let copied = this.graph.remove(selected);
-        selected.each((i, node) => {
-            let n = {
-                group:'nodes',
-                renderedPosition:  node.renderedPosition,
-                data: node.data,
-            }
-            this.graph.add(n);
-        });
-
-
-
-
-        // selected.each((i, node) => {
-        //     this.graph.remove(node);
-        //
-        // });
-
-        // let moved = selected.move({'parent': 'parent'});
-        // moved.each((i, node)=> {
-        //     node.style(selected[i].style());
-        //     console.log(selected[i].style());
-        // });
-        // this.graph.forceRender();
-
-        // selected.each((i, node) => {
-        //     console.log(node.style());
-        // })
-
-
-
+        let container = this.graph.add(nodeContainer);
+        selected.move({parent: parentId});
+        this.registerEvents(container);
     }
+
+
+    private registerEvents(container: any) {
+        container.on('cxttapstart', e => {
+            this.overlay = new Overlay(this.graph, container);
+            this.overlay.show();
+        });
+        container.on('cxttapend', e => {
+            if(this.overlay) {
+                this.overlay.hide();
+                this.overlay.destroy();
+                this.overlay = null;
+            }
+        });
+    }
+
 }

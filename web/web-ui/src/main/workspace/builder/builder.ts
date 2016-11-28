@@ -8,8 +8,10 @@ import {ImageDescriptor} from '../../../model/hal/image'
 import {HttpClient} from "aurelia-fetch-client";
 import * as ocanvas from 'ocanvas';
 
+
 import * as nodeResize from 'cytoscape-node-resize';
 import * as cytoscape from 'cytoscape';
+import * as edgehandles from 'cytoscape-edgehandles';
 
 @inject(HttpClient)
 export class Builder {
@@ -48,9 +50,41 @@ export class Builder {
             ready: (e) => {
                 gridGuide(cytoscape);
                 nodeResize(cytoscape, $, ocanvas);
+                edgehandles(cytoscape);
             },
 
             style: (<any>cytoscape).stylesheet()
+                .selector('edge')
+                .css({
+                    'curve-style': 'bezier',
+                    'target-arrow-shape': 'triangle',
+                    'target-arrow-color': '#ccc',
+                    'line-color': '#ccc',
+                    'width': 1
+                })
+                .selector('node[icon]').style({
+                    "background-width":24,
+                    "background-height":24,
+                    "background-color" : "white",
+                    "background-position-x": "8px",
+                    "border-color":"#a0a0a0",
+                    "border-width": "1px",
+                    "border-style": "solid",
+                    'shadow-blur': 10,
+                    'shadow-color': '#000000',
+                    'shadow-offset-x': 0,
+                    'shadow-offset-y': 0,
+                    'shadow-opacity': 0.9,
+                    "text-valign": "center",
+                    "text-halign": "center",
+                    'backgroundImage': 'data(icon)',
+                    "font-size": "1em",
+                    "font-family": "Open Sans",
+                    shape: 'rectangle',
+                    width:"140",
+                    height:"42",
+                    label: 'data(label)'
+                })
                 .selector('node:selected')
                 .style({
                     "font-weight": "bold",
@@ -74,6 +108,7 @@ export class Builder {
             }
         });
 
+        cy.edgehandles();
 
         cy.gridGuide({
             snapToGrid:true,
@@ -112,7 +147,6 @@ export class Builder {
             y = rawPosition.y - graphPosition.top,
             position = {x:x, y:y},
             contents = this.computeWidth(imageDescriptor.name),
-            width = contents[0],
             label = contents[1];
 
 
@@ -123,30 +157,9 @@ export class Builder {
             data: {
                 id: imageDescriptor.id,
                 resizable:false,
+                label: label,
+                icon: `/hasli/api/v1/storage/s3/images/${imageDescriptor.logo_url.large}`
             },
-            style : {
-                shape: 'rectangle',
-                width:width,
-                height:"42",
-                "background-image": `/hasli/api/v1/storage/s3/images/${imageDescriptor.logo_url.large}`,
-                "background-width":"16px",
-                "background-height":"16px",
-                "background-color" : "white",
-                "background-position-x": "8px",
-                "border-color":"#a0a0a0",
-                "border-width": "1px",
-                "border-style": "solid",
-                'shadow-blur': 10,
-                'shadow-color': '#000000',
-                'shadow-offset-x': 0,
-                'shadow-offset-y': 0,
-                'shadow-opacity': 0.9,
-                "text-valign": "center",
-                "text-halign": "center",
-                "label": label,
-                "font-size": "1em",
-                "font-family": "Open Sans",
-            }
         }])
     }
 
