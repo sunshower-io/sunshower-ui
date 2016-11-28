@@ -2051,6 +2051,8 @@ declare module Cy {
         gridGuide(options?:any);
         nodeResize(options?:any);
 
+        edgehandles(options?:any);
+
 
 
         toolbar();

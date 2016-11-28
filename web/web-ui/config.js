@@ -6,6 +6,7 @@ System.config({
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
+
   meta: {
     "bootstrap": {
       "deps": [
@@ -13,6 +14,7 @@ System.config({
       ]
     }
   },
+
   map: {
     "aurelia-animator-css": "npm:aurelia-animator-css@1.0.1",
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.0",
@@ -31,6 +33,7 @@ System.config({
     "bootstrap": "github:twbs/bootstrap@3.3.7",
     "css": "github:systemjs/plugin-css@0.1.31",
     "cytoscape": "npm:cytoscape@2.7.11",
+    "cytoscape-edgehandles": "npm:cytoscape-edgehandles@2.6.3",
     "cytoscape-grid-guide": "npm:cytoscape-grid-guide@1.0.3",
     "cytoscape-node-resize": "npm:cytoscape-node-resize@1.0.10",
     "dropzone": "github:enyo/dropzone@4.3.0",
@@ -39,6 +42,7 @@ System.config({
     "fetch": "github:github/fetch@1.0.0",
     "font-awesome": "npm:font-awesome@4.6.3",
     "jquery": "npm:jquery@2.2.4",
+    "mxgraph": "github:jgraph/mxgraph-js@master",
     "ocanvas": "npm:ocanvas@2.8.6",
     "pnotify": "github:sciactive/pnotify@3.0.0",
     "semantic-ui": "github:Semantic-Org/Semantic-UI@2.2.4",
@@ -207,6 +211,13 @@ System.config({
       "isarray": "npm:isarray@1.0.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
+    "npm:cytoscape-edgehandles@2.6.3": {
+      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
+      "cytoscape": "npm:cytoscape@2.7.11",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:cytoscape-grid-guide@1.0.3": {
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
@@ -215,10 +226,10 @@ System.config({
     },
     "npm:cytoscape-node-resize@1.0.10": {
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
+      "cytoscape": "npm:cytoscape@2.7.11",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.2",
-      "cytoscape": "npm:cytoscape@2.7.11"
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:cytoscape@2.7.11": {
       "os": "github:jspm/nodelibs-os@0.1.0",
