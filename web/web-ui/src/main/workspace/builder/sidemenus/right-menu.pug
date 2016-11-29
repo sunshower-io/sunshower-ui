@@ -35,6 +35,6 @@ template
                                 draggable="true",
                                 dragend.delegate="addImage(descriptor.pid)")
                                 .ui.mini.image
-                                    img(src='${descriptor.logo_url.large}')
+                                    img(src='/hasli/api/v1/storage/s3/images/${descriptor.logo_url.large}')
                                 .middle.aligned.content
                                     | ${descriptor.name}

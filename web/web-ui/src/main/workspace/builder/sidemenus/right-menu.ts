@@ -47,7 +47,6 @@ export class RightMenu {
             .then(response => response.json())
             .then(elements => {
                 this.elements = elements;
-                console.log(elements);
             });
 
     }
