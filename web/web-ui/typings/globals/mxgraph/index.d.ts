@@ -92,7 +92,8 @@ declare module 'mxgraph' {
             x:number,
             y:number,
             width:number,
-            height:number
+            height:number,
+            style?:string
         ) : Vertex;
 
 
