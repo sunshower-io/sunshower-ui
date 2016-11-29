@@ -53,10 +53,10 @@ template
                         a.item
                             i.search.icon
                             | Browse Templates
-                        a.item.no--padding(type='button', click.trigger='toggle("left")')
+                        a.item.no--padding(type='button', click.trigger='toggleLeft()')
                             .ui.image
                                 img(src='styles/themes/hasli/assets/images/icons/toggle-left-menu-icon.svg')
-                        a.item.no--padding(type='button', click.trigger='toggle("right")')
+                        a.item.no--padding(type='button', click.trigger='toggleRight()')
                             .ui.image
                                 img(src='styles/themes/hasli/assets/images/icons/toggle-right-menu-icon.svg')
         .row.column.workbench(ref="container")
