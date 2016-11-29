@@ -62,7 +62,10 @@ template
         .row.workbench(style="border-top:1px solid gray")
             .three.wide.column.tall(ref="leftSidebar", style="border-right:1px solid gray")
                 left-menu
-            .ten.wide.column.tall(ref="graph", ondrop.delegate="onItemDropped($event)")
+            .ten.wide.column.tall(
+                ref="container",
+                ondrop.delegate="onItemDropped($event)"
+            )
             .three.wide.column.tall(
                 ref="rightSidebar",
                 style="border-left:1px solid gray; padding:0px !important;",
