@@ -4,7 +4,6 @@ import {
     mxGraphView,
     mxEvent
 } from "mxgraph";
-import {Bounds} from "mxgraph";
 
 export class Grid {
     private canvas: HTMLCanvasElement;
