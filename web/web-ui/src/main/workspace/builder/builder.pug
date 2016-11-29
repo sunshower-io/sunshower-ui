@@ -1,7 +1,7 @@
 template
     require(from="main/workspace/builder/sidemenus/left-menu")
     require(from="main/workspace/builder/sidemenus/right-menu")
-    .ui.grid.workbench-container
+    .ui.internally.celled.fluid.grid.workbench-container
         .row
             .twelve.wide.centered.column
                 .ui.mini.secondary.menu
@@ -59,18 +59,6 @@ template
                         a.item.no--padding(type='button', click.trigger='toggleRight()')
                             .ui.image
                                 img(src='styles/themes/hasli/assets/images/icons/toggle-right-menu-icon.svg')
-        .row.workbench(style="border-top:1px solid gray")
-            .three.wide.column.tall(ref="leftSidebar", style="border-right:1px solid gray")
-                left-menu
-            .ten.wide.column.tall(
-                ref="container",
-                ondrop.delegate="onItemDropped($event)"
-            )
-            .three.wide.column.tall(
-                ref="rightSidebar",
-                style="border-left:1px solid gray; padding:0px !important;",
-            )
-                right-menu(
-                    image-dragged.delegate="addTask($event)",
-                    graph.bind="graphInstance"
-                )
+        .row.column.workbench(ref="graph")
+    left-menu(ref="leftSidebar")
+    right-menu(ref="rightSidebar", image-dragged.delegate="onImageAdded($event)")
