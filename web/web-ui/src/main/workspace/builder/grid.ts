@@ -98,7 +98,7 @@ export class Grid {
 
             context.strokeStyle = '#767c89';
 
-            context.setLineDash([5, 5]);
+            context.setLineDash([2, 5]);
             context.beginPath();
 
             for (var x = xs; x <= xe; x += stepping) {

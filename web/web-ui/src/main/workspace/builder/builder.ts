@@ -16,6 +16,7 @@ import {inject, bindable} from 'aurelia-framework';
 import {Grid} from "./grid";
 import {TaskManager} from "../../../task/tasks";
 import {Kv} from "../../../utils/objects";
+import {mxConstants} from "mxgraph";
 
 
 @inject(HttpClient, TaskManager)
@@ -50,6 +51,9 @@ export class Builder {
             mxUtils.error('Browser is not supported!', 200, false);
         }
         else {
+            mxConstants.HANDLE_FILLCOLOR = '#239AE8';
+            mxConstants.HANDLE_STROKECOLOR = '#239AE8';
+            mxConstants.VERTEX_SELECTION_COLOR = '#0000FF';
             mxRubberband.defaultOpacity = 1;
             // mxEvent.disableContextMenu(this.container);
             let graph = new mxGraph(this.container, new mxGraphModel()),
