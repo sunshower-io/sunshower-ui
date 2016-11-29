@@ -14,6 +14,7 @@ export class Grid {
         this.canvas.style.top = '0px';
         this.canvas.style.left = '0px';
         this.canvas.style.zIndex = '-1';
+        this.canvas.style.height = '100%';
         graph.container.appendChild(this.canvas);
     }
 
@@ -95,8 +96,9 @@ export class Grid {
                 iye = Math.round(ye);
 
 
-            context.strokeStyle = '#f2f2f2';
-            context.setLineDash([5, 5, 2, 2]);
+            context.strokeStyle = '#767c89';
+
+            context.setLineDash([5, 5]);
             context.beginPath();
 
             for (var x = xs; x <= xe; x += stepping) {

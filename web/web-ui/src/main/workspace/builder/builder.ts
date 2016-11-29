@@ -76,7 +76,8 @@ export class Builder {
         let graph = this.graph,
             parent = this.graph.getDefaultParent(),
             details = (<any>event).detail,
-            location = (<any>details).location;
+            location = (<any>details).location,
+            offset = $(this.graph.container).offset().top;
 
         this.client.fetch(`docker/images/${details.value}`)
             .then(r => r.json())
@@ -98,7 +99,7 @@ export class Builder {
                         null,
                         'whatever',
                         details.location.x,
-                        details.location.y,
+                        details.location.y - offset,
                         100,
                         40,
                         style

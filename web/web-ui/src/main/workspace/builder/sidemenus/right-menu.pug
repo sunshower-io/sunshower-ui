@@ -33,7 +33,7 @@ template
                         .ui.divided.stackable.items(ref="element")
                             .item.flex.small--item(repeat.for="descriptor of elements",
                                 draggable="true",
-                                dragend.delegate="addImage(descriptor.pid)")
+                                dragend.delegate="addImage(descriptor.pid, $event)")
                                 .ui.mini.image
                                     img(src='/hasli/api/v1/storage/s3/images/${descriptor.logo_url.large}')
                                 .middle.aligned.content
