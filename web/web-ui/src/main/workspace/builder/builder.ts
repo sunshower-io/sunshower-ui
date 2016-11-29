@@ -60,6 +60,8 @@ export class Builder {
                 select = new mxRubberband(graph),
                 grid = new Grid(graph);
             graph.gridSize = 40;
+            graph.setPanning(true);
+            graph.setConnectable(true);
             this.grid = grid;
             this.grid.draw();
             this.graph = graph;

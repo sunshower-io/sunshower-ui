@@ -90,6 +90,11 @@ declare module 'mxgraph' {
 
         getGraphBounds() : Bounds;
 
+        setPanning(panning:boolean);
+
+        setConnectable(connectable:boolean);
+
+
 
         insertVertex(
             parent:Layer,
