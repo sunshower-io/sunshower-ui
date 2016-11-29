@@ -21,18 +21,44 @@ import {Kv} from "../../../utils/objects";
 @inject(HttpClient, TaskManager)
 export class Builder {
 
+    private sidebar;
     graph: mxGraph;
 
     grid: Grid;
     container: HTMLElement;
 
-    resizeHandler = () => this.resized();
-
     constructor(private client:HttpClient, private taskManager:TaskManager) {
         console.log("Task manager", taskManager);
     }
 
-    attached() : void {
+    resizeHandler = () => this.resized();
+
+    attached() {
+        $('.ui.dropdown')
+            .dropdown();
+
+        this.sidebar = $('.side.menus .ui.sidebar')
+            .sidebar({
+                dimPage: false,
+                transition: 'overlay',
+                exclusive: false,
+                closable: false
+            });
+        $('.menu .grid.layout.icon')
+            .popup({
+                on         : 'click',
+                inline     : true,
+                hoverable  : true,
+                position   : 'bottom center',
+                delay: {
+                    hide: 100
+                }
+            });
+
+
+        this.sidebar
+            .sidebar('toggle');
+
         if (!mxClient.isBrowserSupported()) {
             mxUtils.error('Browser is not supported!', 200, false);
         }
@@ -48,13 +74,14 @@ export class Builder {
             this.graph = graph;
             this.configureListeners();
         }
-
     }
 
     detached() : void {
         PLATFORM.global.removeEventListener('resize', this.resizeHandler);
-    }
 
+        this.sidebar
+            .sidebar('hide');
+    }
 
     resized() {
         this.grid.draw();
@@ -101,4 +128,13 @@ export class Builder {
     private configureListeners() {
         PLATFORM.global.addEventListener('resize', this.resizeHandler);
     }
+
+
+    toggle(menu) {
+        console.log("toggling: " + menu);
+        $(`.${menu}--menu`)
+            .sidebar('toggle')
+        ;
+    }
+
 }
