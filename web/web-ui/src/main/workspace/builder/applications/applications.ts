@@ -3,16 +3,32 @@
  */
 
 
-import {HttpClient} from "aurelia-fetch-client";
+import {
+    InfrastructureDescriptor
+} from "../../../../task/infrastructure";
+
+import {
+    Task,
+    TaskManager
+} from "../../../../task/tasks";
+
+
+import {
+    Listener,
+    ObservedEvent
+} from "../../../../utils/observer";
+
+import {
+    TaskMenu,
+    EditMenuItem,
+    CloseMenuItem
+} from "./../task-cell-menu";
+
 import {inject} from 'aurelia-framework';
-import {TaskManager, Task} from "../../../../task/tasks";
-import {TaskMenu, EditMenuItem, CloseMenuItem} from "./../task-cell-menu";
+import {HttpClient} from "aurelia-fetch-client";
 
+import {mxGraph, Layer} from "mxgraph";
 import {AbstractGraph} from '../abstract-graph'
-import {Listener, ObservedEvent} from "../../../../utils/observer";
-import {mxGraph} from "mxgraph";
-import {Layer} from "mxgraph";
-
 
 @inject(HttpClient, TaskManager)
 export class Applications extends AbstractGraph implements Listener {
@@ -45,6 +61,7 @@ export class Applications extends AbstractGraph implements Listener {
                         y: details.location.y - offset
                     },
                 );
+                task.addDeploymentTarget(new InfrastructureDescriptor())
                 this.taskManager.addTask(task);
             });
     }

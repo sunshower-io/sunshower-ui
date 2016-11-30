@@ -5,53 +5,61 @@
 
 import {HttpClient} from "aurelia-fetch-client";
 import {inject} from 'aurelia-framework';
-import {TaskManager} from "../../../../task/tasks";
-import {TaskMenu, EditMenuItem, CloseMenuItem} from "./../task-cell-menu";
+import {
+    Task,
+    TaskManager
+} from "../../../../task/tasks";
+
+
 
 import {AbstractGraph} from '../abstract-graph'
+import {InfrastructureDescriptor} from "../../../../task/infrastructure";
 
 
 @inject(HttpClient, TaskManager)
 export class Infrastructure extends AbstractGraph {
 
 
-    constructor(private client: HttpClient, private taskManager: TaskManager) {
+    constructor(
+        private client: HttpClient,
+        private taskManager: TaskManager
+    ) {
         super();
     }
 
 
-    addTask(event: Event) {
-        let graph = this.graph,
-            parent = this.graph.getDefaultParent(),
-            details = (<any>event).detail,
-            offset = $(this.graph.container).offset().top;
-
-        this.client.fetch(`docker/images/${details.value}`)
-            .then(r => r.json())
-            .then(r => {
-                let url = r.logo_url.large;
-                graph.getModel().beginUpdate();
-                try {
-                    var v1 = graph.insertVertex(
-                        parent,
-                        null,
-                        r.name,
-                        details.location.x,
-                        details.location.y - offset,
-                        120,
-                        80,
-                        super.createStyle(url),
-                    );
-
-                    let menu = new TaskMenu(graph, v1);
-                    menu.add(new CloseMenuItem());
-                    menu.add(new EditMenuItem());
-
-                } finally {
-                    graph.getModel().endUpdate();
-                }
-            });
+    attached() : void {
+        super.attached();
+        this.addDeploymentTargets(this.taskManager.tasks);
     }
 
+    private addDeploymentTargets(tasks: Task[]) : void {
+        this.graph.getModel().beginUpdate();
+        try {
+            for (let task of tasks) {
+                for (let deployment of task.deploymentTargets) {
+                    this.addDeploymentTarget(task, deployment);
 
+                }
+            }
+        } finally {
+            this.graph.getModel().endUpdate();
+        }
+    }
+
+    private addDeploymentTarget(task:Task, deployment: InfrastructureDescriptor) {
+
+        let parent =
+            this.graph.getDefaultParent();
+
+        let node = this.graph.insertVertex(
+            parent,
+            null,
+            "whatever",
+            task.location.x,
+            task.location.y,
+            120, 80
+        );
+
+    }
 }

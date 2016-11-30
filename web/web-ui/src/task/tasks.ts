@@ -3,6 +3,7 @@ import {
     ObservedEvent,
     DefaultEventDispatcher
 } from "../utils/observer";
+import {InfrastructureDescriptor} from "src/task/infrastructure";
 
 type TaskEvent = "task-added" | "task-removed";
 
@@ -12,6 +13,8 @@ const TaskEvent = {
 };
 
 
+
+
 export interface Point {
     x:number;
     y:number;
@@ -19,9 +22,9 @@ export interface Point {
 
 export class Task {
 
+    public deploymentTargets: InfrastructureDescriptor[];
 
     constructor (
-
         public icon: string,
         public name: string,
         public location?: Point,
@@ -30,6 +33,15 @@ export class Task {
     ) {
 
     }
+
+    addDeploymentTarget(target:InfrastructureDescriptor) : Task {
+        if(!this.deploymentTargets) {
+            this.deploymentTargets = [];
+        }
+        this.deploymentTargets.push(target);
+        return this;
+    }
+
 }
 
 export class TaskAddedEvent extends ObservedEvent {
