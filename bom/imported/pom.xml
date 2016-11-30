@@ -65,8 +65,8 @@
         <hasli-hfs.version>1.0.3.Final</hasli-hfs.version>
         <!--<hasli-hfs.version>${snapshot-version}</hasli-hfs.version>-->
         <!--<hasli-api.version>${snapshot-version}</hasli-api.version>-->
-        <hasli-api.version>1.0.32.Final</hasli-api.version>
-        <hasli-service.version>1.0.30.Final</hasli-service.version>
+        <hasli-api.version>1.0.33.Final</hasli-api.version>
+        <hasli-service.version>1.0.31.Final</hasli-service.version>
         <!--<hasli-service.version>${snapshot-version}</hasli-service.version>-->
     </properties>
 
