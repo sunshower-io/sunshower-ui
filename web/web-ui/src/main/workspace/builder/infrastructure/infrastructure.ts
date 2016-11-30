@@ -6,7 +6,7 @@
 import {HttpClient} from "aurelia-fetch-client";
 import {inject} from 'aurelia-framework';
 import {TaskManager} from "../../../../task/tasks";
-import {TaskMenu, EditMenuItem, CloseMenuItem} from "./task-cell-menu";
+import {TaskMenu, EditMenuItem, CloseMenuItem} from "./../task-cell-menu";
 
 import {AbstractGraph} from '../abstract-graph'
 

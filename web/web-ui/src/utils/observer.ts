@@ -2,12 +2,12 @@
 
 
 export interface Listener {
-    (event:ObservedEvent) : void;
+    apply(event:ObservedEvent) : void;
 }
 
 
 export class ObservedEvent  {
-    constructor(private target:any) {
+    constructor(public target:any) {
 
     }
 }
@@ -43,7 +43,7 @@ export class DefaultEventDispatcher implements EventDispatcher {
         let listeners = this.listeners[type];
         if(listeners) {
             for(var listener of listeners) {
-                listener(event);
+                listener.apply(event);
             }
         }
     }

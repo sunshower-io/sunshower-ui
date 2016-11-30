@@ -12,11 +12,24 @@ const TaskEvent = {
 };
 
 
+export interface Point {
+    x:number;
+    y:number;
+}
+
 export class Task {
-    icon: string;
-    name: string
-    subtasks: Task[];
-    successors: Task[];
+
+
+    constructor (
+
+        public icon: string,
+        public name: string,
+        public location?: Point,
+        public subtasks?: Task[],
+        public successors?: Task[]
+    ) {
+
+    }
 }
 
 export class TaskAddedEvent extends ObservedEvent {
