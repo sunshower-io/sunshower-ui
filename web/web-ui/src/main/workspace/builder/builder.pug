@@ -1,54 +1,14 @@
 template
-    require(from="main/workspace/builder/sidemenus/left-menu")
-    require(from="main/workspace/builder/sidemenus/right-menu")
-    .ui.internally.celled.fluid.grid.workbench-container(style="height:100%")
+    .ui.internally.celled.fluid.grid.workbench-container
         .row
             .twelve.wide.centered.column
                 .ui.mini.secondary.menu
-                    a.item
-                        .ui.dropdown
-                            .text Menu
-                            i.dropdown.icon
-                            .menu
-                                .item New
-                                .item
-                                    span.description ctrl + o
-                                    |       Open...
-                                .item
-                                    span.description ctrl + s
-                                    |       Save as...
-                                .item
-                                    span.description ctrl + r
-                                    |       Rename
-                                .item Make a copy
-                                .item
-                                    i.folder.icon
-                                    |       Move to folder
-                                .item
-                                    i.trash.icon
-                                    |       Move to trash
-                                .divider
-                                .item Download As...
-                                .item
-                                    i.dropdown.icon
-                                    |       Publish To Web
-                                    .menu
-                                        .item Google Docs
-                                        .item Google Drive
-                                        .item Dropbox
-                                        .item Adobe Creative Cloud
-                                        .item Private FTP
-                                        .item Another Service...
-                                .item E-mail Collaborators
-                    a.active.item
-                        i.block.layout.icon
-                        | Applications
-                    a.item
-                        i.server.icon
-                        | Infrastructure
-                    a.item
-                        i.arrow.right.icon
-                        | Deploy
+                    a.item(repeat.for="child of router.navigation",
+                        href.bind="child.href",
+                        class="${child.isActive ? 'active' : ''}"
+                    )
+                        i(class="${child.settings.icon} ")
+                        .text ${child.title}
                     .right.compact.mini.menu
                         a.item
                             i.search.icon
@@ -59,6 +19,4 @@ template
                         a.item.no--padding(type='button', click.trigger='toggleRight()')
                             .ui.image
                                 img(src='styles/themes/hasli/assets/images/icons/toggle-right-menu-icon.svg')
-        .row.column.workbench(ref="container", style="height:100%")
-    left-menu(ref="leftSidebar")
-    right-menu(ref="rightSidebar", add-image.delegate="addTask($event)")
+    router-view

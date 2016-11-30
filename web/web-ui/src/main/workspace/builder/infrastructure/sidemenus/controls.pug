@@ -1,0 +1,9 @@
+template
+    .ui.secondary.pointing.menu
+        a.active.item Controls
+
+    .ui.horizontal.list.controls(style="max-height:calc(100% - 50px); overflow-y:auto")
+        .ui.item.button.icon(click.delegate="addGroup()")
+            i.ui.object.group.icon
+        .ui.item.button.icon(clic.delegate="removeGroup()")
+            i.ui.object.ungroup.icon

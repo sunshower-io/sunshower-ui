@@ -1,12 +1,12 @@
 import {HttpClient} from "aurelia-fetch-client";
 import {inject} from "aurelia-framework";
+import {createEvent} from '../../../../../utils/events';
 
-import {ImageDescriptor} from '../../../../model/hal/image'
-import {createEvent} from "../../../../utils/events";
+import {ImageDescriptor} from '../../../../../model/hal/image'
 
 
 @inject(HttpClient)
-export class RightMenu {
+export class Applications {
 
     private element:HTMLElement;
 
@@ -16,13 +16,10 @@ export class RightMenu {
 
     }
 
-    addImage(id:string, e:DragEvent) {
-        let event = createEvent('add-image', {
-            value: id,
-            location: {
-                x:e.clientX,
-                y:e.clientY
-            }
+    addImage(imageId: string, e:DragEvent) {
+        let event = createEvent('image-dragged', {
+            value:imageId,
+            location:{x:e.clientX, y:e.clientY}
         });
         this.element.dispatchEvent(event);
     }
@@ -34,10 +31,9 @@ export class RightMenu {
             .then(response => response.json())
             .then(elements => {
                 this.elements = elements;
+                console.log(elements);
             });
 
     }
-
-
 
 }

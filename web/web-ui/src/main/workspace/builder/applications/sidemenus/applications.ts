@@ -1,8 +1,8 @@
 import {HttpClient} from "aurelia-fetch-client";
 import {inject} from "aurelia-framework";
-import {createEvent} from '../../../../utils/events';
+import {createEvent} from '../../../../../utils/events';
 
-import {ImageDescriptor} from '../../../../model/hal/image'
+import {ImageDescriptor} from '../../../../../model/hal/image'
 
 
 @inject(HttpClient)
