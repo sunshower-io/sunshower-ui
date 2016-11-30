@@ -2,6 +2,7 @@
  * Created by dustinlish on 11/9/16.
  */
 import {
+    mxCell,
     mxGraph,
     mxClient,
     mxUtils,
@@ -10,6 +11,8 @@ import {
     mxGraphModel
 } from 'mxgraph';
 
+
+
 import {PLATFORM} from 'aurelia-pal';
 import {HttpClient} from "aurelia-fetch-client";
 import {inject, bindable} from 'aurelia-framework';
@@ -17,6 +20,9 @@ import {Grid} from "./grid";
 import {TaskManager} from "../../../task/tasks";
 import {Kv} from "../../../utils/objects";
 import {mxConstants} from "mxgraph";
+import {TaskMenu, EditMenuItem, CloseMenuItem} from "./task-cell-menu";
+import {mxGraphHandler} from "mxgraph";
+import {mxStylesheet} from "mxgraph";
 
 
 @inject(HttpClient, TaskManager)
@@ -30,22 +36,23 @@ export class Builder {
 
     private leftVisible: boolean = true;
     private rightVisible: boolean = true;
-    private expanded: number = 2;
-    private states: {[key: number]: string} = {};
 
 
     private leftSidebar: HTMLElement;
     private rightSidebar: HTMLElement;
 
+    private namedDelegates:{[slot:string]:Function};
+
+
     constructor(private client:HttpClient, private taskManager:TaskManager) {
-        this.states[2] = "ten";
-        this.states[0] = "sixteen";
-        this.states[1] = "thirteen";
+        this.namedDelegates = {};
     }
 
     resizeHandler = () => this.resized();
 
     attached() {
+
+        this.decorateGraphHandler();
 
         if (!mxClient.isBrowserSupported()) {
             mxUtils.error('Browser is not supported!', 200, false);
@@ -54,11 +61,14 @@ export class Builder {
             mxConstants.HANDLE_FILLCOLOR = '#239AE8';
             mxConstants.HANDLE_STROKECOLOR = '#239AE8';
             mxConstants.VERTEX_SELECTION_COLOR = '#0000FF';
+
             mxRubberband.defaultOpacity = 1;
             // mxEvent.disableContextMenu(this.container);
             let graph = new mxGraph(this.container, new mxGraphModel()),
                 select = new mxRubberband(graph),
                 grid = new Grid(graph);
+
+            this.configure(graph);
             graph.gridSize = 40;
             graph.setPanning(true);
             graph.setConnectable(true);
@@ -96,20 +106,25 @@ export class Builder {
                     .pair('imageHeight', 24)
                     .pair('fillColor', '#f7f7f7')
                     .pair('shadow', 1)
+                    .pair('fontColor', '#000000')
                     .toString();
-                console.log("Style", style);
                 graph.getModel().beginUpdate();
                 try {
                     var v1 = graph.insertVertex(
                         parent,
                         null,
-                        'whatever',
+                        r.name,
                         details.location.x,
                         details.location.y - offset,
-                        100,
-                        40,
+                        120,
+                        80,
                         style
-                    )
+                    );
+
+                    let menu = new TaskMenu(graph, v1);
+                    menu.add(new CloseMenuItem());
+                    menu.add(new EditMenuItem());
+
                 } finally {
                     graph.getModel().endUpdate();
                 }
@@ -144,14 +159,7 @@ export class Builder {
 
     private toggle(ele:HTMLElement, v :boolean, direction:string) :boolean {
 
-        let visible = v,
-            expanded = this.computeExpanded(visible),
-            previous = this.states[this.expanded],
-            next = this.states[this.expanded + expanded];
-        $(this.graph).removeClass(previous);
-        console.log("previous", previous);
-        this.prependClass(this.graph, next);
-        console.log("next", next);
+        let visible = v;
         if(visible) {
             visible = false;
             $(ele).hide();
@@ -159,8 +167,6 @@ export class Builder {
             visible = true;
             $(ele).show();
         }
-        this.expanded += expanded;
-
         return visible;
     }
 
@@ -169,6 +175,60 @@ export class Builder {
         var classes = el.attr('class');
         classes = strClass + ' ' + classes;
         el.attr('class', classes);
+    }
+
+
+    protected decorateGraphHandler() {
+        let original = mxGraphHandler.prototype.getInitialCellForEvent;
+        mxGraphHandler.prototype.getInitialCellForEvent = function(self:mxGraphHandler) {
+            let cell = original.apply(this, arguments);
+            if(cell.getAttribute('constituent') === '1') {
+                return this.graph.getModel().getParent(cell);
+            }
+            return cell;
+        }
+    }
+
+
+    protected configure(g:mxGraph) : void {
+        g.selectCellForEvent = function(cell:mxCell) {
+            if(cell.getAttribute('constituent') === '1') {
+                cell = this.model.getParent(cell);
+                let args = [cell, arguments[1]];
+                mxGraph.prototype.selectCellForEvent.apply(this, args);
+            } else {
+                mxGraph.prototype.selectCellForEvent.apply(this, arguments);
+            }
+        };
+
+        g.convertValueToString = function(cell:mxCell) {
+            if(mxUtils.isNode(cell.value)) {
+                return cell.getAttribute('label');
+            }
+            return mxGraph.prototype.convertValueToString.apply(this, arguments);
+        }
+
+
+        mxGraph.prototype.hasListener = function(
+            key:string,
+            listener:(sender:any, event:any) => void
+        ) : boolean {
+            let listeners = this.mouseListeners;
+            return listeners[key] || false;
+        }
+    }
+
+
+    protected createStylesheet() : mxStylesheet {
+
+        let ss = new mxStylesheet();
+
+        let dvss = {};
+        dvss[mxConstants.STYLE_FONTFAMILY] = 'FontAwesome';
+        dvss[mxConstants.STYLE_FONTSTYLE] = 'normal';
+        dvss[mxConstants.VERTEX_SELECTION_COLOR] = '#FF0000';
+        ss.putDefaultVertexStyle(dvss);
+        return ss;
     }
 
 

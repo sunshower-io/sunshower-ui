@@ -13,6 +13,7 @@ module.exports = {
         'jspm_packages/system.js',
         'jspm_packages/system-polyfills.js',
         'jspm_packages/system-csp-production.js',
+        'jspm_packages/github/jgraph/mxgraph-js@master.js',
         'styles/styles.css'
     ],
     // this section lists any jspm packages that have
@@ -22,6 +23,14 @@ module.exports = {
     // path.
     'normalize': [
 
+        [
+            'mxgraph', [
+                '/javascript/*/**',
+                '/javascript/*'
+            ]
+
+
+        ],
         [
             // include font-awesome.css and its fonts files
             'font-awesome', [

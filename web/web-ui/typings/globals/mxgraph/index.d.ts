@@ -1,10 +1,7 @@
+
+
 declare module 'mxgraph' {
 
-    export class mxConstants {
-        static HANDLE_FILLCOLOR         :string;
-        static HANDLE_STROKECOLOR       :string;
-        static VERTEX_SELECTION_COLOR   :string;
-    }
 
 
     export interface Cloneable<T> {
@@ -12,22 +9,65 @@ declare module 'mxgraph' {
     }
     export class mxClient {
         static isBrowserSupported() : boolean;
+        static basePath         :string;
+        static imageBasePath    :string;
+    }
+
+    export class XmlDocument {
+
+
+        createElement(name:string) : mxCell;
     }
 
     export module mxUtils {
+        function isNode(cell:Layer) : boolean;
         function error(msg:string, code:number, we: boolean) : void;
-    }
 
-    export class mxCell {
-
-    }
-
-    export class mxEdge {
-
+        function createXmlDocument() : XmlDocument;
     }
 
 
-    export class mxVertex {
+
+
+    export interface Connectable {
+        isConnectable() : boolean;
+        setConnectable(connectable:boolean) : void;
+    }
+
+
+
+    export class mxCell implements Layer, Connectable {
+        value: any;
+        isConnectable(): boolean
+
+        getParent() : mxCell;
+
+
+        setConnectable(connectable: boolean): void
+        getAttribute(key:string) : string;
+
+        setAttribute(key:string, value:string);
+
+    }
+
+    export class mxEdge extends mxCell {
+
+    }
+
+    export class mxGraphHandler {
+        graph:mxGraph;
+        getInitialCellForEvent(self:mxGraphHandler);
+    }
+
+    //not technically part of mxGraph's api, but w/e.
+    export interface Component<T extends mxCell> {
+        graph:mxGraph;
+        constituent:boolean;
+        cast() : T;
+    }
+
+
+    export class mxVertex extends mxCell {
 
     }
 
@@ -35,6 +75,8 @@ declare module 'mxgraph' {
     export class mxGraphModel {
         endUpdate() : void;
         beginUpdate(): void;
+
+        getParent(cell:Layer) : Layer;
     }
 
     type Edge = mxEdge;
@@ -59,11 +101,6 @@ declare module 'mxgraph' {
         clone(): mxGraphBounds
     }
 
-
-    export class mxEvent {
-        static getSource(e:Event) : HTMLElement;
-    }
-
     export class mxGraphView {
         scale: number;
         translate:mxGraphBounds;
@@ -72,8 +109,10 @@ declare module 'mxgraph' {
 
     type Bounds = mxGraphBounds;
 
-    export class mxGraph {
+    class mxGraph implements Connectable {
 
+
+        mouseListeners      : {[name:string]: any};
         gridSize            : number;
         container           : Element;
         view                : mxGraphView;
@@ -82,6 +121,16 @@ declare module 'mxgraph' {
             container?:HTMLElement,
             model?:mxGraphModel
         );
+
+        isConnectable(): boolean
+
+
+        removeCells(cells:mxCell[]);
+
+
+        addListener(key:string, listener:(sender:any, event:any) => void) : boolean;
+
+        hasListener(key:string, listener:(sender:any, event:any) => void) : boolean;
 
 
         getModel() : Model;
@@ -92,7 +141,12 @@ declare module 'mxgraph' {
 
         setPanning(panning:boolean);
 
+        selectCellForEvent(cell:mxCell);
+
         setConnectable(connectable:boolean);
+
+        convertValueToString(cell:mxCell) : string;
+
 
 
 
@@ -127,4 +181,34 @@ declare module 'mxgraph' {
         static enabled:        boolean;
         static defaultOpacity: number;
     }
+
+
+
+    type mxCellStyle = {[key:string]:string};
+
+    export class mxStylesheet {
+        constructor();
+        styles: {[key:string]:mxCellStyle};
+
+        createDefaultEdgeStyle() : mxCellStyle;
+
+        createDefaultVertexStyle() : mxCellStyle;
+
+
+        putDefaultVertexStyle(style:mxCellStyle) : void;
+
+        putDefaultEdgeStyle(style:mxCellStyle) : void;
+
+        getDefaultEdgeStyle() : mxCellStyle;
+
+        getDefaultVertexStyle() : mxCellStyle;
+
+
+        putCellStyle(name:string, style:mxCellStyle) : void;
+
+        getCellStyle(name:string, defaultStyle?:mxCellStyle) :  mxCellStyle;
+
+    }
+
+
 }
