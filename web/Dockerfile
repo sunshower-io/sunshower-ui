@@ -1,7 +1,6 @@
 FROM openjdk:8-jdk
 
 ARG HASLI_VERSION=1.00.000.000-SNAPSHOT
-ARG WILDFLY_VERSION=10.1.0.Final
 
 RUN apt-get update && apt-get -y upgrade && apt-get install -y \
 	unzip \
@@ -9,10 +8,13 @@ RUN apt-get update && apt-get -y upgrade && apt-get install -y \
 	wget \
   && rm -rf /var/lib/apt/lists/*
 
+
+ARG WILDFLY_VERSION=1.0.15.Final
+
 RUN mkdir /opt/wildfly \
     && cd /opt/wildfly \
-    && wget -q http://repo.hasli.io/artifactory/packages/hasli/wildfly/release/latest/hasli-wildfly-$WILDFLY_VERSION.zip \
-    && unzip hasli-wildfly-$WILDFLY_VERSION.zip \
+    && wget -q http://repo.hasli.io/artifactory/libs-release-local/io/hasli/wildfly/wildfly-dist/$WILDFLY_VERSION/wildfly-dist-$WILDFLY_VERSION.zip \
+    && unzip wildfly-dist-$WILDFLY_VERSION.zip \
     && mv hasli-wildfly*/* /opt/wildfly/ \
     && rm -rf hasli-wildfly*
 

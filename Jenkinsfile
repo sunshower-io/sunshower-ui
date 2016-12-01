@@ -1,5 +1,6 @@
 #!/usr/bin/env groovy
 
+// Build Variables
 def majorVersion   = "1"
 def minorVersion   = "0"
 def buildNumber    
@@ -10,8 +11,13 @@ def hasliImage     = "hasli.io/ui"
 def agentVersion   = "latest"
 def agentImage     = "$registry/hasli/agent:$agentVersion"
 def runSystemTests = false
+
+// Gradle Tasks
 def bomTask      
 def gradleTasks    = []
+
+// Dependencies
+def wildflyVersion = '1.0.15.Final'
 
 // TODO: enable integrationTests by default
 if (env.BRANCH_NAME == "master") {
@@ -79,7 +85,7 @@ node('docker-registry') {
                     sh "sed -i.bak 's/^AGENT_NAME=.*/AGENT_NAME=$name-agent/' ./web/.env"
 
                     sh "docker pull $agentImage"
-                    sh "docker build -t $hasliImage:$version.$buildNumber ./web/"
+                    sh "docker build --build-arg WILDFLY_VERSION=$wildflyVersion -t $hasliImage:$version.$buildNumber ./web/"
                     sh "cd web && docker-compose -f docker-compose-staging.yml -p $name up -d"
                 }
 
@@ -95,7 +101,7 @@ node('docker-registry') {
                     echo "Port Mapping: $portMapping"
                 }
             } else {
-                sh "docker build --build-arg HASLI_VERSION=$majorVersion.$minorVersion.$buildNumber.$buildSuffix -t $hasliImage:$version.$buildNumber ./web/ --no-cache"
+                sh "docker build --build-arg WILDFLY_VERSION=$wildflyVersion --build-arg HASLI_VERSION=$majorVersion.$minorVersion.$buildNumber.$buildSuffix -t $hasliImage:$version.$buildNumber ./web/"
                 sh "docker tag $hasliImage:$version.$buildNumber $registry/$hasliImage:$version.$buildNumber"
                 sh "docker tag $hasliImage:$version.$buildNumber $registry/$hasliImage:latest"
                 sh "docker push $registry/$hasliImage:$version.$buildNumber"
