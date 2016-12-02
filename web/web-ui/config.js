@@ -12,12 +12,11 @@ System.config({
         "jquery"
       ]
     },
-    "mxgraph": {
+    "mxgraph/javascript/mxClient": {
       "format": "global"
     }
   },
   map: {
-    "mxgraph": "github:jgraph/mxgraph-js@master/javascript/mxClient",
     "aurelia-animator-css": "npm:aurelia-animator-css@1.0.1",
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.0",
     "aurelia-fetch-client": "npm:aurelia-fetch-client@1.0.1",
@@ -47,6 +46,7 @@ System.config({
     "fetch": "github:github/fetch@1.0.0",
     "font-awesome": "npm:font-awesome@4.6.3",
     "jquery": "npm:jquery@2.2.4",
+    "mxgraph": "github:jgraph/mxgraph-js@master",
     "ocanvas": "npm:ocanvas@2.8.6",
     "plugin-text": "npm:systemjs-plugin-text@0.0.9",
     "pnotify": "github:sciactive/pnotify@3.0.0",
