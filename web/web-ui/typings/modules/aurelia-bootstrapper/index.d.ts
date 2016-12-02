@@ -5,9 +5,6 @@ import 'aurelia-polyfills';
 import {
   PLATFORM
 } from 'aurelia-pal';
-import {
-  initialize
-} from 'aurelia-pal-browser';
 
 /**
  * Manually bootstraps an application.
@@ -15,4 +12,10 @@ import {
  * @return A Promise that completes when configuration is done.
  */
 export function bootstrap(configure: Function): Promise<void>;
+
+/**
+ * A promise that represents the bootstrapper's startup process.
+ * It resolves when the process has finished starting.
+ */
+export const starting: any;
 }
