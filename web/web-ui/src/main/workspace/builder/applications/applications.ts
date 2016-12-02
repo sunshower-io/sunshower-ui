@@ -27,7 +27,7 @@ import {
 import {inject} from 'aurelia-framework';
 import {HttpClient} from "aurelia-fetch-client";
 
-import {mxGraph, Layer} from "mxgraph";
+import {mxGraph, Layer, mxCell} from "mxgraph";
 import {AbstractGraph} from '../abstract-graph'
 
 @inject(HttpClient, TaskManager)
@@ -42,7 +42,7 @@ export class Applications extends AbstractGraph implements Listener {
 
     attached(): void {
         super.attached();
-        this.insertTasks(this.taskManager.tasks);
+        this.insertTasks(this.taskManager.getTasks());
     }
 
 
@@ -61,7 +61,7 @@ export class Applications extends AbstractGraph implements Listener {
                         y: details.location.y - offset
                     },
                 );
-                task.addDeploymentTarget(new InfrastructureDescriptor())
+                task.addDeploymentTarget(new InfrastructureDescriptor());
                 this.taskManager.addTask(task);
             });
     }
@@ -90,7 +90,7 @@ export class Applications extends AbstractGraph implements Listener {
     private insertTask(graph: mxGraph, parent: Layer, task: Task) {
         var v1 = graph.insertVertex(
             parent,
-            null,
+            task.id.toString(),
             task.name,
             task.location.x,
             task.location.y,
@@ -103,6 +103,14 @@ export class Applications extends AbstractGraph implements Listener {
         menu.add(new CloseMenuItem());
         menu.add(new EditMenuItem());
 
+    }
+
+    protected onConnection(
+        source: mxCell,
+        target: mxCell,
+        dropTarget: mxCell
+    ): boolean {
+        return this.taskManager.connect(source.id, target.id);
     }
 
 }

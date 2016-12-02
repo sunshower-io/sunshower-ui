@@ -3,6 +3,9 @@ import {
     ObservedEvent,
     DefaultEventDispatcher
 } from "../utils/observer";
+
+import {UUID} from '../utils/uuid';
+
 import {InfrastructureDescriptor} from "src/task/infrastructure";
 
 type TaskEvent = "task-added" | "task-removed";
@@ -24,13 +27,16 @@ export class Task {
 
     public deploymentTargets: InfrastructureDescriptor[];
 
+    public id: UUID;
+
     constructor (
         public icon: string,
         public name: string,
         public location?: Point,
         public subtasks?: Task[],
-        public successors?: Task[]
+        public successors?: {[id:string]:Task}
     ) {
+        this.id = UUID.randomUUID();
 
     }
 
@@ -42,6 +48,18 @@ export class Task {
         return this;
     }
 
+
+    connect(target:Task) : boolean {
+        if(!this.successors) {
+            this.successors = {};
+        }
+        if(!this.successors[target.id.value]) {
+            this.successors[target.id.value] = target;
+            return true;
+        }
+        return false;
+    }
+
 }
 
 export class TaskAddedEvent extends ObservedEvent {
@@ -50,18 +68,35 @@ export class TaskAddedEvent extends ObservedEvent {
 export class TaskManager extends DefaultEventDispatcher {
 
 
-    tasks: Task[];
-
+    tasks: {[key:string]:Task};
 
     constructor() {
         super();
-        this.tasks = [];
+        this.tasks = {};
+    }
+
+
+
+
+    getTasks() : Task[] {
+        let results = [];
+        for(var value in this.tasks) {
+            results.push(this.tasks[value]);
+        }
+        return results;
     }
 
 
     addTask(task: Task) : void {
         this.dispatch(TaskEvent.TaskAdded, new TaskAddedEvent(task));
-        this.tasks.push(task);
+        this.tasks[task.id.value] = task;
+    }
+
+
+    connect(sourceId:string, targetId:string) : boolean {
+        let source = this.tasks[sourceId],
+            target = this.tasks[targetId];
+        return source.connect(target);
     }
 
 }

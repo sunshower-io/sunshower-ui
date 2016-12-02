@@ -10,6 +10,8 @@ import {
     TaskManager
 } from "../../../../task/tasks";
 
+import {mxCell} from 'mxgraph';
+
 
 
 import {AbstractGraph} from '../abstract-graph'
@@ -18,7 +20,6 @@ import {InfrastructureDescriptor} from "../../../../task/infrastructure";
 
 @inject(HttpClient, TaskManager)
 export class Infrastructure extends AbstractGraph {
-
 
     constructor(
         private client: HttpClient,
@@ -30,7 +31,7 @@ export class Infrastructure extends AbstractGraph {
 
     attached() : void {
         super.attached();
-        this.addDeploymentTargets(this.taskManager.tasks);
+        this.addDeploymentTargets(this.taskManager.getTasks());
     }
 
     private addDeploymentTargets(tasks: Task[]) : void {
@@ -62,4 +63,9 @@ export class Infrastructure extends AbstractGraph {
         );
 
     }
+
+    protected onConnection(source: mxCell, target: mxCell, dropTarget: mxCell): boolean {
+        return false;
+    }
+
 }

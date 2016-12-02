@@ -6,13 +6,16 @@ import {
     mxRubberband,
     mxGraphModel,
     mxConstants,
-    mxGraphHandler
+    mxGraphHandler,
+    mxGeometry,
+    mxConnectionHandler
 } from 'mxgraph';
 
 import {Kv} from "../../../utils/objects";
 
 import {Grid} from './grid';
 import {PLATFORM} from 'aurelia-pal';
+import {mxEvent} from "mxgraph";
 
 export abstract class AbstractGraph {
 
@@ -30,7 +33,10 @@ export abstract class AbstractGraph {
     protected rightSidebar: HTMLElement;
 
     constructor() {
+
     }
+
+
 
     attached() {
         this.decorateGraphHandler();
@@ -48,6 +54,7 @@ export abstract class AbstractGraph {
             let graph = new mxGraph(this.container, new mxGraphModel()),
                 select = new mxRubberband(graph),
                 grid = new Grid(graph);
+
 
             this.configure(graph);
             graph.gridSize = 40;
@@ -129,6 +136,7 @@ export abstract class AbstractGraph {
 
 
     protected configure(g: mxGraph): void {
+        let self = this;
         g.selectCellForEvent = function (cell: mxCell) {
             if (cell.getAttribute('constituent') === '1') {
                 cell = this.model.getParent(cell);
@@ -147,12 +155,29 @@ export abstract class AbstractGraph {
         };
 
 
+        let connect = mxConnectionHandler.prototype.connect;
+        mxConnectionHandler.prototype.connect = function(
+            source:mxCell,
+            target:mxCell,
+            event:mxEvent,
+            dropTarget:mxCell
+        ) {
+            if(self.onConnection(source, target, dropTarget)) {
+                return connect.apply(this, arguments);
+            } else {
+                return null;
+            }
+        };
+
+
         mxGraph.prototype.hasListener = function (key: string,
                                                   listener: (sender: any, event: any) => void): boolean {
             let listeners = this.mouseListeners;
             return listeners[key] || false;
         }
     }
+
+    protected abstract onConnection(source:mxCell, target:mxCell, dropTarget:mxCell) : boolean;
 
     protected createStyle(url: string): string {
         return Kv.create(';')
