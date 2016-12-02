@@ -9,7 +9,7 @@ import {
 
 import {
     Task,
-    TaskManager
+    TaskManager, CycleDetectedEvent, TaskAddedEvent
 } from "../../../../task/tasks";
 
 
@@ -37,6 +37,7 @@ export class Applications extends AbstractGraph implements Listener {
                 private taskManager: TaskManager) {
         super();
         taskManager.addEventListener('task-added', this);
+        taskManager.addEventListener('cycle-detected', this);
     }
 
 
@@ -66,11 +67,20 @@ export class Applications extends AbstractGraph implements Listener {
             });
     }
 
-    apply(event: ObservedEvent): void {
-        let task = event.target,
-            tasks = [].concat(task as Task);
 
-        this.insertTasks(tasks);
+    handleCycle(cycleEvent:CycleDetectedEvent) {
+        alert("Psycles :(");
+    }
+
+    apply(event: ObservedEvent): void {
+        if(event instanceof TaskAddedEvent) {
+            let task = event.target,
+                tasks = [].concat(task as Task);
+
+            this.insertTasks(tasks);
+        } else if(event instanceof CycleDetectedEvent) {
+            this.handleCycle(event as CycleDetectedEvent);
+        }
     }
 
 

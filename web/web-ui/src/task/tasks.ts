@@ -4,15 +4,22 @@ import {
     DefaultEventDispatcher
 } from "../utils/observer";
 
+import {Graph, Node, Traversal} from '../algorithms/graph/graph'
+import {
+    TarjansStronglyConnectedComponents,
+    Component
+} from '../algorithms/graph/tarjans'
+
 import {UUID} from '../utils/uuid';
 
 import {InfrastructureDescriptor} from "src/task/infrastructure";
 
-type TaskEvent = "task-added" | "task-removed";
+type TaskEvent = "task-added" | "task-removed" | "cycle-detected";
 
 const TaskEvent = {
     TaskAdded: "task-added" as TaskEvent,
-    TaskRemoved: "task-removed" as TaskEvent
+    TaskRemoved: "task-removed" as TaskEvent,
+    CycleDetected: "cycle-detected" as TaskEvent,
 };
 
 
@@ -62,41 +69,55 @@ export class Task {
 
 }
 
+export class CycleDetectedEvent extends ObservedEvent {
+
+}
+
 export class TaskAddedEvent extends ObservedEvent {
 }
 
 export class TaskManager extends DefaultEventDispatcher {
 
 
-    tasks: {[key:string]:Task};
+    graph:Graph<Task>;
+    cycleDetector: Traversal<Component<Task>[], Task>;
 
     constructor() {
         super();
-        this.tasks = {};
+        this.graph = new Graph<Task>();
+        this.cycleDetector = new TarjansStronglyConnectedComponents<Task>();
     }
 
 
 
 
     getTasks() : Task[] {
-        let results = [];
-        for(var value in this.tasks) {
-            results.push(this.tasks[value]);
-        }
-        return results;
+        return this.graph.getNodes().map(m => m.data);
     }
 
 
     addTask(task: Task) : void {
         this.dispatch(TaskEvent.TaskAdded, new TaskAddedEvent(task));
-        this.tasks[task.id.value] = task;
+        this.graph.add(new Node<Task>(task.id.value, task));
     }
 
 
     connect(sourceId:string, targetId:string) : boolean {
-        let source = this.tasks[sourceId],
-            target = this.tasks[targetId];
-        return source.connect(target);
+        let source = new Node<Task>(sourceId),
+            target = new Node<Task>(targetId),
+            result = this.graph.connect(source, target);
+        if(result) {
+            let components = this.cycleDetector.run(this.graph);
+            if(components.length > 0) {
+                this.dispatch(
+                    TaskEvent.CycleDetected,
+                    new CycleDetectedEvent(components)
+                );
+                this.graph.disconnect(source, target);
+                return false;
+            }
+        }
+        return true;
     }
 
 }
