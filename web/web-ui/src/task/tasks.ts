@@ -2,7 +2,7 @@
 import {
     ObservedEvent,
     DefaultEventDispatcher
-} from "../utils/observer";
+} from "utils/observer";
 
 import {Graph, Node, Traversal} from '../algorithms/graph/graph'
 import {
@@ -12,7 +12,7 @@ import {
 
 import {UUID} from '../utils/uuid';
 
-import {InfrastructureDescriptor} from "src/task/infrastructure";
+import {InfrastructureDescriptor} from "task/infrastructure";
 
 type TaskEvent = "task-added" | "task-removed" | "cycle-detected";
 

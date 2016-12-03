@@ -1,7 +1,7 @@
 import {inject} from "aurelia-framework";
 import {LocalStorage, Map} from "../../../storage/local/local-storage";
 import {HttpClient} from "aurelia-fetch-client";
-import {User, AuthenticationContext} from "src/model/core/security";
+import {User, AuthenticationContext} from "model/core/security";
 
 export const HEADER = "X-AUTH-TOKEN";
 

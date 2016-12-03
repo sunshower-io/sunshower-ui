@@ -1,6 +1,6 @@
 template
     .ui.grid.palette
-        .item
+        .item(click.delegate="groupElements()")
             i.large.icon.object.group
         .item
             i.large.icon.object.ungroup
@@ -10,3 +10,5 @@ template
             i.large.icon.unlock
         .item
             i.large.icon.clone
+        .item
+            i.large.icon.server

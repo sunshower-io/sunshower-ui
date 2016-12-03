@@ -36,7 +36,7 @@ export class Applications {
 
                 let top = $(this.element).offset().top,
                     wheight = $(window).height(),
-                    height = wheight - top;
+                    height = wheight - top - 32;
                 $(this.element).height(height);
 
             });

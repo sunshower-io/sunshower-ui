@@ -1,4 +1,4 @@
-import {AuthenticationContextHolder} from "src/model/core/security";
+import {AuthenticationContextHolder} from "model/core/security";
 import {Router, RouterConfiguration} from "aurelia-router";
 export class Settings {
 

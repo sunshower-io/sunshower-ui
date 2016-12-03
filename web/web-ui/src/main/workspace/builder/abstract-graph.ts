@@ -17,6 +17,14 @@ import {Grid} from './grid';
 import {PLATFORM} from 'aurelia-pal';
 import {mxEvent} from "mxgraph";
 
+export class GraphContext {
+    graph:mxGraph;
+}
+
+export interface GraphProcessor {
+    apply(context:GraphContext) : void;
+}
+
 export abstract class AbstractGraph {
 
 
