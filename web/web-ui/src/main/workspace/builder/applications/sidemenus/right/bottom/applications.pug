@@ -1,0 +1,21 @@
+template
+    .row
+        .column
+            .ui.basic.segment
+                h4.ui.header Applications
+                .ui.fluid.multiple.search.selection.dropdown
+                    input(name='tags', type='hidden')
+                    i.dropdown.icon
+                    .default.text Most Popular
+                    .menu
+                        .item(data-value='database') Databases
+                        .item(data-value='monitoring') Monitoring
+                .applications(ref="element")
+                    .ui.divided.stackable.items.half
+                        .item.flex.small--item(repeat.for="descriptor of elements",
+                            draggable="true",
+                            dragend.delegate="addImage(descriptor.pid, $event)")
+                            .ui.mini.image
+                                img(src='/hasli/api/v1/storage/s3/images/${descriptor.logo_url.large}')
+                            .middle.aligned.content
+                                | ${descriptor.name}

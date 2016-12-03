@@ -1,4 +1,5 @@
 template(bindable='router')
+    require(from='./bottom/applications')
     .ui.vertical.sticky.right.menu.fixed.right--menu.no--boxshadow
         .ui.grid
             .row
@@ -12,3 +13,6 @@ template(bindable='router')
                             i(class="${component.icon}")
         .ui.basic.secondary.segment.property--menu
             compose(view-model="./top/${active.name || 'palette'}")
+        .ui.grid
+                applications
+

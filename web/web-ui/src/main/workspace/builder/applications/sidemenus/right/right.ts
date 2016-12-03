@@ -44,7 +44,6 @@ export class Right {
     configure(components:Component[]) {
         this.components = [];
         for(let component in components) {
-            console.log("COMP", component);
             this.components[component] = components[component];
         }
     }
