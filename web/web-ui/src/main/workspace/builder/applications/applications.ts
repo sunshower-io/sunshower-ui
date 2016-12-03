@@ -32,12 +32,16 @@ import {AbstractGraph} from '../abstract-graph'
 import {UUID} from "../../../../utils/uuid";
 import {Router} from "aurelia-router";
 
-@inject(HttpClient, TaskManager, Router)
-export class Applications extends AbstractGraph implements Listener {
+import {
+    Builder, NavigationAware
+} from '../builder';
+
+@inject(HttpClient, TaskManager, Builder)
+export class Applications extends AbstractGraph implements Listener, NavigationAware {
 
     constructor(private client: HttpClient,
                 private taskManager: TaskManager,
-                private router:Router
+                private parent:Builder,
     ) {
         super();
         taskManager.addEventListener('task-added', this);
@@ -48,7 +52,7 @@ export class Applications extends AbstractGraph implements Listener {
     attached(): void {
         super.attached();
         this.insertTasks(this.taskManager.getTasks());
-        (<SidebarAware>)this.router
+        this.parent.set(this);
     }
 
 

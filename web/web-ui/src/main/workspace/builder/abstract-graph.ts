@@ -84,18 +84,6 @@ export abstract class AbstractGraph {
     }
 
 
-    protected toggle(ele: HTMLElement, v: boolean, direction: string): boolean {
-
-        let visible = v;
-        if (visible) {
-            visible = false;
-            $(ele).hide();
-        } else {
-            visible = true;
-            $(ele).show();
-        }
-        return visible;
-    }
 
     prependClass(sel, strClass) {
         var el = $(sel);
@@ -122,6 +110,17 @@ export abstract class AbstractGraph {
 
     }
 
+    protected toggle(ele: HTMLElement, v: boolean, direction: string): boolean {
+        let visible = v;
+        if (visible) {
+            visible = false;
+            $(ele).hide();
+        } else {
+            visible = true;
+            $(ele).show();
+        }
+        return visible;
+    }
 
     protected decorateGraphHandler() {
         let original = mxGraphHandler.prototype.getInitialCellForEvent;
