@@ -70,6 +70,8 @@ declare module 'mxgraph' {
         convertValueToString(cell:mxCell) : string;
 
 
+        addCellOverlay(vertex:mxCell, overlay:mxCellOverlay) : void;
+
 
 
         insertVertex(

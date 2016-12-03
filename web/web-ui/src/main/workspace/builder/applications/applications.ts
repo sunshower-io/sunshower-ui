@@ -27,7 +27,15 @@ import {
 import {inject} from 'aurelia-framework';
 import {HttpClient} from "aurelia-fetch-client";
 
-import {mxGraph, Layer, mxCell} from "mxgraph";
+import {
+    mxGraph,
+    Layer,
+    mxCell,
+    mxCellOverlay,
+    mxImage
+
+
+} from "mxgraph";
 import {AbstractGraph} from '../abstract-graph'
 import {UUID} from "../../../../utils/uuid";
 import {Router} from "aurelia-router";
@@ -35,6 +43,7 @@ import {Router} from "aurelia-router";
 import {
     Builder, NavigationAware
 } from '../builder';
+import {mxConstants} from "mxgraph";
 
 @inject(HttpClient, TaskManager, Builder)
 export class Applications extends AbstractGraph implements Listener, NavigationAware {
@@ -113,10 +122,26 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
             task.name,
             task.location.x,
             task.location.y,
-            120,
-            80,
-            super.createStyle(task.icon),
+            160,
+            160,
+            super.createStyle(),
         );
+
+        let image = new mxImage(super.url(task.icon), 30, 30),
+            overlay = new mxCellOverlay(
+                image,
+                'frap',
+                mxConstants.ALIGN_CENTER,
+                mxConstants.ALIGN_MIDDLE
+            );
+
+
+        this.graph.addCellOverlay(source, overlay);
+
+
+
+
+
 
         if (task.successors) {
             let model = this.graph.getModel();
@@ -132,10 +157,9 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
                         successor.location.y,
                         120,
                         80,
-                        super.createStyle(successor.icon),
+                        super.createStyle(),
                     );
                 }
-                console.log(`SID: ${source.id} TID: ${target.id}`);
                 graph.insertEdge(
                     parent,
                     UUID.randomUUID().value,
@@ -143,15 +167,8 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
                     source,
                     target
                 );
-                let menu = new TaskMenu(graph, target);
-                menu.add(new CloseMenuItem());
-                menu.add(new EditMenuItem());
             }
         }
-
-        let menu = new TaskMenu(graph, source);
-        menu.add(new CloseMenuItem());
-        menu.add(new EditMenuItem());
 
 
     }

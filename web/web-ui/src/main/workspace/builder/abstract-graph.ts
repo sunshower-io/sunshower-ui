@@ -178,15 +178,20 @@ export abstract class AbstractGraph {
 
     protected abstract onConnection(source:mxCell, target:mxCell, dropTarget:mxCell) : boolean;
 
-    protected createStyle(url: string): string {
+    protected createStyle(): string {
         return Kv.create(';')
             .pair('shape', 'label')
-            .pair('image', `/hasli/api/v1/storage/s3/images/${url}`)
             .pair('imageWidth', 24)
             .pair('imageHeight', 24)
-            .pair('fillColor', '#f7f7f7')
-            .pair('shadow', 1)
+            .pair('fillOpacity', 0)
+            .pair('verticalAlign', 'bottom')
+            .pair('spacingBottom', '40')
             .pair('fontColor', '#000000')
+            .pair('fontStyle', mxConstants.FONT_BOLD)
             .toString();
+    }
+
+    protected url(url:string) : string {
+        return `/hasli/api/v1/storage/s3/images/${url}`;
     }
 }
