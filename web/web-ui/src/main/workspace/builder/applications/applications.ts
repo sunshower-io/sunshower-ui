@@ -36,9 +36,8 @@ import {
     mxEvent
 } from "mxgraph";
 
-import {AbstractGraph} from '../abstract-graph'
+import {AbstractGraph, GraphContext, GraphProcessor} from '../abstract-graph'
 import {UUID} from "../../../../utils/uuid";
-import {Router} from "aurelia-router";
 
 import {
     Builder, NavigationAware
@@ -64,6 +63,15 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
         this.parent.set(this);
     }
 
+
+    modifyGraph(event:Event) {
+        let context = {
+            graph:this.graph
+        },
+        processor = (<any>event).detail as GraphProcessor;
+        processor.apply(context);
+
+    }
 
     addTask(event: Event) {
         let details = (<any>event).detail,
@@ -147,7 +155,9 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
             );
 
 
-        iconOverlay.addListener(mxEvent.CLICK, (sender:any, event:any) : void => {
+        iconOverlay.addListener(
+            mxEvent.CLICK,
+            (sender:any, event:any) : void => {
             let cell = event.getProperty('cell');
             graph.setSelectionCell(cell);
         });

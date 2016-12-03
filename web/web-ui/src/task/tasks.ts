@@ -4,11 +4,11 @@ import {
     DefaultEventDispatcher
 } from "utils/observer";
 
-import {Graph, Node, Traversal} from '../algorithms/graph/graph'
+import {Graph, Node, Traversal} from 'algorithms/graph/graph'
 import {
     TarjansStronglyConnectedComponents,
     Component
-} from '../algorithms/graph/tarjans'
+} from 'algorithms/graph/tarjans'
 
 import {UUID} from '../utils/uuid';
 

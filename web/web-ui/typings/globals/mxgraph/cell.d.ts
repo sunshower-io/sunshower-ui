@@ -36,20 +36,54 @@ declare module 'mxgraph' {
 
         constructor(label?:string, geometry?:mxGeometry);
 
+        /**
+         *
+         */
         isConnectable(): boolean
 
+        /**
+         *
+         */
         getParent() : mxCell;
 
+        /**
+         *
+         * @param layer
+         */
+        setParent(layer:Layer);
 
+        /**
+         *
+         * @param edge
+         */
         setEdge(edge:boolean) : void;
+
+        /**
+         *
+         * @param style
+         */
+
         setStyle(style:mxStylesheet) : void;
 
 
-        setConnectable(connectable: boolean): void
+        /**
+         *
+         * @param key
+         */
         getAttribute(key:string) : string;
 
+        /**
+         *
+         * @param key
+         * @param value
+         */
         setAttribute(key:string, value:string);
 
+        /**
+         *
+         * @param connectable
+         */
+        setConnectable(connectable: boolean): void
 
     }
 

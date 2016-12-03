@@ -3,11 +3,18 @@ export interface Traversal<T, U> {
     run(g:Graph<U>) : T;
 }
 
+
+enum Relationship {
+    Parent,
+    Child
+}
+
 export class Edge<T> {
 
     constructor(
         public source:Node<T>,
-        public target:Node<T>
+        public target:Node<T>,
+        public relationship?:Relationship
     ) {
 
     }
@@ -65,12 +72,16 @@ export class Graph<T> {
         return source.remove(target);
     }
 
-    connect(s:Node<T>, t:Node<T>) : boolean {
+    connect(
+        s:Node<T>,
+        t:Node<T>,
+        relationship?:Relationship
+    ) : boolean {
         this.check();
         let source = this.nodes[s.id] || s,
             target = this.nodes[t.id] || t;
 
-        let edge = new Edge<T>(source, target);
+        let edge = new Edge<T>(source, target, relationship);
         this.nodes[source.id] = source;
         this.nodes[target.id] = target;
         return source.add(edge);

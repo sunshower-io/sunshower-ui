@@ -17,12 +17,16 @@ import {Grid} from './grid';
 import {PLATFORM} from 'aurelia-pal';
 import {mxEvent} from "mxgraph";
 
-export class GraphContext {
+export interface GraphContext {
     graph:mxGraph;
 }
 
 export interface GraphProcessor {
     apply(context:GraphContext) : void;
+}
+
+export interface GraphModificationEvent {
+    processor:GraphProcessor;
 }
 
 export abstract class AbstractGraph {
@@ -62,6 +66,7 @@ export abstract class AbstractGraph {
             let graph = new mxGraph(this.container, new mxGraphModel()),
                 select = new mxRubberband(graph),
                 grid = new Grid(graph);
+
 
 
             this.configure(graph);
@@ -144,6 +149,7 @@ export abstract class AbstractGraph {
 
     protected configure(g: mxGraph): void {
         let self = this;
+        g.foldingEnabled = false;
         g.selectCellForEvent = function (cell: mxCell) {
             if (cell.getAttribute('constituent') === '1') {
                 cell = this.model.getParent(cell);

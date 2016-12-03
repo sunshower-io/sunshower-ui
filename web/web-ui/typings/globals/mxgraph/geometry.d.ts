@@ -3,6 +3,7 @@ declare module 'mxgraph' {
 
     type Layer = mxCell;
 
+
     type Model = mxGraphModel;
 
     type Vertex = mxVertex;

@@ -14,6 +14,9 @@ declare module 'mxgraph' {
         connect(source:mxCell, target:mxCell, event:mxEvent, dropTarget:mxCell);
     }
 
+    export class mxGraphSelectionModel {
+    }
+
     export class mxGraphBounds implements Cloneable<mxGraphBounds> {
         x       :number;
         y       :number;
@@ -33,49 +36,143 @@ declare module 'mxgraph' {
 
         mouseListeners      : {[name:string]: any};
         gridSize            : number;
+        foldingEnabled      : boolean;
         container           : Element;
         view                : mxGraphView;
         connectionHandler   : mxConnectionHandler;
+
+        /**
+         *
+         * @param container
+         * @param model
+         */
 
         constructor(
             container?:HTMLElement,
             model?:mxGraphModel
         );
 
+        /**
+         *
+         */
+
         createConnectionHandler() : mxConnectionHandler;
+
+        /**
+         *
+         */
 
         isConnectable(): boolean
 
+        getSelectionCells() : Layer[];
+
+        /**
+         *
+         * @param cell
+         */
 
         setSelectionCell(cell:Layer);
 
+        /**
+         *
+         * @param cells
+         */
 
         removeCells(cells:mxCell[]);
 
 
-        addListener(key:string, listener:(sender:any, event:any) => void) : boolean;
-
-        hasListener(key:string, listener:(sender:any, event:any) => void) : boolean;
-
 
         getModel() : Model;
 
+
+        groupCells(
+            group:Layer,
+            border:number,
+            cells:Layer[]
+        );
+
+        /**
+         *
+         */
+
         getDefaultParent() : Layer;
 
+        /**
+         *
+         */
         getGraphBounds() : Bounds;
 
+        /**
+         *
+         * @param panning
+         */
         setPanning(panning:boolean);
 
+        /**
+         *
+         * @param cell
+         */
         selectCellForEvent(cell:mxCell);
 
+        /**
+         *
+         * @param connectable
+         */
+
         setConnectable(connectable:boolean);
+
+        /**
+         *
+         * @param cell
+         */
 
         convertValueToString(cell:mxCell) : string;
 
 
-        addCellOverlay(vertex:mxCell, overlay:mxCellOverlay) : void;
+        /**
+         *
+         * @param vertex
+         * @param overlay
+         */
+        addCellOverlay(
+            vertex:mxCell,
+            overlay:mxCellOverlay
+        ) : void;
+
+        /**
+         *
+         * @param key
+         * @param listener
+         */
+
+        addListener(
+            key:string,
+            listener:(sender:any, event:any) => void
+        ) : boolean;
+
+        /**
+         *
+         * @param key
+         * @param listener
+         */
+
+        hasListener(
+            key:string,
+            listener:(sender:any, event:any) => void
+        ) : boolean;
 
 
+        /**
+         *
+         * @param parent
+         * @param id
+         * @param value
+         * @param x
+         * @param y
+         * @param width
+         * @param height
+         * @param style
+         */
 
         insertVertex(
             parent:Layer,
@@ -88,6 +185,14 @@ declare module 'mxgraph' {
             style?:string
         ) : Vertex;
 
+        /**
+         *
+         * @param parent
+         * @param id
+         * @param value
+         * @param source
+         * @param target
+         */
 
         insertEdge(
             parent:Layer,
