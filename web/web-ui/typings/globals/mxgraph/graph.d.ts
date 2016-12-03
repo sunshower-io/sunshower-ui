@@ -47,6 +47,9 @@ declare module 'mxgraph' {
         isConnectable(): boolean
 
 
+        setSelectionCell(cell:Layer);
+
+
         removeCells(cells:mxCell[]);
 
 

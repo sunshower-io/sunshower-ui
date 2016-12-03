@@ -32,10 +32,10 @@ import {
     Layer,
     mxCell,
     mxCellOverlay,
-    mxImage
-
-
+    mxImage,
+    mxEvent
 } from "mxgraph";
+
 import {AbstractGraph} from '../abstract-graph'
 import {UUID} from "../../../../utils/uuid";
 import {Router} from "aurelia-router";
@@ -127,16 +127,34 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
             super.createStyle(),
         );
 
-        let image = new mxImage(super.url(task.icon), 30, 30),
-            overlay = new mxCellOverlay(
+        let image = new mxImage(super.url(task.icon), 40, 40),
+            iconOverlay = new mxCellOverlay(
                 image,
                 'frap',
                 mxConstants.ALIGN_CENTER,
                 mxConstants.ALIGN_MIDDLE
+            ),
+            controlImage = new mxImage(
+                'assets/sui/themes/hasli/assets/images/icons/provider/generic/single-node-instance.svg',
+                20, 20
+            ),
+            controlOverlay = new mxCellOverlay(
+                controlImage,
+                'frap',
+                mxConstants.ALIGN_LEFT,
+                mxConstants.ALIGN_TOP
             );
 
 
-        this.graph.addCellOverlay(source, overlay);
+        iconOverlay.addListener(mxEvent.CLICK, (sender:any, event:any) : void => {
+            let cell = event.getProperty('cell');
+            graph.setSelectionCell(cell);
+        });
+
+
+
+        this.graph.addCellOverlay(source, iconOverlay);
+        this.graph.addCellOverlay(source, controlOverlay);
 
 
 

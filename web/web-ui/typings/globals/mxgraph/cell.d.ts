@@ -25,6 +25,8 @@ declare module 'mxgraph' {
             cursor?: string
         );
 
+
+        addListener(event:string, listener:(sender:any, event:mxEvent) => void);
     }
 
     export class mxCell implements Layer, Connectable {
