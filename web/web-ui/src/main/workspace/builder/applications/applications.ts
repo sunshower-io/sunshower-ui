@@ -115,8 +115,9 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
         }
     }
 
+    // todo: cleanup
     private insertTask(graph: mxGraph, parent: Layer, task: Task) {
-        var source = graph.insertVertex(
+        let source = graph.insertVertex(
             parent,
             task.id.value,
             task.name,
@@ -152,13 +153,8 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
         });
 
 
-
         this.graph.addCellOverlay(source, iconOverlay);
         this.graph.addCellOverlay(source, controlOverlay);
-
-
-
-
 
 
         if (task.successors) {
@@ -195,7 +191,6 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
                            target: mxCell,
                            dropTarget: mxCell): boolean {
         if (source && target) {
-            console.log(`SID: ${source.id}, ${target.id}`);
             return this.taskManager.connect(source.id, target.id);
         } else {
             return false;
