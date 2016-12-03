@@ -3,5 +3,5 @@ template
     require(from="./sidemenus/right/right")
     .row.column.workbench(ref="container", style="height:100%;" )
     left-menu(ref="leftSidebar")
-    right
+    right(add-image.delegate="addTask($event)", ref="rightSidebar")
     //right-menu(ref="rightSidebar", add-image.delegate="addTask($event)")
