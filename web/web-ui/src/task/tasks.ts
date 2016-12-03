@@ -44,7 +44,6 @@ export class Task {
         public successors?: {[id:string]:Task}
     ) {
         this.id = UUID.randomUUID();
-
     }
 
     addDeploymentTarget(target:InfrastructureDescriptor) : Task {
@@ -90,6 +89,10 @@ export class TaskManager extends DefaultEventDispatcher {
 
 
 
+    contains(id:UUID) : boolean {
+        return this.graph.get(id.value) != null;
+    }
+
 
     getTasks() : Task[] {
         return this.graph.getNodes().map(m => m.data);
@@ -97,15 +100,23 @@ export class TaskManager extends DefaultEventDispatcher {
 
 
     addTask(task: Task) : void {
-        this.dispatch(TaskEvent.TaskAdded, new TaskAddedEvent(task));
         this.graph.add(new Node<Task>(task.id.value, task));
+        this.dispatch(TaskEvent.TaskAdded, new TaskAddedEvent(task));
     }
 
 
     connect(sourceId:string, targetId:string) : boolean {
-        let source = new Node<Task>(sourceId),
-            target = new Node<Task>(targetId),
-            result = this.graph.connect(source, target);
+        console.log(`SID2: ${sourceId}, ${targetId}`);
+        let graph = this.graph,
+            source = graph.get(sourceId),
+            target = graph.get(targetId),
+            result:boolean = false;
+        if(!(source && target)) {
+            return false;
+        } else {
+            result = graph.connect(source, target);
+        }
+
         if(result) {
             let components = this.cycleDetector.run(this.graph);
             if(components.length > 0) {
@@ -117,7 +128,7 @@ export class TaskManager extends DefaultEventDispatcher {
                 return false;
             }
         }
-        return true;
+        return source.data.connect(target.data);
     }
 
 }

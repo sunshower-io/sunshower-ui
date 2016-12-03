@@ -59,6 +59,8 @@ declare module 'mxgraph' {
         endUpdate() : void;
         beginUpdate(): void;
 
+        getCell(id:string) : Layer;
+
         getParent(cell:Layer) : Layer;
     }
 

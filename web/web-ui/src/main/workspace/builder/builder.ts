@@ -1,7 +1,28 @@
 import {RouterConfiguration, Router} from "aurelia-router";
-export class Builder {
+
+type Slot = 'left' | 'right' | 'top' | 'bottom';
+
+const Slot = {
+    Left        : 'left' as Slot,
+    Right       : 'right' as Slot,
+    Top         : 'top' as Slot,
+    Bottom      : 'bottom' as Slot
+};
+
+
+type ElementControl = () => void;
+
+export interface NavigationAware {
+    set(elementControl:ElementControl, slot:Slot);
+}
+
+export class Builder implements NavigationAware {
 
     public router:Router;
+
+    left:ElementControl;
+    right: ElementControl;
+    slots: {[slot:Slot]: ElementControl};
 
     configureRouter(config:RouterConfiguration, router:Router) {
 
@@ -35,5 +56,13 @@ export class Builder {
             }
         }]);
         this.router = router;
+    }
+
+    toggle(slot:Slot) {
+    }
+
+
+    set(elementControl: ElementControl, slot: Slot) {
+        this.slots[slot] = elementControl;
     }
 }
