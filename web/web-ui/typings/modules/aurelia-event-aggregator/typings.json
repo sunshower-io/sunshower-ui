@@ -4,6 +4,7 @@
     "src": "https://raw.githubusercontent.com/aurelia/event-aggregator/master/typings.json",
     "raw": "github:aurelia/event-aggregator",
     "main": "dist/aurelia-event-aggregator.d.ts",
-    "name": "aurelia-event-aggregator"
+    "name": "aurelia-event-aggregator",
+    "type": "typings"
   }
 }
