@@ -13,6 +13,6 @@ template(bindable='router')
                             i(class="${component.icon}")
         .ui.basic.secondary.segment.property--menu
             compose(view-model="./top/${active.name || 'palette'}")
-        .ui.grid
-                applications
+        .ui.container
+            applications
 
