@@ -28,7 +28,12 @@ export class ConnectionHandler extends mxConnectionHandler {
         dropTarget:mxCell
     ) {
         if(source && target) {
-            return this.graph.taskManager.connect(source.id, target.id);
+            let result = this.graph.taskManager.connect(
+                (<any>source).data.id.value,
+                (<any>target).data.id.value);
+            if(result) {
+                return super.connect(source, target, event, dropTarget);
+            }
         }
         return false;
     }
