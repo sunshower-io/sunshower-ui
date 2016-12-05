@@ -3,17 +3,19 @@ import {
     mxGraph,
     mxVertex,
     mxUtils,
+    Layer,
+    mxCellStyle,
+    mxEvent,
     mxStylesheet
 } from "mxgraph";
 
 
+export interface MenuHandler {
+    before(): void;
+    after(): void;
+}
 
-import {mxCellStyle} from "mxgraph";
-import {mxEvent} from "mxgraph";
-
-
-
-export function node(name:string) : mxCell {
+export function node(name: string): mxCell {
     let document = mxUtils.createXmlDocument(),
         node = document.createElement(name);
     return node;
@@ -21,13 +23,14 @@ export function node(name:string) : mxCell {
 
 
 export class MenuItems {
-    constructor(private styles:mxStylesheet){}
+    constructor(private styles: mxStylesheet) {
+    }
 
-    static create(styles:mxStylesheet) : MenuItems {
+    static create(styles: mxStylesheet): MenuItems {
         return new MenuItems(styles);
     }
 
-    register(item:MenuItem) : MenuItems  {
+    register(item: MenuItem): MenuItems {
         this.styles.putCellStyle(item.type, item.style);
         return this;
     }
@@ -35,28 +38,74 @@ export class MenuItems {
 }
 
 
-
-
-type Listener = (sender:any, event:any)  => void;
+type Listener = (sender: any, event: any)  => void;
 
 export class MenuItem {
-    type:   string;
-    event:  string;
-    icon:   string;
-    style : mxCellStyle;
-    cell  : mxCell;
-    host  : mxGraph;
-    listener : Listener;
+    type: string;
+    event: string;
+    icon: string;
+    style: mxCellStyle;
+    cell: mxCell;
+    host: mxGraph;
+    listener: Listener;
+
+    public isTarget(event: mxEvent): boolean {
+        return event.getProperty('cell') == this.cell;
+    }
+}
+
+export class ApplicationMenuItem extends MenuItem {
+    icon = '\uf1c9';
+    event = mxEvent.CLICK;
+
+
+    constructor(private handler: MenuHandler,
+                private parent: Layer) {
+        super();
+    }
+
+    listener = (sender: any, event: mxEvent): void => {
+        if (this.isTarget(event)) {
+            this.handler.before();
+            this.parent.setVisible(true);
+            this.host.refresh(this.parent);
+        }
+    }
+}
+
+export class InfrastructureMenuItem extends MenuItem {
+    icon = '\uf233';
+    event = mxEvent.CLICK;
+
+    constructor(private handler: MenuHandler,
+                private parent: Layer) {
+        super();
+    }
+
+    listener = (sender: any, event: mxEvent): void => {
+        if (this.isTarget(event)) {
+            this.handler.before();
+            this.parent.setVisible(true);
+            this.host.refresh(this.parent);
+        }
+    }
 }
 
 export class EditMenuItem extends MenuItem {
 
-    icon = '\uf044'
+    icon = '\uf044';
     event = mxEvent.CLICK;
 
-    listener = (sender:any, event:mxEvent) : void => {
-        if(event.getProperty('cell') == this.cell) {
-            this.cell.setVisible(false);
+    constructor(private handler: MenuHandler,
+                private parent: Layer) {
+        super();
+    }
+
+    listener = (sender: any, event: mxEvent): void => {
+        if (this.isTarget(event)) {
+            this.handler.before();
+            this.parent.setVisible(true);
+            this.host.refresh(this.parent);
         }
     }
 
@@ -68,8 +117,8 @@ export class CloseMenuItem extends MenuItem {
     event = mxEvent.CLICK;
 
 
-    listener = (sender:any, event:mxEvent) : void => {
-        if(event.getProperty('cell') == this.cell) {
+    listener = (sender: any, event: mxEvent): void => {
+        if (this.isTarget(event)) {
             this.host.removeCells([this.cell.getParent()]);
             event.consume();
         }
@@ -79,14 +128,13 @@ export class CloseMenuItem extends MenuItem {
 export class TaskMenu {
 
     count = 0;
-    constructor(
-        private graph:mxGraph,
-        private parent:mxVertex
-    ) {
+
+    constructor(private graph: mxGraph,
+                private parent: mxVertex) {
     }
 
 
-    public add(item:MenuItem) : void {
+    public add(item: MenuItem): void {
         let vertex = node('a');
 
 
@@ -94,7 +142,7 @@ export class TaskMenu {
         vertex.setAttribute('constituent', '1');
 
         // if(!this.graph.hasListener(item.event, item.listener)) {
-            this.graph.addListener(item.event, item.listener);
+        this.graph.addListener(item.event, item.listener);
         // }
         let result = this.graph.insertVertex(
             this.parent, null,

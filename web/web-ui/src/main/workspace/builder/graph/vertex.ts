@@ -39,7 +39,6 @@ export class AbstractVertex<T extends Task> extends mxCell implements Vertex<T> 
         height:number
     ) {
         super();
-        this.value = data.name;
         this.delegate = new Node<T>(id.value, data);
         this.geometry = new mxGeometry(x, y, width, height);
         this.setEdge(false);
@@ -79,8 +78,6 @@ export class AbstractVertex<T extends Task> extends mxCell implements Vertex<T> 
     }
 
 
-
-
     setComponent(component:boolean) : void {
         if(component) {
             this.setAttribute('constituent', '1');
@@ -99,7 +96,7 @@ export class AbstractVertex<T extends Task> extends mxCell implements Vertex<T> 
             .pair('imageHeight', 24)
             .pair('fillOpacity', 0)
             .pair('verticalAlign', 'bottom')
-            .pair('spacingBottom', '40')
+            .pair('spacingBottom', '24')
             .pair('fontColor', '#000000')
             .pair('fontStyle', mxConstants.FONT_BOLD)
             .toString();

@@ -11,9 +11,17 @@ import {
     mxCellOverlay
 } from "mxgraph";
 import {Builder} from "../graph/builder";
+import {
+    TaskMenu,
+    CloseMenuItem,
+    EditMenuItem,
+    InfrastructureMenuItem,
+    ApplicationMenuItem,
+    MenuHandler
+} from "../menu/task-cell";
 
 
-export class DeploymentUnit extends AbstractVertex<Task> {
+export class DeploymentUnit extends AbstractVertex<Task> implements MenuHandler {
     /**
      *
      */
@@ -45,14 +53,51 @@ export class DeploymentUnit extends AbstractVertex<Task> {
             x,
             y
         );
+
+        this.infrastructureDeployment = new InfrastructureDeploymentUnit(
+            registry, task, this, x, y
+        );
+        this.infrastructureDeployment.setVisible(false);
+
+        this.configurationDeployment = new ConfigurationDeploymentUnit(
+            registry, task, this, x, y
+        );
+        this.configurationDeployment.setVisible(false);
+
+    }
+
+
+    before(): void {
+        this.applicationDeployment.setVisible(false);
+        this.configurationDeployment.setVisible(false);
+        this.infrastructureDeployment.setVisible(false);
+    }
+
+    after(): void {
+
     }
 
 
 
     addTo(builder: Builder): mxCell {
+        this.createMenu(builder);
+        return this.addChildren(builder);
+    }
+
+    private addChildren(builder: Builder) {
         let result = super.addTo(builder);
         this.applicationDeployment.addTo(builder);
+        this.configurationDeployment.addTo(builder);
+        this.infrastructureDeployment.addTo(builder);
         return result;
+    }
+
+    private createMenu(builder: Builder) {
+        let menu = new TaskMenu(builder, this);
+        menu.add(new CloseMenuItem());
+        menu.add(new ApplicationMenuItem(this, this.applicationDeployment));
+        menu.add(new EditMenuItem(this, this.configurationDeployment));
+        menu.add(new InfrastructureMenuItem(this, this.infrastructureDeployment));
     }
 }
 
@@ -65,7 +110,8 @@ export class ApplicationDeploymentUnit extends AbstractVertex<Task> {
         x:number,
         y:number
     ) {
-        super(registry, task.id, task, parent, 0, 0, 160, 160);
+        super(registry, task.id, task, parent, 0, 24, 160, 136);
+        this.value = task.name;
         this.setComponent(true);
     }
 
@@ -94,7 +140,9 @@ export class InfrastructureDeploymentUnit extends AbstractVertex<Task> {
         x:number,
         y:number
     ) {
-        super(registry, task.id, task, parent, 0, 20, 160, 140);
+        super(registry, task.id, task, parent, 0, 24, 160, 136);
+        this.value = "Infrastructure";
+        this.setComponent(true);
     }
 }
 
@@ -107,6 +155,8 @@ export class ConfigurationDeploymentUnit extends AbstractVertex<Task> {
         x:number,
         y:number
     ) {
-        super(registry, task.id, task, parent, 0, 20, 160, 140);
+        super(registry, task.id, task, parent, 0, 24, 160, 136);
+        this.value = "Configuration";
+        this.setComponent(true);
     }
 }

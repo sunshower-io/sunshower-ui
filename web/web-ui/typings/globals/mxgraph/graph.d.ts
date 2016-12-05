@@ -94,6 +94,8 @@ declare module 'mxgraph' {
         isMouseDown: boolean;
         connectionHandler: mxConnectionHandler;
 
+        refresh(cell?:Layer) : void;
+
         /**
          *
          * @param container
