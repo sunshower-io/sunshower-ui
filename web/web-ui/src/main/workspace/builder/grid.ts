@@ -73,7 +73,7 @@ export class Grid {
 
             let translateX = translate.x,
                 translateY = translate.y,
-                minStep = graph.gridSize,
+                minStep = Math.round(graph.gridSize / 2),
                 stepping = minStep * scale;
 
             if (stepping < minStep) {
@@ -96,9 +96,9 @@ export class Grid {
                 iye = Math.round(ye);
 
 
-            context.strokeStyle = '#767c89';
+            context.strokeStyle = '#f0f0f0';
 
-            context.setLineDash([2, 5]);
+            // context.setLineDash([2, 5]);
             context.beginPath();
 
             for (var x = xs; x <= xe; x += stepping) {
