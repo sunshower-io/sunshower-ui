@@ -6,10 +6,15 @@ import {
 } from "main/workspace/builder/abstract-graph";
 import {mxConstants} from "mxgraph";
 import {Kv} from "utils/objects";
-import {mxImage} from "mxgraph";
-import {mxCellOverlay} from "mxgraph";
+import {
+    mxCellOverlay,
+    mxImage
+} from "mxgraph";
 
 
+
+
+import 'pnotify';
 
 export class Palette {
 
@@ -53,8 +58,8 @@ class GroupElementsProcessor implements GraphProcessor {
             ),
             parentImage =
                 new mxImage(
-                    'assets/sui/themes/hasli/assets/images/icons/provider/generic/load-balancer.svg',
-                    30, 30
+                    'assets/sui/themes/hasli/assets/images/icons/provider/generic/cloud.svg',
+                    30, 20
                 ),
             cloudOverlay = new mxCellOverlay(
                 parentImage,
@@ -65,5 +70,9 @@ class GroupElementsProcessor implements GraphProcessor {
         context.graph.addCellOverlay(parent, cloudOverlay);
 
         context.graph.groupCells(parent, 24, selected);
+
+
+
+
     }
 }

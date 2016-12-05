@@ -22,10 +22,13 @@ import {
     TaskMenu,
     EditMenuItem,
     CloseMenuItem
-} from "./../task-cell-menu";
+} from "main/workspace/builder/menu/task-cell";
 
 import {inject} from 'aurelia-framework';
 import {HttpClient} from "aurelia-fetch-client";
+
+import * as PNotify from 'pnotify';
+import 'pnotify.callbacks';
 
 import {
     mxGraph,
@@ -36,7 +39,12 @@ import {
     mxEvent
 } from "mxgraph";
 
-import {AbstractGraph, GraphContext, GraphProcessor} from '../abstract-graph'
+import {
+    AbstractGraph,
+    GraphProcessor
+} from '../abstract-graph'
+
+
 import {UUID} from "../../../../utils/uuid";
 
 import {
@@ -44,13 +52,14 @@ import {
 } from '../builder';
 import {mxConstants} from "mxgraph";
 
+import {Builder as GBuilder} from '../graph/builder'
+
 @inject(HttpClient, TaskManager, Builder)
 export class Applications extends AbstractGraph implements Listener, NavigationAware {
 
     constructor(private client: HttpClient,
                 private taskManager: TaskManager,
-                private parent:Builder,
-    ) {
+                private parent: Builder,) {
         super();
         taskManager.addEventListener('task-added', this);
         taskManager.addEventListener('cycle-detected', this);
@@ -64,11 +73,11 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
     }
 
 
-    modifyGraph(event:Event) {
+    modifyGraph(event: Event) {
         let context = {
-            graph:this.graph
-        },
-        processor = (<any>event).detail as GraphProcessor;
+                graph: this.graph
+            },
+            processor = (<any>event).detail as GraphProcessor;
         processor.apply(context);
 
     }
@@ -94,8 +103,39 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
     }
 
 
+    private computePosition() : JQueryCoordinates {
+        if(this.rightVisible) {
+            let right = $(this.rightSidebar).children(':first-child'),
+                rightOffset = $(right).offset();
+            return {
+                top: rightOffset.top + 20,
+                left: rightOffset.left - 320
+            };
+        } else {
+            let offset = $(this.container).offset(),
+                width = $(this.container).width();
+            return {
+                top: offset.top + 20,
+                left : width - 320
+            }
+        }
+    }
+
+
     handleCycle(cycleEvent: CycleDetectedEvent) {
-        alert("Psycles :(");
+        new PNotify({
+            title: 'Error',
+            text: 'Adding that edge would introduce an irreducible cycle',
+            opacity: 0.90,
+            type: 'error',
+            addclass: 'graph-error',
+            width: '300px',
+            context: $(this.container),
+            before_open: (f) => {
+                let position = this.computePosition();
+                f.get().css(position);
+            }
+        });
     }
 
     apply(event: ObservedEvent): void {
@@ -123,9 +163,9 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
         }
     }
 
-    // todo: cleanup
-    private insertTask(graph: mxGraph, parent: Layer, task: Task) {
-        let source = graph.insertVertex(
+
+    private createSource(task:Task, parent:Layer) : mxCell {
+        let source = this.graph.insertVertex(
             parent,
             task.id.value,
             task.name,
@@ -151,21 +191,33 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
                 controlImage,
                 'frap',
                 mxConstants.ALIGN_LEFT,
-                mxConstants.ALIGN_TOP
+                mxConstants.ALIGN_TOP,
             );
+        controlOverlay.addListener(
+            mxEvent.CLICK, (sender, event) => {
+        });
 
+        controlOverlay.cursor = 'pointer';
 
         iconOverlay.addListener(
             mxEvent.CLICK,
-            (sender:any, event:any) : void => {
-            let cell = event.getProperty('cell');
-            graph.setSelectionCell(cell);
-        });
+            (sender: any, event: any): void => {
+                let cell = event.getProperty('cell');
+                this.graph.setSelectionCell(cell);
+            });
 
 
         this.graph.addCellOverlay(source, iconOverlay);
-        this.graph.addCellOverlay(source, controlOverlay);
+        // this.graph.addCellOverlay(source, controlOverlay);
 
+        let taskMenu = new TaskMenu(this.graph, source);
+        taskMenu.add(new CloseMenuItem());
+        taskMenu.add(new EditMenuItem());
+        return source;
+    }
+
+    private insertTask(graph: mxGraph, parent: Layer, task: Task) {
+        let source = this.createSource(task, parent);
 
         if (task.successors) {
             let model = this.graph.getModel();
@@ -205,6 +257,17 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
         } else {
             return false;
         }
+    }
+
+    protected removeCells(cells: mxCell[]) {
+        for(let cell of cells) {
+            this.taskManager.remove(UUID.fromString(cell.id));
+        }
+    }
+
+    protected createBuilder(): GBuilder {
+        console.log("TASKMANAGER" + this.taskManager);
+        return new GBuilder(this.container, this.taskManager);
     }
 
 }

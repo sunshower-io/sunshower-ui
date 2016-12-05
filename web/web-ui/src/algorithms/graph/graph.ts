@@ -65,6 +65,12 @@ export class Graph<T> {
         return true;
     }
 
+    remove(id:string) : Node<T> {
+        let result = this.nodes[id];
+        delete this.nodes[id];
+        return result;
+    }
+
     disconnect(s:Node<T>, t:Node<T>) : boolean {
         this.check();
         let source = this.nodes[s.id] || s,

@@ -114,25 +114,24 @@ export class NodeConfigurations {
     }
 
 
-    p:PNotify;
 
     showPNotify(title, text) {
 
 
 
-        var notice = new PNotify({
-            title: "Frap",
-
-            text: text,
-            buttons: {
-                closer: false,
-                sticker: false
-            }
-        });
+        // var notice = new PNotify({
+        //     title: "Frap",
         //
-        // notice.open();
-
-        console.log("Pnotify");
+        //     text: text,
+        //     buttons: {
+        //         closer: false,
+        //         sticker: false
+        //     }
+        // });
+        // //
+        // // notice.open();
+        //
+        // console.log("Pnotify");
         // notice.get().click(function() {
         //     notice.remove();
         // });

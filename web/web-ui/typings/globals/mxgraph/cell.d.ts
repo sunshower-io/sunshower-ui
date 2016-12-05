@@ -16,6 +16,8 @@ declare module 'mxgraph' {
 
     export class mxCellOverlay {
 
+        cursor:string;
+
         constructor(
             image?:mxImage,
             tooltip?:string,
@@ -30,8 +32,8 @@ declare module 'mxgraph' {
     }
 
     export class mxCell implements Layer, Connectable {
-        value: any;
         id:string;
+        value: any;
         geometry: mxGeometry;
 
         constructor(label?:string, geometry?:mxGeometry);
@@ -84,6 +86,12 @@ declare module 'mxgraph' {
          * @param connectable
          */
         setConnectable(connectable: boolean): void
+
+        /**
+         *
+         * @param b
+         */
+        setVisible(b: boolean) : void;
 
     }
 

@@ -20,7 +20,11 @@ declare module 'mxgraph' {
     }
 
     export module mxUtils {
+
+        function clone<T>(t:T):T;
+
         function isNode(cell:Layer) : boolean;
+
         function error(msg:string, code:number, we: boolean) : void;
 
         function createXmlDocument() : XmlDocument;
@@ -37,7 +41,9 @@ declare module 'mxgraph' {
 
 
     export class mxGraphHandler {
+
         graph:mxGraph;
+        guidesEnabled: boolean;
         getInitialCellForEvent(self:mxGraphHandler);
     }
 
@@ -55,13 +61,36 @@ declare module 'mxgraph' {
 
     type Bounds = mxGraphBounds;
 
+
     export class mxGraphModel {
+
+        /**
+         *
+         */
         endUpdate() : void;
+
+        /**
+         *
+         */
         beginUpdate(): void;
 
+        /**
+         *
+         * @param id
+         */
         getCell(id:string) : Layer;
 
+        /**
+         *
+         * @param cell
+         */
         getParent(cell:Layer) : Layer;
+
+        /**
+         *
+         * @param cell
+         */
+        isVertex(cell:mxCell) : boolean;
     }
 
 

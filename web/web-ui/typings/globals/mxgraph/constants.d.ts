@@ -10,6 +10,8 @@ declare module 'mxgraph' {
 
         static STYLE_FONTFAMILY         :string;
         static STYLE_FONTSTYLE          :string;
+        static STYLE_FILLCOLOR          :string;
+        static STYLE_FILLOPACITY        :string;
         static ALIGN_CENTER             :string;
         static ALIGN_TOP                :string;
         static ALIGN_MIDDLE             :string;

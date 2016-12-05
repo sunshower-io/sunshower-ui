@@ -89,6 +89,10 @@ export class TaskManager extends DefaultEventDispatcher {
 
 
 
+    remove(id:UUID) : boolean {
+        return this.graph.remove(id.value) != undefined;
+    }
+
     contains(id:UUID) : boolean {
         return this.graph.get(id.value) != null;
     }
@@ -106,7 +110,6 @@ export class TaskManager extends DefaultEventDispatcher {
 
 
     connect(sourceId:string, targetId:string) : boolean {
-        console.log(`SID2: ${sourceId}, ${targetId}`);
         let graph = this.graph,
             source = graph.get(sourceId),
             target = graph.get(targetId),
@@ -128,7 +131,7 @@ export class TaskManager extends DefaultEventDispatcher {
                 return false;
             }
         }
-        return source.data.connect(target.data);
+        return result;
     }
 
 }

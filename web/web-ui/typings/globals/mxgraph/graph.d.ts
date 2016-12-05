@@ -1,45 +1,97 @@
 declare module 'mxgraph' {
 
     export class mxConnectionHandler {
-        constructor(
-            graph:mxGraph,
-            connection?:(
-                source:mxCell,
-                target:mxCell,
-                style:mxStylesheet
-            ) => void);
+        constructor(graph: mxGraph,
+                    connection?: (source: mxCell,
+                                  target: mxCell,
+                                  style: mxStylesheet) => void);
 
 
-        createEdge(source:mxCell, target:mxCell, style:mxStylesheet);
-        connect(source:mxCell, target:mxCell, event:mxEvent, dropTarget:mxCell);
+        createEdge(source: mxCell, target: mxCell, style: mxStylesheet);
+
+        connect(source: mxCell, target: mxCell, event: mxEvent, dropTarget: mxCell);
     }
 
     export class mxGraphSelectionModel {
     }
 
     export class mxGraphBounds implements Cloneable<mxGraphBounds> {
-        x       :number;
-        y       :number;
-        width   :number;
-        height  :number;
+        x: number;
+        y: number;
+        width: number;
+        height: number;
+
         clone(): mxGraphBounds
     }
 
     export class mxGraphView {
         scale: number;
-        translate:mxGraphBounds;
-        isContainerEvent(event:Event) : boolean;
+        translate: mxGraphBounds;
+
+        getState(cell: Layer): mxCellState;
+
+        isContainerEvent(event: Event): boolean;
+    }
+
+
+    export interface MouseListener {
+
+        mouseMove(sender: mxGraph, event: mxMouseEvent): void;
+    }
+
+    type key = string | number;
+
+    type Style = {[key: string]: any};
+
+    export class mxCellState {
+        cell: mxCell;
+        style: Style;
+
+        shape: mxShape;
+        text: mxShape;
+    }
+
+    export class mxShape {
+        /**
+         *
+         */
+        redraw(): void;
+
+        /**
+         *
+         * @param state
+         */
+        apply(state: mxCellState): void;
+
+    }
+
+    export class mxMouseEvent {
+        getEvent(): mxEvent;
+
+        /**
+         *
+         */
+        getCell(): mxCell;
+
+        /**
+         *
+         */
+        getState(): mxCellState;
     }
 
     class mxGraph implements Connectable {
 
 
-        mouseListeners      : {[name:string]: any};
-        gridSize            : number;
-        foldingEnabled      : boolean;
-        container           : Element;
-        view                : mxGraphView;
-        connectionHandler   : mxConnectionHandler;
+        mouseListeners: {[name: string]: any};
+        gridSize: number;
+        container: Element;
+        view: mxGraphView;
+        model: mxGraphModel;
+
+
+        foldingEnabled: boolean;
+        isMouseDown: boolean;
+        connectionHandler: mxConnectionHandler;
 
         /**
          *
@@ -47,16 +99,15 @@ declare module 'mxgraph' {
          * @param model
          */
 
-        constructor(
-            container?:HTMLElement,
-            model?:mxGraphModel
-        );
+        constructor(container?: HTMLElement,
+                    model?: mxGraphModel);
+
 
         /**
          *
          */
 
-        createConnectionHandler() : mxConnectionHandler;
+        createConnectionHandler(): mxConnectionHandler;
 
         /**
          *
@@ -64,69 +115,72 @@ declare module 'mxgraph' {
 
         isConnectable(): boolean
 
-        getSelectionCells() : Layer[];
+        getSelectionCells(): Layer[];
 
         /**
          *
          * @param cell
          */
 
-        setSelectionCell(cell:Layer);
+        setSelectionCell(cell: Layer);
 
         /**
          *
          * @param cells
          */
 
-        removeCells(cells:mxCell[]);
+        removeCells(cells: mxCell[]);
 
 
+        getModel(): Model;
 
-        getModel() : Model;
 
-
-        groupCells(
-            group:Layer,
-            border:number,
-            cells:Layer[]
-        );
+        groupCells(group: Layer,
+                   border: number,
+                   cells: Layer[]);
 
         /**
          *
          */
 
-        getDefaultParent() : Layer;
+        getDefaultParent(): Layer;
 
         /**
          *
          */
-        getGraphBounds() : Bounds;
+        getGraphBounds(): Bounds;
 
         /**
          *
          * @param panning
          */
-        setPanning(panning:boolean);
+        setPanning(panning: boolean);
 
         /**
          *
          * @param cell
          */
-        selectCellForEvent(cell:mxCell);
+        selectCellForEvent(cell: mxCell);
 
         /**
          *
          * @param connectable
          */
 
-        setConnectable(connectable:boolean);
+        setConnectable(connectable: boolean);
 
         /**
          *
          * @param cell
          */
 
-        convertValueToString(cell:mxCell) : string;
+        convertValueToString(cell: mxCell): string;
+
+        /**
+         *
+         * @param listener
+         */
+        addMouseListener(listener: MouseListener): void;
 
 
         /**
@@ -134,10 +188,8 @@ declare module 'mxgraph' {
          * @param vertex
          * @param overlay
          */
-        addCellOverlay(
-            vertex:mxCell,
-            overlay:mxCellOverlay
-        ) : void;
+        addCellOverlay(vertex: mxCell,
+                       overlay: mxCellOverlay): void;
 
         /**
          *
@@ -145,10 +197,8 @@ declare module 'mxgraph' {
          * @param listener
          */
 
-        addListener(
-            key:string,
-            listener:(sender:any, event:any) => void
-        ) : boolean;
+        addListener(key: string,
+                    listener: (sender: any, event: any) => void): boolean;
 
         /**
          *
@@ -156,10 +206,8 @@ declare module 'mxgraph' {
          * @param listener
          */
 
-        hasListener(
-            key:string,
-            listener:(sender:any, event:any) => void
-        ) : boolean;
+        hasListener(key: string,
+                    listener: (sender: any, event: any) => void): boolean;
 
 
         /**
@@ -174,16 +222,14 @@ declare module 'mxgraph' {
          * @param style
          */
 
-        insertVertex(
-            parent:Layer,
-            id:string,
-            value: any,
-            x:number,
-            y:number,
-            width:number,
-            height:number,
-            style?:string
-        ) : Vertex;
+        insertVertex(parent: Layer,
+                     id: string,
+                     value: any,
+                     x: number,
+                     y: number,
+                     width: number,
+                     height: number,
+                     style?: string): Vertex;
 
         /**
          *
@@ -194,12 +240,15 @@ declare module 'mxgraph' {
          * @param target
          */
 
-        insertEdge(
-            parent:Layer,
-            id:string,
-            value:any,
-            source: Vertex,
-            target: Vertex
-        ) : Edge ;
+        insertEdge(parent: Layer,
+                   id: string,
+                   value: any,
+                   source: Vertex,
+                   target: Vertex): Edge ;
+
+        createConnectionHandler() : mxConnectionHandler;
+
+
+
     }
 }

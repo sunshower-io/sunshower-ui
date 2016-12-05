@@ -55,7 +55,9 @@ export class EditMenuItem extends MenuItem {
     event = mxEvent.CLICK;
 
     listener = (sender:any, event:mxEvent) : void => {
-
+        if(event.getProperty('cell') == this.cell) {
+            this.cell.setVisible(false);
+        }
     }
 
 }
@@ -70,7 +72,6 @@ export class CloseMenuItem extends MenuItem {
         if(event.getProperty('cell') == this.cell) {
             this.host.removeCells([this.cell.getParent()]);
             event.consume();
-        } else {
         }
     }
 }
@@ -92,13 +93,13 @@ export class TaskMenu {
         vertex.setAttribute('label', item.icon);
         vertex.setAttribute('constituent', '1');
 
-        if(!this.graph.hasListener(item.event, item.listener)) {
+        // if(!this.graph.hasListener(item.event, item.listener)) {
             this.graph.addListener(item.event, item.listener);
-        }
+        // }
         let result = this.graph.insertVertex(
             this.parent, null,
             vertex, 24 * this.count, 0, 24, 24,
-            'constituent=1;fontFamily=FontAwesome;fillColor=#f7f7f7;fontColor=#000000'
+            'constituent=1;fontFamily=FontAwesome;fontColor=#6b6b6b;fillOpacity=0'
         );
         item.cell = result;
         item.host = this.graph;

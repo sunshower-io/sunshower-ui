@@ -14,6 +14,11 @@ System.config({
     },
     "mxgraph/javascript/mxClient": {
       "format": "global"
+    },
+    "pnotify": {
+      "deps": [
+        "jquery"
+      ]
     }
   },
   map: {
@@ -50,6 +55,7 @@ System.config({
     "ocanvas": "npm:ocanvas@2.8.6",
     "plugin-text": "npm:systemjs-plugin-text@0.0.9",
     "pnotify": "github:sciactive/pnotify@3.0.0",
+    "pnotify.callbacks": "github:sciactive/pnotify@3.0.0/dist/pnotify.callbacks",
     "semantic-ui": "github:Semantic-Org/Semantic-UI@2.2.4",
     "text": "github:systemjs/plugin-text@0.0.9",
     "github:Semantic-Org/Semantic-UI@2.2.4": {

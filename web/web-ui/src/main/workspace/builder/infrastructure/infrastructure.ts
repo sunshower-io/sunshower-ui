@@ -19,7 +19,7 @@ import {InfrastructureDescriptor} from "../../../../task/infrastructure";
 
 
 @inject(HttpClient, TaskManager)
-export class Infrastructure extends AbstractGraph {
+export abstract class Infrastructure extends AbstractGraph {
 
     constructor(
         private client: HttpClient,
@@ -68,4 +68,6 @@ export class Infrastructure extends AbstractGraph {
         return false;
     }
 
+    protected removeCells(cells: mxCell[]) {
+    }
 }

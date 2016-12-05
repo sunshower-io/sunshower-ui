@@ -4,18 +4,16 @@ import {
     mxClient,
     mxUtils,
     mxRubberband,
-    mxGraphModel,
     mxConstants,
     mxGraphHandler,
-    mxGeometry,
-    mxConnectionHandler
 } from 'mxgraph';
 
-import {Kv} from "../../../utils/objects";
+import {Kv} from "utils/objects";
 
 import {Grid} from './grid';
 import {PLATFORM} from 'aurelia-pal';
-import {mxEvent} from "mxgraph";
+import {Builder} from './graph/builder';
+import {MenuHoverListener} from './listeners/hover-listener';
 
 export interface GraphContext {
     graph:mxGraph;
@@ -34,8 +32,7 @@ export abstract class AbstractGraph {
 
     protected container: HTMLElement;
 
-    protected grid: Grid;
-    protected graph: mxGraph;
+    protected graph: Builder;
 
     protected leftVisible: boolean = true;
     protected rightVisible: boolean = true;
@@ -57,29 +54,14 @@ export abstract class AbstractGraph {
             mxUtils.error('Browser is not supported!', 200, false);
         }
         else {
-            mxConstants.HANDLE_FILLCOLOR = '#239AE8';
-            mxConstants.HANDLE_STROKECOLOR = '#239AE8';
-            mxConstants.VERTEX_SELECTION_COLOR = '#0000FF';
-
-            mxRubberband.defaultOpacity = 1;
             // mxEvent.disableContextMenu(this.container);
-            let graph = new mxGraph(this.container, new mxGraphModel()),
-                select = new mxRubberband(graph),
-                grid = new Grid(graph);
-
-
-
-            this.configure(graph);
-            graph.gridSize = 40;
-            graph.setPanning(true);
-            graph.setConnectable(true);
-            this.grid = grid;
-            this.grid.draw();
-            this.graph = graph;
+            let graph = this.createBuilder();
             this.configureListeners();
+            this.graph = graph;
         }
     }
 
+    protected abstract createBuilder() : Builder;
 
     protected configureListeners() {
         PLATFORM.global.addEventListener('resize', this.resizeHandler);
@@ -93,7 +75,7 @@ export abstract class AbstractGraph {
     }
 
     resized() {
-        this.grid.draw();
+        this.graph.redraw();
     }
 
 
@@ -147,48 +129,8 @@ export abstract class AbstractGraph {
     }
 
 
-    protected configure(g: mxGraph): void {
-        let self = this;
-        g.foldingEnabled = false;
-        g.selectCellForEvent = function (cell: mxCell) {
-            if (cell.getAttribute('constituent') === '1') {
-                cell = this.model.getParent(cell);
-                let args = [cell, arguments[1]];
-                mxGraph.prototype.selectCellForEvent.apply(this, args);
-            } else {
-                mxGraph.prototype.selectCellForEvent.apply(this, arguments);
-            }
-        };
+    protected abstract removeCells(cells:mxCell[]);
 
-        g.convertValueToString = function (cell: mxCell) {
-            if (mxUtils.isNode(cell.value)) {
-                return cell.getAttribute('label');
-            }
-            return mxGraph.prototype.convertValueToString.apply(this, arguments);
-        };
-
-
-        let connect = mxConnectionHandler.prototype.connect;
-        mxConnectionHandler.prototype.connect = function(
-            source:mxCell,
-            target:mxCell,
-            event:mxEvent,
-            dropTarget:mxCell
-        ) {
-            if(self.onConnection(source, target, dropTarget)) {
-                return connect.apply(this, arguments);
-            } else {
-                return null;
-            }
-        };
-
-
-        mxGraph.prototype.hasListener = function (key: string,
-                                                  listener: (sender: any, event: any) => void): boolean {
-            let listeners = this.mouseListeners;
-            return listeners[key] || false;
-        }
-    }
 
     protected abstract onConnection(source:mxCell, target:mxCell, dropTarget:mxCell) : boolean;
 
