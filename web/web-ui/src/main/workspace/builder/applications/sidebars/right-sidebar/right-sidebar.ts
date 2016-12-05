@@ -1,16 +1,11 @@
-import {
-    Router,
-    RouterConfiguration
-} from "aurelia-router";
-
-import {bindable} from 'aurelia-framework';
+import {bindable} from "aurelia-framework";
 interface Component {
     name: string;
     icon: string;
     active?: boolean;
 }
 
-export class Right {
+export class RightSidebar {
 
     @bindable
     private active:Component;
