@@ -48,19 +48,22 @@ export class MenuHoverListener extends HoverListenerAdapter {
 
 
     mouseMove(sender: mxGraph, me: mxMouseEvent) {
-        if (
-            this.currentState != null &&
-            me.getState() == this.currentState
-        ) {
+        let cell = me.getCell();
+
+        if (this.currentState != null &&
+            me.getState() == this.currentState) {
             return;
         }
-        let graph = this.graph;
+
+        let graph = this.graph,
+            tmp = graph.view.getState(cell);
 
 
-        let tmp = graph.view.getState(me.getCell());
 
         if (graph.isMouseDown || (tmp != null &&
-            !graph.getModel().isVertex(tmp.cell))) {
+            !graph.getModel().isVertex(tmp.cell)) ||
+                cell.getAttribute('hover') === '0'
+        ) {
             tmp = null;
         }
 

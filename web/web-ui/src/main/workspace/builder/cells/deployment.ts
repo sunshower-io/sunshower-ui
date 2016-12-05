@@ -19,7 +19,36 @@ import {
     ApplicationMenuItem,
     MenuHandler
 } from "../menu/task-cell";
+import {Kv} from "../../../../utils/objects";
 
+
+export class AbstractDeploymentUnit extends AbstractVertex<Task> {
+
+    constructor(
+        registry:Registry,
+        task:Task,
+        parent:DeploymentUnit
+    ) {
+        super(registry, task.id, task, parent, 0, 24, 160, 136);
+        this.value = task.name;
+        this.setComponent(true);
+        this.setAttribute('hover', '0');
+    }
+
+    protected createStyle(): string {
+        return Kv.create(';')
+            .pair('shape', 'label')
+            .pair('imageWidth', 24)
+            .pair('imageHeight', 24)
+            .pair('fillOpacity', 0)
+            .pair('strokeColor', 'none')
+            .pair('verticalAlign', 'bottom')
+            .pair('spacingBottom', '24')
+            .pair('fontColor', '#000000')
+            .pair('fontStyle', mxConstants.FONT_BOLD)
+            .toString();
+    }
+}
 
 export class DeploymentUnit extends AbstractVertex<Task> implements MenuHandler {
     /**
@@ -49,19 +78,18 @@ export class DeploymentUnit extends AbstractVertex<Task> implements MenuHandler 
         this.applicationDeployment = new ApplicationDeploymentUnit(
             registry,
             task,
-            this,
-            x,
-            y
+            this
         );
 
         this.infrastructureDeployment = new InfrastructureDeploymentUnit(
-            registry, task, this, x, y
+            registry, task, this
         );
         this.infrastructureDeployment.setVisible(false);
 
         this.configurationDeployment = new ConfigurationDeploymentUnit(
-            registry, task, this, x, y
+            registry, task, this
         );
+
         this.configurationDeployment.setVisible(false);
 
     }
@@ -101,19 +129,8 @@ export class DeploymentUnit extends AbstractVertex<Task> implements MenuHandler 
     }
 }
 
-export class ApplicationDeploymentUnit extends AbstractVertex<Task> {
+export class ApplicationDeploymentUnit extends AbstractDeploymentUnit {
 
-    constructor(
-        registry:Registry,
-        task:Task,
-        parent:DeploymentUnit,
-        x:number,
-        y:number
-    ) {
-        super(registry, task.id, task, parent, 0, 24, 160, 136);
-        this.value = task.name;
-        this.setComponent(true);
-    }
 
 
 
@@ -131,32 +148,26 @@ export class ApplicationDeploymentUnit extends AbstractVertex<Task> {
     }
 }
 
-export class InfrastructureDeploymentUnit extends AbstractVertex<Task> {
+export class InfrastructureDeploymentUnit extends AbstractDeploymentUnit {
 
     constructor(
         registry:Registry,
         task:Task,
-        parent:DeploymentUnit,
-        x:number,
-        y:number
+        parent:DeploymentUnit
     ) {
-        super(registry, task.id, task, parent, 0, 24, 160, 136);
+        super(registry, task, parent);
         this.value = "Infrastructure";
-        this.setComponent(true);
     }
 }
 
-export class ConfigurationDeploymentUnit extends AbstractVertex<Task> {
+export class ConfigurationDeploymentUnit extends AbstractDeploymentUnit {
 
     constructor(
         registry:Registry,
         task:Task,
-        parent:DeploymentUnit,
-        x:number,
-        y:number
+        parent:DeploymentUnit
     ) {
-        super(registry, task.id, task, parent, 0, 24, 160, 136);
+        super(registry, task, parent);
         this.value = "Configuration";
-        this.setComponent(true);
     }
 }

@@ -8,6 +8,7 @@ import {
     mxEvent,
     mxStylesheet
 } from "mxgraph";
+import {createFullOverrideContext} from "aurelia-templating-resources";
 
 
 export interface MenuHandler {
@@ -140,6 +141,7 @@ export class TaskMenu {
 
         vertex.setAttribute('label', item.icon);
         vertex.setAttribute('constituent', '1');
+        vertex.setAttribute('rresize', '0');
 
         // if(!this.graph.hasListener(item.event, item.listener)) {
         this.graph.addListener(item.event, item.listener);

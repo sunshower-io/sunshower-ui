@@ -18,5 +18,6 @@ declare module 'mxgraph' {
         static ALIGN_LEFT               :string;
         static DEFAULT_FONTSTYLE        :string;
         static FONT_BOLD                :number;
+        static OUTLINE_COLOR            :string;
     }
 }

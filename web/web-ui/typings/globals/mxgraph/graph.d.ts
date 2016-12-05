@@ -106,6 +106,34 @@ declare module 'mxgraph' {
                     model?: mxGraphModel);
 
 
+        isRecursiveResize(state:mxCellState) : boolean;
+
+        /**
+         *
+         * @param cell
+         * @param dx
+         * @param dy
+         * @param recurse
+         */
+        scaleCell(
+            cell:Layer,
+            dx:number,
+            dy:number,
+            recurse:boolean
+        );
+
+        /**
+         *
+         * @param cell
+         * @param bounds
+         * @param recurse
+         */
+        resizeCell(
+            cell:mxCell,
+            bounds:mxRectangle,
+            recurse:boolean
+        ) : Layer;
+
         /**
          *
          */
@@ -148,12 +176,20 @@ declare module 'mxgraph' {
 
         setSelectionCell(cell: Layer);
 
+
         /**
          *
          * @param cells
          */
 
         removeCells(cells: mxCell[]);
+
+
+        /**
+         *
+         * @param cell
+         */
+        getPreferredSizeForCell(cell:Layer) : mxRectangle;
 
 
         getModel(): Model;

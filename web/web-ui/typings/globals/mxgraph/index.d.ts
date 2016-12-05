@@ -66,6 +66,17 @@ declare module 'mxgraph' {
 
         /**
          *
+         * @param parent
+         * @param index
+         */
+        getChildAt(parent:Layer, index:number) : Layer;
+        /**
+         *
+         * @param cell
+         */
+        getGeometry(cell:Layer) : mxGeometry;
+        /**
+         *
          */
         endUpdate() : void;
 
@@ -73,6 +84,8 @@ declare module 'mxgraph' {
          *
          */
         beginUpdate(): void;
+
+        getChildCount(cell:Layer) : number;
 
         /**
          *

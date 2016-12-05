@@ -13,7 +13,13 @@ declare module 'mxgraph' {
         y: number;
     }
 
+    export class mxRectangle {
+
+    }
+
     export class mxGeometry {
+        width:number;
+        height:number;
         relative:boolean;
 
         constructor(

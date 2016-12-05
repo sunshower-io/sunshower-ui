@@ -5,6 +5,7 @@ import {
     mxGraphModel,
     mxRubberband,
     mxConstants,
+    mxRectangle,
     mxConnectionHandler
 } from "mxgraph";
 
@@ -13,6 +14,8 @@ import {TaskManager, Task} from "task/tasks";
 import {Grid} from "../grid";
 import {MenuHoverListener} from "../listeners/hover-listener";
 import {mxGraphHandler} from "mxgraph";
+import {Layer} from "mxgraph";
+import {mxGeometry} from "mxgraph";
 
 mxConstants.HANDLE_FILLCOLOR = '#239AE8';
 mxConstants.HANDLE_STROKECOLOR = '#239AE8';
@@ -73,6 +76,40 @@ export class Builder extends mxGraph {
         }
     }
 
+    resizeChildCells(cell:Layer, geometry:mxGeometry) {
+        let geo = this.model.getGeometry(cell),
+            dx = geometry.width / geo.width,
+            dy = geometry.height / geo.height,
+            childCount = this.model.getChildCount(cell);
+
+        for (let i = 0; i < childCount; i++) {
+            let child = this.model.getChildAt(cell, i);
+            if(child.getAttribute('rresize') !== '0') {
+                this.scaleCell(
+                    this.model.getChildAt(cell, i),
+                    dx,
+                    dy,
+                    true
+                );
+            }
+        }
+    }
+
+    /**
+     *
+     * @param cell
+     * @returns {any}
+     */
+
+
+    getPreferredSizeForCell(cell: Layer): mxRectangle {
+        alert("Cool");
+        if(cell.getAttribute('rresize') === '0') {
+            return cell.geometry;
+        } else {
+            return super.getPreferredSizeForCell(cell);
+        }
+    }
 
     removeCells(cells: mxCell[]) {
         return super.removeCells(cells);
