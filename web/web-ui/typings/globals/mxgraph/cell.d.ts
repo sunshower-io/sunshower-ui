@@ -32,9 +32,9 @@ declare module 'mxgraph' {
     }
 
     export class mxCell implements Layer, Connectable {
-        id:string;
-        value: any;
-        geometry: mxGeometry;
+        id              :string;
+        value           :any;
+        geometry        :mxGeometry;
 
         constructor(label?:string, geometry?:mxGeometry);
 
@@ -62,10 +62,16 @@ declare module 'mxgraph' {
 
         /**
          *
+         * @param vertex
+         */
+        setVertex(vertex:boolean) : void;
+
+        /**
+         *
          * @param style
          */
 
-        setStyle(style:mxStylesheet) : void;
+        setStyle(style:string) : void;
 
 
         /**
@@ -93,6 +99,16 @@ declare module 'mxgraph' {
          */
         setVisible(b: boolean) : void;
 
+
+        /**
+         *
+         */
+        isVertex() : boolean;
+
+        /**
+         *
+         */
+        isEdge() : boolean;
     }
 
     export class mxEdge extends mxCell {

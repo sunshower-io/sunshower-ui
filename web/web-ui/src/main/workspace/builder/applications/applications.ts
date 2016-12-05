@@ -18,11 +18,6 @@ import {
     ObservedEvent
 } from "../../../../utils/observer";
 
-import {
-    TaskMenu,
-    EditMenuItem,
-    CloseMenuItem
-} from "main/workspace/builder/menu/task-cell";
 
 import {inject} from 'aurelia-framework';
 import {HttpClient} from "aurelia-fetch-client";
@@ -34,9 +29,6 @@ import {
     mxGraph,
     Layer,
     mxCell,
-    mxCellOverlay,
-    mxImage,
-    mxEvent
 } from "mxgraph";
 
 import {
@@ -50,17 +42,20 @@ import {UUID} from "../../../../utils/uuid";
 import {
     Builder, NavigationAware
 } from '../builder';
-import {mxConstants} from "mxgraph";
 
 import {Builder as GBuilder} from '../graph/builder'
+import {Registry} from 'utils/registry';
+import {DeploymentUnit} from "../cells/deployment";
 
-@inject(HttpClient, TaskManager, Builder)
+@inject(HttpClient, TaskManager, Builder, Registry)
 export class Applications extends AbstractGraph implements Listener, NavigationAware {
 
     constructor(private client: HttpClient,
                 private taskManager: TaskManager,
-                private parent: Builder,) {
-        super();
+                private parent: Builder,
+                registry:Registry
+    ) {
+        super(registry);
         taskManager.addEventListener('task-added', this);
         taskManager.addEventListener('cycle-detected', this);
     }
@@ -103,8 +98,8 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
     }
 
 
-    private computePosition() : JQueryCoordinates {
-        if(this.rightVisible) {
+    private computePosition(): JQueryCoordinates {
+        if (this.rightVisible) {
             let right = $(this.rightSidebar).children(':first-child'),
                 rightOffset = $(right).offset();
             return {
@@ -116,7 +111,7 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
                 width = $(this.container).width();
             return {
                 top: offset.top + 20,
-                left : width - 320
+                left: width - 320
             }
         }
     }
@@ -164,87 +159,89 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
     }
 
 
-    private createSource(task:Task, parent:Layer) : mxCell {
-        let source = this.graph.insertVertex(
+    private createSource(task: Task, parent: Layer): mxCell {
+        let cell = new DeploymentUnit (
+            this.registry,
+            task,
             parent,
-            task.id.value,
-            task.name,
             task.location.x,
             task.location.y,
-            160,
-            160,
-            super.createStyle(),
         );
+        return cell.addTo(this.graph);
 
-        let image = new mxImage(super.url(task.icon), 40, 40),
-            iconOverlay = new mxCellOverlay(
-                image,
-                'frap',
-                mxConstants.ALIGN_CENTER,
-                mxConstants.ALIGN_MIDDLE
-            ),
-            controlImage = new mxImage(
-                'assets/sui/themes/hasli/assets/images/icons/provider/generic/single-node-instance.svg',
-                20, 20
-            ),
-            controlOverlay = new mxCellOverlay(
-                controlImage,
-                'frap',
-                mxConstants.ALIGN_LEFT,
-                mxConstants.ALIGN_TOP,
-            );
-        controlOverlay.addListener(
-            mxEvent.CLICK, (sender, event) => {
-        });
-
-        controlOverlay.cursor = 'pointer';
-
-        iconOverlay.addListener(
-            mxEvent.CLICK,
-            (sender: any, event: any): void => {
-                let cell = event.getProperty('cell');
-                this.graph.setSelectionCell(cell);
-            });
-
-
-        this.graph.addCellOverlay(source, iconOverlay);
-        // this.graph.addCellOverlay(source, controlOverlay);
-
-        let taskMenu = new TaskMenu(this.graph, source);
-        taskMenu.add(new CloseMenuItem());
-        taskMenu.add(new EditMenuItem());
-        return source;
+        // let source = this.graph.insertVertex(
+        //     parent,
+        //     task.id.value,
+        //     task.name,
+        //     task.location.x,
+        //     task.location.y,
+        //     160,
+        //     160,
+        //     super.createStyle(),
+        // );
+        //
+        //     controlImage = new mxImage(
+        //         'assets/sui/themes/hasli/assets/images/icons/provider/generic/single-node-instance.svg',
+        //         20, 20
+        //     ),
+        //     controlOverlay = new mxCellOverlay(
+        //         controlImage,
+        //         'frap',
+        //         mxConstants.ALIGN_LEFT,
+        //         mxConstants.ALIGN_TOP,
+        //     );
+        // controlOverlay.addListener(
+        //     mxEvent.CLICK, (sender, event) => {
+        // });
+        //
+        // controlOverlay.cursor = 'pointer';
+        //
+        // iconOverlay.addListener(
+        //     mxEvent.CLICK,
+        //     (sender: any, event: any): void => {
+        //         let cell = event.getProperty('cell');
+        //         this.graph.setSelectionCell(cell);
+        //     });
+        //
+        //
+        // this.graph.addCellOverlay(source, iconOverlay);
+        // // this.graph.addCellOverlay(source, controlOverlay);
+        //
+        // let taskMenu = new TaskMenu(this.graph, source);
+        // taskMenu.add(new CloseMenuItem());
+        // taskMenu.add(new EditMenuItem());
+        // return source;
     }
 
     private insertTask(graph: mxGraph, parent: Layer, task: Task) {
-        let source = this.createSource(task, parent);
-
-        if (task.successors) {
-            let model = this.graph.getModel();
-            for (let skey in task.successors) {
-                let successor = task.successors[skey],
-                    target: mxCell = model.getCell(skey);
-                if (!target) {
-                    target = graph.insertVertex(
-                        parent,
-                        successor.id.value,
-                        successor.name,
-                        successor.location.x,
-                        successor.location.y,
-                        120,
-                        80,
-                        super.createStyle(),
-                    );
-                }
-                graph.insertEdge(
-                    parent,
-                    UUID.randomUUID().value,
-                    null,
-                    source,
-                    target
-                );
-            }
-        }
+        this.createSource(task, parent);
+        //
+        // if (task.successors) {
+        //     let model = this.graph.getModel();
+        //     for (let skey in task.successors) {
+        //         let successor = task.successors[skey],
+        //             target: mxCell = model.getCell(skey);
+        //         if (!target) {
+        //             target = graph.insertVertex(
+        //                 parent,
+        //                 successor.id.value,
+        //                 successor.name,
+        //                 successor.location.x,
+        //                 successor.location.y,
+        //                 120,
+        //                 80,
+        //                 super.createStyle(),
+        //             );
+        //         }
+        //         graph.insertEdge(
+        //             parent,
+        //             UUID.randomUUID().value,
+        //             null,
+        //             source,
+        //             target
+        //         );
+        //     }
+        // }
 
 
     }
@@ -260,7 +257,7 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
     }
 
     protected removeCells(cells: mxCell[]) {
-        for(let cell of cells) {
+        for (let cell of cells) {
             this.taskManager.remove(UUID.fromString(cell.id));
         }
     }

@@ -87,6 +87,7 @@ declare module 'mxgraph' {
         container: Element;
         view: mxGraphView;
         model: mxGraphModel;
+        recursiveResize:boolean;
 
 
         foldingEnabled: boolean;
@@ -114,6 +115,27 @@ declare module 'mxgraph' {
          */
 
         isConnectable(): boolean
+
+        /**
+         *
+         * @param cell
+         * @param parent
+         * @param index
+         * @param source
+         * @param target
+         */
+
+        addCell(
+            cell:Layer,
+            parent:Layer,
+            index?:number,
+            source?:Layer,
+            target?:Layer
+        ) : Layer ;
+
+        /**
+         *
+         */
 
         getSelectionCells(): Layer[];
 

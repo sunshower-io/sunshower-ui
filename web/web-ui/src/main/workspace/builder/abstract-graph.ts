@@ -10,10 +10,9 @@ import {
 
 import {Kv} from "utils/objects";
 
-import {Grid} from './grid';
 import {PLATFORM} from 'aurelia-pal';
 import {Builder} from './graph/builder';
-import {MenuHoverListener} from './listeners/hover-listener';
+import {Registry} from "utils/registry";
 
 export interface GraphContext {
     graph:mxGraph;
@@ -30,9 +29,10 @@ export interface GraphModificationEvent {
 export abstract class AbstractGraph {
 
 
-    protected container: HTMLElement;
 
     protected graph: Builder;
+
+    protected container: HTMLElement;
 
     protected leftVisible: boolean = true;
     protected rightVisible: boolean = true;
@@ -41,7 +41,7 @@ export abstract class AbstractGraph {
     protected leftSidebar: HTMLElement;
     protected rightSidebar: HTMLElement;
 
-    constructor() {
+    constructor(public registry:Registry) {
 
     }
 
@@ -134,18 +134,6 @@ export abstract class AbstractGraph {
 
     protected abstract onConnection(source:mxCell, target:mxCell, dropTarget:mxCell) : boolean;
 
-    protected createStyle(): string {
-        return Kv.create(';')
-            .pair('shape', 'label')
-            .pair('imageWidth', 24)
-            .pair('imageHeight', 24)
-            .pair('fillOpacity', 0)
-            .pair('verticalAlign', 'bottom')
-            .pair('spacingBottom', '40')
-            .pair('fontColor', '#000000')
-            .pair('fontStyle', mxConstants.FONT_BOLD)
-            .toString();
-    }
 
     protected url(url:string) : string {
         return `/hasli/api/v1/storage/s3/images/${url}`;

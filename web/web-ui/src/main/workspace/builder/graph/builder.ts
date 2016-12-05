@@ -9,7 +9,7 @@ import {
 } from "mxgraph";
 
 import {ConnectionHandler} from './connection-handler';
-import {TaskManager} from "task/tasks";
+import {TaskManager, Task} from "task/tasks";
 import {Grid} from "../grid";
 import {MenuHoverListener} from "../listeners/hover-listener";
 import {mxGraphHandler} from "mxgraph";
@@ -21,15 +21,12 @@ mxConstants.VERTEX_SELECTION_COLOR = '#0000FF';
 mxRubberband.defaultOpacity = 1;
 
 
-
 export class Builder extends mxGraph {
 
-    private grid:Grid;
+    private grid: Grid;
 
-    constructor(
-        public container:HTMLElement,
-        public taskManager: TaskManager
-    ) {
+    constructor(public container: HTMLElement,
+                public taskManager: TaskManager) {
         super(container, new mxGraphModel());
         new mxRubberband(this);
         this.setPanning(true)
@@ -39,7 +36,14 @@ export class Builder extends mxGraph {
         this.grid = new Grid(this);
         this.grid.draw();
         this.addMouseListener(new MenuHoverListener(this));
+        this.recursiveResize = true;
         mxGraphHandler.prototype.guidesEnabled = true;
+    }
+
+    public addNode(node:Node): void {
+
+
+
     }
 
 
@@ -47,13 +51,13 @@ export class Builder extends mxGraph {
         return new ConnectionHandler(this);
     }
 
-    redraw() : void {
+    redraw(): void {
         this.grid.draw();
     }
 
 
     convertValueToString(cell: mxCell): string {
-        if(mxUtils.isNode(cell.value)) {
+        if (mxUtils.isNode(cell.value)) {
             return cell.getAttribute('label');
         }
         return super.convertValueToString(cell);

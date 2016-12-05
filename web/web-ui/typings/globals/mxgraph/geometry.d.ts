@@ -16,5 +16,12 @@ declare module 'mxgraph' {
     export class mxGeometry {
         relative:boolean;
 
+        constructor(
+            x:number,
+            y:number,
+            width:number,
+            height:number
+        );
+
     }
 }

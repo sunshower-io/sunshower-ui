@@ -25,7 +25,7 @@ export abstract class Infrastructure extends AbstractGraph {
         private client: HttpClient,
         private taskManager: TaskManager
     ) {
-        super();
+        super(null);
     }
 
 

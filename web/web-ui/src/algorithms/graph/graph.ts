@@ -1,6 +1,5 @@
-
 export interface Traversal<T, U> {
-    run(g:Graph<U>) : T;
+    run(g: Graph<U>): T;
 }
 
 
@@ -11,34 +10,44 @@ enum Relationship {
 
 export class Edge<T> {
 
-    constructor(
-        public source:Node<T>,
-        public target:Node<T>,
-        public relationship?:Relationship
-    ) {
+    constructor(public source: Node<T>,
+                public target: Node<T>,
+                public relationship?: Relationship) {
 
     }
 }
 
 
-export class Node<T> {
-    adjacencies: {[key:string]:Edge<T>};
+export interface Vertex<T> {
 
-    constructor(public id:string, public data?:T) {
+    data?: T;
+    id: string;
+
+    add(edge: Edge<T>): boolean;
+
+    remove(edge: Node<T>): boolean;
+
+
+}
+
+export class Node<T> implements Vertex<T> {
+    adjacencies: {[key: string]: Edge<T>};
+
+    constructor(public id: string, public data?: T) {
         this.adjacencies = {};
     }
 
-    add(edge:Edge<T>) : boolean {
-        if(this.adjacencies[edge.target.id]) {
+    add(edge: Edge<T>): boolean {
+        if (this.adjacencies[edge.target.id]) {
             return false;
         }
         this.adjacencies[edge.target.id] = edge;
         return true;
     }
 
-    remove(target:Node<T> ) : boolean {
+    remove(target: Node<T>): boolean {
         let t = this.adjacencies[target.id];
-        if(t) {
+        if (t) {
             delete this.adjacencies[target.id];
             return true;
         }
@@ -46,9 +55,9 @@ export class Node<T> {
     }
 
 
-    toString() : string {
+    toString(): string {
         let result = `${this.id} -> `;
-        for(let k in this.adjacencies) {
+        for (let k in this.adjacencies) {
             result += k + ',';
         }
         return result;
@@ -57,32 +66,30 @@ export class Node<T> {
 
 export class Graph<T> {
 
-    public nodes:{[key:string]:Node<T>};
+    public nodes: {[key: string]: Node<T>};
 
-    add(node:Node<T>) : boolean {
+    add(node: Node<T>): boolean {
         this.check();
         this.nodes[node.id] = node;
         return true;
     }
 
-    remove(id:string) : Node<T> {
+    remove(id: string): Node<T> {
         let result = this.nodes[id];
         delete this.nodes[id];
         return result;
     }
 
-    disconnect(s:Node<T>, t:Node<T>) : boolean {
+    disconnect(s: Node<T>, t: Node<T>): boolean {
         this.check();
         let source = this.nodes[s.id] || s,
             target = this.nodes[t.id] || t;
         return source.remove(target);
     }
 
-    connect(
-        s:Node<T>,
-        t:Node<T>,
-        relationship?:Relationship
-    ) : boolean {
+    connect(s: Node<T>,
+            t: Node<T>,
+            relationship?: Relationship): boolean {
         this.check();
         let source = this.nodes[s.id] || s,
             target = this.nodes[t.id] || t;
@@ -93,25 +100,25 @@ export class Graph<T> {
         return source.add(edge);
     }
 
-    get(id:string) : Node<T> {
+    get(id: string): Node<T> {
         return this.nodes[id];
     }
 
-    getNodes() : Node<T>[] {
+    getNodes(): Node<T>[] {
         let result = [];
-        for(let k in this.nodes) {
+        for (let k in this.nodes) {
             result.push(this.nodes[k]);
         }
         return result;
     }
 
 
-    neighbors(source:Node<T>) : Node<T>[] {
+    neighbors(source: Node<T>): Node<T>[] {
         let s = this.nodes[source.id];
-        if(s) {
+        if (s) {
             let neighbors = s.adjacencies,
                 results = [];
-            for(let key in neighbors) {
+            for (let key in neighbors) {
                 results.push(neighbors[key].target);
             }
             return results;
@@ -121,14 +128,14 @@ export class Graph<T> {
     }
 
     private check() {
-        if(!this.nodes) {
+        if (!this.nodes) {
             this.nodes = {};
         }
     }
 
-    toString() : string {
+    toString(): string {
         let result = '';
-        for(let key in this.nodes) {
+        for (let key in this.nodes) {
             let node = this.nodes[key];
             result += "\n\t" + node.toString();
         }
