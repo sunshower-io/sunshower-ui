@@ -1,10 +1,9 @@
 template
-    require(from="main/workspace/builder/applications/sidemenus/left-menu")
-    require(from="./sidemenus/right/right")
-    .row.column.workbench(ref="container", style="height:100%;" )
-    left-menu(ref="leftSidebar")
-    right(
+    require(from="./sidebars/left-sidebar/left-sidebar")
+    require(from="./sidebars/right-sidebar/right-sidebar")
+    .row.column.workbench(ref="container")
+    left-sidebar(ref="leftSidebar")
+    right-sidebar(
         ref="rightSidebar",
         add-image.delegate="addTask($event)",
         palette-event.delegate="modifyGraph($event)")
-    //right-menu(ref="rightSidebar", add-image.delegate="addTask($event)")
