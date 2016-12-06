@@ -7,8 +7,8 @@ template
                     click.delegate="setActive(component)"
                 ) ${component.name}
 
-        compose(view-model='./${active.ref}')
+        compose(view-model='./${active.ref}', model.bind="task")
         .actions
             .ui.basic.green.button(click.delegate="saveConfiguration()") Save
-            .ui.basic.red.button(click.delegate="cool()") Cancel
+            .ui.basic.red.button(click.delegate="cancel()") Cancel
 

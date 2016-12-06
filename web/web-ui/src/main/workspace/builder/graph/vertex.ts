@@ -1,4 +1,3 @@
-import {Task} from "task/tasks";
 
 import {UUID} from "utils/uuid";
 import {Builder} from './builder';
@@ -19,7 +18,7 @@ import {Kv} from "utils/objects";
 import {Registry} from "utils/registry";
 import {mxCellOverlay} from "mxgraph";
 
-export class AbstractVertex<T extends Task> extends mxCell implements Vertex<T> {
+export class AbstractVertex<T> extends mxCell implements Vertex<T> {
 
 
 
@@ -97,6 +96,8 @@ export class AbstractVertex<T extends Task> extends mxCell implements Vertex<T> 
             .pair('fillOpacity', 0)
             .pair('verticalAlign', 'bottom')
             .pair('spacingBottom', '24')
+            .pair('verticalLabelPosition', mxConstants.ALIGN_CENTER)
+            .pair('labelPosition', mxConstants.ALIGN_MIDDLE)
             .pair('fontColor', '#000000')
             .pair('fontStyle', mxConstants.FONT_BOLD)
             .toString();

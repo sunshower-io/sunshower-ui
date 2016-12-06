@@ -72,7 +72,6 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
         super.attached();
         this.insertTasks(this.taskManager.getTasks());
         this.parent.set(this);
-        this.infrastructureDialog.show();
     }
 
 
@@ -100,7 +99,6 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
                         y: details.location.y - offset
                     },
                 );
-                task.addDeploymentTarget(new InfrastructureDescriptor());
                 this.taskManager.addTask(task);
             });
     }
@@ -127,6 +125,7 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
 
 
     addInfrastructure(e:Event) : void {
+        this.infrastructureDialog.task = (<any>e).detail;
         this.infrastructureDialog.show();
     }
 

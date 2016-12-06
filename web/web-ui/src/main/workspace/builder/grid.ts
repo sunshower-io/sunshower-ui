@@ -23,7 +23,7 @@ export class Grid {
             gridSize = 0,
             width = 0,
             height = 0,
-            translate = new mxPoint(),
+            translate = {x:null, y:null},
             context = this.canvas.getContext('2d'),
             canvas = this.canvas,
             isContainerEvent = mxGraphView.prototype.isContainerEvent;

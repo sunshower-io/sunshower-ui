@@ -38,10 +38,10 @@ export abstract class Infrastructure extends AbstractGraph {
         this.graph.getModel().beginUpdate();
         try {
             for (let task of tasks) {
-                for (let deployment of task.deploymentTargets) {
-                    this.addDeploymentTarget(task, deployment);
-
-                }
+                // for (let deployment of task.deploymentTargets) {
+                //     this.addDeploymentTarget(task, deployment);
+                //
+                // }
             }
         } finally {
             this.graph.getModel().endUpdate();

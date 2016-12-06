@@ -30,11 +30,12 @@ export interface Point {
     y:number;
 }
 
-export class Task {
+export class Task extends DefaultEventDispatcher {
 
-    public deploymentTargets: InfrastructureDescriptor[];
 
     public id: UUID;
+
+    public deploymentTarget: InfrastructureDescriptor;
 
     constructor (
         public icon: string,
@@ -43,15 +44,8 @@ export class Task {
         public subtasks?: Task[],
         public successors?: {[id:string]:Task}
     ) {
+        super();
         this.id = UUID.randomUUID();
-    }
-
-    addDeploymentTarget(target:InfrastructureDescriptor) : Task {
-        if(!this.deploymentTargets) {
-            this.deploymentTargets = [];
-        }
-        this.deploymentTargets.push(target);
-        return this;
     }
 
 

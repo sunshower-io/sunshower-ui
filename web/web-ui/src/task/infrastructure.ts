@@ -1,8 +1,11 @@
 import {Task} from './tasks';
 
+import {OperatingSystem} from "model/os";
+
 
 export class InfrastructureDescriptor {
-    type:string;
-
-    tasks:Task[];
+    cpu                 : number;
+    disk                : number;
+    memory              : number;
+    operatingSystem     : OperatingSystem;
 }

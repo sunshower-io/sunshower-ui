@@ -1,4 +1,4 @@
-template
+template(bindable="task")
     form
         .ui.form
             .field
@@ -6,15 +6,15 @@ template
                     input(
                     type="text",
                     placeholder="Configuration Name",
-                    value.bind="configuration.name"
+                    value.bind="task.name"
                 )
             .field
-                .ui.fluid.search.selection.dropdown
+                .ui.fluid.search.selection.dropdown(ref="osSelect")
                     input(type='hidden', name='operatingSystem')
                     i.dropdown.icon
                     .default.text Select Operating System
                     .menu
-                        .item(data.value='os.id' repeat.for='os of operatingSystems')
+                        .item(repeat.for='os of operatingSystems' data-value="${os.id}")
                             image.ui.image(src='assets/sui/themes/hasli/assets/images/logos/os/${os.icon}')
                             |  ${os.name} (${os.family})
 
@@ -24,7 +24,11 @@ template
 
             .field
                 label CPUs
-                input(type='number', placeholder='Number of CPUs')
+                input(
+                    type='number',
+                    placeholder='Number of CPUs',
+                    value.bind="task.deploymentTarget.cpu"
+                )
             .field
                 label Memory
                 .fields
@@ -32,7 +36,7 @@ template
                         input(
                         type='number',
                         placeholder='Number',
-                        value.bind="memoryProfile.capacity"
+                        value.bind="task.deploymentTarget.memory"
                         )
                     .eight.wide.field
                         select
@@ -49,7 +53,7 @@ template
                         input(
                         type='number',
                         placeholder='Number',
-                        value.bind="storageProfile.capacity"
+                        value.bind="task.deploymentTarget.disk"
                         )
                     .eight.wide.field
                         select

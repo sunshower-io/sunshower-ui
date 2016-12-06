@@ -1,8 +1,12 @@
+import {UUID} from "../utils/uuid";
 export class OperatingSystem {
-    constructor(private name: string,
-                private icon: string,
-                private family: string,
-                private version: string,) {
+    public readonly id:UUID;
+    constructor(public name?: string,
+                public icon?: string,
+                public family?: string,
+                public version?: string
+    ) {
+        this.id = UUID.randomUUID();
     }
 }
 
@@ -56,6 +60,9 @@ export class OperatingSystemService {
         ));
     }
 
+    get(id:UUID) : OperatingSystem {
+        return this.operatingSystems.find(f => f.id.value === id.value);
+    }
 
     list(): OperatingSystem[] {
         return this.operatingSystems;

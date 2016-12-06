@@ -90,11 +90,18 @@ declare module 'mxgraph' {
         recursiveResize:boolean;
 
 
+
         foldingEnabled: boolean;
         isMouseDown: boolean;
         connectionHandler: mxConnectionHandler;
 
         refresh(cell?:Layer) : void;
+
+        /**
+         *
+         * @param labels
+         */
+        setHtmlLabels(labels:boolean) : void;
 
         /**
          *
@@ -104,6 +111,16 @@ declare module 'mxgraph' {
 
         constructor(container?: HTMLElement,
                     model?: mxGraphModel);
+
+        /**
+         *
+         * @param cell
+         * @param overlay
+         */
+        removeCellOverlay(
+            cell:Layer,
+            overlay:mxCellOverlay
+        ) : mxCellOverlay;
 
 
         isRecursiveResize(state:mxCellState) : boolean;

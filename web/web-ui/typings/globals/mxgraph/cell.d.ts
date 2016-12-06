@@ -23,7 +23,7 @@ declare module 'mxgraph' {
             tooltip?:string,
             align?:  string,
             valign?: string,
-            offset?: number,
+            offset?: mxPoint,
             cursor?: string
         );
 

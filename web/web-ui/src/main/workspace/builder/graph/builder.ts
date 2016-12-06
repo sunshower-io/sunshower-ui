@@ -35,6 +35,7 @@ export class Builder extends mxGraph {
         this.setPanning(true)
         this.setConnectable(true);
         this.foldingEnabled = false;
+        this.setHtmlLabels(true);
         this.gridSize = 40;
         this.grid = new Grid(this);
         this.grid.draw();

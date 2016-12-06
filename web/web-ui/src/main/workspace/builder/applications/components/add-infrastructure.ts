@@ -4,6 +4,7 @@ import {
     bindable,
     customElement
 } from "aurelia-framework";
+import {Task} from "task/tasks";
 
 interface Component {
     name: string;
@@ -11,7 +12,6 @@ interface Component {
     active?: boolean;
     ref:  string;
 }
-
 @customElement('add-infrastructure')
 export class AddInfrastructure {
 
@@ -20,7 +20,13 @@ export class AddInfrastructure {
 
     @bindable
     components: Component[];
+
+    @bindable
+    task: Task;
+
+
     private element:HTMLElement;
+
 
     constructor() {
         this.configure([{
@@ -42,6 +48,26 @@ export class AddInfrastructure {
     }
 
     hide() : void {
+        this.task.dispatch('on-change', {
+            target:this.task
+        });
+        this.task = null;
+        $(this.element).modal('hide');
+    }
+
+    saveConfiguration() : void {
+        if(this.task) {
+            this.task.dispatch('on-change', {
+                target:this.task
+            });
+            this.task = null;
+        }
+        $(this.element).modal('hide');
+    }
+
+    cancel() : void {
+        $(this.element).modal('hide');
+        this.task = null;
     }
 
 
@@ -52,6 +78,7 @@ export class AddInfrastructure {
         }
         this.active = active;
         this.active.active = true;
+
     }
 
     attached() {

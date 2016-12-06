@@ -8,7 +8,7 @@ declare module 'mxgraph' {
 
     type Vertex = mxVertex;
 
-    export class mxPoint {
+    export interface mxPoint {
         x: number;
         y: number;
     }
