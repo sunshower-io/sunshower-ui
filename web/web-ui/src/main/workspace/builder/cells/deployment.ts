@@ -1,5 +1,3 @@
-
-
 import {Registry} from 'utils/registry';
 import {Task} from "task/tasks";
 import {AbstractVertex} from "../graph/vertex";
@@ -21,14 +19,15 @@ import {
 } from "../menu/task-cell";
 import {Kv} from "../../../../utils/objects";
 
+import {createEvent} from "utils/events";
+import {mxEvent} from "mxgraph";
+
 
 export class AbstractDeploymentUnit extends AbstractVertex<Task> {
 
-    constructor(
-        registry:Registry,
-        task:Task,
-        parent:DeploymentUnit
-    ) {
+    constructor(registry: Registry,
+                task: Task,
+                parent: DeploymentUnit) {
         super(registry, task.id, task, parent, 0, 24, 160, 136);
         this.value = task.name;
         this.setComponent(true);
@@ -54,26 +53,24 @@ export class DeploymentUnit extends AbstractVertex<Task> implements MenuHandler 
     /**
      *
      */
-    applicationDeployment       : ApplicationDeploymentUnit;
+    applicationDeployment: ApplicationDeploymentUnit;
 
     /**
      *
      */
-    configurationDeployment     : ConfigurationDeploymentUnit;
+    configurationDeployment: ConfigurationDeploymentUnit;
 
     /**
      *
      */
-    infrastructureDeployment    : InfrastructureDeploymentUnit;
+    infrastructureDeployment: InfrastructureDeploymentUnit;
 
 
-    constructor(
-        registry:Registry,
-        task:Task,
-        parent:Layer,
-        x:number,
-        y:number
-    ) {
+    constructor(registry: Registry,
+                task: Task,
+                parent: Layer,
+                x: number,
+                y: number) {
         super(registry, task.id, task, parent, x, y, 160, 160);
         this.applicationDeployment = new ApplicationDeploymentUnit(
             registry,
@@ -106,7 +103,6 @@ export class DeploymentUnit extends AbstractVertex<Task> implements MenuHandler 
     }
 
 
-
     addTo(builder: Builder): mxCell {
         this.createMenu(builder);
         return this.addChildren(builder);
@@ -132,17 +128,17 @@ export class DeploymentUnit extends AbstractVertex<Task> implements MenuHandler 
 export class ApplicationDeploymentUnit extends AbstractDeploymentUnit {
 
 
-
-
-    protected createOverlays() : mxCellOverlay[] {
+    protected createOverlays(): mxCellOverlay[] {
         let
             url = `${this.registry.get(Registry.S3_IMAGES_PATH)}/${this.data.icon}`,
             image = new mxImage(url, 40, 40),
             iconOverlay = new mxCellOverlay(
                 image,
-                'frap',
+                null,
                 mxConstants.ALIGN_CENTER,
-                mxConstants.ALIGN_MIDDLE
+                mxConstants.ALIGN_MIDDLE,
+                null,
+                'default'
             );
         return [iconOverlay];
     }
@@ -150,23 +146,51 @@ export class ApplicationDeploymentUnit extends AbstractDeploymentUnit {
 
 export class InfrastructureDeploymentUnit extends AbstractDeploymentUnit {
 
-    constructor(
-        registry:Registry,
-        task:Task,
-        parent:DeploymentUnit
-    ) {
+    private dispatcher: HTMLElement;
+
+    constructor(registry: Registry,
+                task: Task,
+                parent: DeploymentUnit) {
         super(registry, task, parent);
-        this.value = "Infrastructure";
+        this.value = '';
     }
+
+
+    addTo(builder: Builder): mxCell {
+        this.dispatcher = builder.container;
+        return super.addTo(builder);
+    }
+
+    protected createOverlays(): mxCellOverlay[] {
+        let
+            url = 'assets/sui/themes/hasli/assets/images/icons/plus-green-icon.svg',
+            image = new mxImage(url, 40, 40),
+            iconOverlay = new mxCellOverlay(
+                image,
+                null,
+                mxConstants.ALIGN_CENTER,
+                mxConstants.ALIGN_MIDDLE,
+                null,
+                'default'
+            );
+        this.addListeners(iconOverlay);
+        return [iconOverlay];
+    }
+
+    private addListeners(overlay: mxCellOverlay): void {
+        overlay.addListener(mxEvent.CLICK, (sender: any, e: mxEvent) : void => {
+            let event = createEvent('add-infrastructure', {});
+            this.dispatcher.dispatchEvent(event);
+        });
+    }
+
 }
 
 export class ConfigurationDeploymentUnit extends AbstractDeploymentUnit {
 
-    constructor(
-        registry:Registry,
-        task:Task,
-        parent:DeploymentUnit
-    ) {
+    constructor(registry: Registry,
+                task: Task,
+                parent: DeploymentUnit) {
         super(registry, task, parent);
         this.value = "Configuration";
     }

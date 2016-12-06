@@ -1,9 +1,16 @@
 template
+    require(from='./components/add-infrastructure')
     require(from="./sidebars/left-sidebar/left-sidebar")
     require(from="./sidebars/right-sidebar/right-sidebar")
-    .row.column.workbench(ref="container")
+    .row.column.workbench(
+        ref="container"
+        add-infrastructure.delegate="addInfrastructure($event)"
+    )
+
+
     left-sidebar(ref="leftSidebar")
     right-sidebar(
         ref="rightSidebar",
         add-image.delegate="addTask($event)",
         palette-event.delegate="modifyGraph($event)")
+    add-infrastructure(view-model.ref="infrastructureDialog")

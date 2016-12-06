@@ -46,10 +46,17 @@ import {
 import {Builder as GBuilder} from '../graph/builder'
 import {Registry} from 'utils/registry';
 import {DeploymentUnit} from "../cells/deployment";
+import {AddInfrastructure as AddInfrastructureDialog} from "./components/add-infrastructure";
 
-@inject(HttpClient, TaskManager, Builder, Registry)
+@inject(
+    HttpClient,
+    TaskManager,
+    Builder,
+    Registry
+)
 export class Applications extends AbstractGraph implements Listener, NavigationAware {
 
+    private infrastructureDialog:AddInfrastructureDialog;
     constructor(private client: HttpClient,
                 private taskManager: TaskManager,
                 private parent: Builder,
@@ -65,6 +72,7 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
         super.attached();
         this.insertTasks(this.taskManager.getTasks());
         this.parent.set(this);
+        this.infrastructureDialog.show();
     }
 
 
@@ -98,6 +106,7 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
     }
 
 
+
     private computePosition(): JQueryCoordinates {
         if (this.rightVisible) {
             let right = $(this.rightSidebar).children(':first-child'),
@@ -116,6 +125,10 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
         }
     }
 
+
+    addInfrastructure(e:Event) : void {
+        this.infrastructureDialog.show();
+    }
 
     handleCycle(cycleEvent: CycleDetectedEvent) {
         new PNotify({
@@ -168,82 +181,10 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
             task.location.y,
         );
         return cell.addTo(this.graph);
-
-        // let source = this.graph.insertVertex(
-        //     parent,
-        //     task.id.value,
-        //     task.name,
-        //     task.location.x,
-        //     task.location.y,
-        //     160,
-        //     160,
-        //     super.createStyle(),
-        // );
-        //
-        //     controlImage = new mxImage(
-        //         'assets/sui/themes/hasli/assets/images/icons/provider/generic/single-node-instance.svg',
-        //         20, 20
-        //     ),
-        //     controlOverlay = new mxCellOverlay(
-        //         controlImage,
-        //         'frap',
-        //         mxConstants.ALIGN_LEFT,
-        //         mxConstants.ALIGN_TOP,
-        //     );
-        // controlOverlay.addListener(
-        //     mxEvent.CLICK, (sender, event) => {
-        // });
-        //
-        // controlOverlay.cursor = 'pointer';
-        //
-        // iconOverlay.addListener(
-        //     mxEvent.CLICK,
-        //     (sender: any, event: any): void => {
-        //         let cell = event.getProperty('cell');
-        //         this.graph.setSelectionCell(cell);
-        //     });
-        //
-        //
-        // this.graph.addCellOverlay(source, iconOverlay);
-        // // this.graph.addCellOverlay(source, controlOverlay);
-        //
-        // let taskMenu = new TaskMenu(this.graph, source);
-        // taskMenu.add(new CloseMenuItem());
-        // taskMenu.add(new EditMenuItem());
-        // return source;
     }
 
     private insertTask(graph: mxGraph, parent: Layer, task: Task) {
         this.createSource(task, parent);
-        //
-        // if (task.successors) {
-        //     let model = this.graph.getModel();
-        //     for (let skey in task.successors) {
-        //         let successor = task.successors[skey],
-        //             target: mxCell = model.getCell(skey);
-        //         if (!target) {
-        //             target = graph.insertVertex(
-        //                 parent,
-        //                 successor.id.value,
-        //                 successor.name,
-        //                 successor.location.x,
-        //                 successor.location.y,
-        //                 120,
-        //                 80,
-        //                 super.createStyle(),
-        //             );
-        //         }
-        //         graph.insertEdge(
-        //             parent,
-        //             UUID.randomUUID().value,
-        //             null,
-        //             source,
-        //             target
-        //         );
-        //     }
-        // }
-
-
     }
 
     protected onConnection(source: mxCell,
@@ -263,7 +204,6 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
     }
 
     protected createBuilder(): GBuilder {
-        console.log("TASKMANAGER" + this.taskManager);
         return new GBuilder(this.container, this.taskManager);
     }
 

@@ -1,0 +1,14 @@
+template
+    .ui.modal.select-infrastructure-dialog(ref="element")
+        .ui.secondary.pointing.menu
+                a.item(
+                    class="${component.active ? 'active' : ''}"
+                    repeat.for="component of components",
+                    click.delegate="setActive(component)"
+                ) ${component.name}
+
+        compose(view-model='./${active.ref}')
+        .actions
+            .ui.basic.green.button(click.delegate="saveConfiguration()") Save
+            .ui.basic.red.button(click.delegate="cool()") Cancel
+

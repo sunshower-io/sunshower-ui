@@ -1,0 +1,63 @@
+template
+    form
+        .ui.form
+            .field
+                    label Name
+                    input(
+                    type="text",
+                    placeholder="Configuration Name",
+                    value.bind="configuration.name"
+                )
+            .field
+                .ui.fluid.search.selection.dropdown
+                    input(type='hidden', name='operatingSystem')
+                    i.dropdown.icon
+                    .default.text Select Operating System
+                    .menu
+                        .item(data.value='os.id' repeat.for='os of operatingSystems')
+                            image.ui.image(src='assets/sui/themes/hasli/assets/images/logos/os/${os.icon}')
+                            |  ${os.name} (${os.family})
+
+            .field
+                label Instances
+                input(type='number', placeholder='Instances to provision')
+
+            .field
+                label CPUs
+                input(type='number', placeholder='Number of CPUs')
+            .field
+                label Memory
+                .fields
+                    .eight.wide.field
+                        input(
+                        type='number',
+                        placeholder='Number',
+                        value.bind="memoryProfile.capacity"
+                        )
+                    .eight.wide.field
+                        select
+                            option B
+                            option KB
+                            option MB
+                            option(selected='selected') GB
+                            option TB
+                            option EiB
+            .field
+                label Storage
+                .fields
+                    .eight.wide.field
+                        input(
+                        type='number',
+                        placeholder='Number',
+                        value.bind="storageProfile.capacity"
+                        )
+                    .eight.wide.field
+                        select
+                            option B
+                            option KB
+                            option MB
+                            option(selected='selected') GB
+                            option TB
+                            option EiB
+
+
