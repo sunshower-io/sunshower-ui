@@ -36,7 +36,7 @@ export class Builder extends mxGraph {
         this.setConnectable(true);
         this.foldingEnabled = false;
         this.setHtmlLabels(true);
-        this.gridSize = 40;
+        this.gridSize = 32;
         this.grid = new Grid(this);
         this.grid.draw();
         this.addMouseListener(new MenuHoverListener(this));
@@ -87,12 +87,20 @@ export class Builder extends mxGraph {
             let child = this.model.getChildAt(cell, i);
             if(child.getAttribute('rresize') !== '0') {
                 this.scaleCell(
-                    this.model.getChildAt(cell, i),
+                    child,
                     dx,
                     dy,
                     true
                 );
             }
+
+            if(child.getAttribute('lfix')) {
+                let cgeo = child.geometry;
+                cgeo.x = geometry.width - 32;
+                cgeo.y = cgeo.y;
+                this.model.setGeometry(child, cgeo);
+            }
+
         }
     }
 
@@ -104,7 +112,6 @@ export class Builder extends mxGraph {
 
 
     getPreferredSizeForCell(cell: Layer): mxRectangle {
-        alert("Cool");
         if(cell.getAttribute('rresize') === '0') {
             return cell.geometry;
         } else {

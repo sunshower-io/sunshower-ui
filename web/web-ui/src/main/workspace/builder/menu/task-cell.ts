@@ -3,157 +3,136 @@ import {
     mxGraph,
     mxVertex,
     mxUtils,
+    mxMouseEvent,
     Layer,
     mxCellStyle,
     mxEvent,
-    mxStylesheet
+    mxStylesheet,
+    MouseListener
 } from "mxgraph";
+
+import {UUID} from 'utils/uuid';
 import {createFullOverrideContext} from "aurelia-templating-resources";
+import {AbstractVertex} from "../graph/vertex";
 
 
-export interface MenuHandler {
-    before(): void;
-    after(): void;
+interface Listener {
+  (sender: any, event: any) : void;
 }
 
-export function node(name: string): mxCell {
-    let document = mxUtils.createXmlDocument(),
-        node = document.createElement(name);
-    return node;
-}
-
-
-export class MenuItems {
-    constructor(private styles: mxStylesheet) {
-    }
-
-    static create(styles: mxStylesheet): MenuItems {
-        return new MenuItems(styles);
-    }
-
-    register(item: MenuItem): MenuItems {
-        this.styles.putCellStyle(item.type, item.style);
-        return this;
-    }
-
-}
-
-
-type Listener = (sender: any, event: any)  => void;
 
 export class MenuItem {
-    type: string;
-    event: string;
-    icon: string;
-    style: mxCellStyle;
-    cell: mxCell;
-    host: mxGraph;
-    listener: Listener;
-
-    public isTarget(event: mxEvent): boolean {
-        return event.getProperty('cell') == this.cell;
-    }
+    index:number;
+    icon:string;
+    click :Listener;
 }
 
-export class ApplicationMenuItem extends MenuItem {
-    icon = '\uf1c9';
-    event = mxEvent.CLICK;
-
-
-    constructor(private handler: MenuHandler,
-                private parent: Layer) {
+export class NetworkMenuItem extends MenuItem {
+    constructor() {
         super();
+        this.index = 0;
+        this.icon = '\uf0e8';
     }
 
-    listener = (sender: any, event: mxEvent): void => {
-        if (this.isTarget(event)) {
-            this.handler.before();
-            this.parent.setVisible(true);
-            this.host.refresh(this.parent);
-        }
-    }
-}
-
-export class InfrastructureMenuItem extends MenuItem {
-    icon = '\uf233';
-    event = mxEvent.CLICK;
-
-    constructor(private handler: MenuHandler,
-                private parent: Layer) {
-        super();
-    }
-
-    listener = (sender: any, event: mxEvent): void => {
-        if (this.isTarget(event)) {
-            this.handler.before();
-            this.parent.setVisible(true);
-            this.host.refresh(this.parent);
-        }
-    }
-}
-
-export class EditMenuItem extends MenuItem {
-
-    icon = '\uf044';
-    event = mxEvent.CLICK;
-
-    constructor(private handler: MenuHandler,
-                private parent: Layer) {
-        super();
-    }
-
-    listener = (sender: any, event: mxEvent): void => {
-        if (this.isTarget(event)) {
-            this.handler.before();
-            this.parent.setVisible(true);
-            this.host.refresh(this.parent);
-        }
-    }
 
 }
 
 
-export class CloseMenuItem extends MenuItem {
-    icon = '\uf00d';
-    event = mxEvent.CLICK;
 
+class MenuItemCell extends AbstractVertex<any> {
 
-    listener = (sender: any, event: mxEvent): void => {
-        if (this.isTarget(event)) {
-            this.host.removeCells([this.cell.getParent()]);
-            event.consume();
-        }
+    constructor(
+        private graph:mxGraph,
+        cell:Layer,
+        parent:VertexMenu,
+        item:MenuItem) {
+        super(
+            UUID.randomUUID(),
+            null,
+            cell,
+            cell.geometry.width - 32,
+            32 * (1 + item.index),
+            32,
+            32
+        );
+        this.setVisible(false);
+        this.value = item.icon;
+        this.setConnectable(false);
+        this.setAttribute('constituent', '1');
+        this.setAttribute('rresize', '0');
+        this.setAttribute('lfix', '1');
     }
+
+    click(sender:any, e:mxEvent) {
+
+        console.log("CLICK2");
+        // console.log("GOT CLICKED");
+        // if(isTarget(e, this)) {
+        // }
+    }
+
+
 }
 
-export class TaskMenu {
+function isTarget(event:mxMouseEvent, cell:Layer) : boolean {
+    return event.getCell() === cell;
+}
 
-    count = 0;
+export class VertexMenu extends AbstractVertex<any> implements MouseListener {
+
+    items:mxCell[];
+    toggled:boolean;
 
     constructor(private graph: mxGraph,
-                private parent: mxVertex) {
+                public parent: mxVertex,
+                public icon: string) {
+        super(UUID.randomUUID(),
+            icon,
+            parent,
+            parent.geometry.width - 32,
+            0,
+            32,
+            32
+        );
+        this.items = [];
+        this.value = icon;
+        this.setConnectable(false);
+        this.setAttribute('label', this.icon);
+        this.setAttribute('constituent', '1');
+        this.setAttribute('rresize', '0');
+        this.setAttribute('lfix', '1');
+        this.style = 'fontFamily=FontAwesome;fontColor=#6b6b6b;fillOpacity=0;fontSize=16';
+        graph.addCell(this, parent);
+        graph.addMouseListener(this);
     }
 
+    mouseMove(sender: mxGraph, event: mxMouseEvent): void {
+    }
 
-    public add(item: MenuItem): void {
-        let vertex = node('a');
+    mouseUp(sender: mxGraph, event: mxMouseEvent): void {
 
+    }
 
-        vertex.setAttribute('label', item.icon);
-        vertex.setAttribute('constituent', '1');
-        vertex.setAttribute('rresize', '0');
+    mouseDown(sender: mxGraph, event: mxMouseEvent): void {
+        this.toggled = !this.toggled;
+        if(isTarget(event, this)) {
+            for(let o of this.items) {
+                o.setVisible(this.toggled);
+            }
+            this.graph.refresh(this.parent);
+        }
 
-        // if(!this.graph.hasListener(item.event, item.listener)) {
-        this.graph.addListener(item.event, item.listener);
-        // }
-        let result = this.graph.insertVertex(
-            this.parent, null,
-            vertex, 24 * this.count, 0, 24, 24,
-            'constituent=1;fontFamily=FontAwesome;fontColor=#6b6b6b;fillOpacity=0'
+    }
+
+    public addItem(item: MenuItem): void {
+        let cell = new MenuItemCell(
+            this.graph,
+            this.parent,
+            this,
+            item
         );
-        item.cell = result;
-        item.host = this.graph;
-        result.setConnectable(false);
-        this.count++;
+        cell.style = this.style;
+        this.items.push(cell);
+        this.graph.addCell(cell, this.parent);
     }
 }

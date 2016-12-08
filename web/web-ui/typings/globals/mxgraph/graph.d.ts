@@ -1,5 +1,29 @@
 declare module 'mxgraph' {
 
+    export class mxVertexHandler {
+
+        /**
+         *
+         * @param cell
+         * @param dx
+         * @param dy
+         * @param index
+         * @param gridEnabled
+         * @param constrained
+         * @param recurse
+         */
+        resizeCell(cell:Layer ,
+                   dx: number,
+                   dy: number,
+                   index: number,
+                   gridEnabled: boolean,
+                   constrained: boolean,
+                   recurse: boolean
+        )
+
+
+    }
+
     export class mxConnectionHandler {
         constructor(graph: mxGraph,
                     connection?: (source: mxCell,
@@ -65,7 +89,7 @@ declare module 'mxgraph' {
 
     }
 
-    export class mxMouseEvent {
+    export class mxMouseEvent extends mxEvent {
         getEvent(): mxEvent;
 
         /**
@@ -324,6 +348,16 @@ declare module 'mxgraph' {
                    target: Vertex): Edge ;
 
         createConnectionHandler() : mxConnectionHandler;
+
+        moveCells(
+            child:Layer,
+            dx:number,
+            dy:number,
+            clone?:boolean,
+            parent?:Layer,
+            event?:mxMouseEvent,
+            mapping?:any
+        );
 
 
 

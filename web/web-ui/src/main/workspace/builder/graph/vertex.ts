@@ -18,24 +18,23 @@ import {Kv} from "utils/objects";
 import {Registry} from "utils/registry";
 import {mxCellOverlay} from "mxgraph";
 
+
+
+
 export class AbstractVertex<T> extends mxCell implements Vertex<T> {
-
-
-
-
 
     private readonly delegate:Vertex<T>;
     private attributes: {[key:string]: string};
 
     constructor(
-        public registry:Registry,
         id:UUID,
         public data:T,
         public parent:mxCell,
         x:number,
         y:number,
         width:number,
-        height:number
+        height:number,
+        public registry?:Registry,
     ) {
         super();
         this.delegate = new Node<T>(id.value, data);

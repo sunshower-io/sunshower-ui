@@ -35,6 +35,7 @@ declare module 'mxgraph' {
         id              :string;
         value           :any;
         geometry        :mxGeometry;
+        style           :string;
 
         constructor(label?:string, geometry?:mxGeometry);
 
@@ -65,6 +66,10 @@ declare module 'mxgraph' {
          * @param vertex
          */
         setVertex(vertex:boolean) : void;
+
+        getProperty(key:string) : string;
+
+        setProperty(key:string, value:string) : void;
 
         /**
          *

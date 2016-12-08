@@ -4,7 +4,6 @@ declare module 'mxgraph' {
         static readonly CLICK:string;
 
 
-
         static getSource(e:Event) : HTMLElement;
 
         consume() : void;

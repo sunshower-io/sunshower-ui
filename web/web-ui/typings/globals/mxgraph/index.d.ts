@@ -63,6 +63,12 @@ declare module 'mxgraph' {
 
 
     export class mxGraphModel {
+        /**
+         *
+         * @param cell
+         * @param geometry
+         */
+        setGeometry(cell:Layer, geometry:mxGeometry);
 
         /**
          *

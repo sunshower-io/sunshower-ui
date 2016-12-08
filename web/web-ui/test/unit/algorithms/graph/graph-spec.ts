@@ -40,6 +40,7 @@ describe("tarjan's algorithm", () => {
                 console.log("\t" + cs.id);
             }
         }
+
     });
 
     it('should not detect single components', () => {
@@ -101,5 +102,4 @@ describe('a graph', () => {
             expect(graph.neighbors(source).length).toBe(10);
         }
     })
-
 });
