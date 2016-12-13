@@ -2,7 +2,8 @@ import {
     Layer,
     mxImage,
     mxCellOverlay,
-    mxConstants
+    mxConstants,
+    mxGeometry
 } from 'mxgraph';
 import {Registry} from 'utils/registry';
 
@@ -10,29 +11,19 @@ import {Task} from 'task/tasks';
 import {LayeredNode} from "./layer";
 import {ApplicationDeployment} from "./deployment";
 
-enum Direction {
-    Horizontal,
-    Vertical
-}
-
 
 export class Node extends LayeredNode<ApplicationDeployment> {
-
-
-    private rowCount        : number;
-    private columnCount     : number;
 
 
     applications: ApplicationDeployment[] = [];
 
     constructor(parent:Layer, x:number, y:number, registry?: Registry) {
         super(parent, x, y, registry);
-        this.rowCount = 0;
-        this.columnCount = 0;
     }
 
 
     addApplicationById(id: string): void {
+        console.log("Add application");
         this.registry.client.fetch(`docker/images/${id}`)
             .then(r => r.json())
             .then(r => {
@@ -48,77 +39,79 @@ export class Node extends LayeredNode<ApplicationDeployment> {
             });
     }
 
-    private computeDirection(): Direction {
-        if(this.columnCount < this.rowCount) {
-            return Direction.Horizontal;
-        } else {
-            return Direction.Vertical;
-        }
-    }
-
-    private addVertical(application: ApplicationDeployment) {
-        let geo = this.geometry,
-            x = geo.x,
-            y = geo.y,
-            w = geo.width,
-            h = geo.height;
-        application.geometry.x = 24;
-        if (this.applications.length == 0) {
-            h = 208;
-        } else {
-            h = this.rowCount * 180 + 208;
-        }
-        application.geometry.y = h - 184;
-        this.host.ungroupCells(this.applications);
-        this.applications.push(application);
-        application.addTo(this.host);
-        this.host.groupCells(this, 24, this.applications);
-        geo.x = x;
-        geo.y = y;
-        geo.width = w;
-        geo.height = h;
-        this.host.model.setGeometry(this, geo);
-        this.host.refresh(this);
-        this.rowCount++;
-    }
-
-    private addHorizontal(application: ApplicationDeployment) {
-        let geo = this.geometry,
-            x = geo.x,
-            y = geo.y,
-            w = geo.width,
-            h = geo.height;
-        application.geometry.x = w;
-        if (this.applications.length == 0) {
-            w = 208;
-        } else {
-            w = w + 180;
-        }
-        application.geometry.y = 24;
-        this.host.ungroupCells(this.applications);
-        this.applications.push(application);
-        application.addTo(this.host);
-        this.host.groupCells(this, 24, this.applications);
-        geo.x = x;
-        geo.y = y;
-        geo.width = w;
-        geo.height = h;
-        this.host.model.setGeometry(this, geo);
-        this.host.refresh(this);
-        this.columnCount++;
-    }
-
+    rows                : number = 1;
+    columns             : number = 1;
 
     public addApplication(application: ApplicationDeployment): void {
-        let direction = this.computeDirection();
-        switch (direction) {
-            case Direction.Vertical:
-                this.addVertical(application);
-                break;
-            default:
-                this.addHorizontal(application);
+        this.host.ungroupCells(this.applications);
+        this.applications.push(application);
+        this.addAndResize();
+
+    }
+
+    addGridRow() : void {
+        let geo = this.geometry;
+        geo.height += 184;
+        this.rows++;
+    }
+
+    addGridColumn() : void {
+        let geo = this.geometry;
+        geo.width += 184;
+        this.columns++;
+    }
+
+
+    resizeGrid() : void {
+        if(this.columns > this.rows) {
+            this.addGridRow();
+        } else {
+            this.addGridColumn();
         }
     }
+
+    packed() : boolean {
+        return this.applications.length >
+            this.rows * this.columns;
+    }
+
+    addAndResize() : void {
+        if(this.packed()) {
+            this.resizeGrid();
+        }
+        let geometry = this.geometry,
+            rows = this.rows,
+            columns = this.columns,
+            len = this.applications.length;
+        for(let idx = 0; idx < len; idx++) {
+            let row = Math.floor(idx / columns),
+                column = idx % columns;
+            this.insertGridElement(
+                column,
+                row,
+                this.applications[idx],
+                geometry
+            );
+        }
+        this.host.groupCells(this, 24, this.applications);
+        this.host.model.setGeometry(this, geometry);
+        this.host.refresh(this);
+    }
+
+    insertGridElement(
+        column:number,
+        row:number,
+        application:ApplicationDeployment,
+        geometry:mxGeometry
+    ) {
+        let applicationX = column * 184,
+            applicationY = row * 184,
+            applicationGeometry = application.geometry;
+        applicationGeometry.x = applicationX;
+        applicationGeometry.y = applicationY;
+        application.addTo(this.host);
+    }
+
 
 
     protected createNodeOverlay(): mxCellOverlay {

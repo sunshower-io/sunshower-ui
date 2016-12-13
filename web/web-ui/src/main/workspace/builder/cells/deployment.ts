@@ -43,8 +43,8 @@ export class ApplicationDeployment extends AbstractVertex<Task> implements Liste
     }
 
     private createMenu(builder: Builder) {
-        let menu = new VertexMenu(builder, this, '\uf013');
-        menu.addItem(new NetworkMenuItem());
+        // let menu = new VertexMenu(builder, this, '\uf013');
+        // menu.addItem(new NetworkMenuItem());
     }
 
     protected addOperatingSystemOverlay(): mxCellOverlay {
