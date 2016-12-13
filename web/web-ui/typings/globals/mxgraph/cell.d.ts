@@ -32,6 +32,7 @@ declare module 'mxgraph' {
     }
 
     export class mxCell implements Layer, Connectable {
+        parent          :mxCell;
         id              :string;
         value           :any;
         geometry        :mxGeometry;

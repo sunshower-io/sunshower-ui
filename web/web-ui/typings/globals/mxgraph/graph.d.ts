@@ -175,6 +175,16 @@ declare module 'mxgraph' {
             recurse:boolean
         ) : Layer;
 
+        getCellAt(
+            x:number,
+            y:number,
+            parent?:Layer,
+            vertices?:boolean,
+            edges?: boolean
+        );
+
+        ungroupCells(layers:Layer[]) : Layer[];
+
         /**
          *
          */

@@ -14,24 +14,21 @@ import {
     NetworkMenuItem,
 } from "../menu/task-cell";
 import {mxEvent} from "mxgraph";
-import {Listener, ObservedEvent} from "../../../../utils/observer";
+import {Listener, ObservedEvent} from "utils/observer";
 
 
 
-export class DeploymentUnit extends AbstractVertex<Task> implements Listener {
+export class ApplicationDeployment extends AbstractVertex<Task> implements Listener {
 
     host: Builder;
-
-
     constructor(registry: Registry,
                 task: Task,
                 parent: Layer,
                 x: number,
                 y: number) {
         super(task.id, task, parent, x, y, 160, 160, registry);
-
+        this.setAttribute('constituent', '1');
     }
-
 
 
     addTo(builder: Builder): mxCell {

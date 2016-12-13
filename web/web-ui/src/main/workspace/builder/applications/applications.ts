@@ -45,7 +45,7 @@ import {
 
 import {Builder as GBuilder} from '../graph/builder'
 import {Registry} from 'utils/registry';
-import {DeploymentUnit} from "../cells/deployment";
+import {ApplicationDeployment} from "../cells/deployment";
 import {AddInfrastructure as AddInfrastructureDialog} from "./components/add-infrastructure";
 
 @inject(
@@ -76,7 +76,9 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
 
 
     modifyGraph(event: Event) {
+        let offset = $(this.graph.container).offset();
         let context = {
+                offset: offset,
                 graph: this.graph
             },
             processor = (<any>event).detail as GraphProcessor;
@@ -172,7 +174,7 @@ export class Applications extends AbstractGraph implements Listener, NavigationA
 
 
     private createSource(task: Task, parent: Layer): mxCell {
-        let cell = new DeploymentUnit (
+        let cell = new ApplicationDeployment (
             this.registry,
             task,
             parent,

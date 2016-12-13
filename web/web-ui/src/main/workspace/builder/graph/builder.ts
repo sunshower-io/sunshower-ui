@@ -39,8 +39,8 @@ export class Builder extends mxGraph {
         this.gridSize = 32;
         this.grid = new Grid(this);
         this.grid.draw();
-        this.addMouseListener(new MenuHoverListener(this));
-        this.recursiveResize = true;
+        // this.addMouseListener(new MenuHoverListener(this));
+        this.recursiveResize = false;
         mxGraphHandler.prototype.guidesEnabled = true;
     }
 

@@ -7,72 +7,68 @@ import {
 import {mxConstants} from "mxgraph";
 import {Kv} from "utils/objects";
 import {
+    mxPoint,
+    mxImage,
     mxCellOverlay,
-    mxImage
 } from "mxgraph";
 
+import {Node} from "main/workspace/builder/cells/node";
 
 
 
 import 'pnotify';
+import {Registry} from 'utils/registry';
+import {Builder} from "../../../../graph/builder";
 
+import {inject} from 'aurelia-framework';
+
+@inject(Registry)
 export class Palette {
 
     element:HTMLElement;
+
+    constructor(private registry:Registry) {
+
+    }
 
     attached() : void {
 
 
     }
 
-    groupElements() :void {
+    createNode(e:DragEvent) :void {
         let event = createEvent(
             'palette-event',
-            new GroupElementsProcessor()
+            new NodeProcessor(this.coords(e), this.registry),
         );
         this.element.dispatchEvent(event);
     }
+
+    private coords(e:DragEvent) : mxPoint {
+        if(e) {
+            return {x: e.clientX, y:e.clientY}
+        }
+        return {x:250, y:250};
+    }
 }
 
-class GroupElementsProcessor implements GraphProcessor {
 
-    protected createStyle(): string {
-        return Kv.create(';')
-            .pair('shape', 'label')
-            .pair('imageWidth', 24)
-            .pair('imageHeight', 24)
-            .pair('fillOpacity', 0)
-            .pair('verticalAlign', 'bottom')
-            .pair('spacingBottom', '40')
-            .pair('fontColor', '#000000')
-            .pair('fontStyle', mxConstants.FONT_BOLD)
-            .toString();
+class NodeProcessor implements GraphProcessor {
+    constructor(private coordinates:mxPoint, private registry:Registry) {
+
     }
 
     apply(context: GraphContext): void {
-        let selected = context.graph.getSelectionCells(),
-            parent = context.graph.insertVertex(
-                context.graph.getDefaultParent(),
-                null, null, 400, 400, 400, 400,
-                this.createStyle()
-            ),
-            parentImage =
-                new mxImage(
-                    'assets/sui/themes/hasli/assets/images/icons/provider/generic/cloud.svg',
-                    30, 20
-                ),
-            cloudOverlay = new mxCellOverlay(
-                parentImage,
-                null,
-                mxConstants.ALIGN_LEFT,
-                mxConstants.ALIGN_TOP
+
+        let
+            parent = context.graph.getDefaultParent(),
+            node = new Node(
+                parent,
+                this.coordinates.x,
+                this.coordinates.y - context.offset.top,
+                this.registry
             );
-        context.graph.addCellOverlay(parent, cloudOverlay);
-
-        context.graph.groupCells(parent, 24, selected);
-
-
-
-
+        node.addTo(context.graph as Builder);
     }
 }
+

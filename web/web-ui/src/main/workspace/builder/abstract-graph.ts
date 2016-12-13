@@ -16,6 +16,7 @@ import {Registry} from "utils/registry";
 
 export interface GraphContext {
     graph:mxGraph;
+    offset: {top:number, left:number},
 }
 
 export interface GraphProcessor {
