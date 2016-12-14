@@ -7,25 +7,43 @@ import {
 } from 'mxgraph';
 import {Registry} from 'utils/registry';
 
-import {Application} from 'elements/elements';
+import {
+    ApplicationElement,
+    InfrastructureElement
+} from 'elements/elements';
 
 
 import {LayeredNode} from "./layer";
 import {ApplicationDeployment} from "./deployment";
 import {Builder} from "../graph/builder";
-import {VertexMenu, NetworkMenuItem, StorageMenuItem} from "../menu/task-cell";
+
+import {ElementEvent} from 'elements/events';
+
+import {
+    VertexMenu,
+    NetworkMenuItem,
+    StorageMenuItem
+} from "../menu/task-cell";
 
 
-export class Node extends LayeredNode<ApplicationDeployment> {
+export class Node extends LayeredNode<InfrastructureElement> {
 
 
-    applications: ApplicationDeployment[] = [];
     rows                : number = 1;
     columns             : number = 1;
     scale               : number = 1;
+    applications        : ApplicationDeployment[] = [];
 
-    constructor(parent:Layer, x:number, y:number, registry?: Registry) {
-        super(parent, x, y, registry);
+    constructor(
+        parent:Layer,
+        element:InfrastructureElement,
+        x:number,
+        y:number,
+        registry?: Registry
+    ) {
+        super(
+            parent,
+            element, x, y, registry);
     }
 
     public addTo(builder:Builder) : Layer {
@@ -47,7 +65,7 @@ export class Node extends LayeredNode<ApplicationDeployment> {
                 this.addApplication(
                     new ApplicationDeployment(
                         this.registry,
-                        new Application(r.logo_url.large),
+                        new ApplicationElement(r.logo_url.large, r.name),
                         this,
                         this.geometry.x,
                         this.geometry.y
@@ -58,10 +76,14 @@ export class Node extends LayeredNode<ApplicationDeployment> {
 
 
     public addApplication(application: ApplicationDeployment): void {
+        this.applications.push(application);
+        this.data.add(application.data);
+        this.registry.elementManager.dispatch(
+            'element-modified',
+            new ElementEvent('element-modified', this.data)
+        );
         try {
             this.host.model.beginUpdate();
-            // this.host.ungroupCells(this.applications);
-            this.applications.push(application);
             this.addAndResize();
         } finally {
             this.host.model.endUpdate();

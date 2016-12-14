@@ -21,12 +21,14 @@ export class LayeredNode<T> extends AbstractVertex<T> implements Layerable {
     public host: Builder;
 
     constructor(parent: Layer,
+                data:T,
                 x: number,
                 y: number,
                 registry?: Registry,) {
         super(
             UUID.randomUUID(),
-            null, parent,
+            data,
+            parent,
             x, y, 168, 192,
             registry,
         );

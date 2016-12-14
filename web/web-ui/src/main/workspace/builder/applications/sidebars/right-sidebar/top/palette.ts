@@ -5,12 +5,13 @@ import {
     GraphContext
 } from "main/workspace/builder/abstract-graph";
 import {mxConstants} from "mxgraph";
-import {Kv} from "utils/objects";
 import {
     mxPoint,
     mxImage,
     mxCellOverlay,
 } from "mxgraph";
+
+import {InfrastructureElement} from 'elements/elements';
 
 import {Node} from "main/workspace/builder/cells/node";
 
@@ -62,8 +63,10 @@ class NodeProcessor implements GraphProcessor {
 
         let
             parent = context.graph.getDefaultParent(),
+            ie = new InfrastructureElement(),
             node = new Node(
                 parent,
+                ie,
                 this.coordinates.x,
                 this.coordinates.y - context.offset.top,
                 this.registry

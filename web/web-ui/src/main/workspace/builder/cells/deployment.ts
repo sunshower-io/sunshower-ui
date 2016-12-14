@@ -13,7 +13,7 @@ import {Builder} from "../graph/builder";
 
 
 import {
-    Application
+    ApplicationElement
 } from 'elements/elements';
 
 import {mxEvent} from "mxgraph";
@@ -27,11 +27,11 @@ import {Kv} from 'utils/objects';
 
 
 
-export class ApplicationDeployment extends AbstractVertex<Application> implements Listener {
+export class ApplicationDeployment extends AbstractVertex<ApplicationElement> implements Listener {
 
     host: Builder;
     constructor(registry: Registry,
-                element: Application,
+                element: ApplicationElement,
                 parent: Layer,
                 x: number,
                 y: number) {

@@ -12,6 +12,7 @@ import {
     GraphContext
 } from "main/workspace/builder/abstract-graph";
 
+import {InfrastructureElement} from 'elements/elements';
 
 import {Layer} from 'mxgraph';
 
@@ -91,19 +92,21 @@ class ApplicationProcessor implements GraphProcessor {
             x = this.coordinates.x,
             y = this.coordinates.y - context.offset.top,
             parent = this.resolveParent(context, x, y),
-            node : Node = null,
-            addRelative = false;
+            node : Node = null;
 
         if(parent instanceof Node) {
             node = parent as Node;
         } else {
+            let infrastructureElement = new InfrastructureElement();
             node = new Node(
                 parent,
+                infrastructureElement,
                 this.coordinates.x,
                 this.coordinates.y - context.offset.top,
                 this.registry
             );
             node.addTo(context.graph as Builder);
+            this.registry.elementManager.add(infrastructureElement);
         }
         node.addApplicationById(this.id);
     }
