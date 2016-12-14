@@ -112,7 +112,7 @@ export class Node extends LayeredNode<ApplicationDeployment> {
         this.sizeChanged();
         // this.host.groupCells(this, 24, this.applications);
         this.host.model.setGeometry(this, geometry);
-        this.host.refresh(this);
+        this.host.refresh();
     }
 
     insertGridElement(

@@ -6,22 +6,42 @@ import {
     mxRubberband,
     mxConstants,
     mxRectangle,
-    mxConnectionHandler
+    mxShape,
+    mxPoint,
+    mxConnectionHandler,
+    mxPolyline,
+    mxGeometry,
+    Layer,
+    mxConnectionConstraint,
+    mxGraphHandler
 } from "mxgraph";
 
 import {ConnectionHandler} from './connection-handler';
 import {TaskManager, Task} from "task/tasks";
 import {Grid} from "../grid";
-import {MenuHoverListener} from "../listeners/hover-listener";
-import {mxGraphHandler} from "mxgraph";
-import {Layer} from "mxgraph";
-import {mxGeometry} from "mxgraph";
 
 mxConstants.HANDLE_FILLCOLOR = '#239AE8';
 mxConstants.HANDLE_STROKECOLOR = '#239AE8';
 mxConstants.VERTEX_SELECTION_COLOR = '#0000FF';
 
 mxRubberband.defaultOpacity = 1;
+
+mxShape.prototype.constraints = [
+    // new mxConnectionConstraint(new mxPoint(0.25, 0), true),
+    new mxConnectionConstraint(new mxPoint(0.5, 0), true),
+    // new mxConnectionConstraint(new mxPoint(0.75, 0), true),
+    // new mxConnectionConstraint(new mxPoint(0, 0.25), true),
+    new mxConnectionConstraint(new mxPoint(0, 0.5), true),
+    // new mxConnectionConstraint(new mxPoint(0, 0.75), true),
+    // new mxConnectionConstraint(new mxPoint(1, 0.25), true),
+    new mxConnectionConstraint(new mxPoint(1, 0.5), true),
+    // new mxConnectionConstraint(new mxPoint(1, 0.75), true),
+    // new mxConnectionConstraint(new mxPoint(0.25, 1), true),
+    new mxConnectionConstraint(new mxPoint(0.5, 1), true),
+    // new mxConnectionConstraint(new mxPoint(0.75, 1), true)
+];
+
+mxPolyline.prototype.constraints = null;
 
 
 export class Builder extends mxGraph {
@@ -42,10 +62,16 @@ export class Builder extends mxGraph {
         // this.addMouseListener(new MenuHoverListener(this));
         this.recursiveResize = false;
         mxGraphHandler.prototype.guidesEnabled = true;
+
+        this.getStylesheet()
+            .getDefaultEdgeStyle()
+            ['edgeStyle'] =
+            'orthogonalEdgeStyle';
+
     }
 
-    public addNode(node:Node): void {
 
+    public addNode(node: Node): void {
 
 
     }
@@ -77,7 +103,7 @@ export class Builder extends mxGraph {
         }
     }
 
-    resizeChildCells(cell:Layer, geometry:mxGeometry) {
+    resizeChildCells(cell: Layer, geometry: mxGeometry) {
         let geo = this.model.getGeometry(cell),
             dx = geometry.width / geo.width,
             dy = geometry.height / geo.height,
@@ -85,7 +111,7 @@ export class Builder extends mxGraph {
 
         for (let i = 0; i < childCount; i++) {
             let child = this.model.getChildAt(cell, i);
-            if(child.getAttribute('rresize') !== '0') {
+            if (child.getAttribute('rresize') !== '0') {
                 this.scaleCell(
                     child,
                     dx,
@@ -94,7 +120,7 @@ export class Builder extends mxGraph {
                 );
             }
 
-            if(child.getAttribute('lfix')) {
+            if (child.getAttribute('lfix')) {
                 let cgeo = child.geometry;
                 cgeo.x = geometry.width - 32;
                 cgeo.y = cgeo.y;
@@ -112,7 +138,7 @@ export class Builder extends mxGraph {
 
 
     getPreferredSizeForCell(cell: Layer): mxRectangle {
-        if(cell.getAttribute('rresize') === '0') {
+        if (cell.getAttribute('rresize') === '0') {
             return cell.geometry;
         } else {
             return super.getPreferredSizeForCell(cell);
@@ -121,5 +147,22 @@ export class Builder extends mxGraph {
 
     removeCells(cells: mxCell[]) {
         return super.removeCells(cells);
+    }
+
+
+    getAllConnectionConstraints(terminal: Layer, source: Layer): mxConnectionConstraint[] {
+        if (terminal != null && terminal.shape != null) {
+            if (terminal.shape.stencil != null) {
+                if (terminal.shape.stencil != null) {
+                    return terminal.shape.stencil.constraints;
+                }
+            }
+            else if (terminal.shape.constraints != null) {
+                return terminal.shape.constraints;
+            }
+        }
+
+        return null;
+
     }
 }

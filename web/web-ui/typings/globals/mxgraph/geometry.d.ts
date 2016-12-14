@@ -8,9 +8,36 @@ declare module 'mxgraph' {
 
     type Vertex = mxVertex;
 
-    export interface mxPoint {
-        x: number;
-        y: number;
+    export interface mxConstraint {
+
+    }
+
+    export class mxConnectionConstraint {
+        constructor(pt:mxPoint, a:boolean);
+    }
+
+    export class mxPolyline extends mxShape {}
+
+    export class mxShape {
+        stencil         : mxShape;
+        constraints     : mxConstraint[];
+        /**
+         *
+         */
+        redraw(): void;
+
+        /**
+         *
+         * @param state
+         */
+        apply(state: mxCellState): void;
+
+    }
+
+    export class mxPoint {
+        x:number;
+        y:number;
+        constructor(x:number, y:number);
     }
 
     export class mxRectangle {

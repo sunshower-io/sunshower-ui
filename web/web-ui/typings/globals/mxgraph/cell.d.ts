@@ -37,6 +37,7 @@ declare module 'mxgraph' {
         value           :any;
         geometry        :mxGeometry;
         style           :string;
+        shape           :mxShape;
 
         children        :mxCell[];
 

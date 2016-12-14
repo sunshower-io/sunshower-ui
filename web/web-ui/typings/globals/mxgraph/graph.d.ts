@@ -75,19 +75,8 @@ declare module 'mxgraph' {
         text: mxShape;
     }
 
-    export class mxShape {
-        /**
-         *
-         */
-        redraw(): void;
 
-        /**
-         *
-         * @param state
-         */
-        apply(state: mxCellState): void;
 
-    }
 
     export class mxMouseEvent extends mxEvent {
         getEvent(): mxEvent;
@@ -162,6 +151,8 @@ declare module 'mxgraph' {
             dy:number,
             recurse:boolean
         );
+
+        getStylesheet() : mxStylesheet;
 
         /**
          *
