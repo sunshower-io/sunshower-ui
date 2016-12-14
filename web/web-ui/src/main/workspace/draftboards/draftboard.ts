@@ -60,7 +60,7 @@ export class Draftboard {
     }
 
     hasDraftBoards() : boolean {
-        return true;
+        return false;
     }
 
 }

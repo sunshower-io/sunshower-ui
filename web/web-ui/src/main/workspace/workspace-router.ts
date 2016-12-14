@@ -8,8 +8,19 @@ export class WorkspaceView {
 
     public configureRouter(config: RouterConfiguration, router: Router) {
         config.title = 'Workspace';
-        config.map([{
+        config.map([
+            {
                 route: ['', 'builder'],
+                name: 'builder',
+                moduleId: 'main/workspace/draftboard-navigator/navigator',
+                nav: true,
+                title: 'Workbench',
+                settings: {
+                    parent: false,
+                    child: false
+                }
+            }, {
+                route: 'builder',
                 name: 'builder',
                 moduleId: 'main/workspace/draftboards/draftboard',
                 nav: true,
