@@ -3,7 +3,7 @@ import {createEvent} from "utils/events";
 import {
     GraphProcessor,
     GraphContext
-} from "main/workspace/builder/abstract-graph";
+} from "main/workspace/draftboards/abstract-graph";
 import {mxConstants} from "mxgraph";
 import {
     mxPoint,
@@ -13,13 +13,13 @@ import {
 
 import {InfrastructureElement} from 'elements/elements';
 
-import {Node} from "main/workspace/builder/cells/node";
+import {Node} from "main/workspace/draftboards/cells/node";
 
 
 
 import 'pnotify';
 import {Registry} from 'utils/registry';
-import {Builder} from "../../../../graph/builder";
+import {Builder} from "main/workspace/draftboards/graph/builder";
 
 import {inject} from 'aurelia-framework';
 

@@ -3,14 +3,14 @@ import {HttpClient} from "aurelia-fetch-client";
 import {createEvent} from "utils/events";
 import {ImageDescriptor} from "model/hal/image";
 
-import {Node} from "main/workspace/builder/cells/node";
-import {Builder} from "main/workspace/builder/graph/builder";
+import {Node} from "main/workspace/draftboards/cells/node";
+import {Builder} from "main/workspace/draftboards/graph/builder";
 import {Registry} from 'utils/registry'
 
 import {
     GraphProcessor,
     GraphContext
-} from "main/workspace/builder/abstract-graph";
+} from "main/workspace/draftboards/abstract-graph";
 
 import {InfrastructureElement} from 'elements/elements';
 

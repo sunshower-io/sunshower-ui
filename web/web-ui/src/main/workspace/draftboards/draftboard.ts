@@ -6,7 +6,7 @@ export interface NavigationAware {
     toggleRight() : void;
 }
 
-export class Builder {
+export class Draftboard {
 
     public router:Router;
     private child:NavigationAware;
@@ -20,7 +20,7 @@ export class Builder {
             name: 'applications',
             nav: true,
             title: 'Applications',
-            moduleId: 'main/workspace/builder/applications/applications',
+            moduleId: 'main/workspace/draftboards/applications/applications',
             settings:{
                 icon: 'block layout icon'
             }
@@ -57,6 +57,10 @@ export class Builder {
 
     toggleRight() {
         this.child.toggleRight();
+    }
+
+    hasDraftBoards() : boolean {
+        return true;
     }
 
 }

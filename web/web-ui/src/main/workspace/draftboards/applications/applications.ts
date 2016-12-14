@@ -25,8 +25,8 @@ import {
 
 
 import {
-    Builder, NavigationAware
-} from '../builder';
+    Draftboard, NavigationAware
+} from '../draftboard';
 
 import {Builder as GBuilder} from '../graph/builder'
 import {Registry} from 'utils/registry';
@@ -34,14 +34,14 @@ import {AddInfrastructure as AddInfrastructureDialog} from "./components/add-inf
 
 @inject(
     HttpClient,
-    Builder,
+    Draftboard,
     Registry
 )
 export class Applications extends AbstractGraph implements NavigationAware {
 
     private infrastructureDialog:AddInfrastructureDialog;
     constructor(private client: HttpClient,
-                private parent: Builder,
+                private parent: Draftboard,
                 registry:Registry
     ) {
         super(registry);

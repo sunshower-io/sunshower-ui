@@ -11,7 +11,7 @@ export class WorkspaceView {
         config.map([{
                 route: ['', 'builder'],
                 name: 'builder',
-                moduleId: 'main/workspace/builder/builder',
+                moduleId: 'main/workspace/draftboards/draftboard',
                 nav: true,
                 title: 'Workbench',
                 settings: {

@@ -1,5 +1,5 @@
 template
-    .ui.internally.celled.fluid.grid.workbench-container
+    .ui.internally.celled.fluid.grid
         .row
             .twelve.wide.centered.column
                 .ui.mini.secondary.menu
@@ -21,5 +21,6 @@ template
                                 img(src='styles/themes/hasli/assets/images/icons/toggle-right-menu-icon.svg')
         .row
             .column
-                // displays internally celled grid line
-    router-view
+    .workbench-container
+        router-view(show.bind="hasDraftBoards()")
+        draft-board-init-view(show.bind="!hasDraftBoards()")
