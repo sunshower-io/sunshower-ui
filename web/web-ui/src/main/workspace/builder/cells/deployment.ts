@@ -16,6 +16,8 @@ import {
 import {mxEvent} from "mxgraph";
 import {Listener, ObservedEvent} from "utils/observer";
 
+import {Kv} from 'utils/objects';
+
 
 
 export class ApplicationDeployment extends AbstractVertex<Task> implements Listener {
@@ -26,7 +28,7 @@ export class ApplicationDeployment extends AbstractVertex<Task> implements Liste
                 parent: Layer,
                 x: number,
                 y: number) {
-        super(task.id, task, parent, x, y, 160, 160, registry);
+        super(task.id, task, parent, x, y, 120, 120, registry);
         this.setAttribute('constituent', '1');
     }
 
@@ -43,8 +45,8 @@ export class ApplicationDeployment extends AbstractVertex<Task> implements Liste
     }
 
     private createMenu(builder: Builder) {
-        let menu = new VertexMenu(builder, this, '\uf013');
-        menu.addItem(new NetworkMenuItem());
+        // let menu = new VertexMenu(builder, this, '\uf013');
+        // menu.addItem(new NetworkMenuItem());
     }
 
     protected addOperatingSystemOverlay(): mxCellOverlay {
@@ -93,6 +95,14 @@ export class ApplicationDeployment extends AbstractVertex<Task> implements Liste
 
     apply(event: ObservedEvent): void {
         this.host.addCellOverlay(this, this.addOperatingSystemOverlay());
+    }
+
+    protected createCss() : Kv {
+        let result = super
+            .createCss()
+            .pair('strokeColor', '#DFDFDF');
+        console.log(result.toString());
+        return result;
     }
 }
 

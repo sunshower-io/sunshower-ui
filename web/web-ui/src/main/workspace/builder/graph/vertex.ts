@@ -1,4 +1,3 @@
-
 import {UUID} from "utils/uuid";
 import {Builder} from './builder';
 import {
@@ -19,23 +18,19 @@ import {Registry} from "utils/registry";
 import {mxCellOverlay} from "mxgraph";
 
 
-
-
 export class AbstractVertex<T> extends mxCell implements Vertex<T> {
 
-    private readonly delegate:Vertex<T>;
-    private attributes: {[key:string]: string};
+    private readonly delegate: Vertex<T>;
+    private attributes: {[key: string]: string};
 
-    constructor(
-        id:UUID,
-        public data:T,
-        public parent:mxCell,
-        x:number,
-        y:number,
-        width:number,
-        height:number,
-        public registry?:Registry,
-    ) {
+    constructor(id: UUID,
+                public data: T,
+                public parent: mxCell,
+                x: number,
+                y: number,
+                width: number,
+                height: number,
+                public registry?: Registry,) {
         super();
         this.delegate = new Node<T>(id.value, data);
         this.geometry = new mxGeometry(x, y, width, height);
@@ -44,15 +39,15 @@ export class AbstractVertex<T> extends mxCell implements Vertex<T> {
         this.setStyle(this.createStyle());
     }
 
-    addTo(builder:Builder) : mxCell {
+    addTo(builder: Builder): mxCell {
         let result = builder.addCell(this, this.parent);
-        for(let overlay of this.createOverlays()) {
+        for (let overlay of this.createOverlays()) {
             builder.addCellOverlay(result, overlay);
         }
         return result;
     }
 
-    protected createOverlays() : mxCellOverlay[] {
+    protected createOverlays(): mxCellOverlay[] {
         return [];
     }
 
@@ -64,41 +59,55 @@ export class AbstractVertex<T> extends mxCell implements Vertex<T> {
         return this.delegate.remove(edge);
     }
 
-    getAttribute(key:string) : string {
+    getAttribute(key: string): string {
         return this.attributes && this.attributes[key];
     }
 
-    setAttribute(key:string, value:string) {
-        if(!this.attributes) {
+    setAttribute(key: string, value: string) {
+        if (!this.attributes) {
             this.attributes = {};
         }
         this.attributes[key] = value;
     }
 
 
-    setComponent(component:boolean) : void {
-        if(component) {
+    setComponent(component: boolean): void {
+        if (component) {
             this.setAttribute('constituent', '1');
         } else {
-            if(this.attributes) {
+            if (this.attributes) {
                 delete this.attributes['constituent'];
             }
         }
     }
 
+    protected sizeChanged(): void {
+        if (this.children) {
+            for (let child of this.children) {
+                if (child instanceof AbstractVertex) {
+                    (<AbstractVertex<any>>child).sizeChanged();
+                }
+            }
+        }
+    }
 
-    protected createStyle(): string {
+    protected createCss(): Kv {
         return Kv.create(';')
             .pair('shape', 'label')
             .pair('imageWidth', 24)
             .pair('imageHeight', 24)
             .pair('fillOpacity', 0)
+            .pair('strokeColor', '#B8B8B8')
             .pair('verticalAlign', 'bottom')
             .pair('spacingBottom', '24')
             .pair('verticalLabelPosition', mxConstants.ALIGN_CENTER)
             .pair('labelPosition', mxConstants.ALIGN_MIDDLE)
             .pair('fontColor', '#000000')
             .pair('fontStyle', mxConstants.FONT_BOLD)
-            .toString();
     }
+
+    protected createStyle(): string {
+        return this.createCss().toString();
+    }
+
 }

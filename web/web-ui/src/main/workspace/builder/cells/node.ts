@@ -10,6 +10,8 @@ import {Registry} from 'utils/registry';
 import {Task} from 'task/tasks';
 import {LayeredNode} from "./layer";
 import {ApplicationDeployment} from "./deployment";
+import {Builder} from "../graph/builder";
+import {VertexMenu, NetworkMenuItem} from "../menu/task-cell";
 
 
 export class Node extends LayeredNode<ApplicationDeployment> {
@@ -24,9 +26,18 @@ export class Node extends LayeredNode<ApplicationDeployment> {
         super(parent, x, y, registry);
     }
 
+    public addTo(builder:Builder) : Layer {
+        this.createMenu(builder);
+        return super.addTo(builder);
+    }
+
+    private createMenu(builder: Builder) {
+        let menu = new VertexMenu(builder, this, '\uf013');
+        menu.addItem(new NetworkMenuItem());
+    }
+
 
     addApplicationById(id: string): void {
-        console.log("Add application");
         this.registry.client.fetch(`docker/images/${id}`)
             .then(r => r.json())
             .then(r => {
@@ -46,7 +57,7 @@ export class Node extends LayeredNode<ApplicationDeployment> {
     public addApplication(application: ApplicationDeployment): void {
         try {
             this.host.model.beginUpdate();
-            this.host.ungroupCells(this.applications);
+            // this.host.ungroupCells(this.applications);
             this.applications.push(application);
             this.addAndResize();
         } finally {
@@ -56,13 +67,13 @@ export class Node extends LayeredNode<ApplicationDeployment> {
 
     addGridRow() : void {
         let geo = this.geometry;
-        geo.height += (184 / this.scale);
+        geo.height += (144 / this.scale);
         this.rows++;
     }
 
     addGridColumn() : void {
         let geo = this.geometry;
-        geo.width += (184 / this.scale);
+        geo.width += (144 / this.scale);
         this.columns++;
     }
 
@@ -98,7 +109,8 @@ export class Node extends LayeredNode<ApplicationDeployment> {
                 geometry
             );
         }
-        this.host.groupCells(this, 24, this.applications);
+        this.sizeChanged();
+        // this.host.groupCells(this, 24, this.applications);
         this.host.model.setGeometry(this, geometry);
         this.host.refresh(this);
     }
@@ -110,8 +122,8 @@ export class Node extends LayeredNode<ApplicationDeployment> {
         geometry:mxGeometry
     ) {
         let scale = this.scale,
-            applicationX = column * (184 / scale),
-            applicationY = row * (184 / scale),
+            applicationX = column * (144 / scale) + 24,
+            applicationY = row * (144 / scale) + 48,
             applicationGeometry = application.geometry;
         applicationGeometry.x = applicationX;
         applicationGeometry.y = applicationY;

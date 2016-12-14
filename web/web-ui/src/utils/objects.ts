@@ -4,7 +4,7 @@ type kv = [string, any];
 
 export class Kv {
 
-    readonly values:kv[];
+    readonly values:{[key:string]: any};
     readonly sep:string;
     constructor(sep:string) {
         this.sep = sep;
@@ -12,14 +12,14 @@ export class Kv {
     }
 
     pair(key:string, value:any) : Kv {
-        this.values.push([key, value]);
+        this.values[key] = value;
         return this;
     }
 
     toString() : string {
         let result = "";
-        for(var p of this.values) {
-            result += p[0] + '=' + p[1] + this.sep;
+        for(let p in this.values) {
+            result += p + '=' + this.values[p] + this.sep;
         }
         return result;
     }

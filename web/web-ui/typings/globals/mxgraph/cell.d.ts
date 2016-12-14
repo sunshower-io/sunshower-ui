@@ -38,6 +38,8 @@ declare module 'mxgraph' {
         geometry        :mxGeometry;
         style           :string;
 
+        children        :mxCell[];
+
         constructor(label?:string, geometry?:mxGeometry);
 
         /**

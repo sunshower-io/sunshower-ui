@@ -27,7 +27,7 @@ export class LayeredNode<T> extends AbstractVertex<T> implements Layerable {
         super(
             UUID.randomUUID(),
             null, parent,
-            x, y, 208, 208,
+            x, y, 168, 192,
             registry,
         );
     }
