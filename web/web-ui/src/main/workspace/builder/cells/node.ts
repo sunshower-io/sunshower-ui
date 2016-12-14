@@ -7,7 +7,9 @@ import {
 } from 'mxgraph';
 import {Registry} from 'utils/registry';
 
-import {Task} from 'task/tasks';
+import {Application} from 'elements/elements';
+
+
 import {LayeredNode} from "./layer";
 import {ApplicationDeployment} from "./deployment";
 import {Builder} from "../graph/builder";
@@ -45,7 +47,7 @@ export class Node extends LayeredNode<ApplicationDeployment> {
                 this.addApplication(
                     new ApplicationDeployment(
                         this.registry,
-                        new Task(r.logo_url.large, 'frap'),
+                        new Application(r.logo_url.large),
                         this,
                         this.geometry.x,
                         this.geometry.y

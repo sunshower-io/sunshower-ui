@@ -2,8 +2,9 @@
 import {inject} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
 import {GraphManager} from "graph/graph-manager";
+import {ElementManager} from 'elements/element-manager';
 
-@inject(HttpClient, GraphManager)
+@inject(HttpClient, GraphManager, ElementManager)
 export class Registry {
 
     static readonly S3_IMAGES_PATH = 's3_i';
@@ -11,7 +12,8 @@ export class Registry {
 
     constructor(
         public client:HttpClient,
-        public graphManager:GraphManager
+        public graphManager:GraphManager,
+        public elementManager:ElementManager
     ) {
 
         this.values = {};

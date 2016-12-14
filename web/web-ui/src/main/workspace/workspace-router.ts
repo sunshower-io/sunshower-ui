@@ -30,16 +30,6 @@ export class WorkspaceView {
                     child: false
                 }
             }, {
-                route: 'infrastructure',
-                name: 'infrastructure',
-                moduleId: 'main/workspace/infrastructure/infrastructure',
-                nav: false,
-                title: 'Infrastructure',
-                settings: {
-                    parent: true,
-                    child: false
-                }
-            }, {
                 route: 'infrastructure/main',
                 name: 'main',
                 moduleId: 'main/workspace/infrastructure/main/main',
@@ -51,7 +41,7 @@ export class WorkspaceView {
                     childRoutes: [
                         {title: 'Infrastructure', href: '#/main/workspaces/workspace/infrastructure/main/main'},
                         {title: 'Clouds', href: '#/main/workspaces/workspace/infrastructure/clouds'},
-                        {title: 'Hosts',  href: '#/main/workspaces/workspace/infrastructure/hosts'},
+                        {title: 'Hosts', href: '#/main/workspaces/workspace/infrastructure/hosts'},
                         {title: 'Storage', href: '#/main/workspaces/workspace/infrastructure/storage'}
                     ]
                 }

@@ -4,7 +4,6 @@ import {
     bindable,
     customElement
 } from "aurelia-framework";
-import {Task} from "task/tasks";
 
 interface Component {
     name: string;
@@ -20,9 +19,6 @@ export class AddInfrastructure {
 
     @bindable
     components: Component[];
-
-    @bindable
-    task: Task;
 
 
     private element:HTMLElement;
@@ -46,30 +42,6 @@ export class AddInfrastructure {
     show() : void {
         $(this.element).modal('show');
     }
-
-    hide() : void {
-        this.task.dispatch('on-change', {
-            target:this.task
-        });
-        this.task = null;
-        $(this.element).modal('hide');
-    }
-
-    saveConfiguration() : void {
-        if(this.task) {
-            this.task.dispatch('on-change', {
-                target:this.task
-            });
-            this.task = null;
-        }
-        $(this.element).modal('hide');
-    }
-
-    cancel() : void {
-        $(this.element).modal('hide');
-        this.task = null;
-    }
-
 
 
     setActive(active:Component) {

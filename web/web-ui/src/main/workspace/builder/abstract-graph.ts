@@ -130,12 +130,6 @@ export abstract class AbstractGraph {
     }
 
 
-    protected abstract removeCells(cells:mxCell[]);
-
-
-    protected abstract onConnection(source:mxCell, target:mxCell, dropTarget:mxCell) : boolean;
-
-
     protected url(url:string) : string {
         return `/hasli/api/v1/storage/s3/images/${url}`;
     }

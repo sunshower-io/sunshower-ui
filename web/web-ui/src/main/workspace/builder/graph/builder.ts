@@ -17,7 +17,6 @@ import {
 } from "mxgraph";
 
 import {ConnectionHandler} from './connection-handler';
-import {TaskManager, Task} from "task/tasks";
 import {Grid} from "../grid";
 
 mxConstants.HANDLE_FILLCOLOR = '#239AE8';
@@ -48,8 +47,7 @@ export class Builder extends mxGraph {
 
     private grid: Grid;
 
-    constructor(public container: HTMLElement,
-                public taskManager: TaskManager) {
+    constructor(public container: HTMLElement) {
         super(container, new mxGraphModel());
         new mxRubberband(this);
         this.setPanning(true)

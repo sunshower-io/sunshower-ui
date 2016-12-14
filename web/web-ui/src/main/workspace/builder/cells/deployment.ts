@@ -1,5 +1,5 @@
 import {Registry} from 'utils/registry';
-import {Task} from "task/tasks";
+
 import {AbstractVertex} from "../graph/vertex";
 import {
     Layer,
@@ -8,27 +8,36 @@ import {
     mxConstants,
     mxCellOverlay
 } from "mxgraph";
+
 import {Builder} from "../graph/builder";
+
+
 import {
-    VertexMenu,
-    NetworkMenuItem,
-} from "../menu/task-cell";
+    Application
+} from 'elements/elements';
+
 import {mxEvent} from "mxgraph";
-import {Listener, ObservedEvent} from "utils/observer";
+
+import {
+    Listener,
+    ObservedEvent
+} from "utils/observer";
 
 import {Kv} from 'utils/objects';
 
 
 
-export class ApplicationDeployment extends AbstractVertex<Task> implements Listener {
+export class ApplicationDeployment extends AbstractVertex<Application> implements Listener {
 
     host: Builder;
     constructor(registry: Registry,
-                task: Task,
+                element: Application,
                 parent: Layer,
                 x: number,
                 y: number) {
-        super(task.id, task, parent, x, y, 120, 120, registry);
+        super(
+            element.id,
+            element, parent, x, y, 120, 120, registry);
         this.setAttribute('constituent', '1');
     }
 
@@ -49,21 +58,21 @@ export class ApplicationDeployment extends AbstractVertex<Task> implements Liste
         // menu.addItem(new NetworkMenuItem());
     }
 
-    protected addOperatingSystemOverlay(): mxCellOverlay {
-        let
-            url = `assets/sui/themes/hasli/assets/images/logos/os/${this.data.deploymentTarget.operatingSystem.icon}`,
-            image = new mxImage(url, 24, 24),
-            iconOverlay = new mxCellOverlay(
-                image,
-                null,
-                mxConstants.ALIGN_RIGHT,
-                mxConstants.ALIGN_TOP,
-                {x: -14, y: 14},
-                // null,
-                'default'
-            );
-        return iconOverlay;
-    }
+    // protected addOperatingSystemOverlay(): mxCellOverlay {
+    //     // let
+    //     //     url = `assets/sui/themes/hasli/assets/images/logos/os/${this.data.deploymentTarget.operatingSystem.icon}`,
+    //     //     image = new mxImage(url, 24, 24),
+    //     //     iconOverlay = new mxCellOverlay(
+    //     //         image,
+    //     //         null,
+    //     //         mxConstants.ALIGN_RIGHT,
+    //     //         mxConstants.ALIGN_TOP,
+    //     //         {x: -14, y: 14},
+    //     //         // null,
+    //     //         'default'
+    //     //     );
+    //     // return iconOverlay;
+    // }
 
 
     protected applicationOverlay(): mxCellOverlay {
@@ -84,18 +93,22 @@ export class ApplicationDeployment extends AbstractVertex<Task> implements Liste
     protected createOverlays(): mxCellOverlay[] {
         let results = [];
         results.push(this.applicationOverlay());
-        if (
-            this.data.deploymentTarget &&
-            this.data.deploymentTarget.operatingSystem) {
-            results.push(this.addOperatingSystemOverlay());
-        }
+        // if (
+        //     this.data.deploymentTarget &&
+        //     this.data.deploymentTarget.operatingSystem) {
+        //     results.push(this.addOperatingSystemOverlay());
+        // }
 
         return results;
     }
 
     apply(event: ObservedEvent): void {
-        this.host.addCellOverlay(this, this.addOperatingSystemOverlay());
+
     }
+
+    // apply(event: ObservedEvent): void {
+    //     this.host.addCellOverlay(this, this.addOperatingSystemOverlay());
+    // }
 
     protected createCss() : Kv {
         let result = super

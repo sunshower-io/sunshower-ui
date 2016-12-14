@@ -30,7 +30,8 @@ export class AbstractVertex<T> extends mxCell implements Vertex<T> {
                 y: number,
                 width: number,
                 height: number,
-                public registry?: Registry,) {
+                public registry?: Registry
+    ) {
         super();
         this.delegate = new Node<T>(id.value, data);
         this.geometry = new mxGeometry(x, y, width, height);

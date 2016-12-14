@@ -5,7 +5,6 @@ import {
     mxStylesheet,
     mxConnectionHandler,
 } from "mxgraph";
-import {TaskManager} from "task/tasks";
 
 import {Builder} from './builder';
 
