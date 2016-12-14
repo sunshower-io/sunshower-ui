@@ -11,7 +11,7 @@ import {Task} from 'task/tasks';
 import {LayeredNode} from "./layer";
 import {ApplicationDeployment} from "./deployment";
 import {Builder} from "../graph/builder";
-import {VertexMenu, NetworkMenuItem} from "../menu/task-cell";
+import {VertexMenu, NetworkMenuItem, StorageMenuItem} from "../menu/task-cell";
 
 
 export class Node extends LayeredNode<ApplicationDeployment> {
@@ -34,6 +34,7 @@ export class Node extends LayeredNode<ApplicationDeployment> {
     private createMenu(builder: Builder) {
         let menu = new VertexMenu(builder, this, '\uf013');
         menu.addItem(new NetworkMenuItem());
+        menu.addItem(new StorageMenuItem());
     }
 
 

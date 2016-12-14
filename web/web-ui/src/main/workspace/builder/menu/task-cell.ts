@@ -30,14 +30,20 @@ export class MenuItem {
     click :Listener;
 }
 
+export class StorageMenuItem extends MenuItem {
+    constructor() {
+        super();
+        this.index = 1;
+        this.icon = '\uf1c0';
+    }
+}
+
 export class NetworkMenuItem extends MenuItem {
     constructor() {
         super();
         this.index = 0;
         this.icon = '\uf0e8';
     }
-
-
 }
 
 

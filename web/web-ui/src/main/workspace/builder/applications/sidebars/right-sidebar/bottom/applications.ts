@@ -47,11 +47,17 @@ export class Applications {
             .then(response => response.json())
             .then(elements => {
                 this.elements = elements;
-                let top = $(this.element).offset().top,
-                    wheight = $(window).height(),
-                    height = wheight - top - 56;
-                $(this.element).height(height);
+                this.resize();
             });
+
+        $(window).resize(this.resize);
+    }
+
+    private resize = () => {
+        let top = $(this.element).offset().top,
+            wheight = $(window).height(),
+            height = wheight - top - 32;
+        $(this.element).height(height);
     }
 }
 
@@ -90,7 +96,6 @@ class ApplicationProcessor implements GraphProcessor {
 
         if(parent instanceof Node) {
             node = parent as Node;
-            addRelative = true;
         } else {
             node = new Node(
                 parent,
