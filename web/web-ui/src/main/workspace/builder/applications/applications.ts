@@ -55,14 +55,13 @@ export class Applications extends AbstractGraph implements NavigationAware {
 
 
     modifyGraph(event: Event) {
-        let offset = $(this.graph.container).offset();
-        let context = {
+        let offset = $(this.graph.container).offset(),
+            context = {
                 offset: offset,
                 graph: this.graph
             },
             processor = (<any>event).detail as GraphProcessor;
         processor.apply(context);
-
     }
 
 
@@ -80,7 +79,7 @@ export class Applications extends AbstractGraph implements NavigationAware {
             let offset = $(this.container).offset(),
                 width = $(this.container).width();
             return {
-                top: offset.top + 20,
+                top: offset.top - 40,
                 left: width - 320
             }
         }
