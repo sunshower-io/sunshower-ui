@@ -80,7 +80,7 @@ img.transparent {
   width: 300px !important;
   border-top: none;
   position: fixed;
-  top: 182px !important;
+  top: 114px !important;
   left: 0;
 
   backface-visibility: hidden;

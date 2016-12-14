@@ -79,7 +79,7 @@ export class Applications extends AbstractGraph implements NavigationAware {
             let offset = $(this.container).offset(),
                 width = $(this.container).width();
             return {
-                top: offset.top - 40,
+                top: offset.top + 20,
                 left: width - 320
             }
         }
