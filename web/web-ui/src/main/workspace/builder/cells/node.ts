@@ -16,6 +16,9 @@ export class Node extends LayeredNode<ApplicationDeployment> {
 
 
     applications: ApplicationDeployment[] = [];
+    rows                : number = 1;
+    columns             : number = 1;
+    scale               : number = 1;
 
     constructor(parent:Layer, x:number, y:number, registry?: Registry) {
         super(parent, x, y, registry);
@@ -39,25 +42,27 @@ export class Node extends LayeredNode<ApplicationDeployment> {
             });
     }
 
-    rows                : number = 1;
-    columns             : number = 1;
 
     public addApplication(application: ApplicationDeployment): void {
-        this.host.ungroupCells(this.applications);
-        this.applications.push(application);
-        this.addAndResize();
-
+        try {
+            this.host.model.beginUpdate();
+            this.host.ungroupCells(this.applications);
+            this.applications.push(application);
+            this.addAndResize();
+        } finally {
+            this.host.model.endUpdate();
+        }
     }
 
     addGridRow() : void {
         let geo = this.geometry;
-        geo.height += 184;
+        geo.height += (184 / this.scale);
         this.rows++;
     }
 
     addGridColumn() : void {
         let geo = this.geometry;
-        geo.width += 184;
+        geo.width += (184 / this.scale);
         this.columns++;
     }
 
@@ -104,11 +109,14 @@ export class Node extends LayeredNode<ApplicationDeployment> {
         application:ApplicationDeployment,
         geometry:mxGeometry
     ) {
-        let applicationX = column * 184,
-            applicationY = row * 184,
+        let scale = this.scale,
+            applicationX = column * (184 / scale),
+            applicationY = row * (184 / scale),
             applicationGeometry = application.geometry;
         applicationGeometry.x = applicationX;
         applicationGeometry.y = applicationY;
+        applicationGeometry.width /= scale;
+        applicationGeometry.height /= this.scale;
         application.addTo(this.host);
     }
 
