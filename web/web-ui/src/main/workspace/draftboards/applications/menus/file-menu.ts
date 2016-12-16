@@ -28,7 +28,7 @@ export class SaveMenu extends AbstractMenuItem {
         super();
 
     }
-    showExtraData = true;
+    showExtraData = false;
 
     apply(editor: EditorContext): void {
         this.dialogService.open({ viewModel: SaveDialog, model: { firstName: 'Owen', testScrolling: this.showExtraData }}).then((result) => {
@@ -39,8 +39,6 @@ export class SaveMenu extends AbstractMenuItem {
                 console.log('bad');
             }
         });
-
-
     }
 }
 

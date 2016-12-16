@@ -3,7 +3,17 @@ import 'fetch';
 import {Aurelia} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
 import {LocalStorage, createStorage} from "./storage/local/local-storage";
-import {AuthenticationContextHolder, User, AuthenticationContext} from "./model/core/security/index";
+import {
+    AuthenticationContextHolder,
+    User,
+    AuthenticationContext
+} from "./model/core/security/index";
+
+import {DialogConfiguration} from "aurelia-dialog";
+import {
+    SemanticUIRenderer
+} from "common/renderers/semantic-ui-renderer";
+import {Renderer} from "aurelia-dialog";
 
 export function param(name) {
     return decodeURIComponent((new RegExp(
@@ -16,13 +26,16 @@ export function param(name) {
 }
 
 export function configure(aurelia: Aurelia) {
+
     aurelia.use
         .standardConfiguration()
         .globalResources([
             'common/sidenav/sidenav',
             'common/elements/menu'
-        ]).plugin('aurelia-dialog')
-        .developmentLogging();
+        ])
+        .plugin('aurelia-dialog', (config: DialogConfiguration) => {
+            config.useRenderer(SemanticUIRenderer);
+        }).developmentLogging();
 
     let container = aurelia.container,
         http = new HttpClient();
@@ -40,10 +53,8 @@ export function configure(aurelia: Aurelia) {
     });
 
 
-
     let storage = createStorage(),
         tokenHolder = new AuthenticationContextHolder(http, storage);
-
 
 
     container.registerInstance(
@@ -54,7 +65,7 @@ export function configure(aurelia: Aurelia) {
     http.fetch('initialize/active')
         .then(data => data.json())
         .then(data => {
-            if(!data.value) {
+            if (!data.value) {
                 container.registerInstance(HttpClient, http);
                 aurelia.start().then(() => aurelia.setRoot('initialize/initialize'))
             } else {
@@ -72,7 +83,7 @@ export function configure(aurelia: Aurelia) {
                                 headers: {
                                     'Accept': 'application/json',
                                     'Content-Type': 'application/json',
-                                    'X-AUTH-TOKEN' : token
+                                    'X-AUTH-TOKEN': token
                                 }
                             })
                     });
