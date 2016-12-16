@@ -1,10 +1,11 @@
 import {RouterConfiguration, Router} from "aurelia-router";
 
+import {
+    Editor,
+    NavigationAware
+} from './editor';
 
-export interface NavigationAware {
-    toggleLeft() : boolean;
-    toggleRight() : boolean;
-}
+import {MenuItem} from 'common/elements/menu';
 
 export class Draftboard {
 
@@ -15,7 +16,6 @@ export class Draftboard {
 
 
     configureRouter(config:RouterConfiguration, router:Router) {
-
         config.map([{
             route: ['', 'application'],
             name: 'applications',
@@ -24,25 +24,6 @@ export class Draftboard {
             moduleId: 'main/workspace/draftboards/applications/applications',
             settings:{
                 icon: 'block layout icon'
-            }
-        }, {
-            route: 'infrastructure',
-            name: 'infrastructure',
-            nav: true,
-            title: 'Infrastructure',
-            moduleId: 'main/workspace/builder/infrastructure/infrastructure',
-            settings: {
-                icon: 'server icon'
-            }
-        }, {
-
-            route: 'deploy',
-            name: 'deploy',
-            nav: true,
-            title: 'Deploy',
-            moduleId: 'main/workspace/builder/deploy',
-            settings: {
-                icon: 'arrow right icon'
             }
         }]);
         this.router = router;

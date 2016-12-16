@@ -3,12 +3,9 @@ template
         .row(style="height:40px")
             .sixteen.wide.centered.column(style="height:40px; padding:0px;")
                 .ui.mini.secondary.menu(ref="menu" style="height:100%; padding-left:304px !important; margin-right:304px !important")
-                    a.item(repeat.for="child of router.navigation",
-                        href.bind="child.href",
-                        class="${child.isActive ? 'active' : ''}"
-                    )
-                        i(class="${child.settings.icon} ")
-                        .text ${child.title}
+                    a.item(repeat.for="menu of child.menus")
+                        i(class="${menu.style} icon")
+                        | ${menu.name}
                     .right.compact.mini.menu
                         a.item
                             i.search.icon

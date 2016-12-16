@@ -75,6 +75,7 @@ img.transparent {
   border-bottom: 1px solid #D6D6D7 !important;
   height: 350px !important;
   margin:0px !important;
+  padding:0px !important;
 }
 
 .right--menu, .left--menu {

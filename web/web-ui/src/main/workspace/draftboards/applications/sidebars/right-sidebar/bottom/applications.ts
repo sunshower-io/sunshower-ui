@@ -7,10 +7,15 @@ import {Node} from "main/workspace/draftboards/cells/node";
 import {Builder} from "main/workspace/draftboards/graph/builder";
 import {Registry} from 'utils/registry'
 
+// import {
+//     GraphProcessor,
+//     GraphContext
+// } from "main/workspace/draftboards/abstract-graph";
+
 import {
-    GraphProcessor,
-    GraphContext
-} from "main/workspace/draftboards/abstract-graph";
+    EditorOperation,
+    EditorContext
+} from 'main/workspace/draftboards/editor';
 
 import {InfrastructureElement} from 'elements/elements';
 
@@ -63,7 +68,7 @@ export class Applications {
 }
 
 
-class ApplicationProcessor implements GraphProcessor {
+class ApplicationProcessor implements EditorOperation {
 
     constructor(
         private id:string,
@@ -74,7 +79,7 @@ class ApplicationProcessor implements GraphProcessor {
 
     }
 
-    resolveParent(context:GraphContext, x:number, y:number) : Layer {
+    resolveParent(context:EditorContext, x:number, y:number) : Layer {
         let graph = context.graph,
             defaultParent = graph.getDefaultParent(),
             parent = graph.getCellAt(x, y, defaultParent, true, false);
@@ -87,7 +92,7 @@ class ApplicationProcessor implements GraphProcessor {
     }
 
 
-    apply(context: GraphContext): void {
+    apply(context: EditorContext): void {
         let
             x = this.coordinates.x,
             y = this.coordinates.y - context.offset.top,

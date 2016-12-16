@@ -1,9 +1,9 @@
 
 import {createEvent} from "utils/events";
 import {
-    GraphProcessor,
-    GraphContext
-} from "main/workspace/draftboards/abstract-graph";
+    EditorOperation,
+    EditorContext
+} from "main/workspace/draftboards/editor";
 import {mxConstants} from "mxgraph";
 import {
     mxPoint,
@@ -54,12 +54,12 @@ export class Palette {
 }
 
 
-class NodeProcessor implements GraphProcessor {
+class NodeProcessor implements EditorOperation {
     constructor(private coordinates:mxPoint, private registry:Registry) {
 
     }
 
-    apply(context: GraphContext): void {
+    apply(context: EditorContext): void {
 
         let
             parent = context.graph.getDefaultParent(),

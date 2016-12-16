@@ -18,20 +18,37 @@ import {
 } from "mxgraph";
 
 import {
-    AbstractGraph,
-    GraphProcessor
+    AbstractGraph
 } from '../abstract-graph'
+
+import {
+    EditorEvent,
+    EditorOperation
+} from '../editor';
 
 
 
 import {
-    Draftboard, NavigationAware
+    Draftboard
 } from '../draftboard';
+
+import {
+     NavigationAware
+} from '../editor';
 
 import {Builder as GBuilder} from '../graph/builder'
 import {Registry} from 'utils/registry';
-import {AddInfrastructure as AddInfrastructureDialog} from "./components/add-infrastructure";
+import {
+    AddInfrastructure as AddInfrastructureDialog
+} from "./components/add-infrastructure";
 
+import FileMenu from './menus/file-menu';
+import EditMenu from './menus/edit-menu';
+import ViewMenu from './menus/view-menu';
+import {ZoomOut, ZoomIn} from "./menus/zoom";
+import {Maximize} from "./menus/maximize";
+
+import {MenuItem} from 'common/elements/menu';
 @inject(
     HttpClient,
     Draftboard,
@@ -39,13 +56,27 @@ import {AddInfrastructure as AddInfrastructureDialog} from "./components/add-inf
 )
 export class Applications extends AbstractGraph implements NavigationAware {
 
+    public menus:MenuItem[];
     private infrastructureDialog:AddInfrastructureDialog;
     constructor(private client: HttpClient,
                 private parent: Draftboard,
                 registry:Registry
     ) {
         super(registry);
+        this.menus = [];
+        this.addMenu(new FileMenu());
+        this.addMenu(new EditMenu());
+        this.addMenu(new ViewMenu());
+        this.addMenu(new ZoomOut());
+        this.addMenu(new ZoomIn());
+        this.addMenu(new Maximize());
+
     }
+
+    protected addMenu(menu:MenuItem) {
+        this.menus.push(menu);
+    }
+
 
 
     attached(): void {
@@ -60,7 +91,7 @@ export class Applications extends AbstractGraph implements NavigationAware {
                 offset: offset,
                 graph: this.graph
             },
-            processor = (<any>event).detail as GraphProcessor;
+            processor = (<any>event).detail as EditorOperation;
         processor.apply(context);
     }
 
