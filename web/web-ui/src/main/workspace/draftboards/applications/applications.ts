@@ -56,12 +56,13 @@ import {
 
 import {bindable} from 'aurelia-framework';
 import {ToggleLeft, ToggleRight, SearchMenu} from "./menus/misc-menus";
-
+import {DialogService} from 'aurelia-dialog';
 
 @inject(
     HttpClient,
     Draftboard,
-    Registry
+    Registry,
+    DialogService
 )
 export class Applications extends AbstractGraph implements NavigationAware, OperationContextFactory {
 
@@ -72,11 +73,12 @@ export class Applications extends AbstractGraph implements NavigationAware, Oper
     private infrastructureDialog:AddInfrastructureDialog;
     constructor(private client: HttpClient,
                 private parent: Draftboard,
-                registry:Registry
+                registry:Registry,
+                private dialogService:DialogService
     ) {
         super(registry);
         this.menus = [];
-        this.addMenu(new FileMenu());
+        this.addMenu(new FileMenu(dialogService));
         this.addMenu(new EditMenu());
         this.addMenu(new ViewMenu());
         this.addMenu(new ZoomOut());

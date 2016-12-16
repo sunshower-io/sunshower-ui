@@ -10,8 +10,6 @@ export class ToggleLeft extends AbstractMenuItem {
 
     apply(editor: EditorContext): void {
         editor.host.toggleLeft();
-
-        console.log("FRAPADAP");
     }
 }
 
@@ -22,7 +20,6 @@ export class ToggleRight extends AbstractMenuItem {
 
     apply(editor: EditorContext): void {
         editor.host.toggleRight();
-        console.log("FRAP");
     }
 }
 

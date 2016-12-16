@@ -68,10 +68,16 @@ export interface MenuItem {
     apply(editor: OperationContext): void;
 }
 
-export abstract class AbstractMenuItem {
+export abstract class AbstractMenuItem implements MenuItem {
     align: string = 'left';
+    menus       ?: MenuItem[];
     apply(editor:OperationContext) : void {
-        console.log(editor);
+    }
 
+    addMenu(menu:MenuItem) {
+        if(!this.menus) {
+            this.menus = [];
+        }
+        this.menus.push(menu);
     }
 }

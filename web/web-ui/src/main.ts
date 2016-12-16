@@ -21,7 +21,7 @@ export function configure(aurelia: Aurelia) {
         .globalResources([
             'common/sidenav/sidenav',
             'common/elements/menu'
-        ])
+        ]).plugin('aurelia-dialog')
         .developmentLogging();
 
     let container = aurelia.container,
