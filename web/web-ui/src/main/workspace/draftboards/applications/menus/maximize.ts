@@ -1,7 +1,7 @@
 
-import {MenuItem} from 'common/elements/menu';
+import {MenuItem, AbstractMenuItem} from 'common/elements/menu';
 import {EditorContext} from "main/workspace/draftboards/editor";
-export class Maximize implements MenuItem {
+export class Maximize extends AbstractMenuItem implements MenuItem {
     style: string = 'maximize icon';
     name: string;
     menus: MenuItem[];

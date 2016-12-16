@@ -1,4 +1,5 @@
 import {RouterConfiguration, Router} from "aurelia-router";
+import {bindable, inject} from 'aurelia-framework';
 
 import {
     Editor,
@@ -6,12 +7,18 @@ import {
 } from './editor';
 
 import {MenuItem} from 'common/elements/menu';
+import Menu from 'common/elements/menu';
 
+@inject(Menu)
 export class Draftboard {
 
     public router:Router;
-    public menu:HTMLElement;
+
     private child:NavigationAware;
+    @bindable
+    private menus: MenuItem[] = [];
+
+    private menu:Menu;
 
 
 
@@ -31,15 +38,18 @@ export class Draftboard {
 
     set(child:NavigationAware) : void {
         this.child = child;
+        this.menu.setItems((<any>child).menus);
     }
 
-    toggleLeft() {
-        this.toggle('margin-left', this.child.toggleLeft(), '0px', '-304px');
+    toggleLeft() : boolean {
+        return this.toggle(
+            'margin-left',
+            this.child.toggleLeft(), '0px', '-304px');
     }
 
 
-    toggleRight() {
-        this.toggle('margin-right', this.child.toggleRight(), '304px', '0px')
+    toggleRight() : boolean {
+        return this.toggle('margin-right', this.child.toggleRight(), '304px', '0px')
     }
 
     hasDraftBoards() : boolean {
@@ -51,13 +61,12 @@ export class Draftboard {
         expanded:boolean,
         open:string,
         close:string
-    ) {
+    ) : boolean {
         if(expanded) {
-            $(this.menu).css(style, open);
+            $(this.menu.element).css(style, open);
         } else {
-            $(this.menu).css(style, close);
+            $(this.menu.element).css(style, close);
         }
-
-
+        return expanded;
     }
 }

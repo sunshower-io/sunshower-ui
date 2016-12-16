@@ -23,7 +23,7 @@ import {
 
 import {
     EditorEvent,
-    EditorOperation
+    EditorOperation, EditorContext
 } from '../editor';
 
 
@@ -48,15 +48,27 @@ import ViewMenu from './menus/view-menu';
 import {ZoomOut, ZoomIn} from "./menus/zoom";
 import {Maximize} from "./menus/maximize";
 
-import {MenuItem} from 'common/elements/menu';
+import {
+    MenuItem,
+    OperationContext,
+    OperationContextFactory
+} from 'common/elements/menu';
+
+import {bindable} from 'aurelia-framework';
+import {ToggleLeft, ToggleRight, SearchMenu} from "./menus/misc-menus";
+
+
 @inject(
     HttpClient,
     Draftboard,
     Registry
 )
-export class Applications extends AbstractGraph implements NavigationAware {
+export class Applications extends AbstractGraph implements NavigationAware, OperationContextFactory {
 
+    @bindable
     public menus:MenuItem[];
+
+
     private infrastructureDialog:AddInfrastructureDialog;
     constructor(private client: HttpClient,
                 private parent: Draftboard,
@@ -70,7 +82,19 @@ export class Applications extends AbstractGraph implements NavigationAware {
         this.addMenu(new ZoomOut());
         this.addMenu(new ZoomIn());
         this.addMenu(new Maximize());
+        this.addMenu(new SearchMenu());
+        this.addMenu(new ToggleLeft());
+        this.addMenu(new ToggleRight());
 
+    }
+
+    create(): EditorContext {
+        let offset = $(this.graph.container).offset();
+        return {
+            host:this.parent,
+            graph:this.graph,
+            offset: offset
+        };
     }
 
     protected addMenu(menu:MenuItem) {
@@ -86,13 +110,8 @@ export class Applications extends AbstractGraph implements NavigationAware {
 
 
     modifyGraph(event: Event) {
-        let offset = $(this.graph.container).offset(),
-            context = {
-                offset: offset,
-                graph: this.graph
-            },
-            processor = (<any>event).detail as EditorOperation;
-        processor.apply(context);
+        let processor = (<any>event).detail as EditorOperation;
+        processor.apply(this.create());
     }
 
 

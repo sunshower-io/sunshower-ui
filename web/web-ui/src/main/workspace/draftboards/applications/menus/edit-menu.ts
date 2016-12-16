@@ -1,7 +1,7 @@
-import {MenuItem} from 'common/elements/menu';
+import {MenuItem, AbstractMenuItem} from 'common/elements/menu';
 import {EditorContext} from "main/workspace/draftboards/editor";
 
-export default class EditMenu implements MenuItem {
+export default class EditMenu extends AbstractMenuItem implements MenuItem {
     style: string = 'write';
     name: string = 'Edit';
     menus: MenuItem[];

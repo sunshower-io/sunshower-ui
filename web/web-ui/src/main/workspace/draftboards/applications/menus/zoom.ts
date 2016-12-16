@@ -1,7 +1,7 @@
-import {MenuItem} from 'common/elements/menu';
+import {MenuItem, AbstractMenuItem} from 'common/elements/menu';
 import {EditorContext} from "main/workspace/draftboards/editor";
 
-export class ZoomIn implements MenuItem {
+export class ZoomIn extends AbstractMenuItem implements MenuItem {
     style: string = 'zoom icon';
     name: string;
     menus: MenuItem[];
@@ -11,7 +11,8 @@ export class ZoomIn implements MenuItem {
 
 }
 
-export class ZoomOut implements MenuItem {
+export class ZoomOut extends AbstractMenuItem implements MenuItem {
+
     style: string = 'zoom out icon';
     name: string;
     menus: MenuItem[];

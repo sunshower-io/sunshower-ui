@@ -50,7 +50,6 @@ export abstract class AbstractGraph {
 
     attached() {
         this.decorateGraphHandler();
-
         if (!mxClient.isBrowserSupported()) {
             mxUtils.error('Browser is not supported!', 200, false);
         }

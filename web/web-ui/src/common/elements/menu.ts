@@ -1,22 +1,77 @@
+import {
+    bindable,
+    observable,
+    customElement,
+    containerless,
+    inject,
+    TaskQueue
+} from "aurelia-framework";
 
-import {bindable} from "aurelia-framework";
+
+@containerless
+@inject(TaskQueue)
+@customElement('menu')
+export default class Menu {
+
+    element: HTMLElement;
+
+    @bindable
+    dropdown: boolean = true;
+
+    @bindable
+    style: string;
+
+    @bindable
+    classes: string;
+
+    @bindable
+    @observable
+    items: MenuItem[];
+
+    @bindable
+    contextFactory: OperationContextFactory;
+
+    constructor(private taskQueue:TaskQueue)  {
+
+    }
 
 
+    itemsChanged(oldValue: MenuItem[],
+                 newValue: MenuItem[]): void {
+        let element = this.element;
+        this.taskQueue.queueMicroTask(() => {
+            $(element).find('.dropdown').dropdown({
+                action: 'hide'
+            });
+        });
+    }
 
-@bindable
-export class Menu {
-    items       : MenuItem[];
-    context     : OperationContext;
+
+    setItems(items: MenuItem[]) {
+        this.items = items;
+    }
 }
 
 export interface OperationContext {
 
 }
 
-export interface MenuItem {
-    style       : string;
-    name        : string;
-    menus       : MenuItem[];
+export interface OperationContextFactory {
+    create() :OperationContext;
+}
 
-    apply(editor:OperationContext) : void;
+export interface MenuItem {
+    style       ?: string;
+    name        ?: string;
+    align       ?: string;
+    menus       ?: MenuItem[];
+    apply(editor: OperationContext): void;
+}
+
+export abstract class AbstractMenuItem {
+    align: string = 'left';
+    apply(editor:OperationContext) : void {
+        console.log(editor);
+
+    }
 }
