@@ -25,22 +25,17 @@ module.exports = {
     'normalize': [[
             'pnotify', [
                 '/dist/*'
-        ]],
-        [
+        ]], [
             'mxgraph', [
                 '/javascript/*/**',
                 '/javascript/*'
             ]
-
-
-        ],
-        [
+        ], [
             // include font-awesome.css and its fonts files
             'font-awesome', [
             '/css/font-awesome.min.css',
             '/fonts/*'
-        ]
-        ],
+        ]],
         [
             'bluebird', [
                 '/js/browser/bluebird.min.js'

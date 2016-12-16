@@ -18,20 +18,20 @@ export class WorkspaceView {
         config.map([
             {
                 route: ['', 'navigator'],
-                name: 'builder',
-                moduleId: 'main/workspace/draftboard-navigator/navigator',
+                name: 'Navigator',
+                moduleId: './navigator/navigator',
                 nav: true,
-                title: 'Workbench',
+                title: 'Navigator',
                 settings: {
                     parent: false,
                     child: false
                 }
             }, {
-                route: 'builder',
-                name: 'builder',
-                moduleId: 'main/workspace/draftboards/draftboard',
+                route: 'draftboard',
+                name: 'draftboard',
+                moduleId: './draftboards/draftboard',
                 nav: true,
-                title: 'Workbench',
+                title: 'draftboard',
                 settings: {
                     parent: false,
                     child: false
