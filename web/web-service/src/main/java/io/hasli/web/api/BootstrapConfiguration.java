@@ -112,7 +112,7 @@ public class BootstrapConfiguration {
         administrator.setEnabled(true);
         administrator.setUsername("administrator");
         administrator.setEmailAddress("administrator@hasli.io");
-        administrator.setPassword("t3sti9");
+        administrator.setPassword("h4s143v3r!");
         application.setAdministrators(Collections.singletonList(administrator));
         applicationService.initialize(application);
     }
