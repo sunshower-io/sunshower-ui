@@ -1,16 +1,23 @@
 import 'jquery';
-import {RouterConfiguration} from "aurelia-router";
-import {Router} from "aurelia-router";
+import {bindable} from 'aurelia-framework';
+import {
+    Router,
+    RouterConfiguration
+} from "aurelia-router";
+
 
 export class WorkspaceView {
 
     public router: Router;
 
+    @bindable
+    public loading: boolean;
+
     public configureRouter(config: RouterConfiguration, router: Router) {
         config.title = 'Workspace';
         config.map([
             {
-                route: ['', 'builder'],
+                route: ['', 'navigator'],
                 name: 'builder',
                 moduleId: 'main/workspace/draftboard-navigator/navigator',
                 nav: true,
@@ -42,6 +49,17 @@ export class WorkspaceView {
             .transition('fade in');
         $('.ui.dropdown')
             .dropdown();
+    }
+
+    activate() : void {
+        this.loading = false;
+    }
+
+
+    create() : void {
+        this.loading = true;
+        this.router.navigate('builder');
+        // this.loading = false;
     }
 
 }

@@ -1,8 +1,8 @@
 template
     .ui.internally.celled.fluid.grid
-        .row
-            .twelve.wide.centered.column
-                .ui.mini.secondary.menu
+        .row(style="height:40px")
+            .sixteen.wide.centered.column(style="height:40px; padding:0px;")
+                .ui.mini.secondary.menu(ref="menu" style="height:100%; padding-left:304px !important; margin-right:304px !important")
                     a.item(repeat.for="child of router.navigation",
                         href.bind="child.href",
                         class="${child.isActive ? 'active' : ''}"

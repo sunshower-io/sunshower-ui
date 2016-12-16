@@ -2,13 +2,14 @@ import {RouterConfiguration, Router} from "aurelia-router";
 
 
 export interface NavigationAware {
-    toggleLeft() : void;
-    toggleRight() : void;
+    toggleLeft() : boolean;
+    toggleRight() : boolean;
 }
 
 export class Draftboard {
 
     public router:Router;
+    public menu:HTMLElement;
     private child:NavigationAware;
 
 
@@ -52,15 +53,30 @@ export class Draftboard {
     }
 
     toggleLeft() {
-        this.child.toggleLeft();
+        this.toggle('margin-left', this.child.toggleLeft(), '0px', '-304px');
     }
 
+
     toggleRight() {
-        this.child.toggleRight();
+        this.toggle('margin-right', this.child.toggleRight(), '304px', '0px')
     }
 
     hasDraftBoards() : boolean {
         return false;
     }
 
+    private toggle(
+        style:string,
+        expanded:boolean,
+        open:string,
+        close:string
+    ) {
+        if(expanded) {
+            $(this.menu).css(style, open);
+        } else {
+            $(this.menu).css(style, close);
+        }
+
+
+    }
 }

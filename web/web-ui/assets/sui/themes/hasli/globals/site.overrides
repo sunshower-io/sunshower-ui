@@ -74,14 +74,28 @@ img.transparent {
   border-top: 1px solid #D6D6D7 !important;
   border-bottom: 1px solid #D6D6D7 !important;
   height: 350px !important;
+  margin:0px !important;
 }
 
 .right--menu, .left--menu {
   width: 300px !important;
   border-top: none;
   position: fixed;
-  top: 114px !important;
+  top: 60px !important;
   left: 0;
+  //-webkit-box-sizing: border-box;
+  //-moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border-top:0 !important;
+  background-color: #F4F4F4 !important;
+
+  .menu--header {
+    height:39px !important;
+    box-sizing:border-box !important;
+    border-bottom:1px !important;
+    line-height:39px;
+    vertical-align:middle;
+  }
 
   backface-visibility: hidden;
   transition: none;

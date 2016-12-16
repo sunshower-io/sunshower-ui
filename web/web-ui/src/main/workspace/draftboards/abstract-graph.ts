@@ -89,21 +89,22 @@ export abstract class AbstractGraph {
     }
 
 
-    toggleLeft() {
+    toggleLeft() : boolean {
         this.leftVisible = this.toggle(
             this.leftSidebar,
             this.leftVisible,
             'right'
         );
+        return this.leftVisible;
     };
 
-    toggleRight() {
+    toggleRight() : boolean {
         this.rightVisible = this.toggle(
             this.rightSidebar,
             this.rightVisible,
             'left'
         );
-
+        return this.rightVisible;
     }
 
     protected toggle(ele: HTMLElement, v: boolean, direction: string): boolean {

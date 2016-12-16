@@ -1,11 +1,15 @@
 template
     require(from="./bottom/layers")
     .ui.vertical.sticky.left.menu.fixed.left--menu.no--boxshadow
+        .ui.menu--header
+            .ui.sidebar-header
+                span.left
+                    | Draftboards
+                .ui.right.floated.image.middle.header-icon
+                    img(src='styles/themes/hasli/assets/images/icons/plus-green-icon.svg')
         .ui.basic.secondary.segment.property--menu
             .item
                 .header Draft Boards
-                    .ui.right.floated.image
-                        img(src='styles/themes/hasli/assets/images/icons/plus-green-icon.svg')
                 .menu
                     a.item
                         | Web Tier
