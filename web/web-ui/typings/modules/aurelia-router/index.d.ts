@@ -582,6 +582,14 @@ export class RouterConfiguration {
   addPostRenderStep(step: Function | PipelineStep): RouterConfiguration;
   
   /**
+    * Configures a route that will be used if there is no previous location available on navigation cancellation.
+    *
+    * @param fragment The URL fragment to use as the navigation destination.
+    * @chainable
+    */
+  fallbackRoute(fragment: string): RouterConfiguration;
+  
+  /**
     * Maps one or more routes to be registered with the router.
     *
     * @param route The [[RouteConfig]] to map, or an array of [[RouteConfig]] to map.
@@ -664,6 +672,13 @@ export class Router {
     */
   parent: Router;
   options: any;
+  
+  /**
+    * Extension point to transform the document title before it is built and displayed.
+    * By default, child routers delegate to the parent router, and the app router
+    * returns the title unchanged.
+    */
+  transformTitle: ((title: string) => string);
   
   /**
     * @param container The [[Container]] to use when child routers.

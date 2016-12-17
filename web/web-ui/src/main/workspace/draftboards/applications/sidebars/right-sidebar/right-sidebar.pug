@@ -1,0 +1,17 @@
+template(bindable='router')
+    require(from='./bottom/applications')
+    .ui.vertical.sticky.right.menu.fixed.right--menu.no--boxshadow
+        .ui.menu--header
+            .center.aligned.column
+                .ui.icon.secondary.compact.menu
+                    a.item(
+                        class="${component.active ? 'active' : ''}"
+                        repeat.for="component of components",
+                        click.delegate="setActive(component)"
+                    ) ${key}
+                        i(class="${component.icon}")
+        .ui.basic.secondary.segment.property--menu
+            compose(view-model="./top/${active.name || 'palette'}")
+        .ui.container
+            applications
+

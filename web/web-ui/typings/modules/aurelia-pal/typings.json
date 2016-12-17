@@ -4,6 +4,7 @@
     "src": "https://raw.githubusercontent.com/aurelia/pal/master/typings.json",
     "raw": "github:aurelia/pal",
     "main": "dist/aurelia-pal.d.ts",
-    "name": "aurelia-pal"
+    "name": "aurelia-pal",
+    "type": "typings"
   }
 }

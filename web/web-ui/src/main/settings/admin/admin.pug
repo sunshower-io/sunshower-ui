@@ -1,0 +1,16 @@
+template
+    //start main/settings/admin
+    h1 Admin
+        h2 Approve Registrations
+            p(show.bind="pendingSignups.count == 0") No pending registrations
+            .ui.celled.list(show.bind="pendingSignups.count > 0")
+                a.item(repeat.for="signup of pendingSignups")
+                    button.ui.right.floated.button.basic.secondary(click.delegate="activateUser(signup.requestId)")
+                        | Activate
+                    i.user.icon
+                    .content
+                        .header ${signup.user.username} (${signup.user.emailAddress})
+                        div Requested: ${signup.requested} Expires: ${signup.expires}
+
+        h2 Edit Roles
+    //end main/settings/admin

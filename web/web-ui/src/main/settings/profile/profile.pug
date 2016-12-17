@@ -1,0 +1,68 @@
+template
+    //start main/settings/profile
+    .ui.container
+        .ui.padded.two.column.grid
+            h1 Profile
+            .row
+                .column
+                    h2 ${user.firstname} ${user.lastname}
+                    p(show.bind="expiredUser")
+                        i.icon.delete.calendar
+                        | Expired
+                    p(show.bind="lockedUser")
+                        i.icon.lock
+                        | Locked
+                    p
+                        i.icon.user
+                        | ${user.username}
+                    p
+                        i.icon.mail.outline
+                        | ${user.emailAddress}
+                    p ${user.details}
+                .column
+                    h3 Roles
+                    p Users
+                    p Administrators
+            .ui.two.buttons(show.bind="(!editingUser && !editingPassword)")
+                .ui.button.basic.primary(click.delegate="editUser()") Edit
+                .ui.button.basic.secondary(click.delegate="editPassword()") Change Password
+        .ui.divider.fluid(show.bind="!(!editingUser && !editingPassword)")
+        form.ui.form.two.column.padded.grid(show.bind="editingUser")
+            .row
+                .column
+                    .field
+                        label Name
+                        .fields
+                            .eight.wide.field
+                                input(type='text', placeholder='${user.firstname}', value.bind='user.firstname')
+                            .eight.wide.field
+                                input(type='text', placeholder='${user.lastname}', value.bind='user.lastname')
+                    .field
+                        label
+                            i.icon.user
+                            | Username
+                        input(type='text', placeholder='${user.username}', value.bind='user.username')
+                    .field
+                        label
+                            i.icon.mail.outline
+                            | Email Address
+                        input(type='text', placeholder='${user.emailAddress}', value.bind='user.emailAddress')
+                .column
+                    .field
+                        label Details
+                        textarea(placeholder='${user.details}', value.bind='user.details')
+            .ui.button.basic.primary.fluid(click.delegate="saveUser()") Save
+        form.ui.form.two.column.padded.grid(show.bind="editingPassword")
+            .row
+                .column
+                    label Old Password
+                    input(type='password', value.bind='user.password')
+            .row
+                .column
+                    label Password
+                    input(type='password')
+                .column
+                    label Confirm Password
+                    input(type='password')
+            .ui.button.basic.primary.fluid(click.delegate="savePassword()") Save
+    //end main/settings/profile

@@ -75,6 +75,25 @@ export class BindingBehaviorResource {
  */
 export function subscriberCollection(): any;
 
+
+/**
+ * Describes the strategy phase where event should be handled.
+ */
+export enum delegationStrategy {
+  /**
+   * No event delegation.
+   */
+  none = 0,
+  /**
+   * Capturing phase event delegation strategy.
+   */
+  capturing = 1,
+  /**
+   * Bubbling phase event delegation strategy.
+   */
+  bubbling = 2
+}
+
 /**
  * Subscribes to appropriate element events based on the element property
  * being observed for changes.
@@ -90,7 +109,7 @@ export class EventManager {
    * @param delegate True to use event delegation mechanism.
    * @returns function wich removes event listener.
    */
-  addEventListener(target: Element, targetEvent: string, callback: (event: Event) => any, delegate: boolean): () => void;
+  addEventListener(target: Element, targetEvent: string, callback: (event: Event) => any, delegate: delegationStrategy): () => void;
 }
 
 /**
@@ -249,7 +268,13 @@ export interface InternalCollectionObserver {
 
 /**
  * Provides high-level access to the definition of a binding, which connects the properties of
- * binding target objects (typically, HTML elements), and any data source
+ * binding target objects (typically, HTML elements), and any data source.
+ * 
+ * There are several implementations of this interface, depending on the type of 
+ * binding (attribute, event, interpolation). 
+ * 
+ * The `updateSource`, `updateTarget` and `callSource` are methods that may or may not be defined 
+ * depending on the type of binding.
  */
 export interface Binding {
   /**
@@ -263,15 +288,15 @@ export interface Binding {
   /**
    * Assigns a value to the target.
    */
-  updateTarget?: (value: any) => void;
+  updateTarget?(value: any): void;
   /**
    * Assigns a value to the source.
    */
-  updateSource?: (value: any) => void;
+  updateSource?(value: any): void;
   /**
-   * Calls the source method with the specified args object.
+   * Calls the source method with the specified args object. This method is present in event bindings like trigger/delegate.
    */
-  callSource?: (event: any) => any;
+  callSource?(event: any): any;
   /**
    * Connects the binding to a scope.
    */
@@ -383,15 +408,15 @@ export class AccessScope extends Expression {
  */
 export class AccessMember extends Expression {
   /**
-   * The property name.
-   */
-  name: string;
-  /**
    * The object expression.
    */
   object: Expression;
+  /**
+   * The property name.
+   */
+  name: string;
 
-  constructor(name: string, object: Expression);
+  constructor(object: Expression, name: string);
 }
 
 /**

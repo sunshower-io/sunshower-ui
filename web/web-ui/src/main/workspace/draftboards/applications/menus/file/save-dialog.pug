@@ -1,0 +1,23 @@
+template
+    .header
+        | Save Draftboard
+    .image.content
+        .ui.medium.image
+            //img(src='/images/avatar/large/chris.jpg')
+        .description
+            .ui.form
+                .field
+                    label Name
+                    input(type='text', name='name', value.bind="draft.name")
+                .field
+                    label Name
+                    input(type='text', name='name', value.bind="draft.description")
+                .field
+                    label Name
+                    input(type='text', name='name', value.bind="draft.notes")
+    .actions
+        .ui.black.deny.button
+            | Nope
+        .ui.positive.right.labeled.icon.button
+            | Yep, that's me
+            i.checkmark.icon

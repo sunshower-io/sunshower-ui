@@ -69,8 +69,16 @@ task copyStyles(type:Copy, dependsOn:'bundle') {
     into("export/styles")
 }
 
+task copyMx(type:Copy, dependsOn:'bundle') {
+    from(fileTree('mx')) {
+        include '**/*'
+    }
+    into('export/mx')
+}
+
 task assembleAll(type:Zip, dependsOn: [
         'copyStyles',
+        'copyMx',
         'bundle'
 ]) {
     from(fileTree('export'))

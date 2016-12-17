@@ -1,0 +1,10 @@
+template
+    .ui.list(style="padding:16px")
+        .item(repeat.for="element of layers")
+            .content
+                a.header Infrastructure
+                .description ${element.id}
+                .list
+                    .item(repeat.for="child of element.children")
+                        .content
+                            .description ${child.name}
