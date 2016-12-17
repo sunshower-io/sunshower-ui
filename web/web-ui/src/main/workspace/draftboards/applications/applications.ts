@@ -120,6 +120,7 @@ export class Applications extends AbstractGraph implements NavigationAware, Oper
 
 
     private computePosition(): JQueryCoordinates {
+
         if (this.rightVisible) {
             let right = $(this.rightSidebar).children(':first-child'),
                 rightOffset = $(right).offset();

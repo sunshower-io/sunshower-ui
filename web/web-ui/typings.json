@@ -26,8 +26,6 @@
     "aurelia-templating-router": "github:aurelia/templating-router"
   },
   "globalDevDependencies": {
-    "jasmine": "registry:dt/jasmine#2.2.0+20160505161446",
-    "selenium-webdriver": "registry:dt/selenium-webdriver#2.44.0+20160317120654"
   },
   "globalDependencies": {
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
