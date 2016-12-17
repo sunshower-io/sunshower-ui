@@ -96,6 +96,7 @@ img.transparent {
     border-bottom:1px !important;
     line-height:39px;
     vertical-align:middle;
+    text-align: center;
     background-color: #F4F4F4 !important;
   }
 
