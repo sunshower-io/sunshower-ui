@@ -88,7 +88,7 @@ img.transparent {
   //-moz-box-sizing: border-box;
   box-sizing: border-box;
   border-top:0 !important;
-  background-color: #F4F4F4 !important;
+  background-color: #FFFFFF !important;
 
   .menu--header {
     height:39px !important;
@@ -96,6 +96,7 @@ img.transparent {
     border-bottom:1px !important;
     line-height:39px;
     vertical-align:middle;
+    background-color: #F4F4F4 !important;
   }
 
   backface-visibility: hidden;
