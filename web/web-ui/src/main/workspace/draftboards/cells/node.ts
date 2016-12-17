@@ -60,7 +60,7 @@ export class Node extends LayeredNode<InfrastructureElement> {
 
     addApplicationById(id: string): void {
         this.registry.client.fetch(`docker/images/${id}`)
-            .then(r => r.json())
+            .then(r => r.json() as any)
             .then(r => {
                 this.addApplication(
                     new ApplicationDeployment(

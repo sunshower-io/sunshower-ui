@@ -50,7 +50,7 @@ export class Applications {
 
     public attached(): void {
         this.client.fetch('docker/images')
-            .then(response => response.json())
+            .then(response => response.json() as any)
             .then(elements => {
                 this.elements = elements;
                 this.resize();

@@ -16,13 +16,13 @@ export class Admin {
     public activateUser(id:string) : void {
         this.client.fetch(`signup/${id}/approve`, {
             method: 'post'
-        }).then(response => response.json())
+        }).then(response => response.json() as any)
             .then(r => this.refresh())
     }
 
     private refresh() : void {
         this.client.fetch('signup/pending')
-            .then(response => response.json())
+            .then(response => response.json() as any)
             .then(r => {
                 this.pendingSignups = r;
                 console.log(this.pendingSignups[0].requestId);

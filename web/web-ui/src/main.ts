@@ -63,7 +63,7 @@ export function configure(aurelia: Aurelia) {
     );
 
     http.fetch('initialize/active')
-        .then(data => data.json())
+        .then(data => data.json() as any)
         .then(data => {
             if (!data.value) {
                 container.registerInstance(HttpClient, http);

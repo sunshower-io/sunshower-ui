@@ -14,6 +14,7 @@ import {
   ListenerExpression,
   BindingExpression,
   CallExpression,
+  delegationStrategy,
   NameExpression
 } from 'aurelia-binding';
 import {
@@ -70,6 +71,7 @@ export class SyntaxInterpreter {
   determineDefaultBindingMode(element?: any, attrName?: any, context?: any): any;
   bind(resources?: any, element?: any, info?: any, existingInstruction?: any, context?: any): any;
   trigger(resources?: any, element?: any, info?: any): any;
+  capture(resources?: any, element?: any, info?: any): any;
   delegate(resources?: any, element?: any, info?: any): any;
   call(resources?: any, element?: any, info?: any, existingInstruction?: any): any;
   options(resources?: any, element?: any, info?: any, existingInstruction?: any, context?: any): any;
