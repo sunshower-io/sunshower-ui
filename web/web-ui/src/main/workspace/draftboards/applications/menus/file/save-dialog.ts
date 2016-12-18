@@ -1,14 +1,27 @@
+import {
+    Draftboard,
+    DraftboardManager
+}  from 'elements/draftboard';
+
+import {inject} from 'aurelia-framework';
+
+@inject(DraftboardManager)
 export class SaveDialog {
-    person = { firstName: '' };
-    constructor(controller){
+
+    private current:Draftboard;
+
+    constructor(
+        private draftboardManager:DraftboardManager
+    ) {
+        this.current = draftboardManager
+            .focusedDraftboard();
+
 
     }
-    activate(person){
-        this.person = person;
-    }
 
-    testDelegate () {
-        alert("Delegation worked");
+
+    save() : void {
+        this.draftboardManager.save();
     }
 
 }

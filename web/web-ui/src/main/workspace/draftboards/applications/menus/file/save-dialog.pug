@@ -8,16 +8,16 @@ template
             .ui.form
                 .field
                     label Name
-                    input(type='text', name='name', value.bind="draft.name")
+                    input(type='text', name='name', value.bind="current.name")
                 .field
                     label Name
-                    input(type='text', name='name', value.bind="draft.description")
+                    input(type='text', name='name', value.bind="current.description")
                 .field
                     label Name
-                    input(type='text', name='name', value.bind="draft.notes")
+                    input(type='text', name='name', value.bind="current.notes")
     .actions
         .ui.black.deny.button
-            | Nope
-        .ui.positive.right.labeled.icon.button
-            | Yep, that's me
+            | Cancel
+        .ui.positive.right.labeled.icon.button(click.delegate="save()")
+            | Save
             i.checkmark.icon

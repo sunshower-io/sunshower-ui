@@ -10,14 +10,8 @@ template
         .ui.basic.secondary.segment.property--menu
             .item
                 .menu
-                    a.item
-                        | Web Tier
-                    a.item
-                        | Database Tier
-                    a.item
-                        | Networking
-                    a.item
-                        | Storage
+                    a.item(repeat.for="board of draftboards")
+                        | ${board.name}
         .ui.container
             layers
 

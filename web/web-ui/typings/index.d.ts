@@ -1,7 +1,6 @@
 /// <reference path="globals/cytoscape-edgehandles/index.d.ts" />
 /// <reference path="globals/cytoscape-node-resize/index.d.ts" />
 /// <reference path="globals/cytoscape/index.d.ts" />
-/// <reference path="globals/jasmine/index.d.ts" />
 /// <reference path="globals/jquery.pnotify/index.d.ts" />
 /// <reference path="globals/jquery/index.d.ts" />
 /// <reference path="globals/ocanvas/index.d.ts" />

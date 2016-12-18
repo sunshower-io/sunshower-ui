@@ -50,9 +50,18 @@ import {Maximize} from "./menus/maximize";
 
 import {
     MenuItem,
-    OperationContext,
     OperationContextFactory
 } from 'common/elements/menu';
+
+import {
+    Draftboard as Draft,
+    DraftboardManager
+} from 'elements/draftboard';
+
+import {
+    Listener,
+    ObservedEvent
+} from 'utils/observer';
 
 import {bindable} from 'aurelia-framework';
 import {ToggleLeft, ToggleRight, SearchMenu} from "./menus/misc-menus";
@@ -62,9 +71,14 @@ import {DialogService} from 'aurelia-dialog';
     HttpClient,
     Draftboard,
     Registry,
-    DialogService
+    DialogService,
+    DraftboardManager
 )
-export class Applications extends AbstractGraph implements NavigationAware, OperationContextFactory {
+export class Applications extends AbstractGraph
+    implements
+        Listener,
+        NavigationAware,
+        OperationContextFactory {
 
     @bindable
     public menus:MenuItem[];
@@ -74,7 +88,8 @@ export class Applications extends AbstractGraph implements NavigationAware, Oper
     constructor(private client: HttpClient,
                 private parent: Draftboard,
                 registry:Registry,
-                private dialogService:DialogService
+                private dialogService:DialogService,
+                private draftboardManager:DraftboardManager
     ) {
         super(registry);
         this.menus = [];
@@ -88,6 +103,17 @@ export class Applications extends AbstractGraph implements NavigationAware, Oper
         this.addMenu(new ToggleLeft());
         this.addMenu(new ToggleRight());
 
+        this.draftboardManager
+            .addEventListener('draftboard-saved', this);
+    }
+
+    activate(params:any) {
+        if(params && params.id) {
+
+        } else {
+            this.draftboardManager
+                .setFocusedDraftboard(new Draft());
+        }
     }
 
     create(): EditorContext {
@@ -108,6 +134,8 @@ export class Applications extends AbstractGraph implements NavigationAware, Oper
     attached(): void {
         super.attached();
         this.parent.set(this);
+        this.draftboardManager
+            .setFocusedDraftboard(new Draft());
     }
 
 
@@ -117,30 +145,43 @@ export class Applications extends AbstractGraph implements NavigationAware, Oper
     }
 
 
-
-
     private computePosition(): JQueryCoordinates {
-
         if (this.rightVisible) {
             let right = $(this.rightSidebar).children(':first-child'),
                 rightOffset = $(right).offset();
             return {
-                top: rightOffset.top + 20,
+                top: rightOffset.top + 60,
                 left: rightOffset.left - 320
             };
         } else {
             let offset = $(this.container).offset(),
                 width = $(this.container).width();
             return {
-                top: offset.top + 20,
+                top: offset.top + 60,
                 left: width - 320
             }
         }
     }
 
+    onSave(draftboard:Draft) : void {
+        new PNotify({
+            title: 'Success',
+            text: `Saved ${draftboard.name}`,
+            opacity: 0.90,
+            type: 'error',
+            addclass: 'graph-error',
+            width: '300px',
+            context: $(this.container),
+            before_open: (f) => {
+                let position = this.computePosition();
+                f.get().css(position);
+            }
+        });
 
-    addInfrastructure(e:Event) : void {
-        this.infrastructureDialog.show();
+    }
+
+    apply(event: ObservedEvent): void {
+        this.onSave(event.target as Draft);
     }
 
     handleCycle() {
@@ -158,7 +199,6 @@ export class Applications extends AbstractGraph implements NavigationAware, Oper
             }
         });
     }
-
 
     protected createBuilder(): GBuilder {
         return new GBuilder(this.container);

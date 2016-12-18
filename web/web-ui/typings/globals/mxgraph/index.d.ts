@@ -2,6 +2,13 @@
 
 declare module 'mxgraph' {
 
+    export class mxXmlCanvas2D{
+
+        scale(scale:number) : void;
+        translate(x:number, y:number) : void;
+
+
+    }
 
 
     export interface Cloneable<T> {
@@ -15,11 +22,46 @@ declare module 'mxgraph' {
 
     export class XmlDocument {
 
+        /**
+         *
+         * @param key
+         * @param value
+         */
+        setAttribute(key:string, value:string) : void;
 
-        createElement(name:string) : mxCell;
+        /**
+         *
+         * @param cell
+         */
+        appendChild(cell:XmlDocument);
+
+        /**
+         *
+         * @param name
+         */
+        createElement(name:string) : XmlDocument;
+
+        /**
+         *
+         * @param namespace
+         * @param name
+         */
+
+        createElementNS(namespace:string, name:string) : XmlDocument;
+
+
+        /**
+         *
+         * @param namespace
+         * @param name
+         * @param xlink
+         */
+        setAttributeNS(namespace:string, name:string, xlink?:string) : void;
+
     }
 
     export module mxUtils {
+
 
         function clone<T>(t:T):T;
 
@@ -28,6 +70,8 @@ declare module 'mxgraph' {
         function error(msg:string, code:number, we: boolean) : void;
 
         function createXmlDocument() : XmlDocument;
+
+        function createElementNS(namespace:string, name:string) : XmlDocument;
     }
 
 
@@ -63,6 +107,8 @@ declare module 'mxgraph' {
 
 
     export class mxGraphModel {
+
+        root:               mxCell;
         /**
          *
          * @param cell

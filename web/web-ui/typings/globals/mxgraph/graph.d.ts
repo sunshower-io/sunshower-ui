@@ -96,17 +96,19 @@ declare module 'mxgraph' {
 
 
         mouseListeners: {[name: string]: any};
-        gridSize: number;
-        container: Element;
-        view: mxGraphView;
-        model: mxGraphModel;
-        recursiveResize:boolean;
+        gridSize                    : number;
+        container                   : Element;
+        view                        : mxGraphView;
+        model                       : mxGraphModel;
+        recursiveResize             : boolean;
 
 
 
-        foldingEnabled: boolean;
-        isMouseDown: boolean;
+        foldingEnabled              : boolean;
+        isMouseDown                 : boolean;
         connectionHandler: mxConnectionHandler;
+
+        getView() : mxGraphView;
 
         refresh(cell?:Layer) : void;
 
