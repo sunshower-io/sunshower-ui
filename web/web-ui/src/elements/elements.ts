@@ -15,7 +15,8 @@ export interface Element {
 export class AbstractElement implements Element {
 
     public id           : UUID;
-    public children     :Element[] = [];
+    public name         : string;
+    public children     : Element[] = [];
 
     constructor() {
         this.id = UUID.randomUUID();

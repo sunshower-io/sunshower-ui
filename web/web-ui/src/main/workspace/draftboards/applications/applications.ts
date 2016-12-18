@@ -63,6 +63,10 @@ import {
     ObservedEvent
 } from 'utils/observer';
 
+import {AbstractElement} from 'elements/elements';
+
+import {ElementManager} from 'elements/element-manager';
+
 import {bindable} from 'aurelia-framework';
 import {ToggleLeft, ToggleRight, SearchMenu} from "./menus/misc-menus";
 import {DialogService} from 'aurelia-dialog';
@@ -111,8 +115,6 @@ export class Applications extends AbstractGraph
         if(params && params.id) {
 
         } else {
-            this.draftboardManager
-                .setFocusedDraftboard(new Draft());
         }
     }
 
@@ -136,6 +138,14 @@ export class Applications extends AbstractGraph
         this.parent.set(this);
         this.draftboardManager
             .setFocusedDraftboard(new Draft());
+        let element = new AbstractElement();
+        element.name = "frap";
+        let child = new AbstractElement();
+        child.name = "dap";
+        element.add(child);
+        this.registry
+            .elementManager
+            .add(element);
     }
 
 
