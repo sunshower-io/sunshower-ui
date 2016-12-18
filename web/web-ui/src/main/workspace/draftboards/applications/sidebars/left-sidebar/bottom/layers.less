@@ -1,0 +1,44 @@
+
+.tree {
+  color:  #D6D6D7;
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display:block;
+  }
+  li {
+    line-height: 32px;
+    position: relative;
+    padding-left:12px;
+  }
+  li ul {
+    padding-left: 1em;
+  }
+  li:after {
+    display:block;
+    content: "\00A0";
+    position: absolute;
+    width: 200%;
+    left: -100%;
+    top: 0;
+    border-bottom: 1px solid #D6D6D7;
+  }
+
+}
+
+//.tree li .item .overlay {
+//  position: absolute;
+//  left: 0;
+//  top: 0;
+//  width: 100%;
+//  height: 100%;
+//  background-color: #C5E7E6;
+//  display: none;
+//  border: 1px solid red;
+//}
+//
+//.tree li .item:hover .overlay {
+//  display: block;
+//}
+

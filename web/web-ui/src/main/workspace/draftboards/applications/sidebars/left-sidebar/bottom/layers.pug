@@ -1,16 +1,21 @@
 template
     .ui.menu--header
-        .ui.sidebar-header
+        .ui.sidebar-header(style="border-bottom:1px solid #D6D6D7")
             span.pull-left
                 | Layers
             .ui.right.floated.image.middle.header-icon
                 img(src='styles/themes/hasli/assets/images/icons/plus-green-icon.svg')
-    .ui.list(style="padding:16px")
-        .item(repeat.for="element of layers")
-            .content
-                a.header Infrastructure
-                .description ${element.id}
-                .list
-                    .item(repeat.for="child of element.children")
-                        .content
-                            .description ${child.name}
+
+
+    .tree
+        ul
+            li(repeat.for="element of layers")
+                .cell
+                    i.caret.right.icon
+                    a ${element.id}
+                ul(if.bind="element.children")
+                    li(repeat.for="child of element.children")
+                        .cell
+                            i.caret.right.icon
+                            a ${child.name}
+
