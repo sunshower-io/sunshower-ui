@@ -31,7 +31,8 @@ export function configure(aurelia: Aurelia) {
         .standardConfiguration()
         .globalResources([
             'common/sidenav/sidenav',
-            'common/elements/menu'
+            'common/elements/menu',
+            'common/elements/tree/tree',
         ])
         .plugin('aurelia-dialog', (config: DialogConfiguration) => {
             config.useRenderer(SemanticUIRenderer);
