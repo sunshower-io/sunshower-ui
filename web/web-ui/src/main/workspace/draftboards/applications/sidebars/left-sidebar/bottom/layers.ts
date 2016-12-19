@@ -37,4 +37,16 @@ export class Layers implements Listener {
             .getRootElements();
     }
 
+    toggle(e:Event) : void {
+        let container = $(e.target).parent().parent(),
+            sublist = container.find('ul'),
+            caret = container.find('i.caret');
+        sublist.toggle();
+        caret.toggleClass((index:number, name:string, state:boolean) => {
+            return state ? 'down' : 'right';
+        });
+
+        // $(e.target).parent().parent().find('ul').toggle();
+    }
+
 }

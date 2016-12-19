@@ -16,7 +16,8 @@ export class AbstractElement implements Element {
 
     public id           : UUID;
     public name         : string;
-    public children     : Element[] = [];
+    public children     : Element[];
+
 
     constructor() {
         this.id = UUID.randomUUID();
@@ -24,6 +25,9 @@ export class AbstractElement implements Element {
 
 
     add(element:Element) :Element {
+        if(!this.children) {
+            this.children = [];
+        }
         this.children.push(element);
         return element;
     }
