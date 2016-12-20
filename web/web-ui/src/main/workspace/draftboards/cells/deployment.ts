@@ -80,7 +80,8 @@ export class ApplicationDeployment extends AbstractVertex<ApplicationElement> im
             parent = this.resolveParent(
                 context,
                 location.x,
-                location.y
+                location.y,
+                Node
             ),
             graph = context.graph as Builder,
             node: Node = null;
@@ -97,7 +98,6 @@ export class ApplicationDeployment extends AbstractVertex<ApplicationElement> im
                 this.registry
             );
             node.satisfy(context);
-            // this.registry.elementManager.add(infrastructureElement);
         }
         this.parent = node;
         node.addApplication(this);

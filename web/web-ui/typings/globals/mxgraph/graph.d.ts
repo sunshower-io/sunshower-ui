@@ -92,6 +92,10 @@ declare module 'mxgraph' {
         getState(): mxCellState;
     }
 
+    export class mxPanningHandler {
+
+    }
+
     class mxGraph implements Connectable {
 
 
@@ -108,7 +112,19 @@ declare module 'mxgraph' {
         isMouseDown                 : boolean;
         connectionHandler: mxConnectionHandler;
 
+        zoomIn() : void;
+
+        zoomOut() : void;
+
         getView() : mxGraphView;
+
+
+        setPanningHandler(handler:mxPanningHandler) : void;
+
+        /**
+         *
+          * @param cell
+         */
 
         refresh(cell?:Layer) : void;
 

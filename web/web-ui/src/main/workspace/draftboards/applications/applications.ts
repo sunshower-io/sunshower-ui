@@ -138,23 +138,6 @@ export class Applications extends AbstractGraph
         this.parent.set(this);
         this.draftboardManager
             .setFocusedDraftboard(new Draft());
-        let element = new AbstractElement();
-        element.name = "frap";
-        let child = new AbstractElement();
-        child.name = "dap";
-
-        let gchild = new AbstractElement();
-        gchild.name = "gchild";
-
-        let ggchild = new AbstractElement();
-        ggchild.name = "aggafasdfa";
-        gchild.add(ggchild);
-
-        child.add(gchild);
-        element.add(child);
-        this.registry
-            .elementManager
-            .add(element);
     }
 
 

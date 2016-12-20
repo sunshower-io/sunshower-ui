@@ -164,14 +164,23 @@ export class Node extends LayeredNode<InfrastructureElement> implements Constrai
 
 
     satisfy(context: EditorContext): void {
-        this.addTo(context.graph as Builder);
-        let cloud = new VirtualCloud();
-        cloud.data = new VPC();
-        cloud.data.add(this.data);
+        let location = context.location,
+            parent = this.resolveParent(context, location.x, location.y, VirtualCloud),
+            graph = context.graph as Builder,
+            cloud: VirtualCloud = null;
+        this.addTo(graph);
+
+        if(parent instanceof VirtualCloud) {
+            cloud = parent;
+        } else {
+            cloud = new VirtualCloud();
+            cloud.data = new VPC();
+            cloud.addTo(graph);
+            this.registry.elementManager.add(cloud.data);
+        }
         this.parent = cloud;
-        cloud.addTo(this.host);
+        cloud.data.add(this.data);
         this.host.groupCells(cloud, 100, [this]);
-        this.registry.elementManager.add(cloud.data);
     }
 
     protected createNodeOverlay(): mxCellOverlay {

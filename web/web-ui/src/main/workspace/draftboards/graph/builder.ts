@@ -55,6 +55,7 @@ export class Builder extends mxGraph {
         this.foldingEnabled = false;
         this.setHtmlLabels(true);
         this.gridSize = 32;
+        this.setPanningHandler(new mxPanningHandler());
         this.grid = new Grid(this);
         this.grid.draw();
         // this.addMouseListener(new MenuHoverListener(this));

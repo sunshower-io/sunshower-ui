@@ -62,12 +62,12 @@ export class AbstractVertex<T> extends mxCell implements Vertex<T> {
     }
 
 
-    protected resolveParent(context: EditorContext, x: number, y: number): Layer {
+    protected resolveParent(context: EditorContext, x: number, y: number, type:any): Layer {
         let graph = context.graph,
             defaultParent = graph.getDefaultParent(),
             parent = graph.getCellAt(x, y, defaultParent, true, false);
 
-        while (parent && !(parent instanceof InfrastructureNode)) {
+        while (parent && !(parent instanceof type)) {
             parent = parent.parent;
         }
         return parent || defaultParent;
