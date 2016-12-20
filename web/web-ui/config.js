@@ -15,6 +15,12 @@ System.config({
     "mxgraph/javascript/mxClient": {
       "format": "global"
     },
+    "stackblur": {
+      "format": "global"
+    },
+    "rgbcolor": {
+      "format": "global"
+    },
     "pnotify": {
       "deps": [
         "jquery"
@@ -39,6 +45,9 @@ System.config({
     "aurelia-templating-router": "npm:aurelia-templating-router@1.0.1",
     "bluebird": "npm:bluebird@3.4.1",
     "bootstrap": "github:twbs/bootstrap@3.3.7",
+    "canvg": "github:canvg/canvg@master",
+    "stackblur": "github:canvg/canvg@master/StackBlur",
+    "rgbcolor": "github:canvg/canvg@master/rgbcolor",
     "css": "github:systemjs/plugin-css@0.1.32",
     "cytoscape": "npm:cytoscape@2.7.13",
     "cytoscape-edgehandles": "npm:cytoscape-edgehandles@2.7.1",

@@ -3,6 +3,7 @@
  */
 import {UUID} from 'utils/uuid';
 import {Element} from './elements';
+import {Builder} from 'main/workspace/draftboards/graph/builder'
 import {DefaultEventDispatcher, ObservedEvent} from "../utils/observer";
 export class Draftboard {
 
@@ -12,7 +13,9 @@ export class Draftboard {
 
     rootElements            : Element[];
 
-    constructor() {
+
+
+    constructor(public readonly builder:Builder) {
         this.id = UUID.randomUUID();
     }
 

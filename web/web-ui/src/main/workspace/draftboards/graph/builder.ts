@@ -65,7 +65,20 @@ export class Builder extends mxGraph {
             .getDefaultEdgeStyle()
             ['edgeStyle'] =
             'orthogonalEdgeStyle';
+    }
 
+
+    getHostContainerBounds() : mxRectangle {
+        let je = $(this.container),
+            offset = je.offset();
+
+        return {
+            relative:true,
+            x : offset.left,
+            y : offset.top,
+            width: je.width(),
+            height: je.height()
+        };
     }
 
 

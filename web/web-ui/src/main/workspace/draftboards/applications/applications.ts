@@ -137,7 +137,7 @@ export class Applications extends AbstractGraph
         super.attached();
         this.parent.set(this);
         this.draftboardManager
-            .setFocusedDraftboard(new Draft());
+            .setFocusedDraftboard(new Draft(this.graph));
     }
 
 

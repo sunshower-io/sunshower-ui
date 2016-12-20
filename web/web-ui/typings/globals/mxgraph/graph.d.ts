@@ -49,10 +49,22 @@ declare module 'mxgraph' {
     }
 
     export class mxGraphView {
-        scale: number;
-        translate: mxGraphBounds;
+        scale           : number;
+        currentRoot     : Layer;
+        translate       : mxGraphBounds;
+
+
+        getCanvas() : Element;
+
+        getGraphBounds() : mxRectangle;
+
+        getDrawPane() : Element;
+
+        getBackgroundPane() : Element;
 
         getState(cell: Layer): mxCellState;
+
+        getCellStates(cells:Layer[]) : mxCellState[];
 
         isContainerEvent(event: Event): boolean;
     }
@@ -149,6 +161,8 @@ declare module 'mxgraph' {
 
         constructor(container?: HTMLElement,
                     model?: mxGraphModel);
+
+
 
         /**
          *

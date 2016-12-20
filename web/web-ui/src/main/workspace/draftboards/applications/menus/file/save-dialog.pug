@@ -2,19 +2,21 @@ template
     .header
         | Save Draftboard
     .image.content
-        .ui.medium.image
+        .ui.medium.image(style="border:1px solid #a2a2a2")
+            canvas(ref="image", width="300px", height="200px")
             //img(src='/images/avatar/large/chris.jpg')
-        .description
+        .description(style="width:364px")
             .ui.form
                 .field
                     label Name
                     input(type='text', name='name', value.bind="current.name")
                 .field
-                    label Name
+                    label Description
                     input(type='text', name='name', value.bind="current.description")
                 .field
-                    label Name
-                    input(type='text', name='name', value.bind="current.notes")
+                    label Notes
+                    textarea(value.bind="current.notes")
+                    //input(type='text', name='name', value.bind="current.notes")
     .actions
         .ui.black.deny.button
             | Cancel

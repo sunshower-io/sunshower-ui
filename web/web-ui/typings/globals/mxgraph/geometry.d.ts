@@ -40,7 +40,8 @@ declare module 'mxgraph' {
         constructor(x:number, y:number);
     }
 
-    export class mxRectangle {
+    export class mxRectangle extends mxGeometry {
+
 
     }
 

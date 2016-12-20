@@ -8,7 +8,13 @@ declare module 'mxgraph' {
     }
 
     export class mxSvgCanvas2D {
+
+        root:XMLDocument;
+
+
         constructor(root:XmlDocument);
+
+        writeDefaults() : void;
     }
 
     export class mxImageExport {
