@@ -17,6 +17,7 @@ import {ElementManager} from 'elements/element-manager';
 )
 export class Layers implements Listener {
 
+    element : HTMLElement;
     layers : Element[] = [];
 
     constructor(
@@ -33,12 +34,22 @@ export class Layers implements Listener {
                 'draftboard-changed',
                 this
             );
+        $(window).resize(this.resize);
     }
 
     apply(event: ObservedEvent): void {
         this.layers = this.draftboardManager
             .focusedDraftboard()
             .getRootElements();
+        this.resize();
+    }
+
+
+    private resize = () => {
+        let top = $(this.element).offset().top,
+            wheight = $(window).height(),
+            height = wheight - top;
+        $(this.element).height(height);
     }
 
 

@@ -59,26 +59,11 @@ export class ApplicationDeployment extends AbstractVertex<ApplicationElement> im
         // menu.addItem(new NetworkMenuItem());
     }
 
-    // protected addOperatingSystemOverlay(): mxCellOverlay {
-    //     // let
-    //     //     url = `assets/sui/themes/hasli/assets/images/logos/os/${this.data.deploymentTarget.operatingSystem.icon}`,
-    //     //     image = new mxImage(url, 24, 24),
-    //     //     iconOverlay = new mxCellOverlay(
-    //     //         image,
-    //     //         null,
-    //     //         mxConstants.ALIGN_RIGHT,
-    //     //         mxConstants.ALIGN_TOP,
-    //     //         {x: -14, y: 14},
-    //     //         // null,
-    //     //         'default'
-    //     //     );
-    //     // return iconOverlay;
-    // }
 
 
     protected applicationOverlay(): mxCellOverlay {
         let
-            url = `${this.registry.get(Registry.S3_IMAGES_PATH)}/${this.data.icon}`,
+            url = this.data.icon,
             image = new mxImage(url, 40, 40),
             iconOverlay = new mxCellOverlay(
                 image,

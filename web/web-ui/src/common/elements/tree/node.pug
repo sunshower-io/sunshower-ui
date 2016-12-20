@@ -9,7 +9,7 @@ template(bindable="node")
                 .icell
                     .nodeicon(if.bind="child.icon")
                         img(
-                            src="${rootUrl}/${child.icon}",
+                            src="${child.icon}",
                             width="16px" height="16px"
                         )
                     i.caret.down.icon(show.bind="child.children", click.delegate="toggle($event)")

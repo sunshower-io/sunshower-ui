@@ -34,6 +34,8 @@ export class Node extends LayeredNode<InfrastructureElement> {
     scale               : number = 1;
     applications        : ApplicationDeployment[] = [];
 
+    static count: number = 0;
+
     constructor(
         parent:Layer,
         element:InfrastructureElement,
@@ -44,6 +46,8 @@ export class Node extends LayeredNode<InfrastructureElement> {
         super(
             parent,
             element, x, y, registry);
+
+        this.data.name = "Host " + Node.count++;
     }
 
     public addTo(builder:Builder) : Layer {
@@ -65,7 +69,10 @@ export class Node extends LayeredNode<InfrastructureElement> {
                 this.addApplication(
                     new ApplicationDeployment(
                         this.registry,
-                        new ApplicationElement(r.logo_url.large, r.name),
+                        new ApplicationElement(
+                            `${this.registry.get(Registry.S3_IMAGES_PATH)}/${r.logo_url.large}`,
+                            r.name
+                        ),
                         this,
                         this.geometry.x,
                         this.geometry.y

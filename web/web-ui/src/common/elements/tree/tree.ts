@@ -1,10 +1,10 @@
 import {
     bindable,
-    inject,
+    containerless,
     customElement
 } from 'aurelia-framework';
-import {Registry} from "utils/registry";
 
+@containerless
 @customElement('tree')
 export class Tree {
 
