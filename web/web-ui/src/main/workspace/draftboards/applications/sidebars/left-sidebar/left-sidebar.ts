@@ -7,6 +7,8 @@ import {
     ObservedEvent,
     Listener
 } from 'utils/observer'
+
+
 import {bindable, inject} from 'aurelia-framework';
 
 @inject(DraftboardManager)

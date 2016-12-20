@@ -29,6 +29,7 @@ import {Kv} from 'utils/objects';
 
 export class ApplicationDeployment extends AbstractVertex<ApplicationElement> implements Listener {
 
+    icon:string;
     host: Builder;
     constructor(registry: Registry,
                 element: ApplicationElement,
@@ -93,12 +94,6 @@ export class ApplicationDeployment extends AbstractVertex<ApplicationElement> im
     protected createOverlays(): mxCellOverlay[] {
         let results = [];
         results.push(this.applicationOverlay());
-        // if (
-        //     this.data.deploymentTarget &&
-        //     this.data.deploymentTarget.operatingSystem) {
-        //     results.push(this.addOperatingSystemOverlay());
-        // }
-
         return results;
     }
 
@@ -106,9 +101,6 @@ export class ApplicationDeployment extends AbstractVertex<ApplicationElement> im
 
     }
 
-    // apply(event: ObservedEvent): void {
-    //     this.host.addCellOverlay(this, this.addOperatingSystemOverlay());
-    // }
 
     protected createCss() : Kv {
         let result = super
