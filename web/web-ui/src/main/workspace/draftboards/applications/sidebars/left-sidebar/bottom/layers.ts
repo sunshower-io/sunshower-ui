@@ -42,6 +42,7 @@ export class Layers implements Listener {
             .focusedDraftboard()
             .getRootElements();
         this.resize();
+        console.log(this.layers);
     }
 
 

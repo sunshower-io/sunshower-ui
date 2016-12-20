@@ -11,10 +11,18 @@ import {
 
 import {Builder} from "../graph/builder";
 
+import {Constrained} from './cell';
+
+
+import {ElementEvent} from 'elements/events';
 
 import {
-    ApplicationElement
+    ApplicationElement,
+    InfrastructureElement
 } from 'elements/elements';
+
+import {Node} from './node'
+
 
 import {mxEvent} from "mxgraph";
 
@@ -23,22 +31,29 @@ import {
     ObservedEvent
 } from "utils/observer";
 
+import {UUID} from 'utils/uuid';
+
 import {Kv} from 'utils/objects';
+import {EditorContext} from "../editor";
 
 
+export class ApplicationDeployment extends AbstractVertex<ApplicationElement> implements Listener, Constrained {
 
-export class ApplicationDeployment extends AbstractVertex<ApplicationElement> implements Listener {
-
-    icon:string;
+    icon: string;
     host: Builder;
+
     constructor(registry: Registry,
-                element: ApplicationElement,
-                parent: Layer,
-                x: number,
-                y: number) {
+                private applicationId: string) {
         super(
-            element.id,
-            element, parent, x, y, 120, 120, registry);
+            UUID.randomUUID(),
+            null,
+            null,
+            24,
+            48,
+            120,
+            120,
+            registry
+        );
         this.setAttribute('constituent', '1');
     }
 
@@ -60,6 +75,58 @@ export class ApplicationDeployment extends AbstractVertex<ApplicationElement> im
     }
 
 
+    satisfy(context: EditorContext): void {
+        let location = context.location,
+            parent = this.resolveParent(
+                context,
+                location.x,
+                location.y
+            ),
+            graph = context.graph as Builder,
+            node: Node = null;
+
+        if (parent instanceof Node) {
+            node = parent as Node;
+        } else {
+            let infrastructureElement = new InfrastructureElement();
+            node = new Node(
+                parent,
+                infrastructureElement,
+                location.x,
+                location.y - context.offset.top,
+                this.registry
+            );
+            node.addTo(graph);
+            node.satisfy(context);
+            this.registry.elementManager.add(infrastructureElement);
+        }
+        this.parent = node;
+        node.addApplication(this);
+        this.load(node);
+    }
+
+    protected load(node: Node) {
+        this.setLoading();
+        this.registry.client.fetch(`docker/images/${this.applicationId}`)
+            .then(r => r.json() as any)
+            .then(r => {
+                let element = new ApplicationElement(
+                    this.getIconUrl(r), r.name, this.applicationId
+                );
+                this.data = element;
+                this.host.addCellOverlay(this, this.applicationOverlay());
+                node.data.add(element);
+                this.registry.elementManager.dispatch(
+                    'element-modified',
+                    new ElementEvent('element-modified', node.data)
+                );
+            });
+        this.stopLoading();
+    }
+
+    private getIconUrl(r: any): string {
+        return `${this.registry.get(Registry.S3_IMAGES_PATH)}/${r.logo_url.large}`;
+    }
 
     protected applicationOverlay(): mxCellOverlay {
         let
@@ -76,9 +143,10 @@ export class ApplicationDeployment extends AbstractVertex<ApplicationElement> im
         return iconOverlay;
     }
 
+
     protected createOverlays(): mxCellOverlay[] {
         let results = [];
-        results.push(this.applicationOverlay());
+        // results.push(this.applicationOverlay());
         return results;
     }
 
@@ -87,7 +155,7 @@ export class ApplicationDeployment extends AbstractVertex<ApplicationElement> im
     }
 
 
-    protected createCss() : Kv {
+    protected createCss(): Kv {
         let result = super
             .createCss()
             .pair('strokeColor', '#DFDFDF');

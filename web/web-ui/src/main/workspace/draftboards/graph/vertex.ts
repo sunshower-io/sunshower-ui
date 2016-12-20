@@ -7,21 +7,30 @@ import {
 } from 'algorithms/graph/graph';
 
 import {
+    mxImage,
     mxCell,
+    Layer,
     mxGeometry,
     mxConstants
 } from "mxgraph";
+
+import {Node as InfrastructureNode} from '../cells/node';
 
 
 import {Kv} from "utils/objects";
 import {Registry} from "utils/registry";
 import {mxCellOverlay} from "mxgraph";
+import {EditorContext} from "../editor";
 
 
 export class AbstractVertex<T> extends mxCell implements Vertex<T> {
 
+    public host: Builder;
     private readonly delegate: Vertex<T>;
     private attributes: {[key: string]: string};
+
+    private static readonly loadingOverlay: mxCellOverlay =
+        AbstractVertex.createLoadingOverlay();
 
     constructor(id: UUID,
                 public data: T,
@@ -30,8 +39,7 @@ export class AbstractVertex<T> extends mxCell implements Vertex<T> {
                 y: number,
                 width: number,
                 height: number,
-                public registry?: Registry
-    ) {
+                public registry?: Registry) {
         super();
         this.delegate = new Node<T>(id.value, data);
         this.geometry = new mxGeometry(x, y, width, height);
@@ -41,6 +49,7 @@ export class AbstractVertex<T> extends mxCell implements Vertex<T> {
     }
 
     addTo(builder: Builder): mxCell {
+        this.host = builder;
         let result = builder.addCell(this, this.parent);
         for (let overlay of this.createOverlays()) {
             builder.addCellOverlay(result, overlay);
@@ -50,6 +59,18 @@ export class AbstractVertex<T> extends mxCell implements Vertex<T> {
 
     protected createOverlays(): mxCellOverlay[] {
         return [];
+    }
+
+
+    protected resolveParent(context: EditorContext, x: number, y: number): Layer {
+        let graph = context.graph,
+            defaultParent = graph.getDefaultParent(),
+            parent = graph.getCellAt(x, y, defaultParent, true, false);
+
+        while (parent && !(parent instanceof InfrastructureNode)) {
+            parent = parent.parent;
+        }
+        return parent || defaultParent;
     }
 
     add(edge: Edge<T>): boolean {
@@ -110,5 +131,32 @@ export class AbstractVertex<T> extends mxCell implements Vertex<T> {
     protected createStyle(): string {
         return this.createCss().toString();
     }
+
+    public setLoading(): void {
+        this.host.addCellOverlay(this, AbstractVertex.loadingOverlay);
+    }
+
+    public stopLoading() : void {
+        this.host.removeCellOverlay(this, AbstractVertex.loadingOverlay);
+    }
+
+
+    protected static createLoadingOverlay(): mxCellOverlay {
+        let
+            url = 'assets/sui/themes/hasli/assets/images/rolling.svg',
+            image = new mxImage(url, 40, 40),
+            iconOverlay = new mxCellOverlay(
+                image,
+                null,
+                mxConstants.ALIGN_CENTER,
+                mxConstants.ALIGN_MIDDLE,
+                null,
+                'default'
+            );
+        return iconOverlay;
+    }
+
+
+
 
 }

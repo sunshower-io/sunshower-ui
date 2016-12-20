@@ -20,6 +20,7 @@ import {
 import {InfrastructureElement} from 'elements/elements';
 
 import {Layer} from 'mxgraph';
+import {ApplicationDeployment} from "../../../../cells/deployment";
 
 @inject(HttpClient, Registry)
 export class Applications {
@@ -93,26 +94,34 @@ class ApplicationProcessor implements EditorOperation {
 
 
     apply(context: EditorContext): void {
-        let
-            x = this.coordinates.x,
-            y = this.coordinates.y - context.offset.top,
-            parent = this.resolveParent(context, x, y),
-            node : Node = null;
-
-        if(parent instanceof Node) {
-            node = parent as Node;
-        } else {
-            let infrastructureElement = new InfrastructureElement();
-            node = new Node(
-                parent,
-                infrastructureElement,
-                this.coordinates.x,
-                this.coordinates.y - context.offset.top,
-                this.registry
-            );
-            node.addTo(context.graph as Builder);
-            this.registry.elementManager.add(infrastructureElement);
-        }
-        node.addApplicationById(this.id);
+        context.location = {
+            x: this.coordinates.x,
+            y: this.coordinates.y - context.offset.top
+        };
+        new ApplicationDeployment(
+            this.registry,
+            this.id
+        ).satisfy(context);
+        // let
+        //     x = this.coordinates.x,
+        //     y = this.coordinates.y - context.offset.top,
+        //     parent = this.resolveParent(context, x, y),
+        //     node : Node = null;
+        //
+        // if(parent instanceof Node) {
+        //     node = parent as Node;
+        // } else {
+        //     let infrastructureElement = new InfrastructureElement();
+        //     node = new Node(
+        //         parent,
+        //         infrastructureElement,
+        //         this.coordinates.x,
+        //         this.coordinates.y - context.offset.top,
+        //         this.registry
+        //     );
+        //     node.addTo(context.graph as Builder);
+        //     this.registry.elementManager.add(infrastructureElement);
+        // }
+        // node.addApplicationById(this.id);
     }
 }

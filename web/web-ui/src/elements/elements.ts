@@ -41,7 +41,11 @@ export class ApplicationElement
     extends AbstractElement
     implements Element {
 
-    constructor(public icon:string, public name:string) {
+    constructor(
+        public icon:string,
+        public name:string,
+        public applicationId: string
+    ) {
         super();
     }
 }

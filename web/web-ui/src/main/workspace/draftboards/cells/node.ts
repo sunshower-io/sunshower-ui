@@ -24,9 +24,11 @@ import {
     NetworkMenuItem,
     StorageMenuItem
 } from "../menu/task-cell";
+import {Constrained} from "./cell";
+import {EditorContext} from "../editor";
 
 
-export class Node extends LayeredNode<InfrastructureElement> {
+export class Node extends LayeredNode<InfrastructureElement> implements Constrained {
 
 
     rows                : number = 1;
@@ -63,32 +65,27 @@ export class Node extends LayeredNode<InfrastructureElement> {
 
 
     addApplicationById(id: string): void {
-        this.registry.client.fetch(`docker/images/${id}`)
-            .then(r => r.json() as any)
-            .then(r => {
-                this.addApplication(
-                    new ApplicationDeployment(
-                        this.registry,
-                        new ApplicationElement(
-                            `${this.registry.get(Registry.S3_IMAGES_PATH)}/${r.logo_url.large}`,
-                            r.name
-                        ),
-                        this,
-                        this.geometry.x,
-                        this.geometry.y
-                    )
-                )
-            });
+        // this.registry.client.fetch(`docker/images/${id}`)
+        //     .then(r => r.json() as any)
+        //     .then(r => {
+        //         this.addApplication(
+        //             new ApplicationDeployment(
+        //                 this.registry,
+        //                 new ApplicationElement(
+        //                     `${this.registry.get(Registry.S3_IMAGES_PATH)}/${r.logo_url.large}`,
+        //                     r.name, id
+        //                 ),
+        //                 this,
+        //                 this.geometry.x,
+        //                 this.geometry.y
+        //             )
+        //         )
+        //     });
     }
 
 
     public addApplication(application: ApplicationDeployment): void {
         this.applications.push(application);
-        this.data.add(application.data);
-        this.registry.elementManager.dispatch(
-            'element-modified',
-            new ElementEvent('element-modified', this.data)
-        );
         try {
             this.host.model.beginUpdate();
             this.addAndResize();
@@ -165,6 +162,9 @@ export class Node extends LayeredNode<InfrastructureElement> {
     }
 
 
+    satisfy(context: EditorContext): void {
+
+    }
 
     protected createNodeOverlay(): mxCellOverlay {
         let
