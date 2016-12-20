@@ -96,9 +96,8 @@ export class ApplicationDeployment extends AbstractVertex<ApplicationElement> im
                 location.y - context.offset.top,
                 this.registry
             );
-            node.addTo(graph);
             node.satisfy(context);
-            this.registry.elementManager.add(infrastructureElement);
+            // this.registry.elementManager.add(infrastructureElement);
         }
         this.parent = node;
         node.addApplication(this);

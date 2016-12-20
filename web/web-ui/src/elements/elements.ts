@@ -51,5 +51,5 @@ export class ApplicationElement
 }
 
 export class InfrastructureElement extends AbstractElement {
-
+    icon: string = 'assets/sui/themes/hasli/assets/images/icons/provider/generic/single-node-instance.svg';
 }

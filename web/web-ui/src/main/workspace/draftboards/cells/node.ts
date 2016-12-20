@@ -5,19 +5,21 @@ import {
     mxConstants,
     mxGeometry
 } from 'mxgraph';
+
 import {Registry} from 'utils/registry';
+import {ElementEvent} from 'elements/events';
 
 import {
-    ApplicationElement,
     InfrastructureElement
 } from 'elements/elements';
+
+import {VirtualCloud as VPC} from 'elements/cloud';
 
 
 import {LayeredNode} from "./layer";
 import {ApplicationDeployment} from "./deployment";
 import {Builder} from "../graph/builder";
 
-import {ElementEvent} from 'elements/events';
 
 import {
     VertexMenu,
@@ -26,6 +28,7 @@ import {
 } from "../menu/task-cell";
 import {Constrained} from "./cell";
 import {EditorContext} from "../editor";
+import {VirtualCloud} from "./cloud";
 
 
 export class Node extends LayeredNode<InfrastructureElement> implements Constrained {
@@ -48,7 +51,6 @@ export class Node extends LayeredNode<InfrastructureElement> implements Constrai
         super(
             parent,
             element, x, y, registry);
-
         this.data.name = "Host " + Node.count++;
     }
 
@@ -61,26 +63,6 @@ export class Node extends LayeredNode<InfrastructureElement> implements Constrai
         let menu = new VertexMenu(builder, this, '\uf013');
         menu.addItem(new NetworkMenuItem());
         menu.addItem(new StorageMenuItem());
-    }
-
-
-    addApplicationById(id: string): void {
-        // this.registry.client.fetch(`docker/images/${id}`)
-        //     .then(r => r.json() as any)
-        //     .then(r => {
-        //         this.addApplication(
-        //             new ApplicationDeployment(
-        //                 this.registry,
-        //                 new ApplicationElement(
-        //                     `${this.registry.get(Registry.S3_IMAGES_PATH)}/${r.logo_url.large}`,
-        //                     r.name, id
-        //                 ),
-        //                 this,
-        //                 this.geometry.x,
-        //                 this.geometry.y
-        //             )
-        //         )
-        //     });
     }
 
 
@@ -99,6 +81,7 @@ export class Node extends LayeredNode<InfrastructureElement> implements Constrai
         geo.height += (144 / this.scale);
         this.rows++;
     }
+
 
     addGridColumn() : void {
         let geo = this.geometry;
@@ -138,10 +121,28 @@ export class Node extends LayeredNode<InfrastructureElement> implements Constrai
                 geometry
             );
         }
+        this.updateParent(geometry);
         this.sizeChanged();
+
         // this.host.groupCells(this, 24, this.applications);
         this.host.model.setGeometry(this, geometry);
         this.host.refresh();
+    }
+
+    updateParent(geometry:mxGeometry) {
+        let pgeom = this.parent.geometry,
+            pw = pgeom.width,
+            ph = pgeom.height,
+            w = geometry.width,
+            h = geometry.height;
+        if(geometry.x + w > pw) {
+            pw += 260;
+        }
+        if(geometry.y + h > ph) {
+            ph += 260;
+        }
+        pgeom.width = pw;
+        pgeom.height = ph;
     }
 
     insertGridElement(
@@ -163,7 +164,14 @@ export class Node extends LayeredNode<InfrastructureElement> implements Constrai
 
 
     satisfy(context: EditorContext): void {
-
+        this.addTo(context.graph as Builder);
+        let cloud = new VirtualCloud();
+        cloud.data = new VPC();
+        cloud.data.add(this.data);
+        this.parent = cloud;
+        cloud.addTo(this.host);
+        this.host.groupCells(cloud, 100, [this]);
+        this.registry.elementManager.add(cloud.data);
     }
 
     protected createNodeOverlay(): mxCellOverlay {
@@ -176,7 +184,6 @@ export class Node extends LayeredNode<InfrastructureElement> implements Constrai
                 mxConstants.ALIGN_LEFT,
                 mxConstants.ALIGN_TOP,
                 null,
-                // null,
                 'default'
             );
         return iconOverlay;

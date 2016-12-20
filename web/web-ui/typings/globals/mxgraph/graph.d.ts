@@ -120,6 +120,13 @@ declare module 'mxgraph' {
 
         /**
          *
+         * @param child
+         */
+
+        updateCellSize(child:Layer) : void;
+
+        /**
+         *
          * @param container
          * @param model
          */
