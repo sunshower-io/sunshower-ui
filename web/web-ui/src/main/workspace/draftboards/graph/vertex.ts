@@ -48,6 +48,13 @@ export class AbstractVertex<T> extends mxCell implements Vertex<T> {
         this.setStyle(this.createStyle());
     }
 
+    addChild(child:Layer) : void {
+        if(!this.children) {
+            this.children = [];
+        }
+        this.children.push(child);
+    }
+
     addTo(builder: Builder): mxCell {
         this.host = builder;
         let result = builder.addCell(this, this.parent);

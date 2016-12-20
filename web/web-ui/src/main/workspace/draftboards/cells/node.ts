@@ -172,6 +172,8 @@ export class Node extends LayeredNode<InfrastructureElement> implements Constrai
 
         if(parent instanceof VirtualCloud) {
             cloud = parent;
+            this.geometry.x = location.x - cloud.geometry.x;
+            this.geometry.y = location.y - cloud.geometry.y;
         } else {
             cloud = new VirtualCloud();
             cloud.data = new VPC();
@@ -180,7 +182,9 @@ export class Node extends LayeredNode<InfrastructureElement> implements Constrai
         }
         this.parent = cloud;
         cloud.data.add(this.data);
-        this.host.groupCells(cloud, 100, [this]);
+        cloud.addChild(this);
+        cloud.regroup();
+        // this.host.groupCells(cloud, 100, [this]);
     }
 
     protected createNodeOverlay(): mxCellOverlay {

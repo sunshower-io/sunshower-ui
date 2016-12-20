@@ -95,6 +95,9 @@ export class Builder extends mxGraph {
     selectCellForEvent(cell: mxCell) {
         if (cell.getAttribute('constituent') === '1') {
             let delegate = this.model.getParent(cell);
+            while(delegate.getAttribute('constituent') === '1') {
+                delegate = this.model.getParent(delegate);
+            }
             super.selectCellForEvent(delegate);
         } else {
             super.selectCellForEvent(cell);

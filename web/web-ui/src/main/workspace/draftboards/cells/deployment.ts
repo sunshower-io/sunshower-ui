@@ -76,6 +76,15 @@ export class ApplicationDeployment extends AbstractVertex<ApplicationElement> im
 
 
     satisfy(context: EditorContext): void {
+        try {
+            context.graph.getModel().beginUpdate();
+            this.doSatisfy(context);
+        } finally {
+            context.graph.getModel().endUpdate();
+        }
+    }
+
+    private doSatisfy(context: EditorContext) {
         let location = context.location,
             parent = this.resolveParent(
                 context,

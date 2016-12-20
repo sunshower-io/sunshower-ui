@@ -10,6 +10,24 @@ export class VirtualCloud extends LayeredNode<VPC> implements Constrained {
         super(null, null, 0, 0);
     }
 
+
+    regroup() : void {
+        let geo = this.geometry,
+            x = geo.x,
+            y = geo.y;
+        if(this.children && this.children.length === 1) {
+            let child = this.children[0],
+                cx = child.geometry.x,
+                cy = child.geometry.y;
+            x = cx;
+            y = cy;
+        }
+        this.host.groupCells(this, 20, this.children);
+        this.geometry.x = x;
+        this.geometry.y = y;
+        this.host.refresh(this);
+    }
+
     satisfy(context: EditorContext): void {
 
     }
