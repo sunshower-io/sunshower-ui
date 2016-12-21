@@ -168,8 +168,13 @@ declare module 'mxgraph' {
 
     export class mxRubberband {
         constructor(g:mxGraph);
-        static enabled:        boolean;
-        static defaultOpacity: number;
+        static enabled          : boolean;
+        static defaultOpacity   : number;
+
+        currentX                : number;
+        currentY                : number;
+
+        mouseUp(a:any, b:any) : any;
     }
 
 }

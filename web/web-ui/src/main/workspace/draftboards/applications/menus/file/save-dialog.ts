@@ -40,12 +40,6 @@ export class SaveDialog {
         });
     }
 
-    // activate() : void {
-    //     let image = document.getElementById('__save_dialog_image'),
-    //     // this.image.appendChild(i);
-    //     image.appendChild(i);
-    // }
-
 
     save(): void {
         this.draftboardManager.save();
