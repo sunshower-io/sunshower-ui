@@ -4,9 +4,7 @@ import {UUID} from 'utils/uuid';
 
 export interface Element {
     id:UUID;
-
     children: Element[];
-
     add(child:Element) : Element;
 }
 

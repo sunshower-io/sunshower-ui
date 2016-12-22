@@ -1,11 +1,9 @@
 import {inject} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
-import {ElementManager} from 'elements/element-manager';
 import {DraftboardManager} from "../elements/draftboard";
 
 @inject(
     HttpClient,
-    ElementManager,
     DraftboardManager
 )
 export class Registry {
@@ -15,7 +13,6 @@ export class Registry {
 
     constructor(
         public client:HttpClient,
-        public elementManager:ElementManager,
         public draftboardManager: DraftboardManager
     ) {
 

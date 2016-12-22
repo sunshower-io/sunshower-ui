@@ -1,11 +1,11 @@
 template
-    .header
+    .header(style="width:600px")
         | Save Draftboard
-    .image.content
-        .ui.medium.image(style="border:1px solid #a2a2a2")
+    .image.content(style="width:600px")
+        .ui.medium.image(style="border:1px solid #a2a2a2; background:#f3f3f3")
             canvas(ref="image", width="300px", height="200px")
             //img(src='/images/avatar/large/chris.jpg')
-        .description(style="width:364px")
+        .description(style="width:100%")
             .ui.form
                 .field
                     label Name
@@ -17,7 +17,7 @@ template
                     label Notes
                     textarea(value.bind="current.notes")
                     //input(type='text', name='name', value.bind="current.notes")
-    .actions
+    .actions(style="width:600px")
         .ui.black.deny.button
             | Cancel
         .ui.positive.right.labeled.icon.button(click.delegate="save()")

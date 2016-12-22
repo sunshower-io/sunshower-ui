@@ -21,6 +21,8 @@ import {Grid} from "../grid";
 import {MenuSelector} from "./menu-selection";
 import CreateLayerMenuItem from "./selection-menu/create-layer";
 
+import {DialogService} from 'aurelia-dialog';
+
 mxConstants.HANDLE_FILLCOLOR = '#239AE8';
 mxConstants.HANDLE_STROKECOLOR = '#239AE8';
 mxConstants.VERTEX_SELECTION_COLOR = '#0000FF';
@@ -51,10 +53,13 @@ export class Builder extends mxGraph {
 
     createMenuSelector() : void {
         let menuSelector = new MenuSelector(this);
-        menuSelector.addMenu(new CreateLayerMenuItem());
+        menuSelector.addMenu(new CreateLayerMenuItem(this.dialogService));
     }
 
-    constructor(public container: HTMLElement) {
+    constructor(
+        public container: HTMLElement,
+        public dialogService:DialogService
+    ) {
         super(container, new mxGraphModel());
         this.createMenuSelector();
         this.setPanning(true)

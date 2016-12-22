@@ -22,8 +22,8 @@ import {
 } from '../abstract-graph'
 
 import {
-    EditorEvent,
-    EditorOperation, EditorContext
+    EditorOperation,
+    EditorContext
 } from '../editor';
 
 
@@ -63,9 +63,6 @@ import {
     ObservedEvent
 } from 'utils/observer';
 
-import {AbstractElement} from 'elements/elements';
-
-import {ElementManager} from 'elements/element-manager';
 
 import {bindable} from 'aurelia-framework';
 import {ToggleLeft, ToggleRight, SearchMenu} from "./menus/misc-menus";
@@ -203,7 +200,7 @@ export class Applications extends AbstractGraph
     }
 
     protected createBuilder(): GBuilder {
-        return new GBuilder(this.container);
+        return new GBuilder(this.container, this.dialogService);
     }
 
 }

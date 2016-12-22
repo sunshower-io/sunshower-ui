@@ -1,16 +1,26 @@
 import {AbstractMenuItem, MenuItem} from 'common/elements/menu';
 import {EditorContext} from "../../editor";
-export default class CreateLayerMenuItem
-    extends AbstractMenuItem
-    implements MenuItem {
+import {DialogService} from 'aurelia-dialog';
+import {CreateLayerDialog} from "./dialogs/create-layer-dialog";
+export default class CreateLayerMenuItem extends AbstractMenuItem implements MenuItem {
 
-    constructor() {
+    constructor(private dialogService: DialogService) {
         super();
         this.name = 'Create Layer';
     }
 
     apply(editor: EditorContext): void {
+        this.dialogService.open({
+            viewModel:
+            CreateLayerDialog,
+            model: editor
+        }).then((result) => {
+            if (!result.wasCancelled) {
 
+            } else {
+
+            }
+        });
     }
 
 

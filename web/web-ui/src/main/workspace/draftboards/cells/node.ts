@@ -178,7 +178,7 @@ export class Node extends LayeredNode<InfrastructureElement> implements Constrai
             cloud = new VirtualCloud();
             cloud.data = new VPC();
             cloud.addTo(graph);
-            this.registry.elementManager.add(cloud.data);
+            this.registry.draftboardManager.add(cloud.data);
         }
         this.parent = cloud;
         cloud.data.add(this.data);

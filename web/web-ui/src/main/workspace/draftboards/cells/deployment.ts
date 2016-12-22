@@ -124,7 +124,7 @@ export class ApplicationDeployment extends AbstractVertex<ApplicationElement> im
                 this.data = element;
                 this.host.addCellOverlay(this, this.applicationOverlay());
                 node.data.add(element);
-                this.registry.elementManager.dispatch(
+                this.registry.draftboardManager.dispatch(
                     'element-modified',
                     new ElementEvent('element-modified', node.data)
                 );

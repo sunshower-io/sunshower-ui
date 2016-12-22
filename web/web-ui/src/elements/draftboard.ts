@@ -11,7 +11,7 @@ export class Draftboard {
     name                    : string;
     description             : string;
 
-    rootElements            : Element[];
+    rootElements            : {[key:string]:Element};
 
 
 
@@ -20,15 +20,31 @@ export class Draftboard {
     }
 
 
+    group(layer:Element) : Element {
+        let roots = this.rootElements;
+        for(let child of layer.children) {
+            let existing = roots[child.id.value];
+            if(existing) {
+                delete roots[child.id.value];
+            }
+        }
+        this.addElement(layer);
+        return layer;
+    }
+
     getRootElements() : Element[] {
-        return this.rootElements;
+        let rootElements = [];
+        for(let elementKey in this.rootElements) {
+            rootElements.push(this.rootElements[elementKey]);
+        }
+        return rootElements;
     }
 
     addElement(element:Element) : void {
         if(!this.rootElements) {
-            this.rootElements = [];
+            this.rootElements = {};
         }
-        this.rootElements.push(element);
+        this.rootElements[element.id.value] = element;
     }
 
 }
@@ -57,6 +73,15 @@ export class DraftboardManager extends DefaultEventDispatcher {
         }
     }
 
+    createLayer(layer:Element) : void {
+        this.focusedDraftboard()
+            .getRootElements()
+
+
+
+
+    }
+
     loadDraftboard(id:string) : Draftboard {
         return this.draftboards[id];
     }
@@ -77,6 +102,16 @@ export class DraftboardManager extends DefaultEventDispatcher {
         this.currentDraftboard = draftboard;
         this.dispatch('draftboard-changed',
             new ObservedEvent(draftboard))
+    }
+
+    add(element:Element) : Element {
+        this.focusedDraftboard()
+            .addElement(element);
+        this.dispatch(
+            'element-added',
+            new Event('element-added', element),
+        );
+        return element;
     }
 
 
