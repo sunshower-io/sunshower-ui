@@ -19,6 +19,7 @@ import {
 import {ConnectionHandler} from './connection-handler';
 import {Grid} from "../grid";
 import {MenuSelector} from "./menu-selection";
+import CreateLayerMenuItem from "./selection-menu/create-layer";
 
 mxConstants.HANDLE_FILLCOLOR = '#239AE8';
 mxConstants.HANDLE_STROKECOLOR = '#239AE8';
@@ -48,9 +49,14 @@ export class Builder extends mxGraph {
 
     private grid: Grid;
 
+    createMenuSelector() : void {
+        let menuSelector = new MenuSelector(this);
+        menuSelector.addMenu(new CreateLayerMenuItem());
+    }
+
     constructor(public container: HTMLElement) {
         super(container, new mxGraphModel());
-        new MenuSelector(this);
+        this.createMenuSelector();
         this.setPanning(true)
         this.setConnectable(true);
         this.foldingEnabled = false;

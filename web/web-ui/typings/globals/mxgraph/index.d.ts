@@ -174,7 +174,37 @@ declare module 'mxgraph' {
         currentX                : number;
         currentY                : number;
 
+
+        mouseDown(a:any, b:any) : any;
+
+        /**
+         * @param a
+         * @param b
+         */
+
         mouseUp(a:any, b:any) : any;
+
+        /**
+         *
+         * @param x
+         * @param y
+         */
+
+        update(x:number, y: number) : void;
+
+        /**
+         *
+         * @param a
+         * @param b
+         */
+
+        mouseMove(a:any, b:any) : any;
+
+        /**
+         * @param x
+         * @param y
+         */
+        start(x: number, y:number) : void;
     }
 
 }

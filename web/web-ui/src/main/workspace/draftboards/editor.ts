@@ -11,10 +11,10 @@ export interface NavigationAware {
 }
 
 export interface EditorContext {
-    host: NavigationAware;
-    graph: mxGraph;
-    offset: {top: number, left: number};
-    location?: {x: number, y: number};
+    host        : NavigationAware;
+    graph       : mxGraph;
+    offset      ?: {top: number, left: number};
+    location    ?: {x: number, y: number};
 }
 
 export interface EditorOperation extends OperationContext {
