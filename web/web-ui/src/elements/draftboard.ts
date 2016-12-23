@@ -74,12 +74,9 @@ export class DraftboardManager extends DefaultEventDispatcher {
     }
 
     createLayer(layer:Element) : void {
-        this.focusedDraftboard()
-            .getRootElements()
-
-
-
-
+        this.focusedDraftboard().group(layer);
+        this.dispatch('draftboard-changed',
+            new ObservedEvent(this.currentDraftboard))
     }
 
     loadDraftboard(id:string) : Draftboard {

@@ -180,6 +180,7 @@ export class Node extends LayeredNode<InfrastructureElement> implements Constrai
             cloud.addTo(graph);
             this.registry.draftboardManager.add(cloud.data);
         }
+        this.data.parent = cloud.data;
         this.parent = cloud;
         cloud.data.add(this.data);
         cloud.addChild(this);

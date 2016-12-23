@@ -1,11 +1,13 @@
 
 import {UUID} from 'utils/uuid';
+import {VirtualCloud} from "./cloud";
 
 
 export interface Element {
     id:UUID;
-    children: Element[];
-    add(child:Element) : Element;
+    parent                  ?: Element;
+    children                : Element[];
+    add(child:Element)      : Element;
 }
 
 
@@ -17,7 +19,9 @@ export class AbstractElement implements Element {
     public children     : Element[];
 
 
-    constructor() {
+
+
+    constructor(public parent?: Element) {
         this.id = UUID.randomUUID();
     }
 
@@ -40,14 +44,19 @@ export class ApplicationElement
     implements Element {
 
     constructor(
+        cloud   : InfrastructureElement,
         public icon:string,
         public name:string,
         public applicationId: string
     ) {
-        super();
+        super(cloud);
     }
 }
 
 export class InfrastructureElement extends AbstractElement {
     icon: string = 'assets/sui/themes/hasli/assets/images/icons/provider/generic/single-node-instance.svg';
+
+    constructor(cloud:VirtualCloud) {
+        super(cloud);
+    }
 }

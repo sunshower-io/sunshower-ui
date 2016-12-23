@@ -98,7 +98,7 @@ export class ApplicationDeployment extends AbstractVertex<ApplicationElement> im
         if (parent instanceof Node) {
             node = parent as Node;
         } else {
-            let infrastructureElement = new InfrastructureElement();
+            let infrastructureElement = new InfrastructureElement(null);
             node = new Node(
                 parent,
                 infrastructureElement,
@@ -119,7 +119,10 @@ export class ApplicationDeployment extends AbstractVertex<ApplicationElement> im
             .then(r => r.json() as any)
             .then(r => {
                 let element = new ApplicationElement(
-                    this.getIconUrl(r), r.name, this.applicationId
+                    node.data,
+                    this.getIconUrl(r),
+                    r.name,
+                    this.applicationId
                 );
                 this.data = element;
                 this.host.addCellOverlay(this, this.applicationOverlay());

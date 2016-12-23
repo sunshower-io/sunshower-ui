@@ -63,7 +63,7 @@ class NodeProcessor implements EditorOperation {
 
         let
             parent = context.graph.getDefaultParent(),
-            ie = new InfrastructureElement(),
+            ie = new InfrastructureElement(null),
             node = new Node(
                 parent,
                 ie,
