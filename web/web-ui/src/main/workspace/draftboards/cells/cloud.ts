@@ -8,6 +8,7 @@ import {mxCellOverlay, mxConstants, mxImage} from "mxgraph";
 export class VirtualCloud extends LayeredNode<VPC> implements Constrained {
     constructor() {
         super(null, null, 0, 0);
+        this.setCollapsable(true);
     }
 
 

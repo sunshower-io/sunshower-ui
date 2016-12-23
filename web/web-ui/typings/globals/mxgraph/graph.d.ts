@@ -79,12 +79,30 @@ declare module 'mxgraph' {
 
     type Style = {[key: string]: any};
 
-    export class mxCellState {
-        cell: mxCell;
-        style: Style;
+    export class mxControl {
+        scale       :number;
+        bounds      :  mxRectangle
 
-        shape: mxShape;
-        text: mxShape;
+    }
+
+    export class mxCellState {
+        x           : number;
+        y           : number;
+        width       : number;
+        height      : number;
+
+
+        view        : any;
+
+        cell        : mxCell;
+        style       : Style;
+
+        shape       : mxShape;
+        text        : mxShape;
+        control     : mxControl;
+
+
+
     }
 
 
@@ -108,21 +126,41 @@ declare module 'mxgraph' {
 
     }
 
-    class mxGraph implements Connectable {
+    export class mxCellRenderer {
+        getControlBounds(
+            state:mxCellState,
+            w:number,
+            h:number
+        ) : mxRectangle;
+
+        redrawControl(state:mxCellState, forced:boolean) : void;
+    }
+
+    export class mxGraph implements Connectable {
+
 
 
         mouseListeners: {[name: string]: any};
         gridSize                    : number;
-        container                   : Element;
-        view                        : mxGraphView;
-        model                       : mxGraphModel;
         recursiveResize             : boolean;
 
+        expandedImage               : mxImage;
+        collapsedImage              : mxImage;
 
 
         foldingEnabled              : boolean;
         isMouseDown                 : boolean;
-        connectionHandler: mxConnectionHandler;
+
+        extendParents               : boolean;
+        extendParentsOnAdd          : boolean;
+
+
+        container                   : Element;
+        view                        : mxGraphView;
+        model                       : mxGraphModel;
+        graphHandler                : mxGraphHandler;
+        cellRenderer                : mxCellRenderer;
+        connectionHandler           : mxConnectionHandler;
 
         zoomIn() : void;
 

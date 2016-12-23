@@ -48,6 +48,15 @@ export class AbstractVertex<T> extends mxCell implements Vertex<T> {
         this.setStyle(this.createStyle());
     }
 
+    setCollapsable(collapsable:boolean) {
+
+        if(collapsable) {
+            this.setAttribute('collapsable', '1');
+        } else {
+            delete this.attributes['collapsable'];
+        }
+    }
+
     addChild(child:Layer) : void {
         if(!this.children) {
             this.children = [];

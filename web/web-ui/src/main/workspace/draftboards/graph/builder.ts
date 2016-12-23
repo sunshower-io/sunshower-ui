@@ -1,4 +1,5 @@
 import {
+    mxImage,
     mxCell,
     mxUtils,
     mxGraph,
@@ -22,6 +23,7 @@ import {MenuSelector} from "./menu-selection";
 import CreateLayerMenuItem from "./selection-menu/create-layer";
 
 import {DialogService} from 'aurelia-dialog';
+import {CellRenderer} from "./cell-renderer";
 
 mxConstants.HANDLE_FILLCOLOR = '#239AE8';
 mxConstants.HANDLE_STROKECOLOR = '#239AE8';
@@ -64,14 +66,25 @@ export class Builder extends mxGraph {
         this.createMenuSelector();
         this.setPanning(true)
         this.setConnectable(true);
-        this.foldingEnabled = false;
+        this.foldingEnabled = true;
         this.setHtmlLabels(true);
         this.gridSize = 32;
+        this.extendParents = true;
+        this.extendParentsOnAdd = true;
+        this.cellRenderer = new CellRenderer();
+        this.graphHandler.setRemoveCellsFromParent(false);
+
         this.grid = new Grid(this);
         this.grid.draw();
         // this.addMouseListener(new MenuHoverListener(this));
         this.recursiveResize = false;
         mxGraphHandler.prototype.guidesEnabled = true;
+
+        this.expandedImage =
+            new mxImage('assets/sui/themes/hasli/assets/images/expand.svg', 16, 16);
+        this.collapsedImage = new mxImage(
+            'assets/sui/themes/hasli/assets/images/compress.svg', 16, 16);
+
 
         this.getStylesheet()
             .getDefaultEdgeStyle()
