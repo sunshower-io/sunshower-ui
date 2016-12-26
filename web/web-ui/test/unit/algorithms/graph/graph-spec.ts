@@ -1,6 +1,6 @@
 import {} from 'jasmine';
-import {Graph, Node} from 'src/algorithms/graph/graph';
-import {TarjansStronglyConnectedComponents} from 'src/algorithms/graph/tarjans';
+import {Graph, Node} from 'algorithms/graph/graph';
+import {TarjansStronglyConnectedComponents} from 'algorithms/graph/tarjans';
 
 function n(data:number) : Node<string> {
     return new Node('' + data, '' + data);

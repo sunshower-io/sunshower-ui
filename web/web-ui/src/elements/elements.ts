@@ -18,9 +18,6 @@ export class AbstractElement implements Element {
     public name         : string;
     public children     : Element[];
 
-
-
-
     constructor(public parent?: Element) {
         this.id = UUID.randomUUID();
     }
