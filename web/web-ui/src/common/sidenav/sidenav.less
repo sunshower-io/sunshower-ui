@@ -1,18 +1,13 @@
+@bordercolor: #D6D6D7;
+@borderstyle: 1px solid @bordercolor;
+@pseudoem: 16px;
+@pseudolineheight: 39px;
+@hovercolor: #1e70bf;
 
 .sidenav {
-  height:100%;
-  .sidenav-collapse {
-    height:64px;
-    vertical-align: top;
-  }
-  .sidenav-container {
-    height:100%;
-  }
-
-  a.item {
-    margin-left:24px;
-    font-size:1.2em;
-    color:#8b8d98!important;
+  border-right: @borderstyle;
+  .sidebar-header { border-bottom: @borderstyle ; }
+  a.item {display: block; line-height:@pseudolineheight; padding-left:@pseudoem; border-bottom: @borderstyle;
+    &.active { font-weight: bold; color: @hovercolor; }
   }
 }
-

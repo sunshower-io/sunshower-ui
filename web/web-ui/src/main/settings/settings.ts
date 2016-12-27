@@ -9,7 +9,7 @@ export class Settings {
 
 
     public configureRouter(config: RouterConfiguration, router: Router) {
-        config.title = "";
+        config.title = "Settings";
         config.map([
             {
                 route: ['', 'profile'],
@@ -17,7 +17,9 @@ export class Settings {
                 moduleId: 'main/settings/profile/profile',
                 nav: true,
                 title: "Profile",
-                settings: {}
+                settings: {
+                    icon: 'user'
+                }
             },
             {
                 route: 'storage',
@@ -25,7 +27,9 @@ export class Settings {
                 moduleId: 'main/settings/storage/storage',
                 nav: true,
                 title: "Storage Configuration",
-                settings: {}
+                settings: {
+                    icon: 'database'
+                }
             }]);
         this.router = router;
 
