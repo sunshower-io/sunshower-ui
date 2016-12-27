@@ -1,4 +1,3 @@
-
 import {mxCell} from 'mxgraph';
 import {Layer} from 'elements/layer';
 import {Element} from 'elements/elements';
@@ -15,11 +14,9 @@ export class LayerService {
 
     }
 
-
     create(name: string,
            description: string,
            model: EditorContext): Layer {
-
         let
             host = model.graph,
             selection = host.getSelectionCells(),
@@ -33,19 +30,13 @@ export class LayerService {
         let
             parent = host.getDefaultParent(),
             glayer = new GLayer(parent, layer, 0, 0, null);
-
         for (let e of r.data) {
             e.parent = layer;
         }
-
         glayer.addTo(host as Builder);
-
         host.groupCells(glayer, 50, r.elements);
-
         this.draftboardManager.createLayer(layer);
-
         return layer;
-
     }
 
     private toElements(selection: mxCell[]): result {
@@ -75,7 +66,7 @@ export class LayerService {
         return results;
     }
 
-    private findTopLevel(element: [mxCell, Element],
+    public findTopLevel(element: [mxCell, Element],
                          elements: {[key: string]: [mxCell, Element]}): [mxCell, Element] {
         let current = element;
         while (current[1].parent) {
@@ -91,8 +82,8 @@ export class LayerService {
 }
 
 class result {
-    elements    : mxCell[];
-    data        : Element[];
+    elements: mxCell[];
+    data: Element[];
 
     constructor() {
         this.elements = [];

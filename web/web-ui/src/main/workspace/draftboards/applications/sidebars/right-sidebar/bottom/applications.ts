@@ -23,7 +23,7 @@ import {Layer} from 'mxgraph';
 import {ApplicationDeployment} from "../../../../cells/deployment";
 
 @inject(HttpClient, Registry)
-export class Applications {
+export default class Applications {
 
     private element:HTMLElement;
 
@@ -69,7 +69,7 @@ export class Applications {
 }
 
 
-class ApplicationProcessor implements EditorOperation {
+export class ApplicationProcessor implements EditorOperation {
 
     constructor(
         private id:string,
