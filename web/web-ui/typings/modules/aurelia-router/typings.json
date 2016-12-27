@@ -4,6 +4,7 @@
     "src": "https://raw.githubusercontent.com/aurelia/router/master/typings.json",
     "raw": "github:aurelia/router",
     "main": "dist/aurelia-router.d.ts",
-    "name": "aurelia-router"
+    "name": "aurelia-router",
+    "type": "typings"
   }
 }

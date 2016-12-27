@@ -28,7 +28,8 @@ gulp.task('build-system', function() {
     .pipe(plumber({errorHandler: notify.onError('Error: <%= error.message %>')}))
     .pipe(changed(paths.output, {extension: '.ts'}))
     .pipe(sourcemaps.init({loadMaps: true}))
-    .pipe(typescript(typescriptCompiler))
+    // .pipe(typescript(typescriptCompiler))
+    .pipe(typescriptCompiler())
     .pipe(sourcemaps.write('.', {includeContent: false, sourceRoot: '/dev/src'}))
     .pipe(gulp.dest(paths.output));
 });
@@ -70,7 +71,7 @@ gulp.task('build-pug', function() {
 gulp.task('build', function(callback) {
   return runSequence(
     'clean',
-    ['build-system', 'build-html', 'build-css', 'build-pug', 'build-assets'],
+    ['build-system', 'build-html', 'build-css', 'build-less', 'build-pug', 'build-assets'],
     callback
   );
 });

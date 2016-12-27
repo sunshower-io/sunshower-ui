@@ -1,0 +1,12 @@
+template
+    .navigator-wrapper(click.delegate="create()", show.bind="!loading")
+        .ui.right.floated.primary.basic.button
+            | Create
+        .ui(style="display:flex;justify-content:center;align-items:center; vertical-align:middle;line-height:50%;height:100%;")
+            .shriek(style="width:200px; height:200px")
+                img.ui.fluid.image(src="assets/sui/themes/hasli/assets/images/icons/plus-circle.svg")
+    .ui.navigator-wrapper(show.bind="loading", style="padding:0px")
+        .ui.segment(style="width:100%; height:100%; border:0; border-radius:0")
+            .ui.active.dimmer
+                .ui.indeterminate.text.loader
+                    | Loading Draftbench

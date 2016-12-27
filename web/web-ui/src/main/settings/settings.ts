@@ -1,4 +1,4 @@
-import {AuthenticationContextHolder} from "src/model/core/security";
+import {AuthenticationContextHolder} from "model/core/security";
 import {Router, RouterConfiguration} from "aurelia-router";
 export class Settings {
 
@@ -12,15 +12,7 @@ export class Settings {
         config.title = "";
         config.map([
             {
-                route: ['', 'admin'],
-                name: 'admin',
-                moduleId: 'main/settings/admin/admin',
-                nav: true,
-                title: "Admin",
-                settings: {}
-            },
-            {
-                route: 'profile',
+                route: ['', 'profile'],
                 name: 'profile',
                 moduleId: 'main/settings/profile/profile',
                 nav: true,
@@ -28,11 +20,11 @@ export class Settings {
                 settings: {}
             },
             {
-                route: 'hfs',
-                name: 'hfs',
-                moduleId: 'main/settings/hfs/hfs',
+                route: 'storage',
+                name: 'storage',
+                moduleId: 'main/settings/storage/storage',
                 nav: true,
-                title: "HFS Configuration",
+                title: "Storage Configuration",
                 settings: {}
             }]);
         this.router = router;

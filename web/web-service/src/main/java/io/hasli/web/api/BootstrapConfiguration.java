@@ -19,6 +19,8 @@ import io.hasli.persist.core.DatabaseConfiguration;
 import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.search.es.SearchConfiguration;
 import io.hasli.security.api.SecurityPersistenceConfiguration;
+import io.hasli.service.CoreServiceConfiguration;
+import io.hasli.service.csp.configuration.CSPServiceConfiguration;
 import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.service.vault.VaultConfiguration;
 import org.flywaydb.core.Flyway;
@@ -40,6 +42,7 @@ import java.util.Map;
  */
 @Configuration
 @Import({
+        CSPServiceConfiguration.class,
         FlywayConfiguration.class,
         DataSourceConfiguration.class,
         DatabaseConfiguration.class,
@@ -51,6 +54,7 @@ import java.util.Map;
         DockerConfiguration.class,
         PersistenceConfiguration.class,
         SecurityPersistenceConfiguration.class,
+        CoreServiceConfiguration.class
 })
 public class BootstrapConfiguration {
 
@@ -108,7 +112,7 @@ public class BootstrapConfiguration {
         administrator.setEnabled(true);
         administrator.setUsername("administrator");
         administrator.setEmailAddress("administrator@hasli.io");
-        administrator.setPassword("t3sti9");
+        administrator.setPassword("h4s1!43v3r!");
         application.setAdministrators(Collections.singletonList(administrator));
         applicationService.initialize(application);
     }

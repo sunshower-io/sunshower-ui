@@ -16,6 +16,8 @@ dependencies {
     provided "io.hasli.search:search-es"
     provided "io.hasli.service:service-vault"
     provided "io.hasli.service:service-hal"
+    provided "io.hasli.service:service-core"
+    provided "io.hasli.service:service-csp"
     provided "io.hasli.service:service-security"
     provided "io.hasli.persist:persist-hibernate"
 

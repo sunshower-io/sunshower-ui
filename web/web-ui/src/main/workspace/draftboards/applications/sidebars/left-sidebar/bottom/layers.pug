@@ -1,0 +1,12 @@
+template
+    .ui.container.layers
+        .ui.menu--header
+            .ui.sidebar-header(style="border-bottom:1px solid #D6D6D7")
+                span.pull-left
+                    | Layers
+                .ui.right.floated.image.middle.header-icon
+                    img(src='styles/themes/hasli/assets/images/icons/plus-green-icon.svg')
+
+
+        .layer-tree(ref="element")
+            tree(nodes.bind="layers")

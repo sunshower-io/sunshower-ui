@@ -1,0 +1,207 @@
+import {
+    mxImage,
+    mxCell,
+    mxUtils,
+    mxGraph,
+    mxGraphModel,
+    mxRubberband,
+    mxConstants,
+    mxRectangle,
+    mxShape,
+    mxPoint,
+    mxConnectionHandler,
+    mxPolyline,
+    mxGeometry,
+    Layer,
+    mxConnectionConstraint,
+    mxGraphHandler
+} from "mxgraph";
+
+import {ConnectionHandler} from './connection-handler';
+import {Grid} from "../grid";
+import {MenuSelector} from "./menu-selection";
+import CreateLayerMenuItem from "./selection-menu/create-layer";
+
+import {DialogService} from 'aurelia-dialog';
+import {CellRenderer} from "./cell-renderer";
+
+mxConstants.HANDLE_FILLCOLOR = '#239AE8';
+mxConstants.HANDLE_STROKECOLOR = '#239AE8';
+mxConstants.VERTEX_SELECTION_COLOR = '#0000FF';
+
+mxRubberband.defaultOpacity = 1;
+
+mxShape.prototype.constraints = [
+    // new mxConnectionConstraint(new mxPoint(0.25, 0), true),
+    new mxConnectionConstraint(new mxPoint(0.5, 0), true),
+    // new mxConnectionConstraint(new mxPoint(0.75, 0), true),
+    // new mxConnectionConstraint(new mxPoint(0, 0.25), true),
+    new mxConnectionConstraint(new mxPoint(0, 0.5), true),
+    // new mxConnectionConstraint(new mxPoint(0, 0.75), true),
+    // new mxConnectionConstraint(new mxPoint(1, 0.25), true),
+    new mxConnectionConstraint(new mxPoint(1, 0.5), true),
+    // new mxConnectionConstraint(new mxPoint(1, 0.75), true),
+    // new mxConnectionConstraint(new mxPoint(0.25, 1), true),
+    new mxConnectionConstraint(new mxPoint(0.5, 1), true),
+    // new mxConnectionConstraint(new mxPoint(0.75, 1), true)
+];
+
+mxPolyline.prototype.constraints = null;
+
+
+export class Builder extends mxGraph {
+
+    private grid: Grid;
+
+    createMenuSelector() : void {
+        let menuSelector = new MenuSelector(this);
+        menuSelector.addMenu(new CreateLayerMenuItem(this.dialogService));
+    }
+
+    constructor(
+        public container: HTMLElement,
+        public dialogService:DialogService
+    ) {
+        super(container, new mxGraphModel());
+        this.createMenuSelector();
+        this.setPanning(true)
+        this.setConnectable(true);
+        this.foldingEnabled = true;
+        this.setHtmlLabels(true);
+        this.gridSize = 32;
+        this.extendParents = true;
+        this.extendParentsOnAdd = true;
+        this.cellRenderer = new CellRenderer();
+        this.graphHandler.setRemoveCellsFromParent(false);
+
+        this.grid = new Grid(this);
+        this.grid.draw();
+        // this.addMouseListener(new MenuHoverListener(this));
+        this.recursiveResize = false;
+        mxGraphHandler.prototype.guidesEnabled = true;
+
+        this.expandedImage =
+            new mxImage('assets/sui/themes/hasli/assets/images/expand.svg', 16, 16);
+        this.collapsedImage = new mxImage(
+            'assets/sui/themes/hasli/assets/images/compress.svg', 16, 16);
+
+
+        this.getStylesheet()
+            .getDefaultEdgeStyle()
+            ['edgeStyle'] =
+            'orthogonalEdgeStyle';
+    }
+
+
+    getHostContainerBounds() : mxRectangle {
+        let je = $(this.container),
+            offset = je.offset();
+
+        return {
+            relative:true,
+            x : offset.left,
+            y : offset.top,
+            width: je.width(),
+            height: je.height()
+        };
+    }
+
+
+    public addNode(node: Node): void {
+
+
+    }
+
+
+    createConnectionHandler(): mxConnectionHandler {
+        return new ConnectionHandler(this);
+    }
+
+    redraw(): void {
+        this.grid.draw();
+    }
+
+
+    convertValueToString(cell: mxCell): string {
+        if (mxUtils.isNode(cell.value)) {
+            return cell.getAttribute('label');
+        }
+        return super.convertValueToString(cell);
+    }
+
+
+    selectCellForEvent(cell: mxCell) {
+        if (cell.getAttribute('constituent') === '1') {
+            let delegate = this.model.getParent(cell);
+            while(delegate.getAttribute('constituent') === '1') {
+                delegate = this.model.getParent(delegate);
+            }
+            super.selectCellForEvent(delegate);
+        } else {
+            super.selectCellForEvent(cell);
+        }
+    }
+
+    resizeChildCells(cell: Layer, geometry: mxGeometry) {
+        let geo = this.model.getGeometry(cell),
+            dx = geometry.width / geo.width,
+            dy = geometry.height / geo.height,
+            childCount = this.model.getChildCount(cell);
+
+        for (let i = 0; i < childCount; i++) {
+            let child = this.model.getChildAt(cell, i);
+            if (child.getAttribute('rresize') !== '0') {
+                this.scaleCell(
+                    child,
+                    dx,
+                    dy,
+                    true
+                );
+            }
+
+            if (child.getAttribute('lfix')) {
+                let cgeo = child.geometry;
+                cgeo.x = geometry.width - 32;
+                cgeo.y = cgeo.y;
+                this.model.setGeometry(child, cgeo);
+            }
+
+        }
+    }
+
+    /**
+     *
+     * @param cell
+     * @returns {any}
+     */
+
+
+    getPreferredSizeForCell(cell: Layer): mxRectangle {
+        if (cell.getAttribute('rresize') === '0') {
+            return cell.geometry;
+        } else {
+            return super.getPreferredSizeForCell(cell);
+        }
+    }
+
+    removeCells(cells: mxCell[]) {
+        return super.removeCells(cells);
+    }
+
+
+    getAllConnectionConstraints(terminal: Layer, source: Layer): mxConnectionConstraint[] {
+        if (terminal != null && terminal.shape != null) {
+            if (terminal.shape.stencil != null) {
+                if (terminal.shape.stencil != null) {
+                    return terminal.shape.stencil.constraints;
+                }
+            }
+            else if (terminal.shape.constraints != null) {
+                return terminal.shape.constraints;
+            }
+        }
+
+        return null;
+
+    }
+}

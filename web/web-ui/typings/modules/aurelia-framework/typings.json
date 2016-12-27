@@ -4,6 +4,7 @@
     "src": "https://raw.githubusercontent.com/aurelia/framework/master/typings.json",
     "raw": "github:aurelia/framework",
     "main": "dist/aurelia-framework.d.ts",
-    "name": "aurelia-framework"
+    "name": "aurelia-framework",
+    "type": "typings"
   }
 }

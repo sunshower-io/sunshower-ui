@@ -4,6 +4,7 @@
     "src": "https://raw.githubusercontent.com/aurelia/binding/master/typings.json",
     "raw": "github:aurelia/binding",
     "main": "dist/aurelia-binding.d.ts",
-    "name": "aurelia-binding"
+    "name": "aurelia-binding",
+    "type": "typings"
   }
 }

@@ -1,0 +1,40 @@
+template(bindable="items")
+    div(class.bind="classes", style.bind="style" ref="element")
+        .ui.item(
+            repeat.for="menu of items"
+            class="${menu.menus ? 'dropdown' : ''}",
+            click.delegate="menu.apply(contextFactory.create())"
+            if.bind="menu.align === 'left'"
+        )
+            i(class.bind="menu.style")
+            .text ${menu.name}
+            i.dropdown.icon(if.bind="menu.menus")
+            menu(
+                if.bind="menu.menus",
+                items.bind="menu.menus",
+                classes="menu",
+                style="z-index:500"
+            )
+
+        .right.compact.mini.menu
+            .right.compact.mini.menu
+                a.item(
+                    repeat.for="menu of items"
+                    if.bind="menu.align === 'right'",
+                    class="${menu.pad ? '' : 'no--padding'}"
+                    click.delegate="menu.apply(contextFactory.create())"
+                )
+                    i(if.bind="menu.style", class.bind="menu.style")
+                    .ui.image(if.bind="menu.image")
+                        img(src.bind="menu.image")
+                    .text ${menu.name}
+                //a.item
+                //    i.search.icon
+                //    | Browse Templates
+                //a.item.no--padding(type='button', click.trigger='menu.apply(contextFactory.create())')
+                //    .ui.image
+                //        img(src='styles/themes/hasli/assets/images/icons/toggle-left-menu-icon.svg')
+                //a.item.no--padding(type='button', click.trigger='menu.apply(contextFactory.create())')
+                //    .ui.image
+                //        img(src='styles/themes/hasli/assets/images/icons/toggle-right-menu-icon.svg')
+

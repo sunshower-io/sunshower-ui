@@ -34,12 +34,10 @@ export class Login {
                 private storage: LocalStorage,
                 private auth: Auth,
                 private container: Container,) {
-
     }
 
     attached(): void {
         $('.ui.checkbox').checkbox();
-
         let token = this.storage.get("X-AUTH-TOKEN");
         if (token) {
             this.client.fetch('authenticate/validate', {
@@ -57,25 +55,26 @@ export class Login {
         }
     }
 
+
     login(): void {
         this.client.fetch('authenticate/authenticate', {
             method: 'post',
             body: JSON.stringify(this.user)
-        }).then(response => response.json())
+        }).then(response => response.json() as any)
             .then(data => {
-                if(this.remember) {
+                if (this.remember) {
                     this.storage.put('X-AUTH-TOKEN', data.token.token);
                     window.location.reload(true);
                 } else {
                     this.setParam("token", data.token.token);
                 }
             }).catch(e => {
-                this.credentialsInvalid = true;
-            });
+            this.credentialsInvalid = true;
+        });
     }
 
 
-    setParam(name:string, v:string) {
+    setParam(name: string, v: string) {
         let location = window.location.href,
             value = encodeURIComponent(v),
             pattern = new RegExp(`[&\\?]${name}=`);

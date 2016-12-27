@@ -1,0 +1,18 @@
+template
+    .header
+        | New Layer
+    .image.content
+        .description
+            .ui.form
+                .field
+                    label Name
+                    input(type='text', name='name', value.bind="name")
+                .field
+                    label Description
+                    input(type='text', name='name', value.bind="description")
+    .actions
+        .ui.black.deny.button
+            | Cancel
+        .ui.positive.right.labeled.icon.button(click.delegate="save()")
+            | Save
+            i.checkmark.icon
