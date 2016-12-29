@@ -2,7 +2,10 @@ import {
     mxGraph
 } from 'mxgraph';
 
+
+import {Canvas} from 'canvas/core/canvas';
 import {MenuItem, OperationContext} from 'common/elements/menu';
+
 
 
 export interface NavigationAware {
@@ -12,7 +15,7 @@ export interface NavigationAware {
 
 export interface EditorContext {
     host        : NavigationAware;
-    graph       : mxGraph;
+    graph       : Canvas;
     offset      ?: {top: number, left: number};
     location    ?: {x: number, y: number};
 }

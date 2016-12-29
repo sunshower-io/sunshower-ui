@@ -14,10 +14,10 @@ import {
 
 import {VirtualCloud as VPC} from 'elements/cloud';
 
+import {Canvas} from "canvas/core/canvas";
 
 import {LayeredNode} from "./layer";
 import {ApplicationDeployment} from "./deployment";
-import {Builder} from "canvas/core/builder";
 
 
 import {
@@ -53,12 +53,12 @@ export class Node extends LayeredNode<InfrastructureElement> implements Constrai
         this.data.name = "Host " + Node.count++;
     }
 
-    public addTo(builder:Builder) : mxCell {
+    public addTo(builder:Canvas) : mxCell {
         this.createMenu(builder);
         return super.addTo(builder);
     }
 
-    private createMenu(builder: Builder) {
+    private createMenu(builder: Canvas) {
         let menu = new VertexMenu(builder, this, '\uf013');
         menu.addItem(new NetworkMenuItem());
         menu.addItem(new StorageMenuItem());
@@ -165,7 +165,7 @@ export class Node extends LayeredNode<InfrastructureElement> implements Constrai
     satisfy(context: EditorContext): void {
         let location = context.location,
             parent = this.resolveParent(context, location.x, location.y, VirtualCloud),
-            graph = context.graph as Builder,
+            graph = context.graph as Canvas,
             cloud: VirtualCloud = null;
         this.addTo(graph);
 

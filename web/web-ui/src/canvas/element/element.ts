@@ -12,6 +12,10 @@ type Properties = {[key: string]: any};
 
 export interface Element extends SceneGraphElement, Renderable, Layer {
 
+    getSuccessors()     : Element[];
+
+    getPredecessors()   : Element[];
+
 }
 
 
@@ -93,6 +97,14 @@ export abstract class AbstractElement
 
 
 
+
+    getSuccessors()     : Element[] {
+        return [];
+    }
+
+    getPredecessors()   : Element[] {
+        return [];
+    }
 
 }
 

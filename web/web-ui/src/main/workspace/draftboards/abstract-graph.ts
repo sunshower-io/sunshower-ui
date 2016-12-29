@@ -11,23 +11,22 @@ import {
 
 import {PLATFORM} from 'aurelia-pal';
 import {Registry} from "utils/registry";
-import {Builder} from 'canvas/core//builder';
+import {Canvas} from 'canvas/core/canvas';
 
 
 export abstract class AbstractGraph {
 
 
 
-    protected graph: Builder;
+    protected graph             : Canvas;
+    protected container         : HTMLElement;
 
-    protected container: HTMLElement;
-
-    protected leftVisible: boolean = true;
-    protected rightVisible: boolean = true;
+    protected leftVisible       : boolean = true;
+    protected rightVisible      : boolean = true;
 
 
-    protected leftSidebar: HTMLElement;
-    protected rightSidebar: HTMLElement;
+    protected leftSidebar       : HTMLElement;
+    protected rightSidebar      : HTMLElement;
 
     constructor(public registry:Registry) {
 
@@ -48,7 +47,7 @@ export abstract class AbstractGraph {
         }
     }
 
-    protected abstract createBuilder() : Builder;
+    protected abstract createBuilder() : Canvas;
 
     protected configureListeners() {
         PLATFORM.global.addEventListener('resize', this.resizeHandler);

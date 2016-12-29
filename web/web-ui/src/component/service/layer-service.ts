@@ -3,8 +3,7 @@ import {Layer} from 'elements/layer';
 import {Element} from 'elements/elements';
 import {inject} from 'aurelia-framework';
 import {DraftboardManager} from 'elements/draftboard';
-import {Builder} from "canvas/core/builder";
-import {EditorContext} from "canvas/core/canvas";
+import {Canvas, EditorContext} from "canvas/core/canvas";
 import {Layer as GLayer} from "component/model/layer";
 
 
@@ -33,7 +32,7 @@ export class LayerService {
         for (let e of r.data) {
             e.parent = layer;
         }
-        glayer.addTo(host as Builder);
+        glayer.addTo(host);
         glayer.members = r.elements;
         // host.groupCells(glayer, 50, r.elements);
         this.draftboardManager.createLayer(layer);

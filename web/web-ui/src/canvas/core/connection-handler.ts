@@ -6,12 +6,12 @@ import {
     mxConnectionHandler,
 } from "mxgraph";
 
-import {Builder} from './builder';
+import {Canvas} from './canvas';
 
 export class ConnectionHandler extends mxConnectionHandler {
 
 
-    constructor(public graph: Builder,
+    constructor(public graph: Canvas,
                 connection?: (source: mxCell,
                               target: mxCell,
                               style: mxStylesheet) => void) {

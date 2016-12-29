@@ -3,7 +3,7 @@
  */
 import {UUID} from 'utils/uuid';
 import {Element} from './elements';
-import {Builder} from 'canvas/core/builder'
+import {Canvas} from 'canvas/core/canvas'
 import {DefaultEventDispatcher, ObservedEvent} from "../utils/observer";
 export class Draftboard {
 
@@ -15,7 +15,7 @@ export class Draftboard {
 
 
 
-    constructor(public readonly builder:Builder) {
+    constructor(public readonly builder:Canvas) {
         this.id = UUID.randomUUID();
     }
 

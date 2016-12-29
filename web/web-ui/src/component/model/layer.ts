@@ -12,7 +12,7 @@ import {UUID} from 'utils/uuid';
 import {Layer as ElementLayer} from 'elements/layer';
 
 import {Registry} from 'utils/registry';
-import {Builder} from "canvas/core/builder";
+import {Canvas} from "canvas/core/canvas";
 
 export interface Layerable {
 
@@ -24,7 +24,7 @@ export interface Layerable {
 
 export class LayeredNode<T> extends AbstractVertex<T> implements Layerable {
 
-    public host: Builder;
+    public host: Canvas;
 
     public members: mxLayer[];
 
@@ -57,7 +57,7 @@ export class LayeredNode<T> extends AbstractVertex<T> implements Layerable {
     }
 
 
-    addTo(builder: Builder): mxLayer {
+    addTo(builder: Canvas): mxLayer {
         this.host = builder;
         return super.addTo(builder);
     }

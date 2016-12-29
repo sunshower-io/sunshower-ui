@@ -10,7 +10,7 @@ import {
 
 
 import {Constrained} from './cell';
-import {Builder} from "canvas/core/builder";
+import {Canvas} from "canvas/core/canvas";
 import {ElementEvent} from 'elements/events';
 
 import {
@@ -35,7 +35,7 @@ import {EditorContext} from "canvas/core/canvas";
 export class ApplicationDeployment extends AbstractVertex<ApplicationElement> implements Listener, Constrained {
 
     icon: string;
-    host: Builder;
+    host: Canvas;
 
     constructor(registry: Registry,
                 private applicationId: string) {
@@ -53,18 +53,18 @@ export class ApplicationDeployment extends AbstractVertex<ApplicationElement> im
     }
 
 
-    addTo(builder: Builder): mxCell {
+    addTo(builder: Canvas): mxCell {
         this.createMenu(builder);
         return this.addChildren(builder);
     }
 
-    private addChildren(builder: Builder) {
+    private addChildren(builder: Canvas) {
         this.host = builder;
         let result = super.addTo(builder);
         return result;
     }
 
-    private createMenu(builder: Builder) {
+    private createMenu(builder: Canvas) {
         // let menu = new VertexMenu(builder, this, '\uf013');
         // menu.addItem(new NetworkMenuItem());
     }
@@ -87,7 +87,7 @@ export class ApplicationDeployment extends AbstractVertex<ApplicationElement> im
                 location.y,
                 Node
             ),
-            graph = context.graph as Builder,
+            graph = context.graph as Canvas,
             node: Node = null;
 
         if (parent instanceof Node) {

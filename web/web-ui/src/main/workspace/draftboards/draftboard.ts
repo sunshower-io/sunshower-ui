@@ -1,5 +1,12 @@
-import {RouterConfiguration, Router} from "aurelia-router";
-import {bindable, inject} from 'aurelia-framework';
+import {
+    bindable,
+    inject
+} from 'aurelia-framework';
+
+import {
+    RouterConfiguration,
+    Router
+} from "aurelia-router";
 
 import {
     Editor,

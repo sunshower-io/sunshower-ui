@@ -1,6 +1,7 @@
 
 import {createEvent} from "utils/events";
 import {
+    Canvas,
     EditorOperation,
     EditorContext
 } from "canvas/core/canvas";
@@ -19,7 +20,6 @@ import {Node} from "component/model/node";
 
 import 'pnotify';
 import {Registry} from 'utils/registry';
-import {Builder} from "canvas/core//builder";
 
 import {inject} from 'aurelia-framework';
 
@@ -71,7 +71,7 @@ class NodeProcessor implements EditorOperation {
                 this.coordinates.y - context.offset.top,
                 this.registry
             );
-        node.addTo(context.graph as Builder);
+        node.addTo(context.graph);
     }
 }
 

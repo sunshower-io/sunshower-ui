@@ -3,8 +3,6 @@
  */
 
 
-
-
 import {inject} from 'aurelia-framework';
 import {HttpClient} from "aurelia-fetch-client";
 
@@ -27,13 +25,12 @@ import {
 } from '../editor';
 
 
-
 import {
     Draftboard
 } from '../draftboard';
 
 import {
-     NavigationAware
+    NavigationAware
 } from '../editor';
 
 import {Registry} from 'utils/registry';
@@ -62,11 +59,11 @@ import {
     ObservedEvent
 } from 'utils/observer';
 
+import {Canvas} from 'canvas/core/canvas'
 
 import {DialogService} from 'aurelia-dialog';
 import {bindable} from 'aurelia-framework';
 import {ToggleLeft, ToggleRight, SearchMenu} from "./menus/misc-menus";
-import {Builder as GBuilder} from 'canvas/core/builder'
 
 @inject(
     HttpClient,
@@ -75,23 +72,21 @@ import {Builder as GBuilder} from 'canvas/core/builder'
     DialogService,
     DraftboardManager
 )
-export class Applications extends AbstractGraph
-    implements
-        Listener,
-        NavigationAware,
-        OperationContextFactory {
+export class Applications extends AbstractGraph implements Listener,
+    NavigationAware,
+    OperationContextFactory {
 
     @bindable
-    public menus:MenuItem[];
+    public menus: MenuItem[];
 
 
-    private infrastructureDialog:AddInfrastructureDialog;
+    private infrastructureDialog: AddInfrastructureDialog;
+
     constructor(private client: HttpClient,
                 private parent: Draftboard,
-                registry:Registry,
-                private dialogService:DialogService,
-                private draftboardManager:DraftboardManager
-    ) {
+                registry: Registry,
+                private dialogService: DialogService,
+                private draftboardManager: DraftboardManager) {
         super(registry);
         this.menus = [];
         this.addMenu(new FileMenu(dialogService));
@@ -108,8 +103,8 @@ export class Applications extends AbstractGraph
             .addEventListener('draftboard-saved', this);
     }
 
-    activate(params:any) {
-        if(params && params.id) {
+    activate(params: any) {
+        if (params && params.id) {
 
         } else {
         }
@@ -118,16 +113,15 @@ export class Applications extends AbstractGraph
     create(): EditorContext {
         let offset = $(this.graph.container).offset();
         return {
-            host:this.parent,
-            graph:this.graph,
+            host: this.parent,
+            graph: this.graph,
             offset: offset
         };
     }
 
-    protected addMenu(menu:MenuItem) {
+    protected addMenu(menu: MenuItem) {
         this.menus.push(menu);
     }
-
 
 
     attached(): void {
@@ -162,7 +156,7 @@ export class Applications extends AbstractGraph
         }
     }
 
-    onSave(draftboard:Draft) : void {
+    onSave(draftboard: Draft): void {
         new PNotify({
             title: 'Success',
             text: `Saved ${draftboard.name}`,
@@ -199,8 +193,8 @@ export class Applications extends AbstractGraph
         });
     }
 
-    protected createBuilder(): GBuilder {
-        return new GBuilder(this.container, this.dialogService);
+    protected createBuilder(): Canvas {
+        return new Canvas(this.container, this.dialogService);
     }
 
 }

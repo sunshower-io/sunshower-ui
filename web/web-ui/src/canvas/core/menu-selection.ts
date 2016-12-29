@@ -1,8 +1,13 @@
-import {EditorContext} from "./canvas";
+import {
+    Canvas,
+    EditorContext
+} from "./canvas";
+
 import {
     mxRubberband,
     mxGraph
 } from 'mxgraph';
+
 
 import {MenuItem} from 'common/elements/menu';
 
@@ -23,9 +28,9 @@ export class MenuSelector extends mxRubberband {
      */
     state: number;
 
-    host: mxGraph;
+    host: Canvas;
 
-    constructor(graph: mxGraph) {
+    constructor(graph: Canvas) {
         super(graph);
         this.menus = [];
         this.host = graph;

@@ -1,5 +1,5 @@
 import {UUID} from "utils/uuid";
-import {Builder} from 'canvas/core/builder';
+import {Canvas} from 'canvas/core/canvas';
 
 import {
     Edge,
@@ -23,9 +23,9 @@ import {EditorContext} from "canvas/core/canvas";
 
 
 export class AbstractVertex<T> extends mxCell implements Vertex<T> {
-    public host: Builder;
-    private readonly delegate: Vertex<T>;
-    private attributes: {[key: string]: string};
+    public                  host: Canvas;
+    private readonly        delegate: Vertex<T>;
+    private                 attributes: {[key: string]: string};
 
     adjacencies: {[key:string]: Edge<T>};
 
@@ -106,7 +106,7 @@ export class AbstractVertex<T> extends mxCell implements Vertex<T> {
         this.insert(child);
     }
 
-    addTo(builder: Builder): Layer {
+    addTo(builder: Canvas): Layer {
         this.host = builder;
         let result = builder.addCell(this, this.parent);
         for (let overlay of this.createOverlays()) {
