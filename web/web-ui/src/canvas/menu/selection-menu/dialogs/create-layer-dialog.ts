@@ -1,8 +1,6 @@
-import {EditorContext} from "../../../editor";
-
-import {mxCell} from 'mxgraph';
+import {EditorContext} from "canvas/core/canvas";
 import {inject, bindable} from 'aurelia-framework';
-import {LayerService} from "../../service/layer-service";
+import {LayerService} from "component/service/layer-service";
 
 @inject(LayerService)
 export class CreateLayerDialog {

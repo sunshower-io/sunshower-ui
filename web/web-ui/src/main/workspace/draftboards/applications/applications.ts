@@ -36,7 +36,6 @@ import {
      NavigationAware
 } from '../editor';
 
-import {Builder as GBuilder} from '../graph/builder'
 import {Registry} from 'utils/registry';
 import {
     AddInfrastructure as AddInfrastructureDialog
@@ -64,9 +63,10 @@ import {
 } from 'utils/observer';
 
 
+import {DialogService} from 'aurelia-dialog';
 import {bindable} from 'aurelia-framework';
 import {ToggleLeft, ToggleRight, SearchMenu} from "./menus/misc-menus";
-import {DialogService} from 'aurelia-dialog';
+import {Builder as GBuilder} from 'canvas/core/builder'
 
 @inject(
     HttpClient,

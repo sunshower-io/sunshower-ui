@@ -1,6 +1,6 @@
 import {Registry} from 'utils/registry';
 
-import {AbstractVertex} from "../graph/vertex";
+import {AbstractVertex} from "./vertex";
 import {
     Layer,
     mxImage,
@@ -9,11 +9,9 @@ import {
     mxCellOverlay
 } from "mxgraph";
 
-import {Builder} from "../graph/builder";
 
 import {Constrained} from './cell';
-
-
+import {Builder} from "canvas/core/builder";
 import {ElementEvent} from 'elements/events';
 
 import {
@@ -24,8 +22,6 @@ import {
 import {Node} from './node'
 
 
-import {mxEvent} from "mxgraph";
-
 import {
     Listener,
     ObservedEvent
@@ -34,7 +30,7 @@ import {
 import {UUID} from 'utils/uuid';
 
 import {Kv} from 'utils/objects';
-import {EditorContext} from "../editor";
+import {EditorContext} from "canvas/core/canvas";
 
 
 export class ApplicationDeployment extends AbstractVertex<ApplicationElement> implements Listener, Constrained {

@@ -3,7 +3,7 @@ import {createEvent} from "utils/events";
 import {
     EditorOperation,
     EditorContext
-} from "main/workspace/draftboards/editor";
+} from "canvas/core/canvas";
 import {mxConstants} from "mxgraph";
 import {
     mxPoint,
@@ -13,13 +13,13 @@ import {
 
 import {InfrastructureElement} from 'elements/elements';
 
-import {Node} from "main/workspace/draftboards/cells/node";
+import {Node} from "component/model/node";
 
 
 
 import 'pnotify';
 import {Registry} from 'utils/registry';
-import {Builder} from "main/workspace/draftboards/graph/builder";
+import {Builder} from "canvas/core//builder";
 
 import {inject} from 'aurelia-framework';
 

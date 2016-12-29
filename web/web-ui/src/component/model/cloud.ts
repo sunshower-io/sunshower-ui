@@ -1,7 +1,7 @@
-import {VirtualCloud as VPC} from 'elements/cloud';
 import {LayeredNode} from "./layer";
 import {Constrained} from "./cell";
-import {EditorContext} from "../editor";
+import {VirtualCloud as VPC} from 'elements/cloud';
+import {EditorContext} from "canvas/core/canvas";
 
 import {mxCellOverlay, mxConstants, mxImage} from "mxgraph";
 

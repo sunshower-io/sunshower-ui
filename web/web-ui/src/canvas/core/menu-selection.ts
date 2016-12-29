@@ -1,4 +1,4 @@
-import {EditorContext} from "../editor";
+import {EditorContext} from "./canvas";
 import {
     mxRubberband,
     mxGraph

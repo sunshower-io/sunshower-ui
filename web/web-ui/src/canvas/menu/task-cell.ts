@@ -2,21 +2,17 @@ import {
     mxCell,
     mxGraph,
     mxVertex,
-    mxUtils,
     mxMouseEvent,
     Layer,
-    mxCellStyle,
     mxEvent,
-    mxStylesheet,
     MouseListener,
-    mxConstants
 } from "mxgraph";
 
 import {Kv} from 'utils/objects';
 
 import {UUID} from 'utils/uuid';
-import {createFullOverrideContext} from "aurelia-templating-resources";
-import {AbstractVertex} from "../graph/vertex";
+
+import {AbstractVertex} from "component/model/vertex";
 
 
 interface Listener {

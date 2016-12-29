@@ -7,7 +7,6 @@ import {
 } from 'mxgraph';
 
 import {Registry} from 'utils/registry';
-import {ElementEvent} from 'elements/events';
 
 import {
     InfrastructureElement
@@ -18,17 +17,17 @@ import {VirtualCloud as VPC} from 'elements/cloud';
 
 import {LayeredNode} from "./layer";
 import {ApplicationDeployment} from "./deployment";
-import {Builder} from "../graph/builder";
+import {Builder} from "canvas/core/builder";
 
 
 import {
     VertexMenu,
     NetworkMenuItem,
     StorageMenuItem
-} from "../menu/task-cell";
+} from "canvas/menu/task-cell";
 import {Constrained} from "./cell";
-import {EditorContext} from "../editor";
 import {VirtualCloud} from "./cloud";
+import {EditorContext} from "canvas/core/canvas";
 
 
 export class Node extends LayeredNode<InfrastructureElement> implements Constrained {

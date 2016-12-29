@@ -1,6 +1,10 @@
-import {AbstractMenuItem, MenuItem} from 'common/elements/menu';
-import {EditorContext} from "../../editor";
+import {
+    AbstractMenuItem,
+    MenuItem
+} from 'common/elements/menu';
+
 import {DialogService} from 'aurelia-dialog';
+import {EditorContext} from "canvas/core/canvas";
 import {CreateLayerDialog} from "./dialogs/create-layer-dialog";
 export default class CreateLayerMenuItem extends AbstractMenuItem implements MenuItem {
 

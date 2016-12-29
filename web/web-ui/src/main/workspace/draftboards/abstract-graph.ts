@@ -8,24 +8,11 @@ import {
     mxGraphHandler,
 } from 'mxgraph';
 
-import {Kv} from "utils/objects";
 
 import {PLATFORM} from 'aurelia-pal';
-import {Builder} from './graph/builder';
 import {Registry} from "utils/registry";
+import {Builder} from 'canvas/core//builder';
 
-// export interface GraphContext {
-//     graph:mxGraph;
-//     offset: {top:number, left:number},
-// }
-//
-// export interface GraphProcessor {
-//     apply(context:GraphContext) : void;
-// }
-//
-// export interface GraphModificationEvent {
-//     processor:GraphProcessor;
-// }
 
 export abstract class AbstractGraph {
 

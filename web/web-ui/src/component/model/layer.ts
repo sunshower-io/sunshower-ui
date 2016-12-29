@@ -1,4 +1,4 @@
-import {AbstractVertex} from "../graph/vertex";
+import {AbstractVertex} from "component/model/vertex";
 
 import {
     Layer as mxLayer,
@@ -12,7 +12,7 @@ import {UUID} from 'utils/uuid';
 import {Layer as ElementLayer} from 'elements/layer';
 
 import {Registry} from 'utils/registry';
-import {Builder} from "../graph/builder";
+import {Builder} from "canvas/core/builder";
 
 export interface Layerable {
 

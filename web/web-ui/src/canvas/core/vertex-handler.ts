@@ -4,8 +4,9 @@ import {
     mxEvent,
     mxVertexHandler
 } from 'mxgraph';
-import {LayeredNode} from "../cells/layer";
-import {GraphHandler} from "./graph-handler";
+
+
+import {LayeredNode} from "component/model/layer";
 
 
 export class VertexHandler extends mxVertexHandler {
@@ -19,16 +20,6 @@ export class VertexHandler extends mxVertexHandler {
     getCells(initial: Layer): Layer[] {
         return super.getCells(initial);
     }
-
-    // moveCells(cells: Layer[],
-    //           dx: number,
-    //           dy: number,
-    //           clone: boolean,
-    //           target: Layer,
-    //           event: mxEvent) {
-    //     console.log("MOVE");
-    //     super.moveCells(cells, dx, dy, clone, target, event);
-    // }
 
     resizeCell(cell: Layer,
                dx: number,

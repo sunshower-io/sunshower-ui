@@ -3,7 +3,7 @@
  */
 import {UUID} from 'utils/uuid';
 import {Element} from './elements';
-import {Builder} from 'main/workspace/draftboards/graph/builder'
+import {Builder} from 'canvas/core/builder'
 import {DefaultEventDispatcher, ObservedEvent} from "../utils/observer";
 export class Draftboard {
 

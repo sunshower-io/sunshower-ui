@@ -1,9 +1,9 @@
+import {Layer} from 'mxgraph';
 import {inject} from 'aurelia-framework'
 import {HttpClient} from "aurelia-fetch-client";
 import {createEvent} from "utils/events";
 import {ImageDescriptor} from "model/hal/image";
 
-import {Node} from "main/workspace/draftboards/cells/node";
 import {Registry} from 'utils/registry'
 
 import {
@@ -12,8 +12,8 @@ import {
 } from 'main/workspace/draftboards/editor';
 
 
-import {Layer} from 'mxgraph';
-import {ApplicationDeployment} from "../../../../cells/deployment";
+import {Node} from "component/model/node";
+import {ApplicationDeployment} from "component/model/deployment";
 
 @inject(HttpClient, Registry)
 export class Applications {

@@ -4,7 +4,6 @@ import {
     mxEvent,
     mxGraph
 } from 'mxgraph';
-import {LayeredNode} from "../cells/layer";
 
 export class GraphHandler extends mxGraphHandler {
 

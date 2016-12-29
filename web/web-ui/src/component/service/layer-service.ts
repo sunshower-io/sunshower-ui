@@ -3,9 +3,9 @@ import {Layer} from 'elements/layer';
 import {Element} from 'elements/elements';
 import {inject} from 'aurelia-framework';
 import {DraftboardManager} from 'elements/draftboard';
-import {Builder} from "main/workspace/draftboards/graph/builder";
-import {EditorContext} from "main/workspace/draftboards/editor";
-import {Layer as GLayer} from "main/workspace/draftboards/cells/layer";
+import {Builder} from "canvas/core/builder";
+import {EditorContext} from "canvas/core/canvas";
+import {Layer as GLayer} from "component/model/layer";
 
 
 @inject(DraftboardManager)

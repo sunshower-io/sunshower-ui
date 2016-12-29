@@ -1,5 +1,6 @@
 import {UUID} from "utils/uuid";
-import {Builder} from './builder';
+import {Builder} from 'canvas/core/builder';
+
 import {
     Edge,
     Node,
@@ -14,13 +15,12 @@ import {
     mxConstants
 } from "mxgraph";
 
-import {Node as InfrastructureNode} from '../cells/node';
 
 
 import {Kv} from "utils/objects";
 import {Registry} from "utils/registry";
 import {mxCellOverlay} from "mxgraph";
-import {EditorContext} from "../editor";
+import {EditorContext} from "canvas/core/canvas";
 
 
 export class AbstractVertex<T> extends mxCell implements Vertex<T> {

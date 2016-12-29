@@ -19,18 +19,19 @@ import {
     mxVertexHandler,
     mxGraphHandler
 } from "mxgraph";
-import {Rectangle} from 'geometry/shapes';
 
-import {ConnectionHandler} from './connection-handler';
-import {Grid} from "../grid";
-import {MenuSelector} from "./menu-selection";
-import CreateLayerMenuItem from "./selection-menu/create-layer";
+import {Grid} from "./grid/grid";
+import {Rectangle} from 'geometry/shapes';
 
 import {DialogService} from 'aurelia-dialog';
 import {CellRenderer} from "./cell-renderer";
-import {Layerable, LayeredNode} from "../cells/layer";
+import {MenuSelector} from "./menu-selection";
 import {GraphHandler} from "./graph-handler";
 import {VertexHandler} from "./vertex-handler";
+import {ConnectionHandler} from './connection-handler';
+import {Layerable, LayeredNode} from "component/model/layer";
+import CreateLayerMenuItem from "canvas/menu/selection-menu/create-layer";
+
 
 mxConstants.HANDLE_FILLCOLOR = '#239AE8';
 mxConstants.HANDLE_STROKECOLOR = '#239AE8';
