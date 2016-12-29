@@ -59,5 +59,9 @@ declare module 'mxgraph' {
             height:number
         );
 
+        clone() : mxGeometry;
+
+        translate(x:number, y:number) : void;
+
     }
 }

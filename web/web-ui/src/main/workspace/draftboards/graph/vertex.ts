@@ -48,20 +48,51 @@ export class AbstractVertex<T> extends mxCell implements Vertex<T> {
         this.setStyle(this.createStyle());
     }
 
-    setCollapsable(collapsable:boolean) {
+    setParent(cell:mxCell) : void {
 
-        if(collapsable) {
-            this.setAttribute('collapsable', '1');
+    }
+
+
+    getChildrenOfType<U>(childType:any) : U[] {
+        let results = [];
+        for(let i = 0; i < this.getChildCount(); i++) {
+            let child = this.getChildAt(i);
+            if(child instanceof childType) {
+                results.push(child);
+            }
+        }
+        return results;
+    }
+
+    protected set(attributeName:string, attributeValue:string, set:boolean) : void {
+        if(set) {
+            this.setAttribute(attributeName, attributeValue);
         } else {
-            delete this.attributes['collapsable'];
+            delete this.attributes[attributeName];
         }
     }
 
+    setAncestor(parent:boolean) : void {
+        this.set('synthetic', '1', parent);
+    }
+
+    setCollapsable(collapsable:boolean) {
+        this.set('collapsable', '1', collapsable);
+        // if(collapsable) {
+        //     this.setAttribute('collapsable', '1');
+        // } else {
+        //     delete this.attributes['collapsable'];
+        // }
+    }
+
+
     addChild(child:Layer) : void {
-        if(!this.children) {
-            this.children = [];
-        }
-        this.children.push(child);
+        // if(!this.children) {
+        //     this.children = [];
+        // }
+        // this.children.push(child);
+
+        this.insert(child);
     }
 
     addTo(builder: Builder): mxCell {
@@ -171,8 +202,4 @@ export class AbstractVertex<T> extends mxCell implements Vertex<T> {
             );
         return iconOverlay;
     }
-
-
-
-
 }

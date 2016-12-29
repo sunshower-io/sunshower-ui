@@ -34,7 +34,8 @@ export class LayerService {
             e.parent = layer;
         }
         glayer.addTo(host as Builder);
-        host.groupCells(glayer, 50, r.elements);
+        glayer.members = r.elements;
+        // host.groupCells(glayer, 50, r.elements);
         this.draftboardManager.createLayer(layer);
         return layer;
     }

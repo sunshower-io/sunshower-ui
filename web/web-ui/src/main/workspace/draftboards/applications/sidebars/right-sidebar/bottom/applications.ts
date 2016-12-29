@@ -4,26 +4,19 @@ import {createEvent} from "utils/events";
 import {ImageDescriptor} from "model/hal/image";
 
 import {Node} from "main/workspace/draftboards/cells/node";
-import {Builder} from "main/workspace/draftboards/graph/builder";
 import {Registry} from 'utils/registry'
-
-// import {
-//     GraphProcessor,
-//     GraphContext
-// } from "main/workspace/draftboards/abstract-graph";
 
 import {
     EditorOperation,
     EditorContext
 } from 'main/workspace/draftboards/editor';
 
-import {InfrastructureElement} from 'elements/elements';
 
 import {Layer} from 'mxgraph';
 import {ApplicationDeployment} from "../../../../cells/deployment";
 
 @inject(HttpClient, Registry)
-export default class Applications {
+export class Applications {
 
     private element:HTMLElement;
 
@@ -69,7 +62,9 @@ export default class Applications {
 }
 
 
-export class ApplicationProcessor implements EditorOperation {
+
+
+class ApplicationProcessor implements EditorOperation {
 
     constructor(
         private id:string,
@@ -102,26 +97,5 @@ export class ApplicationProcessor implements EditorOperation {
             this.registry,
             this.id
         ).satisfy(context);
-        // let
-        //     x = this.coordinates.x,
-        //     y = this.coordinates.y - context.offset.top,
-        //     parent = this.resolveParent(context, x, y),
-        //     node : Node = null;
-        //
-        // if(parent instanceof Node) {
-        //     node = parent as Node;
-        // } else {
-        //     let infrastructureElement = new InfrastructureElement();
-        //     node = new Node(
-        //         parent,
-        //         infrastructureElement,
-        //         this.coordinates.x,
-        //         this.coordinates.y - context.offset.top,
-        //         this.registry
-        //     );
-        //     node.addTo(context.graph as Builder);
-        //     this.registry.elementManager.add(infrastructureElement);
-        // }
-        // node.addApplicationById(this.id);
     }
 }

@@ -31,9 +31,6 @@ import {Node} from 'main/workspace/draftboards/cells/node';
 import {Layer} from 'main/workspace/draftboards/cells/layer';
 import {VirtualCloud as VPC} from 'main/workspace/draftboards/cells/cloud';
 
-import {ApplicationProcessor} from
-    'main/workspace/draftboards/applications/sidebars/right-sidebar/bottom/applications';
-
 import {EditorContext} from 'main/workspace/draftboards/editor';
 import {LayerService} from 'main/workspace/draftboards/graph/service/layer-service';
 
@@ -55,6 +52,9 @@ describe('a layer service', () => {
         graph: mxGraph = null,
         registry: Registry,
         context: EditorContext = null;
+
+
+
     beforeEach(() => {
         let container = new Container(),
             draftboardManager = container.get(DraftboardManager);
@@ -68,12 +68,23 @@ describe('a layer service', () => {
             offset: {top: 0, left: 0},
             location: {x: 0, y: 0}
         };
-        spyOn(graph, 'getDefaultParent').and.returnValue(new Layer());
-        spyOn(graph, 'getSelectionCells').and.returnValue([]);
     });
 
     it('should inject the layer service correctly', () => {
         expect(layerService).toBeTruthy();
+    });
+
+    it('should create the correct node -> application deployment hierarchy', () => {
+        let deployment = new ApplicationDeployment(
+            registry,
+            UUID.randomUUID()
+        );
+
+        spyOn(deployment, 'load').and.callFake((node: Node) => {
+            deployment.data = new ApplicationElement(node.data);
+        });
+        deployment.satisfy(context);
+        expect(deployment.parent).toEqual(any(Node));
     });
 
 
@@ -83,18 +94,21 @@ describe('a layer service', () => {
             UUID.randomUUID()
         );
 
-        spyOn(deployment, 'load').and.callFake((node:Node) => {
+        spyOn(deployment, 'load').and.callFake((node: Node) => {
             deployment.data = new ApplicationElement(node.data);
         });
         deployment.satisfy(context);
         expect(deployment.data).toEqual(any(ApplicationElement));
         expect(deployment.parent).toBeTruthy();
         expect(deployment.parent.data).toEqual(any(InfrastructureElement));
+        expect(deployment.parent.parent).toEqual(any(VPC));
         expect(deployment.parent.parent.data).toEqual(any(VirtualCloud));
     });
 
 
     it('should create the correct layer hierarchy for an empty layer', () => {
+        spyOn(graph, 'getDefaultParent').and.returnValue(new Layer());
+        spyOn(graph, 'getSelectionCells').and.returnValue([]);
         let result = layerService.create('frap', 'adap', context);
         expect(result).toBeTruthy();
         expect(result.name).toBe('frap');

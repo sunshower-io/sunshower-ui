@@ -130,19 +130,19 @@ export class Node extends LayeredNode<InfrastructureElement> implements Constrai
     }
 
     updateParent(geometry:mxGeometry) {
-        let pgeom = this.parent.geometry,
-            pw = pgeom.width,
-            ph = pgeom.height,
-            w = geometry.width,
-            h = geometry.height;
-        if(geometry.x + w > pw) {
-            pw += 260;
-        }
-        if(geometry.y + h > ph) {
-            ph += 260;
-        }
-        pgeom.width = pw;
-        pgeom.height = ph;
+        // let pgeom = this.parent.geometry,
+        //     pw = pgeom.width,
+        //     ph = pgeom.height,
+        //     w = geometry.width,
+        //     h = geometry.height;
+        // if(geometry.x + w > pw) {
+        //     pw += 260;
+        // }
+        // if(geometry.y + h > ph) {
+        //     ph += 260;
+        // }
+        // pgeom.width = pw;
+        // pgeom.height = ph;
     }
 
     insertGridElement(
@@ -176,16 +176,18 @@ export class Node extends LayeredNode<InfrastructureElement> implements Constrai
             this.geometry.y = location.y - cloud.geometry.y;
         } else {
             cloud = new VirtualCloud();
+            cloud.geometry.x = location.x - 50;
+            cloud.geometry.y = location.y - 150;
+            cloud.geometry.width = 300;
+            cloud.geometry.height = 300;
             cloud.data = new VPC();
             cloud.addTo(graph);
             this.registry.draftboardManager.add(cloud.data);
         }
+
         this.data.parent = cloud.data;
-        this.parent = cloud;
         cloud.data.add(this.data);
-        cloud.addChild(this);
-        cloud.regroup();
-        // this.host.groupCells(cloud, 100, [this]);
+        cloud.addMember(this);
     }
 
     protected createNodeOverlay(): mxCellOverlay {

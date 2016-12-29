@@ -1,28 +1,5 @@
 declare module 'mxgraph' {
 
-    export class mxVertexHandler {
-
-        /**
-         *
-         * @param cell
-         * @param dx
-         * @param dy
-         * @param index
-         * @param gridEnabled
-         * @param constrained
-         * @param recurse
-         */
-        resizeCell(cell:Layer ,
-                   dx: number,
-                   dy: number,
-                   index: number,
-                   gridEnabled: boolean,
-                   constrained: boolean,
-                   recurse: boolean
-        )
-
-
-    }
 
     export class mxConnectionHandler {
         constructor(graph: mxGraph,
@@ -49,22 +26,22 @@ declare module 'mxgraph' {
     }
 
     export class mxGraphView {
-        scale           : number;
-        currentRoot     : Layer;
-        translate       : mxGraphBounds;
+        scale: number;
+        currentRoot: Layer;
+        translate: mxGraphBounds;
 
 
-        getCanvas() : Element;
+        getCanvas(): Element;
 
-        getGraphBounds() : mxRectangle;
+        getGraphBounds(): mxRectangle;
 
-        getDrawPane() : Element;
+        getDrawPane(): Element;
 
-        getBackgroundPane() : Element;
+        getBackgroundPane(): Element;
 
         getState(cell: Layer): mxCellState;
 
-        getCellStates(cells:Layer[]) : mxCellState[];
+        getCellStates(cells: Layer[]): mxCellState[];
 
         isContainerEvent(event: Event): boolean;
     }
@@ -80,32 +57,29 @@ declare module 'mxgraph' {
     type Style = {[key: string]: any};
 
     export class mxControl {
-        scale       :number;
-        bounds      :  mxRectangle
+        scale: number;
+        bounds: mxRectangle
 
     }
 
     export class mxCellState {
-        x           : number;
-        y           : number;
-        width       : number;
-        height      : number;
+        x: number;
+        y: number;
+        width: number;
+        height: number;
 
 
-        view        : any;
+        view: any;
 
-        cell        : mxCell;
-        style       : Style;
+        cell: mxCell;
+        style: Style;
 
-        shape       : mxShape;
-        text        : mxShape;
-        control     : mxControl;
-
+        shape: mxShape;
+        text: mxShape;
+        control: mxControl;
 
 
     }
-
-
 
 
     export class mxMouseEvent extends mxEvent {
@@ -127,69 +101,73 @@ declare module 'mxgraph' {
     }
 
     export class mxCellRenderer {
-        getControlBounds(
-            state:mxCellState,
-            w:number,
-            h:number
-        ) : mxRectangle;
+        getControlBounds(state: mxCellState,
+                         w: number,
+                         h: number): mxRectangle;
 
-        redrawControl(state:mxCellState, forced:boolean) : void;
+        redrawControl(state: mxCellState, forced: boolean): void;
     }
 
     export class mxGraph implements Connectable {
 
 
-
         mouseListeners: {[name: string]: any};
-        gridSize                    : number;
-        recursiveResize             : boolean;
+        gridSize: number;
+        recursiveResize: boolean;
 
-        expandedImage               : mxImage;
-        collapsedImage              : mxImage;
-
-
-        foldingEnabled              : boolean;
-        isMouseDown                 : boolean;
-
-        extendParents               : boolean;
-        extendParentsOnAdd          : boolean;
+        expandedImage: mxImage;
+        collapsedImage: mxImage;
 
 
-        container                   : Element;
-        view                        : mxGraphView;
-        model                       : mxGraphModel;
-        graphHandler                : mxGraphHandler;
-        cellRenderer                : mxCellRenderer;
-        connectionHandler           : mxConnectionHandler;
+        foldingEnabled: boolean;
+        isMouseDown: boolean;
 
-        zoomIn() : void;
-
-        zoomOut() : void;
-
-        getView() : mxGraphView;
+        extendParents: boolean;
+        extendParentsOnAdd: boolean;
 
 
-        setPanningHandler(handler:mxPanningHandler) : void;
+        container: Element;
+        view: mxGraphView;
+        model: mxGraphModel;
+        graphHandler: mxGraphHandler;
+        cellRenderer: mxCellRenderer;
+        connectionHandler: mxConnectionHandler;
+
+        zoomIn(): void;
+
+        zoomOut(): void;
+
+        getView(): mxGraphView;
 
         /**
          *
-          * @param cell
+         * @param cell
          */
 
-        refresh(cell?:Layer) : void;
+        getCellGeometry(cell:mxCell) : mxGeometry;
+
+
+        setPanningHandler(handler: mxPanningHandler): void;
+
+        /**
+         *
+         * @param cell
+         */
+
+        refresh(cell?: Layer): void;
 
         /**
          *
          * @param labels
          */
-        setHtmlLabels(labels:boolean) : void;
+        setHtmlLabels(labels: boolean): void;
 
         /**
          *
          * @param child
          */
 
-        updateCellSize(child:Layer) : void;
+        updateCellSize(child: Layer): void;
 
         /**
          *
@@ -201,19 +179,16 @@ declare module 'mxgraph' {
                     model?: mxGraphModel);
 
 
-
         /**
          *
          * @param cell
          * @param overlay
          */
-        removeCellOverlay(
-            cell:Layer,
-            overlay:mxCellOverlay
-        ) : mxCellOverlay;
+        removeCellOverlay(cell: Layer,
+                          overlay: mxCellOverlay): mxCellOverlay;
 
 
-        isRecursiveResize(state:mxCellState) : boolean;
+        isRecursiveResize(state: mxCellState): boolean;
 
         /**
          *
@@ -222,14 +197,12 @@ declare module 'mxgraph' {
          * @param dy
          * @param recurse
          */
-        scaleCell(
-            cell:Layer,
-            dx:number,
-            dy:number,
-            recurse:boolean
-        );
+        scaleCell(cell: Layer,
+                  dx: number,
+                  dy: number,
+                  recurse: boolean);
 
-        getStylesheet() : mxStylesheet;
+        getStylesheet(): mxStylesheet;
 
         /**
          *
@@ -237,21 +210,17 @@ declare module 'mxgraph' {
          * @param bounds
          * @param recurse
          */
-        resizeCell(
-            cell:mxCell,
-            bounds:mxRectangle,
-            recurse:boolean
-        ) : Layer;
+        resizeCell(cell: mxCell,
+                   bounds: mxRectangle,
+                   recurse: boolean): Layer;
 
-        getCellAt(
-            x:number,
-            y:number,
-            parent?:Layer,
-            vertices?:boolean,
-            edges?: boolean
-        );
+        getCellAt(x: number,
+                  y: number,
+                  parent?: Layer,
+                  vertices?: boolean,
+                  edges?: boolean);
 
-        ungroupCells(layers:Layer[]) : Layer[];
+        ungroupCells(layers: Layer[]): Layer[];
 
         /**
          *
@@ -274,13 +243,11 @@ declare module 'mxgraph' {
          * @param target
          */
 
-        addCell(
-            cell:Layer,
-            parent:Layer,
-            index?:number,
-            source?:Layer,
-            target?:Layer
-        ) : Layer ;
+        addCell(cell: Layer,
+                parent: Layer,
+                index?: number,
+                source?: Layer,
+                target?: Layer): Layer ;
 
         /**
          *
@@ -295,6 +262,22 @@ declare module 'mxgraph' {
 
         setSelectionCell(cell: Layer);
 
+        /**
+         *
+         * @param cells
+         * @param dx
+         * @param dy
+         * @param disconnect
+         * @param constrain
+         * @param extend
+         */
+
+        cellsMoved(cells: mxCell[],
+                   dx: number,
+                   dy: number,
+                   disconnect: boolean,
+                   constrain: boolean,
+                   extend: boolean): void;
 
         /**
          *
@@ -308,7 +291,7 @@ declare module 'mxgraph' {
          *
          * @param cell
          */
-        getPreferredSizeForCell(cell:Layer) : mxRectangle;
+        getPreferredSizeForCell(cell: Layer): mxRectangle;
 
 
         getModel(): Model;
@@ -317,6 +300,7 @@ declare module 'mxgraph' {
         groupCells(group: Layer,
                    border: number,
                    cells: Layer[]);
+
 
         /**
          *
@@ -425,18 +409,32 @@ declare module 'mxgraph' {
                    source: Vertex,
                    target: Vertex): Edge ;
 
-        createConnectionHandler() : mxConnectionHandler;
+        createConnectionHandler(): mxConnectionHandler;
 
-        moveCells(
-            child:Layer,
-            dx:number,
-            dy:number,
-            clone?:boolean,
-            parent?:Layer,
-            event?:mxMouseEvent,
-            mapping?:any
-        );
+        /**
+         *
+         * @param child
+         * @param dx
+         * @param dy
+         * @param clone
+         * @param parent
+         * @param event
+         * @param mapping
+         */
 
+        moveCells(cells: Layer[],
+                  dx: number,
+                  dy: number,
+                  clone?: boolean,
+                  parent?: Layer,
+                  event?: mxMouseEvent,
+                  mapping?: any): mxCell[];
+
+
+        /**
+         *
+         */
+        createHandler() : mxGraphHandler;
 
 
     }

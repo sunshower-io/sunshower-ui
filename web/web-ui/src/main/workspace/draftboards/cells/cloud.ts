@@ -9,6 +9,8 @@ export class VirtualCloud extends LayeredNode<VPC> implements Constrained {
     constructor() {
         super(null, null, 0, 0);
         this.setCollapsable(true);
+
+        this.setAncestor(true);
     }
 
 
@@ -23,7 +25,7 @@ export class VirtualCloud extends LayeredNode<VPC> implements Constrained {
             x = cx;
             y = cy;
         }
-        this.host.groupCells(this, 20, this.children);
+        // this.host.groupCells(this, 20, this.children);
         this.geometry.x = x;
         this.geometry.y = y;
         this.host.refresh(this);

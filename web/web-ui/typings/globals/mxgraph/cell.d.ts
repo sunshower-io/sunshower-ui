@@ -41,7 +41,16 @@ declare module 'mxgraph' {
 
         children        :mxCell[];
 
+
         constructor(label?:string, geometry?:mxGeometry);
+
+        /**
+         *
+         * @param child
+         * @param index
+         */
+
+        insert(child:mxCell, index?:number) : void;
 
         /**
          *
@@ -71,8 +80,17 @@ declare module 'mxgraph' {
          */
         setVertex(vertex:boolean) : void;
 
+        /**
+         *
+         * @param key
+         */
         getProperty(key:string) : string;
 
+        /**
+         *
+         * @param key
+         * @param value
+         */
         setProperty(key:string, value:string) : void;
 
         /**
@@ -118,6 +136,18 @@ declare module 'mxgraph' {
          *
          */
         isEdge() : boolean;
+
+
+        /**
+         *
+         */
+        getChildCount() : number;
+
+        /**
+         *
+         * @param index
+         */
+        getChildAt(index:number) : Layer;
     }
 
     export class mxEdge extends mxCell {

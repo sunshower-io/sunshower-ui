@@ -84,13 +84,6 @@ declare module 'mxgraph' {
 
 
 
-    export class mxGraphHandler {
-
-        graph                       : mxGraph;
-        guidesEnabled               : boolean;
-        setRemoveCellsFromParent(remove:boolean);
-        getInitialCellForEvent(self:mxGraphHandler);
-    }
 
     //not technically part of mxGraph's api, but w/e.
     export interface Component<T extends mxCell> {

@@ -8,14 +8,18 @@ import {
     mxConstants,
     mxRectangle,
     mxShape,
+    mxCellState,
+    mxMouseEvent,
     mxPoint,
     mxConnectionHandler,
     mxPolyline,
     mxGeometry,
     Layer,
     mxConnectionConstraint,
+    mxVertexHandler,
     mxGraphHandler
 } from "mxgraph";
+import {Rectangle} from 'geometry/shapes';
 
 import {ConnectionHandler} from './connection-handler';
 import {Grid} from "../grid";
@@ -24,6 +28,9 @@ import CreateLayerMenuItem from "./selection-menu/create-layer";
 
 import {DialogService} from 'aurelia-dialog';
 import {CellRenderer} from "./cell-renderer";
+import {Layerable, LayeredNode} from "../cells/layer";
+import {GraphHandler} from "./graph-handler";
+import {VertexHandler} from "./vertex-handler";
 
 mxConstants.HANDLE_FILLCOLOR = '#239AE8';
 mxConstants.HANDLE_STROKECOLOR = '#239AE8';
@@ -53,18 +60,16 @@ export class Builder extends mxGraph {
 
     private grid: Grid;
 
-    createMenuSelector() : void {
+    createMenuSelector(): void {
         let menuSelector = new MenuSelector(this);
         menuSelector.addMenu(new CreateLayerMenuItem(this.dialogService));
     }
 
-    constructor(
-        public container: HTMLElement,
-        public dialogService:DialogService
-    ) {
+    constructor(public container: HTMLElement,
+                public dialogService: DialogService) {
         super(container, new mxGraphModel());
         this.createMenuSelector();
-        this.setPanning(true)
+        this.setPanning(true);
         this.setConnectable(true);
         this.foldingEnabled = true;
         this.setHtmlLabels(true);
@@ -72,37 +77,32 @@ export class Builder extends mxGraph {
         this.extendParents = true;
         this.extendParentsOnAdd = true;
         this.cellRenderer = new CellRenderer();
-        this.graphHandler.setRemoveCellsFromParent(false);
-
         this.grid = new Grid(this);
         this.grid.draw();
         // this.addMouseListener(new MenuHoverListener(this));
         this.recursiveResize = false;
-        mxGraphHandler.prototype.guidesEnabled = true;
 
-        this.expandedImage =
-            new mxImage('assets/sui/themes/hasli/assets/images/expand.svg', 16, 16);
-        this.collapsedImage = new mxImage(
-            'assets/sui/themes/hasli/assets/images/compress.svg', 16, 16);
+        this.createDefaultStyles();
+    }
 
+    createVertexHandler(state: mxCellState): mxVertexHandler {
+        return new VertexHandler(state);
+    }
 
-        this.getStylesheet()
-            .getDefaultEdgeStyle()
-            ['edgeStyle'] =
-            'orthogonalEdgeStyle';
+    createGraphHandler() : mxGraphHandler {
+        return new GraphHandler(this);
     }
 
 
-    getHostContainerBounds() : mxRectangle {
+    getHostContainerBounds(): Rectangle {
         let je = $(this.container),
             offset = je.offset();
 
         return {
-            relative:true,
-            x : offset.left,
-            y : offset.top,
+            x: offset.left,
+            y: offset.top,
             width: je.width(),
-            height: je.height()
+            height: je.height(),
         };
     }
 
@@ -130,10 +130,39 @@ export class Builder extends mxGraph {
     }
 
 
+    cellsMoved(cells: mxCell[],
+               dx: number,
+               dy: number,
+               disconnect: boolean,
+               constrain: boolean,
+               extend: boolean): void {
+        let toMove = [];
+        for(let cell of cells) {
+            if(cell.getAttribute('synthetic')) {
+                toMove.push(cell);
+                let layer = (cell as any) as LayeredNode<any>;
+                for(let member of layer.members) {
+                    toMove.push(member);
+                }
+            }
+        }
+        super.cellsMoved(toMove, dx, dy, disconnect, constrain, extend);
+    }
+
+    moveCells(cells: Layer[],
+              dx: number,
+              dy: number,
+              clone?: boolean,
+              parent?: Layer,
+              event?: mxMouseEvent): mxCell[] {
+        return super.moveCells(cells, dx, dy, clone, parent, event);
+    }
+
+
     selectCellForEvent(cell: mxCell) {
         if (cell.getAttribute('constituent') === '1') {
             let delegate = this.model.getParent(cell);
-            while(delegate.getAttribute('constituent') === '1') {
+            while (delegate.getAttribute('constituent') === '1') {
                 delegate = this.model.getParent(delegate);
             }
             super.selectCellForEvent(delegate);
@@ -200,8 +229,18 @@ export class Builder extends mxGraph {
                 return terminal.shape.constraints;
             }
         }
-
         return null;
+    }
 
+
+    protected createDefaultStyles(): void {
+        this.expandedImage =
+            new mxImage('assets/sui/themes/hasli/assets/images/expand.svg', 16, 16);
+        this.collapsedImage = new mxImage(
+            'assets/sui/themes/hasli/assets/images/compress.svg', 16, 16);
+        this.getStylesheet()
+            .getDefaultEdgeStyle()
+            ['edgeStyle'] =
+            'orthogonalEdgeStyle';
     }
 }

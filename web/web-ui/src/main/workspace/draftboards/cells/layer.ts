@@ -16,6 +16,9 @@ import {Builder} from "../graph/builder";
 
 export interface Layerable {
 
+    members: mxLayer[];
+
+    addMember(member:mxLayer) : void;
 }
 
 
@@ -23,6 +26,10 @@ export interface Layerable {
 export class LayeredNode<T> extends AbstractVertex<T> implements Layerable {
 
     public host: Builder;
+
+    public members:mxLayer[];
+
+
 
     constructor(parent: mxLayer,
                 data:T,
@@ -37,6 +44,18 @@ export class LayeredNode<T> extends AbstractVertex<T> implements Layerable {
             registry,
         );
         this.setCollapsable(true);
+        super.set('synthetic', '1', true);
+    }
+
+    addMember(layer:mxLayer) : void {
+        // if(!this.children) {
+        //     this.children = [];
+        // }
+        // this.children.push(layer);
+        if(!this.members) {
+            this.members = [];
+        }
+        this.members.push(layer);
     }
 
 

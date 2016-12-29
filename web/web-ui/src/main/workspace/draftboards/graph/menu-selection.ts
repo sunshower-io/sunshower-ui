@@ -1,9 +1,10 @@
-import {mxRubberband, mxGraph} from 'mxgraph';
-
-import {UUID} from 'utils/uuid';
+import {EditorContext} from "../editor";
+import {
+    mxRubberband,
+    mxGraph
+} from 'mxgraph';
 
 import {MenuItem} from 'common/elements/menu';
-import {EditorContext} from "../editor";
 
 
 export class MenuSelector extends mxRubberband {
@@ -77,7 +78,6 @@ export class MenuSelector extends mxRubberband {
 
     newDelegate(item:MenuItem , parent: JQuery) : (Event) => void {
         return (e: Event) : void => {
-            console.log("Frap");
             item.apply(this.editorContext());
             parent.remove();
         }
