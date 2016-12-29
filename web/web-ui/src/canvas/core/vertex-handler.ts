@@ -1,10 +1,7 @@
 import {
     Layer,
-    mxCellState,
-    mxEvent,
     mxVertexHandler
 } from 'mxgraph';
-
 
 import {LayeredNode} from "component/model/layer";
 
@@ -28,7 +25,6 @@ export class VertexHandler extends mxVertexHandler {
                gridEnabled: boolean,
                constrained: boolean,
                recurse: boolean) {
-        console.log("RESIZE");
         let fixed = cell.getAttribute('lfix');
         if (fixed) {
             this.handleFixed(
@@ -78,8 +74,6 @@ export class VertexHandler extends mxVertexHandler {
                         gridEnabled: boolean,
                         constrained: boolean,
                         recurse: boolean) {
-
-
     }
 
 

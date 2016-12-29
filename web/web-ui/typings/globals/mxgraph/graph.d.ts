@@ -3,14 +3,19 @@ declare module 'mxgraph' {
 
     export class mxConnectionHandler {
         constructor(graph: mxGraph,
-                    connection?: (source: mxCell,
-                                  target: mxCell,
+                    connection?: (source: Layer,
+                                  target: Layer,
                                   style: mxStylesheet) => void);
 
 
-        createEdge(source: mxCell, target: mxCell, style: mxStylesheet);
+        createEdge(source: Layer,
+                   target: Layer,
+                   style: mxStylesheet);
 
-        connect(source: mxCell, target: mxCell, event: mxEvent, dropTarget: mxCell);
+        connect(source: Layer,
+                target: Layer,
+                event: mxEvent,
+                dropTarget: Layer);
     }
 
     export class mxGraphSelectionModel {
@@ -57,26 +62,26 @@ declare module 'mxgraph' {
     type Style = {[key: string]: any};
 
     export class mxControl {
-        scale: number;
-        bounds: mxRectangle
+        scale           : number;
+        bounds          : mxRectangle
 
     }
 
     export class mxCellState {
-        x: number;
-        y: number;
-        width: number;
-        height: number;
+        x               : number;
+        y               : number;
+        width           : number;
+        height          : number;
 
 
-        view: any;
+        view            : any;
 
-        cell: mxCell;
-        style: Style;
+        cell            : Layer;
+        style           : Style;
 
-        shape: mxShape;
-        text: mxShape;
-        control: mxControl;
+        shape           : mxShape;
+        text            : mxShape;
+        control         : mxControl;
 
 
     }
@@ -88,7 +93,7 @@ declare module 'mxgraph' {
         /**
          *
          */
-        getCell(): mxCell;
+        getCell(): Layer;
 
         /**
          *
@@ -111,27 +116,27 @@ declare module 'mxgraph' {
     export class mxGraph implements Connectable {
 
 
-        mouseListeners: {[name: string]: any};
-        gridSize: number;
-        recursiveResize: boolean;
+        mouseListeners          : {[name: string]: any};
+        gridSize                : number;
+        recursiveResize         : boolean;
 
-        expandedImage: mxImage;
-        collapsedImage: mxImage;
-
-
-        foldingEnabled: boolean;
-        isMouseDown: boolean;
-
-        extendParents: boolean;
-        extendParentsOnAdd: boolean;
+        expandedImage           : mxImage;
+        collapsedImage          : mxImage;
 
 
-        container: Element;
-        view: mxGraphView;
-        model: mxGraphModel;
-        graphHandler: mxGraphHandler;
-        cellRenderer: mxCellRenderer;
-        connectionHandler: mxConnectionHandler;
+        foldingEnabled          : boolean;
+        isMouseDown             : boolean;
+
+        extendParents           : boolean;
+        extendParentsOnAdd      : boolean;
+
+
+        container               : Element;
+        view                    : mxGraphView;
+        model                   : mxGraphModel;
+        graphHandler            : mxGraphHandler;
+        cellRenderer            : mxCellRenderer;
+        connectionHandler       : mxConnectionHandler;
 
         zoomIn(): void;
 
@@ -144,7 +149,7 @@ declare module 'mxgraph' {
          * @param cell
          */
 
-        getCellGeometry(cell:mxCell) : mxGeometry;
+        getCellGeometry(cell: mxCell): mxGeometry;
 
 
         setPanningHandler(handler: mxPanningHandler): void;
@@ -210,7 +215,7 @@ declare module 'mxgraph' {
          * @param bounds
          * @param recurse
          */
-        resizeCell(cell: mxCell,
+        resizeCell(cell: Layer,
                    bounds: mxRectangle,
                    recurse: boolean): Layer;
 
@@ -272,7 +277,7 @@ declare module 'mxgraph' {
          * @param extend
          */
 
-        cellsMoved(cells: mxCell[],
+        cellsMoved(cells: Layer[],
                    dx: number,
                    dy: number,
                    disconnect: boolean,
@@ -284,7 +289,7 @@ declare module 'mxgraph' {
          * @param cells
          */
 
-        removeCells(cells: mxCell[]);
+        removeCells(cells: Layer[]);
 
 
         /**
@@ -323,7 +328,7 @@ declare module 'mxgraph' {
          *
          * @param cell
          */
-        selectCellForEvent(cell: mxCell);
+        selectCellForEvent(cell: Layer);
 
         /**
          *
@@ -337,7 +342,7 @@ declare module 'mxgraph' {
          * @param cell
          */
 
-        convertValueToString(cell: mxCell): string;
+        convertValueToString(cell: Layer): string;
 
         /**
          *
@@ -351,7 +356,7 @@ declare module 'mxgraph' {
          * @param vertex
          * @param overlay
          */
-        addCellOverlay(vertex: mxCell,
+        addCellOverlay(vertex: Layer,
                        overlay: mxCellOverlay): void;
 
         /**
@@ -428,13 +433,13 @@ declare module 'mxgraph' {
                   clone?: boolean,
                   parent?: Layer,
                   event?: mxMouseEvent,
-                  mapping?: any): mxCell[];
+                  mapping?: any): Layer[];
 
 
         /**
          *
          */
-        createHandler() : mxGraphHandler;
+        createHandler(): mxGraphHandler;
 
 
     }

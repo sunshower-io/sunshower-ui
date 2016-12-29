@@ -19,7 +19,7 @@ declare module 'mxgraph' {
         getInitialCellForEvent(self:mxGraphHandler);
 
 
-        getCells(cells:mxCell) : mxCell[];
+        getCells(cells:Layer) : Layer[];
 
         /**
          * @param cells

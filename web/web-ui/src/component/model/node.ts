@@ -1,5 +1,5 @@
 import {
-    Layer,
+    mxCell,
     mxImage,
     mxCellOverlay,
     mxConstants,
@@ -41,7 +41,7 @@ export class Node extends LayeredNode<InfrastructureElement> implements Constrai
     static count: number = 0;
 
     constructor(
-        parent:Layer,
+        parent:mxCell,
         element:InfrastructureElement,
         x:number,
         y:number,
@@ -53,7 +53,7 @@ export class Node extends LayeredNode<InfrastructureElement> implements Constrai
         this.data.name = "Host " + Node.count++;
     }
 
-    public addTo(builder:Builder) : Layer {
+    public addTo(builder:Builder) : mxCell {
         this.createMenu(builder);
         return super.addTo(builder);
     }

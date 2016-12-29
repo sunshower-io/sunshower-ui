@@ -2,7 +2,6 @@ import {Registry} from 'utils/registry';
 
 import {AbstractVertex} from "./vertex";
 import {
-    Layer,
     mxImage,
     mxCell,
     mxConstants,

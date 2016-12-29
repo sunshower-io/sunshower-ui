@@ -1,23 +1,23 @@
-
-
 declare module 'mxgraph' {
 
-    export class mxXmlCanvas2D{
+    export class mxXmlCanvas2D {
 
-        scale(scale:number) : void;
-        translate(x:number, y:number) : void;
+        scale(scale: number): void;
+
+        translate(x: number, y: number): void;
 
 
     }
 
 
     export interface Cloneable<T> {
-        clone()  : T;
+        clone(): T;
     }
     export class mxClient {
-        static isBrowserSupported() : boolean;
-        static basePath         :string;
-        static imageBasePath    :string;
+        static isBrowserSupported(): boolean;
+
+        static basePath: string;
+        static imageBasePath: string;
     }
 
     export class XmlDocument {
@@ -27,19 +27,19 @@ declare module 'mxgraph' {
          * @param key
          * @param value
          */
-        setAttribute(key:string, value:string) : void;
+        setAttribute(key: string, value: string): void;
 
         /**
          *
          * @param cell
          */
-        appendChild(cell:XmlDocument);
+        appendChild(cell: XmlDocument);
 
         /**
          *
          * @param name
          */
-        createElement(name:string) : XmlDocument;
+        createElement(name: string): XmlDocument;
 
         /**
          *
@@ -47,7 +47,7 @@ declare module 'mxgraph' {
          * @param name
          */
 
-        createElementNS(namespace:string, name:string) : XmlDocument;
+        createElementNS(namespace: string, name: string): XmlDocument;
 
 
         /**
@@ -56,44 +56,41 @@ declare module 'mxgraph' {
          * @param name
          * @param xlink
          */
-        setAttributeNS(namespace:string, name:string, xlink?:string) : void;
+        setAttributeNS(namespace: string, name: string, xlink?: string): void;
 
     }
 
     export module mxUtils {
 
 
-        function clone<T>(t:T):T;
+        function clone<T>(t: T): T;
 
-        function isNode(cell:Layer) : boolean;
+        function isNode(cell: Layer): boolean;
 
-        function error(msg:string, code:number, we: boolean) : void;
+        function error(msg: string, code: number, we: boolean): void;
 
-        function createXmlDocument() : XmlDocument;
+        function createXmlDocument(): XmlDocument;
 
-        function createElementNS(namespace:string, name:string) : XmlDocument;
+        function createElementNS(namespace: string, name: string): XmlDocument;
     }
-
-
 
 
     export interface Connectable {
-        isConnectable() : boolean;
-        setConnectable(connectable:boolean) : void;
+        isConnectable(): boolean;
+        setConnectable(connectable: boolean): void;
     }
-
-
 
 
     //not technically part of mxGraph's api, but w/e.
-    export interface Component<T extends mxCell> {
-        graph:mxGraph;
-        constituent:boolean;
-        cast() : T;
+    export interface Component<T extends Layer> {
+        graph: mxGraph;
+        constituent: boolean;
+        cast(): T;
     }
 
 
-    export class mxVertex extends mxCell {
+    export class mxVertex extends mxCell implements Layer {
+
 
     }
 
@@ -102,81 +99,83 @@ declare module 'mxgraph' {
 
     export class mxGraphModel {
 
-        root:               mxCell;
+        root: Layer;
+
         /**
          *
          * @param cell
          * @param geometry
          */
-        setGeometry(cell:Layer, geometry:mxGeometry);
+        setGeometry(cell: Layer, geometry: mxGeometry);
 
         /**
          *
          * @param parent
          * @param index
          */
-        getChildAt(parent:Layer, index:number) : Layer;
+        getChildAt(parent: Layer, index: number): Layer;
+
         /**
          *
          * @param cell
          */
-        getGeometry(cell:Layer) : mxGeometry;
+        getGeometry(cell: Layer): mxGeometry;
+
         /**
          *
          */
-        endUpdate() : void;
+        endUpdate(): void;
 
         /**
          *
          */
         beginUpdate(): void;
 
-        getChildCount(cell:Layer) : number;
+        getChildCount(cell: Layer): number;
 
         /**
          *
          * @param id
          */
-        getCell(id:string) : Layer;
+        getCell(id: string): Layer;
 
         /**
          *
          * @param cell
          */
-        getParent(cell:Layer) : Layer;
+        getParent(cell: Layer): Layer;
 
         /**
          *
          * @param cell
          */
-        isVertex(cell:mxCell) : boolean;
+        isVertex(cell: Layer): boolean;
     }
 
 
-
-
-    export module mxEvent  {
-        function disableContextMenu(container:HTMLElement);
+    export module mxEvent {
+        function disableContextMenu(container: HTMLElement);
     }
 
 
     export class mxRubberband {
-        constructor(g:mxGraph);
-        static enabled          : boolean;
-        static defaultOpacity   : number;
+        constructor(g: mxGraph);
 
-        currentX                : number;
-        currentY                : number;
+        static enabled: boolean;
+        static defaultOpacity: number;
+
+        currentX: number;
+        currentY: number;
 
 
-        mouseDown(a:any, b:any) : any;
+        mouseDown(a: any, b: any): any;
 
         /**
          * @param a
          * @param b
          */
 
-        mouseUp(a:any, b:any) : any;
+        mouseUp(a: any, b: any): any;
 
         /**
          *
@@ -184,7 +183,7 @@ declare module 'mxgraph' {
          * @param y
          */
 
-        update(x:number, y: number) : void;
+        update(x: number, y: number): void;
 
         /**
          *
@@ -192,13 +191,13 @@ declare module 'mxgraph' {
          * @param b
          */
 
-        mouseMove(a:any, b:any) : any;
+        mouseMove(a: any, b: any): any;
 
         /**
          * @param x
          * @param y
          */
-        start(x: number, y:number) : void;
+        start(x: number, y: number): void;
     }
 
 }

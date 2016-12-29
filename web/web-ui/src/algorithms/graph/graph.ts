@@ -3,38 +3,61 @@ export interface Traversal<T, U> {
 }
 
 
-enum Relationship {
-    Parent,
-    Child
-}
+type Relationship = Symbol | string | number;
 
-export class Edge<T> {
 
-    constructor(public source: Node<T>,
-                public target: Node<T>,
-                public relationship?: Relationship) {
+export interface Edge<T> {
 
-    }
+    source          :Node<T>;
+    target          :Node<T>;
+    relationship    :Relationship;
+
 }
 
 
 export interface Vertex<T> {
 
     data?: T;
+
     id: string;
+
+    adjacencies: {[key:string]: Edge<T>};
 
     add(edge: Edge<T>): boolean;
 
-    remove(edge: Node<T>): boolean;
+    remove(edge: Edge<T>): boolean;
 
+    removeSuccessor(successor:Node<T>) : boolean;
+
+    addSuccessor(successor:Node<T>) : boolean;
+
+
+    createEdge(
+        source: Node<T>,
+        target: Node<T>
+    ) : Edge<T>;
 
 }
 
-export class Node<T> implements Vertex<T> {
+
+export abstract class Node<T> implements Vertex<T> {
     adjacencies: {[key: string]: Edge<T>};
 
     constructor(public id: string, public data?: T) {
         this.adjacencies = {};
+    }
+
+    abstract createEdge(
+        source: Node<T>,
+        target: Node<T>
+    ) : Edge<T>;
+
+
+    addSuccessor(successor: Node<T>): boolean {
+        if(this.adjacencies[successor.id]) {
+            return false;
+        }
+        this.adjacencies[successor.id] = this.createEdge(this, successor);
     }
 
     add(edge: Edge<T>): boolean {
@@ -45,13 +68,17 @@ export class Node<T> implements Vertex<T> {
         return true;
     }
 
-    remove(target: Node<T>): boolean {
-        let t = this.adjacencies[target.id];
+    removeSuccessor(successor:Node<T>) : boolean {
+        let t = this.adjacencies[successor.id];
         if (t) {
-            delete this.adjacencies[target.id];
+            delete this.adjacencies[successor.id];
             return true;
         }
         return false;
+    }
+
+    remove(target: Edge<T>): boolean {
+        return this.removeSuccessor(target.target);
     }
 
 
@@ -64,7 +91,7 @@ export class Node<T> implements Vertex<T> {
     }
 }
 
-export class Graph<T> {
+export abstract class Graph<T> {
 
     public nodes: {[key: string]: Node<T>};
 
@@ -80,11 +107,17 @@ export class Graph<T> {
         return result;
     }
 
+    abstract createEdge(
+        source:Node<T>,
+        target:Node<T>,
+        relationship:Relationship
+    ) : Edge<T>;
+
     disconnect(s: Node<T>, t: Node<T>): boolean {
         this.check();
         let source = this.nodes[s.id] || s,
             target = this.nodes[t.id] || t;
-        return source.remove(target);
+        return source.removeSuccessor(target);
     }
 
     connect(s: Node<T>,
@@ -94,7 +127,7 @@ export class Graph<T> {
         let source = this.nodes[s.id] || s,
             target = this.nodes[t.id] || t;
 
-        let edge = new Edge<T>(source, target, relationship);
+        let edge = this.createEdge(source, target, relationship);
         this.nodes[source.id] = source;
         this.nodes[target.id] = target;
         return source.add(edge);

@@ -16,7 +16,6 @@ import {
 } from "mxgraph";
 
 
-
 import {Kv} from "utils/objects";
 import {Registry} from "utils/registry";
 import {mxCellOverlay} from "mxgraph";
@@ -24,24 +23,25 @@ import {EditorContext} from "canvas/core/canvas";
 
 
 export class AbstractVertex<T> extends mxCell implements Vertex<T> {
-
     public host: Builder;
     private readonly delegate: Vertex<T>;
     private attributes: {[key: string]: string};
+
+    adjacencies: {[key:string]: Edge<T>};
 
     private static readonly loadingOverlay: mxCellOverlay =
         AbstractVertex.createLoadingOverlay();
 
     constructor(id: UUID,
                 public data: T,
-                public parent: mxCell,
+                public parent: Layer,
                 x: number,
                 y: number,
                 width: number,
                 height: number,
                 public registry?: Registry) {
         super();
-        this.delegate = new Node<T>(id.value, data);
+        // this.delegate = new Node<T>(id.value, data);
         this.geometry = new mxGeometry(x, y, width, height);
         this.setEdge(false);
         this.setVertex(true);
@@ -52,6 +52,17 @@ export class AbstractVertex<T> extends mxCell implements Vertex<T> {
 
     }
 
+    removeSuccessor(successor: Node<T>): boolean {
+        return undefined;
+    }
+
+    addSuccessor(successor: Node<T>): boolean {
+        return undefined;
+    }
+
+    createEdge(source: Node<T>, target: Node<T>): Edge<T> {
+        return undefined;
+    }
 
     getChildrenOfType<U>(childType:any) : U[] {
         let results = [];
@@ -95,7 +106,7 @@ export class AbstractVertex<T> extends mxCell implements Vertex<T> {
         this.insert(child);
     }
 
-    addTo(builder: Builder): mxCell {
+    addTo(builder: Builder): Layer {
         this.host = builder;
         let result = builder.addCell(this, this.parent);
         for (let overlay of this.createOverlays()) {
@@ -109,7 +120,7 @@ export class AbstractVertex<T> extends mxCell implements Vertex<T> {
     }
 
 
-    protected resolveParent(context: EditorContext, x: number, y: number, type:any): Layer {
+    protected resolveParent(context: EditorContext, x: number, y: number, type:any): mxCell {
         let graph = context.graph,
             defaultParent = graph.getDefaultParent(),
             parent = graph.getCellAt(x, y, defaultParent, true, false);
@@ -124,8 +135,8 @@ export class AbstractVertex<T> extends mxCell implements Vertex<T> {
         return this.delegate.add(edge);
     }
 
-    remove(edge: Node<T>): boolean {
-        return this.delegate.remove(edge);
+    remove(edge: Edge<T>): boolean {
+        return this.delegate.removeSuccessor(edge.target);
     }
 
     getAttribute(key: string): string {

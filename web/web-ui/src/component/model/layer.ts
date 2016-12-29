@@ -1,7 +1,7 @@
 import {AbstractVertex} from "component/model/vertex";
 
 import {
-    Layer as mxLayer,
+    mxCell as mxLayer,
     mxCellOverlay,
     mxImage,
     mxConstants
@@ -18,21 +18,19 @@ export interface Layerable {
 
     members: mxLayer[];
 
-    addMember(member:mxLayer) : void;
+    addMember(member: mxLayer): void;
 }
-
 
 
 export class LayeredNode<T> extends AbstractVertex<T> implements Layerable {
 
     public host: Builder;
 
-    public members:mxLayer[];
-
+    public members: mxLayer[];
 
 
     constructor(parent: mxLayer,
-                data:T,
+                data: T,
                 x: number,
                 y: number,
                 registry?: Registry,) {
@@ -47,12 +45,12 @@ export class LayeredNode<T> extends AbstractVertex<T> implements Layerable {
         super.set('synthetic', '1', true);
     }
 
-    addMember(layer:mxLayer) : void {
+    addMember(layer: mxLayer): void {
         // if(!this.children) {
         //     this.children = [];
         // }
         // this.children.push(layer);
-        if(!this.members) {
+        if (!this.members) {
             this.members = [];
         }
         this.members.push(layer);
@@ -67,8 +65,8 @@ export class LayeredNode<T> extends AbstractVertex<T> implements Layerable {
 
 
 export class Layer extends LayeredNode<ElementLayer> {
-    name                : string;
-    description         : string;
+    name: string;
+    description: string;
 
 
     protected createLayerOverlay(): mxCellOverlay {

@@ -48,7 +48,7 @@ class MenuItemCell extends AbstractVertex<any> {
 
     constructor(
         private graph:mxGraph,
-        cell:Layer,
+        cell:mxCell,
         parent:VertexMenu,
         private item:MenuItem) {
         super(
@@ -90,7 +90,8 @@ function isTarget(event:mxMouseEvent, cell:Layer) : boolean {
 }
 
 class MenuContainer extends AbstractVertex<any> {
-    constructor(parent:mxVertex) {
+
+    constructor(parent:Layer) {
         super(
             UUID.randomUUID(),
             null,

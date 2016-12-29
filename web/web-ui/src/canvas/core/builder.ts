@@ -155,7 +155,7 @@ export class Builder extends mxGraph {
               dy: number,
               clone?: boolean,
               parent?: Layer,
-              event?: mxMouseEvent): mxCell[] {
+              event?: mxMouseEvent): Layer[] {
         return super.moveCells(cells, dx, dy, clone, parent, event);
     }
 
@@ -206,7 +206,7 @@ export class Builder extends mxGraph {
      */
 
 
-    getPreferredSizeForCell(cell: Layer): mxRectangle {
+    getPreferredSizeForCell(cell: mxCell): mxRectangle {
         if (cell.getAttribute('rresize') === '0') {
             return cell.geometry;
         } else {
@@ -219,7 +219,7 @@ export class Builder extends mxGraph {
     }
 
 
-    getAllConnectionConstraints(terminal: Layer, source: Layer): mxConnectionConstraint[] {
+    getAllConnectionConstraints(terminal: mxCell, source: mxCell): mxConnectionConstraint[] {
         if (terminal != null && terminal.shape != null) {
             if (terminal.shape.stencil != null) {
                 if (terminal.shape.stencil != null) {

@@ -17,7 +17,6 @@ declare module 'mxgraph' {
     export class mxCellOverlay {
 
         cursor:string;
-
         constructor(
             image?:mxImage,
             tooltip?:string,
@@ -31,15 +30,27 @@ declare module 'mxgraph' {
         addListener(event:string, listener:(sender:any, event:mxEvent) => void);
     }
 
-    export class mxCell implements Layer, Connectable {
-        parent          :mxCell;
+    export interface Renderable {
+
+    }
+
+    export interface Node extends Renderable {
+
+    }
+
+    export interface SceneGraphElement extends Node {
+
+    }
+
+    export class mxCell implements Connectable, SceneGraphElement, Layer {
+        parent          :Layer;
         id              :string;
         value           :any;
         geometry        :mxGeometry;
         style           :string;
         shape           :mxShape;
 
-        children        :mxCell[];
+        children        :Layer[];
 
 
         constructor(label?:string, geometry?:mxGeometry);
@@ -50,7 +61,7 @@ declare module 'mxgraph' {
          * @param index
          */
 
-        insert(child:mxCell, index?:number) : void;
+        insert(child:Layer, index?:number) : void;
 
         /**
          *
@@ -60,7 +71,7 @@ declare module 'mxgraph' {
         /**
          *
          */
-        getParent() : mxCell;
+        getParent() : Layer;
 
         /**
          *
