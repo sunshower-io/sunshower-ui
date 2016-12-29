@@ -12,9 +12,8 @@ import {
     mxCellOverlay,
 } from "mxgraph";
 
-import {InfrastructureElement} from 'elements/elements';
 
-import {Node} from "component/model/node";
+import {InfrastructureNode} from "component/model/infrastructure-node";
 
 
 
@@ -63,13 +62,12 @@ class NodeProcessor implements EditorOperation {
 
         let
             parent = context.graph.getDefaultParent(),
-            ie = new InfrastructureElement(null),
-            node = new Node(
-                parent,
-                ie,
-                this.coordinates.x,
-                this.coordinates.y - context.offset.top,
+            node = new InfrastructureNode(
                 this.registry
+                // parent,
+                // this.coordinates.x,
+                // this.coordinates.y - context.offset.top,
+                // this.registry
             );
         node.addTo(context.graph);
     }

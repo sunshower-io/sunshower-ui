@@ -1,16 +1,26 @@
-import {LayeredNode} from "./layer";
+
+
+import {
+    mxCellOverlay,
+    mxConstants,
+    mxImage
+
+} from "mxgraph";
+
+
 import {Constrained} from "./cell";
-import {VirtualCloud as VPC} from 'elements/cloud';
+
 import {EditorContext} from "canvas/core/canvas";
+import {AbstractElement} from "canvas/element/element";
 
-import {mxCellOverlay, mxConstants, mxImage} from "mxgraph";
+export class VirtualCloud extends AbstractElement implements Constrained {
 
-export class VirtualCloud extends LayeredNode<VPC> implements Constrained {
     constructor() {
-        super(null, null, 0, 0);
-        this.setCollapsable(true);
-
+        super();
         this.setAncestor(true);
+        this.setCollapsable(true);
+        this.name = 'VPC 0';
+        this.icon = 'assets/sui/themes/hasli/assets/images/icons/provider/generic/cloud.svg';
     }
 
 

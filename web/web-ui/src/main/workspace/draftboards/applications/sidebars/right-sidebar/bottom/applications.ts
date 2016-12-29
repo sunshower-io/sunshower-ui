@@ -12,8 +12,8 @@ import {
 } from 'main/workspace/draftboards/editor';
 
 
-import {Node} from "component/model/node";
 import {ApplicationDeployment} from "component/model/deployment";
+import {InfrastructureNode} from "component/model/infrastructure-node";
 
 @inject(HttpClient, Registry)
 export class Applications {

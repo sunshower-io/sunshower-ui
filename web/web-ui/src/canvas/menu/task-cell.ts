@@ -12,7 +12,9 @@ import {Kv} from 'utils/objects';
 
 import {UUID} from 'utils/uuid';
 
-import {AbstractVertex} from "component/model/vertex";
+import {
+    AbstractElement
+} from "canvas/element/element";
 
 
 interface Listener {
@@ -44,7 +46,7 @@ export class NetworkMenuItem extends MenuItem {
 
 
 
-class MenuItemCell extends AbstractVertex<any> {
+class MenuItemCell extends AbstractElement {
 
     constructor(
         private graph:mxGraph,
@@ -52,13 +54,13 @@ class MenuItemCell extends AbstractVertex<any> {
         parent:VertexMenu,
         private item:MenuItem) {
         super(
-            UUID.randomUUID(),
-            parent,
-            cell,
-            cell.geometry.width - (32 * (2 + item.index)),
-            0,
-            32,
-            32
+            // UUID.randomUUID(),
+            // parent,
+            // cell,
+            // cell.geometry.width - (32 * (2 + item.index)),
+            // 0,
+            // 32,
+            // 32
         );
         this.value = item.icon;
         this.setConnectable(false);
@@ -89,15 +91,15 @@ function isTarget(event:mxMouseEvent, cell:Layer) : boolean {
     return event.getCell() === cell;
 }
 
-class MenuContainer extends AbstractVertex<any> {
+class MenuContainer extends AbstractElement {
 
     constructor(parent:Layer) {
         super(
-            UUID.randomUUID(),
-            null,
-            parent, 0, 0,
-            parent.geometry.width,
-            32
+            // UUID.randomUUID(),
+            // null,
+            // parent, 0, 0,
+            // parent.geometry.width,
+            // 32
         );
 
 
@@ -115,7 +117,7 @@ class MenuContainer extends AbstractVertex<any> {
 
 }
 
-export class VertexMenu extends AbstractVertex<any> implements MouseListener {
+export class VertexMenu extends AbstractElement implements MouseListener {
 
     items:mxCell[];
     toggled:boolean;
@@ -123,13 +125,14 @@ export class VertexMenu extends AbstractVertex<any> implements MouseListener {
     constructor(private graph: mxGraph,
                 parent: mxVertex,
                 public icon: string) {
-        super(UUID.randomUUID(),
-            icon,
-            new MenuContainer(parent),
-            parent.geometry.width - 32,
-            0,
-            32,
-            32
+        super(
+            // UUID.randomUUID(),
+            // icon,
+            // new MenuContainer(parent),
+            // parent.geometry.width - 32,
+            // 0,
+            // 32,
+            // 32
         );
         this.items = [];
         this.parent = new MenuContainer(parent);

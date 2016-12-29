@@ -34,7 +34,6 @@ import {CellRenderer} from "./cell-renderer";
 import {MenuSelector} from "./menu-selection";
 import {GraphHandler} from "./graph-handler";
 import {VertexHandler} from "./vertex-handler";
-import {LayeredNode} from "component/model/layer";
 import {ConnectionHandler} from './connection-handler';
 import CreateLayerMenuItem from "canvas/menu/selection-menu/create-layer";
 
@@ -168,17 +167,17 @@ export class Canvas extends mxGraph {
                disconnect: boolean,
                constrain: boolean,
                extend: boolean): void {
-        let toMove = [];
-        for(let cell of cells) {
-            if(cell.getAttribute('synthetic')) {
-                toMove.push(cell);
-                let layer = (cell as any) as LayeredNode<any>;
-                for(let member of layer.members) {
-                    toMove.push(member);
-                }
-            }
-        }
-        super.cellsMoved(toMove, dx, dy, disconnect, constrain, extend);
+        // let toMove = [];
+        // for(let cell of cells) {
+        //     if(cell.getAttribute('synthetic')) {
+        //         toMove.push(cell);
+        //         let layer = (cell as any) as LayeredNode<any>;
+        //         for(let member of layer.members) {
+        //             toMove.push(member);
+        //         }
+        //     }
+        // }
+        // super.cellsMoved(toMove, dx, dy, disconnect, constrain, extend);
     }
 
     moveCells(cells: Layer[],

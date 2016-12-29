@@ -3,8 +3,6 @@ import {
     mxVertexHandler
 } from 'mxgraph';
 
-import {LayeredNode} from "component/model/layer";
-
 
 export class VertexHandler extends mxVertexHandler {
 
@@ -48,22 +46,7 @@ export class VertexHandler extends mxVertexHandler {
     }
 
     moveChildren(cell: Layer, dx: number, dy: number) {
-        console.log("MOVE CHILDREN");
-        let model = this.graph.getModel();
-        if (cell.getAttribute('synthetic')) {
-            let layer = (cell as any) as LayeredNode<any>,
-                children = layer.members;
-            for (let child of children) {
-                let geometry = this.graph.getCellGeometry(child);
-                if (geometry) {
-                    geometry = geometry.clone();
-                    geometry.translate(dx, dy);
-                    model.setGeometry(child, geometry);
-                }
-            }
-        } else {
-            super.moveChildren(cell, dx, dy);
-        }
+        super.moveChildren(cell, dx, dy);
     }
 
 

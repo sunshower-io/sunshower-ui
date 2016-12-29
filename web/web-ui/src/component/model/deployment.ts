@@ -1,6 +1,5 @@
 import {Registry} from 'utils/registry';
 
-import {AbstractVertex} from "./vertex";
 import {
     mxImage,
     mxCell,
@@ -11,14 +10,7 @@ import {
 
 import {Constrained} from './cell';
 import {Canvas} from "canvas/core/canvas";
-import {ElementEvent} from 'elements/events';
-
-import {
-    ApplicationElement,
-    InfrastructureElement
-} from 'elements/elements';
-
-import {Node} from './node'
+import {ElementEvent} from 'canvas/element/events';
 
 
 import {
@@ -26,29 +18,34 @@ import {
     ObservedEvent
 } from "utils/observer";
 
-import {UUID} from 'utils/uuid';
 
 import {Kv} from 'utils/objects';
 import {EditorContext} from "canvas/core/canvas";
+import {RegistryAwareElement} from "canvas/element/registry-aware";
+import {InfrastructureNode} from "./infrastructure-node";
 
 
-export class ApplicationDeployment extends AbstractVertex<ApplicationElement> implements Listener, Constrained {
+export class ApplicationDeployment extends RegistryAwareElement implements Listener, Constrained {
 
-    icon: string;
-    host: Canvas;
+
+    icon                    : string;
+    host                    : Canvas;
+
+    applicationName         : string;
 
     constructor(registry: Registry,
                 private applicationId: string) {
         super(
-            UUID.randomUUID(),
-            null,
-            null,
-            24,
-            48,
-            120,
-            120,
+            // UUID.randomUUID(),
+            // null,
+            // null,
+            // 24,
+            // 48,
+            // 120,
+            // 120,
             registry
         );
+
         this.setAttribute('constituent', '1');
     }
 
@@ -85,46 +82,34 @@ export class ApplicationDeployment extends AbstractVertex<ApplicationElement> im
                 context,
                 location.x,
                 location.y,
-                Node
+                InfrastructureNode
             ),
             graph = context.graph as Canvas,
-            node: Node = null;
+            node: InfrastructureNode = null;
 
-        if (parent instanceof Node) {
-            node = parent as Node;
+        if (parent instanceof InfrastructureNode) {
+            node = parent as InfrastructureNode;
         } else {
-            let infrastructureElement = new InfrastructureElement(null);
-            node = new Node(
-                parent,
-                infrastructureElement,
-                location.x,
-                location.y - context.offset.top,
-                this.registry
-            );
+            let node = new InfrastructureNode(this.registry);
             node.satisfy(context);
         }
-        this.parent = node;
+        // this.parent = node;
         node.addApplication(this);
         this.load(node);
     }
 
-    protected load(node: Node) {
+    protected load(node: InfrastructureNode) {
         this.setLoading();
         this.registry.client.fetch(`docker/images/${this.applicationId}`)
             .then(r => r.json() as any)
             .then(r => {
-                let element = new ApplicationElement(
-                    node.data,
-                    this.getIconUrl(r),
-                    r.name,
-                    this.applicationId
-                );
-                this.data = element;
+                this.icon = this.getIconUrl(r);
+                this.applicationName = r.name;
                 this.host.addCellOverlay(this, this.applicationOverlay());
-                node.data.add(element);
+                // node.data.add(element);
                 this.registry.draftboardManager.dispatch(
                     'element-modified',
-                    new ElementEvent('element-modified', node.data)
+                    new ElementEvent('element-modified', node)
                 );
             });
         this.stopLoading();
@@ -136,7 +121,7 @@ export class ApplicationDeployment extends AbstractVertex<ApplicationElement> im
 
     protected applicationOverlay(): mxCellOverlay {
         let
-            url = this.data.icon,
+            url = this.icon,
             image = new mxImage(url, 40, 40),
             iconOverlay = new mxCellOverlay(
                 image,

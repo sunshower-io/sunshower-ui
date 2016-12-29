@@ -1,8 +1,8 @@
 import {inject, bindable} from 'aurelia-framework';
-import {Element} from 'elements/elements';
+import {Element} from 'canvas/element/element';
 import {
     DraftboardManager
-} from 'elements/draftboard';
+} from 'component/draftboard/draftboard';
 
 import {Registry} from 'utils/registry';
 

@@ -1,6 +1,6 @@
 import {inject} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
-import {DraftboardManager} from "../elements/draftboard";
+import {DraftboardManager} from "component/draftboard/draftboard";
 
 @inject(
     HttpClient,

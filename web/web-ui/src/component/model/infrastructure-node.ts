@@ -8,15 +8,9 @@ import {
 
 import {Registry} from 'utils/registry';
 
-import {
-    InfrastructureElement
-} from 'elements/elements';
-
-import {VirtualCloud as VPC} from 'elements/cloud';
 
 import {Canvas} from "canvas/core/canvas";
 
-import {LayeredNode} from "./layer";
 import {ApplicationDeployment} from "./deployment";
 
 
@@ -29,8 +23,13 @@ import {Constrained} from "./cell";
 import {VirtualCloud} from "./cloud";
 import {EditorContext} from "canvas/core/canvas";
 
+import {RegistryAwareElement} from 'canvas/element/registry-aware';
 
-export class Node extends LayeredNode<InfrastructureElement> implements Constrained {
+
+
+export class InfrastructureNode extends
+    RegistryAwareElement
+implements Constrained {
 
 
     rows                : number = 1;
@@ -41,16 +40,13 @@ export class Node extends LayeredNode<InfrastructureElement> implements Constrai
     static count: number = 0;
 
     constructor(
-        parent:mxCell,
-        element:InfrastructureElement,
-        x:number,
-        y:number,
-        registry?: Registry
+        registry: Registry
     ) {
-        super(
-            parent,
-            element, x, y, registry);
-        this.data.name = "Host " + Node.count++;
+        super(registry);
+        // super(
+        //     parent,
+        //     element, x, y, registry);
+        // this.data.name = "Host " + Node.count++;
     }
 
     public addTo(builder:Canvas) : mxCell {
@@ -179,14 +175,11 @@ export class Node extends LayeredNode<InfrastructureElement> implements Constrai
             cloud.geometry.y = location.y - 150;
             cloud.geometry.width = 300;
             cloud.geometry.height = 300;
-            cloud.data = new VPC();
+            // cloud.data = new VPC();
             cloud.addTo(graph);
-            this.registry.draftboardManager.add(cloud.data);
+            this.registry.draftboardManager.add(cloud);
         }
-
-        this.data.parent = cloud.data;
-        cloud.data.add(this.data);
-        cloud.addMember(this);
+        // cloud.addMember(this);
     }
 
     protected createNodeOverlay(): mxCellOverlay {

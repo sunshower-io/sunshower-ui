@@ -5,7 +5,7 @@ type ElementEventType = "element-added"
     | "element-modified"
     | "cycle-detected";
 
-import {Element} from './elements';
+import {Element} from './element';
 
 const ElementEventType = {
     ElementModified         : "element-modified" as ElementEventType,

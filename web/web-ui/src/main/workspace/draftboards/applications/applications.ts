@@ -52,7 +52,7 @@ import {
 import {
     Draftboard as Draft,
     DraftboardManager
-} from 'elements/draftboard';
+} from 'component/draftboard/draftboard';
 
 import {
     Listener,

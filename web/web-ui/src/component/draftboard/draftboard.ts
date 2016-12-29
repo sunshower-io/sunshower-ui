@@ -2,9 +2,9 @@
  * Model class for draftboards
  */
 import {UUID} from 'utils/uuid';
-import {Element} from './elements';
 import {Canvas} from 'canvas/core/canvas'
-import {DefaultEventDispatcher, ObservedEvent} from "../utils/observer";
+import {Element} from 'canvas/element/element';
+import {DefaultEventDispatcher, ObservedEvent} from "utils/observer";
 export class Draftboard {
 
     id                      : UUID;
@@ -23,9 +23,9 @@ export class Draftboard {
     group(layer:Element) : Element {
         let roots = this.rootElements;
         for(let child of layer.children) {
-            let existing = roots[child.id.value];
+            let existing = roots[child.id];
             if(existing) {
-                delete roots[child.id.value];
+                delete roots[child.id];
             }
         }
         this.addElement(layer);
@@ -44,7 +44,7 @@ export class Draftboard {
         if(!this.rootElements) {
             this.rootElements = {};
         }
-        this.rootElements[element.id.value] = element;
+        this.rootElements[element.id] = element;
     }
 
 }

@@ -1,7 +1,7 @@
 import {
     Draftboard,
     DraftboardManager
-} from 'elements/draftboard';
+} from 'component/draftboard/draftboard';
 
 import {
     ObservedEvent,

@@ -1,3 +1,5 @@
+/**
+ *
 import {AbstractVertex} from "component/model/vertex";
 
 import {
@@ -90,3 +92,4 @@ export class Layer extends LayeredNode<ElementLayer> {
         return [this.createLayerOverlay()];
     }
 }
+ */

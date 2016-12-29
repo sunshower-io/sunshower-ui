@@ -1,4 +1,4 @@
-
+/**
 import {UUID} from 'utils/uuid';
 import {VirtualCloud} from "./cloud";
 
@@ -57,3 +57,4 @@ export class InfrastructureElement extends AbstractElement {
         super(cloud);
     }
 }
+*/

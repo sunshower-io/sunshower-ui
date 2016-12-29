@@ -1,10 +1,10 @@
 import {mxCell} from 'mxgraph';
-import {Layer} from 'elements/layer';
-import {Element} from 'elements/elements';
+// import {Layer} from 'elements/layer';
+import {Element} from 'canvas/element/element';
 import {inject} from 'aurelia-framework';
-import {DraftboardManager} from 'elements/draftboard';
+import {Group} from "canvas/scene-graph/scene-graph";
 import {Canvas, EditorContext} from "canvas/core/canvas";
-import {Layer as GLayer} from "component/model/layer";
+import {DraftboardManager} from 'component/draftboard/draftboard';
 
 
 @inject(DraftboardManager)
@@ -15,70 +15,72 @@ export class LayerService {
 
     create(name: string,
            description: string,
-           model: EditorContext): Layer {
-        let
-            host = model.graph,
-            selection = host.getSelectionCells(),
-            r = this.toElements(selection),
-            layer = new Layer(
-                name,
-                description,
-                r.data
-            );
+           model: EditorContext): Group {
+        // let
+        //     host = model.graph,
+        //     selection = host.getSelectionCells(),
+        //     r = this.toElements(selection),
+        // layer = new Layer(
+        //     name,
+        //     description,
+        //     r.data
+        // );
 
-        let
-            parent = host.getDefaultParent(),
-            glayer = new GLayer(parent, layer, 0, 0, null);
-        for (let e of r.data) {
-            e.parent = layer;
-        }
-        glayer.addTo(host);
-        glayer.members = r.elements;
-        // host.groupCells(glayer, 50, r.elements);
-        this.draftboardManager.createLayer(layer);
-        return layer;
+        // let
+        //     parent = host.getDefaultParent(),
+        //     glayer = new GLayer(parent, layer, 0, 0, null);
+        // for (let e of r.data) {
+        //     e.parent = layer;
+        // }
+        // glayer.addTo(host);
+        // glayer.members = r.elements;
+        // // host.groupCells(glayer, 50, r.elements);
+        // this.draftboardManager.createLayer(layer);
+        // return layer;
+        return null;
     }
 
-    private toElements(selection: mxCell[]): result {
-        let results = new result();
-        let cache = {};
-        for (let e of selection) {
-            let ae = <any> e;
-            if (ae.data && ae.data.id) {
-                cache[ae.data.id.value] = [ae, ae.data as Element];
-            }
-        }
-
-        let topLevels = {};
-        for (let cell of selection) {
-            let acell = cell as any;
-            if (acell.data && acell.data.children) {
-                let [topLevel, data] = this.findTopLevel([acell, acell.data as Element], cache);
-                if (topLevel) {
-                    if (!topLevels[data.id.value]) {
-                        topLevels[data.id.value] = [topLevel, data];
-                        results.data.push(data);
-                        results.elements.push(topLevel);
-                    }
-                }
-            }
-        }
-        return results;
-    }
-
-    public findTopLevel(element: [mxCell, Element],
-                         elements: {[key: string]: [mxCell, Element]}): [mxCell, Element] {
-        let current = element;
-        while (current[1].parent) {
-            let next = elements[current[1].parent.id.value];
-            if (next) {
-                current = next;
-            } else {
-                break;
-            }
-        }
-        return current;
-    }
+    //
+    // private toElements(selection: mxCell[]): result {
+    //     let results = new result();
+    //     let cache = {};
+    //     for (let e of selection) {
+    //         let ae = <any> e;
+    //         if (ae.data && ae.data.id) {
+    //             cache[ae.data.id.value] = [ae, ae.data as Element];
+    //         }
+    //     }
+    //
+    //     let topLevels = {};
+    //     for (let cell of selection) {
+    //         let acell = cell as any;
+    //         if (acell.data && acell.data.children) {
+    //             let [topLevel, data] = this.findTopLevel([acell, acell.data as Element], cache);
+    //             if (topLevel) {
+    //                 if (!topLevels[data.id.value]) {
+    //                     topLevels[data.id.value] = [topLevel, data];
+    //                     results.data.push(data);
+    //                     results.elements.push(topLevel);
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return results;
+    // }
+    //
+    // public findTopLevel(element: [mxCell, Element],
+    //                     elements: {[key: string]: [mxCell, Element]}): [mxCell, Element] {
+    //     let current = element;
+    //     while (current[1].parent) {
+    //         let next = elements[current[1].parent.id.value];
+    //         if (next) {
+    //             current = next;
+    //         } else {
+    //             break;
+    //         }
+    //     }
+    //     return current;
+    // }
 }
 
 class result {

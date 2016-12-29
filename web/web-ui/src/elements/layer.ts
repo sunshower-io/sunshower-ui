@@ -1,3 +1,4 @@
+/**
 import {Element, AbstractElement} from "./elements";
 
 export class Layer extends AbstractElement {
@@ -13,3 +14,4 @@ export class Layer extends AbstractElement {
     }
 
 }
+*/
