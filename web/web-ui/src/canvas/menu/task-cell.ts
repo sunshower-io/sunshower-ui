@@ -85,7 +85,6 @@ class MenuContainer extends AbstractElement {
     constructor(parent: Layer) {
         super();
         this.parent = parent;
-        console.log("parent", parent);
         this.geometry = new mxGeometry(
             0, 0,
             parent.geometry.width,
@@ -93,8 +92,8 @@ class MenuContainer extends AbstractElement {
         );
 
 
-        this.setComponent(true);
         this.setConnectable(false);
+        this.setAttribute('constituent', '1');
     }
 
 

@@ -43,11 +43,6 @@ implements Constrained {
         registry: Registry
     ) {
         super(registry);
-        // super(
-        //     parent,
-        //     element, x, y, registry);
-        // this.data.name = "Host " + Node.count++;
-
     }
 
     public addTo(builder:Canvas) : mxCell {

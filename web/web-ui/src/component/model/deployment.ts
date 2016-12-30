@@ -50,7 +50,7 @@ export class ApplicationDeployment extends RegistryAwareElement implements Liste
         );
 
         this.geometry = new mxGeometry(24, 48, 120, 120);
-        // this.setAttribute('constituent', '1');
+        this.setAttribute('constituent', '1');
     }
 
 

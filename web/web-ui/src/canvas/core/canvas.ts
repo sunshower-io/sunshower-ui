@@ -1,4 +1,3 @@
-
 import {
     MenuItem,
     OperationContext
@@ -44,8 +43,8 @@ export interface NavigationAware {
 }
 
 export interface EditorContext {
-    host        : NavigationAware;
-    graph       : Canvas;
+    host: NavigationAware;
+    graph: Canvas;
     offset      ?: {top: number, left: number};
     location    ?: {x: number, y: number};
 }
@@ -121,7 +120,7 @@ export class Canvas extends mxGraph {
     //     return new VertexHandler(state);
     // }
 
-    createGraphHandler() : mxGraphHandler {
+    createGraphHandler(): mxGraphHandler {
         return new GraphHandler(this);
     }
 
@@ -191,20 +190,17 @@ export class Canvas extends mxGraph {
     // }
     //
 
-    // selectCellForEvent(cell: mxCell) {
-    //     // if(!cell) {
-    //     //     return;
-    //     // }
-    //     // if (cell.getAttribute('constituent') === '1') {
-    //     //     let delegate = this.model.getParent(cell);
-    //     //     while (delegate.getAttribute('constituent') === '1') {
-    //     //         delegate = this.model.getParent(delegate);
-    //     //     }
-    //     //     super.selectCellForEvent(delegate);
-    //     // } else {
-    //     //     super.selectCellForEvent(cell);
-    //     // }
-    // }
+    selectCellForEvent(cell: mxCell) {
+        if (cell.getAttribute('constituent') === '1') {
+            let delegate = this.model.getParent(cell);
+            while (delegate.getAttribute('constituent') === '1') {
+                delegate = this.model.getParent(delegate);
+            }
+            super.selectCellForEvent(delegate);
+        } else {
+            super.selectCellForEvent(cell);
+        }
+    }
 
     resizeChildCells(cell: Layer, geometry: mxGeometry) {
         let geo = this.model.getGeometry(cell),
