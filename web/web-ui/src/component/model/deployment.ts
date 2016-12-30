@@ -57,13 +57,14 @@ export class ApplicationDeployment extends RegistryAwareElement implements Liste
     addTo(builder: Canvas): mxCell {
         this.host = builder;
         this.createMenu(builder);
-        return this.addChildren(builder);
-    }
-
-    private addChildren(builder: Canvas) {
+        // this.addChildren(builder);
         let result = super.addTo(builder);
         return result;
     }
+
+    // private addChildren(builder: Canvas) {
+    //     return result;
+    // }
 
     private createMenu(builder: Canvas) {
         // let menu = new VertexMenu(builder, this, '\uf013');
@@ -72,7 +73,7 @@ export class ApplicationDeployment extends RegistryAwareElement implements Liste
 
 
     satisfy(context: EditorContext): void {
-        this.addTo(context.graph);
+        // this.addTo(context.graph);
         try {
             context.graph.getModel().beginUpdate();
             this.doSatisfy(context);
@@ -99,8 +100,8 @@ export class ApplicationDeployment extends RegistryAwareElement implements Liste
             node.satisfy(context);
         }
         this.parent = node;
-        this.addTo(graph);
         node.addApplication(this);
+        // this.addTo(graph);
         // this.parent = node;
         // node.addApplication(this);
         // let node = new InfrastructureNode(this.registry);

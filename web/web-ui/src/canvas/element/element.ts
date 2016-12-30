@@ -180,8 +180,7 @@ export abstract class AbstractElement extends mxCell implements Element,
 
     addTo(builder: Canvas): Layer {
         this.host = builder;
-        let result = builder.addCell(this, builder.getDefaultParent());
-        console.log("Add cell");
+        let result = builder.addCell(this, this.parent);
         for (let overlay of this.createOverlays()) {
             builder.addCellOverlay(result, overlay);
         }

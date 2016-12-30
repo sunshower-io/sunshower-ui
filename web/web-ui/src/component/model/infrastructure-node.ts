@@ -47,17 +47,19 @@ implements Constrained {
         //     parent,
         //     element, x, y, registry);
         // this.data.name = "Host " + Node.count++;
+
     }
 
     public addTo(builder:Canvas) : mxCell {
-        // this.createMenu(builder);
+        this.createMenu(builder);
         return super.addTo(builder);
     }
 
     private createMenu(builder: Canvas) {
-        // let menu = new VertexMenu(builder, this, '\uf013');
-        // menu.addItem(new NetworkMenuItem());
-        // menu.addItem(new StorageMenuItem());
+        let menu = new VertexMenu(builder, this, '\uf013');
+        menu.addItem(new NetworkMenuItem());
+        menu.addItem(new StorageMenuItem());
+
     }
 
 
@@ -165,7 +167,7 @@ implements Constrained {
             cloud: VirtualCloud = null;
         this.geometry = new mxGeometry(
             location.x, location.y,
-            160, 160
+            140, 180
         );
         this.addTo(graph);
         //

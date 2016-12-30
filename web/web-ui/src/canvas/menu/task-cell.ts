@@ -11,22 +11,20 @@ import {
 
 import {Kv} from 'utils/objects';
 
-import {UUID} from 'utils/uuid';
-
 import {
     AbstractElement
 } from "canvas/element/element";
 
 
 interface Listener {
-  (sender: any, event: any) : void;
+    (sender: any, event: any): void;
 }
 
 
 export class MenuItem {
-    index:number;
-    icon:string;
-    click :Listener;
+    index: number;
+    icon: string;
+    click: Listener;
 }
 
 export class StorageMenuItem extends MenuItem {
@@ -46,24 +44,14 @@ export class NetworkMenuItem extends MenuItem {
 }
 
 
-
 class MenuItemCell extends AbstractElement {
 
-    constructor(
-        private graph:mxGraph,
-        cell:mxCell,
-        parent:VertexMenu,
-        private item:MenuItem) {
-        super(
-            // UUID.randomUUID(),
-            // parent,
-            // cell,
-            // cell.geometry.width - (32 * (2 + item.index)),
-            // 0,
-            // 32,
-            // 32
-        );
-        this.parent = parent;
+    constructor(private graph: mxGraph,
+                cell: mxCell,
+                parent: VertexMenu,
+                private item: MenuItem) {
+        super();
+        this.parent = cell;
         this.geometry = new mxGeometry(
             cell.geometry.width - (32 * 2 * item.index),
             0, 32, 32
@@ -75,15 +63,10 @@ class MenuItemCell extends AbstractElement {
         this.setAttribute('lfix', '1');
     }
 
-    click(sender:any, e:mxEvent) {
-
-        console.log("CLICK2");
-        // console.log("GOT CLICKED");
-        // if(isTarget(e, this)) {
-        // }
+    click(sender: any, e: mxEvent) {
     }
 
-    protected sizeChanged() : void {
+    protected sizeChanged(): void {
 
         this.geometry.x =
             this.parent.geometry.width -
@@ -93,15 +76,16 @@ class MenuItemCell extends AbstractElement {
 
 }
 
-function isTarget(event:mxMouseEvent, cell:Layer) : boolean {
+function isTarget(event: mxMouseEvent, cell: Layer): boolean {
     return event.getCell() === cell;
 }
 
 class MenuContainer extends AbstractElement {
 
-    constructor(parent:Layer) {
+    constructor(parent: Layer) {
         super();
         this.parent = parent;
+        console.log("parent", parent);
         this.geometry = new mxGeometry(
             0, 0,
             parent.geometry.width,
@@ -117,7 +101,7 @@ class MenuContainer extends AbstractElement {
     protected createCss(): Kv {
         return super.createCss()
             .pair('fillOpacity', '100')
-            .pair('fillColor', '#FFFFFF');
+            .pair('fillColor', '#ffffff');
     }
 
 
@@ -125,20 +109,16 @@ class MenuContainer extends AbstractElement {
 
 export class VertexMenu extends AbstractElement implements MouseListener {
 
-    items:mxCell[];
-    toggled:boolean;
+    items: mxCell[];
+    toggled: boolean;
 
     constructor(private graph: mxGraph,
                 parent: mxVertex,
                 public icon: string) {
-        super(
-            // UUID.randomUUID(),
-            // icon,
-            // new MenuContainer(parent),
-            // parent.geometry.width - 32,
-            // 0,
-            // 32,
-            // 32
+        super();
+        this.geometry = new mxGeometry(
+            parent.geometry.width - 32,
+            0, 32, 32
         );
         this.items = [];
         this.parent = new MenuContainer(parent);
@@ -153,15 +133,13 @@ export class VertexMenu extends AbstractElement implements MouseListener {
         graph.addMouseListener(this);
     }
 
-    protected createCss() : Kv {
+    protected createCss(): Kv {
         return Kv.create(';')
             .pair('fontFamily', 'FontAwesome')
             .pair('strokeColor', 'none')
             .pair('fontSize', 16)
             .pair('fillOpacity', 0)
             .pair('fontColor', '#6B6B6B');
-
-        // this.style = 'fontFamily=FontAwesome;fontColor=#6b6b6b;fillOpacity=0;fontSize=16;strokeColor:none';
     }
 
 
@@ -174,21 +152,22 @@ export class VertexMenu extends AbstractElement implements MouseListener {
 
     mouseDown(sender: mxGraph, event: mxMouseEvent): void {
         this.toggled = !this.toggled;
-        if(isTarget(event, this)) {
-            for(let o of this.items) {
+        if (isTarget(event, this)) {
+            for (let o of this.items) {
                 o.setVisible(this.toggled);
             }
             this.graph.refresh(this.parent);
         }
     }
 
-    sizeChanged() : void {
+    sizeChanged(): void {
         let parent = this.parent,
             gparent = parent.parent,
             pgeometry = parent.geometry,
             ggeometry = gparent.geometry;
         pgeometry.width = ggeometry.width;
         this.geometry.x = pgeometry.width - 32;
+
         super.sizeChanged();
     }
 
