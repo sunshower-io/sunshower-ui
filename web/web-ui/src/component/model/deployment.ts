@@ -23,15 +23,18 @@ import {Kv} from 'utils/objects';
 import {EditorContext} from "canvas/core/canvas";
 import {RegistryAwareElement} from "canvas/element/registry-aware";
 import {InfrastructureNode} from "./infrastructure-node";
+import {mxRectangle} from "mxgraph";
+import {VertexMenu, NetworkMenuItem} from "canvas/menu/task-cell";
+import {mxGeometry} from "mxgraph";
 
 
 export class ApplicationDeployment extends RegistryAwareElement implements Listener, Constrained {
 
 
-    icon                    : string;
-    host                    : Canvas;
+    icon: string;
+    host: Canvas;
 
-    applicationName         : string;
+    applicationName: string;
 
     constructor(registry: Registry,
                 private applicationId: string) {
@@ -46,17 +49,18 @@ export class ApplicationDeployment extends RegistryAwareElement implements Liste
             registry
         );
 
-        this.setAttribute('constituent', '1');
+        this.geometry = new mxGeometry(24, 48, 120, 120);
+        // this.setAttribute('constituent', '1');
     }
 
 
     addTo(builder: Canvas): mxCell {
+        this.host = builder;
         this.createMenu(builder);
         return this.addChildren(builder);
     }
 
     private addChildren(builder: Canvas) {
-        this.host = builder;
         let result = super.addTo(builder);
         return result;
     }
@@ -68,6 +72,7 @@ export class ApplicationDeployment extends RegistryAwareElement implements Liste
 
 
     satisfy(context: EditorContext): void {
+        this.addTo(context.graph);
         try {
             context.graph.getModel().beginUpdate();
             this.doSatisfy(context);
@@ -90,11 +95,16 @@ export class ApplicationDeployment extends RegistryAwareElement implements Liste
         if (parent instanceof InfrastructureNode) {
             node = parent as InfrastructureNode;
         } else {
-            let node = new InfrastructureNode(this.registry);
+            node = new InfrastructureNode(this.registry);
             node.satisfy(context);
         }
-        // this.parent = node;
+        this.parent = node;
+        this.addTo(graph);
         node.addApplication(this);
+        // this.parent = node;
+        // node.addApplication(this);
+        // let node = new InfrastructureNode(this.registry);
+        //     node.satisfy(context);
         this.load(node);
     }
 

@@ -108,6 +108,7 @@ export class Canvas extends mxGraph {
         this.extendParents = true;
         this.extendParentsOnAdd = true;
         this.cellRenderer = new CellRenderer();
+        this.autoScroll = true;
         this.grid = new Grid(this);
         this.grid.draw();
         // this.addMouseListener(new MenuHoverListener(this));
@@ -116,9 +117,9 @@ export class Canvas extends mxGraph {
         this.createDefaultStyles();
     }
 
-    createVertexHandler(state: mxCellState): mxVertexHandler {
-        return new VertexHandler(state);
-    }
+    // createVertexHandler(state: mxCellState): mxVertexHandler {
+    //     return new VertexHandler(state);
+    // }
 
     createGraphHandler() : mxGraphHandler {
         return new GraphHandler(this);
@@ -161,46 +162,49 @@ export class Canvas extends mxGraph {
     }
 
 
-    cellsMoved(cells: mxCell[],
-               dx: number,
-               dy: number,
-               disconnect: boolean,
-               constrain: boolean,
-               extend: boolean): void {
-        // let toMove = [];
-        // for(let cell of cells) {
-        //     if(cell.getAttribute('synthetic')) {
-        //         toMove.push(cell);
-        //         let layer = (cell as any) as LayeredNode<any>;
-        //         for(let member of layer.members) {
-        //             toMove.push(member);
-        //         }
-        //     }
-        // }
-        // super.cellsMoved(toMove, dx, dy, disconnect, constrain, extend);
-    }
+    // cellsMoved(cells: mxCell[],
+    //            dx: number,
+    //            dy: number,
+    //            disconnect: boolean,
+    //            constrain: boolean,
+    //            extend: boolean): void {
+    //     // let toMove = [];
+    //     // for(let cell of cells) {
+    //     //     if(cell.getAttribute('synthetic')) {
+    //     //         toMove.push(cell);
+    //     //         let layer = (cell as any) as LayeredNode<any>;
+    //     //         for(let member of layer.members) {
+    //     //             toMove.push(member);
+    //     //         }
+    //     //     }
+    //     // }
+    //     super.cellsMoved(cells, dx, dy, disconnect, constrain, extend);
+    // }
 
-    moveCells(cells: Layer[],
-              dx: number,
-              dy: number,
-              clone?: boolean,
-              parent?: Layer,
-              event?: mxMouseEvent): Layer[] {
-        return super.moveCells(cells, dx, dy, clone, parent, event);
-    }
+    // moveCells(cells: Layer[],
+    //           dx: number,
+    //           dy: number,
+    //           clone?: boolean,
+    //           parent?: Layer,
+    //           event?: mxMouseEvent): Layer[] {
+    //     return super.moveCells(cells, dx, dy, clone, parent, event);
+    // }
+    //
 
-
-    selectCellForEvent(cell: mxCell) {
-        if (cell.getAttribute('constituent') === '1') {
-            let delegate = this.model.getParent(cell);
-            while (delegate.getAttribute('constituent') === '1') {
-                delegate = this.model.getParent(delegate);
-            }
-            super.selectCellForEvent(delegate);
-        } else {
-            super.selectCellForEvent(cell);
-        }
-    }
+    // selectCellForEvent(cell: mxCell) {
+    //     // if(!cell) {
+    //     //     return;
+    //     // }
+    //     // if (cell.getAttribute('constituent') === '1') {
+    //     //     let delegate = this.model.getParent(cell);
+    //     //     while (delegate.getAttribute('constituent') === '1') {
+    //     //         delegate = this.model.getParent(delegate);
+    //     //     }
+    //     //     super.selectCellForEvent(delegate);
+    //     // } else {
+    //     //     super.selectCellForEvent(cell);
+    //     // }
+    // }
 
     resizeChildCells(cell: Layer, geometry: mxGeometry) {
         let geo = this.model.getGeometry(cell),

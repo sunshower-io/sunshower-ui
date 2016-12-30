@@ -23,9 +23,9 @@ export interface Vertex<T> {
 
     adjacencies: {[key:string]: Edge<T>};
 
-    add(edge: Edge<T>): boolean;
+    addEdge(edge: Edge<T>): boolean;
 
-    remove(edge: Edge<T>): boolean;
+    removeEdge(edge: Edge<T>): boolean;
 
     removeSuccessor(successor:Node<T>) : boolean;
 
@@ -60,7 +60,7 @@ export abstract class Node<T> implements Vertex<T> {
         this.adjacencies[successor.id] = this.createEdge(this, successor);
     }
 
-    add(edge: Edge<T>): boolean {
+    addEdge(edge: Edge<T>): boolean {
         if (this.adjacencies[edge.target.id]) {
             return false;
         }
@@ -77,7 +77,7 @@ export abstract class Node<T> implements Vertex<T> {
         return false;
     }
 
-    remove(target: Edge<T>): boolean {
+    removeEdge(target: Edge<T>): boolean {
         return this.removeSuccessor(target.target);
     }
 
@@ -130,7 +130,7 @@ export abstract class Graph<T> {
         let edge = this.createEdge(source, target, relationship);
         this.nodes[source.id] = source;
         this.nodes[target.id] = target;
-        return source.add(edge);
+        return source.addEdge(edge);
     }
 
     get(id: string): Node<T> {

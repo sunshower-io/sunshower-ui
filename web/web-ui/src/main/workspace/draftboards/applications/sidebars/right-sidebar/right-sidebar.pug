@@ -13,5 +13,5 @@ template(bindable='router')
         .ui.basic.secondary.segment.property--menu
             compose(view-model="./top/${active.name || 'palette'}")
         .ui.container
-            applications
+            applications(canvas.bind="canvas")
 

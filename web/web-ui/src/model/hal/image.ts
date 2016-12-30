@@ -7,9 +7,10 @@ export class Image {
 
 export class ImageDescriptor {
 
-    id: string;
+    id      : string;
+    pid     : string;
 
-    name: string;
+    name    : string;
 
     logo_url: Image;
 }

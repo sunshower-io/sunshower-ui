@@ -60,20 +60,6 @@ declare module 'mxgraph' {
 
     }
 
-    export module mxUtils {
-
-
-        function clone<T>(t: T): T;
-
-        function isNode(cell: Layer): boolean;
-
-        function error(msg: string, code: number, we: boolean): void;
-
-        function createXmlDocument(): XmlDocument;
-
-        function createElementNS(namespace: string, name: string): XmlDocument;
-    }
-
 
     export interface Connectable {
         isConnectable(): boolean;

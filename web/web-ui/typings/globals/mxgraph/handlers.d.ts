@@ -2,6 +2,7 @@ declare module 'mxgraph' {
     export class mxGraphHandler {
 
         graph                       : mxGraph;
+        gridEnabled                 : boolean;
         guidesEnabled               : boolean;
 
         constructor(graph:mxGraph);

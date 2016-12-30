@@ -116,7 +116,7 @@ declare module 'mxgraph' {
     export class mxGraph implements Connectable {
 
 
-        mouseListeners          : {[name: string]: any};
+        autoScroll              : boolean;
         gridSize                : number;
         recursiveResize         : boolean;
 
@@ -138,6 +138,7 @@ declare module 'mxgraph' {
         cellRenderer            : mxCellRenderer;
         connectionHandler       : mxConnectionHandler;
 
+        mouseListeners          : {[name: string]: any};
         zoomIn(): void;
 
         zoomOut(): void;

@@ -86,6 +86,7 @@ export abstract class AbstractElement extends mxCell implements Element,
         this.attributes = {};
         this.setVertex(true);
         this.setStyle(this.createStyle());
+        this.attributes = {};
     }
 
     createEdge(source: PropertyNode,
@@ -93,7 +94,7 @@ export abstract class AbstractElement extends mxCell implements Element,
         return new Relationship(source, target, Relationship.SUCCESSOR);
     }
 
-    add(edge: Relationship): boolean {
+    addEdge(edge: Relationship): boolean {
         if (this.adjacencies[edge.target.id]) {
             return false;
         }
@@ -109,7 +110,7 @@ export abstract class AbstractElement extends mxCell implements Element,
         this.adjacencies[successor.id] = this.createEdge(this, successor);
     }
 
-    remove(target: Relationship): boolean {
+    removeEdge(target: Relationship): boolean {
         return this.removeSuccessor(target.target);
     }
 
@@ -179,7 +180,8 @@ export abstract class AbstractElement extends mxCell implements Element,
 
     addTo(builder: Canvas): Layer {
         this.host = builder;
-        let result = builder.addCell(this, this.parent);
+        let result = builder.addCell(this, builder.getDefaultParent());
+        console.log("Add cell");
         for (let overlay of this.createOverlays()) {
             builder.addCellOverlay(result, overlay);
         }

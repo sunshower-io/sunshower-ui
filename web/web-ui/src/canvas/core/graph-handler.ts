@@ -9,6 +9,9 @@ export class GraphHandler extends mxGraphHandler {
 
     constructor(graph: mxGraph) {
         super(graph);
+        this.guidesEnabled = true;
+        this.gridEnabled = true;
+
     }
 
     // getCells(initialCell: mxCell): mxCell[] {

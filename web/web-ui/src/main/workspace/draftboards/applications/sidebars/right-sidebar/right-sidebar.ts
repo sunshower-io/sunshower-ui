@@ -1,6 +1,13 @@
 
 import {Sidebar} from "../sidebar";
+import {bindable} from 'aurelia-framework';
+import {Canvas} from 'canvas/core/canvas';
+
+
 export class RightSidebar extends Sidebar {
+
+    @bindable
+    canvas: Canvas;
 
 
     constructor() {

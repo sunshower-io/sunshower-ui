@@ -12,6 +12,7 @@ template
     left-sidebar(ref="leftSidebar")
     right-sidebar(
         ref="rightSidebar",
+        canvas.bind="graph",
         add-image.delegate="addTask($event)",
         palette-event.delegate="modifyGraph($event)")
     add-infrastructure(view-model.ref="infrastructureDialog")

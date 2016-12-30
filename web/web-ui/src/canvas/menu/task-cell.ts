@@ -4,6 +4,7 @@ import {
     mxVertex,
     mxMouseEvent,
     Layer,
+    mxGeometry,
     mxEvent,
     MouseListener,
 } from "mxgraph";
@@ -62,6 +63,11 @@ class MenuItemCell extends AbstractElement {
             // 32,
             // 32
         );
+        this.parent = parent;
+        this.geometry = new mxGeometry(
+            cell.geometry.width - (32 * 2 * item.index),
+            0, 32, 32
+        );
         this.value = item.icon;
         this.setConnectable(false);
         this.setAttribute('constituent', '1');
@@ -94,12 +100,12 @@ function isTarget(event:mxMouseEvent, cell:Layer) : boolean {
 class MenuContainer extends AbstractElement {
 
     constructor(parent:Layer) {
-        super(
-            // UUID.randomUUID(),
-            // null,
-            // parent, 0, 0,
-            // parent.geometry.width,
-            // 32
+        super();
+        this.parent = parent;
+        this.geometry = new mxGeometry(
+            0, 0,
+            parent.geometry.width,
+            32
         );
 
 

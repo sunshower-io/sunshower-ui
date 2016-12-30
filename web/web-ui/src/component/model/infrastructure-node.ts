@@ -50,14 +50,14 @@ implements Constrained {
     }
 
     public addTo(builder:Canvas) : mxCell {
-        this.createMenu(builder);
+        // this.createMenu(builder);
         return super.addTo(builder);
     }
 
     private createMenu(builder: Canvas) {
-        let menu = new VertexMenu(builder, this, '\uf013');
-        menu.addItem(new NetworkMenuItem());
-        menu.addItem(new StorageMenuItem());
+        // let menu = new VertexMenu(builder, this, '\uf013');
+        // menu.addItem(new NetworkMenuItem());
+        // menu.addItem(new StorageMenuItem());
     }
 
 
@@ -163,22 +163,26 @@ implements Constrained {
             parent = this.resolveParent(context, location.x, location.y, VirtualCloud),
             graph = context.graph as Canvas,
             cloud: VirtualCloud = null;
+        this.geometry = new mxGeometry(
+            location.x, location.y,
+            160, 160
+        );
         this.addTo(graph);
-
-        if(parent instanceof VirtualCloud) {
-            cloud = parent;
-            this.geometry.x = location.x - cloud.geometry.x;
-            this.geometry.y = location.y - cloud.geometry.y;
-        } else {
-            cloud = new VirtualCloud();
-            cloud.geometry.x = location.x - 50;
-            cloud.geometry.y = location.y - 150;
-            cloud.geometry.width = 300;
-            cloud.geometry.height = 300;
-            // cloud.data = new VPC();
-            cloud.addTo(graph);
-            this.registry.draftboardManager.add(cloud);
-        }
+        //
+        // if(parent instanceof VirtualCloud) {
+        //     cloud = parent;
+        //     this.geometry.x = location.x - cloud.geometry.x;
+        //     this.geometry.y = location.y - cloud.geometry.y;
+        // } else {
+        //     // cloud = new VirtualCloud();
+        //     // cloud.geometry.x = location.x - 50;
+        //     // cloud.geometry.y = location.y - 150;
+        //     // cloud.geometry.width = 300;
+        //     // cloud.geometry.height = 300;
+        //     // cloud.data = new VPC();
+        //     // cloud.addTo(graph);
+        //     // this.registry.draftboardManager.add(cloud);
+        // }
         // cloud.addMember(this);
     }
 
