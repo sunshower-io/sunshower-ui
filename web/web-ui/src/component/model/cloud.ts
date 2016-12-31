@@ -1,48 +1,49 @@
 
 
 import {
-    mxCellOverlay,
+    mxImage,
+    mxGeometry,
     mxConstants,
-    mxImage
+    mxCellOverlay
 
 } from "mxgraph";
 
 
 import {Constrained} from "./cell";
 
+import {Registry} from "utils/registry";
 import {EditorContext} from "canvas/core/canvas";
-import {AbstractElement} from "canvas/element/element";
+import {RegistryAwareElement} from "canvas/element/registry-aware";
 
-export class VirtualCloud extends AbstractElement implements Constrained {
+export class VirtualCloud extends RegistryAwareElement implements Constrained {
 
-    constructor() {
-        super();
+    constructor(registry:Registry) {
+        super(registry);
         this.setAncestor(true);
         this.setCollapsable(true);
         this.name = 'VPC 0';
         this.icon = 'assets/sui/themes/hasli/assets/images/icons/provider/generic/cloud.svg';
+        this.geometry = new mxGeometry(0, 0, 100, 100);
     }
 
 
     regroup() : void {
-        let geo = this.geometry,
-            x = geo.x,
-            y = geo.y;
-        if(this.children && this.children.length === 1) {
-            let child = this.children[0],
-                cx = child.geometry.x,
-                cy = child.geometry.y;
-            x = cx;
-            y = cy;
+        this.host.refresh(this);
+        let bb = this.host.getBoundingBox(this.children);
+        if(bb) {
+            let
+                geometry = this.geometry,
+                x = Math.min(bb.x, geometry.x),
+                y = Math.min(bb.y, geometry.y),
+                width = Math.max(bb.width, geometry.width + 64),
+                height = Math.max(bb.height, geometry.height + 64);
+            this.geometry = new mxGeometry(x, y, width, height);
         }
-        // this.host.groupCells(this, 20, this.children);
-        this.geometry.x = x;
-        this.geometry.y = y;
         this.host.refresh(this);
     }
 
     satisfy(context: EditorContext): void {
-
+        this.registry.draftboardManager.add(this);
     }
 
     protected createCloudOverlay() : mxCellOverlay {

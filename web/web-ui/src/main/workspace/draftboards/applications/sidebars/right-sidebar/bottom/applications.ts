@@ -101,7 +101,7 @@ export class Applications {
                             0,
                             0,
                             true,
-                            false,
+                            true,
                             true
                         );
                         dragSource.gridEnabled = true;

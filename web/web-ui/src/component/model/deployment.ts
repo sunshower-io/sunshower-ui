@@ -48,8 +48,7 @@ export class ApplicationDeployment extends RegistryAwareElement implements Liste
             // 120,
             registry
         );
-
-        this.geometry = new mxGeometry(24, 48, 120, 120);
+        this.geometry = new mxGeometry(0, 0, 100, 100);
         this.setAttribute('constituent', '1');
     }
 
@@ -101,11 +100,7 @@ export class ApplicationDeployment extends RegistryAwareElement implements Liste
         }
         this.parent = node;
         node.addApplication(this);
-        // this.addTo(graph);
-        // this.parent = node;
-        // node.addApplication(this);
-        // let node = new InfrastructureNode(this.registry);
-        //     node.satisfy(context);
+        node.addSuccessor(this);
         this.load(node);
     }
 
@@ -116,6 +111,7 @@ export class ApplicationDeployment extends RegistryAwareElement implements Liste
             .then(r => {
                 this.icon = this.getIconUrl(r);
                 this.applicationName = r.name;
+                this.name = r.name;
                 this.host.addCellOverlay(this, this.applicationOverlay());
                 // node.data.add(element);
                 this.registry.draftboardManager.dispatch(

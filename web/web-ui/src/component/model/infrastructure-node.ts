@@ -32,6 +32,10 @@ export class InfrastructureNode extends
 implements Constrained {
 
 
+    static gridWidth = 128;
+    static gridHeight = 128;
+
+
     rows                : number = 1;
     columns             : number = 1;
     scale               : number = 1;
@@ -43,6 +47,9 @@ implements Constrained {
         registry: Registry
     ) {
         super(registry);
+        // this.setGeometry(0, 0, 120, 120);
+        this.icon = 'assets/sui/themes/hasli/assets/images/icons/provider/generic/single-node-instance.svg';
+        this.name = "frapper";
     }
 
     public addTo(builder:Canvas) : mxCell {
@@ -70,14 +77,14 @@ implements Constrained {
 
     addGridRow() : void {
         let geo = this.geometry;
-        geo.height += (144 / this.scale);
+        geo.height += (InfrastructureNode.gridHeight / this.scale);
         this.rows++;
     }
 
 
     addGridColumn() : void {
         let geo = this.geometry;
-        geo.width += (144 / this.scale);
+        geo.width += (InfrastructureNode.gridWidth / this.scale);
         this.columns++;
     }
 
@@ -144,8 +151,8 @@ implements Constrained {
         geometry:mxGeometry
     ) {
         let scale = this.scale,
-            applicationX = column * (144 / scale) + 24,
-            applicationY = row * (144 / scale) + 48,
+            applicationX = column * (InfrastructureNode.gridWidth / scale) + 18,
+            applicationY = row * (InfrastructureNode.gridHeight / scale) + 50,
             applicationGeometry = application.geometry;
         applicationGeometry.x = applicationX;
         applicationGeometry.y = applicationY;
@@ -158,29 +165,25 @@ implements Constrained {
     satisfy(context: EditorContext): void {
         let location = context.location,
             parent = this.resolveParent(context, location.x, location.y, VirtualCloud),
-            graph = context.graph as Canvas,
+            graph = context.graph,
             cloud: VirtualCloud = null;
-        this.geometry = new mxGeometry(
-            location.x, location.y,
-            140, 180
-        );
+        this.geometry = new mxGeometry(24, 24, 104, 168);
         this.addTo(graph);
-        //
-        // if(parent instanceof VirtualCloud) {
-        //     cloud = parent;
-        //     this.geometry.x = location.x - cloud.geometry.x;
-        //     this.geometry.y = location.y - cloud.geometry.y;
-        // } else {
-        //     // cloud = new VirtualCloud();
-        //     // cloud.geometry.x = location.x - 50;
-        //     // cloud.geometry.y = location.y - 150;
-        //     // cloud.geometry.width = 300;
-        //     // cloud.geometry.height = 300;
-        //     // cloud.data = new VPC();
-        //     // cloud.addTo(graph);
-        //     // this.registry.draftboardManager.add(cloud);
-        // }
-        // cloud.addMember(this);
+
+        if(parent instanceof VirtualCloud) {
+            cloud = parent;
+            this.geometry.x = location.x - cloud.geometry.x;
+            this.geometry.y = location.y - cloud.geometry.y;
+        } else {
+            cloud = new VirtualCloud(this.registry);
+            cloud.geometry = new mxGeometry(location.x, location.y, 300, 300);
+            cloud.addTo(graph);
+        }
+        this.parent = cloud;
+        cloud.addChild(this);
+        cloud.addSuccessor(this);
+        cloud.regroup();
+        cloud.satisfy(context);
     }
 
     protected createNodeOverlay(): mxCellOverlay {
@@ -188,7 +191,7 @@ implements Constrained {
             url = `assets/sui/themes/hasli/assets/images/icons/provider/generic/single-node-instance.svg`,
             image = new mxImage(url, 24, 24),
             iconOverlay = new mxCellOverlay(
-                image,
+                    image,
                 null,
                 mxConstants.ALIGN_LEFT,
                 mxConstants.ALIGN_TOP,

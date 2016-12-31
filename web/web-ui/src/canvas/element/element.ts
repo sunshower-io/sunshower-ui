@@ -14,6 +14,7 @@ import {Kv} from "utils/objects";
 import {mxCellOverlay} from "mxgraph";
 import {EditorContext} from "canvas/core/canvas";
 import {UUID} from "../../utils/uuid";
+import {mxGeometry} from "mxgraph";
 
 type Properties = {[key: string]: any};
 
@@ -26,7 +27,10 @@ export interface Element extends SceneGraphElement, Renderable, Layer {
 }
 
 
+
 type PropertyNode = Vertex<Properties>;
+
+type ElementRelationship = number;
 
 export class Relationship implements Edge<Properties> {
 
@@ -89,9 +93,34 @@ export abstract class AbstractElement extends mxCell implements Element,
         this.attributes = {};
     }
 
+    // setGeometry(x:number, y:number, width:number, height:number) : mxGeometry {
+    //     let geo = new mxGeometry(x, y, width, height);
+    //     this.geometry = geo;
+    //     return geo;
+    // }
+
+
+
+    getAdjacencies(relationship:ElementRelationship) : PropertyNode[] {
+        let results = [];
+        for(let k in this.adjacencies) {
+            let v = this.adjacencies[k];
+            if(v.relationship === relationship) {
+                results.push(v);
+            }
+        }
+        return results;
+    }
+
     createEdge(source: PropertyNode,
-                        target: PropertyNode): Relationship {
-        return new Relationship(source, target, Relationship.SUCCESSOR);
+               target: PropertyNode,
+               relationship?: number
+    ): Relationship {
+        return new Relationship(
+            source,
+            target,
+            relationship || Relationship.SUCCESSOR
+        );
     }
 
     addEdge(edge: Relationship): boolean {
@@ -103,11 +132,57 @@ export abstract class AbstractElement extends mxCell implements Element,
     }
 
 
-    addSuccessor(successor: PropertyNode): boolean {
-        if (this.adjacencies[successor.id]) {
+    addPredecessor(predecessor: PropertyNode) : boolean {
+        let id = this.createId(predecessor, Relationship.PREDECESSOR);
+        if(this.adjacencies[id]) {
             return false;
         }
-        this.adjacencies[successor.id] = this.createEdge(this, successor);
+        this.adjacencies[id] = this.createEdge(
+            this,
+            predecessor,
+            Relationship.PREDECESSOR
+        );
+        predecessor.addSuccessor(this);
+        return true;
+
+    }
+
+    removePredecessor(predecessor: PropertyNode) : boolean {
+        let id = this.createId(predecessor, Relationship.PREDECESSOR);
+        if(!this.adjacencies[id]) {
+            return false;
+        }
+        delete this.adjacencies[id];
+    }
+
+    protected createId(node:PropertyNode, relationship:number) {
+        return node.id + relationship;
+    }
+
+
+    hasChildren() : boolean {
+        for(let c in this.adjacencies) {
+            let v = this.adjacencies[c];
+            if(v.relationship === Relationship.SUCCESSOR) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    getChildren() : PropertyNode[] {
+        return this.getAdjacencies(Relationship.SUCCESSOR);
+    }
+
+
+    addSuccessor(successor: PropertyNode): boolean {
+        let id = this.createId(successor, Relationship.SUCCESSOR);
+        if (this.adjacencies[id]) {
+            return false;
+        }
+        this.adjacencies[id] = this.createEdge(this, successor);
+        successor.addPredecessor(this);
+        return true;
     }
 
     removeEdge(target: Relationship): boolean {
@@ -115,9 +190,10 @@ export abstract class AbstractElement extends mxCell implements Element,
     }
 
     removeSuccessor(successor: PropertyNode): boolean {
-        let t = this.adjacencies[successor.id];
+        let id = this.createId(successor, Relationship.SUCCESSOR);
+        let t = this.adjacencies[id];
         if (t) {
-            delete this.adjacencies[successor.id];
+            delete this.adjacencies[id];
             return true;
         }
         return false;

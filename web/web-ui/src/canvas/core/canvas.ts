@@ -105,11 +105,20 @@ export class Canvas extends mxGraph {
         this.setHtmlLabels(true);
         this.gridSize = 32;
         this.extendParents = true;
+        this.constrainChildren = false;
+        this.constrainRelativeChildren = false;
         this.extendParentsOnAdd = true;
         this.cellRenderer = new CellRenderer();
         this.autoScroll = true;
         this.grid = new Grid(this);
         this.grid.draw();
+        this.allowLoops = false;
+        this.autoExtend = true;
+        this.allowDanglingEdges = false;
+        // this.extendParentsOnAdd = true;
+        // this.extendParents = true;
+        this.resizeContainer = true;
+
         // this.addMouseListener(new MenuHoverListener(this));
         this.recursiveResize = false;
 

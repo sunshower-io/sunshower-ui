@@ -116,34 +116,41 @@ declare module 'mxgraph' {
     export class mxGraph implements Connectable {
 
 
-        autoScroll              : boolean;
-        gridSize                : number;
-        recursiveResize         : boolean;
+        autoScroll                      : boolean;
+        gridSize                        : number;
+        recursiveResize                 : boolean;
 
-        expandedImage           : mxImage;
-        collapsedImage          : mxImage;
-
-
-        foldingEnabled          : boolean;
-        isMouseDown             : boolean;
-
-        extendParents           : boolean;
-        extendParentsOnAdd      : boolean;
+        expandedImage                   : mxImage;
+        collapsedImage                  : mxImage;
 
 
-        container               : Element;
-        view                    : mxGraphView;
-        model                   : mxGraphModel;
-        graphHandler            : mxGraphHandler;
-        cellRenderer            : mxCellRenderer;
-        connectionHandler       : mxConnectionHandler;
+        foldingEnabled                  : boolean;
+        isMouseDown                     : boolean;
 
-        mouseListeners          : {[name: string]: any};
+        extendParents                   : boolean;
+        extendParentsOnAdd              : boolean;
+        resizeContainer                 : boolean;
+        allowDanglingEdges              : boolean;
+        allowLoops                      : boolean;
+        autoExtend                      : boolean;
+
+
+        container                       : Element;
+        view                            : mxGraphView;
+        model                           : mxGraphModel;
+        graphHandler                    : mxGraphHandler;
+        cellRenderer                    : mxCellRenderer;
+        connectionHandler               : mxConnectionHandler;
+        constrainChildren               : boolean;
+        constrainRelativeChildren       : boolean;
+        mouseListeners                  : {[name: string]: any};
         zoomIn(): void;
 
         zoomOut(): void;
 
         getView(): mxGraphView;
+
+        getBoundingBox(children:Layer[]) : mxRectangle;
 
         /**
          *

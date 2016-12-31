@@ -1,4 +1,4 @@
-import {} from 'jasmine';
+/**import {} from 'jasmine';
 import any = jasmine.any;
 import createSpy = jasmine.createSpy;
 import createSpyObj = jasmine.createSpyObj;
@@ -117,3 +117,4 @@ describe('a layer service', () => {
     });
 
 });
+ **/
