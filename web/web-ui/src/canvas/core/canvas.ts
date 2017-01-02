@@ -13,15 +13,12 @@ import {
     mxConstants,
     mxRectangle,
     mxShape,
-    mxCellState,
-    mxMouseEvent,
     mxPoint,
     mxConnectionHandler,
     mxPolyline,
     mxGeometry,
     Layer,
     mxConnectionConstraint,
-    mxVertexHandler,
     mxGraphHandler
 } from "mxgraph";
 
@@ -32,7 +29,6 @@ import {DialogService} from 'aurelia-dialog';
 import {CellRenderer} from "./cell-renderer";
 import {MenuSelector} from "./menu-selection";
 import {GraphHandler} from "./graph-handler";
-import {VertexHandler} from "./vertex-handler";
 import {ConnectionHandler} from './connection-handler';
 import CreateLayerMenuItem from "canvas/menu/selection-menu/create-layer";
 
@@ -90,11 +86,6 @@ export class Canvas extends mxGraph {
 
     private grid: Grid;
 
-    createMenuSelector(): void {
-        let menuSelector = new MenuSelector(this);
-        menuSelector.addMenu(new CreateLayerMenuItem(this.dialogService));
-    }
-
     constructor(public container: HTMLElement,
                 public dialogService: DialogService) {
         super(container, new mxGraphModel());
@@ -125,6 +116,11 @@ export class Canvas extends mxGraph {
         this.createDefaultStyles();
     }
 
+
+    createMenuSelector(): void {
+        let menuSelector = new MenuSelector(this);
+        menuSelector.addMenu(new CreateLayerMenuItem(this.dialogService));
+    }
     // createVertexHandler(state: mxCellState): mxVertexHandler {
     //     return new VertexHandler(state);
     // }

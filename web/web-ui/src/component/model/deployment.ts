@@ -101,6 +101,7 @@ export class ApplicationDeployment extends RegistryAwareElement implements Liste
         this.parent = node;
         node.addApplication(this);
         node.addSuccessor(this);
+        this.addPredecessor(node);
         this.load(node);
     }
 
@@ -157,7 +158,6 @@ export class ApplicationDeployment extends RegistryAwareElement implements Liste
         let result = super
             .createCss()
             .pair('strokeColor', '#DFDFDF');
-        console.log(result.toString());
         return result;
     }
 }

@@ -50,7 +50,7 @@ System.config({
     "css": "github:systemjs/plugin-css@0.1.32",
     "cytoscape": "npm:cytoscape@2.7.13",
     "cytoscape-edgehandles": "npm:cytoscape-edgehandles@2.7.1",
-    "cytoscape-grid-guide": "npm:cytoscape-grid-guide@1.0.3",
+    "cytoscape-grid-guide": "npm:cytoscape-grid-guide@1.0.4",
     "cytoscape-node-resize": "npm:cytoscape-node-resize@1.0.10",
     "cytoscape-node-resize:n": "npm:cytoscape-node-resize@1.0.10",
     "dropzone": "github:enyo/dropzone@4.3.0",
@@ -61,15 +61,15 @@ System.config({
     "font-awesome": "npm:font-awesome@4.6.3",
     "jquery": "npm:jquery@2.2.4",
     "mxgraph": "github:jgraph/mxgraph-js@master",
-    "ocanvas": "npm:ocanvas@2.8.6",
+    "ocanvas": "npm:ocanvas@2.8.7",
     "plugin-text": "npm:systemjs-plugin-text@0.0.9",
     "pnotify": "github:sciactive/pnotify@3.0.0",
     "pnotify.callbacks": "github:sciactive/pnotify@3.0.0/dist/pnotify.callbacks",
     "rgbcolor": "github:canvg/canvg@master/rgbcolor",
-    "semantic-ui": "github:Semantic-Org/Semantic-UI@2.2.6",
+    "semantic-ui": "github:Semantic-Org/Semantic-UI@2.2.7",
     "stackblur": "github:canvg/canvg@master/StackBlur",
     "text": "github:systemjs/plugin-text@0.0.9",
-    "github:Semantic-Org/Semantic-UI@2.2.6": {
+    "github:Semantic-Org/Semantic-UI@2.2.7": {
       "css": "github:systemjs/plugin-css@0.1.32",
       "jquery": "npm:jquery@2.2.4"
     },
@@ -104,13 +104,13 @@ System.config({
       "util": "npm:util@0.10.3"
     },
     "npm:aurelia-animator-css@1.0.1": {
-      "aurelia-metadata": "npm:aurelia-metadata@1.0.2",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-pal": "npm:aurelia-pal@1.2.0",
       "aurelia-templating": "npm:aurelia-templating@1.1.4"
     },
     "npm:aurelia-binding@1.1.0": {
       "aurelia-logging": "npm:aurelia-logging@1.2.0",
-      "aurelia-metadata": "npm:aurelia-metadata@1.0.2",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-pal": "npm:aurelia-pal@1.2.0",
       "aurelia-task-queue": "npm:aurelia-task-queue@1.1.0"
     },
@@ -131,12 +131,12 @@ System.config({
       "aurelia-templating-router": "npm:aurelia-templating-router@1.0.1"
     },
     "npm:aurelia-dependency-injection@1.2.1": {
-      "aurelia-metadata": "npm:aurelia-metadata@1.0.2",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-pal": "npm:aurelia-pal@1.2.0"
     },
     "npm:aurelia-dialog@1.0.0-beta.3.0.1": {
       "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.2.1",
-      "aurelia-metadata": "npm:aurelia-metadata@1.0.2",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-pal": "npm:aurelia-pal@1.2.0",
       "aurelia-templating": "npm:aurelia-templating@1.1.4"
     },
@@ -148,7 +148,7 @@ System.config({
       "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.2.1",
       "aurelia-loader": "npm:aurelia-loader@1.0.0",
       "aurelia-logging": "npm:aurelia-logging@1.2.0",
-      "aurelia-metadata": "npm:aurelia-metadata@1.0.2",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-pal": "npm:aurelia-pal@1.2.0",
       "aurelia-path": "npm:aurelia-path@1.1.1",
       "aurelia-task-queue": "npm:aurelia-task-queue@1.1.0",
@@ -160,17 +160,17 @@ System.config({
     },
     "npm:aurelia-loader-default@1.0.0": {
       "aurelia-loader": "npm:aurelia-loader@1.0.0",
-      "aurelia-metadata": "npm:aurelia-metadata@1.0.2",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-pal": "npm:aurelia-pal@1.2.0"
     },
     "npm:aurelia-loader@1.0.0": {
-      "aurelia-metadata": "npm:aurelia-metadata@1.0.2",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-path": "npm:aurelia-path@1.1.1"
     },
     "npm:aurelia-logging-console@1.0.0": {
       "aurelia-logging": "npm:aurelia-logging@1.2.0"
     },
-    "npm:aurelia-metadata@1.0.2": {
+    "npm:aurelia-metadata@1.0.3": {
       "aurelia-pal": "npm:aurelia-pal@1.2.0"
     },
     "npm:aurelia-pal-browser@1.1.0": {
@@ -203,7 +203,7 @@ System.config({
       "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.2.1",
       "aurelia-loader": "npm:aurelia-loader@1.0.0",
       "aurelia-logging": "npm:aurelia-logging@1.2.0",
-      "aurelia-metadata": "npm:aurelia-metadata@1.0.2",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-pal": "npm:aurelia-pal@1.2.0",
       "aurelia-path": "npm:aurelia-path@1.1.1",
       "aurelia-task-queue": "npm:aurelia-task-queue@1.1.0",
@@ -213,7 +213,7 @@ System.config({
       "aurelia-binding": "npm:aurelia-binding@1.1.0",
       "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.2.1",
       "aurelia-logging": "npm:aurelia-logging@1.2.0",
-      "aurelia-metadata": "npm:aurelia-metadata@1.0.2",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-pal": "npm:aurelia-pal@1.2.0",
       "aurelia-path": "npm:aurelia-path@1.1.1",
       "aurelia-router": "npm:aurelia-router@1.1.0",
@@ -224,7 +224,7 @@ System.config({
       "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.2.1",
       "aurelia-loader": "npm:aurelia-loader@1.0.0",
       "aurelia-logging": "npm:aurelia-logging@1.2.0",
-      "aurelia-metadata": "npm:aurelia-metadata@1.0.2",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-pal": "npm:aurelia-pal@1.2.0",
       "aurelia-path": "npm:aurelia-path@1.1.1",
       "aurelia-task-queue": "npm:aurelia-task-queue@1.1.0"
@@ -247,7 +247,7 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:cytoscape-grid-guide@1.0.3": {
+    "npm:cytoscape-grid-guide@1.0.4": {
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
@@ -271,7 +271,7 @@ System.config({
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
-    "npm:ocanvas@2.8.6": {
+    "npm:ocanvas@2.8.7": {
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",

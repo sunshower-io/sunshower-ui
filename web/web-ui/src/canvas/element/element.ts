@@ -206,11 +206,11 @@ export abstract class AbstractElement extends mxCell implements Element,
 
 
     getSuccessors(): Element[] {
-        return [];
+        return this.getAdjacencies(Relationship.SUCCESSOR) as any as Element[];
     }
 
     getPredecessors(): Element[] {
-        return [];
+        return this.getAdjacencies(Relationship.PREDECESSOR) as any as Element[];
     }
 
 

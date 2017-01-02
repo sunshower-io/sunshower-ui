@@ -79,7 +79,6 @@ implements Constrained {
             'element-added',
             new Event('element-added',
                 application));
-        console.log("ADDED", application);
     }
 
     addGridRow() : void {
