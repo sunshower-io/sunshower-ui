@@ -66,6 +66,8 @@ export abstract class AbstractElement extends mxCell implements Element,
     private readonly                        attributes: {[key: string]: string};
     public readonly                         adjacencies: {[key: string]: Edge<Properties> };
 
+    private readonly                        childNodes: PropertyNode[];
+
 
     // constructor(id: UUID,
     //             public data: T,
@@ -91,6 +93,7 @@ export abstract class AbstractElement extends mxCell implements Element,
         this.setVertex(true);
         this.setStyle(this.createStyle());
         this.attributes = {};
+        this.childNodes = [];
     }
 
     // setGeometry(x:number, y:number, width:number, height:number) : mxGeometry {
@@ -106,7 +109,7 @@ export abstract class AbstractElement extends mxCell implements Element,
         for(let k in this.adjacencies) {
             let v = this.adjacencies[k];
             if(v.relationship === relationship) {
-                results.push(v);
+                results.push(v.target);
             }
         }
         return results;
@@ -142,7 +145,6 @@ export abstract class AbstractElement extends mxCell implements Element,
             predecessor,
             Relationship.PREDECESSOR
         );
-        predecessor.addSuccessor(this);
         return true;
 
     }
@@ -161,17 +163,11 @@ export abstract class AbstractElement extends mxCell implements Element,
 
 
     hasChildren() : boolean {
-        for(let c in this.adjacencies) {
-            let v = this.adjacencies[c];
-            if(v.relationship === Relationship.SUCCESSOR) {
-                return true;
-            }
-        }
-        return false;
+        return this.childNodes && this.childNodes.length > 0;
     }
 
     getChildren() : PropertyNode[] {
-        return this.getAdjacencies(Relationship.SUCCESSOR);
+        return this.childNodes;
     }
 
 
@@ -181,7 +177,7 @@ export abstract class AbstractElement extends mxCell implements Element,
             return false;
         }
         this.adjacencies[id] = this.createEdge(this, successor);
-        successor.addPredecessor(this);
+        this.childNodes.push(successor);
         return true;
     }
 

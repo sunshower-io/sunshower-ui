@@ -9,31 +9,27 @@ export class Settings {
 
 
     public configureRouter(config: RouterConfiguration, router: Router) {
-        config.title = "";
+        config.title = "Settings";
         config.map([
             {
-                route: ['', 'admin'],
-                name: 'admin',
-                moduleId: 'main/settings/admin/admin',
-                nav: true,
-                title: "Admin",
-                settings: {}
-            },
-            {
-                route: 'profile',
+                route: ['', 'profile'],
                 name: 'profile',
                 moduleId: 'main/settings/profile/profile',
                 nav: true,
                 title: "Profile",
-                settings: {}
+                settings: {
+                    icon: 'user'
+                }
             },
             {
-                route: 'hfs',
-                name: 'hfs',
-                moduleId: 'main/settings/hfs/hfs',
+                route: 'storage',
+                name: 'storage',
+                moduleId: 'main/settings/storage/storage',
                 nav: true,
-                title: "HFS Configuration",
-                settings: {}
+                title: "Storage Configuration",
+                settings: {
+                    icon: 'database'
+                }
             }]);
         this.router = router;
 

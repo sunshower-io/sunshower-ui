@@ -15,6 +15,8 @@ import {Listener, ObservedEvent} from 'utils/observer';
 export class Layers implements Listener {
 
     element : HTMLElement;
+
+    @bindable
     layers : Element[] = [];
 
     constructor(

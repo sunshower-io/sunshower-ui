@@ -73,6 +73,13 @@ implements Constrained {
         } finally {
             this.host.model.endUpdate();
         }
+        this.addSuccessor(application);
+        application.addPredecessor(this);
+        this.registry.draftboardManager.dispatch(
+            'element-added',
+            new Event('element-added',
+                application));
+        console.log("ADDED", application);
     }
 
     addGridRow() : void {
@@ -182,6 +189,7 @@ implements Constrained {
         this.parent = cloud;
         cloud.addChild(this);
         cloud.addSuccessor(this);
+        this.addPredecessor(cloud);
         cloud.regroup();
         cloud.satisfy(context);
     }

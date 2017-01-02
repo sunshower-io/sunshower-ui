@@ -19,7 +19,14 @@ export class App {
                 name: 'navigator',
                 moduleId: './workspace/workspace',
                 nav: true,
-                title : 'Workspace',
+                title: 'Workspace',
+            }, {
+                route: 'settings',
+                name: 'settings',
+                moduleId: 'main/settings/settings',
+                nav: false,
+                title: 'Settings',
+                settings: {}
             }
         ]);
         config.mapUnknownRoutes('./workspace/workspace');
