@@ -158,6 +158,8 @@ declare module 'mxgraph' {
     export class mxRectangle extends mxGeometry {
 
 
+        add(rect:mxRectangle) : void;
+
     }
 
     export class mxGeometry {
@@ -166,6 +168,8 @@ declare module 'mxgraph' {
         width:number;
         height:number;
         relative:boolean;
+
+        points: mxPoint[];
 
         constructor(
             x           ?:number,
@@ -176,7 +180,18 @@ declare module 'mxgraph' {
 
         clone() : mxGeometry;
 
+        offset: mxPoint;
+
+
         translate(x:number, y:number) : void;
 
+        getTerminalPoint(c:boolean) : mxGeometry;
+
+
+
+    }
+    export module mxGeometry {
+
+        function fromRectangle(geometry:mxGeometry) : mxRectangle;
     }
 }

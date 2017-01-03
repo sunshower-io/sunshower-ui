@@ -147,14 +147,14 @@ export class Canvas extends mxGraph {
         }
     }
 
-    getCellsForGroup(cells:Layer[]) : Layer[] {
+    getCellsForGroup(cells: Layer[]): Layer[] {
         console.log("CELLS", cells);
         return super.getCellsForGroup(cells);
     }
 
-    getChildCells(cell:Layer, vertices?: boolean, edges?: boolean) : Layer[] {
+    getChildCells(cell: Layer, vertices?: boolean, edges?: boolean): Layer[] {
         console.log("CELL");
-        if(cell.getAttribute('element')) {
+        if (cell.getAttribute('element')) {
             let successors = (cell as Element).getSuccessors();
             console.log("SUCCESSORS", successors);
             return successors;
@@ -274,8 +274,8 @@ export class Canvas extends mxGraph {
 
         let toMove = [].concat(cells);
 
-        for(let cell of cells) {
-            if(cell.getAttribute('element')) {
+        for (let cell of cells) {
+            if (cell.getAttribute('element')) {
                 // let ccell = cell;
                 // while(ccell.getAttribute('element')) {
                 //     let children = (cell as any as Element).getSuccessors();
@@ -291,10 +291,10 @@ export class Canvas extends mxGraph {
         return super.moveCells(toMove, dx, dy, clone, parent, event);
     }
 
-    getDescendendants(cell:Element, elements:Element[]) : void {
+    getDescendendants(cell: Element, elements: Element[]): void {
         let successors = cell.getSuccessors();
-        if(successors) {
-            for(let child of successors) {
+        if (successors) {
+            for (let child of successors) {
                 elements.push(child);
                 this.getDescendendants(child, elements);
             }
@@ -350,7 +350,7 @@ export class Canvas extends mxGraph {
 
     getPreferredSizeForCell(cell: mxCell): mxRectangle {
         if (cell.getAttribute('rresize') === '0') {
-            return cell.geometry;
+            return cell.geometry as any as mxRectangle;
         } else {
             return super.getPreferredSizeForCell(cell);
         }
@@ -385,5 +385,83 @@ export class Canvas extends mxGraph {
             .getDefaultEdgeStyle()
             ['edgeStyle'] =
             'orthogonalEdgeStyle';
+    }
+
+
+    public computeBoundingBox(cells: Layer[], relative: boolean, includeEdges: boolean): mxRectangle {
+        includeEdges = (includeEdges != null) ? includeEdges : false;
+        let result: mxRectangle = null;
+        if (cells) {
+            for (let i = 0; i < cells.length; i++) {
+                if (includeEdges || this.model.isVertex(cells[i])) {
+                    let geo = this.model.getCellState(cells[i]).getCellBounds();
+                    if (geo) {
+                        let bbox = null;
+                        if (this.model.isEdge(cells[i])) {
+                            let pts = geo.points;
+                            if (pts && pts.length > 0) {
+                                let tmp = new mxRectangle(pts[0].x, pts[0].y, 0, 0);
+                                let addPoint = function (pt) {
+                                    if (pt != null) {
+                                        tmp.add(new mxRectangle(pt.x, pt.y, 0, 0));
+                                    }
+                                };
+                                for (let j = 1; j < pts.length; j++) {
+                                    addPoint(pts[j]);
+                                }
+                                addPoint(geo.getTerminalPoint(true));
+                                addPoint(geo.getTerminalPoint(false));
+                                bbox = tmp;
+                            }
+                        }
+                        else {
+                            let parent = this.model.getParent(cells[i]);
+                            if (geo.relative && relative) {
+                                if (this.model.isVertex(parent) && parent != this.view.currentRoot) {
+                                    let tmp = this.getBoundingBoxFromGeometry([parent], false);
+
+                                    if (tmp != null) {
+                                        bbox = new mxRectangle(geo.x * tmp.width, geo.y * tmp.height, geo.width, geo.height);
+
+                                        if (mxUtils.indexOf(cells, parent) >= 0) {
+                                            bbox.x += tmp.x;
+                                            bbox.y += tmp.y;
+                                        }
+                                    }
+                                }
+                            }
+                            else {
+                                geo = geo.clone() as mxRectangle;
+                                geo.relative = false;
+                                geo.offset = parent.geometry.offset;
+                                bbox = mxRectangle.fromRectangle(geo);
+                                if (this.model.isVertex(parent) && mxUtils.indexOf(cells, parent) >= 0) {
+                                    let tmp = this.getBoundingBoxFromGeometry([parent], false);
+                                    if (tmp != null) {
+                                        bbox.x += tmp.x;
+                                        bbox.y += tmp.y;
+                                    }
+                                }
+                            }
+
+                            if (bbox != null && geo.offset != null) {
+                                bbox.x += geo.offset.x;
+                                bbox.y += geo.offset.y;
+                            }
+                        }
+
+                        if (bbox != null) {
+                            if (result == null) {
+                                result = mxRectangle.fromRectangle(bbox);
+                            }
+                            else {
+                                result.add(bbox);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
     }
 }

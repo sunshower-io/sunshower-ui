@@ -40,6 +40,8 @@ declare module 'mxgraph' {
 
         getGraphBounds(): mxRectangle;
 
+        getBounds(cells:Layer[]) : any;
+
         getDrawPane(): Element;
 
         getBackgroundPane(): Element;
@@ -62,27 +64,33 @@ declare module 'mxgraph' {
     type Style = {[key: string]: any};
 
     export class mxControl {
-        scale           : number;
-        bounds          : mxRectangle
+        scale: number;
+        bounds: mxRectangle
 
     }
 
     export class mxCellState {
-        x               : number;
-        y               : number;
-        width           : number;
-        height          : number;
+        x: number;
+        y: number;
+        width: number;
+        height: number;
 
 
-        view            : any;
+        view: any;
 
-        cell            : Layer;
-        style           : Style;
+        cell: Layer;
+        style: Style;
 
-        shape           : mxShape;
-        text            : mxShape;
-        control         : mxControl;
 
+        shape: mxShape;
+        text: mxShape;
+        control: mxControl;
+
+
+        getPerimeterBounds(border ?: number,
+                           bounds?: mxRectangle): mxRectangle;
+
+        getCellBounds() : mxRectangle;
 
     }
 
@@ -116,41 +124,42 @@ declare module 'mxgraph' {
     export class mxGraph implements Connectable {
 
 
-        autoScroll                      : boolean;
-        gridSize                        : number;
-        recursiveResize                 : boolean;
+        autoScroll: boolean;
+        gridSize: number;
+        recursiveResize: boolean;
 
-        expandedImage                   : mxImage;
-        collapsedImage                  : mxImage;
-
-
-        foldingEnabled                  : boolean;
-        isMouseDown                     : boolean;
-
-        extendParents                   : boolean;
-        extendParentsOnAdd              : boolean;
-        resizeContainer                 : boolean;
-        allowDanglingEdges              : boolean;
-        allowLoops                      : boolean;
-        autoExtend                      : boolean;
+        expandedImage: mxImage;
+        collapsedImage: mxImage;
 
 
-        container                       : Element;
-        view                            : mxGraphView;
-        model                           : mxGraphModel;
-        graphHandler                    : mxGraphHandler;
-        cellRenderer                    : mxCellRenderer;
-        connectionHandler               : mxConnectionHandler;
-        constrainChildren               : boolean;
-        constrainRelativeChildren       : boolean;
-        mouseListeners                  : {[name: string]: any};
+        foldingEnabled: boolean;
+        isMouseDown: boolean;
+
+        extendParents: boolean;
+        extendParentsOnAdd: boolean;
+        resizeContainer: boolean;
+        allowDanglingEdges: boolean;
+        allowLoops: boolean;
+        autoExtend: boolean;
+
+
+        container: Element;
+        view: mxGraphView;
+        model: mxGraphModel;
+        graphHandler: mxGraphHandler;
+        cellRenderer: mxCellRenderer;
+        connectionHandler: mxConnectionHandler;
+        constrainChildren: boolean;
+        constrainRelativeChildren: boolean;
+        mouseListeners: {[name: string]: any};
+
         zoomIn(): void;
 
         zoomOut(): void;
 
         getView(): mxGraphView;
 
-        getBoundingBox(children:Layer[]) : mxRectangle;
+        getBoundingBox(children: Layer[]): mxRectangle;
 
         /**
          *
@@ -280,7 +289,7 @@ declare module 'mxgraph' {
          *
          * @param parent
          */
-        getChildVertices(parent:Layer) : Layer[];
+        getChildVertices(parent: Layer): Layer[];
 
         /**
          *
@@ -288,16 +297,14 @@ declare module 'mxgraph' {
          * @param includeEdges
          */
 
-        getBoundingBoxFromGeometry(
-            cells:Layer[],
-            includeEdges:boolean
-        ) : mxRectangle;
+        getBoundingBoxFromGeometry(cells: Layer[],
+                                   includeEdges: boolean): mxRectangle;
 
         /**
          *
          * @param cell
          */
-        getChildCells(cell: Layer) : Layer[];
+        getChildCells(cell: Layer): Layer[];
 
         /**
          *
@@ -323,22 +330,18 @@ declare module 'mxgraph' {
          * @param bounds
          * @param recurse
          */
-        cellsResized(
-            cells:Layer[],
-            bounds:mxRectangle[],
-            recurse:boolean
-        ) : void;
+        cellsResized(cells: Layer[],
+                     bounds: mxRectangle[],
+                     recurse: boolean): void;
 
         /**
          * @param group
          * @param cells
          * @param border
          */
-        getBoundsForGroup(
-            group:Layer,
-            cells:Layer[],
-            border:number
-        ) : mxRectangle;
+        getBoundsForGroup(group: Layer,
+                          cells: Layer[],
+                          border: number): mxRectangle;
 
 
         /**
@@ -346,13 +349,13 @@ declare module 'mxgraph' {
          * @param cells
          */
 
-        createGroupCell(cells : Layer[]) : Layer;
+        createGroupCell(cells: Layer[]): Layer;
 
         /**
          *
          * @param event
          */
-        fireEvent(event:mxEvent) : void;
+        fireEvent(event: mxEvent): void;
 
         /**
          *
@@ -520,15 +523,13 @@ declare module 'mxgraph' {
          * @param constrain
          */
 
-        cellsAdded(
-            cells:Layer[],
-            parent:Layer,
-            index:number,
-            source:Layer,
-            target:Layer,
-            absolute?:boolean,
-            constrain?:boolean
-        ) : void ;
+        cellsAdded(cells: Layer[],
+                   parent: Layer,
+                   index: number,
+                   source: Layer,
+                   target: Layer,
+                   absolute?: boolean,
+                   constrain?: boolean): void ;
 
 
         /**
@@ -540,7 +541,7 @@ declare module 'mxgraph' {
         /**
          * @param cells
          */
-        getCellsForGroup(cells:Layer[]) : Layer[];
+        getCellsForGroup(cells: Layer[]): Layer[];
 
 
     }

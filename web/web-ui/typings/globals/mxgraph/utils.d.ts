@@ -11,6 +11,8 @@ declare module 'mxgraph' {
 
     export module mxUtils {
 
+
+        function indexOf(cells:Layer[], parent:Layer) : number;
         /**
          *
          * @param cells

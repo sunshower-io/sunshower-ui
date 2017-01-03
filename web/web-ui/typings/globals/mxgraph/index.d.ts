@@ -93,6 +93,18 @@ declare module 'mxgraph' {
 
         /**
          *
+         * @param layer
+         */
+        isEdge(layer: Layer): boolean;
+
+        /**
+         *
+         * @param layer
+         */
+        isVertex(layer: Layer): boolean;
+
+        /**
+         *
          * @param cell
          * @param geometry
          */
@@ -105,11 +117,12 @@ declare module 'mxgraph' {
          * @param edges
          */
 
-        getChildCells(
-            parent:Layer,
-            vertices:boolean,
-            edges:boolean
-        ) : Layer[];
+        getChildCells(parent: Layer,
+                      vertices: boolean,
+                      edges: boolean): Layer[];
+
+
+        getCellState(cell: Layer): mxCellState;
 
         /**
          *
