@@ -17,6 +17,7 @@ export default class CreateSecurityGroupMenuItem extends CanvasAction {
             'csg',
             'assets/sui/themes/hasli/assets/images/lock.svg'
         );
+        this.setProperty('palette', '1');
         this.setProperty('canvas-menu', '1');
     }
 

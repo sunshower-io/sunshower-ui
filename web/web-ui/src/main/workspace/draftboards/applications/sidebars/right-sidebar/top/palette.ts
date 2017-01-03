@@ -22,12 +22,22 @@ import {Registry} from 'utils/registry';
 
 import {inject} from 'aurelia-framework';
 
-@inject(Registry)
+import {Action, ActionManager} from 'canvas/actions/action-service';
+
+@inject(Registry, ActionManager)
 export class Palette {
 
     element:HTMLElement;
 
-    constructor(private registry:Registry) {
+    actions: Action[];
+
+    constructor(
+        private registry:Registry,
+        private actionManager:ActionManager
+    ) {
+        this.actions = actionManager
+            .getActions()
+            .filter(action => action.getProperty('palette') === '1');
 
     }
 

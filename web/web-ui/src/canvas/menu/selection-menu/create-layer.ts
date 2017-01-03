@@ -15,6 +15,7 @@ export default class CreateLayerMenuItem extends CanvasAction {
             'clayer',
             'assets/sui/themes/hasli/assets/images/layers.svg'
         );
+        this.setProperty('palette', '1');
         this.setProperty('canvas-menu', '1');
     }
 

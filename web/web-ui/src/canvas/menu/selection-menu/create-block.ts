@@ -15,6 +15,7 @@ export default class CreateBlockMenuItem extends CanvasAction {
             'cblock',
             'assets/sui/themes/hasli/assets/images/cube.svg'
         );
+        this.setProperty('palette', '1');
         this.setProperty('canvas-menu', '1');
     }
 

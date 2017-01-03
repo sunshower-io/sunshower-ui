@@ -1,5 +1,11 @@
 .palette {
   padding: 16px !important;
+  [data-tooltip]:hover:before {
+    opacity: 0 !important;
+  }
+  [data-tooltip]:hover {
+    z-index: 50000;
+  }
   div.item {
     i.icon {
       margin:auto !important;
@@ -11,5 +17,6 @@
       border: 1px solid #737373 !important;
       background-color: #999 !important;
     }
+
   }
 }

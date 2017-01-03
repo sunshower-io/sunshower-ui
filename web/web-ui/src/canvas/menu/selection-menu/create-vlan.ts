@@ -12,6 +12,7 @@ export default class CreateVLANMenuItem extends CanvasAction {
             'cvlan',
             'assets/sui/themes/hasli/assets/images/icons/provider/generic/vlan.svg'
         );
+        this.setProperty('palette', '1');
         this.setProperty('canvas-menu', '1');
     }
 

@@ -16,6 +16,7 @@ export default class CreateGroupMenuItem extends CanvasAction {
             'cgroup',
             'assets/sui/themes/hasli/assets/images/object-group.svg'
         );
+        this.setProperty('palette', '1');
         this.setProperty('canvas-menu', '1');
     }
 

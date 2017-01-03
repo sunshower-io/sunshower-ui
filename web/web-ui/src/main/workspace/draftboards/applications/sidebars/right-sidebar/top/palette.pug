@@ -1,11 +1,19 @@
 template
     .ui.grid.palette(ref="element")
         .item(
-            click.delegate="createNode()",
-            draggable="true",
-            dragend.delegate="createNode($event)"
+            repeat.for="action of actions"
+            data-tooltip="${action.name}"
+            data-position="bottom right"
+            data-inverted=""
+            data-variation="basic"
         )
-            i.large.square.icon
+            img(src="${action.icon}" width="16px" height="16px")
+        //.item(
+        //    click.delegate="createNode()",
+        //    draggable="true",
+        //    dragend.delegate="createNode($event)"
+        //)
+        //    i.large.square.icon
         //.item(click.delegate="groupElements()")
         //    i.large.icon.object.group
         //.item
