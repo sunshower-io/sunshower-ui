@@ -5,9 +5,30 @@
 @hovercolor: #1e70bf;
 
 .sidenav {
+  /* stolen from .left--menu */
+  position:fixed; left: 0;
+  height:100%;
+  top: 60px!important;
+  overflow:hidden;
+  box-sizing:border-box;
+  /*end stolen from .left--menu */
   border-right: @borderstyle;
-  .sidebar-header { border-bottom: @borderstyle ; }
-  a.item {display: block; line-height:@pseudolineheight; padding-left:@pseudoem; border-bottom: @borderstyle;
+  .menu--header {
+    /* stolen from .left--menu .menu-header*/
+    height: @pseudolineheight;
+    box-sizing: border-box;
+    border-bottom: 1px;
+    line-height: @pseudolineheight;
+    background-color: #F4F4F4!important;
+    /* end stolen from .left--menu .menu-header */
+    .sidebar-header {
+      /* stolen */
+      height: @pseudolineheight;
+      font-weight: bold;
+      padding-left: @pseudoem;
+      border-bottom: @borderstyle ; }
+  }
+  a.item {display: block; line-height:@pseudolineheight; padding:0 @pseudoem; border-bottom: @borderstyle;
     &.active { font-weight: bold; color: @hovercolor; }
   }
 }
