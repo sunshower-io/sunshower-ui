@@ -10,6 +10,7 @@ import {
 
 
 import {MenuItem} from 'common/elements/menu';
+import {ActionManager, Action} from "canvas/actions/action-service";
 
 
 export class MenuSelector extends mxRubberband {
@@ -30,9 +31,11 @@ export class MenuSelector extends mxRubberband {
 
     host: Canvas;
 
-    constructor(graph: Canvas) {
+    constructor(graph: Canvas,
+                public readonly actionManager:ActionManager) {
         super(graph);
-        this.menus = [];
+        this.menus = actionManager.getActions()
+            .filter(action => action.getProperty('canvas-menu') == '1');
         this.host = graph;
     }
 
@@ -61,21 +64,30 @@ export class MenuSelector extends mxRubberband {
     }
 
     private showMenu(): void {
-        let
-            id = this.id,
-            menu = $(`<div class="graph-context-menu ui vertical menu" id="${id}"/>`);
-        for (let menuItem of this.menus) {
-            menu.append(this.createMenu(menuItem, menu));
+        if(this.currentX > 10) {
+            let
+                id = this.id,
+                menu = $(`<div class="graph-context-menu ui inverted vertical menu" id="${id}"/>`);
+            for (let menuItem of this.menus) {
+                menu.append(this.createMenu(menuItem, menu));
+            }
+            menu.offset({
+                top: this.currentY + 100,
+                left: this.currentX - 80
+            });
+            $('body').append(menu);
         }
-        menu.offset({
-            top: this.currentY + 100,
-            left: this.currentX - 80
-        });
-        $('body').append(menu);
     }
 
     createMenu(item: MenuItem, parent: JQuery): JQuery {
-        let element = $(`<a class="item"">${item.name}</a>`);
+        let element = $(`
+            <a class="item" vertical-align:middle">
+                <img class="ui image" width="16px" height="16px" src="${(item as Action).icon}" style="display:inline-block; line-height:16px; vertical-align:middle"/>
+                <span style="vertical-align:middle; margin-left:8px">
+                    ${item.name}
+                </span>
+            </a>`
+        );
         element.click(this.newDelegate(item, parent));
         return element;
     }

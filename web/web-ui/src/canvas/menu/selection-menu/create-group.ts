@@ -1,19 +1,20 @@
+
 import {
     AbstractMenuItem,
     MenuItem
 } from 'common/elements/menu';
-import {DialogService} from "aurelia-dialog";
+
+import {DialogService} from 'aurelia-dialog';
 import {EditorContext} from "canvas/core/canvas";
 import {CreateLayerDialog} from "./dialogs/create-layer-dialog";
 import {CanvasAction} from "../action";
-
-export default class CreateBlockMenuItem extends CanvasAction {
+export default class CreateGroupMenuItem extends CanvasAction {
 
     constructor(private dialogService: DialogService) {
         super(
-            'Create Block',
-            'cblock',
-            'assets/sui/themes/hasli/assets/images/cube.svg'
+            'Create Group',
+            'cgroup',
+            'assets/sui/themes/hasli/assets/images/object-group.svg'
         );
         this.setProperty('canvas-menu', '1');
     }

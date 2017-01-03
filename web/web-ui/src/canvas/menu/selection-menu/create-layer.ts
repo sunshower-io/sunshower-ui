@@ -6,11 +6,16 @@ import {
 import {DialogService} from 'aurelia-dialog';
 import {EditorContext} from "canvas/core/canvas";
 import {CreateLayerDialog} from "./dialogs/create-layer-dialog";
-export default class CreateLayerMenuItem extends AbstractMenuItem implements MenuItem {
+import {CanvasAction} from "canvas/menu/action";
+export default class CreateLayerMenuItem extends CanvasAction {
 
     constructor(private dialogService: DialogService) {
-        super();
-        this.name = 'Create Layer';
+        super(
+            'Create Layer',
+            'clayer',
+            'assets/sui/themes/hasli/assets/images/layers.svg'
+        );
+        this.setProperty('canvas-menu', '1');
     }
 
     apply(editor: EditorContext): void {

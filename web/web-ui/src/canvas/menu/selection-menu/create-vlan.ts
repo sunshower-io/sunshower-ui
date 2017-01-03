@@ -1,19 +1,16 @@
-import {
-    AbstractMenuItem,
-    MenuItem
-} from 'common/elements/menu';
-import {DialogService} from "aurelia-dialog";
+
+
+import {DialogService} from 'aurelia-dialog';
 import {EditorContext} from "canvas/core/canvas";
 import {CreateLayerDialog} from "./dialogs/create-layer-dialog";
-import {CanvasAction} from "../action";
-
-export default class CreateBlockMenuItem extends CanvasAction {
+import {CanvasAction} from "canvas/menu/action";
+export default class CreateVLANMenuItem extends CanvasAction {
 
     constructor(private dialogService: DialogService) {
         super(
-            'Create Block',
-            'cblock',
-            'assets/sui/themes/hasli/assets/images/cube.svg'
+            'Create VLAN',
+            'cvlan',
+            'assets/sui/themes/hasli/assets/images/icons/provider/generic/vlan.svg'
         );
         this.setProperty('canvas-menu', '1');
     }

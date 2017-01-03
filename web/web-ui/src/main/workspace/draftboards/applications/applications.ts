@@ -64,13 +64,16 @@ import {Canvas} from 'canvas/core/canvas'
 import {DialogService} from 'aurelia-dialog';
 import {bindable} from 'aurelia-framework';
 import {ToggleLeft, ToggleRight, SearchMenu} from "./menus/misc-menus";
-
+import {DefaultActionSet} from 'canvas/actions/default-action-set';
+import {ActionManager} from 'canvas/actions/action-service';
 @inject(
     HttpClient,
     Draftboard,
     Registry,
     DialogService,
-    DraftboardManager
+    DraftboardManager,
+    DefaultActionSet,
+    ActionManager
 )
 export class Applications extends AbstractGraph implements Listener,
     NavigationAware,
@@ -86,7 +89,10 @@ export class Applications extends AbstractGraph implements Listener,
                 private parent: Draftboard,
                 registry: Registry,
                 private dialogService: DialogService,
-                private draftboardManager: DraftboardManager) {
+                private draftboardManager: DraftboardManager,
+                actionSet: DefaultActionSet,
+                private actionManager:ActionManager
+    ) {
         super(registry);
         this.menus = [];
         this.addMenu(new FileMenu(dialogService));
@@ -194,7 +200,7 @@ export class Applications extends AbstractGraph implements Listener,
     }
 
     protected createBuilder(): Canvas {
-        return new Canvas(this.container, this.dialogService);
+        return new Canvas(this.container, this.actionManager);
     }
 
 }

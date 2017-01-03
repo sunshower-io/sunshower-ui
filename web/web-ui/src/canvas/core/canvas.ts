@@ -35,8 +35,13 @@ import {MenuSelector} from "./menu-selection";
 import {GraphHandler} from "./graph-handler";
 import {ConnectionHandler} from './connection-handler';
 import CreateLayerMenuItem from "canvas/menu/selection-menu/create-layer";
+import CreateBlockMenuItem from 'canvas/menu/selection-menu/create-block';
+import CreateGroupMenuItem from 'canvas/menu/selection-menu/create-group';
+import CreateVLANMenuItem from 'canvas/menu/selection-menu/create-vlan';
+import CreateSecurityGroupMenuItem from 'canvas/menu/selection-menu/create-security-group';
 import {CanvasModel} from "./canvas-model";
 import {VertexHandler} from "./vertex-handler";
+import {ActionManager} from "canvas/actions/action-service";
 
 
 export interface NavigationAware {
@@ -92,8 +97,8 @@ export class Canvas extends mxGraph {
 
     private grid: Grid;
 
-    constructor(public container: HTMLElement,
-                public dialogService: DialogService) {
+    constructor(public readonly container: HTMLElement,
+                private readonly actionManager: ActionManager) {
         super(container, new CanvasModel());
         this.createMenuSelector();
         this.setPanning(true);
@@ -124,8 +129,15 @@ export class Canvas extends mxGraph {
 
 
     createMenuSelector(): void {
-        let menuSelector = new MenuSelector(this);
-        menuSelector.addMenu(new CreateLayerMenuItem(this.dialogService));
+        new MenuSelector(this, this.actionManager);
+        // for(let action of this.actionManager.getActions()) {
+        //     menu
+        // }
+        // menuSelector.addMenu(new CreateLayerMenuItem(this.dialogService));
+        // menuSelector.addMenu(new CreateBlockMenuItem(this.dialogService));
+        // menuSelector.addMenu(new CreateGroupMenuItem(this.dialogService));
+        // menuSelector.addMenu(new CreateVLANMenuItem(this.dialogService));
+        // menuSelector.addMenu(new CreateSecurityGroupMenuItem(this.dialogService));
     }
 
     createVertexHandler(state: mxCellState): mxVertexHandler {

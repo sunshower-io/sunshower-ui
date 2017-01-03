@@ -73,6 +73,7 @@ export abstract class AbstractMenuItem implements MenuItem {
     name : string;
     menus       ?: MenuItem[];
     apply(editor:OperationContext) : void {
+
     }
 
     addMenu(menu:MenuItem) {
