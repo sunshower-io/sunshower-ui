@@ -5,6 +5,9 @@ import {inject} from 'aurelia-framework';
 import {Group} from "canvas/scene-graph/scene-graph";
 import {Canvas, EditorContext} from "canvas/core/canvas";
 import {DraftboardManager} from 'component/draftboard/draftboard';
+import {Layer} from "mxgraph";
+import {LayerElement} from "component/model/layer";
+import {mxGeometry} from "mxgraph";
 
 
 @inject(DraftboardManager)
@@ -15,80 +18,110 @@ export class LayerService {
 
     create(name: string,
            description: string,
-           model: EditorContext): Group {
-        // let
-        //     host = model.graph,
-        //     selection = host.getSelectionCells(),
-        //     r = this.toElements(selection),
-        // layer = new Layer(
-        //     name,
-        //     description,
-        //     r.data
-        // );
+           model: EditorContext): LayerElement {
 
-        // let
-        //     parent = host.getDefaultParent(),
-        //     glayer = new GLayer(parent, layer, 0, 0, null);
-        // for (let e of r.data) {
-        //     e.parent = layer;
-        // }
-        // glayer.addTo(host);
-        // glayer.members = r.elements;
-        // // host.groupCells(glayer, 50, r.elements);
-        // this.draftboardManager.createLayer(layer);
-        // return layer;
-        return null;
+        let layer = new LayerElement(
+                name,
+                description,
+            ),
+            canvas = model.graph,
+            roots = this.resolveRoots(
+                canvas.getSelectionCells()
+            );
+        this.draftboardManager
+            .removeAll(roots);
+
+
+        layer.addElements(roots);
+        this.draftboardManager.add(layer);
+
+        try {
+            canvas.getModel().beginUpdate();
+
+            let boundingBox = canvas.getBoundingBoxFromGeometry(roots, true);
+            let geometry = new mxGeometry(
+                boundingBox.x - 48,
+                boundingBox.y - 48,
+                boundingBox.width + 96,
+                boundingBox.height + 96
+            );
+            layer.geometry = geometry;
+            layer.addTo(canvas);
+
+            // canvas.groupCells(layer, 48, roots);
+        } finally {
+            canvas.getModel().endUpdate();
+        }
+        return layer;
+
     }
 
-    //
-    // private toElements(selection: mxCell[]): result {
-    //     let results = new result();
-    //     let cache = {};
-    //     for (let e of selection) {
-    //         let ae = <any> e;
-    //         if (ae.data && ae.data.id) {
-    //             cache[ae.data.id.value] = [ae, ae.data as Element];
-    //         }
-    //     }
-    //
-    //     let topLevels = {};
-    //     for (let cell of selection) {
-    //         let acell = cell as any;
-    //         if (acell.data && acell.data.children) {
-    //             let [topLevel, data] = this.findTopLevel([acell, acell.data as Element], cache);
-    //             if (topLevel) {
-    //                 if (!topLevels[data.id.value]) {
-    //                     topLevels[data.id.value] = [topLevel, data];
-    //                     results.data.push(data);
-    //                     results.elements.push(topLevel);
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     return results;
-    // }
-    //
-    // public findTopLevel(element: [mxCell, Element],
-    //                     elements: {[key: string]: [mxCell, Element]}): [mxCell, Element] {
-    //     let current = element;
-    //     while (current[1].parent) {
-    //         let next = elements[current[1].parent.id.value];
-    //         if (next) {
-    //             current = next;
-    //         } else {
-    //             break;
-    //         }
-    //     }
-    //     return current;
-    // }
-}
+    aggregate(selection:Layer[]) : {[key:string]: Element} {
+        let result = {};
+        for(let select of selection) {
+            result[select.id] = selection;
+        }
+        return result;
+    }
 
-class result {
-    elements: mxCell[];
-    data: Element[];
 
-    constructor() {
-        this.elements = [];
-        this.data = [];
+    resolveRoots(cells:Layer[]) : Element[] {
+        let results = [],
+            duplicates = {},
+            selected = this.aggregate(cells);
+        for(let cell of cells) {
+            let root = this.resolveRoot(cell, selected);
+            if(root && root.getAttribute('element') && !duplicates[root.id]) {
+                results.push(root);
+                duplicates[root.id] = true;
+            }
+        }
+        return results;
+    }
+
+
+    resolveRootAndLevel(
+        cell:Element,
+        selected:{[key:string]:Element},
+        level:number
+    ) : [Element, number] {
+        let predecessors = cell.getPredecessors();
+        if(predecessors && predecessors.length) {
+            let max = level,
+                root = cell;
+            for(let predecessor of predecessors) {
+
+                if(selected[predecessor.id] === predecessor) {
+                    return [predecessor, level];
+                }
+
+                let [element, height] = this.resolveRootAndLevel(
+                    predecessor,
+                    selected,
+                    level + 1
+                );
+                if(height > max) {
+                    max = height;
+                    root = element;
+                }
+            }
+            return [root, max];
+        } else {
+            return [cell, level];
+        }
+
+    }
+
+    resolveRoot(cell:Layer, selected:{[key:string]: Element}) : Element {
+        if(cell.getAttribute('element')) {
+            let [element, ] = this.resolveRootAndLevel(
+                cell as Element,
+                selected, 0
+            );
+            return element;
+        } else {
+            return null;
+        }
     }
 }
+

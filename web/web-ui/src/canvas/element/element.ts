@@ -10,11 +10,10 @@ import {Vertex, Edge} from "algorithms/graph/graph";
 
 import {Canvas} from 'canvas/core/canvas';
 
+import {UUID} from "utils/uuid";
 import {Kv} from "utils/objects";
 import {mxCellOverlay} from "mxgraph";
 import {EditorContext} from "canvas/core/canvas";
-import {UUID} from "../../utils/uuid";
-import {mxGeometry} from "mxgraph";
 
 type Properties = {[key: string]: any};
 
@@ -94,6 +93,7 @@ export abstract class AbstractElement extends mxCell implements Element,
         this.setStyle(this.createStyle());
         this.attributes = {};
         this.childNodes = [];
+        this.setAttribute('element', '1');
     }
 
     // setGeometry(x:number, y:number, width:number, height:number) : mxGeometry {

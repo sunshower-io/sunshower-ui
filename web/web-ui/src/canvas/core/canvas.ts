@@ -8,7 +8,6 @@ import {
     mxCell,
     mxUtils,
     mxGraph,
-    mxGraphModel,
     mxRubberband,
     mxConstants,
     mxRectangle,
@@ -16,8 +15,11 @@ import {
     mxPoint,
     mxConnectionHandler,
     mxPolyline,
+    mxVertexHandler,
+    mxCellState,
     mxGeometry,
     Layer,
+    mxMouseEvent,
     mxConnectionConstraint,
     mxGraphHandler
 } from "mxgraph";
@@ -25,12 +27,16 @@ import {
 import {Grid} from "./grid/grid";
 import {Rectangle} from 'geometry/shapes';
 
+import {Element} from 'canvas/element/element';
+
 import {DialogService} from 'aurelia-dialog';
 import {CellRenderer} from "./cell-renderer";
 import {MenuSelector} from "./menu-selection";
 import {GraphHandler} from "./graph-handler";
 import {ConnectionHandler} from './connection-handler';
 import CreateLayerMenuItem from "canvas/menu/selection-menu/create-layer";
+import {CanvasModel} from "./canvas-model";
+import {VertexHandler} from "./vertex-handler";
 
 
 export interface NavigationAware {
@@ -88,7 +94,7 @@ export class Canvas extends mxGraph {
 
     constructor(public container: HTMLElement,
                 public dialogService: DialogService) {
-        super(container, new mxGraphModel());
+        super(container, new CanvasModel());
         this.createMenuSelector();
         this.setPanning(true);
         this.setConnectable(true);
@@ -121,13 +127,87 @@ export class Canvas extends mxGraph {
         let menuSelector = new MenuSelector(this);
         menuSelector.addMenu(new CreateLayerMenuItem(this.dialogService));
     }
-    // createVertexHandler(state: mxCellState): mxVertexHandler {
-    //     return new VertexHandler(state);
-    // }
+
+    createVertexHandler(state: mxCellState): mxVertexHandler {
+        return new VertexHandler(state);
+    }
 
     createGraphHandler(): mxGraphHandler {
         return new GraphHandler(this);
     }
+
+    getChildVertices(parent: Layer): Layer[] {
+        console.log("CELL");
+        if (parent.getAttribute('element')) {
+            let successors = (parent as Element).getSuccessors();
+            console.log("SUCCESSORS", successors);
+            return successors;
+        } else {
+            return super.getChildVertices(parent);
+        }
+    }
+
+    getCellsForGroup(cells:Layer[]) : Layer[] {
+        console.log("CELLS", cells);
+        return super.getCellsForGroup(cells);
+    }
+
+    getChildCells(cell:Layer, vertices?: boolean, edges?: boolean) : Layer[] {
+        console.log("CELL");
+        if(cell.getAttribute('element')) {
+            let successors = (cell as Element).getSuccessors();
+            console.log("SUCCESSORS", successors);
+            return successors;
+        } else {
+            return super.getChildCells(cell);
+        }
+    }
+
+    // groupCells(group: Layer, border: number, cells: Layer[]) {
+    //     if (!cells) {
+    //         cells = mxUtils.sortCells(this.getSelectionCells(), true);
+    //     }
+    //     cells = this.getCellsForGroup(cells);
+    //     if (!group) {
+    //         group = this.createGroupCell(cells);
+    //     }
+    //
+    //     let bounds = this.getBoundsForGroup(group, cells, border);
+    //
+    //     if (cells.length > 0 && bounds) {
+    //         let parent = this.model.getParent(group);
+    //
+    //         if (!parent) {
+    //             parent = this.model.getParent(cells[0]);
+    //         }
+    //         this.model.beginUpdate();
+    //         try {
+    //             if (this.getCellGeometry(group) == null) {
+    //                 this.model.setGeometry(group, new mxGeometry());
+    //             }
+    //             let index = this.model.getChildCount(parent);
+    //             this.cellsAdded([group], parent, index, null, null, false);
+    //             index = this.model.getChildCount(group);
+    //             this.cellsAdded(cells, group, index, null, null, false, false);
+    //             this.cellsMoved(cells, -bounds.x, -bounds.y, false, true);
+    //             this.cellsResized([group], [bounds], false);
+    //             this.fireEvent(new mxEventObject(
+    //                 mxEvent.GROUP_CELLS,
+    //                 'group',
+    //                 group,
+    //                 'border',
+    //                 border,
+    //                 'cells',
+    //                 cells
+    //             ));
+    //         }
+    //         finally {
+    //             this.model.endUpdate();
+    //         }
+    //     }
+    //
+    //     return group;
+    // }
 
 
     getHostContainerBounds(): Rectangle {
@@ -185,15 +265,42 @@ export class Canvas extends mxGraph {
     //     super.cellsMoved(cells, dx, dy, disconnect, constrain, extend);
     // }
 
-    // moveCells(cells: Layer[],
-    //           dx: number,
-    //           dy: number,
-    //           clone?: boolean,
-    //           parent?: Layer,
-    //           event?: mxMouseEvent): Layer[] {
-    //     return super.moveCells(cells, dx, dy, clone, parent, event);
-    // }
-    //
+    moveCells(cells: Layer[],
+              dx: number,
+              dy: number,
+              clone?: boolean,
+              parent?: Layer,
+              event?: mxMouseEvent): Layer[] {
+
+        let toMove = [].concat(cells);
+
+        for(let cell of cells) {
+            if(cell.getAttribute('element')) {
+                // let ccell = cell;
+                // while(ccell.getAttribute('element')) {
+                //     let children = (cell as any as Element).getSuccessors();
+                //     if(children && children.length) {
+                //         toMove = toMove.concat(children);
+                //     }
+                //     ccell =
+                // }
+                //
+                this.getDescendendants(cell as Element, toMove);
+            }
+        }
+        return super.moveCells(toMove, dx, dy, clone, parent, event);
+    }
+
+    getDescendendants(cell:Element, elements:Element[]) : void {
+        let successors = cell.getSuccessors();
+        if(successors) {
+            for(let child of successors) {
+                elements.push(child);
+                this.getDescendendants(child, elements);
+            }
+        }
+    }
+
 
     selectCellForEvent(cell: mxCell) {
         if (cell.getAttribute('constituent') === '1') {

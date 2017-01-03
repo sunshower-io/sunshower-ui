@@ -35,11 +35,6 @@ describe('an application deployment', () => {
         container = new Container();
         draftboardManager = container.get(DraftboardManager);
         canvas = new Canvas(containerElement, container.get(DialogService))
-        // let container = new Container(),
-        //     draftboardManager = container.get(DraftboardManager),
-            // containerElement = document.createElement('div'),
-            // canvas = new Canvas(containerElement, container.get(DialogService))
-        // draftboardManager.setFocusedDraftboard(new Draftboard());
         registry = container.get(Registry);
 
         context = {
