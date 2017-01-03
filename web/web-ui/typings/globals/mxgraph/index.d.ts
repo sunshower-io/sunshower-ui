@@ -87,12 +87,29 @@ declare module 'mxgraph' {
 
         root: Layer;
 
+
+        constructor(root?: Layer);
+
+
         /**
          *
          * @param cell
          * @param geometry
          */
         setGeometry(cell: Layer, geometry: mxGeometry);
+
+        /**
+         *
+         * @param parent
+         * @param vertices
+         * @param edges
+         */
+
+        getChildCells(
+            parent:Layer,
+            vertices:boolean,
+            edges:boolean
+        ) : Layer[];
 
         /**
          *

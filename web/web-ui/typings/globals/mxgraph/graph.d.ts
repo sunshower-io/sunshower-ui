@@ -275,6 +275,30 @@ declare module 'mxgraph' {
 
         setSelectionCell(cell: Layer);
 
+
+        /**
+         *
+         * @param parent
+         */
+        getChildVertices(parent:Layer) : Layer[];
+
+        /**
+         *
+         * @param cells
+         * @param includeEdges
+         */
+
+        getBoundingBoxFromGeometry(
+            cells:Layer[],
+            includeEdges:boolean
+        ) : mxRectangle;
+
+        /**
+         *
+         * @param cell
+         */
+        getChildCells(cell: Layer) : Layer[];
+
         /**
          *
          * @param cells
@@ -288,9 +312,47 @@ declare module 'mxgraph' {
         cellsMoved(cells: Layer[],
                    dx: number,
                    dy: number,
-                   disconnect: boolean,
-                   constrain: boolean,
-                   extend: boolean): void;
+                   disconnect?: boolean,
+                   constrain?: boolean,
+                   extend?: boolean): void;
+
+
+        /**
+         *
+         * @param cells
+         * @param bounds
+         * @param recurse
+         */
+        cellsResized(
+            cells:Layer[],
+            bounds:mxRectangle[],
+            recurse:boolean
+        ) : void;
+
+        /**
+         * @param group
+         * @param cells
+         * @param border
+         */
+        getBoundsForGroup(
+            group:Layer,
+            cells:Layer[],
+            border:number
+        ) : mxRectangle;
+
+
+        /**
+         *
+         * @param cells
+         */
+
+        createGroupCell(cells : Layer[]) : Layer;
+
+        /**
+         *
+         * @param event
+         */
+        fireEvent(event:mxEvent) : void;
 
         /**
          *
@@ -422,11 +484,15 @@ declare module 'mxgraph' {
                    source: Vertex,
                    target: Vertex): Edge ;
 
+        /**
+         *
+         */
+
         createConnectionHandler(): mxConnectionHandler;
 
         /**
          *
-         * @param child
+         * @param cells
          * @param dx
          * @param dy
          * @param clone
@@ -434,7 +500,6 @@ declare module 'mxgraph' {
          * @param event
          * @param mapping
          */
-
         moveCells(cells: Layer[],
                   dx: number,
                   dy: number,
@@ -446,8 +511,36 @@ declare module 'mxgraph' {
 
         /**
          *
+         * @param cells
+         * @param parent
+         * @param index
+         * @param source
+         * @param target
+         * @param absolute
+         * @param constrain
+         */
+
+        cellsAdded(
+            cells:Layer[],
+            parent:Layer,
+            index:number,
+            source:Layer,
+            target:Layer,
+            absolute?:boolean,
+            constrain?:boolean
+        ) : void ;
+
+
+        /**
+         *
          */
         createHandler(): mxGraphHandler;
+
+
+        /**
+         * @param cells
+         */
+        getCellsForGroup(cells:Layer[]) : Layer[];
 
 
     }

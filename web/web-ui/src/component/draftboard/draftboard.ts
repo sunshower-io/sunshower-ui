@@ -40,6 +40,17 @@ export class Draftboard {
         return rootElements;
     }
 
+    removeElement(element:Element) : Element {
+        if(!this.rootElements) {
+            return null;
+        }
+        let e = this.rootElements[element.id];
+        if(e) {
+            delete this.rootElements[element.id];
+        }
+        return e;
+    }
+
     addElement(element:Element) : void {
         if(!this.rootElements) {
             this.rootElements = {};
@@ -111,5 +122,24 @@ export class DraftboardManager extends DefaultEventDispatcher {
         return element;
     }
 
+    remove(element: Element) : Element {
+        let result = this.focusedDraftboard()
+            .removeElement(element);
+        this.dispatch('element-removed',
+            new Event('element-removed', element));
+        return result;
+    }
 
+
+    removeAll(roots: Element[]) : Element[] {
+        let draftboard = this.focusedDraftboard(),
+            results = [];
+        for(let root of roots) {
+            let removed = draftboard.removeElement(root);
+            if(removed) {
+                results.push(removed);
+            }
+        }
+        return results;
+    }
 }

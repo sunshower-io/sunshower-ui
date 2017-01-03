@@ -1,4 +1,61 @@
+
+
+import {Element, AbstractElement} from "canvas/element/element";
+
+
+import {Vertex} from "algorithms/graph/graph";
+import {
+    mxImage,
+    mxConstants,
+    mxCellOverlay
+} from "mxgraph";
+
+type Properties = {[key:string] : any};
+type PropertyNode = Vertex<Properties>;
+
+export class LayerElement extends AbstractElement {
+
+    constructor(
+        public name:string,
+        public description:string
+    ) {
+        super();
+    }
+
+
+    addElements(members: Element[]) : void {
+        for(let member of members) {
+            let pmember = member as any as PropertyNode;
+            this.addSuccessor(pmember);
+            pmember.addPredecessor(this);
+        }
+    }
+
+    protected createLayerOverlay(): mxCellOverlay {
+        let
+            url = `assets/sui/themes/hasli/assets/images/layers.svg`,
+            image = new mxImage(url, 24, 24),
+            iconOverlay = new mxCellOverlay(
+                image,
+                null,
+                mxConstants.ALIGN_LEFT,
+                mxConstants.ALIGN_TOP,
+                null,
+                'default'
+            );
+        return iconOverlay;
+    }
+
+
+    protected createOverlays(): mxCellOverlay[] {
+        return [this.createLayerOverlay()];
+    }
+}
+
+
 /**
+ *
+ *
  *
 import {AbstractVertex} from "component/model/vertex";
 

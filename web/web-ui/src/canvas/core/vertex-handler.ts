@@ -46,6 +46,7 @@ export class VertexHandler extends mxVertexHandler {
     }
 
     moveChildren(cell: Layer, dx: number, dy: number) {
+        console.log("CHILDREN");
         super.moveChildren(cell, dx, dy);
     }
 
