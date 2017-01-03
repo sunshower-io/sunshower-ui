@@ -26,5 +26,9 @@ declare module 'mxgraph' {
         static STYLE_VERTICAL_LABEL_POSITION    : string;
         static STYLE_LABEL_POSITION             : string;
         static STYLE_LABEL_WIDTH                : string;
+
+        static STYLE_SPACING_BOTTOM             : string;
+
+        static LINE_HEIGHT                      : string;
     }
 }

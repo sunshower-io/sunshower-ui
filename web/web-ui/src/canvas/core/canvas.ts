@@ -137,10 +137,8 @@ export class Canvas extends mxGraph {
     }
 
     getChildVertices(parent: Layer): Layer[] {
-        console.log("CELL");
         if (parent.getAttribute('element')) {
             let successors = (parent as Element).getSuccessors();
-            console.log("SUCCESSORS", successors);
             return successors;
         } else {
             return super.getChildVertices(parent);
@@ -148,15 +146,12 @@ export class Canvas extends mxGraph {
     }
 
     getCellsForGroup(cells: Layer[]): Layer[] {
-        console.log("CELLS", cells);
         return super.getCellsForGroup(cells);
     }
 
     getChildCells(cell: Layer, vertices?: boolean, edges?: boolean): Layer[] {
-        console.log("CELL");
         if (cell.getAttribute('element')) {
             let successors = (cell as Element).getSuccessors();
-            console.log("SUCCESSORS", successors);
             return successors;
         } else {
             return super.getChildCells(cell);
@@ -239,8 +234,9 @@ export class Canvas extends mxGraph {
 
 
     convertValueToString(cell: mxCell): string {
-        if (mxUtils.isNode(cell.value)) {
-            return cell.getAttribute('label');
+        let label = cell.getAttribute('label');
+        if (label) {
+            return label;
         }
         return super.convertValueToString(cell);
     }
@@ -276,15 +272,6 @@ export class Canvas extends mxGraph {
 
         for (let cell of cells) {
             if (cell.getAttribute('element')) {
-                // let ccell = cell;
-                // while(ccell.getAttribute('element')) {
-                //     let children = (cell as any as Element).getSuccessors();
-                //     if(children && children.length) {
-                //         toMove = toMove.concat(children);
-                //     }
-                //     ccell =
-                // }
-                //
                 this.getDescendendants(cell as Element, toMove);
             }
         }

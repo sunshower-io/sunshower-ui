@@ -68,41 +68,28 @@ export abstract class AbstractElement extends mxCell implements Element,
     private readonly                        childNodes: PropertyNode[];
 
 
-    // constructor(id: UUID,
-    //             public data: T,
-    //             public parent: Layer,
-    //             x: number,
-    //             y: number,
-    //             width: number,
-    //             height: number,
-    //             public registry?: Registry) {
-    //     super();
-    //     // this.delegate = new Node<T>(id.value, data);
-    //     this.geometry = new mxGeometry(x, y, width, height);
-    //     this.setEdge(false);
-    //     this.setVertex(true);
-    //     this.setStyle(this.createStyle());
-    // }
 
     constructor() {
         super();
         this.id = UUID.randomUUID().value;
+        this.data = {};
         this.adjacencies = {};
         this.attributes = {};
         this.setVertex(true);
         this.setStyle(this.createStyle());
-        this.attributes = {};
         this.childNodes = [];
         this.setAttribute('element', '1');
     }
 
-    // setGeometry(x:number, y:number, width:number, height:number) : mxGeometry {
-    //     let geo = new mxGeometry(x, y, width, height);
-    //     this.geometry = geo;
-    //     return geo;
-    // }
 
 
+    setLabel(label:string) : void {
+        this.attributes['label'] = label;
+    }
+
+    getLabel() : string {
+        return this.attributes['label'];
+    }
 
     getAdjacencies(relationship:ElementRelationship) : PropertyNode[] {
         let results = [];

@@ -9,6 +9,7 @@ import {
     mxConstants,
     mxCellOverlay
 } from "mxgraph";
+import {Kv} from "utils/objects";
 
 type Properties = {[key:string] : any};
 type PropertyNode = Vertex<Properties>;
@@ -20,6 +21,7 @@ export class LayerElement extends AbstractElement {
         public description:string
     ) {
         super();
+        this.setLabel(name);
     }
 
 
@@ -50,103 +52,25 @@ export class LayerElement extends AbstractElement {
     protected createOverlays(): mxCellOverlay[] {
         return [this.createLayerOverlay()];
     }
-}
 
 
-/**
- *
- *
- *
-import {AbstractVertex} from "component/model/vertex";
-
-import {
-    mxCell as mxLayer,
-    mxCellOverlay,
-    mxImage,
-    mxConstants
-} from  'mxgraph';
-
-import {UUID} from 'utils/uuid';
-
-import {Layer as ElementLayer} from 'elements/layer';
-
-import {Registry} from 'utils/registry';
-import {Canvas} from "canvas/core/canvas";
-
-export interface Layerable {
-
-    members: mxLayer[];
-
-    addMember(member: mxLayer): void;
-}
-
-
-export class LayeredNode<T> extends AbstractVertex<T> implements Layerable {
-
-    public host: Canvas;
-
-    public members: mxLayer[];
-
-
-    constructor(parent: mxLayer,
-                data: T,
-                x: number,
-                y: number,
-                registry?: Registry,) {
-        super(
-            UUID.randomUUID(),
-            data,
-            parent,
-            x, y, 168, 192,
-            registry,
-        );
-        this.setCollapsable(true);
-        super.set('synthetic', '1', true);
-    }
-
-    addMember(layer: mxLayer): void {
-        // if(!this.children) {
-        //     this.children = [];
-        // }
-        // this.children.push(layer);
-        if (!this.members) {
-            this.members = [];
-        }
-        this.members.push(layer);
-    }
-
-
-    addTo(builder: Canvas): mxLayer {
-        this.host = builder;
-        return super.addTo(builder);
+    protected createCss(): Kv {
+        return Kv.create(';')
+            .pair('spacingBottom', -100)
+            .pair('indicatorStrokeColor', '#ff0000')
+            .pair('shape', 'label')
+            .pair('imageWidth', 24)
+            .pair('imageHeight', 24)
+            .pair('fillOpacity', 0)
+            .pair('strokeColor', '#B8B8B8')
+            .pair('verticalAlign', 'bottom')
+            .pair('spacingBottom', '24')
+            .pair('verticalLabelPosition', mxConstants.ALIGN_TOP)
+            .pair('labelPosition', mxConstants.ALIGN_MIDDLE)
+            .pair('fontColor', '#A2A2A2')
+            .pair(mxConstants.LINE_HEIGHT, 0.6)
+            .pair('fontStyle', mxConstants.FONT_BOLD)
     }
 }
 
 
-export class Layer extends LayeredNode<ElementLayer> {
-    name: string;
-    description: string;
-
-
-    protected createLayerOverlay(): mxCellOverlay {
-
-        let
-            url = `assets/sui/themes/hasli/assets/images/layers.svg`,
-            image = new mxImage(url, 24, 24),
-            iconOverlay = new mxCellOverlay(
-                image,
-                null,
-                mxConstants.ALIGN_LEFT,
-                mxConstants.ALIGN_TOP,
-                null,
-                'default'
-            );
-        return iconOverlay;
-    }
-
-
-    protected createOverlays(): mxCellOverlay[] {
-        return [this.createLayerOverlay()];
-    }
-}
- */
