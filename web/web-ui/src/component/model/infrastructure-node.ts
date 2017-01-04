@@ -26,14 +26,20 @@ import {EditorContext} from "canvas/core/canvas";
 import {RegistryAwareElement} from 'canvas/element/registry-aware';
 import {EditableElement} from "canvas/element/element";
 import {InfrastructureNodeEditor} from "component/editors/infrastructure-node/editor";
-import {Class} from "lang/class";
+import {
+    OperatingSystem,
+    NodeConfiguration
+} from "model/hal/api";
 
 
 
 export class InfrastructureNode extends
     RegistryAwareElement implements
     Constrained,
-    EditableElement<InfrastructureNode, InfrastructureNodeEditor> {
+    EditableElement<
+        InfrastructureNode,
+        InfrastructureNodeEditor
+        > {
 
 
     readonly editor = InfrastructureNodeEditor;
@@ -50,15 +56,35 @@ export class InfrastructureNode extends
 
     static count: number = 0;
 
+    public configuration                :NodeConfiguration;
+    public operatingSystem              :OperatingSystem;
+
+
+
 
     constructor(
         registry: Registry
     ) {
         super(registry);
-        // this.setGeometry(0, 0, 120, 120);
+        this.configuration = new NodeConfiguration();
+        this.operatingSystem = new OperatingSystem();
         this.icon = 'assets/sui/themes/hasli/assets/images/icons/provider/generic/single-node-instance.svg';
         this.name = "Node " + InfrastructureNode.count++;
     }
+
+
+    public setConfiguration(configuration:NodeConfiguration) : void {
+        this.configuration = configuration;
+    }
+
+    public setOperatingSystem(operatingSystem:OperatingSystem) : void {
+        if(operatingSystem.icon) {
+            this.icon = operatingSystem.icon;
+            this.refresh();
+        }
+        this.operatingSystem = operatingSystem;
+    }
+
 
     public addTo(builder:Canvas) : mxCell {
         this.createMenu(builder);
@@ -203,7 +229,7 @@ export class InfrastructureNode extends
 
     protected createNodeOverlay(): mxCellOverlay {
         let
-            url = `assets/sui/themes/hasli/assets/images/icons/provider/generic/single-node-instance.svg`,
+            url = this.icon,
             image = new mxImage(url, 24, 24),
             iconOverlay = new mxCellOverlay(
                     image,

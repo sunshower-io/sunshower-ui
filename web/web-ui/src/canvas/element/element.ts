@@ -154,15 +154,15 @@ export abstract class AbstractElement extends mxCell implements Element,
         AbstractElement.createLoadingOverlay();
 
 
-    public readonly id: string;
-    public icon: string;
-    public name: string;
+    public readonly id                  : string;
+    public icon                         : string;
+    public name                         : string;
     public host: Canvas;
-    public readonly data: Properties;
-    private readonly attributes: {[key: string]: string};
-    public readonly adjacencies: {[key: string]: Edge<Properties>};
-
-    private readonly childNodes: PropertyNode[];
+    public readonly data                : Properties;
+    private cellOverlays                : mxCellOverlay[];
+    private readonly attributes         : {[key: string]: string};
+    public readonly adjacencies         : {[key: string]: Edge<Properties>};
+    private readonly childNodes         : PropertyNode[];
 
 
     constructor() {
@@ -331,10 +331,24 @@ export abstract class AbstractElement extends mxCell implements Element,
         this.insert(child);
     }
 
+
+    refresh() {
+        for(let overlay of this.cellOverlays) {
+            this.host.removeCellOverlay(this, overlay);
+        }
+
+        this.cellOverlays = this.createOverlays();
+        for(let overlay of this.cellOverlays) {
+            this.host.addCellOverlay(this, overlay);
+        }
+
+    }
     addTo(builder: Canvas): Layer {
         this.host = builder;
         let result = builder.addCell(this, this.parent);
-        for (let overlay of this.createOverlays()) {
+        let overlays = this.createOverlays();
+        this.cellOverlays = overlays;
+        for (let overlay of overlays) {
             builder.addCellOverlay(result, overlay);
         }
         return result;

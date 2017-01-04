@@ -12,8 +12,9 @@ interface DropdownOptions {
 
 
 interface JQuery {
-    dropdown(options?:DropdownOptions) :void;
     menu() : void;
+    dropdown(options?:DropdownOptions) :void;
+    dropdown(fname:string, ...options:any[]);
 }
 
 interface JQueryStatic {

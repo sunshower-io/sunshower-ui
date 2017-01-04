@@ -4,6 +4,7 @@ import {OperatingSystemService} from 'model/os';
 import {ElementEditor} from "canvas/element/element";
 
 import {InfrastructureNode} from "component/model/infrastructure-node";
+import {UUID} from "utils/uuid";
 
 
 @inject(OperatingSystemService)
@@ -29,11 +30,17 @@ export class InfrastructureNodeEditor implements ElementEditor<InfrastructureNod
 
     }
 
+    osChanged = (value: string, text:any, item:any) => {
+        this.node.setOperatingSystem(this.osService.get(UUID.fromString(value)));
+    };
+
     attached() : void {
         setTimeout(() => {
             $(this.list).dropdown({
-                action: 'activate'
+                action: 'activate',
+                onChange: this.osChanged,
             });
+            $(this.list).dropdown('set selected', this.node.operatingSystem.id);
         });
     }
 

@@ -9,8 +9,8 @@ template
                             | Select OS
                         .ui.dropdown.icon
                         .menu
-                            .item(repeat.for="os of osService.list()")
-                                image.ui.image(src='assets/sui/themes/hasli/assets/images/logos/os/${os.icon}')
+                            .item(repeat.for="os of osService.list()" data-value="${os.id}")
+                                image.ui.image(src='${os.icon}')
                                 | ${os.name}
                 .field(style="line-height:64px; vertical-align:middle")
                     span.ui.medium.header ${node.name}
