@@ -4,7 +4,6 @@ import 'aurelia-polyfills';
 import {Container} from "aurelia-framework";
 import {Registry} from "utils/registry";
 import {EditorContext, Canvas} from "canvas/core/canvas";
-import {DialogService} from "aurelia-dialog";
 import {initialize} from 'aurelia-pal-browser';
 
 import {VirtualCloud} from "component/model/cloud";
@@ -15,6 +14,7 @@ import {
     DraftboardManager,
     Draftboard
 } from "component/draftboard/draftboard";
+import {ActionManager} from "canvas/actions/action-service";
 
 
 describe('an application deployment', () => {
@@ -34,7 +34,7 @@ describe('an application deployment', () => {
         containerElement = document.createElement('div');
         container = new Container();
         draftboardManager = container.get(DraftboardManager);
-        canvas = new Canvas(containerElement, container.get(DialogService))
+        canvas = new Canvas(containerElement, new ActionManager())
         registry = container.get(Registry);
 
         context = {

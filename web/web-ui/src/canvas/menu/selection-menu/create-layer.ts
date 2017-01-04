@@ -3,6 +3,7 @@ import {DialogService} from 'aurelia-dialog';
 import {EditorContext, EditorOperations} from "canvas/core/canvas";
 import {CanvasAction} from "canvas/menu/action";
 import {GroupItemsAsDialog} from "./dialogs/group-items-as-dialog";
+import {LayerElementFactory} from "component/model/layer";
 
 
 export default class CreateLayerMenuItem extends CanvasAction {
@@ -19,6 +20,7 @@ export default class CreateLayerMenuItem extends CanvasAction {
 
     apply(editor: EditorContext): void {
         EditorOperations.set(editor, 'layer-type', 'Layer');
+        EditorOperations.set(editor, 'element-factory', new LayerElementFactory())
 
         this.dialogService.open({
             viewModel: GroupItemsAsDialog,

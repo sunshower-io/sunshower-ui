@@ -3,21 +3,23 @@ import any = jasmine.any;
 import 'aurelia-polyfills';
 import {Container} from "aurelia-framework";
 import {Registry} from "utils/registry";
-import {EditorContext, Canvas} from "canvas/core/canvas";
-import {DialogService} from "aurelia-dialog";
 import {initialize} from 'aurelia-pal-browser';
+import {
+    EditorContext,
+    Canvas
+} from "canvas/core/canvas";
 
-import {VirtualCloud} from "component/model/cloud";
 import {ApplicationDeployment} from "component/model/deployment";
 import {InfrastructureNode} from "component/model/infrastructure-node";
 
-import {LayerService} from 'component/service/layer-service';
 
 import {
     DraftboardManager,
     Draftboard
 } from "component/draftboard/draftboard";
-import {LayerElement} from "component/model/layer";
+import {Elements} from "canvas/element/element";
+import {ActionManager} from "canvas/actions/action-service";
+import {DefaultActionSet} from "canvas/actions/default-action-set";
 
 
 describe('an application deployment', () => {
@@ -27,9 +29,10 @@ describe('an application deployment', () => {
     let canvas: Canvas= null,
         registry: Registry,
         container: Container,
+        actionManager: ActionManager,
+        actionSet : DefaultActionSet,
         context: EditorContext = null,
         draftboardManager: DraftboardManager,
-        layerService : LayerService,
         containerElement : HTMLElement;
 
 
@@ -37,9 +40,10 @@ describe('an application deployment', () => {
     beforeEach(() => {
         containerElement = document.createElement('div');
         container = new Container();
+        actionManager = new ActionManager(null);
+        actionSet = new DefaultActionSet(null, actionManager);
         draftboardManager = container.get(DraftboardManager);
-        canvas = new Canvas(containerElement, container.get(DialogService));
-        layerService = container.get(LayerService);
+        canvas = new Canvas(containerElement, actionManager);
         registry = container.get(Registry);
 
         context = {
@@ -65,11 +69,11 @@ describe('an application deployment', () => {
         snd.addPredecessor(third);
 
 
-        let roots = layerService.resolveRoots([fst, snd]);
+        let roots = Elements.resolveRoots([fst, snd]);
 
         expect(roots.length).toBe(1);
         expect(roots[0]).toBe(snd);
-    })
+    });
 
     it('should resolve the grandparent of a node if the node and all its intermediate ancestors are selected', () =>{
         let fst = new InfrastructureNode(),
@@ -83,7 +87,7 @@ describe('an application deployment', () => {
         snd.addPredecessor(third);
 
 
-        let roots = layerService.resolveRoots([fst, third, snd]);
+        let roots = Elements.resolveRoots([fst, third, snd]);
 
         expect(roots.length).toBe(1);
         expect(roots[0]).toBe(third);
@@ -96,7 +100,7 @@ describe('an application deployment', () => {
         parent.addSuccessor(deployment);
         deployment.addPredecessor(parent);
 
-        let roots = layerService.resolveRoots([parent, deployment]);
+        let roots = Elements.resolveRoots([parent, deployment]);
         expect(roots.length).toBe(1);
         expect(roots[0]).toBe(parent);
     });
@@ -109,7 +113,7 @@ describe('an application deployment', () => {
         parent.addSuccessor(deployment);
         deployment.addPredecessor(parent);
 
-        let roots = layerService.resolveRoots([deployment, parent]);
+        let roots = Elements.resolveRoots([deployment, parent]);
         expect(roots.length).toBe(1);
         expect(roots[0]).toBe(parent);
     });
@@ -164,15 +168,8 @@ describe('an application deployment', () => {
         // expect(level).toBe(2);
         // expect(root).toEqual(any(VirtualCloud));
     });
-
-
-    it('should be injected', () => {
-        expect(layerService).toBeTruthy();
-    });
-
-
-
-
-
+    it('should be imported', () => {
+        expect(Elements).toBeTruthy();
+    })
 
 });

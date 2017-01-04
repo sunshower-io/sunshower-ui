@@ -10,6 +10,11 @@ import {Vertex, Edge} from "algorithms/graph/graph";
 
 import {Canvas} from 'canvas/core/canvas';
 
+
+import {
+    DraftboardManager
+} from 'component/draftboard/draftboard'
+
 import {UUID} from "utils/uuid";
 import {Kv} from "utils/objects";
 import {mxCellOverlay} from "mxgraph";
@@ -26,15 +31,14 @@ export interface Element extends SceneGraphElement, Renderable, Layer {
 }
 
 
-
 type PropertyNode = Vertex<Properties>;
 
 type ElementRelationship = number;
 
 export class Relationship implements Edge<Properties> {
 
-    static readonly SUCCESSOR            : number = 0;
-    static readonly PREDECESSOR          : number = 1;
+    static readonly SUCCESSOR: number = 0;
+    static readonly PREDECESSOR: number = 1;
 
 
     constructor(public source: PropertyNode,
@@ -47,7 +51,99 @@ export class Relationship implements Edge<Properties> {
 }
 
 export class ElementProperties {
-    static readonly COLLAPSIBLE             :string = 'collapsible';
+    static readonly COLLAPSIBLE: string = 'collapsible';
+}
+
+export interface ElementFactory<E extends Element> {
+    create(model: EditorContext,
+           draftboardManager: DraftboardManager) : E;
+
+    getProperty(key:string) : any;
+
+    setProperty(key:string, value:any);
+}
+
+export class Elements {
+
+
+    static pluckLayers(cells: Layer[]): Element[] {
+        let results = [];
+        for (let cell of cells) {
+            if (cell.getAttribute('element')) {
+                results.push(cell as Element);
+            }
+        }
+        return results;
+    }
+
+    static aggregate(selection: Layer[]): {[key: string]: Element} {
+        let result = {};
+        for (let select of selection) {
+            result[select.id] = selection;
+        }
+        return result;
+    }
+
+
+    static resolveRoots(cells: Layer[]): Element[] {
+        let results = [],
+            duplicates = {},
+            selected = Elements.aggregate(cells);
+        for (let cell of cells) {
+            let root = Elements.resolveRoot(cell, selected);
+            if (root && root.getAttribute('element') && !duplicates[root.id]) {
+                results.push(root);
+                duplicates[root.id] = true;
+            }
+        }
+        return results;
+    }
+
+
+    static resolveRootAndLevel(cell: Element,
+                                      selected: {[key: string]: Element},
+                                      level: number): [Element, number] {
+        if (selected[cell.id]) {
+            let predecessors = cell.getPredecessors();
+            if (predecessors && predecessors.length) {
+                let max = level,
+                    root = cell;
+                for (let predecessor of predecessors) {
+                    if (selected[predecessor.id]) {
+                        let [element, height] = Elements.resolveRootAndLevel(
+                            predecessor,
+                            selected,
+                            level + 1
+                        );
+                        if (element && selected[element.id]) {
+                            if (height > max) {
+                                max = height;
+                                root = element;
+                            }
+                        } else {
+                            root = predecessor;
+                        }
+                    }
+                }
+                return [root, max];
+            }
+        }
+        return [null, null];
+    }
+
+    static resolveRoot(cell: Layer, selected: {[key: string]: Element}): Element {
+        if (cell.getAttribute('element')) {
+            let element = Elements.resolveRootAndLevel(
+                cell as Element,
+                selected, 0
+            );
+            if (element) {
+                return element[0];
+            }
+        } else {
+            return null;
+        }
+    }
 }
 
 export abstract class AbstractElement extends mxCell implements Element,
@@ -57,16 +153,15 @@ export abstract class AbstractElement extends mxCell implements Element,
         AbstractElement.createLoadingOverlay();
 
 
-    public readonly                         id : string;
-    public                                  icon : string;
-    public                                  name  :string;
-    public                                  host: Canvas;
-    public readonly                         data: Properties;
-    private readonly                        attributes: {[key: string]: string};
-    public readonly                         adjacencies: {[key: string]: Edge<Properties> };
+    public readonly id: string;
+    public icon: string;
+    public name: string;
+    public host: Canvas;
+    public readonly data: Properties;
+    private readonly attributes: {[key: string]: string};
+    public readonly adjacencies: {[key: string]: Edge<Properties>};
 
-    private readonly                        childNodes: PropertyNode[];
-
+    private readonly childNodes: PropertyNode[];
 
 
     constructor() {
@@ -82,20 +177,19 @@ export abstract class AbstractElement extends mxCell implements Element,
     }
 
 
-
-    setLabel(label:string) : void {
+    setLabel(label: string): void {
         this.attributes['label'] = label;
     }
 
-    getLabel() : string {
+    getLabel(): string {
         return this.attributes['label'];
     }
 
-    getAdjacencies(relationship:ElementRelationship) : PropertyNode[] {
+    getAdjacencies(relationship: ElementRelationship): PropertyNode[] {
         let results = [];
-        for(let k in this.adjacencies) {
+        for (let k in this.adjacencies) {
             let v = this.adjacencies[k];
-            if(v.relationship === relationship) {
+            if (v.relationship === relationship) {
                 results.push(v.target);
             }
         }
@@ -104,8 +198,7 @@ export abstract class AbstractElement extends mxCell implements Element,
 
     createEdge(source: PropertyNode,
                target: PropertyNode,
-               relationship?: number
-    ): Relationship {
+               relationship?: number): Relationship {
         return new Relationship(
             source,
             target,
@@ -122,9 +215,9 @@ export abstract class AbstractElement extends mxCell implements Element,
     }
 
 
-    addPredecessor(predecessor: PropertyNode) : boolean {
+    addPredecessor(predecessor: PropertyNode): boolean {
         let id = this.createId(predecessor, Relationship.PREDECESSOR);
-        if(this.adjacencies[id]) {
+        if (this.adjacencies[id]) {
             return false;
         }
         this.adjacencies[id] = this.createEdge(
@@ -136,24 +229,24 @@ export abstract class AbstractElement extends mxCell implements Element,
 
     }
 
-    removePredecessor(predecessor: PropertyNode) : boolean {
+    removePredecessor(predecessor: PropertyNode): boolean {
         let id = this.createId(predecessor, Relationship.PREDECESSOR);
-        if(!this.adjacencies[id]) {
+        if (!this.adjacencies[id]) {
             return false;
         }
         delete this.adjacencies[id];
     }
 
-    protected createId(node:PropertyNode, relationship:number) {
+    protected createId(node: PropertyNode, relationship: number) {
         return node.id + relationship;
     }
 
 
-    hasChildren() : boolean {
+    hasChildren(): boolean {
         return this.childNodes && this.childNodes.length > 0;
     }
 
-    getChildren() : PropertyNode[] {
+    getChildren(): PropertyNode[] {
         return this.childNodes;
     }
 
