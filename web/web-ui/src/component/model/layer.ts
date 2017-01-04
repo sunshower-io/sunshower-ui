@@ -1,5 +1,3 @@
-
-
 import {Element, AbstractElement} from "canvas/element/element";
 
 
@@ -11,31 +9,31 @@ import {
 } from "mxgraph";
 import {Kv} from "utils/objects";
 
-type Properties = {[key:string] : any};
+type Properties = {[key: string]: any};
 type PropertyNode = Vertex<Properties>;
 
-export class LayerElement extends AbstractElement {
 
-    constructor(
-        public name:string,
-        public description:string
-    ) {
+export class CompositeElement extends AbstractElement {
+
+    constructor(public readonly name: string,
+                public readonly description: string,
+                public readonly icon: string) {
         super();
         this.setLabel(name);
     }
 
-
-    addElements(members: Element[]) : void {
-        for(let member of members) {
+    addElements(members: Element[]): void {
+        for (let member of members) {
             let pmember = member as any as PropertyNode;
             this.addSuccessor(pmember);
             pmember.addPredecessor(this);
         }
     }
 
-    protected createLayerOverlay(): mxCellOverlay {
+    protected createOverlay(): mxCellOverlay {
+
         let
-            url = `assets/sui/themes/hasli/assets/images/layers.svg`,
+            url = this.icon,
             image = new mxImage(url, 24, 24),
             iconOverlay = new mxCellOverlay(
                 image,
@@ -50,7 +48,7 @@ export class LayerElement extends AbstractElement {
 
 
     protected createOverlays(): mxCellOverlay[] {
-        return [this.createLayerOverlay()];
+        return [this.createOverlay()];
     }
 
 
@@ -71,6 +69,21 @@ export class LayerElement extends AbstractElement {
             .pair(mxConstants.LINE_HEIGHT, 0.6)
             .pair('fontStyle', mxConstants.FONT_BOLD)
     }
+
+}
+
+export class LayerElement extends CompositeElement {
+
+    constructor(name: string,
+                description: string) {
+        super(
+            name,
+            description,
+            `assets/sui/themes/hasli/assets/images/layers.svg`
+        );
+    }
+
+
 }
 
 

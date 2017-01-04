@@ -1,11 +1,11 @@
-import {
-    AbstractMenuItem,
-    MenuItem
-} from 'common/elements/menu';
 import {DialogService} from "aurelia-dialog";
-import {EditorContext} from "canvas/core/canvas";
-import {CreateLayerDialog} from "./dialogs/create-layer-dialog";
 import {CanvasAction} from "../action";
+import {
+    EditorContext,
+    EditorOperations
+} from "canvas/core/canvas";
+
+import {GroupItemsAsDialog} from "./dialogs/group-items-as-dialog";
 
 export default class CreateBlockMenuItem extends CanvasAction {
 
@@ -20,10 +20,10 @@ export default class CreateBlockMenuItem extends CanvasAction {
     }
 
     apply(editor: EditorContext): void {
+        EditorOperations.set(editor, 'layer-type', 'Block');
         this.dialogService.open({
-            viewModel:
-            CreateLayerDialog,
-            model: editor
+            model: editor,
+            viewModel: GroupItemsAsDialog
         }).then((result) => {
             if (!result.wasCancelled) {
 

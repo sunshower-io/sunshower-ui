@@ -1,15 +1,19 @@
-import {EditorContext} from "canvas/core/canvas";
+import {EditorContext, EditorOperations} from "canvas/core/canvas";
 import {inject, bindable} from 'aurelia-framework';
 import {LayerService} from "component/service/layer-service";
 
 @inject(LayerService)
-export class CreateLayerDialog {
+export class GroupItemsAsDialog {
+
 
     @bindable
-    private name        :string;
+    private type                    : string;
 
     @bindable
-    private description         : string;
+    private name                    : string;
+
+    @bindable
+    private description             : string;
 
     private model: EditorContext;
 
@@ -19,6 +23,7 @@ export class CreateLayerDialog {
 
     activate(model: EditorContext): void {
         this.model = model;
+        this.type = EditorOperations.get(model, 'layer-type');
     }
 
     save(): void {

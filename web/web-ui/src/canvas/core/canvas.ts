@@ -29,16 +29,10 @@ import {Rectangle} from 'geometry/shapes';
 
 import {Element} from 'canvas/element/element';
 
-import {DialogService} from 'aurelia-dialog';
 import {CellRenderer} from "./cell-renderer";
 import {MenuSelector} from "./menu-selection";
 import {GraphHandler} from "./graph-handler";
 import {ConnectionHandler} from './connection-handler';
-import CreateLayerMenuItem from "canvas/menu/selection-menu/create-layer";
-import CreateBlockMenuItem from 'canvas/menu/selection-menu/create-block';
-import CreateGroupMenuItem from 'canvas/menu/selection-menu/create-group';
-import CreateVLANMenuItem from 'canvas/menu/selection-menu/create-vlan';
-import CreateSecurityGroupMenuItem from 'canvas/menu/selection-menu/create-security-group';
 import {CanvasModel} from "./canvas-model";
 import {VertexHandler} from "./vertex-handler";
 import {ActionManager} from "canvas/actions/action-service";
@@ -52,10 +46,29 @@ export interface NavigationAware {
 export interface EditorContext {
     host: NavigationAware;
     graph: Canvas;
-    offset      ?: {top: number, left: number};
-    location    ?: {x: number, y: number};
+    offset          ?: {top: number, left: number};
+    location        ?: {x: number, y: number};
+    properties      ?: {[key: string]: any};
 }
 
+
+export class EditorOperations {
+    static set(editorOperation: EditorContext,
+                 key: string,
+                 object: any): void {
+        if (!editorOperation.properties) {
+            editorOperation.properties = {};
+        }
+        editorOperation.properties[key] = object;
+    }
+
+    static get(editorOperation:EditorContext, key:string) : any {
+        if(editorOperation.properties) {
+            return editorOperation.properties[key];
+        }
+        return null;
+    }
+}
 export interface EditorOperation extends OperationContext {
     apply(context: EditorContext): void;
 }
@@ -130,14 +143,6 @@ export class Canvas extends mxGraph {
 
     createMenuSelector(): void {
         new MenuSelector(this, this.actionManager);
-        // for(let action of this.actionManager.getActions()) {
-        //     menu
-        // }
-        // menuSelector.addMenu(new CreateLayerMenuItem(this.dialogService));
-        // menuSelector.addMenu(new CreateBlockMenuItem(this.dialogService));
-        // menuSelector.addMenu(new CreateGroupMenuItem(this.dialogService));
-        // menuSelector.addMenu(new CreateVLANMenuItem(this.dialogService));
-        // menuSelector.addMenu(new CreateSecurityGroupMenuItem(this.dialogService));
     }
 
     createVertexHandler(state: mxCellState): mxVertexHandler {
