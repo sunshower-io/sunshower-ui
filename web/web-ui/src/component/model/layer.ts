@@ -2,7 +2,7 @@ import {
     Element,
     Elements,
     AbstractElement,
-    ElementFactory,
+    AbstractElementFactory,
 } from "canvas/element/element";
 
 
@@ -97,24 +97,8 @@ export class LayerElement extends CompositeElement {
 }
 
 
-export class LayerElementFactory implements ElementFactory<LayerElement> {
+export class LayerElementFactory extends AbstractElementFactory<LayerElement> {
 
-    properties: {[key:string]:any};
-
-
-    setProperty(key: string, value: any) {
-        if(!this.properties) {
-            this.properties = {};
-        }
-        this.properties[key] = value;
-    }
-
-    getProperty(key: string): any {
-        if(this.properties) {
-            return this.properties[key];
-        }
-        return null;
-    }
 
     create(model: EditorContext, draftboardManager: DraftboardManager): LayerElement {
 

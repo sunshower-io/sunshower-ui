@@ -21,7 +21,10 @@ export class Applications {
     @bindable
     private canvas: Canvas;
 
+
+    private loading: boolean = true;
     private element: HTMLElement;
+    private loader: HTMLElement;
 
 
     private elements: ImageDescriptor[];
@@ -57,13 +60,25 @@ export class Applications {
         return `${this.registry.get(Registry.S3_IMAGES_PATH)}/${id}`;
     }
 
+    activate(canvas: Canvas) {
+        this.canvas = canvas;
+    }
+
+    setLoading(): void {
+        let top = $(this.loader).offset().top,
+            wheight = $(window).height(),
+            height = wheight - top;
+        $(this.loader).height(height);
+        this.loading = true;
+    }
+
     public attached(): void {
+        this.setLoading();
         this.client.fetch('docker/images')
             .then(response => response.json() as any)
             .then(elements => {
                 let self = this;
                 this.elements = elements;
-                this.resize();
 
                 setTimeout(() => {
                     $(this.element).find('.app-drag-target').each((i: number, el: HTMLElement) => {
@@ -93,7 +108,7 @@ export class Applications {
                                 deployment.satisfy({
                                     host: null,
                                     graph: this.canvas,
-                                    location: {x:x, y:y},
+                                    location: {x: x, y: y},
                                 });
 
                             },
@@ -106,7 +121,11 @@ export class Applications {
                         );
                         dragSource.gridEnabled = true;
                         dragSource.guidesEnabled = true;
-                    })
+                        setTimeout(() => {
+                            this.resize();
+                            this.loading = false;
+                        }) ;
+                    });
                 });
             });
 

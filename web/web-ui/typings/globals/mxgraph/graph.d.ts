@@ -19,6 +19,15 @@ declare module 'mxgraph' {
     }
 
     export class mxGraphSelectionModel {
+
+        cells: Layer[];
+        /**
+         *
+         * @param t
+         * @param fireElement
+         */
+        addListener(t:string, fireElement:(a:mxGraphSelectionModel, b:mxEventObject) => void);
+
     }
 
     export class mxGraphBounds implements Cloneable<mxGraphBounds> {
@@ -170,6 +179,12 @@ declare module 'mxgraph' {
 
 
         setPanningHandler(handler: mxPanningHandler): void;
+
+        /**
+         *
+         */
+
+        getSelectionModel() : mxGraphSelectionModel;
 
         /**
          *

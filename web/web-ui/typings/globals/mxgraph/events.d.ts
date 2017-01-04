@@ -1,6 +1,7 @@
 declare module 'mxgraph' {
 
     export class mxEvent {
+        static readonly CHANGE                  : string;
         static readonly CLICK                   : string;
         static readonly GROUP_CELLS             : string;
 

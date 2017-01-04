@@ -1,6 +1,8 @@
 template
     .ui.basic.segment
-        h4.ui.header Applications
+        .ui.active.dimmer(ref="loader" style="position:absolute; top:0; bottom:0; left:0; right:0" if.bind="loading")
+            .ui.text.loader Loading Application List...
+    .ui.basic.segment
         .ui.fluid.multiple.search.selection.dropdown
             input(name='tags', type='hidden')
             i.dropdown.icon
@@ -8,7 +10,7 @@ template
             .menu
                 .item(data-value='database') Databases
                 .item(data-value='monitoring') Monitoring
-        .applications(ref="element")
+        .ui.applications(ref="element" show.bind="!loading")
             .ui.divided.stackable.items
                 .item.flex.small--item.app-drag-target(repeat.for="descriptor of elements")
                     .ui.mini.image

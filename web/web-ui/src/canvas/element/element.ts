@@ -435,3 +435,30 @@ export abstract class AbstractElement extends mxCell implements Element,
 
 }
 
+
+
+export abstract class AbstractElementFactory<E extends Element> implements ElementFactory<E> {
+
+    properties: {[key:string]:any};
+
+
+    setProperty(key: string, value: any) {
+        if(!this.properties) {
+            this.properties = {};
+        }
+        this.properties[key] = value;
+    }
+
+    getProperty(key: string): any {
+        if(this.properties) {
+            return this.properties[key];
+        }
+        return null;
+    }
+
+
+    abstract create(
+        model:EditorContext,
+        draftboardManager:DraftboardManager
+    ) : E;
+}

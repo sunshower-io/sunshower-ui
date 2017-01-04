@@ -4,7 +4,12 @@
 
 
 import {inject} from 'aurelia-framework';
+
 import {HttpClient} from "aurelia-fetch-client";
+
+import {
+    EventAggregator
+} from 'aurelia-event-aggregator';
 
 import * as PNotify from 'pnotify';
 import 'pnotify.callbacks';
@@ -13,6 +18,9 @@ import {
     mxGraph,
     Layer,
     mxCell,
+    mxEvent,
+    mxEventObject,
+    mxGraphSelectionModel
 } from "mxgraph";
 
 import {
@@ -66,6 +74,10 @@ import {bindable} from 'aurelia-framework';
 import {ToggleLeft, ToggleRight, SearchMenu} from "./menus/misc-menus";
 import {DefaultActionSet} from 'canvas/actions/default-action-set';
 import {ActionManager} from 'canvas/actions/action-service';
+
+import {CanvasEvents} from 'canvas/events/canvas-events';
+
+
 @inject(
     HttpClient,
     Draftboard,
@@ -73,7 +85,8 @@ import {ActionManager} from 'canvas/actions/action-service';
     DialogService,
     DraftboardManager,
     DefaultActionSet,
-    ActionManager
+    ActionManager,
+    EventAggregator
 )
 export class Applications extends AbstractGraph implements Listener,
     NavigationAware,
@@ -85,13 +98,27 @@ export class Applications extends AbstractGraph implements Listener,
 
     private infrastructureDialog: AddInfrastructureDialog;
 
+    private fireElementsChanged = (
+        sender:mxGraphSelectionModel, event:mxEventObject) => {
+        let cells = sender.cells;
+        if(cells && cells.length) {
+            this.eventAggregator.publish(CanvasEvents.CELL_SELECTION_CHANGED, {
+                name        : CanvasEvents.CELL_SELECTION_CHANGED,
+                cells       : cells,
+                canvas      : this.graph
+            })
+        }
+
+    };
+
     constructor(private client: HttpClient,
                 private parent: Draftboard,
                 registry: Registry,
                 private dialogService: DialogService,
                 private draftboardManager: DraftboardManager,
                 actionSet: DefaultActionSet,
-                private actionManager:ActionManager
+                private actionManager:ActionManager,
+                private eventAggregator: EventAggregator
     ) {
         super(registry);
         this.menus = [];
@@ -197,10 +224,13 @@ export class Applications extends AbstractGraph implements Listener,
                 f.get().css(position);
             }
         });
+
     }
 
     protected createBuilder(): Canvas {
-        return new Canvas(this.container, this.actionManager);
+        let canvas = new Canvas(this.container, this.actionManager);
+        canvas.getSelectionModel().addListener(mxEvent.CHANGE, this.fireElementsChanged);
+        return canvas;
     }
 
 }
