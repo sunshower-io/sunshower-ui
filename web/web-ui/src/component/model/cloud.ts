@@ -14,8 +14,17 @@ import {Constrained} from "./cell";
 import {Registry} from "utils/registry";
 import {EditorContext} from "canvas/core/canvas";
 import {RegistryAwareElement} from "canvas/element/registry-aware";
+import {EditableElement} from "canvas/element/element";
+import {VirtualCloudEditor} from "component/editors/cloud/editor";
+import {Class} from "lang/class";
 
-export class VirtualCloud extends RegistryAwareElement implements Constrained {
+export class VirtualCloud extends
+    RegistryAwareElement
+    implements
+        EditableElement<VirtualCloud, VirtualCloudEditor>,
+        Constrained {
+
+    editor: Class<VirtualCloudEditor> = VirtualCloudEditor;
 
     constructor(registry:Registry) {
         super(registry);

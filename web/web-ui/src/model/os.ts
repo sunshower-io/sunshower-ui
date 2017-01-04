@@ -1,4 +1,4 @@
-import {UUID} from "../utils/uuid";
+import {UUID} from "utils/uuid";
 export class OperatingSystem {
     public readonly id:UUID;
     constructor(public name?: string,

@@ -15,6 +15,7 @@ import {
     DraftboardManager
 } from 'component/draftboard/draftboard'
 
+import {Class} from "lang/class";
 import {UUID} from "utils/uuid";
 import {Kv} from "utils/objects";
 import {mxCellOverlay} from "mxgraph";
@@ -462,3 +463,17 @@ export abstract class AbstractElementFactory<E extends Element> implements Eleme
         draftboardManager:DraftboardManager
     ) : E;
 }
+
+
+export interface ElementEditor<E extends Element> {
+    open(e:E) : void;
+}
+
+export interface EditableElement<
+    E extends Element,
+    T extends ElementEditor<E>
+> {
+    editor: Class<T>;
+}
+
+

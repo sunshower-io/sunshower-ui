@@ -24,12 +24,19 @@ import {VirtualCloud} from "./cloud";
 import {EditorContext} from "canvas/core/canvas";
 
 import {RegistryAwareElement} from 'canvas/element/registry-aware';
+import {EditableElement} from "canvas/element/element";
+import {InfrastructureNodeEditor} from "component/editors/infrastructure-node/editor";
+import {Class} from "lang/class";
 
 
 
 export class InfrastructureNode extends
-    RegistryAwareElement
-implements Constrained {
+    RegistryAwareElement implements
+    Constrained,
+    EditableElement<InfrastructureNode, InfrastructureNodeEditor> {
+
+
+    readonly editor = InfrastructureNodeEditor;
 
 
     static gridWidth = 128;
@@ -43,13 +50,14 @@ implements Constrained {
 
     static count: number = 0;
 
+
     constructor(
         registry: Registry
     ) {
         super(registry);
         // this.setGeometry(0, 0, 120, 120);
         this.icon = 'assets/sui/themes/hasli/assets/images/icons/provider/generic/single-node-instance.svg';
-        this.name = "frapper";
+        this.name = "Node " + InfrastructureNode.count++;
     }
 
     public addTo(builder:Canvas) : mxCell {

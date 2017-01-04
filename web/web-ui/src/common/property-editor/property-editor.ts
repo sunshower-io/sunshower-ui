@@ -55,7 +55,9 @@ export class PropertyEditor {
             target.attr('contenteditable', 'false');
             target.css('background-color', bgcolor);
             delete this.propertyAware.data[property.key];
-            this.propertyAware.data[target.html()] = property.value;
+            let key = target.html();
+            this.propertyAware.data[key] = property.value;
+            property.key = key;
         });
     }
 

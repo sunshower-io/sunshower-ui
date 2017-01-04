@@ -2,25 +2,31 @@ import {CanvasEvents} from 'canvas/events/canvas-events';
 import {inject, bindable} from 'aurelia-framework'
 import {EventAggregator} from 'aurelia-event-aggregator';
 
-import {PropertyAware, PropertyEditor} from 'common/property-editor/property-editor'
+import ApplicationState from 'storage/application-state';
+import {PropertyAware} from 'common/property-editor/property-editor'
 
-
-@inject(EventAggregator)
+@inject(EventAggregator, ApplicationState)
 export class Editor {
 
 
     current: PropertyAware;
 
+
     onSelectionChanged = (event:any) => {
-        console.log("DONE");
         this.current = event.cells[0];
     };
 
 
-    constructor(private eventAggregator:EventAggregator) {
+    constructor(
+        private eventAggregator:EventAggregator,
+        private applicationState:ApplicationState
+    ) {
         eventAggregator.subscribe(
             CanvasEvents.CELL_SELECTION_CHANGED, this.onSelectionChanged);
+    }
 
+    attached() : void {
+        this.current = this.applicationState.currentElement as any as PropertyAware;
     }
 
 }

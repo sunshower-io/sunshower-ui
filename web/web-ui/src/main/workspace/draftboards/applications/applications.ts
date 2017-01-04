@@ -77,6 +77,10 @@ import {ActionManager} from 'canvas/actions/action-service';
 
 import {CanvasEvents} from 'canvas/events/canvas-events';
 
+import {Element} from 'canvas/element/element';
+
+
+import ApplicationState from 'storage/application-state';
 
 @inject(
     HttpClient,
@@ -86,7 +90,8 @@ import {CanvasEvents} from 'canvas/events/canvas-events';
     DraftboardManager,
     DefaultActionSet,
     ActionManager,
-    EventAggregator
+    EventAggregator,
+    ApplicationState
 )
 export class Applications extends AbstractGraph implements Listener,
     NavigationAware,
@@ -106,7 +111,9 @@ export class Applications extends AbstractGraph implements Listener,
                 name        : CanvasEvents.CELL_SELECTION_CHANGED,
                 cells       : cells,
                 canvas      : this.graph
-            })
+            });
+
+            this.applicationState.currentElement = cells[0] as Element;
         }
 
     };
@@ -118,7 +125,8 @@ export class Applications extends AbstractGraph implements Listener,
                 private draftboardManager: DraftboardManager,
                 actionSet: DefaultActionSet,
                 private actionManager:ActionManager,
-                private eventAggregator: EventAggregator
+                private eventAggregator: EventAggregator,
+                private applicationState:ApplicationState
     ) {
         super(registry);
         this.menus = [];

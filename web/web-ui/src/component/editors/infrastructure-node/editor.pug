@@ -1,0 +1,41 @@
+template
+    .element-editor
+        form.ui.tiny.form
+            .two.fields
+                .field
+                    .ui.inline.dropdown(ref="list")
+                        span.text.inlineimage
+                            img.ui.mini.image(src="")
+                            | Select OS
+                        .ui.dropdown.icon
+                        .menu
+                            .item(repeat.for="os of osService.list()")
+                                image.ui.image(src='assets/sui/themes/hasli/assets/images/logos/os/${os.icon}')
+                                | ${os.name}
+                .field(style="line-height:64px; vertical-align:middle")
+                    span.ui.medium.header ${node.name}
+
+            .one.field
+                label Node Name
+                input(type="text" name="name" value.bind="node.name")
+            .one.field
+                label Description
+                textarea(type="text" name="description", rows="2")
+            .two.fields
+                .field
+                    label Instance Count
+                    input(type="text" name="instanceCount")
+                .field
+                    label CPU
+                    input(type="text" name="cpu")
+            .two.fields
+                .field
+                    label Disk
+                    input(type="text" name="disk")
+                .field
+                    label Memory
+                    input(type="text" name="memory")
+
+
+
+
