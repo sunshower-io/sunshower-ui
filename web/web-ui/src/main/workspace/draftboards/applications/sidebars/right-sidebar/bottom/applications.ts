@@ -8,8 +8,8 @@ import {HttpClient} from "aurelia-fetch-client";
 import {ImageDescriptor} from "model/hal/image";
 
 import {Registry} from 'utils/registry'
-
 import {Canvas} from 'canvas/core/canvas';
+import {Element} from 'canvas/element/element';
 import {CanvasUtilities} from 'canvas/utilities';
 
 import {ApplicationDeployment} from "component/model/deployment";
@@ -93,7 +93,8 @@ export class Applications {
                                     y,
                                     CanvasUtilities.ofType(InfrastructureNode)
                                     ),
-                                    node: InfrastructureNode = null;
+                                    node: InfrastructureNode = null,
+                                    pparent = canvas.getCellAt(x, y, canvas.getDefaultParent(), true, false);
                                 try {
                                     canvas.model.beginUpdate();
                                     if (cparent) {
@@ -101,8 +102,17 @@ export class Applications {
                                     } else {
                                         node = new InfrastructureNode();
                                         node.geometry = new mxGeometry(x, y, 104, 168);
-                                        node.addTo(canvas, canvas.getDefaultParent());
-                                        registry.draftboardManager.add(node);
+                                        node.addTo(canvas, pparent);
+                                        if(pparent && pparent.addElement) {
+                                            let pgeom = pparent.geometry,
+                                                px = pgeom.x,
+                                                py = pgeom.y;
+                                            node.geometry.x = x - px;
+                                            node.geometry.y = y - py;
+                                            (pparent as Element).addElement(node);
+                                        } else {
+                                            registry.draftboardManager.add(node);
+                                        }
                                     }
                                     node.addElement(deployment);
                                 } finally {

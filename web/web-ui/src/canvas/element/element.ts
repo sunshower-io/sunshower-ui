@@ -245,7 +245,7 @@ export abstract class AbstractElement
 
 
     private recomputeLocation(parent:Layer) {
-        console.log("COOL", parent);
+
     }
 
 
