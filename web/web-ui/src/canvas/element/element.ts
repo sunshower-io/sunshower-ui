@@ -32,6 +32,7 @@ export interface Element extends SceneGraphElement, Renderable, Layer {
     addTo(
         canvas: Canvas,
         parent:Layer,
+        relative:boolean
    );
 
     addElement(element:Element) : void;
@@ -221,7 +222,7 @@ export abstract class AbstractElement
 
     }
 
-    addTo(context:Canvas, parent:Layer): Layer {
+    addTo(context:Canvas, parent:Layer, relative:boolean): Layer {
         this.beforeAdd(context);
         this.parent = parent;
         let result = this.host.addCell(this, parent);
@@ -230,6 +231,13 @@ export abstract class AbstractElement
         this.cellOverlays = overlays;
         for (let overlay of overlays) {
             this.host.addCellOverlay(result, overlay);
+        }
+        if(relative && parent) {
+            this.geometry.x -= parent.geometry.x;
+            this.geometry.y -= parent.geometry.y;
+        }
+        for(let child of this.childNodes) {
+            (child as any as Element).addTo(context, this, true);
         }
         this.afterAdd(context);
         return result;

@@ -94,7 +94,10 @@ export class Applications {
                                     CanvasUtilities.ofType(InfrastructureNode)
                                     ),
                                     node: InfrastructureNode = null,
-                                    pparent = canvas.getCellAt(x, y, canvas.getDefaultParent(), true, false);
+                                    defaultParent = canvas.getDefaultParent(),
+                                    pparent = canvas.getCellAt(x, y, defaultParent, true, false),
+                                    relative = pparent !== defaultParent;
+
                                 try {
                                     canvas.model.beginUpdate();
                                     if (cparent) {
@@ -102,7 +105,7 @@ export class Applications {
                                     } else {
                                         node = new InfrastructureNode();
                                         node.geometry = new mxGeometry(x, y, 104, 168);
-                                        node.addTo(canvas, pparent);
+                                        node.addTo(canvas, pparent, relative);
                                         if(pparent && pparent.addElement) {
                                             let pgeom = pparent.geometry,
                                                 px = pgeom.x,

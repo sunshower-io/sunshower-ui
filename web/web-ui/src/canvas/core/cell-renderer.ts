@@ -8,7 +8,7 @@ import {
 export class CellRenderer extends mxCellRenderer {
 
     redrawControl(state: mxCellState, forced: boolean) {
-        if(state.cell.getAttribute('collapsable')) {
+        if(state.cell.getAttribute('collapsible')) {
             return super.redrawControl(state, forced);
         }
     }

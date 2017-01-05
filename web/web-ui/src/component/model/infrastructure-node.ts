@@ -83,8 +83,8 @@ export class InfrastructureNode extends
         this.addApplication(e as any as ApplicationDeployment);
     }
 
-    public addTo(builder:Canvas, parent:Layer) : mxCell {
-        let result = super.addTo(builder, parent);
+    public addTo(builder:Canvas, parent:Layer, relative:boolean) : mxCell {
+        let result = super.addTo(builder, parent, relative);
         this.createMenu(builder);
         return result;
     }
@@ -174,7 +174,7 @@ export class InfrastructureNode extends
         applicationGeometry.y = applicationY;
         applicationGeometry.width /= scale;
         applicationGeometry.height /= this.scale;
-        application.addTo(this.host, this);
+        application.addTo(this.host, this, false);
     }
 
 

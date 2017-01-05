@@ -31,6 +31,7 @@ export class CompositeElement extends AbstractElement {
     constructor() {
         super();
         this.setLabel(name);
+        this.setCollapsable(true);
     }
 
     addElement(element: Element): void {
@@ -129,7 +130,7 @@ export class LayerElementFactory extends AbstractElementFactory<LayerElement> {
                 boundingBox.height + 96
             );
             layer.geometry = geometry;
-            layer.addTo(canvas, canvas.getDefaultParent());
+            layer.addTo(canvas, canvas.getDefaultParent(), false);
         } finally {
             canvas.getModel().endUpdate();
         }

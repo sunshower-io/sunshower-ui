@@ -73,8 +73,10 @@ export class Blocks {
 
                         this.canvas.getModel().beginUpdate();
                         try {
-                            let copy = $.extend(true, new BlockElement(), block);
-                            this.registry.draftboardManager.add(copy);
+                            let copy = block.copy();
+                            copy.geometry.x = x;
+                            copy.geometry.y = y;
+                            copy.addTo(this.canvas, this.canvas.getDefaultParent(), true);
                         }
                         finally {
                             this.canvas.getModel().endUpdate();

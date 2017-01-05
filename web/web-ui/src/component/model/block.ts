@@ -24,6 +24,13 @@ export class BlockElement extends CompositeElement {
         this.geometry = new mxGeometry();
     }
 
+    copy() : BlockElement {
+        let copy = new BlockElement();
+        copy.geometry = this.geometry.clone();
+        copy.name = this.name;
+        return copy;
+    }
+
 }
 
 export class BlockElementFactory extends AbstractElementFactory<BlockElement> {
@@ -58,7 +65,7 @@ export class BlockElementFactory extends AbstractElementFactory<BlockElement> {
                 boundingBox.height + 96
             );
             layer.geometry = geometry;
-            layer.addTo(model.graph, canvas.getDefaultParent());
+            layer.addTo(model.graph, canvas.getDefaultParent(), true);
         } finally {
             canvas.getModel().endUpdate();
         }
