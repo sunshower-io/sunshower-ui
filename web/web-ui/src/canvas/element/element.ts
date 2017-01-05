@@ -16,6 +16,8 @@ import {UUID} from "utils/uuid";
 import {Kv} from "utils/objects";
 import {mxCellOverlay} from "mxgraph";
 import {Registry} from "utils/registry";
+import {Rectangle} from "geometry/shapes";
+import {Element} from 'canvas/element/element';
 import {EditorContext} from "canvas/core/canvas";
 
 type Properties = {[key: string]: any};
@@ -27,6 +29,12 @@ export interface Element extends SceneGraphElement, Renderable, Layer {
 
     getPredecessors(): Element[];
 
+    addTo(
+        canvas: Canvas,
+        parent:Layer,
+   );
+
+    addElement(element:Element) : void;
 
     beforeAdd(context: Canvas): void;
 
@@ -182,6 +190,9 @@ export abstract class AbstractElement
 
     static count = 0;
 
+
+    public location: Rectangle;
+
     constructor() {
         super();
         this.id = UUID.randomUUID().value;
@@ -210,9 +221,11 @@ export abstract class AbstractElement
 
     }
 
-    addTo(context:Canvas): Layer {
+    addTo(context:Canvas, parent:Layer): Layer {
         this.beforeAdd(context);
-        let result = this.host.addCell(this, this.parent || this.host.getDefaultParent());
+        this.parent = parent;
+        let result = this.host.addCell(this, parent);
+        this.recomputeLocation(parent);
         let overlays = this.createOverlays();
         this.cellOverlays = overlays;
         for (let overlay of overlays) {
@@ -220,6 +233,19 @@ export abstract class AbstractElement
         }
         this.afterAdd(context);
         return result;
+    }
+
+    public addElement(e:Element) : void {
+        if(e) {
+            let pnode = e as any as PropertyNode;
+            this.addSuccessor(pnode);
+            pnode.addPredecessor(this);
+        }
+    }
+
+
+    private recomputeLocation(parent:Layer) {
+        console.log("COOL", parent);
     }
 
 

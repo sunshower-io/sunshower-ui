@@ -129,7 +129,7 @@ export class LayerElementFactory extends AbstractElementFactory<LayerElement> {
                 boundingBox.height + 96
             );
             layer.geometry = geometry;
-            layer.addTo(canvas);
+            layer.addTo(canvas, canvas.getDefaultParent());
         } finally {
             canvas.getModel().endUpdate();
         }

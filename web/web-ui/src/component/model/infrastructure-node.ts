@@ -3,13 +3,13 @@ import {
     mxImage,
     mxCellOverlay,
     mxConstants,
+    Layer,
     mxGeometry
 } from 'mxgraph';
 
-import {Registry} from 'utils/registry';
-
 
 import {Canvas} from "canvas/core/canvas";
+import {Element} from 'canvas/element/element';
 
 import {ApplicationDeployment} from "./deployment";
 
@@ -18,8 +18,6 @@ import {
     NetworkMenuItem,
     StorageMenuItem
 } from "canvas/menu/task-cell";
-import {Constrained} from "./cell";
-import {EditorContext} from "canvas/core/canvas";
 
 import {RegistryAwareElement} from 'canvas/element/registry-aware';
 import {EditableElement} from "canvas/element/element";
@@ -33,7 +31,6 @@ import {
 
 export class InfrastructureNode extends
     RegistryAwareElement implements
-    Constrained,
     EditableElement<
         InfrastructureNode,
         InfrastructureNodeEditor
@@ -82,8 +79,12 @@ export class InfrastructureNode extends
     }
 
 
-    public addTo(builder:Canvas) : mxCell {
-        let result = super.addTo(builder);
+    public addElement(e:Element) {
+        this.addApplication(e as any as ApplicationDeployment);
+    }
+
+    public addTo(builder:Canvas, parent:Layer) : mxCell {
+        let result = super.addTo(builder, parent);
         this.createMenu(builder);
         return result;
     }
@@ -178,19 +179,19 @@ export class InfrastructureNode extends
         applicationGeometry.y = applicationY;
         applicationGeometry.width /= scale;
         applicationGeometry.height /= this.scale;
-        application.addTo(this.host);
+        application.addTo(this.host, this);
     }
 
 
-    satisfy(context: EditorContext): void {
-        this.geometry = new mxGeometry(
-            context.location.x,
-            context.location.y,
-            104,
-            168
-        );
-        this.addTo(context.graph);
-    }
+    // satisfy(context: EditorContext): void {
+    //     this.geometry = new mxGeometry(
+    //         context.location.x,
+    //         context.location.y,
+    //         104,
+    //         168
+    //     );
+    //     this.addTo(context.graph);
+    // }
 
     protected createNodeOverlay(): mxCellOverlay {
         let

@@ -35,26 +35,7 @@ export class Applications {
     }
 
 
-    // addImage(id: string, e: DragEvent) {
-    //     let event = createEvent('palette-event',
-    //         new ApplicationProcessor(
-    //             id,
-    //             this.registry,
-    //             {x: e.clientX, y: e.clientY},
-    //         ));
-    //     this.element.dispatchEvent(event);
-    // }
 
-
-    startDrag(id: string, event: MouseEvent): void {
-        let e = createEvent('palette-event',
-            new DragProcessor(
-                id,
-                event.target as HTMLElement,
-                this.registry
-            ));
-        this.element.dispatchEvent(e);
-    }
 
     private getIconUrl(id: string): string {
         return `${this.registry.get(Registry.S3_IMAGES_PATH)}/${id}`;
@@ -104,11 +85,13 @@ export class Applications {
                                 console.log('x', x, 'y', y);
                                 deployment.geometry.x = x;
                                 deployment.geometry.y = y;
-                                deployment.satisfy({
-                                    host: null,
-                                    graph: this.canvas,
-                                    location: {x: x, y: y},
-                                });
+                                deployment.addTo(this.canvas, this.canvas.getDefaultParent());
+
+                                // deployment.satisfy({
+                                //     host: null,
+                                //     graph: this.canvas,
+                                //     location: {x: x, y: y},
+                                // });
 
                             },
                             element,
@@ -141,43 +124,5 @@ export class Applications {
             $(this.element).height(height);
         }
     }
-}
-
-class DragProcessor implements EditorOperation {
-    constructor(private id: string,
-                private element: HTMLElement,
-                private registry: Registry) {
-
-    }
-
-    apply(context: EditorContext): void {
-        let element = document.createElement('div');
-        element.style.border = 'dashed black 1px';
-        element.style.width = '100px';
-        element.style.height = '100px';
-
-        let dragSource = mxUtils.makeDraggable(
-            this.element,
-            context.graph,
-            (graph: Canvas, event: Event, target: any, x: number, y: number) => {
-                let deployment = new ApplicationDeployment();
-                deployment.applicationId = this.id;
-                console.log('x', x, 'y', 'y');
-                deployment.geometry.x = x;
-                deployment.geometry.y = y;
-                deployment.satisfy(context);
-
-            },
-            element,
-            0,
-            0,
-            true,
-            false,
-            true
-        );
-        dragSource.gridEnabled = true;
-        dragSource.guidesEnabled = true;
-    }
-
 }
 

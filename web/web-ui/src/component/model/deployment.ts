@@ -29,8 +29,7 @@ import {mxGeometry} from "mxgraph";
 export class ApplicationDeployment extends
     RegistryAwareElement
 implements
-    Listener,
-    Constrained
+    Listener
 {
 
     icon: string;
@@ -47,38 +46,38 @@ implements
 
 
 
-    satisfy(context: EditorContext): void {
-        try {
-            context.graph.getModel().beginUpdate();
-            this.doSatisfy(context);
-        } finally {
-            context.graph.getModel().endUpdate();
-        }
-    }
+    // satisfy(context: EditorContext): void {
+    //     try {
+    //         context.graph.getModel().beginUpdate();
+    //         this.doSatisfy(context);
+    //     } finally {
+    //         context.graph.getModel().endUpdate();
+    //     }
+    // }
 
-    private doSatisfy(context: EditorContext) {
-        let location = context.location,
-            parent = this.resolveParent(
-                context,
-                location.x,
-                location.y,
-                InfrastructureNode
-            ),
-            node: InfrastructureNode = null;
-
-        if (parent instanceof InfrastructureNode) {
-            node = parent as InfrastructureNode;
-        } else {
-            node = new InfrastructureNode();
-            node.satisfy(context);
-        }
-        this.parent = node;
-        node.addApplication(this);
-        node.addSuccessor(this);
-        this.registry.draftboardManager.add(node);
-        this.addPredecessor(node);
-        this.load(node);
-    }
+    // private doSatisfy(context: EditorContext) {
+    //     let location = context.location,
+    //         parent = this.resolveParent(
+    //             context,
+    //             location.x,
+    //             location.y,
+    //             InfrastructureNode
+    //         ),
+    //         node: InfrastructureNode = null;
+    //
+    //     if (parent instanceof InfrastructureNode) {
+    //         node = parent as InfrastructureNode;
+    //     } else {
+    //         node = new InfrastructureNode();
+    //         node.satisfy(context);
+    //     }
+    //     this.parent = node;
+    //     node.addApplication(this);
+    //     node.addSuccessor(this);
+    //     this.registry.draftboardManager.add(node);
+    //     this.addPredecessor(node);
+    //     this.load(node);
+    // }
 
     protected load(node: InfrastructureNode) {
         this.setLoading();

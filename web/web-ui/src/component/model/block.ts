@@ -58,7 +58,7 @@ export class BlockElementFactory extends AbstractElementFactory<BlockElement> {
                 boundingBox.height + 96
             );
             layer.geometry = geometry;
-            layer.addTo(model.graph);
+            layer.addTo(model.graph, canvas.getDefaultParent());
         } finally {
             canvas.getModel().endUpdate();
         }
