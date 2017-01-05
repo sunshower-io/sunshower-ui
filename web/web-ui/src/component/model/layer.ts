@@ -21,8 +21,12 @@ import {EditorContext} from "canvas/core/canvas";
 type Properties = {[key: string]: any};
 type PropertyNode = Vertex<Properties>;
 
+interface pt {
+    x:number;
+    y:number;
+}
 
-export class CompositeElement extends AbstractElement {
+export abstract class CompositeElement extends AbstractElement {
 
     public name: string;
     public description: string;
@@ -45,6 +49,34 @@ export class CompositeElement extends AbstractElement {
             this.addElement(member);
         }
     }
+
+    protected computePosition() : mxGeometry {
+        let predecessors = this.getPredecessors(),
+            tgeo = this.geometry.clone();
+
+        if(predecessors && predecessors.length > 0) {
+            let predecessor = predecessors[0],
+                geo = predecessor.geometry;
+            tgeo.x -= geo.x;
+            tgeo.y -= geo.y;
+        }
+        return tgeo;
+    }
+
+    copy(): CompositeElement {
+        let copy = this.shallowCopy(),
+            geometry = this.computePosition();
+        copy.geometry = geometry;
+        for(let child of this.getChildren()) {
+            let ccopy = child as any as Element;
+            copy.addElement(ccopy.copy());
+        }
+        return copy;
+    }
+
+    protected abstract shallowCopy(): CompositeElement;
+
+
 
     protected createOverlay(): mxCellOverlay {
 
@@ -95,6 +127,11 @@ export class LayerElement extends CompositeElement {
         this.icon = `assets/sui/themes/hasli/assets/images/layers.svg`
     }
 
+    protected shallowCopy(): CompositeElement {
+        let copy = new LayerElement();
+        copy.name = this.name;
+        return copy;
+    }
 }
 
 

@@ -34,7 +34,7 @@ describe('an application deployment', () => {
         containerElement = document.createElement('div');
         container = new Container();
         draftboardManager = container.get(DraftboardManager);
-        canvas = new Canvas(containerElement, new ActionManager())
+        canvas = new Canvas(containerElement, registry, new ActionManager());
         registry = container.get(Registry);
 
         context = {
@@ -48,18 +48,6 @@ describe('an application deployment', () => {
     });
 
 
-
-    it('should construct the correct node hierarchy when deployment.satisfy() is invoked', () => {
-        let deployment = new ApplicationDeployment(registry, '');
-        deployment.satisfy(context);
-        expect(deployment.getChildren().length).toBe(0);
-        expect(deployment.getPredecessors().length).toBe(1);
-        let hostInfrastructure = deployment.getPredecessors()[0];
-        expect(hostInfrastructure).toEqual(any(InfrastructureNode));
-        // expect(hostInfrastructure.getPredecessors().length).toBe(1);
-        // let cloud = hostInfrastructure.getPredecessors()[0];
-        // expect(cloud).toEqual(any(VirtualCloud));
-    });
 
     it('should be able to open and close a graph transaction', () => {
 

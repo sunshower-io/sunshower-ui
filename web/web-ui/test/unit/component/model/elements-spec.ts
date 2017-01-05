@@ -43,7 +43,7 @@ describe('an application deployment', () => {
         actionManager = new ActionManager(null);
         actionSet = new DefaultActionSet(null, actionManager);
         draftboardManager = container.get(DraftboardManager);
-        canvas = new Canvas(containerElement, actionManager);
+        canvas = new Canvas(containerElement, registry, actionManager);
         registry = container.get(Registry);
 
         context = {

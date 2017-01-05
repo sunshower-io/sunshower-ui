@@ -86,6 +86,7 @@ export class Blocks {
                             copy.geometry.x = x;
                             copy.geometry.y = y;
                             copy.addTo(this.canvas, this.canvas.getDefaultParent(), false);
+                            this.blockManager.add(copy as BlockElement);
                             this.addRecursively(this.canvas, copy, x, y, true);
                         }
                         finally {

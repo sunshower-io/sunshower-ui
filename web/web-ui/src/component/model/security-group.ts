@@ -1,10 +1,10 @@
 import {CompositeElement} from './layer';
 
-export class SecurityGroupElement extends CompositeElement {
+export class SecurityGroupElement {
 
     constructor() {
-        super();
-        this.icon = `assets/sui/themes/hasli/assets/images/layers.svg`;
+        // super();
+        // this.icon = `assets/sui/themes/hasli/assets/images/layers.svg`;
     }
 
 }

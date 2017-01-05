@@ -1,10 +1,10 @@
 import {CompositeElement} from './layer';
 
-export class GroupElement extends CompositeElement {
+export class GroupElement {
 
     constructor() {
-        super();
-        this.icon = `assets/sui/themes/hasli/assets/images/layers.svg`;
+        // super();
+        // this.icon = `assets/sui/themes/hasli/assets/images/layers.svg`;
     }
 
 

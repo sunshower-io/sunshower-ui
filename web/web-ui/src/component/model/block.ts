@@ -24,17 +24,22 @@ export class BlockElement extends CompositeElement {
         this.geometry = new mxGeometry();
     }
 
-    copy() : BlockElement {
+    // copy() : BlockElement {
+    //     let copy = new BlockElement();
+    //     copy.geometry = this.geometry.clone();
+    //     copy.name = this.name;
+    //     for(let child of this.getChildren()) {
+    //         let ccopy = child as any as Element;
+    //         copy.addElement(ccopy.copy());
+    //     }
+    //     return copy;
+    // }
+
+    protected shallowCopy(): CompositeElement {
         let copy = new BlockElement();
-        copy.geometry = this.geometry.clone();
         copy.name = this.name;
-        for(let child of this.getChildren()) {
-            let ccopy = child as any as Element;
-            copy.addElement(ccopy.copy());
-        }
         return copy;
     }
-
 }
 
 export class BlockElementFactory extends AbstractElementFactory<BlockElement> {
