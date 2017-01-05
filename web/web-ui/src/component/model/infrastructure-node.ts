@@ -66,6 +66,26 @@ export class InfrastructureNode extends
         this.set('element', '1', true);
     }
 
+
+    findRelative() : Element {
+        return this.getPredecessors()[0];
+    }
+
+    public copy() : InfrastructureNode {
+        let copy = new InfrastructureNode(),
+            predecessor = this.findRelative();
+        copy.icon = this.icon;
+        copy.geometry = this.geometry.clone();
+        copy.geometry.x -= predecessor.geometry.x;
+        copy.geometry.y -= predecessor.geometry.y;
+        copy.host = this.host;
+        for(let child of this.getChildren()) {
+            let ccopy = child as any as Element;
+            copy.addElement(ccopy.copy());
+        }
+        return copy;
+    }
+
     public setConfiguration(configuration:NodeConfiguration) : void {
         this.configuration = configuration;
     }

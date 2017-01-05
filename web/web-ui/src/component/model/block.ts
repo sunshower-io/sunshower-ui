@@ -28,6 +28,10 @@ export class BlockElement extends CompositeElement {
         let copy = new BlockElement();
         copy.geometry = this.geometry.clone();
         copy.name = this.name;
+        for(let child of this.getChildren()) {
+            let ccopy = child as any as Element;
+            copy.addElement(ccopy.copy());
+        }
         return copy;
     }
 
@@ -52,6 +56,7 @@ export class BlockElementFactory extends AbstractElementFactory<BlockElement> {
             .removeAll(roots);
 
         layer.addElements(roots);
+        blockManager.add(layer);
         draftboardManager.add(layer);
 
         try {
@@ -65,7 +70,7 @@ export class BlockElementFactory extends AbstractElementFactory<BlockElement> {
                 boundingBox.height + 96
             );
             layer.geometry = geometry;
-            layer.addTo(model.graph, canvas.getDefaultParent(), true);
+            layer.addTo(model.graph, canvas.getDefaultParent(), false);
         } finally {
             canvas.getModel().endUpdate();
         }

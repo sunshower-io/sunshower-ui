@@ -24,14 +24,14 @@ export class Blocks {
     @bindable
     private canvas: Canvas;
 
-    private blockManager:BlockManager;
+    private blockManager: BlockManager;
 
     constructor(private registry: Registry) {
         this.blockManager = registry.blockManager;
         console.log("BM", this.blockManager);
     }
 
-    activate(canvas:Canvas) {
+    activate(canvas: Canvas) {
         this.canvas = canvas;
     }
 
@@ -44,6 +44,15 @@ export class Blocks {
             $(this.element).height(height);
         }
     };
+
+
+    addRecursively(canvas: Canvas, parent: Element, x: number, y: number, relative: boolean): void {
+        for (let child of parent.getSuccessors()) {
+            child.addTo(canvas, parent, false);
+            this.addRecursively(canvas, child, x, y, false);
+        }
+    }
+
 
     attached(): void {
         this.resize();
@@ -76,7 +85,8 @@ export class Blocks {
                             let copy = block.copy();
                             copy.geometry.x = x;
                             copy.geometry.y = y;
-                            copy.addTo(this.canvas, this.canvas.getDefaultParent(), true);
+                            copy.addTo(this.canvas, this.canvas.getDefaultParent(), false);
+                            this.addRecursively(this.canvas, copy, x, y, true);
                         }
                         finally {
                             this.canvas.getModel().endUpdate();

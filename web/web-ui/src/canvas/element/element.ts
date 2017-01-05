@@ -11,7 +11,7 @@ import {Vertex, Edge} from "algorithms/graph/graph";
 import {Canvas} from 'canvas/core/canvas';
 
 
-import {Class} from "lang/class";
+import {Class, Copyable} from "lang/class";
 import {UUID} from "utils/uuid";
 import {Kv} from "utils/objects";
 import {mxCellOverlay} from "mxgraph";
@@ -23,7 +23,7 @@ import {EditorContext} from "canvas/core/canvas";
 type Properties = {[key: string]: any};
 
 
-export interface Element extends SceneGraphElement, Renderable, Layer {
+export interface Element extends SceneGraphElement, Renderable, Layer, Copyable<Element> {
 
     getSuccessors(): Element[];
 
@@ -206,6 +206,10 @@ export abstract class AbstractElement
         this.setAttribute('element', '1');
     }
 
+    copy() : Element {
+        return this;
+    }
+
     beforeAdd(context: Canvas): void {
         this.host = context;
     }
@@ -231,13 +235,6 @@ export abstract class AbstractElement
         this.cellOverlays = overlays;
         for (let overlay of overlays) {
             this.host.addCellOverlay(result, overlay);
-        }
-        if(relative && parent) {
-            this.geometry.x -= parent.geometry.x;
-            this.geometry.y -= parent.geometry.y;
-        }
-        for(let child of this.childNodes) {
-            (child as any as Element).addTo(context, this, true);
         }
         this.afterAdd(context);
         return result;

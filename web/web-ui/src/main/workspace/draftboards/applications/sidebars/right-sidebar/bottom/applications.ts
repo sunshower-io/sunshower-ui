@@ -107,11 +107,11 @@ export class Applications {
                                         node.geometry = new mxGeometry(x, y, 104, 168);
                                         node.addTo(canvas, pparent, relative);
                                         if(pparent && pparent.addElement) {
-                                            let pgeom = pparent.geometry,
-                                                px = pgeom.x,
-                                                py = pgeom.y;
-                                            node.geometry.x = x - px;
-                                            node.geometry.y = y - py;
+                                            // let pgeom = pparent.geometry,
+                                            //     px = pgeom.x,
+                                            //     py = pgeom.y;
+                                            // node.geometry.x = x - px;
+                                            // node.geometry.y = y - py;
                                             (pparent as Element).addElement(node);
                                         } else {
                                             registry.draftboardManager.add(node);
