@@ -108,11 +108,6 @@ export class InfrastructureNode extends
             this.host.model.endUpdate();
         }
         this.addSuccessor(application);
-        application.addPredecessor(this);
-        this.registry.draftboardManager.dispatch(
-            'element-added',
-            new Event('element-added',
-                application));
     }
 
     addGridRow() : void {

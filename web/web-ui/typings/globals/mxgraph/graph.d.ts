@@ -255,7 +255,9 @@ declare module 'mxgraph' {
                   y: number,
                   parent?: Layer,
                   vertices?: boolean,
-                  edges?: boolean);
+                  edges?: boolean,
+                  ignore?:(state:mxCellState, x:number, y:number) => boolean
+        );
 
         ungroupCells(layers: Layer[]): Layer[];
 

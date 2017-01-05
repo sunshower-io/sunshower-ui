@@ -420,17 +420,6 @@ export abstract class AbstractElement
     }
 
 
-    protected resolveParent(context: EditorContext, x: number, y: number, type: any): mxCell {
-        let graph = context.graph,
-            defaultParent = graph.getDefaultParent(),
-            parent = graph.getCellAt(x, y, defaultParent, true, false);
-
-        while (parent && !(parent instanceof type)) {
-            parent = parent.parent;
-        }
-        return parent || defaultParent;
-    }
-
     getAttribute(key: string): string {
         return this.attributes && this.attributes[key];
     }

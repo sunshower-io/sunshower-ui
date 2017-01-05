@@ -24,6 +24,7 @@ import {EditorContext} from "canvas/core/canvas";
 import {RegistryAwareElement} from "canvas/element/registry-aware";
 import {InfrastructureNode} from "./infrastructure-node";
 import {mxGeometry} from "mxgraph";
+import {Layer} from "mxgraph";
 
 
 export class ApplicationDeployment extends
@@ -45,6 +46,12 @@ implements
     }
 
 
+
+    addTo(canvas:Canvas, parent:Layer) : Layer {
+        super.addTo(canvas, parent);
+        this.load(parent as InfrastructureNode);
+        return this;
+    }
 
     // satisfy(context: EditorContext): void {
     //     try {

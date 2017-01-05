@@ -1,19 +1,19 @@
-import {Layer, mxUtils} from 'mxgraph';
+import {
+    Layer,
+    mxUtils,
+    mxGeometry
+} from 'mxgraph';
 import {inject, bindable} from 'aurelia-framework'
 import {HttpClient} from "aurelia-fetch-client";
-import {createEvent} from "utils/events";
 import {ImageDescriptor} from "model/hal/image";
 
 import {Registry} from 'utils/registry'
 
-import {
-    EditorOperation,
-    EditorContext,
-} from 'main/workspace/draftboards/editor';
-
 import {Canvas} from 'canvas/core/canvas';
+import {CanvasUtilities} from 'canvas/utilities';
 
 import {ApplicationDeployment} from "component/model/deployment";
+import {InfrastructureNode} from 'component/model/infrastructure-node';
 
 @inject(HttpClient, Registry)
 export class Applications {
@@ -35,8 +35,6 @@ export class Applications {
     }
 
 
-
-
     private getIconUrl(id: string): string {
         return `${this.registry.get(Registry.S3_IMAGES_PATH)}/${id}`;
     }
@@ -53,60 +51,72 @@ export class Applications {
         this.loading = true;
     }
 
+    private createDragElement(descriptor: ImageDescriptor): HTMLElement {
+        let element = document.createElement('div');
+        element.style.border = 'dashed black 1px';
+        element.style.width = '100px';
+        element.style.height = '100px';
+        let img = $(`<img src="${this.getIconUrl(descriptor.logo_url.large)}" 
+                        width="100px" 
+                        height="100px" />
+                    `);
+        $(element).append(img);
+        return element;
+    }
+
     public attached(): void {
         this.setLoading();
         this.client.fetch('docker/images')
             .then(response => response.json() as any)
             .then(elements => {
-                let self = this;
                 this.elements = elements;
-
                 setTimeout(() => {
                     $(this.element).find('.app-drag-target').each((i: number, el: HTMLElement) => {
-                        let element = document.createElement('div'),
+                        let
                             descriptor = this.elements[i],
-                            id = descriptor.pid;
-                        element.style.border = 'dashed black 1px';
-                        element.style.width = '100px';
-                        element.style.height = '100px';
-
-                        let img = $(`
-                                <img src="${this.getIconUrl(descriptor.logo_url.large)}" width="100px" height="100px" />
-                        `);
-                        $(element).append(img);
-
-
+                            id = descriptor.pid,
+                            element = this.createDragElement(descriptor);
                         let dragSource = mxUtils.makeDraggable(
                             el,
                             this.canvas,
                             (graph: Canvas, event: Event, target: any, x: number, y: number) => {
-                                let deployment = new ApplicationDeployment();
+                                let deployment = new ApplicationDeployment(),
+                                    canvas = this.canvas,
+                                    registry = this.registry;
                                 deployment.applicationId = id;
-                                console.log('x', x, 'y', y);
                                 deployment.geometry.x = x;
                                 deployment.geometry.y = y;
-                                deployment.addTo(this.canvas, this.canvas.getDefaultParent());
 
-                                // deployment.satisfy({
-                                //     host: null,
-                                //     graph: this.canvas,
-                                //     location: {x: x, y: y},
-                                // });
-
+                                let cparent = CanvasUtilities.resolveParent(
+                                    this.canvas,
+                                    x,
+                                    y,
+                                    CanvasUtilities.ofType(InfrastructureNode)
+                                    ),
+                                    node: InfrastructureNode = null;
+                                try {
+                                    canvas.model.beginUpdate();
+                                    if (cparent) {
+                                        node = cparent as InfrastructureNode;
+                                    } else {
+                                        node = new InfrastructureNode();
+                                        node.geometry = new mxGeometry(x, y, 104, 168);
+                                        node.addTo(canvas, canvas.getDefaultParent());
+                                        registry.draftboardManager.add(node);
+                                    }
+                                    node.addElement(deployment);
+                                } finally {
+                                    canvas.model.endUpdate();
+                                }
                             },
-                            element,
-                            0,
-                            0,
-                            true,
-                            true,
-                            true
+                            element, 0, 0, true, true, true
                         );
                         dragSource.gridEnabled = true;
                         dragSource.guidesEnabled = true;
                         setTimeout(() => {
                             this.resize();
                             this.loading = false;
-                        }) ;
+                        });
                     });
                 });
             });
@@ -116,7 +126,7 @@ export class Applications {
 
     private resize = () => {
         let offset = $(this.element).offset();
-        if(offset) {
+        if (offset) {
 
             let top = offset.top,
                 wheight = $(window).height(),
