@@ -1,3 +1,101 @@
+import {inject} from 'aurelia-framework';
+import {Canvas} from 'canvas/core/canvas';
+import {BlockElement} from 'component/model/block';
+import {BlockManager} from 'component/blocks/block';
+
+import {bindable} from 'aurelia-framework';
+import {
+    mxUtils
+} from 'mxgraph';
+
+import {Registry} from 'utils/registry';
+
+@inject(Registry)
 export class Blocks {
 
+    private element: HTMLElement;
+
+    private elements: BlockElement[];
+
+    @bindable
+    private canvas: Canvas;
+
+    private blockManager:BlockManager;
+
+    constructor(private registry: Registry) {
+        this.blockManager = registry.blockManager;
+        console.log("BM", this.blockManager);
+    }
+
+    activate(canvas:Canvas) {
+        this.canvas = canvas;
+    }
+
+    private resize = () => {
+        let offset = $(this.element).offset();
+        if (offset) {
+            let top = offset.top,
+                wheight = $(window).height(),
+                height = wheight - top - 32;
+            $(this.element).height(height);
+        }
+    };
+
+    attached(): void {
+        this.resize();
+        $(window).resize(this.resize);
+        this.elements = this.blockManager.list();
+
+
+        setTimeout(() => {
+            $(this.element).find('.app-drag-target').each((i: number, el: HTMLElement) => {
+                let element = document.createElement('div'),
+                    descriptor = this.elements[i],
+                    id = descriptor.id,
+                    icon = descriptor.icon;
+                element.style.border = 'dashed black 1px';
+                element.style.width = '100px';
+                element.style.height = '100px';
+
+                let img = $(`<img src="${icon}" width="100px" height="100px" />`);
+                $(element).append(img);
+
+
+                let dragSource = mxUtils.makeDraggable(
+                    el,
+                    this.canvas,
+                    (graph: Canvas, event: Event, target: any, x: number, y: number) => {
+                        let block = this.elements[i];
+
+                        this.canvas.getModel().beginUpdate();
+                        try {
+                            let copy = block.copyInto(this.canvas, this.canvas.getDefaultParent(), x, y);
+                            copy.addTo(this.canvas);
+                            this.canvas.moveCells([copy], x, y, false);
+                            this.canvas.refresh(copy);
+                            this.registry.draftboardManager.add(copy);
+                        }
+                        finally {
+                            this.canvas.getModel().endUpdate();
+                        }
+                    },
+                    element,
+                    0,
+                    0,
+                    true,
+                    true,
+                    true
+                );
+                dragSource.gridEnabled = true;
+                dragSource.guidesEnabled = true;
+                setTimeout(() => {
+                    this.resize();
+                });
+            });
+
+            $(window).resize(this.resize);
+
+        })
+
+    }
 }

@@ -19,6 +19,7 @@ import {Class} from "lang/class";
 import {UUID} from "utils/uuid";
 import {Kv} from "utils/objects";
 import {mxCellOverlay} from "mxgraph";
+import {Registry} from "utils/registry";
 import {EditorContext} from "canvas/core/canvas";
 
 type Properties = {[key: string]: any};
@@ -28,7 +29,10 @@ export interface Element extends SceneGraphElement, Renderable, Layer {
     getSuccessors(): Element[];
 
     getPredecessors(): Element[];
+}
 
+export interface BlockMember<T> {
+    copyInto(canvas:Canvas, parent:Layer, x:number, y:number) : T;
 }
 
 
@@ -57,7 +61,7 @@ export class ElementProperties {
 
 export interface ElementFactory<E extends Element> {
     create(model: EditorContext,
-           draftboardManager: DraftboardManager) : E;
+           registry: Registry) : E;
 
     getProperty(key:string) : any;
 
@@ -127,6 +131,8 @@ export class Elements {
                     }
                 }
                 return [root, max];
+            } else {
+                return [cell, level];
             }
         }
         return [null, null];
@@ -165,6 +171,8 @@ export abstract class AbstractElement extends mxCell implements Element,
     private readonly childNodes         : PropertyNode[];
 
 
+
+    static count = 0;
     constructor() {
         super();
         this.id = UUID.randomUUID().value;
@@ -345,7 +353,7 @@ export abstract class AbstractElement extends mxCell implements Element,
     }
     addTo(builder: Canvas): Layer {
         this.host = builder;
-        let result = builder.addCell(this, this.parent);
+        let result = builder.addCell(this, this.parent || this.host.getDefaultParent());
         let overlays = this.createOverlays();
         this.cellOverlays = overlays;
         for (let overlay of overlays) {
@@ -474,7 +482,7 @@ export abstract class AbstractElementFactory<E extends Element> implements Eleme
 
     abstract create(
         model:EditorContext,
-        draftboardManager:DraftboardManager
+        registry:Registry
     ) : E;
 }
 

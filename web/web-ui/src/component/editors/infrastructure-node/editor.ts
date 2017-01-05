@@ -1,10 +1,14 @@
 import {inject, bindable} from 'aurelia-framework';
 import {OperatingSystemService} from 'model/os';
 
-import {ElementEditor} from "canvas/element/element";
+import {
+    ElementEditor
+} from "canvas/element/element";
 
-import {InfrastructureNode} from "component/model/infrastructure-node";
 import {UUID} from "utils/uuid";
+import {
+    InfrastructureNode
+} from "component/model/infrastructure-node";
 
 
 @inject(OperatingSystemService)
@@ -45,11 +49,6 @@ export class InfrastructureNodeEditor implements ElementEditor<InfrastructureNod
     }
 
     activate(model:any) : void {
-        // console.log("beans");
-        //
-        // $(this.list).dropdown({
-        //     action: 'activate'
-        // });
     }
 
 

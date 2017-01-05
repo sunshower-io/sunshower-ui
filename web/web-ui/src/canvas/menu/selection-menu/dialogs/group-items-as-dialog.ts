@@ -2,8 +2,9 @@ import {EditorContext, EditorOperations} from "canvas/core/canvas";
 import {inject, bindable} from 'aurelia-framework';
 import {DraftboardManager} from "component/draftboard/draftboard";
 import {ElementFactory} from "canvas/element/element";
+import {Registry} from "utils/registry";
 
-@inject(DraftboardManager)
+@inject(Registry)
 export class GroupItemsAsDialog {
 
 
@@ -20,8 +21,7 @@ export class GroupItemsAsDialog {
 
     private model: EditorContext;
 
-    constructor(private draftboardManager:DraftboardManager) {
-
+    constructor(private registry:Registry) {
 
     }
 
@@ -34,7 +34,7 @@ export class GroupItemsAsDialog {
     save(): void {
         this.elementFactory.setProperty('name', this.name);
         this.elementFactory.setProperty('description', this.description);
-        this.elementFactory.create(this.model, this.draftboardManager);
+        this.elementFactory.create(this.model, this.registry);
         this.description = '';
         this.name = '';
     }

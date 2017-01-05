@@ -15,8 +15,9 @@ import {
     mxCellOverlay
 } from "mxgraph";
 import {Kv} from "utils/objects";
+import {Copyable} from "lang/class";
+import {Registry} from "utils/registry";
 import {EditorContext} from "canvas/core/canvas";
-import {DraftboardManager} from "component/draftboard/draftboard";
 
 type Properties = {[key: string]: any};
 type PropertyNode = Vertex<Properties>;
@@ -31,12 +32,15 @@ export class CompositeElement extends AbstractElement {
         this.setLabel(name);
     }
 
+    addElement(element:Element) : void {
+        let pmember = element as any as PropertyNode;
+        this.addSuccessor(pmember);
+        pmember.addPredecessor(this);
+    }
 
     addElements(members: Element[]): void {
         for (let member of members) {
-            let pmember = member as any as PropertyNode;
-            this.addSuccessor(pmember);
-            pmember.addPredecessor(this);
+            this.addElement(member);
         }
     }
 
@@ -93,6 +97,22 @@ export class LayerElement extends CompositeElement {
         );
     }
 
+    clone() : LayerElement {
+
+        let clone = new LayerElement(
+            "clone of " + this.name,
+            "clone of " + this.description
+        );
+        clone.host = this.host;
+        clone.geometry = this.geometry.clone();
+        for(let child of this.getChildren()) {
+            if((child as any).copy) {
+                let clonable = child as any as Copyable<any>;
+                this.addSuccessor(clonable.copy());
+            }
+        }
+        return clone;
+    }
 
 }
 
@@ -100,9 +120,11 @@ export class LayerElement extends CompositeElement {
 export class LayerElementFactory extends AbstractElementFactory<LayerElement> {
 
 
-    create(model: EditorContext, draftboardManager: DraftboardManager): LayerElement {
+    create(model: EditorContext, registry:Registry): LayerElement {
 
-        let layer = new LayerElement(
+        let
+            draftboardManager = registry.draftboardManager,
+            layer = new LayerElement(
                 this.getProperty('name'),
                 this.getProperty('description')
             ),

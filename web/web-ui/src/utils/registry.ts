@@ -1,9 +1,11 @@
 import {inject} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
+import {BlockManager} from "component/blocks/block";
 import {DraftboardManager} from "component/draftboard/draftboard";
 
 @inject(
     HttpClient,
+    BlockManager,
     DraftboardManager
 )
 export class Registry {
@@ -12,8 +14,9 @@ export class Registry {
     private readonly values : {[key:string]: any};
 
     constructor(
-        public client:HttpClient,
-        public draftboardManager: DraftboardManager
+        public client                   : HttpClient,
+        public blockManager             : BlockManager,
+        public draftboardManager        : DraftboardManager
     ) {
 
         this.values = {};

@@ -23,13 +23,17 @@ import {Kv} from 'utils/objects';
 import {EditorContext} from "canvas/core/canvas";
 import {RegistryAwareElement} from "canvas/element/registry-aware";
 import {InfrastructureNode} from "./infrastructure-node";
-import {mxRectangle} from "mxgraph";
-import {VertexMenu, NetworkMenuItem} from "canvas/menu/task-cell";
 import {mxGeometry} from "mxgraph";
+import {Copyable} from "lang/class";
 
 
-export class ApplicationDeployment extends RegistryAwareElement implements Listener, Constrained {
-
+export class ApplicationDeployment extends
+    RegistryAwareElement
+implements
+    Listener,
+    Constrained,
+    Copyable<ApplicationDeployment>
+{
 
     icon: string;
     host: Canvas;
@@ -101,6 +105,7 @@ export class ApplicationDeployment extends RegistryAwareElement implements Liste
         this.parent = node;
         node.addApplication(this);
         node.addSuccessor(this);
+        this.registry.draftboardManager.add(node);
         this.addPredecessor(node);
         this.load(node);
     }
@@ -160,6 +165,15 @@ export class ApplicationDeployment extends RegistryAwareElement implements Liste
             .pair('strokeColor', '#DFDFDF');
         return result;
     }
+
+    copy(): ApplicationDeployment {
+        let clone = new ApplicationDeployment(this.registry, this.applicationId);
+        clone.name = this.name;
+        clone.host = this.host;
+        clone.geometry = this.geometry.clone();
+        return clone;
+    }
+
 }
 
 

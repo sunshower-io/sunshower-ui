@@ -133,10 +133,14 @@ export class Applications {
     }
 
     private resize = () => {
-        let top = $(this.element).offset().top,
-            wheight = $(window).height(),
-            height = wheight - top - 32;
-        $(this.element).height(height);
+        let offset = $(this.element).offset();
+        if(offset) {
+
+            let top = offset.top,
+                wheight = $(window).height(),
+                height = wheight - top - 32;
+            $(this.element).height(height);
+        }
     }
 }
 

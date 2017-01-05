@@ -56,6 +56,14 @@ describe('an application deployment', () => {
         draftboardManager.setFocusedDraftboard(new Draftboard(canvas));
     });
 
+    it('should resolve the node if there is no parent', () => {
+        let fst = new InfrastructureNode(),
+            roots = Elements.resolveRoots([fst]);
+
+        expect(roots.length).toBe(1);
+
+    });
+
     it('should resolve the parent of the node if a grand parent exists but is not selected', () => {
 
         let fst = new InfrastructureNode(),
