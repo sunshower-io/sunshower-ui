@@ -15,29 +15,23 @@ import {Registry} from "utils/registry";
 import {EditorContext, Canvas} from "canvas/core/canvas";
 import {RegistryAwareElement} from "canvas/element/registry-aware";
 import {VirtualCloudEditor} from "component/editors/cloud/editor";
-import {Class, Copyable} from "lang/class";
-import {BlockElement} from "./block";
+import {Class} from "lang/class";
 
 import {
     EditableElement,
-    BlockMember,
-    Element
 } from "canvas/element/element";
-import {Layer} from "mxgraph";
 
 export class VirtualCloud extends
     RegistryAwareElement
     implements
         Constrained ,
-        Copyable<VirtualCloud>,
-        BlockMember<VirtualCloud>,
         EditableElement<VirtualCloud, VirtualCloudEditor>
 {
 
     editor: Class<VirtualCloudEditor> = VirtualCloudEditor;
 
-    constructor(registry:Registry) {
-        super(registry);
+    constructor() {
+        super();
         this.setAncestor(true);
         this.setCollapsable(true);
         this.name = 'VPC 0';
@@ -45,38 +39,6 @@ export class VirtualCloud extends
         this.geometry = new mxGeometry(0, 0, 100, 100);
     }
 
-    copyInto(canvas:Canvas, parent:Layer, x:number, y:number) : VirtualCloud {
-        let clone = new VirtualCloud(this.registry);
-        clone.geometry = this.geometry.clone();
-        clone.host = this.host;
-        clone.parent = parent;
-        clone.geometry.x = 48;
-        clone.geometry.y = 48;
-        for(let child of this.getChildren()) {
-            if((child as any).copyInto) {
-                let cchild = (child as any as BlockElement).copyInto(canvas, clone, x, y);
-                cchild.addPredecessor(clone);
-                clone.addSuccessor(cchild);
-            }
-        }
-        clone.addTo(canvas);
-        return clone;
-    }
-
-    copy(): VirtualCloud {
-        let clone = new VirtualCloud(this.registry);
-        clone.geometry = this.geometry.clone();
-        clone.host = this.host;
-        for(let child of this.getChildren()) {
-            if((child as any).copy) {
-                let clonable = child as any as Copyable<any>;
-                let ccopy = clonable.copy();
-                ccopy.addPredecessor(clone);
-                clone.addSuccessor(ccopy);
-            }
-        }
-        return clone;
-    }
 
     regroup() : void {
         this.host.refresh(this);

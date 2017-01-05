@@ -24,59 +24,30 @@ import {EditorContext} from "canvas/core/canvas";
 import {RegistryAwareElement} from "canvas/element/registry-aware";
 import {InfrastructureNode} from "./infrastructure-node";
 import {mxGeometry} from "mxgraph";
-import {Copyable} from "lang/class";
 
 
 export class ApplicationDeployment extends
     RegistryAwareElement
 implements
     Listener,
-    Constrained,
-    Copyable<ApplicationDeployment>
+    Constrained
 {
 
     icon: string;
     host: Canvas;
 
-    applicationName: string;
+    applicationId           : string;
+    applicationName         : string;
 
-    constructor(registry: Registry,
-                private applicationId: string) {
-        super(
-            // UUID.randomUUID(),
-            // null,
-            // null,
-            // 24,
-            // 48,
-            // 120,
-            // 120,
-            registry
-        );
+    constructor() {
+        super();
         this.geometry = new mxGeometry(0, 0, 100, 100);
         this.setAttribute('constituent', '1');
     }
 
 
-    addTo(builder: Canvas): mxCell {
-        this.host = builder;
-        this.createMenu(builder);
-        // this.addChildren(builder);
-        let result = super.addTo(builder);
-        return result;
-    }
-
-    // private addChildren(builder: Canvas) {
-    //     return result;
-    // }
-
-    private createMenu(builder: Canvas) {
-        // let menu = new VertexMenu(builder, this, '\uf013');
-        // menu.addItem(new NetworkMenuItem());
-    }
-
 
     satisfy(context: EditorContext): void {
-        // this.addTo(context.graph);
         try {
             context.graph.getModel().beginUpdate();
             this.doSatisfy(context);
@@ -93,13 +64,12 @@ implements
                 location.y,
                 InfrastructureNode
             ),
-            graph = context.graph as Canvas,
             node: InfrastructureNode = null;
 
         if (parent instanceof InfrastructureNode) {
             node = parent as InfrastructureNode;
         } else {
-            node = new InfrastructureNode(this.registry);
+            node = new InfrastructureNode();
             node.satisfy(context);
         }
         this.parent = node;
@@ -166,13 +136,6 @@ implements
         return result;
     }
 
-    copy(): ApplicationDeployment {
-        let clone = new ApplicationDeployment(this.registry, this.applicationId);
-        clone.name = this.name;
-        clone.host = this.host;
-        clone.geometry = this.geometry.clone();
-        return clone;
-    }
 
 }
 

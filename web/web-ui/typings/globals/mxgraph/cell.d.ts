@@ -159,6 +159,8 @@ declare module 'mxgraph' {
          * @param index
          */
         getChildAt(index:number) : Layer;
+
+        clone() : Layer;
     }
 
     export class mxEdge extends mxCell {

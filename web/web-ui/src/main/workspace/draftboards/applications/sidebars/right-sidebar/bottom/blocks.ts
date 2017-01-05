@@ -1,7 +1,11 @@
 import {inject} from 'aurelia-framework';
 import {Canvas} from 'canvas/core/canvas';
+import {UUID} from 'utils/uuid';
+import {Element} from 'canvas/element/element';
 import {BlockElement} from 'component/model/block';
 import {BlockManager} from 'component/blocks/block';
+import {InfrastructureNode} from 'component/model/infrastructure-node'
+
 
 import {bindable} from 'aurelia-framework';
 import {
@@ -69,10 +73,7 @@ export class Blocks {
 
                         this.canvas.getModel().beginUpdate();
                         try {
-                            let copy = block.copyInto(this.canvas, this.canvas.getDefaultParent(), x, y);
-                            copy.addTo(this.canvas);
-                            this.canvas.moveCells([copy], x, y, false);
-                            this.canvas.refresh(copy);
+                            let copy = $.extend(true, new BlockElement(), block);
                             this.registry.draftboardManager.add(copy);
                         }
                         finally {

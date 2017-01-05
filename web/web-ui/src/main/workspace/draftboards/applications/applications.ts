@@ -236,7 +236,11 @@ export class Applications extends AbstractGraph implements Listener,
     }
 
     protected createBuilder(): Canvas {
-        let canvas = new Canvas(this.container, this.actionManager);
+        let canvas = new Canvas(
+            this.container,
+            this.registry,
+            this.actionManager
+        );
         canvas.getSelectionModel().addListener(mxEvent.CHANGE, this.fireElementsChanged);
         return canvas;
     }

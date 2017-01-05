@@ -35,15 +35,15 @@ export class Applications {
     }
 
 
-    addImage(id: string, e: DragEvent) {
-        let event = createEvent('palette-event',
-            new ApplicationProcessor(
-                id,
-                this.registry,
-                {x: e.clientX, y: e.clientY},
-            ));
-        this.element.dispatchEvent(event);
-    }
+    // addImage(id: string, e: DragEvent) {
+    //     let event = createEvent('palette-event',
+    //         new ApplicationProcessor(
+    //             id,
+    //             this.registry,
+    //             {x: e.clientX, y: e.clientY},
+    //         ));
+    //     this.element.dispatchEvent(event);
+    // }
 
 
     startDrag(id: string, event: MouseEvent): void {
@@ -99,9 +99,8 @@ export class Applications {
                             el,
                             this.canvas,
                             (graph: Canvas, event: Event, target: any, x: number, y: number) => {
-                                let deployment = new ApplicationDeployment(
-                                    this.registry, id
-                                );
+                                let deployment = new ApplicationDeployment();
+                                deployment.applicationId = id;
                                 console.log('x', x, 'y', y);
                                 deployment.geometry.x = x;
                                 deployment.geometry.y = y;
@@ -161,10 +160,8 @@ class DragProcessor implements EditorOperation {
             this.element,
             context.graph,
             (graph: Canvas, event: Event, target: any, x: number, y: number) => {
-                let deployment = new ApplicationDeployment(
-                    this.registry,
-                    this.id
-                );
+                let deployment = new ApplicationDeployment();
+                deployment.applicationId = this.id;
                 console.log('x', x, 'y', 'y');
                 deployment.geometry.x = x;
                 deployment.geometry.y = y;
@@ -184,36 +181,3 @@ class DragProcessor implements EditorOperation {
 
 }
 
-class ApplicationProcessor implements EditorOperation {
-
-    constructor(private id: string,
-                private registry: Registry,
-                private coordinates: {x: number, y: number}) {
-
-
-    }
-
-    resolveParent(context: EditorContext, x: number, y: number): Layer {
-        let graph = context.graph,
-            defaultParent = graph.getDefaultParent(),
-            parent = graph.getCellAt(x, y, defaultParent, true, false);
-
-        while (parent && !(parent instanceof Node)) {
-            parent = parent.parent;
-        }
-
-        return parent || defaultParent;
-    }
-
-
-    apply(context: EditorContext): void {
-        context.location = {
-            x: this.coordinates.x,
-            y: this.coordinates.y - context.offset.top
-        };
-        new ApplicationDeployment(
-            this.registry,
-            this.id
-        ).satisfy(context);
-    }
-}

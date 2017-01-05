@@ -72,13 +72,7 @@ class NodeProcessor implements EditorOperation {
 
         let
             parent = context.graph.getDefaultParent(),
-            node = new InfrastructureNode(
-                this.registry
-                // parent,
-                // this.coordinates.x,
-                // this.coordinates.y - context.offset.top,
-                // this.registry
-            );
+            node = new InfrastructureNode();
         node.addTo(context.graph);
     }
 }

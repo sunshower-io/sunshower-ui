@@ -35,6 +35,7 @@ import {GraphHandler} from "./graph-handler";
 import {ConnectionHandler} from './connection-handler';
 import {CanvasModel} from "./canvas-model";
 import {VertexHandler} from "./vertex-handler";
+import {Registry} from "utils/registry";
 import {ActionManager} from "canvas/actions/action-service";
 
 
@@ -44,8 +45,8 @@ export interface NavigationAware {
 }
 
 export interface EditorContext {
-    host: NavigationAware;
-    graph: Canvas;
+    host            : NavigationAware;
+    graph           : Canvas;
     offset          ?: {top: number, left: number};
     location        ?: {x: number, y: number};
     properties      ?: {[key: string]: any};
@@ -110,8 +111,11 @@ export class Canvas extends mxGraph {
 
     private grid: Grid;
 
-    constructor(public readonly container: HTMLElement,
-                private readonly actionManager: ActionManager) {
+
+    constructor(public readonly container           : HTMLElement,
+                public readonly registry            : Registry,
+                private readonly actionManager      : ActionManager
+    ) {
         super(container, new CanvasModel());
         this.createMenuSelector();
         this.setPanning(true);

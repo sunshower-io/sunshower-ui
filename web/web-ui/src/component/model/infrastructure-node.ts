@@ -19,27 +19,21 @@ import {
     StorageMenuItem
 } from "canvas/menu/task-cell";
 import {Constrained} from "./cell";
-import {VirtualCloud} from "./cloud";
 import {EditorContext} from "canvas/core/canvas";
 
 import {RegistryAwareElement} from 'canvas/element/registry-aware';
-import {EditableElement, BlockMember} from "canvas/element/element";
+import {EditableElement} from "canvas/element/element";
 import {InfrastructureNodeEditor} from "component/editors/infrastructure-node/editor";
 import {
     OperatingSystem,
     NodeConfiguration
 } from "model/hal/api";
-import {Copyable} from "lang/class";
-import {BlockElement} from "./block";
-import {Layer} from "mxgraph";
 
 
 
 export class InfrastructureNode extends
     RegistryAwareElement implements
     Constrained,
-    Copyable<InfrastructureNode>,
-    BlockMember<InfrastructureNode>,
     EditableElement<
         InfrastructureNode,
         InfrastructureNodeEditor
@@ -66,40 +60,13 @@ export class InfrastructureNode extends
 
 
 
-    constructor(
-        registry: Registry
-    ) {
-        super(registry);
+    constructor() {
+        super();
         this.configuration = new NodeConfiguration();
         this.operatingSystem = new OperatingSystem();
         this.icon = 'assets/sui/themes/hasli/assets/images/icons/provider/generic/single-node-instance.svg';
         this.name = "Node " + InfrastructureNode.count++;
         this.set('element', '1', true);
-    }
-
-
-    copyInto(canvas: Canvas, parent: Layer, x: number, y: number): InfrastructureNode {
-        let clone = new InfrastructureNode(this.registry);
-        clone.geometry = this.geometry.clone();
-        clone.geometry.x += x;
-        clone.geometry.y += y;
-        clone.parent = parent;
-        clone.addTo(canvas);
-        return clone;
-    }
-
-    copy(): InfrastructureNode {
-        let clone = new InfrastructureNode(this.registry);
-        clone.host = this.host;
-        clone.geometry = this.geometry.clone();
-        clone.name = "Clone of " + this.name;
-        clone.setConfiguration(this.configuration.copy());
-        clone.setOperatingSystem(this.operatingSystem.copy());
-
-        for(let child of this.getChildren()) {
-            clone.addApplication((child as ApplicationDeployment).copy());
-        }
-        return clone;
     }
 
     public setConfiguration(configuration:NodeConfiguration) : void {
@@ -116,8 +83,9 @@ export class InfrastructureNode extends
 
 
     public addTo(builder:Canvas) : mxCell {
+        let result = super.addTo(builder);
         this.createMenu(builder);
-        return super.addTo(builder);
+        return result;
     }
 
     private createMenu(builder: Canvas) {
@@ -191,28 +159,9 @@ export class InfrastructureNode extends
                 geometry
             );
         }
-        this.updateParent(geometry);
         this.sizeChanged();
-
-        // this.host.groupCells(this, 24, this.applications);
         this.host.model.setGeometry(this, geometry);
         this.host.refresh();
-    }
-
-    updateParent(geometry:mxGeometry) {
-        // let pgeom = this.parent.geometry,
-        //     pw = pgeom.width,
-        //     ph = pgeom.height,
-        //     w = geometry.width,
-        //     h = geometry.height;
-        // if(geometry.x + w > pw) {
-        //     pw += 260;
-        // }
-        // if(geometry.y + h > ph) {
-        //     ph += 260;
-        // }
-        // pgeom.width = pw;
-        // pgeom.height = ph;
     }
 
     insertGridElement(
@@ -234,10 +183,6 @@ export class InfrastructureNode extends
 
 
     satisfy(context: EditorContext): void {
-        // let location = context.location,
-        //     parent = this.resolveParent(context, location.x, location.y, VirtualCloud),
-        //     graph = context.graph,
-        //     cloud: VirtualCloud = null;
         this.geometry = new mxGeometry(
             context.location.x,
             context.location.y,
@@ -245,22 +190,6 @@ export class InfrastructureNode extends
             168
         );
         this.addTo(context.graph);
-
-        // if(parent instanceof VirtualCloud) {
-        //     cloud = parent;
-        //     this.geometry.x = location.x - cloud.geometry.x;
-        //     this.geometry.y = location.y - cloud.geometry.y;
-        // } else {
-        //     cloud = new VirtualCloud(this.registry);
-        //     cloud.geometry = new mxGeometry(location.x, location.y, 300, 300);
-        //     cloud.addTo(graph);
-        // }
-        // this.parent = cloud;
-        // cloud.addChild(this);
-        // cloud.addSuccessor(this);
-        // this.addPredecessor(cloud);
-        // cloud.regroup();
-        // cloud.satisfy(context);
     }
 
     protected createNodeOverlay(): mxCellOverlay {

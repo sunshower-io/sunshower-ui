@@ -6,7 +6,6 @@ import {
 } from "canvas/element/element";
 
 
-
 import {Vertex} from "algorithms/graph/graph";
 import {
     mxImage,
@@ -25,14 +24,16 @@ type PropertyNode = Vertex<Properties>;
 
 export class CompositeElement extends AbstractElement {
 
-    constructor(public readonly name: string,
-                public readonly description: string,
-                public readonly icon: string) {
+    public name: string;
+    public description: string;
+    public icon: string;
+
+    constructor() {
         super();
         this.setLabel(name);
     }
 
-    addElement(element:Element) : void {
+    addElement(element: Element): void {
         let pmember = element as any as PropertyNode;
         this.addSuccessor(pmember);
         pmember.addPredecessor(this);
@@ -88,30 +89,9 @@ export class CompositeElement extends AbstractElement {
 
 export class LayerElement extends CompositeElement {
 
-    constructor(name: string,
-                description: string) {
-        super(
-            name,
-            description,
-            `assets/sui/themes/hasli/assets/images/layers.svg`
-        );
-    }
-
-    clone() : LayerElement {
-
-        let clone = new LayerElement(
-            "clone of " + this.name,
-            "clone of " + this.description
-        );
-        clone.host = this.host;
-        clone.geometry = this.geometry.clone();
-        for(let child of this.getChildren()) {
-            if((child as any).copy) {
-                let clonable = child as any as Copyable<any>;
-                this.addSuccessor(clonable.copy());
-            }
-        }
-        return clone;
+    constructor() {
+        super();
+        this.icon = `assets/sui/themes/hasli/assets/images/layers.svg`
     }
 
 }
@@ -120,17 +100,18 @@ export class LayerElement extends CompositeElement {
 export class LayerElementFactory extends AbstractElementFactory<LayerElement> {
 
 
-    create(model: EditorContext, registry:Registry): LayerElement {
+    create(model: EditorContext, registry: Registry): LayerElement {
 
         let
             draftboardManager = registry.draftboardManager,
-            layer = new LayerElement(
-                this.getProperty('name'),
-                this.getProperty('description')
-            ),
+            layer = new LayerElement(),
             canvas = model.graph,
             selected = Elements.pluckLayers(canvas.getSelectionCells()),
             roots = Elements.resolveRoots(selected);
+
+
+        layer.name = this.getProperty('name');
+        layer.description = this.getProperty('description');
         draftboardManager
             .removeAll(roots);
 

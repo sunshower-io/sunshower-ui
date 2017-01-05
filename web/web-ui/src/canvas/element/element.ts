@@ -11,10 +11,6 @@ import {Vertex, Edge} from "algorithms/graph/graph";
 import {Canvas} from 'canvas/core/canvas';
 
 
-import {
-    DraftboardManager
-} from 'component/draftboard/draftboard'
-
 import {Class} from "lang/class";
 import {UUID} from "utils/uuid";
 import {Kv} from "utils/objects";
@@ -24,15 +20,25 @@ import {EditorContext} from "canvas/core/canvas";
 
 type Properties = {[key: string]: any};
 
+
 export interface Element extends SceneGraphElement, Renderable, Layer {
 
     getSuccessors(): Element[];
 
     getPredecessors(): Element[];
+
+
+    beforeAdd(context: Canvas): void;
+
+    afterAdd(context: Canvas): void;
+
+    beforeRemove(context: Canvas): void;
+
+    afterRemove(context: Canvas): void;
 }
 
 export interface BlockMember<T> {
-    copyInto(canvas:Canvas, parent:Layer, x:number, y:number) : T;
+    copyInto(canvas: Canvas, parent: Layer, x: number, y: number): T;
 }
 
 
@@ -61,11 +67,13 @@ export class ElementProperties {
 
 export interface ElementFactory<E extends Element> {
     create(model: EditorContext,
-           registry: Registry) : E;
+           registry: Registry): E;
 
-    getProperty(key:string) : any;
+    getProperty(key: string): any;
 
-    setProperty(key:string, value:any);
+    setProperty(key: string, value: any);
+
+
 }
 
 export class Elements {
@@ -106,8 +114,8 @@ export class Elements {
 
 
     static resolveRootAndLevel(cell: Element,
-                                      selected: {[key: string]: Element},
-                                      level: number): [Element, number] {
+                               selected: {[key: string]: Element},
+                               level: number): [Element, number] {
         if (selected[cell.id]) {
             let predecessors = cell.getPredecessors();
             if (predecessors && predecessors.length) {
@@ -153,26 +161,27 @@ export class Elements {
     }
 }
 
-export abstract class AbstractElement extends mxCell implements Element,
-    Vertex<Properties> {
+export abstract class AbstractElement
+    extends mxCell
+    implements Element, Vertex<Properties> {
 
     private static readonly loadingOverlay: mxCellOverlay =
         AbstractElement.createLoadingOverlay();
 
 
-    public readonly id                  : string;
-    public icon                         : string;
-    public name                         : string;
+    public id: string;
+    public icon: string;
+    public name: string;
     public host: Canvas;
-    public readonly data                : Properties;
-    private cellOverlays                : mxCellOverlay[];
-    private readonly attributes         : {[key: string]: string};
-    public readonly adjacencies         : {[key: string]: Edge<Properties>};
-    private readonly childNodes         : PropertyNode[];
-
+    public readonly data: Properties;
+    private cellOverlays: mxCellOverlay[];
+    private readonly attributes: {[key: string]: string};
+    public readonly adjacencies: {[key: string]: Edge<Properties>};
+    private readonly childNodes: PropertyNode[];
 
 
     static count = 0;
+
     constructor() {
         super();
         this.id = UUID.randomUUID().value;
@@ -183,6 +192,34 @@ export abstract class AbstractElement extends mxCell implements Element,
         this.setStyle(this.createStyle());
         this.childNodes = [];
         this.setAttribute('element', '1');
+    }
+
+    beforeAdd(context: Canvas): void {
+        this.host = context;
+    }
+
+    afterAdd(context: Canvas): void {
+
+    }
+
+    beforeRemove(context: Canvas): void {
+
+    }
+
+    afterRemove(context: Canvas): void {
+
+    }
+
+    addTo(context:Canvas): Layer {
+        this.beforeAdd(context);
+        let result = this.host.addCell(this, this.parent || this.host.getDefaultParent());
+        let overlays = this.createOverlays();
+        this.cellOverlays = overlays;
+        for (let overlay of overlays) {
+            this.host.addCellOverlay(result, overlay);
+        }
+        this.afterAdd(context);
+        return result;
     }
 
 
@@ -341,25 +378,15 @@ export abstract class AbstractElement extends mxCell implements Element,
 
 
     refresh() {
-        for(let overlay of this.cellOverlays) {
+        for (let overlay of this.cellOverlays) {
             this.host.removeCellOverlay(this, overlay);
         }
 
         this.cellOverlays = this.createOverlays();
-        for(let overlay of this.cellOverlays) {
+        for (let overlay of this.cellOverlays) {
             this.host.addCellOverlay(this, overlay);
         }
 
-    }
-    addTo(builder: Canvas): Layer {
-        this.host = builder;
-        let result = builder.addCell(this, this.parent || this.host.getDefaultParent());
-        let overlays = this.createOverlays();
-        this.cellOverlays = overlays;
-        for (let overlay of overlays) {
-            builder.addCellOverlay(result, overlay);
-        }
-        return result;
     }
 
     protected createOverlays(): mxCellOverlay[] {
@@ -459,42 +486,39 @@ export abstract class AbstractElement extends mxCell implements Element,
 }
 
 
-
 export abstract class AbstractElementFactory<E extends Element> implements ElementFactory<E> {
 
-    properties: {[key:string]:any};
+    properties: {[key: string]: any};
 
 
     setProperty(key: string, value: any) {
-        if(!this.properties) {
+        if (!this.properties) {
             this.properties = {};
         }
         this.properties[key] = value;
     }
 
     getProperty(key: string): any {
-        if(this.properties) {
+        if (this.properties) {
             return this.properties[key];
         }
         return null;
     }
 
 
-    abstract create(
-        model:EditorContext,
-        registry:Registry
-    ) : E;
+    abstract create(model: EditorContext,
+                    registry: Registry): E;
 }
 
 
 export interface ElementEditor<E extends Element> {
-    open(e:E) : void;
+    open(e: E): void;
 }
 
 export interface EditableElement<
     E extends Element,
     T extends ElementEditor<E>
-> {
+    > {
     editor: Class<T>;
 }
 

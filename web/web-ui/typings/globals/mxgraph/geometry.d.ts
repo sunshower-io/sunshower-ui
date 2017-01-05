@@ -117,6 +117,8 @@ declare module 'mxgraph' {
          */
         getChildAt(index:number) : Layer;
 
+        clone() : Layer;
+
     }
 
     type Model = mxGraphModel;
