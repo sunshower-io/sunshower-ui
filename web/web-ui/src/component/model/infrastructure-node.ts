@@ -130,7 +130,7 @@ export class InfrastructureNode extends
             geo = new mxGeometry();
             this.geometry = geo;
         }
-        geo.width = this.columns * InfrastructureNode.gridWidth + 18;
+        geo.width = this.columns * InfrastructureNode.gridWidth + 24;
         geo.height = this.rows * InfrastructureNode.gridHeight + 50;
         this.sizeChanged();
     }
@@ -204,7 +204,7 @@ export class InfrastructureNode extends
         geometry:mxGeometry
     ) {
         let scale = this.scale,
-            applicationX = column * (InfrastructureNode.gridWidth / scale) + 18,
+            applicationX = column * (InfrastructureNode.gridWidth / scale) + 24,
             applicationY = row * (InfrastructureNode.gridHeight / scale) + 50,
             applicationGeometry = application.geometry;
         applicationGeometry.x = applicationX;
