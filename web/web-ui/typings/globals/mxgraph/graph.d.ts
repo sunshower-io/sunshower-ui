@@ -258,6 +258,29 @@ declare module 'mxgraph' {
                    bounds: mxRectangle,
                    recurse: boolean): Layer;
 
+
+        /**
+         *
+         */
+        clearSelection() : void;
+
+        /**
+         *
+         * @param cells
+         */
+        setSelectionCells(cells:Layer[]) : void;
+
+
+        /**
+         *
+         * @param x
+         * @param y
+         * @param parent
+         * @param vertices
+         * @param edges
+         * @param ignore
+         */
+
         getCellAt(x: number,
                   y: number,
                   parent?: Layer,

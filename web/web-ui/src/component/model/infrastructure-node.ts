@@ -214,17 +214,6 @@ export class InfrastructureNode extends
         application.addTo(this.host, this, false);
     }
 
-
-    // satisfy(context: EditorContext): void {
-    //     this.geometry = new mxGeometry(
-    //         context.location.x,
-    //         context.location.y,
-    //         104,
-    //         168
-    //     );
-    //     this.addTo(context.graph);
-    // }
-
     protected createNodeOverlay(): mxCellOverlay {
         let
             url = this.icon,

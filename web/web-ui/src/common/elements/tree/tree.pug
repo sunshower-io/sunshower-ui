@@ -2,5 +2,8 @@ template(bindable="nodes")
     require(from="./node")
     .tree
         ul(repeat.for="node of nodes")
-            node(node.bind="node")
+            node(
+                tree.bind="self"
+                node.bind="node"
+            )
 

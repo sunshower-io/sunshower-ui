@@ -75,7 +75,10 @@ import {ToggleLeft, ToggleRight, SearchMenu} from "./menus/misc-menus";
 import {DefaultActionSet} from 'canvas/actions/default-action-set';
 import {ActionManager} from 'canvas/actions/action-service';
 
-import {CanvasEvents} from 'canvas/events/canvas-events';
+import {
+    CanvasEvent,
+    CanvasEvents
+} from 'canvas/events/canvas-events';
 
 import {Element} from 'canvas/element/element';
 
@@ -103,20 +106,27 @@ export class Applications extends AbstractGraph implements Listener,
 
     private infrastructureDialog: AddInfrastructureDialog;
 
-    private fireElementsChanged = (
-        sender:mxGraphSelectionModel, event:mxEventObject) => {
+    private fireElementsChanged = (sender: mxGraphSelectionModel, event: mxEventObject) => {
         let cells = sender.cells;
+        this.eventAggregator.publish(CanvasEvents.CELL_SELECTION_CHANGED, {
+            sender: this,
+            name: CanvasEvents.CELL_SELECTION_CHANGED,
+            cells: cells,
+            canvas: this.graph
+        });
         if(cells && cells.length) {
-            this.eventAggregator.publish(CanvasEvents.CELL_SELECTION_CHANGED, {
-                name        : CanvasEvents.CELL_SELECTION_CHANGED,
-                cells       : cells,
-                canvas      : this.graph
-            });
-
             this.applicationState.currentElement = cells[0] as Element;
         }
-
     };
+
+    private updateSelection = (e:CanvasEvent) => {
+        if(e.sender !== this) {
+            this.graph.clearSelection();
+            this.graph.setSelectionCells(e.cells);
+        }
+    };
+
+
 
     constructor(private client: HttpClient,
                 private parent: Draftboard,
@@ -124,10 +134,9 @@ export class Applications extends AbstractGraph implements Listener,
                 private dialogService: DialogService,
                 private draftboardManager: DraftboardManager,
                 actionSet: DefaultActionSet,
-                private actionManager:ActionManager,
+                private actionManager: ActionManager,
                 private eventAggregator: EventAggregator,
-                private applicationState:ApplicationState
-    ) {
+                private applicationState: ApplicationState) {
         super(registry);
         this.menus = [];
         this.addMenu(new FileMenu(dialogService));
@@ -142,6 +151,11 @@ export class Applications extends AbstractGraph implements Listener,
 
         this.draftboardManager
             .addEventListener('draftboard-saved', this);
+
+        eventAggregator.subscribe(
+            CanvasEvents.CELL_SELECTION_CHANGED,
+            this.updateSelection
+        );
     }
 
     activate(params: any) {

@@ -9,4 +9,8 @@ template
 
 
         .layer-tree(ref="element")
-            tree(nodes.bind="layers")
+            tree(
+                nodes.bind="layers",
+                node-clicked.delegate="nodeSelected($event)",
+                view-model.ref="tree"
+            )
