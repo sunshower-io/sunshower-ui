@@ -133,34 +133,35 @@ declare module 'mxgraph' {
     export class mxGraph implements Connectable {
 
 
-        autoScroll: boolean;
-        gridSize: number;
-        recursiveResize: boolean;
+        cellsDeletable                      : boolean;
+        autoScroll                          : boolean;
+        gridSize                            : number;
+        recursiveResize                     : boolean;
 
-        expandedImage: mxImage;
-        collapsedImage: mxImage;
-
-
-        foldingEnabled: boolean;
-        isMouseDown: boolean;
-
-        extendParents: boolean;
-        extendParentsOnAdd: boolean;
-        resizeContainer: boolean;
-        allowDanglingEdges: boolean;
-        allowLoops: boolean;
-        autoExtend: boolean;
+        expandedImage                       : mxImage;
+        collapsedImage                      : mxImage;
 
 
-        container: Element;
-        view: mxGraphView;
-        model: mxGraphModel;
-        graphHandler: mxGraphHandler;
-        cellRenderer: mxCellRenderer;
-        connectionHandler: mxConnectionHandler;
-        constrainChildren: boolean;
-        constrainRelativeChildren: boolean;
-        mouseListeners: {[name: string]: any};
+        foldingEnabled                      : boolean;
+        isMouseDown                         : boolean;
+
+        extendParents                       : boolean;
+        extendParentsOnAdd                  : boolean;
+        resizeContainer                     : boolean;
+        allowDanglingEdges                  : boolean;
+        allowLoops                          : boolean;
+        autoExtend                          : boolean;
+
+
+        container                           : Element;
+        view                                : mxGraphView;
+        model                               : mxGraphModel;
+        graphHandler                        : mxGraphHandler;
+        cellRenderer                        : mxCellRenderer;
+        connectionHandler                   : mxConnectionHandler;
+        constrainChildren                   : boolean;
+        constrainRelativeChildren           : boolean;
+        mouseListeners                      : {[name: string]: any};
 
         zoomIn(): void;
 
@@ -409,7 +410,7 @@ declare module 'mxgraph' {
          * @param cells
          */
 
-        removeCells(cells: Layer[]);
+        removeCells(cells: Layer[], c?:boolean);
 
 
         /**

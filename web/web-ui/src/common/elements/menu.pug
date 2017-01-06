@@ -14,6 +14,7 @@ template(bindable="items")
                 items.bind="menu.menus",
                 classes="menu",
                 style="z-index:500"
+                context-factory.bind="contextFactory"
             )
 
         .right.compact.mini.menu
@@ -28,13 +29,3 @@ template(bindable="items")
                     .ui.image(if.bind="menu.image")
                         img(src.bind="menu.image")
                     .text ${menu.name}
-                //a.item
-                //    i.search.icon
-                //    | Browse Templates
-                //a.item.no--padding(type='button', click.trigger='menu.apply(contextFactory.create())')
-                //    .ui.image
-                //        img(src='styles/themes/hasli/assets/images/icons/toggle-left-menu-icon.svg')
-                //a.item.no--padding(type='button', click.trigger='menu.apply(contextFactory.create())')
-                //    .ui.image
-                //        img(src='styles/themes/hasli/assets/images/icons/toggle-right-menu-icon.svg')
-

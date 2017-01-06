@@ -1,8 +1,4 @@
 
-import {
-    AbstractMenuItem,
-    MenuItem
-} from 'common/elements/menu';
 
 import {DialogService} from 'aurelia-dialog';
 import {EditorContext, EditorOperations} from "canvas/core/canvas";
@@ -10,6 +6,7 @@ import {CanvasAction} from "canvas/menu/action";
 import {
     GroupItemsAsDialog
 } from "./dialogs/group-items-as-dialog";
+import {SecurityGroupElementFactory} from "component/model/security-group";
 
 export default class CreateSecurityGroupMenuItem extends CanvasAction {
 
@@ -25,6 +22,7 @@ export default class CreateSecurityGroupMenuItem extends CanvasAction {
 
     apply(editor: EditorContext): void {
         EditorOperations.set(editor, 'layer-type', 'Security Group');
+        EditorOperations.set(editor, 'element-factory', new SecurityGroupElementFactory())
         this.dialogService.open({
             model: editor,
             viewModel: GroupItemsAsDialog

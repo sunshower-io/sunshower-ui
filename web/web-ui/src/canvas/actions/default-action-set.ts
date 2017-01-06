@@ -19,5 +19,6 @@ export class DefaultActionSet {
         actionManager.register(new CreateSecurityGroupMenuItem(dialogService));
         actionManager.register(new CreateGroupMenuItem(dialogService));
         actionManager.register(new CreateLayerMenuItem(dialogService));
+
     }
 }

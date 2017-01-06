@@ -149,6 +149,8 @@ export class Applications extends AbstractGraph implements Listener,
         this.addMenu(new ToggleLeft());
         this.addMenu(new ToggleRight());
 
+
+
         this.draftboardManager
             .addEventListener('draftboard-saved', this);
 

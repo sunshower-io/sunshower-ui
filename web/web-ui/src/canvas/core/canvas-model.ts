@@ -11,9 +11,6 @@ export class CanvasModel extends mxGraphModel {
     }
 
     getChildCells(parent:Layer, vertices:boolean, edges:boolean) : Layer[] {
-        console.log("child cells");
-
-
         return super.getChildCells(parent, vertices, edges);
     }
 

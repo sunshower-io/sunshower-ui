@@ -88,7 +88,14 @@ declare module 'mxgraph' {
         root: Layer;
 
 
+
+
         constructor(root?: Layer);
+
+
+        remove(cell:Layer) : Layer;
+
+        clear() : void;
 
 
         /**

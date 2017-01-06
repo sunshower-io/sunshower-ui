@@ -130,6 +130,7 @@ export class Canvas extends mxGraph {
         this.cellRenderer = new CellRenderer();
         this.autoScroll = true;
         this.grid = new Grid(this);
+        this.cellsDeletable = true;
         this.grid.draw();
         this.allowLoops = false;
         this.autoExtend = true;
@@ -372,10 +373,6 @@ export class Canvas extends mxGraph {
         } else {
             return super.getPreferredSizeForCell(cell);
         }
-    }
-
-    removeCells(cells: mxCell[]) {
-        return super.removeCells(cells);
     }
 
 
