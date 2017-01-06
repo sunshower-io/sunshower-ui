@@ -36,6 +36,7 @@ export abstract class CompositeElement extends AbstractElement {
         super();
         this.setLabel(name);
         this.setCollapsable(true);
+        this.setAttribute('named', '1');
     }
 
     addElement(element: Element): void {

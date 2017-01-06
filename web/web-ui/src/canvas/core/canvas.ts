@@ -269,6 +269,11 @@ export class Canvas extends mxGraph {
         if (label) {
             return label;
         }
+        if(cell.getAttribute('named')) {
+            if((cell as any).name) {
+                return (cell as any).name;
+            }
+        }
         return super.convertValueToString(cell);
     }
 
@@ -320,17 +325,17 @@ export class Canvas extends mxGraph {
     }
 
 
-    selectCellForEvent(cell: mxCell) {
-        if (cell.getAttribute('constituent') === '1') {
-            let delegate = this.model.getParent(cell);
-            while (delegate.getAttribute('constituent') === '1') {
-                delegate = this.model.getParent(delegate);
-            }
-            super.selectCellForEvent(delegate);
-        } else {
-            super.selectCellForEvent(cell);
-        }
-    }
+    // selectCellForEvent(cell: mxCell) {
+    //     if (cell.getAttribute('constituent') === '1') {
+    //         let delegate = this.model.getParent(cell);
+    //         while (delegate.getAttribute('constituent') === '1') {
+    //             delegate = this.model.getParent(delegate);
+    //         }
+    //         super.selectCellForEvent(delegate);
+    //     } else {
+    //         super.selectCellForEvent(cell);
+    //     }
+    // }
 
     resizeChildCells(cell: Layer, geometry: mxGeometry) {
         let geo = this.model.getGeometry(cell),

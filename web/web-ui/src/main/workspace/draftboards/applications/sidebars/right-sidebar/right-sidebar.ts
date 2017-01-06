@@ -32,8 +32,12 @@ export class RightSidebar extends Sidebar {
             location: 'top',
             name: 'editor',
             icon: 'large write icon'
-        }
-        ]);
+        }, {
+            location: 'bottom',
+            name: 'components',
+            icon: 'cloud icon'
+
+        }]);
         this.activeTop = this.componentsTop[0];
         this.activeBottom = this.componentsBottom[0];
     }
