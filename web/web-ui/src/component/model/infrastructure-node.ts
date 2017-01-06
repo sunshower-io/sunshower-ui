@@ -64,6 +64,13 @@ export class InfrastructureNode extends
         this.icon = 'assets/sui/themes/hasli/assets/images/icons/provider/generic/single-node-instance.svg';
         this.name = "Node " + InfrastructureNode.count++;
         this.set('element', '1', true);
+        this.set('no-resize', '1', true);
+    }
+
+    setGeometry(geo:mxGeometry) {
+
+        super.setGeometry(geo);
+        this.resize();
     }
 
 
@@ -117,6 +124,17 @@ export class InfrastructureNode extends
     }
 
 
+    private resize() : void {
+        let geo = this.geometry;
+        if(!geo) {
+            geo = new mxGeometry();
+            this.geometry = geo;
+        }
+        geo.width = this.columns * InfrastructureNode.gridWidth + 18;
+        geo.height = this.rows * InfrastructureNode.gridHeight + 50;
+        this.sizeChanged();
+    }
+
     public addApplication(application: ApplicationDeployment): void {
         this.applications.push(application);
         application.addPredecessor(this);
@@ -127,7 +145,6 @@ export class InfrastructureNode extends
         } finally {
             this.host.model.endUpdate();
         }
-        this.addSuccessor(application);
     }
 
     addGridRow() : void {

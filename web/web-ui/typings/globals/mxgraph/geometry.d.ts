@@ -12,6 +12,13 @@ declare module 'mxgraph' {
 
         children        :Layer[];
 
+
+        /**
+         *
+         * @param geo
+         */
+        setGeometry(geo:mxGeometry);
+
         /**
          *
          * @param child

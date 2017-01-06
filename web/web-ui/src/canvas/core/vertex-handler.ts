@@ -23,7 +23,7 @@ export class VertexHandler extends mxVertexHandler {
                gridEnabled: boolean,
                constrained: boolean,
                recurse: boolean) {
-        let fixed = cell.getAttribute('lfix');
+        let fixed = cell.getAttribute('lfix') || cell.getAttribute('no-resize');
         if (fixed) {
             this.handleFixed(
                 cell,

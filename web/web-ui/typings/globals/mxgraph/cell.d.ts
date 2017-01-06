@@ -55,6 +55,7 @@ declare module 'mxgraph' {
 
         constructor(label?:string, geometry?:mxGeometry);
 
+        setGeometry(geo: mxGeometry);
         /**
          *
          * @param child

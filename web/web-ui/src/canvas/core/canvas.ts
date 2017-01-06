@@ -124,8 +124,8 @@ export class Canvas extends mxGraph {
         this.setHtmlLabels(true);
         this.gridSize = 32;
         this.extendParents = true;
-        this.constrainChildren = false;
-        this.constrainRelativeChildren = false;
+        this.constrainChildren = true;
+        this.constrainRelativeChildren = true;
         this.extendParentsOnAdd = true;
         this.cellRenderer = new CellRenderer();
         this.autoScroll = true;
@@ -142,8 +142,17 @@ export class Canvas extends mxGraph {
         this.recursiveResize = false;
 
         this.createDefaultStyles();
+
     }
 
+
+    extendParent(cell:Layer) {
+        if(cell.getAttribute('no-extend-parent')) {
+
+        } else {
+            super.extendParent(cell);
+        }
+    }
 
     createMenuSelector(): void {
         new MenuSelector(this, this.actionManager);
@@ -357,7 +366,8 @@ export class Canvas extends mxGraph {
 
 
     getPreferredSizeForCell(cell: mxCell): mxRectangle {
-        if (cell.getAttribute('rresize') === '0') {
+        if (cell.getAttribute('rresize') === '0' || cell.getAttribute('no-resize')) {
+            console.log("FRAP");
             return cell.geometry as any as mxRectangle;
         } else {
             return super.getPreferredSizeForCell(cell);

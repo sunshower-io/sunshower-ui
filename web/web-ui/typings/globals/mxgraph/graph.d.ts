@@ -170,6 +170,13 @@ declare module 'mxgraph' {
 
         getBoundingBox(children: Layer[]): mxRectangle;
 
+
+        /**
+         *
+         * @param cell
+         */
+        extendParent(cell:Layer) : void;
+
         /**
          *
          * @param cell

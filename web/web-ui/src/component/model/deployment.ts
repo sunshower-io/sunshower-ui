@@ -43,6 +43,7 @@ implements
         super();
         this.geometry = new mxGeometry(0, 0, 100, 100);
         this.setAttribute('constituent', '1');
+        this.setAttribute('no-extend-parent', '1');
     }
 
 
