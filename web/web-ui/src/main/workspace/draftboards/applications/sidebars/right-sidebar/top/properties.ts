@@ -25,12 +25,14 @@ export class Properties {
 
 
     changeEditor = (e:CanvasEvent) => {
-        let cell = e.cells[0];
-        if(cell && (cell as any).editor) {
-            let editableCell = cell as any as EditableElement<any, any>;
-            this.currentEditor = this.container
-                .invoke(editableCell.editor);
-            this.currentEditor.open(cell);
+        if(e.sender !== this)  {
+            let cell = e.cells[0];
+            if(cell && (cell as any).editor) {
+                let editableCell = cell as any as EditableElement<any, any>;
+                this.currentEditor = this.container
+                    .invoke(editableCell.editor);
+                this.currentEditor.open(cell);
+            }
         }
     };
 

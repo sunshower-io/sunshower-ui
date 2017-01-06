@@ -49,15 +49,7 @@ export class VlanElementFactory extends AbstractElementFactory<VlanElement> {
 
         try {
             canvas.getModel().beginUpdate();
-
-            let boundingBox = canvas.view.getBounds(roots);
-            let geometry = new mxGeometry(
-                boundingBox.x - 48,
-                boundingBox.y - 48,
-                boundingBox.width + 96,
-                boundingBox.height + 96
-            );
-            layer.geometry = geometry;
+            layer.geometry = this.getGeometry(canvas, roots);
             layer.addTo(model.graph, canvas.getDefaultParent(), false);
         } finally {
             canvas.getModel().endUpdate();

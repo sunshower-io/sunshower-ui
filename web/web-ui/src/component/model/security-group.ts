@@ -2,7 +2,7 @@
 import {CompositeElement} from './layer';
 import {
     AbstractElementFactory,
-    Elements,
+    Elements, EditableElement,
 } from "canvas/element/element";
 
 
@@ -12,7 +12,16 @@ import {
 import {EditorContext} from "canvas/core/canvas";
 
 import {Registry} from "utils/registry";
-export class SecurityGroupElement extends CompositeElement {
+import {SecurityGroupEditor} from "component/editors/security-group/security-group";
+import {Class} from "lang/class";
+export class SecurityGroupElement extends CompositeElement
+    implements
+        EditableElement<
+            SecurityGroupElement,
+            SecurityGroupEditor
+        >
+{
+    editor: Class<SecurityGroupEditor> = SecurityGroupEditor;
 
     constructor() {
         super();
@@ -46,15 +55,7 @@ export class SecurityGroupElementFactory extends AbstractElementFactory<Security
         draftboardManager.add(layer);
         try {
             canvas.getModel().beginUpdate();
-
-            let boundingBox = canvas.view.getBounds(roots);
-            let geometry = new mxGeometry(
-                boundingBox.x - 48,
-                boundingBox.y - 48,
-                boundingBox.width + 96,
-                boundingBox.height + 96
-            );
-            layer.geometry = geometry;
+            layer.geometry = this.getGeometry(canvas, roots);
             layer.addTo(model.graph, canvas.getDefaultParent(), false);
         } finally {
             canvas.getModel().endUpdate();

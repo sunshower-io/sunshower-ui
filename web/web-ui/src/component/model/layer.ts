@@ -158,15 +158,7 @@ export class LayerElementFactory extends AbstractElementFactory<LayerElement> {
 
         try {
             canvas.getModel().beginUpdate();
-
-            let boundingBox = canvas.view.getBounds(roots);
-            let geometry = new mxGeometry(
-                boundingBox.x - 48,
-                boundingBox.y - 48,
-                boundingBox.width + 96,
-                boundingBox.height + 96
-            );
-            layer.geometry = geometry;
+            layer.geometry = this.getGeometry(canvas, roots);
             layer.addTo(canvas, canvas.getDefaultParent(), false);
         } finally {
             canvas.getModel().endUpdate();

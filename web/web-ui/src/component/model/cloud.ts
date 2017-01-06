@@ -1,19 +1,22 @@
 
 
+import {CompositeElement} from './layer';
 import {
-    mxImage,
+    AbstractElementFactory,
+    Elements,
+} from "canvas/element/element";
+
+
+import {EditorContext} from "canvas/core/canvas";
+
+import {Registry} from "utils/registry";
+
+import {
     mxGeometry,
-    mxConstants,
-    mxCellOverlay
 
 } from "mxgraph";
 
 
-import {Constrained} from "./cell";
-
-import {Registry} from "utils/registry";
-import {EditorContext, Canvas} from "canvas/core/canvas";
-import {RegistryAwareElement} from "canvas/element/registry-aware";
 import {VirtualCloudEditor} from "component/editors/cloud/editor";
 import {Class} from "lang/class";
 
@@ -22,9 +25,8 @@ import {
 } from "canvas/element/element";
 
 export class VirtualCloud extends
-    RegistryAwareElement
+    CompositeElement
     implements
-        Constrained ,
         EditableElement<VirtualCloud, VirtualCloudEditor>
 {
 
@@ -39,6 +41,12 @@ export class VirtualCloud extends
         this.geometry = new mxGeometry(0, 0, 100, 100);
     }
 
+    protected shallowCopy(): CompositeElement {
+        let clone = new VirtualCloud();
+        clone.name = this.name;
+        clone.geometry = this.geometry.clone();
+        return clone;
+    }
 
     regroup() : void {
         this.host.refresh(this);
@@ -55,28 +63,37 @@ export class VirtualCloud extends
         this.host.refresh(this);
     }
 
-    satisfy(context: EditorContext): void {
-        this.registry.draftboardManager.add(this);
-    }
 
-    protected createCloudOverlay() : mxCellOverlay {
+
+}
+
+export class CloudElementFactory extends AbstractElementFactory<VirtualCloud> {
+
+    create(model: EditorContext, registry: Registry): VirtualCloud {
         let
-            url = `assets/sui/themes/hasli/assets/images/icons/provider/generic/cloud.svg`,
-            image = new mxImage(url, 30, 20),
-            iconOverlay = new mxCellOverlay(
-                image,
-                null,
-                mxConstants.ALIGN_LEFT,
-                mxConstants.ALIGN_TOP,
-                null,
-                'default'
-            );
-        return iconOverlay;
+            draftboardManager = registry.draftboardManager,
+            layer = new VirtualCloud(),
+            canvas = model.graph,
+            selected = Elements.pluckLayers(canvas.getSelectionCells()),
+            roots = Elements.resolveRoots(selected);
 
+        layer.name = this.getProperty('name');
+        layer.description = this.getProperty('description');
+        draftboardManager
+            .removeAll(roots);
+
+        layer.addElements(roots);
+        draftboardManager.add(layer);
+
+        try {
+            canvas.getModel().beginUpdate();
+
+            layer.geometry = this.getGeometry(canvas, roots);
+            layer.addTo(model.graph, canvas.getDefaultParent(), false);
+        } finally {
+            canvas.getModel().endUpdate();
+        }
+
+        return layer;
     }
-
-    protected createOverlays(): mxCellOverlay[] {
-        return [this.createCloudOverlay()];
-    }
-
 }

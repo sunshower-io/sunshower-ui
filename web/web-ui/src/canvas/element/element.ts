@@ -4,6 +4,8 @@ import {
     mxConstants,
     mxImage,
     Renderable,
+    mxGeometry,
+    mxRectangle,
     SceneGraphElement
 } from 'mxgraph';
 import {Vertex, Edge} from "algorithms/graph/graph";
@@ -29,13 +31,11 @@ export interface Element extends SceneGraphElement, Renderable, Layer, Copyable<
 
     getPredecessors(): Element[];
 
-    addTo(
-        canvas: Canvas,
-        parent:Layer,
-        relative:boolean
-   );
+    addTo(canvas: Canvas,
+          parent: Layer,
+          relative: boolean);
 
-    addElement(element:Element) : void;
+    addElement(element: Element): void;
 
     beforeAdd(context: Canvas): void;
 
@@ -170,9 +170,7 @@ export class Elements {
     }
 }
 
-export abstract class AbstractElement
-    extends mxCell
-    implements Element, Vertex<Properties> {
+export abstract class AbstractElement extends mxCell implements Element, Vertex<Properties> {
 
     private static readonly loadingOverlay: mxCellOverlay =
         AbstractElement.createLoadingOverlay();
@@ -206,7 +204,7 @@ export abstract class AbstractElement
         this.setAttribute('element', '1');
     }
 
-    copy() : Element {
+    copy(): Element {
         return this;
     }
 
@@ -226,9 +224,9 @@ export abstract class AbstractElement
 
     }
 
-    addTo(context:Canvas, parent:Layer, relative:boolean): Layer {
+    addTo(context: Canvas, parent: Layer, relative: boolean): Layer {
         this.beforeAdd(context);
-        this.parent = parent;
+        this.setParent(parent);
         let result = this.host.addCell(this, parent);
         this.recomputeLocation(parent);
         let overlays = this.createOverlays();
@@ -240,8 +238,8 @@ export abstract class AbstractElement
         return result;
     }
 
-    public addElement(e:Element) : void {
-        if(e) {
+    public addElement(e: Element): void {
+        if (e) {
             let pnode = e as any as PropertyNode;
             this.addSuccessor(pnode);
             pnode.addPredecessor(this);
@@ -249,7 +247,7 @@ export abstract class AbstractElement
     }
 
 
-    private recomputeLocation(parent:Layer) {
+    private recomputeLocation(parent: Layer) {
 
     }
 
@@ -370,10 +368,6 @@ export abstract class AbstractElement
         return this.getAdjacencies(Relationship.PREDECESSOR) as any as Element[];
     }
 
-
-    setParent(cell: mxCell): void {
-
-    }
 
     getChildrenOfType<U>(childType: any): U[] {
         let results = [];
@@ -523,6 +517,34 @@ export abstract class AbstractElementFactory<E extends Element> implements Eleme
             return this.properties[key];
         }
         return null;
+    }
+
+    getBounds(canvas: Canvas, roots: Layer[]): mxRectangle {
+        let boundingBox = canvas.view.getBounds(roots),
+            scale = canvas.view.scale,
+            tx = canvas.view.translate.x,
+            ty = canvas.view.translate.y;
+        boundingBox.x -= tx * scale;
+        boundingBox.y -= ty * scale;
+
+        boundingBox.x /= scale;
+        boundingBox.y /= scale;
+        boundingBox.width /= scale;
+        boundingBox.height /= scale;
+
+        return boundingBox;
+    }
+
+    getGeometry(canvas: Canvas, roots: Layer[]): mxGeometry {
+        let boundingBox = this.getBounds(canvas, roots),
+            scale = canvas.view.scale,
+            geometry = new mxGeometry(
+                boundingBox.x - (48 * scale),
+                boundingBox.y - (48 * scale),
+                boundingBox.width + (96 * scale),
+                boundingBox.height + (96 * scale)
+            );
+        return geometry;
     }
 
 

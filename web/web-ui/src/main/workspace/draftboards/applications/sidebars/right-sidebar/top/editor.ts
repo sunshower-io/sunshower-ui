@@ -22,7 +22,9 @@ export class Editor {
         private applicationState:ApplicationState
     ) {
         eventAggregator.subscribe(
-            CanvasEvents.CELL_SELECTION_CHANGED, this.onSelectionChanged);
+            CanvasEvents.CELL_SELECTION_CHANGED,
+            this.onSelectionChanged
+        );
     }
 
     attached() : void {

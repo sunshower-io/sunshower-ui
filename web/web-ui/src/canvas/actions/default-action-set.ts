@@ -6,6 +6,7 @@ import CreateVLANMenuItem from "canvas/menu/selection-menu/create-vlan";
 import CreateSecurityGroupMenuItem from "canvas/menu/selection-menu/create-security-group";
 import CreateGroupMenuItem from "canvas/menu/selection-menu/create-group";
 import CreateLayerMenuItem from "canvas/menu/selection-menu/create-layer";
+import CreateCloudMenuItem from "canvas/menu/selection-menu/create-cloud";
 
 
 @inject(DialogService, ActionManager)
@@ -19,6 +20,7 @@ export class DefaultActionSet {
         actionManager.register(new CreateSecurityGroupMenuItem(dialogService));
         actionManager.register(new CreateGroupMenuItem(dialogService));
         actionManager.register(new CreateLayerMenuItem(dialogService));
+        actionManager.register(new CreateCloudMenuItem(dialogService));
 
     }
 }
