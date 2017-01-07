@@ -3,10 +3,13 @@
  */
 
 
-
-
 import {inject} from 'aurelia-framework';
+
 import {HttpClient} from "aurelia-fetch-client";
+
+import {
+    EventAggregator
+} from 'aurelia-event-aggregator';
 
 import * as PNotify from 'pnotify';
 import 'pnotify.callbacks';
@@ -15,6 +18,9 @@ import {
     mxGraph,
     Layer,
     mxCell,
+    mxEvent,
+    mxEventObject,
+    mxGraphSelectionModel
 } from "mxgraph";
 
 import {
@@ -22,10 +28,9 @@ import {
 } from '../abstract-graph'
 
 import {
-    EditorEvent,
-    EditorOperation, EditorContext
+    EditorOperation,
+    EditorContext
 } from '../editor';
-
 
 
 import {
@@ -33,10 +38,9 @@ import {
 } from '../draftboard';
 
 import {
-     NavigationAware
+    NavigationAware
 } from '../editor';
 
-import {Builder as GBuilder} from '../graph/builder'
 import {Registry} from 'utils/registry';
 import {
     AddInfrastructure as AddInfrastructureDialog
@@ -50,32 +54,89 @@ import {Maximize} from "./menus/maximize";
 
 import {
     MenuItem,
-    OperationContext,
     OperationContextFactory
 } from 'common/elements/menu';
 
+import {
+    Draftboard as Draft,
+    DraftboardManager
+} from 'component/draftboard/draftboard';
+
+import {
+    Listener,
+    ObservedEvent
+} from 'utils/observer';
+
+import {Canvas} from 'canvas/core/canvas'
+
+import {DialogService} from 'aurelia-dialog';
 import {bindable} from 'aurelia-framework';
 import {ToggleLeft, ToggleRight, SearchMenu} from "./menus/misc-menus";
-import {DialogService} from 'aurelia-dialog';
+import {DefaultActionSet} from 'canvas/actions/default-action-set';
+import {ActionManager} from 'canvas/actions/action-service';
+
+import {
+    CanvasEvent,
+    CanvasEvents
+} from 'canvas/events/canvas-events';
+
+import {Element} from 'canvas/element/element';
+
+
+import ApplicationState from 'storage/application-state';
 
 @inject(
     HttpClient,
     Draftboard,
     Registry,
-    DialogService
+    DialogService,
+    DraftboardManager,
+    DefaultActionSet,
+    ActionManager,
+    EventAggregator,
+    ApplicationState
 )
-export class Applications extends AbstractGraph implements NavigationAware, OperationContextFactory {
+export class Applications extends AbstractGraph implements Listener,
+    NavigationAware,
+    OperationContextFactory {
 
     @bindable
-    public menus:MenuItem[];
+    public menus: MenuItem[];
 
 
-    private infrastructureDialog:AddInfrastructureDialog;
+    private infrastructureDialog: AddInfrastructureDialog;
+
+    private fireElementsChanged = (sender: mxGraphSelectionModel, event: mxEventObject) => {
+        let cells = sender.cells;
+        this.eventAggregator.publish(CanvasEvents.CELL_SELECTION_CHANGED, {
+            sender: this,
+            name: CanvasEvents.CELL_SELECTION_CHANGED,
+            cells: cells,
+            canvas: this.graph
+        });
+        if(cells && cells.length) {
+            this.applicationState.currentElement = cells[0] as Element;
+        }
+    };
+
+    private updateSelection = (e:CanvasEvent) => {
+        if(e.sender !== this) {
+            this.graph.clearSelection();
+            this.graph.setSelectionCells(e.cells);
+        }
+    };
+
+
+
     constructor(private client: HttpClient,
                 private parent: Draftboard,
-                registry:Registry,
-                private dialogService:DialogService
-    ) {
+                registry: Registry,
+                private dialogService: DialogService,
+                private draftboardManager: DraftboardManager,
+                actionSet: DefaultActionSet,
+                private actionManager: ActionManager,
+                private eventAggregator: EventAggregator,
+                private applicationState: ApplicationState) {
         super(registry);
         this.menus = [];
         this.addMenu(new FileMenu(dialogService));
@@ -88,26 +149,43 @@ export class Applications extends AbstractGraph implements NavigationAware, Oper
         this.addMenu(new ToggleLeft());
         this.addMenu(new ToggleRight());
 
+
+
+        this.draftboardManager
+            .addEventListener('draftboard-saved', this);
+
+        eventAggregator.subscribe(
+            CanvasEvents.CELL_SELECTION_CHANGED,
+            this.updateSelection
+        );
+    }
+
+    activate(params: any) {
+        if (params && params.id) {
+
+        } else {
+        }
     }
 
     create(): EditorContext {
         let offset = $(this.graph.container).offset();
         return {
-            host:this.parent,
-            graph:this.graph,
+            host: this.parent,
+            graph: this.graph,
             offset: offset
         };
     }
 
-    protected addMenu(menu:MenuItem) {
+    protected addMenu(menu: MenuItem) {
         this.menus.push(menu);
     }
-
 
 
     attached(): void {
         super.attached();
         this.parent.set(this);
+        this.draftboardManager
+            .setFocusedDraftboard(new Draft(this.graph));
     }
 
 
@@ -117,30 +195,43 @@ export class Applications extends AbstractGraph implements NavigationAware, Oper
     }
 
 
-
-
     private computePosition(): JQueryCoordinates {
-
         if (this.rightVisible) {
             let right = $(this.rightSidebar).children(':first-child'),
                 rightOffset = $(right).offset();
             return {
-                top: rightOffset.top + 20,
+                top: rightOffset.top + 60,
                 left: rightOffset.left - 320
             };
         } else {
             let offset = $(this.container).offset(),
                 width = $(this.container).width();
             return {
-                top: offset.top + 20,
+                top: offset.top + 60,
                 left: width - 320
             }
         }
     }
 
+    onSave(draftboard: Draft): void {
+        new PNotify({
+            title: 'Success',
+            text: `Saved ${draftboard.name}`,
+            opacity: 0.90,
+            type: 'error',
+            addclass: 'graph-error',
+            width: '300px',
+            context: $(this.container),
+            before_open: (f) => {
+                let position = this.computePosition();
+                f.get().css(position);
+            }
+        });
 
-    addInfrastructure(e:Event) : void {
-        this.infrastructureDialog.show();
+    }
+
+    apply(event: ObservedEvent): void {
+        this.onSave(event.target as Draft);
     }
 
     handleCycle() {
@@ -157,11 +248,17 @@ export class Applications extends AbstractGraph implements NavigationAware, Oper
                 f.get().css(position);
             }
         });
+
     }
 
-
-    protected createBuilder(): GBuilder {
-        return new GBuilder(this.container);
+    protected createBuilder(): Canvas {
+        let canvas = new Canvas(
+            this.container,
+            this.registry,
+            this.actionManager
+        );
+        canvas.getSelectionModel().addListener(mxEvent.CHANGE, this.fireElementsChanged);
+        return canvas;
     }
 
 }

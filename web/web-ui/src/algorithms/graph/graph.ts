@@ -3,30 +3,53 @@ export interface Traversal<T, U> {
 }
 
 
-enum Relationship {
-    Parent,
-    Child
-}
+type Relationship = Symbol | string | number;
 
-export class Edge<T> {
 
-    constructor(public source: Node<T>,
-                public target: Node<T>,
-                public relationship?: Relationship) {
+export interface Edge<T> {
 
-    }
+    source          :Node<T>;
+    target          :Node<T>;
+    relationship    :Relationship;
+
 }
 
 
 export interface Vertex<T> {
 
     data?: T;
+
     id: string;
 
-    add(edge: Edge<T>): boolean;
+    adjacencies: {[key:string]: Edge<T>};
 
-    remove(edge: Node<T>): boolean;
+    addEdge(edge: Edge<T>): boolean;
 
+    removeEdge(edge: Edge<T>): boolean;
+
+    removeSuccessor(successor:Node<T>) : boolean;
+
+    addSuccessor(successor:Node<T>) : boolean;
+
+    addPredecessor(successor: Node<T>) : boolean;
+
+    removePredecessor(predecessor: Node<T>) : boolean;
+
+    getAdjacencies(relationship:Relationship) : Node<T>[];
+
+
+    createEdge(
+        source: Node<T>,
+        target: Node<T>,
+        relationship?: Relationship
+    ) : Edge<T>;
+
+}
+
+export class DefaultEdge<T> implements Edge<T> {
+    source: Node<T>;
+    target: Node<T>;
+    relationship: Relationship;
 
 }
 
@@ -37,7 +60,38 @@ export class Node<T> implements Vertex<T> {
         this.adjacencies = {};
     }
 
-    add(edge: Edge<T>): boolean {
+    addPredecessor(successor: Node<T>) : boolean {
+        return false;
+
+    }
+
+    removePredecessor(predecessor: Node<T>) : boolean {
+        return false;
+
+    }
+
+    createEdge(
+        source: Node<T>,
+        target: Node<T>
+    ) : Edge<T> {
+            let edge = new DefaultEdge<T>();
+            edge.source = this;
+            edge.target = this;
+            return edge;
+    }
+
+    getAdjacencies(relationship:Relationship) : Node<T>[] {
+            return [];
+    }
+
+    addSuccessor(successor: Node<T>): boolean {
+        if(this.adjacencies[successor.id]) {
+            return false;
+        }
+        this.adjacencies[successor.id] = this.createEdge(this, successor);
+    }
+
+    addEdge(edge: Edge<T>): boolean {
         if (this.adjacencies[edge.target.id]) {
             return false;
         }
@@ -45,13 +99,17 @@ export class Node<T> implements Vertex<T> {
         return true;
     }
 
-    remove(target: Node<T>): boolean {
-        let t = this.adjacencies[target.id];
+    removeSuccessor(successor:Node<T>) : boolean {
+        let t = this.adjacencies[successor.id];
         if (t) {
-            delete this.adjacencies[target.id];
+            delete this.adjacencies[successor.id];
             return true;
         }
         return false;
+    }
+
+    removeEdge(target: Edge<T>): boolean {
+        return this.removeSuccessor(target.target);
     }
 
 
@@ -64,7 +122,7 @@ export class Node<T> implements Vertex<T> {
     }
 }
 
-export class Graph<T> {
+export abstract class Graph<T> {
 
     public nodes: {[key: string]: Node<T>};
 
@@ -80,11 +138,23 @@ export class Graph<T> {
         return result;
     }
 
+    createEdge(
+        source: Node<T>,
+        target: Node<T>,
+        relationship:Relationship
+    ) : Edge<T> {
+        let edge = new DefaultEdge<T>();
+        edge.source = source;
+        edge.target = target;
+        edge.relationship = relationship;
+        return edge;
+    }
+
     disconnect(s: Node<T>, t: Node<T>): boolean {
         this.check();
         let source = this.nodes[s.id] || s,
             target = this.nodes[t.id] || t;
-        return source.remove(target);
+        return source.removeSuccessor(target);
     }
 
     connect(s: Node<T>,
@@ -94,10 +164,10 @@ export class Graph<T> {
         let source = this.nodes[s.id] || s,
             target = this.nodes[t.id] || t;
 
-        let edge = new Edge<T>(source, target, relationship);
+        let edge = this.createEdge(source, target, relationship);
         this.nodes[source.id] = source;
         this.nodes[target.id] = target;
-        return source.add(edge);
+        return source.addEdge(edge);
     }
 
     get(id: string): Node<T> {

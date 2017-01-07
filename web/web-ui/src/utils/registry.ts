@@ -1,19 +1,22 @@
-
 import {inject} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
-import {GraphManager} from "graph/graph-manager";
-import {ElementManager} from 'elements/element-manager';
+import {BlockManager} from "component/blocks/block";
+import {DraftboardManager} from "component/draftboard/draftboard";
 
-@inject(HttpClient, GraphManager, ElementManager)
+@inject(
+    HttpClient,
+    BlockManager,
+    DraftboardManager
+)
 export class Registry {
 
     static readonly S3_IMAGES_PATH = 's3_i';
     private readonly values : {[key:string]: any};
 
     constructor(
-        public client:HttpClient,
-        public graphManager:GraphManager,
-        public elementManager:ElementManager
+        public client                   : HttpClient,
+        public blockManager             : BlockManager,
+        public draftboardManager        : DraftboardManager
     ) {
 
         this.values = {};

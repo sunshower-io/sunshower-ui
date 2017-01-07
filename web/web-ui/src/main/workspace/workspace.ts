@@ -27,7 +27,8 @@ export class WorkspaceView {
                     child: false
                 }
             }, {
-                route: 'draftboard',
+                href: 'draftboard',
+                route: 'draftboard/:id?',
                 name: 'draftboard',
                 moduleId: './draftboards/draftboard',
                 nav: true,

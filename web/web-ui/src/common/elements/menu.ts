@@ -70,8 +70,10 @@ export interface MenuItem {
 
 export abstract class AbstractMenuItem implements MenuItem {
     align: string = 'left';
+    name : string;
     menus       ?: MenuItem[];
     apply(editor:OperationContext) : void {
+
     }
 
     addMenu(menu:MenuItem) {

@@ -1,6 +1,7 @@
-import {OperatingSystemService, OperatingSystem} from "model/os";
+import {OperatingSystem} from "model/hal/api";
 
-import {UUID} from "utils/uuid";
+import {OperatingSystemService} from "model/os";
+
 import {inject, bindable, bindingMode} from 'aurelia-framework';
 
 @inject(

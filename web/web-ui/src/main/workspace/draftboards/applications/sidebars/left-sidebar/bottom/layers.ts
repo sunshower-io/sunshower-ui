@@ -1,25 +1,85 @@
-import {inject} from 'aurelia-framework';
-import {Element} from 'elements/elements';
+import {inject, bindable} from 'aurelia-framework';
+import {Element} from 'canvas/element/element';
+import {
+    DraftboardManager
+} from 'component/draftboard/draftboard';
+
+import {Registry} from 'utils/registry';
+
+import {Tree} from 'common/elements/tree/tree';
 import {Listener, ObservedEvent} from 'utils/observer';
-import {ElementManager} from 'elements/element-manager'
+import {EventAggregator} from 'aurelia-event-aggregator';
+import {
+    CanvasEvent,
+    CanvasEvents
+} from 'canvas/events/canvas-events';
 
-@inject(ElementManager)
-export class Layers {
+@inject(
+    Registry,
+    DraftboardManager,
+    EventAggregator
+)
+export class Layers implements Listener {
 
-    layers : Element[];
+    element : HTMLElement;
+
+    @bindable
+    layers : Element[] = [];
+
+    tree:Tree;
+
     constructor(
-        public elementManager:ElementManager,
+        public registry:Registry,
+        public draftboardManager:DraftboardManager,
+        private eventAggregator: EventAggregator
     ) {
-        this.layers = elementManager.elements;
-        // this.elementManager.addEventListener('element-modified', this);
+        this.draftboardManager.addEventListener('element-added', this);
+
+        eventAggregator.subscribe(
+            CanvasEvents.CELL_SELECTION_CHANGED,
+            this.cellSelectionChanged
+        )
     }
 
-    // apply(event: ObservedEvent): void {
-    //     this.layers = this.elementManager.elements;
-    //     for(let layer of this.layers) {
-    //         console.log("LAYER", layer);
-    //         console.log("CHILDREN", layer.children);
-    //     }
-    // }
+
+
+    attached() : void {
+        this.draftboardManager
+            .addEventListener(
+                'draftboard-changed',
+                this
+            );
+        $(window).resize(this.resize);
+    }
+
+    apply(event: ObservedEvent): void {
+        this.layers = this.draftboardManager
+            .focusedDraftboard()
+            .getRootElements();
+        this.resize();
+    }
+
+    nodeSelected(e:Event) : void {
+        this.eventAggregator.publish(
+            CanvasEvents.CELL_SELECTION_CHANGED, {
+                sender: this,
+                cells:[(e as any).detail]
+            });
+    }
+
+    private cellSelectionChanged = (e:CanvasEvent) => {
+        if(e.sender !== this) {
+            this.tree.focus(e.cells);
+        }
+    };
+
+
+    private resize = () => {
+        let top = $(this.element).offset().top,
+            wheight = $(window).height(),
+            height = wheight - top;
+        $(this.element).height(height);
+    }
+
 
 }

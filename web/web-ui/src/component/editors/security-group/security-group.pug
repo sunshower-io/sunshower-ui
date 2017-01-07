@@ -1,0 +1,24 @@
+template
+    .element-editor
+        form.ui.tiny.form
+            .two.fields
+                .field
+                        span.text.inlineimage
+                            img.ui.mini.image(src="assets/sui/themes/hasli/assets/images/shield.svg")
+                .field(style="line-height:64px; vertical-align:middle")
+                    span.ui.medium.header ${name}
+
+            .one.field
+                label Security Group Name
+                input(type="text" name="name" value.bind="name")
+            .one.field
+                label Description
+                textarea(type="text" name="description", rows="2")
+            .two.fields
+                .field
+                    label Instance Count
+                    input(type="text" name="instanceCount")
+                .field
+                    label CPU
+                    input(type="text" name="cpu")
+

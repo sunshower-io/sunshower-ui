@@ -13,7 +13,6 @@ export class Navigator {
     }
 
     create() : void {
-        console.log("ROUTER", this.router);
         this.loading = true;
         this.router.navigate('workspace/draftboard');
     }

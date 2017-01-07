@@ -2,6 +2,7 @@ declare module 'mxgraph' {
 
     type mxCellStyle = {[key:string]:string};
 
+
     export class mxStylesheet {
         constructor();
         styles: {[key:string]:mxCellStyle};

@@ -1,18 +1,35 @@
+@bordercolor: #D6D6D7;
+@borderstyle: 1px solid @bordercolor;
+@pseudoem: 16px;
+@pseudolineheight: 39px;
+@hovercolor: #1e70bf;
 
 .sidenav {
+  /* stolen from .left--menu */
+  position:fixed; left: 0;
   height:100%;
-  .sidenav-collapse {
-    height:64px;
-    vertical-align: top;
+  top: 60px!important;
+  overflow:hidden;
+  box-sizing:border-box;
+  /*end stolen from .left--menu */
+  border-right: @borderstyle;
+  width: 18.75%!important; /* TODO incorporate media queries from .ui.column.grid>[class*="three wide"].column, .ui.grid>.column.row>[class*="three wide"].column, .ui.grid>.row>[class*="three wide"].column, .ui.grid>[class*="three wide"].column */
+  .menu--header {
+    /* stolen from .left--menu .menu-header*/
+    height: @pseudolineheight;
+    box-sizing: border-box;
+    border-bottom: 1px;
+    line-height: @pseudolineheight;
+    background-color: #F4F4F4!important;
+    /* end stolen from .left--menu .menu-header */
+    .sidebar-header {
+      /* stolen */
+      height: @pseudolineheight;
+      font-weight: bold;
+      padding-left: @pseudoem;
+      border-bottom: @borderstyle ; }
   }
-  .sidenav-container {
-    height:100%;
-  }
-
-  a.item {
-    margin-left:24px;
-    font-size:1.2em;
-    color:#8b8d98!important;
+  a.item {display: block; line-height:@pseudolineheight; padding:0 @pseudoem; border-bottom: @borderstyle;
+    &.active { font-weight: bold; color: @hovercolor; }
   }
 }
-

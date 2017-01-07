@@ -1,5 +1,12 @@
-import {RouterConfiguration, Router} from "aurelia-router";
-import {bindable, inject} from 'aurelia-framework';
+import {
+    bindable,
+    inject
+} from 'aurelia-framework';
+
+import {
+    RouterConfiguration,
+    Router
+} from "aurelia-router";
 
 import {
     Editor,
@@ -12,13 +19,16 @@ import Menu from 'common/elements/menu';
 @inject(Menu)
 export class Draftboard {
 
-    public router:Router;
+    private menu            : Menu;
 
-    private child:NavigationAware;
+    public router            : Router;
+
     @bindable
-    private menus: MenuItem[] = [];
+    private child           : NavigationAware;
 
-    private menu:Menu;
+    @bindable
+    private menus           : MenuItem[] = [];
+
 
 
 

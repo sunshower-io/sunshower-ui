@@ -1,34 +1,54 @@
 
 import {bindable} from "aurelia-framework";
 interface Component {
-    name: string;
-    icon: string;
-    active?: boolean;
+    location            : string;
+    name                : string;
+    icon                : string;
+    active              ?: boolean;
 }
 
 export class Sidebar {
     @bindable
-    protected active:Component;
+    protected activeTop:Component;
 
     @bindable
-    public components: Component[];
+    protected activeBottom: Component;
+
+    @bindable
+    public componentsTop: Component[];
+
+    @bindable
+    public componentsBottom: Component[];
 
 
-    setActive(active:Component) {
-        if(this.active) {
-            this.active.active = false;
+    setActiveTop(active:Component) {
+        if(this.activeTop) {
+            this.activeTop.active = false;
         }
-        this.active = active;
-        this.active.active = true;
+        this.activeTop = active;
+        this.activeTop.active = true;
+    }
+
+    setActiveBottom(active:Component) {
+        if(this.activeBottom) {
+            this.activeBottom.active = false;
+        }
+        this.activeBottom = active;
+        this.activeBottom.active = true;
     }
 
     attached() {
     }
 
     configure(components:Component[]) {
-        this.components = [];
-        for(let component in components) {
-            this.components[component] = components[component];
+        this.componentsTop    = [];
+        this.componentsBottom = [];
+        for(let component of components) {
+            if(component.location === 'top') {
+                this.componentsTop.push(component);
+            } else {
+                this.componentsBottom.push(component);
+            }
         }
     }
 

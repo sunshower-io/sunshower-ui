@@ -1,23 +1,25 @@
 template
-    .header
+    .header(style="width:600px")
         | Save Draftboard
-    .image.content
-        .ui.medium.image
+    .image.content(style="width:600px")
+        .ui.medium.image(style="border:1px solid #a2a2a2; background:#f3f3f3")
+            canvas(ref="image", width="300px", height="200px")
             //img(src='/images/avatar/large/chris.jpg')
-        .description
+        .description(style="width:100%")
             .ui.form
                 .field
                     label Name
-                    input(type='text', name='name', value.bind="draft.name")
+                    input(type='text', name='name', value.bind="current.name")
                 .field
-                    label Name
-                    input(type='text', name='name', value.bind="draft.description")
+                    label Description
+                    input(type='text', name='name', value.bind="current.description")
                 .field
-                    label Name
-                    input(type='text', name='name', value.bind="draft.notes")
-    .actions
+                    label Notes
+                    textarea(value.bind="current.notes")
+                    //input(type='text', name='name', value.bind="current.notes")
+    .actions(style="width:600px")
         .ui.black.deny.button
-            | Nope
-        .ui.positive.right.labeled.icon.button
-            | Yep, that's me
+            | Cancel
+        .ui.positive.right.labeled.icon.button(click.delegate="save()")
+            | Save
             i.checkmark.icon

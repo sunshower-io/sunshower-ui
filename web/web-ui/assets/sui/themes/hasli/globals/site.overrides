@@ -4,11 +4,17 @@
 
 @text-colors: blue, green, orange, pink, purple, red, teal, yellow, black, grey, white;
 .text {
-    .-(@i: length(@text-colors)) when (@i > 0) {
-        @c: extract(@text-colors, @i);
-        &.@{c} { color: @@c }
-        .-((@i - 1));
-    }.-;
+  .-
+(@i: length(@text-colors)) when (@i > 0) {
+  @c: extract(@text-colors, @i);
+  &.@{c} {
+    color: @@c
+  }
+  .-
+((@i - 1));
+}
+  .-
+;
 }
 
 .page.header {
@@ -26,11 +32,9 @@
   }
 }
 
-
 img.transparent {
-  opacity:0;
+  opacity: 0;
 }
-
 
 /* used for plus/minus icone toggle */
 .toggle--icon {
@@ -47,10 +51,9 @@ img.transparent {
 
 .grid--lines {
   background: transparent linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent);
-  height:100%;
-  background-size:50px 50px;
+  height: 100%;
+  background-size: 50px 50px;
 }
-
 
 /* Application Explore height */
 .form--scroll {
@@ -74,8 +77,8 @@ img.transparent {
   border-top: 1px solid #D6D6D7 !important;
   border-bottom: 1px solid #D6D6D7 !important;
   height: 350px !important;
-  margin:0px !important;
-  padding:0px !important;
+  margin: 0px !important;
+  padding: 0px !important;
 }
 
 .right--menu, .left--menu {
@@ -87,15 +90,15 @@ img.transparent {
   //-webkit-box-sizing: border-box;
   //-moz-box-sizing: border-box;
   box-sizing: border-box;
-  border-top:0 !important;
-  background-color: #FFFFFF !important;
+  border-top: 0 !important;
+  overflow:hidden;
 
   .menu--header {
-    height:39px !important;
-    box-sizing:border-box !important;
-    border-bottom:1px !important;
-    line-height:39px;
-    vertical-align:middle;
+    height: 39px !important;
+    box-sizing: border-box !important;
+    border-bottom: 1px !important;
+    line-height: 39px;
+    vertical-align: middle;
     text-align: center;
     background-color: #F4F4F4 !important;
   }

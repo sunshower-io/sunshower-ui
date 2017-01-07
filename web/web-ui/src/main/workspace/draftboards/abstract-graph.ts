@@ -8,39 +8,25 @@ import {
     mxGraphHandler,
 } from 'mxgraph';
 
-import {Kv} from "utils/objects";
 
 import {PLATFORM} from 'aurelia-pal';
-import {Builder} from './graph/builder';
 import {Registry} from "utils/registry";
+import {Canvas} from 'canvas/core/canvas';
 
-// export interface GraphContext {
-//     graph:mxGraph;
-//     offset: {top:number, left:number},
-// }
-//
-// export interface GraphProcessor {
-//     apply(context:GraphContext) : void;
-// }
-//
-// export interface GraphModificationEvent {
-//     processor:GraphProcessor;
-// }
 
 export abstract class AbstractGraph {
 
 
 
-    protected graph: Builder;
+    protected graph             : Canvas;
+    protected container         : HTMLElement;
 
-    protected container: HTMLElement;
-
-    protected leftVisible: boolean = true;
-    protected rightVisible: boolean = true;
+    protected leftVisible       : boolean = true;
+    protected rightVisible      : boolean = true;
 
 
-    protected leftSidebar: HTMLElement;
-    protected rightSidebar: HTMLElement;
+    protected leftSidebar       : HTMLElement;
+    protected rightSidebar      : HTMLElement;
 
     constructor(public registry:Registry) {
 
@@ -61,7 +47,7 @@ export abstract class AbstractGraph {
         }
     }
 
-    protected abstract createBuilder() : Builder;
+    protected abstract createBuilder() : Canvas;
 
     protected configureListeners() {
         PLATFORM.global.addEventListener('resize', this.resizeHandler);

@@ -15,6 +15,12 @@ System.config({
     "mxgraph/javascript/mxClient": {
       "format": "global"
     },
+    "stackblur": {
+      "format": "global"
+    },
+    "rgbcolor": {
+      "format": "global"
+    },
     "pnotify": {
       "deps": [
         "jquery"
@@ -25,6 +31,7 @@ System.config({
     "aurelia-animator-css": "npm:aurelia-animator-css@1.0.1",
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.1",
     "aurelia-dialog": "npm:aurelia-dialog@1.0.0-beta.3.0.1",
+    "aurelia-event-aggregator": "npm:aurelia-event-aggregator@1.0.1",
     "aurelia-fetch-client": "npm:aurelia-fetch-client@1.1.0",
     "aurelia-framework": "npm:aurelia-framework@1.0.8",
     "aurelia-history-browser": "npm:aurelia-history-browser@1.0.0",
@@ -39,10 +46,12 @@ System.config({
     "aurelia-templating-router": "npm:aurelia-templating-router@1.0.1",
     "bluebird": "npm:bluebird@3.4.1",
     "bootstrap": "github:twbs/bootstrap@3.3.7",
+    "canvg": "github:canvg/canvg@master",
+    "canvg/canvg": "github:canvg/canvg@master",
     "css": "github:systemjs/plugin-css@0.1.32",
     "cytoscape": "npm:cytoscape@2.7.13",
     "cytoscape-edgehandles": "npm:cytoscape-edgehandles@2.7.1",
-    "cytoscape-grid-guide": "npm:cytoscape-grid-guide@1.0.3",
+    "cytoscape-grid-guide": "npm:cytoscape-grid-guide@1.0.4",
     "cytoscape-node-resize": "npm:cytoscape-node-resize@1.0.10",
     "cytoscape-node-resize:n": "npm:cytoscape-node-resize@1.0.10",
     "dropzone": "github:enyo/dropzone@4.3.0",
@@ -53,13 +62,15 @@ System.config({
     "font-awesome": "npm:font-awesome@4.6.3",
     "jquery": "npm:jquery@2.2.4",
     "mxgraph": "github:jgraph/mxgraph-js@master",
-    "ocanvas": "npm:ocanvas@2.8.6",
+    "ocanvas": "npm:ocanvas@2.8.7",
     "plugin-text": "npm:systemjs-plugin-text@0.0.9",
     "pnotify": "github:sciactive/pnotify@3.0.0",
     "pnotify.callbacks": "github:sciactive/pnotify@3.0.0/dist/pnotify.callbacks",
-    "semantic-ui": "github:Semantic-Org/Semantic-UI@2.2.6",
+    "rgbcolor": "github:canvg/canvg@master/rgbcolor",
+    "semantic-ui": "github:Semantic-Org/Semantic-UI@2.2.7",
+    "stackblur": "github:canvg/canvg@master/StackBlur",
     "text": "github:systemjs/plugin-text@0.0.9",
-    "github:Semantic-Org/Semantic-UI@2.2.6": {
+    "github:Semantic-Org/Semantic-UI@2.2.7": {
       "css": "github:systemjs/plugin-css@0.1.32",
       "jquery": "npm:jquery@2.2.4"
     },
@@ -94,13 +105,13 @@ System.config({
       "util": "npm:util@0.10.3"
     },
     "npm:aurelia-animator-css@1.0.1": {
-      "aurelia-metadata": "npm:aurelia-metadata@1.0.2",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-pal": "npm:aurelia-pal@1.2.0",
       "aurelia-templating": "npm:aurelia-templating@1.1.4"
     },
     "npm:aurelia-binding@1.1.0": {
       "aurelia-logging": "npm:aurelia-logging@1.2.0",
-      "aurelia-metadata": "npm:aurelia-metadata@1.0.2",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-pal": "npm:aurelia-pal@1.2.0",
       "aurelia-task-queue": "npm:aurelia-task-queue@1.1.0"
     },
@@ -121,12 +132,12 @@ System.config({
       "aurelia-templating-router": "npm:aurelia-templating-router@1.0.1"
     },
     "npm:aurelia-dependency-injection@1.2.1": {
-      "aurelia-metadata": "npm:aurelia-metadata@1.0.2",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-pal": "npm:aurelia-pal@1.2.0"
     },
     "npm:aurelia-dialog@1.0.0-beta.3.0.1": {
       "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.2.1",
-      "aurelia-metadata": "npm:aurelia-metadata@1.0.2",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-pal": "npm:aurelia-pal@1.2.0",
       "aurelia-templating": "npm:aurelia-templating@1.1.4"
     },
@@ -138,7 +149,7 @@ System.config({
       "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.2.1",
       "aurelia-loader": "npm:aurelia-loader@1.0.0",
       "aurelia-logging": "npm:aurelia-logging@1.2.0",
-      "aurelia-metadata": "npm:aurelia-metadata@1.0.2",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-pal": "npm:aurelia-pal@1.2.0",
       "aurelia-path": "npm:aurelia-path@1.1.1",
       "aurelia-task-queue": "npm:aurelia-task-queue@1.1.0",
@@ -150,17 +161,17 @@ System.config({
     },
     "npm:aurelia-loader-default@1.0.0": {
       "aurelia-loader": "npm:aurelia-loader@1.0.0",
-      "aurelia-metadata": "npm:aurelia-metadata@1.0.2",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-pal": "npm:aurelia-pal@1.2.0"
     },
     "npm:aurelia-loader@1.0.0": {
-      "aurelia-metadata": "npm:aurelia-metadata@1.0.2",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-path": "npm:aurelia-path@1.1.1"
     },
     "npm:aurelia-logging-console@1.0.0": {
       "aurelia-logging": "npm:aurelia-logging@1.2.0"
     },
-    "npm:aurelia-metadata@1.0.2": {
+    "npm:aurelia-metadata@1.0.3": {
       "aurelia-pal": "npm:aurelia-pal@1.2.0"
     },
     "npm:aurelia-pal-browser@1.1.0": {
@@ -193,7 +204,7 @@ System.config({
       "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.2.1",
       "aurelia-loader": "npm:aurelia-loader@1.0.0",
       "aurelia-logging": "npm:aurelia-logging@1.2.0",
-      "aurelia-metadata": "npm:aurelia-metadata@1.0.2",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-pal": "npm:aurelia-pal@1.2.0",
       "aurelia-path": "npm:aurelia-path@1.1.1",
       "aurelia-task-queue": "npm:aurelia-task-queue@1.1.0",
@@ -203,7 +214,7 @@ System.config({
       "aurelia-binding": "npm:aurelia-binding@1.1.0",
       "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.2.1",
       "aurelia-logging": "npm:aurelia-logging@1.2.0",
-      "aurelia-metadata": "npm:aurelia-metadata@1.0.2",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-pal": "npm:aurelia-pal@1.2.0",
       "aurelia-path": "npm:aurelia-path@1.1.1",
       "aurelia-router": "npm:aurelia-router@1.1.0",
@@ -214,7 +225,7 @@ System.config({
       "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.2.1",
       "aurelia-loader": "npm:aurelia-loader@1.0.0",
       "aurelia-logging": "npm:aurelia-logging@1.2.0",
-      "aurelia-metadata": "npm:aurelia-metadata@1.0.2",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
       "aurelia-pal": "npm:aurelia-pal@1.2.0",
       "aurelia-path": "npm:aurelia-path@1.1.1",
       "aurelia-task-queue": "npm:aurelia-task-queue@1.1.0"
@@ -237,7 +248,7 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:cytoscape-grid-guide@1.0.3": {
+    "npm:cytoscape-grid-guide@1.0.4": {
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
@@ -261,7 +272,7 @@ System.config({
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
-    "npm:ocanvas@2.8.6": {
+    "npm:ocanvas@2.8.7": {
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
@@ -289,8 +300,8 @@ System.config({
   },
   bundles: {
     "aurelia.js": [
-      "github:Semantic-Org/Semantic-UI@2.2.6.js",
-      "github:Semantic-Org/Semantic-UI@2.2.6/semantic.js",
+      "github:Semantic-Org/Semantic-UI@2.2.7.js",
+      "github:Semantic-Org/Semantic-UI@2.2.7/semantic.js",
       "github:github/fetch@1.1.1.js",
       "github:github/fetch@1.1.1/fetch.js",
       "npm:aurelia-animator-css@1.0.1.js",
@@ -334,8 +345,8 @@ System.config({
       "npm:aurelia-logging-console@1.0.0/aurelia-logging-console.js",
       "npm:aurelia-logging@1.2.0.js",
       "npm:aurelia-logging@1.2.0/aurelia-logging.js",
-      "npm:aurelia-metadata@1.0.2.js",
-      "npm:aurelia-metadata@1.0.2/aurelia-metadata.js",
+      "npm:aurelia-metadata@1.0.3.js",
+      "npm:aurelia-metadata@1.0.3/aurelia-metadata.js",
       "npm:aurelia-pal-browser@1.1.0.js",
       "npm:aurelia-pal-browser@1.1.0/aurelia-pal-browser.js",
       "npm:aurelia-pal@1.2.0.js",
@@ -406,36 +417,92 @@ System.config({
       "auth/login/login.js",
       "auth/signup/signup.html!github:systemjs/plugin-text@0.0.9.js",
       "auth/signup/signup.js",
+      "canvas/actions/action-service.js",
+      "canvas/actions/default-action-set.js",
+      "canvas/core/canvas-model.js",
+      "canvas/core/canvas.js",
+      "canvas/core/cell-renderer.js",
+      "canvas/core/connection-handler.js",
+      "canvas/core/graph-handler.js",
+      "canvas/core/grid/grid.js",
+      "canvas/core/menu-selection.js",
+      "canvas/core/vertex-handler.js",
+      "canvas/element/element.js",
+      "canvas/element/events.js",
+      "canvas/element/registry-aware.js",
+      "canvas/events/canvas-events.js",
+      "canvas/menu/action.js",
+      "canvas/menu/selection-menu/create-block.js",
+      "canvas/menu/selection-menu/create-cloud.js",
+      "canvas/menu/selection-menu/create-group.js",
+      "canvas/menu/selection-menu/create-layer.js",
+      "canvas/menu/selection-menu/create-security-group.js",
+      "canvas/menu/selection-menu/create-vlan.js",
+      "canvas/menu/selection-menu/dialogs/group-items-as-dialog.html!github:systemjs/plugin-text@0.0.9.js",
+      "canvas/menu/selection-menu/dialogs/group-items-as-dialog.js",
+      "canvas/menu/task-cell.js",
+      "canvas/scene-graph/scene-graph.js",
+      "canvas/utilities.js",
       "common/elements/menu.html!github:systemjs/plugin-text@0.0.9.js",
       "common/elements/menu.js",
       "common/elements/nav-bar.html!github:systemjs/plugin-text@0.0.9.js",
       "common/elements/page-header.html!github:systemjs/plugin-text@0.0.9.js",
       "common/elements/profile-dropdown.html!github:systemjs/plugin-text@0.0.9.js",
       "common/elements/profile-dropdown.js",
+      "common/elements/tree/node.html!github:systemjs/plugin-text@0.0.9.js",
+      "common/elements/tree/node.js",
+      "common/elements/tree/tree.html!github:systemjs/plugin-text@0.0.9.js",
+      "common/elements/tree/tree.js",
+      "common/property-editor/property-editor.html!github:systemjs/plugin-text@0.0.9.js",
+      "common/property-editor/property-editor.js",
       "common/renderers/semantic-ui-renderer.js",
       "common/sidenav/sidenav.html!github:systemjs/plugin-text@0.0.9.js",
       "common/sidenav/sidenav.js",
+      "component/blocks/block.js",
+      "component/draftboard/draftboard.js",
+      "component/editors/cloud/editor.html!github:systemjs/plugin-text@0.0.9.js",
+      "component/editors/cloud/editor.js",
+      "component/editors/infrastructure-node/editor.html!github:systemjs/plugin-text@0.0.9.js",
+      "component/editors/infrastructure-node/editor.js",
+      "component/editors/load-balancer/editor.html!github:systemjs/plugin-text@0.0.9.js",
+      "component/editors/load-balancer/editor.js",
+      "component/editors/security-group/security-group.html!github:systemjs/plugin-text@0.0.9.js",
+      "component/editors/security-group/security-group.js",
+      "component/infrastructure/endpoint.js",
+      "component/infrastructure/gateway.js",
+      "component/infrastructure/infrastructure-manager.js",
+      "component/infrastructure/infrastructure.js",
+      "component/infrastructure/load-balancer.js",
+      "component/infrastructure/router.js",
+      "component/model/block.js",
+      "component/model/cell.js",
+      "component/model/cloud.js",
+      "component/model/configuration.js",
+      "component/model/deployment.js",
+      "component/model/group.js",
+      "component/model/infrastructure-node.js",
+      "component/model/infrastructure.js",
+      "component/model/layer.js",
+      "component/model/security-group.js",
+      "component/model/vlan.js",
       "core/exceptions/type-errors.js",
       "core/trait.js",
-      "elements/element-manager.js",
-      "elements/element.js",
-      "elements/elements.js",
-      "elements/events.js",
-      "graph/graph-manager.js",
+      "geometry/shapes.js",
       "initialize/initialize.html!github:systemjs/plugin-text@0.0.9.js",
       "initialize/initialize.js",
+      "lang/class.js",
       "main.js",
       "main/main.html!github:systemjs/plugin-text@0.0.9.js",
       "main/main.js",
       "main/nav-bar.html!github:systemjs/plugin-text@0.0.9.js",
-      "main/settings/admin/admin.html!github:systemjs/plugin-text@0.0.9.js",
       "main/settings/admin/admin.js",
-      "main/settings/hfs/hfs.html!github:systemjs/plugin-text@0.0.9.js",
-      "main/settings/hfs/hfs.js",
       "main/settings/profile/profile.html!github:systemjs/plugin-text@0.0.9.js",
       "main/settings/profile/profile.js",
       "main/settings/settings.html!github:systemjs/plugin-text@0.0.9.js",
       "main/settings/settings.js",
+      "main/settings/storage/storage.js",
+      "main/workspace/builder/sidemenus/modal.html!github:systemjs/plugin-text@0.0.9.js",
+      "main/workspace/builder/sidemenus/modal.js",
       "main/workspace/draftboards/abstract-graph.js",
       "main/workspace/draftboards/applications/applications.html!github:systemjs/plugin-text@0.0.9.js",
       "main/workspace/draftboards/applications/applications.js",
@@ -445,6 +512,7 @@ System.config({
       "main/workspace/draftboards/applications/components/infrastructure.js",
       "main/workspace/draftboards/applications/components/properties.html!github:systemjs/plugin-text@0.0.9.js",
       "main/workspace/draftboards/applications/components/properties.js",
+      "main/workspace/draftboards/applications/menus/delete-cells.js",
       "main/workspace/draftboards/applications/menus/edit-menu.js",
       "main/workspace/draftboards/applications/menus/file-menu.js",
       "main/workspace/draftboards/applications/menus/file/save-dialog.html!github:systemjs/plugin-text@0.0.9.js",
@@ -462,31 +530,23 @@ System.config({
       "main/workspace/draftboards/applications/sidebars/left-sidebar/left-sidebar.js",
       "main/workspace/draftboards/applications/sidebars/right-sidebar/bottom/applications.html!github:systemjs/plugin-text@0.0.9.js",
       "main/workspace/draftboards/applications/sidebars/right-sidebar/bottom/applications.js",
+      "main/workspace/draftboards/applications/sidebars/right-sidebar/bottom/blocks.html!github:systemjs/plugin-text@0.0.9.js",
+      "main/workspace/draftboards/applications/sidebars/right-sidebar/bottom/blocks.js",
+      "main/workspace/draftboards/applications/sidebars/right-sidebar/bottom/components.html!github:systemjs/plugin-text@0.0.9.js",
+      "main/workspace/draftboards/applications/sidebars/right-sidebar/bottom/components.js",
       "main/workspace/draftboards/applications/sidebars/right-sidebar/right-sidebar.html!github:systemjs/plugin-text@0.0.9.js",
       "main/workspace/draftboards/applications/sidebars/right-sidebar/right-sidebar.js",
+      "main/workspace/draftboards/applications/sidebars/right-sidebar/top/editor.html!github:systemjs/plugin-text@0.0.9.js",
+      "main/workspace/draftboards/applications/sidebars/right-sidebar/top/editor.js",
       "main/workspace/draftboards/applications/sidebars/right-sidebar/top/palette.html!github:systemjs/plugin-text@0.0.9.js",
       "main/workspace/draftboards/applications/sidebars/right-sidebar/top/palette.js",
       "main/workspace/draftboards/applications/sidebars/right-sidebar/top/properties.html!github:systemjs/plugin-text@0.0.9.js",
       "main/workspace/draftboards/applications/sidebars/right-sidebar/top/properties.js",
       "main/workspace/draftboards/applications/sidebars/sidebar.js",
-      "main/workspace/draftboards/cells/cloud.js",
-      "main/workspace/draftboards/cells/configuration.js",
-      "main/workspace/draftboards/cells/deployment.js",
-      "main/workspace/draftboards/cells/infrastructure.js",
-      "main/workspace/draftboards/cells/layer.js",
-      "main/workspace/draftboards/cells/node.js",
       "main/workspace/draftboards/draftboard.html!github:systemjs/plugin-text@0.0.9.js",
       "main/workspace/draftboards/draftboard.js",
       "main/workspace/draftboards/editor.js",
-      "main/workspace/draftboards/graph/builder.js",
-      "main/workspace/draftboards/graph/connection-handler.js",
-      "main/workspace/draftboards/graph/vertex-handler.js",
-      "main/workspace/draftboards/graph/vertex.js",
-      "main/workspace/draftboards/grid-view/grid-view.html!github:systemjs/plugin-text@0.0.9.js",
-      "main/workspace/draftboards/grid-view/grid-view.js",
-      "main/workspace/draftboards/grid.js",
       "main/workspace/draftboards/listeners/hover-listener.js",
-      "main/workspace/draftboards/menu/task-cell.js",
       "main/workspace/navigator/navigator.html!github:systemjs/plugin-text@0.0.9.js",
       "main/workspace/navigator/navigator.js",
       "main/workspace/workspace.html!github:systemjs/plugin-text@0.0.9.js",
@@ -500,7 +560,9 @@ System.config({
       "model/hal/api.js",
       "model/hal/image.js",
       "model/os.js",
+      "storage/application-state.js",
       "storage/local/local-storage.js",
+      "utils/diagram/image-export.js",
       "utils/events.js",
       "utils/objects.js",
       "utils/observer.js",
@@ -540,6 +602,113 @@ System.config({
       "../auth",
       "aurelia-router"
     ],
+    "canvas/actions/action-service.js": [
+      "../../utils/uuid"
+    ],
+    "canvas/actions/default-action-set.js": [
+      "aurelia-framework",
+      "./action-service",
+      "aurelia-dialog",
+      "canvas/menu/selection-menu/create-block",
+      "canvas/menu/selection-menu/create-vlan",
+      "canvas/menu/selection-menu/create-security-group",
+      "canvas/menu/selection-menu/create-group",
+      "canvas/menu/selection-menu/create-layer",
+      "canvas/menu/selection-menu/create-cloud"
+    ],
+    "canvas/core/canvas-model.js": [
+      "mxgraph"
+    ],
+    "canvas/core/canvas.js": [
+      "mxgraph",
+      "./grid/grid",
+      "./cell-renderer",
+      "./menu-selection",
+      "./graph-handler",
+      "./connection-handler",
+      "./canvas-model",
+      "./vertex-handler"
+    ],
+    "canvas/core/cell-renderer.js": [
+      "mxgraph"
+    ],
+    "canvas/core/connection-handler.js": [
+      "mxgraph"
+    ],
+    "canvas/core/graph-handler.js": [
+      "mxgraph"
+    ],
+    "canvas/core/grid/grid.js": [
+      "mxgraph"
+    ],
+    "canvas/core/menu-selection.js": [
+      "mxgraph"
+    ],
+    "canvas/core/vertex-handler.js": [
+      "mxgraph"
+    ],
+    "canvas/element/element.js": [
+      "mxgraph",
+      "utils/uuid",
+      "utils/objects"
+    ],
+    "canvas/element/events.js": [
+      "utils/observer"
+    ],
+    "canvas/element/registry-aware.js": [
+      "./element"
+    ],
+    "canvas/menu/action.js": [
+      "canvas/actions/action-service"
+    ],
+    "canvas/menu/selection-menu/create-block.js": [
+      "../action",
+      "canvas/core/canvas",
+      "component/model/block",
+      "./dialogs/group-items-as-dialog"
+    ],
+    "canvas/menu/selection-menu/create-cloud.js": [
+      "canvas/core/canvas",
+      "canvas/menu/action",
+      "./dialogs/group-items-as-dialog",
+      "component/model/cloud"
+    ],
+    "canvas/menu/selection-menu/create-group.js": [
+      "canvas/core/canvas",
+      "../action",
+      "./dialogs/group-items-as-dialog"
+    ],
+    "canvas/menu/selection-menu/create-layer.js": [
+      "canvas/core/canvas",
+      "canvas/menu/action",
+      "./dialogs/group-items-as-dialog",
+      "component/model/layer"
+    ],
+    "canvas/menu/selection-menu/create-security-group.js": [
+      "canvas/core/canvas",
+      "canvas/menu/action",
+      "./dialogs/group-items-as-dialog",
+      "component/model/security-group"
+    ],
+    "canvas/menu/selection-menu/create-vlan.js": [
+      "canvas/core/canvas",
+      "canvas/menu/action",
+      "./dialogs/group-items-as-dialog",
+      "component/model/vlan"
+    ],
+    "canvas/menu/selection-menu/dialogs/group-items-as-dialog.js": [
+      "canvas/core/canvas",
+      "aurelia-framework",
+      "utils/registry"
+    ],
+    "canvas/menu/task-cell.js": [
+      "mxgraph",
+      "utils/objects",
+      "canvas/element/element"
+    ],
+    "canvas/scene-graph/scene-graph.js": [
+      "canvas/element/element"
+    ],
     "common/elements/menu.js": [
       "aurelia-framework"
     ],
@@ -550,6 +719,17 @@ System.config({
       "../../model/core/security/token",
       "jquery"
     ],
+    "common/elements/tree/node.js": [
+      "aurelia-framework",
+      "./tree"
+    ],
+    "common/elements/tree/tree.js": [
+      "aurelia-framework",
+      "utils/events"
+    ],
+    "common/property-editor/property-editor.js": [
+      "aurelia-framework"
+    ],
     "common/renderers/semantic-ui-renderer.js": [
       "aurelia-pal"
     ],
@@ -557,15 +737,80 @@ System.config({
       "aurelia-framework",
       "aurelia-router"
     ],
-    "elements/element-manager.js": [
-      "./events",
+    "component/draftboard/draftboard.js": [
+      "utils/uuid",
       "utils/observer"
     ],
-    "elements/elements.js": [
-      "utils/uuid"
+    "component/editors/cloud/editor.js": [
+      "aurelia-framework",
+      "component/model/cloud"
     ],
-    "elements/events.js": [
-      "utils/observer"
+    "component/editors/infrastructure-node/editor.js": [
+      "aurelia-framework",
+      "model/os",
+      "utils/uuid",
+      "component/model/infrastructure-node"
+    ],
+    "component/infrastructure/endpoint.js": [
+      "mxgraph",
+      "./infrastructure"
+    ],
+    "component/infrastructure/gateway.js": [
+      "mxgraph",
+      "./infrastructure"
+    ],
+    "component/infrastructure/infrastructure-manager.js": [
+      "./load-balancer",
+      "./gateway",
+      "./endpoint"
+    ],
+    "component/infrastructure/infrastructure.js": [
+      "mxgraph",
+      "utils/objects",
+      "canvas/element/element"
+    ],
+    "component/infrastructure/load-balancer.js": [
+      "component/editors/load-balancer/editor",
+      "mxgraph",
+      "./infrastructure"
+    ],
+    "component/model/block.js": [
+      "./layer",
+      "canvas/element/element",
+      "mxgraph"
+    ],
+    "component/model/cloud.js": [
+      "./layer",
+      "canvas/element/element",
+      "mxgraph",
+      "component/editors/cloud/editor"
+    ],
+    "component/model/deployment.js": [
+      "utils/registry",
+      "mxgraph",
+      "canvas/element/events",
+      "canvas/element/registry-aware"
+    ],
+    "component/model/infrastructure-node.js": [
+      "mxgraph",
+      "canvas/menu/task-cell",
+      "canvas/element/registry-aware",
+      "component/editors/infrastructure-node/editor",
+      "model/hal/api"
+    ],
+    "component/model/layer.js": [
+      "canvas/element/element",
+      "mxgraph",
+      "utils/objects"
+    ],
+    "component/model/security-group.js": [
+      "./layer",
+      "canvas/element/element",
+      "component/editors/security-group/security-group"
+    ],
+    "component/model/vlan.js": [
+      "./layer",
+      "canvas/element/element"
     ],
     "initialize/initialize.js": [
       "../model/core/application",
@@ -596,6 +841,10 @@ System.config({
       "../../../model/core/security/user",
       "aurelia-framework"
     ],
+    "main/settings/storage/storage.js": [
+      "../../../model/core/security/user",
+      "aurelia-framework"
+    ],
     "main/workspace/draftboards/abstract-graph.js": [
       "mxgraph",
       "aurelia-pal"
@@ -603,33 +852,53 @@ System.config({
     "main/workspace/draftboards/applications/applications.js": [
       "aurelia-framework",
       "aurelia-fetch-client",
+      "aurelia-event-aggregator",
       "pnotify",
+      "mxgraph",
       "../abstract-graph",
       "../draftboard",
-      "../graph/builder",
       "utils/registry",
       "./menus/file-menu",
       "./menus/edit-menu",
       "./menus/view-menu",
       "./menus/zoom",
       "./menus/maximize",
-      "./menus/misc-menus",
+      "component/draftboard/draftboard",
+      "canvas/core/canvas",
       "aurelia-dialog",
+      "./menus/misc-menus",
+      "canvas/actions/default-action-set",
+      "canvas/actions/action-service",
+      "canvas/events/canvas-events",
+      "storage/application-state",
       "pnotify.callbacks"
     ],
     "main/workspace/draftboards/applications/components/add-infrastructure.js": [
       "aurelia-framework"
     ],
     "main/workspace/draftboards/applications/components/infrastructure.js": [
+      "model/hal/api",
       "model/os",
       "aurelia-framework"
     ],
-    "main/workspace/draftboards/applications/menus/edit-menu.js": [
+    "main/workspace/draftboards/applications/menus/delete-cells.js": [
       "common/elements/menu"
+    ],
+    "main/workspace/draftboards/applications/menus/edit-menu.js": [
+      "common/elements/menu",
+      "./delete-cells"
     ],
     "main/workspace/draftboards/applications/menus/file-menu.js": [
       "common/elements/menu",
       "./file/save-dialog"
+    ],
+    "main/workspace/draftboards/applications/menus/file/save-dialog.js": [
+      "component/draftboard/draftboard",
+      "aurelia-framework",
+      "canvg/canvg",
+      "utils/diagram/image-export",
+      "canvg/rgbcolor",
+      "canvg/StackBlur"
     ],
     "main/workspace/draftboards/applications/menus/maximize.js": [
       "common/elements/menu"
@@ -645,77 +914,73 @@ System.config({
     ],
     "main/workspace/draftboards/applications/sidebars/left-sidebar/bottom/layers.js": [
       "aurelia-framework",
-      "elements/element-manager"
+      "component/draftboard/draftboard",
+      "utils/registry",
+      "aurelia-event-aggregator",
+      "canvas/events/canvas-events"
+    ],
+    "main/workspace/draftboards/applications/sidebars/left-sidebar/left-sidebar.js": [
+      "component/draftboard/draftboard",
+      "aurelia-framework"
     ],
     "main/workspace/draftboards/applications/sidebars/right-sidebar/bottom/applications.js": [
+      "mxgraph",
       "aurelia-framework",
       "aurelia-fetch-client",
-      "utils/events",
-      "main/workspace/draftboards/cells/node",
       "utils/registry",
-      "elements/elements"
+      "canvas/core/canvas",
+      "canvas/utilities",
+      "component/model/deployment",
+      "component/model/infrastructure-node"
+    ],
+    "main/workspace/draftboards/applications/sidebars/right-sidebar/bottom/blocks.js": [
+      "aurelia-framework",
+      "canvas/core/canvas",
+      "mxgraph",
+      "utils/registry"
+    ],
+    "main/workspace/draftboards/applications/sidebars/right-sidebar/bottom/components.js": [
+      "aurelia-framework",
+      "canvas/core/canvas",
+      "mxgraph",
+      "utils/registry",
+      "component/infrastructure/infrastructure-manager"
     ],
     "main/workspace/draftboards/applications/sidebars/right-sidebar/right-sidebar.js": [
-      "../sidebar"
+      "../sidebar",
+      "aurelia-framework",
+      "canvas/core/canvas"
+    ],
+    "main/workspace/draftboards/applications/sidebars/right-sidebar/top/editor.js": [
+      "canvas/events/canvas-events",
+      "aurelia-framework",
+      "aurelia-event-aggregator",
+      "storage/application-state"
     ],
     "main/workspace/draftboards/applications/sidebars/right-sidebar/top/palette.js": [
       "utils/events",
-      "elements/elements",
-      "main/workspace/draftboards/cells/node",
+      "component/model/infrastructure-node",
       "utils/registry",
       "aurelia-framework",
+      "canvas/actions/action-service",
       "pnotify"
+    ],
+    "main/workspace/draftboards/applications/sidebars/right-sidebar/top/properties.js": [
+      "aurelia-framework",
+      "aurelia-event-aggregator",
+      "canvas/events/canvas-events",
+      "aurelia-dependency-injection",
+      "storage/application-state"
     ],
     "main/workspace/draftboards/applications/sidebars/sidebar.js": [
       "aurelia-framework"
-    ],
-    "main/workspace/draftboards/cells/deployment.js": [
-      "utils/registry",
-      "../graph/vertex",
-      "mxgraph"
-    ],
-    "main/workspace/draftboards/cells/layer.js": [
-      "../graph/vertex",
-      "utils/uuid"
-    ],
-    "main/workspace/draftboards/cells/node.js": [
-      "mxgraph",
-      "elements/elements",
-      "./layer",
-      "./deployment",
-      "elements/events",
-      "../menu/task-cell"
     ],
     "main/workspace/draftboards/draftboard.js": [
       "aurelia-framework",
       "common/elements/menu"
     ],
-    "main/workspace/draftboards/graph/builder.js": [
-      "mxgraph",
-      "./connection-handler",
-      "../grid"
-    ],
-    "main/workspace/draftboards/graph/connection-handler.js": [
-      "mxgraph"
-    ],
-    "main/workspace/draftboards/graph/vertex-handler.js": [
-      "mxgraph"
-    ],
-    "main/workspace/draftboards/graph/vertex.js": [
-      "algorithms/graph/graph",
-      "mxgraph",
-      "utils/objects"
-    ],
-    "main/workspace/draftboards/grid.js": [
-      "mxgraph"
-    ],
     "main/workspace/draftboards/listeners/hover-listener.js": [
       "mxgraph"
-    ],
-    "main/workspace/draftboards/menu/task-cell.js": [
-      "utils/objects",
-      "utils/uuid",
-      "../graph/vertex"
     ],
     "main/workspace/navigator/navigator.js": [
       "aurelia-router",
@@ -734,8 +999,11 @@ System.config({
       "../../../storage/local/local-storage",
       "aurelia-fetch-client"
     ],
+    "model/hal/api.js": [
+      "utils/uuid"
+    ],
     "model/os.js": [
-      "../utils/uuid"
+      "model/hal/api"
     ],
     "storage/local/local-storage.js": [
       "../../core/exceptions/type-errors"
@@ -743,8 +1011,8 @@ System.config({
     "utils/registry.js": [
       "aurelia-framework",
       "aurelia-fetch-client",
-      "graph/graph-manager",
-      "elements/element-manager"
+      "component/blocks/block",
+      "component/draftboard/draftboard"
     ]
   }
 });

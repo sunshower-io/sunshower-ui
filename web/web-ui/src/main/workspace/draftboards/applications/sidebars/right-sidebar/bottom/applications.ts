@@ -1,118 +1,151 @@
-import {inject} from 'aurelia-framework'
+import {
+    Layer,
+    mxUtils,
+    mxGeometry
+} from 'mxgraph';
+import {inject, bindable} from 'aurelia-framework'
 import {HttpClient} from "aurelia-fetch-client";
-import {createEvent} from "utils/events";
 import {ImageDescriptor} from "model/hal/image";
 
-import {Node} from "main/workspace/draftboards/cells/node";
-import {Builder} from "main/workspace/draftboards/graph/builder";
 import {Registry} from 'utils/registry'
+import {Canvas} from 'canvas/core/canvas';
+import {Element} from 'canvas/element/element';
+import {CanvasUtilities} from 'canvas/utilities';
 
-// import {
-//     GraphProcessor,
-//     GraphContext
-// } from "main/workspace/draftboards/abstract-graph";
-
-import {
-    EditorOperation,
-    EditorContext
-} from 'main/workspace/draftboards/editor';
-
-import {InfrastructureElement} from 'elements/elements';
-
-import {Layer} from 'mxgraph';
+import {ApplicationDeployment} from "component/model/deployment";
+import {InfrastructureNode} from 'component/model/infrastructure-node';
 
 @inject(HttpClient, Registry)
 export class Applications {
 
-    private element:HTMLElement;
+    @bindable
+    private canvas: Canvas;
+
+
+    private loading: boolean = true;
+    private element: HTMLElement;
+    private loader: HTMLElement;
+
 
     private elements: ImageDescriptor[];
 
-    constructor(
-        private client:HttpClient,
-        private registry:Registry
-    ) {
+    constructor(private client: HttpClient,
+                private registry: Registry) {
 
     }
 
 
-    addImage(id:string, e:DragEvent) {
-        let event = createEvent('palette-event',
-            new ApplicationProcessor(
-                    id,
-                    this.registry,
-                    {x:e.clientX, y:e.clientY},
-                ));
-        this.element.dispatchEvent(event);
+    private getIconUrl(id: string): string {
+        return `${this.registry.get(Registry.S3_IMAGES_PATH)}/${id}`;
     }
 
+    activate(canvas: Canvas) {
+        this.canvas = canvas;
+    }
 
+    setLoading(): void {
+        let top = $(this.loader).offset().top,
+            wheight = $(window).height(),
+            height = wheight - top;
+        $(this.loader).height(height);
+        this.loading = true;
+    }
+
+    private createDragElement(descriptor: ImageDescriptor): HTMLElement {
+        let element = document.createElement('div');
+        element.style.border = 'dashed black 1px';
+        element.style.width = '100px';
+        element.style.height = '100px';
+        let img = $(`<img src="${this.getIconUrl(descriptor.logo_url.large)}" 
+                        width="100px" 
+                        height="100px" />
+                    `);
+        $(element).append(img);
+        return element;
+    }
 
     public attached(): void {
+        this.setLoading();
         this.client.fetch('docker/images')
             .then(response => response.json() as any)
             .then(elements => {
                 this.elements = elements;
-                this.resize();
+                setTimeout(() => {
+                    $(this.element).find('.app-drag-target').each((i: number, el: HTMLElement) => {
+                        let
+                            descriptor = this.elements[i],
+                            id = descriptor.pid,
+                            element = this.createDragElement(descriptor);
+                        let dragSource = mxUtils.makeDraggable(
+                            el,
+                            this.canvas,
+                            (graph: Canvas, event: Event, target: any, x: number, y: number) => {
+                                let deployment = new ApplicationDeployment(),
+                                    canvas = this.canvas,
+                                    registry = this.registry;
+                                deployment.applicationId = id;
+                                deployment.geometry.x = x;
+                                deployment.geometry.y = y;
+
+                                let cparent = CanvasUtilities.resolveParent(
+                                    this.canvas,
+                                    x,
+                                    y,
+                                    CanvasUtilities.ofType(InfrastructureNode)
+                                    ),
+                                    node: InfrastructureNode = null,
+                                    defaultParent = canvas.getDefaultParent(),
+                                    pparent = canvas.getCellAt(x, y, defaultParent, true, false),
+                                    relative = pparent !== defaultParent;
+
+                                try {
+                                    canvas.model.beginUpdate();
+                                    if (cparent) {
+                                        node = cparent as InfrastructureNode;
+                                    } else {
+                                        node = new InfrastructureNode();
+                                        node.geometry = new mxGeometry(x, y, 104, 168);
+                                        node.addTo(canvas, pparent, relative);
+                                        if(pparent && pparent.addElement) {
+                                            // let pgeom = pparent.geometry,
+                                            //     px = pgeom.x,
+                                            //     py = pgeom.y;
+                                            // node.geometry.x = x - px;
+                                            // node.geometry.y = y - py;
+                                            (pparent as Element).addElement(node);
+                                        } else {
+                                            registry.draftboardManager.add(node);
+                                        }
+                                    }
+                                    node.addElement(deployment);
+                                } finally {
+                                    canvas.model.endUpdate();
+                                }
+                            },
+                            element, 0, 0, true, true, true
+                        );
+                        dragSource.gridEnabled = true;
+                        dragSource.guidesEnabled = true;
+                        setTimeout(() => {
+                            this.resize();
+                            this.loading = false;
+                        });
+                    });
+                });
             });
 
         $(window).resize(this.resize);
     }
 
     private resize = () => {
-        let top = $(this.element).offset().top,
-            wheight = $(window).height(),
-            height = wheight - top - 32;
-        $(this.element).height(height);
+        let offset = $(this.element).offset();
+        if (offset) {
+
+            let top = offset.top,
+                wheight = $(window).height(),
+                height = wheight - top - 32;
+            $(this.element).height(height);
+        }
     }
 }
 
-
-class ApplicationProcessor implements EditorOperation {
-
-    constructor(
-        private id:string,
-        private registry:Registry,
-        private coordinates:{x:number, y:number}
-    ) {
-
-
-    }
-
-    resolveParent(context:EditorContext, x:number, y:number) : Layer {
-        let graph = context.graph,
-            defaultParent = graph.getDefaultParent(),
-            parent = graph.getCellAt(x, y, defaultParent, true, false);
-
-        while(parent && !(parent instanceof Node)) {
-            parent = parent.parent;
-        }
-
-        return parent || defaultParent;
-    }
-
-
-    apply(context: EditorContext): void {
-        let
-            x = this.coordinates.x,
-            y = this.coordinates.y - context.offset.top,
-            parent = this.resolveParent(context, x, y),
-            node : Node = null;
-
-        if(parent instanceof Node) {
-            node = parent as Node;
-        } else {
-            let infrastructureElement = new InfrastructureElement();
-            node = new Node(
-                parent,
-                infrastructureElement,
-                this.coordinates.x,
-                this.coordinates.y - context.offset.top,
-                this.registry
-            );
-            node.addTo(context.graph as Builder);
-            this.registry.elementManager.add(infrastructureElement);
-        }
-        node.addApplicationById(this.id);
-    }
-}

@@ -24,11 +24,11 @@ export default class FileMenu extends AbstractMenuItem implements MenuItem {
 export class SaveMenu extends AbstractMenuItem {
     name: string = 'Save';
 
+    showExtraData = false;
     constructor(private dialogService:DialogService) {
         super();
 
     }
-    showExtraData = false;
 
     apply(editor: EditorContext): void {
         this.dialogService.open({ viewModel: SaveDialog, model: { firstName: 'Owen', testScrolling: this.showExtraData }}).then((result) => {

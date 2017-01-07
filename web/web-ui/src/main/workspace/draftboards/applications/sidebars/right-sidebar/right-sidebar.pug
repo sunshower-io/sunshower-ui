@@ -6,12 +6,26 @@ template(bindable='router')
                 .ui.icon.secondary.compact.menu
                     a.item(
                         class="${component.active ? 'active' : ''}"
-                        repeat.for="component of components",
-                        click.delegate="setActive(component)"
+                        repeat.for="component of componentsTop",
+                        click.delegate="setActiveTop(component)"
                     ) ${key}
                         i(class="${component.icon}")
         .ui.basic.secondary.segment.property--menu
-            compose(view-model="./top/${active.name || 'palette'}")
-        .ui.container
-            applications
+            compose(view-model="./top/${activeTop.name || 'palette'}")
+        .ui.container.layers
+            .ui.menu--header
+                .center.aligned.column
+                    .ui.icon.secondary.compact.menu
+                        a.item(
+                            class="${component.active ? 'active' : ''}",
+                            repeat.for="component of componentsBottom",
+                            click.delegate="setActiveBottom(component)"
+                        ) ${key}
+                            i(class="${component.icon}")
+
+            compose(
+                model.bind="canvas"
+                view-model="./bottom/${activeBottom.name || 'applications'}"
+            )
+            //applications(canvas.bind="canvas")
 

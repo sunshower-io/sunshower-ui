@@ -1,9 +1,10 @@
 
 import {createEvent} from "utils/events";
 import {
+    Canvas,
     EditorOperation,
     EditorContext
-} from "main/workspace/draftboards/editor";
+} from "canvas/core/canvas";
 import {mxConstants} from "mxgraph";
 import {
     mxPoint,
@@ -11,24 +12,32 @@ import {
     mxCellOverlay,
 } from "mxgraph";
 
-import {InfrastructureElement} from 'elements/elements';
 
-import {Node} from "main/workspace/draftboards/cells/node";
+import {InfrastructureNode} from "component/model/infrastructure-node";
 
 
 
 import 'pnotify';
 import {Registry} from 'utils/registry';
-import {Builder} from "main/workspace/draftboards/graph/builder";
 
 import {inject} from 'aurelia-framework';
 
-@inject(Registry)
+import {Action, ActionManager} from 'canvas/actions/action-service';
+
+@inject(Registry, ActionManager)
 export class Palette {
 
     element:HTMLElement;
 
-    constructor(private registry:Registry) {
+    actions: Action[];
+
+    constructor(
+        private registry:Registry,
+        private actionManager:ActionManager
+    ) {
+        this.actions = actionManager
+            .getActions()
+            .filter(action => action.getProperty('palette') === '1');
 
     }
 
@@ -63,15 +72,8 @@ class NodeProcessor implements EditorOperation {
 
         let
             parent = context.graph.getDefaultParent(),
-            ie = new InfrastructureElement(),
-            node = new Node(
-                parent,
-                ie,
-                this.coordinates.x,
-                this.coordinates.y - context.offset.top,
-                this.registry
-            );
-        node.addTo(context.graph as Builder);
+            node = new InfrastructureNode();
+        node.addTo(context.graph, parent, true);
     }
 }
 

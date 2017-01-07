@@ -23,9 +23,11 @@ template
                     h3 Roles
                     p Users
                     p Administrators
-            .ui.two.buttons(show.bind="(!editingUser && !editingPassword)")
-                .ui.button.basic.primary(click.delegate="editUser()") Edit
-                .ui.button.basic.secondary(click.delegate="editPassword()") Change Password
+            .row(show.bind="(!editingUser && !editingPassword)")
+                .column
+                .column
+                    .ui.right.floated.button.basic.primary(click.delegate="editUser()") Edit
+                    .ui.right.floated.button.basic.secondary(click.delegate="editPassword()") Change Password
         .ui.divider.fluid(show.bind="!(!editingUser && !editingPassword)")
         form.ui.form.two.column.padded.grid(show.bind="editingUser")
             .row
