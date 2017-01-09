@@ -3,7 +3,8 @@
 declare module 'aurelia-bootstrapper' {
 import 'aurelia-polyfills';
 import {
-  PLATFORM
+  PLATFORM,
+  isInitialized
 } from 'aurelia-pal';
 
 /**

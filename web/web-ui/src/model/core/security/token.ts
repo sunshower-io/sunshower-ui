@@ -1,7 +1,7 @@
 import {inject} from "aurelia-framework";
 import {LocalStorage, Map} from "../../../storage/local/local-storage";
 import {HttpClient} from "aurelia-fetch-client";
-import {User, AuthenticationContext} from "src/model/core/security";
+import {User, AuthenticationContext} from "model/core/security";
 
 export const HEADER = "X-AUTH-TOKEN";
 
@@ -53,7 +53,7 @@ export class AuthenticationContextHolder {
             return this.client.fetch('authenticate/validate', {
                 method: 'post',
                 body: JSON.stringify(tok)
-            }).then(response => response.json());
+            }).then(response => response.json() as any);
         } else {
             return Promise.reject("No token");
         }
@@ -66,7 +66,7 @@ export class AuthenticationContextHolder {
             this.client.fetch('authentication/validate', {
                 method:'post',
                 body: JSON.stringify(this.storage.get(HEADER))
-            }).then(response => response.json())
+            }).then(response => response.json() as any)
                 .then(data => {
                     AuthenticationContextHolder.context = data;
                 });

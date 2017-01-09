@@ -26,6 +26,9 @@ import {
   DOM
 } from 'aurelia-pal';
 import {
+  createOverrideContext
+} from 'aurelia-binding';
+import {
   Origin
 } from 'aurelia-metadata';
 import {

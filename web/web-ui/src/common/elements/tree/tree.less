@@ -1,0 +1,81 @@
+.tree {
+  a {
+    color: #A2A2A2;
+  }
+  .icell.active {
+    font-weight:bold;
+  }
+  .icell {
+    color: #A2A2A2;
+    width: 100%;
+    height: 32px;
+    line-height: 32px;
+    vertical-align: middle;
+    .nodeicon {
+      width:16px;
+      height:16px;
+      vertical-align:middle;
+      display:inline-block;
+      margin-right:8px;
+
+      img {
+        position:absolute;
+        display:inline-block;
+      }
+    }
+    i.r {
+      float: right;
+      margin-right: 1rem;
+      display: inline-block;
+    }
+    &:hover {
+      font-weight: bold;
+    }
+  }
+  & > ul {
+    border-bottom: 1px solid #F3F4F5;
+    overflow: hidden;
+  }
+  a {
+    text-decoration: none;
+
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  li {
+    line-height: 2em;
+    position: relative;
+    padding-left: 1rem;
+  }
+  li ul {
+    padding-left: 1em;
+  }
+  li:after {
+    content: "\00A0";
+    position: absolute;
+    width: 200%;
+    left: -100%;
+    top: 0;
+    border-top: 1px solid #F3F4F5;
+    z-index: -1;
+  }
+
+}
+
+//.tree li .item .overlay {
+//  position: absolute;
+//  left: 0;
+//  top: 0;
+//  width: 100%;
+//  height: 100%;
+//  background-color: #C5E7E6;
+//  display: none;
+//  border: 1px solid red;
+//}
+//
+//.tree li .item:hover .overlay {
+//  display: block;
+//}

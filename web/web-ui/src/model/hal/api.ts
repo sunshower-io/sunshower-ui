@@ -1,39 +1,78 @@
-export class OperatingSystem {
+import {UUID} from "utils/uuid";
+import {Copyable} from "lang/class";
+export class OperatingSystem implements Copyable<OperatingSystem> {
 
-    constructor(
-        public name?:string,
-        public icon?: string,
-        public description?: string) {
+    public readonly id: UUID;
 
+    constructor(public name     ?: string,
+                public icon     ?: string,
+                public family   ?: string,
+                public version  ?: string) {
+        this.id = UUID.randomUUID();
+
+    }
+    copy(): OperatingSystem {
+        return new OperatingSystem(
+            this.name,
+            this.icon,
+            this.family,
+            this.version
+        );
     }
 }
 
 
-export class NodeConfiguration {
+export class NodeConfiguration implements Copyable<NodeConfiguration> {
 
-    public name:string;
+    public memoryProfile: MemoryProfile;
 
-    public description:string;
+    public storageProfile: StorageProfile;
 
-    public memoryProfile:MemoryProfile;
+    public computeProfile: ComputeProfile;
 
-    public storageProfile:StorageProfile;
+    constructor() {
+        this.memoryProfile = new MemoryProfile();
+        this.storageProfile = new StorageProfile();
+        this.computeProfile = new ComputeProfile();
+    }
 
-    public computeProfile:ComputeProfile;
+    copy(): NodeConfiguration {
+        let nc = new NodeConfiguration();
+        nc.memoryProfile = this.memoryProfile.copy();
+        nc.storageProfile = this.storageProfile.copy();
+        nc.computeProfile = this.computeProfile.copy();
+        return nc;
+    }
 
 }
 
-export class MemoryProfile {
-    capacity:number;
+export class MemoryProfile implements Copyable<MemoryProfile> {
+    capacity: number;
+
+    copy(): MemoryProfile {
+        let mp = new MemoryProfile();
+        mp.capacity = this.capacity;
+        return mp;
+    }
 }
 
-export class StorageProfile {
-    capacity:number;
+export class StorageProfile implements Copyable<StorageProfile> {
+    capacity: number;
+
+    copy(): StorageProfile {
+        let sp = new StorageProfile();
+        sp.capacity = this.capacity;
+        return sp;
+    }
 }
 
-export class ComputeProfile {
+export class ComputeProfile implements Copyable<ComputeProfile> {
+    cores: number;
 
-    cores:number;
-
+    copy(): ComputeProfile {
+        let cp = new ComputeProfile();
+        cp.cores = this.cores;
+        return cp;
+    }
 }
 

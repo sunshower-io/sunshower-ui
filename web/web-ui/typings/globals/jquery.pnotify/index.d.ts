@@ -112,6 +112,9 @@ interface PNotifyButtons {
 }
 
 interface PNotifyOptions {
+
+    context: JQuery;
+    before_open: (f:any) => void;
     /**
      * The notice's title. Either boolean false or string
      */
@@ -288,3 +291,7 @@ interface PNotifyConstructor {
 }
 
 declare var PNotify: PNotifyConstructor;
+
+declare module 'pnotify' {
+    export = PNotify;
+}

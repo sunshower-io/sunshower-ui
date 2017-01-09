@@ -257,8 +257,6 @@ export class Focus {
 }
 export class DebounceBindingBehavior {
   bind(binding?: any, source?: any, delay?: any): any;
-  
-  // should not delay initial target update that occurs during bind.
   unbind(binding?: any, source?: any): any;
 }
 
