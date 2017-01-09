@@ -1,8 +1,9 @@
 template(bindable="router")
     require(from="common/elements/profile-dropdown")
-    .ui.secondary.menu
+    .ui.secondary.menu.primary-header
         .ui.image.small
-            img.item.header(src="styles/themes/hasli/assets/images/logos/hasli-logo.svg", click.delegate="router.navigate('#/main')")
+            img.item.header(style="height:32px" src="styles/themes/hasli/assets/images/logos/hasli-logo.svg", click.delegate="router.navigate('#/main')")
+        banner(items.bind="carouselItems")
         .right.menu
             a.item
                 i.large.grey.grid.layout.icon

@@ -30,9 +30,11 @@ export function configure(aurelia: Aurelia) {
     aurelia.use
         .standardConfiguration()
         .globalResources([
-            'common/sidenav/sidenav',
             'common/elements/menu',
+            'common/sidenav/sidenav',
             'common/elements/tree/tree',
+            'common/banner/banner',
+            'common/carousel/carousel',
             'common/property-editor/property-editor',
         ])
         .plugin('aurelia-dialog', (config: DialogConfiguration) => {

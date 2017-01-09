@@ -3,12 +3,19 @@ import 'semantic-ui'
 import {Router, RouterConfiguration} from 'aurelia-router';
 import {AuthenticationContextHolder} from "../model/core/security/index";
 import {inject} from "aurelia-framework";
+import {BannerElements} from "./banner/elements";
 
-@inject(AuthenticationContextHolder)
+@inject(
+    AuthenticationContextHolder,
+    BannerElements
+)
 export class App {
     public router: Router;
 
-    constructor(private tokenHolder: AuthenticationContextHolder) {
+    constructor(
+        private tokenHolder: AuthenticationContextHolder,
+        private bannerElements: BannerElements
+    ) {
     }
 
     public configureRouter(config: RouterConfiguration, router: Router) {

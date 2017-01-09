@@ -1,7 +1,10 @@
 template
-    require(from="common/elements/page-header.html")
+    require(from="common/elements/page-header")
     .page.header
-        .ui.container
-            page-header(router.bind="router")
+        .ui
+            page-header(
+                router.bind="router",
+                carousel-items.bind="bannerElements.items"
+            )
     .page.content
         router-view
