@@ -54,6 +54,9 @@ System.config({
     "cytoscape-grid-guide": "npm:cytoscape-grid-guide@1.0.4",
     "cytoscape-node-resize": "npm:cytoscape-node-resize@1.0.10",
     "cytoscape-node-resize:n": "npm:cytoscape-node-resize@1.0.10",
+    "d3": "npm:d3@3.5.17",
+    "d3-geo-projection": "github:d3/d3-geo-projection@1.2.1",
+    "datamaps": "github:markmarkoh/datamaps@0.5.8",
     "dropzone": "github:enyo/dropzone@4.3.0",
     "edge-editiation": "github:frankiex/cytoscape.js-edge-editation@master",
     "element-queries": "github:marcj/css-element-queries@0.3.2",
@@ -70,6 +73,7 @@ System.config({
     "semantic-ui": "github:Semantic-Org/Semantic-UI@2.2.7",
     "stackblur": "github:canvg/canvg@master/StackBlur",
     "text": "github:systemjs/plugin-text@0.0.9",
+    "topojson": "github:topojson/topojson@2.2.0",
     "github:Semantic-Org/Semantic-UI@2.2.7": {
       "css": "github:systemjs/plugin-css@0.1.32",
       "jquery": "npm:jquery@2.2.4"
@@ -94,6 +98,10 @@ System.config({
     },
     "github:jspm/nodelibs-vm@0.1.0": {
       "vm-browserify": "npm:vm-browserify@0.0.4"
+    },
+    "github:markmarkoh/datamaps@0.5.8": {
+      "d3": "npm:d3@3.5.17",
+      "d3-geo-projection": "github:d3/d3-geo-projection@1.2.1"
     },
     "github:twbs/bootstrap@3.3.7": {
       "jquery": "npm:jquery@2.2.4"

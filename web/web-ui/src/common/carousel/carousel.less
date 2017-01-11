@@ -1,32 +1,43 @@
 .carousel-container {
-  height:calc(~"100% - 32px");
-}
-.carousel-menu {
-  width:100px;
-  margin:0 auto;
-  height:32px;
-  line-height:42px;
-  vertical-align: middle;
 
-  .citem {
-    //background-color: #f2f2f2;
-    border:1px solid #f2f2f2;
-    display:inline-block;
-    width:8px;
-    height:8px;
-    margin:4px;
-    -webkit-border-radius:100%;
-    -moz-border-radius:100%;
-    border-radius:100%;
+  & > * {
+    background-color: #171b26;
+  }
 
-    &:hover {
+  .carousel-contents {
+    font-color: red;
+  }
+
+
+  .carousel-menu {
+    .items {
+      display:inline-block;
+    }
+    text-align:center;
+    margin: 0 auto;
+    height: 32px;
+    line-height: 42px;
+    vertical-align: middle;
+
+    .citem {
+      border: 1px solid #f2f2f2;
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      margin: 4px;
+      -webkit-border-radius: 100%;
+      -moz-border-radius: 100%;
+      border-radius: 100%;
+      &:hover {
+        opacity: 90;
+        background-color: #f2f2f2;
+      }
+    }
+
+    .active {
       opacity: 90;
       background-color: #f2f2f2;
     }
   }
 
-  .active {
-    opacity: 90;
-    background-color: #f2f2f2;
-  }
 }

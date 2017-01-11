@@ -1,10 +1,11 @@
 template
     .carousel-container
-        compose(view-model.bind="currentItem")
-
-    .carousel-menu
-        div.citem(
-            repeat.for="item of items",
-            class="${item.active ? 'active' : ''}"
-            click.delegate="setCurrent(item)"
-        )
+        .carousel-contents
+            compose(view-model.bind="currentItem")
+        .carousel-menu
+            .items
+                div(
+                    repeat.for="item of items",
+                    class="citem ${item.active ? 'active' : ''}"
+                    click.delegate="setCurrent(item, $index)"
+                )

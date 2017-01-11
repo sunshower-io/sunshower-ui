@@ -22,12 +22,19 @@ export class App {
         config.title = '';
         config.map([
             {
-                route: ['', 'workspace'],
+                route: ['', 'home'],
+                name: 'navigator',
+                moduleId: './home/home',
+                nav: true,
+                title: 'Home',
+            }, {
+                route: 'workspace',
                 name: 'navigator',
                 moduleId: './workspace/workspace',
                 nav: true,
                 title: 'Workspace',
-            }, {
+            },
+            {
                 route: 'settings',
                 name: 'settings',
                 moduleId: 'main/settings/settings',

@@ -1,7 +1,17 @@
-import {bindable} from 'aurelia-framework';
+import {
+    bindable,
+    inject,
+    containerless
+} from 'aurelia-framework';
 import {Carousel} from "common/carousel/carousel";
 import {CarouselViewModel} from "common/carousel/carousel-item";
+
+@containerless
 export class Banner {
+
+    private static visible: boolean;
+
+    private static instance:Banner;
 
     private visible: boolean;
 
@@ -12,16 +22,58 @@ export class Banner {
     @bindable
     private items: CarouselViewModel[];
 
+    constructor() {
 
+    }
+
+    public static setVisible(visible: boolean) : void {
+        Banner.visible = visible;
+    }
+
+    attached() {
+        this.toggle();
+        if(!Banner.instance) {
+            Banner.instance = this;
+        }
+    }
+
+    open() : void {
+        this.carousel.open(this.items);
+    }
+
+    close() : void {
+        this.carousel.close();
+    }
+
+    public static open() : void {
+        if(Banner.instance) {
+            Banner.instance.open();
+        }
+    }
+
+    public static close() : void {
+        if(Banner.instance) {
+            Banner.instance.close();
+        }
+    }
+
+    public static toggle() {
+        if(Banner.instance) {
+            let instance = Banner.instance;
+            instance.toggle();
+        }
+    }
 
 
     toggle() : void {
-        console.log("TH", this.items);
-        if(this.visible) {
-            this.carousel.close();
-        } else {
-            this.carousel.open(this.items);
+        if(Banner.visible)  {
+            if(this.visible) {
+                this.close();
+            } else {
+                this.open();
+            }
+            this.visible = !this.visible;
+            $(this.container).transition('toggle', 'fade down');
         }
-        $(this.container).transition('toggle', 'fade down');
     }
 }

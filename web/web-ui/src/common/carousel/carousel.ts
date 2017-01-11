@@ -1,4 +1,3 @@
-
 import {
     inject,
     bindable,
@@ -12,37 +11,41 @@ import {Container} from "aurelia-dependency-injection";
 export class Carousel {
 
 
+
     @bindable
     items: CarouselViewModel[];
 
     @bindable
-    currentItem : CarouselViewModel;
+    currentItem: CarouselViewModel;
 
-    constructor(private container:Container) {
+    currentIndex: number = 0;
+
+    constructor(private container: Container) {
 
     }
 
-    setCurrent(item:CarouselViewModel) : void {
-        if(this.currentItem) {
-            this.currentItem.active = false;
-        }
+    setCurrent(item: CarouselViewModel, index: number): void {
+        this.items[this.currentIndex].active = false;
         this.currentItem = this.container.invoke(item.view);
-        this.currentItem.active = true;
+        this.items[index].active = true;
+        this.currentIndex = index;
     }
 
-    activate() : void {
+    activate(): void {
 
     }
 
-    open(items: CarouselViewModel[]) : void {
-        this.items = items;
-        this.setCurrent(this.items[0]);
+    open(items: CarouselViewModel[]): void {
+        if(items && items.length) {
+            this.items = items;
+            this.setCurrent(this.items[0], 0);
+        }
     }
 
-    close() : void {
+    close(): void {
     }
 
-    attached() : void {
+    attached(): void {
     }
 
 }

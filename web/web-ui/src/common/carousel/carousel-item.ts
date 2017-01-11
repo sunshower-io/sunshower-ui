@@ -3,9 +3,7 @@ export class CarouselViewModel {
 
     title: string;
 
-
-    view: Class<any>;
-
     active : boolean;
 
+    view: Class<any>;
 }

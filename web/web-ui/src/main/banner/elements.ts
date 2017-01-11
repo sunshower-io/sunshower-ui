@@ -1,14 +1,18 @@
 import {Dashboard} from "./dashboard/dashboard";
 import {CarouselViewModel} from 'common/carousel/carousel-item'
 import {Activity} from "./activity/activity";
+import {Deployments} from "./deployments/deployments";
+import {inject, Container} from 'aurelia-framework'
 
+@inject(Container)
 export class BannerElements {
     items:CarouselViewModel[];
 
-    constructor() {
+    constructor(container: Container) {
         this.items = [
-            new Dashboard(),
+            new Dashboard(container),
             new Activity(),
+            new Deployments()
         ];
     }
 }

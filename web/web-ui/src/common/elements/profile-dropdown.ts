@@ -2,6 +2,7 @@ import 'jquery';
 import {User} from '../../model/core/security/user';
 import {inject} from "aurelia-framework";
 import {Router} from "aurelia-router";
+
 import {AuthenticationContextHolder} from "../../model/core/security/token";
 @inject(User, Router, AuthenticationContextHolder)
 export class ProfileDropdown {
