@@ -20,6 +20,9 @@ export class Banner {
     private container:HTMLElement;
 
     @bindable
+    public label:string;
+
+    @bindable
     private items: CarouselViewModel[];
 
     constructor() {

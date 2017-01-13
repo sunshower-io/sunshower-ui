@@ -1,6 +1,6 @@
 template
     .banner-menu(click.delegate="toggle()")
-        span.text Banner
+        span.text ${label}
         i.caret.down.icon
     .banner-container(ref="container" show.bind="visible")
         carousel(
