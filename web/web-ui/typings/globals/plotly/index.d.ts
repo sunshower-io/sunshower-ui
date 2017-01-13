@@ -32,13 +32,23 @@ declare class Line {
 
 declare class Trace {
 
-    x               : number[];
-    y               : number[];
-    mode            : string;
-    name            : string;
+    x               ?: number[];
+    y               ?: number[];
+    mode            ?: string;
+    name            ?: string;
 
-    line            : Line;
+    line            ?: Line;
+    values          ?: number[];
+    labels          ?: string[];
+    type            ?: string;
+    hole            ?: number;
 
+    marker          ?: Marker;
+
+}
+
+declare interface Marker {
+    colors          ?: string | string[];
 }
 
 declare class Layout {

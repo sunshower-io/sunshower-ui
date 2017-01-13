@@ -1,6 +1,6 @@
 import {Source} from "data/source";
 import * as Plotly from 'plotly/plotly.js';
-import {inject, bindable} from "aurelia-framework";
+import {bindable} from "aurelia-framework";
 import {containerless} from "aurelia-framework";
 
 
@@ -8,7 +8,6 @@ import {containerless} from "aurelia-framework";
 export class LineChart {
     private element: Element;
 
-    private plot: Plot;
 
 
     private trace: Trace;
@@ -66,11 +65,6 @@ export class LineChart {
         this.source.source.subscribe(data => {
             this.redraw(data)
         });
-
-        // this.source.source.map(t => {
-        //     this.redraw(t);
-        // });
-
 
     }
 

@@ -55,14 +55,20 @@ export class RandomSource extends AbstractSource<[number, number]> {
     }
 
     start(): void {
-        let count = 0;
-        setInterval(() => {
+        let count = 0,
+            max = 10;
+        let interval = setInterval(() => {
             this.source.next([
                 count++,
                 Math.random()
             ]);
-        }, 1000)
+            if(count >= max) {
+                clearInterval(interval);
+                return;
+            }
+        }, 1000);
     }
+
 
     close(): void {
     }
