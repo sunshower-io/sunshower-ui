@@ -56,6 +56,7 @@ System.config({
     "cytoscape-node-resize:n": "npm:cytoscape-node-resize@1.0.10",
     "d3": "npm:d3@3.5.17",
     "d3-geo-projection": "github:d3/d3-geo-projection@1.2.1",
+    "d3/d3-geo-projection": "github:d3/d3-geo-projection@1.2.1",
     "datamaps": "github:markmarkoh/datamaps@0.5.8",
     "dropzone": "github:enyo/dropzone@4.3.0",
     "edge-editiation": "github:frankiex/cytoscape.js-edge-editation@master",
@@ -64,16 +65,20 @@ System.config({
     "fetch": "github:github/fetch@1.1.1",
     "font-awesome": "npm:font-awesome@4.6.3",
     "jquery": "npm:jquery@2.2.4",
+    "markmarkoh/datamaps": "github:markmarkoh/datamaps@0.5.8",
     "mxgraph": "github:jgraph/mxgraph-js@master",
     "ocanvas": "npm:ocanvas@2.8.7",
+    "plotly/plotly.js": "github:plotly/plotly.js@1.21.3",
     "plugin-text": "npm:systemjs-plugin-text@0.0.9",
     "pnotify": "github:sciactive/pnotify@3.0.0",
     "pnotify.callbacks": "github:sciactive/pnotify@3.0.0/dist/pnotify.callbacks",
     "rgbcolor": "github:canvg/canvg@master/rgbcolor",
+    "rx": "npm:rxjs@5.0.3",
     "semantic-ui": "github:Semantic-Org/Semantic-UI@2.2.7",
     "stackblur": "github:canvg/canvg@master/StackBlur",
     "text": "github:systemjs/plugin-text@0.0.9",
     "topojson": "github:topojson/topojson@2.2.0",
+    "topojson/topojson": "github:topojson/topojson@2.2.0",
     "github:Semantic-Org/Semantic-UI@2.2.7": {
       "css": "github:systemjs/plugin-css@0.1.32",
       "jquery": "npm:jquery@2.2.4"
@@ -297,6 +302,11 @@ System.config({
       "assert": "github:jspm/nodelibs-assert@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "vm": "github:jspm/nodelibs-vm@0.1.0"
+    },
+    "npm:rxjs@5.0.3": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "symbol-observable": "npm:symbol-observable@1.0.4"
     },
     "npm:util@0.10.3": {
       "inherits": "npm:inherits@2.0.1",

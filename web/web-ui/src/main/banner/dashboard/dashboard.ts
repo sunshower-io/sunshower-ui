@@ -3,6 +3,8 @@ import {inject, Container} from 'aurelia-framework';
 import {MercatorMap} from 'geography/global/mercator';
 import {Widget, WidgetView} from 'common/carousel/widget';
 import {CarouselViewModel} from 'common/carousel/carousel-item';
+import InstanceWidget from "./instance-widget";
+import HealthWidget from "./health-widget";
 
 
 @inject(Container)
@@ -17,6 +19,8 @@ export class Dashboard implements CarouselViewModel, WidgetView {
 
     constructor(container:Container) {
         this.viewModels = [
+            new InstanceWidget(container),
+            new HealthWidget(container),
             new MercatorMap(container)
         ];
     }

@@ -7,7 +7,9 @@ import {inject} from "aurelia-dependency-injection";
 @inject(EnvironmentManager)
 export class MercatorView {
 
+    private map:Datamap;
     private element: HTMLElement;
+
 
 
     constructor(private environment: EnvironmentManager) {
@@ -19,56 +21,58 @@ export class MercatorView {
     }
 
 
-
     attached(): void {
-        let map = new Datamap({
-            fills: {
-                defaultFill: 'url(#horizontal-stripe)',
-                error: 'red',
-                bubbles: '#171b2c'
-            },
-            done: (datamap) => {
-                let redraw = () => {
-                    datamap.svg.selectAll("g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-                };
-                datamap.svg.call(d3.behavior.zoom().on("zoom", redraw));
+        if(!this.map) {
+            let map = new Datamap({
+                fills: {
+                    defaultFill: 'url(#horizontal-stripe)',
+                    error: 'red',
+                    bubbles: '#171b2c'
+                },
+                done: (datamap) => {
+                    let redraw = () => {
+                        datamap.svg.selectAll("g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+                    };
+                    datamap.svg.call(d3.behavior.zoom().on("zoom", redraw));
 
-                datamap.svg.selectAll(".datamaps-subunit").on("click", (geo) => {
+                    datamap.svg.selectAll(".datamaps-subunit").on("click", (geo) => {
 
-                })
+                    })
 
-            },
+                },
 
-            element: this.element,
-            geographyConfig: {
-                borderWidth: 0,
-                highlightBorderWidth: 2,
-                highlightFillColor: '#171b2c',
-                highlightFillOpacity: '.65',
-                highlightBorderColor: '#ffffff',
-            },
-            bubblesConfig: {
-                fillColor: '#171bc2',
-                fillOpacity: 1,
-                borderWidth: 1,
-            },
-            zoomConfig: {
-                zoomOnClick: true,
-                zoomFactor: 1
-            }
-        });
-        this.registerPlugins(map);
-        let dcs = this.environment.listDataCenters().map(dc => {
-            let dca = dc as any;
-            dca.radius = 15;
-            dca.borderColor = this.colorFor(dc.status),
-            dca.fillOpacity = 1;
-            dca.fillKey = 'bubbles';
-            return dca;
+                element: this.element,
+                geographyConfig: {
+                    borderWidth: 0,
+                    highlightBorderWidth: 2,
+                    highlightFillColor: '#171b2c',
+                    highlightFillOpacity: '.65',
+                    highlightBorderColor: '#ffffff',
+                },
+                bubblesConfig: {
+                    fillColor: '#171bc2',
+                    fillOpacity: 1,
+                    borderWidth: 1,
+                },
+                zoomConfig: {
+                    zoomOnClick: true,
+                    zoomFactor: 1
+                }
+            });
+            this.registerPlugins(map);
+            let dcs = this.environment.listDataCenters().map(dc => {
+                let dca = dc as any;
+                dca.radius = 15;
+                dca.borderColor = this.colorFor(dc.status),
+                    dca.fillOpacity = 1;
+                dca.fillKey = 'bubbles';
+                return dca;
 
-        });
-        map.bubbles(dcs);
-        map.labelDatacenters(dcs, {labelColor: 'red', labelKey:'fillKey'});
+            });
+            map.bubbles(dcs);
+            map.labelDatacenters(dcs, {labelColor: 'red', labelKey:'fillKey'});
+            this.map = map;
+        }
 
 
     }
