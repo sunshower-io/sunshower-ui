@@ -41,11 +41,17 @@ export class DonutChart {
                     b: 16,
                     t: 16,
                     pad: 0
-                },
-                displayModeBar: false
+                }
             };
 
-        Plotly.newPlot(this.element, data, layout);
+        Plotly.newPlot(
+            this.element,
+            data,
+            layout,
+            {
+                displayModeBar:false
+            }
+        );
     }
 
     attached(): void {
