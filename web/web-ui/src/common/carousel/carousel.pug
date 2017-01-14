@@ -1,8 +1,11 @@
 template
+    .ui.segment(if.bind="loading", style="height:100%; width:100%;")
+        .ui.active.dimmer
+            .ui.text.loader Loading
     .carousel-container
         .carousel-contents
             compose(view-model.bind="currentItem")
-        .carousel-menu
+        .carousel-menu(show.bind="!loading")
             .items
                 div(
                     repeat.for="item of items",

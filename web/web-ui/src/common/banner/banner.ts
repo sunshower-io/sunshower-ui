@@ -5,19 +5,23 @@ import {
 } from 'aurelia-framework';
 import {Carousel} from "common/carousel/carousel";
 import {CarouselViewModel} from "common/carousel/carousel-item";
-
+import {Subject} from 'rx';
 @containerless
 export class Banner {
 
-    private static visible: boolean;
 
-    private static instance:Banner;
+    public static visible: boolean;
 
-    private visible: boolean;
+    public static instance:Banner;
 
-    private carousel: Carousel;
+    @bindable
+    public visible: boolean;
 
-    private container:HTMLElement;
+    public carousel: Carousel;
+
+    public container:HTMLElement;
+
+    public static visibility: Subject<boolean> = new Subject<boolean>();
 
     @bindable
     public label:string;
@@ -42,10 +46,12 @@ export class Banner {
 
     open() : void {
         this.carousel.open(this.items);
+        Banner.visibility.next(true);
     }
 
     close() : void {
         this.carousel.close();
+        Banner.visibility.next(false);
     }
 
     public static open() : void {
@@ -66,6 +72,7 @@ export class Banner {
             instance.toggle();
         }
     }
+
 
 
     toggle() : void {

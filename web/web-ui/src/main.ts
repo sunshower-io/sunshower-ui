@@ -35,7 +35,7 @@ export function configure(aurelia: Aurelia) {
             'common/elements/tree/tree',
             'common/banner/banner',
             'common/carousel/carousel',
-            'common/folio',
+            'common/folio/folio',
             'common/property-editor/property-editor',
         ])
         .plugin('aurelia-dialog', (config: DialogConfiguration) => {

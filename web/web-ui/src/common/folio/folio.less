@@ -1,0 +1,43 @@
+@folioFontColor: #7c7b7b;
+
+.folio {
+
+  padding:16px;
+  .header {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: @folioFontColor;
+    width:100%;
+    padding:0 8px;
+    height:32px;
+    border-bottom: 1px solid @folioFontColor;
+    height:40px;
+
+  }
+
+  .menu {
+    line-height:32px;
+    img {
+      width:  24px;
+      height: 24px;
+      vertical-align: middle;
+      margin-right:8px;
+    }
+    a {
+      font-size:8pt;
+      font-weight: normal;
+      display:inline-block;
+      vertical-align: middle;
+      &.active {
+        font-weight:bold;
+      }
+    }
+    float:right;
+    .item {
+      margin-right:8px;
+    }
+  }
+  .control, .item {
+    display:inline-block;
+  }
+}

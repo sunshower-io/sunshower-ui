@@ -5,6 +5,7 @@
 /// <reference path="globals/d3/index.d.ts" />
 /// <reference path="globals/datamaps/index.d.ts" />
 /// <reference path="globals/jquery.pnotify/index.d.ts" />
+/// <reference path="globals/maskedinput/index.d.ts" />
 /// <reference path="globals/jquery/index.d.ts" />
 /// <reference path="globals/ocanvas/index.d.ts" />
 /// <reference path="globals/plotly/index.d.ts" />

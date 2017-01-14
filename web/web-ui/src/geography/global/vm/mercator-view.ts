@@ -2,22 +2,36 @@ import * as d3 from 'd3';
 import * as Datamap from 'datamaps';
 import {EnvironmentManager} from "environment/environment";
 import {inject} from "aurelia-dependency-injection";
+import {
+    ProgressMonitor,
+    ProgressEvents
+} from "utils/progress";
+import {Carousel} from "common/carousel/carousel";
 
+import activate = ProgressEvents.activate;
+import attached = ProgressEvents.attached;
 
-@inject(EnvironmentManager)
+@inject(EnvironmentManager, Carousel)
 export class MercatorView {
 
     private map:Datamap;
     private element: HTMLElement;
 
+    public static publishes = [
+        'activate',
+        'attached'
+    ];
 
+    constructor(
+        private environment: EnvironmentManager,
+        private progressMonitor: Carousel
+    ) {
 
-    constructor(private environment: EnvironmentManager) {
     }
 
 
     activate(): void {
-
+        this.progressMonitor.subject.next(activate(this));
     }
 
 
@@ -72,9 +86,8 @@ export class MercatorView {
             map.bubbles(dcs);
             map.labelDatacenters(dcs, {labelColor: 'red', labelKey:'fillKey'});
             this.map = map;
+            this.progressMonitor.subject.next(attached(this));
         }
-
-
     }
 
     colorFor(status:string) : string {

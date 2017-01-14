@@ -11,5 +11,7 @@ export interface WidgetView {
 
 
     list() : Widget;
+
+
     add(widget:Widget) : void;
 }

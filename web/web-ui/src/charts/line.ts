@@ -22,11 +22,13 @@ export class LineChart {
     }
 
     redraw(data: [number, number]): void {
-        let trace = this.trace,
-            [x, y] = data;
-        trace.x.push(x);
-        trace.y.push(y);
-        Plotly.redraw(this.element);
+        if(this.element) {
+            let trace = this.trace,
+                [x, y] = data;
+            trace.x.push(x);
+            trace.y.push(y);
+            Plotly.redraw(this.element);
+        }
     }
 
     attached(): void {

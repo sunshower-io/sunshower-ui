@@ -66,6 +66,7 @@ System.config({
     "font-awesome": "npm:font-awesome@4.6.3",
     "jquery": "npm:jquery@2.2.4",
     "markmarkoh/datamaps": "github:markmarkoh/datamaps@0.5.8",
+    "maskedinput": "github:digitalBush/jquery.maskedinput@1.4.1",
     "mxgraph": "github:jgraph/mxgraph-js@master",
     "ocanvas": "npm:ocanvas@2.8.7",
     "plotly/plotly.js": "github:plotly/plotly.js@1.21.3",
