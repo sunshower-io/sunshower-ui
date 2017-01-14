@@ -24,7 +24,6 @@ export class App {
             {
                 route: '',
                 redirect: 'main',
-
             },
             {
                 route: 'main',
@@ -34,9 +33,7 @@ export class App {
                 name: 'main'
             }
         ]);
-        config.mapUnknownRoutes('main/main');
-
-
+        config.mapUnknownRoutes('main');
         this.router = router;
 
     }

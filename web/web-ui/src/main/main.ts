@@ -12,28 +12,29 @@ import {BannerElements} from "./banner/elements";
 export class App {
     public router: Router;
 
-    constructor(
-        private tokenHolder: AuthenticationContextHolder,
-        private bannerElements: BannerElements
-    ) {
+    constructor(private tokenHolder: AuthenticationContextHolder,
+                private bannerElements: BannerElements) {
     }
 
     public configureRouter(config: RouterConfiguration, router: Router) {
         config.title = '';
-        config.map([
-            {
-                route: ['', 'home'],
-                name: 'navigator',
-                moduleId: './home/home',
-                nav: true,
-                title: 'Home',
-            }, {
-                route: 'workspace',
-                name: 'navigator',
-                moduleId: './workspace/workspace',
-                nav: true,
-                title: 'Workspace',
-            },
+        config.map([{
+            route: '',
+            redirect: 'home'
+
+        }, {
+            route: 'home',
+            name: 'navigator',
+            moduleId: './home/home',
+            nav: true,
+            title: 'Home',
+        }, {
+            route: 'workspace',
+            name: 'navigator',
+            moduleId: './workspace/workspace',
+            nav: true,
+            title: 'Workspace',
+        },
             {
                 route: 'settings',
                 name: 'settings',
@@ -43,7 +44,6 @@ export class App {
                 settings: {}
             }
         ]);
-        config.mapUnknownRoutes('./workspace/workspace');
         this.router = router;
     }
 
