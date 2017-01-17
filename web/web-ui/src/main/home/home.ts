@@ -20,7 +20,7 @@ export class Home {
     contentSpace:HTMLElement;
 
     constructor() {
-        Banner.setVisible(true);
+        Banner.setVisible(false);
     }
 
     attached() : void {
@@ -52,7 +52,7 @@ export class Home {
     public configureRouter(config: RouterConfiguration, router: Router) {
         config.title = 'Workspace';
         config.map([{
-            route: ['', 'Blocks'],
+            route: ['', 'blocks'],
             name: 'blocks',
             moduleId: 'main/blocks/blocks',
             nav: true,
