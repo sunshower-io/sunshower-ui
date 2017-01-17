@@ -1,2 +1,46 @@
 template
-    h1 Activity
+    .activity-segment
+        .header
+            span January 2017
+    .activity-segment.active
+        .header
+            span December 2016
+        .activity-entry
+            .header Dec. 25th, 12:00pm
+            .content
+                .image
+                .information Something about green and AWS
+                .metrics
+                    .column.status
+                        .header Status
+                        .value
+                            i.checkmark.icon
+                            | Success
+                    .column
+                        .header VMs
+                        .value 1
+                    .column
+                        .header Apps
+                        .value 3
+            a.more details
+        .activity-entry
+            .header Dec. 9th, 7:00pm
+            .content
+                .image
+                .information Dustin added something
+                    .extra something something
+                .metrics
+                    .column
+                        .header Files Added
+                        .value 0
+                    .column
+                        .header Files Modified
+                        .value 1
+                    .column
+                        .header Commit
+                        .value 3061488
+
+            a.more details
+    .activity-segment
+        .header
+            span November 2016
