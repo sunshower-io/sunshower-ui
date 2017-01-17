@@ -50,6 +50,7 @@ export class Banner {
     }
 
     close() : void {
+        this.visible = false;
         this.carousel.close();
         Banner.visibility.next(false);
     }

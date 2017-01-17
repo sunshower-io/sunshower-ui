@@ -91,6 +91,7 @@
   "jspm": {
     "dependencies": {
       "aurelia-animator-css": "npm:aurelia-animator-css@^1.0.0",
+      "aurelia-animator-velocity": "npm:aurelia-animator-velocity@^1.0.1",
       "aurelia-bootstrapper": "npm:aurelia-bootstrapper@^1.0.0",
       "aurelia-dialog": "npm:aurelia-dialog@^1.0.0-beta.3.0.1",
       "aurelia-fetch-client": "npm:aurelia-fetch-client@^1.0.0",
@@ -130,7 +131,8 @@
       "rx": "npm:rxjs@^5.0.3",
       "semantic-ui": "github:Semantic-Org/Semantic-UI@^2.2.4",
       "text": "github:systemjs/plugin-text@^0.0.9",
-      "topojson/topojson": "github:topojson/topojson@^2.2.0"
+      "topojson/topojson": "github:topojson/topojson@^2.2.0",
+      "velocity": "github:julianshapiro/velocity@^1.4.1"
     },
     "devDependencies": {},
     "overrides": {

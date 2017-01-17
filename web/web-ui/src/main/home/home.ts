@@ -1,6 +1,7 @@
 import {inject, bindable} from 'aurelia-framework'
 import {Banner} from 'common/banner/banner';
-
+import 'velocity';
+import 'velocity-ui';
 import {
     Router,
     RouterConfiguration
@@ -14,13 +15,21 @@ export class Home {
     private instance: Banner;
 
     @bindable
+    private menuExpanded;
+
+    @bindable
+    private menu: HTMLElement;
+
+    @bindable
     private bannerVisible: boolean;
 
 
+    control: HTMLElement;
     contentSpace: HTMLElement;
 
     constructor() {
         Banner.setVisible(false);
+
     }
 
     attached(): void {
@@ -30,6 +39,18 @@ export class Home {
                 this.resize();
             }
         );
+        $(this.control).hover((e) => {
+            if(!this.menuExpanded) {
+                $(this.menu).velocity('transition.slideRightIn', {display: 'inline-block'});
+                this.menuExpanded = true;
+            }
+        });
+        $(this.menu).hover((e) =>{}, (e) => {
+            if(this.menuExpanded) {
+                $(this.menu).velocity('transition.slideRightOut', {display: 'inline-block'});
+                this.menuExpanded = false;
+            }
+        });
 
         Banner.visibility.subscribe(visible => {
             this.bannerVisible = visible;

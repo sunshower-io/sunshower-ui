@@ -5,16 +5,19 @@ template
             .header
                 | Workspace
                 .menu
-                    .item(
-                        repeat.for="row of router.navigation"
+                    .items(
+                        ref="menu"
                     )
-                        a(
-                            href.bind="row.href",
-                            class="${row.isActive ? 'active' : ''}"
+                        .item(
+                            repeat.for="row of router.navigation"
                         )
-                            img(src="${row.settings.icon}")
-                            | ${row.title}
-                    .control
+                            a(
+                                href.bind="row.href",
+                                class="${row.isActive ? 'active' : ''}"
+                            )
+                                img(src="${row.settings.icon}")
+                                | ${row.title}
+                    .control(ref="control")
                         img(src="assets/sui/themes/hasli/assets/images/icons/plus-circle.svg")
             .body
                 router-view
