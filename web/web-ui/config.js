@@ -87,9 +87,6 @@ System.config({
       "css": "github:systemjs/plugin-css@0.1.32",
       "jquery": "npm:jquery@2.2.4"
     },
-    "github:julianshapiro/velocity@1.4.1": {
-      "velocity-ui": "github:julianshapiro/velocity@1.4.1/velocity.ui.js"
-    },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.4.1"
     },
@@ -110,6 +107,9 @@ System.config({
     },
     "github:jspm/nodelibs-vm@0.1.0": {
       "vm-browserify": "npm:vm-browserify@0.0.4"
+    },
+    "github:julianshapiro/velocity@1.4.1": {
+      "velocity-ui": "github:julianshapiro/velocity@1.4.1/velocity.ui.js"
     },
     "github:markmarkoh/datamaps@0.5.8": {
       "d3": "npm:d3@3.5.17",

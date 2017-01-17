@@ -1,6 +1,5 @@
 template
     div
-        div(ref="contentSpace", if.bind="bannerVisible")
         .folio
             .header
                 | Workspace
@@ -13,7 +12,8 @@ template
                             repeat.for="row of router.navigation"
                         )
                             a(
-                                href.bind="row.href",
+                                //href.bind="row.href",
+                                click.delegate="open(row.href)"
                                 class="${row.isActive ? 'active' : ''}"
                             )
                                 img(src="${row.settings.icon}")

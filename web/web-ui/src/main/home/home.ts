@@ -10,32 +10,35 @@ import {
 export class Home {
 
 
-    public router: Router;
+    public router           : Router;
 
-    private instance: Banner;
-
-    @bindable
-    private menuExpanded;
+    private instance        : Banner;
 
     @bindable
-    private menu: HTMLElement;
+    private menuExpanded    : boolean;
 
     @bindable
-    private bannerVisible: boolean;
+    private bannerVisible   : boolean;
+
+    private expandSpace     : boolean;
 
 
-    control: HTMLElement;
-    contentSpace: HTMLElement;
+    @bindable
+    private menu            : HTMLElement;
+
+    control                 : HTMLElement;
+
+    contentSpace            : HTMLElement;
 
     constructor() {
         Banner.setVisible(true);
-
+        this.expandSpace = true;
     }
 
     attached(): void {
+
         Banner.instance.carousel.subject.subscribe(
             null, null, () => {
-                this.bannerVisible = Banner.visible;
                 this.resize();
             }
         );
@@ -53,9 +56,15 @@ export class Home {
         });
 
         Banner.visibility.subscribe(visible => {
-            this.bannerVisible = visible;
+            this.expandSpace = this.bannerVisible && visible;
         });
         Banner.open();
+    }
+
+    open(name: string) {
+        this.bannerVisible = this.router.routes[name].settings.expandBanner;
+        Banner.close();
+        this.router.navigateToRoute(name);
     }
 
     private resize() {
