@@ -55,6 +55,7 @@ export class Home {
         Banner.visibility.subscribe(visible => {
             this.bannerVisible = visible;
         });
+        Banner.open();
     }
 
     private resize() {
