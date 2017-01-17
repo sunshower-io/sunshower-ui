@@ -45,11 +45,13 @@ export class Banner {
     }
 
     open() : void {
+        this.visible = true;
         this.carousel.open(this.items);
         Banner.visibility.next(true);
     }
 
     close() : void {
+        this.visible = false;
         this.carousel.close();
         Banner.visibility.next(false);
     }
@@ -83,7 +85,7 @@ export class Banner {
                 this.open();
             }
             this.visible = !this.visible;
-            $(this.container).transition('toggle', 'fade down');
+            // $(this.container).transition('toggle', 'fade down');
         }
     }
 }

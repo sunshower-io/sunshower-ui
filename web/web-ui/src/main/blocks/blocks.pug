@@ -1,48 +1,5 @@
 template
     .ui.grid(style="width:100%")
-        .ui.three.wide.column
-            div(style="box-sizing:border-box; border-right: 1px solid #D6D6D7; width:100%")
-                //position:fixed; left: 0; height:100%; top: 60px!important; overflow:hidden;width: 18.75%!important;
-                h1 Block Library
-                .ui.segment
-                    h2 Type
-                    .ui.divider
-                .ui.segment
-                    h2 Categories
-                    .ui.divider
-        .ui.thirteen.wide.column
-            .ui.relaxed.grid
-                .ui.two.wide.column
-                    .ui.search
-                        .ui.icon.input
-                            input(type="text")
-                            i.search.icon
-                .ui.two.wide.column
-                    .ui.button Actions
-                .ui.two.wide.column
-                    .ui.button Select
-                .ui.right.floated.one.wide.column
-                    i.icon.list.layout
-                .ui.right.floated.one.wide.column
-                    i.icon.block.layout
-            table.ui.celled.table
-                thead
-                    tr
-                        th
-                            input(type="checkbox")
-                        th Block
-                        th Name
-                        th Version
-                        th Updated
-                        th
-                            .ui.button New
-                tbody
-                    tr(repeat.for="block of blocks")
-                        th
-                            input(type="checkbox")
-                        th Logo
-                        th Name
-                        th Version
-                        th Updated
-                        th
-                            input(type="checkbox")
+        .sidenav
+            | Block Library
+

@@ -38,6 +38,7 @@ export function configure(aurelia: Aurelia) {
             'common/folio/folio',
             'common/property-editor/property-editor',
         ])
+        .plugin('aurelia-animator-velocity')
         .plugin('aurelia-dialog', (config: DialogConfiguration) => {
             config.useRenderer(SemanticUIRenderer);
         }).developmentLogging();
