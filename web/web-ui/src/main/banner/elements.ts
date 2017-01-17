@@ -10,8 +10,8 @@ export class BannerElements {
 
     constructor(container: Container) {
         this.items = [
-            new Dashboard(container),
-            new Activity(),
+            container.invoke(Dashboard),
+            container.invoke(Activity),
             new Deployments()
         ];
     }
