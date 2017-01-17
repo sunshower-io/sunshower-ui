@@ -28,7 +28,7 @@ export class Home {
     contentSpace: HTMLElement;
 
     constructor() {
-        Banner.setVisible(false);
+        Banner.setVisible(true);
 
     }
 

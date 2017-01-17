@@ -2,7 +2,7 @@ template
     .banner-menu(click.delegate="toggle()")
         span.text ${label}
         i.caret.down.icon
-    .banner-container(ref="container" show.bind="visible")
+    .banner-container(ref="container" style="border:1px solid red", show.bind="visible")
         carousel(
             items.bind="carouselItems",
             view-model.ref="carousel",

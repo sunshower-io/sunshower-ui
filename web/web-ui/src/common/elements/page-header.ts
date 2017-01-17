@@ -6,28 +6,37 @@ export class PageHeader {
     @bindable
     carouselItems: CarouselViewModel[];
 
-    private banner:Banner;
+    private banner: Banner;
 
-    private element:Element;
+    private element: Element;
 
     constructor() {
     }
 
-    closed:boolean = false;
-    attached() : void {
-        window.addEventListener('scroll', (e) => {
-            let dy = window.pageYOffset || document.documentElement.scrollTop,
-                triggerDistance = 20,
-                banner = this.banner,
-                header = this.element;
-            if(!this.closed) {
-                banner.toggle();
-                this.closed = true;
+    attached(): void {
+        let
+            getDistance = () => {
+                var topDist = h.offsetTop;
+                return topDist;
+            },
+            h = this.element as HTMLElement,
+            stuck = false,
+            stickPoint = getDistance();
+
+        window.onscroll = (e) => {
+            let distance = getDistance() - window.pageYOffset,
+                offset = window.pageYOffset;
+            if ((distance <= 0) && !stuck) {
+                h.style.position = 'fixed';
+                h.style.top = '0px';
+                this.banner.close();
+                stuck = true;
+            } else if (stuck && (offset <= stickPoint)) {
+                h.style.position = 'static';
+                this.banner.open();
+                stuck = false;
             }
-
-
-        });
-
+        }
 
     }
 }

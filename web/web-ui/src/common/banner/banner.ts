@@ -45,6 +45,7 @@ export class Banner {
     }
 
     open() : void {
+        this.visible = true;
         this.carousel.open(this.items);
         Banner.visibility.next(true);
     }
@@ -84,7 +85,7 @@ export class Banner {
                 this.open();
             }
             this.visible = !this.visible;
-            $(this.container).transition('toggle', 'fade down');
+            // $(this.container).transition('toggle', 'fade down');
         }
     }
 }
