@@ -15,13 +15,20 @@ import {EditorContext} from "canvas/core/canvas";
 import {Registry} from "utils/registry";
 
 type Properties = {[key: string]: any};
+export enum BlockType {
+    Official,
+
+    Custom
+}
 
 export class BlockElement extends CompositeElement {
 
+    type: BlockType;
     constructor() {
         super();
         this.icon = `assets/sui/themes/hasli/assets/images/cube.svg`;
         this.geometry = new mxGeometry();
+
     }
 
 

@@ -9,11 +9,19 @@ export class HomeDefault {
     constructor(private home:Home) {
     }
 
-    activate(): void {
+    attached() : void {
         Banner.setToggling(false);
         Banner.open();
         this.home.pad = true;
         this.home.root = true;
+    }
+
+    activate(): void {
+        // console.log("activate")
+        // Banner.setToggling(false);
+        // Banner.open();
+        // this.home.pad = true;
+        // this.home.root = true;
     }
 
     deactivate() : void {
@@ -23,7 +31,4 @@ export class HomeDefault {
         this.home.pad = false;
     }
 
-    attached(): void {
-
-    }
 }

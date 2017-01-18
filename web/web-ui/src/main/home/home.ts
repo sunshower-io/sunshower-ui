@@ -10,13 +10,13 @@ import {
 export class Home {
 
 
-    public root             : boolean;
     public router           : Router;
     private instance        : Banner;
     @bindable
     private menuExpanded    : boolean;
 
-    public pad              : boolean = true;
+    public root             : boolean = false;
+    public pad              : boolean = false;
 
     @bindable
     private menu            : HTMLElement;
@@ -25,34 +25,34 @@ export class Home {
     contentSpace            : HTMLElement;
 
     constructor() {
-        Banner.setVisible(true);
     }
 
+
     attached(): void {
+        Banner.close();
 
         Banner.instance.carousel.subject.subscribe(
             null, null, () => {
                 this.resize(true);
             }
         );
-        $(this.control).hover((e) => {
-            if (!this.menuExpanded) {
-                $(this.menu).velocity('transition.slideRightIn', {display: 'inline-block'});
-                this.menuExpanded = true;
-            }
-        });
-        $(this.menu).hover((e) => {
-        }, (e) => {
-            if (this.menuExpanded) {
-                $(this.menu).velocity('transition.slideRightOut', {display: 'inline-block'});
-                this.menuExpanded = false;
-            }
-        });
+        // $(this.control).hover((e) => {
+        //     if (!this.menuExpanded) {
+        //         $(this.menu).velocity('transition.slideRightIn', {display: 'inline-block'});
+        //         this.menuExpanded = true;
+        //     }
+        // });
+        // $(this.menu).hover((e) => {
+        // }, (e) => {
+        //     if (this.menuExpanded) {
+        //         $(this.menu).velocity('transition.slideRightOut', {display: 'inline-block'});
+        //         this.menuExpanded = false;
+        //     }
+        // });
 
         Banner.visibility.subscribe(visible => {
             this.resize(visible);
         });
-        Banner.open();
     }
 
     navigateBack() : void {
@@ -60,7 +60,6 @@ export class Home {
     }
 
     open(name: string) {
-        Banner.close();
         this.router.navigate(name);
     }
 

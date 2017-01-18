@@ -3,11 +3,9 @@ template
         div(ref="contentSpace" if.bind="pad")
         .folio
             .header
-                | Workspace
                 .menu
                     .items(
                         ref="menu",
-                        style="display:none",
                         if.bind="root"
                     )
                         .item(
@@ -27,6 +25,6 @@ template
                             src="assets/sui/themes/hasli/assets/images/icons/x-circle.svg",
                             click.delegate="navigateBack()"
                         )
-            .body(style="border:1px solid red; min-height:800px")
+            .body(style="min-height:800px")
                 router-view
 
