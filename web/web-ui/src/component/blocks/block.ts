@@ -1,4 +1,8 @@
-import {BlockType, BlockElement} from "component/model/block";
+import {
+    BlockType,
+    BlockElement
+} from "component/model/block";
+import * as _ from 'lodash';
 export class BlockManager {
 
     private blockList: BlockElement[];
@@ -28,6 +32,23 @@ export class BlockManager {
             return true;
         }
         return false;
+    }
+
+    getElementsOfType(type:BlockType) : BlockElement[] {
+        return _.filter(this.blockList, (e) => e.type === type);
+    }
+
+    listTypes() : BlockType[] {
+        let results = [];
+        _.reduce(this.blocks,
+            (result:Map<string, BlockType>, value:BlockElement, key:string) => {
+            if(!result[value.type]) {
+                result[value.type] = 1;
+                results.push(value.type);
+            }
+            return result;
+        }, {});
+        return results;
     }
 
     list() : BlockElement[] {
