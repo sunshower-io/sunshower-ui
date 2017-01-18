@@ -1,10 +1,38 @@
+@grey: #7D7C7C;
+@lightgrey: lighten(#D6D6D7, 5%);
+@em: 16px;
+@blue: #239AE8;
 
-.fpage-list {
+.folio {
+  .sidenav {
+    .fpage-list {
+      border: 1px solid @lightgrey;
+      border-radius: 5px;
+      padding:@em;
 
-  .menu {
-    width:100% !important;
-    .active.item {
-      border-left-width: 1px;
+      .header {
+        color: @grey;
+        font-weight:bold;
+        border-bottom: 1px solid @lightgrey;
+        font-size:1.75rem;
+        padding-bottom:1rem;
+      }
+
+      .menu {
+        width:100% !important;
+        float:none;
+        .item {
+          margin-left: -@em !important;
+          padding-left:@em;
+          color: @grey;
+          &.active {
+            color: @blue;
+            padding-left:@em - 2px;
+            border-left:2px solid @blue;
+          }
+        }
+      }
     }
+
   }
 }

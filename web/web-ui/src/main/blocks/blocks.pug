@@ -17,13 +17,18 @@ template
                             repeat.for="t of blockManager.listTypes()",
                             click.delegate="filterTypes(t, $event)"
                         )
-                            | ${nameOf(t)}
+                            span.name ${nameOf(t)}
+                            span.count
+                .fpage-list
+                    .header Categories
+                    .ui.vertical.secondary.pointing.menu
+                        a.item(
+                            repeat.for="c of blockManager.getCategories()"
+                        )
+                            span.name ${c.name}
+                            span.count ${c.count}
         .twelve.wide.column(style="padding:64px;")
             .ui.relaxed.middle.aligned.selection.divided.list(style="overflow-y: auto" ref="list")
                 .item(repeat.for="block of blocks")
                     img.ui.image(src="${block.icon}", width="24px", height="24px")
                     .content ${block.name}
-
-
-
-

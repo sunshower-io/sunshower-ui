@@ -16,6 +16,7 @@ import {
 } from "component/draftboard/draftboard";
 import {ActionManager} from "canvas/actions/action-service";
 import {BlockManager} from 'component/blocks/block';
+import {BlockElement} from "component/model/block";
 
 
 describe('a block manager', () => {
@@ -34,6 +35,14 @@ describe('a block manager', () => {
 
     it('should list element types correctly', () => {
         expect(blockManager.listTypes().length).toBe(2);
+    });
+    it('should collect categories correctly', () => {
+
+        let c1 = new BlockElement();
+        c1.categories = ["Frap", "adap"];
+        blockManager.add(c1);
+        let categories = blockManager.getCategories();
+        expect(categories.length).toBe(2);
     });
 
     it('should list element type names', () => {

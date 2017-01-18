@@ -42,4 +42,5 @@ export class Blocks {
         this.previousSelectedType = element;
         this.blocks = this.blockManager.getElementsOfType(t);
     }
+
 }
