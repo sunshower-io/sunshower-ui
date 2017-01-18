@@ -96,7 +96,6 @@ export class Home {
                 },
                 title: 'Blocks'
             }, {
-
                 route: 'deployment',
                 name: 'Deployment',
                 moduleId: 'main/deployment/deployment',
@@ -106,6 +105,14 @@ export class Home {
                 },
                 title: 'Deployment'
             }, {
+
+                route: 'block/:id',
+                name: 'block',
+                moduleId: 'main/blocks/block',
+                nav: false,
+                title: 'Block'
+            },
+            {
                 route: 'design',
                 name: 'Design',
                 moduleId: 'main/design/design',

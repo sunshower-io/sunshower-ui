@@ -1,0 +1,28 @@
+template
+    .ui.grid(style="width:100%")
+        .four.wide.column
+            .sidenav(style="margin-top:-20px; width:25% !important")
+                .fpage-header
+                    .ui.small.image(style="width:100%; margin-top:32px")
+                        img(
+                        src="assets/sui/themes/hasli/assets/images/icons/blocks-icon.svg",
+                        style="margin:auto", width="80px", height="80px"
+                        )
+                    span.label Block Library
+                .fpage-list
+                    .header
+                        | Type
+                    .ui.vertical.secondary.pointing.menu
+                        a.item(
+                        repeat.for="t of blockManager.listTypes()",
+                        click.delegate="filterTypes(t, $event)"
+                        )
+                            | ${nameOf(t)}
+        .fpage-body.twelve.wide.column(style="padding:64px;")
+            .ui.secondary.pointing.menu
+                a.item(
+                    repeat.for="row of router.navigation",
+                    class="${row.isActive ? 'active' : ''}"
+                    href.bind="row.href"
+                ) ${row.title}
+            router-view

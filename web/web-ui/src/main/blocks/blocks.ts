@@ -1,9 +1,10 @@
 import * as _ from 'lodash';
+import {Router} from 'aurelia-router';
 import {inject, TaskQueue} from 'aurelia-framework';
 import {BlockManager} from 'component/blocks/block';
 import {BlockElement, BlockType} from 'component/model/block';
 
-@inject(TaskQueue, BlockManager)
+@inject(Router, TaskQueue, BlockManager)
 export class Blocks {
 
     private list:HTMLElement;
@@ -11,10 +12,16 @@ export class Blocks {
     private previousSelectedType: JQuery;
 
     constructor(
+        private router      : Router,
         private taskQueue   : TaskQueue,
         private blockManager: BlockManager
     ) {
 
+    }
+
+
+    openBlock(id:string) : void {
+        this.router.navigate('block/' + id);
     }
 
     attached() : void {

@@ -20,7 +20,7 @@ template
                             | ${nameOf(t)}
         .twelve.wide.column(style="padding:64px;")
             .ui.relaxed.middle.aligned.selection.divided.list(style="overflow-y: auto" ref="list")
-                .item(repeat.for="block of blocks")
+                .item(repeat.for="block of blocks" dblclick.delegate="openBlock(block.id)")
                     img.ui.image(src="${block.icon}", width="24px", height="24px")
                     .content ${block.name}
 

@@ -3,6 +3,7 @@ import {
     BlockElement
 } from "component/model/block";
 import * as _ from 'lodash';
+import {UUID} from "utils/uuid";
 export class BlockManager {
 
     private blockList: BlockElement[];
@@ -23,6 +24,10 @@ export class BlockManager {
 
             this.add(block);
         }
+    }
+
+    get(id:string) : BlockElement {
+        return this.blocks[id];
     }
 
     add(block:BlockElement) : boolean {
