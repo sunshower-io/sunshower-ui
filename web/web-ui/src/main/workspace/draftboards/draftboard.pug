@@ -1,4 +1,5 @@
 template
+    require(from="./breadcrumb/breadcrumb")
     .ui.internally.celled.fluid.grid
         .row.draftboard--row
             .sixteen.wide.centered.column.draftboard--column
@@ -9,6 +10,7 @@ template
                     style="height:100%; padding-left:304px !important; margin-right:304px !important;"
                     items.bind="menus"
                 )
+                breadcrumb
         .row
             .column
     .workbench-container

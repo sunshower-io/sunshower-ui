@@ -12,8 +12,7 @@ template
                             repeat.for="row of router.navigation"
                         )
                             a(
-                                //href.bind="row.href",
-                                click.delegate="open(row.href)"
+                                click.delegate="open(row)"
                                 class="${row.isActive ? 'active' : ''}"
                             )
                                 img(src="${row.settings.icon}")

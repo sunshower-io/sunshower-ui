@@ -4,6 +4,7 @@ import {
     Router,
     RouterConfiguration
 } from "aurelia-router";
+import {Banner} from 'common/banner/banner';
 
 
 export class WorkspaceView {
@@ -13,11 +14,12 @@ export class WorkspaceView {
     @bindable
     public loading: boolean;
 
+
     public configureRouter(config: RouterConfiguration, router: Router) {
         config.title = 'Workspace';
         config.map([
             {
-                route: ['', 'navigator'],
+                route: 'navigator',
                 name: 'Navigator',
                 moduleId: './navigator/navigator',
                 nav: true,
@@ -27,8 +29,7 @@ export class WorkspaceView {
                     child: false
                 }
             }, {
-                href: 'draftboard',
-                route: 'draftboard/:id?',
+                route: ['', 'draftboard/:id?'],
                 name: 'draftboard',
                 moduleId: './draftboards/draftboard',
                 nav: true,
@@ -54,6 +55,7 @@ export class WorkspaceView {
 
     activate() : void {
         this.loading = false;
+        Banner.close();
     }
 
 

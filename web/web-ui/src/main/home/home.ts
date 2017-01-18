@@ -4,6 +4,7 @@ import 'velocity';
 import 'velocity-ui';
 import {
     Router,
+    RouteConfig,
     RouterConfiguration
 } from 'aurelia-router';
 
@@ -59,8 +60,11 @@ export class Home {
         this.router.navigateBack();
     }
 
-    open(name: string) {
-        this.router.navigate(name);
+    open(routeConfig: RouteConfig) {
+        if(routeConfig.settings.closeBanner) {
+            Banner.close();
+        }
+        this.router.navigate(routeConfig.href);
     }
 
     private resize(visible: boolean) {
@@ -114,10 +118,12 @@ export class Home {
             },
             {
                 route: 'design',
+                href: '#/main/workspace/draftboard',
                 name: 'Design',
-                moduleId: 'main/design/design',
                 nav: true,
+                moduleId: 'main/workspace/workspace',
                 settings: {
+                    closeBanner: true,
                     icon: 'assets/sui/themes/hasli/assets/images/icons/design-icon.svg'
                 },
                 title: 'Design'
