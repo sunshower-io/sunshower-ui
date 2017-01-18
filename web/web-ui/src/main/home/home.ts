@@ -10,6 +10,7 @@ import {
 export class Home {
 
 
+    public root             : boolean;
     public router           : Router;
     private instance        : Banner;
     @bindable
@@ -52,6 +53,10 @@ export class Home {
             this.resize(visible);
         });
         Banner.open();
+    }
+
+    navigateBack() : void {
+        this.router.navigateBack();
     }
 
     open(name: string) {

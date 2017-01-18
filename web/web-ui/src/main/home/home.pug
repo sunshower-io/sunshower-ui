@@ -7,7 +7,8 @@ template
                 .menu
                     .items(
                         ref="menu",
-                        style="display:none"
+                        style="display:none",
+                        if.bind="root"
                     )
                         .item(
                             repeat.for="row of router.navigation"
@@ -19,8 +20,13 @@ template
                             )
                                 img(src="${row.settings.icon}")
                                 | ${row.title}
-                    .control(ref="control")
+                    .control(ref="control" if.bind="root")
                         img(src="assets/sui/themes/hasli/assets/images/icons/plus-circle.svg")
-            .body
+                    .control(ref="stackControl" if.bind="!root")
+                        img(
+                            src="assets/sui/themes/hasli/assets/images/icons/x-circle.svg",
+                            click.delegate="navigateBack()"
+                        )
+            .body(style="border:1px solid red; min-height:800px")
                 router-view
 
