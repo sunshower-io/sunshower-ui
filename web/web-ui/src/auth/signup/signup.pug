@@ -1,13 +1,10 @@
 template
-    .ui.hidden.divider
-    .ui.hidden.divider
-    .ui.hidden.divider
-    .ui.one.column.center.aligned.grid
+    .ui.center.aligned.grid(style="margin-top:6rem;")
         .column.eight.wide.form-holder
             h2.center.aligned.header.form-head
                 | Create Account
             .ui.hidden.divider
-            .ui.small.form
+            form.ui.small.form
                 .two.fields
                     .field
                         label.pull-left First Name
@@ -31,5 +28,6 @@ template
                         input(type='password', placeholder='Re-enter your password', value.bind='user.password')
                 .ui.error.message.left(show.bind="showError" style="margin-top:10px")
                     p Username or email already exists
-                input.ui.field.button.fluid.primary(type='submit', value='Sign Up', click.delegate="signup()")
+
+                button.ui.field.button.fluid.primary(type='submit', click.delegate="signup()") Sign Up
 

@@ -1,6 +1,9 @@
 template
-    .ui.segment(if.bind="loading", style="height:100%; width:100%;")
-        .ui.active.dimmer
+    div(
+        if.bind="loading"
+        style="height:100%; width:100%;"
+        )
+        .ui.active.dimmer(style="background-color:#171b26")
             .ui.text.loader Loading
     .carousel-container
         .carousel-contents
