@@ -1,15 +1,24 @@
 import {Banner} from 'common/banner/banner';
+import {Home} from "./home";
+import {inject} from 'aurelia-framework';
+
+@inject(Home)
 export class HomeDefault {
 
-    private             pad: boolean;
-    private             container: HTMLElement;
 
+    constructor(private home:Home) {
+        home.pad = true;
+    }
 
     activate(): void {
+        Banner.setToggling(false);
+        Banner.open();
+    }
 
-        Banner.visibility.subscribe(visible => {
-            this.pad = visible;
-        });
+    deactivate() : void {
+        Banner.setToggling(true);
+        Banner.close();
+        this.home.pad = false;
     }
 
     attached(): void {

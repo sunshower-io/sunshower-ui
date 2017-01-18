@@ -14,6 +14,8 @@ export class Banner {
 
     public static instance: Banner;
 
+    public static toggling: boolean = true;
+
     @bindable
     public visible: boolean;
 
@@ -46,6 +48,10 @@ export class Banner {
 
     }
 
+
+    public static setToggling(toggling: boolean): void {
+        Banner.toggling = toggling;
+    }
 
     public static setVisible(visible: boolean): void {
         Banner.visible = visible;
@@ -91,11 +97,13 @@ export class Banner {
 
 
     toggle(): void {
-        if (this.visible) {
-            this.close();
-        } else {
-            this.open();
+        if (Banner.toggling) {
+            if (this.visible) {
+                this.close();
+            } else {
+                this.open();
+            }
+            this.visible = !this.visible;
         }
-        this.visible = !this.visible;
     }
 }

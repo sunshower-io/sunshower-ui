@@ -15,7 +15,7 @@ export class Home {
     @bindable
     private menuExpanded    : boolean;
 
-
+    public pad              : boolean = true;
 
     @bindable
     private menu            : HTMLElement;
@@ -56,7 +56,7 @@ export class Home {
 
     open(name: string) {
         Banner.close();
-        this.router.navigateToRoute(name);
+        this.router.navigate(name);
     }
 
     private resize(visible: boolean) {
