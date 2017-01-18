@@ -28,6 +28,7 @@ System.config({
     }
   },
   map: {
+    "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.3.0",
     "aurelia-animator-css": "npm:aurelia-animator-css@1.0.1",
     "aurelia-animator-velocity": "npm:aurelia-animator-velocity@1.0.1",
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.1",
@@ -66,6 +67,7 @@ System.config({
     "fetch": "github:github/fetch@1.1.1",
     "font-awesome": "npm:font-awesome@4.6.3",
     "jquery": "npm:jquery@2.2.4",
+    "lodash": "npm:lodash@4.17.4",
     "markmarkoh/datamaps": "github:markmarkoh/datamaps@0.5.8",
     "maskedinput": "github:digitalBush/jquery.maskedinput@1.4.1",
     "mxgraph": "github:jgraph/mxgraph-js@master",

@@ -1,19 +1,29 @@
 template
     .ui.grid(style="width:100%")
-        .sidenav(style="margin-top:-20px; width:25% !important")
-            .fpage-header
-                .ui.small.image(style="width:100%; margin-top:32px")
-                    img(
-                        src="assets/sui/themes/hasli/assets/images/icons/blocks-icon.svg",
-                        style="margin:auto", width="80px", height="80px"
-                    )
-                span.label Block Library
-            .fpage-list
-                .header
-                    | Type
-                .ui.vertical.secondary.pointing.menu
-                    a.active.item First
-                    a.item Second
+        .four.wide.column
+            .sidenav(style="margin-top:-20px; width:25% !important")
+                .fpage-header
+                    .ui.small.image(style="width:100%; margin-top:32px")
+                        img(
+                            src="assets/sui/themes/hasli/assets/images/icons/blocks-icon.svg",
+                            style="margin:auto", width="80px", height="80px"
+                        )
+                    span.label Block Library
+                .fpage-list
+                    .header
+                        | Type
+                    .ui.vertical.secondary.pointing.menu
+                        a.item(
+                            repeat.for="t of blockManager.listTypes()",
+                            click.delegate="filterTypes(t, $event)"
+                        )
+                            | ${nameOf(t)}
+        .twelve.wide.column(style="padding:64px;")
+            .ui.relaxed.middle.aligned.selection.divided.list(style="overflow-y: auto" ref="list")
+                .item(repeat.for="block of blocks")
+                    img.ui.image(src="${block.icon}", width="24px", height="24px")
+                    .content ${block.name}
+
 
 
 
