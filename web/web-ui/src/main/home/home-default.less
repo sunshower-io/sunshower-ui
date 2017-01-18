@@ -1,0 +1,34 @@
+@headercolor: #606060;
+@explainercolor: #9A9A9A;
+@activecolor: #15B4F1;
+@inactivecolor: #D0F0FC;
+@buttonheight: 50px;
+
+.carousel-columns {
+  h2 {
+    text-transform: uppercase;
+    color: @headercolor;
+  }
+  p {
+    color: @explainercolor;
+  }
+  .carousel-menu {
+    div { background-color: @inactivecolor;
+      &.active {
+        background-color: @activecolor;
+      }
+    }
+  }
+  .button {
+    text-transform: uppercase;
+    background-color: @activecolor;
+    margin:0 auto;
+    width:@buttonheight*3;
+    height: @buttonheight;
+    line-height: @buttonheight;
+    text-align:center;
+    color: white;
+    border-radius: @buttonheight/2;
+    font-size:1.5rem;
+  }
+}
