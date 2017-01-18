@@ -28,10 +28,10 @@ System.config({
     }
   },
   map: {
-    "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.3.0",
     "aurelia-animator-css": "npm:aurelia-animator-css@1.0.1",
     "aurelia-animator-velocity": "npm:aurelia-animator-velocity@1.0.1",
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.1",
+    "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.3.0",
     "aurelia-dialog": "npm:aurelia-dialog@1.0.0-beta.3.0.1",
     "aurelia-event-aggregator": "npm:aurelia-event-aggregator@1.0.1",
     "aurelia-fetch-client": "npm:aurelia-fetch-client@1.1.0",

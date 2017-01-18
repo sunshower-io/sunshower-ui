@@ -24,6 +24,9 @@ export enum BlockType {
 export class BlockElement extends CompositeElement {
 
     type: BlockType;
+
+    categories : string[];
+
     constructor() {
         super();
         this.icon = `assets/sui/themes/hasli/assets/images/cube.svg`;
