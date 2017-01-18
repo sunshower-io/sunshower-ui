@@ -16,7 +16,7 @@ export class PageHeader {
     attached(): void {
         let
             getDistance = () => {
-                let topDist = h.offsetTop + 500;
+                let topDist = h.offsetTop + 700;
                 return topDist;
             },
             h = this.element as HTMLElement,

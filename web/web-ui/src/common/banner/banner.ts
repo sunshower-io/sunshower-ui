@@ -12,19 +12,19 @@ export class Banner {
 
     public static visible: boolean;
 
-    public static instance:Banner;
+    public static instance: Banner;
 
     @bindable
     public visible: boolean;
 
     public carousel: Carousel;
 
-    public container:HTMLElement;
+    public container: HTMLElement;
 
     public static visibility: Subject<boolean> = new Subject<boolean>();
 
     @bindable
-    public label:string;
+    public label: string;
 
     @bindable
     private items: CarouselViewModel[];
@@ -33,59 +33,69 @@ export class Banner {
 
     }
 
-    public static setVisible(visible: boolean) : void {
+
+    public static getOffsetAndHeight(): [number, number] {
+        if (Banner.visible && Banner.instance) {
+            let instance = Banner.instance,
+                container = $(instance.container).find('.carousel-container'),
+                offset = $(container).offset(),
+                height = $(container).height();
+            return [offset.top, height];
+        }
+        return [0, 0];
+
+    }
+
+
+    public static setVisible(visible: boolean): void {
         Banner.visible = visible;
     }
 
     attached() {
         this.toggle();
-        if(!Banner.instance) {
+        if (!Banner.instance) {
             Banner.instance = this;
         }
     }
 
-    open() : void {
-        this.visible = true;
+    open(): void {
+        $(this.container).show();
         this.carousel.open(this.items);
         Banner.visibility.next(true);
     }
 
-    close() : void {
-        this.visible = false;
+    close(): void {
+        $(this.container).hide();
         this.carousel.close();
         Banner.visibility.next(false);
     }
 
-    public static open() : void {
-        if(Banner.instance) {
+    public static open(): void {
+        if (Banner.instance) {
             Banner.instance.open();
         }
     }
 
-    public static close() : void {
-        if(Banner.instance) {
+    public static close(): void {
+        if (Banner.instance) {
             Banner.instance.close();
         }
     }
 
     public static toggle() {
-        if(Banner.instance) {
+        if (Banner.instance) {
             let instance = Banner.instance;
             instance.toggle();
         }
     }
 
 
-
-    toggle() : void {
-        if(Banner.visible)  {
-            if(this.visible) {
-                this.close();
-            } else {
-                this.open();
-            }
-            this.visible = !this.visible;
-            // $(this.container).transition('toggle', 'fade down');
+    toggle(): void {
+        if (this.visible) {
+            this.close();
+        } else {
+            this.open();
         }
+        this.visible = !this.visible;
     }
 }

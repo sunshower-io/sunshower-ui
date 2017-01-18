@@ -11,73 +11,66 @@ export class Home {
 
 
     public router           : Router;
-
     private instance        : Banner;
-
     @bindable
     private menuExpanded    : boolean;
 
-    @bindable
-    private bannerVisible   : boolean;
-
-    private expandSpace     : boolean;
 
 
     @bindable
     private menu            : HTMLElement;
 
     control                 : HTMLElement;
-
     contentSpace            : HTMLElement;
 
     constructor() {
         Banner.setVisible(true);
-        this.expandSpace = true;
     }
 
     attached(): void {
 
         Banner.instance.carousel.subject.subscribe(
             null, null, () => {
-                this.resize();
+                this.resize(true);
             }
         );
         $(this.control).hover((e) => {
-            if(!this.menuExpanded) {
+            if (!this.menuExpanded) {
                 $(this.menu).velocity('transition.slideRightIn', {display: 'inline-block'});
                 this.menuExpanded = true;
             }
         });
-        $(this.menu).hover((e) =>{}, (e) => {
-            if(this.menuExpanded) {
+        $(this.menu).hover((e) => {
+        }, (e) => {
+            if (this.menuExpanded) {
                 $(this.menu).velocity('transition.slideRightOut', {display: 'inline-block'});
                 this.menuExpanded = false;
             }
         });
 
         Banner.visibility.subscribe(visible => {
-            this.expandSpace = this.bannerVisible && visible;
+            this.resize(visible);
         });
         Banner.open();
     }
 
     open(name: string) {
-        this.bannerVisible = this.router.routes[name].settings.expandBanner;
         Banner.close();
         this.router.navigateToRoute(name);
     }
 
-    private resize() {
-        if (Banner.visible) {
-            let instance = Banner.instance,
-                container = $(instance.container).find('.carousel-container'),
-                offset = $(container).offset(),
-                height = $(container).height(),
-                content = $(this.contentSpace);
+    private resize(visible: boolean) {
+        let instance = Banner.instance,
+            container = $(instance.container).find('.carousel-container'),
+            offset = $(container).offset(),
+            height = $(container).height(),
+            content = $(this.contentSpace);
+        if(visible) {
             content.height(height);
             content.offset(offset);
-            this.instance = instance;
         }
+
+        this.instance = instance;
     }
 
     public configureRouter(config: RouterConfiguration, router: Router) {
