@@ -35,6 +35,11 @@ export class BlockManager {
         return _.values(categories);
     }
 
+    getElementsOfCategory(category: string): BlockElement[] {
+        return _.filter(this.blockList, (e) => e.categories.indexOf(category) > -1)
+    }
+
+
     add(block: BlockElement): boolean {
         if (!this.blocks[block.id]) {
             this.blocks[block.id] = block;
