@@ -29,6 +29,8 @@ export class VlanElement extends CompositeElement {
 
 
 }
+
+
 export class VlanElementFactory extends AbstractElementFactory<VlanElement> {
 
     create(model: EditorContext, registry: Registry): VlanElement {
@@ -55,7 +57,6 @@ export class VlanElementFactory extends AbstractElementFactory<VlanElement> {
         } finally {
             canvas.getModel().endUpdate();
         }
-
         return layer;
     }
 }

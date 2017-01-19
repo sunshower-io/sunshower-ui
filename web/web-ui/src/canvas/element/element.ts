@@ -22,10 +22,16 @@ import {Rectangle} from "geometry/shapes";
 import {Element} from 'canvas/element/element';
 import {EditorContext} from "canvas/core/canvas";
 
-type Properties = {[key: string]: any};
+export type Properties = {[key: string]: any};
 
 
-export interface Element extends SceneGraphElement, Renderable, Layer, Copyable<Element> {
+export interface Element extends
+    SceneGraphElement,
+    Renderable,
+    Layer,
+    Copyable<Element>,
+    Vertex<Properties>
+{
 
     getSuccessors(): Element[];
 
