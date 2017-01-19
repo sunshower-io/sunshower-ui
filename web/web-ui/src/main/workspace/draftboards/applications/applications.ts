@@ -260,7 +260,7 @@ export class Applications extends AbstractGraph implements Listener,
         canvas.addListener(mxEvent.CLICK, (canvas:Canvas, event:mxEventObject) => {
             let e = event as any;
             if(e.properties && e.properties.cell) {
-
+                canvas.selectCellForEvent(e.properties.cell);
                 this.eventAggregator.publish(CanvasEvents.CELL_SELECTION_CHANGED, {
                     sender: this,
                     name: CanvasEvents.CELL_SELECTION_CHANGED,
