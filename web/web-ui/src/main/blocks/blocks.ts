@@ -10,6 +10,7 @@ export class Blocks {
     private list:HTMLElement;
     private blocks:BlockElement[];
     private previousSelectedType: JQuery;
+    private previousSelectedCategory: JQuery;
 
     constructor(
         private router      : Router,
@@ -28,7 +29,10 @@ export class Blocks {
         this.blocks = this.blockManager.list();
         this.taskQueue.queueMicroTask(() => {
             this.resize();
-        })
+        });
+        //TODO set previousSelectedType
+        this.previousSelectedCategory = $(".category-menu .name:contains('All')").parent('.item');
+        this.previousSelectedCategory.addClass('active');
     }
 
     resize() : void {
@@ -44,10 +48,24 @@ export class Blocks {
         if (this.previousSelectedType) {
             $(this.previousSelectedType).removeClass('active');
         }
-        let element = $(event.target);
+        let clicked_element = $(event.target);
+        let element = clicked_element.hasClass('item') ? clicked_element : clicked_element.parent('.item');
         element.addClass('active');
         this.previousSelectedType = element;
         this.blocks = this.blockManager.getElementsOfType(t);
+        //TODO take into account active category
+    }
+
+    private filterCategories(c: string, event: Event) {
+        if (this.previousSelectedCategory) {
+            $(this.previousSelectedCategory).removeClass('active');
+        }
+        let clicked_element = $(event.target);
+        let element = clicked_element.hasClass('item') ? clicked_element : clicked_element.parent('.item');
+        element.addClass('active');
+        this.previousSelectedCategory = element;
+        this.blocks = this.blockManager.getElementsOfCategory(c);
+        //TODO take into account active type
     }
 
 }

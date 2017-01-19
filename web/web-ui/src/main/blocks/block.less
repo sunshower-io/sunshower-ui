@@ -16,23 +16,52 @@
         border-bottom: 1px solid @lightgrey;
         font-size:1.75rem;
         padding-bottom:1rem;
+        line-height: normal;
+        height: auto;
       }
 
-      .menu {
+      .ui.secondary.vertical.pointing.menu {
         width:100% !important;
         float:none;
         .item {
-          margin-left: -@em !important;
-          padding-left:@em;
+          width: auto;
+          margin: 1rem 0 1rem -@em !important;
+          padding: 0 0 0 @em !important;
           color: @grey;
+          border-left:2px solid white !important;
           &.active {
             color: @blue;
-            padding-left:@em - 2px;
-            border-left:2px solid @blue;
+            border-left:2px solid @blue !important;
+          }
+          &:after {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            content: '';
+            clear: both;
+            height: 0;
           }
         }
       }
     }
+  }
+  .fpage-menu {
+    &> * {
+      display: inline-block;
+      margin-right:3rem;
+    }
+    * {
+      border-radius:0 !important;
+    }
+    .icon-holder {
+      margin-right:0;
+      float:right;
+      i.icon {
+        color: @lightgrey;
+        margin:2px 3rem 0 0;
+      }
+    }
 
   }
+
 }

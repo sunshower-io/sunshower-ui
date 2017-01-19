@@ -20,7 +20,7 @@ export class BlockManager {
                 block.type = BlockType.Custom;
             }
             block.categories = ['All'];
-            if (i % 2 === 0 ) {
+            if (i % 2 == 0 ) {
                 block.categories.push('Analytics');
             }
             else {
@@ -49,6 +49,14 @@ export class BlockManager {
         }, new Map<string, Category>());
 
         return _.values(categories);
+    }
+
+    getElementsOfCategory(category: string): BlockElement[] {
+        return _.filter(this.blockList, (e) => e.categories.indexOf(category) > -1)
+    }
+
+    get(id:string) : BlockElement {
+        return this.blocks[id];
     }
 
     add(block: BlockElement): boolean {

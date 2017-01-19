@@ -12,22 +12,35 @@ template
                 .fpage-list
                     .header
                         | Type
-                    .ui.vertical.secondary.pointing.menu
+                    .ui.vertical.secondary.pointing.menu.type-menu
                         a.item(
                             repeat.for="t of blockManager.listTypes()",
                             click.delegate="filterTypes(t, $event)"
                         )
                             span.name ${nameOf(t)}
-                            span.count
+                            span.count.pull-right
                 .fpage-list
                     .header Categories
-                    .ui.vertical.secondary.pointing.menu
+                    .ui.vertical.secondary.pointing.menu.category-menu
                         a.item(
-                            repeat.for="c of blockManager.getCategories()"
+                            repeat.for="c of blockManager.getCategories()",
+                            click.delegate="filterCategories(c.name, $event)"
                         )
                             span.name ${c.name}
-                            span.count ${c.count}
-        .twelve.wide.column(style="padding:64px;")
+                            span.count.pull-right ${c.count}
+        .twelve.wide.column(style="padding:32px 64px")
+            .fpage-menu
+                .ui.icon.input
+                    input(
+                    type='text',
+                    placeholder='Search'
+                    )
+                    i.search.icon
+                .ui.basic.button.primary Actions
+                .ui.basic.button.primary Select: Type
+                span.icon-holder
+                    i.big.block.layout.icon
+                    i.big.list.layout.icon
             .ui.relaxed.middle.aligned.selection.divided.list(style="overflow-y: auto" ref="list")
                 .item(repeat.for="block of blocks" dblclick.delegate="openBlock(block.id)")
                     img.ui.image(src="${block.icon}", width="24px", height="24px")
