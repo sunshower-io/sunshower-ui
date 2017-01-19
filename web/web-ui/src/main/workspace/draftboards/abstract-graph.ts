@@ -13,23 +13,49 @@ import {PLATFORM} from 'aurelia-pal';
 import {Registry} from "utils/registry";
 import {Canvas} from 'canvas/core/canvas';
 
+export interface GraphEvent {
+    name:string;
+}
+
+export class GraphEvents {
+    static readonly RESIZED             : string = 'resized';
+    static readonly LEFT_CLOSED         : string = 'left-closed';
+    static readonly LEFT_OPENED         : string = 'left-opened';
+    static readonly RIGHT_CLOSED        : string = 'right-closed';
+    static readonly RIGHT_OPENED        : string = 'right-opened';
+}
+
+import {Subject} from 'rx';
 
 export abstract class AbstractGraph {
 
 
+    /**
+     * public fields
+     */
+    public    container         : HTMLElement;
+    public leftSidebar          : HTMLElement;
+    public leftVisible          : boolean = true;
+    public rightVisible         : boolean = true;
+    public subject              : Subject<GraphEvent>;
+
+    /**
+     * protected fields
+     */
 
     protected graph             : Canvas;
-    protected container         : HTMLElement;
-
-    protected leftVisible       : boolean = true;
-    protected rightVisible      : boolean = true;
 
 
-    protected leftSidebar       : HTMLElement;
+
     protected rightSidebar      : HTMLElement;
 
-    constructor(public registry:Registry) {
+    /**
+     * private fields
+     */
 
+
+    constructor(public registry:Registry) {
+        this.subject = new Subject<GraphEvent>();
     }
 
 
@@ -61,6 +87,7 @@ export abstract class AbstractGraph {
     }
 
     resized() {
+        this.subject.next({name: GraphEvents.RESIZED});
         this.graph.redraw();
     }
 
@@ -80,6 +107,9 @@ export abstract class AbstractGraph {
             this.leftVisible,
             'right'
         );
+        let eventType = this.leftVisible ?
+            GraphEvents.LEFT_OPENED : GraphEvents.LEFT_CLOSED;
+        this.subject.next({name: eventType});
         return this.leftVisible;
     };
 
@@ -89,6 +119,9 @@ export abstract class AbstractGraph {
             this.rightVisible,
             'left'
         );
+        let eventType = this.rightVisible ?
+            GraphEvents.RIGHT_OPENED : GraphEvents.RIGHT_CLOSED;
+        this.subject.next({name: eventType});
         return this.rightVisible;
     }
 

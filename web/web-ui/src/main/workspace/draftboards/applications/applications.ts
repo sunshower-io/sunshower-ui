@@ -32,6 +32,8 @@ import {
     EditorContext
 } from '../editor';
 
+import {ElementEditor} from './element-editor';
+
 
 import {
     Draftboard
@@ -104,7 +106,9 @@ export class Applications extends AbstractGraph implements Listener,
     public menus: MenuItem[];
 
 
+
     private infrastructureDialog: AddInfrastructureDialog;
+    private elementEditor       : ElementEditor;
 
     private fireElementsChanged = (sender: mxGraphSelectionModel, event: mxEventObject) => {
         let cells = sender.cells;
@@ -128,15 +132,16 @@ export class Applications extends AbstractGraph implements Listener,
 
 
 
-    constructor(private client: HttpClient,
-                private parent: Draftboard,
-                registry: Registry,
-                private dialogService: DialogService,
-                private draftboardManager: DraftboardManager,
-                actionSet: DefaultActionSet,
-                private actionManager: ActionManager,
-                private eventAggregator: EventAggregator,
-                private applicationState: ApplicationState) {
+    constructor(private client                  : HttpClient,
+                private parent                  : Draftboard,
+                registry                        : Registry,
+                private dialogService           : DialogService,
+                private draftboardManager       : DraftboardManager,
+                actionSet                       : DefaultActionSet,
+                private actionManager           : ActionManager,
+                private eventAggregator         : EventAggregator,
+                private applicationState        : ApplicationState
+    ) {
         super(registry);
         this.menus = [];
         this.addMenu(new FileMenu(dialogService));
@@ -186,6 +191,10 @@ export class Applications extends AbstractGraph implements Listener,
         this.parent.set(this);
         this.draftboardManager
             .setFocusedDraftboard(new Draft(this.graph));
+    }
+
+    openElement(element:Element) : void {
+        this.elementEditor.open(this, element);
     }
 
 
@@ -251,12 +260,20 @@ export class Applications extends AbstractGraph implements Listener,
 
     }
 
+
     protected createBuilder(): Canvas {
         let canvas = new Canvas(
             this.container,
             this.registry,
             this.actionManager
         );
+        canvas.addListener(mxEvent.DOUBLE_CLICK, (canvas:Canvas, event:mxEventObject) => {
+            let e = event as any;
+            if(e.properties && e.properties.cell) {
+                this.openElement(e.properties.cell as any as Element);
+            }
+        });
+
         canvas.addListener(mxEvent.CLICK, (canvas:Canvas, event:mxEventObject) => {
             let e = event as any;
             if(e.properties && e.properties.cell) {
