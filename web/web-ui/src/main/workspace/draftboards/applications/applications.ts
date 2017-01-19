@@ -257,7 +257,19 @@ export class Applications extends AbstractGraph implements Listener,
             this.registry,
             this.actionManager
         );
-        canvas.getSelectionModel().addListener(mxEvent.CHANGE, this.fireElementsChanged);
+        canvas.addListener(mxEvent.CLICK, (canvas:Canvas, event:mxEventObject) => {
+            let e = event as any;
+            if(e.properties && e.properties.cell) {
+
+                this.eventAggregator.publish(CanvasEvents.CELL_SELECTION_CHANGED, {
+                    sender: this,
+                    name: CanvasEvents.CELL_SELECTION_CHANGED,
+                    cells: [c.properties.cell],
+                    canvas: this.graph
+                });
+
+            }
+        });
         return canvas;
     }
 

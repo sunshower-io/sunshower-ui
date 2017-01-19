@@ -51,11 +51,11 @@ export class WorkspaceView {
             .transition('fade in');
         $('.ui.dropdown')
             .dropdown();
+        Banner.close();
     }
 
     activate() : void {
         this.loading = false;
-        Banner.close();
     }
 
 

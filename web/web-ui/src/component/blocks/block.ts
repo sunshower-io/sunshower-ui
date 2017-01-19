@@ -20,17 +20,18 @@ export class BlockManager {
                 block.type = BlockType.Custom;
             }
             block.categories = ['All'];
-            if (i % 2 === 0 ) {
+            if (i % 2 === 0) {
                 block.categories.push('Analytics');
-            }
-            else {
+            } else {
                 block.categories.push('Web');
             }
-
             block.name = "Block" + i;
-
             this.add(block);
         }
+    }
+
+    get(id: string): BlockElement {
+        return this.blocks[id];
     }
 
     getCategories(): Category[] {

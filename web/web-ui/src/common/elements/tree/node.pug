@@ -18,7 +18,7 @@ template(bindable="node")
                         src="${child.icon}",
                         width="16px" height="16px"
                         )
-                    a(click.delegate="onClick(node)") ${child.name}
+                    a(click.delegate="onClick(child)") ${child.name}
                     i.r.hide.icon
                 ul(if.bind="child.hasChildren()" repeat.for="c of child.getChildren()")
                     node(node.bind="c")
