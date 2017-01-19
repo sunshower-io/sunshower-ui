@@ -11,7 +11,7 @@ export class InfrastructureManager {
     constructor() {
         this.elements = {};
         this.elementList = [];
-        this.register(new GatewayElement())
+        this.register(new GatewayElement());
         this.register(new EndpointElement());
         this.register(new LoadBalancerComponentElement());
     }

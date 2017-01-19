@@ -43,6 +43,7 @@ export abstract class CompositeElement extends AbstractElement {
         let pmember = element as any as PropertyNode;
         this.addSuccessor(pmember);
         pmember.addPredecessor(this);
+        element.setParent(this);
     }
 
     addElements(members: Element[]): void {
@@ -161,6 +162,7 @@ export class LayerElementFactory extends AbstractElementFactory<LayerElement> {
             canvas.getModel().beginUpdate();
             layer.geometry = this.getGeometry(canvas, roots);
             layer.addTo(canvas, canvas.getDefaultParent(), false);
+            canvas.groupCells(layer, 24, roots);
         } finally {
             canvas.getModel().endUpdate();
         }

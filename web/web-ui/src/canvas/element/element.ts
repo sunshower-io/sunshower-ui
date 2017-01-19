@@ -31,6 +31,8 @@ export interface Element extends SceneGraphElement, Renderable, Layer, Copyable<
 
     getPredecessors(): Element[];
 
+    setParent(element:Element) : void;
+
     addTo(canvas: Canvas,
           parent: Layer,
           relative: boolean);

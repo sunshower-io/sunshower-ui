@@ -11,23 +11,23 @@ export class BlockManager {
     constructor() {
         this.blocks = {};
         this.blockList = [];
-        for (let i = 0; i < 100; i++) {
-            let block = new BlockElement();
-            let num = Math.random();
-            if (num > 0.9) {
-                block.type = BlockType.Official;
-            } else {
-                block.type = BlockType.Custom;
-            }
-            block.categories = ['All'];
-            if (i % 2 === 0) {
-                block.categories.push('Analytics');
-            } else {
-                block.categories.push('Web');
-            }
-            block.name = "Block" + i;
-            this.add(block);
-        }
+        // for (let i = 0; i < 100; i++) {
+        //     let block = new BlockElement();
+        //     let num = Math.random();
+        //     if (num > 0.9) {
+        //         block.type = BlockType.Official;
+        //     } else {
+        //         block.type = BlockType.Custom;
+        //     }
+        //     block.categories = ['All'];
+        //     if (i % 2 === 0) {
+        //         block.categories.push('Analytics');
+        //     } else {
+        //         block.categories.push('Web');
+        //     }
+        //     block.name = "Block" + i;
+        //     this.add(block);
+        // }
     }
 
     get(id: string): BlockElement {

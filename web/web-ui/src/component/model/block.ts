@@ -68,6 +68,7 @@ export class BlockElementFactory extends AbstractElementFactory<BlockElement> {
             canvas.getModel().beginUpdate();
             layer.geometry = this.getGeometry(canvas, roots);
             layer.addTo(model.graph, canvas.getDefaultParent(), false);
+            canvas.groupCells(layer, 24, roots);
         } finally {
             canvas.getModel().endUpdate();
         }
