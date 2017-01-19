@@ -19,18 +19,22 @@ import {
 } from "utils/observer";
 
 
+import {Class} from "lang/class";
+import {Layer} from "mxgraph";
+import {mxGeometry} from "mxgraph";
 import {Kv} from 'utils/objects';
-import {EditorContext} from "canvas/core/canvas";
 import {RegistryAwareElement} from "canvas/element/registry-aware";
 import {InfrastructureNode} from "./infrastructure-node";
-import {mxGeometry} from "mxgraph";
-import {Layer} from "mxgraph";
+import {EditableElement} from "canvas/element/element";
+import {ApplicationDeploymentEditor} from "component/editors/deployment/editor";
 
 
 export class ApplicationDeployment extends
     RegistryAwareElement
-implements
-    Listener
+implements EditableElement<
+    ApplicationDeployment,
+    ApplicationDeploymentEditor
+>, Listener
 {
 
     icon: string;
@@ -38,6 +42,7 @@ implements
 
     applicationId           : string;
     applicationName         : string;
+    editor                  : Class<ApplicationDeploymentEditor> = ApplicationDeploymentEditor;
 
     constructor() {
         super();
