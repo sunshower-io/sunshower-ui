@@ -264,7 +264,7 @@ export class Applications extends AbstractGraph implements Listener,
                 this.eventAggregator.publish(CanvasEvents.CELL_SELECTION_CHANGED, {
                     sender: this,
                     name: CanvasEvents.CELL_SELECTION_CHANGED,
-                    cells: [c.properties.cell],
+                    cells: [e.properties.cell],
                     canvas: this.graph
                 });
 
