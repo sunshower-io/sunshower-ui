@@ -10,8 +10,6 @@ template
                     style="height:100%; padding-left:304px !important; margin-right:304px !important;"
                     items.bind="menus"
                 )
-                breadcrumb
-        .row
-            .column
+                breadcrumb(view-model.ref="breadcrumb")
     .workbench-container
         router-view

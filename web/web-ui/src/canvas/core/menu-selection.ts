@@ -44,6 +44,8 @@ export class MenuSelector extends mxRubberband {
     }
 
     mouseDown(sender: any, me: any): void {
+
+
         $('#' + this.id).remove();
         this.state = MenuSelector.down;
         super.mouseDown(sender, me);

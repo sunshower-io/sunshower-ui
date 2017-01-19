@@ -167,6 +167,10 @@ export class Canvas extends mxGraph {
         return new GraphHandler(this);
     }
 
+    isCellSelectable(cell:Layer) : boolean {
+        return true;
+    }
+
     getChildVertices(parent: Layer): Layer[] {
         if (parent.getAttribute('element')) {
             let successors = (parent as Element).getSuccessors();
@@ -276,6 +280,7 @@ export class Canvas extends mxGraph {
         }
         return super.convertValueToString(cell);
     }
+
 
 
     // cellsMoved(cells: mxCell[],

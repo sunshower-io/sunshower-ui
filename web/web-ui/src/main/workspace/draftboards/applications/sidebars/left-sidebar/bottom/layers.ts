@@ -68,9 +68,7 @@ export class Layers implements Listener {
     }
 
     private cellSelectionChanged = (e:CanvasEvent) => {
-        if(e.sender !== this) {
-            this.tree.focus(e.cells);
-        }
+        this.tree.focus(e.cells);
     };
 
 
