@@ -1,2 +1,39 @@
 template
-    img(src="${applicationDeployment.icon}", width="100px", height="100px")
+    //TODO hide sidenav and top navigator if not in the overlay
+    .overlay-sidenav
+        .overlay-header
+            .ui.small.image.overlay-header-image
+                img(src="${applicationDeployment.icon}")
+            span.overlay-header-label ${applicationDeployment.applicationName}
+            span.overlay-header-sublabel Version Goes Here
+        .overlay-segment
+            .segment-header Details
+            .segment-body
+                .item
+                    | Created
+                    | Date
+                .item
+                    | Updated
+                    | Date
+                .item
+                    | Blocks
+                    | Count
+        .overlay-segment
+            .segment-header Activity
+            .segment-body
+                //TODO
+    .overlay-body
+        .ui.secondary.pointing.menu
+            .item.active Summary
+            .item Stuff
+            .item Stuff2
+        .overlay-form
+            //h2 Form Header
+            .field
+                .label
+                    label This is a label!
+                .ui.input
+                    input(type="text")
+                .help
+                    i.icon.help.circle.outline.large
+

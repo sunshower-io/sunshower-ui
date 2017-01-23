@@ -3,14 +3,14 @@ template
         .four.wide.column
             .sidenav.overlay-sidenav
                 .overlay-header
-                    .ui.small.image
+                    .ui.small.overlay-header-image
                         img(src="assets/sui/themes/hasli/assets/images/icons/blocks-icon.svg",)
-                    span.label Block Library
+                    span.overlay-header-label Block Library
                     //This is NOT the block library, don't be fooled
                 .overlay-segment
                     .segment-header
                         | Type
-                    .ui.vertical.secondary.pointing.menu.type-menu
+                    .ui.vertical.secondary.pointing.menu.type-menu.segment-body
                         a.item(
                         repeat.for="t of blockManager.listTypes()",
                         click.delegate="filterTypes(t, $event)"

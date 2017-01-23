@@ -1,100 +1,160 @@
 @grey: #7D7C7C;
-@lightgrey: lighten(#D6D6D7, 5%);
+@standardgrey: #D6D6D7;
+@lightgrey: lighten(@standardgrey, 5%);
 @em: 16px;
 @primarycolor: #239AE8;
+@sidenavwidth: 25%;
 
-.overlay {
-  width:100%;
-  .overlay-sidenav {
-    margin-top:-20px;
-    width:25% !important;
-    .overlay-header {
-      .image {
-        width:100%;
-        margin-top:32px;
-        img {
-          margin: auto;
-          width: 80px;
-          height:80px;
-        }
-      }
-      .label {
-        display: inline-block;
-        font-weight: bold;
-        text-align: center;
-        width: 100%;
-        margin: 16px auto;
-      }
-    }
-    .overlay-segment {
-      border: 1px solid @lightgrey;
-      border-radius: 5px;
-      padding:@em;
-      margin:@em;
-      .segment-header {
-        color: @grey;
-        font-weight:bold;
-        border-bottom: 1px solid @lightgrey;
-        font-size:1.75rem;
-        padding-bottom:1rem;
-        line-height: normal;
-        height: auto;
-      }
-      .ui.secondary.vertical.pointing.menu {
-        width:100% !important;
-        float:none;
-        .item {
-          width: auto;
-          margin: 1rem 0 1rem -@em !important;
-          padding: 0 0 0 @em !important;
-          color: @grey;
-          border-left:2px solid white !important;
-          &.active {
-            color: @primarycolor;
-            border-left:2px solid @primarycolor !important;
-          }
-          &:after {
-            visibility: hidden;
-            display: block;
-            font-size: 0;
-            content: '';
-            clear: both;
-            height: 0;
-          }
-        }
-      }
-
-    }
-  }
-
-  .overlay-top-menu {
-    &> * {
-      display: inline-block;
-      margin-right:3rem;
-    }
-    * {
-      border-radius:0 !important;
-    }
-    .overlay-icons {
-      margin-right:0;
-      float:right;
-      i.icon {
-        color: @lightgrey;
-        margin:2px 3rem 0 0;
-      }
-    }
-  }
-
-  .overlay-body {
-    padding: 32px 64px;
-  }
-
-  .overlay-table {
-    overflow-y: auto;
-
-    .item img {
-      width:24px;
-      height: 24px;
-    }
+//for mixin purposes
+.clearfix {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: '';
+    clear: both;
+    height: 0;
   }
 }
+
+//TODO put this elsewhere because it relates to all overlays
+
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 38px;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.overlay-sidenav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  border-right: 1px solid @standardgrey;
+  width:@sidenavwidth !important;
+}
+
+.overlay-header {
+  text-align:center;
+}
+
+.overlay-header-image {
+  margin-top:32px;
+  img {
+    margin: auto;
+    width: 80px;
+    height:80px;
+  }
+}
+.overlay-header-label, .overlay-header-sublabel {
+  display: block;
+  margin: 16px auto;
+}
+.overlay-header-label {
+  font-weight: bold;
+}
+
+.overlay-segment {
+  border: 1px solid @lightgrey;
+  border-radius: 5px;
+  padding:@em;
+  margin:@em;
+  .segment-header {
+    color: @grey;
+    font-weight:bold;
+    border-bottom: 1px solid @lightgrey;
+    font-size:1.75rem;
+    padding-bottom:1rem;
+    line-height: normal;
+    height: auto;
+  }
+
+  .segment-body, .ui.secondary.vertical.pointing.menu {
+    width:100% !important;
+    float:none;
+    .item {
+      width: auto;
+      margin: 1rem 0 1rem -@em !important;
+      padding: 0 0 0 @em !important;
+      color: @grey;
+      border-left:2px solid transparent !important;
+      &.active {
+        color: @primarycolor;
+        border-left:2px solid @primarycolor !important;
+      }
+      .clearfix
+    }
+  }
+
+}
+
+.overlay-top-menu {
+  &> * {
+    display: inline-block;
+    margin-right:3rem;
+  }
+  * {
+    border-radius:0 !important;
+  }
+}
+
+.overlay-icons {
+  margin-right:0;
+  float:right;
+  i.icon {
+    color: @lightgrey;
+    margin:2px 3rem 0 0;
+  }
+}
+
+.overlay-body {
+  width: (100% - @sidenavwidth) !important;
+  margin-left: @sidenavwidth;
+  box-sizing:border-box;
+}
+
+.overlay-table {
+  overflow-y: auto;
+
+  .item img {
+    width:24px;
+    height: 24px;
+  }
+}
+
+.overlay-form {
+  .field {
+    &>* {
+      box-sizing:border-box;
+      float:left;
+    }
+    .label {
+      text-align:right;
+      padding-right:1em;
+      width:25%;
+    } //TODO make percentage
+    .input {
+      padding-right:1em;
+      width:65%;
+      input, select {
+        width:100%;
+      }
+    } //TODO make percentage
+    .help {
+      color: @grey;
+      width:10%;
+      i {
+        margin:auto;
+      }
+    } //TODO set width
+    .clearfix
+  }
+}
+
+.overlay .overlay-body { padding: 32px 64px; }
+.element-editor-body .overlay-body { padding:32px;}
