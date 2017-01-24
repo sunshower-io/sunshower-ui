@@ -21,13 +21,20 @@ export class SecurityGroupElement extends CompositeElement
             SecurityGroupEditor
         >
 {
-    editor: Class<SecurityGroupEditor> = SecurityGroupEditor;
+
 
     constructor() {
         super();
         this.icon = 'assets/sui/themes/hasli/assets/images/shield.svg';
     }
 
+    hasEditorOfRole(role: string): boolean {
+        return true;
+    }
+
+    getEditorOfRole(role: string): Class<SecurityGroupEditor> {
+        return SecurityGroupEditor;
+    }
 
     protected shallowCopy(): CompositeElement {
         let clone = new SecurityGroupElement();

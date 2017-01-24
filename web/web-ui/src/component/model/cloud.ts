@@ -3,7 +3,7 @@
 import {CompositeElement} from './layer';
 import {
     AbstractElementFactory,
-    Elements,
+    Elements, ElementEditor,
 } from "canvas/element/element";
 
 
@@ -17,20 +17,36 @@ import {
 } from "mxgraph";
 
 
-import {VirtualCloudEditor} from "component/editors/cloud/editor";
+import {
+    FullVirtualCloudEditor
+} from "component/editors/cloud/full";
+
 import {Class} from "lang/class";
 
 import {
     EditableElement,
 } from "canvas/element/element";
+import {BasicVirtualCloudEditor} from "component/editors/cloud/basic";
+
 
 export class VirtualCloud extends
     CompositeElement
     implements
-        EditableElement<VirtualCloud, VirtualCloudEditor>
+        EditableElement<VirtualCloud, ElementEditor<VirtualCloud>>
 {
 
-    editor: Class<VirtualCloudEditor> = VirtualCloudEditor;
+
+    static readonly editors: Map<string, ElementEditor<VirtualCloud>> = VirtualCloud.initialize();
+
+
+    static initialize():Map<string, ElementEditor<VirtualCloud>> {
+        let result = new Map<string, ElementEditor<VirtualCloud>>();
+        result['basic'] = BasicVirtualCloudEditor;
+        result['full'] =  FullVirtualCloudEditor;
+        return result;
+    }
+
+
 
     constructor() {
         super();
@@ -39,6 +55,14 @@ export class VirtualCloud extends
         this.name = 'VPC 0';
         this.icon = 'assets/sui/themes/hasli/assets/images/icons/provider/generic/cloud.svg';
         this.geometry = new mxGeometry(0, 0, 100, 100);
+    }
+
+    getEditorOfRole(role: string): Class<ElementEditor<VirtualCloud>> {
+        return VirtualCloud.editors[role];
+    }
+
+    hasEditorOfRole(role: string): boolean {
+        return VirtualCloud.editors[role];
     }
 
     protected shallowCopy(): CompositeElement {

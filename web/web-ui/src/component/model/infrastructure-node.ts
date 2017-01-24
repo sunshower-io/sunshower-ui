@@ -26,6 +26,7 @@ import {
     OperatingSystem,
     NodeConfiguration
 } from "model/hal/api";
+import {Class} from "../../lang/class";
 
 
 
@@ -37,7 +38,6 @@ export class InfrastructureNode extends
         > {
 
 
-    readonly editor = InfrastructureNodeEditor;
 
 
     static gridWidth = 128;
@@ -65,6 +65,14 @@ export class InfrastructureNode extends
         this.name = "Node " + InfrastructureNode.count++;
         this.set('element', '1', true);
         this.set('no-resize', '1', true);
+    }
+
+    hasEditorOfRole(role: string): boolean {
+        return true;
+    }
+
+    getEditorOfRole(role: string): Class<InfrastructureNodeEditor> {
+        return InfrastructureNodeEditor;
     }
 
     setGeometry(geo:mxGeometry) {

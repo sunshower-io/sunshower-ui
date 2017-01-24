@@ -70,10 +70,14 @@ export class ElementEditor {
     }
 
     private openElement(cell: Element) {
-        if(cell && (cell as any).editor) {
+        if(
+            cell &&
+            (cell as any).hasEditorOfRole &&
+            (cell as any).hasEditorOfRole('full')
+        ) {
             let editableCell = cell as any as EditableElement<any, any>;
             this.currentEditor = this.container
-                .invoke(editableCell.editor);
+                .invoke(editableCell.getEditorOfRole('full'));
             this.currentEditor.open(cell);
         }
     }

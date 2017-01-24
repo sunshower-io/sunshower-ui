@@ -29,20 +29,15 @@ import {EditableElement} from "canvas/element/element";
 import {ApplicationDeploymentEditor} from "component/editors/deployment/editor";
 
 
-export class ApplicationDeployment extends
-    RegistryAwareElement
-implements EditableElement<
+export class ApplicationDeployment extends RegistryAwareElement implements EditableElement<
     ApplicationDeployment,
     ApplicationDeploymentEditor
->, Listener
-{
-
+    >, Listener {
     icon: string;
     host: Canvas;
 
-    applicationId           : string;
-    applicationName         : string;
-    editor                  : Class<ApplicationDeploymentEditor> = ApplicationDeploymentEditor;
+    applicationId: string;
+    applicationName: string;
 
     constructor() {
         super();
@@ -51,8 +46,16 @@ implements EditableElement<
         this.setAttribute('no-extend-parent', '1');
     }
 
+    hasEditorOfRole(role: string): boolean {
+        return true;
+    }
 
-    copy() : ApplicationDeployment {
+    getEditorOfRole(role: string): Class<ApplicationDeploymentEditor> {
+        return ApplicationDeploymentEditor;
+    }
+
+
+    copy(): ApplicationDeployment {
         let copy = new ApplicationDeployment();
         copy.geometry = this.geometry.clone();
         // console.log("APPX", this.geometry.x, this.geometry.y);
@@ -62,7 +65,7 @@ implements EditableElement<
         return copy;
     }
 
-    addTo(canvas:Canvas, parent:Layer, relative:boolean) : Layer {
+    addTo(canvas: Canvas, parent: Layer, relative: boolean): Layer {
         super.addTo(canvas, parent, relative);
         this.load(parent as InfrastructureNode);
         return this;

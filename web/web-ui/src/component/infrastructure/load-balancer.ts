@@ -18,7 +18,6 @@ export class LoadBalancerComponentElement extends InfrastructureElement
         this.geometry = new mxGeometry();
         this.name = "Load Balancer";
         this.icon = 'assets/sui/themes/hasli/assets/images/icons/provider/generic/load-balancer.svg';
-        console.log("ICOn", this.icon);
     }
 
     copy() : LoadBalancerComponentElement {
@@ -28,4 +27,11 @@ export class LoadBalancerComponentElement extends InfrastructureElement
         return clone;
     }
 
+    hasEditorOfRole(role: string): boolean {
+        return true;
+    }
+
+    getEditorOfRole(role: string): Class<LoadBalancerComponentElementEditor> {
+        return LoadBalancerComponentElementEditor;
+    }
 }

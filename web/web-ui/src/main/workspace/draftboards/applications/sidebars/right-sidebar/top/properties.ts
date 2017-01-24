@@ -26,11 +26,12 @@ export class Properties {
 
     changeEditor = (e:CanvasEvent) => {
         if(e.sender !== this)  {
-            let cell = e.cells[0];
-            if(cell && (cell as any).editor) {
+            let cell = e.cells[0] as any,
+                isEditor = cell.hasEditorOfRole;
+            if(cell && isEditor && cell.hasEditorOfRole('basic')) {
                 let editableCell = cell as any as EditableElement<any, any>;
                 this.currentEditor = this.container
-                    .invoke(editableCell.editor);
+                    .invoke(editableCell.getEditorOfRole('basic'));
                 this.currentEditor.open(cell);
             }
         }

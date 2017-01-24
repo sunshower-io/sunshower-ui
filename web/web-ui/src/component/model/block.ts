@@ -1,12 +1,10 @@
-import {CompositeElement, LayerElement} from './layer';
+import {CompositeElement} from './layer';
 import {
     AbstractElementFactory,
-    Elements, BlockMember,
-    Element
+    Elements
 } from "canvas/element/element";
 
 
-import {Vertex} from "algorithms/graph/graph";
 import {
     mxGeometry,
 } from "mxgraph";

@@ -176,6 +176,8 @@ export class Elements {
             return null;
         }
     }
+
+
 }
 
 export abstract class AbstractElement extends mxCell implements Element, Vertex<Properties> {
@@ -253,7 +255,6 @@ export abstract class AbstractElement extends mxCell implements Element, Vertex<
             pnode.addPredecessor(this);
         }
     }
-
 
     private recomputeLocation(parent: Layer) {
 
@@ -569,7 +570,21 @@ export interface EditableElement<
     E extends Element,
     T extends ElementEditor<E>
     > {
-    editor: Class<T>;
+
+
+    /**
+     *
+     * @param role
+     */
+    hasEditorOfRole(role:string) : boolean;
+
+
+    /**
+     *
+     * @param role
+     */
+    getEditorOfRole(role:string) : Class<T>;
+
 }
 
 
