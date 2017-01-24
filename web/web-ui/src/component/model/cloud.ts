@@ -4,6 +4,7 @@ import {CompositeElement} from './layer';
 import {
     AbstractElementFactory,
     Elements, ElementEditor,
+    EditableElement
 } from "canvas/element/element";
 
 
@@ -23,9 +24,6 @@ import {
 
 import {Class} from "lang/class";
 
-import {
-    EditableElement,
-} from "canvas/element/element";
 import {BasicVirtualCloudEditor} from "component/editors/cloud/basic";
 
 

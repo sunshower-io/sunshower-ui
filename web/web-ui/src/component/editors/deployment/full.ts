@@ -1,7 +1,7 @@
 import {ElementEditor} from "canvas/element/element";
 import {ApplicationDeployment} from "component/model/deployment";
 
-export class ApplicationDeploymentEditor implements
+export class FullApplicationDeploymentEditor implements
     ElementEditor<ApplicationDeployment> {
     private applicationDeployment: ApplicationDeployment;
 

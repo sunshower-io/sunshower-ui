@@ -25,19 +25,30 @@ import {mxGeometry} from "mxgraph";
 import {Kv} from 'utils/objects';
 import {RegistryAwareElement} from "canvas/element/registry-aware";
 import {InfrastructureNode} from "./infrastructure-node";
-import {EditableElement} from "canvas/element/element";
-import {ApplicationDeploymentEditor} from "component/editors/deployment/editor";
+import {EditableElement, ElementEditor} from "canvas/element/element";
+import {FullApplicationDeploymentEditor} from "component/editors/deployment/full";
+import {BasicApplicationDeploymentEditor} from "component/editors/deployment/basic";
 
 
-export class ApplicationDeployment extends RegistryAwareElement implements EditableElement<
-    ApplicationDeployment,
-    ApplicationDeploymentEditor
+export class ApplicationDeployment extends
+    RegistryAwareElement
+    implements
+        EditableElement<ApplicationDeployment, ElementEditor<ApplicationDeployment>
     >, Listener {
     icon: string;
     host: Canvas;
 
     applicationId: string;
     applicationName: string;
+
+    static readonly editors: Map<string, ElementEditor<ApplicationDeployment>> = ApplicationDeployment.initialize();
+
+    static initialize():Map<string, ElementEditor<ApplicationDeployment>> {
+        let result = new Map<string, ElementEditor<ApplicationDeployment>>();
+        result['basic'] = BasicApplicationDeploymentEditor;
+        result['full'] =  FullApplicationDeploymentEditor;
+        return result;
+    }
 
     constructor() {
         super();
@@ -46,12 +57,12 @@ export class ApplicationDeployment extends RegistryAwareElement implements Edita
         this.setAttribute('no-extend-parent', '1');
     }
 
-    hasEditorOfRole(role: string): boolean {
-        return true;
+    getEditorOfRole(role: string): Class<ElementEditor<ApplicationDeployment>> {
+        return ApplicationDeployment.editors[role];
     }
 
-    getEditorOfRole(role: string): Class<ApplicationDeploymentEditor> {
-        return ApplicationDeploymentEditor;
+    hasEditorOfRole(role: string): boolean {
+        return ApplicationDeployment.editors[role];
     }
 
 

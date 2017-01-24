@@ -1,4 +1,5 @@
 template
+    require(from="./basic")
     //TODO hide sidenav and top navigator if not in the overlay
     .overlay-sidenav
         .overlay-header
@@ -28,14 +29,4 @@ template
             .item Stuff
             .item Stuff2
         .overlay-form
-            //h2 Form Header
-            .field.overlay-field
-                .overlay-label
-                    label This is a label!
-                .ui.input.overlay-input
-                    input(type="text")
-                .overlay-help
-                    i.icon.help.circle.outline.large
-
-
-
+            basic-application-deployment-editor
