@@ -1,0 +1,43 @@
+template
+    .field.overlay-field
+        .overlay-label
+            label Node Name
+        .ui.input.overlay-input
+            input(type="text" name="name" value.bind="node.name")
+        .overlay-help
+            i.icon.help.circle.outline.large
+    .field.overlay-field
+        .overlay-label
+            label Description
+        .ui.input.overlay-input
+            textarea(name="description", rows="2")
+        .overlay-help
+            i.icon.help.circle.outline.large
+    .field.overlay-field
+        .overlay-label
+            label Instance Count
+        .ui.input.overlay-input
+            input(type="number" name="instanceCount" min="0" step="1")
+        .overlay-help
+            i.icon.help.circle.outline.large
+    .field.overlay-field
+        .overlay-label
+            label CPU
+        .ui.input.overlay-input
+            input(type="number" name="cpu" min="0" step="1")
+        .overlay-help
+            i.icon.help.circle.outline.large
+    .field.overlay-field
+        .overlay-label
+            label Disk
+        .ui.input.overlay-input
+            input(type="text" name="disk")
+        .overlay-help
+            i.icon.help.circle.outline.large
+    .field.overlay-field
+        .overlay-label
+            label Memory
+        .ui.input.overlay-input
+            input(type="text" name="memory")
+        .overlay-help
+            i.icon.help.circle.outline.large

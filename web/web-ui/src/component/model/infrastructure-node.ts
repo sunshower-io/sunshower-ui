@@ -20,8 +20,9 @@ import {
 } from "canvas/menu/task-cell";
 
 import {RegistryAwareElement} from 'canvas/element/registry-aware';
-import {EditableElement} from "canvas/element/element";
-import {InfrastructureNodeEditor} from "component/editors/infrastructure-node/editor";
+import {EditableElement, ElementEditor} from "canvas/element/element";
+import {FullInfrastructureNodeEditor} from "component/editors/infrastructure-node/full";
+import {BasicInfrastructureNodeEditor} from "component/editors/infrastructure-node/basic";
 import {
     OperatingSystem,
     NodeConfiguration
@@ -34,7 +35,7 @@ export class InfrastructureNode extends
     RegistryAwareElement implements
     EditableElement<
         InfrastructureNode,
-        InfrastructureNodeEditor
+        ElementEditor<InfrastructureNode>
         > {
 
 
@@ -54,8 +55,14 @@ export class InfrastructureNode extends
     public configuration                :NodeConfiguration;
     public operatingSystem              :OperatingSystem;
 
+    static readonly editors: Map<string, ElementEditor<InfrastructureNode>> = InfrastructureNode.initialize();
 
-
+    static initialize():Map<string, ElementEditor<InfrastructureNode>> {
+        let result = new Map<string, ElementEditor<InfrastructureNode>>();
+        result['basic'] = BasicInfrastructureNodeEditor;
+        result['full'] =  FullInfrastructureNodeEditor;
+        return result;
+    }
 
     constructor() {
         super();
@@ -67,12 +74,12 @@ export class InfrastructureNode extends
         this.set('no-resize', '1', true);
     }
 
-    hasEditorOfRole(role: string): boolean {
-        return true;
+    getEditorOfRole(role: string): Class<ElementEditor<InfrastructureNode>> {
+        return InfrastructureNode.editors[role];
     }
 
-    getEditorOfRole(role: string): Class<InfrastructureNodeEditor> {
-        return InfrastructureNodeEditor;
+    hasEditorOfRole(role: string): boolean {
+        return InfrastructureNode.editors[role];
     }
 
     setGeometry(geo:mxGeometry) {

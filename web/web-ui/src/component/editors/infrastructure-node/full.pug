@@ -1,12 +1,17 @@
 template
     require(from="./basic")
-    //TODO hide sidenav and top navigator if not in the overlay
     .overlay-sidenav
         .overlay-header
-            .ui.small.image.overlay-header-image
-                img(src="${applicationDeployment.icon}")
-            span.overlay-header-label ${applicationDeployment.applicationName}
-            span.overlay-header-sublabel Version Goes Here
+            .ui.inline.dropdown(ref="list")
+                span.text.inlineimage.ui.small.image.overlay-header-image
+                    img.ui.mini.image(src="")
+                    | Select OS
+                    i.caret.down.icon
+                .menu
+                    .item(repeat.for="os of osService.list()" data-value="${os.id}")
+                        image.ui.image(src='${os.icon}')
+                        | ${os.name}
+                span.overlay-header-label ${node.name}
         .overlay-segment
             .segment-header Details
             .segment-body
@@ -29,4 +34,4 @@ template
             .item Stuff
             .item Stuff2
         .overlay-form.ui.form
-            basic-application-deployment-editor
+            basic-infrastructure-node-editor

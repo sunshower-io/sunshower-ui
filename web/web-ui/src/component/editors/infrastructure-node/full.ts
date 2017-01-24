@@ -12,7 +12,7 @@ import {
 
 
 @inject(OperatingSystemService)
-export class InfrastructureNodeEditor implements ElementEditor<InfrastructureNode> {
+export class FullInfrastructureNodeEditor implements ElementEditor<InfrastructureNode> {
 
 
     list:HTMLElement;
