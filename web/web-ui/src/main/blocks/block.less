@@ -41,6 +41,12 @@
 
 .overlay-header {
   text-align:center;
+  .inline.dropdown {
+    text-align:inherit !important;
+    img {
+      margin: 0 auto !important;
+    }
+  }
 }
 
 .overlay-header-image {
@@ -54,6 +60,7 @@
 .overlay-header-label, .overlay-header-sublabel {
   display: block;
   margin: 16px auto;
+  text-align:center;
 }
 .overlay-header-label {
   font-weight: bold;
@@ -93,7 +100,7 @@
 
 }
 
-.overlay-top-menu {
+.overlay-action-menu {
   &> * {
     display: inline-block;
     margin-right:3rem;
@@ -128,33 +135,37 @@
 }
 
 .overlay-form {
-  .field {
+  .overlay-field {
+    margin: @em 0;
     &>* {
       box-sizing:border-box;
       float:left;
     }
-    .label {
+    .overlay-label {
+      color: @grey;
       text-align:right;
       padding-right:1em;
       width:25%;
-    } //TODO make percentage
-    .input {
+      padding-top:@em/2;
+    }
+    .overlay-input {
       padding-right:1em;
-      width:65%;
-      input, select {
-        width:100%;
-      }
-    } //TODO make percentage
-    .help {
+      width:65% !important;
+    }
+    .overlay-help {
       color: @grey;
       width:10%;
       i {
         margin:auto;
       }
-    } //TODO set width
+    }
     .clearfix
   }
 }
 
-.overlay .overlay-body { padding: 32px 64px; }
-.element-editor-body .overlay-body { padding:32px;}
+.overlay .overlay-body {
+  padding: 32px 64px;
+}
+.element-editor-body .overlay-body {
+  padding:32px;
+}
