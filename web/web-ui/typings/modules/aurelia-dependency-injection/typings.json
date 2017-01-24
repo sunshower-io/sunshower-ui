@@ -4,6 +4,7 @@
     "src": "https://raw.githubusercontent.com/aurelia/dependency-injection/master/typings.json",
     "raw": "github:aurelia/dependency-injection",
     "main": "dist/aurelia-dependency-injection.d.ts",
-    "name": "aurelia-dependency-injection"
+    "name": "aurelia-dependency-injection",
+    "type": "typings"
   }
 }

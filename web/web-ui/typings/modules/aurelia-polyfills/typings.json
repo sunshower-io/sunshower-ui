@@ -4,6 +4,7 @@
     "src": "https://raw.githubusercontent.com/aurelia/polyfills/master/typings.json",
     "raw": "github:aurelia/polyfills",
     "main": "dist/aurelia-polyfills.d.ts",
-    "name": "aurelia-polyfills"
+    "name": "aurelia-polyfills",
+    "type": "typings"
   }
 }
