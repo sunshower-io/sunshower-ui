@@ -2,16 +2,9 @@ template
     require(from="./basic")
     .overlay-sidenav
         .overlay-header
-            .ui.inline.dropdown(ref="list")
-                span.text.inlineimage.ui.small.image.overlay-header-image
-                    img.ui.mini.image(src="")
-                    | Select OS
-                    i.caret.down.icon
-                .menu
-                    .item(repeat.for="os of osService.list()" data-value="${os.id}")
-                        image.ui.image(src='${os.icon}')
-                        | ${os.name}
-                span.overlay-header-label ${node.name}
+            .ui.small.image.overlay-header-image
+                img(src="${node && node.operatingSystem.icon ? node.operatingSystem.icon : node.icon}")
+            span.overlay-header-label ${node.name}
         .overlay-segment
             .segment-header Details
             .segment-body
@@ -33,5 +26,5 @@ template
             .item.active Summary
             .item Stuff
             .item Stuff2
-        .overlay-form.ui.form
-            basic-infrastructure-node-editor
+        .overlay-form
+            basic-infrastructure-node-editor(mode.bind="editorMode", node.bind="node")

@@ -561,8 +561,15 @@ export abstract class AbstractElementFactory<E extends Element> implements Eleme
                     registry: Registry): E;
 }
 
+export interface EditorMode {
+    name            ?: string;
+    viewState       ?: string;
+
+}
 
 export interface ElementEditor<E extends Element> {
+    mode ?: EditorMode;
+
     open(e: E): void;
 }
 
@@ -586,5 +593,4 @@ export interface EditableElement<
     getEditorOfRole(role:string) : Class<T>;
 
 }
-
 

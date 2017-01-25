@@ -1,4 +1,4 @@
-import {Element} from 'canvas/element/element';
+import {Element, EditorMode} from 'canvas/element/element';
 import {inject} from 'aurelia-framework';
 
 import {EventAggregator} from 'aurelia-event-aggregator';
@@ -18,6 +18,11 @@ import ApplicationState from 'storage/application-state';
 
 @inject(EventAggregator, ApplicationState, Container)
 export class Properties {
+
+    readonly editorMode : EditorMode = {
+        viewState: 'basic'
+    };
+
 
     activeElement: Element;
 
