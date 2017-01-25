@@ -3,8 +3,8 @@ template
     .overlay-sidenav
         .overlay-header
             .ui.small.image.overlay-header-image
-                img(src="${cloud.icon}")
-            span.overlay-header-label ${cloud.name}
+                img(src="${secGroup.icon}")
+            span.overlay-header-label ${secGroup.name}
         .overlay-segment
             .segment-header Details
             .segment-body
@@ -23,5 +23,4 @@ template
                 //TODO
     .overlay-body
         .overlay-form
-            basic-virtual-cloud-editor
-
+            basic-security-group-editor

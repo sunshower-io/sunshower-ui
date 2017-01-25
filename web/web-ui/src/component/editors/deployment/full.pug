@@ -1,12 +1,11 @@
 template
     require(from="./basic")
-    //TODO hide sidenav and top navigator if not in the overlay
     .overlay-sidenav
         .overlay-header
             .ui.small.image.overlay-header-image
                 img(src="${applicationDeployment.icon}")
             span.overlay-header-label ${applicationDeployment.applicationName}
-            span.overlay-header-sublabel Version Goes Here
+            //span.overlay-header-sublabel Version Goes Here
         .overlay-segment
             .segment-header Details
             .segment-body
@@ -28,5 +27,5 @@ template
             .item.active Summary
             .item Stuff
             .item Stuff2
-        .overlay-form.ui.form
+        .overlay-form
             basic-application-deployment-editor
