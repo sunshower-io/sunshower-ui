@@ -32,6 +32,8 @@
   }
 }
 
+
+
 img.transparent {
   opacity: 0;
 }

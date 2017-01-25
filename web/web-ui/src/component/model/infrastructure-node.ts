@@ -152,7 +152,6 @@ export class InfrastructureNode extends
 
     public addApplication(application: ApplicationDeployment): void {
         this.applications.push(application);
-        application.addPredecessor(this);
         this.addSuccessor(application);
         try {
             this.host.model.beginUpdate();

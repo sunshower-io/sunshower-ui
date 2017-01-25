@@ -3,9 +3,11 @@
  */
 import {UUID} from 'utils/uuid';
 import {Canvas} from 'canvas/core/canvas'
-import {Element} from 'canvas/element/element';
+import {Element, Properties} from 'canvas/element/element';
 import {DefaultEventDispatcher, ObservedEvent} from "utils/observer";
-export class Draftboard {
+import {Graph} from "algorithms/graph/graph";
+
+export class Draftboard extends Graph<Properties> {
 
     id                      : UUID;
     name                    : string;
@@ -16,6 +18,7 @@ export class Draftboard {
 
 
     constructor(public readonly builder:Canvas) {
+        super();
         this.id = UUID.randomUUID();
     }
 
@@ -52,6 +55,7 @@ export class Draftboard {
     }
 
     addElement(element:Element) : void {
+        super.add(element);
         if(!this.rootElements) {
             this.rootElements = {};
         }

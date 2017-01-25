@@ -8,9 +8,9 @@ type Relationship = Symbol | string | number;
 
 export interface Edge<T> {
 
-    source          :Node<T>;
-    target          :Node<T>;
-    relationship    :Relationship;
+    source: Vertex<T>;
+    target: Vertex<T>;
+    relationship: Relationship;
 
 }
 
@@ -21,34 +21,32 @@ export interface Vertex<T> {
 
     id: string;
 
-    adjacencies: {[key:string]: Edge<T>};
+    adjacencies: {[key: string]: Edge<T>};
 
     addEdge(edge: Edge<T>): boolean;
 
     removeEdge(edge: Edge<T>): boolean;
 
-    removeSuccessor(successor:Node<T>) : boolean;
+    removeSuccessor(successor: Vertex<T>): boolean;
 
-    addSuccessor(successor:Node<T>) : boolean;
+    addSuccessor(successor: Vertex<T>): boolean;
 
-    addPredecessor(successor: Node<T>) : boolean;
+    addPredecessor(successor: Vertex<T>): boolean;
 
-    removePredecessor(predecessor: Node<T>) : boolean;
+    removePredecessor(predecessor: Vertex<T>): boolean;
 
-    getAdjacencies(relationship:Relationship) : Node<T>[];
+    getAdjacencies(relationship: Relationship): Vertex<T>[];
 
 
-    createEdge(
-        source: Node<T>,
-        target: Node<T>,
-        relationship?: Relationship
-    ) : Edge<T>;
+    createEdge(source: Vertex<T>,
+               target: Vertex<T>,
+               relationship?: Relationship): Edge<T>;
 
 }
 
 export class DefaultEdge<T> implements Edge<T> {
-    source: Node<T>;
-    target: Node<T>;
+    source: Vertex<T>;
+    target: Vertex<T>;
     relationship: Relationship;
 
 }
@@ -60,32 +58,30 @@ export class Node<T> implements Vertex<T> {
         this.adjacencies = {};
     }
 
-    addPredecessor(successor: Node<T>) : boolean {
+    addPredecessor(successor: Vertex<T>): boolean {
         return false;
 
     }
 
-    removePredecessor(predecessor: Node<T>) : boolean {
+    removePredecessor(predecessor: Vertex<T>): boolean {
         return false;
 
     }
 
-    createEdge(
-        source: Node<T>,
-        target: Node<T>
-    ) : Edge<T> {
-            let edge = new DefaultEdge<T>();
-            edge.source = this;
-            edge.target = this;
-            return edge;
+    createEdge(source: Vertex<T>,
+               target: Vertex<T>): Edge<T> {
+        let edge = new DefaultEdge<T>();
+        edge.source = this;
+        edge.target = this;
+        return edge;
     }
 
-    getAdjacencies(relationship:Relationship) : Node<T>[] {
-            return [];
+    getAdjacencies(relationship: Relationship): Node<T>[] {
+        return [];
     }
 
-    addSuccessor(successor: Node<T>): boolean {
-        if(this.adjacencies[successor.id]) {
+    addSuccessor(successor: Vertex<T>): boolean {
+        if (this.adjacencies[successor.id]) {
             return false;
         }
         this.adjacencies[successor.id] = this.createEdge(this, successor);
@@ -99,7 +95,7 @@ export class Node<T> implements Vertex<T> {
         return true;
     }
 
-    removeSuccessor(successor:Node<T>) : boolean {
+    removeSuccessor(successor: Node<T>): boolean {
         let t = this.adjacencies[successor.id];
         if (t) {
             delete this.adjacencies[successor.id];
@@ -122,9 +118,38 @@ export class Node<T> implements Vertex<T> {
     }
 }
 
+export function copy<T>(g: Graph<T>,
+                        into: Graph<T>,
+                        over: (node: Vertex<T>) => Vertex<T>): Graph<T> {
+    let marked = {};
+    for (let n in g.nodes) {
+        let node = g.nodes[n];
+        copyNode(node, marked, into, over)
+    }
+    return into;
+}
+
+function copyNode<T>(node: Vertex<T>,
+                     marked: {},
+                     into: Graph<T>,
+                     over: (node: Vertex<T>) => Vertex<T>
+): void {
+    if(!marked[node.id]) {
+        marked[node.id] = true;
+        for(let akey in node.adjacencies) {
+            let adjacency = node.adjacencies[akey];
+            into.connect(
+                over(node),
+                over(adjacency.target),
+                adjacency.relationship
+            );
+        }
+    }
+}
+
 export abstract class Graph<T> {
 
-    public nodes: {[key: string]: Node<T>};
+    public nodes: {[key: string]: Vertex<T>};
 
     add(node: Node<T>): boolean {
         this.check();
@@ -132,17 +157,15 @@ export abstract class Graph<T> {
         return true;
     }
 
-    remove(id: string): Node<T> {
+    remove(id: string): Vertex<T> {
         let result = this.nodes[id];
         delete this.nodes[id];
         return result;
     }
 
-    createEdge(
-        source: Node<T>,
-        target: Node<T>,
-        relationship:Relationship
-    ) : Edge<T> {
+    createEdge(source: Vertex<T>,
+               target: Vertex<T>,
+               relationship: Relationship): Edge<T> {
         let edge = new DefaultEdge<T>();
         edge.source = source;
         edge.target = target;
@@ -150,15 +173,21 @@ export abstract class Graph<T> {
         return edge;
     }
 
-    disconnect(s: Node<T>, t: Node<T>): boolean {
+    disconnect(s: Vertex<T>, t: Vertex<T>): boolean {
         this.check();
         let source = this.nodes[s.id] || s,
             target = this.nodes[t.id] || t;
         return source.removeSuccessor(target);
     }
 
-    connect(s: Node<T>,
-            t: Node<T>,
+    connectAll(s: Vertex<T>, targets: Vertex<T>[], relationship?: Relationship): void {
+        for (let t of targets) {
+            this.connect(s, t, relationship);
+        }
+    }
+
+    connect(s: Vertex<T>,
+            t: Vertex<T>,
             relationship?: Relationship): boolean {
         this.check();
         let source = this.nodes[s.id] || s,
@@ -170,11 +199,11 @@ export abstract class Graph<T> {
         return source.addEdge(edge);
     }
 
-    get(id: string): Node<T> {
+    get(id: string): Vertex<T> {
         return this.nodes[id];
     }
 
-    getNodes(): Node<T>[] {
+    getNodes(): Vertex<T>[] {
         let result = [];
         for (let k in this.nodes) {
             result.push(this.nodes[k]);
@@ -183,7 +212,7 @@ export abstract class Graph<T> {
     }
 
 
-    neighbors(source: Node<T>): Node<T>[] {
+    neighbors(source: Vertex<T>): Vertex<T>[] {
         let s = this.nodes[source.id];
         if (s) {
             let neighbors = s.adjacencies,
