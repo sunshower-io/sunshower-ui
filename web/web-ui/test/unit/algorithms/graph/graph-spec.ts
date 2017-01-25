@@ -92,13 +92,40 @@ describe("tarjan's algorithm", () => {
         graph = new Graph<string>();
     });
 
-    it('should compute the task dependencies of a graph', () => {
+    it('should compute the task dependencies of a simple graph', () => {
+        graph.connect(s('b'), s('a'));
+        graph.connect(s('c'), s('a'));
+        graph.connect(s('d'), s('b'));
+        graph.connect(s('f'), s('e'));
+        let ps = new ParallelSchedule(),
+            seqs = ps.run(graph);
+
+        expect(seqs.length).toBe(3);
+
+        expect(seqs[0].elements.map(e => e.id)).toEqual(['a', 'e']);
+        expect(seqs[1].elements.map(e => e.id)).toEqual(['b', 'c', 'f']);
+        expect(seqs[2].elements.map(e => e.id)).toEqual(['d']);
+
+    });
+
+    it('should compute the task dependencies of a complex graph', () => {
         let g = buildGraph(graph),
             ps = new ParallelSchedule(),
             seqs = ps.run(g);
-        for(let seq of seqs) {
-            console.log("SEQ", seq.elements.map(d => d.id));
-        }
+        expect(seqs.length).toBe(4);
+
+        expect(seqs[0].elements.map(e => e.id))
+            .toEqual(['std', 'synopsys', 'ieee']);
+
+        expect(seqs[1].elements.map(e => e.id))
+            .toEqual(['std_cell_lib', 'ramlib', 'dware', 'gtech']);
+
+        expect(seqs[2].elements.map(e => e.id))
+            .toEqual(['dw02', 'dw01', 'dw05', 'dw06', 'dw07']);
+
+        expect(seqs[3].elements.map(e => e.id))
+            .toEqual(['des_system_lib', 'dw03', 'dw04']);
+
     });
 
     it('should compute the level sets of the dependencies', () => {
@@ -114,8 +141,6 @@ describe("tarjan's algorithm", () => {
         ordered = ps.roots(clone.nodes, existing);
         ordered1 = ordered.map(n => n.id);
         expect(ordered1).toEqual([ 'std_cell_lib', 'ramlib', 'dware', 'gtech' ])
-
-
     });
 
 
