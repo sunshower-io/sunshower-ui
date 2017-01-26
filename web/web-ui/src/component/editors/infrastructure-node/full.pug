@@ -24,7 +24,6 @@ template
             .segment-body
                 //TODO
     .overlay-body
-        div ${activeComponentPath}
         .ui.secondary.pointing.menu.overlay-body-tab-menu
             a.item(
                 class="${component.active ? 'active' : ''}"
@@ -34,6 +33,6 @@ template
         .overlay-form
             compose(
                 model.bind="editorMode" node.bind="node"
-                view-model="./${activeComponent.path || 'basic'}"
+                view-model="./${activeComponentPath || 'basic'}"
                 )
             //basic-infrastructure-node-editor(mode.bind="editorMode", node.bind="node")

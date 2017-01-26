@@ -39,6 +39,7 @@ export class FullVirtualCloudEditor implements ElementEditor<VirtualCloud> {
         }
         this.activeComponent = active;
         this.activeComponent.active = true;
+        this.activeComponentPath = active.path;
     }
 
     open(e: VirtualCloud): void {
