@@ -7,10 +7,8 @@ import {inject} from 'aurelia-framework';
 
 import 'canvg/rgbcolor';
 import 'canvg/StackBlur';
-import * as canvg from 'canvg/canvg';
 import {
     ImageExporter,
-    ExportResult
 } from 'utils/diagram/image-export';
 
 @inject(DraftboardManager)
@@ -26,8 +24,6 @@ export class SaveDialog {
 
     activate(): void {
         setTimeout(() => {
-            let c = canvg as any;
-
             let exportResult = new ImageExporter(this.current.builder).render(),
                 bounds = this.current.builder.getHostContainerBounds(),
                 i = exportResult.element,

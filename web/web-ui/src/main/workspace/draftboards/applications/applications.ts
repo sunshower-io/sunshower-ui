@@ -86,6 +86,7 @@ import {Element} from 'canvas/element/element';
 
 
 import ApplicationState from 'storage/application-state';
+import ViewExecutionOrderMenuItem from "./menus/execution-order";
 
 @inject(
     HttpClient,
@@ -149,6 +150,7 @@ export class Applications extends AbstractGraph implements Listener,
         this.addMenu(new ViewMenu());
         this.addMenu(new ZoomOut());
         this.addMenu(new ZoomIn());
+        this.addMenu(new ViewExecutionOrderMenuItem(dialogService));
         this.addMenu(new Maximize());
         this.addMenu(new SearchMenu());
         this.addMenu(new ToggleLeft());

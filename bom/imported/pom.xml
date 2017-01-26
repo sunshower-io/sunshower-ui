@@ -35,10 +35,10 @@
         <snapshot-version>1.00.000.000-SNAPSHOT</snapshot-version>
         <spring.version>4.3.3.RELEASE</spring.version>
         <javaee-spec.version>1.0.3.Final</javaee-spec.version>
-        <junit.jupiter.version>5.0.0-M2</junit.jupiter.version>
-        <junit.vintage.version>4.12.0-M2</junit.vintage.version>
+        <junit.jupiter.version>5.0.0-M3</junit.jupiter.version>
+        <junit.vintage.version>4.12.0-M3</junit.vintage.version>
         <arquillian.version>1.1.11.Final</arquillian.version>
-        <junit.platform.version>1.0.0-M2</junit.platform.version>
+        <junit.platform.version>1.0.0-M3</junit.platform.version>
         <arquillian-weld.version>1.0.0.CR9</arquillian-weld.version>
         <projectreactor.version>2.0.8.RELEASE</projectreactor.version>
         <moxy.version>2.7.0-SNAPSHOT</moxy.version>
@@ -58,16 +58,21 @@
         <aws-sdk.version>1.11.51</aws-sdk.version>
         <lucene.version>6.2.1</lucene.version>
         <elastic-search.version>5.0.0</elastic-search.version>
+
+
         <hasli-test.version>1.0.20.Final</hasli-test.version>
-        <hasli-search.version>1.0.24.Final</hasli-search.version>
-        <!--<hasli-hal.version>${snapshot-version}</hasli-hal.version>-->
-        <hasli-hal.version>1.0.51.Final</hasli-hal.version>
-        <hasli-hfs.version>1.0.20.Final</hasli-hfs.version>
-        <!--<hasli-hfs.version>${snapshot-version}</hasli-hfs.version>-->
-        <!--<hasli-api.version>${snapshot-version}</hasli-api.version>-->
-        <hasli-api.version>1.0.33.Final</hasli-api.version>
-        <hasli-service.version>1.0.31.Final</hasli-service.version>
-        <!--<hasli-service.version>${snapshot-version}</hasli-service.version>-->
+        <!--<hasli-hal.version>1.0.51.Final</hasli-hal.version>-->
+        <!--<hasli-hfs.version>1.0.20.Final</hasli-hfs.version>-->
+        <!--<hasli-api.version>1.0.33.Final</hasli-api.version>-->
+        <!--<hasli-service.version>1.0.31.Final</hasli-service.version>-->
+        <!--<hasli-search.version>1.0.24.Final</hasli-search.version>-->
+
+        <hasli-hal.version>${snapshot-version}</hasli-hal.version>
+        <hasli-api.version>${snapshot-version}</hasli-api.version>
+        <hasli-hfs.version>${snapshot-version}</hasli-hfs.version>
+        <hasli-search.version>${snapshot-version}</hasli-search.version>
+        <hasli-service.version>${snapshot-version}</hasli-service.version>
+
     </properties>
 
     <dependencyManagement>

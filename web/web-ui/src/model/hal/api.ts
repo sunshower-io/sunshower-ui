@@ -20,15 +20,17 @@ export class OperatingSystem implements Copyable<OperatingSystem> {
         );
     }
 }
-
+export class InstanceDescriptor {
+    name            :string;
+    description     :string;
+}
 
 export class NodeConfiguration implements Copyable<NodeConfiguration> {
 
-    public memoryProfile: MemoryProfile;
-
-    public storageProfile: StorageProfile;
-
-    public computeProfile: ComputeProfile;
+    public instanceCount            : number;
+    public memoryProfile            : MemoryProfile;
+    public storageProfile           : StorageProfile;
+    public computeProfile           : ComputeProfile;
 
     constructor() {
         this.memoryProfile = new MemoryProfile();

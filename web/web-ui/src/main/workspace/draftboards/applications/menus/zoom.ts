@@ -6,7 +6,6 @@ export class ZoomIn extends AbstractMenuItem implements MenuItem {
     name: string;
     menus: MenuItem[];
     apply(editor: EditorContext): void {
-        console.log("IN");
         editor.graph.zoomIn();
     }
 }
@@ -18,7 +17,6 @@ export class ZoomOut extends AbstractMenuItem implements MenuItem {
     menus: MenuItem[];
 
     apply(editor: EditorContext): void {
-        console.log("out");
         editor.graph.zoomOut();
     }
 }

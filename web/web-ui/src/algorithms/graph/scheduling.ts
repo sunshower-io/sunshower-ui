@@ -18,7 +18,7 @@ export class CGraph<T> extends Graph<T> {
 
 export class ParallelSchedule<T> implements Traversal<Sequence<T>[], T> {
 
-    copyF = (e: Vertex<T>) => new Node<T>(e.id, e.data);
+    copyF = (e: Vertex<T>) => new Node<T>(e.id, e as any as T);
 
     run(g: Graph<T>): Sequence<T>[] {
         let graph = this.pluck(copy(
