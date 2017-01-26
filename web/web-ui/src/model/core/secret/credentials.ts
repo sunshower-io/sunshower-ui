@@ -1,4 +1,4 @@
-import {User} from "../security/user";
+import {User} from "model/core/security/user";
 
 export class Secrets {
     static Credential =

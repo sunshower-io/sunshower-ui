@@ -1,6 +1,6 @@
 
 export interface Marshaller<T> {
-    write(data:T) : Map<string, any>;
+    write(data:T) : {};
 }
 
 export interface Unmarshaller<T> {

@@ -252,7 +252,6 @@ export abstract class AbstractElement extends mxCell implements Element, Vertex<
         if (e) {
             let pnode = e as any as PropertyNode;
             this.addSuccessor(pnode);
-            pnode.addPredecessor(this);
         }
     }
 

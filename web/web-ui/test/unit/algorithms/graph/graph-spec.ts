@@ -99,13 +99,10 @@ describe("tarjan's algorithm", () => {
         graph.connect(s('f'), s('e'));
         let ps = new ParallelSchedule(),
             seqs = ps.run(graph);
-
         expect(seqs.length).toBe(3);
-
         expect(seqs[0].elements.map(e => e.id)).toEqual(['a', 'e']);
         expect(seqs[1].elements.map(e => e.id)).toEqual(['b', 'c', 'f']);
         expect(seqs[2].elements.map(e => e.id)).toEqual(['d']);
-
     });
 
     it('should compute the task dependencies of a complex graph', () => {

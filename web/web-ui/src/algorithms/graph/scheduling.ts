@@ -108,8 +108,7 @@ export class TopologicalSort<T> implements Traversal<Vertex<T>[], T> {
         if (size > 0) {
             let marked = {},
                 stack = [],
-                nodes = g.nodes,
-                first = nodes[keys[0]];
+                nodes = g.nodes;
             for (let k in nodes) {
                 this.traverse(marked, stack, nodes[k]);
             }

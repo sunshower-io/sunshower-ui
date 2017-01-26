@@ -15,6 +15,7 @@ import {Relationship} from "canvas/element/element";
 import {ActionManager} from "canvas/actions/action-service";
 import {ApplicationDeployment} from "component/model/deployment";
 import {InfrastructureNode} from "component/model/infrastructure-node";
+import {ParallelSchedule} from "algorithms/graph/scheduling";
 
 describe('a draftboard marshaller', () => {
 
@@ -43,14 +44,58 @@ describe('a draftboard marshaller', () => {
 
     it('should serialize a single application and node correctly', () => {
         let application = new ApplicationDeployment(),
-            host = new InfrastructureNode();
+            host = new InfrastructureNode(),
+            ps = new ParallelSchedule();
         host.addTo(canvas, null, true);
 
         host.addElement(application);
-        draftboard.addElement(host);
-        draftboard.connect(host, application, Relationship.SUCCESSOR);
-        let result = marshaller.write(draftboard),
-            root = result.get('graph');
+        draftboard.connect(application, host);
+        let seqs = ps.run(draftboard);
+        expect(seqs.length).toBe(2);
+        expect(seqs[0].elements[0].id).toBe(host.id);
+    });
+
+    it('should compute the execution order of a node with multiple applications correctly', () => {
+        let application = new ApplicationDeployment(),
+            app2 = new ApplicationDeployment(),
+            app3 = new ApplicationDeployment(),
+            host = new InfrastructureNode(),
+            ps = new ParallelSchedule();
+        host.addTo(canvas, null, true);
+
+        host.addElement(application);
+        host.addElement(app2);
+        host.addElement(app3);
+
+        draftboard.connect(application, host);
+        draftboard.connect(app2, host);
+        draftboard.connect(app3, host);
+        let seqs = ps.run(draftboard);
+        expect(seqs.length).toBe(2);
+        expect(seqs[0].elements[0].id).toBe(host.id);
+        expect(seqs[1].elements.length).toBe(3);
+
+    });
+
+    it('should serialize a node with multiple applications correctly', () => {
+        let application = new ApplicationDeployment(),
+            app2 = new ApplicationDeployment(),
+            app3 = new ApplicationDeployment(),
+            host = new InfrastructureNode(),
+            ps = new ParallelSchedule(),
+            marshaller = new DraftboardMarshaller();
+        host.addTo(canvas, null, true);
+
+        host.addElement(application);
+        host.addElement(app2);
+        host.addElement(app3);
+
+        draftboard.connect(application, host);
+        draftboard.connect(app2, host);
+        draftboard.connect(app3, host);
+
+        let dboard = marshaller.write(draftboard);
+        console.log(JSON.stringify(dboard));
     });
 
 });
