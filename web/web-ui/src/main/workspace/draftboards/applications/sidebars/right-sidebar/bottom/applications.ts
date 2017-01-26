@@ -54,12 +54,12 @@ export class Applications {
     private createDragElement(descriptor: ImageDescriptor): HTMLElement {
         let element = document.createElement('div'),
             icon = descriptor.logo_url && descriptor.logo_url.large;
-        //element.style.border = 'dashed black 1px';
-        //element.style.width = '100px';
-        //element.style.height = '100px';
-        element.style.width = '195px';
-        element.style.height = '215px';
-        element.style.backgroundImage = './assets/node_bg.png';
+        element.style.border = 'dashed black 1px';
+        element.style.width = '100px';
+        element.style.height = '100px';
+        //element.style.width = '195px';
+        //element.style.height = '215px';
+        //element.style.backgroundImage = './assets/node_bg.png';
         let img = $(`<img src="${this.getIconUrl(icon)}" 
                         width="100px" 
                         height="100px" />
