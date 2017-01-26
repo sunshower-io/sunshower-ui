@@ -134,6 +134,30 @@
   }
 }
 
+.overlay-field {
+  .clearfix
+}
+
+
+.property--menu {
+  .ui.form {padding:1em;}
+  .overlay-field {
+    .overlay-input {
+      padding-right: 1em;
+      width: 90% !important;
+      float: left;
+    }
+    .overlay-help {
+      color: @grey;
+      width: 10%;
+      float: left;
+      i {
+        margin: auto;
+      }
+    }
+  }
+}
+
 .overlay-form {
   .overlay-field {
     margin: @em 0;
@@ -149,19 +173,11 @@
       padding-top:@em/2;
     }
     .overlay-input {
-      padding-right:1em;
       width:65% !important;
     }
-    .overlay-help {
-      color: @grey;
-      width:10%;
-      i {
-        margin:auto;
-      }
-    }
-    .clearfix
   }
 }
+
 
 .overlay .overlay-body {
   padding: 32px 64px;

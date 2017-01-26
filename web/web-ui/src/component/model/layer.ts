@@ -2,7 +2,7 @@ import {
     Element,
     Elements,
     AbstractElement,
-    AbstractElementFactory,
+    AbstractElementFactory
 } from "canvas/element/element";
 
 

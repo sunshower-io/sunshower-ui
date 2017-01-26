@@ -2,7 +2,7 @@
 import {CompositeElement} from './layer';
 import {
     AbstractElementFactory,
-    Elements, EditableElement,
+    Elements, EditableElement, ElementEditor
 } from "canvas/element/element";
 
 
@@ -12,15 +12,26 @@ import {
 import {EditorContext} from "canvas/core/canvas";
 
 import {Registry} from "utils/registry";
-import {SecurityGroupEditor} from "component/editors/security-group/security-group";
+import {FullSecurityGroupEditor} from "component/editors/security-group/full";
+import {BasicSecurityGroupEditor} from "component/editors/security-group/basic";
 import {Class} from "lang/class";
 export class SecurityGroupElement extends CompositeElement
     implements
         EditableElement<
             SecurityGroupElement,
-            SecurityGroupEditor
+            ElementEditor<SecurityGroupElement>
         >
 {
+
+    static readonly editors: Map<string, ElementEditor<SecurityGroupElement>> = SecurityGroupElement.initialize();
+
+
+    static initialize():Map<string, ElementEditor<SecurityGroupElement>> {
+        let result = new Map<string, ElementEditor<SecurityGroupElement>>();
+        result['basic'] = BasicSecurityGroupEditor;
+        result['full'] =  FullSecurityGroupEditor;
+        return result;
+    }
 
 
     constructor() {
@@ -28,12 +39,12 @@ export class SecurityGroupElement extends CompositeElement
         this.icon = 'assets/sui/themes/hasli/assets/images/shield.svg';
     }
 
-    hasEditorOfRole(role: string): boolean {
-        return true;
+    getEditorOfRole(role: string): Class<ElementEditor<SecurityGroupElement>> {
+        return SecurityGroupElement.editors[role];
     }
 
-    getEditorOfRole(role: string): Class<SecurityGroupEditor> {
-        return SecurityGroupEditor;
+    hasEditorOfRole(role: string): boolean {
+        return SecurityGroupElement.editors[role];
     }
 
     protected shallowCopy(): CompositeElement {

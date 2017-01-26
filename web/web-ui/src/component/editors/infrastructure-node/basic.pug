@@ -1,6 +1,5 @@
 template
     .ui.form
-        //TODO OS selection
         .ui.inline.dropdown(if.bind="mode.viewState === 'basic'", ref="list")
             span.text.inlineimage
                 img.ui.mini.image(src="")
@@ -10,7 +9,6 @@ template
                 .item(repeat.for="os of osService.list()" data-value="${os.id}")
                     image.ui.image(src='${os.icon}')
                     | ${os.name}
-
         .field.overlay-field
             .overlay-label
                 label Node Name
