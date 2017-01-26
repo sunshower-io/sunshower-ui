@@ -2,8 +2,7 @@ import {
     Element,
     Elements,
     AbstractElement,
-    AbstractElementFactory,
-    EditableElement, ElementEditor
+    AbstractElementFactory
 } from "canvas/element/element";
 
 
@@ -18,10 +17,6 @@ import {Kv} from "utils/objects";
 import {Copyable} from "lang/class";
 import {Registry} from "utils/registry";
 import {EditorContext} from "canvas/core/canvas";
-import {Class} from "lang/class";
-
-import {FullLayerEditor} from "component/editors/layer/full";
-import {BasicLayerEditor} from "component/editors/layer/basic";
 
 type Properties = {[key: string]: any};
 type PropertyNode = Vertex<Properties>;
@@ -31,41 +26,17 @@ interface pt {
     y:number;
 }
 
-export abstract class CompositeElement extends AbstractElement
-    implements
-        EditableElement<
-            CompositeElement,
-            ElementEditor<CompositeElement>
-            >
-{
+export abstract class CompositeElement extends AbstractElement {
 
     public name: string;
     public description: string;
     public icon: string;
-
-    static readonly editors: Map<string, ElementEditor<CompositeElement>> = CompositeElement.initialize();
-
-
-    static initialize():Map<string, ElementEditor<CompositeElement>> {
-        let result = new Map<string, ElementEditor<CompositeElement>>();
-        result['basic'] = BasicLayerEditor;
-        result['full'] =  FullLayerEditor;
-        return result;
-    }
 
     constructor() {
         super();
         this.setLabel(name);
         this.setCollapsable(true);
         this.setAttribute('named', '1');
-    }
-
-    getEditorOfRole(role: string): Class<ElementEditor<CompositeElement>> {
-        return CompositeElement.editors[role];
-    }
-
-    hasEditorOfRole(role: string): boolean {
-        return CompositeElement.editors[role];
     }
 
     addElement(element: Element): void {
