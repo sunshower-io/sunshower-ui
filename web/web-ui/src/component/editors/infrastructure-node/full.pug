@@ -1,6 +1,5 @@
 template
     require(from="./basic")
-    require(from="./credentials")
     .overlay-sidenav
         .overlay-header
             .ui.small.image.overlay-header-image
@@ -25,7 +24,7 @@ template
     .overlay-body
         .ui.secondary.pointing.menu.overlay-body-tab-menu
             .item.active Summary
-            .item Credentials
+            .item Applications
+            .item Cloud
         .overlay-form
-            credentials(node.bind="node")
-            //basic-infrastructure-node-editor(mode.bind="editorMode", node.bind="node")
+            basic-infrastructure-node-editor(mode.bind="editorMode", node.bind="node")

@@ -108,6 +108,7 @@
   * {
     border-radius:0 !important;
   }
+  .clearfix
 }
 
 .overlay-icons {
@@ -134,33 +135,18 @@
   }
 }
 
-.overlay-field {
-  .clearfix
-}
 
 
-.property--menu {
-  .ui.form {padding:1em;}
-  .overlay-field {
-    .overlay-input {
-      padding-right: 1em;
-      width: 90% !important;
-      float: left;
-    }
-    .overlay-help {
-      color: @grey;
-      width: 10%;
-      float: left;
-      i {
-        margin: auto;
-      }
-    }
+.property--menu .ui.form {
+  padding:1em;
+  .overlay-field .overlay-help {
+    display: none;
   }
 }
 
 .overlay-form {
-  .overlay-field {
-    margin: @em 0;
+  .field.overlay-field {
+    margin: @em 0 !important;
     &>* {
       box-sizing:border-box;
       float:left;
@@ -175,6 +161,14 @@
     .overlay-input {
       width:65% !important;
     }
+    .overlay-help {
+      color: @grey;
+      width: 10%;
+      i {
+        margin: auto;
+      }
+    }
+    .clearfix
   }
 }
 

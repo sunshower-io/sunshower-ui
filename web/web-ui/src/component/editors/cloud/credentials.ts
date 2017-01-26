@@ -4,15 +4,15 @@ import {
 } from "aurelia-framework";
 
 import {HttpClient} from "aurelia-fetch-client";
-import {CredentialSecret} from "model/core/secret/credentials";
-import {InfrastructureNode} from "component/model/infrastructure-node";
+import {CredentialSecret} from "../../../model/core/secret/credentials";
+import {VirtualCloud} from "component/model/cloud";
 import {json} from "aurelia-fetch-client";
 
 @inject(HttpClient)
 export class Credentials {
 
     @bindable
-    private node                : InfrastructureNode;
+    private node                : VirtualCloud;
 
     private credential          : CredentialSecret;
 
