@@ -40,7 +40,9 @@ export class BasicInfrastructureNodeEditor implements
                 action: 'activate',
                 onChange: this.osChanged,
             });
-            $(this.list).dropdown('set selected', this.node.operatingSystem.id);
+            if (this.node && this.node.operatingSystem) {
+                $(this.list).dropdown('set selected', this.node.operatingSystem.id);
+            }
         });
     }
 

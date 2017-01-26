@@ -32,7 +32,7 @@ template
         .overlay-form
             compose(
                 model.bind="cloud"
-                view-model="./${activeComponent.path || 'basic'}"
+                view-model="./${activeComponentPath || 'basic'}"
             )
             //credentials(node.bind="cloud")
             //basic-virtual-cloud-editor

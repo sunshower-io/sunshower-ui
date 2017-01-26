@@ -5,14 +5,14 @@ import {
 
 import {HttpClient} from "aurelia-fetch-client";
 import {CredentialSecret} from "../../../model/core/secret/credentials";
-import {VirtualCloud} from "component/model/cloud";
+import {InfrastructureNode} from "component/model/infrastructure-node";
 import {json} from "aurelia-fetch-client";
 
 @inject(HttpClient)
 export class Credentials {
 
     @bindable
-    private node                : VirtualCloud;
+    private node                : InfrastructureNode;
 
     private loading             : boolean = true;
 
@@ -57,8 +57,8 @@ export class Credentials {
             });
     }
 
-    activate(model:VirtualCloud) : void {
-        this.node = model;
+    activate(node:InfrastructureNode) : void {
+        this.node = node;
     }
 
 }

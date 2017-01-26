@@ -13,10 +13,13 @@ export class FullVirtualCloudEditor implements ElementEditor<VirtualCloud> {
     private cloud:VirtualCloud;
 
     @bindable
+    protected activeComponentPath:string;
+
+    @bindable
     protected activeComponent:CloudComponent;
 
     @bindable
-    protected components:CloudComponent[];
+    public components:CloudComponent[];
 
     constructor() {
         this.components = [{
@@ -27,6 +30,7 @@ export class FullVirtualCloudEditor implements ElementEditor<VirtualCloud> {
             name: 'Credentials',
             path: 'credentials'
         }];
+        this.activeComponent = this.components[0];
     }
 
     setActive(active:CloudComponent) {
