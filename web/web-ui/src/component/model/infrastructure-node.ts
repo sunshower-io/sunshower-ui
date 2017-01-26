@@ -9,9 +9,11 @@ import {
 
 
 import {Canvas} from "canvas/core/canvas";
-import {Element} from 'canvas/element/element';
+import {Element, Relationship} from 'canvas/element/element';
 
 import {ApplicationDeployment} from "./deployment";
+
+import {Class} from "lang/class";
 
 import {
     VertexMenu,
@@ -27,7 +29,6 @@ import {
     OperatingSystem,
     NodeConfiguration
 } from "model/hal/api";
-import {Class} from "../../lang/class";
 
 
 
@@ -152,6 +153,12 @@ export class InfrastructureNode extends
 
     public addApplication(application: ApplicationDeployment): void {
         this.applications.push(application);
+        this.host
+            .registry
+            .draftboardManager
+            .focusedDraftboard()
+            .connect(application, this, Relationship.SUCCESSOR);
+        this.addSuccessor(application);
         try {
             this.host.model.beginUpdate();
             this.addAndResize();

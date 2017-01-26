@@ -90,18 +90,10 @@ mxConstants.VERTEX_SELECTION_COLOR = '#0000FF';
 mxRubberband.defaultOpacity = 1;
 
 mxShape.prototype.constraints = [
-    // new mxConnectionConstraint(new mxPoint(0.25, 0), true),
     new mxConnectionConstraint(new mxPoint(0.5, 0), true),
-    // new mxConnectionConstraint(new mxPoint(0.75, 0), true),
-    // new mxConnectionConstraint(new mxPoint(0, 0.25), true),
     new mxConnectionConstraint(new mxPoint(0, 0.5), true),
-    // new mxConnectionConstraint(new mxPoint(0, 0.75), true),
-    // new mxConnectionConstraint(new mxPoint(1, 0.25), true),
     new mxConnectionConstraint(new mxPoint(1, 0.5), true),
-    // new mxConnectionConstraint(new mxPoint(1, 0.75), true),
-    // new mxConnectionConstraint(new mxPoint(0.25, 1), true),
     new mxConnectionConstraint(new mxPoint(0.5, 1), true),
-    // new mxConnectionConstraint(new mxPoint(0.75, 1), true)
 ];
 
 mxPolyline.prototype.constraints = null;
@@ -135,11 +127,8 @@ export class Canvas extends mxGraph {
         this.allowLoops = false;
         this.autoExtend = true;
         this.allowDanglingEdges = false;
-        // this.extendParentsOnAdd = true;
-        // this.extendParents = true;
         this.resizeContainer = true;
 
-        // this.addMouseListener(new MenuHoverListener(this));
         this.recursiveResize = false;
 
         this.createDefaultStyles();
@@ -193,51 +182,6 @@ export class Canvas extends mxGraph {
         }
     }
 
-    // groupCells(group: Layer, border: number, cells: Layer[]) {
-    //     if (!cells) {
-    //         cells = mxUtils.sortCells(this.getSelectionCells(), true);
-    //     }
-    //     cells = this.getCellsForGroup(cells);
-    //     if (!group) {
-    //         group = this.createGroupCell(cells);
-    //     }
-    //
-    //     let bounds = this.getBoundsForGroup(group, cells, border);
-    //
-    //     if (cells.length > 0 && bounds) {
-    //         let parent = this.model.getParent(group);
-    //
-    //         if (!parent) {
-    //             parent = this.model.getParent(cells[0]);
-    //         }
-    //         this.model.beginUpdate();
-    //         try {
-    //             if (this.getCellGeometry(group) == null) {
-    //                 this.model.setGeometry(group, new mxGeometry());
-    //             }
-    //             let index = this.model.getChildCount(parent);
-    //             this.cellsAdded([group], parent, index, null, null, false);
-    //             index = this.model.getChildCount(group);
-    //             this.cellsAdded(cells, group, index, null, null, false, false);
-    //             this.cellsMoved(cells, -bounds.x, -bounds.y, false, true);
-    //             this.cellsResized([group], [bounds], false);
-    //             this.fireEvent(new mxEventObject(
-    //                 mxEvent.GROUP_CELLS,
-    //                 'group',
-    //                 group,
-    //                 'border',
-    //                 border,
-    //                 'cells',
-    //                 cells
-    //             ));
-    //         }
-    //         finally {
-    //             this.model.endUpdate();
-    //         }
-    //     }
-    //
-    //     return group;
-    // }
 
 
     getHostContainerBounds(): Rectangle {

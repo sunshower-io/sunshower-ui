@@ -335,11 +335,10 @@ export abstract class AbstractElement extends mxCell implements Element, Vertex<
 
 
     addSuccessor(successor: PropertyNode): boolean {
-        let id = this.createId(successor, Relationship.SUCCESSOR);
-        if (this.adjacencies[id]) {
-            return false;
-        }
-        this.adjacencies[id] = this.createEdge(this, successor);
+        // let id = this.createId(successor, Relationship.SUCCESSOR);
+        // if (this.adjacencies[id]) {
+        //     return false;
+        // }
         this.childNodes.push(successor);
         return true;
     }
@@ -349,12 +348,12 @@ export abstract class AbstractElement extends mxCell implements Element, Vertex<
     }
 
     removeSuccessor(successor: PropertyNode): boolean {
-        let id = this.createId(successor, Relationship.SUCCESSOR);
-        let t = this.adjacencies[id];
-        if (t) {
-            delete this.adjacencies[id];
-            return true;
-        }
+        // let id = this.createId(successor, Relationship.SUCCESSOR);
+        // let t = this.adjacencies[id];
+        // if (t) {
+        //     delete this.adjacencies[id];
+        //     return true;
+        // }
         return false;
     }
 

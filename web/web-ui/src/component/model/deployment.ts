@@ -69,8 +69,6 @@ export class ApplicationDeployment extends
     copy(): ApplicationDeployment {
         let copy = new ApplicationDeployment();
         copy.geometry = this.geometry.clone();
-        // console.log("APPX", this.geometry.x, this.geometry.y);
-        // console.log("OFFSET", this.geometry.offset.x, this.geometry.offset.y);
         copy.applicationId = this.applicationId;
         copy.icon = this.icon;
         return copy;
@@ -123,7 +121,6 @@ export class ApplicationDeployment extends
 
     protected createOverlays(): mxCellOverlay[] {
         let results = [];
-        // results.push(this.applicationOverlay());
         return results;
     }
 

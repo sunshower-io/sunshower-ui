@@ -38,6 +38,7 @@ describe('a draftboard marshaller', () => {
         containerElement = document.createElement('div');
         canvas = new Canvas(containerElement, registry, actionManager);
         draftboard = new Draftboard(canvas);
+        registry.draftboardManager.setFocusedDraftboard(draftboard);
         marshaller = new DraftboardMarshaller();
     });
 
@@ -67,9 +68,6 @@ describe('a draftboard marshaller', () => {
         host.addElement(app2);
         host.addElement(app3);
 
-        draftboard.connect(application, host);
-        draftboard.connect(app2, host);
-        draftboard.connect(app3, host);
         let seqs = ps.run(draftboard);
         expect(seqs.length).toBe(2);
         expect(seqs[0].elements[0].id).toBe(host.id);
@@ -90,9 +88,9 @@ describe('a draftboard marshaller', () => {
         host.addElement(app2);
         host.addElement(app3);
 
-        draftboard.connect(application, host);
-        draftboard.connect(app2, host);
-        draftboard.connect(app3, host);
+        // draftboard.connect(application, host);
+        // draftboard.connect(app2, host);
+        // draftboard.connect(app3, host);
 
         let dboard = marshaller.write(draftboard);
         console.log(JSON.stringify(dboard));
