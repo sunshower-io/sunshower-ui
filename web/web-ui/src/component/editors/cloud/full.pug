@@ -24,9 +24,16 @@ template
                 //TODO
     .overlay-body
         .ui.secondary.pointing.menu.overlay-body-tab-menu
-            .item.active Summary
-            .item Credentials
+            a.item(
+                class="${component.active ? 'active' : ''}"
+                repeat.for="component of components",
+                click.delegate="setActive(component)"
+            ) ${component.name}
         .overlay-form
-            credentials(node.bind="cloud")
+            compose(
+                model.bind="cloud"
+                view-model="./${activeComponent.path || 'basic'}"
+            )
+            //credentials(node.bind="cloud")
             //basic-virtual-cloud-editor
 

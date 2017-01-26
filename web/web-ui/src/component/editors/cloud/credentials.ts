@@ -51,4 +51,8 @@ export class Credentials {
             });
     }
 
+    activate(model:VirtualCloud) : void {
+        this.node = model;
+    }
+
 }
