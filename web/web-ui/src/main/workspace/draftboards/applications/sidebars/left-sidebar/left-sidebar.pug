@@ -10,7 +10,7 @@ template
         .ui.basic.secondary.segment.property--menu
             .item
                 .menu
-                    a.item(repeat.for="board of draftboards")
+                    a.item(repeat.for="board of draftboards", click.delegate="open(board.id)")
                         | ${board.name}
         layers
 
