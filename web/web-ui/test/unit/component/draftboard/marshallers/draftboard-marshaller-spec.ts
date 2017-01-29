@@ -9,13 +9,12 @@ import
     DraftboardMarshaller
  from 'component/draftboard/marshallers/marshaller';
 
-import {Draftboard} from "component/draftboard/draftboard";
 import {Container} from "aurelia-dependency-injection";
-import {Relationship} from "canvas/element/element";
+import {Draftboard} from "component/draftboard/draftboard";
 import {ActionManager} from "canvas/actions/action-service";
+import {ParallelSchedule} from "algorithms/graph/scheduling";
 import {ApplicationDeployment} from "component/model/deployment";
 import {InfrastructureNode} from "component/model/infrastructure-node";
-import {ParallelSchedule} from "algorithms/graph/scheduling";
 
 describe('a draftboard marshaller', () => {
 

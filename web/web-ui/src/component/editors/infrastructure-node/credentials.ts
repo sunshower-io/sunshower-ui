@@ -4,7 +4,7 @@ import {
 } from "aurelia-framework";
 
 import {HttpClient} from "aurelia-fetch-client";
-import {CredentialSecret} from "../../../model/core/secret/credentials";
+import {CredentialSecret} from "model/core/secret/credentials";
 import {InfrastructureNode} from "component/model/infrastructure-node";
 import {json} from "aurelia-fetch-client";
 

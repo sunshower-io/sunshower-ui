@@ -1,4 +1,4 @@
-import * as _ from 'loadash'
+import * as _ from 'lodash'
 import {inject} from 'aurelia-framework';
 import {Element} from 'canvas/element/element';
 import {

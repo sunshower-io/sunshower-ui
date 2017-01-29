@@ -4,6 +4,7 @@ import io.hasli.common.configuration.ConfigurationSource;
 import io.hasli.common.configuration.MapConfigurationSource;
 import io.hasli.common.rs.MoxyProvider;
 import io.hasli.core.ApplicationService;
+import io.hasli.hal.HALConfiguration;
 import io.hasli.hal.api.HALPersistenceConfiguration;
 import io.hasli.hal.api.instance.NodeConfigurationService;
 import io.hasli.hal.aws.AwsComputeService;
@@ -46,6 +47,7 @@ import java.util.Map;
         DatabaseConfiguration.class,
         HibernateConfiguration.class,
         SecurityConfiguration.class,
+        HALConfiguration.class,
         VaultConfiguration.class,
         SearchConfiguration.class,
         HFSConfiguration.class,

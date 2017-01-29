@@ -32,7 +32,7 @@ export class SaveDialog {
                 scaleFactor = Math.min(scaleWidth, scaleHeight) * 1.2,
                 context = this.image.getContext('2d') as any;
             context.scale(scaleFactor, scaleFactor);
-            context.drawSvg(i.outerHTML, 300 * scaleFactor, 200 * scaleFactor);
+            // context.drawImage(i.outerHTML, 300 * scaleFactor, 200 * scaleFactor);
         });
     }
 

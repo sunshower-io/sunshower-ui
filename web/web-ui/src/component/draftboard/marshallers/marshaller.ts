@@ -8,7 +8,7 @@ import {Vertex, Edge} from "algorithms/graph/graph";
 import {Class} from "lang/class";
 import {ApplicationDeployment} from "component/model/deployment";
 import {InfrastructureNode} from "component/model/infrastructure-node";
-
+import {UUID} from "utils/uuid";
 
 
 export class ApplicationDeploymentMarshaller implements Marshaller<ApplicationDeployment> {
@@ -16,8 +16,8 @@ export class ApplicationDeploymentMarshaller implements Marshaller<ApplicationDe
         return {
             id: data.id,
             type: 'ApplicationDeployment',
-            deployer: 'docker',
-            application: {
+            payload: {
+                deployer: 'docker',
                 id: data.applicationId,
                 name: data.applicationName
             }
@@ -29,7 +29,8 @@ export class InfrastructureNodeMarshaller implements Marshaller<InfrastructureNo
     write(data: InfrastructureNode): {} {
         return {
             id: data.id,
-            type: 'InfrastructureNode'
+            type: 'InfrastructureNode',
+            payload: {}
         }
     }
 }
@@ -44,7 +45,7 @@ export default class DraftboardMarshaller implements Marshaller<Draftboard> {
     }
 
 
-    static registerDefaults() : void {
+    static registerDefaults(): void {
         DraftboardMarshaller.register(ApplicationDeployment, new ApplicationDeploymentMarshaller());
         DraftboardMarshaller.register(InfrastructureNode, new InfrastructureNodeMarshaller());
     }
@@ -73,19 +74,22 @@ export default class DraftboardMarshaller implements Marshaller<Draftboard> {
         }
 
         return {
+            id: data.id,
+            name: data.name,
             type: 'draftboard',
+            description: data.description,
             graph: {
                 nodes: nodes,
                 edges: edges
             }
-        }
+        };
     }
 
 
     private writeNode(node: Vertex<Properties>): {} {
         let marshaller = DraftboardMarshaller.marshallers
             .get(node.constructor as Class<Element>);
-        if(!marshaller) {
+        if (!marshaller) {
             throw new Error("Unable to find marshaller for type: " + typeof marshaller);
         }
         return marshaller.write(node as Element);
@@ -93,9 +97,10 @@ export default class DraftboardMarshaller implements Marshaller<Draftboard> {
 
     private writeEdge(edge: Edge<Properties>) {
         return {
-            source: edge.source.id,
-            target: edge.target.id,
-            relation: 'successor'
+            source: edge.target.id,
+            target: edge.source.id,
+            relation: 'run-after',
+            direction: 'out'
         }
     }
 }
