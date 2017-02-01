@@ -26,8 +26,7 @@ export class Admin {
              method: 'get'
          }).then(response => response.json() as any)
              .then(r =>
-                 //this.indexingImages = false
-                 console.log('booped the images')
+                 this.indexingImages = false
              );
     }
 
