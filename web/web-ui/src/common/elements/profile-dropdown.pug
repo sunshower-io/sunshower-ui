@@ -2,15 +2,16 @@
    Created by dustinlish on 10/21/16.
 
 template(bindable="router")
-    //TODO change this from being a dropdown so the span doesn't change to whatever the route is
-    .ui.pointing.dropdown.white(style="z-index:1000")
-        span(style="color:white") ${user.username}
-        //had to remove span.white.text because .text was causing the text to change upon selection of an option
-        i.inverted.white.dropdown.icon
-        .menu
-            .item(click.delegate="router.navigate('#/main/settings/profile')") Profile
-            .item(click.delegate="router.navigate('#/main/settings')") Settings
-            .item Help
-            .divider
-            .item(click.delegate="logout()") Sign out
+    .ui.vertical.menu.page-header--menu-dropdown(style="width:75px; background:none;")
+        .ui.simple.dropdown.item(style="z-index:1000000")
+            img.ui.image.mini(src="assets/sui/themes/hasli/assets/images/icons/profile.svg")
+            //i.dropdown.icon //TODO make icon not show up in weird places
+            .menu(style="margin-top:-1px")
+                //TODO restyle
+                a.item(href='#/main/settings/profile') Profile
+                a.item(href='#/main/settings/admin') Admin
+                .item Help
+                .divider
+                .item(click.delegate="logout()") Sign out
+
 

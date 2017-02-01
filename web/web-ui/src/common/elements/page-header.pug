@@ -3,8 +3,8 @@ template(bindable="router")
     .page.header(ref="element", style="width:100%;z-index:2")
         .ui
             .ui.secondary.menu.primary-header
-                .ui.image.small
-                    img.item.header(style="height:32px" src="styles/themes/hasli/assets/images/logos/hasli-logo.svg", click.delegate="router.navigate('#/main')")
+                a.ui.image.small(href='#/main')
+                    img.item.header(style="height:36px" src="styles/themes/hasli/assets/images/logos/hasli-logo.svg")
                 banner(items.bind="carouselItems", view-model.ref="banner")
                 .right.menu
                     a.item
