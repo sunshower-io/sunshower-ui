@@ -14,16 +14,42 @@ export class PreferenceManager {
 
     private preferences: Preferences;
 
-    constructor(private localStorage: LocalStorage) {
+    private savedPreferences: any;
 
+    constructor(private localStorage: LocalStorage) {
+        this.savedPreferences = []
+    }
+
+    preference(key:string) : any {
+        for (let prefs of this.savedPreferences) {
+            if (prefs.key === key) {
+                return prefs
+            }
+        }
     }
 
     put(key:string, value:any) : void {
-        this.localStorage.put(key, JSON.stringify(value));
+        let thisPreference = this.preference(key);
+        if (thisPreference) {
+            thisPreference.value = value;
+        } else {
+            this.savedPreferences.push({key: key, value: value});
+        }
     }
 
-    get(key:string) : any {
-        return JSON.parse(this.localStorage.get(key));
+    get(key:string, defaults:any) : any {
+        let thisPreference = this.preference(key),
+            savedPrefs = thisPreference ? thisPreference.value : {},
+            mergedPrefs = {};
+
+        for (let key in defaults) {
+            if (defaults.hasOwnProperty(key)) {
+                mergedPrefs[key] = key in savedPrefs ? savedPrefs[key] : defaults[key];
+            }
+        }
+
+        this.put(key, mergedPrefs);
+        return mergedPrefs;
     }
 
 }

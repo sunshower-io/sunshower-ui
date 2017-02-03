@@ -31,8 +31,20 @@ export class Draftboard {
 
     private breadcrumb: Breadcrumb;
 
-    constructor(private menu : Menu, private preferenceManager : PreferenceManager) {
+    private preferences: any;
 
+    static readonly draftboardPath: string = 'main/workspace/draftboards/Draftboard';
+
+    static readonly draftboardDefaults = {
+        leftToggled: true,
+        rightToggled: true
+    };
+
+    constructor(private menu : Menu, private preferenceManager : PreferenceManager) {
+        this.preferences = this.preferenceManager.get(
+            Draftboard.draftboardPath,
+            Draftboard.draftboardDefaults
+        );
     }
 
     configureRouter(config: RouterConfiguration, router: Router) {
@@ -49,18 +61,7 @@ export class Draftboard {
         this.router = router;
     }
 
-    leftToggled: boolean = true;
-    rightToggled: boolean = true;
-    draftboardPath: string = 'main/workspace/draftboards/Draftboard';
     attached() : void {
-        let preferences = this.preferenceManager.get(this.draftboardPath);
-        console.log(preferences);
-        if (!preferences) {
-            this.savePreferences(true, true);
-        }
-
-        this.leftToggled = preferences ? preferences.leftToggled : true;
-        this.rightToggled = preferences ? preferences.rightToggled : true;
 
     }
 
@@ -68,13 +69,13 @@ export class Draftboard {
         this.child = child;
         this.menu.setItems((<any>child).menus);
 
-        if (this.leftToggled) {
+        if (this.preferences.leftToggled) {
             this.breadcrumb.pad();
         } else {
             this.toggleLeft();
         }
 
-        if (!this.rightToggled) {
+        if (!this.preferences.rightToggled) {
             this.toggleRight();
         }
     }
@@ -89,23 +90,18 @@ export class Draftboard {
         } else {
             this.breadcrumb.unpad();
         }
-        this.savePreferences(childToggleLeft, this.rightToggled);
-        return (this.leftToggled = toggled);
+        return (this.preferences.leftToggled = toggled);
     }
 
 
     toggleRight(): boolean {
         let childToggleRight = this.child.toggleRight();
-        this.savePreferences(this.leftToggled, childToggleRight);
-        return (this.rightToggled = this.toggle('margin-right', childToggleRight, '304px', '0px'))
+        this.preferences.rightToggled = childToggleRight;
+        return (this.preferences.rightToggled = this.toggle('margin-right', childToggleRight, '304px', '0px'))
     }
 
     hasDraftBoards(): boolean {
         return false;
-    }
-
-    private savePreferences(leftBool : boolean, rightBool : boolean) : void {
-        this.preferenceManager.put(this.draftboardPath, {leftToggled: leftBool, rightToggled: rightBool});
     }
 
     private toggle(style: string,
