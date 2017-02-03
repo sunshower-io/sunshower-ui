@@ -8,16 +8,14 @@ import {Vertex, Edge} from "algorithms/graph/graph";
 import {Class} from "lang/class";
 import {ApplicationDeployment} from "component/model/deployment";
 import {InfrastructureNode} from "component/model/infrastructure-node";
-import {UUID} from "utils/uuid";
-
 
 export class ApplicationDeploymentMarshaller implements Marshaller<ApplicationDeployment> {
     write(data: ApplicationDeployment): {} {
         return {
             id: data.id,
+            provider: 'aws',
             type: 'ApplicationDeployment',
             payload: {
-                deployer: 'docker',
                 id: data.applicationId,
                 name: data.applicationName
             }
@@ -29,8 +27,20 @@ export class InfrastructureNodeMarshaller implements Marshaller<InfrastructureNo
     write(data: InfrastructureNode): {} {
         return {
             id: data.id,
+            provider: 'aws',
             type: 'InfrastructureNode',
-            payload: {}
+            payload: {
+                operatingSystem : {
+                    name: data.operatingSystem.name,
+                    icon: data.operatingSystem.icon,
+                    family: data.operatingSystem.family,
+                    version: data.operatingSystem.version,
+                },
+                image           : {
+                    "image-id"      : data.operatingSystem.provider.imageId,
+                    "instance-type" : data.configuration.instanceDescriptor.key,
+                },
+            }
         }
     }
 }

@@ -6,8 +6,9 @@ export class Secrets {
 }
 export class CredentialSecret {
 
-    name:string;
+    id: string;
 
+    name:string;
 
     secret:string;
 

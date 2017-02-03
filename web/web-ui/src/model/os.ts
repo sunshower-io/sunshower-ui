@@ -11,7 +11,12 @@ export class OperatingSystemService {
             'Windows 8',
             'assets/sui/themes/hasli/assets/images/logos/os/Windows8-48.png',
             'windows',
-            '8'
+            '8',
+            {
+                id: UUID.randomUUID(),
+                name: 'aws',
+                imageId : 'ami-6e833e0e'
+            }
         ));
         this.operatingSystems.push(new OperatingSystem(
             'Debian',

@@ -68,6 +68,7 @@
         <!--<hasli-search.version>1.0.24.Final</hasli-search.version>-->
 
         <hasli-hal.version>${snapshot-version}</hasli-hal.version>
+        <hasli-persist.version>${snapshot-version}</hasli-persist.version>
         <hasli-api.version>${snapshot-version}</hasli-api.version>
         <hasli-hfs.version>${snapshot-version}</hasli-hfs.version>
         <hasli-search.version>${snapshot-version}</hasli-search.version>
@@ -84,6 +85,16 @@
                 <groupId>io.hasli.hal</groupId>
                 <artifactId>bom-exported</artifactId>
                 <version>${hasli-hal.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.hasli.persist</groupId>
+                <artifactId>bom-imported</artifactId>
+                <version>${hasli-persist.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
             <dependency>
@@ -94,12 +105,6 @@
                 <scope>import</scope>
             </dependency>
 
-
-            <dependency>
-                <groupId>io.hasli.service</groupId>
-                <artifactId>service-hal</artifactId>
-                <version>${hasli-service.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>io.hasli.api</groupId>
@@ -128,19 +133,7 @@
                 <artifactId>search-es</artifactId>
                 <version>${hasli-search.version}</version>
             </dependency>
-            <dependency>
-                <groupId>io.hasli.search</groupId>
-                <artifactId>search-api</artifactId>
-                <version>${hasli-search.version}</version>
-            </dependency>
 
-            <dependency>
-                <groupId>io.hasli.hal</groupId>
-                <artifactId>bom-exported</artifactId>
-                <version>${hasli-hal.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
 
 
             <dependency>

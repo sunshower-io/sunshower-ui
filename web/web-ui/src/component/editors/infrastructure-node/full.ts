@@ -14,12 +14,19 @@ interface InfrastructureNodeComponent {
     active          ?: boolean;
 }
 
+export class Model {
+    editorMode              :EditorMode;
+    node                    :InfrastructureNode;
+}
+
 export class FullInfrastructureNodeEditor implements ElementEditor<InfrastructureNode> {
 
 
     readonly editorMode : EditorMode = {
         viewState: 'full'
     };
+
+
 
     list:HTMLElement;
 
@@ -61,7 +68,7 @@ export class FullInfrastructureNodeEditor implements ElementEditor<Infrastructur
 
     open(node: InfrastructureNode): void {
         this.node = node;
-
+        this.editorMode.data = node;
     }
 
 
