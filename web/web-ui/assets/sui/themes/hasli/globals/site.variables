@@ -53,6 +53,8 @@
 @lightPrimaryColor   : @lightBlue;
 @lightSecondaryColor : @lightBlack;
 
+@hasliGreen          : #25CD6B;
+
 /*--------------
   Page Heading
 ---------------*/
@@ -161,7 +163,7 @@
 @loaderLineColor         : @grey;
 
 @invertedLoaderFillColor : rgba(255, 255, 255, 0.15);
-@invertedLoaderLineColor : @white;
+@invertedLoaderLineColor : @primaryColor;
 
 /*-------------------
         Grid
