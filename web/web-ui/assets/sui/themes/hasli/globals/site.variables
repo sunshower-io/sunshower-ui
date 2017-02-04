@@ -25,10 +25,10 @@
 --------------------*/
 
 /* This is the single variable that controls them all */
-@emSize   : 12px;
+@emSize   : 13px;
 
 /* The size of page text  */
-@fontSize : 12px;
+@fontSize : 13px;
 
 
 /*-------------------

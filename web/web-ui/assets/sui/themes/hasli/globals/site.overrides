@@ -17,10 +17,21 @@
 ;
 }
 
-.page.header {
-  background-color: #171B26;
-  //border-bottom: 1px solid #E5E5E5;
-  padding: 2px 0px;
+.masthead {
+  background-color: #171B26 !important;
+  padding: 2px 0 !important;
+}
+
+.main {
+  margin-top: 6em;
+}
+
+.popup--transition {
+  top: 554px;
+  left: 1px;
+  bottom: auto;
+  right: auto;
+  width: 400px;
 }
 
 .nav--color {
