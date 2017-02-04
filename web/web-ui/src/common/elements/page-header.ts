@@ -1,12 +1,10 @@
-import {bindable} from "aurelia-framework";
-import {CarouselViewModel} from "common/carousel/carousel-item";
 import {Banner} from "common/banner/banner";
 export class PageHeader {
 
-    @bindable
-    carouselItems: CarouselViewModel[];
-
-    private banner: Banner;
+    // @bindable
+    // carouselItems: CarouselViewModel[];
+    //
+    // private banner: Banner;
 
     private element: Element;
 
@@ -23,20 +21,20 @@ export class PageHeader {
             stuck = false,
             stickPoint = getDistance();
 
-        window.onscroll = (e) => {
-            let distance = getDistance() - window.pageYOffset,
-                offset = window.pageYOffset;
-            if ((distance <= 0) && !stuck) {
-                h.style.position = 'fixed';
-                h.style.top = '0px';
-                this.banner.close();
-                stuck = true;
-            } else if (stuck && (offset <= stickPoint)) {
-                h.style.position = 'static';
-                this.banner.open();
-                stuck = false;
-            }
-        }
+        // window.onscroll = (e) => {
+        //     let distance = getDistance() - window.pageYOffset,
+        //         offset = window.pageYOffset;
+        //     if ((distance <= 0) && !stuck) {
+        //         h.style.position = 'fixed';
+        //         h.style.top = '0px';
+        //         this.banner.close();
+        //         stuck = true;
+        //     } else if (stuck && (offset <= stickPoint)) {
+        //         h.style.position = 'static';
+        //         this.banner.open();
+        //         stuck = false;
+        //     }
+        // }
 
     }
 }

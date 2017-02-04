@@ -1,29 +1,28 @@
 template
-    div
-        div(ref="contentSpace" if.bind="pad")
-        .folio
-            .header
-                .menu
-                    .items(
-                        ref="menu",
-                        if.bind="root"
-                    )
-                        .item(
-                            repeat.for="row of router.navigation"
-                        )
-                            a(
-                                click.delegate="open(row)"
-                                class="${row.isActive ? 'active' : ''}"
-                            )
-                                img(src="${row.settings.icon}")
-                                | ${row.title}
-                    .control(ref="control" if.bind="root")
-                        img(src="assets/sui/themes/hasli/assets/images/icons/plus-circle.svg")
-                    .control(ref="stackControl" if.bind="!root")
-                        img(
-                            src="assets/sui/themes/hasli/assets/images/icons/x-circle.svg",
-                            click.delegate="navigateBack()"
-                        )
-            .body(style="min-height:800px")
-                router-view
+    //div
+    //    div(ref="contentSpace" if.bind="pad")
+    //    .folio
+    //        .header
+    //            .menu
+    //                .items(
+    //                    ref="menu",
+    //                    if.bind="root"
+    //                )
+    //                    .item(
+    //                        repeat.for="row of router.navigation"
+    //                    )
+    //                        a(
+    //                            click.delegate="open(row)"
+    //                            class="${row.isActive ? 'active' : ''}"
+    //                        )
+    //                            img(src="${row.settings.icon}")
+    //                            | ${row.title}
+    //                .control(ref="control" if.bind="root")
+    //                    img(src="assets/sui/themes/hasli/assets/images/icons/plus-circle.svg")
+    //                .control(ref="stackControl" if.bind="!root")
+    //                    img(
+    //                        src="assets/sui/themes/hasli/assets/images/icons/x-circle.svg",
+    //                        click.delegate="navigateBack()"
+    //                    )
+    router-view
 

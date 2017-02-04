@@ -21,7 +21,6 @@ export class App {
         config.map([{
             route: '',
             redirect: 'home'
-
         }, {
             route: 'home',
             name: 'navigator',
@@ -34,21 +33,20 @@ export class App {
             moduleId: './workspace/workspace',
             nav: true,
             title: 'Workspace',
-        },
-            {
-                route: 'settings',
-                name: 'settings',
-                moduleId: 'main/settings/settings',
-                nav: false,
-                title: 'Settings',
-                settings: {}
-            }
+        }, {
+            route: 'settings',
+            name: 'settings',
+            moduleId: 'main/settings/settings',
+            nav: false,
+            title: 'Settings',
+            settings: {}
+        }
         ]);
         this.router = router;
     }
 
     attached() {
-        $('.menu .grid.layout.icon')
+        $('.menu .ion-grid.icon')
             .popup({
                 on: 'click',
                 inline: true,
