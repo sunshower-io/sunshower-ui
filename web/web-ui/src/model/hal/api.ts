@@ -1,5 +1,13 @@
 import {UUID} from "utils/uuid";
 import {Copyable} from "lang/class";
+
+export interface Provider {
+    id                  : UUID;
+    name                : string;
+    imageId             : string;
+}
+
+
 export class OperatingSystem implements Copyable<OperatingSystem> {
 
     public readonly id: UUID;
@@ -7,10 +15,14 @@ export class OperatingSystem implements Copyable<OperatingSystem> {
     constructor(public name     ?: string,
                 public icon     ?: string,
                 public family   ?: string,
-                public version  ?: string) {
+                public version  ?: string,
+                public provider ?: Provider
+    ) {
         this.id = UUID.randomUUID();
 
     }
+
+
     copy(): OperatingSystem {
         return new OperatingSystem(
             this.name,
@@ -21,9 +33,13 @@ export class OperatingSystem implements Copyable<OperatingSystem> {
     }
 }
 export class InstanceDescriptor {
-    name            :string;
-    description     :string;
+    id              : UUID;
+    key             : string;
+    name            : string;
+    description     : string;
+
 }
+
 
 export class NodeConfiguration implements Copyable<NodeConfiguration> {
 
@@ -31,11 +47,13 @@ export class NodeConfiguration implements Copyable<NodeConfiguration> {
     public memoryProfile            : MemoryProfile;
     public storageProfile           : StorageProfile;
     public computeProfile           : ComputeProfile;
+    public instanceDescriptor       : InstanceDescriptor;
 
     constructor() {
-        this.memoryProfile = new MemoryProfile();
-        this.storageProfile = new StorageProfile();
-        this.computeProfile = new ComputeProfile();
+        this.memoryProfile      =   new MemoryProfile();
+        this.storageProfile     =   new StorageProfile();
+        this.computeProfile     =   new ComputeProfile();
+        this.instanceDescriptor =   new InstanceDescriptor();
     }
 
     copy(): NodeConfiguration {

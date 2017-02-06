@@ -1,7 +1,7 @@
 {
-  "name": "aurelia-skeleton-navigation-typescript",
+  "name": "hasli.io",
   "version": "1.0.2",
-  "description": "A starter kit for building a standard navigation-style app with Aurelia and TypeScript.",
+  "description": "Hasli.io",
   "keywords": [
     "aurelia",
     "navigation",
@@ -9,16 +9,16 @@
     "typescript",
     "vscode"
   ],
-  "homepage": "http://aurelia.io",
+  "homepage": "http://app.hasli.io",
   "bugs": {
     "url": "https://github.com/aurelia/skeleton-navigation-typescript/issues"
   },
   "license": "CC0-1.0",
-  "author": "Mike Graham <mgraham@technicalmedia.com> (http://cmichaelgraham.io/)",
+  "author": "",
   "main": "dist/main.js",
   "repository": {
     "type": "git",
-    "url": "http://github.com/aurelia/skeleton-navigation-typescript"
+    "url": "http://github.com/hasli-projects/hasli.io"
   },
   "scripts": {
     "prepublish": "./node_modules/.bin/typings install",

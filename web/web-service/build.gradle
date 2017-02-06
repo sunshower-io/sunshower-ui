@@ -11,6 +11,7 @@ dependencies {
     provided 'org.flywaydb:flyway-core'
 
 
+    provided "io.hasli.hal:hal-aws"
     provided "io.hasli.hal:hal-docker"
     provided "io.hasli.hfs:hfs-service"
     provided "io.hasli.search:search-es"
@@ -20,6 +21,7 @@ dependencies {
     provided "io.hasli.service:service-csp"
     provided "io.hasli.service:service-security"
     provided "io.hasli.persist:persist-hibernate"
+    testCompile "io.hasli.barometer.modules:jaxrs"
 
 }
 

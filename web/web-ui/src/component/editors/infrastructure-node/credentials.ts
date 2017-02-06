@@ -34,7 +34,7 @@ export class Credentials {
     save() : void {
         this.client.fetch('secrets/vault', {
             method: 'post',
-            body: json(this.credential)
+            body: JSON.stringify(this.credential)
         }).then(data => {
             this.listCredentials();
         });

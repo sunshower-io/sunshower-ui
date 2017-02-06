@@ -5,6 +5,7 @@ import {
 import {EditorContext} from "main/workspace/draftboards/editor";
 import {DialogService} from 'aurelia-dialog';
 import {SaveDialog} from "./file/save-dialog";
+import DeployMenu from "./deploy-menu";
 
 
 export default class FileMenu extends AbstractMenuItem implements MenuItem {
@@ -12,11 +13,12 @@ export default class FileMenu extends AbstractMenuItem implements MenuItem {
     name: string = 'File';
     menus = [];
 
-    constructor(service:DialogService) {
+    constructor(service: DialogService) {
         super();
         this.addMenu(new SaveMenu(service));
         this.addMenu(new ImportMenu());
         this.addMenu(new ExportMenu());
+        this.addMenu(new DeployMenu(service));
     }
 
 }
@@ -25,18 +27,18 @@ export class SaveMenu extends AbstractMenuItem {
     name: string = 'Save';
 
     showExtraData = false;
-    constructor(private dialogService:DialogService) {
+
+    constructor(private dialogService: DialogService) {
         super();
 
     }
 
     apply(editor: EditorContext): void {
-        this.dialogService.open({ viewModel: SaveDialog, model: { firstName: 'Owen', testScrolling: this.showExtraData }}).then((result) => {
+        this.dialogService.open({
+            viewModel: SaveDialog,
+        }).then((result) => {
             if (!result.wasCancelled) {
-                console.log('good');
                 console.log(result.output);
-            } else {
-                console.log('bad');
             }
         });
     }

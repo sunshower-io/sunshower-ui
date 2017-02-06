@@ -8,7 +8,9 @@ import io.hasli.hal.HALConfiguration;
 import io.hasli.hal.api.HALPersistenceConfiguration;
 import io.hasli.hal.api.instance.NodeConfigurationService;
 import io.hasli.hal.aws.AwsComputeService;
+import io.hasli.hal.aws.HALAwsConfiguration;
 import io.hasli.hal.core.node.DefaultNodeConfigurationService;
+import io.hasli.hal.core.node.HypervisorAbstractionLayerServiceConfiguration;
 import io.hasli.hal.docker.DockerConfiguration;
 import io.hasli.hfs.service.HFSConfiguration;
 import io.hasli.jpa.flyway.FlywayConfiguration;
@@ -24,6 +26,7 @@ import io.hasli.service.CoreServiceConfiguration;
 import io.hasli.service.csp.configuration.CSPServiceConfiguration;
 import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.service.vault.VaultConfiguration;
+import io.hasli.web.preferences.DefaultPreferencesService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -51,11 +54,13 @@ import java.util.Map;
         VaultConfiguration.class,
         SearchConfiguration.class,
         HFSConfiguration.class,
+        HALAwsConfiguration.class,
         DockerConfiguration.class,
         PersistenceConfiguration.class,
         HALPersistenceConfiguration.class,
         SecurityPersistenceConfiguration.class,
-        CoreServiceConfiguration.class
+        CoreServiceConfiguration.class,
+        HypervisorAbstractionLayerServiceConfiguration.class
 })
 public class BootstrapConfiguration {
 
@@ -67,6 +72,10 @@ public class BootstrapConfiguration {
     public BootstrapConfiguration() {
     }
 
+    @Bean
+    public DefaultPreferencesService defaultPreferencesService() {
+        return new DefaultPreferencesService();
+    }
 
     @Bean
     public AwsComputeService awsComputeService() {

@@ -32,7 +32,7 @@ template
             ) ${component.name}
         .overlay-form
             compose(
-                    model.bind="editorMode" node.bind="node"
+                    model.bind="editorMode"
                     view-model="./${activeComponentPath || 'basic'}"
                 )
             //basic-infrastructure-node-editor(mode.bind="editorMode", node.bind="node")

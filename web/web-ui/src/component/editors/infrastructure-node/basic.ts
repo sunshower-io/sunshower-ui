@@ -60,6 +60,10 @@ export class BasicInfrastructureNodeEditor implements ElementEditor<Infrastructu
         }
     }
 
+    imageChanged = (value: string, text:any, item:any) => {
+        this.node.configuration.instanceDescriptor.key = value;
+    };
+
 
     osChanged = (value: string, text: any, item: any) => {
         this.node.setOperatingSystem(this.osService.get(UUID.fromString(value)));
@@ -72,7 +76,10 @@ export class BasicInfrastructureNodeEditor implements ElementEditor<Infrastructu
                 action: 'activate',
                 onChange: this.osChanged,
             });
-            $(this.instanceType).dropdown();
+            $(this.instanceType).dropdown({
+                action: 'activate',
+                onChange: this.imageChanged,
+            });
             if (this.node && this.node.operatingSystem) {
                 $(this.list).dropdown('set selected', this.node.operatingSystem.id);
             }
@@ -81,5 +88,6 @@ export class BasicInfrastructureNodeEditor implements ElementEditor<Infrastructu
 
     activate(model: EditorMode): void {
         this.mode = model;
+        this.node = model.data as InfrastructureNode;
     }
 }

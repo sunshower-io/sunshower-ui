@@ -110,7 +110,7 @@ template
                 i.dropdown.icon
                 .default.text Select Instance
                 .menu
-                    .item(repeat.for="descriptor of instanceTypes")
+                    .item(repeat.for="descriptor of instanceTypes", data-value="${descriptor.key}")
                         | ${descriptor.name} (${descriptor.description})
 
 

@@ -1,6 +1,7 @@
 import {Layer} from "mxgraph";
 
 export class CanvasEvents {
+    static readonly DASHBOARD_OPENED                : string = 'dashboard-opened';
     static readonly CELL_SELECTION_CHANGED          : string = 'cells-selection-changed';
 
 }

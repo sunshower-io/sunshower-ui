@@ -22,7 +22,7 @@ export class PreferenceManager {
 
     preference(key:string) : any {
         for (let prefs of this.savedPreferences) {
-            if (prefs.key === key) {
+            if (prefs.region === key) {
                 return prefs
             }
         }
@@ -31,15 +31,15 @@ export class PreferenceManager {
     put(key:string, value:any) : void {
         let thisPreference = this.preference(key);
         if (thisPreference) {
-            thisPreference.value = value;
+            thisPreference.values = value;
         } else {
-            this.savedPreferences.push({key: key, value: value});
+            this.savedPreferences.push({region: key, values: value});
         }
     }
 
     get(key:string, defaults:any) : any {
         let thisPreference = this.preference(key),
-            savedPrefs = thisPreference ? thisPreference.value : {},
+            savedPrefs = thisPreference ? thisPreference.values : {},
             mergedPrefs = {};
 
         for (let key in defaults) {
@@ -57,6 +57,7 @@ export class PreferenceManager {
 export default class ApplicationState {
 
     currentUser: User;
+
 
     currentElement: Element;
 }

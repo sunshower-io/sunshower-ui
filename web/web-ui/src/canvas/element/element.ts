@@ -562,7 +562,7 @@ export abstract class AbstractElementFactory<E extends Element> implements Eleme
 export interface EditorMode {
     name            ?: string;
     viewState       ?: string;
-
+    data            ?: any;
 }
 
 export interface ElementEditor<E extends Element> {

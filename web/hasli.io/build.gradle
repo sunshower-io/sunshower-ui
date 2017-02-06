@@ -19,6 +19,10 @@ configurations {
 
 dependencies {
     earlib "io.hasli.api:schemata"
+    earlib "io.hasli.api:core-api"
+    earlib "io.hasli.api:common-api"
+    earlib "io.hasli.api:security-api"
+    earlib "io.hasli.api:vault-api"
     earlib "io.hasli.search:search-es"
     earlib "io.hasli.hfs:hfs-service"
     earlib "io.hasli.service:service-vault"
@@ -27,6 +31,10 @@ dependencies {
     earlib "io.hasli.service:service-csp"
     earlib "io.hasli.service:service-core"
     earlib "io.hasli.service:service-security"
+    earlib "io.hasli.persist:persist-api:1.00.000.000-SNAPSHOT"
+    earlib "io.hasli.persist:persist-core:1.00.000.000-SNAPSHOT"
+    earlib "io.hasli.persist:persist-hibernate:1.00.000.000-SNAPSHOT"
+    earlib "io.hasli.persist:persist-jpa:1.00.000.000-SNAPSHOT"
     deploy project(path: ':web:web-site', configuration: 'archives')
     deploy project(path: ':web:web-service', configuration:'archives')
 }
