@@ -219,7 +219,9 @@
 @secondaryItemTransition: color @defaultDuration @defaultEasing;
 @secondaryItemColor: @unselectedTextColor;
 
-@secondaryHoverItemBackground: @transparentBlack;
+//@secondaryHoverItemBackground: @transparentBlack;
+//@secondaryHoverItemColor: @selectedTextColor;
+@secondaryHoverItemBackground: none;
 @secondaryHoverItemColor: @selectedTextColor;
 
 @secondaryActiveItemBackground: @transparentBlack;
@@ -249,6 +251,7 @@
 @secondaryPointingItemVerticalPadding: @relativeTiny;
 @secondaryPointingItemHorizontalPadding: @relativeMassive;
 
+//@secondaryPointingHoverTextColor: @textColor;
 @secondaryPointingHoverTextColor: @textColor;
 
 @secondaryPointingActiveBorderColor: #239AE8;
@@ -362,7 +365,7 @@
 @textMenuHeaderSize: @relativeSmall;
 @textMenuHeaderColor: @darkTextColor;
 @textMenuHeaderFontWeight: bold;
-@textMenuHeaderTextTransform: uppercase;
+@textMenuHeaderTextTransform: none;
 
 @textVerticalMenuMargin: @relativeMedium 0em;
 @textVerticalMenuHeaderMargin: @relative8px 0em @relative10px;
