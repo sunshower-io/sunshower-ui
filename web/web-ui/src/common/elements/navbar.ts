@@ -1,5 +1,5 @@
 import {Banner} from "common/banner/banner";
-export class PageHeader {
+export class Navbar {
 
     // @bindable
     // carouselItems: CarouselViewModel[];
