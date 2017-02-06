@@ -30,7 +30,7 @@ export class App {
         }, {
             route: 'workspace',
             name: 'navigator',
-            moduleId: './workspace/workspace',
+            moduleId: './workspaces/workspaces',
             nav: true,
             title: 'Workspace',
         }, {

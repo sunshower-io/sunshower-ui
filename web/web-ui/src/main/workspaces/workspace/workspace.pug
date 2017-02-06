@@ -1,0 +1,51 @@
+template
+    .ui.hidden.divider
+        .ui.container
+            .ui.items
+                .item
+                    .image
+                        i.huge.blue.ion-images.icon
+                    .content
+                        a.header Header
+                        .meta
+                            span Description
+                        .description
+                            p
+                        .extra
+                            | Additional Details
+            //.ui.text.menu
+                //h1.ui.header
+                //    | Workspaces
+                .right.compact.menu
+                    .ui.fitted.item
+                        i.large.ion-navicon-round.icon
+                    .ui.fitted.item
+                        i.large.ion-android-apps.icon
+            .ui.divider
+            .ui.container.grid
+                .two.column.row
+                    .column
+                        .ui.icon.green.input
+                            input(type='text', placeholder='Search...')
+                            i.search.icon
+                    .right.aligned.seven.wide.column
+                        .ui.basic.primary.button(type='button', click.trigger='create()')
+                            | + CREATE
+                .ui.hidden.divider
+                .three.column.centered.row
+                    .column
+                        .ui.cards
+                            .centered.card
+                                .content
+                                    i.right.floated.grey.ellipsis.horizontal.icon
+                                    .header
+                                        | CREATE NEW WORKSPACE
+                                    .description
+                                        .ui.image
+                                            i.huge.blue.ion-plus-round.icon
+                                .extra.content
+                                    .ui.two.buttons
+                                        .ui.basic.green.button(type='button', click.trigger="open()")
+                                            | Open
+                                        .ui.basic.blue.button Deploy
+
