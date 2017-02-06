@@ -1,0 +1,33 @@
+template
+    .overview-widget
+        h2.widget-header Applications
+        .widget-action-menu
+            .ui.icon.input
+                input(type='text', placeholder='Search')
+                i.search.icon
+            .ui.basic.button.primary Actions
+            .ui.basic.button.primary Select: Type
+            span.widget-icons
+                .ui.button.primary New
+        table.ui.very.basic.table.widget-table
+            thead
+                tr
+                    th Name
+                    th Status
+                    th IP
+                    th Ports
+                    th CPU
+                    th Memory
+            tbody
+                tr(
+                if.bind="applications.length > 0",
+                repeat.for='application of applications'
+                )
+                    td
+                    td
+                    td
+                    td
+                    td
+                    td
+                tr(if.bind="applications.length == 0")
+                    td.widget-table-empty-alert(colspan='6') You have no applications

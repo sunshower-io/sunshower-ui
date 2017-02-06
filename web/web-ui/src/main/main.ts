@@ -40,6 +40,12 @@ export class App {
             nav: false,
             title: 'Settings',
             settings: {}
+        }, {
+            route: 'overview',
+            name: 'overview',
+            moduleId: './overview/overview',
+            nav: true,
+            title: 'Overview'
         }
         ]);
         this.router = router;

@@ -1,0 +1,32 @@
+@grey: #7D7C7C;
+@standardgrey: #D6D6D7;
+//@lightgrey: lighten(@standardgrey, 5%);
+@em: 16px;
+@primarycolor: #239AE8;
+@border: 2px solid @standardgrey;
+
+.overview-widget {
+  padding: 1rem;
+}
+
+.widget-header {
+  color: @grey;
+  font-weight:normal;
+}
+
+.ui.table.widget-table {
+  thead tr th {
+    border-bottom: @border;
+    text-align:center;
+    color: @standardgrey;
+  }
+  margin:2rem 0 !important;
+}
+
+.widget-table-empty-alert {
+  text-align:center !important;
+  color: @standardgrey;
+  font-size:2rem;
+  padding: 4rem !important;
+  border-bottom: @border;
+}

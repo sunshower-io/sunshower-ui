@@ -19,7 +19,7 @@
 
 @media (min-height: 320px) {
   .ui.footer.hasli--footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     background-color: #FFFFFF !important;
