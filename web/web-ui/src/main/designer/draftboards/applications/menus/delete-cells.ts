@@ -6,7 +6,7 @@ import {
 import {Element} from 'canvas/element/element';
 
 import {Canvas} from 'canvas/core/canvas';
-import {EditorContext} from "main/workspace/draftboards/editor";
+import {EditorContext} from "main/designer/draftboards/editor";
 
 export default class DeleteCells extends AbstractMenuItem {
 

@@ -1,7 +1,7 @@
 
 import {DialogService} from 'aurelia-dialog';
 import {AbstractMenuItem} from 'common/elements/menu';
-import {EditorContext} from "main/workspace/draftboards/editor";
+import {EditorContext} from "main/designer/draftboards/editor";
 import {ExecutionDialog} from "./execution/execution-dialog";
 
 export default class ViewExecutionOrderMenuItem extends AbstractMenuItem {
