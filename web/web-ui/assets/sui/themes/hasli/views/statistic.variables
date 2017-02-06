@@ -28,7 +28,7 @@
 @valueFontWeight: normal;
 @valueLineHeight: 1em;
 @valueColor: @black;
-@valueTextTransform: uppercase;
+@valueTextTransform: none;
 
 /* Label */
 @labelSize: @relativeMedium;
@@ -38,7 +38,7 @@
 @labelFontWeight: bold;
 @labelColor: @textColor;
 @labelLineHeight: @relativeLarge;
-@labelTextTransform: uppercase;
+@labelTextTransform: none;
 
 /* Text */
 @textValueLineHeight: 1em;

@@ -25,7 +25,7 @@
 @subHeadingDistance: @2px;
 @subHeadingFontSize: @relativeTiny;
 @subHeadingFontWeight: bold;
-@subHeadingTextTransform: uppercase;
+@subHeadingTextTransform: none;
 @subHeadingColor: '';
 
 @smallSubHeadingSize: @relativeMini;

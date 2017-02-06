@@ -6,7 +6,7 @@ import {
 
 import {
     EditorContext
-} from "main/workspace/draftboards/editor";
+} from "main/designer/draftboards/editor";
 import {DeployDialog} from "./file/deploy-dialog";
 
 export default class DeployMenu extends AbstractMenuItem implements MenuItem {

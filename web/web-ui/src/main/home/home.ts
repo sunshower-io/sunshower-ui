@@ -30,13 +30,13 @@ export class Home {
 
 
     attached(): void {
-        Banner.close();
-
-        Banner.instance.carousel.subject.subscribe(
-            null, null, () => {
-                this.resize(true);
-            }
-        );
+        // Banner.close();
+        //
+        // Banner.instance.carousel.subject.subscribe(
+        //     null, null, () => {
+        //         this.resize(true);
+        //     }
+        // );
         // $(this.control).hover((e) => {
         //     if (!this.menuExpanded) {
         //         $(this.menu).velocity('transition.slideRightIn', {display: 'inline-block'});
@@ -50,10 +50,10 @@ export class Home {
         //         this.menuExpanded = false;
         //     }
         // });
-
-        Banner.visibility.subscribe(visible => {
-            this.resize(visible);
-        });
+        //
+        // Banner.visibility.subscribe(visible => {
+        //     this.resize(visible);
+        // });
     }
 
     navigateBack() : void {
@@ -68,27 +68,27 @@ export class Home {
     }
 
     private resize(visible: boolean) {
-        let instance = Banner.instance,
-            container = $(instance.container).find('.carousel-container'),
-            offset = $(container).offset(),
-            height = $(container).height(),
-            content = $(this.contentSpace);
-        if(visible) {
-            content.height(height);
-            content.offset(offset);
-        }
-
-        this.instance = instance;
+        // let instance = Banner.instance,
+        //     container = $(instance.container).find('.carousel-container'),
+        //     offset = $(container).offset(),
+        //     height = $(container).height(),
+        //     content = $(this.contentSpace);
+        // if(visible) {
+        //     content.height(height);
+        //     content.offset(offset);
+        // }
+        //
+        // this.instance = instance;
     }
 
     public configureRouter(config: RouterConfiguration, router: Router) {
         config.title = 'Workspace';
         config.map([
             {
-                route: ['', 'workspace'],
-                name: 'workspace',
-                moduleId: 'main/home/home-default',
-                title: 'Workspace'
+                route: ['', 'workspaces'],
+                name: 'workspaces',
+                moduleId: 'main/workspaces/workspaces',
+                title: 'Workspaces'
             },
             {
                 route: 'blocks',
@@ -121,7 +121,7 @@ export class Home {
                 href: '#/main/workspace/draftboard',
                 name: 'Design',
                 nav: true,
-                moduleId: 'main/workspace/workspace',
+                moduleId: 'main/workspaces/workspaces',
                 settings: {
                     closeBanner: true,
                     icon: 'assets/sui/themes/hasli/assets/images/icons/design-icon.svg'

@@ -25,9 +25,9 @@
 @itemHorizontalPadding: @relativeLarge;
 @itemTextTransform: none;
 @itemTransition:
-  background @defaultDuration @defaultEasing,
-  box-shadow @defaultDuration @defaultEasing,
-  color @defaultDuration @defaultEasing
+        background @defaultDuration @defaultEasing,
+        box-shadow @defaultDuration @defaultEasing,
+        color @defaultDuration @defaultEasing
 ;
 @itemFontWeight: normal;
 @itemTextColor: @textColor;
@@ -219,7 +219,9 @@
 @secondaryItemTransition: color @defaultDuration @defaultEasing;
 @secondaryItemColor: @unselectedTextColor;
 
-@secondaryHoverItemBackground: @transparentBlack;
+//@secondaryHoverItemBackground: @transparentBlack;
+//@secondaryHoverItemColor: @selectedTextColor;
+@secondaryHoverItemBackground: none;
 @secondaryHoverItemColor: @selectedTextColor;
 
 @secondaryActiveItemBackground: @transparentBlack;
@@ -243,12 +245,13 @@
 @secondaryMenuSubMenuItemPadding: @relative7px @secondarySubMenuHorizontalPadding;
 
 /* Pointing */
-@secondaryPointingBorderWidth: 0px;
+@secondaryPointingBorderWidth: 2px;
 //@secondaryPointingBorderColor: @borderColor;
 @secondaryPointingBorderColor: none;
 @secondaryPointingItemVerticalPadding: @relativeTiny;
 @secondaryPointingItemHorizontalPadding: @relativeMassive;
 
+//@secondaryPointingHoverTextColor: @textColor;
 @secondaryPointingHoverTextColor: @textColor;
 
 @secondaryPointingActiveBorderColor: #239AE8;
@@ -362,7 +365,7 @@
 @textMenuHeaderSize: @relativeSmall;
 @textMenuHeaderColor: @darkTextColor;
 @textMenuHeaderFontWeight: bold;
-@textMenuHeaderTextTransform: uppercase;
+@textMenuHeaderTextTransform: none;
 
 @textVerticalMenuMargin: @relativeMedium 0em;
 @textVerticalMenuHeaderMargin: @relative8px 0em @relative10px;
@@ -435,8 +438,8 @@
 @attachedBoxShadow: none;
 @attachedBorder: @borderWidth solid @solidBorderColor;
 @attachedBottomBoxShadow:
-  @boxShadow,
-  @attachedBoxShadow
+        @boxShadow,
+        @attachedBoxShadow
 ;
 
 /* Resize large sizes */

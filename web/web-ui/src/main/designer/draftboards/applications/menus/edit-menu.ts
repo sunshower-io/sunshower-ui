@@ -1,5 +1,5 @@
 import {MenuItem, AbstractMenuItem} from 'common/elements/menu';
-import {EditorContext} from "main/workspace/draftboards/editor";
+import {EditorContext} from "main/designer/draftboards/editor";
 import DeleteCells from "./delete-cells";
 
 export default class EditMenu extends AbstractMenuItem implements MenuItem {

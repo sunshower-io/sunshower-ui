@@ -1,8 +1,20 @@
 template
-    require(from="common/elements/page-header")
-    page-header(
-        router.bind="router",
-        carousel-items.bind="bannerElements.items"
-    )
-    .page.content
-        router-view
+    require(from="common/elements/navbar")
+
+    navbar(router.bind="router")
+
+    // main
+    router-view
+
+    // footer
+    .ui.vertical.footer.segment.hasli--footer
+        .ui.fluid.container
+            .ui.container
+                .ui.right.floated.horizontal.list
+                    .disabled.item(href='#') © Hasli, Inc.
+                    a.item(href='#') Terms
+                    a.item(href='#') Privacy Policy
+                .ui.horizontal.list
+                    a.item(href='#') Docs
+                    a.item(href='#') Blogs
+                    a.item(href='#') Help & Support

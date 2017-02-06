@@ -2,7 +2,7 @@ import {
     MenuItem,
     AbstractMenuItem
 } from 'common/elements/menu';
-import {EditorContext} from "main/workspace/draftboards/editor";
+import {EditorContext} from "main/designer/draftboards/editor";
 import {DialogService} from 'aurelia-dialog';
 import {SaveDialog} from "./file/save-dialog";
 import DeployMenu from "./deploy-menu";
