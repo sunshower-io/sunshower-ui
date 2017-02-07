@@ -2,6 +2,8 @@
         Global Overrides
 *******************************/
 
+
+// Give text colors name
 @text-colors: blue, green, orange, pink, purple, red, teal, yellow, black, grey, white;
 .text {
   .-
@@ -17,13 +19,17 @@
 ;
 }
 
-@media (min-height: 320px) {
-  .ui.footer.hasli--footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #FFFFFF !important;
-  }
+body {
+  height: 100%;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.hasli--footer {
+  background-color: #FFFFFF !important;
+  border-top: 1px solid rgba(34, 36, 38, 0.15) !important;
+  position: inherit;
 }
 
 .masthead {
@@ -31,7 +37,7 @@
   padding: 2px 0 !important;
 }
 
-.main {
+.auth--main_container {
   margin-top: 6em;
 }
 
@@ -39,9 +45,28 @@
   background-color: #FFFFFF !important;
 }
 
-.content-view {
-  background-color: #FFFFFF !important;
+.circular--icon {
+  width: 30px !important;
+  height: 30px !important;
+  box-shadow: 1px 1px 25px !important;
 }
+
+.circular--icon_green {
+  color: @hasliGreen !important;
+}
+.circular--icon_blue {
+  color: @primaryColor !important;
+}
+.circular--icon_orange {
+  color: #5bfa !important;
+}
+.circular--icon_red {
+  color: #D41800 !important;
+}
+.circular--icon_purple {
+  color: #9012FE !important;
+}
+
 
 .navbar {
   height: 48px;
@@ -59,18 +84,31 @@
   top: 0;
 }
 
-.workspace--image_container {
+.workspace--content-view {
+  background-color: #FFFFFF !important;
+  height: 100% !important;
+}
+
+.workspace--navbar {
+  padding: 2px 0 !important;
+}
+
+.workspaces--image_container {
   height: 80px !important;
   width: 150px !important;
   text-align: center; margin: 1em 0;
 }
 
-.workspace--image_size {
+.workspaces--image_size {
   max-height: 80px;
   max-width: 150px;
   display: inline-block;
   height: 100%;
   vertical-align: middle;
+}
+
+.cloud--image_container {
+  width: 150px !important;
 }
 
 .popup--transition {
@@ -81,21 +119,6 @@
   width: 400px;
 }
 
-
-.nav--color {
-  a:active {
-    background-color: blue;
-  }
-  a:hover {
-    color: red;
-  }
-}
-
-
-
-img.transparent {
-  opacity: 0;
-}
 
 /* used for plus/minus icone toggle */
 .toggle--icon {
@@ -110,11 +133,6 @@ img.transparent {
   box-shadow: none !important;
 }
 
-.grid--lines {
-  background: transparent linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent);
-  height: 100%;
-  background-size: 50px 50px;
-}
 
 /* Application Explore height */
 .form--scroll {
