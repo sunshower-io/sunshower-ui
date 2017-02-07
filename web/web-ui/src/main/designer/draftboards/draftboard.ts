@@ -39,7 +39,7 @@ export class Draftboard {
             name: 'applications',
             nav: true,
             title: 'Applications',
-            moduleId: 'main/workspace/draftboards/applications/applications',
+            moduleId: 'main/designer/draftboards/applications/applications',
             settings: {
                 icon: 'block layout icon'
             }
