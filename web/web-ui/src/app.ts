@@ -20,23 +20,38 @@ export class App {
         config.title = 'Hasli.io';
         config.addPipelineStep('authorize', new SecurityStep(this.tokenHolder));
 
+        this.router = router;
+        config.title = '';
         config.map([
             {
                 route: '',
-                redirect: 'main',
+                redirect: 'workspaces',
+            }, {
+                route: 'workspaces',
+                name: 'workspaces',
+                moduleId: 'main/workspaces/workspaces',
+                nav: false,
+                title: 'Workspaces',
             },
             {
-                route: 'main',
-                nav: true,
-                moduleId: './main/main',
-                title: 'Main',
-                name: 'main'
+                route: 'workspace',
+                name: 'workspace',
+                moduleId: 'main/workspaces/workspace/workspace',
+                nav: false,
+                title: 'Workspace',
+            }, {
+                route: 'settings',
+                name: 'settings',
+                moduleId: './main/settings/settings',
+                nav: false,
+                title: 'Settings',
+                settings: {}
             }
         ]);
-        config.mapUnknownRoutes('main');
-        this.router = router;
 
+        this.router = router;
     }
+
 }
 
 
