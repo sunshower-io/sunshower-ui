@@ -58,7 +58,7 @@ body {
   color: @primaryColor !important;
 }
 .circular--icon_orange {
-  color: #F6A623 !important;
+  color: #5bfa !important;
 }
 .circular--icon_red {
   color: #D41800 !important;
@@ -105,6 +105,10 @@ body {
   display: inline-block;
   height: 100%;
   vertical-align: middle;
+}
+
+.cloud--image_container {
+  width: 150px !important;
 }
 
 .popup--transition {

@@ -7,3 +7,24 @@ template
         |   Welcome to Hasli.io! Browse some existing applications or create your own to deploy!
     h4.ui.center.aligned.grey.header
         |   You'll need to add a cloud provider before deploying any applications
+    .ui.centered.grid.container
+        .ui.hidden.divider
+        .ui.basic.segment
+            .ui.cards
+                .ui.card(type='button', click.trigger="open()")
+                    .content
+                        .meta
+                        .description
+                            .ui.container.workspaces--image_container
+                                img(src='styles/themes/hasli/assets/images/icons/code-working.svg').workspaces--image_size
+                        .ui.secondary.button
+                            | + Create New Application
+                .ui.card
+                    .content
+                        .meta
+                        .description
+                            .ui.container.workspaces--image_container
+                                img(src='styles/themes/hasli/assets/images/logos/docker-icon.svg').workspaces--image_size
+                        .ui.secondary.button
+                            | Browse Applications
+            .ui.hidden.divider
