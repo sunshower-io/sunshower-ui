@@ -44,7 +44,7 @@ template
                 if.bind="applications.length > 0 && !loading",
                 repeat.for='application of applications'
                 )
-                    td
+                    td.center.aligned
                         input(type="checkbox")
                     td
                         img.ui.image.tiny(src="${application.logo}")
