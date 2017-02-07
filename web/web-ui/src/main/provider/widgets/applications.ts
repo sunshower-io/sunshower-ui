@@ -5,19 +5,28 @@ export class ApplicationsWidget {
     @bindable
     applications: Application[];
 
+    @bindable
+    loading: boolean;
+
 
     attached(): void {
         this.applications = [];
     };
 
+    refresh(): void {
+        this.loading = true;
+    }
+
 }
 
-
+//leaving this here so Josiah can put it wherever
 export class Application {
-    name: string;
-    status: string;
-    ip: string;
-    ports: string;
-    cpu: string;
-    memory: string;
+    logo    ?: string;
+    name    ?: string;
+    status  ?: string;
+    ip      ?: string;
+    ports   ?: string;
+    cpu     ?: number;
+    memory  ?: number;
+    disk    ?: number;
 }
