@@ -26,10 +26,17 @@ body {
   flex-direction: column;
 }
 
+@footerheight: 48px;
 .hasli--footer {
   background-color: #FFFFFF !important;
   border-top: 1px solid rgba(34, 36, 38, 0.15) !important;
-  position: inherit;
+  position: fixed !important;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height:@footerheight;
+  box-sizing:border-box;
+  z-index: 51 !important; //one higher than the workspace BG
 }
 
 .masthead {
@@ -67,13 +74,11 @@ body {
   color: #9012FE !important;
 }
 
-
+@headerheight: 48px;
 .navbar {
-  height: 48px;
-  min-height: 48px;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+  height: @headerheight;
   z-index: 2;
-  line-height: 48px;
+  line-height: @headerheight;
   background: #171B26 !important;
   color: white;
   box-shadow: none;
@@ -165,13 +170,25 @@ body {
   width: 300px !important;
   border-top: none;
   position: fixed;
-  top: 38px !important;
-  left: 0;
+  top: @headerheight !important;
+  bottom:@footerheight !important;
   //-webkit-box-sizing: border-box;
   //-moz-box-sizing: border-box;
   box-sizing: border-box;
   border-top: 0 !important;
+  border-bottom: 0 !important;
   overflow:hidden;
+  backface-visibility: hidden;
+  transition: none;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  visibility: visible;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  overflow-y: auto !important;
+  z-index: 102;
+
 
   .menu--header {
     height: 39px !important;
@@ -183,19 +200,6 @@ body {
     background-color: #F4F4F4 !important;
   }
 
-  backface-visibility: hidden;
-  transition: none;
-  will-change: transform;
-  transform: translate3d(0, 0, 0);
-  visibility: visible;
-  -webkit-overflow-scrolling: touch;
-
-  height: 100% !important;
-  max-height: 100%;
-  border-radius: 0em !important;
-  margin: 0em !important;
-  overflow-y: auto !important;
-  z-index: 102;
 }
 
 /* Builder */
