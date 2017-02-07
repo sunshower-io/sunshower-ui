@@ -19,28 +19,41 @@ export class App {
     public configureRouter(config: RouterConfiguration, router: Router) {
         config.title = '';
         config.map([{
-            route: '',
-            redirect: 'home'
-        }, {
-            route: 'home',
-            name: 'navigator',
-            moduleId: './home/home',
-            nav: true,
-            title: 'Home',
-        }, {
-            route: 'workspace',
-            name: 'navigator',
-            moduleId: './workspaces/workspaces',
-            nav: true,
-            title: 'Workspace',
-        }, {
-            route: 'settings',
-            name: 'settings',
-            moduleId: 'main/settings/settings',
-            nav: false,
-            title: 'Settings',
-            settings: {}
-        }
+                route: '',
+                redirect: 'home'
+            }, {
+                route: 'home',
+                name: 'navigator',
+                moduleId: './home/home',
+                nav: true,
+                title: 'Home',
+            }, {
+                route: 'overview',
+                name: 'overview',
+                moduleId: './overview/overview',
+                nav: true,
+                title: 'Overview',
+            }, {
+                route: 'designer',
+                name: 'designer',
+                moduleId: './designer/workspace',
+                nav: true,
+                title: 'Designer'
+            },
+            {
+                route: 'workspace',
+                name: 'navigator',
+                moduleId: './workspaces/workspaces',
+                nav: true,
+                title: 'Workspace',
+            }, {
+                route: 'settings',
+                name: 'settings',
+                moduleId: 'main/settings/settings',
+                nav: false,
+                title: 'Settings',
+                settings: {}
+            }
         ]);
         this.router = router;
     }
