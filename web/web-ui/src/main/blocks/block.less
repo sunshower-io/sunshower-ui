@@ -100,7 +100,7 @@
 
 }
 
-.overlay-action-menu {
+.overlay-action-menu, .widget-action-menu {
   &> * {
     display: inline-block;
     margin-right:3rem;
@@ -108,15 +108,23 @@
   * {
     border-radius:0 !important;
   }
+  .button i.icon:last-child {
+    margin: 0 0 0 .5rem;
+  }
   .clearfix
 }
 
-.overlay-icons {
+.overlay-icons, .widget-icons {
   margin-right:0;
   float:right;
+  & > * {
+    margin:2px 3rem 0 0;
+  }
   i.icon {
     color: @lightgrey;
-    margin:2px 3rem 0 0;
+  }
+  .button {
+    text-transform: uppercase;
   }
 }
 
