@@ -41,7 +41,7 @@
 @iconOpacity: 1;
 @iconSize: 1.5em;
 @iconOffset: @lineHeightOffset;
-@iconMargin: 0.75rem;
+@iconMargin: 1.75rem;
 @iconAlignment: middle;
 
 /* Image */
