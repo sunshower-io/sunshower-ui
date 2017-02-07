@@ -15,6 +15,7 @@ export class ApplicationDeploymentMarshaller implements Marshaller<ApplicationDe
             id: data.id,
             provider: 'aws',
             type: 'ApplicationDeployment',
+            name: data.applicationName,
             payload: {
                 id: data.applicationId,
                 name: data.applicationName
@@ -28,8 +29,10 @@ export class InfrastructureNodeMarshaller implements Marshaller<InfrastructureNo
         return {
             id: data.id,
             provider: 'aws',
+            name: data.name,
             type: 'InfrastructureNode',
             payload: {
+                name: data.name,
                 operatingSystem : {
                     name: data.operatingSystem.name,
                     icon: data.operatingSystem.icon,
@@ -107,8 +110,8 @@ export default class DraftboardMarshaller implements Marshaller<Draftboard> {
 
     private writeEdge(edge: Edge<Properties>) {
         return {
-            source: edge.target.id,
-            target: edge.source.id,
+            target: edge.target.id,
+            source: edge.source.id,
             relation: 'run-after',
             direction: 'out'
         }
