@@ -19,28 +19,17 @@ export class InstancesWidget {
     }
 
     attached(): void {
-        this.client.fetch('compute')
-            .then(d => d.json() as any)
-            .then(d => {
-                console.log(d);
-                this.instances = d;
-            });
-        // this.instances = [
-        //     {
-        //         logo: 'http://i.crn.com/logos/ca_technologies.jpg',
-        //         name: 'CA UIM Azure Probe',
-        //         status: 'Running',
-        //         ip: '10.238.0.2',
-        //         ports: '8080',
-        //         cpu: 40,
-        //         memory: 40,
-        //         disk: 40
-        //     }
-        //         ];
+        this.refresh();
     };
 
     refresh(): void {
         this.loading = true;
+        this.client.fetch('compute')
+            .then(d => d.json() as any)
+            .then(d => {
+                this.instances = d;
+                this.loading = false;
+            });
     }
 
 }
