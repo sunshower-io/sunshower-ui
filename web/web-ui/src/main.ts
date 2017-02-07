@@ -14,6 +14,7 @@ import {
     SemanticUIRenderer
 } from "common/renderers/semantic-ui-renderer";
 import {Renderer} from "aurelia-dialog";
+import {PreferenceManager} from "./storage/application-state";
 
 export function param(name) {
     return decodeURIComponent((new RegExp(
@@ -95,6 +96,14 @@ export function configure(aurelia: Aurelia) {
                     });
                     tokenHolder.set(context, false);
                     container.registerInstance(HttpClient, authenticatedClient);
+                    // authenticatedClient.fetch('preferences')
+                    //     .then(preferences => preferences.json() as any)
+                    //     .then(preferences => {
+                    //         let preferenceManager = new PreferenceManager();
+                    //         preferenceManager.preferences = preferences;
+                    //         container.registerInstance(PreferenceManager, preferences)
+                    //     });
+                    //TODO set preferences
                     aurelia.start().then(() => aurelia.setRoot('app'));
                 }).catch(a => {
                     container.registerInstance(HttpClient, http);

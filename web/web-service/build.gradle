@@ -21,6 +21,7 @@ dependencies {
     provided "io.hasli.service:service-csp"
     provided "io.hasli.service:service-security"
     provided "io.hasli.persist:persist-hibernate"
+    testCompile "io.hasli.barometer.modules:jaxrs"
 
 }
 
