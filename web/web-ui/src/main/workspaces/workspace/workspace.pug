@@ -1,51 +1,36 @@
-template
+template(bindable="router")
     .ui.hidden.divider
-        .ui.container
-            .ui.items
-                .item
-                    .image
-                        i.huge.blue.ion-images.icon
-                    .content
-                        a.header Header
-                        .meta
-                            span Description
-                        .description
-                            p
-                        .extra
-                            | Additional Details
-            //.ui.text.menu
-                //h1.ui.header
-                //    | Workspaces
-                .right.compact.menu
-                    .ui.fitted.item
-                        i.large.ion-navicon-round.icon
-                    .ui.fitted.item
-                        i.large.ion-android-apps.icon
-            .ui.divider
-            .ui.container.grid
-                .two.column.row
-                    .column
-                        .ui.icon.green.input
-                            input(type='text', placeholder='Search...')
-                            i.search.icon
-                    .right.aligned.seven.wide.column
-                        .ui.basic.primary.button(type='button', click.trigger='create()')
-                            | + CREATE
-                .ui.hidden.divider
-                .three.column.centered.row
-                    .column
-                        .ui.cards
-                            .centered.card
-                                .content
-                                    i.right.floated.grey.ellipsis.horizontal.icon
-                                    .header
-                                        | CREATE NEW WORKSPACE
-                                    .description
-                                        .ui.image
-                                            i.huge.blue.ion-plus-round.icon
-                                .extra.content
-                                    .ui.two.buttons
-                                        .ui.basic.green.button(type='button', click.trigger="open()")
-                                            | Open
-                                        .ui.basic.blue.button Deploy
+    .ui.container
+        .ui.items
+            .item
+                .ui.small.image
+                    img(src='styles/themes/hasli/assets/images/logos/aws-logo.svg')
+                .middle.aligned.content
+                    a.header Workspace Name
+                    .meta
+                        span description
+                    .description
+                        p
+                    .extra
+                        | Last Updated: February 11th, 2017
+        .ui.hidden.divider
+        .ui.secondary.pointing.menu
+            a.item(repeat.for='row of router.navigation', class="${row.isActive ? 'active' : ''}" href.bind='row.href')
+                | ${row.title}
+        //.ui.secondary.pointing.menu
+        //    a.active.item
+        //        | Dashboard
+        //    a.item
+        //        | Applications
+        //    a.item
+        //        | Clouds
+        //    a.item
+        //        | Instances
+        //    a.item
+        //        | Designer
+        //    a.item
+        //        | Settings
+    .ui.fluid.container.workspace--content-view
+        .ui.fitted.divider
+        router-view
 
