@@ -46,6 +46,21 @@ export class App {
                 nav: false,
                 title: 'Settings',
                 settings: {}
+            }, {
+                route: 'designer',
+                name: 'designer',
+                moduleId: 'main/designer/workspace',
+                nav: false,
+                title: 'Designer',
+                settings: {}
+            }, {
+
+                route: 'overview',
+                name: 'overview',
+                moduleId: 'main/overview/overview',
+                nav: false,
+                title: 'Overview',
+                settings: {}
             }
         ]);
 
