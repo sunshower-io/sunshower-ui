@@ -186,7 +186,6 @@ body {
   -webkit-overflow-scrolling: touch;
   border-radius: 0 !important;
   margin: 0 !important;
-  overflow-y: auto !important;
   z-index: 102;
 
 
@@ -216,3 +215,5 @@ body {
 .no--padding {
   padding: 0px !important;
 }
+
+

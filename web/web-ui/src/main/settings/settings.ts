@@ -9,7 +9,7 @@ export class Settings {
 
 
     public configureRouter(config: RouterConfiguration, router: Router) {
-        config.title = "Settings";
+        config.title = "";
         config.map([
             {
                 route: ['', 'profile'],
@@ -19,6 +19,15 @@ export class Settings {
                 title: "Profile",
                 settings: {
                     icon: 'user'
+                }
+            }, {
+                route: 'admin',
+                name: 'admin',
+                moduleId: 'main/settings/admin/admin',
+                nav: true,
+                title: 'Admin',
+                settings: {
+                    icon: 'setting'
                 }
             },
             {

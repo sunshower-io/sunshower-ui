@@ -16,11 +16,10 @@ import {
 import {MenuItem} from 'common/elements/menu';
 import Menu from 'common/elements/menu';
 import {Breadcrumb} from "./breadcrumb/breadcrumb";
+import {PreferenceManager} from "storage/application-state";
 
-@inject(Menu)
+@inject(Menu, PreferenceManager)
 export class Draftboard {
-
-    private menu: Menu;
 
     public router: Router;
 
@@ -32,6 +31,21 @@ export class Draftboard {
 
     private breadcrumb: Breadcrumb;
 
+    private preferences: any;
+
+    static readonly draftboardPath: string = 'main/workspace/draftboards/Draftboard';
+
+    static readonly draftboardDefaults = {
+        leftToggled: true,
+        rightToggled: true
+    };
+
+    constructor(private menu : Menu, private preferenceManager : PreferenceManager) {
+        this.preferences = this.preferenceManager.get(
+            Draftboard.draftboardPath,
+            Draftboard.draftboardDefaults
+        );
+    }
 
     configureRouter(config: RouterConfiguration, router: Router) {
         config.map([{
@@ -47,36 +61,43 @@ export class Draftboard {
         this.router = router;
     }
 
-    leftToggled: boolean = true;
     attached() : void {
 
-        if(this.leftToggled) {
-            this.breadcrumb.pad();
-        } else {
-            this.breadcrumb.unpad();
-        }
     }
 
     set(child: NavigationAware): void {
         this.child = child;
         this.menu.setItems((<any>child).menus);
+
+        if (this.preferences.leftToggled) {
+            this.breadcrumb.pad();
+        } else {
+            this.toggleLeft();
+        }
+
+        if (!this.preferences.rightToggled) {
+            this.toggleRight();
+        }
     }
 
     toggleLeft(): boolean {
-        let toggled = this.toggle(
+        let childToggleLeft = this.child.toggleLeft(),
+            toggled = this.toggle(
             'margin-left',
-            this.child.toggleLeft(), '0px', '-304px');
+            childToggleLeft, '0px', '-304px');
         if(toggled) {
             this.breadcrumb.pad();
         } else {
             this.breadcrumb.unpad();
         }
-        return (this.leftToggled = toggled);
+        return (this.preferences.leftToggled = toggled);
     }
 
 
     toggleRight(): boolean {
-        return this.toggle('margin-right', this.child.toggleRight(), '304px', '0px')
+        let childToggleRight = this.child.toggleRight();
+        this.preferences.rightToggled = childToggleRight;
+        return (this.preferences.rightToggled = this.toggle('margin-right', childToggleRight, '304px', '0px'))
     }
 
     hasDraftBoards(): boolean {
