@@ -109,7 +109,7 @@
 @basicBorderRadius: 0px;
 
 /* Colors */
-@coloredBorderSize: 2px;
+@coloredBorderSize: 1px;
 
 /* Ordinality */
 @secondaryBackground: @darkWhite;
