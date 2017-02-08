@@ -60,19 +60,19 @@
         <elastic-search.version>5.0.0</elastic-search.version>
 
 
-        <hasli-test.version>1.0.20.Final</hasli-test.version>
-        <!--<hasli-hal.version>1.0.51.Final</hasli-hal.version>-->
-        <!--<hasli-hfs.version>1.0.20.Final</hasli-hfs.version>-->
-        <!--<hasli-api.version>1.0.33.Final</hasli-api.version>-->
-        <!--<hasli-service.version>1.0.31.Final</hasli-service.version>-->
-        <!--<hasli-search.version>1.0.24.Final</hasli-search.version>-->
+        <hasli-test.version>1.0.30.Final</hasli-test.version>
+        <hasli-hal.version>1.0.51.Final</hasli-hal.version>
+        <hasli-hfs.version>1.0.20.Final</hasli-hfs.version>
+        <hasli-api.version>1.0.36.Final</hasli-api.version>
+        <hasli-service.version>1.0.31.Final</hasli-service.version>
+        <hasli-search.version>1.0.25.Final</hasli-search.version>
 
-        <hasli-hal.version>${snapshot-version}</hasli-hal.version>
-        <hasli-persist.version>${snapshot-version}</hasli-persist.version>
-        <hasli-api.version>${snapshot-version}</hasli-api.version>
-        <hasli-hfs.version>${snapshot-version}</hasli-hfs.version>
-        <hasli-search.version>${snapshot-version}</hasli-search.version>
-        <hasli-service.version>${snapshot-version}</hasli-service.version>
+        <!--<hasli-hal.version>${snapshot-version}</hasli-hal.version>-->
+        <!--<hasli-persist.version>${snapshot-version}</hasli-persist.version>-->
+        <!--<hasli-api.version>${snapshot-version}</hasli-api.version>-->
+        <!--<hasli-hfs.version>${snapshot-version}</hasli-hfs.version>-->
+        <!--<hasli-search.version>${snapshot-version}</hasli-search.version>-->
+        <!--<hasli-service.version>${snapshot-version}</hasli-service.version>-->
 
     </properties>
 
