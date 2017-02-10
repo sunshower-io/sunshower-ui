@@ -4,9 +4,9 @@ import {
 } from "aurelia-framework";
 
 import {HttpClient} from "aurelia-fetch-client";
-import {CredentialSecret} from "../../../model/core/secret/credentials";
-import {VirtualCloud} from "component/model/cloud";
 import {json} from "aurelia-fetch-client";
+import {CredentialSecret} from "common/model/security";
+import {VirtualCloud} from "apps/workspaces/model/components/cloud";
 
 @inject(HttpClient)
 export class Credentials {

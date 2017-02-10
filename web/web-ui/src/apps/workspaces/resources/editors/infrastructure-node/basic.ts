@@ -1,11 +1,11 @@
-import {inject, bindable} from 'aurelia-framework';
-import {InfrastructureNode} from "component/model/infrastructure-node";
-import {ElementEditor, EditorMode} from "canvas/element/element";
-import {OperatingSystemService} from 'model/os';
-import {UUID} from "utils/uuid";
-import {HttpClient} from "aurelia-fetch-client";
-import {InstanceDescriptor, NodeConfiguration} from "model/hal/api";
+import {UUID} from "common/lib/utils";
 import {json} from "aurelia-fetch-client";
+import {HttpClient} from "aurelia-fetch-client";
+import {inject, bindable} from 'aurelia-framework';
+import {OperatingSystemService} from 'common/model/api/hal';
+import {ElementEditor, EditorMode} from "common/lib/canvas/element";
+import {InfrastructureNode} from "apps/workspaces/model/infrastructure";
+import {InstanceDescriptor, NodeConfiguration} from "common/model/api/hal";
 
 @inject(HttpClient, OperatingSystemService)
 export class BasicInfrastructureNodeEditor implements ElementEditor<InfrastructureNode> {

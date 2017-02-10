@@ -1,10 +1,10 @@
 
-import {DialogService} from 'aurelia-dialog';
-import {EditorContext, EditorOperations} from "canvas/core/canvas";
-import {CanvasAction} from "canvas/menu/action";
-import {GroupItemsAsDialog} from "./dialogs/group-items-as-dialog";
-import {LayerElementFactory} from "component/model/layer";
 
+import {DialogService} from 'aurelia-dialog';
+import {EditorContext, EditorOperations} from "common/lib/canvas";
+import {CanvasAction} from "common/lib/canvas/actions";
+import {GroupItemsAsDialog} from "./dialogs/group-items-as-dialog";
+import {LayerElementFactory} from "apps/workspaces/model/components/layer";
 
 export class CreateLayerMenuItem extends CanvasAction {
 
@@ -20,7 +20,7 @@ export class CreateLayerMenuItem extends CanvasAction {
 
     apply(editor: EditorContext): void {
         EditorOperations.set(editor, 'layer-type', 'Layer');
-        EditorOperations.set(editor, 'element-factory', new LayerElementFactory())
+        EditorOperations.set(editor, 'element-factory', new LayerElementFactory());
 
         this.dialogService.open({
             viewModel: GroupItemsAsDialog,

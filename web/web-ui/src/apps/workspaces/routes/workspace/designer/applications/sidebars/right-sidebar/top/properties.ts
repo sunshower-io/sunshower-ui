@@ -1,4 +1,3 @@
-import {Element, EditorMode} from 'canvas/element/element';
 import {inject} from 'aurelia-framework';
 
 import {EventAggregator} from 'aurelia-event-aggregator';
@@ -6,15 +5,17 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {
     CanvasEvent,
     CanvasEvents
-} from 'canvas/events/canvas-events';
+} from 'common/lib/canvas';
 
 import {
     ElementEditor,
+    Element,
+    EditorMode,
     EditableElement
-} from 'canvas/element/element';
+} from 'common/lib/canvas/element';
 
 import {Container} from 'aurelia-dependency-injection';
-import ApplicationState from 'storage/application-state';
+import {ApplicationState} from 'common/lib/storage';
 
 @inject(EventAggregator, ApplicationState, Container)
 export class Properties {

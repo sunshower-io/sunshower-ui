@@ -1,6 +1,6 @@
 import {bindable} from "aurelia-framework";
-import {VirtualCloud} from "component/model/cloud";
-import {ElementEditor} from "canvas/element/element";
+import {ElementEditor} from "common/lib/canvas/element/element";
+import {VirtualCloud} from "apps/workspaces/model/components/cloud";
 
 interface CloudComponent {
     name             : string;
@@ -8,7 +8,8 @@ interface CloudComponent {
     active          ?: boolean;
 }
 
-export class FullVirtualCloudEditor implements ElementEditor<VirtualCloud> {
+export class FullVirtualCloudEditor implements
+    ElementEditor<VirtualCloud> {
     @bindable
     private cloud:VirtualCloud;
 

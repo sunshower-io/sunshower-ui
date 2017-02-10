@@ -1,7 +1,6 @@
 import {Applications} from "./applications";
 import {
     inject,
-    bindable,
     containerless,
     Container,
     customElement
@@ -11,7 +10,7 @@ import {
     Element,
     ElementEditor as Editor,
     EditableElement,
-} from 'canvas/element/element'
+} from 'common/lib/canvas/element'
 
 @containerless
 @inject(Container)

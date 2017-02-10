@@ -1,28 +1,25 @@
 
-import {createEvent} from "utils/events";
+import {createEvent} from "common/lib/utils";
 import {
-    Canvas,
     EditorOperation,
     EditorContext
-} from "canvas/core/canvas";
-import {mxConstants} from "mxgraph";
+} from "common/lib/canvas";
+
 import {
     mxPoint,
-    mxImage,
-    mxCellOverlay,
 } from "mxgraph";
 
 
-import {InfrastructureNode} from "component/model/infrastructure-node";
 
 
 
 import 'pnotify';
-import {Registry} from 'utils/registry';
+import {Registry} from 'common/lib/utils';
 
 import {inject} from 'aurelia-framework';
 
-import {Action, ActionManager} from 'canvas/actions/action-service';
+import {Action, ActionManager} from 'common/lib/canvas/actions';
+import {InfrastructureNode} from "apps/workspaces/model/components/infrastructure-node";
 
 @inject(Registry, ActionManager)
 export class Palette {

@@ -1,8 +1,14 @@
-import {EditorContext, EditorOperations} from "canvas/core/canvas";
-import {inject, bindable} from 'aurelia-framework';
-import {DraftboardManager} from "component/draftboard/draftboard";
-import {ElementFactory} from "canvas/element/element";
-import {Registry} from "utils/registry";
+import {Registry} from "common/lib/utils";
+import {
+    inject,
+    bindable
+} from 'aurelia-framework';
+
+import {ElementFactory} from "common/lib/canvas/element";
+import {
+    EditorContext,
+    EditorOperations
+} from "common/lib/canvas";
 
 @inject(Registry)
 export class GroupItemsAsDialog {

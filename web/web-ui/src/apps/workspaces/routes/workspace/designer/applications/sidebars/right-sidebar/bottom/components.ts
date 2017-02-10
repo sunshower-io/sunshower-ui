@@ -1,10 +1,11 @@
 import {inject, bindable} from 'aurelia-framework'
-import {Canvas} from 'canvas/core/canvas';
-import {Element} from 'canvas/element/element';
-import {CanvasUtilities} from 'canvas/utilities';
+import {Canvas} from 'common/lib/canvas';
+import {Element} from 'common/lib/canvas/element';
 import {mxUtils} from 'mxgraph';
-import {Registry} from 'utils/registry';
-import {InfrastructureManager} from 'component/infrastructure/infrastructure-manager';
+import {Registry} from 'common/lib/utils';
+import {DraftboardManager} from "apps/workspaces/services/draftboard/draftboard";
+import {InfrastructureManager} from "apps/workspaces/services/infrastructure/infrastructure-manager";
+
 @inject(InfrastructureManager, Registry)
 export class Components {
 
@@ -38,7 +39,8 @@ export class Components {
             $(this.element).find('.web-component').each((i: number, el: HTMLElement) => {
                 let
                     descriptor = this.elements[i],
-                    element = this.createDragElement(descriptor);
+                    element = this.createDragElement(descriptor),
+                    draftboardManager = this.registry.get(DraftboardManager) as DraftboardManager;
                 let dragSource = mxUtils.makeDraggable(
                     el,
                     this.canvas,
@@ -53,7 +55,8 @@ export class Components {
                         try {
                             canvas.model.beginUpdate();
                             deployment.addTo(canvas, canvas.getDefaultParent(), false);
-                            this.registry.draftboardManager.add(deployment);
+
+                            draftboardManager.add(deployment);
                             // canvas.addCell(deployment, canvas.getDefaultParent());
                         } finally {
                             canvas.model.endUpdate();

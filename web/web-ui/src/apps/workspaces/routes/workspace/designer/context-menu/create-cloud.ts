@@ -1,10 +1,9 @@
+
 import {DialogService} from 'aurelia-dialog';
-import {EditorContext, EditorOperations} from "canvas/core/canvas";
-import {CanvasAction} from "canvas/menu/action";
-import {
-    GroupItemsAsDialog
-} from "./dialogs/group-items-as-dialog";
-import {CloudElementFactory} from "component/model/cloud";
+import {EditorContext, EditorOperations} from "common/lib/canvas";
+import {CanvasAction} from "common/lib/canvas/actions";
+import {GroupItemsAsDialog} from "./dialogs/group-items-as-dialog";
+import {CloudElementFactory} from "apps/workspaces/model/components/cloud";
 
 export class CreateCloudMenuItem extends CanvasAction {
 

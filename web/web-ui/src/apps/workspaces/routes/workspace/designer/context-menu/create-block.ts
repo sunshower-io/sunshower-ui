@@ -5,8 +5,8 @@ import {
     EditorOperations
 } from "common/lib/canvas";
 
-import {BlockElementFactory} from "component/model/block";
 import {GroupItemsAsDialog} from "./dialogs/group-items-as-dialog";
+import {BlockElementFactory} from "apps/workspaces/model/components/block";
 
 export class CreateBlockMenuItem extends CanvasAction {
 
@@ -22,7 +22,7 @@ export class CreateBlockMenuItem extends CanvasAction {
 
     apply(editor: EditorContext): void {
         EditorOperations.set(editor, 'layer-type', 'Block');
-        EditorOperations.set(editor, 'element-factory', new BlockElementFactory())
+        EditorOperations.set(editor, 'element-factory', new BlockElementFactory());
         this.dialogService.open({
             model: editor,
             viewModel: GroupItemsAsDialog

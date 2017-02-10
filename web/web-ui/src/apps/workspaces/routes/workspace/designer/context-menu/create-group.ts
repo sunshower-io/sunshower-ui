@@ -1,11 +1,10 @@
 
 
+
 import {DialogService} from 'aurelia-dialog';
-import {EditorContext, EditorOperations} from "canvas/core/canvas";
-import {CanvasAction} from "../action";
-import {
-    GroupItemsAsDialog
-} from "./dialogs/group-items-as-dialog";
+import {EditorContext, EditorOperations} from "common/lib/canvas";
+import {CanvasAction} from "common/lib/canvas/actions";
+import {GroupItemsAsDialog} from "./dialogs/group-items-as-dialog";
 
 export class CreateGroupMenuItem extends CanvasAction {
 

@@ -4,7 +4,7 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {
     CanvasEvent,
     CanvasEvents
-} from 'canvas/events/canvas-events';
+} from 'common/lib/canvas';
 
 import {Layer} from 'mxgraph';
 

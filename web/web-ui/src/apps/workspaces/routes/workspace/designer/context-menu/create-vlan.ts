@@ -1,10 +1,10 @@
 
 
 import {DialogService} from 'aurelia-dialog';
-import {EditorContext, EditorOperations} from "canvas/core/canvas";
-import {CanvasAction} from "canvas/menu/action";
+import {EditorContext, EditorOperations} from "common/lib/canvas";
+import {CanvasAction} from "common/lib/canvas/actions";
 import {GroupItemsAsDialog} from "./dialogs/group-items-as-dialog";
-import {VlanElementFactory} from "component/model/vlan";
+import {VlanElementFactory} from "apps/workspaces/model/components/vlan";
 
 export class CreateVLANMenuItem extends CanvasAction {
 
@@ -20,7 +20,7 @@ export class CreateVLANMenuItem extends CanvasAction {
 
     apply(editor: EditorContext): void {
         EditorOperations.set(editor, 'layer-type', 'VLAN');
-        EditorOperations.set(editor, 'element-factory', new VlanElementFactory())
+        EditorOperations.set(editor, 'element-factory', new VlanElementFactory());
         this.dialogService.open({
             model: editor,
             viewModel: GroupItemsAsDialog

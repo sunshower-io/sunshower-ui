@@ -1,5 +1,5 @@
-import {ElementEditor} from "canvas/element/element";
-import {ApplicationDeployment} from "component/model/deployment";
+import {ElementEditor} from "common/lib/canvas/element";
+import {ApplicationDeployment} from "apps/workspaces/model/components/deployment";
 
 export class FullApplicationDeploymentEditor implements
     ElementEditor<ApplicationDeployment> {

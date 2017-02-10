@@ -55,7 +55,7 @@ export class PreferenceManager {
 
 }
 
-export default class ApplicationState {
+export class ApplicationState {
 
     currentUser: User;
 

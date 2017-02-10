@@ -1,9 +1,9 @@
-import {CanvasEvents} from 'canvas/events/canvas-events';
-import {inject, bindable} from 'aurelia-framework'
+import {CanvasEvents} from 'common/lib/canvas';
+import {inject} from 'aurelia-framework'
 import {EventAggregator} from 'aurelia-event-aggregator';
 
-import ApplicationState from 'storage/application-state';
-import {PropertyAware} from 'common/property-editor/property-editor'
+import {ApplicationState} from 'common/lib/storage';
+import {PropertyAware} from 'apps/workspaces/resources/custom-elements/properties'
 
 @inject(EventAggregator, ApplicationState)
 export class Editor {
