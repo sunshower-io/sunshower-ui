@@ -14,6 +14,12 @@
 
 
         <dependencies>
+
+            <module
+                    export="true"
+                    name="org.atmosphere"
+            />
+
             <module
                     export="true"
                     name="org.apache.log4j"

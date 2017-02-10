@@ -2,19 +2,27 @@ import 'jquery'
 import 'fetch';
 import {Aurelia} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
-import {LocalStorage, createStorage} from "./storage/local/local-storage";
+
+
+import {
+    LocalStorage,
+    createStorage
+} from "common/lib/storage/local/local-storage";
+
+
 import {
     AuthenticationContextHolder,
     User,
     AuthenticationContext
-} from "./model/core/security/index";
+} from "common/model/security";
 
 import {DialogConfiguration} from "aurelia-dialog";
+
+
 import {
     SemanticUIRenderer
-} from "common/renderers/semantic-ui-renderer";
-import {Renderer} from "aurelia-dialog";
-import {PreferenceManager} from "./storage/application-state";
+} from "common/resources/custom-components/semantic-ui-renderer";
+
 
 export function param(name) {
     return decodeURIComponent((new RegExp(
@@ -30,15 +38,15 @@ export function configure(aurelia: Aurelia) {
 
     aurelia.use
         .standardConfiguration()
-        .globalResources([
-            'common/elements/menu',
-            'common/sidenav/sidenav',
-            'common/elements/tree/tree',
-            'common/banner/banner',
-            'common/carousel/carousel',
-            'common/folio/folio',
-            'common/property-editor/property-editor',
-        ])
+        // .globalResources([
+        //     'common/elements/menu',
+        //     'common/sidenav/sidenav',
+        //     'common/elements/tree/tree',
+        //     'common/banner/banner',
+        //     'common/carousel/carousel',
+        //     'common/folio/folio',
+        //     'common/property-editor/property-editor',
+        // ])
         .plugin('aurelia-animator-velocity')
         .plugin('aurelia-dialog', (config: DialogConfiguration) => {
             config.useRenderer(SemanticUIRenderer);
@@ -107,7 +115,7 @@ export function configure(aurelia: Aurelia) {
                     aurelia.start().then(() => aurelia.setRoot('app'));
                 }).catch(a => {
                     container.registerInstance(HttpClient, http);
-                    aurelia.start().then(() => aurelia.setRoot('auth/auth'));
+                    aurelia.start().then(() => aurelia.setRoot('apps/auth/auth'));
                 });
 
             }

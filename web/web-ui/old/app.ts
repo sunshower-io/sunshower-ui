@@ -4,21 +4,16 @@ import {Router, RouterConfiguration} from 'aurelia-router';
 import {PipelineStep} from "aurelia-router";
 import {NavigationInstruction} from "aurelia-router";
 import {Next} from "aurelia-router";
+import {AuthenticationContextHolder} from "./model/core/security/index";
 import {inject} from "aurelia-framework";
 import {RedirectToRoute} from "aurelia-router";
+import {Settings} from './main/settings/settings'
 
-import {
-    AuthenticationContextHolder
-} from "common/model/security";
-
-
-@inject(AuthenticationContextHolder)
+@inject(AuthenticationContextHolder, Settings)
 export class App {
     public router: Router;
 
-    constructor(
-        private tokenHolder:AuthenticationContextHolder
-    ) {
+    constructor(private tokenHolder:AuthenticationContextHolder, private settings:Settings) {
     }
 
     public configureRouter(config: RouterConfiguration, router: Router) {

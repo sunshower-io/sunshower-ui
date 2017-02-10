@@ -146,6 +146,8 @@
     }
   },
   "dependencies": {
+    "@types/d3": "^4.5.0",
+    "@types/d3-selection": "^1.0.9",
     "cytoscape": "^2.7.11"
   }
 }

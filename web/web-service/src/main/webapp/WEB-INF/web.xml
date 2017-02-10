@@ -33,4 +33,33 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>io.hasli.web.api.BootstrapConfiguration</param-value>
     </context-param>
+
+    <description>AtmosphereServlet</description>
+    <display-name>AtmosphereServlet</display-name>
+    <servlet>
+        <description>AtmosphereServlet</description>
+        <servlet-name>AtmosphereServlet</servlet-name>
+        <servlet-class>org.atmosphere.cpr.AtmosphereServlet</servlet-class>
+        <async-supported>true</async-supported>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AtmosphereServlet</servlet-name>
+        <url-pattern>/topics</url-pattern>
+    </servlet-mapping>
+
+    <description>AtmosphereFilter</description>
+    <display-name>AtmosphereFilter</display-name>
+
+    <filter>
+        <description>AtmosphereFilter</description>
+        <filter-name>AtmosphereFilter</filter-name>
+        <filter-class>org.atmosphere.cpr.AtmosphereFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AtmosphereFilter</filter-name>
+        <url-pattern>/afilter</url-pattern>
+    </filter-mapping>
+
+
 </web-app>
