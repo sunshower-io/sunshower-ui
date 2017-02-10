@@ -1,56 +1,42 @@
+
 import {CompositeElement} from './layer';
 import {
+    AbstractElementFactory,
     Elements,
-    AbstractElementFactory
-} from "common/lib/canvas/element";
+} from "canvas/element/element";
 
 
 import {
     mxGeometry,
 } from "mxgraph";
+import {EditorContext} from "canvas/core/canvas";
 
-import {EditorContext} from "common/lib/canvas";
+import {Registry} from "utils/registry";
 
-import {Registry} from "common/lib/utils";
 
-type Properties = {[key: string]: any};
-
-export enum BlockType {
-    Official,
-
-    Custom
-}
-
-export class BlockElement extends CompositeElement {
-
-    type: BlockType;
-
-    categories : string[];
+export class VlanElement extends CompositeElement {
 
     constructor() {
         super();
-        this.icon = `assets/sui/themes/hasli/assets/images/cube.svg`;
-        this.geometry = new mxGeometry();
-
+        this.icon = `assets/sui/themes/hasli/assets/images/icons/provider/generic/vlan.svg`
     }
-
 
     protected shallowCopy(): CompositeElement {
-        let copy = new BlockElement();
-        copy.name = this.name;
+        let copy = new VlanElement();
+        copy.geometry = this.geometry.clone();
         return copy;
     }
+
+
 }
 
-export class BlockElementFactory extends AbstractElementFactory<BlockElement> {
 
+export class VlanElementFactory extends AbstractElementFactory<VlanElement> {
 
-    create(model: EditorContext, registry: Registry): BlockElement {
-
+    create(model: EditorContext, registry: Registry): VlanElement {
         let
-            blockManager = registry.blockManager,
             draftboardManager = registry.draftboardManager,
-            layer = new BlockElement(),
+            layer = new VlanElement(),
             canvas = model.graph,
             selected = Elements.pluckLayers(canvas.getSelectionCells()),
             roots = Elements.resolveRoots(selected);
@@ -61,7 +47,6 @@ export class BlockElementFactory extends AbstractElementFactory<BlockElement> {
             .removeAll(roots);
 
         layer.addElements(roots);
-        blockManager.add(layer);
         draftboardManager.add(layer);
 
         try {
@@ -72,8 +57,6 @@ export class BlockElementFactory extends AbstractElementFactory<BlockElement> {
         } finally {
             canvas.getModel().endUpdate();
         }
-
-        blockManager.add(layer);
         return layer;
     }
 }

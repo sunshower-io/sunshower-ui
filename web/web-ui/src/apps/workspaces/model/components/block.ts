@@ -1,4 +1,6 @@
 import {CompositeElement} from './layer';
+
+
 import {
     Elements,
     AbstractElementFactory
@@ -8,13 +10,11 @@ import {
 import {
     mxGeometry,
 } from "mxgraph";
-
 import {EditorContext} from "common/lib/canvas";
 
 import {Registry} from "common/lib/utils";
 
 type Properties = {[key: string]: any};
-
 export enum BlockType {
     Official,
 

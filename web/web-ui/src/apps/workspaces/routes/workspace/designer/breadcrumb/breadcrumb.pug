@@ -1,0 +1,8 @@
+template
+    div.workspace-breadcrumb
+        .ui.breadcrumb(ref="element")
+            template(repeat.for="c of ancestors")
+                a.section(if.bind="!$last") ${c.name}
+                i.right.angle.icon.divider(if.bind="!$last")
+                div.active.section(if.bind="$last") ${c.name}
+

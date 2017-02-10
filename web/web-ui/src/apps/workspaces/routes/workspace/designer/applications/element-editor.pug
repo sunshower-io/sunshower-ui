@@ -1,0 +1,10 @@
+template
+    .element-editor-overlay(show.bind="visible" ref="element")
+        .element-editor-topbar
+            .icon-holder
+                img(
+                    src="assets/sui/themes/hasli/assets/images/icons/x-circle.svg",
+                    click.delegate="close()"
+                )
+        .element-editor-body
+            compose(view-model.bind="currentEditor")

@@ -1,0 +1,116 @@
+template
+    .ui.form
+        .ui.inline.dropdown(if.bind="mode.viewState === 'basic'", ref="list")
+            span.text.inlineimage
+                img.ui.mini.image(src="")
+                | Select OS
+                i.caret.down.icon
+            .menu
+                .item(repeat.for="os of osService.list()" data-value="${os.id}")
+                    image.ui.image(src='${os.icon}')
+                    | ${os.name}
+        .field.overlay-field
+            .overlay-label
+                label Node Name
+            .ui.input.overlay-input
+                input(type="text" name="name" value.bind="node.name")
+            .overlay-help
+                i.icon.help.circle.outline.large
+        .field.overlay-field
+            .overlay-label
+                label Description
+            .ui.input.overlay-input
+                textarea(name="description", rows="2")
+            .overlay-help
+                i.icon.help.circle.outline.large
+        .field.overlay-field(if.bind="mode.viewState === 'full'")
+            .overlay-label
+                label Operating System
+            .ui.input.overlay-input
+                .ui.fluid.search.selection.dropdown(style="line-height: 24px;" ref="list")
+                    input(type="hidden" name="operatingSystem")
+                    i.dropdown.icon
+                    .default.text Select OS
+                    .menu
+                        .item(repeat.for="os of osService.list()" data-value="${os.id}")
+                            image.ui.image(src='${os.icon}')
+                            | ${os.name}
+            .overlay-help
+                i.icon.help.circle.outline.large
+        .field.overlay-field
+            .overlay-label
+                label Instance Count
+            .ui.input.overlay-input
+                input(
+                    type="number"
+                    name="instanceCount"
+                    min="0"
+                    step="1"
+                    value.bind="configuration.instanceCount"
+                )
+            .overlay-help
+                i.icon.help.circle.outline.large
+        .field.overlay-field
+            .overlay-label
+                label CPU
+            .ui.input.overlay-input
+                input(
+                    type="number"
+                    name="cpu"
+                    min="0"
+                    step="1",
+                    value.bind="configuration.computeProfile.cores"
+                )
+            .overlay-help
+                i.icon.help.circle.outline.large
+        .field.overlay-field
+            .overlay-label
+                label Disk
+            .ui.input.overlay-input
+                input(
+                    type="text"
+                    name="disk"
+                    value.bind="configuration.storageProfile.capacity"
+                )
+            .overlay-help
+                i.icon.help.circle.outline.large
+        .field.overlay-field
+            .overlay-label
+                label Memory
+            .ui.input.overlay-input
+                input(
+                    type="text"
+                    name="memory"
+                    value.bind="configuration.memoryProfile.capacity"
+                )
+            .overlay-help
+                i.icon.help.circle.outline.large
+    h4.ui.header Search for instances
+        .ui.segment(class="${searching ? 'loading' : ''}")
+            .ui.fluid.search.selection.dropdown(ref="providers")
+                span.text Select Provider
+                .menu
+                    .item
+                        image.ui.image(src="assets/sui/themes/hasli/assets/images/icons/provider/generic/vlan.svg")
+                            | Amazon EC2
+
+                    .item
+                        image.ui.image(src="assets/sui/themes/hasli/assets/images/icons/provider/generic/cloud.svg")
+                            | Inventory
+            .ui.horizontal.divider
+            .overlay-action-menu
+                .overlay-icons
+                    button.ui.button.primary(
+                        click.delegate="search()"
+                        class="${searching} ? 'disabled' : ''"
+                    ) Search
+            .ui.horizontal.divider
+            .ui.fluid.search.selection.dropdown(ref="instanceType")
+                input(type="hidden")
+                i.dropdown.icon
+                .default.text Select Instance
+                .menu
+                    .item(repeat.for="descriptor of instanceTypes", data-value="${descriptor.key}")
+                        | ${descriptor.name} (${descriptor.description})
+
+

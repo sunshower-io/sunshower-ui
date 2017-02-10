@@ -57,19 +57,6 @@ export class Workspaces {
             route: 'dashboard',
             redirect: 'dashboard'
         });
-        // config.map([{
-        //     route: '',
-        //     moduleId: './workspaces/workspaces',
-        //     name: '',
-        //     nav: false
-        // }, {
-        //
-        //     route: ':id',
-        //     nav: 'false',
-        //     moduleId: 'view',
-        //
-        //
-        // }]);
         this.router = router;
     }
 
