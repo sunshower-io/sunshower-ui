@@ -16,9 +16,7 @@ import {
 export class App {
     public router: Router;
 
-    constructor(
-        private tokenHolder:AuthenticationContextHolder
-    ) {
+    constructor(private tokenHolder: AuthenticationContextHolder) {
     }
 
     public configureRouter(config: RouterConfiguration, router: Router) {
@@ -27,54 +25,17 @@ export class App {
 
         this.router = router;
         config.title = '';
-        config.map([
-            {
-                route: '',
-                redirect: 'workspaces',
-            }, {
+        config.map([{
+            route: '',
+            redirect: 'workspaces'
+        }, {
                 route: 'workspaces',
                 name: 'workspaces',
-                moduleId: 'main/workspaces/workspaces',
+                moduleId: 'apps/workspaces/index',
                 nav: false,
                 title: 'Workspaces',
             },
-            {
-                route: 'workspace',
-                name: 'workspace',
-                moduleId: 'main/workspaces/workspace/workspace',
-                nav: false,
-                title: 'Workspace',
-            }, {
-                route: 'settings',
-                name: 'settings',
-                moduleId: './main/settings/settings',
-                nav: false,
-                title: 'Settings',
-                settings: {}
-            }, {
-                route: 'designer',
-                name: 'designer',
-                moduleId: 'main/designer/workspace',
-                nav: false,
-                title: 'Designer',
-                settings: {}
-            }, {
-                route: 'overview',
-                name: 'overview',
-                moduleId: 'main/overview/overview',
-                nav: false,
-                title: 'Overview',
-                settings: {}
-            }, {
-                route: 'deployments',
-                name: 'deployments',
-                moduleId: 'main/deployment/deployment',
-                nav: true,
-                title: 'Deployments',
-                settings: {}
-            }
         ]);
-
         this.router = router;
     }
 
@@ -84,15 +45,15 @@ export class App {
 class SecurityStep implements PipelineStep {
 
 
-    constructor(private tokenHolder:AuthenticationContextHolder) {
+    constructor(private tokenHolder: AuthenticationContextHolder) {
 
     }
 
 
     run(instruction: NavigationInstruction, next: Next) {
-        if(!instruction.getAllInstructions().some(i => i.config.name == 'login')) {
+        if (!instruction.getAllInstructions().some(i => i.config.name == 'login')) {
             let th = this.tokenHolder.validate();
-            if(!th) {
+            if (!th) {
                 return next.complete(new RedirectToRoute('login'))
             } else {
                 return next();
@@ -102,3 +63,51 @@ class SecurityStep implements PipelineStep {
     }
 
 }
+
+//     {
+//         route: '',
+//         redirect: 'workspaces',
+//     }, {
+//         route: 'workspaces',
+//         name: 'workspaces',
+//         moduleId: 'main/workspaces/workspaces',
+//         nav: false,
+//         title: 'Workspaces',
+//     },
+//     {
+//         route: 'workspace',
+//         name: 'workspace',
+//         moduleId: 'main/workspaces/workspace/workspace',
+//         nav: false,
+//         title: 'Workspace',
+//     }, {
+//         route: 'settings',
+//         name: 'settings',
+//         moduleId: './main/settings/settings',
+//         nav: false,
+//         title: 'Settings',
+//         settings: {}
+//     }, {
+//         route: 'designer',
+//         name: 'designer',
+//         moduleId: 'main/designer/workspace',
+//         nav: false,
+//         title: 'Designer',
+//         settings: {}
+//     }, {
+//         route: 'overview',
+//         name: 'overview',
+//         moduleId: 'main/overview/overview',
+//         nav: false,
+//         title: 'Overview',
+//         settings: {}
+//     }, {
+//         route: 'deployments',
+//         name: 'deployments',
+//         moduleId: 'main/deployment/deployment',
+//         nav: true,
+//         title: 'Deployments',
+//         settings: {}
+//     }
+// ]);
+
