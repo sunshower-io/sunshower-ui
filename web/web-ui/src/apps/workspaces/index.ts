@@ -11,11 +11,23 @@ export class Workspace {
         this.router = router;
         config.title = '';
         config.map([{
-            route: ['', 'home'],
-            name: 'home',
-            moduleId: './routes/workspace/index',
+            route: ['', 'workspaces'],
+            name: 'workspaces',
+            title: 'Workspaces',
             nav: false,
-            title: 'Home'
+            moduleId: './routes/workspace/workspaces/workspaces',
+        }, {
+            route: ':id',
+            name: 'workspace',
+            title: 'Workspace',
+            moduleId: './routes/workspace/index',
+            nav: false
+
         }]);
+        config.mapUnknownRoutes({
+            route: 'workspaces',
+            redirect: 'workspaces'
+        });
     }
+
 }

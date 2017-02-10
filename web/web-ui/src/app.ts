@@ -36,6 +36,11 @@ export class App {
                 title: 'Workspaces',
             },
         ]);
+
+        config.mapUnknownRoutes({
+            route: 'workspaces',
+            redirect: 'workspaces'
+        });
         this.router = router;
     }
 
