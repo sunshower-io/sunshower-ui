@@ -1,33 +1,40 @@
-import {Registry} from 'utils/registry';
+import {Registry} from 'common/lib/utils';
 
 import {
     mxImage,
-    mxCell,
     mxConstants,
     mxCellOverlay
 } from "mxgraph";
 
 
-import {Constrained} from './cell';
-import {Canvas} from "canvas/core/canvas";
-import {ElementEvent} from 'canvas/element/events';
+import {Canvas} from "common/lib/canvas";
+import {ElementEvent} from 'common/lib/canvas/element';
 
 
 import {
     Listener,
     ObservedEvent
-} from "utils/observer";
+} from "common/lib/utils";
 
 
-import {Class} from "lang/class";
+import {Class} from "common/lib/lang";
+
+
 import {Layer} from "mxgraph";
 import {mxGeometry} from "mxgraph";
-import {Kv} from 'utils/objects';
-import {RegistryAwareElement} from "canvas/element/registry-aware";
+import {Kv} from 'common/lib/utils';
 import {InfrastructureNode} from "./infrastructure-node";
-import {EditableElement, ElementEditor} from "canvas/element/element";
-import {FullApplicationDeploymentEditor} from "component/editors/deployment/full";
-import {BasicApplicationDeploymentEditor} from "component/editors/deployment/basic";
+import {
+    RegistryAwareElement,
+    EditableElement,
+    ElementEditor
+} from "common/lib/canvas/element";
+
+import {
+    FullApplicationDeploymentEditor,
+    BasicApplicationDeploymentEditor
+} from "apps/workspaces/resources/editors/deployment";
+import {DraftboardManager} from "apps/workspaces/services/draftboard/draftboard";
 
 
 export class ApplicationDeployment extends
@@ -91,7 +98,8 @@ export class ApplicationDeployment extends
                 this.name = r.name;
                 this.host.addCellOverlay(this, this.applicationOverlay());
                 // node.data.add(element);
-                this.registry.draftboardManager.dispatch(
+                let draftboardManager = this.registry.get(DraftboardManager) as DraftboardManager;
+                draftboardManager.dispatch(
                     'element-modified',
                     new ElementEvent('element-modified', node)
                 );

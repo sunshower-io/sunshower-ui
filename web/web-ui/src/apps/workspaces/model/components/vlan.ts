@@ -3,15 +3,13 @@ import {CompositeElement} from './layer';
 import {
     AbstractElementFactory,
     Elements,
-} from "canvas/element/element";
+} from "common/lib/canvas/element";
 
 
-import {
-    mxGeometry,
-} from "mxgraph";
-import {EditorContext} from "canvas/core/canvas";
+import {Registry} from "common/lib/utils";
+import {EditorContext} from "common/lib/canvas";
+import {DraftboardManager} from "apps/workspaces/services/draftboard/draftboard";
 
-import {Registry} from "utils/registry";
 
 
 export class VlanElement extends CompositeElement {
@@ -35,7 +33,7 @@ export class VlanElementFactory extends AbstractElementFactory<VlanElement> {
 
     create(model: EditorContext, registry: Registry): VlanElement {
         let
-            draftboardManager = registry.draftboardManager,
+            draftboardManager = registry.get(DraftboardManager) as DraftboardManager,
             layer = new VlanElement(),
             canvas = model.graph,
             selected = Elements.pluckLayers(canvas.getSelectionCells()),

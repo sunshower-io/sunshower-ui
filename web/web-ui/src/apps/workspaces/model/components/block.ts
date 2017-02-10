@@ -13,6 +13,8 @@ import {
 import {EditorContext} from "common/lib/canvas";
 
 import {Registry} from "common/lib/utils";
+import {BlockManager} from "apps/workspaces/services/blocks/block";
+import {DraftboardManager} from "apps/workspaces/services/draftboard/draftboard";
 
 type Properties = {[key: string]: any};
 export enum BlockType {
@@ -48,8 +50,8 @@ export class BlockElementFactory extends AbstractElementFactory<BlockElement> {
     create(model: EditorContext, registry: Registry): BlockElement {
 
         let
-            blockManager = registry.blockManager,
-            draftboardManager = registry.draftboardManager,
+            blockManager = registry.get(BlockManager) as BlockManager,
+            draftboardManager = registry.get(DraftboardManager) as DraftboardManager,
             layer = new BlockElement(),
             canvas = model.graph,
             selected = Elements.pluckLayers(canvas.getSelectionCells()),

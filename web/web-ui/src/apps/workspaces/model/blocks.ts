@@ -1,1 +1,1 @@
-export * from './components/blocks/block';
+export * from './components/block';

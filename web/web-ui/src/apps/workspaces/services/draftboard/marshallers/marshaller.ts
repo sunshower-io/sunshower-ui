@@ -1,5 +1,5 @@
 import {Marshaller} from "common/lib/io/marshalling";
-import {Draftboard} from "apps/workspaces/services/draftboard/draftboard";
+import {Draftboard} from "apps/workspaces/services/draftboard";
 
 import {
     Vertex,
@@ -12,8 +12,9 @@ import {Properties, Element} from "common/lib/canvas/element";
 
 import {Class} from "common/lib/lang";
 
-import {ApplicationDeployment} from "component/model/deployment";
-import {InfrastructureNode} from "component/model/infrastructure-node";
+import {ApplicationDeployment} from "apps/workspaces/model/deployment";
+import {InfrastructureNode} from "apps/workspaces/model/infrastructure";
+
 
 export class ApplicationDeploymentMarshaller implements Marshaller<ApplicationDeployment> {
     write(data: ApplicationDeployment): {} {

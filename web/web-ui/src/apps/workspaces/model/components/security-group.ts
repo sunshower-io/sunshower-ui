@@ -2,19 +2,22 @@
 import {CompositeElement} from './layer';
 import {
     AbstractElementFactory,
-    Elements, EditableElement, ElementEditor
-} from "canvas/element/element";
+    Elements,
+    EditableElement,
+    ElementEditor
+} from "common/lib/canvas/element";
 
+import {EditorContext} from "common/lib/canvas";
+
+import {Class} from "common/lib/lang";
+import {Registry} from "common/lib/utils";
 
 import {
-    mxGeometry,
-} from "mxgraph";
-import {EditorContext} from "canvas/core/canvas";
+    FullSecurityGroupEditor,
+    BasicSecurityGroupEditor
+} from "apps/workspaces/resources/editors/security-group";
+import {DraftboardManager} from "apps/workspaces/services/draftboard/draftboard";
 
-import {Registry} from "utils/registry";
-import {FullSecurityGroupEditor} from "component/editors/security-group/full";
-import {BasicSecurityGroupEditor} from "component/editors/security-group/basic";
-import {Class} from "lang/class";
 export class SecurityGroupElement extends CompositeElement
     implements
         EditableElement<
@@ -58,7 +61,7 @@ export class SecurityGroupElementFactory extends AbstractElementFactory<Security
 
     create(model: EditorContext, registry: Registry): SecurityGroupElement {
         let
-            draftboardManager = registry.draftboardManager,
+            draftboardManager = registry.get(DraftboardManager) as DraftboardManager,
             layer = new SecurityGroupElement(),
             canvas = model.graph,
             selected = Elements.pluckLayers(canvas.getSelectionCells()),

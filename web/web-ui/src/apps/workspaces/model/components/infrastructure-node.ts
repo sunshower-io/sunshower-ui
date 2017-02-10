@@ -8,27 +8,40 @@ import {
 } from 'mxgraph';
 
 
-import {Canvas} from "canvas/core/canvas";
-import {Element, Relationship} from 'canvas/element/element';
+import {Canvas} from "common/lib/canvas";
+import {
+    Element,
+    Relationship
+} from 'common/lib/canvas/element';
+
 
 import {ApplicationDeployment} from "./deployment";
 
-import {Class} from "lang/class";
+import {Class} from "common/lib/lang";
 
 import {
     VertexMenu,
     NetworkMenuItem,
     StorageMenuItem
-} from "canvas/menu/task-cell";
+} from "common/lib/canvas/actions";
 
-import {RegistryAwareElement} from 'canvas/element/registry-aware';
-import {EditableElement, ElementEditor} from "canvas/element/element";
-import {FullInfrastructureNodeEditor} from "component/editors/infrastructure-node/full";
-import {BasicInfrastructureNodeEditor} from "component/editors/infrastructure-node/basic";
+import {
+    RegistryAwareElement,
+    EditableElement,
+    ElementEditor
+} from 'common/lib/canvas/element';
+
+import {
+    FullInfrastructureNodeEditor,
+    BasicInfrastructureNodeEditor
+} from "apps/workspaces/resources/editors/infrastructure";
+
+
 import {
     OperatingSystem,
     NodeConfiguration
-} from "model/hal/api";
+} from "common/model/api/hal";
+import {DraftboardManager} from "apps/workspaces/services/draftboard/draftboard";
 
 
 
@@ -153,10 +166,8 @@ export class InfrastructureNode extends
 
     public addApplication(application: ApplicationDeployment): void {
         this.applications.push(application);
-        this.host
-            .registry
-            .draftboardManager
-            .focusedDraftboard()
+        let draftboardManager = this.host.registry.get(DraftboardManager) as DraftboardManager;
+            draftboardManager.focusedDraftboard()
             .connect(application, this, Relationship.SUCCESSOR);
         this.addSuccessor(application);
         try {
