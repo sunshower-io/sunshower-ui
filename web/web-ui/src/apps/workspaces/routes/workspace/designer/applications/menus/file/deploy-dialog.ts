@@ -5,12 +5,12 @@ import {
     inject
 } from "aurelia-framework";
 import * as _ from 'lodash';
-import Deployment from "component/deployment/deployment";
 import {json, HttpClient} from "aurelia-fetch-client";
-import {CredentialSecret} from "model/core/secret/credentials";
-import {DraftboardManager} from 'component/draftboard/draftboard'
-import {InfrastructureNode} from "component/model/infrastructure-node";
-import {DeploymentMarshaller} from 'component/deployment/deployment-marshaller';
+import {CredentialSecret} from "common/model/security/credentials";
+import Deployment from "apps/workspaces/model/deployment/deployment";
+import {DraftboardManager} from "apps/workspaces/services/draftboard/draftboard";
+import {InfrastructureNode} from "apps/workspaces/model/components/infrastructure-node";
+import {DeploymentMarshaller} from "apps/workspaces/model/deployment/deployment-marshaller";
 
 @inject(HttpClient, DraftboardManager)
 export class DeployDialog {

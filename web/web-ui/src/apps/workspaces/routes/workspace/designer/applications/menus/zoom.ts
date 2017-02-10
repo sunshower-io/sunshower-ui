@@ -1,5 +1,5 @@
-import {MenuItem, AbstractMenuItem} from 'common/elements/menu';
-import {EditorContext} from "main/designer/draftboards/editor";
+import {MenuItem, AbstractMenuItem} from 'common/lib/widget';
+import {EditorContext} from "apps/workspaces/routes/workspace/designer/editor";
 
 export class ZoomIn extends AbstractMenuItem implements MenuItem {
     style: string = 'zoom icon';

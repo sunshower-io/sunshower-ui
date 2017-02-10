@@ -11,8 +11,8 @@ import {Canvas} from 'common/lib/canvas';
 import {Element} from 'common/lib/canvas/element';
 import {CanvasUtilities} from 'common/lib/canvas/utilities';
 import {DraftboardManager} from 'apps/workspaces/services/draftboard';
+import {InfrastructureNode} from 'apps/workspaces/model/infrastructure';
 import {ApplicationDeployment} from 'apps/workspaces/model/components/deployment';
-import {InfrastructureNode} from 'apps/workspaces/model/components/infrastructure-node';
 
 
 @inject(HttpClient, Registry)

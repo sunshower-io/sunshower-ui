@@ -1,12 +1,8 @@
 import {
-    bindable,
-    inject
+    bindable
 } from "aurelia-framework";
+import {InfrastructureNode} from "apps/workspaces/model/components/infrastructure-node";
 
-import {HttpClient} from "aurelia-fetch-client";
-import {CredentialSecret} from "../../../model/core/secret/credentials";
-import {InfrastructureNode} from "component/model/infrastructure-node";
-import {json} from "aurelia-fetch-client";
 
 export class InfrastructureNodeCloud {
 

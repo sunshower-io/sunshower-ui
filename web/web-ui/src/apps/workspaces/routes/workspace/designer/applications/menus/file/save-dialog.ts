@@ -1,15 +1,13 @@
 import {
     Draftboard,
     DraftboardManager
-}  from 'component/draftboard/draftboard';
+}  from 'apps/workspaces/services/draftboard';
 
 import {inject} from 'aurelia-framework';
 
 import 'canvg/rgbcolor';
 import 'canvg/StackBlur';
-import {
-    ImageExporter,
-} from 'utils/diagram/image-export';
+import {ImageExporter} from "common/lib/utils/diagram/image-export";
 
 @inject(DraftboardManager)
 export class SaveDialog {

@@ -1,12 +1,10 @@
 import {bindable} from 'aurelia-framework';
 
+import {InfrastructureNode} from "apps/workspaces/model/infrastructure";
 import {
-    ElementEditor, EditorMode
-} from "canvas/element/element";
-
-import {
-    InfrastructureNode
-} from "component/model/infrastructure-node";
+    ElementEditor,
+    EditorMode
+} from "common/lib/canvas/element";
 
 interface InfrastructureNodeComponent {
     name             : string;

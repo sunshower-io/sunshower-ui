@@ -1,17 +1,13 @@
 import {
-    mxCell,
-    mxGraph,
     mxClient,
     mxUtils,
-    mxRubberband,
-    mxConstants,
     mxGraphHandler,
 } from 'mxgraph';
 
 
 import {PLATFORM} from 'aurelia-pal';
-import {Registry} from "utils/registry";
-import {Canvas} from 'canvas/core/canvas';
+import {Canvas} from 'common/lib/canvas';
+import {Registry} from "common/lib/utils";
 
 export interface GraphEvent {
     name:string;

@@ -1,12 +1,6 @@
 import {DialogService} from 'aurelia-dialog';
-import {
-    MenuItem,
-    AbstractMenuItem
-} from 'common/elements/menu';
-
-import {
-    EditorContext
-} from "main/designer/draftboards/editor";
+import {AbstractMenuItem, MenuItem} from 'common/lib/widget';
+import {EditorContext} from "apps/workspaces/routes/workspace/designer/editor";
 import {DeployDialog} from "./file/deploy-dialog";
 
 export default class DeployMenu extends AbstractMenuItem implements MenuItem {

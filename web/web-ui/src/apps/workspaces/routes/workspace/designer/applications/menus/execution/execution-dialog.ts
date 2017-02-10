@@ -1,11 +1,15 @@
 import * as _ from 'lodash'
 import {inject} from 'aurelia-framework';
-import {Element} from 'canvas/element/element';
+import {Element} from 'common/lib/canvas/element';
+
 import {
     Sequence,
     ParallelSchedule
-} from "algorithms/graph/scheduling";
-import {DraftboardManager, Draftboard} from 'component/draftboard/draftboard';
+} from "common/lib/algorithms/graph";
+import {
+    Draftboard,
+    DraftboardManager
+} from "apps/workspaces/services/draftboard/draftboard";
 
 
 @inject(DraftboardManager)

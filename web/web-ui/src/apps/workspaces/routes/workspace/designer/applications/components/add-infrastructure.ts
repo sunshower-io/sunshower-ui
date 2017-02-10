@@ -1,6 +1,5 @@
 
 import {
-    inject,
     bindable,
     customElement
 } from "aurelia-framework";

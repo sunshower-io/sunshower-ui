@@ -1,6 +1,5 @@
-import {ElementEditor} from "canvas/element/element";
-import {LoadBalancerComponentElement} from 'component/infrastructure/load-balancer';
-
+import {ElementEditor} from "common/lib/canvas/element";
+import {LoadBalancerComponentElement} from "apps/workspaces/model/infrastructure";
 export class LoadBalancerComponentElementEditor implements
     ElementEditor<LoadBalancerComponentElement> {
 

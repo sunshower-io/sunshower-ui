@@ -1,6 +1,8 @@
-import {OperatingSystem} from "model/hal/api";
+import {
+    OperatingSystem,
+    OperatingSystemService
+} from "common/model/api/hal";
 
-import {OperatingSystemService} from "model/os";
 
 import {inject, bindable, bindingMode} from 'aurelia-framework';
 

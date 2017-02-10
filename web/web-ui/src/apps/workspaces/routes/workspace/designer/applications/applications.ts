@@ -15,9 +15,6 @@ import * as PNotify from 'pnotify';
 import 'pnotify.callbacks';
 
 import {
-    mxGraph,
-    Layer,
-    mxCell,
     mxEvent,
     mxEventObject,
     mxGraphSelectionModel
@@ -37,13 +34,13 @@ import {ElementEditor} from './element-editor';
 
 import {
     Draftboard
-} from '../draftboard';
+} from '../designer';
 
 import {
     NavigationAware
 } from '../editor';
 
-import {Registry} from 'utils/registry';
+import {Registry} from 'common/lib/utils';
 import {
     AddInfrastructure as AddInfrastructureDialog
 } from "./components/add-infrastructure";
@@ -57,36 +54,36 @@ import {Maximize} from "./menus/maximize";
 import {
     MenuItem,
     OperationContextFactory
-} from 'common/elements/menu';
+} from 'common/lib/widget';
 
 import {
     Draftboard as Draft,
     DraftboardManager
-} from 'component/draftboard/draftboard';
+} from 'apps/workspaces/services/draftboard';
 
 import {
     Listener,
     ObservedEvent
-} from 'utils/observer';
+} from 'common/lib/utils';
 
-import {Canvas} from 'canvas/core/canvas'
+import {Canvas} from 'common/lib/canvas'
 
 import {DialogService} from 'aurelia-dialog';
 import {bindable} from 'aurelia-framework';
 import {ToggleLeft, ToggleRight, SearchMenu} from "./menus/misc-menus";
-import {DefaultActionSet} from 'canvas/actions/default-action-set';
-import {ActionManager} from 'canvas/actions/action-service';
+import {ActionManager} from 'common/lib/canvas/actions';
 
 import {
     CanvasEvent,
     CanvasEvents
-} from 'canvas/events/canvas-events';
+} from 'common/lib/canvas';
 
-import {Element} from 'canvas/element/element';
+import {Element} from 'common/lib/canvas/element';
 
 
-import ApplicationState from 'storage/application-state';
+import {ApplicationState} from 'common/lib/storage';
 import ViewExecutionOrderMenuItem from "./menus/execution-order";
+import {DefaultActionSet} from "../default-action-set";
 
 @inject(
     HttpClient,

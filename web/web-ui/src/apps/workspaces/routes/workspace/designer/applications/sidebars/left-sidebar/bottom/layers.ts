@@ -1,18 +1,19 @@
 import {inject, bindable} from 'aurelia-framework';
-import {Element} from 'canvas/element/element';
+import {Element} from 'common/lib/canvas/element';
+
 import {
-    DraftboardManager
-} from 'component/draftboard/draftboard';
+    Registry,
+    Listener,
+    ObservedEvent
+} from 'common/lib/utils';
 
-import {Registry} from 'utils/registry';
-
-import {Tree} from 'common/elements/tree/tree';
-import {Listener, ObservedEvent} from 'utils/observer';
+import {Tree} from 'common/resources/custom-elements/tree';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {
     CanvasEvent,
     CanvasEvents
-} from 'canvas/events/canvas-events';
+} from 'common/lib/canvas';
+import {DraftboardManager} from "apps/workspaces/services/draftboard/draftboard";
 
 @inject(
     Registry,

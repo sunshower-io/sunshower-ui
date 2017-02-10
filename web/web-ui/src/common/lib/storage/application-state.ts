@@ -3,6 +3,7 @@ import {LocalStorage} from "./local";
 import {inject} from "aurelia-framework";
 
 import {User} from "common/model/security";
+import {Element} from 'common/lib/canvas/element';
 
 
 

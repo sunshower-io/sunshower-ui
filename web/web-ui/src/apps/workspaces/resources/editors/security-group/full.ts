@@ -1,6 +1,6 @@
 import {bindable} from "aurelia-framework";
-import {ElementEditor} from "canvas/element/element";
-import {SecurityGroupElement} from "component/model/security-group";
+import {ElementEditor} from "common/lib/canvas/element";
+import {SecurityGroupElement} from "apps/workspaces/model/components/security-group";
 
 export class FullSecurityGroupEditor implements ElementEditor<SecurityGroupElement> {
 

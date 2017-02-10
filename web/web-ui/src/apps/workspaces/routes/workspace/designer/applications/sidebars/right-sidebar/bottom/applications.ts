@@ -5,15 +5,16 @@ import {
 } from 'mxgraph';
 import {inject, bindable} from 'aurelia-framework'
 import {HttpClient} from "aurelia-fetch-client";
-import {ImageDescriptor} from "model/hal/image";
+import {ImageDescriptor} from "common/model/api/hal";
 
-import {Registry} from 'utils/registry'
-import {Canvas} from 'canvas/core/canvas';
-import {Element} from 'canvas/element/element';
-import {CanvasUtilities} from 'canvas/utilities';
+import {Registry} from 'common/lib/utils'
+import {Canvas} from 'common/lib/canvas';
+import {Element} from 'common/lib/canvas/element';
+import {CanvasUtilities} from 'common/lib/canvas/utilities';
+import {DraftboardManager} from "apps/workspaces/services/draftboard";
+import {ApplicationDeployment} from "apps/workspaces/model/components/deployment";
+import {InfrastructureNode} from "apps/workspaces/model/components/infrastructure-node";
 
-import {ApplicationDeployment} from "component/model/deployment";
-import {InfrastructureNode} from 'component/model/infrastructure-node';
 
 @inject(HttpClient, Registry)
 export class Applications {
@@ -76,6 +77,7 @@ export class Applications {
                         let
                             descriptor = this.elements[i],
                             id = descriptor.pid,
+                            draftboardManager = this.registry.get(DraftboardManager) as DraftboardManager,
                             element = this.createDragElement(descriptor);
                         let dragSource = mxUtils.makeDraggable(
                             el,
@@ -115,7 +117,7 @@ export class Applications {
                                             // node.geometry.y = y - py;
                                             (pparent as Element).addElement(node);
                                         } else {
-                                            registry.draftboardManager.add(node);
+                                            draftboardManager.add(node);
                                         }
                                     }
                                     node.addElement(deployment);

@@ -1,18 +1,18 @@
-import {
-    Draftboard,
-    DraftboardManager
-} from 'component/draftboard/draftboard';
 
 import {
     ObservedEvent,
     Listener
-} from 'utils/observer'
+} from 'common/lib/utils'
 
-import {UUID} from 'utils/uuid';
+import {UUID} from 'common/lib/utils';
 import {HttpClient} from 'aurelia-fetch-client';
 import {bindable, inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {CanvasEvents} from 'canvas/events/canvas-events';
+import {CanvasEvents} from 'common/lib/canvas';
+import {
+    DraftboardManager,
+    Draftboard
+} from "apps/workspaces/services/draftboard/draftboard";
 
 @inject(
     HttpClient,

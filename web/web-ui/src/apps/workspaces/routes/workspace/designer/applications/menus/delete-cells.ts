@@ -1,12 +1,7 @@
-import {Layer, mxGraphModel} from 'mxgraph';
-import {
-    MenuItem,
-    AbstractMenuItem
-} from 'common/elements/menu';
-import {Element} from 'canvas/element/element';
-
-import {Canvas} from 'canvas/core/canvas';
-import {EditorContext} from "main/designer/draftboards/editor";
+import {Layer} from 'mxgraph';
+import {Element} from 'common/lib/canvas/element';
+import {AbstractMenuItem} from 'common/lib/widget';
+import {EditorContext} from "apps/workspaces/routes/workspace/designer/editor";
 
 export default class DeleteCells extends AbstractMenuItem {
 

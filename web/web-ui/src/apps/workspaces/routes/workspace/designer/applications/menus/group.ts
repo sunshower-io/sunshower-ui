@@ -1,5 +1,5 @@
-import {MenuItem} from 'common/elements/menu';
-import {EditorContext} from "main/designer/draftboards/editor";
+import {MenuItem} from 'common/lib/widget';
+import {EditorContext} from "apps/workspaces/routes/workspace/designer/editor";
 
 export class Group implements MenuItem {
     style: string ;
