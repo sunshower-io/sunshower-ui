@@ -51,7 +51,14 @@ export class Workspaces {
             name: 'settings',
             route: 'settings',
             moduleId: './settings/settings',
-        }]);
+        }, {
+            nav: true,
+            title: 'Designer',
+            name: 'designer',
+            route: 'designer',
+            moduleId: './designer/designer',
+        }
+        ]);
 
         config.mapUnknownRoutes({
             route: 'dashboard',

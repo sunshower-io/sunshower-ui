@@ -38,6 +38,10 @@ export function configure(aurelia: Aurelia) {
 
     aurelia.use
         .standardConfiguration()
+        .globalResources([
+            'common/lib/widget/menu/menu',
+            'common/resources/custom-elements/tree/tree'
+        ])
         // .globalResources([
         //     'common/elements/menu',
         //     'common/sidenav/sidenav',

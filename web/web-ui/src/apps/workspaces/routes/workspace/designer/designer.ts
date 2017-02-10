@@ -19,7 +19,7 @@ import {Breadcrumb} from "./breadcrumb/breadcrumb";
 import {PreferenceManager} from "common/lib/storage";
 
 @inject(Menu, PreferenceManager)
-export class Draftboard {
+export class Designer {
 
     public router: Router;
 
@@ -42,18 +42,18 @@ export class Draftboard {
 
     constructor(private menu : Menu, private preferenceManager : PreferenceManager) {
         this.preferences = this.preferenceManager.get(
-            Draftboard.draftboardPath,
-            Draftboard.draftboardDefaults
+            Designer.draftboardPath,
+            Designer.draftboardDefaults
         );
     }
 
     configureRouter(config: RouterConfiguration, router: Router) {
         config.map([{
-            route: ['', 'application'],
-            name: 'applications',
+            route: ['', 'designer'],
+            name: 'designer',
             nav: true,
             title: 'Applications',
-            moduleId: 'main/designer/draftboards/applications/applications',
+            moduleId: 'apps/workspaces/routes/workspace/designer/applications/applications',
             settings: {
                 icon: 'block layout icon'
             }

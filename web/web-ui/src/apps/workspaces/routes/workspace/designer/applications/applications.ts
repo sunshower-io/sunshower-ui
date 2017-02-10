@@ -33,7 +33,7 @@ import {ElementEditor} from './element-editor';
 
 
 import {
-    Draftboard
+   Designer as Draftboard
 } from '../designer';
 
 import {
