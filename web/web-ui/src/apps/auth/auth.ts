@@ -18,7 +18,7 @@ export class Auth {
             {
                 route: ['', 'login'],
                 name: 'login',
-                moduleId: './login/login',
+                moduleId: 'apps/auth/login/login',
                 nav: true,
                 title: 'Login',
                 settings : {
@@ -27,13 +27,13 @@ export class Auth {
             }, {
                 route: 'signup',
                 name: 'signup',
-                moduleId: './signup/signup',
+                moduleId: 'apps/auth/signup/signup',
                 nav: true,
                 title: 'Signup'
             }
         ]);
 
-        config.mapUnknownRoutes('auth/login/login');
+        config.mapUnknownRoutes('apps/auth/login/login');
         this.router = router;
     }
 }
