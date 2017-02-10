@@ -22,27 +22,32 @@ export class Workspaces {
         config.map([{
             route: ['', 'dashboard'],
             nav: true,
-            name: 'Dashboard',
+            title: 'Dashboard',
+            name: 'dashboard',
             moduleId: './dashboard/dashboard',
         }, {
             nav: true,
+            title: 'Applications',
             name: 'applications',
             route: 'applications',
             moduleId: './applications/applications',
         }, {
             nav: true,
+            title: 'Dashboard',
             name: 'dashboard',
             route: 'dashboard',
             moduleId: './dashboard/dashboard',
         }, {
 
             nav: true,
+            title: 'Instances',
             name: 'instances',
             route: 'instances',
             moduleId: './instances/instances',
 
         }, {
             nav: true,
+            title: 'Settings',
             name: 'settings',
             route: 'settings',
             moduleId: './settings/settings',
