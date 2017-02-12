@@ -340,8 +340,12 @@ System.config({
       "github:Semantic-Org/Semantic-UI@2.2.7/semantic.js",
       "github:github/fetch@1.1.1.js",
       "github:github/fetch@1.1.1/fetch.js",
+      "github:jspm/nodelibs-process@0.1.2.js",
+      "github:jspm/nodelibs-process@0.1.2/index.js",
       "npm:aurelia-animator-css@1.0.1.js",
       "npm:aurelia-animator-css@1.0.1/aurelia-animator-css.js",
+      "npm:aurelia-animator-velocity@1.0.1.js",
+      "npm:aurelia-animator-velocity@1.0.1/aurelia-animator-velocity.js",
       "npm:aurelia-binding@1.1.1.js",
       "npm:aurelia-binding@1.1.1/aurelia-binding.js",
       "npm:aurelia-bootstrapper@1.0.1.js",
@@ -439,7 +443,12 @@ System.config({
       "npm:aurelia-templating@1.2.0.js",
       "npm:aurelia-templating@1.2.0/aurelia-templating.js",
       "npm:jquery@2.2.4.js",
-      "npm:jquery@2.2.4/dist/jquery.js"
+      "npm:jquery@2.2.4/dist/jquery.js",
+      "npm:process@0.11.9.js",
+      "npm:process@0.11.9/browser.js",
+      "npm:velocity-animate@1.4.0.js",
+      "npm:velocity-animate@1.4.0/velocity.js",
+      "npm:velocity-animate@1.4.0/velocity.ui.js"
     ],
     "app-build.js": [
       "app.html!github:systemjs/plugin-text@0.0.9.js",

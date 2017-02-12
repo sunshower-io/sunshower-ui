@@ -140,6 +140,9 @@
       "github:Semantic-Org/Semantic-UI@2.2.4": {
         "shim": {}
       },
+      "npm:lodash@4.17.4": {
+        "main": "lodash.js"
+      },
       "github:plotly/plotly.js@1.21.3": {
         "main": "dist/plotly.js"
       }
