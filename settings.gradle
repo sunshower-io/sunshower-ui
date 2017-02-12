@@ -1,0 +1,13 @@
+include(
+        'logging',
+        'web:hasli.io',
+        'web:web-ui',
+        'web:web-site',
+        'web:web-service',
+        'integration:integration-api',
+        'integration:integration-spring',
+        'system-tests',
+        'system-tests:st-common',
+        'system-tests:st-security',
+        'system-tests:st-web',
+)

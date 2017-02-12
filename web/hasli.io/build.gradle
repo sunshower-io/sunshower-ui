@@ -13,7 +13,9 @@ configurations {
     site
 
     earlib.exclude group: 'dom4j'
+    earlib.exclude group: 'org.junit'
 }
+
 
 
 
@@ -31,10 +33,10 @@ dependencies {
     earlib "io.hasli.service:service-csp"
     earlib "io.hasli.service:service-core"
     earlib "io.hasli.service:service-security"
-    earlib "io.hasli.persist:persist-api:1.00.000.000-SNAPSHOT"
-    earlib "io.hasli.persist:persist-core:1.00.000.000-SNAPSHOT"
-    earlib "io.hasli.persist:persist-hibernate:1.00.000.000-SNAPSHOT"
-    earlib "io.hasli.persist:persist-jpa:1.00.000.000-SNAPSHOT"
+    earlib "io.hasli.persist:persist-api"
+    earlib "io.hasli.persist:persist-core"
+    earlib "io.hasli.persist:persist-hibernate"
+    earlib "io.hasli.persist:persist-jpa"
     deploy project(path: ':web:web-site', configuration: 'archives')
     deploy project(path: ':web:web-service', configuration:'archives')
 }
