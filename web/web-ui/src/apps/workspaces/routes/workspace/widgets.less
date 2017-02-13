@@ -51,19 +51,15 @@
 
 //refactor to somewhere else for reuse
 .status-circle {
-  border-radius: 50%;
-  width:.5rem;
-  height:.5rem;
-  margin-right: .5rem;
-  margin-left: -1rem;
-  display:inline-block;
+  margin-right: .5rem !important;
+  margin-left: -1rem !important;
   &.green {
-    background-color: @statusgreen
+    color: @statusgreen
   }
   &.yellow {
-    background-color: @statusyellow
+    color: @statusyellow
   }
   &.red {
-    background-color: @statusred
+    color: @statusred
   }
 }

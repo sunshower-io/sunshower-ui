@@ -23,12 +23,12 @@ export class Instances {
 
         // let myInstance = new Instance,
         //     myOtherInstance = new Instance;
-        // myInstance.logo = 'http://www.prescientdigital.com/about-us/case-studies-1/calogo.jpg';
+        // //myInstance.logo = 'http://www.prescientdigital.com/about-us/case-studies-1/calogo.jpg';
         // myInstance.name = 'A name';
         // myInstance.status = 'Running';
         // myOtherInstance.logo = '';
         // myOtherInstance.name = 'Booped';
-        // myOtherInstance.status = 'Stopped';
+        // myOtherInstance.status = 'Stopping';
         // this.instances.push(myInstance);
         // this.instances.push(myOtherInstance);
     };
@@ -70,15 +70,19 @@ export class Instance {
     memory  ?: number;
     disk    ?: number;
 
-    statusClass() : string {
-        if (this.status == 'Running' || this.status == 'Deploying' || this.status == 'Starting') {
-            return 'green';
+    statusCircle() : string {
+        if (this.status == 'Running') {
+            return 'circle green';
         }
         else if (this.status == 'Stopped') {
-            return 'red';
+            return 'circle red';
+        }
+        else if (this.status == 'Starting' || this.status == 'Deploying' || this.status == 'Stopping') {
+            return 'notched circle loading';
+            //return 'ion-ios-loop-strong loading'
         }
         else {
-            return 'yellow';
+            return 'circle yellow';
         }
         //returns class name for circle
     }

@@ -69,13 +69,13 @@ template
                                 input(type="checkbox")
                             td
                                 img.ui.image.tiny(
-                                    if.bind="instance.logo != ''",
+                                    if.bind="instance.logo",
                                     src="${instance.logo}"
                                     )
                             td
                                 | ${instance.name}
                             td
-                                .status-circle(class="${instance.statusClass()}")
+                                i.icon.status-circle(class="${instance.statusCircle()}")
                                 | ${instance.status}
                             td
                                 | ${instance.ip}
