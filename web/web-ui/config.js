@@ -48,6 +48,7 @@ System.config({
     "aurelia-templating-router": "npm:aurelia-templating-router@1.0.1",
     "bluebird": "npm:bluebird@3.4.1",
     "bootstrap": "github:twbs/bootstrap@3.3.7",
+    "buffer": "github:jspm/nodelibs-buffer@0.1.0",
     "canvg": "github:canvg/canvg@master",
     "canvg/canvg": "github:canvg/canvg@master",
     "css": "github:systemjs/plugin-css@0.1.32",

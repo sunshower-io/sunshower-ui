@@ -30,8 +30,9 @@ module.exports = {
     'normalize': [
         [
             'rx', [
-                '/*',
-                '/**'
+                '/bundles/*.js'
+                // '/*.js',
+                // '/util/*.js'
 
         ]],
         [
