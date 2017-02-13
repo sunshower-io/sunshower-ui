@@ -1,0 +1,20 @@
+template
+    require(from='./components/add-infrastructure')
+    require(from="./sidebars/left-sidebar/left-sidebar")
+    require(from="./sidebars/right-sidebar/right-sidebar")
+    require(from="./element-editor")
+    .row.column.workbench(
+        ref="container"
+        add-infrastructure.delegate="addInfrastructure($event)"
+        palette-event.delegate="modifyGraph($event)"
+    )
+
+
+    left-sidebar(ref="leftSidebar")
+    right-sidebar(
+        ref="rightSidebar",
+        canvas.bind="graph",
+        add-image.delegate="addTask($event)",
+        palette-event.delegate="modifyGraph($event)")
+    add-infrastructure(view-model.ref="infrastructureDialog")
+    element-editor(view-model.ref="elementEditor")

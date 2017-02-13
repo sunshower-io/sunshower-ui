@@ -16,6 +16,9 @@ module.exports = {
         'jspm_packages/system-csp-production.js',
         'jspm_packages/github/sciactive/pnotify@3.0.0.js',
         'jspm_packages/github/jgraph/mxgraph-js@master.js',
+        'jspm_packages/npm/aurelia-animator-velocity@1.0.1',
+        'jspm_packages/npm/lodash@4.17.4.js',
+        'jspm_packages/npm/rxjs@5.0.3.js',
         'jspm_packages/github/canvg/canvg@master.js',
         'styles/styles.css'
     ],
@@ -24,7 +27,20 @@ module.exports = {
     // these files are in versioned folders and thus
     // must be 'normalized' by jspm to get the proper
     // path.
-    'normalize': [[
+    'normalize': [
+        [
+            'rx', [
+                '/bundles/*.js'
+                // '/*.js',
+                // '/util/*.js'
+
+        ]],
+        [
+            'lodash', [
+                '/lodash.js'
+
+        ]],
+        [
             'canvg', [
                 '/*',
                 '/**',

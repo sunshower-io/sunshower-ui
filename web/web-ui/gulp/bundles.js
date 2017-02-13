@@ -20,6 +20,7 @@ module.exports = {
                 "aurelia-fetch-client",
                 "aurelia-dialog",
                 "aurelia-router",
+                "aurelia-animator-velocity",
                 "aurelia-animator-css",
                 "aurelia-templating-binding",
                 "aurelia-polyfills",

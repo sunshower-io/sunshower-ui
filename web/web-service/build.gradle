@@ -7,19 +7,23 @@ dependencies {
     provided group: 'org.springframework', name: 'spring-webmvc', version: '4.1.4.RELEASE'
     provided group: 'org.eclipse.persistence', name: 'org.eclipse.persistence.moxy'
 
+    provided group: 'org.atmosphere', name: 'atmosphere-runtime', version: '2.4.9'
+
     provided 'com.zaxxer:HikariCP'
     provided 'org.flywaydb:flyway-core'
 
 
+    provided "io.hasli.hal:hal-aws"
     provided "io.hasli.hal:hal-docker"
+    provided "io.hasli.hal:hal-service"
     provided "io.hasli.hfs:hfs-service"
     provided "io.hasli.search:search-es"
     provided "io.hasli.service:service-vault"
-    provided "io.hasli.service:service-hal"
     provided "io.hasli.service:service-core"
     provided "io.hasli.service:service-csp"
     provided "io.hasli.service:service-security"
     provided "io.hasli.persist:persist-hibernate"
+    testCompile "io.hasli.barometer.modules:jaxrs"
 
 }
 

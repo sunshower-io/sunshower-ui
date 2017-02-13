@@ -1,7 +1,7 @@
 {
-  "name": "aurelia-skeleton-navigation-typescript",
+  "name": "hasli.io",
   "version": "1.0.2",
-  "description": "A starter kit for building a standard navigation-style app with Aurelia and TypeScript.",
+  "description": "Hasli.io",
   "keywords": [
     "aurelia",
     "navigation",
@@ -9,16 +9,16 @@
     "typescript",
     "vscode"
   ],
-  "homepage": "http://aurelia.io",
+  "homepage": "http://app.hasli.io",
   "bugs": {
     "url": "https://github.com/aurelia/skeleton-navigation-typescript/issues"
   },
   "license": "CC0-1.0",
-  "author": "Mike Graham <mgraham@technicalmedia.com> (http://cmichaelgraham.io/)",
+  "author": "",
   "main": "dist/main.js",
   "repository": {
     "type": "git",
-    "url": "http://github.com/aurelia/skeleton-navigation-typescript"
+    "url": "http://github.com/hasli-projects/hasli.io"
   },
   "scripts": {
     "prepublish": "./node_modules/.bin/typings install",
@@ -71,7 +71,7 @@
     "jspm": "^0.16.41",
     "karma": "^1.1.2",
     "karma-chrome-launcher": "^1.0.1",
-    "karma-jasmine": "^1.0.2",
+    "karma-jasmine": "^1.1.0",
     "karma-systemjs": "^0.14.0",
     "karma-typescript": "^2.1.5",
     "karma-typescript-preprocessor": "^0.3.1",
@@ -91,6 +91,7 @@
   "jspm": {
     "dependencies": {
       "aurelia-animator-css": "npm:aurelia-animator-css@^1.0.0",
+      "aurelia-animator-velocity": "npm:aurelia-animator-velocity@^1.0.1",
       "aurelia-bootstrapper": "npm:aurelia-bootstrapper@^1.0.0",
       "aurelia-dialog": "npm:aurelia-dialog@^1.0.0-beta.3.0.1",
       "aurelia-fetch-client": "npm:aurelia-fetch-client@^1.0.0",
@@ -112,27 +113,44 @@
       "cytoscape-edgehandles": "npm:cytoscape-edgehandles@^2.6.3",
       "cytoscape-grid-guide": "npm:cytoscape-grid-guide@^1.0.3",
       "cytoscape-node-resize:n": "npm:cytoscape-node-resize@^1.0.10",
+      "d3": "npm:d3@^3.2.0",
+      "d3/d3-geo-projection": "github:d3/d3-geo-projection@^1.2.1",
       "edge-editiation": "github:frankiex/cytoscape.js-edge-editation@master",
       "element-queries": "github:marcj/css-element-queries@^0.3.2",
       "enyo/dropzone": "github:enyo/dropzone@^4.3.0",
       "fetch": "github:github/fetch@^1.0.0",
       "font-awesome": "npm:font-awesome@4.6.3",
       "jquery": "npm:jquery@^2.2.4",
+      "lodash": "npm:lodash@^4.17.4",
+      "markmarkoh/datamaps": "github:markmarkoh/datamaps@^0.5.8.js",
+      "maskedinput": "github:digitalBush/jquery.maskedinput@^1.4.1",
       "mxgraph": "github:jgraph/mxgraph-js@master",
       "ocanvas": "npm:ocanvas@^2.8.6",
+      "plotly/plotly.js": "github:plotly/plotly.js@^1.21.3",
       "plugin-text": "npm:systemjs-plugin-text@^0.0.9",
       "pnotify": "github:sciactive/pnotify@^3.0.0",
+      "rx": "npm:rxjs@^5.0.3",
       "semantic-ui": "github:Semantic-Org/Semantic-UI@^2.2.4",
-      "text": "github:systemjs/plugin-text@^0.0.9"
+      "text": "github:systemjs/plugin-text@^0.0.9",
+      "topojson/topojson": "github:topojson/topojson@^2.2.0",
+      "velocity": "github:julianshapiro/velocity@^1.4.1"
     },
     "devDependencies": {},
     "overrides": {
       "github:Semantic-Org/Semantic-UI@2.2.4": {
         "shim": {}
+      },
+      "npm:lodash@4.17.4": {
+        "main": "lodash.js"
+      },
+      "github:plotly/plotly.js@1.21.3": {
+        "main": "dist/plotly.js"
       }
     }
   },
   "dependencies": {
+    "@types/d3": "^4.5.0",
+    "@types/d3-selection": "^1.0.9",
     "cytoscape": "^2.7.11"
   }
 }

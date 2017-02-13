@@ -7,6 +7,10 @@ buildscript {
     apply from: 'gradle/buildscript.gradle', to: buildscript
 }
 
+allprojects {
+    apply plugin: 'java'
+}
+
 
 /**
  * Subproject configurations

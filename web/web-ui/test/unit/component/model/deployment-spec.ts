@@ -43,7 +43,6 @@ describe('an application deployment', () => {
             offset: {top: 0, left: 0},
             location: {x: 0, y: 0}
         };
-
         draftboardManager.setFocusedDraftboard(new Draftboard(canvas));
     });
 
@@ -63,7 +62,5 @@ describe('an application deployment', () => {
     it('should construct the draftboard manager correctly', () => {
         expect(draftboardManager).toBeTruthy();
     });
-
-
 
 });

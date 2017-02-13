@@ -958,21 +958,22 @@ Floated Menu / Item
 /* Vertical Pointing */
 .ui.secondary.vertical.pointing.menu {
   border-bottom-width: 0px;
-  border-right-width: @secondaryPointingBorderWidth;
-  border-right-style: solid;
-  border-right-color: @secondaryPointingBorderColor;
+  border-left-width: @secondaryPointingBorderWidth;
+  border-left-style: solid;
+  border-left-color: @secondaryPointingBorderColor;
 }
 .ui.secondary.vertical.pointing.menu .item {
   border-bottom: none;
-  border-right-style: solid;
-  border-right-color: transparent;
+  border-left-style: solid;
+  border-left-color: transparent;
   border-radius: 0em !important;
   margin: @secondaryVerticalPointingItemMargin;
-  border-right-width: @secondaryPointingBorderWidth;
+  border-left-width: @secondaryPointingBorderWidth;
 }
 
 /* Vertical Active */
 .ui.secondary.vertical.pointing.menu .active.item {
+  border-left-width: 2px;
   border-color: @secondaryPointingActiveBorderColor;
 }
 

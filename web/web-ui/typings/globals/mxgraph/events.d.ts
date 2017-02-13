@@ -4,6 +4,7 @@ declare module 'mxgraph' {
         static readonly CHANGE                  : string;
         static readonly CLICK                   : string;
         static readonly GROUP_CELLS             : string;
+        static readonly DOUBLE_CLICK            : string;
 
 
         consume() : void;

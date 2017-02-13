@@ -25,12 +25,13 @@
 @itemHorizontalPadding: @relativeLarge;
 @itemTextTransform: none;
 @itemTransition:
-  background @defaultDuration @defaultEasing,
-  box-shadow @defaultDuration @defaultEasing,
-  color @defaultDuration @defaultEasing
+        background @defaultDuration @defaultEasing,
+        box-shadow @defaultDuration @defaultEasing,
+        color @defaultDuration @defaultEasing
 ;
 @itemFontWeight: normal;
-@itemTextColor: @textColor;
+@itemTextColor: #A8B0BD;
+
 
 /* Divider */
 @dividerSize: 1px;
@@ -219,7 +220,9 @@
 @secondaryItemTransition: color @defaultDuration @defaultEasing;
 @secondaryItemColor: @unselectedTextColor;
 
-@secondaryHoverItemBackground: @transparentBlack;
+//@secondaryHoverItemBackground: @transparentBlack;
+//@secondaryHoverItemColor: @selectedTextColor;
+@secondaryHoverItemBackground: none;
 @secondaryHoverItemColor: @selectedTextColor;
 
 @secondaryActiveItemBackground: @transparentBlack;
@@ -244,15 +247,14 @@
 
 /* Pointing */
 @secondaryPointingBorderWidth: 2px;
-//@secondaryPointingBorderColor: @borderColor;
 @secondaryPointingBorderColor: none;
-@secondaryPointingItemVerticalPadding: @relativeTiny;
+@secondaryPointingItemVerticalPadding: @relativeMassive;
 @secondaryPointingItemHorizontalPadding: @relativeMassive;
 
-@secondaryPointingHoverTextColor: @textColor;
+@secondaryPointingHoverTextColor: @primaryColor;
 
-@secondaryPointingActiveBorderColor: #239AE8;
-@secondaryPointingActiveTextColor: @selectedTextColor;
+@secondaryPointingActiveBorderColor: @primaryColor;
+@secondaryPointingActiveTextColor: @primaryColor;
 @secondaryPointingActiveFontWeight: Medium;
 
 @secondaryPointingActiveDropdownBorderColor: transparent;
@@ -362,7 +364,7 @@
 @textMenuHeaderSize: @relativeSmall;
 @textMenuHeaderColor: @darkTextColor;
 @textMenuHeaderFontWeight: bold;
-@textMenuHeaderTextTransform: uppercase;
+@textMenuHeaderTextTransform: none;
 
 @textVerticalMenuMargin: @relativeMedium 0em;
 @textVerticalMenuHeaderMargin: @relative8px 0em @relative10px;
@@ -435,8 +437,8 @@
 @attachedBoxShadow: none;
 @attachedBorder: @borderWidth solid @solidBorderColor;
 @attachedBottomBoxShadow:
-  @boxShadow,
-  @attachedBoxShadow
+        @boxShadow,
+        @attachedBoxShadow
 ;
 
 /* Resize large sizes */

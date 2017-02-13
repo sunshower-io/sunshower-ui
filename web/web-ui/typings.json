@@ -25,8 +25,7 @@
     "aurelia-templating-resources": "github:aurelia/templating-resources",
     "aurelia-templating-router": "github:aurelia/templating-router"
   },
-  "globalDevDependencies": {
-  },
+  "globalDevDependencies": {},
   "globalDependencies": {
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
     "url": "github:aurelia/fetch-client/doc/url.d.ts#bbe0777ef710d889a05759a65fa2c9c3865fc618",
