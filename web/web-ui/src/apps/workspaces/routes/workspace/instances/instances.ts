@@ -15,11 +15,22 @@ export class Instances {
     loading: boolean;
 
     constructor(private client:HttpClient) {
-
+        this.instances = [];
     }
 
     attached(): void {
         this.refresh();
+
+        // let myInstance = new Instance,
+        //     myOtherInstance = new Instance;
+        // myInstance.logo = 'http://www.prescientdigital.com/about-us/case-studies-1/calogo.jpg';
+        // myInstance.name = 'A name';
+        // myInstance.status = 'Running';
+        // myOtherInstance.logo = '';
+        // myOtherInstance.name = 'Booped';
+        // myOtherInstance.status = 'Stopped';
+        // this.instances.push(myInstance);
+        // this.instances.push(myOtherInstance);
     };
 
     refresh(): void {
@@ -34,16 +45,66 @@ export class Instances {
         }, 2)
     }
 
+    stop(instance:Instance) : void {
+        instance.stop();
+    }
+
+    start(instance:Instance) : void {
+        instance.start();
+    }
+
+    restart(instance:Instance) : void {
+        instance.restart();
+    }
+
 }
 
 //leaving this here so Josiah can put it wherever
 export class Instance {
     logo    ?: string;
     name    ?: string;
-    status  ?: string;
+    status  ?: string; //Running, Stopped, Stopping, Restart, Terminating, Deploying, Starting
     ip      ?: string;
     ports   ?: string;
     cpu     ?: number;
     memory  ?: number;
     disk    ?: number;
+
+    statusClass() : string {
+        if (this.status == 'Running' || this.status == 'Deploying' || this.status == 'Starting') {
+            return 'green';
+        }
+        else if (this.status == 'Stopped') {
+            return 'red';
+        }
+        else {
+            return 'yellow';
+        }
+        //returns class name for circle
+    }
+
+    statusButtons() : string[] {
+        if (this.status == 'Running') {
+            return ['stop', 'restart']
+        }
+        else if (this.status == 'Stopped') {
+            return ['start']
+        }
+        else {
+            return []
+        }
+        //returns names of allowable buttons
+    }
+
+    stop() : void {
+        console.log('stopping ' + this.name);
+    }
+
+    start() : void {
+        console.log('starting ' + this.name);
+    }
+
+    restart() : void {
+        console.log('restarting ' + this.name);
+    }
 }
