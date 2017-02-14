@@ -7,7 +7,7 @@ import io.hasli.core.ApplicationService;
 import io.hasli.hal.HALConfiguration;
 import io.hasli.hal.api.HALPersistenceConfiguration;
 import io.hasli.hal.api.instance.NodeConfigurationService;
-import io.hasli.hal.aws.AwsComputeService;
+//import io.hasli.hal.aws.AwsComputeService;
 import io.hasli.hal.aws.HALAwsConfiguration;
 import io.hasli.hal.core.node.DefaultNodeConfigurationService;
 import io.hasli.hal.core.node.HypervisorAbstractionLayerServiceConfiguration;
@@ -77,10 +77,10 @@ public class BootstrapConfiguration {
         return new DefaultPreferencesService();
     }
 
-    @Bean
-    public AwsComputeService awsComputeService() {
-        return new AwsComputeService();
-    }
+//    @Bean
+//    public AwsComputeService awsComputeService() {
+//        return new AwsComputeService();
+//    }
 
 
     @Bean
