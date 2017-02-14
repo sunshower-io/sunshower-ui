@@ -6,7 +6,8 @@ import {
 import {HttpClient} from 'aurelia-fetch-client';
 import {Provider} from "common/model/api/hal/api";
 
-@inject(HttpClient)
+import {Workspaces} from "apps/workspaces/routes/workspace/index";
+@inject(Workspaces, HttpClient)
 export class Instances {
 
     @bindable
@@ -17,8 +18,12 @@ export class Instances {
     @bindable
     loading: boolean;
 
-    constructor(private client:HttpClient) {
+    constructor(private parent:Workspaces, private client:HttpClient) {
         this.instances = [];
+    }
+
+    activate() : void {
+        this.parent.setMenuVisible(true);
     }
 
     attached(): void {

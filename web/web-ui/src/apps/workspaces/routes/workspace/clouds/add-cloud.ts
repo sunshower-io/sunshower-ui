@@ -6,7 +6,8 @@ import {
 import {HttpClient} from 'aurelia-fetch-client';
 import {Provider} from "common/model/api/hal/api";
 
-@inject(HttpClient)
+import {Workspaces} from "apps/workspaces/routes/workspace/index";
+@inject(Workspaces, HttpClient)
 @customElement('add-cloud')
 export class AddCloud {
 
@@ -22,7 +23,7 @@ export class AddCloud {
     @bindable
     private provider:Provider;
 
-    constructor(private client:HttpClient) {
+    constructor(private parent:Workspaces, private client:HttpClient) {
         this.providers = [];
         let aws = new Provider,
             vmware = new Provider;
@@ -37,19 +38,16 @@ export class AddCloud {
     attached(): void {
     }
 
+    activate() : void {
+        this.parent.setMenuVisible(false);
+    }
+
     saveProvider() : void {
         this.client.fetch('provider', {
             method: 'post',
             body: JSON.stringify(this.provider)
         }).then(t => this.close());
     }
-
-    // refresh() : void {
-    //     this.client.fetch('provider')
-    //         .then(r => r.json() as any)
-    //         .then(r => this.providers = r);
-    // }
-
 
 
 
@@ -70,7 +68,7 @@ export class AddCloud {
     }
 
     close() : void {
-        this.visible = false;
+        this.parent.router.navigateBack();
     }
 
 }

@@ -2,6 +2,7 @@ import {bindable, autoinject} from "aurelia-framework";
 import {Provider} from "common/model/api/hal/api";
 import {CredentialSecret} from "common/model/security/credentials";
 import {HttpClient} from "aurelia-fetch-client";
+import {Workspaces} from "apps/workspaces/routes/workspace/index";
 @autoinject
 export class AddCredential {
 
@@ -20,7 +21,7 @@ export class AddCredential {
 
     private credentials: CredentialSecret[];
 
-    constructor(private client:HttpClient) {
+    constructor(private parent:Workspaces, private client:HttpClient) {
 
     }
 
@@ -34,8 +35,12 @@ export class AddCredential {
     attached() : void {
     }
 
+    activate() : void {
+        this.parent.setMenuVisible(false);
+    }
+
     close() {
-        this.visible = false;
+        this.parent.router.navigateBack();
     }
 
     saveCredential() : void {

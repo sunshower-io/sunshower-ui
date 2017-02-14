@@ -1,6 +1,6 @@
 template
-    .ui.hidden.divider
-    .ui.container
+    .ui.hidden.divider(if.bind="mode === 'partial'")
+    .ui.container(if.bind="mode === 'partial'")
         .ui.items
             .item
                 .ui.small.image
