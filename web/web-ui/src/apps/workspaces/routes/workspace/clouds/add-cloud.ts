@@ -5,8 +5,14 @@ import {
 } from "aurelia-framework";
 import {HttpClient} from 'aurelia-fetch-client';
 import {Provider} from "common/model/api/hal/api";
+import {
+    ValidationControllerFactory,
+    ValidationController,
+    ValidationRules
+} from 'aurelia-validation';
+import {BootstrapFormRenderer} from 'common/resources/custom-components/bootstrap-form-renderer';
 
-@inject(HttpClient)
+@inject(HttpClient, ValidationControllerFactory)
 @customElement('add-cloud')
 export class AddCloud {
 
@@ -22,7 +28,13 @@ export class AddCloud {
     @bindable
     private provider:Provider;
 
-    constructor(private client:HttpClient) {
+    controller = null;
+
+    constructor(private client:HttpClient, controllerFactory) {
+        //this.controller = controllerFactory.createForCurrentScope();
+        //this.controller.addRenderer(new BootstrapFormRenderer());
+        //this.controller.addObject(this.provider, Provider.validationRules);
+
         this.providers = [];
         let aws = new Provider,
             vmware = new Provider;
@@ -37,36 +49,25 @@ export class AddCloud {
     attached(): void {
     }
 
-    saveProvider() : void {
-        this.client.fetch('provider', {
-            method: 'post',
-            body: JSON.stringify(this.provider)
-        }).then(t => this.close());
-    }
-
-    // refresh() : void {
-    //     this.client.fetch('provider')
-    //         .then(r => r.json() as any)
-    //         .then(r => this.providers = r);
-    // }
-
-
-
-
     selectProvider(provider:Provider) : void {
         this.providerSelected = true;
+        this.provider = provider;
     }
 
-    saveCredential() : void {
-        this.providerSelected = false;
-        //todo refresh clouds
-        this.close();
+    saveProvider() : void {
+        // this.controller.validate().then(result => {
+        //     if (result.valid) {
+                this.client.fetch('provider', {
+                    method: 'post',
+                    body: JSON.stringify(this.provider)
+                }).then(t => this.close());
+        //     }
+        // });
     }
 
     open() : void {
         this.providerSelected = false;
         this.visible = true;
-
     }
 
     close() : void {
@@ -74,4 +75,3 @@ export class AddCloud {
     }
 
 }
-

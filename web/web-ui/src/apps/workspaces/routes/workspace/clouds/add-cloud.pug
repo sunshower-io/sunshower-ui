@@ -18,10 +18,15 @@ template
                 .overlay-cards.ui.four.stackable.cards
                     .card(repeat.for="provider of providers")
                         .image(click.delegate="selectProvider(provider)")
-                            img(src="${provider.logo}" alt="${provider.name}")
+                            img(src="${provider.icon}" alt="${provider.name}")
 
             template(if.bind="providerSelected")
                 .ui.form
+                    img.ui.image.small(src="${provider.icon}" alt="${provider.name}")
+                    input(type="hidden", value.bind="provider.icon")
+
+                    .ui.hidden.divider
+
                     .field
                         label Name
                         input(type="text", value.bind="provider.name")
@@ -39,4 +44,4 @@ template
                             type="submit",
                             click.delegate="saveProvider()"
                         )
-                            | Save Credential
+                            | Save Provider
