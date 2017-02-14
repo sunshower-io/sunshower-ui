@@ -204,16 +204,16 @@ body {
 /* Builder */
 .left--menu {
   right: auto;
-  left: 0px;
+  left: 0;
 }
 
 .right--menu {
-  right: 0px !important;
+  right: 0 !important;
   left: auto !important;
 }
 
 .no--padding {
-  padding: 0px !important;
+  padding: 0 !important;
 }
 
 //TODO make sure site variables align with the required colors
@@ -238,10 +238,30 @@ body {
 .overlay {
   position: absolute;
   left: 0;
-  top: 38px;
+  top: @headerheight;
   right: 0;
-  bottom: 0;
+  bottom: @footerheight;
   overflow: hidden;
+  background-color: white;
+  z-index:2;
+}
+
+.overlay-close {
+  margin-top:16px;
+  margin-bottom:16px;
+  text-align:right;
+}
+
+@cardmargin:50px;
+.overlay-cards.ui.cards {
+  & > .card>.image {
+    background-color:inherit;
+    padding:15px;
+  }
+  &.four > .card {
+    margin: @cardmargin !important;
+    width:calc(~"25% - "@cardmargin*2);
+  }
 }
 
 .overlay-sidenav {

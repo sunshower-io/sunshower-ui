@@ -33,12 +33,11 @@ export class Workspaces {
             moduleId: './applications/applications',
         }, {
             nav: true,
-            title: 'Dashboard',
-            name: 'dashboard',
-            route: 'dashboard',
-            moduleId: './dashboard/dashboard',
+            title: 'Clouds',
+            name: 'clouds',
+            route: 'clouds',
+            moduleId: './clouds/clouds',
         }, {
-
             nav: true,
             title: 'Instances',
             name: 'instances',

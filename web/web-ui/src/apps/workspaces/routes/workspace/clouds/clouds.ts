@@ -1,21 +1,27 @@
 import {bindable} from "aurelia-framework";
+import {AddCloud} from "./add-cloud";
 
 export class Clouds {
 
     @bindable
     clouds: Cloud[];
 
-
     @bindable
     loading: boolean;
 
+    private addCloudOverlay: AddCloud;
+
 
     attached(): void {
-        this.clouds = [''];
+        this.clouds = [];
     };
 
     refresh(): void {
         this.loading = true;
+    }
+
+    addCloud() : void {
+        this.addCloudOverlay.open();
     }
 
 }
