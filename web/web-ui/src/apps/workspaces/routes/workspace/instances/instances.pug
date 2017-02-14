@@ -3,7 +3,7 @@
 template
     .ui.hidden.divider
 
-    template(if.bind="instances.length == 0")
+    template(if.bind="providers.length == 0")
         h2.ui.center.aligned.icon.header
             i.circular.red.ion-ios-loop.icon.circular--icon.circular--icon_red
             |   Welcome to Hasli.io! Browse some existing applications or create your own to deploy!
@@ -11,7 +11,7 @@ template
             |   You'll need to add a cloud provider before deploying any applications
 
 
-    .ui.container(if.bind="instances.length > 0")
+    .ui.container(if.bind="providers.length > 0")
         .ui.basic.segment
             h2.ui.header
                 i.circular.red.ion-ios-loop.icon.circular--icon.circular--icon_red
@@ -59,11 +59,11 @@ template
                             td.widget-table-reloading(colspan='11')
                                 .ui.active.inverted.dimmer
                                     .ui.large.text.loader Reloading ...
-                        tr(if.bind="instances.length == 0 && !loading")
+                        tr(if.bind="providers.length == 0 && !loading")
                             td.widget-table-empty-alert(colspan='11') You have no instances
                         tr(
-                        if.bind="instances.length > 0 && !loading",
-                        repeat.for='instance of instances'
+                        if.bind="providers.length > 0 && !loading",
+                        repeat.for='instance of providers'
                         )
                             td
                                 input(type="checkbox")

@@ -62,14 +62,15 @@
 
         <hasli-test.version>1.0.30.Final</hasli-test.version>
         <!--<hasli-hal.version>1.0.54.Final</hasli-hal.version>-->
+        <!--<hasli-api.version>1.0.39.Final</hasli-api.version>-->
         <hasli-search.version>1.0.3.Final</hasli-search.version>
-        <hasli-api.version>1.0.39.Final</hasli-api.version>
         <hasli-persist.version>1.0.65.Final</hasli-persist.version>
         <hasli-service.version>1.0.32.Final</hasli-service.version>
 
         <hasli-hfs.version>1.0.22.Final</hasli-hfs.version>
 
         <hasli-hal.version>1.00.000.000-SNAPSHOT</hasli-hal.version>
+        <hasli-api.version>1.00.000.000-SNAPSHOT</hasli-api.version>
         <!--<hasli-persist.version>${snapshot-version}</hasli-persist.version>-->
         <!--<hasli-api.version>${snapshot-version}</hasli-api.version>-->
         <!--<hasli-hfs.version>${snapshot-version}</hasli-hfs.version>-->

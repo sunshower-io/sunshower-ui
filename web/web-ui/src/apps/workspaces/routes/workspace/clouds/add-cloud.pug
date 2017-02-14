@@ -23,11 +23,20 @@ template
             template(if.bind="providerSelected")
                 .ui.form
                     .field
-                        label Credentials
-                        input(type="text")
+                        label Name
+                        input(type="text", value.bind="provider.name")
+
+                    .field
+                        label Key
+                        input(type="text", value.bind="provider.key")
+
+                    .field
+                        label Description
+                        input(type="text", value.bind="provider.description")
+
                     .field
                         button.ui.pull-right.button.primary(
                             type="submit",
-                            click.delegate="saveCredential()"
+                            click.delegate="saveProvider()"
                         )
                             | Save Credential

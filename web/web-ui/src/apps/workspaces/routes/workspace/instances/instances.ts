@@ -4,10 +4,13 @@ import {
 } from "aurelia-framework";
 
 import {HttpClient} from 'aurelia-fetch-client';
+import {Provider} from "common/model/api/hal/api";
 
 @inject(HttpClient)
 export class Instances {
 
+    @bindable
+    providers: Provider[];
     @bindable
     instances: Instance[];
 
@@ -20,27 +23,21 @@ export class Instances {
 
     attached(): void {
         this.refresh();
-
-        // let myInstance = new Instance,
-        //     myOtherInstance = new Instance;
-        // //myInstance.logo = 'http://www.prescientdigital.com/about-us/case-studies-1/calogo.jpg';
-        // myInstance.name = 'A name';
-        // myInstance.status = 'Running';
-        // myOtherInstance.logo = '';
-        // myOtherInstance.name = 'Booped';
-        // myOtherInstance.status = 'Stopping';
-        // this.instances.push(myInstance);
-        // this.instances.push(myOtherInstance);
     };
 
     refresh(): void {
         this.loading = true;
         setTimeout(() => {
-            this.client.fetch('compute')
+            this.client.fetch('provider')
                 .then(d => d.json() as any)
                 .then(d => {
                     this.loading = false;
-                    this.instances = d;
+                    this.providers = d;
+                    for(let provider of d) {
+                        this.client.fetch(`compute/${provider.id}/instances`)
+                            .then(d => d.json() as any)
+                            .then(d => console.log(d));
+                    }
                 });
         }, 2)
     }

@@ -2,9 +2,14 @@
    Created by dustinlish on 2/6/17.
 template
     require(from="./add-cloud")
+    require(from='./add-credential')
     add-cloud(view-model.ref="addCloudOverlay")
+    add-credential(
+        view-model.ref="addCredentialOverlay",
+        model.bind="provider"
+    )
     .ui.hidden.divider
-    template(if.bind="clouds.length == 0")
+    template(if.bind="providers.length == 0")
         h2.ui.center.aligned.icon.header
             i.circular.blue.ion-ios-cloud-outline.icon.circular--icon.circular--icon_blue
             |   Looks like you haven't added any cloud providers yet
@@ -20,7 +25,7 @@ template
                     img(src='styles/themes/hasli/assets/images/logos/aws-logo.svg')
                     img(src='styles/themes/hasli/assets/images/logos/vmware-logo.png')
 
-    .ui.container(if.bind="clouds.length > 0")
+    .ui.container(if.bind="providers.length > 0")
         .ui.basic.segment
             h2.ui.header
                 i.circular.blue.ion-ios-cloud-outline.icon.circular--icon.circular--icon_blue
@@ -57,8 +62,8 @@ template
                             th Disk
                             th.right.aligned
                                 i.big.blue.ion-ios-loop-strong.icon(
-                                    class="${loading ? 'loading' : ''}"
-                                    click.delegate="refresh()"
+                                class="${loading ? 'loading' : ''}"
+                                click.delegate="refresh()"
                                 )
                                 //settings
                     tbody
@@ -66,11 +71,11 @@ template
                             td.widget-table-reloading(colspan='10')
                                 .ui.active.inverted.dimmer
                                     .ui.large.text.loader Reloading ...
-                        tr(if.bind="clouds.length == 0 && !loading")
+                        tr(if.bind="providers.length == 0 && !loading")
                             td.widget-table-empty-alert(colspan='10') You have no clouds
                         tr(
-                        if.bind="clouds.length > 0 && !loading",
-                        repeat.for='cloud of clouds'
+                            if.bind="providers.length > 0 && !loading",
+                            repeat.for='cloud of providers'
                         )
                             td
                                 input(type="checkbox")
@@ -96,4 +101,4 @@ template
                                 //TODO graph
                                 | ${cloud.disk}%
                             td
-                                i.icon.setting
+                                i.icon.setting(click.delegate="configure(cloud.id)")

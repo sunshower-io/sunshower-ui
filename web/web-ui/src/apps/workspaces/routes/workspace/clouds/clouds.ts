@@ -1,23 +1,49 @@
 import {bindable} from "aurelia-framework";
 import {AddCloud} from "./add-cloud";
+import {Provider} from "common/model/api/hal/api";
+import {autoinject} from "aurelia-framework";
+import {HttpClient} from "aurelia-fetch-client";
+import {AddCredential} from "./add-credential";
 
+@autoinject
 export class Clouds {
 
     @bindable
-    clouds: Cloud[];
+    providers: Provider[];
 
     @bindable
     loading: boolean;
 
     private addCloudOverlay: AddCloud;
+    private addCredentialOverlay: AddCredential;
 
+
+    constructor(private client:HttpClient) {
+
+    }
 
     attached(): void {
-        this.clouds = [];
+        this.refresh();
     };
+
+    activate(id:any)  {
+        this.refresh();
+    }
 
     refresh(): void {
         this.loading = true;
+        this.client.fetch('provider')
+            .then(r => r.json() as any)
+            .then(r => {
+                this.providers = r;
+                this.loading = false;
+            });
+    }
+
+    configure(id: string) : void {
+        let provider = this.providers.find(t => t.id == id);
+        this.addCredentialOverlay.open(provider);
+
     }
 
     addCloud() : void {
@@ -26,14 +52,3 @@ export class Clouds {
 
 }
 
-//leaving this here so Josiah can put it wherever
-export class Cloud {
-    logo    ?: string;
-    name    ?: string;
-    status  ?: string;
-    ip      ?: string;
-    ports   ?: string;
-    cpu     ?: number;
-    memory  ?: number;
-    disk    ?: number;
-}
