@@ -30,6 +30,11 @@ export class Instances {
         this.refresh();
     };
 
+
+    createInstance() : void {
+        this.parent.router.navigate('instances/new');
+    }
+
     refresh(): void {
         this.loading = true;
         setTimeout(() => {

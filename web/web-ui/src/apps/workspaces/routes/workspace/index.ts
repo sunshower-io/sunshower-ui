@@ -91,7 +91,6 @@ export class Workspaces {
                 route: 'designer',
                 moduleId: './designer/designer'
             }, {
-
                 nav: false,
                 title: 'New Instance',
                 name: 'new-instance',

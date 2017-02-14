@@ -13,4 +13,7 @@ export class NewInstance {
         this.parent.setMenuVisible(false);
     }
 
+    close() : void {
+        this.parent.router.navigateBack();
+    }
 }
