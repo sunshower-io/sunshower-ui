@@ -42,15 +42,7 @@ export function configure(aurelia: Aurelia) {
             'common/lib/widget/menu/menu',
             'common/resources/custom-elements/tree/tree'
         ])
-        // .globalResources([
-        //     'common/elements/menu',
-        //     'common/sidenav/sidenav',
-        //     'common/elements/tree/tree',
-        //     'common/banner/banner',
-        //     'common/carousel/carousel',
-        //     'common/folio/folio',
-        //     'common/property-editor/property-editor',
-        // ])
+        .plugin('aurelia-validation')
         .plugin('aurelia-animator-velocity')
         .plugin('aurelia-dialog', (config: DialogConfiguration) => {
             config.useRenderer(SemanticUIRenderer);
