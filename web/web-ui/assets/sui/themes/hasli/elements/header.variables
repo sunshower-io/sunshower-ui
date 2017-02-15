@@ -25,7 +25,7 @@
 @subHeadingDistance: @2px;
 @subHeadingFontSize: @relativeTiny;
 @subHeadingFontWeight: bold;
-@subHeadingTextTransform: uppercase;
+@subHeadingTextTransform: none;
 @subHeadingColor: '';
 
 @smallSubHeadingSize: @relativeMini;
@@ -41,7 +41,7 @@
 @iconOpacity: 1;
 @iconSize: 1.5em;
 @iconOffset: @lineHeightOffset;
-@iconMargin: 0.75rem;
+@iconMargin: 1.75rem;
 @iconAlignment: middle;
 
 /* Image */
@@ -91,7 +91,7 @@
 /* Icon Header */
 @iconHeaderSize: 3em;
 @iconHeaderOpacity: 1;
-@iconHeaderMargin: 0.5rem;
+@iconHeaderMargin: 3.5rem;
 @circularHeaderIconSize: 2em;
 @squareHeaderIconSize: 2em;
 

@@ -1,0 +1,29 @@
+template
+    require(from="./basic")
+    .overlay-sidenav
+        .overlay-header
+            .ui.small.image.overlay-header-image
+                img(src="${applicationDeployment.icon}")
+            span.overlay-header-label ${applicationDeployment.applicationName}
+            //span.overlay-header-sublabel Version Goes Here
+        .overlay-segment
+            .segment-header Details
+            .segment-body
+                .item
+                    | Created
+                    | Date
+                .item
+                    | Updated
+                    | Date
+                .item
+                    | Blocks
+                    | Count
+        .overlay-segment
+            .segment-header Activity
+            .segment-body
+                //TODO
+    .overlay-body
+        .ui.secondary.pointing.menu.overlay-body-tab-menu
+            .item.active Summary
+        .overlay-form
+            basic-application-deployment-editor

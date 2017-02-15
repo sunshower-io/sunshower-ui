@@ -163,13 +163,35 @@ declare module 'mxgraph' {
         constrainRelativeChildren           : boolean;
         mouseListeners                      : {[name: string]: any};
 
+        isCellSelectable(cell:Layer) : boolean;
+
+        /**
+         *
+         */
         zoomIn(): void;
 
+        /**
+         *
+         */
         zoomOut(): void;
 
+        /**
+         *
+         */
         getView(): mxGraphView;
 
+        /**
+         *
+         * @param children
+         */
         getBoundingBox(children: Layer[]): mxRectangle;
+
+        /**
+         *
+         * @param back
+         * @param cells
+         */
+        orderCells(back:boolean, cells:Layer[]) : void;
 
 
         /**

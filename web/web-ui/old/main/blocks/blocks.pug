@@ -1,0 +1,40 @@
+template
+    .overlay
+        .overlay-sidenav
+            .overlay-header
+                .ui.small.overlay-header-image
+                    img(src="assets/sui/themes/hasli/assets/images/icons/blocks-icon.svg")
+                span.overlay-header-label Block Library
+            .overlay-segment
+                .segment-header
+                    | Type
+                .ui.vertical.secondary.pointing.menu.type-menu.segment-body
+                    a.item(
+                        repeat.for="t of blockManager.listTypes()",
+                        click.delegate="filterTypes(t, $event)"
+                    )
+                        span.name ${nameOf(t)}
+                        span.count.pull-right
+            .overlay-segment
+                .segment-header Categories
+                .ui.vertical.secondary.pointing.menu.category-menu.segment-body
+                    a.item(
+                        repeat.for="c of blockManager.getCategories()",
+                        click.delegate="filterCategories(c.name, $event)"
+                    )
+                        span.name ${c.name}
+                        span.count.pull-right ${c.count}
+        .overlay-body
+            .overlay-action-menu
+                .ui.icon.input
+                    input(type='text', placeholder='Search')
+                    i.search.icon
+                .ui.basic.button.primary Actions
+                .ui.basic.button.primary Select: Type
+                span.overlay-icons
+                    i.big.block.layout.icon
+                    i.big.list.layout.icon
+            .ui.relaxed.middle.aligned.selection.divided.list(ref="list")
+                .item(repeat.for="block of blocks" dblclick.delegate="openBlock(block.id)")
+                    img.ui.image(src="${block.icon}")
+                    .content ${block.name}

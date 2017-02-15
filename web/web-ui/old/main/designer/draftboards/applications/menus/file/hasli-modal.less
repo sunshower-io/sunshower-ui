@@ -1,0 +1,28 @@
+//TODO refactor up into where the dimmer styles are set
+
+//for mixin purposes
+.clearfix {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: '';
+    clear: both;
+    height: 0;
+  }
+}
+
+.hasli-modal {
+  margin-top:-50px;
+  h1, h2, h3, h4, h5, h6 {
+    color: white;
+    text-align:center;
+    margin-bottom:50px;
+  }
+}
+
+.hasli-modal--button-holder {
+  margin-top: 3em;
+  .button { float: right; }
+  .clearfix
+}

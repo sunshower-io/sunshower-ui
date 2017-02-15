@@ -4,15 +4,18 @@ import io.hasli.common.configuration.ConfigurationSource;
 import io.hasli.common.configuration.MapConfigurationSource;
 import io.hasli.common.rs.MoxyProvider;
 import io.hasli.core.ApplicationService;
+import io.hasli.hal.HALConfiguration;
+import io.hasli.hal.api.HALPersistenceConfiguration;
 import io.hasli.hal.api.instance.NodeConfigurationService;
 import io.hasli.hal.aws.AwsComputeService;
+import io.hasli.hal.aws.HALAwsConfiguration;
 import io.hasli.hal.core.node.DefaultNodeConfigurationService;
+import io.hasli.hal.core.node.HypervisorAbstractionLayerServiceConfiguration;
 import io.hasli.hal.docker.DockerConfiguration;
 import io.hasli.hfs.service.HFSConfiguration;
 import io.hasli.jpa.flyway.FlywayConfiguration;
 import io.hasli.model.core.Application;
 import io.hasli.model.core.PersistenceConfiguration;
-import io.hasli.model.core.Version;
 import io.hasli.model.core.auth.User;
 import io.hasli.persist.core.DataSourceConfiguration;
 import io.hasli.persist.core.DatabaseConfiguration;
@@ -23,14 +26,13 @@ import io.hasli.service.CoreServiceConfiguration;
 import io.hasli.service.csp.configuration.CSPServiceConfiguration;
 import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.service.vault.VaultConfiguration;
-import org.flywaydb.core.Flyway;
+import io.hasli.web.preferences.DefaultPreferencesService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Collections;
@@ -48,13 +50,17 @@ import java.util.Map;
         DatabaseConfiguration.class,
         HibernateConfiguration.class,
         SecurityConfiguration.class,
+        HALConfiguration.class,
         VaultConfiguration.class,
         SearchConfiguration.class,
         HFSConfiguration.class,
+        HALAwsConfiguration.class,
         DockerConfiguration.class,
         PersistenceConfiguration.class,
+        HALPersistenceConfiguration.class,
         SecurityPersistenceConfiguration.class,
-        CoreServiceConfiguration.class
+        CoreServiceConfiguration.class,
+        HypervisorAbstractionLayerServiceConfiguration.class
 })
 public class BootstrapConfiguration {
 
@@ -66,6 +72,10 @@ public class BootstrapConfiguration {
     public BootstrapConfiguration() {
     }
 
+    @Bean
+    public DefaultPreferencesService defaultPreferencesService() {
+        return new DefaultPreferencesService();
+    }
 
     @Bean
     public AwsComputeService awsComputeService() {

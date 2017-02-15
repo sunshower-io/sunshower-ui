@@ -1,0 +1,109 @@
+//
+   Created by dustinlish on 2/6/17.
+template
+    .ui.hidden.divider
+
+    template(if.bind="applications.length == 0")
+        h2.ui.center.aligned.icon.header
+            i.circular.orange.ion-ios-keypad-outline.icon.circular--icon.circular--icon_orange
+            |   Looks like you don't have any applications, create a new application or browse existing ones!
+        h4.ui.center.aligned.grey.header
+            |   You'll need to add a cloud provider before deploying any applications
+        .ui.centered.grid.container
+            .ui.hidden.divider
+            .ui.basic.segment
+                .ui.cards
+                    .ui.card
+                        .content
+                            .meta
+                            .description
+                                .ui.container.workspaces--image_container
+                                    img.blue(src='styles/themes/hasli/assets/images/icons/code-working.svg').workspaces--image_size
+                            .ui.secondary.button
+                                | + Create New Application
+                    .ui.card
+                        .content
+                            .meta
+                            .description
+                                .ui.container.workspaces--image_container
+                                    img(src='styles/themes/hasli/assets/images/browse-applications-image.png').workspaces--image_size
+                            .ui.secondary.button
+                                | Browse Applications
+                .ui.hidden.divider
+
+    template(if.bind="applications.length > 0")
+        .ui.container
+            .ui.basic.segment
+                h2.ui.header
+                    i.circular.orange.ion-ios-keypad-outline.icon.circular--icon.circular--icon_orange
+                    .content
+                        |   Applications
+            .ui.hidden.divider
+            .ui.basic.segment
+                .overview-widget
+                    .widget-action-menu
+                        .ui.small.icon.input
+                            input(type='text', placeholder='Search')
+                            i.search.icon
+                        .ui.small.basic.button.primary
+                            | Actions
+                            i.dropdown.icon
+                        .ui.small.basic.button.primary
+                            | Select: Type
+                            i.dropdown.icon
+                        span.widget-icons
+                            .ui.small.button.primary + Create New
+                    table.ui.very.basic.table.widget-table
+                        thead
+                            tr
+                                th
+                                    //checkbox
+                                th
+                                    //logo
+                                th Name
+                                th Status
+                                th Deployer
+                                th Ports
+                                th CPU
+                                th Memory
+                                th Disk
+                                th.right.aligned
+                                    i.big.blue.ion-ios-loop-strong.icon(
+                                    class="${loading ? 'loading' : ''}"
+                                    click.delegate="refresh()"
+                                    )
+                                    //settings
+                        tbody
+                            tr(if.bind="loading")
+                                td.widget-table-reloading(colspan='10')
+                                    .ui.active.inverted.dimmer
+                                        .ui.large.text.loader Reloading ...
+                            tr(
+                            if.bind="applications.length > 0 && !loading",
+                            repeat.for='application of applications'
+                            )
+                                td
+                                    input(type="checkbox")
+                                td
+                                    img.ui.image.tiny(src="${application.logo}")
+                                td
+                                    | ${application.application.name}
+                                td
+                                    //TODO circle
+                                    .status-circle.green
+                                    | ${application.status}
+                                td
+                                    |  Docker
+                                td
+                                    | ${application.ports}
+                                td
+                                    //TODO graph
+                                    | ${application.cpu}%
+                                td
+                                    //TODO graph
+                                    | ${application.memory}%
+                                td
+                                    //TODO graph
+                                    | ${application.disk}%
+                                td
+                                    i.icon.setting

@@ -1,0 +1,13 @@
+template(bindable="router")
+    require(from="common/elements/profile-dropdown")
+    .ui.secondary.menu.navbar(ref="element")
+        img.ui.image.item.header(src="styles/themes/hasli/assets/images/logos/hasli-logo.svg", click.delegate="router.navigate('#/')")
+        .right.compact.menu
+            a.fitted.item(click.delegate="openWorkspaces()")
+                i.large.inverted.ion-grid.icon
+            a.fitted.item
+                i.large.inverted.ion-ios-pulse-strong.icon
+            a.fitted.item
+                i.large.green.ion-android-notifications-none.icon
+            a.item
+                profile-dropdown

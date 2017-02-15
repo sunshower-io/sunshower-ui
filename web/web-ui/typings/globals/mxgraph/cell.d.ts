@@ -13,6 +13,10 @@ declare module 'mxgraph' {
 
 
 
+    export class mxSelectionCellsHandler {
+        mouseDown()
+    }
+
 
     export class mxCellOverlay {
 

@@ -75,7 +75,7 @@
 @menuHeaderColor: @darkTextColor;
 @menuHeaderFontSize: @relative11px;
 @menuHeaderFontWeight: bold;
-@menuHeaderTextTransform: uppercase;
+@menuHeaderTextTransform: none;
 @menuHeaderMargin: 1rem 0rem 0.75rem;
 @menuHeaderPadding: 0em @itemHorizontalPadding;
 

@@ -2,6 +2,8 @@
         Global Overrides
 *******************************/
 
+
+// Give text colors name
 @text-colors: blue, green, orange, pink, purple, red, teal, yellow, black, grey, white;
 .text {
   .-
@@ -17,24 +19,111 @@
 ;
 }
 
-.page.header {
-  background-color: #171B26;
-  //border-bottom: 1px solid #E5E5E5;
-  padding: 2px 0px;
+body {
+  height: 100%;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
-.nav--color {
-  a:active {
-    background-color: blue;
-  }
-  a:hover {
-    color: red;
-  }
+@footerheight: 48px;
+.hasli--footer {
+  background-color: #FFFFFF !important;
+  border-top: 1px solid rgba(34, 36, 38, 0.15) !important;
+  position: fixed !important;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height:@footerheight;
+  box-sizing:border-box;
+  z-index: 51 !important; //one higher than the workspace BG
 }
 
-img.transparent {
-  opacity: 0;
+.masthead {
+  background-color: #171B26 !important;
+  padding: 2px 0 !important;
 }
+
+.auth--main_container {
+  margin-top: 6em;
+}
+
+.title-bar {
+  background-color: #FFFFFF !important;
+}
+
+.circular--icon {
+  width: 30px !important;
+  height: 30px !important;
+  box-shadow: 1px 1px 25px !important;
+}
+
+.circular--icon_green {
+  color: @hasliGreen !important;
+}
+.circular--icon_blue {
+  color: @primaryColor !important;
+}
+.circular--icon_orange {
+  color: #5bfa !important;
+}
+.circular--icon_red {
+  color: #D41800 !important;
+}
+.circular--icon_purple {
+  color: #9012FE !important;
+}
+
+@headerheight: 48px;
+.navbar {
+  height: @headerheight;
+  z-index: 2;
+  line-height: @headerheight;
+  background: #171B26 !important;
+  color: white;
+  box-shadow: none;
+  border-radius: 0;
+  margin-bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.workspace--content-view {
+  background-color: #FFFFFF !important;
+  height: 100% !important;
+}
+
+.workspace--navbar {
+  padding: 2px 0 !important;
+}
+
+.workspaces--image_container {
+  height: 80px !important;
+  width: 150px !important;
+  text-align: center; margin: 1em 0;
+}
+
+.workspaces--image_size {
+  max-height: 80px;
+  max-width: 150px;
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.cloud--image_container {
+  width: 150px !important;
+}
+
+.popup--transition {
+  top: 554px;
+  left: 1px;
+  bottom: auto;
+  right: auto;
+  width: 400px;
+}
+
 
 /* used for plus/minus icone toggle */
 .toggle--icon {
@@ -49,11 +138,6 @@ img.transparent {
   box-shadow: none !important;
 }
 
-.grid--lines {
-  background: transparent linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent);
-  height: 100%;
-  background-size: 50px 50px;
-}
 
 /* Application Explore height */
 .form--scroll {
@@ -79,19 +163,31 @@ img.transparent {
   height: 350px !important;
   margin: 0px !important;
   padding: 0px !important;
+  overflow-y:scroll;
 }
 
 .right--menu, .left--menu {
   width: 300px !important;
   border-top: none;
   position: fixed;
-  top: 60px !important;
-  left: 0;
+  top: @headerheight !important;
+  bottom:@footerheight !important;
   //-webkit-box-sizing: border-box;
   //-moz-box-sizing: border-box;
   box-sizing: border-box;
   border-top: 0 !important;
+  border-bottom: 0 !important;
   overflow:hidden;
+  backface-visibility: hidden;
+  transition: none;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  visibility: visible;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  z-index: 102;
+
 
   .menu--header {
     height: 39px !important;
@@ -103,19 +199,6 @@ img.transparent {
     background-color: #F4F4F4 !important;
   }
 
-  backface-visibility: hidden;
-  transition: none;
-  will-change: transform;
-  transform: translate3d(0, 0, 0);
-  visibility: visible;
-  -webkit-overflow-scrolling: touch;
-
-  height: 100% !important;
-  max-height: 100%;
-  border-radius: 0em !important;
-  margin: 0em !important;
-  overflow-y: auto !important;
-  z-index: 102;
 }
 
 /* Builder */
@@ -132,3 +215,5 @@ img.transparent {
 .no--padding {
   padding: 0px !important;
 }
+
+

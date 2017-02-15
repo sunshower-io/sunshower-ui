@@ -9,8 +9,8 @@
 @fontName          : 'Open Sans Regular';
 @fontSmoothing     : antialiased;
 
-@headerFont        : @fontName, 'Muli', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-@pageFont          : @fontName, 'Muli', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@headerFont        : @fontName, 'Roboto Regular', 'Muli', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@pageFont          : @fontName, 'Roboto Regular', 'Muli', 'Helvetica Neue', Arial, Helvetica, sans-serif;
 
 @googleFontName    : @fontName;
 @importGoogleFonts : true;
@@ -48,10 +48,12 @@
 --------------------*/
 
 @primaryColor        : #239AE8;
-@secondaryColor      : @black;
+@secondaryColor      : #1EC38A;
 
 @lightPrimaryColor   : @lightBlue;
-@lightSecondaryColor : @lightBlack;
+@lightSecondaryColor : #25CD6B;
+
+@hasliGreen          : #25CD6B;
 
 /*--------------
   Page Heading
@@ -117,7 +119,8 @@
         Page
 --------------------*/
 
-@pageBackground      : #FFFFFF;
+//@pageBackground      : #F8F9FB;
+@pageBackground      : #F8F9FB;
 @pageOverflowX       : hidden;
 
 @lineHeight          : 1.4285em;
@@ -161,7 +164,7 @@
 @loaderLineColor         : @grey;
 
 @invertedLoaderFillColor : rgba(255, 255, 255, 0.15);
-@invertedLoaderLineColor : @white;
+@invertedLoaderLineColor : @primaryColor;
 
 /*-------------------
         Grid
@@ -197,7 +200,7 @@
 @olive            : #B5CC18;
 @green            : #00D46A;
 @teal             : #00B5AD;
-@blue             : #80A6CD;
+@blue             : @primaryColor;
 @violet           : #6435C9;
 @purple           : #A333C8;
 @pink             : #E03997;
