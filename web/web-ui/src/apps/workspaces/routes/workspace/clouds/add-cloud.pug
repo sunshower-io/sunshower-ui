@@ -18,7 +18,7 @@ template
                 .overlay-cards.ui.four.stackable.cards
                     .card(repeat.for="provider of providers")
                         .image(click.delegate="selectProvider(provider)")
-                            img(src="${provider.logo}" alt="${provider.name}")
+                            img(src="${provider.icon}" alt="${provider.name}")
 
             template(if.bind="providerSelected")
                 .ui.form

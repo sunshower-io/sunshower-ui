@@ -7,7 +7,6 @@ import io.hasli.core.ApplicationService;
 import io.hasli.hal.HALConfiguration;
 import io.hasli.hal.api.HALPersistenceConfiguration;
 import io.hasli.hal.api.instance.NodeConfigurationService;
-//import io.hasli.hal.aws.AwsComputeService;
 import io.hasli.hal.aws.HALAwsConfiguration;
 import io.hasli.hal.core.node.DefaultNodeConfigurationService;
 import io.hasli.hal.core.node.HypervisorAbstractionLayerServiceConfiguration;
@@ -38,6 +37,7 @@ import javax.inject.Named;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Created by haswell on 10/14/16.
@@ -64,12 +64,15 @@ import java.util.Map;
 })
 public class BootstrapConfiguration {
 
+    static final Logger log = Logger.getLogger(BootstrapConfiguration.class.getName());
+
     @Inject
     @Named("createMigrations")
     private String flyway;
 
 
     public BootstrapConfiguration() {
+        log.info("Starting Hasli.io");
     }
 
     @Bean
@@ -110,6 +113,8 @@ public class BootstrapConfiguration {
 
     @EventListener
     public void initializeApplication(ContextRefreshedEvent event) {
+        log.info("Initializing Hasli");
+
         final ApplicationService applicationService =
                 event.getApplicationContext()
                         .getBean(ApplicationService.class);
@@ -125,6 +130,10 @@ public class BootstrapConfiguration {
         administrator.setPassword("h4s1!43v3r!");
         application.setAdministrators(Collections.singletonList(administrator));
         applicationService.initialize(application);
+
+        log.info("Hasli initialized");
     }
+
+
 
 }

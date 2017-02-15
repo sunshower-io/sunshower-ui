@@ -12,6 +12,8 @@ export class Instances {
 
     @bindable
     providers: Provider[];
+
+    provider : Provider;
     @bindable
     instances: Instance[];
 
@@ -38,26 +40,39 @@ export class Instances {
     refresh(): void {
         this.loading = true;
         setTimeout(() => {
+
+
+
             this.client.fetch('provider')
                 .then(d => d.json() as any)
                 .then(d => {
                     this.loading = false;
                     this.providers = d;
+                    console.log("Providers", d);
                     for(let provider of d) {
-                        this.client.fetch(`compute/${provider.id}/instances`)
-                            .then(d => d.json() as any)
-                            .then(d => console.log(d));
+                        if(provider.key == 'aws') {
+                            this.provider = provider;
+                            this.client.fetch(`compute/${provider.id}/instances`)
+                                .then(d => d.json() as any)
+                                .then(d => this.instances = d);
+                        }
                     }
                 });
         }, 2)
     }
 
     stop(instance:Instance) : void {
-        instance.stop();
+        this.client.fetch(`compute/${this.provider.id}/instances/${instance.id}/Stopping`)
+            .then(r => {
+                console.log(r);
+            });
     }
 
     start(instance:Instance) : void {
-        instance.start();
+        this.client.fetch(`compute/${this.provider.id}/instances/${instance.id}/Starting`)
+            .then(r => {
+                console.log(r);
+            });
     }
 
     restart(instance:Instance) : void {
@@ -68,23 +83,24 @@ export class Instances {
 
 //leaving this here so Josiah can put it wherever
 export class Instance {
-    logo    ?: string;
-    name    ?: string;
-    status  ?: string; //Running, Stopped, Stopping, Restart, Terminating, Deploying, Starting
-    ip      ?: string;
-    ports   ?: string;
-    cpu     ?: number;
-    memory  ?: number;
-    disk    ?: number;
+    id          ?: string;
+    logo        ?: string;
+    name        ?: string;
+    state       ?: string; //Running, Stopped, Stopping, Restart, Terminating, Deploying, Starting
+    publicIp    ?: string;
+    ports       ?: string;
+    cpu         ?: number;
+    memory      ?: number;
+    disk        ?: number;
 
     statusCircle() : string {
-        if (this.status == 'Running') {
+        if (this.state == 'running') {
             return 'circle green';
         }
-        else if (this.status == 'Stopped') {
+        else if (this.state == 'stopped') {
             return 'circle red';
         }
-        else if (this.status == 'Starting' || this.status == 'Deploying' || this.status == 'Stopping') {
+        else if (this.state == 'starting' || this.state == 'deploying' || this.state == 'stopping') {
             return 'notched circle loading';
             //return 'ion-ios-loop-strong loading'
         }
@@ -95,10 +111,10 @@ export class Instance {
     }
 
     statusButtons() : string[] {
-        if (this.status == 'Running') {
+        if (this.state == 'running') {
             return ['stop', 'restart']
         }
-        else if (this.status == 'Stopped') {
+        else if (this.state == 'stopped') {
             return ['start']
         }
         else {

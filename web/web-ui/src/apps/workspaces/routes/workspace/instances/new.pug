@@ -1,5 +1,5 @@
 template
-    .overlay
+    .overlay(style="overflow-y:auto")
         .ui.container
             .overlay-close
                 i.big.grey.icon.ion-close-round(click.delegate="close()")
@@ -9,13 +9,149 @@ template
                     i.circular.blue.ion-ios-cloud-outline.icon.circular--icon.circular--icon_blue
                     .content
                         |  New Instance
-            h4.ui.dividing.header Details
-            form.ui.form
-                .inline.fields
-                    .field
-                        label Name
-                        input(type="text" value.bind="deployment.name")
+            .ui.divider(style="margin-bottom:16px")
+            .ui.two.column.centered.grid
+                .row
+                    .column
+                        h4.ui.dividing.header Details
+                .row
+                    .column
+                        form.ui.form
+                            .twelve.wide.field
+                                label Name
+                                input(type="text" value.bind="template.name")
+                            .twelve.wide.field
+                                label Description
+                                textarea(
+                                    name="description"
+                                    rows="3"
+                                    value.bind="template.description"
+                                )
+
+
+                .row
+                    .column
+                        h4.ui.dividing.header Credentials
+                .row
+                    .column
+                        .ui.form
+                            .twelve.wide.field
+                                .ui.input
+                                    .ui.fluid.search.selection.dropdown(style="line-height: 24px;" ref="credentialList")
+                                        input(type="hidden" name="credentialList")
+                                        i.dropdown.icon
+                                        .default.text Select Credential
+                                        .menu
+                                            .item(repeat.for="credential of credentials" data-value="${credential.id}")
+                                                | ${credential.name}
+
+
+                .row
+                    .column
+                        h4.ui.dividing.header Providers
+
+
+                .row
+                    .column
+                        .ui.form
+                            .twelve.wide.field
+                                label Providers
+                                .ui.input
+                                    .ui.fluid.search.selection.dropdown(style="line-height: 24px;" ref="providerList")
+                                        input(type="hidden")
+                                        i.dropdown.icon
+                                        .default.text Select Provider
+                                        .menu
+                                            .item(repeat.for="provider of cloudProviders" data-value="${provider.id}")
+                                                | ${provider.name}
 
 
 
+                .row
+                    .column
+                        h4.ui.dividing.header Configuration
+
+
+
+                .row
+                    .column
+                        .ui.form
+                            .twelve.wide.field
+                                label Operating System
+                                .ui.input
+                                    .ui.fluid.search.selection.dropdown(style="line-height: 24px;" ref="list")
+                                        input(type="hidden" name="operatingSystem")
+                                        i.dropdown.icon
+                                        .default.text Select OS
+                                        .menu
+                                            .item(repeat.for="os of osService.list()" data-value="${os.id}")
+                                                image.ui.image(src='${os.icon}')
+                                                | ${os.name}
+
+                            .twelve.wide.field
+                                label Instance Count
+                                input(
+                                    type="number"
+                                    name="instanceCount"
+                                    min="0"
+                                    step="1"
+                                    value.bind="configuration.instanceCount"
+                                )
+                            .twelve.wide.field
+                                label CPU
+                                input(
+                                    type="number"
+                                    name="cpu"
+                                    min="0"
+                                    step="1",
+                                    value.bind="configuration.computeProfile.cores"
+                                )
+                            .twelve.wide.field
+                                label Disk
+                                input(
+                                    type="text"
+                                    name="disk"
+                                    value.bind="configuration.storageProfile.capacity"
+                                )
+                            .twelve.wide.field
+                                label Memory
+                                input(
+                                    type="text"
+                                    name="memory"
+                                    value.bind="configuration.memoryProfile.capacity"
+                                )
+                .row
+                    .column
+                        h4.ui.header Search for instances
+                .row
+                    .column
+                        .ui.twelve.wide.segment(class="${searching ? 'loading' : ''}")
+                            .ui.fluid.search.selection.dropdown(ref="providers")
+                                span.text Select Provider
+                                .menu
+                                    .item
+                                        image.ui.image(src="assets/sui/themes/hasli/assets/images/icons/provider/generic/vlan.svg")
+                                            | Amazon EC2
+
+                                    .item
+                                        image.ui.image(src="assets/sui/themes/hasli/assets/images/icons/provider/generic/cloud.svg")
+                                            | Inventory
+                            .ui.horizontal.divider
+                            .overlay-action-menu
+                                .overlay-icons
+                                    button.ui.button.primary(
+                                    click.delegate="search()"
+                                    class="${searching} ? 'disabled' : ''"
+                                    ) Search
+                            .ui.horizontal.divider
+                            .ui.fluid.search.selection.dropdown(ref="instanceType")
+                                input(type="hidden")
+                                i.dropdown.icon
+                                .default.text Select Instance
+                                .menu
+                                    .item(repeat.for="descriptor of instanceTypes", data-value="${descriptor.key}")
+                                        | ${descriptor.name} (${descriptor.description})
+                .row
+                    .column
+                        button.ui.pull-right.button.primary(click.delegate="deployInstance()") Deploy Instance
 
