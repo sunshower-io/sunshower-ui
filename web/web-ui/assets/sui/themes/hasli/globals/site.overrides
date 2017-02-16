@@ -430,3 +430,5 @@ body {
 .element-editor-body .overlay-body {
   padding:32px;
 }
+
+.clickable { cursor: pointer; }

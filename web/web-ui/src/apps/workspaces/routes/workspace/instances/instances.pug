@@ -91,17 +91,17 @@ template
                                 //TODO graph
                                 | ${instance.disk}%
                             td
-                                i.icon.large.ion-stop(
+                                i.icon.large.ion-stop.clickable(
                                     if.bind="instance.statusButtons().indexOf('stop') != -1",
                                     click.delegate="stop(instance)"
                                     )
-                                i.icon.large.ion-play(
+                                i.icon.large.ion-play.clickable(
                                     if.bind="instance.statusButtons().indexOf('start') != -1",
                                     click.delegate="start(instance)"
                                 )
-                                i.icon.large.ion-loop(
+                                i.icon.large.ion-loop.clickable(
                                     if.bind="instance.statusButtons().indexOf('restart') != -1",
                                     click.delegate="restart(instance)"
                                 )
                             td.right.aligned
-                                i.icon.large.setting
+                                i.icon.large.setting.clickable
