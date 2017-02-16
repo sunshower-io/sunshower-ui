@@ -1,18 +1,18 @@
 import {
     bindable,
     inject,
-    customElement
+    customElement,
+    NewInstance
 } from "aurelia-framework";
 import {HttpClient} from 'aurelia-fetch-client';
 import {Provider} from "common/model/api/hal/api";
 import {
-    ValidationControllerFactory,
     ValidationController,
     ValidationRules
 } from 'aurelia-validation';
 import {BootstrapFormRenderer} from 'common/resources/custom-components/bootstrap-form-renderer';
 
-@inject(HttpClient, ValidationControllerFactory)
+@inject(HttpClient, NewInstance.of(ValidationController))
 @customElement('add-cloud')
 export class AddCloud {
 
@@ -28,12 +28,10 @@ export class AddCloud {
     @bindable
     private provider:Provider;
 
-    controller = null;
 
-    constructor(private client:HttpClient, controllerFactory) {
-        //this.controller = controllerFactory.createForCurrentScope();
-        //this.controller.addRenderer(new BootstrapFormRenderer());
-        //this.controller.addObject(this.provider, Provider.validationRules);
+
+    constructor(private client:HttpClient, private controller:ValidationController) {
+        this.controller.addRenderer(new BootstrapFormRenderer());
 
         this.providers = [];
         let aws = new Provider,
@@ -52,17 +50,21 @@ export class AddCloud {
     selectProvider(provider:Provider) : void {
         this.providerSelected = true;
         this.provider = provider;
+        let validationRules = ValidationRules
+            .ensure((p:Provider) => p.name).required()
+            .rules;
+        this.controller.addObject(this.provider, validationRules);
     }
 
     saveProvider() : void {
-        // this.controller.validate().then(result => {
-        //     if (result.valid) {
+        this.controller.validate().then(result => {
+            if (result.valid) {
                 this.client.fetch('provider', {
                     method: 'post',
                     body: JSON.stringify(this.provider)
                 }).then(t => this.close());
-        //     }
-        // });
+            }
+        });
     }
 
     open() : void {

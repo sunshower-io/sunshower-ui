@@ -29,7 +29,7 @@ template
 
                     .field
                         label Name
-                        input(type="text", value.bind="provider.name")
+                        input(type="text", value.bind="provider.name & validate")
 
                     .field
                         label Key
