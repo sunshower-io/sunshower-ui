@@ -23,17 +23,14 @@ template
             template(if.bind="providerSelected")
                 .ui.form
                     img.ui.image.small(src="${provider.icon}" alt="${provider.name}")
-                    input(type="hidden", value.bind="provider.icon")
+                    //input(type="hidden", value.bind="provider.icon")
+                    //input(type="hidden", value.bind="provider.key & validate")
 
                     .ui.hidden.divider
 
                     .field
                         label Name
                         input(type="text", value.bind="provider.name & validate")
-
-                    .field
-                        label Key
-                        input(type="text", value.bind="provider.key")
 
                     .field
                         label Description

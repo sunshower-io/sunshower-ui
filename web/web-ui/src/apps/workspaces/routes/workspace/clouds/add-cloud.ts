@@ -38,8 +38,10 @@ export class AddCloud {
             vmware = new Provider;
         aws.icon = 'styles/themes/hasli/assets/images/logos/aws-logo.svg';
         aws.name = 'AWS';
+        aws.key = 'AWS'; //key has to be 3 chars long
         vmware.icon = 'styles/themes/hasli/assets/images/logos/vmware-logo.png';
         vmware.name = 'VMWare';
+        vmware.key = 'VMW';
         this.providers.push(aws);
         this.providers.push(vmware);
     }
@@ -50,13 +52,11 @@ export class AddCloud {
     selectProvider(provider:Provider) : void {
         this.providerSelected = true;
         this.provider = provider;
-        let validationRules = ValidationRules
-            .ensure((p:Provider) => p.name).required()
-            .rules;
-        this.controller.addObject(this.provider, validationRules);
+        this.setupValidation();
     }
 
     saveProvider() : void {
+
         this.controller.validate().then(result => {
             if (result.valid) {
                 this.client.fetch('provider', {
@@ -65,6 +65,15 @@ export class AddCloud {
                 }).then(t => this.close());
             }
         });
+    }
+
+    setupValidation() : void {
+        //            .ensure((p:Provider) => p.key).required().satisfies(p => p.length === 3)
+        //.withMessage('Key must be exactly three characters long')
+        let validationRules = ValidationRules
+            .ensure((p:Provider) => p.name).required()
+            .rules;
+        this.controller.addObject(this.provider, validationRules);
     }
 
     open() : void {

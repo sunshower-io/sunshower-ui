@@ -13,7 +13,7 @@ export class Auth {
     }
 
     public configureRouter(config: RouterConfiguration, router: Router) {
-        config.title = 'Aurelia';
+        config.title = 'Hasli';
         config.map([
             {
                 route: ['', 'login'],

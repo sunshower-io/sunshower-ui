@@ -1,6 +1,5 @@
 import {Copyable} from "common/lib/lang";
 import {UUID} from "common/lib/utils/uuid";
-import {ValidationRules} from 'aurelia-validation';
 
 export class Provider {
     id          ?: string;
@@ -9,11 +8,6 @@ export class Provider {
     icon        ?: string;
     description ?: string;
     imageId     ?: string;
-
-    // static validationRules = ValidationRules
-    //     .ensure(name).required()
-    //     .rules;
-
 }
 
 
