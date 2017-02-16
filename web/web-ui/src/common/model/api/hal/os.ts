@@ -13,7 +13,7 @@ export class OperatingSystemService {
             'windows',
             '8',
             {
-                id: UUID.randomUUID(),
+                id: UUID.randomUUID().value,
                 name: 'aws',
                 imageId : 'ami-6e833e0e'
             }

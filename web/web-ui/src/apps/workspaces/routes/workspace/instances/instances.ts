@@ -4,46 +4,134 @@ import {
 } from "aurelia-framework";
 
 import {HttpClient} from 'aurelia-fetch-client';
+import {Provider} from "common/model/api/hal/api";
 
-@inject(HttpClient)
+import {Workspaces} from "apps/workspaces/routes/workspace/index";
+@inject(Workspaces, HttpClient)
 export class Instances {
 
+    @bindable
+    providers: Provider[];
+
+    provider : Provider;
     @bindable
     instances: Instance[];
 
     @bindable
     loading: boolean;
 
-    constructor(private client:HttpClient) {
+    constructor(private parent:Workspaces, private client:HttpClient) {
+        this.instances = [];
+    }
 
+    activate() : void {
+        this.parent.setMenuVisible(true);
     }
 
     attached(): void {
         this.refresh();
     };
 
+
+    createInstance() : void {
+        this.parent.router.navigate('instances/new');
+    }
+
     refresh(): void {
         this.loading = true;
         setTimeout(() => {
-            this.client.fetch('compute')
+
+
+
+            this.client.fetch('provider')
                 .then(d => d.json() as any)
                 .then(d => {
                     this.loading = false;
-                    this.instances = d;
+                    this.providers = d;
+                    console.log("Providers", d);
+                    for(let provider of d) {
+                        if(provider.key == 'aws') {
+                            this.provider = provider;
+                            this.client.fetch(`compute/${provider.id}/instances`)
+                                .then(d => d.json() as any)
+                                .then(d => this.instances = d);
+                        }
+                    }
                 });
         }, 2)
+    }
+
+    stop(instance:Instance) : void {
+        this.client.fetch(`compute/${this.provider.id}/instances/${instance.id}/Stopping`)
+            .then(r => {
+                console.log(r);
+            });
+    }
+
+    start(instance:Instance) : void {
+        this.client.fetch(`compute/${this.provider.id}/instances/${instance.id}/Starting`)
+            .then(r => {
+                console.log(r);
+            });
+    }
+
+    restart(instance:Instance) : void {
+        instance.restart();
     }
 
 }
 
 //leaving this here so Josiah can put it wherever
 export class Instance {
-    logo    ?: string;
-    name    ?: string;
-    status  ?: string;
-    ip      ?: string;
-    ports   ?: string;
-    cpu     ?: number;
-    memory  ?: number;
-    disk    ?: number;
+    id          ?: string;
+    logo        ?: string;
+    name        ?: string;
+    state       ?: string; //Running, Stopped, Stopping, Restart, Terminating, Deploying, Starting
+    publicIp    ?: string;
+    ports       ?: string;
+    cpu         ?: number;
+    memory      ?: number;
+    disk        ?: number;
+
+    statusCircle() : string {
+        if (this.state == 'running') {
+            return 'circle green';
+        }
+        else if (this.state == 'stopped') {
+            return 'circle red';
+        }
+        else if (this.state == 'starting' || this.state == 'deploying' || this.state == 'stopping') {
+            return 'notched circle loading';
+            //return 'ion-ios-loop-strong loading'
+        }
+        else {
+            return 'circle yellow';
+        }
+        //returns class name for circle
+    }
+
+    statusButtons() : string[] {
+        if (this.state == 'running') {
+            return ['stop', 'restart']
+        }
+        else if (this.state == 'stopped') {
+            return ['start']
+        }
+        else {
+            return []
+        }
+        //returns names of allowable buttons
+    }
+
+    stop() : void {
+        console.log('stopping ' + this.name);
+    }
+
+    start() : void {
+        console.log('starting ' + this.name);
+    }
+
+    restart() : void {
+        console.log('restarting ' + this.name);
+    }
 }

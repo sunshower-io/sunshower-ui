@@ -1,0 +1,42 @@
+template
+    .overlay
+        .ui.container
+            .overlay-close
+                i.big.grey.icon.ion-close-round(click.delegate="close()")
+            h2.ui.center.aligned.grey.header Add New Cloud
+            template(if.bind="!providerSelected")
+                .overlay-action-menu
+                    .ui.small.icon.input
+                        input(type='text', placeholder='Search')
+                        i.search.icon
+                    .ui.small.basic.button.primary
+                        | Recent
+                        i.dropdown.icon
+                    span.overlay-icons
+                        i.icon.list.layout.large
+                        i.icon.grid.layout.large
+                .overlay-cards.ui.four.stackable.cards
+                    .card(repeat.for="provider of providers")
+                        .image(click.delegate="selectProvider(provider)")
+                            img(src="${provider.icon}" alt="${provider.name}")
+
+            template(if.bind="providerSelected")
+                .ui.form
+                    .field
+                        label Name
+                        input(type="text", value.bind="provider.name")
+
+                    .field
+                        label Key
+                        input(type="text", value.bind="provider.key")
+
+                    .field
+                        label Description
+                        input(type="text", value.bind="provider.description")
+
+                    .field
+                        button.ui.pull-right.button.primary(
+                            type="submit",
+                            click.delegate="saveProvider()"
+                        )
+                            | Save Credential
