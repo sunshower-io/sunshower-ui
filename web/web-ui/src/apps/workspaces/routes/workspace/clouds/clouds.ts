@@ -36,16 +36,6 @@ export class Clouds {
             .then(r => {
                 this.providers = r;
                 this.loading = false;
-
-
-                //testdata
-                this.providers = [];
-                let aws = new Provider;
-                aws.icon = 'styles/themes/hasli/assets/images/logos/aws-logo.svg';
-                aws.name = 'AWS';
-                aws.key = 'aws';
-                aws.id ='testboop';
-                this.providers.push(aws);
             });
     }
 

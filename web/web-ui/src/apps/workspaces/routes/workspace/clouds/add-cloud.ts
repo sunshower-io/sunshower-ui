@@ -33,12 +33,14 @@ export class AddCloud {
     constructor(private client:HttpClient, private controller:ValidationController) {
         this.controller.addRenderer(new BootstrapFormRenderer());
 
+
+        //should be removed in favor of pulling in the real thing
         this.providers = [];
         let aws = new Provider,
             vmware = new Provider;
         aws.icon = 'styles/themes/hasli/assets/images/logos/aws-logo.svg';
         aws.name = 'AWS';
-        aws.key = 'aws'; //key has to be 3 chars long
+        aws.key = 'aws';
         vmware.icon = 'styles/themes/hasli/assets/images/logos/vmware-logo.png';
         vmware.name = 'VMWare';
         vmware.key = 'vmw';
