@@ -2,19 +2,19 @@ import {} from 'jasmine';
 import any = jasmine.any;
 import 'aurelia-polyfills';
 import {Container} from "aurelia-framework";
-import {Registry} from "utils/registry";
-import {EditorContext, Canvas} from "canvas/core/canvas";
+import {Registry} from "common/lib/utils/registry";
+import {EditorContext, Canvas} from 'common/lib/canvas/core/canvas';
 import {initialize} from 'aurelia-pal-browser';
 
-import {VirtualCloud} from "component/model/cloud";
-import {ApplicationDeployment} from "component/model/deployment";
-import {InfrastructureNode} from "component/model/infrastructure-node";
+import {VirtualCloud} from "apps/workspaces/model/components/cloud";
+import {ApplicationDeployment} from "apps/workspaces/model/components/deployment";
+import {InfrastructureNode} from "apps/workspaces/model/components/infrastructure-node";
 
 import {
     DraftboardManager,
     Draftboard
-} from "component/draftboard/draftboard";
-import {ActionManager} from "canvas/actions/action-service";
+} from "apps/workspaces/services/draftboard/draftboard";
+import {ActionManager} from "common/lib/canvas/actions/action-service";
 
 
 describe('an application deployment', () => {
