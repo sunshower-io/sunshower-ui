@@ -36,6 +36,11 @@ export class Clouds {
             .then(r => {
                 this.providers = r;
                 this.loading = false;
+
+                // let aws = new Provider;
+                // aws.name = "AWS";
+                // aws.key = 'aws';
+                // this.providers.push(aws)
             });
     }
 
