@@ -5,14 +5,16 @@ import {Registry} from "common/lib/utils/registry";
 import {Canvas} from 'common/lib/canvas/core/canvas';
 import {initialize} from 'aurelia-pal-browser';
 
-import {DraftboardMarshaller} from 'apps/workspaces/services/draftboard/marshallers/marshaller';
+import DraftboardMarshaller from 'apps/workspaces/services/draftboard/marshallers/marshaller';
 
 import {Container} from "aurelia-dependency-injection";
-import {Draftboard} from "apps/workspaces/services/draftboard/draftboard";
+import {Draftboard, DraftboardManager} from "apps/workspaces/services/draftboard/draftboard";
 import {ActionManager} from "common/lib/canvas/actions/action-service";
 import {ParallelSchedule} from "common/lib/algorithms/graph/scheduling";
 import {ApplicationDeployment} from "apps/workspaces/model/components/deployment";
 import {InfrastructureNode} from "apps/workspaces/model/components/infrastructure-node";
+import {Provider} from "common/model/api/hal/api";
+
 
 describe('a draftboard marshaller', () => {
 
@@ -35,7 +37,7 @@ describe('a draftboard marshaller', () => {
         containerElement = document.createElement('div');
         canvas = new Canvas(containerElement, registry, actionManager);
         draftboard = new Draftboard(canvas);
-        registry.draftboardManager.setFocusedDraftboard(draftboard);
+        registry.get(DraftboardManager).setFocusedDraftboard(draftboard);
         marshaller = new DraftboardMarshaller();
     });
 
@@ -80,6 +82,8 @@ describe('a draftboard marshaller', () => {
             ps = new ParallelSchedule(),
             marshaller = new DraftboardMarshaller();
         host.addTo(canvas, null, true);
+
+        host.operatingSystem.provider = new Provider(); //there is probably a better way to do this
 
         host.addElement(application);
         host.addElement(app2);

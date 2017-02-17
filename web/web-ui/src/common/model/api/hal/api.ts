@@ -19,7 +19,7 @@ export class OperatingSystem implements Copyable<OperatingSystem> {
                 public icon     ?: string,
                 public family   ?: string,
                 public version  ?: string,
-                public provider ?: Provider
+                public provider ?: Provider //test fails with no provider
     ) {
         this.id = UUID.randomUUID();
 

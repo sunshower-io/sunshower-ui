@@ -38,10 +38,10 @@ export class AddCloud {
             vmware = new Provider;
         aws.icon = 'styles/themes/hasli/assets/images/logos/aws-logo.svg';
         aws.name = 'AWS';
-        aws.key = 'AWS'; //key has to be 3 chars long
+        aws.key = 'aws'; //key has to be 3 chars long
         vmware.icon = 'styles/themes/hasli/assets/images/logos/vmware-logo.png';
         vmware.name = 'VMWare';
-        vmware.key = 'VMW';
+        vmware.key = 'vmw';
         this.providers.push(aws);
         this.providers.push(vmware);
     }
