@@ -1,13 +1,13 @@
 //
    Created by dustinlish on 2/6/17.
 template
-    require(from="./add-cloud")
-    require(from='./add-credential')
-    add-cloud(view-model.ref="addCloudOverlay")
-    add-credential(
-        view-model.ref="addCredentialOverlay",
-        model.bind="provider"
-    )
+    //require(from="./add-cloud")
+    //require(from='./add-credential')
+    //add-cloud(view-model.ref="addCloudOverlay")
+    //add-credential(
+    //    view-model.ref="addCredentialOverlay",
+    //    model.bind="provider"
+    //)
     .ui.hidden.divider
     template(if.bind="providers.length == 0")
         h2.ui.center.aligned.icon.header

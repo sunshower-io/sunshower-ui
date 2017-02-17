@@ -5,6 +5,7 @@ import {autoinject} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
 import {AddCredential} from "./add-credential";
 
+import {Workspaces} from "apps/workspaces/routes/workspace/index";
 @autoinject
 export class Clouds {
 
@@ -14,11 +15,8 @@ export class Clouds {
     @bindable
     loading: boolean;
 
-    private addCloudOverlay: AddCloud;
-    private addCredentialOverlay: AddCredential;
 
-
-    constructor(private client:HttpClient) {
+    constructor(private parent:Workspaces, private client:HttpClient) {
     }
 
     attached(): void {
@@ -26,6 +24,7 @@ export class Clouds {
     };
 
     activate(id:any)  {
+        this.parent.setMenuVisible(true);
         this.refresh();
     }
 
@@ -36,22 +35,15 @@ export class Clouds {
             .then(r => {
                 this.providers = r;
                 this.loading = false;
-
-                // let aws = new Provider;
-                // aws.name = "AWS";
-                // aws.key = 'aws';
-                // this.providers.push(aws)
             });
     }
 
     configure(id: string) : void {
-        let provider = this.providers.find(t => t.id == id);
-        this.addCredentialOverlay.open(provider);
-
+        this.parent.router.navigate(`clouds/${id}/credential/new`);
     }
 
     addCloud() : void {
-        this.addCloudOverlay.open();
+        this.parent.router.navigate('clouds/new');
     }
 
 }

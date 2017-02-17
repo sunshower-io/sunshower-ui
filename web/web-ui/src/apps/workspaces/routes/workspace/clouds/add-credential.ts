@@ -11,6 +11,7 @@ import {
     ValidationRules
 } from 'aurelia-validation';
 import {BootstrapFormRenderer} from 'common/resources/custom-components/bootstrap-form-renderer';
+import {Workspaces} from "apps/workspaces/routes/workspace/index";
 
 @inject(HttpClient, NewInstance.of(ValidationController))
 export class AddCredential {
@@ -20,17 +21,18 @@ export class AddCredential {
     private visible: boolean;
 
     @bindable
-    private provider:Provider;
+    private provider            :Provider;
 
     @bindable
-    private credential:CredentialSecret;
+    private credential          :CredentialSecret;
 
     @bindable
-    private loading: boolean;
+    private loading             : boolean;
+    private providerId          : string;
 
-    private credentials: CredentialSecret[];
+    private credentials         : CredentialSecret[];
 
-    constructor(private client:HttpClient, private controller:ValidationController) {
+    constructor(private parent:Workspaces, private client:HttpClient, private controller:ValidationController) {
         this.controller.addRenderer(new BootstrapFormRenderer());
 
     }
@@ -61,15 +63,20 @@ export class AddCredential {
     attached() : void {
     }
 
+    activate(params:any) : void {
+        this.providerId = params.id;
+        this.parent.setMenuVisible(false);
+    }
+
     close() {
-        this.visible = false;
+        this.parent.router.navigateBack();
     }
 
     saveCredential() : void {
         this.controller.validate().then(result => {
             if (result.valid) {
                 console.log('it valid');
-                this.client.fetch(`provider/${this.provider.id}`, {
+                this.client.fetch(`provider/${this.providerId}`, {
                     method: 'post',
                     body: JSON.stringify(this.credential)
                 }).then(t => this.refresh());
@@ -79,9 +86,10 @@ export class AddCredential {
         });
     }
 
+
     refresh() : void {
         this.loading = true;
-        this.client.fetch(`provider/${this.provider.id}`)
+        this.client.fetch(`provider/${this.providerId}`)
             .then(r => r.json() as any)
             .then(r => {
                 this.credentials = r;

@@ -11,6 +11,7 @@ export class Provider {
 }
 
 
+
 export class OperatingSystem implements Copyable<OperatingSystem> {
 
     public readonly id: UUID;

@@ -12,7 +12,8 @@ import {
 } from 'aurelia-validation';
 import {BootstrapFormRenderer} from 'common/resources/custom-components/bootstrap-form-renderer';
 
-@inject(HttpClient, NewInstance.of(ValidationController))
+import {Workspaces} from "apps/workspaces/routes/workspace/index";
+@inject(Workspaces, HttpClient, NewInstance.of(ValidationController))
 @customElement('add-cloud')
 export class AddCloud {
 
@@ -30,7 +31,7 @@ export class AddCloud {
 
 
 
-    constructor(private client:HttpClient, private controller:ValidationController) {
+    constructor(private parent:Workspaces, private client:HttpClient, private controller:ValidationController) {
         this.controller.addRenderer(new BootstrapFormRenderer());
 
 
@@ -49,6 +50,10 @@ export class AddCloud {
     }
 
     attached(): void {
+    }
+
+    activate() : void {
+        this.parent.setMenuVisible(false);
     }
 
     selectProvider(provider:Provider) : void {
@@ -81,10 +86,12 @@ export class AddCloud {
     open() : void {
         this.providerSelected = false;
         this.visible = true;
+
     }
 
     close() : void {
-        this.visible = false;
+        this.parent.router.navigateBack();
     }
 
 }
+
