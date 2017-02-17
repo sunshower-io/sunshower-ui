@@ -1,11 +1,15 @@
 import {Copyable} from "common/lib/lang";
 import {UUID} from "common/lib/utils/uuid";
 
-export interface Provider {
-    id                  : UUID;
-    name                : string;
-    imageId             : string;
+export class Provider {
+    id          ?: string;
+    key         ?: string;
+    name        ?: string;
+    icon        ?: string;
+    description ?: string;
+    imageId     ?: string;
 }
+
 
 
 export class OperatingSystem implements Copyable<OperatingSystem> {
