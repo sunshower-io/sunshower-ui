@@ -706,6 +706,44 @@ body {
   }
 
 }
-//end what was breadcrumb.less
+//end what was breadcrumb.lesss
 
 .clickable { cursor: pointer; }
+
+
+//styles for drag-n-drop
+.upload-box__dragndrop, .upload-box__uploading, .upload-box__success, .upload-box__error {
+    display: none;
+}
+
+.upload-box__file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.upload-box {
+  text-align:center;
+  background-color:lighten(@primarycolor, 50%);
+  &.has-advanced-upload {
+    background-color: white;
+    outline: 2px dashed black;
+    outline-offset: -10px;
+    .upload-box__dragndrop {
+      display: inline;
+      margin-left: .5em;
+    }
+  }
+  label {
+    display:block;
+    text-align:center;
+    font-size:2em;
+    margin-bottom:2em;
+  }
+  &.is-dragover {
+    background-color: grey;
+  }
+}

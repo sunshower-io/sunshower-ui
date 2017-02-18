@@ -35,6 +35,9 @@ export class Applications {
         }, 2)
     }
 
+    addApplication() : void {
+        this.parent.router.navigate('applications/new');
+    }
 }
 
 export class Application {

@@ -34,10 +34,8 @@ export class Workspaces {
     }
 
     public configureRouter(config: RouterConfiguration, router: Router) {
-        config.title = 'Workspaces';
-
-        this.router = router;
         config.title = '';
+        this.router = router;
 
         config.map([{
             route: ['', 'dashboard'],
@@ -52,6 +50,13 @@ export class Workspaces {
             route: 'applications',
             moduleId: './applications/applications',
         }, {
+            nav: false,
+            title: 'Applications',
+            name: 'add-application',
+            route: 'applications/new',
+            moduleId: './applications/add-application',
+        },
+            {
             nav: true,
             title: 'Clouds',
             name: 'clouds',
@@ -104,7 +109,6 @@ export class Workspaces {
             route: 'dashboard',
             redirect: 'dashboard'
         });
-        this.router = router;
 
 
     }

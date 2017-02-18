@@ -7,7 +7,7 @@ export class Workspace {
     private router: Router;
 
     public configureRouter(config: RouterConfiguration, router: Router) {
-        config.title = 'Workspaces';
+        config.title = '';
         this.router = router;
         config.title = '';
         config.map([{

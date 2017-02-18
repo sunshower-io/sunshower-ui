@@ -30,11 +30,11 @@ export class BootstrapFormRenderer {
         }
 
         // add the has-error class to the enclosing form-group div
-        formGroup.classList.add('has-error');
+        formGroup.classList.add('error');
 
         // add help-block
         const message = document.createElement('span');
-        message.className = 'help-block validation-message';
+        message.className = 'ui error message';
         message.textContent = result.message;
         message.id = `validation-message-${result.id}`;
         formGroup.appendChild(message);

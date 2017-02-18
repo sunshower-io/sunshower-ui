@@ -1,9 +1,9 @@
-import {bindable} from "aurelia-framework";
-import {AddCloud} from "./add-cloud";
+import {
+    bindable,
+    autoinject
+} from "aurelia-framework";
 import {Provider} from "common/model/api/hal/api";
-import {autoinject} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
-import {AddCredential} from "./add-credential";
 
 import {Workspaces} from "apps/workspaces/routes/workspace/index";
 @autoinject
