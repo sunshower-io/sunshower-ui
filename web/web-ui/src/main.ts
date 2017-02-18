@@ -42,7 +42,6 @@ export function configure(aurelia: Aurelia) {
             'common/lib/widget/menu/menu',
             'common/resources/custom-elements/tree/tree'
         ])
-        .plugin('aurelia-validation')
         .plugin('aurelia-animator-velocity')
         .plugin('aurelia-dialog', (config: DialogConfiguration) => {
             config.useRenderer(SemanticUIRenderer);
