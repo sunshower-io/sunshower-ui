@@ -5,7 +5,7 @@ import {autoinject} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
 import {AddCredential} from "./add-credential";
 
-import {Workspaces} from "apps/workspaces/routes/workspace/index";
+import {Workspace} from "apps/workspaces/routes/workspace/index";
 @autoinject
 export class Clouds {
 
@@ -16,7 +16,7 @@ export class Clouds {
     loading: boolean;
 
 
-    constructor(private parent:Workspaces, private client:HttpClient) {
+    constructor(private parent:Workspace, private client:HttpClient) {
 
     }
 

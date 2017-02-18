@@ -2,7 +2,7 @@ import {bindable, autoinject} from "aurelia-framework";
 import {Provider} from "common/model/api/hal/api";
 import {CredentialSecret} from "common/model/security/credentials";
 import {HttpClient} from "aurelia-fetch-client";
-import {Workspaces} from "apps/workspaces/routes/workspace/index";
+import {Workspace} from "apps/workspaces/routes/workspace/index";
 @autoinject
 export class AddCredential {
 
@@ -22,7 +22,7 @@ export class AddCredential {
 
     private credentials         : CredentialSecret[];
 
-    constructor(private parent:Workspaces, private client:HttpClient) {
+    constructor(private parent:Workspace, private client:HttpClient) {
 
     }
 

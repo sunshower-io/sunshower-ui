@@ -13,7 +13,7 @@ export interface MenuAware {
 
 
 @autoinject
-export class Workspaces {
+export class Workspace {
 
     public router: Router;
 

@@ -3,7 +3,7 @@
 import {autoinject, bindable} from "aurelia-framework";
 import {UUID} from "common/lib/utils/uuid";
 import {OperatingSystemService} from "common/model/api/hal/os";
-import {Workspaces} from "apps/workspaces/routes/workspace/index";
+import {Workspace} from "apps/workspaces/routes/workspace/index";
 import {
     NodeConfiguration,
     InstanceDescriptor,
@@ -51,7 +51,7 @@ export class NewInstance {
 
 
     constructor(
-        private parent:Workspaces,
+        private parent:Workspace,
         private client:HttpClient,
         private osService:OperatingSystemService,
     ) {

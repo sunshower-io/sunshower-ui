@@ -3,7 +3,7 @@
 template
     .ui.hidden.divider
 
-    template(if.bind="!(applications || applications.length)")
+    template(if.bind="!applications || applications.length == 0")
         h2.ui.center.aligned.icon.header
             i.circular.orange.ion-ios-keypad-outline.icon.circular--icon.circular--icon_orange
             |   Looks like you don't have any applications, create a new application or browse existing ones!

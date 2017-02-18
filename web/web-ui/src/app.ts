@@ -35,6 +35,14 @@ export class App {
                 nav: false,
                 title: 'Workspaces',
             },
+            {
+                route: 'workspace/:id',
+                name: 'workspace',
+                title: 'Workspace',
+                moduleId: 'apps/workspaces/routes/workspace/index',
+                nav: false
+
+            }
         ]);
 
         config.mapUnknownRoutes({
