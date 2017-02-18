@@ -11,13 +11,13 @@ template
                 .ui.hidden.divider
 
                 form.ui.segment.upload-box(method='post', action='', enctype='multipart/form-data')
-                    .upload-box__input
+                    label.upload-box__input
                         i.massive.icon.ion-ios-upload-outline
-                        input#applicationFile.upload-box__file(type='file', name='files[]', data-multiple-caption='{count} files selected', multiple='')
-                        label(for='applicationFile')
+                        input.upload-box__file(type='file', name='files[]', data-multiple-caption='{count} files selected', multiple='')
+                        .upload-box__file-label
                             | Choose a file
                             span.upload-box__dragndrop or drag it here
-                        button.ui.button.primary(type='submit',
+                    button.ui.button.primary(type='submit',
                         click.delegate="uploadFiles()") Upload
                     .upload-box__uploading Uploading...
                         //TODO consider switching to our usual loader

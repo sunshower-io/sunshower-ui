@@ -35,6 +35,7 @@ export class AddApplication {
     activate() : void {
         this.parent.setMenuVisible(false);
         this.setupValidation();
+        this.setupFileUpload();
     }
 
 
@@ -60,7 +61,6 @@ export class AddApplication {
 
     open() : void {
         this.visible = true;
-        this.setupFileUpload();
         this.application = new ApplicationDescriptor();
     }
 

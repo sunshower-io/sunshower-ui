@@ -725,9 +725,14 @@ body {
   z-index: -1;
 }
 
+.upload-box__file-label {
+  font-size:2em;
+}
+
 .upload-box {
   text-align:center;
   background-color:lighten(@primarycolor, 50%);
+  padding:2em;
   &.has-advanced-upload {
     background-color: white;
     outline: 2px dashed black;
@@ -736,12 +741,6 @@ body {
       display: inline;
       margin-left: .5em;
     }
-  }
-  label {
-    display:block;
-    text-align:center;
-    font-size:2em;
-    margin-bottom:2em;
   }
   &.is-dragover {
     background-color: grey;
