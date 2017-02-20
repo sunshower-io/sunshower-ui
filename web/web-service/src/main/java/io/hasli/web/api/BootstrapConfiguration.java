@@ -32,6 +32,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 
+import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Collections;
@@ -84,6 +85,12 @@ public class BootstrapConfiguration {
 //    public AwsComputeService awsComputeService() {
 //        return new AwsComputeService();
 //    }
+
+    @Bean
+    public ServerEndpointExporter serverEndpointExporter() {
+        return new ServerEndpointExporter();
+    }
+
 
 
     @Bean

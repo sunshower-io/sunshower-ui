@@ -98,7 +98,20 @@ export function configure(aurelia: Aurelia) {
                                 }
                             })
                     });
+
+                    //
+                    let webSocket = new WebSocket(`ws://${location.host}/hasli/api/events`);
+                    webSocket.onopen = (e:Event) => {
+                        alert("Got one");
+                    };
+
+                    webSocket.onmessage = (e:Event) => {
+                        alert("Got another one");
+                    };
+
+
                     tokenHolder.set(context, false);
+                    // container.registerInstance(WebSocket, webSocket);
                     container.registerInstance(HttpClient, authenticatedClient);
                     // authenticatedClient.fetch('preferences')
                     //     .then(preferences => preferences.json() as any)
