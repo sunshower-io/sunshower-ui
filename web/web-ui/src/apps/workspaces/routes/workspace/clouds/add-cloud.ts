@@ -1,7 +1,6 @@
 import {
     bindable,
     inject,
-    customElement,
     NewInstance
 } from "aurelia-framework";
 import {HttpClient} from 'aurelia-fetch-client';
@@ -14,7 +13,6 @@ import {BootstrapFormRenderer} from 'common/resources/custom-components/bootstra
 
 import {Workspaces} from "apps/workspaces/routes/workspace/index";
 @inject(Workspaces, HttpClient, NewInstance.of(ValidationController))
-@customElement('add-cloud')
 export class AddCloud {
 
     @bindable

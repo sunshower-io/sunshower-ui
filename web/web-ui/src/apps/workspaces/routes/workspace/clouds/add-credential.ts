@@ -13,7 +13,7 @@ import {
 import {BootstrapFormRenderer} from 'common/resources/custom-components/bootstrap-form-renderer';
 import {Workspaces} from "apps/workspaces/routes/workspace/index";
 
-@inject(HttpClient, NewInstance.of(ValidationController))
+@inject(Workspaces, HttpClient, NewInstance.of(ValidationController))
 export class AddCredential {
 
 
@@ -28,6 +28,7 @@ export class AddCredential {
 
     @bindable
     private loading             : boolean;
+
     private providerId          : string;
 
     private credentials         : CredentialSecret[];

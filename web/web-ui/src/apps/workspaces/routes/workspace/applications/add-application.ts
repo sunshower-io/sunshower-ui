@@ -25,6 +25,9 @@ export class AddApplication {
     @bindable
     private files:FileList;
 
+    @bindable
+    private uploadStatus:string = 'none'; //none, uploading, done, error
+
     constructor(private parent:Workspaces, private client:HttpClient, private controller:ValidationController) {
         this.controller.addRenderer(new BootstrapFormRenderer());
     }
@@ -70,6 +73,7 @@ export class AddApplication {
 
     uploadFiles() : void {
         if (this.files) {
+            this.uploadStatus = 'uploading';
             let formData = new FormData();
             $.each( this.files, function(i, file) {
                 formData.append(file.name, file );
@@ -77,7 +81,7 @@ export class AddApplication {
             this.client.fetch('application_upload', {
                 method: 'post',
                 body: formData
-            }).then(t => console.log("uploaded!", t));
+            }).then(t => console.log("uploaded!", t)).then(t => this.uploadStatus = 'uploaded');
             //TODO finish
         }
     }
