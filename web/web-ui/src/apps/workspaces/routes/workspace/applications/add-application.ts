@@ -30,12 +30,12 @@ export class AddApplication {
     }
 
     attached(): void {
+        this.setupValidation();
+        this.setupFileUpload();
     }
 
     activate() : void {
         this.parent.setMenuVisible(false);
-        this.setupValidation();
-        this.setupFileUpload();
     }
 
 
@@ -87,7 +87,7 @@ export class AddApplication {
     setupFileUpload() : void {
         let $form = $('.upload-box'),
             $input    = $form.find('input[type="file"]'),
-            $label    = $form.find('label'),
+            $label    = $form.find('.upload-box__file-label'),
             showFiles = function(files) {
                 $label.text(files.length > 1 ? ($input.attr('data-multiple-caption') || '').replace( '{count}', files.length ) : files[ 0 ].name);
             },
@@ -113,6 +113,8 @@ export class AddApplication {
                     showFiles( this.files );
                 });
         }
+
+        //TODO fix type error
         // $input.on('change', function(e) {
         //     showFiles(e.target.files);
         // });
