@@ -3,7 +3,7 @@
  */
 
 import {autoinject} from "aurelia-framework";
-import {Workspaces} from "apps/workspaces/routes/workspace/index";
+import {Workspace} from "apps/workspaces/routes/workspace/index";
 @autoinject
 export class Dashboard {
 

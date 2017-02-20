@@ -6,8 +6,8 @@ import {
 import {HttpClient} from 'aurelia-fetch-client';
 import {Provider} from "common/model/api/hal/api";
 
-import {Workspaces} from "apps/workspaces/routes/workspace/index";
-@inject(Workspaces, HttpClient)
+import {Workspace} from "apps/workspaces/routes/workspace/index";
+@inject(Workspace, HttpClient)
 export class Instances {
 
     @bindable
@@ -20,7 +20,7 @@ export class Instances {
     @bindable
     loading: boolean;
 
-    constructor(private parent:Workspaces, private client:HttpClient) {
+    constructor(private parent:Workspace, private client:HttpClient) {
         this.instances = [];
     }
 

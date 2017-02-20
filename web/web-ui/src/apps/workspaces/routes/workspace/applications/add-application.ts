@@ -11,9 +11,9 @@ import {
 } from 'aurelia-validation';
 import {BootstrapFormRenderer} from 'common/resources/custom-components/bootstrap-form-renderer';
 
-import {Workspaces} from "apps/workspaces/routes/workspace/index";
+import {Workspace} from "apps/workspaces/routes/workspace/index";
 
-@inject(Workspaces, HttpClient, NewInstance.of(ValidationController))
+@inject(Workspace, HttpClient, NewInstance.of(ValidationController))
 export class AddApplication {
 
     @bindable
@@ -25,7 +25,7 @@ export class AddApplication {
     private files:FileList;
 
 
-    constructor(private parent:Workspaces, private client:HttpClient, private controller:ValidationController) {
+    constructor(private parent:Workspace, private client:HttpClient, private controller:ValidationController) {
         this.controller.addRenderer(new BootstrapFormRenderer());
     }
 

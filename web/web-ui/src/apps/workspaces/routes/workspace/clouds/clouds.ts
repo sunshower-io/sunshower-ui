@@ -1,11 +1,11 @@
-import {
-    bindable,
-    autoinject
-} from "aurelia-framework";
+import {bindable} from "aurelia-framework";
+import {AddCloud} from "./add-cloud";
 import {Provider} from "common/model/api/hal/api";
+import {autoinject} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
+import {AddCredential} from "./add-credential";
 
-import {Workspaces} from "apps/workspaces/routes/workspace/index";
+import {Workspace} from "apps/workspaces/routes/workspace/index";
 @autoinject
 export class Clouds {
 
@@ -16,7 +16,8 @@ export class Clouds {
     loading: boolean;
 
 
-    constructor(private parent:Workspaces, private client:HttpClient) {
+    constructor(private parent:Workspace, private client:HttpClient) {
+
     }
 
     attached(): void {
@@ -27,6 +28,7 @@ export class Clouds {
         this.parent.setMenuVisible(true);
         this.refresh();
     }
+
 
     refresh(): void {
         this.loading = true;

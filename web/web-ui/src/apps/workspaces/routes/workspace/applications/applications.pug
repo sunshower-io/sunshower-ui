@@ -3,7 +3,7 @@
 template
     .ui.hidden.divider
 
-    template(if.bind="applications.length == 0")
+    template(if.bind="!applications || applications.length == 0")
         h2.ui.center.aligned.icon.header
             i.circular.orange.ion-ios-keypad-outline.icon.circular--icon.circular--icon_orange
             |   Looks like you don't have any applications, create a new application or browse existing ones!
@@ -19,7 +19,7 @@ template
                             .description
                                 .ui.container.workspaces--image_container
                                     img.blue(src='styles/themes/hasli/assets/images/icons/code-working.svg').workspaces--image_size
-                            .ui.secondary.button(click.delegate="addApplication()")
+                            .ui.secondary.button
                                 | + Create New Application
                     .ui.card
                         .content
@@ -31,7 +31,7 @@ template
                                 | Browse Applications
                 .ui.hidden.divider
 
-    template(if.bind="applications.length > 0")
+    template(if.bind="applications && applications.length")
         .ui.container
             .ui.basic.segment
                 h2.ui.header

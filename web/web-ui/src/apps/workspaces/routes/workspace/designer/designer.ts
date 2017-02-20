@@ -17,9 +17,9 @@ import {MenuItem, Menu} from 'common/lib/widget';
 // import Menu from 'common/elements/menu';
 import {Breadcrumb} from "./breadcrumb/breadcrumb";
 import {PreferenceManager} from "common/lib/storage";
-import {Workspaces} from "apps/workspaces/routes/workspace/index";
+import {Workspace} from "apps/workspaces/routes/workspace/index";
 
-@inject(Workspaces, Menu, PreferenceManager)
+@inject(Workspace, Menu, PreferenceManager)
 export class Designer {
 
     public router: Router;
@@ -41,7 +41,7 @@ export class Designer {
         rightToggled: true
     };
 
-    constructor(private parent: Workspaces, private menu : Menu, private preferenceManager : PreferenceManager) {
+    constructor(private parent: Workspace, private menu : Menu, private preferenceManager : PreferenceManager) {
         this.preferences = this.preferenceManager.get(
             Designer.draftboardPath,
             Designer.draftboardDefaults

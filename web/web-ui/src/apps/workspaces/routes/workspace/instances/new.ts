@@ -3,7 +3,7 @@
 import {autoinject, bindable} from "aurelia-framework";
 import {UUID} from "common/lib/utils/uuid";
 import {OperatingSystemService} from "common/model/api/hal/os";
-import {Workspaces} from "apps/workspaces/routes/workspace/index";
+import {Workspace} from "apps/workspaces/routes/workspace/index";
 import {
     NodeConfiguration,
     InstanceDescriptor,
@@ -51,7 +51,7 @@ export class NewInstance {
 
 
     constructor(
-        private parent:Workspaces,
+        private parent:Workspace,
         private client:HttpClient,
         private osService:OperatingSystemService,
     ) {
@@ -82,14 +82,16 @@ export class NewInstance {
     }
 
     private listCredentials() {
-        this.client.fetch('secrets/vault/io.hasli.vault.api.secrets.CredentialSecret/list')
-            .then(response => response.json() as any)
-            .then(data => {
-                this.credentials = data;
-                setTimeout(() => {
-                    this.loading = false;
+        if(this.providerId) {
+            this.client.fetch(`provider/${this.providerId}`)
+                .then(response => response.json() as any)
+                .then(data => {
+                    this.credentials = data;
+                    setTimeout(() => {
+                        this.loading = false;
+                    });
                 });
-            });
+        }
     }
 
 
@@ -122,6 +124,7 @@ export class NewInstance {
 
     providerChanged = (value: string, text: any, item: any) => {
         this.providerId = value;
+        this.listCredentials();
     };
 
     credentialChanged = (value: string, text: any, item: any) => {

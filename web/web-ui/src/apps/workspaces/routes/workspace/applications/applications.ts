@@ -1,8 +1,8 @@
 
 import {HttpClient} from 'aurelia-fetch-client';
 import {bindable, inject} from "aurelia-framework";
-import {Workspaces} from "apps/workspaces/routes/workspace/index";
-@inject(Workspaces, HttpClient)
+import {Workspace} from "apps/workspaces/routes/workspace/index";
+@inject(Workspace, HttpClient)
 export class Applications {
 
     @bindable
@@ -11,7 +11,7 @@ export class Applications {
     @bindable
     loading: boolean;
 
-    constructor(private parent:Workspaces, private client:HttpClient) {
+    constructor(private parent:Workspace, private client:HttpClient) {
     }
 
 
@@ -31,6 +31,7 @@ export class Applications {
                 .then(d => {
                     this.loading = false;
                     this.applications = d;
+                    console.log(this.applications)
                 });
         }, 2)
     }

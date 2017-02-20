@@ -17,7 +17,7 @@ def bomTask
 def gradleTasks    = []
 
 // Dependencies
-def wildflyVersion = '1.0.15.Final'
+def wildflyVersion = '1.0.19.Final'
 
 // TODO: enable integrationTests by default
 if (env.BRANCH_NAME == "master") {
