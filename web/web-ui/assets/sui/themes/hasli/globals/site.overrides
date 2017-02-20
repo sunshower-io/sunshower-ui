@@ -428,12 +428,15 @@ body {
   &.ui.form {
     textarea, input:not([type]), input[type=text], input[type=email], input[type=search], input[type=password], input[type=date], input[type=datetime-local], input[type=tel], input[type=time], input[type=file], input[type=url], input[type=number], .ui.selection.dropdown {
       border-radius: 0;
+      &:focus {
+        border-radius: 0
+      }
     }
   }
 
   .ui.search.selection.dropdown {
     line-height:24px;
-    &:hover, &.active {
+    &:hover, &.active, .menu, .menu:hover {
       border-color: @primarycolor;
     }
   }

@@ -43,7 +43,7 @@ template
                                     input(
                                     type="hidden"
                                     name="credentialList"
-                                    value.bind="template.credentialId & validate"
+                                    value.bind="credentialId & validate"
                                     )
                                     i.dropdown.icon
                                     .default.text Select Credential
@@ -62,7 +62,8 @@ template
                                 .ui.fluid.search.selection.dropdown(ref="providerList")
                                     input(
                                         type="hidden"
-                                        value.bind="template.providerId & validate"
+                                        value.bind="providerId & validate"
+                                        change.delegate="search()"
                                         )
                                     i.dropdown.icon
                                     .default.text Select Provider
@@ -128,40 +129,21 @@ template
                                     value.bind="configuration.memoryProfile.capacity"
                                 )
 
-
-
-
                 .row
-                    h4.ui.dividing.header.column Instances
+                    h4.ui.dividing.header.column Instance
                 .row
                     .column
-                        .ui.segment(class="${searching ? 'loading' : ''}")
-                            .ui.fluid.search.selection.dropdown(ref="providers")
-                                i.dropdown.icon
-                                .default.text Select OS
-                                .menu
-                                    .item
-                                        image.ui.image(src="assets/sui/themes/hasli/assets/images/icons/provider/generic/vlan.svg")
-                                            | Amazon EC2
-
-                                    .item
-                                        image.ui.image(src="assets/sui/themes/hasli/assets/images/icons/provider/generic/cloud.svg")
-                                            | Inventory
-                            .ui.horizontal.divider
-                            .overlay-action-menu
-                                .overlay-icons
-                                    button.ui.button.secondary(
-                                        click.delegate="search()"
-                                        class="${searching} ? 'disabled' : ''"
-                                        ) Search
-                            .ui.horizontal.divider
-                            .ui.fluid.search.selection.dropdown(ref="instanceType")
-                                input(type="hidden")
-                                i.dropdown.icon
-                                .default.text Select Instance
-                                .menu
-                                    .item(repeat.for="descriptor of instanceTypes", data-value="${descriptor.key}")
-                                        | ${descriptor.name} (${descriptor.description})
+                        .ui.field.overlay-field
+                            .overlay-label
+                                label Instance
+                            .overlay-input.ui.input
+                                .ui.fluid.search.selection.dropdown(ref="instanceType")
+                                    input(type="hidden" value.bind="instanceType & validate")
+                                    i.dropdown.icon
+                                    .default.text Select Instance
+                                    .menu
+                                        .item(repeat.for="descriptor of instanceTypes", data-value="${descriptor.key}")
+                                            | ${descriptor.name} (${descriptor.description})
 
                 .row
                     .column

@@ -73,18 +73,16 @@ export class NewInstance {
         //            .ensure((p:Provider) => p.key).required().satisfies(p => p.length === 3)
         //.withMessage('Key must be exactly three characters long')
         ValidationRules
-            .ensure((inst:NewInstance) => inst.credentialId).required()
-            .ensure((inst:NewInstance) => inst.providerId).required()
-            .ensure((inst:NewInstance) => inst.instanceType).required()
+            .ensure((inst:NewInstance) => inst.credentialId).displayName('Credential').required()
+            .ensure((inst:NewInstance) => inst.providerId).displayName('Provider').required()
+            .ensure((inst:NewInstance) => inst.instanceType).displayName('Instance').required()
             .on(NewInstance);
         let validationRules = ValidationRules
              .ensure((temp:ComputeNodeTemplate) => temp.name).required()
              .ensure((temp:ComputeNodeTemplate) => temp.operatingSystem).required()
              .rules;
         this.controller.addObject(this.template, validationRules);
-        //credentialID required
-        //provider required
-        //os required
+        //name, credential, provider, OS and instance all required
 
     }
 
@@ -203,17 +201,24 @@ export class NewInstance {
     }
 
     deployInstance() : void {
-
-        let payload = JSON.stringify(new ComputeNodeTemplateMarshaller()
-            .write(this.template)),
-            credentialId = this.credentialId,
-            providerId = this.providerId;
-
-        this.client.fetch(`compute/${providerId}/${this.channelSet.sessionId}/instances/${credentialId}/deploy`, {
-            method: 'post',
-            body:payload
-            }).then(r => r.json() as any).then(r => {
-                this.close();
-        })
+        this.controller.validate().then(result => {
+            if (result.valid) {
+                console.log('deploying');
+                // let payload = JSON.stringify(new ComputeNodeTemplateMarshaller()
+                //     .write(this.template)),
+                //     credentialId = this.credentialId,
+                //     providerId = this.providerId;
+                //
+                // this.client.fetch(`compute/${providerId}/${this.channelSet.sessionId}/instances/${credentialId}/deploy`, {
+                //     method: 'post',
+                //     body:payload
+                //     }).then(r => r.json() as any).then(r => {
+                //         this.close();
+                // })
+            }
+            else {
+                console.log('something was bad');
+            }
+        });
     }
 }
