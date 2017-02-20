@@ -43,9 +43,6 @@ template
                             th Status
                             th IP
                             th ID
-                            th CPU
-                            th Memory
-                            th Disk
                             th
                                 //stopstartrestart
                             th.right.aligned
@@ -56,11 +53,11 @@ template
                                 //settings
                     tbody
                         tr(if.bind="loading")
-                            td.widget-table-reloading(colspan='11')
+                            td.widget-table-reloading(colspan='8')
                                 .ui.active.inverted.dimmer
                                     .ui.large.text.loader Reloading ...
                         tr(if.bind="instances.length == 0 && !loading")
-                            td.widget-table-empty-alert(colspan='11') You have no instances
+                            td.widget-table-empty-alert(colspan='8') You have no instances
                         tr(
                         if.bind="instances.length > 0 && !loading",
                         repeat.for='instance of instances'
@@ -75,32 +72,23 @@ template
                             td
                                 | ${instance.name}
                             td
-                                i.icon.status-circle(class="${instance.statusCircle()}")
-                                | ${instance.status}
+                                i.icon.status-circle(class="${computeStatus(instance)}")
+                                | ${instance.state}
                             td
                                 | ${instance.publicIp}
                             td
                                 | ${instance.instanceId}
                             td
-                                //TODO graph
-                                | ${instance.cpu}%
-                            td
-                                //TODO graph
-                                | ${instance.memory}%
-                            td
-                                //TODO graph
-                                | ${instance.disk}%
-                            td
                                 i.icon.large.ion-stop.clickable(
-                                    if.bind="instance.statusButtons().indexOf('stop') != -1",
+                                    if.bind="statusButtons(instance).indexOf('stop') != -1",
                                     click.delegate="stop(instance)"
                                     )
                                 i.icon.large.ion-play.clickable(
-                                    if.bind="instance.statusButtons().indexOf('start') != -1",
+                                    if.bind="statusButtons(instance).indexOf('start') != -1",
                                     click.delegate="start(instance)"
                                 )
                                 i.icon.large.ion-loop.clickable(
-                                    if.bind="instance.statusButtons().indexOf('restart') != -1",
+                                    if.bind="statusButtons(instance).indexOf('restart') != -1",
                                     click.delegate="restart(instance)"
                                 )
                             td.right.aligned

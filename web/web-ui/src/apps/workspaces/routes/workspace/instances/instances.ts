@@ -20,22 +20,20 @@ export class Instances {
     @bindable
     providers: Provider[];
 
-    provider : Provider;
+    provider: Provider;
     @bindable
     instances: Instance[];
 
     @bindable
     loading: boolean;
 
-    constructor(
-        private parent:Workspace,
-        private client:HttpClient,
-        private channelSet: ChannelSet
-    ) {
+    constructor(private parent: Workspace,
+                private client: HttpClient,
+                private channelSet: ChannelSet) {
         this.instances = [];
     }
 
-    activate() : void {
+    activate(): void {
         this.parent.setMenuVisible(true);
     }
 
@@ -50,7 +48,7 @@ export class Instances {
     };
 
 
-    createInstance() : void {
+    createInstance(): void {
         this.parent.router.navigate('instances/new');
     }
 
@@ -59,15 +57,14 @@ export class Instances {
         setTimeout(() => {
 
 
-
             this.client.fetch('provider')
                 .then(d => d.json() as any)
                 .then(d => {
                     this.loading = false;
                     this.providers = d;
                     console.log("Providers", d);
-                    for(let provider of d) {
-                        if(provider.key == 'aws') {
+                    for (let provider of d) {
+                        if (provider.key == 'aws') {
                             this.provider = provider;
                             this.client.fetch(`compute/${provider.id}/${this.channelSet.sessionId}/instances`)
                                 .then(d => d.json() as any)
@@ -78,46 +75,44 @@ export class Instances {
         }, 2)
     }
 
-    stop(instance:Instance) : void {
+    stop(instance: Instance): void {
         this.client.fetch(`compute/${this.provider.id}/instances/${instance.id}/Stopping`)
             .then(r => {
                 console.log(r);
             });
     }
 
-    start(instance:Instance) : void {
+    start(instance: Instance): void {
         this.client.fetch(`compute/${this.provider.id}/instances/${instance.id}/Starting`)
             .then(r => {
                 console.log(r);
             });
     }
 
-    restart(instance:Instance) : void {
-        instance.restart();
+    restart(instance: Instance): void {
     }
 
-}
 
-//leaving this here so Josiah can put it wherever
-export class Instance {
-    id          ?: string;
-    logo        ?: string;
-    name        ?: string;
-    state       ?: string; //Running, Stopped, Stopping, Restart, Terminating, Deploying, Starting
-    publicIp    ?: string;
-    ports       ?: string;
-    cpu         ?: number;
-    memory      ?: number;
-    disk        ?: number;
+    statusButtons(instance: Instance): string[] {
+        if (instance.state == 'running') {
+            return ['stop', 'restart']
+        }
+        else if (instance.state == 'stopped') {
+            return ['start']
+        }
+        else {
+            return []
+        }
+    }
 
-    statusCircle() : string {
-        if (this.state == 'running') {
+    computeStatus(instance: Instance): string {
+        if (instance.state == 'running') {
             return 'circle green';
         }
-        else if (this.state == 'stopped') {
+        else if (instance.state == 'stopped') {
             return 'circle red';
         }
-        else if (this.state == 'starting' || this.state == 'deploying' || this.state == 'stopping') {
+        else if (instance.state == 'starting' || instance.state == 'deploying' || instance.state == 'stopping') {
             return 'notched circle loading';
             //return 'ion-ios-loop-strong loading'
         }
@@ -125,30 +120,16 @@ export class Instance {
             return 'circle yellow';
         }
         //returns class name for circle
-    }
 
-    statusButtons() : string[] {
-        if (this.state == 'running') {
-            return ['stop', 'restart']
-        }
-        else if (this.state == 'stopped') {
-            return ['start']
-        }
-        else {
-            return []
-        }
-        //returns names of allowable buttons
     }
+}
 
-    stop() : void {
-        console.log('stopping ' + this.name);
-    }
+export class Instance {
+    id          ?: string;
+    logo        ?: string;
+    name        ?: string;
+    state       ?: string; //Running, Stopped, Stopping, Restart, Terminating, Deploying, Starting
+    publicIp    ?: string;
+    ports       ?: string;
 
-    start() : void {
-        console.log('starting ' + this.name);
-    }
-
-    restart() : void {
-        console.log('restarting ' + this.name);
-    }
 }
