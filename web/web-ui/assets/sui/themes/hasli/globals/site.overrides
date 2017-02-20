@@ -252,16 +252,39 @@ body {
   text-align:right;
 }
 
-@cardmargin:50px;
-.overlay-cards.ui.cards {
-  & > .card>.image {
-    background-color:inherit;
-    padding:15px;
+@cardmargin:120px;
+.overlay-cards.ui.four.cards {
+  .card {
+    margin-right: @cardmargin !important;
+    margin-bottom: @cardmargin !important;
+    width:calc(~"25% - "@cardmargin);
+    position:relative;
+    padding-bottom:12.5%;
   }
-  &.four > .card {
-    margin: @cardmargin !important;
-    width:calc(~"25% - "@cardmargin*2);
+
+  .overlay-card--image {
+    position:absolute;
+    top:50%;
+    right: 5%;
+    bottom:5%;
+    left:5%;
+    transform: perspective(1px) translateY(-55%);
+    max-width:90%;
+    max-height:90%;
+    width:auto;
+    height:auto;
   }
+
+  .overlay-card--label {
+    text-align:center;
+    color: @hasliGrey;
+    font-weight: bold;
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:-@cardmargin/3;
+  }
+
 }
 
 .overlay-sidenav {

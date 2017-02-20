@@ -15,10 +15,14 @@ template
                     span.overlay-icons
                         i.icon.list.layout.large
                         i.icon.grid.layout.large
+                .ui.hidden.divider
                 .overlay-cards.ui.four.stackable.cards
-                    .card(repeat.for="provider of providers")
-                        .image(click.delegate="selectProvider(provider)")
-                            img(src="${provider.icon}" alt="${provider.name}")
+                    .card.clickable(
+                        repeat.for="provider of providers",
+                        click.delegate="selectProvider(provider)"
+                        )
+                        img.overlay-card--image(src="${provider.icon}" alt="${provider.name}")
+                        .overlay-card--label ${provider.name}
 
             template(if.bind="providerSelected")
                 .ui.form
