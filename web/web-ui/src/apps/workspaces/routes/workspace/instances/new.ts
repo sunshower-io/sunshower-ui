@@ -1,6 +1,8 @@
-
-
-import {autoinject, bindable} from "aurelia-framework";
+import {
+    inject,
+    bindable,
+    NewInstance as NI
+} from "aurelia-framework";
 import {UUID} from "common/lib/utils/uuid";
 import {OperatingSystemService} from "common/model/api/hal/os";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
@@ -17,8 +19,13 @@ import {
     ComputeNodeTemplateMarshaller
 } from "common/model/api/hal/compute";
 import {ChannelSet} from "common/lib/events";
+import {
+    ValidationController,
+    ValidationRules
+} from 'aurelia-validation';
+import {BootstrapFormRenderer} from 'common/resources/custom-components/bootstrap-form-renderer';
 
-@autoinject
+@inject(Workspace, HttpClient, ChannelSet, OperatingSystemService, NI.of(ValidationController))
 export class NewInstance {
 
     providerList                : HTMLElement;
@@ -56,11 +63,30 @@ export class NewInstance {
         private client:HttpClient,
         private channelSet: ChannelSet,
         private osService:OperatingSystemService,
+        private controller:ValidationController
     ) {
+        this.controller.addRenderer(new BootstrapFormRenderer());
         this.template = newNodeTemplate();
     }
 
+    setupValidation() : void {
+        //            .ensure((p:Provider) => p.key).required().satisfies(p => p.length === 3)
+        //.withMessage('Key must be exactly three characters long')
+        ValidationRules
+            .ensure((inst:NewInstance) => inst.credentialId).required()
+            .ensure((inst:NewInstance) => inst.providerId).required()
+            .ensure((inst:NewInstance) => inst.instanceType).required()
+            .on(NewInstance);
+        let validationRules = ValidationRules
+             .ensure((temp:ComputeNodeTemplate) => temp.name).required()
+             .ensure((temp:ComputeNodeTemplate) => temp.operatingSystem).required()
+             .rules;
+        this.controller.addObject(this.template, validationRules);
+        //credentialID required
+        //provider required
+        //os required
 
+    }
 
     addCredential() {
         this.addingCredential = true;
@@ -140,6 +166,7 @@ export class NewInstance {
     };
 
     attached(): void {
+        this.setupValidation();
         this.listCredentials();
         this.listProviders();
         setTimeout(() => {

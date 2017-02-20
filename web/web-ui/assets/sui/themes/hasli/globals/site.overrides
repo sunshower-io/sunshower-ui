@@ -419,6 +419,26 @@ body {
 }
 
 .overlay-form {
+  .ui.dividing.header {
+    font-weight:normal;
+    color: @hasliGrey;
+    font-size:.9em;
+  }
+
+  &.ui.form {
+    textarea, input:not([type]), input[type=text], input[type=email], input[type=search], input[type=password], input[type=date], input[type=datetime-local], input[type=tel], input[type=time], input[type=file], input[type=url], input[type=number], .ui.selection.dropdown {
+      border-radius: 0;
+    }
+  }
+
+  .ui.search.selection.dropdown {
+    line-height:24px;
+    &:hover, &.active {
+      border-color: @primarycolor;
+    }
+  }
+
+
   .field.overlay-field {
     margin: @hasliem 0 !important;
     &>* {
@@ -431,9 +451,10 @@ body {
       padding-right:1em;
       width:25%;
       padding-top:@hasliem/2;
+      font-size: 1.2em;
     }
     .overlay-input {
-      width:65% !important;
+      width:75% !important;
     }
     .overlay-help {
       color: @hasliGrey;
@@ -442,6 +463,12 @@ body {
         margin: auto;
       }
     }
+
+    .ui.error.message {
+      margin-left:25%;
+      width:75%;
+    }
+
     .clearfix
   }
 }

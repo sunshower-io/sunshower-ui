@@ -10,86 +10,87 @@ template
                     .content
                         |  New Instance
             .ui.divider(style="margin-bottom:16px")
-            .ui.two.column.centered.grid
+            .ui.two.column.centered.grid.ui.form.overlay-form
+                .row
+                    h4.ui.dividing.header.column Details
                 .row
                     .column
-                        h4.ui.dividing.header Details
-                .row
-                    .column
-                        form.ui.form
-                            .twelve.wide.field
-                                label Name
-                                input(type="text" value.bind="template.name")
-                            .twelve.wide.field
-                                label Description
-                                textarea(
-                                    name="description"
-                                    rows="3"
-                                    value.bind="template.description"
-                                )
-
-
-                .row
-                    .column
-                        h4.ui.dividing.header Credentials
-                .row
-                    .column
-                        .ui.form
-                            .twelve.wide.field
-                                .ui.input
-                                    .ui.fluid.search.selection.dropdown(style="line-height: 24px;" ref="credentialList")
-                                        input(type="hidden" name="credentialList")
-                                        i.dropdown.icon
-                                        .default.text Select Credential
-                                        .menu
-                                            .item(repeat.for="credential of credentials" data-value="${credential.id}")
-                                                | ${credential.name}
-
+                        form
+                            .ui.field.overlay-field
+                                .overlay-label
+                                    label Name
+                                .overlay-input.ui.input
+                                    input(type="text" value.bind="template.name & validate")
+                            .ui.field.overlay-field
+                                .overlay-label
+                                    label Description
+                                .overlay-input.ui.input
+                                    textarea(
+                                        name="description"
+                                        rows="3"
+                                        value.bind="template.description"
+                                    )
 
                 .row
-                    .column
-                        h4.ui.dividing.header Providers
-
-
+                    h4.ui.dividing.header.column Credentials
                 .row
                     .column
-                        .ui.form
-                            .twelve.wide.field
+                        .ui.field.overlay-field
+                            .overlay-label
+                                label Credential
+                            .overlay-input.ui.input
+                                .ui.fluid.search.selection.dropdown(ref="credentialList")
+                                    input(
+                                    type="hidden"
+                                    name="credentialList"
+                                    value.bind="template.credentialId & validate"
+                                    )
+                                    i.dropdown.icon
+                                    .default.text Select Credential
+                                    .menu
+                                        .item(repeat.for="credential of credentials" data-value="${credential.id}")
+                                            | ${credential.name}
+
+                .row
+                    h4.ui.dividing.header.column Providers
+                .row
+                    .column
+                        .ui.field.overlay-field
+                            .overlay-label
                                 label Providers
-                                .ui.input
-                                    .ui.fluid.search.selection.dropdown(style="line-height: 24px;" ref="providerList")
-                                        input(type="hidden")
-                                        i.dropdown.icon
-                                        .default.text Select Provider
-                                        .menu
-                                            .item(repeat.for="provider of cloudProviders" data-value="${provider.id}")
-                                                | ${provider.name}
-
-
-
-                .row
-                    .column
-                        h4.ui.dividing.header Configuration
-
-
+                            .overlay-input.ui.input
+                                .ui.fluid.search.selection.dropdown(ref="providerList")
+                                    input(
+                                        type="hidden"
+                                        value.bind="template.providerId & validate"
+                                        )
+                                    i.dropdown.icon
+                                    .default.text Select Provider
+                                    .menu
+                                        .item(repeat.for="provider of cloudProviders" data-value="${provider.id}")
+                                            | ${provider.name}
 
                 .row
+                    h4.ui.dividing.header.column Configuration
+                .row
                     .column
-                        .ui.form
-                            .twelve.wide.field
+                        .ui.field.overlay-field
+                            .overlay-label
                                 label Operating System
-                                .ui.input
-                                    .ui.fluid.search.selection.dropdown(style="line-height: 24px;" ref="list")
-                                        input(type="hidden" name="operatingSystem")
-                                        i.dropdown.icon
-                                        .default.text Select OS
-                                        .menu
-                                            .item(repeat.for="os of osService.list()" data-value="${os.id}")
-                                                image.ui.image(src='${os.icon}')
-                                                | ${os.name}
+                            .overlay-input.ui.input
+                                .ui.fluid.search.selection.dropdown(ref="list")
+                                    input(type="hidden" name="operatingSystem" value.bind="template.operatingSystem & validate")
+                                    i.dropdown.icon
+                                    .default.text Select OS
+                                    .menu
+                                        .item(repeat.for="os of osService.list()" data-value="${os.id}")
+                                            image.ui.image(src='${os.icon}')
+                                            | ${os.name}
 
-                            .twelve.wide.field
+                        .ui.field.overlay-field
+                            .overlay-label
                                 label Instance Count
+                            .overlay-input.ui.input
                                 input(
                                     type="number"
                                     name="instanceCount"
@@ -97,8 +98,10 @@ template
                                     step="1"
                                     value.bind="configuration.instanceCount"
                                 )
-                            .twelve.wide.field
+                        .ui.field.overlay-field
+                            .overlay-label
                                 label CPU
+                            .overlay-input.ui.input
                                 input(
                                     type="number"
                                     name="cpu"
@@ -106,28 +109,36 @@ template
                                     step="1",
                                     value.bind="configuration.computeProfile.cores"
                                 )
-                            .twelve.wide.field
+                        .ui.field.overlay-field
+                            .overlay-label
                                 label Disk
+                            .overlay-input.ui.input
                                 input(
                                     type="text"
                                     name="disk"
                                     value.bind="configuration.storageProfile.capacity"
                                 )
-                            .twelve.wide.field
+                        .ui.field.overlay-field
+                            .overlay-label
                                 label Memory
+                            .overlay-input.ui.input
                                 input(
                                     type="text"
                                     name="memory"
                                     value.bind="configuration.memoryProfile.capacity"
                                 )
+
+
+
+
+                .row
+                    h4.ui.dividing.header.column Instances
                 .row
                     .column
-                        h4.ui.header Search for instances
-                .row
-                    .column
-                        .ui.twelve.wide.segment(class="${searching ? 'loading' : ''}")
+                        .ui.segment(class="${searching ? 'loading' : ''}")
                             .ui.fluid.search.selection.dropdown(ref="providers")
-                                span.text Select Provider
+                                i.dropdown.icon
+                                .default.text Select OS
                                 .menu
                                     .item
                                         image.ui.image(src="assets/sui/themes/hasli/assets/images/icons/provider/generic/vlan.svg")
@@ -139,10 +150,10 @@ template
                             .ui.horizontal.divider
                             .overlay-action-menu
                                 .overlay-icons
-                                    button.ui.button.primary(
-                                    click.delegate="search()"
-                                    class="${searching} ? 'disabled' : ''"
-                                    ) Search
+                                    button.ui.button.secondary(
+                                        click.delegate="search()"
+                                        class="${searching} ? 'disabled' : ''"
+                                        ) Search
                             .ui.horizontal.divider
                             .ui.fluid.search.selection.dropdown(ref="instanceType")
                                 input(type="hidden")
@@ -151,6 +162,7 @@ template
                                 .menu
                                     .item(repeat.for="descriptor of instanceTypes", data-value="${descriptor.key}")
                                         | ${descriptor.name} (${descriptor.description})
+
                 .row
                     .column
                         button.ui.pull-right.button.primary(click.delegate="deployInstance()") Deploy Instance

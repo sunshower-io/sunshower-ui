@@ -4,7 +4,7 @@ import {
     NewInstance
 } from "aurelia-framework";
 import {HttpClient} from 'aurelia-fetch-client';
-import {Provider} from "common/model/api/hal/api";
+
 import {
     ValidationController,
     ValidationRules
