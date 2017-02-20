@@ -39,64 +39,30 @@ export class Workspace {
         this.router = router;
         config.title = '';
 
-        config.map([{
-            route: ['', 'dashboard'],
-            nav: true,
-            title: 'Dashboard',
-            name: 'dashboard',
-            moduleId: './dashboard/dashboard',
-        }, {
-            nav: true,
-            title: 'Applications',
-            name: 'applications',
-            route: 'applications',
-            moduleId: './applications/applications',
-        }, {
-            nav: true,
-            title: 'Clouds',
-            name: 'clouds',
-            route: 'clouds',
-            moduleId: './clouds/clouds',
-        }, {
+        config.map([
 
-            nav: false,
-            title: 'Clouds',
-            name: 'create-cloud',
-            route: 'clouds/new',
-            moduleId: './clouds/add-cloud',
-        }, {
+            // Dashboard
+            {route: ['', 'dashboard'], name: 'dashboard', moduleId: './dashboard/dashboard', nav: true, title: 'Dashboard'},
 
-            nav: false,
-            title: 'Add Cloud Credential',
-            name: 'add-cloud-credential',
-            route: 'clouds/:id/credential/new',
-            moduleId: './clouds/add-credential',
-        },
-            {
-                nav: true,
-                title: 'Instances',
-                name: 'instances',
-                route: 'instances',
-                moduleId: './instances/instances',
-            }, {
-                nav: true,
-                title: 'Settings',
-                name: 'settings',
-                route: 'settings',
-                moduleId: './settings/settings',
-            }, {
-                nav: true,
-                title: 'Designer',
-                name: 'designer',
-                route: 'designer',
-                moduleId: './designer/designer'
-            }, {
-                nav: false,
-                title: 'New Instance',
-                name: 'new-instance',
-                route: 'instances/new',
-                moduleId: './instances/new'
-            }
+            // Application Routes
+            {route: 'applications', name: 'applications', moduleId: './applications/applications', nav: true, title: 'Applications'},
+            {route: 'applications/new', name: 'create-app', moduleId: './applications/create/create-app', nav: false, title: 'Create Application'},
+
+            // Cloud Routes
+            {route: 'clouds', name: 'clouds', moduleId: './clouds/clouds', nav: true, title: 'Clouds'},
+            {route: 'clouds/new', name: 'create-cloud', moduleId: './clouds/add-cloud', nav: false, title: 'Clouds'},
+            {route: 'clouds/:id/credential/new', name: 'add-cloud-credential', moduleId: './clouds/add-credential', nav: false, title: 'Add Cloud Credential'},
+
+            // Instances Routes
+            {route: 'instances', name: 'instances', moduleId: './instances/instances', nav: true, title: 'Instances'},
+            {route: 'instances/new', name: 'new-instance', moduleId: './instances/new', nav: false, title: 'New Instance'},
+
+            // Designer
+            {route: 'designer', name: 'designer', moduleId: './designer/designer', nav: true, title: 'Designer'},
+
+            // Settings
+            {route: 'settings', name: 'settings', moduleId: './settings/settings', nav: true, title: 'Settings'},
+
 
         ]);
 
