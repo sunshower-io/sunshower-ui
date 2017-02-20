@@ -712,7 +712,7 @@ body {
 
 
 //styles for drag-n-drop
-.upload-box__dragndrop, .upload-box__uploading, .upload-box__success, .upload-box__error {
+.upload-box__dragndrop {
     display: none;
 }
 

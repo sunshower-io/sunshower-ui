@@ -18,7 +18,8 @@ template
                             | Choose a file
                             span.upload-box__dragndrop or drag it here
                     button.ui.button.primary(type='submit',
-                        click.delegate="uploadFiles()") Upload
+                        click.delegate="uploadFiles()",
+                        class="${files.length == 0 ? 'disabled' : ''}") Upload
                     .upload-box__uploading Uploading...
                         //TODO consider switching to our usual loader
                     .upload-box__success Done!
