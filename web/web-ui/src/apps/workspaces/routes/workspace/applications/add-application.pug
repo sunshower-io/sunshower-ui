@@ -20,10 +20,10 @@ template
                     button.ui.button.primary(type='submit',
                         click.delegate="uploadFiles()",
                         class="${files.length == 0 ? 'disabled' : ''}") Upload
-                    //.upload-box__uploading(if.bind=false) Uploading...
-                        //TODO consider switching to our usual loader
-                    //.upload-box__success(if.bind=true) Done!
-                    //.upload-box__error(if.bind=true) Error!
+                    .upload-box__uploading.ui.active.inverted.dimmer(if.bind="uploadStatus == 'uploading'")
+                        .ui.text.loader Uploading...
+                    .upload-box__success(if.bind="uploadStatus == 'done'") Done!
+                    .upload-box__error(if.bind="uploadStatus == 'error'") Error!
 
                 .field
                     label Name

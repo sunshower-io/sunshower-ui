@@ -81,7 +81,7 @@ export class AddApplication {
             this.client.fetch('application_upload', {
                 method: 'post',
                 body: formData
-            }).then(t => console.log("uploaded!", t)).then(t => this.uploadStatus = 'uploaded');
+            }).then(t => console.log("uploaded!", t)).then(t => this.uploadStatus = 'done');
             //TODO finish
         }
     }

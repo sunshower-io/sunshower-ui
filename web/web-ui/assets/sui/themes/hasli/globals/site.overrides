@@ -725,8 +725,9 @@ body {
   z-index: -1;
 }
 
-.upload-box__uploading, .upload-box__success, .upload-box__error {
+.upload-box__success, .upload-box__error {
   font-size: 2em;
+  margin-top:1em;
 }
 
 .upload-box__file-label {
