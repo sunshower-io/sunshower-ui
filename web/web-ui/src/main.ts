@@ -22,6 +22,7 @@ import {DialogConfiguration} from "aurelia-dialog";
 import {
     SemanticUIRenderer
 } from "common/resources/custom-components/semantic-ui-renderer";
+import {ChannelSet} from "common/lib/events";
 
 
 export function param(name) {
@@ -99,28 +100,10 @@ export function configure(aurelia: Aurelia) {
                             })
                     });
 
-                    //
-                    let webSocket = new WebSocket(`ws://${location.host}/hasli/api/events`);
-                    webSocket.onopen = (e:Event) => {
-                        alert("Got one");
-                    };
-
-                    webSocket.onmessage = (e:Event) => {
-                        alert("Got another one");
-                    };
-
-
+                    let channelSet = new ChannelSet(`ws://${location.host}/hasli/api/events`);
                     tokenHolder.set(context, false);
-                    // container.registerInstance(WebSocket, webSocket);
                     container.registerInstance(HttpClient, authenticatedClient);
-                    // authenticatedClient.fetch('preferences')
-                    //     .then(preferences => preferences.json() as any)
-                    //     .then(preferences => {
-                    //         let preferenceManager = new PreferenceManager();
-                    //         preferenceManager.preferences = preferences;
-                    //         container.registerInstance(PreferenceManager, preferences)
-                    //     });
-                    //TODO set preferences
+                    container.registerInstance(ChannelSet, channelSet);
                     aurelia.start().then(() => aurelia.setRoot('app'));
                 }).catch(a => {
                     container.registerInstance(HttpClient, http);

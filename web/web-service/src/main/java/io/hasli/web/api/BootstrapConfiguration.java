@@ -19,6 +19,7 @@ import io.hasli.model.core.auth.User;
 import io.hasli.persist.core.DataSourceConfiguration;
 import io.hasli.persist.core.DatabaseConfiguration;
 import io.hasli.persist.hibernate.HibernateConfiguration;
+import io.hasli.persistence.annotations.CacheMode;
 import io.hasli.search.es.SearchConfiguration;
 import io.hasli.security.api.SecurityPersistenceConfiguration;
 import io.hasli.service.CoreServiceConfiguration;
@@ -63,6 +64,7 @@ import java.util.logging.Logger;
         CoreServiceConfiguration.class,
         HypervisorAbstractionLayerServiceConfiguration.class
 })
+@CacheMode(CacheMode.Mode.Grid)
 public class BootstrapConfiguration {
 
     static final Logger log = Logger.getLogger(BootstrapConfiguration.class.getName());

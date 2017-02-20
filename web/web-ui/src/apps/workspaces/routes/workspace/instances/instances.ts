@@ -6,8 +6,15 @@ import {
 import {HttpClient} from 'aurelia-fetch-client';
 import {Provider} from "common/model/api/hal/api";
 
+import {ChannelSet} from "common/lib/events/websockets";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
-@inject(Workspace, HttpClient)
+
+
+@inject(
+    Workspace,
+    HttpClient,
+    ChannelSet
+)
 export class Instances {
 
     @bindable
@@ -20,7 +27,11 @@ export class Instances {
     @bindable
     loading: boolean;
 
-    constructor(private parent:Workspace, private client:HttpClient) {
+    constructor(
+        private parent:Workspace,
+        private client:HttpClient,
+        private channelSet: ChannelSet
+    ) {
         this.instances = [];
     }
 
@@ -30,6 +41,12 @@ export class Instances {
 
     attached(): void {
         this.refresh();
+        this.channelSet.subscribe({
+            type: 'compute',
+            category: 'deployment'
+        }).forEach(t => {
+            this.refresh();
+        })
     };
 
 
@@ -52,7 +69,7 @@ export class Instances {
                     for(let provider of d) {
                         if(provider.key == 'aws') {
                             this.provider = provider;
-                            this.client.fetch(`compute/${provider.id}/instances`)
+                            this.client.fetch(`compute/${provider.id}/${this.channelSet.sessionId}/instances`)
                                 .then(d => d.json() as any)
                                 .then(d => this.instances = d);
                         }

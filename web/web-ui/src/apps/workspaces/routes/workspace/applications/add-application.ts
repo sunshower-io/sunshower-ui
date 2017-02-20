@@ -22,8 +22,8 @@ export class AddApplication {
     @bindable
     private application:ApplicationDescriptor;
 
+    @bindable
     private files:FileList;
-
 
     constructor(private parent:Workspace, private client:HttpClient, private controller:ValidationController) {
         this.controller.addRenderer(new BootstrapFormRenderer());
@@ -77,10 +77,8 @@ export class AddApplication {
             this.client.fetch('application_upload', {
                 method: 'post',
                 body: formData
-            }).then(t => console.log("we should return and save where they're saved or some such", t));
+            }).then(t => console.log("uploaded!", t));
             //TODO finish
-        } else {
-            //tell them they're a ninny; alternately, don't let them click the button if there's no upload
         }
     }
 

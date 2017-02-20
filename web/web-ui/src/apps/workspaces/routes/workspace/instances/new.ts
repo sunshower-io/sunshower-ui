@@ -16,6 +16,7 @@ import {
     ComputeNodeTemplate,
     ComputeNodeTemplateMarshaller
 } from "common/model/api/hal/compute";
+import {ChannelSet} from "common/lib/events";
 
 @autoinject
 export class NewInstance {
@@ -53,6 +54,7 @@ export class NewInstance {
     constructor(
         private parent:Workspace,
         private client:HttpClient,
+        private channelSet: ChannelSet,
         private osService:OperatingSystemService,
     ) {
         this.template = newNodeTemplate();
@@ -180,13 +182,10 @@ export class NewInstance {
             credentialId = this.credentialId,
             providerId = this.providerId;
 
-        // console.log("Credential ID", this.credentialId);
-        // console.log("Provider ID", this.providerId);
-
-        this.client.fetch(`compute/${providerId}/instances/${credentialId}/deploy`, {
+        this.client.fetch(`compute/${providerId}/${this.channelSet.sessionId}/instances/${credentialId}/deploy`, {
             method: 'post',
             body:payload
-            }).then(r => {
+            }).then(r => r.json() as any).then(r => {
                 this.close();
         })
     }

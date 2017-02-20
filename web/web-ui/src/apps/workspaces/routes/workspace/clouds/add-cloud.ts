@@ -27,6 +27,7 @@ export class AddCloud {
         this.providers = [];
         let aws = new Provider,
             vmware = new Provider;
+        aws.key = 'aws';
         aws.icon = 'styles/themes/hasli/assets/images/logos/aws-logo.svg';
         aws.name = 'AWS';
         vmware.icon = 'styles/themes/hasli/assets/images/logos/vmware-logo.png';
@@ -43,6 +44,7 @@ export class AddCloud {
     }
 
     saveProvider() : void {
+        this.provider.key = 'aws';
         this.client.fetch('provider', {
             method: 'post',
             body: JSON.stringify(this.provider)
