@@ -6,7 +6,7 @@
        Fonts
 --------------------*/
 
-@fontName          : 'Open Sans Regular';
+@fontName          : 'Open Sans';
 @fontSmoothing     : antialiased;
 
 @headerFont        : @fontName, 'Roboto Regular', 'Muli', 'Helvetica Neue', Arial, Helvetica, sans-serif;

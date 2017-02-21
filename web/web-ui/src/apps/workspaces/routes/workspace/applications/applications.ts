@@ -1,3 +1,4 @@
+
 import {HttpClient} from 'aurelia-fetch-client';
 import {bindable, inject} from "aurelia-framework";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
@@ -42,6 +43,9 @@ export class Applications {
         this.showModal = true;
     }
 
+    addApplication() : void {
+        this.parent.router.navigate('applications/new');
+    }
 }
 
 export class Application {

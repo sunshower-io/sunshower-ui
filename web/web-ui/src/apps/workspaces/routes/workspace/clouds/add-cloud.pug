@@ -2,7 +2,7 @@ template
     .overlay
         .ui.container
             .overlay-close
-                i.big.grey.icon.ion-close-round(click.delegate="close()")
+                i.big.grey.icon.ion-close-round.clickable(click.delegate="close()")
             h2.ui.center.aligned.grey.header Add New Cloud
             template(if.bind="!providerSelected")
                 .overlay-action-menu
@@ -15,20 +15,26 @@ template
                     span.overlay-icons
                         i.icon.list.layout.large
                         i.icon.grid.layout.large
+                .ui.hidden.divider
                 .overlay-cards.ui.four.stackable.cards
-                    .card(repeat.for="provider of providers")
-                        .image(click.delegate="selectProvider(provider)")
-                            img(src="${provider.icon}" alt="${provider.name}")
+                    .card.clickable(
+                        repeat.for="provider of providers",
+                        click.delegate="selectProvider(provider)"
+                        )
+                        img.overlay-card--image(src="${provider.icon}" alt="${provider.name}")
+                        .overlay-card--label ${provider.name}
 
             template(if.bind="providerSelected")
                 .ui.form
+                    img.ui.image.small(src="${provider.icon}" alt="${provider.name}")
+                    //input(type="hidden", value.bind="provider.icon")
+                    //input(type="hidden", value.bind="provider.key & validate")
+
+                    .ui.hidden.divider
+
                     .field
                         label Name
                         input(type="text", value.bind="provider.name")
-
-                    .field
-                        label Key
-                        input(type="text", value.bind="provider.key")
 
                     .field
                         label Description
@@ -39,4 +45,4 @@ template
                             type="submit",
                             click.delegate="saveProvider()"
                         )
-                            | Save Credential
+                            | Save Provider

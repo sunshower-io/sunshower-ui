@@ -1,9 +1,7 @@
 import {bindable} from "aurelia-framework";
-import {AddCloud} from "./add-cloud";
 import {Provider} from "common/model/api/hal/api";
 import {autoinject} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
-import {AddCredential} from "./add-credential";
 
 import {Workspace} from "apps/workspaces/routes/workspace/index";
 @autoinject
@@ -17,7 +15,6 @@ export class Clouds {
 
 
     constructor(private parent:Workspace, private client:HttpClient) {
-
     }
 
     attached(): void {

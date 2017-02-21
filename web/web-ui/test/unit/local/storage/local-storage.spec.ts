@@ -1,5 +1,5 @@
 import {} from 'jasmine';
-import {CookieStorage, LocalStorage, createStorage} from 'storage/local/local-storage';
+import {CookieStorage, LocalStorage, createStorage} from 'common/lib/storage/local/local-storage';
 
 
 describe('cookie storage', () => {

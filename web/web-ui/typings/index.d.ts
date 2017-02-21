@@ -36,4 +36,5 @@
 /// <reference path="modules/aurelia-templating-resources/index.d.ts" />
 /// <reference path="modules/aurelia-templating-router/index.d.ts" />
 /// <reference path="modules/aurelia-templating/index.d.ts" />
+/// <reference path="modules/aurelia-validation/index.d.ts" />
 /// <reference path="modules/lodash/index.d.ts" />

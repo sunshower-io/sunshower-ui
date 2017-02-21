@@ -3,15 +3,26 @@
 template
     .ui.hidden.divider
 
-    template(if.bind="providers.length == 0")
+    template(if.bind="!instances || instances.length == 0")
         h2.ui.center.aligned.icon.header
             i.circular.red.ion-ios-loop.icon.circular--icon.circular--icon_red
-            |   Welcome to Hasli.io! Browse some existing applications or create your own to deploy!
-        h4.ui.center.aligned.grey.header
-            |   You'll need to add a cloud provider before deploying any applications
+            //|   Welcome to Hasli.io! Browse some existing applications or create your own to deploy!
+            |   Looks like you don't have any instances, create a new one!
+        h4.ui.center.aligned.grey.header(if.bind="providers.length == 0")
+            |   You'll need to add a cloud provider before deploying any instances
+        .ui.centered.grid.container
+            .ui.hidden.divider
+            .ui.card.clickable(click.delegate="createInstance()")
+                .content
+                    .meta
+                    .description
+                        .ui.container.workspaces--image_container
+                            img.blue(src='styles/themes/hasli/assets/images/icons/code-working.svg').workspaces--image_size
+                    .ui.secondary.button
+                                | + Create New Instance
+            .ui.hidden.divider
 
-
-    .ui.container(if.bind="instances.length > 0 || providers.length > 0")
+    .ui.container(if.bind="instances && instances.length > 0")
         .ui.basic.segment
             h2.ui.header
                 i.circular.red.ion-ios-loop.icon.circular--icon.circular--icon_red
@@ -43,9 +54,6 @@ template
                             th Status
                             th IP
                             th ID
-                            th CPU
-                            th Memory
-                            th Disk
                             th
                                 //stopstartrestart
                             th.right.aligned
@@ -56,11 +64,11 @@ template
                                 //settings
                     tbody
                         tr(if.bind="loading")
-                            td.widget-table-reloading(colspan='11')
+                            td.widget-table-reloading(colspan='8')
                                 .ui.active.inverted.dimmer
                                     .ui.large.text.loader Reloading ...
                         tr(if.bind="instances.length == 0 && !loading")
-                            td.widget-table-empty-alert(colspan='11') You have no instances
+                            td.widget-table-empty-alert(colspan='8') You have no instances
                         tr(
                         if.bind="instances.length > 0 && !loading",
                         repeat.for='instance of instances'
@@ -75,33 +83,24 @@ template
                             td
                                 | ${instance.name}
                             td
-                                i.icon.status-circle(class="${instance.statusCircle()}")
-                                | ${instance.status}
+                                i.icon.status-circle(class="${computeStatus(instance)}")
+                                | ${instance.state}
                             td
                                 | ${instance.publicIp}
                             td
                                 | ${instance.instanceId}
                             td
-                                //TODO graph
-                                | ${instance.cpu}%
-                            td
-                                //TODO graph
-                                | ${instance.memory}%
-                            td
-                                //TODO graph
-                                | ${instance.disk}%
-                            td
-                                i.icon.large.ion-stop(
-                                    if.bind="instance.statusButtons().indexOf('stop') != -1",
+                                i.icon.large.ion-stop.clickable(
+                                    if.bind="statusButtons(instance).indexOf('stop') != -1",
                                     click.delegate="stop(instance)"
                                     )
-                                i.icon.large.ion-play(
-                                    if.bind="instance.statusButtons().indexOf('start') != -1",
+                                i.icon.large.ion-play.clickable(
+                                    if.bind="statusButtons(instance).indexOf('start') != -1",
                                     click.delegate="start(instance)"
                                 )
-                                i.icon.large.ion-loop(
-                                    if.bind="instance.statusButtons().indexOf('restart') != -1",
+                                i.icon.large.ion-loop.clickable(
+                                    if.bind="statusButtons(instance).indexOf('restart') != -1",
                                     click.delegate="restart(instance)"
                                 )
                             td.right.aligned
-                                i.icon.large.setting
+                                i.icon.large.setting.clickable

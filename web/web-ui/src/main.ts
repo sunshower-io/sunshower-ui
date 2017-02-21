@@ -22,6 +22,7 @@ import {DialogConfiguration} from "aurelia-dialog";
 import {
     SemanticUIRenderer
 } from "common/resources/custom-components/semantic-ui-renderer";
+import {ChannelSet} from "common/lib/events";
 
 
 export function param(name) {
@@ -42,6 +43,7 @@ export function configure(aurelia: Aurelia) {
             'common/lib/widget/menu/menu',
             'common/resources/custom-elements/tree/tree'
         ])
+        .plugin('aurelia-validation')
         .plugin('aurelia-animator-velocity')
         .plugin('aurelia-dialog', (config: DialogConfiguration) => {
             config.useRenderer(SemanticUIRenderer);
@@ -97,16 +99,11 @@ export function configure(aurelia: Aurelia) {
                                 }
                             })
                     });
+
+                    let channelSet = new ChannelSet(`ws://${location.host}/hasli/api/events`);
                     tokenHolder.set(context, false);
                     container.registerInstance(HttpClient, authenticatedClient);
-                    // authenticatedClient.fetch('preferences')
-                    //     .then(preferences => preferences.json() as any)
-                    //     .then(preferences => {
-                    //         let preferenceManager = new PreferenceManager();
-                    //         preferenceManager.preferences = preferences;
-                    //         container.registerInstance(PreferenceManager, preferences)
-                    //     });
-                    //TODO set preferences
+                    container.registerInstance(ChannelSet, channelSet);
                     aurelia.start().then(() => aurelia.setRoot('app'));
                 }).catch(a => {
                     container.registerInstance(HttpClient, http);

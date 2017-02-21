@@ -1,0 +1,37 @@
+template
+    .overlay
+        .ui.container
+            .overlay-close
+                i.big.grey.icon.ion-close-round.clickable(click.delegate="close()")
+            h2.ui.center.aligned.grey.header Add New Cloud
+
+            .ui.form
+                //img.ui.image.small(src="${provider.icon}" alt="${provider.name}")
+
+                .ui.hidden.divider
+
+                form.ui.segment.upload-box(method='post', action='', enctype='multipart/form-data')
+                    label.upload-box__input
+                        i.massive.icon.ion-ios-upload-outline
+                        input.upload-box__file(type='file', name='files[]', data-multiple-caption='{count} files selected', multiple='')
+                        .upload-box__file-label
+                            | Choose a file
+                            span.upload-box__dragndrop or drag it here
+                    button.ui.button.primary(type='submit',
+                        click.delegate="uploadFiles()",
+                        class="${files.length == 0 ? 'disabled' : ''}") Upload
+                    .upload-box__uploading.ui.active.inverted.dimmer(if.bind="uploadStatus == 'uploading'")
+                        .ui.text.loader Uploading...
+                    .upload-box__success(if.bind="uploadStatus == 'done'") Done!
+                    .upload-box__error(if.bind="uploadStatus == 'error'") Error!
+
+                .field
+                    label Name
+                    input(type="text", value.bind="application.name & validate")
+
+                .field
+                    button.ui.pull-right.button.primary(
+                        type="submit",
+                        click.delegate="saveApplication()"
+                    )
+                        | Save Application
