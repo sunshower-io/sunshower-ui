@@ -1169,7 +1169,9 @@ System.config({
       "aurelia-fetch-client",
       "common/model/security/credentials",
       "common/model/api/hal/compute",
-      "common/lib/events"
+      "common/lib/events",
+      "aurelia-validation",
+      "common/resources/custom-components/bootstrap-form-renderer"
     ],
     "apps/workspaces/services/blocks.js": [
       "./blocks/block"
