@@ -167,6 +167,7 @@ export class NewInstance {
         this.setupValidation();
         this.listCredentials();
         this.listProviders();
+        this.search();
         setTimeout(() => {
             $(this.providers).dropdown();
 
@@ -204,17 +205,16 @@ export class NewInstance {
         this.controller.validate().then(result => {
             if (result.valid) {
                 console.log('deploying');
-                // let payload = JSON.stringify(new ComputeNodeTemplateMarshaller()
-                //     .write(this.template)),
-                //     credentialId = this.credentialId,
-                //     providerId = this.providerId;
-                //
-                // this.client.fetch(`compute/${providerId}/${this.channelSet.sessionId}/instances/${credentialId}/deploy`, {
-                //     method: 'post',
-                //     body:payload
-                //     }).then(r => r.json() as any).then(r => {
-                //         this.close();
-                // })
+                let payload = JSON.stringify(new ComputeNodeTemplateMarshaller()
+                    .write(this.template)),
+                    credentialId = this.credentialId,
+                    providerId = this.providerId;
+                this.client.fetch(`compute/${providerId}/${this.channelSet.sessionId}/instances/${credentialId}/deploy`, {
+                    method: 'post',
+                    body:payload
+                    }).then(r => r.json() as any).then(r => {
+                        this.close();
+                });
             }
             else {
                 console.log('something was bad');

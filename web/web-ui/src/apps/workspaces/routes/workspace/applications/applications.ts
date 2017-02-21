@@ -2,6 +2,8 @@
 import {HttpClient} from 'aurelia-fetch-client';
 import {bindable, inject} from "aurelia-framework";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
+
+
 @inject(Workspace, HttpClient)
 export class Applications {
 
@@ -11,9 +13,11 @@ export class Applications {
     @bindable
     loading: boolean;
 
-    constructor(private parent:Workspace, private client:HttpClient) {
-    }
+    @bindable
+    showModal: boolean;
 
+    constructor(public parent:Workspace, private client:HttpClient) {
+    }
 
     activate(id:any) : void {
         this.parent.setMenuVisible(true);
@@ -31,9 +35,12 @@ export class Applications {
                 .then(d => {
                     this.loading = false;
                     this.applications = d;
-                    console.log(this.applications)
                 });
         }, 2)
+    }
+
+    create() : void {
+        this.showModal = true;
     }
 
     addApplication() : void {

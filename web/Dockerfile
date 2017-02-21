@@ -9,7 +9,7 @@ RUN apt-get update && apt-get -y upgrade && apt-get install -y \
   && rm -rf /var/lib/apt/lists/*
 
 
-ARG WILDFLY_VERSION=1.0.19.Final
+ARG WILDFLY_VERSION=1.0.20.Final
 
 RUN mkdir /opt/wildfly \
     && cd /opt/wildfly \

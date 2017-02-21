@@ -80,16 +80,16 @@ export class Instances {
     }
 
     stop(instance: ComputeInstance): void {
-        this.client.fetch(`compute/${this.provider.id}/instances/${instance.id}/Stopping`)
+        this.client.fetch(`compute/${this.provider.id}/${this.channelSet.sessionId}/instances/${instance.id}/Stopped`)
             .then(r => {
-                console.log(r);
+                this.refresh();
             });
     }
 
     start(instance: ComputeInstance): void {
-        this.client.fetch(`compute/${this.provider.id}/instances/${instance.id}/Starting`)
+        this.client.fetch(`compute/${this.provider.id}/${this.channelSet.sessionId}/instances/${instance.id}/Starting`)
             .then(r => {
-                console.log(r);
+                this.refresh();
             });
     }
 
