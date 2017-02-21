@@ -436,7 +436,7 @@ body {
 
   .ui.search.selection.dropdown {
     line-height:24px;
-    &:hover, &.active, .menu, .menu:hover {
+    &:hover, &.active, .menu, .menu:hover, .menu:focus {
       border-color: @primarycolor;
     }
   }
