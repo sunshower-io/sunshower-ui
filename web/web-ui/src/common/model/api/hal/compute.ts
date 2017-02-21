@@ -68,3 +68,15 @@ export class OperatingSystemMarshaller implements Marshaller<OperatingSystem> {
     }
 
 }
+
+export class ComputeInstance {
+    id          ?: string;
+    logo        ?: string;
+    name        ?: string;
+    state       ?: string; //Running, Stopped, Stopping, Restart, Terminating, Deploying, Starting
+    publicIp    ?: string;
+    ports       ?: string;
+
+
+    //TODO add provider
+}

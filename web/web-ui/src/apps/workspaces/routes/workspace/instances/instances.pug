@@ -50,6 +50,7 @@ template
                                 //checkbox
                             th
                                 //logo
+                            th Provider
                             th Name
                             th Status
                             th IP
@@ -64,11 +65,11 @@ template
                                 //settings
                     tbody
                         tr(if.bind="loading")
-                            td.widget-table-reloading(colspan='8')
+                            td.widget-table-reloading(colspan='9')
                                 .ui.active.inverted.dimmer
                                     .ui.large.text.loader Reloading ...
                         tr(if.bind="instances.length == 0 && !loading")
-                            td.widget-table-empty-alert(colspan='8') You have no instances
+                            td.widget-table-empty-alert(colspan='9') You have no instances
                         tr(
                         if.bind="instances.length > 0 && !loading",
                         repeat.for='instance of instances'
@@ -80,6 +81,8 @@ template
                                     if.bind="instance.logo",
                                     src="${instance.logo}"
                                     )
+                            td
+                                //instance.provider.name
                             td
                                 | ${instance.name}
                             td
