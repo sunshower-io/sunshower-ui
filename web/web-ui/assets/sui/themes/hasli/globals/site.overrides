@@ -248,6 +248,10 @@ body {
   & > .ui.container {
     position:relative;
   }
+
+  h2.center.aligned.header {
+    margin-bottom:2.5em;
+  }
 }
 
 .overlay-close {
