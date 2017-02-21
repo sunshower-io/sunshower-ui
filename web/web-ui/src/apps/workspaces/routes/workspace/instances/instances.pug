@@ -82,7 +82,10 @@ template
                                     src="${instance.logo}"
                                     )
                             td
-                                //instance.provider.name
+                                img.ui.image.tiny(
+                                    if.bind="instance.provider && instance.provider.icon",
+                                    src="${instance.provider.icon}"
+                                )
                             td
                                 | ${instance.name}
                             td
