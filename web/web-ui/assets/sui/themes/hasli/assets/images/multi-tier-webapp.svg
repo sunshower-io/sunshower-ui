@@ -1,0 +1,48 @@
+
+<svg width="95px" height="74px" viewBox="0 0 95 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="35.6551724" y="56.260274" width="22.6896552" height="17.739726" rx="4"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="22.6896552" height="17.739726" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <rect id="path-3" x="71.3103448" y="28.3835616" width="22.6896552" height="17.739726" rx="4"></rect>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="22.6896552" height="17.739726" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <rect id="path-5" x="35.6551724" y="28.3835616" width="22.6896552" height="17.739726" rx="4"></rect>
+        <mask id="mask-6" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="22.6896552" height="17.739726" fill="white">
+            <use xlink:href="#path-5"></use>
+        </mask>
+        <rect id="path-7" x="0" y="28.3835616" width="22.6896552" height="17.739726" rx="4"></rect>
+        <mask id="mask-8" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="22.6896552" height="17.739726" fill="white">
+            <use xlink:href="#path-7"></use>
+        </mask>
+        <rect id="path-9" x="35.6551724" y="0" width="22.6896552" height="17.739726" rx="4"></rect>
+        <mask id="mask-10" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="22.6896552" height="17.739726" fill="white">
+            <use xlink:href="#path-9"></use>
+        </mask>
+    </defs>
+    <g id="icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <use id="Rectangle-Copy-4" stroke="#389BFF" mask="url(#mask-2)" stroke-width="6" xlink:href="#path-1"></use>
+        <use id="Rectangle-Copy-3" stroke="#389BFF" mask="url(#mask-4)" stroke-width="6" xlink:href="#path-3"></use>
+        <use id="Rectangle-Copy-2" stroke="#389BFF" mask="url(#mask-6)" stroke-width="6" xlink:href="#path-5"></use>
+        <use id="Rectangle-Copy" stroke="#389BFF" mask="url(#mask-8)" stroke-width="6" xlink:href="#path-7"></use>
+        <use id="Rectangle" stroke="#389BFF" mask="url(#mask-10)" stroke-width="6" xlink:href="#path-9"></use>
+        <g id="bottom-edges" transform="translate(47.000000, 51.952055) scale(1, -1) translate(-47.000000, -51.952055) translate(10.372414, 46.123288)" stroke="#389BFF" stroke-linecap="square">
+            <path d="M36.6275862,0.253424658 L36.6275862,11.4041096" id="Line"></path>
+            <path d="M36.6275862,5.32191781 L72.2827586,5.32191781" id="Line"></path>
+            <path d="M72.2827586,5.32191781 L72.2827586,11.4041096" id="Line"></path>
+            <path d="M1.62068966,5.32191781 L37.2758621,5.32191781" id="Line-Copy-2"></path>
+            <path d="M0.972413793,5.32191781 L0.972413793,11.4041096" id="Line-Copy"></path>
+        </g>
+        <g id="top-edges" transform="translate(10.372414, 17.232877)" stroke="#389BFF" stroke-linecap="square">
+            <path d="M36.6275862,0.253424658 L36.6275862,11.4041096" id="Line"></path>
+            <path d="M36.6275862,5.32191781 L72.2827586,5.32191781" id="Line"></path>
+            <path d="M72.2827586,5.32191781 L72.2827586,11.4041096" id="Line"></path>
+            <path d="M1.62068966,5.32191781 L37.2758621,5.32191781" id="Line-Copy-2"></path>
+            <path d="M0.972413793,5.32191781 L0.972413793,11.4041096" id="Line-Copy"></path>
+        </g>
+    </g>
+</svg>

@@ -3,6 +3,8 @@
 template
     .ui.hidden.divider
 
+    compose(show.bind="showModal", view-model='./create/app-details')
+
     template(if.bind="!applications || applications.length == 0")
         h2.ui.center.aligned.icon.header
             i.circular.orange.ion-ios-keypad-outline.icon.circular--icon.circular--icon_orange
@@ -19,7 +21,7 @@ template
                             .description
                                 .ui.container.workspaces--image_container
                                     img.blue(src='styles/themes/hasli/assets/images/icons/code-working.svg').workspaces--image_size
-                            .ui.secondary.button
+                            .ui.secondary.button(click.delegate="create()")
                                 | + Create New Application
                     .ui.card
                         .content

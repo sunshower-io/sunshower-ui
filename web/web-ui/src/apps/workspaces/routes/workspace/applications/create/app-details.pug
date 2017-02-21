@@ -1,0 +1,86 @@
+//
+   Created by dustinlish on 2/19/17.
+template
+    .overlay.au-animate
+        .ui.container
+            .ui.secondary.menu
+                .right.menu
+                    a.item
+                        i.huge.ion-ios-close-empty.icon(click.delegate="cancel()")
+            .ui.middle.aligned.center.aligned.grid
+                .two.column.centered.row
+                    .column
+                        h3.ui.center.aligned.header
+                            | CREATE NEW APPLICATION
+                    .column
+                        .ui.hidden.divider
+                        .ui.hidden.divider
+                        .ui.fluid.transparent.input
+                            input(type='text', placeholder='Add application name').overlay-input-centered
+                        .ui.divider
+            .ui.hidden.divider
+            .ui.hidden.divider
+            .ui.basic.center.aligned.segment
+                h1.ui.center.aligned.header
+                    i.circular.blue.ion-image.icon.circular--icon
+                    | Add Photo
+                .ui.hidden.divider
+                .ui.hidden.divider
+                .ui.hidden.divider
+                .ui.grid
+                    .row
+                        .two.wide.column
+                        .twelve.wide.column
+                            .ui.four.link.cards
+                                .new-app_type.card.hvr-glow
+                                    .content
+                                        .header
+                                            img(src='styles/themes/hasli/assets/images/blue-plus.svg')
+                                        .description
+                                            | Custom Application
+                                .new-app_type.card.hvr-glow
+                                    .content
+                                        .header
+                                            img(src='styles/themes/hasli/assets/images/block.svg')
+                                        .description
+                                            | Create New Container
+                                .new-app_type.card.hvr-glow
+                                    .content
+                                        .header
+                                            img(src='styles/themes/hasli/assets/images/multi-block.svg')
+                                        .description
+                                            | Docker Compose
+                                .new-app_type.card.hvr-glow
+                                    .content
+                                        .header
+                                            img(src='styles/themes/hasli/assets/images/docker-swarm.svg')
+                                        .description
+                                            | Docker Swarm
+                                .new-app_type.card.hvr-glow
+                                    .content
+                                        .header
+                                            img(src='styles/themes/hasli/assets/images/multi-tier-webapp.svg')
+                                        .description.hvr-glow
+                                            | 3 Tier Web App
+                                .new-app_type.card.hvr-glow
+                                    .content
+                                        .header
+                                            img(src='styles/themes/hasli/assets/images/cd-build-environment.svg')
+                                        .description
+                                            | CD Build Environment
+                                .new-app_type.card.hvr-glow
+                                    .content
+                                        .header
+                                            img(src='styles/themes/hasli/assets/images/ms-architecture.svg')
+                                        .description
+                                            | Microservices Architecture
+                                .new-app_type.card.hvr-glow
+                                    .content
+                                        .header
+                                            img(src='styles/themes/hasli/assets/images/java-ee.svg')
+                                        .description
+                                            | Java EE Enterprise
+                        .two.wide.column
+                .ui.hidden.divider
+                button.ui.secondary.button(click.delegate="create()")
+                    | Get Started

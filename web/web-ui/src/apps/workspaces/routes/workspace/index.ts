@@ -34,11 +34,7 @@ export class Workspace {
     }
 
     public configureRouter(config: RouterConfiguration, router: Router) {
-        config.title = 'Workspaces';
-
-        this.router = router;
         config.title = '';
-
         config.map([
 
             // Dashboard
@@ -46,7 +42,7 @@ export class Workspace {
 
             // Application Routes
             {route: 'applications', name: 'applications', moduleId: './applications/applications', nav: true, title: 'Applications'},
-            {route: 'applications/new', name: 'create-app', moduleId: './applications/create/create-app', nav: false, title: 'Create Application'},
+            {route: 'applications/:id/application', name: 'application', moduleId: './applications/application/application', nav: false, title: 'Application'},
 
             // Cloud Routes
             {route: 'clouds', name: 'clouds', moduleId: './clouds/clouds', nav: true, title: 'Clouds'},
@@ -66,13 +62,12 @@ export class Workspace {
 
         ]);
 
-        config.mapUnknownRoutes({
-            route: 'dashboard',
-            redirect: 'dashboard'
-        });
+        // config.mapUnknownRoutes({
+        //     route: 'dashboard',
+        //     redirect: 'dashboard'
+        // });
+
         this.router = router;
-
-
     }
 
 

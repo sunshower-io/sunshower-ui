@@ -1,6 +1,7 @@
 /*******************************
         Global Overrides
 *******************************/
+@headerheight: 48px;
 
 
 // Give text colors name
@@ -24,6 +25,10 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+}
+
+.main-container {
+  padding-top: @headerheight;
 }
 
 @footerheight: 48px;
@@ -74,7 +79,6 @@ body {
   color: #9012FE !important;
 }
 
-@headerheight: 48px;
 .navbar {
   height: @headerheight;
   z-index: 2;
@@ -87,6 +91,7 @@ body {
   left: 0;
   right: 0;
   top: 0;
+  position: fixed;
 }
 
 .workspace--content-view {
@@ -110,6 +115,36 @@ body {
   display: inline-block;
   height: 100%;
   vertical-align: middle;
+}
+
+.new-app_type {
+  //width: 175px !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+}
+
+.workspace-navbar {
+  height: 100px !important;
+}
+
+.workspace-image {
+  width: 55px !important;
+}
+
+.hvr-glow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: box-shadow;
+  transition-property: box-shadow;
+}
+.hvr-glow:hover, .hvr-glow:focus, .hvr-glow:active {
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1) !important;
 }
 
 .cloud--image_container {
@@ -236,14 +271,14 @@ body {
 }
 
 .overlay {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: @headerheight;
   right: 0;
   bottom: @footerheight;
-  overflow: hidden;
+  overflow: auto;
   background-color: white;
-  z-index:2;
+  z-index:1;
 }
 
 .overlay-close {
@@ -262,6 +297,11 @@ body {
     margin: @cardmargin !important;
     width:calc(~"25% - "@cardmargin*2);
   }
+}
+
+.overlay-input-centered {
+  font-size: 20px;
+  text-align: center !important;
 }
 
 .overlay-sidenav {
