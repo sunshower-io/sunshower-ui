@@ -66,7 +66,7 @@ export class Instances {
                     for (let provider of d) {
                         if (provider.key == 'aws') {
                             this.provider = provider;
-                            this.client.fetch(`compute/${provider.id}/${this.channelSet.sessionId}/instances`)
+                            this.client.fetch(`compute/${provider.id}/${this.channelSet.sessionId}/instances/synchronize`)
                                 .then(d => d.json() as any)
                                 .then(d => this.instances = d);
                         }
