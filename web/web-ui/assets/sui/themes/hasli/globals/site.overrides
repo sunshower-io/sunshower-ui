@@ -132,6 +132,28 @@ body {
   width: 55px !important;
 }
 
+.float-right {
+  float: right !important;
+}
+
+.summary-segment_header {
+  margin: 0em -.58333333em !important;
+}
+
+.segment-header_divider {
+  border-top: 1px solid rgba(34,36,38,.15) !important;
+  border-bottom: 1px solid rgba(255,255,255,.1) !important;
+  padding-bottom: 15px;
+}
+
+.segment-header_menu {
+  margin-top: -11px;
+}
+
+.file-icons_small {
+  font-size: 1.3em !important;
+}
+
 .hvr-glow {
   display: inline-block;
   vertical-align: middle;

@@ -29,6 +29,10 @@ template
                 href.bind='row.href'
                 )
                     | ${row.title}
+                .right.menu
+                    a.item
+                        .ui.primary.button()
+                            | Deploy
         .ui.container
             .ui.fitted.divider
             router-view
