@@ -57,7 +57,7 @@ export interface PipelineStep {
      * @param instruction The navigation instruction.
      * @param next The next step in the pipeline.
      */
-  run(instruction: NavigationInstruction, next: Next): void;
+  run(instruction: NavigationInstruction, next: Next): Promise<any>;
 }
 
 /**
@@ -122,7 +122,8 @@ export interface RouteConfig {
     * The view ports to target when activating this route. If unspecified, the target moduleId is loaded
     * into the default viewPort (the viewPort with name 'default'). The viewPorts object should have keys
     * whose property names correspond to names used by <router-view> elements. The values should be objects
-    * specifying the moduleId to load into that viewPort.
+    * specifying the moduleId to load into that viewPort.  The values may optionally include properties related to layout:
+    * `layoutView`, `layoutViewModel` and `layoutModel`.
     */
   viewPorts?: any;
   
@@ -170,6 +171,21 @@ export interface RouteConfig {
     * to be in your view-model code. Available values are 'replace' and 'invoke-lifecycle'.
     */
   activationStrategy?: string;
+  
+  /**
+     * specifies the file name of a layout view to use.
+     */
+  layoutView?: string;
+  
+  /**
+     * specifies the moduleId of the view model to use with the layout view.
+     */
+  layoutViewModel?: string;
+  
+  /**
+     * specifies the model parameter to pass to the layout view model's `activate` function.
+     */
+  layoutModel?: string;
   [x: string]: any;
 }
 
@@ -656,6 +672,16 @@ export class Router {
     * True if the [[Router]] is currently processing a navigation.
     */
   isNavigating: boolean;
+  
+  /**
+    * True if the [[Router]] is navigating due to explicit call to navigate function(s).
+    */
+  isExplicitNavigation: boolean;
+  
+  /**
+    * True if the [[Router]] is navigating due to explicit call to navigateBack function.
+    */
+  isExplicitNavigationBack: boolean;
   
   /**
     * The navigation models for routes that specified [[RouteConfig.nav]].
