@@ -1,8 +1,0 @@
-{
-  "resolution": "main",
-  "tree": {
-    "src": "/home/haswell/dev/src/github.com/hasli-projects/hasli.io/web/web-ui/node_modules/rx/ts/rx.all.d.ts",
-    "raw": "npm:rx/ts/rx.all.d.ts",
-    "typings": "/home/haswell/dev/src/github.com/hasli-projects/hasli.io/web/web-ui/node_modules/rx/ts/rx.all.d.ts"
-  }
-}

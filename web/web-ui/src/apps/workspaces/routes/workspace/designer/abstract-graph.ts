@@ -5,6 +5,8 @@ import {
 } from 'mxgraph';
 
 
+import {Subject} from 'rxjs/Subject';
+
 import {PLATFORM} from 'aurelia-pal';
 import {Canvas} from 'common/lib/canvas';
 import {Registry} from "common/lib/utils";
@@ -21,7 +23,6 @@ export class GraphEvents {
     static readonly RIGHT_OPENED        : string = 'right-opened';
 }
 
-import {Subject} from 'rx';
 
 export abstract class AbstractGraph {
 

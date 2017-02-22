@@ -1,4 +1,5 @@
-import {Observable, Subject} from 'rx';
+import {Subject} from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
 import {Event as E} from 'core-js/library';
 export enum Type {
     ChannelBound,
@@ -9,6 +10,7 @@ export enum Type {
 }
 export interface Lifecycle {
 
+    data?: any;
     type: Type;
 }
 
