@@ -23,6 +23,7 @@ import {
     SemanticUIRenderer
 } from "common/resources/custom-components/semantic-ui-renderer";
 import {ChannelSet} from "common/lib/events";
+import {FetchClientInterceptor} from "./common/resources/custom-components/fetch-client-errors";
 
 
 export function param(name) {
@@ -62,6 +63,7 @@ export function configure(aurelia: Aurelia) {
                     'Content-Type': 'application/json',
                 }
             })
+            .withInterceptor(container.get(FetchClientInterceptor));
     });
 
 

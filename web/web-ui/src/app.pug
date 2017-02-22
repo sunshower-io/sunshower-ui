@@ -1,5 +1,6 @@
 template
     require(from="common/resources/custom-elements/nav-bar/navbar")
+    require(from="common/resources/custom-elements/footer")
 
     navbar
 
@@ -7,14 +8,4 @@ template
 
     router-view(style="flex: 1;").main-container
 
-    // footer
-    .ui.vertical.footer.segment.hasli--footer
-        .ui.container
-            .ui.right.floated.horizontal.list
-                .disabled.item(href='#') © Hasli, Inc.
-                a.item(href='#') Terms
-                a.item(href='#') Privacy Policy
-            .ui.horizontal.list
-                a.item(href='#') Docs
-                a.item(href='#') Blogs
-                a.item(href='#') Help & Support
+    footer
