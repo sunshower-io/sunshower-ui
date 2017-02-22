@@ -19,6 +19,9 @@ module.exports = {
         'jspm_packages/npm/aurelia-animator-velocity@1.0.1',
         'jspm_packages/npm/lodash@4.17.4.js',
         'jspm_packages/npm/rxjs@5.0.3.js',
+        'jspm_packages/github/jspm/**/*',
+        'jspm_packages/npm/buffer@3.6.0.js',
+        'jspm_packages/npm/buffer@3.6.0/**/*',
         'jspm_packages/github/canvg/canvg@master.js',
         'styles/styles.css'
     ],
@@ -29,10 +32,9 @@ module.exports = {
     // path.
     'normalize': [
         [
-            'rx', [
-                '/bundles/*.js'
-                // '/*.js',
-                // '/util/*.js'
+            'rxjs', [
+                '/**/*.js',
+                '/*.js'
 
         ]],
         [

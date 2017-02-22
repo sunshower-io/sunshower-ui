@@ -1,8 +1,8 @@
 import {} from 'jasmine';
-import {UUID} from "utils/uuid";
+import {UUID} from "common/lib/utils/uuid";
 
-import {App} from 'main/main';
-import {AuthenticationContextHolder} from 'storage/local/local-storage'
+import {App} from 'app';
+import {AuthenticationContextHolder} from 'common/lib/storage/local/local-storage'
 
 describe('it must be a uuid', () => {
     it('must do uuid things', () => {

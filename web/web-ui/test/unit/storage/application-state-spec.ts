@@ -1,7 +1,7 @@
 import {} from 'jasmine';
 import {Container} from 'aurelia-dependency-injection';
-import {LocalStorage} from "storage/local/local-storage";
-import {PreferenceManager} from "storage/application-state";
+import {LocalStorage} from 'common/lib/storage/local/local-storage';
+import {PreferenceManager} from "common/lib/storage/application-state";
 
 describe('application-state', () => {
 

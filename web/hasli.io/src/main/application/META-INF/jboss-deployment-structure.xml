@@ -15,6 +15,10 @@
 
         <dependencies>
 
+            <module name="org.infinispan" export="true" />
+            <module name="org.hibernate.infinispan" export="true" />
+            <module name="org.infinispan.spring" export="true" />
+
 
             <module
                     export="true"

@@ -13,7 +13,7 @@ export interface MenuAware {
 
 
 @autoinject
-export class Workspaces {
+export class Workspace {
 
     public router: Router;
 
@@ -34,78 +34,78 @@ export class Workspaces {
     }
 
     public configureRouter(config: RouterConfiguration, router: Router) {
-        config.title = 'Workspaces';
-
-        this.router = router;
         config.title = '';
+        config.map([
 
-        config.map([{
-            route: ['', 'dashboard'],
-            nav: true,
-            title: 'Dashboard',
-            name: 'dashboard',
-            moduleId: './dashboard/dashboard',
-        }, {
-            nav: true,
-            title: 'Applications',
-            name: 'applications',
-            route: 'applications',
-            moduleId: './applications/applications',
-        }, {
-            nav: true,
-            title: 'Clouds',
-            name: 'clouds',
-            route: 'clouds',
-            moduleId: './clouds/clouds',
-        }, {
-
-            nav: false,
-            title: 'Clouds',
-            name: 'create-cloud',
-            route: 'clouds/new',
-            moduleId: './clouds/add-cloud',
-        }, {
-
-            nav: false,
-            title: 'Add Cloud Credential',
-            name: 'add-cloud-credential',
-            route: 'clouds/:id/credential/new',
-            moduleId: './clouds/add-credential',
-        },
+            // Dashboard
             {
+                route: ['', 'dashboard'],
+                name: 'dashboard',
+                moduleId: './dashboard/dashboard',
                 nav: true,
-                title: 'Instances',
-                name: 'instances',
-                route: 'instances',
-                moduleId: './instances/instances',
-            }, {
+                title: 'Dashboard'
+            },
+
+            // Application Routes
+            {
+                route: 'applications',
+                name: 'applications',
+                moduleId: './applications/applications',
                 nav: true,
-                title: 'Settings',
-                name: 'settings',
-                route: 'settings',
-                moduleId: './settings/settings',
-            }, {
-                nav: true,
-                title: 'Designer',
-                name: 'designer',
-                route: 'designer',
-                moduleId: './designer/designer'
-            }, {
+                title: 'Applications'
+            },
+            {
+                route: 'applications/:id/application',
+                name: 'application',
+                moduleId: './applications/application/application',
                 nav: false,
-                title: 'New Instance',
-                name: 'new-instance',
+                title: 'Application'
+            },
+            {
+                route: 'applications/new',
+                name: 'add-application',
+                moduleId: './applications/add-application',
+                nav: false,
+                title: 'Applications'
+            },
+
+            // Cloud Routes
+            {route: 'clouds', name: 'clouds', moduleId: './clouds/clouds', nav: true, title: 'Clouds'},
+            {route: 'clouds/new', name: 'create-cloud', moduleId: './clouds/add-cloud', nav: false, title: 'Clouds'},
+            {
+                route: 'clouds/:id/credential/new',
+                name: 'add-cloud-credential',
+                moduleId: './clouds/add-credential',
+                nav: false,
+                title: 'Add Cloud Credential'
+            },
+
+            // Instances Routes
+            {route: 'instances', name: 'instances', moduleId: './instances/instances', nav: true, title: 'Instances'},
+            {
                 route: 'instances/new',
-                moduleId: './instances/new'
-            }
+                name: 'new-instance',
+                moduleId: './instances/new',
+                nav: false,
+                title: 'New Instance'
+            },
+
+            // Designer
+            {route: 'designer', name: 'designer', moduleId: './designer/designer', nav: true, title: 'Designer'},
+
+            // Settings
+            {route: 'settings', name: 'settings', moduleId: './settings/settings', nav: true, title: 'Settings'},
+
 
         ]);
 
-        config.mapUnknownRoutes({
-            route: 'dashboard',
-            redirect: 'dashboard'
-        });
-        this.router = router;
+        // TODO: Create 404 page
+        // config.mapUnknownRoutes({
+        //     route: 'dashboard',
+        //     redirect: 'dashboard'
+        // });
 
+        this.router = router;
 
     }
 

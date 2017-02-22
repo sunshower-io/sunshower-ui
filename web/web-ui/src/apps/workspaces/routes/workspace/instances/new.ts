@@ -1,9 +1,11 @@
-
-
-import {autoinject, bindable} from "aurelia-framework";
+import {
+    inject,
+    bindable,
+    NewInstance as NI
+} from "aurelia-framework";
 import {UUID} from "common/lib/utils/uuid";
 import {OperatingSystemService} from "common/model/api/hal/os";
-import {Workspaces} from "apps/workspaces/routes/workspace/index";
+import {Workspace} from "apps/workspaces/routes/workspace/index";
 import {
     NodeConfiguration,
     InstanceDescriptor,
@@ -16,8 +18,14 @@ import {
     ComputeNodeTemplate,
     ComputeNodeTemplateMarshaller
 } from "common/model/api/hal/compute";
+import {ChannelSet} from "common/lib/events";
+import {
+    ValidationController,
+    ValidationRules
+} from 'aurelia-validation';
+import {BootstrapFormRenderer} from 'common/resources/custom-components/bootstrap-form-renderer';
 
-@autoinject
+@inject(Workspace, HttpClient, ChannelSet, OperatingSystemService, NI.of(ValidationController))
 export class NewInstance {
 
     providerList                : HTMLElement;
@@ -51,14 +59,32 @@ export class NewInstance {
 
 
     constructor(
-        private parent:Workspaces,
+        private parent:Workspace,
         private client:HttpClient,
+        private channelSet: ChannelSet,
         private osService:OperatingSystemService,
+        private controller:ValidationController
     ) {
+        this.controller.addRenderer(new BootstrapFormRenderer());
         this.template = newNodeTemplate();
     }
 
+    setupValidation() : void {
+        //            .ensure((p:Provider) => p.key).required().satisfies(p => p.length === 3)
+        //.withMessage('Key must be exactly three characters long')
+        ValidationRules
+            .ensure((inst:NewInstance) => inst.credentialId).displayName('Credential').required()
+            .ensure((inst:NewInstance) => inst.providerId).displayName('Provider').required()
+            .ensure((inst:NewInstance) => inst.instanceType).displayName('Instance').required()
+            .on(NewInstance);
+        let validationRules = ValidationRules
+             .ensure((temp:ComputeNodeTemplate) => temp.name).required()
+             .ensure((temp:ComputeNodeTemplate) => temp.operatingSystem).required()
+             .rules;
+        this.controller.addObject(this.template, validationRules);
+        //name, credential, provider, OS and instance all required
 
+    }
 
     addCredential() {
         this.addingCredential = true;
@@ -82,14 +108,16 @@ export class NewInstance {
     }
 
     private listCredentials() {
-        this.client.fetch('secrets/vault/io.hasli.vault.api.secrets.CredentialSecret/list')
-            .then(response => response.json() as any)
-            .then(data => {
-                this.credentials = data;
-                setTimeout(() => {
-                    this.loading = false;
+        if(this.providerId) {
+            this.client.fetch(`provider/${this.providerId}`)
+                .then(response => response.json() as any)
+                .then(data => {
+                    this.credentials = data;
+                    setTimeout(() => {
+                        this.loading = false;
+                    });
                 });
-            });
+        }
     }
 
 
@@ -122,6 +150,7 @@ export class NewInstance {
 
     providerChanged = (value: string, text: any, item: any) => {
         this.providerId = value;
+        this.listCredentials();
     };
 
     credentialChanged = (value: string, text: any, item: any) => {
@@ -135,8 +164,10 @@ export class NewInstance {
     };
 
     attached(): void {
+        this.setupValidation();
         this.listCredentials();
         this.listProviders();
+        this.search();
         setTimeout(() => {
             $(this.providers).dropdown();
 
@@ -171,20 +202,23 @@ export class NewInstance {
     }
 
     deployInstance() : void {
-
-        let payload = JSON.stringify(new ComputeNodeTemplateMarshaller()
-            .write(this.template)),
-            credentialId = this.credentialId,
-            providerId = this.providerId;
-
-        // console.log("Credential ID", this.credentialId);
-        // console.log("Provider ID", this.providerId);
-
-        this.client.fetch(`compute/${providerId}/instances/${credentialId}/deploy`, {
-            method: 'post',
-            body:payload
-            }).then(r => {
-                this.close();
-        })
+        this.controller.validate().then(result => {
+            if (result.valid) {
+                console.log('deploying');
+                let payload = JSON.stringify(new ComputeNodeTemplateMarshaller()
+                    .write(this.template)),
+                    credentialId = this.credentialId,
+                    providerId = this.providerId;
+                this.client.fetch(`compute/${providerId}/${this.channelSet.sessionId}/instances/${credentialId}/deploy`, {
+                    method: 'post',
+                    body:payload
+                    }).then(r => r.json() as any).then(r => {
+                        this.close();
+                });
+            }
+            else {
+                console.log('something was bad');
+            }
+        });
     }
 }

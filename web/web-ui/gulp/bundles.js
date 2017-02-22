@@ -30,6 +30,7 @@ module.exports = {
                 "aurelia-loader-default",
                 "aurelia-history-browser",
                 "aurelia-logging-console",
+                "aurelia-validation",
                 "semantic-ui",
                 "fetch",
                 "jquery"

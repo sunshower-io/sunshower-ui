@@ -1,6 +1,7 @@
 /*******************************
         Global Overrides
 *******************************/
+@headerheight: 48px;
 
 
 // Give text colors name
@@ -19,11 +20,27 @@
 ;
 }
 
+//for mixin purposes
+.clearfix {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: '';
+    clear: both;
+    height: 0;
+  }
+}
+
 body {
   height: 100%;
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+}
+
+.main-container {
+  padding-top: @headerheight;
 }
 
 @footerheight: 48px;
@@ -74,7 +91,6 @@ body {
   color: #9012FE !important;
 }
 
-@headerheight: 48px;
 .navbar {
   height: @headerheight;
   z-index: 2;
@@ -87,6 +103,7 @@ body {
   left: 0;
   right: 0;
   top: 0;
+  position: fixed;
 }
 
 .workspace--content-view {
@@ -110,6 +127,66 @@ body {
   display: inline-block;
   height: 100%;
   vertical-align: middle;
+}
+
+.new-app_type {
+  //width: 175px !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+}
+
+.workspace-navbar {
+  height: 100px !important;
+}
+
+.workspace-image {
+  width: 55px !important;
+}
+
+.float-right {
+  float: right !important;
+}
+
+.vertical-menu_no-divider {
+  border: none !important;
+}
+
+.full-screen {
+
+}
+
+.summary-segment_header {
+  margin: 0em -.58333333em !important;
+}
+
+.segment-header_divider {
+  border-top: 1px solid rgba(34,36,38,.15) !important;
+  border-bottom: 1px solid rgba(255,255,255,.1) !important;
+  padding-bottom: 15px;
+}
+
+.segment-header_menu {
+  margin-top: -11px;
+}
+
+.file-icons_small {
+  font-size: 1.3em !important;
+}
+
+.hvr-glow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: box-shadow;
+  transition-property: box-shadow;
+}
+.hvr-glow:hover, .hvr-glow:focus, .hvr-glow:active {
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1) !important;
 }
 
 .cloud--image_container {
@@ -223,45 +300,61 @@ body {
 @hasliem: 16px;
 @sidenavwidth: 25%;
 
-//for mixin purposes
-.clearfix {
-  &:after {
-    visibility: hidden;
-    display: block;
-    font-size: 0;
-    content: '';
-    clear: both;
-    height: 0;
-  }
-}
-
 .overlay {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: @headerheight;
   right: 0;
   bottom: @footerheight;
-  overflow: hidden;
+  overflow: auto;
   background-color: white;
-  z-index:2;
+  z-index:1;
 }
 
 .overlay-close {
-  margin-top:16px;
-  margin-bottom:16px;
+  margin-top:@hasliem;
+  margin-bottom:@hasliem;
   text-align:right;
 }
 
-@cardmargin:50px;
-.overlay-cards.ui.cards {
-  & > .card>.image {
-    background-color:inherit;
-    padding:15px;
+@cardmargin:120px;
+.overlay-cards.ui.four.cards {
+  .card {
+    margin-right: @cardmargin !important;
+    margin-bottom: @cardmargin !important;
+    width:calc(~"25% - "@cardmargin);
+    position:relative;
+    padding-bottom:12.5%;
   }
-  &.four > .card {
-    margin: @cardmargin !important;
-    width:calc(~"25% - "@cardmargin*2);
+
+  .overlay-card--image {
+    position:absolute;
+    top:50%;
+    right: 5%;
+    bottom:5%;
+    left:5%;
+    transform: perspective(1px) translateY(-55%);
+    max-width:90%;
+    max-height:90%;
+    width:auto;
+    height:auto;
   }
+
+  .overlay-card--label {
+    text-align:center;
+    color: @hasliGrey;
+    font-weight: bold;
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:-@cardmargin/3;
+  }
+
+}
+
+.overlay-input-centered {
+  font-size: 20px;
+  text-align: center !important;
 }
 
 .overlay-sidenav {
@@ -295,7 +388,7 @@ body {
 }
 .overlay-header-label, .overlay-header-sublabel {
   display: block;
-  margin: 16px auto;
+  margin: @hasliem auto;
   text-align:center;
 }
 .overlay-header-label {
@@ -396,6 +489,29 @@ body {
 }
 
 .overlay-form {
+  .ui.dividing.header {
+    font-weight:normal;
+    color: @hasliGrey;
+    font-size:.9em;
+  }
+
+  &.ui.form {
+    textarea, input:not([type]), input[type=text], input[type=email], input[type=search], input[type=password], input[type=date], input[type=datetime-local], input[type=tel], input[type=time], input[type=file], input[type=url], input[type=number], .ui.selection.dropdown {
+      border-radius: 0;
+      &:focus {
+        border-radius: 0
+      }
+    }
+  }
+
+  .ui.search.selection.dropdown {
+    line-height:24px;
+    &:hover, &.active, .menu, .menu:hover, .menu:focus {
+      border-color: @primarycolor;
+    }
+  }
+
+
   .field.overlay-field {
     margin: @hasliem 0 !important;
     &>* {
@@ -408,9 +524,10 @@ body {
       padding-right:1em;
       width:25%;
       padding-top:@hasliem/2;
+      font-size: 1.2em;
     }
     .overlay-input {
-      width:65% !important;
+      width:75% !important;
     }
     .overlay-help {
       color: @hasliGrey;
@@ -419,6 +536,12 @@ body {
         margin: auto;
       }
     }
+
+    .ui.error.message {
+      margin-left:25%;
+      width:75%;
+    }
+
     .clearfix
   }
 }
@@ -429,4 +552,326 @@ body {
 }
 .element-editor-body .overlay-body {
   padding:32px;
+}
+
+//start what was widget.less
+@hasliGreen: #25CD6B;
+@primarycolor: #239AE8;
+@trheight: 150px;
+@statusgreen: @hasliGreen;
+@statusyellow: yellow;
+@statusred: red;
+
+.overview-widget {
+  padding: 1rem;
+}
+
+.widget-header {
+  color: @hasliGrey;
+  font-weight:normal;
+}
+
+.ui.table.widget-table {
+  margin:2rem 0 !important;
+  //border-bottom: @border !important;
+  color: @hasliGrey;
+  tbody {
+    background-color: white;
+  }
+  thead th {
+    border-bottom: 1px solid @hasliStandardGrey;
+  }
+  td {
+    vertical-align: middle;
+    padding: 30px 0 !important;
+  }
+}
+
+.widget-table-empty-alert {
+  text-align:center !important;
+  color: @hasliStandardGrey;
+  font-size:2rem;
+  height: @trheight;
+  box-sizing:border-box;
+}
+
+.widget-table-reloading {
+  position: relative;
+  height: @trheight;
+  box-sizing:border-box;
+}
+
+//refactor to somewhere else for reuse
+.status-circle {
+  margin-right: .5rem !important;
+  margin-left: -1rem !important;
+  &.green {
+    color: @statusgreen
+  }
+  &.yellow {
+    color: @statusyellow
+  }
+  &.red {
+    color: @statusred
+  }
+}
+//end what was widget.less
+
+
+//start what was designer.less
+.draftboard--row {
+  height: 40px !important;
+}
+
+.draftboard--column {
+  height: 40px !important;
+  padding: 0 !important;
+}
+
+.draftboard--drag-element {
+  box-sizing: border-box;
+  width:195px;
+  height:215px;
+  // todo: Change to /hasli/web
+  background-image: url('/dev/assets/node_bg.png');
+  padding: 100px 0 0 75px;
+
+}
+//end what was designer.less
+
+//start what was applications.less
+.workbench-container {
+  height:calc(~"100vh - 112px") !important; //because navbar grew 10px
+  margin-top:24px !important;
+}
+
+
+.workbench {
+  height:100% !important;
+  width:100% !important;
+  z-index: 50 !important;
+  //top: -24px !important;
+}
+
+.mxRubberband {
+  border: 1px solid #030f17;
+  position:absolute;
+  opacity: 1;
+  background-color:#239AE8 ;
+}
+
+.graph-error {
+  background-color: #727272
+}
+//end what was applications.less
+
+//start what was element-editor.less
+@topbarheight: 32px;
+
+.element-editor-overlay {
+  position:absolute;
+  background-color: white;
+  z-index: 100;
+  border-color: @hasliGrey;
+  overflow: hidden;
+  .element-editor-topbar {
+    width:100%;
+    position:relative;
+    height:@topbarheight;
+    .icon-holder {
+      float:right;
+      z-index:9000;
+      vertical-align:middle;
+      line-height:@topbarheight;
+      padding:4px;
+      img {
+        width:24px;
+        height:24px;
+      }
+    }
+  }
+}
+//end what was element-editor.less
+
+//start what was add-infrastructure.less
+.select-infrastructure-dialog {
+  padding:@hasliem;
+}
+
+
+.node-icon {
+  padding-left: 8px;
+}
+
+.node-icon span {
+  display: inline-block;
+  color: #292929
+}
+//end what was add-infrastructure.less
+
+//start what was hasli-modal.less
+//TODO refactor up into where the dimmer styles are set
+.hasli-modal {
+  margin-top:-50px;
+  h1, h2, h3, h4, h5, h6 {
+    color: white;
+    text-align:center;
+    margin-bottom:50px;
+  }
+}
+
+.hasli-modal--button-holder {
+  margin-top: 3em;
+  .button { float: right; }
+  .clearfix
+}
+//end what was hasli-modal.less
+
+//start what was controls.less
+.nooverflow {
+  overflow:hidden;
+}
+
+.controls {
+  padding-left:0.5rem !important;
+  margin-left: 0.5rem !important;
+
+
+  .button {
+    height:24px;
+    width:24px;
+  }
+}
+//end what was controls.less
+
+//start what was sidebars.less
+
+.right--menu, .left--menu {
+  .sidebar-header {
+    height:39px !important;
+    font-weight:bold;
+    padding-left:@hasliem;
+  }
+
+  .header-icon {
+    height:100%;
+    display:inline-block;
+    vertical-align:middle;
+    padding-right:12px;
+    > img {
+      display:inline-block;
+    }
+
+  }
+}
+//end what was sidebars.less
+
+//start what was layers.less
+.layer-tree {
+  overflow-y: auto;
+}
+//end what was layers.less
+
+
+//start what was right-sidebar.less
+.applications {
+  position:absolute;
+  top:85px;
+  left:0;
+  right:0;
+  bottom:0;
+  overflow-y:auto;
+  padding:@hasliem !important;
+}
+//end what was right-sidebar.less
+
+//start what was palette.less
+.palette {
+  padding: @hasliem !important;
+  [data-tooltip]:hover:before {
+    opacity: 0 !important;
+  }
+  [data-tooltip]:hover {
+    z-index: 50000;
+  }
+  div.item {
+    i.icon {
+      margin:auto !important;
+    }
+    &:hover {
+      border: 1px solid #737373 !important;
+    }
+    &:active {
+      border: 1px solid #737373 !important;
+      background-color: #999 !important;
+    }
+
+  }
+}
+//end what was palette.less
+
+//start what was breadcrumb.less
+.workspace-breadcrumb {
+  width: 100%;
+  height: 25px;
+  line-height:23px;
+  margin-right:-2px;
+  margin-top:-13px;
+  z-index:100;
+  background-color:#f3f4f5;
+  box-sizing: border-box;
+  padding-left:8px;
+  border-bottom: 1px solid @hasliGrey;
+  border-top: 1px solid @hasliGrey;
+
+  .indent {
+    margin-left: 304px;
+  }
+
+}
+//end what was breadcrumb.lesss
+
+.clickable { cursor: pointer; }
+
+
+//styles for drag-n-drop
+.upload-box__dragndrop {
+    display: none;
+}
+
+.upload-box__file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.upload-box__success, .upload-box__error {
+  font-size: 2em;
+  margin-top:1em;
+}
+
+.upload-box__file-label {
+  font-size:2em;
+  margin-bottom: 2em;
+  margin-top: 1em;
+}
+
+.ui.segment.upload-box {
+  text-align:center;
+  background-color:lighten(@primarycolor, 50%);
+  padding:3em !important;
+  &.has-advanced-upload {
+    outline: 2px dashed @primarycolor;
+    outline-offset: -@hasliem;
+    .upload-box__dragndrop {
+      display: inline;
+      margin-left: .25em;
+    }
+  }
+  &.is-dragover {
+    background-color: lighten(@primarycolor, 25%);
+  }
 }

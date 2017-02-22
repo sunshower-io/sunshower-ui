@@ -12,6 +12,9 @@ publishing {
 configurations {
     site
 
+    earlib.exclude group: 'org.infinispan'
+    earlib.exclude group: 'org.hibernate'
+
     earlib.exclude group: 'dom4j'
     earlib.exclude group: 'org.junit'
 }
