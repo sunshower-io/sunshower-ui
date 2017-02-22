@@ -148,6 +148,14 @@ body {
   float: right !important;
 }
 
+.vertical-menu_no-divider {
+  border: none !important;
+}
+
+.full-screen {
+
+}
+
 .summary-segment_header {
   margin: 0em -.58333333em !important;
 }
