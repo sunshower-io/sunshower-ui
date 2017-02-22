@@ -18,7 +18,7 @@ export class Application {
     public configureRouter(config: RouterConfiguration, router: Router) {
         config.map([
             {route: ['', 'summary'], name: 'Summary', moduleId: './summary', nav: true, title: 'Summary'},
-            {route: 'containers', name: 'Containers', moduleId: './container/containers', nav: true, title: 'Containers'},
+            {route: 'container', name: 'Container', moduleId: './container/container', nav: true, title: 'Container'},
             {route: 'tasks', name: 'Tasks', moduleId: './tasks', nav: true, title: 'Tasks'},
             {route: 'versions', name: 'Versions', moduleId: './versions', nav: true, title: 'Versions'},
             {route: 'activity', name: 'Activity', moduleId: './activity', nav: true, title: 'Activity'},
