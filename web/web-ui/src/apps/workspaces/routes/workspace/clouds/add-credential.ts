@@ -99,7 +99,9 @@ export class AddCredential {
     }
 
     removeCredential(credential) : void {
-
+        this.client.fetch(`secrets/vault/${credential.id}`, {
+            method: 'delete'
+        }).then(t => this.refresh());
     }
 
     refresh() : void {
