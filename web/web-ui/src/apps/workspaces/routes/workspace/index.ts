@@ -38,21 +38,57 @@ export class Workspace {
         config.map([
 
             // Dashboard
-            {route: ['', 'dashboard'], name: 'dashboard', moduleId: './dashboard/dashboard', nav: true, title: 'Dashboard'},
+            {
+                route: ['', 'dashboard'],
+                name: 'dashboard',
+                moduleId: './dashboard/dashboard',
+                nav: true,
+                title: 'Dashboard'
+            },
 
             // Application Routes
-            {route: 'applications', name: 'applications', moduleId: './applications/applications', nav: true, title: 'Applications'},
-            {route: 'applications/:id/application', name: 'application', moduleId: './applications/application/application', nav: false, title: 'Application'},
-            {route: 'applications/new', name: 'add-application', moduleId: './applications/add-application', nav: false, title: 'Applications'},
+            {
+                route: 'applications',
+                name: 'applications',
+                moduleId: './applications/applications',
+                nav: true,
+                title: 'Applications'
+            },
+            {
+                route: 'applications/:id/application',
+                name: 'application',
+                moduleId: './applications/application/application',
+                nav: false,
+                title: 'Application'
+            },
+            {
+                route: 'applications/new',
+                name: 'add-application',
+                moduleId: './applications/add-application',
+                nav: false,
+                title: 'Applications'
+            },
 
             // Cloud Routes
             {route: 'clouds', name: 'clouds', moduleId: './clouds/clouds', nav: true, title: 'Clouds'},
             {route: 'clouds/new', name: 'create-cloud', moduleId: './clouds/add-cloud', nav: false, title: 'Clouds'},
-            {route: 'clouds/:id/credential/new', name: 'add-cloud-credential', moduleId: './clouds/add-credential', nav: false, title: 'Add Cloud Credential'},
+            {
+                route: 'clouds/:id/credential/new',
+                name: 'add-cloud-credential',
+                moduleId: './clouds/add-credential',
+                nav: false,
+                title: 'Add Cloud Credential'
+            },
 
             // Instances Routes
             {route: 'instances', name: 'instances', moduleId: './instances/instances', nav: true, title: 'Instances'},
-            {route: 'instances/new', name: 'new-instance', moduleId: './instances/new', nav: false, title: 'New Instance'},
+            {
+                route: 'instances/new',
+                name: 'new-instance',
+                moduleId: './instances/new',
+                nav: false,
+                title: 'New Instance'
+            },
 
             // Designer
             {route: 'designer', name: 'designer', moduleId: './designer/designer', nav: true, title: 'Designer'},

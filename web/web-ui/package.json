@@ -130,7 +130,7 @@
       "plotly/plotly.js": "github:plotly/plotly.js@^1.21.3",
       "plugin-text": "npm:systemjs-plugin-text@^0.0.9",
       "pnotify": "github:sciactive/pnotify@^3.0.0",
-      "rx": "npm:rxjs@^5.0.3",
+      "rxjs": "npm:rxjs@^5.2.0",
       "semantic-ui": "github:Semantic-Org/Semantic-UI@^2.2.4",
       "text": "github:systemjs/plugin-text@^0.0.9",
       "topojson/topojson": "github:topojson/topojson@^2.2.0",

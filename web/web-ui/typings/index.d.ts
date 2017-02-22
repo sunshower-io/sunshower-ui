@@ -8,7 +8,6 @@
 /// <reference path="globals/maskedinput/index.d.ts" />
 /// <reference path="globals/ocanvas/index.d.ts" />
 /// <reference path="globals/plotly/index.d.ts" />
-/// <reference path="globals/rx/index.d.ts" />
 /// <reference path="globals/url/index.d.ts" />
 /// <reference path="globals/velocity-animate/index.d.ts" />
 /// <reference path="globals/whatwg-fetch/index.d.ts" />
