@@ -64,11 +64,6 @@ export class AddCloud {
     }
 
     selectProvider(provider:Provider) : void {
-        this.client.fetch('secrets/vault/123513432342', {
-            method: 'get'
-        }).then(data => {
-            console.log('blorp')
-        });
         this.providerSelected = true;
         this.provider = provider;
         if (this.provider.key == 'aws') {

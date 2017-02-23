@@ -26,15 +26,18 @@ export class Footer {
                 notice = new PNotify({
                 before_open: null,
                 context: null,
+                hide: false,
                 title: response.status.toString() + ' ' + response.statusText,
                 text: response.url,
                 shadow: false,
                 icon: false,
                 addclass: 'hasli-error'
             });
-            console.log('response', response)
+            notice.get().click(() => {
+                notice.remove();
+                this.errors.splice(i, 1);
+            })
         }
-        this.errors = [];
     }
 
 }
