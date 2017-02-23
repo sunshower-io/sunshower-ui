@@ -69,14 +69,14 @@ export class InfrastructureNode extends
     public configuration                :NodeConfiguration;
     public operatingSystem              :OperatingSystem;
 
-    static readonly editors: Map<string, ElementEditor<InfrastructureNode>> = InfrastructureNode.initialize();
-
     static initialize():Map<string, ElementEditor<InfrastructureNode>> {
         let result = new Map<string, ElementEditor<InfrastructureNode>>();
         result['basic'] = BasicInfrastructureNodeEditor;
         result['full'] =  FullInfrastructureNodeEditor;
         return result;
     }
+    static readonly editors: Map<string, ElementEditor<InfrastructureNode>> = InfrastructureNode.initialize();
+
 
     constructor() {
         super();
