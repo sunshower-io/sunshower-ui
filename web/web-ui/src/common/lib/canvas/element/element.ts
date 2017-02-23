@@ -188,6 +188,22 @@ export class Elements {
 
 export abstract class AbstractElement extends mxCell implements Element, Vertex<Properties> {
 
+    protected static createLoadingOverlay(): mxCellOverlay {
+        let
+            url = 'assets/sui/themes/hasli/assets/images/rolling.svg',
+            image = new mxImage(url, 40, 40),
+            iconOverlay = new mxCellOverlay(
+                image,
+                null,
+                mxConstants.ALIGN_CENTER,
+                mxConstants.ALIGN_MIDDLE,
+                null,
+                'default'
+            );
+        return iconOverlay;
+    }
+
+
     private static readonly loadingOverlay: mxCellOverlay =
         AbstractElement.createLoadingOverlay();
 
@@ -495,20 +511,6 @@ export abstract class AbstractElement extends mxCell implements Element, Vertex<
     }
 
 
-    protected static createLoadingOverlay(): mxCellOverlay {
-        let
-            url = 'assets/sui/themes/hasli/assets/images/rolling.svg',
-            image = new mxImage(url, 40, 40),
-            iconOverlay = new mxCellOverlay(
-                image,
-                null,
-                mxConstants.ALIGN_CENTER,
-                mxConstants.ALIGN_MIDDLE,
-                null,
-                'default'
-            );
-        return iconOverlay;
-    }
 
 }
 

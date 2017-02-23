@@ -56,10 +56,7 @@ template
                             th Name
                             th Status
                             th IP
-                            th Ports
-                            th CPU
-                            th Memory
-                            th Disk
+                            th Deploy
                             th.right.aligned
                                 i.big.blue.ion-ios-loop-strong.icon(
                                 class="${loading ? 'loading' : ''}"
@@ -89,16 +86,7 @@ template
                                 | ${cloud.status}
                             td
                                 | ${cloud.ip}
-                            td
-                                | ${cloud.ports}
-                            td
-                                //TODO graph
-                                | ${cloud.cpu}%
-                            td
-                                //TODO graph
-                                | ${cloud.memory}%
-                            td
-                                //TODO graph
-                                | ${cloud.disk}%
+                            td(click.delegate="deploy(cloud.id)")
+                                | Deploy
                             td
                                 i.icon.setting.clickable(click.delegate="configure(cloud.id)")
