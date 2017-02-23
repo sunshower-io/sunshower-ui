@@ -1,6 +1,8 @@
 import {EventAggregator} from "aurelia-event-aggregator";
 import {inject, bindable} from "aurelia-framework";
-import {FetchError} from "common/resources/custom-components/fetch-client-errors";
+import * as PNotify from 'pnotify';
+import 'pnotify.callbacks';
+
 
 @inject(EventAggregator)
 export class Footer {
@@ -9,13 +11,30 @@ export class Footer {
     errors      : any[];
 
     constructor(private eventAgg:EventAggregator) {
-        this.errors = [{}];
-        this.eventAgg.subscribe(FetchError.name, response => this.displayError(response));
+        this.errors = [];
+        this.eventAgg.subscribe('fetchError', response => this.displayError(response));
     }
 
 
     displayError(response:any) : void {
-        this.errors.push(response)
+        this.errors.push(response);
+    }
+
+    clickErrors() : void {
+        for (let i = 0; i < this.errors.length; i++) {
+            let response = this.errors[i],
+                notice = new PNotify({
+                before_open: null,
+                context: null,
+                title: response.status.toString() + ' ' + response.statusText,
+                text: response.url,
+                shadow: false,
+                icon: false,
+                addclass: 'hasli-error'
+            });
+            console.log('response', response)
+        }
+        this.errors = [];
     }
 
 }

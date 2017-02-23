@@ -30,17 +30,17 @@ export class FetchClientInterceptor implements Interceptor {
     }
 
     publish(error: any) : void {
-        let boop = new FetchError(error);
-        this.eventAgg.publish(FetchError.name, boop.data);
+        this.eventAgg.publish('fetchError', error);
     }
 
 }
 
 //create special event type
 export class FetchError {
-    public static name:string = 'fetchError';
+    // public static name:string = 'fetchError';
 
     constructor(public data:any) {
+        this.data = data;
     }
 
 }

@@ -5,9 +5,11 @@ template
                 .disabled.item(href='#') © Hasli, Inc.
                 a.item(href='#') Terms
                 a.item(href='#') Privacy Policy
-                i.item.icons
-                    i.mail.outline.icon
-                    i.corner.add.icon(if.bind="errors && errors.length > 0")
+                i.item.mail.outline.icon(
+                    class="${errors && errors.length > 0 ? 'red clickable' : ''}"
+                    click.delegate="clickErrors()"
+                )
+                    | ${errors && errors.length > 0 ? errors.length : ''}
             .ui.horizontal.list
                 a.item(href='#') Docs
                 a.item(href='#') Blogs

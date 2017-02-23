@@ -899,3 +899,23 @@ body {
     background-color: lighten(@primarycolor, 25%);
   }
 }
+
+//TODO refactor to use variables
+.ui-pnotify {
+  //copied from ui..segment
+  box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+  padding: 1em;
+  border-radius: .2307em;
+  border: 1px solid rgba(34,36,38,.15);
+
+  &.hasli-error {
+    background-color: #FFF6F6;
+    .ui-pnotify-title {
+      color: #9F3A38;
+    }
+  }
+
+  .ui-pnotify-text {
+    word-wrap: break-word;
+  }
+}

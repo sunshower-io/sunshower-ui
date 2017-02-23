@@ -62,8 +62,7 @@ export function configure(aurelia: Aurelia) {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 }
-            })
-            .withInterceptor(container.get(FetchClientInterceptor));
+            });
     });
 
 
@@ -100,6 +99,7 @@ export function configure(aurelia: Aurelia) {
                                     'X-AUTH-TOKEN': token
                                 }
                             })
+                            .withInterceptor(container.get(FetchClientInterceptor));
                     });
 
                     let channelSet = new ChannelSet(`ws://${location.host}/hasli/api/events`);
