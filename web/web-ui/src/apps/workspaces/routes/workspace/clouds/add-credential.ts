@@ -43,14 +43,10 @@ export class AddCredential {
     }
 
     open() : void {
-        this.client.fetch(`provider`, { method: 'get' })
+        this.client.fetch(`provider/${this.providerId}`)
             .then(response => response.json() as any)
             .then(response => {
-                for (let i = 0; i < response.length; i++) {
-                    if (response[i]["id"] == this.providerId) {
-                        this.provider = response[i]; //TODO figure out better way to get provider from ID
-                    }
-                }
+                this.provider = response;
             });
         this.visible = true;
         this.credential = new CredentialSecret();
@@ -106,7 +102,7 @@ export class AddCredential {
 
     refresh() : void {
         this.loading = true;
-        this.client.fetch(`provider/${this.providerId}`)
+        this.client.fetch(`provider/${this.providerId}/secrets`)
             .then(r => r.json() as any)
             .then(r => {
                 this.credentials = r;

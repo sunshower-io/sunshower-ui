@@ -76,7 +76,6 @@ export class AddCloud {
     }
 
     saveProvider() : void {
-
         this.controller.validate().then(result => {
             if (result.valid) {
                 this.client.fetch('provider', {
@@ -94,7 +93,6 @@ export class AddCloud {
             .ensure((p:Provider) => p.name).required()
             .ensure((p:Provider) => p.awsRegion).required().when((p:Provider) => p.key == 'aws').withMessage('A region is required for AWS clouds.')
             .rules;
-        //TODO figure out option validation for if provider key is aws
         this.controller.addObject(this.provider, validationRules);
     }
 
