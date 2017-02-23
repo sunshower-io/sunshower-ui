@@ -6,11 +6,11 @@
        Fonts
 --------------------*/
 
-@fontName          : 'Open Sans Regular';
+@fontName          : 'Open Sans';
 @fontSmoothing     : antialiased;
 
-@headerFont        : @fontName, 'Roboto Regular', 'Muli', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-@pageFont          : @fontName, 'Roboto Regular', 'Muli', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@headerFont        : @fontName, 'Roboto', 'Muli', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@pageFont          : @fontName, 'Roboto', 'Muli', 'Helvetica Neue', Arial, Helvetica, sans-serif;
 
 @googleFontName    : @fontName;
 @importGoogleFonts : true;
