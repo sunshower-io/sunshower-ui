@@ -12,13 +12,13 @@ template
                         .ui.tiny.image
                             img(src='styles/themes/hasli/assets/images/logos/ca-logo.png')
                         .middle.aligned.content
-                            a.header Header
+                            a.header CA UIM
                             .meta
-                                span Description
+                                span Deploys CA UIM, UMP, and monitoring probes
                             .description
                                 p
                             .extra
-                                | Additional Details
+                                | Version: 8.47
                 .right.menu
                     a.item
                         i.huge.ion-ios-close-empty.icon(click.delegate="close()")
@@ -29,10 +29,6 @@ template
                 href.bind='row.href'
                 )
                     | ${row.title}
-                .right.menu
-                    a.item
-                        .ui.primary.button()
-                            | Save
         .ui.container
             .ui.fitted.divider
             router-view
