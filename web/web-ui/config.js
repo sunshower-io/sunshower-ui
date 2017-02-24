@@ -547,6 +547,8 @@ System.config({
       "apps/workspaces/routes/workspace/applications/application/application.js",
       "apps/workspaces/routes/workspace/applications/application/container/container.html!github:systemjs/plugin-text@0.0.9.js",
       "apps/workspaces/routes/workspace/applications/application/container/container.js",
+      "apps/workspaces/routes/workspace/applications/application/container/containers.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/workspaces/routes/workspace/applications/application/container/containers.js",
       "apps/workspaces/routes/workspace/applications/application/container/settings/args.html!github:systemjs/plugin-text@0.0.9.js",
       "apps/workspaces/routes/workspace/applications/application/container/settings/args.js",
       "apps/workspaces/routes/workspace/applications/application/container/settings/dockerfile.html!github:systemjs/plugin-text@0.0.9.js",
@@ -922,7 +924,21 @@ System.config({
       "aurelia-framework"
     ],
     "apps/workspaces/routes/workspace/applications/application/container/container.js": [
+      "aurelia-framework",
+      "aurelia-fetch-client"
+    ],
+    "apps/workspaces/routes/workspace/applications/application/container/containers.js": [
+      "aurelia-router",
       "aurelia-framework"
+    ],
+    "apps/workspaces/routes/workspace/applications/application/container/settings/general.js": [
+      "aurelia-framework",
+      "aurelia-router",
+      "aurelia-fetch-client"
+    ],
+    "apps/workspaces/routes/workspace/applications/application/container/settings/output.js": [
+      "aurelia-framework",
+      "aurelia-fetch-client"
     ],
     "apps/workspaces/routes/workspace/applications/applications.js": [
       "aurelia-fetch-client",
