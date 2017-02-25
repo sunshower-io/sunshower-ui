@@ -13,25 +13,17 @@ template
             |   You'll need to add a cloud provider before deploying any applications
         .ui.centered.grid.container
             .ui.hidden.divider
-            .ui.basic.segment
-                .ui.cards
-                    .ui.card.clickable
-                        .content
-                            .meta
-                            .description
-                                .ui.container.workspaces--image_container
-                                    img.blue(src='styles/themes/hasli/assets/images/icons/code-working.svg').workspaces--image_size
-                            .ui.secondary.button(click.delegate="create()")
-                                | + Create New Application
-                    .ui.card
-                        .content
-                            .meta
-                            .description
-                                .ui.container.workspaces--image_container
-                                    img(src='styles/themes/hasli/assets/images/browse-applications-image.png').workspaces--image_size
-                            .ui.secondary.button
-                                | Browse Applications
-                .ui.hidden.divider
+            .ui.cards
+                .new-app_type.card
+                    .content
+                        .meta
+                        .description
+                            .ui.container
+                                i.ui.massive.blue.ion-code-working.icon
+                                .ui.hidden.divider
+                        .ui.secondary.button(click.delegate="create()")
+                            | Create Application
+            .ui.hidden.divider
 
     template(if.bind="applications && applications.length")
         .ui.container

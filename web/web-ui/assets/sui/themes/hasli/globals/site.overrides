@@ -129,6 +129,10 @@ body {
   vertical-align: middle;
 }
 
+.big-divider {
+  margin: 5rem 0;
+}
+
 .new-app_type {
   //width: 175px !important;
   box-shadow: none !important;
@@ -154,6 +158,15 @@ body {
 
 .full-screen {
 
+}
+
+.version-segment {
+  background-color: #F9F9FB !important;
+  border: none !important;
+}
+
+.version-status_header {
+  margin-top: 1rem !important;
 }
 
 .summary-segment_header {

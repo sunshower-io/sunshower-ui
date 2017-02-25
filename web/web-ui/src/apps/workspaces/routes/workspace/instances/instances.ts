@@ -34,11 +34,14 @@ export class Instances {
     }
 
     activate(): void {
+        this.loading = true;
+
         this.parent.setMenuVisible(true);
     }
 
     attached(): void {
         this.refresh();
+
         this.channelSet.subscribe({
             type: 'compute',
             category: 'deployment'
@@ -53,7 +56,6 @@ export class Instances {
     }
 
     refresh(): void {
-        this.loading = true;
         setTimeout(() => {
 
 
