@@ -6,7 +6,7 @@ template
                 a.item(href='#') Terms
                 a.item(href='#') Privacy Policy
                 i.item.mail.outline.icon(
-                    class="${errors && errors.length > 0 ? 'red clickable' : ''}"
+                    class="${errors && errors.length > 0 ? 'red clickable' : 'disabled'}"
                     click.delegate="clickErrors()"
                 )
                     | ${errors && errors.length > 0 ? errors.length : ''}
