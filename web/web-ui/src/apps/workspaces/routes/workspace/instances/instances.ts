@@ -1,11 +1,11 @@
 import {
     bindable,
-    inject
+    inject,
+    CompositionTransaction
 } from "aurelia-framework";
-
+import "chart.js";
 import {HttpClient} from 'aurelia-fetch-client';
 import {Provider} from "common/model/api/hal/api";
-
 import {ChannelSet} from "common/lib/events/websockets";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
 
@@ -21,30 +21,41 @@ export class Instances {
     providers: Provider[];
 
     provider: Provider;
+
     @bindable
     instances: Instance[];
 
     @bindable
     loading: boolean;
 
+    totalInstancesData;
+    totalInstanceStatuses;
+
     constructor(private parent: Workspace,
                 private client: HttpClient,
-                private channelSet: ChannelSet) {
+                private channelSet: ChannelSet
+    ) {
         this.instances = [];
     }
 
     activate(): void {
+        this.loading = true;
+
         this.parent.setMenuVisible(true);
+
+        this.totalInstancesData = this.getInstancesData();
+        this.totalInstanceStatuses = this.getInstanceStatuses();
     }
 
     attached(): void {
         this.refresh();
+
         this.channelSet.subscribe({
             type: 'compute',
             category: 'deployment'
         }).forEach(t => {
             this.refresh();
-        })
+        });
     };
 
 
@@ -53,7 +64,6 @@ export class Instances {
     }
 
     refresh(): void {
-        this.loading = true;
         setTimeout(() => {
 
 
@@ -121,6 +131,57 @@ export class Instances {
         }
         //returns class name for circle
 
+    }
+
+    private getInstancesData() {
+        let primaryColor = "rgba(56, 155, 255, .8)";
+        let backgroundColor = "rgba(246, 249, 255, 0.4)";
+
+        return {
+            labels: ["", "Oct'16'", "Nov'16'", "Dec '16'", "Jan'17'", "Feb'17'"],
+            datasets: [
+                {
+                    radius: 0,
+                    label: "Commits",
+                    lineTension: 0.0,
+                    fill: false,
+                    borderJoinStyle: 'miter',
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderWidth: 2,
+                    borderColor: primaryColor,
+                    backgroundColor: backgroundColor,
+                    data: [0, 4, 5, 0, 0, 6]
+                }
+            ]
+        };
+    }
+
+    private getInstanceStatuses() {
+        let primaryColor = "rgba(56, 155, 255, .8)";
+        let backgroundColor = "rgba(246, 249, 255, 0.4)";
+
+        return {
+            labels: ["" ,"10:05", "10:10", "10:15", "10:20", "10:25", "10:30"],
+            datasets: [
+                {
+                    radius: 0,
+                    label: "Running",
+                    lineTension: 0.0,
+                    fill: false,
+                    borderJoinStyle: 'miter',
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderWidth: 2,
+                    borderColor: "#36C68C",
+                    backgroundColor: backgroundColor,
+                    data: [1, 3, 4, 5, 5, 5, 6, 6]
+                }
+                // }
+            ]
+        };
     }
 }
 

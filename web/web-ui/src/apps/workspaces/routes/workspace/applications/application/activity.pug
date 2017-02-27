@@ -2,3 +2,111 @@
    Created by dustinlish on 2/21/17.
 
 template
+    .ui.hidden.divider
+    .ui.grid
+        .six.wide.column
+            .ui.grid
+                .row
+                    .column
+                        .ui.segment
+                            .ui.text.menu
+                                .item
+                                    h3.ui.header
+                                        | Changes over time
+                            canvas(ref='canvasElement1')
+                .row
+                    .column
+                        .ui.center.aligned.segment
+                            .ui.three.small.statistics
+                                .statistic
+                                    .value
+                                        | 22
+                                    .label
+                                        | Instances
+                                .statistic
+                                    .value
+                                        | 10
+                                    .label
+                                        | Revisions
+                                .statistic
+                                    .value
+                                        | 3
+                                    .label
+                                        | Members
+        .ten.wide.column
+            .ui.segment
+                .ui.divided.items
+                    .item
+                        .ui.tiny.image
+                            img(src='styles/themes/hasli/assets/images/logos/aws-logo.svg')
+                        .content
+                            a.header Deployed Application to 'AWS EC2 - Ubuntu 16.04-1'
+                            .ui.right.floated.tiny.basic.green.button
+                                | Details
+                            .meta
+                            .description
+                            .extra
+                                .ui.grid
+                                    .three.column.row
+                                        .four.wide.column
+                                            .ui.list
+                                                .green.item Status: successful
+                                        .four.wide.column
+                                            .ui.list
+                                                .item CPU: 4
+                                                .item Memory: 4gb
+                                        .four.wide.column
+                                            .ui.list
+                                                .item OS: Ubuntu 16.04
+                                                .item IP: 51.42.31.12
+            .ui.segment
+                .ui.divided.items
+                    .item
+                        .ui.tiny.image
+                            img(src='styles/themes/hasli/assets/images/logos/azure-logo.png')
+                        .content
+                            a.header Deployed CA UIM to 'Azure - Ubuntu 16.04-1'
+                            .ui.right.floated.tiny.basic.green.button
+                                | Details
+                            .meta
+                            .description
+                            .extra
+                                .ui.grid
+                                    .three.column.row
+                                        .four.wide.column
+                                            .ui.list
+                                                .item Status: successful
+                                        .four.wide.column
+                                            .ui.list
+                                                .item CPU: 4
+                                                .item Memory: 4gb
+                                        .four.wide.column
+                                            .ui.list
+                                                .item OS: Ubuntu 16.04
+                                                .item IP: 51.42.31.12
+            .ui.segment
+                .ui.divided.items
+                    .item
+                        .ui.tiny.image
+                            img(src='styles/themes/hasli/assets/images/logos/vmware-logo.svg')
+                        .content
+                            a.header Deployed CA UIM to 'VMware DC - Ubuntu 16.04-1'
+                            .ui.right.floated.tiny.basic.green.button
+                                | Details
+                            .meta
+                            .description
+                            .extra
+                                .ui.grid
+                                    .three.column.row
+                                        .four.wide.column
+                                            .ui.list
+                                                .item Status: successful
+                                        .four.wide.column
+                                            .ui.list
+                                                .item CPU: 4
+                                                .item Memory: 4gb
+                                        .four.wide.column
+                                            .ui.list
+                                                .item OS: Ubuntu 16.04
+                                                .item IP: 51.42.31.12
+
