@@ -169,6 +169,31 @@ body {
   margin-top: 1rem !important;
 }
 
+.board {
+  position: relative;
+  padding: 25px;
+}
+
+.board--white {
+
+}
+
+.chart {
+  margin-left: -1em !important;
+}
+
+.chart-header {
+  font-size: 14px !important;
+  color: #7D7C7C !important;
+  padding-bottom: 1em !important;
+}
+
+.chart-stat_value {
+  margin-left: 15px !important;
+  color: #5B6A74 !important;
+
+}
+
 .summary-segment_header {
   margin: 0em -.58333333em !important;
 }

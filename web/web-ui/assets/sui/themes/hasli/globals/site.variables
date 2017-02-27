@@ -120,7 +120,6 @@
         Page
 --------------------*/
 
-//@pageBackground      : #F8F9FB;
 @pageBackground      : #F8F9FB;
 @pageOverflowX       : hidden;
 

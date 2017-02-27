@@ -7,11 +7,6 @@ import {bindable} from "aurelia-framework";
 
 export class Activity {
     @bindable canvasElement1;
-    @bindable canvasElement2;
-    @bindable canvasElement3;
-    @bindable canvasElement4;
-    @bindable canvasElement5;
-    @bindable canvasElement6;
 
     @bindable isEmpty;
 
@@ -82,12 +77,6 @@ function getDefaultLineOptions() {
         scaleLabel: {
             display: true
         }
-    };
-}
-
-
-function getDefaultDoughnutOptions() {
-    return {
     };
 }
 

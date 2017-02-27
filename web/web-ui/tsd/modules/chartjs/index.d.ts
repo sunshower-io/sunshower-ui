@@ -30,6 +30,11 @@ interface CircularChartData {
 }
 
 interface ChartSettings {
+    title: any;
+    defaultFontStyle: string;
+    defaultFontSize: string;
+    defaultFontFamily: string;
+    defaultFontColor: string;
     animation?: boolean;
     animationSteps?: number;
     animationEasing?: string;
