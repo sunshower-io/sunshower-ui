@@ -20,6 +20,11 @@
 ;
 }
 
+//greater nesting needed to override semantic styles
+.ui.applications .item.inactive {
+  display:none !important;
+}
+
 //for mixin purposes
 .clearfix {
   &:after {
