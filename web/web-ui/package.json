@@ -110,6 +110,7 @@
       "bluebird": "npm:bluebird@3.4.1",
       "bootstrap": "github:twbs/bootstrap@^3.3.6",
       "canvg/canvg": "github:canvg/canvg@master",
+      "chart.js": "npm:chart.js@^2.5.0",
       "cytoscape": "npm:cytoscape@^2.7.11",
       "cytoscape-edgehandles": "npm:cytoscape-edgehandles@^2.6.3",
       "cytoscape-grid-guide": "npm:cytoscape-grid-guide@^1.0.3",

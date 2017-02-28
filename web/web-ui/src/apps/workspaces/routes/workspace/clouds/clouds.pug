@@ -25,38 +25,27 @@ template
                     img(src='styles/themes/hasli/assets/images/logos/aws-logo.svg')
                     img(src='styles/themes/hasli/assets/images/logos/vmware-logo.png')
 
-    .ui.container(if.bind="providers.length > 0")
-        .ui.basic.segment
-            h2.ui.header
-                i.circular.blue.ion-ios-cloud-outline.icon.circular--icon.circular--icon_blue
-                .content
-                    |   Clouds
-        .ui.hidden.divider
-        .ui.basic.segment
-            .overview-widget
-                .widget-action-menu
-                    .ui.small.icon.input
-                        input(type='text', placeholder='Search')
-                        i.search.icon
-                    .ui.small.basic.button.primary
-                        | Actions
-                        i.dropdown.icon
-                    .ui.small.basic.button.primary
-                        | Select: Type
-                        i.dropdown.icon
-                    span.widget-icons
-                        .ui.small.button.primary(click.delegate="addCloud()") + Create New
-                table.ui.very.basic.table.widget-table
+    template(if.bind="providers.length > 0")
+        .ui.container
+            .ui.basic.segment
+                h2.ui.header
+                    i.circular.blue.ion-ios-cloud-outline.icon.circular--icon.circular--icon_blue
+                    .content
+                        |   Clouds
+            .ui.hidden.divider
+            .ui.basic.segment
+                table.ui.very.basic.table
                     thead
                         tr
                             th
                                 //checkbox
                             th
                                 //logo
+                            th Type
                             th Name
                             th Status
-                            th IP
-                            th Deploy
+                            th Location
+                            th Account
                             th.right.aligned
                                 i.big.blue.ion-ios-loop-strong.icon(
                                 class="${loading ? 'loading' : ''}"
@@ -71,8 +60,8 @@ template
                         tr(if.bind="providers.length == 0 && !loading")
                             td.widget-table-empty-alert(colspan='10') You have no clouds
                         tr(
-                            if.bind="providers.length > 0 && !loading",
-                            repeat.for='cloud of providers'
+                        if.bind="providers.length > 0 && !loading",
+                        repeat.for='cloud of providers'
                         )
                             td
                                 input(type="checkbox")
@@ -99,3 +88,17 @@ template
                                 | ${cloud.disk}%
                             td
                                 i.icon.setting.clickable(click.delegate="configure(cloud.id)")
+                //.overview-widget
+                //    .widget-action-menu
+                //        .ui.small.icon.input
+                //            input(type='text', placeholder='Search')
+                //            i.search.icon
+                //        .ui.small.basic.button.primary
+                //            | Actions
+                //            i.dropdown.icon
+                //        .ui.small.basic.button.primary
+                //            | Select: Type
+                //            i.dropdown.icon
+                //        span.widget-icons
+                //            .ui.small.button.primary(click.delegate="addCloud()") + Create New
+

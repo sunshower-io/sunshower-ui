@@ -23,6 +23,7 @@ module.exports = {
         'jspm_packages/npm/buffer@3.6.0.js',
         'jspm_packages/npm/buffer@3.6.0/**/*',
         'jspm_packages/github/canvg/canvg@master.js',
+        'jspm_packages/npm/chart.js@2.5.0/dist/Chart.js',
         'styles/styles.css'
     ],
     // this section lists any jspm packages that have

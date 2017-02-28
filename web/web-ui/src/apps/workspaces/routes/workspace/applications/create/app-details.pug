@@ -18,15 +18,12 @@ template
                         .ui.fluid.transparent.input
                             input(type='text', placeholder='Add application name').overlay-input-centered
                         .ui.divider
-            .ui.hidden.divider
-            .ui.hidden.divider
+            .big-divider
             .ui.basic.center.aligned.segment
                 h1.ui.center.aligned.header
                     i.circular.blue.ion-image.icon.circular--icon
                     | Add Photo
-                .ui.hidden.divider
-                .ui.hidden.divider
-                .ui.hidden.divider
+                .big-divider
                 .ui.grid
                     .row
                         .two.wide.column
@@ -39,6 +36,6 @@ template
                                         .description
                                             | ${template.description}
                         .two.wide.column
-                .ui.hidden.divider
+                .big-divider
                 button.ui.secondary.button(click.delegate="create()")
                     | Get Started
