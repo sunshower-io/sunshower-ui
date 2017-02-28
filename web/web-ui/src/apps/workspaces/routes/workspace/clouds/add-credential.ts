@@ -42,8 +42,12 @@ export class AddCredential {
 
     }
 
-    open(provider:Provider) : void {
-        this.provider = provider;
+    open() : void {
+        this.client.fetch(`provider/${this.providerId}`)
+            .then(response => response.json() as any)
+            .then(response => {
+                this.provider = response;
+            });
         this.visible = true;
         this.credential = new CredentialSecret();
         this.setupValidation();
@@ -71,6 +75,7 @@ export class AddCredential {
     activate(params:any) : void {
         this.providerId = params.id;
         this.parent.setMenuVisible(false);
+        this.open()
     }
 
     close() {
@@ -80,21 +85,24 @@ export class AddCredential {
     saveCredential() : void {
         this.controller.validate().then(result => {
             if (result.valid) {
-                console.log('it valid');
                 this.client.fetch(`provider/${this.providerId}`, {
                     method: 'post',
                     body: JSON.stringify(this.credential)
                 }).then(t => this.refresh());
             } else {
-                console.log('it not valid');
             }
         });
     }
 
+    removeCredential(credential) : void {
+        this.client.fetch(`secrets/vault/${credential.id}`, {
+            method: 'delete'
+        }).then(t => this.refresh());
+    }
 
     refresh() : void {
         this.loading = true;
-        this.client.fetch(`provider/${this.providerId}`)
+        this.client.fetch(`provider/${this.providerId}/secrets`)
             .then(r => r.json() as any)
             .then(r => {
                 this.credentials = r;

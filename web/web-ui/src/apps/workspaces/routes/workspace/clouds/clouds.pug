@@ -86,7 +86,16 @@ template
                                 | ${cloud.status}
                             td
                                 | ${cloud.ip}
-                            td(click.delegate="deploy(cloud.id)")
-                                | Deploy
+                            td
+                                | ${cloud.ports}
+                            td
+                                //TODO graph
+                                | ${cloud.cpu}%
+                            td
+                                //TODO graph
+                                | ${cloud.memory}%
+                            td
+                                //TODO graph
+                                | ${cloud.disk}%
                             td
                                 i.icon.setting.clickable(click.delegate="configure(cloud.id)")

@@ -23,6 +23,7 @@ import {
     SemanticUIRenderer
 } from "common/resources/custom-components/semantic-ui-renderer";
 import {ChannelSet} from "common/lib/events";
+import {FetchClientInterceptor} from "./common/resources/custom-components/fetch-client-errors";
 
 
 export function param(name) {
@@ -61,7 +62,7 @@ export function configure(aurelia: Aurelia) {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 }
-            })
+            });
     });
 
 
@@ -98,6 +99,7 @@ export function configure(aurelia: Aurelia) {
                                     'X-AUTH-TOKEN': token
                                 }
                             })
+                            .withInterceptor(container.get(FetchClientInterceptor));
                     });
 
                     let channelSet = new ChannelSet(`ws://${location.host}/hasli/api/events`);

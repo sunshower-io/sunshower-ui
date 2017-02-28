@@ -1,8 +1,9 @@
 template
     .overlay
         .ui.container
-            .overlay-close
-                i.big.grey.icon.ion-close-round.clickable(click.delegate="close()")
+            .overlay-close(click.delegate="close()")
+                i.icon.ion-close-round
+                span close
             h2.ui.center.aligned.grey.header Add New Cloud
 
             .ui.form

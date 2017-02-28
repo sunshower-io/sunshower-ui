@@ -8,6 +8,7 @@ import {Provider} from "common/model/api/hal/api";
 
 import {ChannelSet} from "common/lib/events/websockets";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
+import {ComputeInstance} from "common/model/api/hal/compute";
 
 
 @inject(
@@ -22,7 +23,7 @@ export class Instances {
 
     provider: Provider;
     @bindable
-    instances: Instance[];
+    instances: ComputeInstance[];
 
     @bindable
     loading: boolean;
@@ -68,32 +69,35 @@ export class Instances {
                             this.provider = provider;
                             this.client.fetch(`compute/${provider.id}/${this.channelSet.sessionId}/instances/synchronize`)
                                 .then(d => d.json() as any)
-                                .then(d => this.instances = d);
+                                .then(d => {
+                                    console.log('d', d);
+                                    this.instances = d
+                                });
                         }
                     }
                 });
         }, 2)
     }
 
-    stop(instance: Instance): void {
+    stop(instance: ComputeInstance): void {
         this.client.fetch(`compute/${this.provider.id}/${this.channelSet.sessionId}/instances/${instance.id}/Stopped`)
             .then(r => {
                 this.refresh();
             });
     }
 
-    start(instance: Instance): void {
+    start(instance: ComputeInstance): void {
         this.client.fetch(`compute/${this.provider.id}/${this.channelSet.sessionId}/instances/${instance.id}/Starting`)
             .then(r => {
                 this.refresh();
             });
     }
 
-    restart(instance: Instance): void {
+    restart(instance: ComputeInstance): void {
     }
 
 
-    statusButtons(instance: Instance): string[] {
+    statusButtons(instance: ComputeInstance): string[] {
         if (instance.state == 'running') {
             return ['stop', 'restart']
         }
@@ -105,7 +109,7 @@ export class Instances {
         }
     }
 
-    computeStatus(instance: Instance): string {
+    computeStatus(instance: ComputeInstance): string {
         if (instance.state == 'running') {
             return 'circle green';
         }
@@ -122,14 +126,4 @@ export class Instances {
         //returns class name for circle
 
     }
-}
-
-export class Instance {
-    id          ?: string;
-    logo        ?: string;
-    name        ?: string;
-    state       ?: string; //Running, Stopped, Stopping, Restart, Terminating, Deploying, Starting
-    publicIp    ?: string;
-    ports       ?: string;
-
 }

@@ -725,7 +725,10 @@ System.config({
       "common/model/security/token.js",
       "common/model/security/user.js",
       "common/resources/custom-components/bootstrap-form-renderer.js",
+      "common/resources/custom-components/fetch-client-errors.js",
       "common/resources/custom-components/semantic-ui-renderer.js",
+      "common/resources/custom-elements/footer/footer.html!github:systemjs/plugin-text@0.0.9.js",
+      "common/resources/custom-elements/footer/footer.js",
       "common/resources/custom-elements/nav-bar/navbar.html!github:systemjs/plugin-text@0.0.9.js",
       "common/resources/custom-elements/nav-bar/navbar.js",
       "common/resources/custom-elements/nav-bar/page-header.html!github:systemjs/plugin-text@0.0.9.js",
@@ -1412,8 +1415,18 @@ System.config({
       "common/lib/storage/local/local-storage",
       "aurelia-fetch-client"
     ],
+    "common/resources/custom-components/fetch-client-errors.js": [
+      "aurelia-event-aggregator",
+      "aurelia-framework"
+    ],
     "common/resources/custom-components/semantic-ui-renderer.js": [
       "aurelia-pal"
+    ],
+    "common/resources/custom-elements/footer/footer.js": [
+      "aurelia-event-aggregator",
+      "aurelia-framework",
+      "pnotify",
+      "pnotify.callbacks"
     ],
     "common/resources/custom-elements/nav-bar/profile-dropdown.js": [
       "common/model/security",
@@ -1439,6 +1452,7 @@ System.config({
       "common/model/security",
       "common/resources/custom-components/semantic-ui-renderer",
       "common/lib/events",
+      "./common/resources/custom-components/fetch-client-errors",
       "jquery",
       "fetch"
     ]
