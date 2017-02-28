@@ -39,6 +39,13 @@ export class App {
                 moduleId: 'apps/workspaces/routes/workspace/index',
                 nav: false
 
+            },
+            {
+                route: 'admin',
+                name: 'admin',
+                moduleId: 'apps/admin/admin',
+                nav: false,
+                title: 'Admin'
             }
         ]);
 

@@ -13,6 +13,7 @@
 /// <reference path="modules/aurelia-binding/index.d.ts" />
 /// <reference path="modules/aurelia-bootstrapper/index.d.ts" />
 /// <reference path="modules/aurelia-dependency-injection/index.d.ts" />
+/// <reference path="modules/aurelia-http-client/index.d.ts" />
 /// <reference path="modules/aurelia-event-aggregator/index.d.ts" />
 /// <reference path="modules/aurelia-fetch-client/index.d.ts" />
 /// <reference path="modules/aurelia-framework/index.d.ts" />

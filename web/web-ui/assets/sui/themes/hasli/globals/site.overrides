@@ -20,6 +20,11 @@
 ;
 }
 
+//greater nesting needed to override semantic styles
+.ui.applications .item.inactive {
+  display:none !important;
+}
+
 //for mixin purposes
 .clearfix {
   &:after {
@@ -647,6 +652,12 @@ body {
   td {
     vertical-align: middle;
     padding: 30px 0 !important;
+  }
+  tr th:first-child, tr td:first-child {
+    padding-left: @hasliem !important;
+  }
+  tr th:last-child, tr td:last-child {
+    padding-right: @hasliem !important;
   }
 }
 
