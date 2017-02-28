@@ -6,11 +6,13 @@ import {Workspace} from "apps/workspaces/routes/workspace/index";
 import {autoinject} from "aurelia-framework";
 import {Router} from "aurelia-router";
 import {RouterConfiguration} from "aurelia-router";
+import {NavigationInstruction} from "aurelia-router";
 
 @autoinject
 export class Application {
 
     public router: Router;
+    private lastLocation : NavigationInstruction;
 
     constructor(private parent: Workspace) {
     }
@@ -27,8 +29,7 @@ export class Application {
         this.router = router;
     }
 
-
     close() : void {
-        this.parent.router.navigateToRoute('applications');
+        this.router.navigateBack();
     }
 }

@@ -40,7 +40,7 @@ export class App {
         }, {
             route: 'catalog',
             name: 'catalog',
-            moduleId: 'apps/catalog/catalog',
+            moduleId: 'apps/catalog/index',
             nav: false,
             title: 'Catalog',
         },

@@ -53,6 +53,7 @@ export class Workspace {
             // Instances Routes
             {route: 'instances', name: 'instances', moduleId: './instances/instances', nav: true, title: 'Instances'},
             {route: 'instances/new', name: 'new-instance', moduleId: './instances/new', nav: false, title: 'New Instance'},
+            {route: 'instances/:id/instance', name: 'instance', moduleId: './instances/instance/instance', nav: false, title: 'Instance'},
 
             // Designer
             {route: 'designer', name: 'designer', moduleId: './designer/designer', nav: true, title: 'Designer'},

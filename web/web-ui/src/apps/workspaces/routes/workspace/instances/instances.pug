@@ -96,10 +96,7 @@ template
                                             .ui.large.text.loader Reloading ...
                                 tr(if.bind="instances.length == 0 && !loading")
                                     td.widget-table-empty-alert(colspan='8') You have no instances
-                                tr(
-                                if.bind="instances.length > 0 && !loading",
-                                repeat.for='instance of instances'
-                                )
+                                tr(if.bind="instances.length > 0 && !loading", repeat.for='instance of instances' click.delegate="openInstance()")
                                     td
                                         input(type="checkbox")
                                     td
@@ -108,7 +105,8 @@ template
                                             src="${instance.logo}"
                                             )
                                     td
-                                        | ${instance.name}
+                                        a.item
+                                            | ${instance.name}
                                     td
                                         i.icon.status-circle(class="${computeStatus(instance)}")
                                         | ${instance.state}

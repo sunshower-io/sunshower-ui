@@ -63,6 +63,10 @@ export class Instances {
         this.parent.router.navigate('/catalog');
     }
 
+    openInstance(): void {
+        this.parent.router.navigate('instances/:id/instance');
+    }
+
     refresh(): void {
         setTimeout(() => {
 
