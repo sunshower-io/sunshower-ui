@@ -105,6 +105,10 @@ body {
   right: 0;
   top: 0;
   position: fixed;
+
+  .ui.dropdown .menu {
+    z-index:105 !important;
+  }
 }
 
 .workspace--content-view {
@@ -681,7 +685,7 @@ body {
 .workbench {
   height:100% !important;
   width:100% !important;
-  z-index: 50 !important;
+  z-index: 0 !important;
   //top: -24px !important;
 }
 
@@ -795,6 +799,8 @@ body {
     }
 
   }
+
+  z-index:auto !important; //may need additional classes to make work
 }
 //end what was sidebars.less
 
