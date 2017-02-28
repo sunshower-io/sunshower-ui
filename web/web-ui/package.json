@@ -154,6 +154,8 @@
     "@types/d3": "^4.5.0",
     "@types/d3-selection": "^1.0.9",
     "aurelia-validation": "^1.0.0-beta.1.0.1",
-    "cytoscape": "^2.7.11"
+    "cytoscape": "^2.7.11",
+    "url": "^0.11.0",
+    "whatwg-fetch": "^2.0.2"
   }
 }

@@ -69,11 +69,11 @@
         <hasli-persist.version>1.0.67.Final</hasli-persist.version>
 
         <hasli-hal.version>${snapshot-version}</hasli-hal.version>
+        <hasli-service.version>${snapshot-version}</hasli-service.version>
         <!--<hasli-persist.version>${snapshot-version}</hasli-persist.version>-->
         <!--<hasli-api.version>${snapshot-version}</hasli-api.version>-->
         <!--<hasli-hfs.version>${snapshot-version}</hasli-hfs.version>-->
         <!--<hasli-search.version>${snapshot-version}</hasli-search.version>-->
-        <hasli-service.version>${snapshot-version}</hasli-service.version>
 
     </properties>
 

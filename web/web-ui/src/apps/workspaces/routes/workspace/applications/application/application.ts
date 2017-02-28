@@ -17,9 +17,34 @@ export class Application {
 
     public configureRouter(config: RouterConfiguration, router: Router) {
         config.map([
-            {route: ['', 'summary'], name: 'Summary', moduleId: './summary', nav: true, title: 'Summary'},
-            {route: 'container', name: 'Container', moduleId: './container/container', nav: true, title: 'Container'},
-            {route: 'tasks', name: 'Tasks', moduleId: './tasks', nav: true, title: 'Tasks'},
+            {
+                route: ['', 'summary'],
+                name: 'Summary',
+                moduleId: './summary',
+                nav: true,
+                title: 'Summary'
+            },
+            {
+                route: 'container',
+                name: 'Container',
+                moduleId: './container/containers',
+                nav: true,
+                title: 'Container'
+            },
+            {
+                route: 'container/:id',
+                name: 'Container',
+                moduleId: './container/container',
+                nav: false,
+                title: 'Container'
+            },
+            {
+                route: 'tasks',
+                name: 'Tasks',
+                moduleId: './tasks',
+                nav: true,
+                title: 'Tasks'
+            },
             {route: 'versions', name: 'Versions', moduleId: './versions', nav: true, title: 'Versions'},
             {route: 'activity', name: 'Activity', moduleId: './activity', nav: true, title: 'Activity'},
         ]);
@@ -28,7 +53,7 @@ export class Application {
     }
 
 
-    close() : void {
+    close(): void {
         this.parent.router.navigateToRoute('applications');
     }
 }

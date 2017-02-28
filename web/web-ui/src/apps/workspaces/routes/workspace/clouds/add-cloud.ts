@@ -41,7 +41,6 @@ export class AddCloud {
     ) {
         this.controller.addRenderer(new BootstrapFormRenderer());
 
-
         //should be removed in favor of pulling in the real thing
         this.providers = [];
         let aws = new Provider,

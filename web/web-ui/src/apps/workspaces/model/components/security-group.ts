@@ -26,15 +26,15 @@ export class SecurityGroupElement extends CompositeElement
         >
 {
 
-    static readonly editors: Map<string, ElementEditor<SecurityGroupElement>> = SecurityGroupElement.initialize();
-
-
     static initialize():Map<string, ElementEditor<SecurityGroupElement>> {
         let result = new Map<string, ElementEditor<SecurityGroupElement>>();
         result['basic'] = BasicSecurityGroupEditor;
         result['full'] =  FullSecurityGroupEditor;
         return result;
     }
+
+    static readonly editors: Map<string, ElementEditor<SecurityGroupElement>> = SecurityGroupElement.initialize();
+
 
 
     constructor() {

@@ -56,10 +56,7 @@ template
                             th Name
                             th Status
                             th IP
-                            th Ports
-                            th CPU
-                            th Memory
-                            th Disk
+                            th Deploy
                             th.right.aligned
                                 i.big.blue.ion-ios-loop-strong.icon(
                                 class="${loading ? 'loading' : ''}"
@@ -68,11 +65,11 @@ template
                                 //settings
                     tbody
                         tr(if.bind="loading")
-                            td.widget-table-reloading(colspan='10')
+                            td.widget-table-reloading(colspan='7')
                                 .ui.active.inverted.dimmer
                                     .ui.large.text.loader Reloading ...
                         tr(if.bind="providers.length == 0 && !loading")
-                            td.widget-table-empty-alert(colspan='10') You have no clouds
+                            td.widget-table-empty-alert(colspan='7') You have no clouds
                         tr(
                             if.bind="providers.length > 0 && !loading",
                             repeat.for='cloud of providers'
@@ -89,16 +86,7 @@ template
                                 | ${cloud.status}
                             td
                                 | ${cloud.ip}
-                            td
-                                | ${cloud.ports}
-                            td
-                                //TODO graph
-                                | ${cloud.cpu}%
-                            td
-                                //TODO graph
-                                | ${cloud.memory}%
-                            td
-                                //TODO graph
-                                | ${cloud.disk}%
+                            td(click.delegate="deploy(cloud.id)")
+                                | Deploy
                             td.right.aligned
                                 i.icon.large.setting.clickable(click.delegate="configure(cloud.id)")

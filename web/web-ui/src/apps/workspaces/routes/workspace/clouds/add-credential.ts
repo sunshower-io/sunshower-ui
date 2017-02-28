@@ -11,9 +11,8 @@ import {
     ValidationRules
 } from 'aurelia-validation';
 import {BootstrapFormRenderer} from 'common/resources/custom-components/bootstrap-form-renderer';
-import {Workspace} from "apps/workspaces/routes/workspace/index";
 
-@inject(Workspace, HttpClient, NewInstance.of(ValidationController))
+@inject(HttpClient, NewInstance.of(ValidationController))
 export class AddCredential {
 
 
@@ -29,12 +28,9 @@ export class AddCredential {
     @bindable
     private loading             : boolean;
 
-    private providerId          : string;
-
     private credentials         : CredentialSecret[];
 
     constructor(
-        private parent:Workspace,
         private client:HttpClient,
         private controller:ValidationController
     ) {
@@ -43,11 +39,7 @@ export class AddCredential {
     }
 
     open() : void {
-        this.client.fetch(`provider/${this.providerId}`)
-            .then(response => response.json() as any)
-            .then(response => {
-                this.provider = response;
-            });
+
         this.visible = true;
         this.credential = new CredentialSecret();
         this.setupValidation();
@@ -72,20 +64,14 @@ export class AddCredential {
     attached() : void {
     }
 
-    activate(params:any) : void {
-        this.providerId = params.id;
-        this.parent.setMenuVisible(false);
-        this.open()
-    }
 
     close() {
-        this.parent.router.navigateBack();
     }
 
     saveCredential() : void {
         this.controller.validate().then(result => {
             if (result.valid) {
-                this.client.fetch(`provider/${this.providerId}`, {
+                this.client.fetch(`provider/${this.provider.id}`, {
                     method: 'post',
                     body: JSON.stringify(this.credential)
                 }).then(t => this.refresh());
@@ -102,7 +88,7 @@ export class AddCredential {
 
     refresh() : void {
         this.loading = true;
-        this.client.fetch(`provider/${this.providerId}/secrets`)
+        this.client.fetch(`provider/${this.provider.id}/secrets`)
             .then(r => r.json() as any)
             .then(r => {
                 this.credentials = r;
