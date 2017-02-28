@@ -38,38 +38,39 @@ template
                                         if.bind="row.settings.category == 'Infrastructure'")
                                     | ${row.title}
             .ui.twelve.wide.column
+                .ui.text.menu
+                    a.item
+                        i.big.ion-android-apps.icon
+                        .content
+                            .header Applications (0)
+                    a.item
+                        i.big.ion-social-buffer.icon
+                        .content
+                            .header Services (0)
+                    a.item
+                        i.big.ion-laptop.icon
+                        .content
+                            .header Infrastructure (0)
+                    .right.menu
+                        .item
+                            .ui.primary.button
+                                | Deploy
                 .ui.hidden.divider
-                .ui.grid
-                    .four.wide.column
+                .ui.two.column.grid
+                    .column
                         .ui.icon.fluid.input
-                            input.prompt(type='text', placeholder='Search animals...')
+                            input.prompt(type='text', placeholder='Search...')
                             i.search.icon
-                        .ui.hidden.divider
-                    .two.wide.column
+                    .column
                         .ui.selection.dropdown
                             input(type='hidden', name='Filter')
                             i.dropdown.icon
-                            .default.text Gender
+                            .default.text Filter
                             .menu
                                 .item(data-value='1') Most Popular
                                 .item(data-value='0') Recently Added
-                    .nine.wide.center.aligned.column
-                        .ui.relaxed.horizontal.middle.aligned.list
-                            .item
-                                i.big.ion-android-apps.icon
-                                .content
-                                    .header Applications (0)
-                            .item
-                                i.big.ion-social-buffer.icon
-                                .content
-                                    .header Services (0)
-                            .item
-                                i.big.ion-laptop.icon
-                                .content
-                                    .header Infrastructure (0)
-                    .one.wide.right.aligned.column
-                        .ui.primary.button
-                            | Deploy
+                .ui.hidden.divider
+                .ui.hidden.divider
                 router-view
         .ui.hidden.divider
         .ui.hidden.divider
