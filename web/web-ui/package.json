@@ -97,6 +97,7 @@
       "aurelia-fetch-client": "npm:aurelia-fetch-client@^1.0.0",
       "aurelia-framework": "npm:aurelia-framework@^1.0.0",
       "aurelia-history-browser": "npm:aurelia-history-browser@^1.0.0",
+      "aurelia-http-client": "npm:aurelia-http-client@^1.0.4",
       "aurelia-loader-default": "npm:aurelia-loader-default@^1.0.0",
       "aurelia-logging-console": "npm:aurelia-logging-console@^1.0.0",
       "aurelia-pal": "npm:aurelia-pal@^1.0.0",
@@ -110,6 +111,7 @@
       "bluebird": "npm:bluebird@3.4.1",
       "bootstrap": "github:twbs/bootstrap@^3.3.6",
       "canvg/canvg": "github:canvg/canvg@master",
+      "chart.js": "npm:chart.js@^2.5.0",
       "cytoscape": "npm:cytoscape@^2.7.11",
       "cytoscape-edgehandles": "npm:cytoscape-edgehandles@^2.6.3",
       "cytoscape-grid-guide": "npm:cytoscape-grid-guide@^1.0.3",
@@ -154,8 +156,6 @@
     "@types/d3": "^4.5.0",
     "@types/d3-selection": "^1.0.9",
     "aurelia-validation": "^1.0.0-beta.1.0.1",
-    "cytoscape": "^2.7.11",
-    "url": "^0.11.0",
-    "whatwg-fetch": "^2.0.2"
+    "cytoscape": "^2.7.11"
   }
 }

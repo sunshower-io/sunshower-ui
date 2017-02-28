@@ -28,7 +28,6 @@
   },
   "globalDevDependencies": {},
   "globalDependencies": {
-    "jquery": "registry:dt/jquery#1.10.0+20160929162922",
-    "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20161120230953"
+    "jquery": "registry:dt/jquery#1.10.0+20160929162922"
   }
 }

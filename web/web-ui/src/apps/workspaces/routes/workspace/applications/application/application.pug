@@ -2,37 +2,34 @@
    Created by dustinlish on 2/20/17.
 template
     .overlay.au-animate
-        .ui.hidden.divider
-        .ui.hidden.divider
-        .ui.hidden.divider
-        .ui.container
-            .ui.secondary.menu
-                .ui.items
-                    .item
-                        .ui.tiny.image
-                            img(src='styles/themes/hasli/assets/images/logos/ca-logo.png')
-                        .middle.aligned.content
-                            a.header Header
-                            .meta
-                                span Description
-                            .description
-                                p
-                            .extra
-                                | Additional Details
-                .right.menu
-                    a.item
-                        i.huge.ion-ios-close-empty.icon(click.delegate="close()")
-            .ui.secondary.pointing.menu
-                a.item(
-                repeat.for='row of router.navigation',
-                class="${row.isActive ? 'active' : ''}"
-                href.bind='row.href'
-                )
-                    | ${row.title}
-                .right.menu
-                    a.item
-                        .ui.primary.button()
-                            | Save
+        .ui.fluid.container(style="background-color: #fff !important")
+            .ui.hidden.divider
+            .ui.hidden.divider
+            .ui.hidden.divider
+            .ui.container
+                .ui.secondary.menu
+                    .ui.items
+                        .item
+                            .ui.tiny.image
+                                img(src='styles/themes/hasli/assets/images/logos/ca-logo.png')
+                            .middle.aligned.content
+                                a.header CA UIM
+                                .meta
+                                    span Deploys CA UIM, UMP, and monitoring probes
+                                .description
+                                    p
+                                .extra
+                                    | Version: 8.47
+                    .right.menu
+                        a.item
+                            i.huge.ion-ios-close-empty.icon(click.delegate="close()")
+                .ui.secondary.pointing.menu
+                    a.item(
+                    repeat.for='row of router.navigation',
+                    class="${row.isActive ? 'active' : ''}"
+                    href.bind='row.href'
+                    )
+                        | ${row.title}
         .ui.container
             .ui.fitted.divider
             router-view

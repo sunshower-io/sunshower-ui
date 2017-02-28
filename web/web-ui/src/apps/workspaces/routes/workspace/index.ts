@@ -37,6 +37,7 @@ export class Workspace {
         config.title = '';
         config.map([
 
+
             // Dashboard
             {
                 route: ['', 'dashboard'],
@@ -44,6 +45,15 @@ export class Workspace {
                 moduleId: './dashboard/dashboard',
                 nav: true,
                 title: 'Dashboard'
+            },
+
+            // Workspace
+            {
+                route: 'create',
+                name: 'create',
+                moduleId: './create/create',
+                nav: false,
+                title: 'Create'
             },
 
             // Application Routes
@@ -115,6 +125,6 @@ export class Workspace {
 
 
     open(id: string): void {
-        this.router.navigate('4/applications');
+        // this.router.navigate('4/applications');
     }
 }

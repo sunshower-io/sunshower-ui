@@ -22,9 +22,6 @@ export class App {
     public configureRouter(config: RouterConfiguration, router: Router) {
         config.title = 'Hasli.io';
         config.addPipelineStep('authorize', new SecurityStep(this.tokenHolder));
-
-        this.router = router;
-        config.title = '';
         config.map([{
             route: '',
             redirect: 'workspaces'
@@ -56,6 +53,7 @@ export class App {
             route: 'workspaces',
             redirect: 'workspaces'
         });
+
         this.router = router;
     }
 
