@@ -97,8 +97,8 @@ template
                         repeat.for='cloud of providers'
                         )
                             td
-                                img.ui.image.tiny(if.bind="cloud.logo", src="${cloud.logo}")
+                                img.ui.image.tiny(if.bind="cloud.icon", src="${cloud.icon}")
                             td
                                 | ${cloud.name}
                             td.right.aligned
-                                i.icon.large.setting.clickable(click.delegate="configure(cloud)")
+                                i.icon.large.setting.clickable(click.delegate="addCredential(cloud)")
