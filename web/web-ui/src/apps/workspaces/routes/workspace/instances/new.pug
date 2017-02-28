@@ -1,15 +1,22 @@
 template
-    .overlay(style="overflow-y:auto")
+    .overlay.au-animate
         .ui.container
-            .overlay-close
-                i.big.grey.icon.ion-close-round(click.delegate="close()")
-            h2.ui.center.aligned.grey.header Create Instance
-            .ui.basic.segment
-                h2.ui.header
-                    i.circular.blue.ion-ios-cloud-outline.icon.circular--icon.circular--icon_blue
-                    .content
-                        |  New Instance
-            .ui.divider(style="margin-bottom:16px")
+            .ui.secondary.menu
+                .right.menu
+                    a.item
+                        i.huge.ion-ios-close-empty.icon(click.delegate="close()")
+            .ui.middle.aligned.center.aligned.grid
+                .two.column.centered.row
+                    .column
+                        h3.ui.center.aligned.header
+                            | CREATE NEW APPLICATION
+                    .column
+                        .ui.hidden.divider
+                        .ui.hidden.divider
+                        .ui.fluid.transparent.input
+                            input(type='text', placeholder='Add instance name').overlay-input-centered
+                        .ui.divider
+            .big-divider
             .ui.two.column.centered.grid.ui.form.overlay-form
                 .row
                     h4.ui.dividing.header.column Details

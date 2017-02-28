@@ -445,7 +445,7 @@
 @borderColor               : rgba(225, 236, 244, 100);
 @strongBorderColor         : rgba(34, 36, 38, 0.22);
 @internalBorderColor       : rgba(34, 36, 38, 0.1);
-@selectedBorderColor       : rgba(0, 212, 106, 100);
+@selectedBorderColor       : @primaryColor;
 @strongSelectedBorderColor : rgba(34, 36, 38, 0.5);
 @disabledBorderColor       : rgba(34, 36, 38, 0.5);
 
