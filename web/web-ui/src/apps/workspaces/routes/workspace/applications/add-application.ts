@@ -28,7 +28,11 @@ export class AddApplication {
     @bindable
     private uploadStatus:string = 'none'; //none, uploading, done, error
 
-    constructor(private parent:Workspace, private client:HttpClient, private controller:ValidationController) {
+    constructor(
+        private parent:Workspace,
+        private client:HttpClient,
+        private controller:ValidationController
+    ) {
         this.controller.addRenderer(new BootstrapFormRenderer());
     }
 
