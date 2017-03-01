@@ -20,10 +20,32 @@ template
                         .ui.divider
             .big-divider
             .ui.basic.center.aligned.segment
-                h1.ui.center.aligned.header
-                    i.circular.blue.ion-image.icon.circular--icon
-                    | Add Photo
+                label(for="applicationImageUploadInput")
+                    h1.ui.center.aligned.header
+                        i.circular.blue.ion-image.icon.circular--icon
+                            input(
+                                type="file"
+                                id="applicationImageUploadInput"
+                                ref="imageInput"
+                                style="position:fixed; top: -100em"
+                            )
+                        | ${fileName || "Add Photo"}
                 .big-divider
+
+                label(for="applicationFileUploadInput")
+                    h1.ui.center.aligned.header
+                        i.circular.blue.ion-image.icon.circular--icon
+                            input(
+                                type="file"
+                                id="applicationFileUploadInput"
+                                ref="fileInput"
+                                style="position:fixed; top: -100em"
+                            )
+                        | ${fileName || "Upload Application"}
+                .big-divider
+
+
+
                 .ui.grid
                     .row
                         .two.wide.column

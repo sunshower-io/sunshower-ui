@@ -2,6 +2,7 @@
 import {HttpClient} from 'aurelia-fetch-client';
 import {bindable, inject} from "aurelia-framework";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
+import {WorkspaceRevision} from "apps/workspaces/model/workspaces/workspace";
 
 
 @inject(Workspace, HttpClient)
@@ -16,7 +17,13 @@ export class Applications {
     @bindable
     showModal: boolean;
 
-    constructor(public parent:Workspace, private client:HttpClient) {
+    @bindable
+    workspace: WorkspaceRevision;
+
+    constructor(
+        public parent:Workspace,
+        private client:HttpClient
+    ) {
     }
 
     activate(id:any) : void {
