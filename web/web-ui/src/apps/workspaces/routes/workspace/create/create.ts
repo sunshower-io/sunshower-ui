@@ -31,13 +31,8 @@ export class Create {
         ValidationRules
             .ensure((wsp:Create) => wsp.name).required()
             .ensure((wsp:Create) => wsp.description).required()
+            .ensure((wsp:Create) => wsp.files).required()
             .on(Create);
-        // let imageValidator = ValidationRules
-        //     .ensureObject()
-        //         .satisfies((files:FileList) => files.length > 0)
-        //         .withMessage('An image to represent the workspace is required')
-        //     .rules;
-        // this.controller.addObject(this.files, imageValidator);
     }
 
     activate(): void {
@@ -67,8 +62,12 @@ export class Create {
         });
     }
 
+    cancel() : void {
+        this.parent.router.navigate('/')
+    }
+
     onchange(): void {
-        this.files = this.imageElement.files;
+        console.log(this.files);
     }
 
     setupFileUpload() : void {
@@ -83,7 +82,7 @@ export class Create {
                 return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
             }();
         if (isAdvancedUpload) {
-            $form.addClass('has-advanced-upload');
+            //$form.addClass('has-advanced-upload');
 
             $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
                 e.preventDefault();

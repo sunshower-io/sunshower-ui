@@ -40,6 +40,9 @@ export class Workspace {
             // Dashboard
             {route: ['', 'dashboard'], name: 'dashboard', moduleId: './dashboard/dashboard', nav: true, title: 'Dashboard'},
 
+            // Create Workspace
+            {route: 'create', name: 'create', moduleId: './create/create', nav: false, title: 'Create'},
+
             // Application Routes
             {route: 'applications', name: 'applications', moduleId: './applications/applications', nav: true, title: 'Applications'},
             {route: 'applications/:id/application', name: 'application', moduleId: './applications/application/application', nav: false, title: 'Application'},

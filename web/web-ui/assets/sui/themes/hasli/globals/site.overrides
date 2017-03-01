@@ -362,7 +362,8 @@ body {
   top: @headerheight;
   right: 0;
   bottom: @footerheight;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   background-color: white;
   z-index:1;
 
@@ -626,6 +627,9 @@ body {
   }
 }
 
+.fluid.field .message {
+  display:block;
+}
 
 .overlay .overlay-body {
   padding: 32px 64px;
@@ -945,11 +949,7 @@ body {
   margin-top:1em;
 }
 
-.upload-box__file-label {
-  font-size:2em;
-  margin-bottom: 2em;
-  margin-top: 1em;
-}
+
 
 .ui.segment.upload-box {
   text-align:center;
@@ -965,6 +965,25 @@ body {
   }
   &.is-dragover {
     background-color: lighten(@primarycolor, 25%);
+  }
+
+  .upload-box__file-label {
+    font-size:2em;
+    margin-bottom: 2em;
+    margin-top: 1em;
+  }
+}
+
+.header {
+  .upload-box__file-label {
+    margin-top: 1em;
+    color: @hasliGrey;
+  }
+}
+
+.field.ui.fluid.input.error {
+  & > * {
+    display: block;
   }
 }
 

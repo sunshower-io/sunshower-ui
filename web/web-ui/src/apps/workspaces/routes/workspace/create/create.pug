@@ -2,40 +2,48 @@ template
     .ui.active.dimmer(if.bind="loading", style="position:absolute; top:47px; left:0; right:0; bottom:0;")
         .ui.loader
 
-    .ui.form.ui.two.column.centered.grid.ui.form.overlay-form(if.bind="!loading")
-        .ui.hidden.divider
-        .ui.hidden.divider
-        h2.ui.center.aligned.grey.header Create New Workspace
-        .row
-            form.ui.form.overlay-form.column(enctype="multipart/form-data")
-                input(type="hidden" name="image-name")
-                input(type="hidden" name="image-type")
-                .ui.field.overlay-field
-                    .overlay-label
-                        label Name
-                    .overlay-input.ui.input
-                        input(
-                            type='text',
-                            name='name',
-                            placeholder='name',
-                            value.bind="name & validate"
-                        )
-                .ui.field.overlay-field
-                    .overlay-label
-                        label Description
-                    .overlay-input.ui.input
-                        textarea(
-                            name='description',
-                            placeholder='description',
-                            value.bind="description & validate"
-                        )
-                .field
-                    .ui.segment.upload-box(ref="uploader")
-                        label.upload-box__input
-                            i.massive.icon.ion-image
-                            input.upload-box__file(type="file" name="image" change.delegate="onchange()" ref="imageElement")
-                            .upload-box__file-label
-                                | Choose an image
-                                span.upload-box__dragndrop or drag it here
+    form.overlay(enctype="multipart/form-data" if.bind="!loading")
+        .ui.container
+            .ui.secondary.menu
+                .right.menu
+                    a.item
+                        i.huge.ion-ios-close-empty.icon(click.delegate="cancel()")
+            .ui.center.aligned.grid
+                .two.column.centered.row
+                    .column
+                        h3.ui.center.aligned.header
+                            | CREATE NEW WORKSPACE
+                        .ui.hidden.divider
+                        .ui.hidden.divider
+                        input(type="hidden" name="image-name")
+                        input(type="hidden" name="image-type")
+                        .fluid.field
+                            .ui.fluid.transparent.input
+                                input.overlay-input-centered(
+                                    type='text',
+                                    name='name',
+                                    placeholder='Add workspace name',
+                                    value.bind="name & validate"
+                                )
+                            .ui.divider
+                        .big-divider
+                        .ui.basic.center.aligned.segment
+                            h1.ui.center.aligned.header(ref="uploader")
+                                label.clickables
+                                    input.upload-box__file(type="file" name="image" change.delegate="onchange()" ref="imageElement" files.bind="files & validate")
+                                    i.circular.blue.ion-image.icon.circular--icon
+                                    span(style="margin-left:1em;") Add Image
+                                    .upload-box__file-label
 
-                button.ui.pull-right.button.primary(class="${files && files.length > 0 ? '' : 'disabled'}" click.delegate="create()") Create
+                            .big-divider
+                            .ui.form
+                                .field
+                                    textarea(
+                                    name='description',
+                                    placeholder='Add a description',
+                                    value.bind="description & validate"
+                                    )
+                            .big-divider
+
+                            button.ui.secondary.button(class="${files && files.length > 0 ? '' : 'disabled'}" click.delegate="create()")
+                                | Get Started
