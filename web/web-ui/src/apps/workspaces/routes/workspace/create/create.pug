@@ -28,12 +28,13 @@ template
                             .ui.divider
                         .big-divider
                         .ui.basic.center.aligned.segment
-                            h1.ui.center.aligned.header(ref="uploader")
-                                label.clickables
-                                    input.upload-box__file(type="file" name="image" change.delegate="onchange()" ref="imageElement" files.bind="files & validate")
-                                    i.circular.blue.ion-image.icon.circular--icon
-                                    span(style="margin-left:1em;") Add Image
-                                    .upload-box__file-label
+                            .fluid.field
+                                h1.ui.center.aligned.header(ref="uploader")
+                                    label.clickable
+                                        input.upload-box__file(type="file" name="image" change.delegate="onchange()" ref="imageElement" files.bind="files & validate")
+                                        i.circular.blue.ion-image.icon.circular--icon
+                                        span(style="margin-left:1em;") Add Image
+                                        .upload-box__file-label
 
                             .big-divider
                             .ui.form
@@ -45,5 +46,5 @@ template
                                     )
                             .big-divider
 
-                            button.ui.secondary.button(class="${files && files.length > 0 ? '' : 'disabled'}" click.delegate="create()")
+                            button.ui.secondary.button(click.delegate="create()")
                                 | Get Started

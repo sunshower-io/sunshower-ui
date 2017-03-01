@@ -31,7 +31,7 @@ export class Create {
         ValidationRules
             .ensure((wsp:Create) => wsp.name).required()
             .ensure((wsp:Create) => wsp.description).required()
-            .ensure((wsp:Create) => wsp.files).required()
+            .ensure((wsp:Create) => wsp.files).displayName('Image').required()
             .on(Create);
     }
 
@@ -54,8 +54,9 @@ export class Create {
                 form.append('image-type', this.files[0].type);
                 this.client.post('workspaces/save', form)
                     .then(t => {
-                        this.loading = false;
-                        this.parent.router.navigate('/');
+                        console.log(t);
+                        //this.loading = false;
+                        //this.parent.router.navigate('/');
                         //todo redirect to this workspace?
                     });
             }

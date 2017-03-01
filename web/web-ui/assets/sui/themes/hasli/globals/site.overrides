@@ -629,6 +629,7 @@ body {
 
 .fluid.field .message {
   display:block;
+  text-align:center;
 }
 
 .overlay .overlay-body {
