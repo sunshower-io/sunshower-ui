@@ -60,7 +60,11 @@ export class Instances {
 
 
     createInstance(): void {
-        this.parent.router.navigate('instances/new');
+        this.parent.router.navigate('/catalog');
+    }
+
+    openInstance(): void {
+        this.parent.router.navigate('instances/:id/instance');
     }
 
     refresh(): void {

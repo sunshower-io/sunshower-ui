@@ -146,6 +146,18 @@ body {
   -moz-box-shadow: none !important;
 }
 
+.catalog--sidebar {
+  margin-left: 30px !important;
+}
+
+.catalog--category_header {
+  font-size: 18px !important;
+}
+
+.catalog--category_item {
+  font-size: 14px !important;
+}
+
 .workspace-navbar {
   height: 100px !important;
 }

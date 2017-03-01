@@ -3,13 +3,8 @@ import {
     Router,
     RouterConfiguration
 } from "aurelia-router";
-import {HttpClient} from "aurelia-fetch-client";
-import {
-    Subscription,
-    EventAggregator
-} from "aurelia-event-aggregator";
-import {WorkspaceRevision} from "apps/workspaces/model/workspaces";
-import {Identifier} from "common/lib/lang";
+import {NavigationInstruction} from "aurelia-router";
+import {Subscription, EventAggregator} from "aurelia-event-aggregator";
 
 type Mode = 'full' | 'partial';
 export interface MenuAware {
@@ -25,12 +20,7 @@ export class Workspace {
     private mode: Mode;
     private subscription: Subscription;
 
-    private workspace:WorkspaceRevision;
-
-    constructor(
-        private client:HttpClient,
-        private eventAggregator: EventAggregator
-    ) {
+    constructor(private eventAggregator: EventAggregator) {
         this.setMenuVisible(true);
     }
 
@@ -47,68 +37,23 @@ export class Workspace {
         config.title = '';
         config.map([
 
-
             // Dashboard
-            {
-                route: ['', 'dashboard'],
-                name: 'dashboard',
-                moduleId: './dashboard/dashboard',
-                nav: true,
-                title: 'Dashboard'
-            },
-
-            // Workspace
-            {
-                route: 'create',
-                name: 'create',
-                moduleId: './create/create',
-                nav: false,
-                title: 'Create'
-            },
+            {route: ['', 'dashboard'], name: 'dashboard', moduleId: './dashboard/dashboard', nav: true, title: 'Dashboard'},
 
             // Application Routes
-            {
-                route: 'applications',
-                name: 'applications',
-                moduleId: './applications/applications',
-                nav: true,
-                title: 'Applications'
-            },
-            {
-                route: 'applications/:id/application',
-                name: 'application',
-                moduleId: './applications/application/application',
-                nav: false,
-                title: 'Application'
-            },
-            {
-                route: 'applications/new',
-                name: 'add-application',
-                moduleId: './applications/add-application',
-                nav: false,
-                title: 'Applications'
-            },
+            {route: 'applications', name: 'applications', moduleId: './applications/applications', nav: true, title: 'Applications'},
+            {route: 'applications/:id/application', name: 'application', moduleId: './applications/application/application', nav: false, title: 'Application'},
+            {route: 'applications/new', name: 'add-application', moduleId: './applications/add-application', nav: false, title: 'Applications'},
 
             // Cloud Routes
             {route: 'clouds', name: 'clouds', moduleId: './clouds/clouds', nav: true, title: 'Clouds'},
             {route: 'clouds/new', name: 'create-cloud', moduleId: './clouds/add-cloud', nav: false, title: 'Clouds'},
-            {
-                route: 'clouds/:id/credential/new',
-                name: 'add-cloud-credential',
-                moduleId: './clouds/add-credential',
-                nav: false,
-                title: 'Add Cloud Credential'
-            },
+            {route: 'clouds/:id/credential/new', name: 'add-cloud-credential', moduleId: './clouds/add-credential', nav: false, title: 'Add Cloud Credential'},
 
             // Instances Routes
             {route: 'instances', name: 'instances', moduleId: './instances/instances', nav: true, title: 'Instances'},
-            {
-                route: 'instances/new',
-                name: 'new-instance',
-                moduleId: './instances/new',
-                nav: false,
-                title: 'New Instance'
-            },
+            {route: 'instances/new', name: 'new-instance', moduleId: './instances/new', nav: false, title: 'New Instance'},
+            {route: 'instances/:id/instance', name: 'instance', moduleId: './instances/instance/instance', nav: false, title: 'Instance'},
 
             // Designer
             {route: 'designer', name: 'designer', moduleId: './designer/designer', nav: true, title: 'Designer'},
@@ -134,9 +79,7 @@ export class Workspace {
     }
 
 
-    activate(id: Identifier): void {
-        this.client.fetch(`workspaces/revision/${id.id}`)
-            .then(ws => ws.json() as any)
-            .then(ws => this.workspace = ws);
+    open(id: string): void {
+        this.router.navigate('4/applications');
     }
 }
