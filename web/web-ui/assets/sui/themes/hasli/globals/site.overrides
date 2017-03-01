@@ -20,11 +20,6 @@
 ;
 }
 
-//greater nesting needed to override semantic styles
-.ui.applications .item.inactive {
-  display:none !important;
-}
-
 //for mixin purposes
 .clearfix {
   &:after {
@@ -110,6 +105,10 @@ body {
   right: 0;
   top: 0;
   position: fixed;
+
+  .ui.dropdown .menu {
+    z-index:105 !important;
+  }
 }
 
 .workspace--content-view {
@@ -294,9 +293,10 @@ body {
   border-top: 1px solid #D6D6D7 !important;
   border-bottom: 1px solid #D6D6D7 !important;
   height: 350px !important;
-  margin: 0px !important;
-  padding: 0px !important;
-  overflow-y:scroll;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-y:auto;
+  overflow-x:hidden;
 }
 
 .right--menu, .left--menu {
@@ -735,7 +735,7 @@ body {
 .workbench {
   height:100% !important;
   width:100% !important;
-  z-index: 50 !important;
+  z-index: 0 !important;
   //top: -24px !important;
 }
 
@@ -849,6 +849,8 @@ body {
     }
 
   }
+
+  z-index:auto !important; //may need additional classes to make work
 }
 //end what was sidebars.less
 
@@ -862,12 +864,16 @@ body {
 //start what was right-sidebar.less
 .applications {
   position:absolute;
-  top:85px;
+  top:65px;
   left:0;
   right:0;
   bottom:0;
   overflow-y:auto;
   padding:@hasliem !important;
+
+  .item.inactive {
+    display:none !important;
+  }
 }
 //end what was right-sidebar.less
 
@@ -899,16 +905,16 @@ body {
 //start what was breadcrumb.less
 .workspace-breadcrumb {
   width: 100%;
-  height: 25px;
+  height: 27px;
   line-height:23px;
   margin-right:-2px;
-  margin-top:-13px;
+  margin-top:-15px;
   z-index:100;
   background-color:#f3f4f5;
   box-sizing: border-box;
   padding-left:8px;
-  border-bottom: 1px solid @hasliGrey;
-  border-top: 1px solid @hasliGrey;
+  border-bottom: 1px solid @hasliStandardGrey;
+  border-top: 1px solid @hasliStandardGrey;
 
   .indent {
     margin-left: 304px;

@@ -1787,6 +1787,7 @@ export function children(selectorOrConfig: string | Object): any;
 * Creates a behavior property that references an immediate content child element that matches the provided selector.
 */
 export function child(selectorOrConfig: string | Object): any;
+export const SwapStrategies: any;
 
 /**
 * Used to dynamically compose components.

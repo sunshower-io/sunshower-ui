@@ -113,13 +113,13 @@ export class AddApplication {
                 .on('drop', function(e) {
                     this.files = (e.originalEvent as DragEvent).dataTransfer.files;
                     showFiles( this.files );
+                    //todo fix
                 });
         }
 
-        //TODO fix type error
-        // $input.on('change', function(e) {
-        //     showFiles(e.target.files);
-        // });
+        $input.on('change', function(e) {
+            showFiles((e as any).target.files);
+        });
     }
 
 }
