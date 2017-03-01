@@ -29,14 +29,6 @@ export class Applications {
 
     refresh(): void {
         this.loading = true;
-        setTimeout(() => {
-            this.client.fetch('applications')
-                .then(d => d.json() as any)
-                .then(d => {
-                    this.loading = false;
-                    this.applications = d;
-                });
-        }, 2)
     }
 
     create() : void {

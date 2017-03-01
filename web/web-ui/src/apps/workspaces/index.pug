@@ -12,7 +12,7 @@ template
         .ui.container
             .ui.hidden.divider
             .ui.stackable.cards
-                .ui.centered.link.card(type='button', click.trigger="open()", repeat.for="workspace of workspaces")
+                .ui.centered.link.card(type='button', click.trigger="open(workspace.id)", repeat.for="workspace of workspaces")
                     .content
                         .header
                             | ${workspace.name}
@@ -21,7 +21,7 @@ template
                         .description
                             .ui.container.workspaces--image_container
                                 //img(src='styles/themes/hasli/assets/images/logos/ca-logo.png').workspaces--image_size
-                                img(src='/hasli/api/v1/files/${workspace.picture.name}').workspaces--image_size
+                                img(src='/hasli/api/v1/files/${workspace.picture.id}').workspaces--image_size
                     .extra.content
                         .ui.centered.grid
                             .center.aligned.column
@@ -33,4 +33,4 @@ template
                                     a.fitted.item
                                         i.big.ion-ios-browsers-outline.icon
                                     a.fitted.item
-                                        i.big.ion-ios-trash-outline.icon
+                                        i.big.ion-ios-trash-outline.icon(click.delegate="delete(workspace.id.id)")

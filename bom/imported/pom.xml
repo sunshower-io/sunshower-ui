@@ -77,11 +77,11 @@
 
 
         <hasli-test.version>1.0.32.Final</hasli-test.version>
-        <hasli-service.version>1.0.36.Final</hasli-service.version>
-        <hasli-api.version>1.0.42.Final</hasli-api.version>
-        <hasli-persist.version>1.0.68.Final</hasli-persist.version>
-        <hasli-schemata.version>1.0.1.Final</hasli-schemata.version>
-        <hasli-common.version>1.0.2.Final</hasli-common.version>
+        <!--<hasli-service.version>1.0.36.Final</hasli-service.version>-->
+        <!--<hasli-api.version>1.0.42.Final</hasli-api.version>-->
+        <!--<hasli-persist.version>1.0.68.Final</hasli-persist.version>-->
+        <!--<hasli-schemata.version>1.0.1.Final</hasli-schemata.version>-->
+        <!--<hasli-common.version>1.0.2.Final</hasli-common.version>-->
 
 
 

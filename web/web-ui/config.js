@@ -534,6 +534,7 @@ System.config({
       "apps/workspaces/model/infrastructure/gateway.js",
       "apps/workspaces/model/infrastructure/infrastructure.js",
       "apps/workspaces/model/infrastructure/load-balancer.js",
+      "apps/workspaces/model/io/file.js",
       "apps/workspaces/model/workspaces.js",
       "apps/workspaces/model/workspaces/workspace.js",
       "apps/workspaces/resources/custom-elements/charts/chart-header.html!github:systemjs/plugin-text@0.0.9.js",
@@ -1272,6 +1273,7 @@ System.config({
     ],
     "apps/workspaces/routes/workspace/index.js": [
       "aurelia-dependency-injection",
+      "aurelia-fetch-client",
       "aurelia-event-aggregator"
     ],
     "apps/workspaces/routes/workspace/instances/instances.js": [

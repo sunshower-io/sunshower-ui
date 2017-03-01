@@ -3,8 +3,13 @@ import {
     Router,
     RouterConfiguration
 } from "aurelia-router";
-import {NavigationInstruction} from "aurelia-router";
-import {Subscription, EventAggregator} from "aurelia-event-aggregator";
+import {HttpClient} from "aurelia-fetch-client";
+import {
+    Subscription,
+    EventAggregator
+} from "aurelia-event-aggregator";
+import {WorkspaceRevision} from "apps/workspaces/model/workspaces";
+import {Identifier} from "common/lib/lang";
 
 type Mode = 'full' | 'partial';
 export interface MenuAware {
@@ -20,7 +25,12 @@ export class Workspace {
     private mode: Mode;
     private subscription: Subscription;
 
-    constructor(private eventAggregator: EventAggregator) {
+    private workspace:WorkspaceRevision;
+
+    constructor(
+        private client:HttpClient,
+        private eventAggregator: EventAggregator
+    ) {
         this.setMenuVisible(true);
     }
 
@@ -124,7 +134,9 @@ export class Workspace {
     }
 
 
-    open(id: string): void {
-        // this.router.navigate('4/applications');
+    activate(id: Identifier): void {
+        this.client.fetch(`workspaces/revision/${id.id}`)
+            .then(ws => ws.json() as any)
+            .then(ws => this.workspace = ws);
     }
 }

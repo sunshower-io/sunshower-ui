@@ -5,6 +5,7 @@ import {HttpClient} from "aurelia-fetch-client";
 import {
     Workspace as WorkspaceModel
 } from  'apps/workspaces/model/workspaces';
+import {Identifier} from "common/lib/lang";
 
 @autoinject
 export class Workspace {
@@ -26,8 +27,18 @@ export class Workspace {
 
     }
 
-    open() : void {
-        this.router.navigate("workspace/4/applications");
+    delete(id:string) : void {
+        this.client.fetch(`workspaces/${id}`, {method: 'delete'})
+            .then(t => {
+                this.client.fetch('workspaces/head')
+                    .then(t => t.json() as any)
+                    .then(workspaces => this.workspaces = workspaces)
+
+            });
+    }
+
+    open(id:Identifier) : void {
+        this.router.navigate(`workspace/${id.id}/applications`);
     }
 
     newWorkspace() : void {
