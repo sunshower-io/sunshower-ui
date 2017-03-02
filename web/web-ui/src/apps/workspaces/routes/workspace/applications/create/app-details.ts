@@ -22,7 +22,9 @@ export class CreateApp {
     private file: File;
     private image: File;
     private name: string;
-    private loadingA: boolean = false;
+
+    @bindable
+    private loading: boolean = false;
 
     @bindable
     private appType: boolean = false;
@@ -74,6 +76,7 @@ export class CreateApp {
 
 
     create(): void {
+        this.loading = true;
         this.controller.validate().then(result => {
             if (result.valid) {
                 let request = new FormData(),
@@ -96,10 +99,13 @@ export class CreateApp {
                     .send()
                     .then(t => JSON.parse(t.response))
                     .then(t => {
-                        this.loadingA = false;
+                        this.loading = false;
                         this.parent.parent.router.navigate(`applications/${t.application.id}/application`)
 
                     });
+            }
+            else {
+                this.loading = false;
             }
         });
 
