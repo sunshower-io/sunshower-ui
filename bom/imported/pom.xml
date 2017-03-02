@@ -69,15 +69,19 @@
         <!--<hasli-persist.version>1.0.67.Final</hasli-persist.version>-->
 
         <!--<hasli-hal.version>${snapshot-version}</hasli-hal.version>-->
-        <hasli-api.version>${snapshot-version}</hasli-api.version>
-        <hasli-schemata.version>${snapshot-version}</hasli-schemata.version>
-        <hasli-service.version>${snapshot-version}</hasli-service.version>
-        <hasli-persist.version>${snapshot-version}</hasli-persist.version>
+        <!--<hasli-api.version>${snapshot-version}</hasli-api.version>-->
+        <!--<hasli-schemata.version>${snapshot-version}</hasli-schemata.version>-->
+        <!--<hasli-service.version>${snapshot-version}</hasli-service.version>-->
+        <!--<hasli-persist.version>${snapshot-version}</hasli-persist.version>-->
 
+        <hasli-api.version>1.0.43.Final</hasli-api.version>
+        <hasli-persist.version>1.0.69.Final</hasli-persist.version>
+        <hasli-schemata.version>1.0.2.Final</hasli-schemata.version>
+        <hasli-common.version>1.0.2.Final</hasli-common.version>
 
 
         <hasli-test.version>1.0.32.Final</hasli-test.version>
-        <!--<hasli-service.version>1.0.36.Final</hasli-service.version>-->
+        <hasli-service.version>1.0.37.Final</hasli-service.version>
         <!--<hasli-api.version>1.0.42.Final</hasli-api.version>-->
         <!--<hasli-persist.version>1.0.68.Final</hasli-persist.version>-->
         <!--<hasli-schemata.version>1.0.1.Final</hasli-schemata.version>-->

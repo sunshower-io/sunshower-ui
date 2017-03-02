@@ -1,3 +1,8 @@
+import * as showdown from 'showdown';
+import {Identifier} from "common/lib/lang";
+import {HttpClient} from "aurelia-fetch-client";
+import {Application} from './application';
+import {ApplicationRevision} from "apps/workspaces/model/application";
 import {bindable, autoinject} from "aurelia-framework";
 import {OperatingSystemService} from "common/model/api/hal/os";
 /**
@@ -38,9 +43,14 @@ export class Summary {
     applications        : any[];
 
 
-    constructor(private osService:OperatingSystemService) {
+    private applicationRevision: ApplicationRevision;
+
+    private summary: HTMLElement;
+
+    constructor(private osService:OperatingSystemService, private client: HttpClient, private parent: Application) {
 
     }
+
 
     attached() : void {
         $(this.requirementDD).dropdown();
@@ -94,6 +104,40 @@ export class Summary {
 
     selectApplication() : void {
         this.closePopup();
+    }
+
+
+    activate(identifier: Identifier) {
+
+
+
+        let id = identifier.id;
+
+        this.client.fetch(`applications/${id}`)
+            .then(t => t.json() as any)
+            .then(t => {
+                this.applicationRevision = t;
+                this.parent.applicationRevision = t;
+
+                this.load(id);
+            });
+    }
+
+    private load(appId:string): void {
+        let revision = this.applicationRevision,
+            readme = revision.readme;
+        this.client
+            .fetch(`applications/${appId}/readme`)
+            .then(t => t.json() as any)
+            .then(t => {
+
+                let converter = new showdown.Converter();
+                this.summary.innerHTML = converter.makeHtml(t.data);
+
+
+
+
+            });
     }
 
 }

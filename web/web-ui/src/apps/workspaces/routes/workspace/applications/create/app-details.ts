@@ -19,34 +19,32 @@ import {Workspace} from "apps/workspaces/routes/workspace/index";
 @customElement('create-app')
 export class CreateApp {
 
-    private file            : File;
-    private image           : File;
-    private name            : string;
-    private loadingA         : boolean = false;
+    private file: File;
+    private image: File;
+    private name: string;
+    private loadingA: boolean = false;
 
     @bindable
-    private appType : boolean = false;
+    private appType: boolean = false;
 
     @bindable
-    templates               : Template[];
+    templates: Template[];
 
-    template                : Template;
+    template: Template;
 
     @bindable
-    private workspace       : WorkspaceRevision;
+    private workspace: WorkspaceRevision;
 
-    private fileInput       : HTMLInputElement;
-    private imageInput      : HTMLInputElement;
+    private fileInput: HTMLInputElement;
+    private imageInput: HTMLInputElement;
 
-    private imageUploader   : HTMLElement;
-    private fileUploader    : HTMLElement;
+    private imageUploader: HTMLElement;
+    private fileUploader: HTMLElement;
 
-    constructor(
-        private workspaceVm:Workspace,
-        private parent:Applications,
-        private client:HttpClient,
-        private controller:ValidationController
-    ) {
+    constructor(private workspaceVm: Workspace,
+                private parent: Applications,
+                private client: HttpClient,
+                private controller: ValidationController) {
         this.templates = [
             new Template('styles/themes/hasli/assets/images/blue-plus.svg', 'Custom Application'),
             new Template('styles/themes/hasli/assets/images/block.svg', 'Create New Container'),
@@ -63,30 +61,32 @@ export class CreateApp {
     activate() {
     }
 
-    attached() : void {
+    attached(): void {
         this.setupImageUpload();
         this.setupFileUpload();
         ValidationRules
-            .ensure((app:CreateApp) => app.name).required()
-            .ensure((app:CreateApp) => app.image).required()
-            .ensure((app:CreateApp) => app.file).displayName('Application upload').required()
+            .ensure((app: CreateApp) => app.name).required()
+            .ensure((app: CreateApp) => app.image).required()
+            .ensure((app: CreateApp) => app.file).displayName('Application upload').required()
             .on(CreateApp);
         //todo set up better rule to require either file OR template
     }
 
 
-    create() : void {
+    create(): void {
         this.controller.validate().then(result => {
             if (result.valid) {
                 let request = new FormData(),
                     workspace = this.workspaceVm.workspace,
-                    client = this.client as any;
+                    client = this.client as any,
+                    image = this.image[0],
+                    file = this.file[0];
 
                 request.append('name', this.name);
                 request.append('description', 'sample app');
-                request.append('image', this.image[0]);
-                request.append('repository', this.file[0]);
-                request.append('image-name', this.image[0].name);
+                request.append('image', image);
+                request.append('repository', file);
+                request.append('image-name', image.name);
                 client.createRequest(`workspaces/${workspace.workspace.id}`)
                     .asPost()
                     .withProgressCallback(c => {
@@ -94,92 +94,94 @@ export class CreateApp {
                     })
                     .withContent(request)
                     .send()
+                    .then(t => JSON.parse(t.response))
                     .then(t => {
                         this.loadingA = false;
-                        this.parent.parent.router.navigate("applications/4/application")
+                        this.parent.parent.router.navigate(`applications/${t.application.id}/application`)
+
                     });
             }
         });
 
     }
 
-    cancel() : void {
+    cancel(): void {
         this.controller.reset();
         this.parent.showModal = false;
     }
 
-    click() : void {
-        $('#btn-test').on("hover", function() {
+    click(): void {
+        $('#btn-test').on("hover", function () {
             $('#Shape').css({fill: "#ff0000"})
         })
     }
 
-    switchTab(tab:boolean) : void {
+    switchTab(tab: boolean): void {
         this.appType = tab;
     }
 
     //todo refactor uploads
     //todo fix label changer
-    setupImageUpload() : void {
+    setupImageUpload(): void {
         let $form = $(this.imageUploader),
             $input    = $form.find('input[type="file"]'),
             $label    = $form.find('.upload-box__file-label'),
             showFiles = function(files) {
                 $label.text(files[0].name);
             },
-            isAdvancedUpload = function() {
+            isAdvancedUpload = function () {
                 let div = document.createElement('div');
                 return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
             }();
         if (isAdvancedUpload) {
-            $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
+            $form.on('drag dragstart dragend dragover dragenter dragleave drop', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
-                })
-                .on('dragover dragenter', function() {
+            })
+                .on('dragover dragenter', function () {
                     $form.addClass('is-dragover');
                 })
-                .on('dragleave dragend drop', function() {
+                .on('dragleave dragend drop', function () {
                     $form.removeClass('is-dragover');
                 })
                 .on('drop', (e) => {
                     this.image = (e.originalEvent as DragEvent).dataTransfer.files[0];
-                    showFiles( this.image );
+                    showFiles(this.image);
                 });
         }
-        $input.on('change', function(e) {
+        $input.on('change', function (e) {
             showFiles((e as any).target.files);
         });
     }
 
-    setupFileUpload() : void {
+    setupFileUpload(): void {
         let $form = $(this.fileUploader),
-            $input    = $form.find('input[type="file"]'),
-            $label    = $form.find('.upload-box__file-label'),
-            showFiles = function(files) {
+            $input = $form.find('input[type="file"]'),
+            $label = $form.find('.upload-box__file-label'),
+            showFiles = function (files) {
                 $label.text(files[0].name);
             },
-            isAdvancedUpload = function() {
+            isAdvancedUpload = function () {
                 let div = document.createElement('div');
                 return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
             }();
         if (isAdvancedUpload) {
-            $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
+            $form.on('drag dragstart dragend dragover dragenter dragleave drop', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
-                })
-                .on('dragover dragenter', function() {
+            })
+                .on('dragover dragenter', function () {
                     $form.addClass('is-dragover');
                 })
-                .on('dragleave dragend drop', function() {
+                .on('dragleave dragend drop', function () {
                     $form.removeClass('is-dragover');
                 })
                 .on('drop', (e) => {
                     this.file = (e.originalEvent as DragEvent).dataTransfer.files[0];
-                    showFiles( this.file );
+                    showFiles(this.file);
                 });
         }
-        $input.on('change', function(e) {
+        $input.on('change', function (e) {
             showFiles((e as any).target.files);
         });
     }
