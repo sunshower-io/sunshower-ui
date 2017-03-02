@@ -2,19 +2,24 @@
  * Created by dustinlish on 2/20/17.
  */
 
-import {Workspace} from "apps/workspaces/routes/workspace/index";
 import {autoinject} from "aurelia-framework";
 import {Router} from "aurelia-router";
 import {RouterConfiguration} from "aurelia-router";
 import {NavigationInstruction} from "aurelia-router";
+
+import {Identifier} from "common/lib/lang";
+import {HttpClient} from "aurelia-fetch-client";
+import {ApplicationRevision} from "apps/workspaces/model/application";
+
 
 @autoinject
 export class Application {
 
     public router: Router;
     private lastLocation : NavigationInstruction;
+    applicationRevision: ApplicationRevision;
 
-    constructor(private parent: Workspace) {
+    constructor(private client:HttpClient) {
     }
 
     public configureRouter(config: RouterConfiguration, router: Router) {
@@ -32,4 +37,24 @@ export class Application {
     close() : void {
         this.router.navigateBack();
     }
+
+
+    attached(identifier: Identifier) : void {
+
+    }
+
+
+    activate(identifier: Identifier) {
+
+        let id = identifier.id;
+
+        this.client.fetch(`applications/${id}`)
+            .then(t => t.json() as any)
+            .then(t => {
+                this.applicationRevision = t;
+            });
+
+    }
+
+
 }
