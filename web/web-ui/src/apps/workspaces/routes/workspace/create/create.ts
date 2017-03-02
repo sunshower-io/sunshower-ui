@@ -54,9 +54,9 @@ export class Create {
                 form.append('image-type', this.files[0].type);
                 this.client.post('workspaces/save', form)
                     .then(t => {
-                        console.log(t);
-                        //this.loading = false;
-                        //this.parent.router.navigate('/');
+                        // console.log(t);
+                        this.loading = false;
+                        this.parent.router.navigate('/');
                         //todo redirect to this workspace?
                     });
             }

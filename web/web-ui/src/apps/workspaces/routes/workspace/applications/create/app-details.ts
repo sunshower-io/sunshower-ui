@@ -119,12 +119,13 @@ export class CreateApp {
     }
 
     //todo refactor uploads
+    //todo fix label changer
     setupImageUpload() : void {
         let $form = $(this.imageUploader),
             $input    = $form.find('input[type="file"]'),
             $label    = $form.find('.upload-box__file-label'),
-            showFiles = function(file) {
-                $label.text(file.name);
+            showFiles = function(files) {
+                $label.text(files[0].name);
             },
             isAdvancedUpload = function() {
                 let div = document.createElement('div');
@@ -155,8 +156,8 @@ export class CreateApp {
         let $form = $(this.fileUploader),
             $input    = $form.find('input[type="file"]'),
             $label    = $form.find('.upload-box__file-label'),
-            showFiles = function(file) {
-                $label.text(file.name);
+            showFiles = function(files) {
+                $label.text(files[0].name);
             },
             isAdvancedUpload = function() {
                 let div = document.createElement('div');
