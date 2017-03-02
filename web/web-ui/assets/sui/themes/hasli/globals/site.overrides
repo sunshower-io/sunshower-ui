@@ -514,10 +514,6 @@ body {
   margin-top:-250px !important;
   .ui.card>.image, .ui.cards>.card>.image {
     background: inherit !important;
-    & img, img {
-      width: auto;
-      margin: auto;
-    }
   }
 }
 
@@ -636,6 +632,8 @@ body {
 
     .clearfix
   }
+
+  .clearfix
 }
 
 .fluid.field .message {

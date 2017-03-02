@@ -19,6 +19,23 @@ export class Summary {
     @bindable
     os                  : string;
 
+    @bindable
+    template            : any;
+
+    @bindable
+    instance            : any;
+
+    @bindable
+    selectingTemplate   : boolean = false;
+
+    @bindable
+    nodeTemplates       : any[];
+
+    @bindable
+    instances           : any[];
+
+    @bindable
+    applications        : any[];
 
 
     constructor(private osService:OperatingSystemService) {
@@ -33,7 +50,7 @@ export class Summary {
         this.popupState = state;
         console.log(state);
         $(this.requirementPopup).modal('show');
-        //todo set closePopup as a callback -- having issues w/ void
+        //todo set closePopup as a callback, just in case they click out
     }
 
     closePopup() : void {
@@ -49,6 +66,33 @@ export class Summary {
 
     selectOS(os: string) : void {
         this.os = os;
+        this.closePopup();
+    }
+
+    saveService() : void {
+        this.closePopup();
+    }
+
+    toggleTemplate(state : boolean) : void {
+        this.selectingTemplate = state;
+    }
+
+    saveNodeTemplate() : void {
+        //todo save new node template
+        this.closePopup();
+    }
+
+    selectNodeTemplate(template : any) : void {
+        this.template = template;
+        this.closePopup();
+    }
+
+    selectInstance(instance : any) : void {
+        this.instance = instance;
+        this.closePopup();
+    }
+
+    selectApplication() : void {
         this.closePopup();
     }
 
