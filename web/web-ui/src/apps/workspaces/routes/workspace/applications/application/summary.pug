@@ -22,16 +22,24 @@ template
                                 .item
                                     | Requirements
                                 .right.menu
-                                    a.item
+                                    span.item.ui.icon.top.right.pointing.dropdown(ref="requirementDD")
                                         i.big.ion-ios-gear-outline.icon
+                                        .menu
+                                            .item(click.delegate="openPopup('deployer')") Deployer
+                                            .item(click.delegate="openPopup('nodeTemplate')")  Node Template
+                                            .item(click.delegate="openPopup('applications')")  Applications
+                                            .item(click.delegate="openPopup('operatingSystem')")  Operating System
+                                            .item(click.delegate="openPopup('service')")  Service
+                                            .item(click.delegate="openPopup('instances')")  Instances
+
                             .segment-header_divider
                             .ui.horizontal.list
-                                .item
+                                .item(if.bind="deployer && deployer != ''")
                                     .ui.basic.tiny.primary.button
-                                        | Linux
-                                .item
+                                        | ${deployer}
+                                .item(if.bind="os && os != ''")
                                     .ui.basic.tiny.primary.button
-                                        | Docker
+                                        | ${os}
                                 .item
                                     .ui.basic.tiny.primary.button
                                         | Primary Hub
@@ -60,3 +68,44 @@ template
                 h2.ui.header Environment Variables
                 p
                 | Mauris non tempor quam, et lacinia sapien. Mauris accumsan eros eget libero posuere vulputate. Etiam elit elit, elementum sed varius at, adipiscing vitae est. Sed nec felis pellentesque, lacinia dui sed, ultricies sapien. Pellentesque orci lectus, consectetur vel posuere posuere, rutrum eu ipsum. Aliquam eget odio sed ligula iaculis consequat at eget orci. Mauris molestie sit amet metus mattis varius. Donec sit amet ligula eget nisi sodales egestas. Aliquam interdum dolor aliquet dolor sollicitudin fermentum. Donec congue lorem a molestie bibendum. Etiam nisi ante, consectetur eget placerat a, tempus a neque. Donec ut elit urna. Etiam venenatis eleifend urna eget scelerisque. Aliquam in nunc quis dui sollicitudin ornare ac vitae lectus.
+
+
+    .ui.modal(ref="requirementPopup")
+        template(if.bind="popupState == 'deployer'")
+            .header Select Deployer
+            .content
+                .ui.link.centered.four.cards
+                    .card(click.delegate="selectDeployer('HFS')")
+                        .image
+                            img(src="styles/themes/hasli/assets/images/logos/hasli-icon.svg")
+                    .card(click.delegate="selectDeployer('Docker')")
+                        .image
+                            img(src="styles/themes/hasli/assets/images/logos/docker-icon.svg")
+        template(if.bind="popupState == 'nodeTemplate'")
+            .header Node Template
+            .content
+                //form
+        template(if.bind="popupState == 'applications'")
+            .header Applications
+            .content
+                //cards
+        template(if.bind="popupState == 'operatingSystem'")
+            .header Operating System
+            .content
+                .ui.link.centered.four.cards
+                    .card(repeat.for="os of osService.list()" click.delegate="selectOS(os.name)")
+                        .image
+                            img(src="${os.icon}")
+                        .content ${os.name}
+                //cards
+        template(if.bind="popupState == 'service'")
+            .header Service
+            .content
+                .ui.form
+                    .field
+                        textarea
+                    button.ui.button.primary(click.delegate="closePopup()") Save
+        template(if.bind="popupState == 'instances'")
+            .header Instances
+            .content
+                // ?

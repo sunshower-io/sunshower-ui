@@ -84,9 +84,9 @@ export class CreateApp {
 
                 request.append('name', this.name);
                 request.append('description', 'sample app');
-                request.append('image', this.image);
-                request.append('repository', this.file);
-                request.append('image-name', this.image.name);
+                request.append('image', this.image[0]);
+                request.append('repository', this.file[0]);
+                request.append('image-name', this.image[0].name);
                 client.createRequest(`workspaces/${workspace.workspace.id}`)
                     .asPost()
                     .withProgressCallback(c => {
