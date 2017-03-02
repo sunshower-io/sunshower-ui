@@ -45,11 +45,12 @@ export class Summary {
 
     private applicationRevision: ApplicationRevision;
 
-    private summary: HTMLElement;
-
     constructor(private osService:OperatingSystemService, private client: HttpClient, private parent: Application) {
 
     }
+
+    private summary: HTMLElement;
+
 
 
     attached() : void {
@@ -108,9 +109,6 @@ export class Summary {
 
 
     activate(identifier: Identifier) {
-
-
-
         let id = identifier.id;
 
         this.client.fetch(`applications/${id}`)
@@ -118,7 +116,6 @@ export class Summary {
             .then(t => {
                 this.applicationRevision = t;
                 this.parent.applicationRevision = t;
-
                 this.load(id);
             });
     }
@@ -130,13 +127,8 @@ export class Summary {
             .fetch(`applications/${appId}/readme`)
             .then(t => t.json() as any)
             .then(t => {
-
                 let converter = new showdown.Converter();
                 this.summary.innerHTML = converter.makeHtml(t.data);
-
-
-
-
             });
     }
 
