@@ -20,10 +20,10 @@ export class CreateApp {
             new Template('styles/themes/hasli/assets/images/block.svg', 'Create New Container'),
             new Template('styles/themes/hasli/assets/images/multi-block.svg', 'Docker Compose'),
             new Template('styles/themes/hasli/assets/images/docker-swarm.svg', 'Docker Swarm'),
-            // new Template('styles/themes/hasli/assets/images/multi-tier-webapp.svg', '3 Tier Web App'),
-            // new Template('styles/themes/hasli/assets/images/cd-build-environment.svg', 'CD Build Environment'),
-            // new Template('styles/themes/hasli/assets/images/ms-architecture.svg', 'Microservices Architecture'),
-            // new Template('styles/themes/hasli/assets/images/java-ee.svg', 'Java EE Enterprise'),
+            new Template('styles/themes/hasli/assets/images/multi-tier-webapp.svg', '3 Tier Web App'),
+            new Template('styles/themes/hasli/assets/images/cd-build-environment.svg', 'CD Build Environment'),
+            new Template('styles/themes/hasli/assets/images/ms-architecture.svg', 'Microservices Architecture'),
+            new Template('styles/themes/hasli/assets/images/java-ee.svg', 'Java EE Enterprise'),
         ]
     }
 
@@ -36,12 +36,6 @@ export class CreateApp {
 
     cancel() : void {
         this.parent.showModal = false;
-    }
-
-    click() : void {
-        $('#btn-test').on("hover", function() {
-            $('#Shape').css({fill: "#ff0000"})
-        })
     }
 
 }

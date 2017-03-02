@@ -1,6 +1,9 @@
 //
    Created by dustinlish on 2/6/17.
 template
+    require(from="apps/workspaces/routes/workspace/applications/resources/application-row")
+    //compose(if.bind="showModal", view-model='./create/wizard')
+
     .ui.hidden.divider
 
     compose(show.bind="showModal", view-model='./create/app-details')
@@ -42,12 +45,14 @@ template
                             .item(data-value="3") Docker Compose
                 .four.wide.right.aligned.column
                     span.widget-icons
-                        .ui.small.button.primary + Create New
+                        .ui.small.button.primary(click.delegate="create()") + Create New
                 table.ui.very.basic.very.padded.selectable.table
                     thead
                         tr
-                            th
-                                //checkbox
+                            th.right.aligned
+                                .ui.master.checkbox
+                                    input(type='checkbox', name='master')
+                                    label
                             th Name
                             th Version
                             th Status
@@ -76,42 +81,10 @@ template
                                     .ui.secondary.button(click.delegate="create()")
                                         | Create Application
                                     .ui.hidden.divider
-
                         tr(
-                        if.bind="applications.length > 0 && !loading",
-                        repeat.for='application of applications'
+                            show.bind="applications.length > 0 && !loading",
+                            as-element="application-row",
+                            repeat.for='application of applications',
+                            application.bind="application"
                         )
-                            // checkbox
-                            td
-                                input(type='checkbox', name='')
-                            // name
-                            td
-                                .ui.link.items
-                                    .item
-                                        .ui.middle.aligned.mini.image
-                                            img(src="${application.logo}")
-                                        .content
-                                            | ${application.name}
-                            // version
-                            td
-                                | ${application.version}
-                            // status
-                            td
-                                .status-circle.green
-                                | ${application.status}
-                            // instances
-                            td
-                                | ${application.instances}
-                            // containers
-                            td
-                                | ${application.containers}
-                            // modified
-                            td
-                                | ${application.modified}
-                            // owner
-                            td
-                                | ${application.owner.id}
-                            td.right.aligned
-                                i.link.ion-ios-gear-outline.big.blue.icon
-
 

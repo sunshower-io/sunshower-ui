@@ -1,10 +1,13 @@
 
 import {HttpClient} from 'aurelia-fetch-client';
-import {bindable, inject} from "aurelia-framework";
+import {bindable} from "aurelia-framework";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
+import {autoinject} from "aurelia-dependency-injection";
+import {Application} from "../../../../../common/model/api/core/application";
+import {User} from "../../../../../common/model/security/user";
 
 
-@inject(Workspace, HttpClient)
+@autoinject
 export class Applications {
 
     @bindable
@@ -16,7 +19,13 @@ export class Applications {
     @bindable
     showModal: boolean;
 
-    constructor(public parent:Workspace, private client:HttpClient) {
+    @bindable
+    showModal2: boolean;
+
+    constructor(
+        public parent:Workspace,
+        private client:HttpClient,
+    ) {
         this.applications = [];
     }
 
@@ -30,7 +39,27 @@ export class Applications {
         $('.ui.dropdown')
             .dropdown()
         ;
-    };
+
+        // $('.ui.checkbox')
+        //     .checkbox()
+        // ;
+
+        $('.master.checkbox')
+            .checkbox({
+                // check all children
+                onChecked: function() {
+                    $('.ui.child.checkbox').checkbox('check');
+                },
+                // uncheck all children
+                onUnchecked: function() {
+                    $('.ui.child.checkbox').checkbox('uncheck');
+                }
+            })
+        ;
+
+
+
+    }
 
     refresh(): void {
         this.loading = true;
@@ -42,12 +71,15 @@ export class Applications {
                     // this.applications = d;
 
                     // TODO plug into application service
+                    let user = new User();
+                    user.firstname = "Dustin";
+                    user.lastname = "Lish";
                     this.applications = [
-                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Full Stack", "8.47", "running", 5, 4, this.getDate(), new Owner("Dustin Lish")),
-                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA UIM", "8.47", "running", 1, 1, this.getDate(), new Owner("Dustin Lish")),
-                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA UMP", "8.47", "running", 1, 1, this.getDate(), new Owner("Dustin Lish")),
-                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA MySql", "5.6", "running", 1, 1, this.getDate(), new Owner("Dustin Lish")),
-                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Robot", "8.47", "running", 5, 1, this.getDate(), new Owner("Dustin Lish")),
+                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Full Stack", "8.47", "running", 5, 4, this.getDate(), user),
+                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA UIM", "8.47", "running", 1, 1, this.getDate(), user),
+                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA UMP", "8.47", "running", 1, 1, this.getDate(), user),
+                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA MySql", "5.6", "running", 1, 1, this.getDate(), user),
+                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Robot", "8.47", "running", 5, 1, this.getDate(), user)
                     ];
                 });
         }, 500)
@@ -61,33 +93,14 @@ export class Applications {
         this.parent.router.navigate('applications/new');
     }
 
+    checkbox() {
+
+    }
+
     private getDate(): string {
         let currentDate = new Date();
         return `${currentDate.getDay()}/${currentDate.getDate()}/${currentDate.getFullYear()} 
                 at ${currentDate.getHours()}:${currentDate.getMinutes()}`;
-    }
-}
-
-export class Application {
-    logo       ?: string;
-    name       ?: string;
-    version    ?: string;
-    status     ?: string;
-    instances  ?: number;
-    containers ?: number;
-    modified   ?: string;
-    owner      ?: Owner;
-
-
-    constructor(logo: string, name: string, version: string, status: string, instances: number, containers: number, modified: string, owner: Owner) {
-        this.logo = logo;
-        this.name = name;
-        this.version = version;
-        this.status = status;
-        this.instances = instances;
-        this.containers = containers;
-        this.modified = modified;
-        this.owner = owner;
     }
 }
 

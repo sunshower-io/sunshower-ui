@@ -22,7 +22,7 @@
 ;
 
 /* Checkmark */
-@checkboxCheckFontSize: 14px;
+@checkboxCheckFontSize: 12px;
 @checkboxCheckTop: 0px;
 @checkboxCheckLeft: 0px;
 @checkboxCheckSize: @checkboxSize;
@@ -50,20 +50,20 @@
 /* Focus */
 @checkboxFocusBackground: @white;
 @checkboxFocusBorderColor: @focusedFormMutedBorderColor;
-@checkboxFocusCheckColor: @selectedTextColor;
+@checkboxFocusCheckColor: @hasliGreen;
 @labelFocusColor: @selectedTextColor;
 
 /* Active */
 @labelActiveColor: @selectedTextColor;
 @checkboxActiveBackground: @white;
 @checkboxActiveBorderColor: @selectedBorderColor;
-@checkboxActiveCheckColor: @selectedTextColor;
+@checkboxActiveCheckColor: @hasliGreen;
 @checkboxActiveCheckOpacity: 1;
 
 /* Active Focus */
 @checkboxActiveFocusBackground: @white;
 @checkboxActiveFocusBorderColor: @checkboxFocusBorderColor;
-@checkboxActiveFocusCheckColor: @selectedTextColor;
+@checkboxActiveFocusCheckColor: @hasliGreen;
 
 /* Indeterminate */
 @checkboxIndeterminateBackground: @checkboxActiveBackground;
