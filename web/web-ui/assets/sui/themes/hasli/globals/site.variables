@@ -49,6 +49,7 @@
 --------------------*/
 
 @primaryColor        : #65A8FB;
+//@primaryColor        : #65A8FB;
 @secondaryColor      : #1EC38A;
 
 @lightPrimaryColor   : @lightBlue;
@@ -161,7 +162,7 @@
 @loaderSpeed             : 0.6s;
 @loaderLineWidth         : 0.2em;
 @loaderFillColor         : rgba(0, 0, 0, 0.1);
-@loaderLineColor         : @grey;
+@loaderLineColor         : @primaryColor;
 
 @invertedLoaderFillColor : rgba(255, 255, 255, 0.15);
 @invertedLoaderLineColor : @primaryColor;
@@ -287,7 +288,8 @@
 --------------------*/
 
 @subtleTransparentBlack     : rgba(0, 0, 0, 0.03);
-@transparentBlack           : rgba(0, 0, 0, 0.05);
+//@transparentBlack           : rgba(0, 0, 0, 0.05);
+@transparentBlack           : #f3f5f8;
 @strongTransparentBlack     : rgba(0, 0, 0, 0.10);
 @veryStrongTransparentBlack : rgba(0, 0, 0, 0.15);
 

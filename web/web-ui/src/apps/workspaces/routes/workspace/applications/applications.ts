@@ -17,6 +17,7 @@ export class Applications {
     showModal: boolean;
 
     constructor(public parent:Workspace, private client:HttpClient) {
+        this.applications = [];
     }
 
     activate(id:any) : void {
@@ -25,6 +26,10 @@ export class Applications {
 
     attached(): void {
         this.refresh();
+
+        $('.ui.dropdown')
+            .dropdown()
+        ;
     };
 
     refresh(): void {
@@ -34,9 +39,18 @@ export class Applications {
                 .then(d => d.json() as any)
                 .then(d => {
                     this.loading = false;
-                    this.applications = d;
+                    // this.applications = d;
+
+                    // TODO plug into application service
+                    this.applications = [
+                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Full Stack", "8.47", "running", 5, 4, this.getDate(), new Owner("Dustin Lish")),
+                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA UIM", "8.47", "running", 1, 1, this.getDate(), new Owner("Dustin Lish")),
+                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA UMP", "8.47", "running", 1, 1, this.getDate(), new Owner("Dustin Lish")),
+                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA MySql", "5.6", "running", 1, 1, this.getDate(), new Owner("Dustin Lish")),
+                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Robot", "8.47", "running", 5, 1, this.getDate(), new Owner("Dustin Lish")),
+                    ];
                 });
-        }, 2)
+        }, 500)
     }
 
     create() : void {
@@ -46,15 +60,45 @@ export class Applications {
     addApplication() : void {
         this.parent.router.navigate('applications/new');
     }
+
+    private getDate(): string {
+        let currentDate = new Date();
+        return `${currentDate.getDay()}/${currentDate.getDate()}/${currentDate.getFullYear()} 
+                at ${currentDate.getHours()}:${currentDate.getMinutes()}`;
+    }
 }
 
 export class Application {
-    logo    ?: string;
-    name    ?: string;
-    status  ?: string;
-    ip      ?: string;
-    ports   ?: string;
-    cpu     ?: number;
-    memory  ?: number;
-    disk    ?: number;
+    logo       ?: string;
+    name       ?: string;
+    version    ?: string;
+    status     ?: string;
+    instances  ?: number;
+    containers ?: number;
+    modified   ?: string;
+    owner      ?: Owner;
+
+
+    constructor(logo: string, name: string, version: string, status: string, instances: number, containers: number, modified: string, owner: Owner) {
+        this.logo = logo;
+        this.name = name;
+        this.version = version;
+        this.status = status;
+        this.instances = instances;
+        this.containers = containers;
+        this.modified = modified;
+        this.owner = owner;
+    }
+}
+
+export class Owner {
+    private _id ?: string;
+
+    constructor(id: string) {
+        this._id = id;
+    }
+
+    get id(): string {
+        return this._id;
+    }
 }

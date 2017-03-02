@@ -186,9 +186,14 @@ body {
   padding: 25px;
 }
 
-.board--white {
-
+.hasli--basic_blue {
+  border: 1px solid #65a8fb !important;
 }
+
+.hasli--blue {
+  color: #65a8fb !important;
+}
+
 
 .chart {
   margin-left: -1em !important;

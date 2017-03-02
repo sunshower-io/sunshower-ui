@@ -1,0 +1,19 @@
+//
+   Created by dustinlish on 3/1/17.
+
+template
+    .ui.hidden.divider
+    h2.ui.center.aligned.icon.header
+        i.circular.blue.ion-ios-cloud-outline.icon.circular--icon.circular--icon_blue
+        |   Looks like you haven't added any cloud providers yet
+    h4.ui.center.aligned.grey.header
+        |   You can add a cloud now or at deploy time
+    .ui.vertical.center.aligned.segment
+        .ui.container
+            .ui.hidden.divider
+            .ui.primary.button(click.delegate="addCloud()")
+                | + Add New Cloud
+            .ui.hidden.divider
+            .ui.small.images
+                img(src='styles/themes/hasli/assets/images/logos/aws-logo.svg')
+                img(src='styles/themes/hasli/assets/images/logos/vmware-logo.png')

@@ -13,46 +13,39 @@ template
             |   Looks like you don't have any instances, create a new one!
         h4.ui.center.aligned.grey.header(if.bind="providers.length == 0")
             |   You'll need to add a cloud provider before deploying any instances
-        .ui.centered.grid.container
-            .ui.hidden.divider
-            .ui.card.clickable(click.delegate="createInstance()")
-                .content
-                    .meta
-                    .description
-                        .ui.container.workspaces--image_container
-                            img.blue(src='styles/themes/hasli/assets/images/icons/code-working.svg').workspaces--image_size
-                    .ui.secondary.button
-                                | + Create New Instance
+        .ui.basic.center.aligned.segment
+            .ui.secondary.button(click.delegate="createInstance()")
+                        | + Create New Instance
             .ui.hidden.divider
 
     template(if.bind="instances && instances.length > 0")
-        .ui.fluid.container
-            .ui.container.equal.height.grid
-                .row
-                    .column
-                        .ui.basic.segment
-                            h2.ui.header
-                                i.circular.red.ion-ios-loop.icon.circular--icon.circular--icon_red
-                                .content
-                                    |   Instances
-                        .ui.hidden.divider
-                .row
-                    .eight.wide.column
-                        .ui.basic.segment
-                            .chart-header
-                                | Total Number of Instances
-                            chart-stat(value="6", color="rgba(56, 155, 255, .8)")
-                            .chart
-                                line-chart(data.bind="totalInstancesData")
-                    .eight.wide.column
-                        .ui.basic.segment
-                            .chart-header
-                                | Running Instances
-                            chart-stat(value="6", color="#1EC38A")
-                            .chart
-                                line-chart(data.bind="totalInstanceStatuses")
-        .ui.hidden.divider
-        .ui.divider
+        //.ui.fluid.container
+        //    .ui.container.equal.height.grid
+        //        .row
+        //            .column
+        //                .ui.basic.segment
+        //                    h2.ui.header
+        //                        i.circular.red.ion-ios-loop.icon.circular--icon.circular--icon_red
+        //                        .content
+        //                            |   Instances
+        //                .ui.hidden.divider
+        //        .row
+        //            .eight.wide.column
+        //                .ui.basic.segment
+        //                    .chart-header
+        //                        | Total Number of Instances
+        //                    chart-stat(value="6", color="rgba(56, 155, 255, .8)")
+        //                    .chart
+        //                        line-chart(data.bind="totalInstancesData")
+        //            .eight.wide.column
+        //                .ui.basic.segment
+        //                    .chart-header
+        //                        | Running Instances
+        //                    chart-stat(value="6", color="#1EC38A")
+        //                    .chart
+        //                        line-chart(data.bind="totalInstanceStatuses")
+        //.ui.hidden.divider
+        //.ui.divider
         .ui.hidden.divider
         .ui.fluid.container
             .ui.container
