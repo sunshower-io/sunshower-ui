@@ -90,6 +90,7 @@
   },
   "jspm": {
     "dependencies": {
+      "ace": "github:ajaxorg/ace-builds@^1.2.6",
       "aurelia-animator-css": "npm:aurelia-animator-css@^1.0.0",
       "aurelia-animator-velocity": "npm:aurelia-animator-velocity@^1.0.1",
       "aurelia-bootstrapper": "npm:aurelia-bootstrapper@^1.0.0",

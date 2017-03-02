@@ -25,9 +25,13 @@ System.config({
       "deps": [
         "jquery"
       ]
+    },
+    "ace/*": {
+      "deps": "ace"
     }
   },
   map: {
+    "ace": "github:ajaxorg/ace-builds@1.2.6",
     "aurelia-animator-css": "npm:aurelia-animator-css@1.0.1",
     "aurelia-animator-velocity": "npm:aurelia-animator-velocity@1.0.1",
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.1",
@@ -402,7 +406,7 @@ System.config({
     "npm:normalize-package-data@2.3.5": {
       "hosted-git-info": "npm:hosted-git-info@2.2.0",
       "is-builtin-module": "npm:is-builtin-module@1.0.0",
-      "semver": "npm:semver@5.3.0",
+      "semver": "npm:semver@5.0.1",
       "systemjs-json": "github:systemjs/plugin-json@0.1.2",
       "url": "github:jspm/nodelibs-url@0.1.0",
       "util": "github:jspm/nodelibs-util@0.1.0",
@@ -462,7 +466,7 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "path-type": "npm:path-type@1.1.0"
     },
-    "npm:readable-stream@1.1.14": {
+    "npm:readable-stream@1.0.34": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "core-util-is": "npm:core-util-is@1.0.2",
       "events": "github:jspm/nodelibs-events@0.1.1",
@@ -484,7 +488,7 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "symbol-observable": "npm:symbol-observable@1.0.4"
     },
-    "npm:semver@5.3.0": {
+    "npm:semver@5.0.1": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:set-blocking@2.0.0": {
@@ -510,7 +514,7 @@ System.config({
     "npm:stream-browserify@1.0.0": {
       "events": "github:jspm/nodelibs-events@0.1.1",
       "inherits": "npm:inherits@2.0.1",
-      "readable-stream": "npm:readable-stream@1.1.14"
+      "readable-stream": "npm:readable-stream@1.0.34"
     },
     "npm:string-width@1.0.2": {
       "code-point-at": "npm:code-point-at@1.1.0",
