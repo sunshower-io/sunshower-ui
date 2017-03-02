@@ -21,21 +21,15 @@ export class Applications {
     showModal: boolean;
 
     @bindable
-    showModal2: boolean;
+    workspace: WorkspaceRevision;
 
     constructor(
         public parent:Workspace,
         private client:HttpClient,
     ) {
         this.applications = [];
-    @bindable
-    workspace: WorkspaceRevision;
-
-    constructor(
-        public parent:Workspace,
-        private client:HttpClient
-    ) {
     }
+
 
     activate(id:any) : void {
         this.parent.setMenuVisible(true);
@@ -82,6 +76,9 @@ export class Applications {
                         new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA MySql", "5.6", "running", 1, 1, this.getDate(), user),
                         new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Robot", "8.47", "running", 5, 1, this.getDate(), user)
                     ];
+                })
+                .catch(err => {
+                    this.loading = false;
                 });
         }, 500)
     }

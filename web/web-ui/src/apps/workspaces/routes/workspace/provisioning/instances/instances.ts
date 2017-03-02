@@ -78,8 +78,11 @@ export class Instances {
                                 .then(d => this.instances = d);
                         }
                     }
+                })
+                .catch(err => {
+                    this.loading = false;
                 });
-        }, 2)
+        }, 500)
     }
 
     stop(instance: Instance): void {

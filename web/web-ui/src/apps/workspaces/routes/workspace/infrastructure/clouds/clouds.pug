@@ -34,7 +34,7 @@ template
                             .item(data-value="2") AWS
                 .four.wide.right.aligned.column
                     span.widget-icons
-                        .ui.small.button.primary(click.delegate="create()") + Create New
+                        .ui.small.button.primary(click.delegate="addCloud()") Add Cloud
                 table.ui.very.basic.very.padded.selectable.table
                     thead
                         tr
@@ -69,7 +69,7 @@ template
                                 .ui.vertical.center.aligned.segment
                                     .ui.container
                                         .ui.hidden.divider
-                                        .ui.primary.button(click.delegate="addCloud()")
+                                        .ui.secondary.button(click.delegate="addCloud()")
                                             | + Add New Cloud
                                         .ui.hidden.divider
                         tr(

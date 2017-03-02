@@ -72,6 +72,9 @@ export class Clouds {
                     // this.providers = r;
                     this.providers = this.createMockProviders();
                     this.loading = false;
+                })
+                .catch(err => {
+                    this.loading = false;
                 });
         }, 500)
     }
