@@ -55,19 +55,27 @@ export class Summary {
 
     attached() : void {
         $(this.requirementDD).dropdown();
+        $(this.requirementPopup).modal({
+            onHide: () => {
+                this.popupCleanup();
+            }
+        });
     }
 
     openPopup(state: string) : void {
         this.popupState = state;
-        console.log(state);
         $(this.requirementPopup).modal('show');
-        //todo set closePopup as a callback, just in case they click out
+    }
+
+    popupCleanup() : void {
+        this.popupState = '';
+        $(this.requirementDD).find('.active').removeClass('active');
+        $(this.requirementDD).find('.selected').removeClass('selected');
     }
 
     closePopup() : void {
-        this.popupState = '';
+        this.popupCleanup();
         $(this.requirementPopup).modal('hide');
-        $(this.requirementDD).find('.active').removeClass('active');
     }
 
     selectDeployer(deployer: string) : void {
