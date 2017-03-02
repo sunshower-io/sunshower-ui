@@ -74,14 +74,23 @@
         <!--<hasli-service.version>${snapshot-version}</hasli-service.version>-->
         <!--<hasli-persist.version>${snapshot-version}</hasli-persist.version>-->
 
-        <hasli-api.version>1.0.43.Final</hasli-api.version>
-        <hasli-persist.version>1.0.69.Final</hasli-persist.version>
+        <!--<hasli-api.version>1.0.43.Final</hasli-api.version>-->
+        <!--<hasli-persist.version>1.0.69.Final</hasli-persist.version>-->
+        <!--<hasli-schemata.version>1.0.2.Final</hasli-schemata.version>-->
+        <!--<hasli-common.version>1.0.2.Final</hasli-common.version>-->
+
+
+        <hasli-service.version>1.0.37.Final</hasli-service.version>
+
+
+
+
+        <hasli-api.version>1.0.44.Final</hasli-api.version>
         <hasli-schemata.version>1.0.2.Final</hasli-schemata.version>
         <hasli-common.version>1.0.2.Final</hasli-common.version>
+        <hasli-test.version>1.0.34.Final</hasli-test.version>
+        <hasli-persist.version>1.0.70.Final</hasli-persist.version>
 
-
-        <hasli-test.version>1.0.32.Final</hasli-test.version>
-        <hasli-service.version>1.0.37.Final</hasli-service.version>
         <!--<hasli-api.version>1.0.42.Final</hasli-api.version>-->
         <!--<hasli-persist.version>1.0.68.Final</hasli-persist.version>-->
         <!--<hasli-schemata.version>1.0.1.Final</hasli-schemata.version>-->
