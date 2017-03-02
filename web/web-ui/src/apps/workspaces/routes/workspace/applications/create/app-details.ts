@@ -104,6 +104,7 @@ export class CreateApp {
     }
 
     cancel() : void {
+        this.controller.reset();
         this.parent.showModal = false;
     }
 
