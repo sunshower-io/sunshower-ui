@@ -10,29 +10,29 @@ template
     // name
     td
         .ui.link.items
-            .item
+            .item(click.delegate="open()")
                 .ui.middle.aligned.mini.image
-                    img(src="${application.logo}")
+                    img(src="${model.logo}")
                 .content
-                    | ${application.name}
+                    | ${model.name}
     // version
     td
-        | ${application.version}
+        | ${model.version}
     // status
     td
         .status-circle.green
-        | ${application.status}
+        | ${model.status}
     // instances
     td
-        | ${application.instances}
+        | ${model.instances}
     // containers
     td
-        | ${application.containers}
+        | ${model.containers}
     // modified
     td
-        | ${application.modified}
+        | ${model.modified}
     // owner
     td
-        | ${application.user.firstname} ${application.user.lastname}
+        | ${model.owner.firstname} ${model.owner.lastname}
     td.right.aligned
         i.link.ion-ios-gear-outline.big.blue.icon

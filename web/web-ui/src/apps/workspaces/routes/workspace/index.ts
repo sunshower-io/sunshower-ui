@@ -45,14 +45,14 @@ export class Workspace {
             {route: 'applications/:id/application', name: 'application', moduleId: './applications/application/application', nav: false, title: 'Application'},
             {route: 'applications/new', name: 'add-application', moduleId: './applications/add-application', nav: false, title: 'Applications'},
 
-            // Cloud Routes
-            {route: 'infrastructure', name: 'infrastructure', moduleId: './infrastructure/index', nav: true, title: 'Infrastructure'},
+            // Infrastructure Routes
+            {route: 'infrastructure', name: 'infrastructure', moduleId: './infrastructure/infrastructure', nav: true, title: 'Infrastructure'},
             {route: 'clouds', name: 'clouds', moduleId: './infrastructure/clouds/clouds', nav: false, title: 'Clouds'},
             {route: 'clouds/new', name: 'create-cloud', moduleId: './infrastructure/clouds/add-cloud', nav: false, title: 'Clouds'},
             {route: 'clouds/:id/credential/new', name: 'add-cloud-credential', moduleId: './infrastructure/clouds/add-credential', nav: false, title: 'Add Cloud Credential'},
 
-            // Instances Routes
-            {route: 'provisioning', name: 'provisioning', moduleId: './provisioning/index', nav: true, title: 'Provisioning'},
+            // Provisioning Routes
+            {route: 'provisioning', name: 'provisioning', moduleId: './provisioning/provisioning', nav: true, title: 'Provisioning'},
             {route: 'instances', name: 'instances', moduleId: './provisioning/instances/instances', nav: false, title: 'Instances'},
             {route: 'instances/new', name: 'new-instance', moduleId: './provisioning/instances/new', nav: false, title: 'New Instance'},
             {route: 'instances/:id/instance', name: 'instance', moduleId: './provisioning/instances/instance/instance', nav: false, title: 'Instance'},

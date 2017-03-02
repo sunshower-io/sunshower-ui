@@ -1,11 +1,18 @@
 import {Copyable} from "common/lib/lang";
 import {UUID} from "common/lib/utils/uuid";
+import {User} from "../../security/user";
 
 export class Provider {
     id          ?: string;
     key         ?: string;
     name        ?: string;
     icon        ?: string;
+    location    ?: string;
+    account     ?: string;
+    hosts       ?: number;
+    vms         ?: number;
+    bareMetal   ?: number;
+    owner       ?: User;
     description ?: string;
     imageId     ?: string;
 }

@@ -1,13 +1,31 @@
-import {Application} from "../../../../../../common/model/api/core/application";
-import {bindable} from "aurelia-framework";
+
+import {Workspace} from "apps/workspaces/routes/workspace/index";
+import {bindable, noView} from "aurelia-framework";
+import {autoinject} from "aurelia-dependency-injection";
+
 /**
  * Created by dustinlish on 3/2/17.
  */
 
-export class ApplicationRow {
+@noView
+@autoinject
+export class Row {
 
     @bindable
-    private application: Application;
+    private model: any;
+
+    @bindable
+    private route: string;
+
+    @bindable
+    private id: any;
+
+    constructor(private parent: Workspace) {
+    }
+
+    activate(model) {
+        this.model = model;
+    }
 
     attached() {
         $('.child.checkbox')
@@ -44,6 +62,12 @@ export class ApplicationRow {
                 }
             })
         ;
+    }
+
+    open() : void {
+        // TODO use app service
+        // this.parent.router.navigateToRoute(this.router, id)
+        this.parent.router.navigate('applications/4/application')
     }
 
 }

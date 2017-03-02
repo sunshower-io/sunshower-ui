@@ -40,10 +40,6 @@ export class Applications {
             .dropdown()
         ;
 
-        // $('.ui.checkbox')
-        //     .checkbox()
-        // ;
-
         $('.master.checkbox')
             .checkbox({
                 // check all children
@@ -56,9 +52,6 @@ export class Applications {
                 }
             })
         ;
-
-
-
     }
 
     refresh(): void {

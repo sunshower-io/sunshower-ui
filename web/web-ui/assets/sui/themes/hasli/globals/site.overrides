@@ -75,6 +75,12 @@ body {
   box-shadow: 1px 1px 25px !important;
 }
 
+.circular--icon_no-box {
+  width: 30px !important;
+  height: 30px !important;
+  box-shadow: 1px 1px 10px !important;
+}
+
 .circular--icon_green {
   color: @hasliGreen !important;
 }

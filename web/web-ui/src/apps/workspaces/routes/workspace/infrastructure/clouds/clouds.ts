@@ -2,8 +2,9 @@ import {bindable} from "aurelia-framework";
 import {Provider} from "common/model/api/hal/api";
 import {autoinject} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
-
 import {Workspace} from "apps/workspaces/routes/workspace/index";
+import {User} from "../../../../../../common/model/security/user";
+
 @autoinject
 export class Clouds {
 
@@ -19,6 +20,23 @@ export class Clouds {
 
     attached(): void {
         this.refresh();
+
+        $('.ui.dropdown')
+            .dropdown()
+        ;
+
+        $('.master.checkbox')
+            .checkbox({
+                // check all children
+                onChecked: function() {
+                    $('.ui.child.checkbox').checkbox('check');
+                },
+                // uncheck all children
+                onUnchecked: function() {
+                    $('.ui.child.checkbox').checkbox('uncheck');
+                }
+            })
+        ;
     };
 
     activate(id:any)  {
@@ -45,12 +63,17 @@ export class Clouds {
 
     refresh(): void {
         this.loading = true;
-        this.client.fetch('provider')
-            .then(r => r.json() as any)
-            .then(r => {
-                this.providers = r;
-                this.loading = false;
-            });
+
+        setTimeout(() => {
+            this.client.fetch('provider')
+                .then(r => r.json() as any)
+                .then(r => {
+                    // TODO change back after testing
+                    // this.providers = r;
+                    this.providers = this.createMockProviders();
+                    this.loading = false;
+                });
+        }, 500)
     }
 
     configure(id: string) : void {
@@ -59,6 +82,31 @@ export class Clouds {
 
     addCloud() : void {
         this.parent.router.navigate('clouds/new');
+    }
+
+    createMockProviders() : Array<Provider> {
+        let clouds = [];
+        for (let i of [1, 2, 3, 4, 5]) {
+            let c1 = new Provider();
+            c1.name = "Hasli AWS west " + i;
+            c1.icon = "styles/themes/hasli/assets/images/logos/aws-logo-2.svg";
+            c1.location = "us-west-1";
+            c1.account = "Hasli AWS Dev Account";
+            c1.hosts = 2 + i;
+            c1.vms = 100 + i;
+            c1.bareMetal = 0;
+
+            let owner = new User();
+            owner.firstname = "Dustin";
+            owner.lastname = "Lish";
+
+            c1.owner = owner;
+
+            clouds.push(c1)
+        }
+
+
+        return clouds;
     }
 
 }

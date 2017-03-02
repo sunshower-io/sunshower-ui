@@ -1,7 +1,6 @@
 //
    Created by dustinlish on 2/6/17.
 template
-    require(from="apps/workspaces/routes/workspace/applications/resources/application-row")
     //compose(if.bind="showModal", view-model='./create/wizard')
 
     .ui.hidden.divider
@@ -83,8 +82,10 @@ template
                                     .ui.hidden.divider
                         tr(
                             show.bind="applications.length > 0 && !loading",
-                            as-element="application-row",
+                            as-element="compose",
+                            view-model="apps/workspaces/resources/custom-elements/table/row",
+                            view="apps/workspaces/resources/custom-elements/table/application-row.html"
                             repeat.for='application of applications',
-                            application.bind="application"
+                            model.bind="application",
                         )
 

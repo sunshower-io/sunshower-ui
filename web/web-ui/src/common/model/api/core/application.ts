@@ -3,6 +3,7 @@ import {User} from 'common/model/security'
 
 export class Application {
 
+    id         ?: string;
     logo       ?: string;
     name       ?: string;
     version    ?: string;
