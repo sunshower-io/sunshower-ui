@@ -26,6 +26,7 @@ export class Applications {
     private loading: boolean = true;
     private element: HTMLElement;
     private loader: HTMLElement;
+    private applicationSearch: HTMLElement;
 
 
     private elements: ImageDescriptor[];
@@ -52,6 +53,29 @@ export class Applications {
         this.loading = true;
     }
 
+    setupSearch() : void {
+        let $searchBar = $(this.applicationSearch);
+        $searchBar.on('change', 'input', () => {
+            let searchOptions = $(this.element).find('.item'),
+                searchTerm = $searchBar.find('input').val().toLowerCase();
+            console.log('searchTerm', searchTerm);
+            if (searchTerm == '') {
+                searchOptions.removeClass('inactive');
+            }
+            else {
+                for (let i = 0; i < searchOptions.length; i++) {
+                    let thisItem = $(searchOptions[i]);
+                    //TODO account for casing?
+                    if (thisItem.attr('data-value').toLowerCase().indexOf(searchTerm) == -1) {
+                        thisItem.addClass('inactive');
+                    } else {
+                        thisItem.removeClass('inactive');
+                    }
+                }
+            }
+        });
+    }
+
     private createDragElement(descriptor: ImageDescriptor): HTMLElement {
         let element = document.createElement('div'),
             icon = descriptor.logo_url && descriptor.logo_url.large;
@@ -72,6 +96,7 @@ export class Applications {
             .then(response => response.json() as any)
             .then(elements => {
                 this.elements = elements;
+                this.setupSearch();
                 setTimeout(() => {
                     $(this.element).find('.app-drag-target').each((i: number, el: HTMLElement) => {
                         let

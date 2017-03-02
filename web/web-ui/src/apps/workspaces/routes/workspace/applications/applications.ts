@@ -2,6 +2,7 @@
 import {HttpClient} from 'aurelia-fetch-client';
 import {bindable} from "aurelia-framework";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
+import {WorkspaceRevision} from "apps/workspaces/model/workspaces/workspace";
 import {autoinject} from "aurelia-dependency-injection";
 import {Application} from "../../../../../common/model/api/core/application";
 import {User} from "../../../../../common/model/security/user";
@@ -27,6 +28,13 @@ export class Applications {
         private client:HttpClient,
     ) {
         this.applications = [];
+    @bindable
+    workspace: WorkspaceRevision;
+
+    constructor(
+        public parent:Workspace,
+        private client:HttpClient
+    ) {
     }
 
     activate(id:any) : void {

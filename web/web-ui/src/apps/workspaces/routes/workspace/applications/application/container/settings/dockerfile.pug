@@ -3,7 +3,7 @@
 
 template
     .ui.segment(style="background-color: #F9F9FB")
-        pre
+        div(id="editor", style="min-height:324px")
             | FROM buildpack-deps:wheezy
             |
             | RUN groupadd --gid 1000 node \

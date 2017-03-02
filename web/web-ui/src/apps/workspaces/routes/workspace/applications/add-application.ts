@@ -28,7 +28,11 @@ export class AddApplication {
     @bindable
     private uploadStatus:string = 'none'; //none, uploading, done, error
 
-    constructor(private parent:Workspace, private client:HttpClient, private controller:ValidationController) {
+    constructor(
+        private parent:Workspace,
+        private client:HttpClient,
+        private controller:ValidationController
+    ) {
         this.controller.addRenderer(new BootstrapFormRenderer());
     }
 
@@ -113,13 +117,13 @@ export class AddApplication {
                 .on('drop', function(e) {
                     this.files = (e.originalEvent as DragEvent).dataTransfer.files;
                     showFiles( this.files );
+                    //todo fix
                 });
         }
 
-        //TODO fix type error
-        // $input.on('change', function(e) {
-        //     showFiles(e.target.files);
-        // });
+        $input.on('change', function(e) {
+            showFiles((e as any).target.files);
+        });
     }
 
 }

@@ -14,87 +14,10 @@ template
                     | + NEW FILE
         table.ui.very.basic.files.single.line.unstackable.selectable.table
             tbody
-                tr
+                tr(repeat.for="file of files")
                     td
-                        i.blue.ion-ios-folder-outline.icon.file-icons_small
+                        i(class="${style(file)}")
                         a(href='#')
-                            | src
+                            | ${name(file)}
                     td Clean up logic in onComplete
                     td.right.aligned 5 days ago
-                tr
-                    td
-                        i.blue.ion-ios-folder-outline.icon.file-icons_small
-                        a(href='#')
-                            | docs
-                    td Initial commit
-                    td.right.aligned 5 days ago
-                tr
-                    td
-                        i.blue.ion-ios-folder-outline.icon.file-icons_small
-                        a(href='#')
-                            | tasks
-                    td Updated browser prefix config
-                    td.right.aligned 5 days ago
-                tr
-                    td
-                        i.blue.ion-ios-folder-outline.icon.file-icons_small
-                        a(href='#')
-                            | test
-                    td  Restructure test/ for meteor #1607
-                    td.right.aligned 10 months ago
-                tr
-                    td
-                        i.grey.file.outline.icon
-                        a(href='#')
-                            | README.md
-                    td Update README.md
-                    td.right.aligned 7 days ago
-                tr
-                    td
-                        i.grey.file.outline.icon
-                        a(href='#')
-                            | bower.json
-                    td main: semantic.css => semantic.less
-                    td.right.aligned 3 months ago
-                tr
-                    td
-                        i.grey.file.outline.icon
-                        a(href='#')
-                            | composer.json
-                    td #1853 Fix some composer.json fields
-                    td.right.aligned 5 months ago
-                tr
-                    td
-                        i.grey.file.outline.icon
-                        a(href='#')
-                            | gulpfile.js
-                    td Update gulpfile
-                    td.right.aligned 4 months ago
-                tr
-                    td
-                        i.grey.file.outline.icon
-                        a(href='#')
-                            | karma.conf.js
-                    td Remove execute permission.
-                    td.right.aligned 8 months ago
-                tr
-                    td
-                        i.grey.file.outline.icon
-                        a(href='#')
-                            | logo.png
-                    td Remove execute permission.
-                    td.right.aligned 8 months ago
-                tr
-                    td
-                        i.grey.file.outline.icon
-                        a(href='#')
-                            | package.json
-                    td Build 2.0.7
-                    td.right.aligned 5 days ago
-                tr
-                    td
-                        i.grey.file.outline.icon
-                        a(href='#')
-                            | semantic.json.example
-                    td Fix admin flag set in example json! #2453
-                    td.right.aligned 28 days ago

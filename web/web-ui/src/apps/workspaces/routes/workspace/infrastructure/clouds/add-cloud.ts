@@ -4,7 +4,7 @@ import {
     NewInstance
 } from "aurelia-framework";
 import {HttpClient} from 'aurelia-fetch-client';
-import {Provider} from "common/model/api/hal/api";
+import {Provider, AWSRegion} from "common/model/api/hal/api";
 import {
     ValidationController,
     ValidationRules
@@ -16,17 +16,22 @@ import {Workspace} from "apps/workspaces/routes/workspace/index";
 export class AddCloud {
 
     @bindable
-    visible: boolean;
+    visible             : boolean;
 
     @bindable
-    providerSelected :boolean;
+    providerSelected    : boolean;
 
     @bindable
-    providers: Provider[];
+    providers           : Provider[];
 
     @bindable
-    private provider:Provider;
+    private provider    : Provider;
 
+    @bindable
+    regions             : any[];
+
+    @bindable
+    region              : HTMLElement;
 
 
     constructor(
@@ -35,7 +40,6 @@ export class AddCloud {
         private controller:ValidationController
     ) {
         this.controller.addRenderer(new BootstrapFormRenderer());
-
 
         //should be removed in favor of pulling in the real thing
         this.providers = [];
@@ -61,11 +65,16 @@ export class AddCloud {
     selectProvider(provider:Provider) : void {
         this.providerSelected = true;
         this.provider = provider;
+        if (this.provider.key == 'aws') {
+            this.regions = AWSRegion.get();
+            setTimeout(() => {
+               $(this.region).dropdown();
+            });
+        }
         this.setupValidation();
     }
 
     saveProvider() : void {
-
         this.controller.validate().then(result => {
             if (result.valid) {
                 this.client.fetch('provider', {
@@ -81,6 +90,7 @@ export class AddCloud {
         //.withMessage('Key must be exactly three characters long')
         let validationRules = ValidationRules
             .ensure((p:Provider) => p.name).required()
+            .ensure((p:Provider) => p.awsRegion).required().when((p:Provider) => p.key == 'aws').withMessage('A region is required for AWS clouds.')
             .rules;
         this.controller.addObject(this.provider, validationRules);
     }

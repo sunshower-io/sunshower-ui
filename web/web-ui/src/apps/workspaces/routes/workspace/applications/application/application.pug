@@ -11,9 +11,9 @@ template
                     .ui.items
                         .item
                             .ui.tiny.image
-                                img(src='styles/themes/hasli/assets/images/logos/ca-logo.png')
+                                img(src='/hasli/api/v1/applications/${applicationRevision.picture.id}/picture')
                             .middle.aligned.content
-                                a.header CA UIM
+                                a.header ${applicationRevision.name}
                                 .meta
                                     span Deploys CA UIM, UMP, and monitoring probes
                                 .description
