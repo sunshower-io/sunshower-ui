@@ -57,7 +57,6 @@ export class Summary {
     }
 
 
-
     openPopup(state: string) : void {
         this.popupState = state;
         $(this.requirementPopup).modal('show');
@@ -79,9 +78,17 @@ export class Summary {
         this.closePopup();
     }
 
+    clearDeployer() : void {
+        this.deployer = '';
+    }
+
     selectOS(os: string) : void {
         this.os = os;
         this.closePopup();
+    }
+
+    clearOS() : void {
+        this.os = '';
     }
 
     saveService() : void {

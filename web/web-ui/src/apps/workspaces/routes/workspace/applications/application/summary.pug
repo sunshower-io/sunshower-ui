@@ -33,20 +33,24 @@ template
                                             .item(click.delegate="openPopup('instances')")  Instances
 
                             .segment-header_divider
-                            .ui.horizontal.list
-                                .item(if.bind="deployer && deployer != ''")
-                                    .ui.basic.tiny.primary.button
+                            .ui.horizontal.list.pills
+                                .item.closeable(if.bind="deployer && deployer != ''")
+                                    .ui.basic.primary.button(title="Edit Deployer" click.delegate="openPopup('deployer')")
                                         | ${deployer}
-                                .item(if.bind="os && os != ''")
-                                    .ui.basic.tiny.primary.button
+                                    .hover-close
+                                        i.ion-ios-trash-outline.big.fitted.icon(title="Remove Deployer" click.delegate="clearDeployer()")
+
+                                .item.closeable(if.bind="os && os != ''")
+                                    .ui.basic.primary.button(title="Edit OS" click.delegate="openPopup('operatingSystem')")
                                         | ${os}
+                                    .hover-close
+                                        i.ion-ios-trash-outline.big.fitted.icon(title="Remove OS" click.delegate="clearOS()")
                                 .item
-                                    .ui.basic.tiny.primary.button
+                                    .ui.basic.primary.button
                                         | Primary Hub
                                 .item
-                                    .ui.basic.tiny.primary.button
+                                    .ui.basic.primary.button
                                         | UIM
-                                //todo write out pills based on template
                 .row
                     .column
                         .ui.segment
@@ -59,10 +63,10 @@ template
                             .segment-header_divider
         .twelve.wide.column
             .ui.segment(style="position:relative; min-height:150px;")
-                .ui.active.dimmer(if.bind="loadingSummary", style="position:absolute; top:0px; left:0; right:0; bottom:0;")
-                    .ui.text.loader Loading Readme ...
-                h1.ui.header Readme
+                h1.ui.header(if.bind="!loadingSummary") Readme
                 div(ref="summary")
+                .ui.inverted.active.dimmer(if.bind="loadingSummary", style="position:absolute; top:0px; left:0; right:0; bottom:0;")
+                    .ui.text.loader Loading Readme ...
 
 
 
