@@ -11,6 +11,7 @@ import {
     ValidationRules
 } from 'aurelia-validation';
 import {BootstrapFormRenderer} from 'common/resources/custom-components/bootstrap-form-renderer';
+import {NavigationInstruction} from "aurelia-router";
 
 @inject(HttpClient, NewInstance.of(ValidationController))
 export class AddCredential {
@@ -28,6 +29,8 @@ export class AddCredential {
     @bindable
     private loading             : boolean;
 
+    private providerId          : string;
+
     private credentials         : CredentialSecret[];
 
     constructor(
@@ -36,6 +39,11 @@ export class AddCredential {
     ) {
         this.controller.addRenderer(new BootstrapFormRenderer());
 
+    }
+
+
+    activate(id: string, p:any, u:NavigationInstruction) {
+        this.providerId = u.params.id;
     }
 
     open() : void {
@@ -71,7 +79,7 @@ export class AddCredential {
     saveCredential() : void {
         this.controller.validate().then(result => {
             if (result.valid) {
-                this.client.fetch(`provider/${this.provider.id}`, {
+                this.client.fetch(`providers/${this.providerId}/credential`, {
                     method: 'post',
                     body: JSON.stringify(this.credential)
                 }).then(t => this.refresh());
@@ -88,7 +96,7 @@ export class AddCredential {
 
     refresh() : void {
         this.loading = true;
-        this.client.fetch(`provider/${this.provider.id}/secrets`)
+        this.client.fetch(`providers/${this.providerId}/credentials`)
             .then(r => r.json() as any)
             .then(r => {
                 this.credentials = r;

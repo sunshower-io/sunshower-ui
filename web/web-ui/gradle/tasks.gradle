@@ -7,37 +7,62 @@ def isWindows()  {
      return (Os.isFamily(Os.FAMILY_WINDOWS))
 }
 
+
+def fast() {
+    final boolean fast = System.getProperty("fast") != null
+    if(fast) {
+        logger.info("Running in fast mode (will not bundle UI)")
+    }
+    return fast
+}
+
 task installGulp(type:Exec) {
-    if(isWindows()) {
-        commandLine 'cmd', '/c', 'npm', 'install', 'gulp', '-g'
+    if(!fast()) {
+        if (isWindows()) {
+            commandLine 'cmd', '/c', 'npm', 'install', 'gulp', '-g'
+        } else {
+            commandLine 'npm', 'install', 'gulp', '-g'
+        }
     } else {
-        commandLine 'npm', 'install', 'gulp', '-g'
+        commandLine "echo", "'not running gulp'"
+
     }
 }
 
 task installJspm(type:Exec) {
-    if(isWindows()) {
-        commandLine 'cmd', 'c', 'npm', 'install', 'jspm', '-g'
+    if(!fast()) {
+        if(isWindows()) {
+            commandLine 'cmd', 'c', 'npm', 'install', 'jspm', '-g'
+        } else {
+            commandLine 'npm', 'install', 'jspm', '-g'
+        }
     } else {
-        commandLine 'npm', 'install', 'jspm', '-g'
+        commandLine "echo", "'not running npm deps'"
     }
 }
 
 task installNpmDeps(type:Exec) {
-    if(isWindows()) {
-
-        commandLine 'cmd', '/c', 'npm', 'install', '-y'
+    if(!fast()) {
+        if (isWindows()) {
+            commandLine 'cmd', '/c', 'npm', 'install', '-y'
+        } else {
+            commandLine 'npm', 'install', '-y'
+        }
     } else {
-        commandLine 'npm', 'install', '-y'
+        commandLine "echo", "'not running npm deps'"
     }
 }
 
 task installJspmDeps(type:Exec) {
-    if(isWindows()) {
-        commandLine 'cmd', '/c', 'jspm', 'install', '-y'
+    if(!fast()) {
+        if (isWindows()) {
+            commandLine 'cmd', '/c', 'jspm', 'install', '-y'
+        } else {
+            commandLine 'jspm', 'install', '-y'
+        }
     } else {
-        commandLine 'jspm', 'install', '-y'
 
+        commandLine "echo", "'not running jspm'"
     }
 }
 
@@ -46,10 +71,14 @@ task cleanAll(type:Delete) {
 }
 
 task bundle(type:Exec) {
-    if(isWindows()) {
-        commandLine 'cmd', '/c', 'gulp', 'export'
+    if(!fast()) {
+        if (isWindows()) {
+            commandLine 'cmd', '/c', 'gulp', 'export'
+        } else {
+            commandLine 'gulp', 'export'
+        }
     } else {
-        commandLine 'gulp', 'export'
+        commandLine "echo", "'not running bundle'"
     }
 }
 
@@ -63,17 +92,21 @@ task installEnvironment(dependsOn:[
 
 
 task copyStyles(type:Copy, dependsOn:'bundle') {
-    from(fileTree("styles")) {
-        include "**/*"
+    if(!fast()) {
+        from(fileTree("styles")) {
+            include "**/*"
+        }
+        into("export/styles")
     }
-    into("export/styles")
 }
 
 task copyMx(type:Copy, dependsOn:'bundle') {
-    from(fileTree('mx')) {
-        include '**/*'
+    if(!fast()) {
+        from(fileTree('mx')) {
+            include '**/*'
+        }
+        into('export/mx')
     }
-    into('export/mx')
 }
 
 task assembleAll(type:Zip, dependsOn: [
@@ -81,9 +114,11 @@ task assembleAll(type:Zip, dependsOn: [
         'copyMx',
         'bundle'
 ]) {
-    from(fileTree('export'))
-    into "assembly"
-    classifier = "package"
+    if(!fast()) {
+        from(fileTree('export'))
+        into "assembly"
+        classifier = "package"
+    }
 }
 
 clean.dependsOn cleanAll

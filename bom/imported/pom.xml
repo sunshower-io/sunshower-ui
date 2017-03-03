@@ -86,7 +86,7 @@
 
 
         <!--<hasli-api.version>1.0.44.Final</hasli-api.version>-->
-        <hasli-schemata.version>1.0.2.Final</hasli-schemata.version>
+        <!--<hasli-schemata.version>1.0.2.Final</hasli-schemata.version>-->
         <hasli-common.version>1.0.3.Final</hasli-common.version>
         <hasli-test.version>1.0.34.Final</hasli-test.version>
         <hasli-persist.version>1.0.70.Final</hasli-persist.version>
@@ -99,6 +99,7 @@
 
 
         <hasli-service.version>${snapshot-version}</hasli-service.version>
+        <hasli-schemata.version>${snapshot-version}</hasli-schemata.version>
         <hasli-api.version>${snapshot-version}</hasli-api.version>
         <!--<hasli-hfs.version>${snapshot-version}</hasli-hfs.version>-->
         <!--<hasli-search.version>${snapshot-version}</hasli-search.version>-->
