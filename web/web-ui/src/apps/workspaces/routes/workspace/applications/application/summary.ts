@@ -11,6 +11,7 @@ import {OperatingSystemService} from "common/model/api/hal/os";
 
 @autoinject
 export class Summary {
+    loading             : boolean;
 
     requirementDD       : HTMLElement;
     requirementPopup    : HTMLElement;
@@ -43,25 +44,19 @@ export class Summary {
     applications        : any[];
 
 
-    private applicationRevision: ApplicationRevision;
+    private applicationRevision     : ApplicationRevision;
 
-    private summary: HTMLElement;
+    private summary                 : HTMLElement;
     @bindable
-    private loadingSummary: boolean;
+    private loadingSummary          : boolean;
+    private  id                     : string;
+
 
     constructor(private osService:OperatingSystemService, private client: HttpClient, private parent: Application) {
 
     }
 
 
-    attached() : void {
-        $(this.requirementDD).dropdown();
-        $(this.requirementPopup).modal({
-            onHide: () => {
-                this.popupCleanup();
-            }
-        });
-    }
 
     openPopup(state: string) : void {
         this.popupState = state;
@@ -116,17 +111,28 @@ export class Summary {
         this.closePopup();
     }
 
+    attached() : void {
+        $(this.requirementDD).dropdown();
+        $(this.requirementPopup).modal({
+            onHide: () => {
+                this.popupCleanup();
+            }
+        });
 
-    activate(identifier: Identifier) {
-        let id = identifier.id;
 
-        this.client.fetch(`applications/${id}`)
+        this.client.fetch(`applications/${this.id}/base`)
             .then(t => t.json() as any)
             .then(t => {
                 this.applicationRevision = t;
                 this.parent.applicationRevision = t;
-                this.load(id);
+                this.load(this.id);
+                this.loading = false;
             });
+    }
+
+    activate(identifier: Identifier) {
+        this.id = identifier.id;
+        this.loading = true;
     }
 
     private load(appId:string): void {
@@ -138,6 +144,7 @@ export class Summary {
             .then(t => t.json() as any)
             .then(t => {
                 let converter = new showdown.Converter();
+                converter.setFlavor('github');
                 this.summary.innerHTML = converter.makeHtml(t.data);
                 this.loadingSummary = false;
             });

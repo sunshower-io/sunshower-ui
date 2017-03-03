@@ -39,7 +39,7 @@ export class General {
 
     refresh(): void {
         this.loading = true;
-        this.client.fetch('provider')
+        this.client.fetch('providers')
             .then(r => r.json() as any)
             .then(r => {
                 this.providers = r;

@@ -107,7 +107,7 @@ export class Files {
 
     saveFile(file:File) : void {
         this.loadingFile = true;
-        this.client.fetch(`applications/${this.id}/files/${file.id}`, {
+        this.client.fetch(`applications/${this.parent.application.id}/files/${file.id}`, {
                 method: 'post',
                 body: JSON.stringify({data: this.activeFileText})
             })
