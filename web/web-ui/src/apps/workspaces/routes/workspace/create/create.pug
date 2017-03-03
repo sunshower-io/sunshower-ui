@@ -1,5 +1,5 @@
 template
-    .ui.active.dimmer(if.bind="loading", style="position:absolute; top:47px; left:0; right:0; bottom:0;")
+    .ui.active.dimmer(if.bind="loading")
         .ui.loader
 
     form.overlay(enctype="multipart/form-data" if.bind="!loading")
@@ -23,7 +23,8 @@ template
                                     type='text',
                                     name='name',
                                     placeholder='Add workspace name',
-                                    value.bind="name & validate"
+                                    value.bind="name & validate",
+                                    autocomplete="off"
                                 )
                             .ui.divider
                         .big-divider
