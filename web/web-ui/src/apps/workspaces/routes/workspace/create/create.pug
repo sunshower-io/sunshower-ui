@@ -1,5 +1,5 @@
 template
-    .ui.active.dimmer(if.bind="loading", style="position:absolute; top:47px; left:0; right:0; bottom:0;")
+    .ui.active.dimmer(if.bind="loading")
         .ui.loader
 
     form.overlay(enctype="multipart/form-data" if.bind="!loading")
@@ -23,7 +23,8 @@ template
                                     type='text',
                                     name='name',
                                     placeholder='Add workspace name',
-                                    value.bind="name & validate"
+                                    value.bind="name & validate",
+                                    autocomplete="off"
                                 )
                             .ui.divider
                         .big-divider
@@ -32,19 +33,21 @@ template
                                 h1.ui.center.aligned.header(ref="uploader")
                                     label.clickable
                                         input.upload-box__file(type="file" name="image" change.delegate="onchange()" ref="imageElement" files.bind="files & validate")
-                                        i.circular.blue.ion-image.icon.circular--icon
-                                        span(style="margin-left:1em;") Add Image
+                                        i.circular.blue.large.ion-image.icon.circular--icon
+                                        span(style="margin-left:1em;")
+                                            .ui.basic.primary.button
+                                                | Add Icon Image
                                         .upload-box__file-label
 
                             .big-divider
-                            .ui.form
-                                .field
-                                    textarea(
-                                    name='description',
-                                    placeholder='Add a description',
-                                    value.bind="description & validate"
-                                    )
-                            .big-divider
+                            //.ui.form
+                            //    .field
+                            //        textarea(
+                            //        name='description',
+                            //        placeholder='Add a description',
+                            //        value.bind="description & validate"
+                            //        )
+                            //.big-divider
 
                             button.ui.secondary.button(click.delegate="create()")
                                 | Get Started
