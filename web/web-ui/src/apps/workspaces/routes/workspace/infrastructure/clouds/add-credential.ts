@@ -13,7 +13,8 @@ import {
 import {BootstrapFormRenderer} from 'common/resources/custom-components/bootstrap-form-renderer';
 import {NavigationInstruction} from "aurelia-router";
 
-@inject(HttpClient, NewInstance.of(ValidationController))
+import {Workspace} from "apps/workspaces/routes/workspace/index";
+@inject(Workspace, HttpClient, NewInstance.of(ValidationController))
 export class AddCredential {
 
 
@@ -34,6 +35,7 @@ export class AddCredential {
     private credentials         : CredentialSecret[];
 
     constructor(
+        private parent: Workspace,
         private client:HttpClient,
         private controller:ValidationController
     ) {
@@ -70,10 +72,15 @@ export class AddCredential {
     }
 
     attached() : void {
+        this.visible = true;
+        this.credential = new CredentialSecret();
+        this.setupValidation();
+        this.refresh();
     }
 
 
-    close() {
+    close() : void {
+        this.parent.router.navigateBack();
     }
 
     saveCredential() : void {
@@ -82,7 +89,10 @@ export class AddCredential {
                 this.client.fetch(`providers/${this.providerId}/credential`, {
                     method: 'post',
                     body: JSON.stringify(this.credential)
-                }).then(t => this.refresh());
+                }).then(t => {
+                    this.refresh();
+                    this.credential = new CredentialSecret();
+                });
             } else {
             }
         });
@@ -99,6 +109,7 @@ export class AddCredential {
         this.client.fetch(`providers/${this.providerId}/credentials`)
             .then(r => r.json() as any)
             .then(r => {
+                console.log('these should be the credentials', r);
                 this.credentials = r;
                 this.loading = false;
             });
