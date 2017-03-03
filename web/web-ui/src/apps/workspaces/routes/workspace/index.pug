@@ -5,11 +5,11 @@ template
             .ui.items
                 .item
                     .ui.workspace-image.image
-                        img(src='styles/themes/hasli/assets/images/logos/ca-logo.png')
+                        img(src='/hasli/api/v1/files/${workspace.picture.id}')
                     .middle.aligned.content
-                        a.header CA Demo
+                        a.header ${workspace.name}
                         .extra
-                            | Last Updated: February 11th, 2017
+                            | ${workspace.workspace.updated}
             .ui.secondary.pointing.menu
                 a.item(
                     repeat.for='row of router.navigation',

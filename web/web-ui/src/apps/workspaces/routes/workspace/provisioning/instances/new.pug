@@ -1,0 +1,158 @@
+template
+    .overlay.au-animate
+        .ui.container
+            .ui.secondary.menu
+                .right.menu
+                    a.item
+                        i.huge.ion-ios-close-empty.icon(click.delegate="close()")
+            .ui.middle.aligned.center.aligned.grid
+                .two.column.centered.row
+                    .column
+                        h3.ui.center.aligned.header
+                            | CREATE NEW APPLICATION
+                    .column
+                        .ui.hidden.divider
+                        .ui.hidden.divider
+                        .ui.fluid.transparent.input
+                            input(type='text', placeholder='Add instance name').overlay-input-centered
+                        .ui.divider
+            .big-divider
+            .ui.two.column.centered.grid.ui.form.overlay-form
+                .row
+                    h4.ui.dividing.header.column Details
+                .row
+                    .column
+                        form
+                            .ui.field.overlay-field
+                                .overlay-label
+                                    label Name
+                                .overlay-input.ui.input
+                                    input(type="text" value.bind="template.name & validate")
+                            .ui.field.overlay-field
+                                .overlay-label
+                                    label Description
+                                .overlay-input.ui.input
+                                    textarea(
+                                        name="description"
+                                        rows="3"
+                                        value.bind="template.description"
+                                    )
+
+                .row
+                    h4.ui.dividing.header.column Credentials
+                .row
+                    .column
+                        .ui.field.overlay-field
+                            .overlay-label
+                                label Credential
+                            .overlay-input.ui.input
+                                .ui.fluid.search.selection.dropdown(ref="credentialList")
+                                    input(
+                                    type="hidden"
+                                    name="credentialList"
+                                    value.bind="credentialId & validate"
+                                    )
+                                    i.dropdown.icon
+                                    .default.text Select Credential
+                                    .menu
+                                        .item(repeat.for="credential of credentials" data-value="${credential.id}")
+                                            | ${credential.name}
+
+                .row
+                    h4.ui.dividing.header.column Providers
+                .row
+                    .column
+                        .ui.field.overlay-field
+                            .overlay-label
+                                label Providers
+                            .overlay-input.ui.input
+                                .ui.fluid.search.selection.dropdown(ref="providerList")
+                                    input(
+                                        type="hidden"
+                                        value.bind="providerId & validate"
+                                        change.delegate="search()"
+                                        )
+                                    i.dropdown.icon
+                                    .default.text Select Provider
+                                    .menu
+                                        .item(repeat.for="provider of cloudProviders" data-value="${provider.id}")
+                                            | ${provider.name}
+
+                .row
+                    h4.ui.dividing.header.column Configuration
+                .row
+                    .column
+                        .ui.field.overlay-field
+                            .overlay-label
+                                label Operating System
+                            .overlay-input.ui.input
+                                .ui.fluid.search.selection.dropdown(ref="list")
+                                    input(type="hidden" name="operatingSystem" value.bind="template.operatingSystem & validate")
+                                    i.dropdown.icon
+                                    .default.text Select OS
+                                    .menu
+                                        .item(repeat.for="os of osService.list()" data-value="${os.id}")
+                                            image.ui.image(src='${os.icon}')
+                                            | ${os.name}
+
+                        .ui.field.overlay-field
+                            .overlay-label
+                                label Instance Count
+                            .overlay-input.ui.input
+                                input(
+                                    type="number"
+                                    name="instanceCount"
+                                    min="0"
+                                    step="1"
+                                    value.bind="configuration.instanceCount"
+                                )
+                        .ui.field.overlay-field
+                            .overlay-label
+                                label CPU
+                            .overlay-input.ui.input
+                                input(
+                                    type="number"
+                                    name="cpu"
+                                    min="0"
+                                    step="1",
+                                    value.bind="configuration.computeProfile.cores"
+                                )
+                        .ui.field.overlay-field
+                            .overlay-label
+                                label Disk
+                            .overlay-input.ui.input
+                                input(
+                                    type="text"
+                                    name="disk"
+                                    value.bind="configuration.storageProfile.capacity"
+                                )
+                        .ui.field.overlay-field
+                            .overlay-label
+                                label Memory
+                            .overlay-input.ui.input
+                                input(
+                                    type="text"
+                                    name="memory"
+                                    value.bind="configuration.memoryProfile.capacity"
+                                )
+
+                .row
+                    h4.ui.dividing.header.column Instance
+                .row
+                    .column
+                        .ui.field.overlay-field
+                            .overlay-label
+                                label Instance
+                            .overlay-input.ui.input
+                                .ui.fluid.search.selection.dropdown(ref="instanceType")
+                                    input(type="hidden" value.bind="instanceType & validate")
+                                    i.dropdown.icon
+                                    .default.text Select Instance
+                                    .menu
+                                        .item(repeat.for="descriptor of instanceTypes", data-value="${descriptor.key}")
+                                            | ${descriptor.name} (${descriptor.description})
+
+                .row
+                    .column
+                        button.ui.pull-right.button.primary(click.delegate="deployInstance()") Deploy Instance
+

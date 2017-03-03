@@ -12,7 +12,9 @@ import {
   BehaviorInstruction,
   CompositionTransaction,
   CompositionEngine,
-  ShadowDOM
+  ShadowDOM,
+  SwapStrategies,
+  useView
 } from 'aurelia-templating';
 import {
   inject,
@@ -46,11 +48,29 @@ export class RouterView {
   layoutView: any;
   layoutViewModel: any;
   layoutModel: any;
+  element: any;
   constructor(element?: any, container?: any, viewSlot?: any, router?: any, viewLocator?: any, compositionTransaction?: any, compositionEngine?: any);
   created(owningView?: any): any;
   bind(bindingContext?: any, overrideContext?: any): any;
   process(viewPortInstruction?: any, waitToSwap?: any): any;
   swap(viewPortInstruction?: any): any;
+}
+
+/**
+* Locator which finds the nearest RouterView, relative to the current dependency injection container.
+*/
+export class RouterViewLocator {
+  
+  /**
+    * Creates an instance of the RouterViewLocator class.
+    */
+  constructor();
+  
+  /**
+    * Finds the nearest RouterView instance.
+    * @returns A promise that will be resolved with the located RouterView instance.
+    */
+  findNearest(): Promise<RouterView>;
 }
 export class TemplatingRouteLoader extends RouteLoader {
   constructor(compositionEngine?: any);

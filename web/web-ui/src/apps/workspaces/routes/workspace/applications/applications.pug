@@ -1,103 +1,91 @@
 //
    Created by dustinlish on 2/6/17.
 template
+    //compose(if.bind="showModal", view-model='./create/wizard')
+
     .ui.hidden.divider
 
     compose(show.bind="showModal", view-model='./create/app-details')
 
-    template(if.bind="!applications || applications.length == 0")
-        h2.ui.center.aligned.icon.header
-            i.circular.orange.ion-ios-keypad-outline.icon.circular--icon.circular--icon_orange
-            |   Looks like you don't have any applications, create a new application or browse existing ones!
-        h4.ui.center.aligned.grey.header
-            |   You'll need to add a cloud provider before deploying any applications
-        .ui.centered.grid.container
-            .ui.hidden.divider
-            .ui.cards
-                .new-app_type.card
-                    .content
-                        .meta
-                        .description
-                            .ui.container
-                                i.ui.massive.blue.ion-code-working.icon
+    .ui.container
+        .ui.basic.segment
+            h2.ui.header
+                i.circular.orange.ion-ios-keypad-outline.icon.circular--icon.circular--icon_orange
+                .content
+                    |   Applications
+        .ui.hidden.divider
+        .ui.basic.segment
+            .ui.grid
+                .four.wide.column
+                    .ui.small.icon.fluid.input
+                        input(type='text', placeholder='Search')
+                        i.search.icon
+                .eight.wide.column
+                    .ui.hasli--basic_blue.hasli--blue.selection.dropdown
+                        | Actions
+                        i.dropdown.icon
+                        .menu
+                            .item
+                                i.ion-ios-copy.large.grey.icon
+                                | Clone
+                            .item
+                                i.ion-arrow-right-a.large.grey.icon
+                                | Deploy
+                            .item
+                                i.ion-trash-a.large.grey.icon
+                                | Delete
+                    .ui.hasli--basic_blue.hasli--blue.selection.dropdown
+                        input(type='hidden', name='type')
+                        .default.text.hasli--blue Select: Type
+                        i.dropdown.icon
+                        .menu
+                            .item(data-value="1") All
+                            .item(data-value="2") Docker
+                            .item(data-value="3") Docker Compose
+                .four.wide.right.aligned.column
+                    span.widget-icons
+                        .ui.small.button.primary(click.delegate="create()") + Create New
+                table.ui.very.basic.very.padded.selectable.table
+                    thead
+                        tr
+                            th.right.aligned
+                                .ui.master.checkbox
+                                    input(type='checkbox', name='master')
+                                    label
+                            th Name
+                            th Version
+                            th Status
+                            th Instances
+                            th Containers
+                            th Modified
+                            th Owner
+                            th.right.aligned
+                                i.link.big.blue.ion-ios-loop-strong.icon(
+                                class="${loading ? 'loading' : ''}"
+                                click.delegate="refresh()"
+                                )
+                    tbody
+                        tr(if.bind="loading")
+                            td.widget-table-reloading(colspan='10')
+                                .ui.active.inverted.dimmer
+                                    .ui.huge.loader
+                        tr(if.bind="(!applications || applications.length == 0) && !loading")
+                            td.widget-table-reloading(colspan='10')
                                 .ui.hidden.divider
-                        .ui.secondary.button(click.delegate="create()")
-                            | Create Application
-            .ui.hidden.divider
+                                h2.ui.center.aligned.icon.header
+                                    |   Looks like you don't have any applications, create a new application or browse existing ones!
+                                h4.ui.center.aligned.grey.header
+                                    |   You'll need to add a cloud provider before deploying any applications
+                                .ui.basic.center.aligned.segment
+                                    .ui.secondary.button(click.delegate="create()")
+                                        | Create Application
+                                    .ui.hidden.divider
+                        tr(
+                            show.bind="applications.length > 0 && !loading",
+                            as-element="compose",
+                            view-model="apps/workspaces/resources/custom-elements/table/row",
+                            view="apps/workspaces/resources/custom-elements/table/application-row.html"
+                            repeat.for='application of applications',
+                            model.bind="application",
+                        )
 
-    template(if.bind="applications && applications.length")
-        .ui.container
-            .ui.basic.segment
-                h2.ui.header
-                    i.circular.orange.ion-ios-keypad-outline.icon.circular--icon.circular--icon_orange
-                    .content
-                        |   Applications
-            .ui.hidden.divider
-            .ui.basic.segment
-                .overview-widget
-                    .widget-action-menu
-                        .ui.small.icon.input
-                            input(type='text', placeholder='Search')
-                            i.search.icon
-                        .ui.small.basic.button.primary
-                            | Actions
-                            i.dropdown.icon
-                        .ui.small.basic.button.primary
-                            | Select: Type
-                            i.dropdown.icon
-                        span.widget-icons
-                            .ui.small.button.primary + Create New
-                    table.ui.very.basic.table.widget-table
-                        thead
-                            tr
-                                th
-                                    //checkbox
-                                th
-                                    //logo
-                                th Name
-                                th Status
-                                th Deployer
-                                th Ports
-                                th CPU
-                                th Memory
-                                th Disk
-                                th.right.aligned
-                                    i.big.blue.ion-ios-loop-strong.icon(
-                                    class="${loading ? 'loading' : ''}"
-                                    click.delegate="refresh()"
-                                    )
-                                    //settings
-                        tbody
-                            tr(if.bind="loading")
-                                td.widget-table-reloading(colspan='10')
-                                    .ui.active.inverted.dimmer
-                                        .ui.large.text.loader Reloading ...
-                            tr(
-                            if.bind="applications.length > 0 && !loading",
-                            repeat.for='application of applications'
-                            )
-                                td
-                                    input(type="checkbox")
-                                td
-                                    img.ui.image.tiny(src="${application.logo}")
-                                td
-                                    | ${application.application.name}
-                                td
-                                    //TODO circle
-                                    .status-circle.green
-                                    | ${application.status}
-                                td
-                                    |  Docker
-                                td
-                                    | ${application.ports}
-                                td
-                                    //TODO graph
-                                    | ${application.cpu}%
-                                td
-                                    //TODO graph
-                                    | ${application.memory}%
-                                td
-                                    //TODO graph
-                                    | ${application.disk}%
-                                td
-                                    i.icon.setting

@@ -26,20 +26,24 @@ export class App {
             route: '',
             redirect: 'workspaces'
         }, {
-                route: 'workspaces',
-                name: 'workspaces',
-                moduleId: 'apps/workspaces/index',
-                nav: false,
-                title: 'Workspaces',
-            },
-            {
-                route: 'workspace/:id',
-                name: 'workspace',
-                title: 'Workspace',
-                moduleId: 'apps/workspaces/routes/workspace/index',
-                nav: false
-
-            }
+            route: 'workspaces',
+            name: 'workspaces',
+            moduleId: 'apps/workspaces/index',
+            nav: false,
+            title: 'Workspaces',
+        }, {
+            route: 'workspace/:id',
+            name: 'workspace',
+            title: 'Workspace',
+            moduleId: 'apps/workspaces/routes/workspace/index',
+            nav: false
+        }, {
+            route: 'catalog',
+            name: 'catalog',
+            moduleId: 'apps/catalog/index',
+            nav: false,
+            title: 'Catalog',
+        },
         ]);
 
         config.mapUnknownRoutes({

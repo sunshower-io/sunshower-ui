@@ -6,8 +6,8 @@ include(
         'web:web-service',
         'integration:integration-api',
         'integration:integration-spring',
-        'system-tests',
-        'system-tests:st-common',
-        'system-tests:st-security',
-        'system-tests:st-web',
+//        'system-tests',
+//        'system-tests:st-common',
+//        'system-tests:st-security',
+//        'system-tests:st-web',
 )

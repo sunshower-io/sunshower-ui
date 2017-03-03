@@ -37,6 +37,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  overflow:hidden;
 }
 
 .main-container {
@@ -75,6 +76,12 @@ body {
   box-shadow: 1px 1px 25px !important;
 }
 
+.circular--icon_no-box {
+  width: 30px !important;
+  height: 30px !important;
+  box-shadow: 1px 1px 10px !important;
+}
+
 .circular--icon_green {
   color: @hasliGreen !important;
 }
@@ -104,6 +111,10 @@ body {
   right: 0;
   top: 0;
   position: fixed;
+
+  .ui.dropdown .menu {
+    z-index:105 !important;
+  }
 }
 
 .workspace--content-view {
@@ -140,6 +151,18 @@ body {
   -moz-box-shadow: none !important;
 }
 
+.catalog--sidebar {
+  margin-left: 30px !important;
+}
+
+.catalog--category_header {
+  font-size: 18px !important;
+}
+
+.catalog--category_item {
+  font-size: 14px !important;
+}
+
 .workspace-navbar {
   height: 100px !important;
 }
@@ -174,9 +197,14 @@ body {
   padding: 25px;
 }
 
-.board--white {
-
+.hasli--basic_blue {
+  border: 1px solid #65a8fb !important;
 }
+
+.hasli--blue {
+  color: #65a8fb !important;
+}
+
 
 .chart {
   margin-left: -1em !important;
@@ -276,9 +304,10 @@ body {
   border-top: 1px solid #D6D6D7 !important;
   border-bottom: 1px solid #D6D6D7 !important;
   height: 350px !important;
-  margin: 0px !important;
-  padding: 0px !important;
-  overflow-y:scroll;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-y:auto;
+  overflow-x:hidden;
 }
 
 .right--menu, .left--menu {
@@ -344,15 +373,40 @@ body {
   top: @headerheight;
   right: 0;
   bottom: @footerheight;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   background-color: white;
   z-index:1;
+
+  & > .ui.container {
+    position:relative;
+  }
+
+  h2.center.aligned.header {
+    margin-bottom:2.5em;
+  }
 }
 
 .overlay-close {
-  margin-top:@hasliem;
-  margin-bottom:@hasliem;
-  text-align:right;
+  position:absolute;
+  top:0;
+  right:0;
+  text-align:center;
+  font-weight:bold;
+  color: @hasliStandardGrey;
+  * {
+    display: block;
+  }
+  i.icon {
+    margin:0;
+    font-size:1.75em;
+  }
+  span {
+    margin-top: .25em;
+    font-size: 1.25em;
+  }
+
+  .clickable
 }
 
 @cardmargin:120px;
@@ -465,6 +519,13 @@ body {
     }
   }
 
+}
+
+.modal {
+  margin-top:-250px !important;
+  .ui.card>.image, .ui.cards>.card>.image {
+    background: inherit !important;
+  }
 }
 
 .overlay-action-menu, .widget-action-menu {
@@ -582,8 +643,14 @@ body {
 
     .clearfix
   }
+
+  .clearfix
 }
 
+.fluid.field .message {
+  display:block;
+  text-align:center;
+}
 
 .overlay .overlay-body {
   padding: 32px 64px;
@@ -622,6 +689,12 @@ body {
   td {
     vertical-align: middle;
     padding: 30px 0 !important;
+  }
+  tr th:first-child, tr td:first-child {
+    padding-left: @hasliem !important;
+  }
+  tr th:last-child, tr td:last-child {
+    padding-right: @hasliem !important;
   }
 }
 
@@ -687,7 +760,7 @@ body {
 .workbench {
   height:100% !important;
   width:100% !important;
-  z-index: 50 !important;
+  z-index: 0 !important;
   //top: -24px !important;
 }
 
@@ -801,6 +874,8 @@ body {
     }
 
   }
+
+  z-index:auto !important; //may need additional classes to make work
 }
 //end what was sidebars.less
 
@@ -814,12 +889,16 @@ body {
 //start what was right-sidebar.less
 .applications {
   position:absolute;
-  top:85px;
+  top:65px;
   left:0;
   right:0;
   bottom:0;
   overflow-y:auto;
   padding:@hasliem !important;
+
+  .item.inactive {
+    display:none !important;
+  }
 }
 //end what was right-sidebar.less
 
@@ -851,16 +930,16 @@ body {
 //start what was breadcrumb.less
 .workspace-breadcrumb {
   width: 100%;
-  height: 25px;
+  height: 27px;
   line-height:23px;
   margin-right:-2px;
-  margin-top:-13px;
+  margin-top:-15px;
   z-index:100;
   background-color:#f3f4f5;
   box-sizing: border-box;
   padding-left:8px;
-  border-bottom: 1px solid @hasliGrey;
-  border-top: 1px solid @hasliGrey;
+  border-bottom: 1px solid @hasliStandardGrey;
+  border-top: 1px solid @hasliStandardGrey;
 
   .indent {
     margin-left: 304px;
@@ -891,11 +970,7 @@ body {
   margin-top:1em;
 }
 
-.upload-box__file-label {
-  font-size:2em;
-  margin-bottom: 2em;
-  margin-top: 1em;
-}
+
 
 .ui.segment.upload-box {
   text-align:center;
@@ -911,5 +986,44 @@ body {
   }
   &.is-dragover {
     background-color: lighten(@primarycolor, 25%);
+  }
+
+  .upload-box__file-label {
+    font-size:2em;
+    margin-bottom: 2em;
+    margin-top: 1em;
+  }
+}
+
+.header {
+  .upload-box__file-label {
+    margin-top: 1em;
+    color: @hasliGrey;
+  }
+}
+
+.field.ui.fluid.input.error {
+  & > * {
+    display: block;
+  }
+}
+
+//TODO refactor to use variables
+.ui-pnotify {
+  //copied from ui..segment
+  box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+  padding: 1em;
+  border-radius: .2307em;
+  border: 1px solid rgba(34,36,38,.15);
+
+  &.hasli-error {
+    background-color: #FFF6F6;
+    .ui-pnotify-title {
+      color: #9F3A38;
+    }
+  }
+
+  .ui-pnotify-text {
+    word-wrap: break-word;
   }
 }

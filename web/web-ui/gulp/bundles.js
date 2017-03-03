@@ -29,6 +29,7 @@ module.exports = {
                 "aurelia-templating-router",
                 "aurelia-loader-default",
                 "aurelia-history-browser",
+                "aurelia-http-client",
                 "aurelia-logging-console",
                 "aurelia-validation",
                 "semantic-ui",

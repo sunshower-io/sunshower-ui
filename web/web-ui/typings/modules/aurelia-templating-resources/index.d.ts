@@ -102,6 +102,10 @@ export class ThrottleBindingBehavior {
   bind(binding?: any, source?: any, delay?: any): any;
   unbind(binding?: any, source?: any): any;
 }
+export class SelfBindingBehavior {
+  bind(binding?: any, source?: any): any;
+  unbind(binding?: any, source?: any): any;
+}
 
 /**
 * Marks any part of a view to be replacable by the consumer.
@@ -267,6 +271,7 @@ export class Compose {
   model: any;
   view: any;
   viewModel: any;
+  swapOrder: any;
   
   /**
     * Creates an instance of Compose.

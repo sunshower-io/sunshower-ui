@@ -11,7 +11,7 @@ template(bindable="router")
                 i.large.ion-image.icon
                 | ${user.username}
             .divider
-            .item(click.delegate="router.navigate('#/main/settings')")
+            .item(click.delegate="openSettings()")
                 i.ion-ios-settings-strong.icon
                 | Account Settings
             .item

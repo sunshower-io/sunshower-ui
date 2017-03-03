@@ -3,6 +3,9 @@ import 'fetch';
 import {Aurelia} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
 
+import {
+    HttpClient as BasicHttpClient
+} from 'aurelia-http-client'
 
 import {
     LocalStorage,
@@ -23,6 +26,7 @@ import {
     SemanticUIRenderer
 } from "common/resources/custom-components/semantic-ui-renderer";
 import {ChannelSet} from "common/lib/events";
+import {FetchClientInterceptor} from "./common/resources/custom-components/fetch-client-errors";
 
 
 export function param(name) {
@@ -51,7 +55,6 @@ export function configure(aurelia: Aurelia) {
 
     let container = aurelia.container,
         http = new HttpClient();
-
     http.configure(config => {
         config
             .useStandardConfiguration()
@@ -61,7 +64,7 @@ export function configure(aurelia: Aurelia) {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 }
-            })
+            });
     });
 
 
@@ -86,7 +89,19 @@ export function configure(aurelia: Aurelia) {
                     container.registerInstance(User, context.user);
                     container.registerInstance(AuthenticationContext, context);
                     http.defaults.headers['X-AUTH-TOKEN'] = token;
-                    let authenticatedClient = new HttpClient();
+                    let authenticatedClient = new HttpClient(),
+                        basicClient = new BasicHttpClient();
+
+
+
+                    basicClient.configure(config => {
+                            config.withBaseUrl('/hasli/api/v1/')
+                                .withInterceptor(
+                                    container.get(FetchClientInterceptor)
+                                ).withHeader('X-AUTH-TOKEN', token);
+                        }
+                    );
+
                     authenticatedClient.configure(config => {
                         config
                             .useStandardConfiguration()
@@ -98,11 +113,13 @@ export function configure(aurelia: Aurelia) {
                                     'X-AUTH-TOKEN': token
                                 }
                             })
+                            .withInterceptor(container.get(FetchClientInterceptor));
                     });
 
                     let channelSet = new ChannelSet(`ws://${location.host}/hasli/api/events`);
                     tokenHolder.set(context, false);
                     container.registerInstance(HttpClient, authenticatedClient);
+                    container.registerInstance(BasicHttpClient, basicClient);
                     container.registerInstance(ChannelSet, channelSet);
                     aurelia.start().then(() => aurelia.setRoot('app'));
                 }).catch(a => {
