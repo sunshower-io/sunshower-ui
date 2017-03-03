@@ -32,3 +32,14 @@ template
                             | ${name(file)}
                     td.commitMsg Clean up logic in onComplete
                     td.right.aligned.commitTime 5 days ago
+
+    .ui.long.modal(ref="filePopup")
+        template(if.bind="activeFile")
+            .header ${name(activeFile)}
+            .content
+                .ui.form.overlay-form
+                    .field(style="position:relative;")
+                        .ui.active.inverted.dimmer(if.bind="loadingFile", style="position:absolute; top:0px; left:0; right:0; bottom:0;")
+                            .ui.loader
+                        textarea(value.bind="activeFileText")
+                    button.ui.button.primary.pull-right(click.delegate="saveFile(activeFile)") Save

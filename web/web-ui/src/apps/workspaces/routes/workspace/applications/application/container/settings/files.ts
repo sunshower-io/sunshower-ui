@@ -13,12 +13,23 @@ export class Files {
     @bindable
     loadingTable : boolean;
 
+    @bindable
+    loadingFile : boolean;
+
     id: string;
 
     @bindable
-    parentList : File[]; //properly type this
+    parentList : File[];
 
-    files : File;
+    @bindable
+    activeFile : File;
+
+    @bindable
+    activeFileText : string;
+
+    filePopup : HTMLElement;
+
+    files : File; //hey Josiah, shouldn't this be an array? typing is weird
     constructor(
         private parent:Application,
         private client:HttpClient
@@ -78,8 +89,35 @@ export class Files {
                 });
         } else {
             console.log('someday I will open', file);
-            //todo open it
+            this.setActiveFile(file);
         }
+    }
+
+    setActiveFile(file:File) : void {
+        this.activeFile = file;
+        $(this.filePopup).modal('show');
+        this.loadingFile = true;
+        this.client.fetch(`applications/${this.id}/files/${file.id}`)
+            .then(t => t.json() as any)
+            .then(t => {
+                this.activeFileText = t.data;
+                this.loadingFile = false;
+            });
+    }
+
+    saveFile(file:File) : void {
+        this.loadingFile = true;
+        this.client.fetch(`applications/${this.id}/files/${file.id}`, {
+                method: 'post',
+                body: JSON.stringify({data: this.activeFileText})
+            })
+            .then(t => t.json() as any)
+            .then(t => {
+                this.loadingFile = false;
+                $(this.filePopup).modal('hide');
+                this.activeFile = null;
+                this.activeFileText = '';
+            });
     }
 
     activate(revid: Identifier) {
