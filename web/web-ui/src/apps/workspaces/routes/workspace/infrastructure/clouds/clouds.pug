@@ -1,18 +1,12 @@
 //
    Created by dustinlish on 2/6/17.
 template
-    //compose(if.bind="showModal", view-model='./create/wizard')
-
     .ui.hidden.divider
-
-    compose(show.bind="showModal", view-model='./create/app-details')
-
     .ui.container
         .ui.basic.segment
             h2.ui.header
-                i.circular.orange.ion-ios-keypad-outline.icon.circular--icon.circular--icon_orange
                 .content
-                    |   Applications
+                    |   Clouds
         .ui.hidden.divider
         .ui.basic.segment
             .ui.grid
@@ -26,11 +20,8 @@ template
                         i.dropdown.icon
                         .menu
                             .item
-                                i.ion-ios-copy.large.grey.icon
-                                | Clone
-                            .item
-                                i.ion-arrow-right-a.large.grey.icon
-                                | Deploy
+                                i.ion-android-sync.large.grey.icon
+                                | Sync
                             .item
                                 i.ion-trash-a.large.grey.icon
                                 | Delete
@@ -40,11 +31,10 @@ template
                         i.dropdown.icon
                         .menu
                             .item(data-value="1") All
-                            .item(data-value="2") Docker
-                            .item(data-value="3") Docker Compose
+                            .item(data-value="2") AWS
                 .four.wide.right.aligned.column
                     span.widget-icons
-                        .ui.small.button.primary(click.delegate="create()") + Create New
+                        .ui.small.button.primary(click.delegate="addCloud()") Add Cloud
                 table.ui.very.basic.very.padded.selectable.table
                     thead
                         tr
@@ -53,11 +43,11 @@ template
                                     input(type='checkbox', name='master')
                                     label
                             th Name
-                            th Version
-                            th Status
-                            th Instances
-                            th Containers
-                            th Modified
+                            th Location
+                            th Account
+                            th Hosts
+                            th VMs
+                            th Bare Metal
                             th Owner
                             th.right.aligned
                                 i.link.big.blue.ion-ios-loop-strong.icon(
@@ -69,23 +59,24 @@ template
                             td.widget-table-reloading(colspan='10')
                                 .ui.active.inverted.dimmer
                                     .ui.huge.loader
-                        tr(if.bind="(!applications || applications.length == 0) && !loading")
+                        tr(if.bind="(!providers || providers.length == 0) && !loading")
                             td.widget-table-reloading(colspan='10')
                                 .ui.hidden.divider
                                 h2.ui.center.aligned.icon.header
-                                    |   Looks like you don't have any applications, create a new application or browse existing ones!
+                                    |   Looks like you haven't added any cloud providers yet
                                 h4.ui.center.aligned.grey.header
-                                    |   You'll need to add a cloud provider before deploying any applications
-                                .ui.basic.center.aligned.segment
-                                    .ui.secondary.button(click.delegate="create()")
-                                        | Create Application
-                                    .ui.hidden.divider
+                                    |   You can add a cloud now or at deploy time
+                                .ui.vertical.center.aligned.segment
+                                    .ui.container
+                                        .ui.hidden.divider
+                                        .ui.secondary.button(click.delegate="addCloud()")
+                                            | + Add New Cloud
+                                        .ui.hidden.divider
                         tr(
-                            show.bind="applications.length > 0 && !loading",
+                            show.bind="providers.length > 0 && !loading",
                             as-element="compose",
                             view-model="apps/workspaces/resources/custom-elements/table/row",
-                            view="apps/workspaces/resources/custom-elements/table/application-row.html"
-                            repeat.for='application of applications',
-                            model.bind="application",
+                            view="apps/workspaces/resources/custom-elements/table/provider-row.html"
+                            repeat.for='provider of providers',
+                            model.bind="provider",
                         )
-

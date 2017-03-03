@@ -13,7 +13,7 @@ The easiest way to build Hasli.io is to use [Docker](https://www.docker.com).  F
 
 2. After the build environment image is created, cd into `hasli.io/web` directory and build the runtime container.  We'll use the Docker.dev file for developing on Hasli.io as the other Dockerfile is used for production.
 
-  `cd web && docker build -t hasli.io/ui-dev -f Dockerfile.dev`
+  `cd web && docker build -t hasli.io/ui-dev -f Dockerfile.dev .`
 
 3. Once both images have been created you can run the hasli.io/ui-dev image to build and deploy the application. You'll want to be sure to mount the entire repository into the container as it will execute the gradle build process for getting everything setup and all of the dependencies requires resolved.
 

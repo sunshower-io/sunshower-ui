@@ -1,18 +1,16 @@
 //
    Created by dustinlish on 2/6/17.
 template
-    //compose(if.bind="showModal", view-model='./create/wizard')
+    require(from="apps/workspaces/resources/custom-elements/charts/line-chart")
+    require(from="apps/workspaces/resources/custom-elements/charts/chart-stat.html")
 
     .ui.hidden.divider
-
-    compose(show.bind="showModal", view-model='./create/app-details')
 
     .ui.container
         .ui.basic.segment
             h2.ui.header
-                i.circular.orange.ion-ios-keypad-outline.icon.circular--icon.circular--icon_orange
                 .content
-                    |   Applications
+                    |   Instances
         .ui.hidden.divider
         .ui.basic.segment
             .ui.grid
@@ -44,7 +42,7 @@ template
                             .item(data-value="3") Docker Compose
                 .four.wide.right.aligned.column
                     span.widget-icons
-                        .ui.small.button.primary(click.delegate="create()") + Create New
+                        .ui.small.button.primary(click.delegate="createInstance()") + Create New
                 table.ui.very.basic.very.padded.selectable.table
                     thead
                         tr
@@ -53,17 +51,16 @@ template
                                     input(type='checkbox', name='master')
                                     label
                             th Name
-                            th Version
                             th Status
-                            th Instances
-                            th Containers
-                            th Modified
-                            th Owner
+                            th IP
+                            th CPU
+                            th Memory
+                            th Disk
                             th.right.aligned
                                 i.link.big.blue.ion-ios-loop-strong.icon(
                                 class="${loading ? 'loading' : ''}"
                                 click.delegate="refresh()"
-                                )
+                            )
                     tbody
                         tr(if.bind="loading")
                             td.widget-table-reloading(colspan='10')
@@ -73,19 +70,19 @@ template
                             td.widget-table-reloading(colspan='10')
                                 .ui.hidden.divider
                                 h2.ui.center.aligned.icon.header
-                                    |   Looks like you don't have any applications, create a new application or browse existing ones!
+                                    |   Looks like you don't have any instances, create a new one!
                                 h4.ui.center.aligned.grey.header
-                                    |   You'll need to add a cloud provider before deploying any applications
+                                    |   You'll need to add a cloud provider before deploying any instances
                                 .ui.basic.center.aligned.segment
-                                    .ui.secondary.button(click.delegate="create()")
-                                        | Create Application
+                                    .ui.secondary.button(click.delegate="createInstance()")
+                                        | Create Instance
                                     .ui.hidden.divider
                         tr(
-                            show.bind="applications.length > 0 && !loading",
+                            show.bind="instances.length > 0 && !loading",
                             as-element="compose",
                             view-model="apps/workspaces/resources/custom-elements/table/row",
-                            view="apps/workspaces/resources/custom-elements/table/application-row.html"
-                            repeat.for='application of applications',
-                            model.bind="application",
+                            view="apps/workspaces/resources/custom-elements/table/instance-row.html"
+                            repeat.for='instance of instances',
+                            model.bind="instance",
                         )
 
