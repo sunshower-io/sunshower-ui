@@ -13,16 +13,44 @@ export class Infrastructure {
         config.map([
 
             // Cloud Route
-            {route: ['', 'clouds'], name: 'infrastructure/clouds', moduleId: './clouds/clouds', nav: true, title: 'Clouds', settings: {icon: "ion-ios-cloud"}},
+            {
+                route: ['', 'clouds'],
+                name: 'infrastructure/clouds',
+                moduleId: './clouds/clouds',
+                nav: true,
+                title: 'Clouds',
+                settings: {icon: "ion-ios-cloud"}
+            },
 
             // Hosts Route
-            {route: 'hosts', name: 'infrastructure/hosts', moduleId: './hosts/hosts', nav: true, title: 'Hosts', settings: {icon: "ion-monitor"}},
+            {
+                route: 'hosts',
+                name: 'infrastructure/hosts',
+                moduleId: './hosts/hosts',
+                nav: true,
+                title: 'Hosts',
+                settings: {icon: "ion-monitor"}
+            },
 
             // Storage Route
-            {route: 'storage', name: 'infrastructure/storage', moduleId: './storage/storage', nav: true, title: 'Storage', settings: {icon: "database"}},
+            {
+                route: 'storage',
+                name: 'infrastructure/storage',
+                moduleId: './storage/storage',
+                nav: true,
+                title: 'Storage',
+                settings: {icon: "database"}
+            },
 
             // KeyPair Route
-            {route: 'keypairs', name: 'infrastructure/keypairs', moduleId: './keypairs/keypairs', nav: true, title: 'Key Pairs', settings: {icon: "ion-ios-unlocked"}},
+            {
+                route: 'keypairs',
+                name: 'infrastructure/keypairs',
+                moduleId: './keypairs/keypairs',
+                nav: true,
+                title: 'Key Pairs',
+                settings: {icon: "ion-ios-unlocked"}
+            },
 
         ]);
 

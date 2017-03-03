@@ -11,6 +11,7 @@ import {OperatingSystemService} from "common/model/api/hal/os";
 
 @autoinject
 export class Summary {
+    loading             : boolean;
 
     requirementDD       : HTMLElement;
     requirementPopup    : HTMLElement;
@@ -43,30 +44,33 @@ export class Summary {
     applications        : any[];
 
 
-    private applicationRevision: ApplicationRevision;
+    private applicationRevision     : ApplicationRevision;
 
-    private summary: HTMLElement;
+    private summary                 : HTMLElement;
+    @bindable
+    private loadingSummary          : boolean;
+    private  id                     : string;
+
 
     constructor(private osService:OperatingSystemService, private client: HttpClient, private parent: Application) {
 
     }
 
 
-    attached() : void {
-        $(this.requirementDD).dropdown();
-    }
-
     openPopup(state: string) : void {
         this.popupState = state;
-        console.log(state);
         $(this.requirementPopup).modal('show');
-        //todo set closePopup as a callback, just in case they click out
+    }
+
+    popupCleanup() : void {
+        this.popupState = '';
+        $(this.requirementDD).find('.active').removeClass('active');
+        $(this.requirementDD).find('.selected').removeClass('selected');
     }
 
     closePopup() : void {
-        this.popupState = '';
+        this.popupCleanup();
         $(this.requirementPopup).modal('hide');
-        $(this.requirementDD).find('.active').removeClass('active');
     }
 
     selectDeployer(deployer: string) : void {
@@ -74,9 +78,17 @@ export class Summary {
         this.closePopup();
     }
 
+    clearDeployer() : void {
+        this.deployer = '';
+    }
+
     selectOS(os: string) : void {
         this.os = os;
         this.closePopup();
+    }
+
+    clearOS() : void {
+        this.os = '';
     }
 
     saveService() : void {
@@ -106,37 +118,42 @@ export class Summary {
         this.closePopup();
     }
 
+    attached() : void {
+        $(this.requirementDD).dropdown();
+        $(this.requirementPopup).modal({
+            onHide: () => {
+                this.popupCleanup();
+            }
+        });
 
-    activate(identifier: Identifier) {
 
-
-
-        let id = identifier.id;
-
-        this.client.fetch(`applications/${id}`)
+        this.client.fetch(`applications/${this.id}/base`)
             .then(t => t.json() as any)
             .then(t => {
                 this.applicationRevision = t;
                 this.parent.applicationRevision = t;
-
-                this.load(id);
+                this.load(this.id);
+                this.loading = false;
             });
     }
 
+    activate(identifier: Identifier) {
+        this.id = identifier.id;
+        this.loading = true;
+    }
+
     private load(appId:string): void {
+        this.loadingSummary = true;
         let revision = this.applicationRevision,
             readme = revision.readme;
         this.client
             .fetch(`applications/${appId}/readme`)
             .then(t => t.json() as any)
             .then(t => {
-
                 let converter = new showdown.Converter();
+                converter.setFlavor('github');
                 this.summary.innerHTML = converter.makeHtml(t.data);
-
-
-
-
+                this.loadingSummary = false;
             });
     }
 

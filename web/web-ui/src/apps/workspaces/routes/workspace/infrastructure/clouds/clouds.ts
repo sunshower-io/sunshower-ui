@@ -65,12 +65,16 @@ export class Clouds {
         this.loading = true;
 
         setTimeout(() => {
-            this.client.fetch('provider')
+            this.client.fetch('providers')
                 .then(r => r.json() as any)
                 .then(r => {
                     // TODO change back after testing
-                    // this.providers = r;
-                    this.providers = this.createMockProviders();
+                    this.providers = r.map(r => {
+                        r.icon = "styles/themes/hasli/assets/images/logos/aws-logo-2.svg";
+                        r.name = "Provider";
+                        return r;
+                    });
+                    // this.providers = this.createMockProviders();
                     this.loading = false;
                 })
                 .catch(err => {

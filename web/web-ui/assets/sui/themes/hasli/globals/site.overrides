@@ -530,6 +530,36 @@ body {
 
 }
 
+.item.closeable {
+  position:relative;
+
+  .hover-close {
+    display: none;
+
+    top:0;
+    right:0;
+    bottom:0;
+    padding: 2px 5px;
+    position:absolute;
+    cursor:pointer;
+
+    color: @primaryColor;
+    &:hover {
+      color: red;
+    }
+  }
+
+  &:hover .hover-close {
+    display:block;
+  }
+
+}
+
+.ui.horizontal.list.pills > .item {
+    margin-left: 0 !important;
+    margin-right: 1em !important;
+}
+
 .modal {
   margin-top:-250px !important;
   .ui.card>.image, .ui.cards>.card>.image {

@@ -3,6 +3,11 @@ import {UUID} from "common/lib/utils/uuid";
 import {User} from "../../security/user";
 
 export class Provider {
+
+    readonly type ?: string = 'provider';
+
+
+
     id          ?: string;
     key         ?: string;
     name        ?: string;
@@ -16,6 +21,10 @@ export class Provider {
     description ?: string;
     imageId     ?: string;
     awsRegion   ?: AWSRegion;
+
+
+
+
 }
 
 export class AWSRegion {
