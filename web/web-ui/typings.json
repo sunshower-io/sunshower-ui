@@ -28,6 +28,8 @@
   },
   "globalDevDependencies": {},
   "globalDependencies": {
-    "jquery": "registry:dt/jquery#1.10.0+20160929162922"
+    "jquery": "registry:dt/jquery#1.10.0+20160929162922",
+    "url-search-params-typing": "github:RomkeVdMeulen/URLSearchParams",
+    "whatwg-streams": "registry:dt/whatwg-streams#0.0.0+20161214010628"
   }
 }
