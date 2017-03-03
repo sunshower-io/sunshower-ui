@@ -107,6 +107,7 @@ export class Create {
 
         $input.on('change', function(e) {
             showFiles((e as any).target.files);
+            console.log(this.files[0].type.name)
         });
     }
 

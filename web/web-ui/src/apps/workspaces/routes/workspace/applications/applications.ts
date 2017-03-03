@@ -1,11 +1,10 @@
 
 import {HttpClient} from 'aurelia-fetch-client';
 import {bindable} from "aurelia-framework";
-import {Workspace} from "apps/workspaces/routes/workspace/index";
+import {Workspace as WorkspaceRoute} from "apps/workspaces/routes/workspace/index";
 import {WorkspaceRevision} from "apps/workspaces/model/workspaces/workspace";
 import {autoinject} from "aurelia-dependency-injection";
-import {Application} from "../../../../../common/model/api/core/application";
-import {User} from "../../../../../common/model/security/user";
+import {Application} from "common/model/api/core/application";
 
 
 @autoinject
@@ -24,7 +23,7 @@ export class Applications {
     workspace: WorkspaceRevision;
 
     constructor(
-        public parent:Workspace,
+        public parent:WorkspaceRoute,
         private client:HttpClient,
     ) {
         this.applications = [];
@@ -59,23 +58,24 @@ export class Applications {
     refresh(): void {
         this.loading = true;
         setTimeout(() => {
-            this.client.fetch('applications')
+            this.client.fetch(`workspaces/${this.parent.hostWorkspace.id}/applications/heads`)
                 .then(d => d.json() as any)
                 .then(d => {
                     this.loading = false;
-                    // this.applications = d;
-
-                    // TODO plug into application service
-                    let user = new User();
-                    user.firstname = "Dustin";
-                    user.lastname = "Lish";
-                    this.applications = [
-                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Full Stack", "8.47", "running", 5, 4, this.getDate(), user),
-                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA UIM", "8.47", "running", 1, 1, this.getDate(), user),
-                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA UMP", "8.47", "running", 1, 1, this.getDate(), user),
-                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA MySql", "5.6", "running", 1, 1, this.getDate(), user),
-                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Robot", "8.47", "running", 5, 1, this.getDate(), user)
-                    ];
+                    this.applications = d;
+                    // // this.applications = d;
+                    //
+                    // // TODO plug into application service
+                    // let user = new User();
+                    // user.firstname = "Dustin";
+                    // user.lastname = "Lish";
+                    // this.applications = [
+                    //     new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Full Stack", "8.47", "running", 5, 4, this.getDate(), user),
+                    //     new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA UIM", "8.47", "running", 1, 1, this.getDate(), user),
+                    //     new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA UMP", "8.47", "running", 1, 1, this.getDate(), user),
+                    //     new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA MySql", "5.6", "running", 1, 1, this.getDate(), user),
+                    //     new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Robot", "8.47", "running", 5, 1, this.getDate(), user)
+                    // ];
                 })
                 .catch(err => {
                     this.loading = false;
