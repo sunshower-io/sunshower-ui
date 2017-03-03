@@ -42,16 +42,17 @@ export class Summary {
     @bindable
     applications        : any[];
 
-
     private applicationRevision: ApplicationRevision;
 
     private summary: HTMLElement;
+
     @bindable
     private loadingSummary: boolean;
 
     constructor(private osService:OperatingSystemService, private client: HttpClient, private parent: Application) {
 
     }
+
 
 
     attached() : void {
@@ -84,9 +85,17 @@ export class Summary {
         this.closePopup();
     }
 
+    clearDeployer() : void {
+        this.deployer = '';
+    }
+
     selectOS(os: string) : void {
         this.os = os;
         this.closePopup();
+    }
+
+    clearOS() : void {
+        this.os = '';
     }
 
     saveService() : void {
