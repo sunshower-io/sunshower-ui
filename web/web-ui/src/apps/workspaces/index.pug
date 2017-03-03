@@ -2,7 +2,7 @@ template
     .ui.vertical.center.aligned.divided.segment.title-bar
         .ui.container
             .ui.text.menu
-                .ui.header.item
+                .ui.header.item.light-font-weight
                     h2 Workspaces
                 .right.compact.menu
                     .ui.fitted.item
@@ -14,15 +14,6 @@ template
             .ui.stackable.cards
                 .ui.centered.link.card(type='button', click.trigger="open(workspace.id)", repeat.for="workspace of workspaces")
                     .content
-                        .header
-                            | ${workspace.name}
-                        .meta
-                            | ${workspace.description}
-                        .description
-                            .ui.container.workspaces--image_container
-                                //img(src='styles/themes/hasli/assets/images/logos/ca-logo.png').workspaces--image_size
-                                img(src='/hasli/api/v1/files/${workspace.picture.id}').workspaces--image_size
-                    .extra.content
                         .ui.centered.grid
                             .center.aligned.column
                                 .ui.compact.secondary.menu
@@ -34,3 +25,13 @@ template
                                         i.big.ion-ios-browsers-outline.icon
                                     a.fitted.item
                                         i.big.ion-ios-trash-outline.icon(click.delegate="delete(workspace.workspace.id)")
+                    .content
+                        .ui.container.workspaces--image_container
+                            //img(src='styles/themes/hasli/assets/images/logos/ca-logo.png').workspaces--image_size
+                            img(src='/hasli/api/v1/files/${workspace.picture.id}').workspaces--image_size
+                        .header
+                        .meta
+                            .ui.hidden.divider
+                            .workspace-name
+                                | ${workspace.name}
+                        .description
