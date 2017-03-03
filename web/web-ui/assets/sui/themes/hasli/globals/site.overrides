@@ -417,12 +417,12 @@ body {
   .clickable
 }
 
-@cardmargin:120px;
+//@cardmargin:120px;
 .overlay-cards.ui.four.cards {
   .card {
-    margin-right: @cardmargin !important;
-    margin-bottom: @cardmargin !important;
-    width:calc(~"25% - "@cardmargin);
+    //margin-right: @cardmargin !important;
+    //margin-bottom: @cardmargin !important;
+    //width:calc(~"25% - "@cardmargin);
     position:relative;
     padding-bottom:12.5%;
   }
@@ -447,7 +447,8 @@ body {
     position:absolute;
     left:0;
     right:0;
-    bottom:-@cardmargin/3;
+    //bottom:-@cardmargin/3;
+    bottom: -40px;
   }
 
 }
