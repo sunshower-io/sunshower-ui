@@ -46,7 +46,7 @@ template
                                 .item
                                     .ui.basic.tiny.primary.button
                                         | UIM
-                                //todo write out buttons based on template
+                                //todo write out pills based on template
                 .row
                     .column
                         .ui.segment
@@ -58,7 +58,9 @@ template
                                         i.big.ion-ios-gear-outline.icon
                             .segment-header_divider
         .twelve.wide.column
-            .ui.segment
+            .ui.segment(style="position:relative; min-height:150px;")
+                .ui.active.dimmer(if.bind="loadingSummary", style="position:absolute; top:0px; left:0; right:0; bottom:0;")
+                    .ui.text.loader Loading Readme ...
                 h1.ui.header Readme
                 div(ref="summary")
 
@@ -69,7 +71,6 @@ template
             .header Select Deployer
             .content
                 .ui.link.centered.four.cards
-                    //todo unjack styles
                     .card(click.delegate="selectDeployer('HFS')")
                         .image
                             img(src="styles/themes/hasli/assets/images/logos/hasli-icon.svg")

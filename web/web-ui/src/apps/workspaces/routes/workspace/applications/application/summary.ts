@@ -45,12 +45,13 @@ export class Summary {
 
     private applicationRevision: ApplicationRevision;
 
+    private summary: HTMLElement;
+    @bindable
+    private loadingSummary: boolean;
+
     constructor(private osService:OperatingSystemService, private client: HttpClient, private parent: Application) {
 
     }
-
-    private summary: HTMLElement;
-
 
 
     attached() : void {
@@ -129,6 +130,7 @@ export class Summary {
     }
 
     private load(appId:string): void {
+        this.loadingSummary = true;
         let revision = this.applicationRevision,
             readme = revision.readme;
         this.client
@@ -137,6 +139,7 @@ export class Summary {
             .then(t => {
                 let converter = new showdown.Converter();
                 this.summary.innerHTML = converter.makeHtml(t.data);
+                this.loadingSummary = false;
             });
     }
 
