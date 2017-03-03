@@ -30,8 +30,6 @@ export class Create {
         this.setupFileUpload();
         ValidationRules
             .ensure((wsp:Create) => wsp.name).required()
-            .ensure((wsp:Create) => wsp.description).required()
-            .ensure((wsp:Create) => wsp.files).displayName('Image').required()
             .on(Create);
     }
 
@@ -41,26 +39,31 @@ export class Create {
 
 
     create(): void {
-        this.controller.validate().then(result => {
-            if (result.valid) {
-                this.loading = true;
-                let form = new FormData();
-                let fd = form as any;
+        this.controller.validate()
+            .then(result => {
+                if (result.valid) {
+                    this.loading = true;
+                    let form = new FormData();
+                    let fd = form as any;
 
-                form.append('name', this.name);
-                fd.append('image', this.files[0]);
-                form.append('image-name', this.files[0].name);
-                form.append('description', this.description);
-                form.append('image-type', this.files[0].type);
-                this.client.post('workspaces/save', form)
-                    .then(t => {
-                        // console.log(t);
-                        this.loading = false;
-                        this.parent.router.navigate('/');
-                        //todo redirect to this workspace?
-                    });
-            }
-        });
+                    form.append('name', this.name);
+                    fd.append('image', this.files != null ? this.files[0] : "");
+                    form.append('image-name', this.files != null ? this.files[0].name : "");
+                    form.append('image-type', this.files != null ? this.files[0].type : "");
+                    form.append('description', this.description != null ? this.description : "No description");
+
+                    this.client.post('workspaces/save', form)
+                        .then(t => {
+                            // console.log(t);
+                            this.loading = false;
+                            this.parent.router.navigate('/');
+                            //todo redirect to this workspace?
+                        });
+                }
+            })
+            .catch(err => {
+                console.log("Caught error: " + err.toString())
+            });
     }
 
     cancel() : void {

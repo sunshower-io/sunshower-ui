@@ -104,6 +104,12 @@ export class Workspace {
     activate(id: Identifier): void {
         this.client.fetch(`workspaces/revision/${id.id}`)
             .then(ws => ws.json() as any)
-            .then(ws => this.workspace = ws);
+            .then(ws => {
+                console.log(ws);
+                this.workspace = ws
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 }

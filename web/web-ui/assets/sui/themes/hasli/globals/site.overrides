@@ -122,19 +122,27 @@ body {
   height: 100% !important;
 }
 
+.workspace-name {
+  font-size: 14px !important;
+}
+
 .workspace--navbar {
   padding: 2px 0 !important;
 }
 
 .workspaces--image_container {
-  height: 80px !important;
-  width: 150px !important;
+  height: 70px !important;
+  width: 125px !important;
   text-align: center; margin: 1em 0;
 }
 
+.light-font-weight {
+  font-weight: 400 !important;
+}
+
 .workspaces--image_size {
-  max-height: 80px;
-  max-width: 150px;
+  max-height: 70px;
+  max-width: 125px;
   display: inline-block;
   height: 100%;
   vertical-align: middle;
