@@ -35,7 +35,7 @@ export class SemanticUIRenderer {
     showDialog(dialogController: DialogController) {
         let body = DOM.querySelectorAll('body')[0] as HTMLElement;
         this.anchor = dialogController.slot.anchor;
-        this.anchor.classList.add('ui', 'small', 'basic', 'modal');
+        this.anchor.classList.add('ui', 'long', 'modal');
         return new Promise((resolve) => {
             $(this.anchor).modal('show');
         });

@@ -15,10 +15,11 @@ declare module 'aurelia-dialog' {
     }
 
 
-    export interface DialogController {
+    export class DialogController {
         slot                :any;
         settings            :any;
 
+        ok(whatever?:any)   : void;
         cancel()            : void;
         centerDialog        : () => void;
     }

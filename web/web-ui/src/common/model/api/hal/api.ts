@@ -1,6 +1,6 @@
+import {UUID} from "common/lib/utils";
 import {Copyable} from "common/lib/lang";
-import {UUID} from "common/lib/utils/uuid";
-import {User} from "../../security/user";
+import {User} from "common/model/security/user";
 
 export class Provider {
 
