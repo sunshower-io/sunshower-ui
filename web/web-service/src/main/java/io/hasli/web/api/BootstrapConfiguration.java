@@ -4,6 +4,8 @@ import io.hasli.common.configuration.ConfigurationSource;
 import io.hasli.common.configuration.MapConfigurationSource;
 import io.hasli.common.rs.MoxyProvider;
 import io.hasli.core.ApplicationService;
+import io.hasli.hal.HALConfiguration;
+import io.hasli.hal.aws.HALAwsConfiguration;
 import io.hasli.jpa.flyway.FlywayConfiguration;
 import io.hasli.model.core.Application;
 import io.hasli.model.core.PersistenceConfiguration;
@@ -45,10 +47,10 @@ import java.util.logging.Logger;
         DatabaseConfiguration.class,
         HibernateConfiguration.class,
         SecurityConfiguration.class,
-//        HALConfiguration.class,
+        HALConfiguration.class,
 //        SearchConfiguration.class,
 //        HFSConfiguration.class,
-//        HALAwsConfiguration.class,
+        HALAwsConfiguration.class,
 //        DockerConfiguration.class,
         PersistenceConfiguration.class,
 //        HALPersistenceConfiguration.class,

@@ -68,7 +68,6 @@
         <hasli-hfs.version>1.0.22.Final</hasli-hfs.version>
         <!--<hasli-persist.version>1.0.67.Final</hasli-persist.version>-->
 
-        <!--<hasli-hal.version>${snapshot-version}</hasli-hal.version>-->
         <!--<hasli-api.version>${snapshot-version}</hasli-api.version>-->
         <!--<hasli-schemata.version>${snapshot-version}</hasli-schemata.version>-->
         <!--<hasli-service.version>${snapshot-version}</hasli-service.version>-->
@@ -87,6 +86,7 @@
 
         <hasli-api.version>1.0.45.Final</hasli-api.version>
 
+        <hasli-hal.version>${snapshot-version}</hasli-hal.version>
         <hasli-schemata.version>${snapshot-version}</hasli-schemata.version>
         <hasli-service.version>${snapshot-version}</hasli-service.version>
         <hasli-persist.version>${snapshot-version}</hasli-persist.version>
@@ -102,13 +102,13 @@
 
         <dependencies>
 
-            <!--<dependency>-->
-                <!--<groupId>io.hasli.hal</groupId>-->
-                <!--<artifactId>bom-exported</artifactId>-->
-                <!--<version>${hasli-hal.version}</version>-->
-                <!--<type>pom</type>-->
-                <!--<scope>import</scope>-->
-            <!--</dependency>-->
+            <dependency>
+                <groupId>io.hasli.hal</groupId>
+                <artifactId>bom-exported</artifactId>
+                <version>${hasli-hal.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
             <dependency>
                 <groupId>io.hasli.schemata</groupId>
