@@ -5,6 +5,8 @@ import {Application} from './application';
 import {ApplicationRevision} from "apps/workspaces/model/application";
 import {bindable, autoinject} from "aurelia-framework";
 import {OperatingSystemService} from "common/model/api/hal/os";
+import {DialogService} from "aurelia-dialog";
+import {NodeTemplateDialog} from "./dialogs/node-template";
 /**
  * Created by dustinlish on 2/20/17.
  */
@@ -52,8 +54,22 @@ export class Summary {
     private  id                     : string;
 
 
-    constructor(private osService:OperatingSystemService, private client: HttpClient, private parent: Application) {
+    constructor(
+        private osService:OperatingSystemService,
+        private client: HttpClient,
+        private parent: Application,
+        private dialogService:DialogService
+    ) {
 
+    }
+
+
+    openNodeTemplate() {
+        this.dialogService.open({
+            viewModel: 'apps/workspaces/routes/workspace/applications/application/dialogs/node-template'
+        }).then(t => {
+            this.popupCleanup()
+        });
     }
 
 
@@ -95,14 +111,6 @@ export class Summary {
         this.closePopup();
     }
 
-    toggleTemplate(state : boolean) : void {
-        this.selectingTemplate = state;
-    }
-
-    saveNodeTemplate() : void {
-        //todo save new node template
-        this.closePopup();
-    }
 
     selectNodeTemplate(template : any) : void {
         this.template = template;

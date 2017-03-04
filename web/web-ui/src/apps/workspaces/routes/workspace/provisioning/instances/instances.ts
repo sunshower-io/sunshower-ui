@@ -129,7 +129,7 @@ export class Instances {
         else {
             return 'circle yellow';
         }
-        //returns class name for circle
+
 
     }
 }
