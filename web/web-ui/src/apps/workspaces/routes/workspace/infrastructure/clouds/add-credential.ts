@@ -36,6 +36,10 @@ export class AddCredential {
     private credentialFilter    : HTMLElement;
     private credentialHolder    : HTMLElement;
 
+
+    @bindable
+    private addingCredential    : boolean;
+
     constructor(
         private parent: Workspace,
         private client:HttpClient,
@@ -103,6 +107,10 @@ export class AddCredential {
         this.parent.router.navigateBack();
     }
 
+    addCredential() : void {
+        this.addingCredential = true;
+    }
+
     saveCredential() : void {
         this.controller.validate().then(result => {
             if (result.valid) {
@@ -110,6 +118,7 @@ export class AddCredential {
                     method: 'post',
                     body: JSON.stringify(this.credential)
                 }).then(t => {
+                    this.addingCredential = false;
                     this.refresh();
                     this.controller.reset();
                     this.credential = new CredentialSecret;

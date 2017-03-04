@@ -7,6 +7,7 @@ import {
 } from "common/model/api/hal/compute";
 import {OperatingSystemService} from "common/model/api/hal/os";
 import {UUID} from "../../../../../../../common/lib/utils/uuid";
+import {CredentialSecret} from "../../../../../../../common/model/security/credentials";
 
 
 @inject(
@@ -18,10 +19,14 @@ export class NodeTemplateDialog {
 
 
     private selectingTemplate       : boolean;
+    private selectingCredential     : boolean;
+    private loading                 : boolean;
     private list                    : HTMLElement;
     private template                : ComputeTemplate;
     private templates               : ComputeTemplate[];
     private marshaller              : ComputeTemplateMarshaller;
+    private credential              : CredentialSecret;
+    private credentials             : CredentialSecret[];
 
     constructor(
         private controller:DialogController,
@@ -48,22 +53,40 @@ export class NodeTemplateDialog {
 
 
     toggleTemplate(state : boolean) : void {
-        this.selectingTemplate = true;
-        this.client.fetch('compute')
-            .then(t => t.json() as any)
-            .then(t => {
-                this.templates = t;
-                console.log("GOT", t);
-            });
-
+        this.selectingTemplate = state;
+        if (this.selectingTemplate) {
+            this.loading = true;
+            this.client.fetch('compute')
+                .then(t => t.json() as any)
+                .then(t => {
+                    this.templates = t;
+                    this.loading = false;
+                    console.log("GOT", t[0]);
+                });
+        };
     }
 
     saveNodeTemplate() : void {
+        this.loading = true;
         this.client.fetch('compute/index', {
             method: 'put',
             body: JSON.stringify(this.marshaller.write(this.template))
         }).then(t => {
-            this.controller.ok();
+            this.loading = false;
+            this.selectNodeTemplate(t);
         });
     }
+
+    selectNodeTemplate(template: any) : void {
+        this.template = template;
+        this.selectingCredential = true;
+    }
+
+    save() : void {
+        //todo wire credential, node template and application together
+
+
+        this.controller.ok();
+    }
+
 }
