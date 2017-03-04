@@ -31,6 +31,7 @@ export class AddCredential {
 
     private credentials         : CredentialSecret[];
 
+    private filterHolder        : HTMLElement;
     private credentialSearch    : HTMLElement;
     private credentialFilter    : HTMLElement;
     private credentialHolder    : HTMLElement;
@@ -72,27 +73,25 @@ export class AddCredential {
     }
 
     setupSearch() : void {
-        let $searchBar = $(this.credentialSearch),
-            $filterBar = $(this.credentialFilter);
-        console.log($searchBar);
-        $searchBar.on('change', 'input', () => {
-            let searchOptions = $(this.credentialHolder).find('.credential'),
-                searchTerm = $searchBar.find('input').val().toLowerCase();
-            console.log(searchTerm);
-            if (searchTerm == '') {
-                searchOptions.removeClass('inactive');
+        $(this.filterHolder).on('change', 'input', () => {
+            let credentials = $(this.credentialHolder).find('.credential'),
+                searchTerm = $(this.credentialSearch).val().toLowerCase(),
+                filterTerm = $(this.credentialFilter).val();
+            if (searchTerm == '' && filterTerm == '') {
+                credentials.removeClass('inactive');
             }
             else {
-                for (let i = 0; i < searchOptions.length; i++) {
-                    let thisItem = $(searchOptions[i]);
-                    if (thisItem.attr('data-name').toLowerCase().indexOf(searchTerm) == -1) {
-                        thisItem.addClass('inactive');
-                    } else {
+                for (let i = 0; i < credentials.length; i++) {
+                    let thisItem = $(credentials[i]);
+                    if (thisItem.attr('data-name').toLowerCase().indexOf(searchTerm) >= 0 && thisItem.attr('data-type').indexOf(filterTerm) >= 0) {
                         thisItem.removeClass('inactive');
+                    } else {
+                        thisItem.addClass('inactive');
                     }
                 }
             }
         });
+
     }
 
     attached() : void {
