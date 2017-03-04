@@ -22,9 +22,6 @@ export class AddCredential {
     private visible: boolean;
 
     @bindable
-    private provider            :Provider;
-
-    @bindable
     private credential          :CredentialSecret;
 
     @bindable
@@ -49,9 +46,8 @@ export class AddCredential {
     }
 
     open() : void {
-
-        this.visible = true;
-        this.credential = new CredentialSecret();
+        //this.visible = true;
+        this.credential = new CredentialSecret;
         this.setupValidation();
         this.refresh();
     }
@@ -72,10 +68,7 @@ export class AddCredential {
     }
 
     attached() : void {
-        this.visible = true;
-        this.credential = new CredentialSecret();
-        this.setupValidation();
-        this.refresh();
+        this.open();
     }
 
 
@@ -84,6 +77,7 @@ export class AddCredential {
     }
 
     saveCredential() : void {
+        console.log(JSON.stringify(this.credential));
         this.controller.validate().then(result => {
             if (result.valid) {
                 this.client.fetch(`providers/${this.providerId}/credential`, {
@@ -91,15 +85,16 @@ export class AddCredential {
                     body: JSON.stringify(this.credential)
                 }).then(t => {
                     this.refresh();
-                    this.credential = new CredentialSecret();
+                    this.controller.reset();
+                    this.credential = new CredentialSecret;
                 });
             } else {
             }
         });
     }
 
-    removeCredential(credential) : void {
-        this.client.fetch(`secrets/vault/${credential.id}`, {
+    removeCredential(credential:CredentialSecret) : void {
+        this.client.fetch(`providers/${this.providerId}/credential/${credential.id}`, {
             method: 'delete'
         }).then(t => this.refresh());
     }
@@ -109,7 +104,6 @@ export class AddCredential {
         this.client.fetch(`providers/${this.providerId}/credentials`)
             .then(r => r.json() as any)
             .then(r => {
-                console.log('these should be the credentials', r);
                 this.credentials = r;
                 this.loading = false;
             });
