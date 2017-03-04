@@ -939,6 +939,10 @@ body {
     display:none !important;
   }
 }
+
+table tr.inactive {
+  display:none !important;
+}
 //end what was right-sidebar.less
 
 //start what was palette.less

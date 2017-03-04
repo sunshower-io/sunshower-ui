@@ -31,6 +31,10 @@ export class AddCredential {
 
     private credentials         : CredentialSecret[];
 
+    private credentialSearch    : HTMLElement;
+    private credentialFilter    : HTMLElement;
+    private credentialHolder    : HTMLElement;
+
     constructor(
         private parent: Workspace,
         private client:HttpClient,
@@ -46,10 +50,10 @@ export class AddCredential {
     }
 
     open() : void {
-        //this.visible = true;
         this.credential = new CredentialSecret;
         this.setupValidation();
         this.refresh();
+        this.setupSearch();
     }
 
 
@@ -67,6 +71,30 @@ export class AddCredential {
         this.controller.addObject(this.credential, validationRules);
     }
 
+    setupSearch() : void {
+        let $searchBar = $(this.credentialSearch),
+            $filterBar = $(this.credentialFilter);
+        console.log($searchBar);
+        $searchBar.on('change', 'input', () => {
+            let searchOptions = $(this.credentialHolder).find('.credential'),
+                searchTerm = $searchBar.find('input').val().toLowerCase();
+            console.log(searchTerm);
+            if (searchTerm == '') {
+                searchOptions.removeClass('inactive');
+            }
+            else {
+                for (let i = 0; i < searchOptions.length; i++) {
+                    let thisItem = $(searchOptions[i]);
+                    if (thisItem.attr('data-name').toLowerCase().indexOf(searchTerm) == -1) {
+                        thisItem.addClass('inactive');
+                    } else {
+                        thisItem.removeClass('inactive');
+                    }
+                }
+            }
+        });
+    }
+
     attached() : void {
         this.open();
     }
@@ -77,7 +105,6 @@ export class AddCredential {
     }
 
     saveCredential() : void {
-        console.log(JSON.stringify(this.credential));
         this.controller.validate().then(result => {
             if (result.valid) {
                 this.client.fetch(`providers/${this.providerId}/credential`, {
