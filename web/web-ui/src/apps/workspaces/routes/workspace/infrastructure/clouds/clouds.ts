@@ -111,7 +111,7 @@ export class Clouds {
         let clouds = [];
         for (let i of [1]) {
             let c1 = new Provider();
-            c1.name = "Hasli AWS west " + i;
+            c1.key = "Hasli AWS west " + i;
             c1.icon = "styles/themes/hasli/assets/images/logos/aws-logo-2.svg";
             c1.location = "us-west-1";
             c1.account = "Hasli AWS Dev Account";
@@ -130,7 +130,7 @@ export class Clouds {
 
 
         let c1 = new Provider();
-        c1.name = "Hasli AWS west ";
+        c1.key = "Hasli AWS west ";
         c1.icon = "styles/themes/hasli/assets/images/logos/vmware-logo.svg";
         c1.location = "us-west-1";
         c1.account = "Hasli AWS Dev Account";

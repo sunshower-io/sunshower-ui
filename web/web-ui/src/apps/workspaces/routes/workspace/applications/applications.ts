@@ -5,6 +5,7 @@ import {Workspace as WorkspaceRoute} from "apps/workspaces/routes/workspace/inde
 import {WorkspaceRevision} from "apps/workspaces/model/workspaces/workspace";
 import {autoinject} from "aurelia-dependency-injection";
 import {Application} from "common/model/api/core/application";
+import {User} from "../../../../../common/model/security/user";
 
 
 @autoinject
@@ -62,20 +63,22 @@ export class Applications {
                 .then(d => d.json() as any)
                 .then(d => {
                     this.loading = false;
-                    this.applications = d;
+                    // this.applications = d;
                     // // this.applications = d;
                     //
                     // // TODO plug into application service
-                    // let user = new User();
-                    // user.firstname = "Dustin";
-                    // user.lastname = "Lish";
-                    // this.applications = [
-                    //     new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Full Stack", "8.47", "running", 5, 4, this.getDate(), user),
-                    //     new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA UIM", "8.47", "running", 1, 1, this.getDate(), user),
-                    //     new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA UMP", "8.47", "running", 1, 1, this.getDate(), user),
-                    //     new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA MySql", "5.6", "running", 1, 1, this.getDate(), user),
-                    //     new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Robot", "8.47", "running", 5, 1, this.getDate(), user)
-                    // ];
+                    let user = new User();
+                    user.firstname = "Dustin";
+                    user.lastname = "Lish";
+                    this.applications = [
+                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Full Stack", "8.47", "running", 5, 4, this.getDate(), user),
+                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA UIM", "8.47", "running", 1, 1, this.getDate(), user),
+                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA UMP", "8.47", "running", 1, 1, this.getDate(), user),
+                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA MySql", "5.6", "running", 1, 1, this.getDate(), user),
+                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Robot", "8.47", "running", 5, 1, this.getDate(), user),
+                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Azure Probe", "8.47", "running", 5, 1, this.getDate(), user),
+                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA AWS Probe", "8.47", "running", 5, 1, this.getDate(), user)
+                    ];
                 })
                 .catch(err => {
                     this.loading = false;
