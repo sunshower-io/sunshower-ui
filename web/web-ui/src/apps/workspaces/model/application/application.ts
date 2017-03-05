@@ -1,5 +1,7 @@
 import {File} from 'apps/workspaces/model/io'
 import {Identifier} from "common/lib/lang";
+import {ComputeTemplate} from "common/model/api/hal/compute";
+import {CredentialSecret} from "common/model/security/credentials";
 export class Application {
 
     id                  : string;
@@ -14,4 +16,9 @@ export class ApplicationRevision {
 
     readme                  : File;
     application             : Application;
+
+
+    //added by Lisa
+    template                : ComputeTemplate;
+    credential              : CredentialSecret;
 }

@@ -27,8 +27,8 @@ export class Summary {
     @bindable
     os                  : string;
 
-    @bindable
-    template            : any;
+    // @bindable
+    // template            : any;
 
     @bindable
     instance            : any;
@@ -92,11 +92,11 @@ export class Summary {
     openNodeTemplate() {
         this.dialogService.open({
             viewModel: NodeTemplateDialog,
-            model: this.template
+            model: this.applicationRevision
         }).then(t => {
-            //todo determine why this isn't being called
+            //todo figure out why this isn't working
             console.log('dialog response', t);
-            this.popupCleanup()
+            this.popupCleanup();
         });
     }
 
@@ -140,7 +140,8 @@ export class Summary {
     }
 
     clearNodeTemplate() : void {
-        this.template = null;
+        //todo update applicationRevision
+        this.applicationRevision.template = null;
     }
 
     selectInstance(instance : any) : void {

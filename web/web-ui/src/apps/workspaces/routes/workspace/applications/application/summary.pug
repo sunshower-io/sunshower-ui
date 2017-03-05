@@ -45,9 +45,9 @@ template
                                         | ${os}
                                     .hover-close
                                         i.circular.inverted.red.remove.link.icon(title="Remove OS" click.delegate="clearOS()")
-                                .item.closeable(if.bind="template")
+                                .item.closeable(if.bind="applicationRevision.template")
                                     .ui.basic.primary.button(title="Edit Node Template" click.delegate="openNodeTemplate()")
-                                        | ${template.name}
+                                        | ${applicationRevision.template.name}
                                     .hover-close
                                         i.circular.inverted.remove.close.link.icon(title="Remove Node Template" click.delegate="")
                 .row

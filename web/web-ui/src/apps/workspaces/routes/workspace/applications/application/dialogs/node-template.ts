@@ -6,8 +6,9 @@ import {
     ComputeTemplateMarshaller
 } from "common/model/api/hal/compute";
 import {OperatingSystemService} from "common/model/api/hal/os";
-import {UUID} from "../../../../../../../common/lib/utils/uuid";
-import {CredentialSecret} from "../../../../../../../common/model/security/credentials";
+import {UUID} from "common/lib/utils/uuid";
+import {CredentialSecret} from "common/model/security/credentials";
+import {ApplicationRevision} from "../../../../../model/application/application";
 
 
 @inject(
@@ -27,21 +28,20 @@ export class NodeTemplateDialog {
     private marshaller              : ComputeTemplateMarshaller;
     private credential              : CredentialSecret;
     private credentials             : CredentialSecret[];
+    private applicationRevision     : ApplicationRevision;
 
     constructor(
         private controller:DialogController,
         private client:HttpClient,
         private osService:OperatingSystemService
     ) {
-
         this.template = {} as ComputeTemplate;
         this.marshaller = new ComputeTemplateMarshaller();
     }
 
-    activate(template) : void {
-        this.template = template;
-        console.log('I got a template passed in to me', template);
+    activate(applicationRevision : ApplicationRevision) : void {
         setTimeout(() => {
+            this.applicationRevision = applicationRevision;
             $(this.list).dropdown({
                 action: 'activate',
                 onChange: this.osChanged,
@@ -83,11 +83,11 @@ export class NodeTemplateDialog {
         this.selectingCredential = true;
     }
 
-    save() : void {
-        //todo wire credential, node template and application together
-
-
-        this.controller.ok(this.template);
+    save() : any {
+        this.applicationRevision.template = this.template;
+        this.applicationRevision.credential = this.credential;
+        //todo save applicationRevision
+        this.controller.ok(this.applicationRevision);
     }
 
 }
