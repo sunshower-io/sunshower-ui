@@ -1,0 +1,12 @@
+//
+   Created by dustinlish on 3/5/17.
+
+template
+    require(from="common/resources/custom-elements/form/multi-step-form")
+    multi-step-form(
+        view-models.bind="viewModels"
+        cancel.call="cancel()"
+        complete.call="complete(multiStepViewData)"
+        show.call="show()"
+        header.bind="'CREATE INSTANCE'"
+    )
