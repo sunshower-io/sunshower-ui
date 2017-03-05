@@ -36,6 +36,16 @@ export class AWSRegion {
 
     }
 
+    static find(name : string) : AWSRegion {
+        let regions = this.get();
+        for (let i = 0; i < regions.length; i++) {
+            let region = regions[i];
+            if (name == region.name) {
+                return region;
+            }
+        }
+        return null;
+    }
 
     static get() : Array<AWSRegion> {
 
