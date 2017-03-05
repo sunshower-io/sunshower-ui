@@ -18,7 +18,7 @@ export class Infrastructure {
                 name: 'infrastructure/clouds',
                 moduleId: './clouds/clouds',
                 nav: true,
-                title: 'Clouds',
+                title: 'Environments',
                 settings: {icon: "ion-ios-cloud"}
             },
 

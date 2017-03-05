@@ -1,8 +1,4 @@
-import {
-    bindable,
-    inject,
-    CompositionTransaction
-} from "aurelia-framework";
+import {bindable} from "aurelia-framework";
 import "chart.js";
 import {HttpClient} from 'aurelia-fetch-client';
 import {Provider} from "common/model/api/hal/api";
@@ -10,11 +6,11 @@ import {ChannelSet} from "common/lib/events/websockets";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
 
 
-@inject(
-    Workspace,
-    HttpClient,
-    ChannelSet
-)
+import {CreateInstance} from "./create/create-instance";
+import {autoinject} from "aurelia-dependency-injection";
+
+
+@autoinject
 export class Instances {
 
     @bindable
@@ -28,9 +24,13 @@ export class Instances {
     @bindable
     loading: boolean;
 
+    @bindable
+    showModal;
+
     constructor(private parent: Workspace,
                 private client: HttpClient,
-                private channelSet: ChannelSet
+                private channelSet: ChannelSet,
+                private createInstanceForm: CreateInstance
     ) {
         this.instances = [];
     }
@@ -53,7 +53,9 @@ export class Instances {
 
 
     createInstance(): void {
-        this.parent.router.navigate('/catalog');
+        // this.parent.router.navigate('/catalog');
+        this.showModal = true;
+        this.createInstanceForm.show();
     }
 
     openInstance(): void {
@@ -101,7 +103,6 @@ export class Instances {
 
     restart(instance: Instance): void {
     }
-
 
     statusButtons(instance: Instance): string[] {
         if (instance.state == 'running') {
