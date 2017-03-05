@@ -2,7 +2,7 @@ import {
     ComputeProfile,
     OperatingSystem,
     MemoryProfile,
-    StorageProfile
+    StorageProfile, AWSRegion
 } from "./api";
 import {Marshaller} from "common/lib/io/marshalling/marshaller";
 
@@ -19,6 +19,8 @@ export interface ComputeTemplate {
     computeProfile      : ComputeProfile;
 
     operatingSystem     : OperatingSystem;
+
+    location            ?: AWSRegion; //will need to figure out better way to do this
 
 }
 

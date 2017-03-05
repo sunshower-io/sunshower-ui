@@ -9,6 +9,7 @@ import {ApplicationRevision} from "apps/workspaces/model/application";
 )
 export class ApplicationDialog {
 
+    loading             : boolean;
     applications        : any[];
 
     private applicationRevision     : ApplicationRevision;
@@ -23,6 +24,9 @@ export class ApplicationDialog {
     activate(applicationRevision : ApplicationRevision) : void {
         setTimeout(() => {
             this.applicationRevision = applicationRevision;
+            this.loading = true;
+            //todo fetch applications
+            this.loading = false;
         }, 1000);
     }
 

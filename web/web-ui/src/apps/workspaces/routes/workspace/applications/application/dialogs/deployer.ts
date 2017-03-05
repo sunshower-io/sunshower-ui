@@ -10,6 +10,8 @@ import {ApplicationRevision, ApplicationRevisionDeployer} from "apps/workspaces/
 
 export class DeployerDialog {
 
+    private loading                 : boolean;
+
     private applicationRevision     : ApplicationRevision;
     private deployers               : ApplicationRevisionDeployer[];
 
@@ -19,20 +21,26 @@ export class DeployerDialog {
         private client:HttpClient
     ) {
         this.deployers = [];
-        let hfs = new ApplicationRevisionDeployer(),
-            docker = new ApplicationRevisionDeployer();
-        hfs.name = 'HFS';
-        hfs.icon = 'styles/themes/hasli/assets/images/logos/hasli-icon.svg';
-        docker.name = 'Docker';
-        docker.icon = 'styles/themes/hasli/assets/images/logos/docker-icon.svg';
-        this.deployers.push(hfs);
-        this.deployers.push(docker);
 
     }
 
     activate(applicationRevision : ApplicationRevision) : void {
         setTimeout(() => {
             this.applicationRevision = applicationRevision;
+
+            this.loading = true;
+
+            let hfs = new ApplicationRevisionDeployer(),
+                docker = new ApplicationRevisionDeployer();
+            hfs.name = 'HFS';
+            hfs.icon = 'styles/themes/hasli/assets/images/logos/hasli-icon.svg';
+            docker.name = 'Docker';
+            docker.icon = 'styles/themes/hasli/assets/images/logos/docker-icon.svg';
+            this.deployers.push(hfs);
+            this.deployers.push(docker);
+
+            this.loading = false;
+
         }, 1000);
     }
 
