@@ -25,31 +25,54 @@ template
                                     span.item.ui.icon.top.right.pointing.dropdown(ref="requirementDD")
                                         i.big.ion-ios-plus-empty.green.link.icon
                                         .menu
-                                            .item(click.delegate="openPopup('deployer')") Deployer
-                                            .item(click.delegate="openNodeTemplate()")  Node Template
-                                            .item(click.delegate="openPopup('applications')")  Applications
-                                            .item(click.delegate="openPopup('operatingSystem')")  Operating System
-                                            .item(click.delegate="openPopup('service')")  Service
-                                            .item(click.delegate="openPopup('instances')")  Instances
+                                            .item(click.delegate="openPopup('deployer')")
+                                                | Deployer
+                                            .item(click.delegate="openNodeTemplate()")
+                                                | Node Template
+                                            .item(click.delegate="openPopup('applications')")
+                                                | Applications
+                                            .item(click.delegate="openPopup('operatingSystem')")
+                                                | Operating System
+                                            .item(click.delegate="openPopup('service')")
+                                                | Service
+                                            .item(click.delegate="openPopup('instances')")
+                                                | Instances
 
                             .segment-header_divider
                             .ui.horizontal.list.pills
                                 .item.closeable(if.bind="deployer && deployer != ''")
-                                    .ui.basic.primary.button(title="Edit Deployer" click.delegate="openPopup('deployer')")
+                                    .ui.basic.primary.button(
+                                        title="Edit Deployer"
+                                        click.delegate="openPopup('deployer')"
+                                    )
                                         | ${deployer}
                                     .hover-close
-                                        i.circular.inverted.red.remove.link.icon(title="Remove Deployer" click.delegate="clearDeployer()")
-
+                                        i.circular.inverted.red.remove.link.icon(
+                                            title="Remove Deployer"
+                                            click.delegate="clearDeployer()"
+                                        )
                                 .item.closeable(if.bind="os && os != ''")
-                                    .ui.basic.primary.button(title="Edit OS" click.delegate="openPopup('operatingSystem')")
+                                    .ui.basic.primary.button(
+                                        title="Edit OS"
+                                        click.delegate="openPopup('operatingSystem')"
+                                    )
                                         | ${os}
                                     .hover-close
-                                        i.circular.inverted.red.remove.link.icon(title="Remove OS" click.delegate="clearOS()")
+                                        i.circular.inverted.red.remove.link.icon(
+                                            title="Remove OS"
+                                            click.delegate="clearOS()"
+                                        )
                                 .item.closeable(if.bind="applicationRevision.template")
-                                    .ui.basic.primary.button(title="Edit Node Template" click.delegate="openNodeTemplate()")
+                                    .ui.basic.primary.button(
+                                        title="Edit Node Template"
+                                        click.delegate="openNodeTemplate()"
+                                    )
                                         | ${applicationRevision.template.name}
                                     .hover-close
-                                        i.circular.inverted.remove.close.link.icon(title="Remove Node Template" click.delegate="")
+                                        i.circular.inverted.red.remove.link.icon(
+                                            title="Remove Node Template"
+                                            click.delegate="clearNodeTemplate()"
+                                        )
                 .row
                     .column
                         .ui.segment
