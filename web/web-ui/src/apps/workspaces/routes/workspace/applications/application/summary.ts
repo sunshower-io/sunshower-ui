@@ -9,6 +9,9 @@ import {NodeTemplateDialog} from "./dialogs/node-template";
 import {OperatingSystemDialog} from "./dialogs/operating-system";
 import {DeployerDialog} from "./dialogs/deployer";
 import {OperatingSystem} from "common/model/api/hal/api";
+import {ApplicationDialog} from "./dialogs/applications";
+import {ServiceDialog} from "./dialogs/service";
+import {InstancesDialog} from "./dialogs/instances";
 /**
  * Created by dustinlish on 2/20/17.
  */
@@ -28,9 +31,6 @@ export class Summary {
 
     @bindable
     instances           : any[];
-
-    @bindable
-    applications        : any[];
 
 
     private applicationRevision     : ApplicationRevision;
@@ -77,34 +77,61 @@ export class Summary {
     }
 
     openNodeTemplate() {
+        this.popupCleanup();
         this.dialogService.open({
             viewModel: NodeTemplateDialog,
             model: this.applicationRevision
         }).then(t => {
-            this.popupCleanup();
         });
     }
 
     openOperatingSystem() {
+        this.popupCleanup();
         this.dialogService.open({
             viewModel: OperatingSystemDialog,
             model: this.applicationRevision
         }).then(t => {
-            this.popupCleanup();
         })
     }
 
     openDeployer() {
+        this.popupCleanup();
         this.dialogService.open({
            viewModel: DeployerDialog,
             model: this.applicationRevision
         }).then(t => {
-            this.popupCleanup();
+        });
+    }
+
+    openApplications() {
+        this.popupCleanup();
+        this.dialogService.open({
+            viewModel: ApplicationDialog,
+            model: this.applicationRevision
+        }).then(t => {
+        });
+    }
+
+    openService() {
+        this.popupCleanup();
+        this.dialogService.open({
+            viewModel: ServiceDialog,
+            model: this.applicationRevision
+        }).then(t => {
+        });
+    }
+
+    openInstances() {
+        this.popupCleanup();
+        this.dialogService.open({
+            viewModel: InstancesDialog,
+            model: this.applicationRevision
+        }).then(t => {
         });
     }
 
     openDialog(requirement : any) {
-        console.log('requirement', requirement);
+        //console.log('requirement', requirement);
         if (typeof requirement.type != 'undefined' && requirement.type == 'computeTemplate') {
             this.openNodeTemplate();
         }
@@ -114,7 +141,7 @@ export class Summary {
         if (requirement instanceof OperatingSystem) {
             this.openOperatingSystem();
         }
-        //todo check type and open relevant popup
+        //todo check type and open relevant popup for applications, service and instances
     }
 
     clearRequirement(requirement: any) : void {
@@ -122,39 +149,10 @@ export class Summary {
         this.applicationRevision.requirements.splice(index, 1);
     }
 
-
-    openPopup(state: string) : void {
-        this.popupState = state;
-        $(this.requirementPopup).modal('show');
-    }
-
     popupCleanup() : void {
-        this.popupState = '';
         $(this.requirementDD).find('.active').removeClass('active');
         $(this.requirementDD).find('.selected').removeClass('selected');
     }
-
-    closePopup() : void {
-        this.popupCleanup();
-        $(this.requirementPopup).modal('hide');
-    }
-
-
-
-    saveService() : void {
-        this.closePopup();
-    }
-
-    selectInstance(instance : any) : void {
-        this.instance = instance;
-        this.closePopup();
-    }
-
-    selectApplication() : void {
-        this.closePopup();
-    }
-
-
 
     private load(appId:string): void {
         this.loadingSummary = true;
