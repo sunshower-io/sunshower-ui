@@ -1,0 +1,58 @@
+//
+   Created by dustinlish on 3/4/17.
+
+template
+    //.ui.hidden.divider
+    //.ui.container
+    //    .ui.container
+    //        .ui.basic.segment
+    //            h2.ui.header
+    //                .ui.middle.aligned.image
+    //                    img(src="styles/themes/hasli/assets/images/logos/aws-logo-2.svg")
+    //                .content
+    //                    |   Hasli AWS Dev Account
+    //        .ui.hidden.divider
+    //    .ui.basic.segment
+    //        .ui.secondary.pointing.menu
+    //            a.item(
+    //            repeat.for='row of router.navigation',
+    //            class="${row.isActive ? 'active' : ''}"
+    //            href.bind='row.href'
+    //            )
+    //                .content
+    //                    | ${row.title}
+    //.ui.container
+    //    .ui.fitted.divider
+    //    router-view
+    .overlay.au-animate
+        .ui.fluid.container(style="background-color: #fff !important")
+            .ui.hidden.divider
+            .ui.hidden.divider
+            .ui.hidden.divider
+            .ui.container
+                .ui.secondary.menu
+                    .ui.items
+                        .item
+                            .ui.tiny.image
+                                img(
+                                src='styles/themes/hasli/assets/images/logos/aws-logo-2.svg'
+                                )
+                            .middle.aligned.content
+                                a.header Hasli AWS Dev Account
+                                .meta
+                                .description
+                                    p
+                                .extra
+                    .right.menu
+                        a.item
+                            i.huge.ion-ios-close-empty.icon(click.delegate="close()")
+                .ui.secondary.pointing.menu
+                    a.item(
+                    repeat.for='row of router.navigation',
+                    class="${row.isActive ? 'active' : ''}"
+                    href.bind='row.href'
+                    )
+                        | ${row.title}
+        .ui.container
+            .ui.fitted.divider
+            router-view

@@ -14,8 +14,12 @@ export class Clouds {
     @bindable
     loading: boolean;
 
+    modal: HTMLElement;
 
-    constructor(private parent:Workspace, private client:HttpClient) {
+    constructor(
+        private parent:Workspace,
+        private client:HttpClient,
+    ) {
     }
 
     attached(): void {
@@ -37,6 +41,13 @@ export class Clouds {
                 }
             })
         ;
+
+        $(this.modal)
+            .modal({
+                allowMultiple: false,
+                detachable: false,
+                observeChanges: true
+            });
     };
 
     activate(id:any)  {
@@ -69,12 +80,12 @@ export class Clouds {
                 .then(r => r.json() as any)
                 .then(r => {
                     // TODO change back after testing
-                    this.providers = r.map(r => {
-                        r.icon = "styles/themes/hasli/assets/images/logos/aws-logo-2.svg";
-                        r.name = "Provider";
-                        return r;
-                    });
-                    // this.providers = this.createMockProviders();
+                    // this.providers = r.map(r => {
+                    //     r.icon = "styles/themes/hasli/assets/images/logos/aws-logo-2.svg";
+                    //     r.name = "Provider";
+                    //     return r;
+                    // });
+                    this.providers = this.createMockProviders();
                     this.loading = false;
                 })
                 .catch(err => {
@@ -91,9 +102,14 @@ export class Clouds {
         this.parent.router.navigate('clouds/new');
     }
 
+    openEnvironment() : void {
+        //
+        this.parent.router.navigate('environment');
+    }
+
     createMockProviders() : Array<Provider> {
         let clouds = [];
-        for (let i of [1, 2, 3, 4, 5]) {
+        for (let i of [1]) {
             let c1 = new Provider();
             c1.name = "Hasli AWS west " + i;
             c1.icon = "styles/themes/hasli/assets/images/logos/aws-logo-2.svg";
@@ -112,6 +128,17 @@ export class Clouds {
             clouds.push(c1)
         }
 
+
+        let c1 = new Provider();
+        c1.name = "Hasli AWS west ";
+        c1.icon = "styles/themes/hasli/assets/images/logos/vmware-logo.svg";
+        c1.location = "us-west-1";
+        c1.account = "Hasli AWS Dev Account";
+        c1.hosts = 2;
+        c1.vms = 100;
+        c1.bareMetal = 0;
+
+        clouds.push(c1);
 
         return clouds;
     }
