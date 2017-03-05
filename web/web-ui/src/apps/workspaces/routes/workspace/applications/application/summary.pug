@@ -26,7 +26,7 @@ template
                                     span.item.ui.icon.top.right.pointing.dropdown(ref="requirementDD")
                                         i.big.ion-ios-plus-empty.green.link.icon
                                         .menu
-                                            .item(click.delegate="openPopup('deployer')")
+                                            .item(click.delegate="openDeployer()")
                                                 | Deployer
                                             .item(click.delegate="openNodeTemplate()")
                                                 | Node Template
@@ -40,39 +40,18 @@ template
                                                 | Instances
 
                             .segment-header_divider
+
                             .ui.horizontal.list.pills
-                                .item.closeable(if.bind="deployer && deployer != ''")
+                                .item.closeable(repeat.for="requirement of applicationRevision.requirements")
                                     .ui.basic.primary.button(
-                                        title="Edit Deployer"
-                                        click.delegate="openPopup('deployer')"
+                                        title="Edit"
+                                        click.delegate="openDialog(requirement)"
                                     )
-                                        | ${deployer}
+                                        | ${requirement.name}
                                     .hover-close
                                         i.circular.inverted.red.remove.link.icon(
-                                            title="Remove Deployer"
-                                            click.delegate="clearDeployer()"
-                                        )
-                                .item.closeable(if.bind="applicationRevision.operatingSystem")
-                                    .ui.basic.primary.button(
-                                        title="Edit OS"
-                                        click.delegate="openOperatingSystem()"
-                                    )
-                                        | ${applicationRevision.operatingSystem.name}
-                                    .hover-close
-                                        i.circular.inverted.red.remove.link.icon(
-                                            title="Remove OS"
-                                            click.delegate="clearOS()"
-                                        )
-                                .item.closeable(if.bind="applicationRevision.template")
-                                    .ui.basic.primary.button(
-                                        title="Edit Node Template"
-                                        click.delegate="openNodeTemplate()"
-                                    )
-                                        | ${applicationRevision.template.name}
-                                    .hover-close
-                                        i.circular.inverted.red.remove.link.icon(
-                                            title="Remove Node Template"
-                                            click.delegate="clearNodeTemplate()"
+                                            title="Remove"
+                                            click.delegate="clearRequirement(requirement)"
                                         )
                 .row
                     .column
@@ -95,16 +74,6 @@ template
 
 
     .ui.long.modal(ref="requirementPopup")
-        template(if.bind="popupState == 'deployer'")
-            .header Select Deployer
-            .content
-                .ui.link.centered.four.cards
-                    .card(click.delegate="selectDeployer('HFS')")
-                        .image
-                            img(src="styles/themes/hasli/assets/images/logos/hasli-icon.svg")
-                    .card(click.delegate="selectDeployer('Docker')")
-                        .image
-                            img(src="styles/themes/hasli/assets/images/logos/docker-icon.svg")
         template(if.bind="popupState == 'applications'")
             .header Applications
             .content

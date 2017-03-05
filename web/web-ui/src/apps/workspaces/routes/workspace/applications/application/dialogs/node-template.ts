@@ -85,9 +85,12 @@ export class NodeTemplateDialog {
     }
 
     save() : void {
-        this.applicationRevision.template = this.template;
-        this.applicationRevision.credential = this.credential;
-        //todo save applicationRevision
+        if (typeof this.template != 'undefined') {
+            this.applicationRevision.requirements.push(this.template);
+        }
+        if (typeof this.credential != 'undefined') {
+            this.applicationRevision.requirements.push(this.credential);
+        }
         this.controller.ok(this.applicationRevision);
     }
 

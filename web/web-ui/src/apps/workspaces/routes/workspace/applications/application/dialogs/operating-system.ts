@@ -26,7 +26,7 @@ export class OperatingSystemDialog {
 
 
     save(os: OperatingSystem)  : void {
-        this.applicationRevision.operatingSystem = os;
+        this.applicationRevision.requirements.push(os);
         //todo save applicationRevision
         this.controller.ok(this.applicationRevision);
     }

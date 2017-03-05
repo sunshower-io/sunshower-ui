@@ -2,12 +2,13 @@ import * as showdown from 'showdown';
 import {Identifier} from "common/lib/lang";
 import {HttpClient} from "aurelia-fetch-client";
 import {Application} from './application';
-import {ApplicationRevision} from "apps/workspaces/model/application";
+import {ApplicationRevision, ApplicationRevisionDeployer} from "apps/workspaces/model/application";
 import {bindable, autoinject} from "aurelia-framework";
-import {OperatingSystemService} from "common/model/api/hal/os";
 import {DialogService} from "aurelia-dialog";
 import {NodeTemplateDialog} from "./dialogs/node-template";
 import {OperatingSystemDialog} from "./dialogs/operating-system";
+import {DeployerDialog} from "./dialogs/deployer";
+import {OperatingSystem} from "common/model/api/hal/api";
 /**
  * Created by dustinlish on 2/20/17.
  */
@@ -23,21 +24,7 @@ export class Summary {
     popupState          : string;
 
     @bindable
-    deployer            : string;
-
-    // @bindable
-    // os                  : string;
-    // @bindable
-    // template            : any;
-
-    @bindable
     instance            : any;
-
-    @bindable
-    selectingTemplate   : boolean = false;
-
-    @bindable
-    nodeTemplates       : any[];
 
     @bindable
     instances           : any[];
@@ -55,7 +42,6 @@ export class Summary {
 
 
     constructor(
-        private osService:OperatingSystemService,
         private client: HttpClient,
         private parent: Application,
         private dialogService:DialogService
@@ -77,6 +63,9 @@ export class Summary {
             .then(t => {
                 this.applicationRevision = t;
                 this.parent.applicationRevision = t;
+                if (typeof this.applicationRevision.requirements == 'undefined') {
+                    this.applicationRevision.requirements = [];
+                }
                 this.load(this.id);
                 this.loading = false;
             });
@@ -87,15 +76,11 @@ export class Summary {
         this.loading = true;
     }
 
-
-
     openNodeTemplate() {
         this.dialogService.open({
             viewModel: NodeTemplateDialog,
             model: this.applicationRevision
         }).then(t => {
-            //todo figure out why this isn't working
-            console.log('dialog response', t);
             this.popupCleanup();
         });
     }
@@ -105,10 +90,36 @@ export class Summary {
             viewModel: OperatingSystemDialog,
             model: this.applicationRevision
         }).then(t => {
-            //todo figure out why this isn't working
-            console.log('dialog response', t);
             this.popupCleanup();
         })
+    }
+
+    openDeployer() {
+        this.dialogService.open({
+           viewModel: DeployerDialog,
+            model: this.applicationRevision
+        }).then(t => {
+            this.popupCleanup();
+        });
+    }
+
+    openDialog(requirement : any) {
+        console.log('requirement', requirement);
+        if (typeof requirement.type != 'undefined' && requirement.type == 'computeTemplate') {
+            this.openNodeTemplate();
+        }
+        if (requirement instanceof ApplicationRevisionDeployer) {
+            this.openDeployer();
+        }
+        if (requirement instanceof OperatingSystem) {
+            this.openOperatingSystem();
+        }
+        //todo check type and open relevant popup
+    }
+
+    clearRequirement(requirement: any) : void {
+        let index = this.applicationRevision.requirements.indexOf(requirement);
+        this.applicationRevision.requirements.splice(index, 1);
     }
 
 
@@ -128,27 +139,10 @@ export class Summary {
         $(this.requirementPopup).modal('hide');
     }
 
-    selectDeployer(deployer: string) : void {
-        this.deployer = deployer;
-        this.closePopup();
-    }
 
-    clearDeployer() : void {
-        this.deployer = '';
-    }
-
-    clearOS() : void {
-        this.applicationRevision.operatingSystem = null;
-        //todo save applicationRevision
-    }
 
     saveService() : void {
         this.closePopup();
-    }
-
-    clearNodeTemplate() : void {
-        //todo update applicationRevision
-        this.applicationRevision.template = null;
     }
 
     selectInstance(instance : any) : void {

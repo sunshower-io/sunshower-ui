@@ -1,8 +1,6 @@
 import {File} from 'apps/workspaces/model/io'
 import {Identifier} from "common/lib/lang";
-import {ComputeTemplate} from "common/model/api/hal/compute";
-import {CredentialSecret} from "common/model/security/credentials";
-import {OperatingSystem} from "common/model/api/hal/api";
+
 export class Application {
 
     id                  : string;
@@ -19,8 +17,19 @@ export class ApplicationRevision {
     application             : Application;
 
 
-    //added by Lisa
-    template                : ComputeTemplate;
-    credential              : CredentialSecret;
-    operatingSystem         : OperatingSystem;
+    requirements            : Requirement[];
+
+    constructor() {
+        this.requirements = [];
+    }
+
+}
+
+export interface Requirement {
+
+}
+
+export class ApplicationRevisionDeployer {
+    name        : string;
+    icon        : string;
 }
