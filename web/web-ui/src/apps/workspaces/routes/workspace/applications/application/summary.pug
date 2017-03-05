@@ -15,6 +15,7 @@ template
                                     span.item.ui.icon.top.right.pointing.dropdown
                                         i.big.ion-ios-gear-outline.icon
                             .segment-header_divider
+                            .ui.horizontal.list.pills
                 .row
                     .column
                         .ui.segment
@@ -31,7 +32,7 @@ template
                                                 | Node Template
                                             .item(click.delegate="openPopup('applications')")
                                                 | Applications
-                                            .item(click.delegate="openPopup('operatingSystem')")
+                                            .item(click.delegate="openOperatingSystem()")
                                                 | Operating System
                                             .item(click.delegate="openPopup('service')")
                                                 | Service
@@ -51,12 +52,12 @@ template
                                             title="Remove Deployer"
                                             click.delegate="clearDeployer()"
                                         )
-                                .item.closeable(if.bind="os && os != ''")
+                                .item.closeable(if.bind="applicationRevision.operatingSystem")
                                     .ui.basic.primary.button(
                                         title="Edit OS"
-                                        click.delegate="openPopup('operatingSystem')"
+                                        click.delegate="openOperatingSystem()"
                                     )
-                                        | ${os}
+                                        | ${applicationRevision.operatingSystem.name}
                                     .hover-close
                                         i.circular.inverted.red.remove.link.icon(
                                             title="Remove OS"
@@ -83,6 +84,7 @@ template
                                     span.item.ui.icon.top.right.pointing.dropdown
                                         i.big.ion-ios-gear-outline.icon
                             .segment-header_divider
+                            .ui.horizontal.list.pills
         .twelve.wide.column
             .ui.segment(style="position:relative; min-height:150px;")
                 h1.ui.header(if.bind="!loadingSummary") Readme
@@ -110,14 +112,6 @@ template
                     .card(repeat.for="application of applications" click.delegate="selectApplication(application)")
                         //.image
                         .content ${application.name}
-        template(if.bind="popupState == 'operatingSystem'")
-            .header Operating System
-            .content
-                .ui.link.centered.four.cards
-                    .card(repeat.for="os of osService.list()" click.delegate="selectOS(os.name)")
-                        .content
-                            img.ui.huge.avatar.image(src="${os.icon}")
-                            | ${os.name}
         template(if.bind="popupState == 'service'")
             .header Service
             .content

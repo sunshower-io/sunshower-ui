@@ -7,6 +7,7 @@ import {bindable, autoinject} from "aurelia-framework";
 import {OperatingSystemService} from "common/model/api/hal/os";
 import {DialogService} from "aurelia-dialog";
 import {NodeTemplateDialog} from "./dialogs/node-template";
+import {OperatingSystemDialog} from "./dialogs/operating-system";
 /**
  * Created by dustinlish on 2/20/17.
  */
@@ -24,9 +25,8 @@ export class Summary {
     @bindable
     deployer            : string;
 
-    @bindable
-    os                  : string;
-
+    // @bindable
+    // os                  : string;
     // @bindable
     // template            : any;
 
@@ -100,6 +100,17 @@ export class Summary {
         });
     }
 
+    openOperatingSystem() {
+        this.dialogService.open({
+            viewModel: OperatingSystemDialog,
+            model: this.applicationRevision
+        }).then(t => {
+            //todo figure out why this isn't working
+            console.log('dialog response', t);
+            this.popupCleanup();
+        })
+    }
+
 
     openPopup(state: string) : void {
         this.popupState = state;
@@ -126,13 +137,9 @@ export class Summary {
         this.deployer = '';
     }
 
-    selectOS(os: string) : void {
-        this.os = os;
-        this.closePopup();
-    }
-
     clearOS() : void {
-        this.os = '';
+        this.applicationRevision.operatingSystem = null;
+        //todo save applicationRevision
     }
 
     saveService() : void {

@@ -8,7 +8,7 @@ import {
 import {OperatingSystemService} from "common/model/api/hal/os";
 import {UUID} from "common/lib/utils/uuid";
 import {CredentialSecret} from "common/model/security/credentials";
-import {ApplicationRevision} from "../../../../../model/application/application";
+import {ApplicationRevision} from "apps/workspaces/model/application";
 
 
 @inject(
@@ -46,6 +46,7 @@ export class NodeTemplateDialog {
                 action: 'activate',
                 onChange: this.osChanged,
             });
+            //todo get credentials
         }, 1000);
     }
 
@@ -83,7 +84,7 @@ export class NodeTemplateDialog {
         this.selectingCredential = true;
     }
 
-    save() : any {
+    save() : void {
         this.applicationRevision.template = this.template;
         this.applicationRevision.credential = this.credential;
         //todo save applicationRevision
