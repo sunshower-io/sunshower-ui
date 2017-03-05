@@ -38,7 +38,9 @@ export class NodeTemplateDialog {
         this.marshaller = new ComputeTemplateMarshaller();
     }
 
-    activate() : void {
+    activate(template) : void {
+        this.template = template;
+        console.log('I got a template passed in to me', template);
         setTimeout(() => {
             $(this.list).dropdown({
                 action: 'activate',
@@ -61,7 +63,6 @@ export class NodeTemplateDialog {
                 .then(t => {
                     this.templates = t;
                     this.loading = false;
-                    console.log("GOT", t[0]);
                 });
         };
     }
@@ -86,7 +87,7 @@ export class NodeTemplateDialog {
         //todo wire credential, node template and application together
 
 
-        this.controller.ok();
+        this.controller.ok(this.template);
     }
 
 }

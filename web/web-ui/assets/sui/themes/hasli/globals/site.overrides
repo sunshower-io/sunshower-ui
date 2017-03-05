@@ -536,17 +536,10 @@ body {
   .hover-close {
     display: none;
 
-    top:0;
-    right:0;
-    bottom:0;
-    padding: 2px 5px;
+    top:-7px;
+    right:-11px;
     position:absolute;
     cursor:pointer;
-
-    color: @primaryColor;
-    &:hover {
-      color: red;
-    }
   }
 
   &:hover .hover-close {

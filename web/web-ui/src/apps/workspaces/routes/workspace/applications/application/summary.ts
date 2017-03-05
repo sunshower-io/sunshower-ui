@@ -63,11 +63,39 @@ export class Summary {
 
     }
 
+    attached() : void {
+        $(this.requirementDD).dropdown();
+        $(this.requirementPopup).modal({
+            onHide: () => {
+                this.popupCleanup();
+            }
+        });
+
+
+        this.client.fetch(`applications/${this.id}/base`)
+            .then(t => t.json() as any)
+            .then(t => {
+                this.applicationRevision = t;
+                this.parent.applicationRevision = t;
+                this.load(this.id);
+                this.loading = false;
+            });
+    }
+
+    activate(identifier: Identifier) {
+        this.id = identifier.id;
+        this.loading = true;
+    }
+
+
 
     openNodeTemplate() {
         this.dialogService.open({
-            viewModel: 'apps/workspaces/routes/workspace/applications/application/dialogs/node-template'
+            viewModel: NodeTemplateDialog,
+            model: this.template
         }).then(t => {
+            //todo determine why this isn't being called
+            console.log('dialog response', t);
             this.popupCleanup()
         });
     }
@@ -111,10 +139,8 @@ export class Summary {
         this.closePopup();
     }
 
-
-    selectNodeTemplate(template : any) : void {
-        this.template = template;
-        this.closePopup();
+    clearNodeTemplate() : void {
+        this.template = null;
     }
 
     selectInstance(instance : any) : void {
@@ -126,29 +152,7 @@ export class Summary {
         this.closePopup();
     }
 
-    attached() : void {
-        $(this.requirementDD).dropdown();
-        $(this.requirementPopup).modal({
-            onHide: () => {
-                this.popupCleanup();
-            }
-        });
 
-
-        this.client.fetch(`applications/${this.id}/base`)
-            .then(t => t.json() as any)
-            .then(t => {
-                this.applicationRevision = t;
-                this.parent.applicationRevision = t;
-                this.load(this.id);
-                this.loading = false;
-            });
-    }
-
-    activate(identifier: Identifier) {
-        this.id = identifier.id;
-        this.loading = true;
-    }
 
     private load(appId:string): void {
         this.loadingSummary = true;

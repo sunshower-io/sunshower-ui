@@ -75,17 +75,20 @@ template
 
                     button.ui.pull-right.primary.button(click.delegate="saveNodeTemplate()") Save Node Template
 
-                .ui.link.centered.four.cards(if.bind="selectingTemplate")
-                    .card(repeat.for="template of templates" click.delegate="selectNodeTemplate(template)")
-                        .content
-                            .header ${template.name}
-                            .meta CPUs: ${template['compute-profile'].cores}
-                            .meta Disk (GB): ${template['storage-profile'].capacity}
-                            .meta Memory (GB): ${template['memory-profile'].capacity}
-                            .description ${template.description}
-                        .extra.content
-                            img.ui.right.spaced.mini.image(src="${template.operatingSystem.icon}")
-                            | ${template.operatingSystem.name}
+                template(if.bind="selectingTemplate")
+                    .ui.basic.segment(if.bind="templates.length == 0")
+                        .widget-table-empty-alert You have no templates available
+                    .ui.link.centered.four.cards(if.bind="templates.length > 0")
+                        .card(repeat.for="template of templates" click.delegate="selectNodeTemplate(template)")
+                            .content
+                                .header ${template.name}
+                                .meta CPUs: ${template['compute-profile'].cores}
+                                .meta Disk (GB): ${template['storage-profile'].capacity}
+                                .meta Memory (GB): ${template['memory-profile'].capacity}
+                                .description ${template.description}
+                            .extra.content(if.bind="template.operatingSystem")
+                                img.ui.right.spaced.mini.image(src="${template.operatingSystem.icon}")
+                                | ${template.operatingSystem.name}
 
         .ui.form.overlay-form(if.bind="selectingCredential")
             .field.overlay-field

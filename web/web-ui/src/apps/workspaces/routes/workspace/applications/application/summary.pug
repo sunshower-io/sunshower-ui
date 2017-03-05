@@ -8,11 +8,11 @@ template
                 .row
                     .column
                         .ui.segment
-                            .ui.text.menu
+                            .ui.text.menu.summary-segment_header
                                 .item
                                     | Details
                                 .right.menu
-                                    a.item
+                                    span.item.ui.icon.top.right.pointing.dropdown
                                         i.big.ion-ios-gear-outline.icon
                             .segment-header_divider
                 .row
@@ -23,7 +23,7 @@ template
                                     | Requirements
                                 .right.menu
                                     span.item.ui.icon.top.right.pointing.dropdown(ref="requirementDD")
-                                        i.big.ion-ios-gear-outline.icon
+                                        i.big.ion-ios-plus-empty.green.link.icon
                                         .menu
                                             .item(click.delegate="openPopup('deployer')") Deployer
                                             .item(click.delegate="openNodeTemplate()")  Node Template
@@ -38,19 +38,18 @@ template
                                     .ui.basic.primary.button(title="Edit Deployer" click.delegate="openPopup('deployer')")
                                         | ${deployer}
                                     .hover-close
-                                        i.ion-ios-trash-outline.big.fitted.icon(title="Remove Deployer" click.delegate="clearDeployer()")
+                                        i.circular.inverted.red.remove.link.icon(title="Remove Deployer" click.delegate="clearDeployer()")
 
                                 .item.closeable(if.bind="os && os != ''")
                                     .ui.basic.primary.button(title="Edit OS" click.delegate="openPopup('operatingSystem')")
                                         | ${os}
                                     .hover-close
-                                        i.ion-ios-trash-outline.big.fitted.icon(title="Remove OS" click.delegate="clearOS()")
-                                .item
-                                    .ui.basic.primary.button
-                                        | Primary Hub
-                                .item
-                                    .ui.basic.primary.button
-                                        | UIM
+                                        i.circular.inverted.red.remove.link.icon(title="Remove OS" click.delegate="clearOS()")
+                                .item.closeable(if.bind="template")
+                                    .ui.basic.primary.button(title="Edit Node Template" click.delegate="openNodeTemplate()")
+                                        | ${template.name}
+                                    .hover-close
+                                        i.circular.inverted.remove.close.link.icon(title="Remove Node Template" click.delegate="")
                 .row
                     .column
                         .ui.segment
@@ -58,7 +57,7 @@ template
                                 .item
                                     | Contributors
                                 .right.menu
-                                    a.item
+                                    span.item.ui.icon.top.right.pointing.dropdown
                                         i.big.ion-ios-gear-outline.icon
                             .segment-header_divider
         .twelve.wide.column
