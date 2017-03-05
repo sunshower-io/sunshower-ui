@@ -42,7 +42,9 @@ template
                             .item(data-value="3") Docker Compose
                 .four.wide.right.aligned.column
                     span.widget-icons
-                        .ui.small.button.primary(click.delegate="createInstance()") + Create New
+                        .ui.small.button.primary(click.delegate="createInstance()")
+                            | + Create New
+                        compose(view-model='./create/create-instance')
                 table.ui.very.basic.very.padded.selectable.table
                     thead
                         tr
@@ -80,7 +82,7 @@ template
                         tr(
                             show.bind="instances.length > 0 && !loading",
                             as-element="compose",
-                            view-model="apps/workspaces/resources/custom-elements/table/row",
+                            view-model="common/resources/custom-elements/table/row",
                             view="apps/workspaces/resources/custom-elements/table/instance-row.html"
                             repeat.for='instance of instances',
                             model.bind="instance",

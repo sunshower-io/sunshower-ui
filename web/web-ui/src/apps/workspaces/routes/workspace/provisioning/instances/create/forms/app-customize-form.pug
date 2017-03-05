@@ -1,0 +1,144 @@
+template
+    .ui.form
+        h4.ui.dividing.header General Information
+        .ui.stackable.grid
+            .ui.hidden.divider
+            .row.form--field
+                .three.wide.right.aligned.middle.aligned.column
+                    .field
+                        label Deploy to single node
+                .twelve.wide.column
+                    .ui.checkbox
+                        input.hidden(type='checkbox', tabindex='0')
+            .row.form--field
+                .three.wide.right.aligned.middle.aligned.column
+                    .field
+                        label Deployment Policy
+                .twelve.wide.column
+                    .field
+                        select.ui.fluid.dropdown
+                            option(value='') Select Policy
+                            option(value='new') default-micro-us-west-1
+                            option(value='new') default-small-us-west-1
+                            option(value='new') default-medium-us-west-1
+        .field
+
+    .ui.hidden.divider
+    h4.ui.dividing.header
+        | Configure Applications
+    .ui.fluid.styled.accordion
+        // TODO foreach application, add to form for configuration
+        .active.title
+            i.dropdown.icon
+            .ui.tiny.image
+                img(src='styles/themes/hasli/assets/images/logos/mysql-logo.svg')
+        .active.content
+            .ui.basic.segment
+                .ui.pointing.secondary.tabular.menu
+                    // TODO bind to app id
+                    a.active.item(data-tab="details-app-1")
+                        | Details
+                    a.item(data-tab="configuration-app-1")
+                        | Configuration
+                    a.item(data-tab="scaling-app-1")
+                        | Scaling
+                // TODO bind to app id
+                .ui.active.tab(data-tab='details-app-1')
+                    .ui.form
+                        .ui.hidden.divider
+                        .ui.stackable.grid
+                            .row.form--field
+                                .three.wide.right.aligned.middle.aligned.column
+                                    .required.field
+                                        label Name
+                                .twelve.wide.column
+                                    input(type='text', name='name', value='MySql')
+                            .row.form--field
+                                .three.wide.right.aligned.middle.aligned.column
+                                    .required.field
+                                        label Version
+                                .twelve.wide.column
+                                    select.ui.fluid.dropdown
+                                        option(value='6.10.0 LTS') 5.6
+                                        option(value='new') 5.5
+                                        option(value='new') 4.4
+                            .row.form--field
+                                .three.wide.right.aligned.middle.aligned.column
+                                    .required.field
+                                        label Deployment Policy
+                                .twelve.wide.column
+                                    select.ui.fluid.dropdown
+                                        option(value='') Select Policy
+                                        option(value='new') default-micro-us-west-1
+                                        option(value='new') default-small-us-west-1
+                                        option(value='new') default-medium-us-west-1
+                        .ui.hidden.divider
+                .ui.tab(data-tab='configuration-app-1')
+                    .ui.form
+                        .ui.hidden.divider
+                        .ui.stackable.grid
+                            // TODO dynamic fields based on application
+                            .row.form--field
+                                .three.wide.right.aligned.middle.aligned.column
+                                    .required.field
+                                        label ROOT PASSWORD
+                                .twelve.wide.column
+                                    input(type='text', name='root-password', placeholder='root password')
+                            .row.form--field
+                                .three.wide.right.aligned.middle.aligned.column
+                                    .required.field
+                                        label ADMIN USERNAME
+                                .twelve.wide.column
+                                    input(type='text', name='admin-user', placeholder='MySql admin user')
+                            .row.form--field
+                                .three.wide.right.aligned.middle.aligned.column
+                                    .required.field
+                                        label ADMIN PASSWORD
+                                .twelve.wide.column
+                                    input(type='text', name='admin-pass', placeholder='admin user password')
+                        .ui.hidden.divider
+                .ui.tab(data-tab='scaling-app-1')
+                    .ui.form
+                        .ui.hidden.divider
+                        .ui.stackable.grid
+                            .row.form--field
+                                .three.wide.right.aligned.middle.aligned.column
+                                    .field
+                                        label Autoscaling
+                                .twelve.wide.column
+                                    .inline.fields
+                                        .field
+                                            .ui.checkbox
+                                                input.hidden(type='checkbox', tabindex='0')
+                                                label Auto Upscale
+                                        .field
+                                            .ui.checkbox
+                                                input.hidden(type='checkbox', tabindex='0')
+                                                label Auto Downscale
+                            .row.form--field
+                                .three.wide.right.aligned.middle.aligned.column
+                                    .required.field
+                                        label Min number of nodes
+                                .twelve.wide.column
+                                    select.ui.dropdown
+                                        option(value='1') 1
+                                        option(value='new') 2
+                                        option(value='new') 3
+                                        option(value='new') 4
+                                        option(value='new') 5
+                                        option(value='new') 6
+                                        option(value='new') 7
+                            .row.form--field
+                                .three.wide.right.aligned.middle.aligned.column
+                                    .required.field
+                                        label Max number of nodes
+                                .twelve.wide.column
+                                    select.ui.dropdown
+                                        option(value='1') 1
+                                        option(value='new') 2
+                                        option(value='new') 3
+                                        option(value='new') 4
+                                        option(value='new') 5
+                                        option(value='new') 6
+                                        option(value='new') 7
+                        .ui.hidden.divider
