@@ -4,6 +4,7 @@ import {HttpClient} from 'aurelia-fetch-client';
 import {Provider} from "common/model/api/hal/api";
 import {ChannelSet} from "common/lib/events/websockets";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
+import {DialogService} from "aurelia-dialog";
 
 
 import {CreateInstance} from "./create/create-instance";
@@ -32,7 +33,8 @@ export class Instances {
                 private client: HttpClient,
                 private channelSet: ChannelSet,
                 private createInstanceForm: CreateInstance,
-                private updateInstanceForm: UpdateInstance
+                private updateInstanceForm: UpdateInstance,
+                private dialogService: DialogService
     ) {
         this.instances = [];
     }
@@ -58,12 +60,18 @@ export class Instances {
 
     createInstance(): void {
         // this.parent.router.navigate('/catalog');
-        this.createInstanceForm.show();
+        //todo switch to wizard
+        console.log('i need to see a wizard')
+        //this.createInstanceForm.show();
     }
 
     updateInstance(): void {
+        this.dialogService.open({
+            viewModel: UpdateInstance
+        }).then(t => {
+        });
         console.log("updateInstance called");
-        this.updateInstanceForm.show();
+        //this.updateInstanceForm.show();
     }
 
     openInstance(instance): void {

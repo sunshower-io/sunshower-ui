@@ -2,11 +2,77 @@
    Created by dustinlish on 3/5/17.
 
 template
-    require(from="common/resources/custom-elements/form/multi-step-form")
-    multi-step-form(
-        view-models.bind="viewModels"
-        cancel.call="cancel()"
-        complete.call="complete(multiStepViewData)"
-        show.call="show()"
-        header.bind="'UPDATE INSTANCE'"
-    )
+    //require(from="common/resources/custom-elements/form/multi-step-form")
+    //multi-step-form(
+    //    view-models.bind="viewModels"
+    //    cancel.call="cancel()"
+    //    complete.call="complete(multiStepViewData)"
+    //    show.call="show()"
+    //    header.bind="'UPDATE INSTANCE'"
+    //)
+
+
+
+    .header
+        .center.aligned
+            | UPDATE INSTANCE
+    .content
+        table.ui.striped.table
+            thead
+                tr
+                    th
+                    th Version
+                    th Description
+                    th Author
+                    th Created At
+            tbody
+                tr
+                    td
+                        .ui.radio.checkbox
+                            input(type='radio', name='example2', checked='checked')
+                            label
+                    td 4.0.0
+                    td commit message
+                    td Dustin Lish
+                    td 03/05/2017
+                tr
+                    td
+                        .ui.radio.checkbox
+                            input(type='radio', name='example2', checked='checked')
+                            label
+                    td 3.0.0
+                    td commit message
+                    td Dustin Lish
+                    td 03/05/2017
+                tr
+                    td
+                        .ui.radio.checkbox
+                            input(type='radio', name='example2', checked='checked')
+                            label
+                    td 2.0.0
+                    td commit message
+                    td Dustin Lish
+                    td 03/05/2017
+                tr
+                    td
+                        .ui.radio.checkbox
+                            input(type='radio', name='example2', checked='checked')
+                            label
+                    td 1.1.0
+                    td commit message
+                    td Dustin Lish
+                    td 03/05/2017
+                tr
+                    td
+                        .ui.radio.checkbox
+                            input(type='radio', name='example2', checked='checked')
+                            label
+                    td 1.0.0
+                    td commit message
+                    td Dustin Lish
+                    td 03/05/2017
+        .ui.segment
+            h3.ui.dividing.header Changes
+    .actions
+        button.ui.right.primary.button(click.delegate="complete()")
+            | Update
