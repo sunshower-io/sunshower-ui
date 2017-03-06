@@ -44,7 +44,7 @@ template
                             label Location
                         .ui.input.overlay-input
                             .ui.fluid.search.selection.dropdown(style="line-height: 24px;" ref="locationList")
-                                input(type="hidden" name="operatingSystem", value.bind="template.location")
+                                input(type="hidden" name="location", value.bind="template.location")
                                 i.dropdown.icon
                                 .default.text Select location
                                 .menu
@@ -89,7 +89,7 @@ template
                 template(if.bind="selectingTemplate")
                     .ui.basic.segment(if.bind="templates.length == 0")
                         .widget-table-empty-alert You have no templates available
-                    .ui.link.centered.four.cards(if.bind="templates.length > 0")
+                    .ui.centered.four.cards(if.bind="templates.length > 0")
                         .card(repeat.for="template of templates")
                             .content
                                 .header ${template.name}
@@ -102,12 +102,26 @@ template
                                     img.ui.right.spaced.mini.image(src="${template.operatingSystem.icon}")
                                     | ${template.operatingSystem.name}
                                 .field(if.bind="!template.operatingSystem")
-                                    //todo allow setting of OS
-                                // .field(if.bind="template.location")
+                                    .ui.fluid.search.selection.dropdown.osList(ref="list" style="line-height: 24px;")
+                                        input(type="hidden" name="operatingSystem", value.bind="os_id")
+                                        i.dropdown.icon
+                                        .default.text Select OS
+                                        .menu
+                                            .item(repeat.for="os of operatingSystems" data-value="${os.id}")
+                                                image.ui.image(src='${os.icon}')
+                                                | ${os.name}
+                            .extra.content
+                                .field(if.bind="template.location")
                                     | Location: ${template.location.name}
-                                //.field(if.bind="!template.location")
-                                    // todo allow setting of location
-                            .ui.bottom.attached.secondary.button(click.delegate="selectNodeTemplate(template)")
+                                .field(if.bind="!template.location")
+                                    .ui.fluid.search.selection.dropdown.locationList(ref="locationList" style="line-height: 24px;")
+                                        input(type="hidden" name="location", value.bind="location_id")
+                                        i.dropdown.icon
+                                        .default.text Select location
+                                        .menu
+                                            .item(repeat.for="location of locations" data-value="${location.name}")
+                                                | ${location.region} (${location.name})
+                            .ui.bottom.attached.secondary.button.clickable(click.delegate="selectNodeTemplate(template)")
                                 | Select ${template.name}
 
         .ui.form.overlay-form(if.bind="selectingCredential")
