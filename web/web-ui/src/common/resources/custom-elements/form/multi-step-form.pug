@@ -4,7 +4,7 @@
 template
     .multi-step-form.ui.large.first.coupled.modal.transition(ref="modal")
         i.large.close.icon(click.delegate="hide()")
-        .ui.header(style="background-color: #F8F9FB")
+        .ui.center.aligned.header(style="background-color: #F8F9FB")
             | ${header}
         .content
             compose(view-model="${currentViewModelPath}" model.bind="model" compose.ref="composeRef" containerless)

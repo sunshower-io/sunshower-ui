@@ -1,11 +1,8 @@
 //
    Created by dustinlish on 2/6/17.
 template
-    require(from="apps/workspaces/resources/custom-elements/charts/line-chart")
-    require(from="apps/workspaces/resources/custom-elements/charts/chart-stat.html")
-
     .ui.hidden.divider
-
+    compose(view-model='./update/update-instance')
     .ui.container
         .ui.basic.segment
             h2.ui.header
@@ -26,7 +23,7 @@ template
                             .item
                                 i.ion-ios-copy.large.grey.icon
                                 | Clone
-                            .item
+                            .item(click.delegate="updateInstance()")
                                 i.ion-arrow-right-a.large.grey.icon
                                 | Update Instance
                             .item
@@ -44,7 +41,7 @@ template
                     span.widget-icons
                         .ui.small.button.primary(click.delegate="createInstance()")
                             | + Create New
-                        compose(view-model='./create/create-instance')
+                        //compose(view-model='./create/create-instance')
                 table.ui.very.basic.very.padded.selectable.table
                     thead
                         tr
@@ -62,7 +59,7 @@ template
                                 i.link.big.blue.ion-ios-loop-strong.icon(
                                 class="${loading ? 'loading' : ''}"
                                 click.delegate="refresh()"
-                            )
+                                )
                     tbody
                         tr(if.bind="loading")
                             td.widget-table-reloading(colspan='10')
@@ -80,10 +77,9 @@ template
                                         | Create Instance
                                     .ui.hidden.divider
                         tr(
-                            if.bind="instances.length > 0 && !loading",
+                            show.bind="instances.length > 0 && !loading",
                             as-element="compose",
-                            view-model="common/resources/custom-elements/table/row",
-                            view="apps/workspaces/resources/custom-elements/table/instance-row.html"
+                            view-model="apps/workspaces/resources/custom-elements/table/instance-row"
                             repeat.for='instance of instances',
                             model.bind="instance",
                         )
