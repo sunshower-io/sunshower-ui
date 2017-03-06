@@ -28,7 +28,7 @@ export class Instance {
     }
 
     close() : void {
-        this.parent.router.navigate('instances');
+        this.parent.router.navigate('provisioning');
     }
 
 

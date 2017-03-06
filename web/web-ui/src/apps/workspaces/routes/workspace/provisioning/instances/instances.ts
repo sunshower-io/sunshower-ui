@@ -41,6 +41,8 @@ export class Instances {
     }
 
     attached(): void {
+        $('.ui.dropdown').dropdown();
+
         this.refresh();
 
         this.channelSet.subscribe({
@@ -49,7 +51,6 @@ export class Instances {
         }).forEach(t => {
             this.refresh();
         });
-
     };
 
 

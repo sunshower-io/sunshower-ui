@@ -24,6 +24,9 @@ template
     // IP
     td
         | ${model.ip}
+    // Nodes
+    td
+        | ${model.nodes}
     // cpu
     td.right.aligned
         compose(view-model="apps/workspaces/resources/custom-elements/charts/doughnut-chart", model.bind="model.cpu")

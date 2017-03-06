@@ -17,6 +17,7 @@ export class Overview {
     }
 
     attached() {
+        $('.ui.dropdown').dropdown();
         this.refresh();
     }
 
@@ -57,6 +58,7 @@ export class Overview {
             i.version = "8.47";
             i.state = "running";
             i.ip = `54.183.158.11${num}`;
+            i.nodes = 4;
             i.cpu = {labels: ["used", "free"], datasets: [{data: [30, 100], backgroundColor: ["#1EC38A", "#ECF0F1"], hoverBackgroundColor: ["#1EC38A"]}]};
             i.mem = {labels: ["used", "free"], datasets: [{data: [10, 100], backgroundColor: ["#1EC38A", "#ECF0F1"], hoverBackgroundColor: ["#1EC38A"]}]};
             i.disk = {labels: ["used", "free"], datasets: [{data: [34, 100], backgroundColor: ["#1EC38A", "#ECF0F1"], hoverBackgroundColor: ["#1EC38A"]}]};
@@ -74,6 +76,7 @@ export class Instance {
     version     ?: string;
     state       ?: string; //Running, Stopped, Stopping, Restart, Terminating, Deploying, Starting
     ip          ?: string;
+    nodes       ?: number;
     cpu         ?: any;
     mem         ?: any;
     disk        ?: any;
