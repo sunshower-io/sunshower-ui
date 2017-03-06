@@ -37,7 +37,13 @@ export class Workspace {
             });
     }
 
+    activate(id: any) {
+        console.log("ID", id);
+    }
+
+
     open(id: Identifier): void {
+        console.log("OPEN", id);
         this.context.workspaceRevision.id = id;
         this.client.fetch(`workspaces/${id.id}`)
             .then(t => t.json() as any).then(t => {

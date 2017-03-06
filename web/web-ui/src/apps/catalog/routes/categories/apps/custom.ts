@@ -6,6 +6,9 @@ import {HttpClient} from "aurelia-fetch-client";
 import {bindable, autoinject} from "aurelia-framework";
 import {Application} from "common/model/api/core/application";
 
+import {EventAggregator} from 'aurelia-event-aggregator';
+import {Identifier} from "common/lib/lang";
+
 @autoinject
 export class Custom {
 
@@ -15,7 +18,19 @@ export class Custom {
 
     @bindable
     loading: boolean;
-    constructor(private parent: Catalog, private client:HttpClient) {
+    constructor(
+        private parent: Catalog,
+        private client:HttpClient,
+        private eventAggregator: EventAggregator
+    ) {
+    }
+
+    select(applicationRevision:any) : void {
+        this.eventAggregator.publish(
+            'application::selected',
+            applicationRevision
+        );
+
     }
 
 

@@ -16,8 +16,8 @@ template
                         .meta
                             | Docker Compose
                         .description
-                            | Deploys CA UIM, UMP and MySql
+                            | ${application.description}
                     .extra.content
                         .ui.two.buttons
-                            .ui.basic.secondary.button Add
+                            .ui.basic.secondary.button(click.delegate="select(application)")
                             .ui.basic.blue.button(click.delegate="open()") View
