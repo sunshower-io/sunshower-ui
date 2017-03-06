@@ -149,6 +149,12 @@ body {
     &.content-dropdown {
       width:400px;
       min-width:400px;
+
+      .ui.progress>.label {
+        color: @hasliLightGrey;
+        font-weight:normal;
+        //todo move above progress bar
+      }
     }
   }
 }
