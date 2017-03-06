@@ -121,9 +121,18 @@ body {
     &.inverted {
       background: @navbarbg;
 
+
+      &>.item.alert-item {
+        border-bottom: 1px solid lighten(@navbarbg, 5%) !important;
+      }
+
+      &>.item.activity-item {
+        margin: 1em;
+        background: lighten(@navbarbg, 5%) !important;
+      }
+
       &>.item {
         color: @hasliLightGrey !important;
-        border-bottom: 1px solid lighten(@navbarbg, 5%) !important;
         white-space: normal;
         line-height: 1.1em;
 
@@ -159,7 +168,9 @@ body {
         border-bottom: 1px solid @hasliGrey;
       }
 
-      .ui.inverted.progress {
+      .ui.inverted.tiny.progress {
+        margin: 1em 0 .5em;
+
         .bar {
           background: @primarycolor;
         }
@@ -167,7 +178,8 @@ body {
         &>.label {
           color: @hasliLightGrey;
           font-weight:normal;
-          //todo move above progress bar
+          margin-top:0;
+          top:-300%;
         }
       }
     }

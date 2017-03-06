@@ -7,7 +7,7 @@ template
                 | Activity Monitor
             .item(if.bind="activities.length == 0")
                 | You have no activity to view
-            .item(repeat.for="activity of activities")
+            .item.activity-item(repeat.for="activity of activities")
                 .ui.grid
                     .row
                         .two.wide.column

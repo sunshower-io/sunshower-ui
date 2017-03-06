@@ -4,7 +4,7 @@ template
         .ui.menu.inverted.content-dropdown
             .item(if.bind="alerts.length == 0")
                 | You have no alerts
-            .item(repeat.for="alert of alerts")
+            .item.alert-item(repeat.for="alert of alerts")
                 .ui.grid
                     .row
                         .two.wide.column

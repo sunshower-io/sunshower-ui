@@ -21,10 +21,16 @@ export class ActivityProgressBar {
         });
 
         // setTimeout(() => {
+        //     this.activity.progress = 75;
+        //     console.log('should update progress', this.activity.progress);
+        //     this.updateBar();
+        // }, 10000);
+        //
+        // setTimeout(() => {
         //     this.activity.progress = 100;
         //     console.log('should update progress', this.activity.progress);
         //     this.updateBar();
-        // }, 30000);
+        // }, 20000);
     }
 
 
@@ -41,6 +47,9 @@ export class ActivityProgressBar {
     updateBar() : void {
         $(this.element).find('.ui.progress')
             .progress("set percent", this.activity.progress);
+        if (this.activity.progress == 100) {
+            this.activity.status = 'done';
+        }
     }
 
 }
