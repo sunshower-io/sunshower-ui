@@ -36,9 +36,20 @@ template
                                 i.dropdown.icon
                                 .default.text Select OS
                                 .menu
-                                    .item(repeat.for="os of osService.list()" data-value="${os.id}")
+                                    .item(repeat.for="os of operatingSystems" data-value="${os.id}")
                                         image.ui.image(src='${os.icon}')
                                         | ${os.name}
+                    .field.overlay-field
+                        .overlay-label
+                            label Location
+                        .ui.input.overlay-input
+                            .ui.fluid.search.selection.dropdown(style="line-height: 24px;" ref="locationList")
+                                input(type="hidden" name="operatingSystem", value.bind="template.location")
+                                i.dropdown.icon
+                                .default.text Select location
+                                .menu
+                                    .item(repeat.for="location of locations" data-value="${location.name}")
+                                        | ${location.region} (${location.name})
                     .field.overlay-field
                         .overlay-label
                             label CPUs
@@ -79,19 +90,31 @@ template
                     .ui.basic.segment(if.bind="templates.length == 0")
                         .widget-table-empty-alert You have no templates available
                     .ui.link.centered.four.cards(if.bind="templates.length > 0")
-                        .card(repeat.for="template of templates" click.delegate="selectNodeTemplate(template)")
+                        .card(repeat.for="template of templates")
                             .content
                                 .header ${template.name}
                                 .meta CPUs: ${template['compute-profile'].cores}
                                 .meta Disk (GB): ${template['storage-profile'].capacity}
                                 .meta Memory (GB): ${template['memory-profile'].capacity}
                                 .description ${template.description}
-                            .extra.content(if.bind="template.operatingSystem")
-                                img.ui.right.spaced.mini.image(src="${template.operatingSystem.icon}")
-                                | ${template.operatingSystem.name}
+                            .extra.content
+                                .field(if.bind="template.operatingSystem")
+                                    img.ui.right.spaced.mini.image(src="${template.operatingSystem.icon}")
+                                    | ${template.operatingSystem.name}
+                                .field(if.bind="!template.operatingSystem")
+                                    //todo allow setting of OS
+                                // .field(if.bind="template.location")
+                                    | Location: ${template.location.name}
+                                //.field(if.bind="!template.location")
+                                    // todo allow setting of location
+                            .ui.bottom.attached.secondary.button(click.delegate="selectNodeTemplate(template)")
+                                | Select ${template.name}
 
         .ui.form.overlay-form(if.bind="selectingCredential")
-            .field.overlay-field
+            .ui.basic.segment.inline-loader-holder(if.bind="loading")
+                .ui.active.inverted.dimmer.inline-loader
+                    .ui.large.loader
+            .field.overlay-field(if.bind="!loading")
                 .overlay-label
                     label Credential
                 .ui.input.overlay-input

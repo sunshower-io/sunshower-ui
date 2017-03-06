@@ -10,6 +10,8 @@ import {ApplicationRevision} from "apps/workspaces/model/application";
 
 export class InstancesDialog {
 
+    private loading                 : boolean;
+
     private applicationRevision     : ApplicationRevision;
     private instances               : any[];
 
@@ -18,13 +20,14 @@ export class InstancesDialog {
         private controller:DialogController,
         private client:HttpClient
     ) {
-        this.instances = [];
-
     }
 
     activate(applicationRevision : ApplicationRevision) : void {
         setTimeout(() => {
             this.applicationRevision = applicationRevision;
+            this.loading = true;
+            this.instances = [];
+            this.loading = false;
         }, 1000);
     }
 

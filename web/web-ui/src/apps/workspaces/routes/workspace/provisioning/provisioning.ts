@@ -15,6 +15,7 @@ export class Provisioning {
             // Instances Route
             {route: ['', 'instances'], name: 'provisioning/instances', moduleId: './instances/instances', nav: true, title: 'Instances', settings: {icon: "ion-ios-cloud"}},
 
+            {route: 'wizard', name: 'provisioning/wizard/catalog', moduleId: './instances/wizard/wizard', nav: false, title: 'Wizard'},
             // Images Route
             {route: 'images', name: 'provisioning/images', moduleId: './images/images', nav: true, title: 'Images', settings: {icon: "ion-monitor"}},
 
@@ -22,11 +23,11 @@ export class Provisioning {
             {route: 'design', name: 'provisioning/design', moduleId: './design/design', nav: true, title: 'Design', settings: {icon: "database"}},
 
         ]);
-
-        config.mapUnknownRoutes({
-            route: 'instances',
-            redirect: 'instances'
-        });
+        //
+        // config.mapUnknownRoutes({
+        //     route: 'instances',
+        //     redirect: 'instances'
+        // });
 
         this.router = router;
     }
