@@ -8,6 +8,7 @@ import {Workspace} from "apps/workspaces/routes/workspace/index";
 
 import {CreateInstance} from "./create/create-instance";
 import {autoinject} from "aurelia-dependency-injection";
+import {UpdateInstance} from "./update/update-instance";
 
 
 @autoinject
@@ -30,7 +31,8 @@ export class Instances {
     constructor(private parent: Workspace,
                 private client: HttpClient,
                 private channelSet: ChannelSet,
-                private createInstanceForm: CreateInstance
+                private createInstanceForm: CreateInstance,
+                private updateInstanceForm: UpdateInstance
     ) {
         this.instances = [];
     }
@@ -56,8 +58,12 @@ export class Instances {
 
     createInstance(): void {
         // this.parent.router.navigate('/catalog');
-        this.showModal = true;
         this.createInstanceForm.show();
+    }
+
+    updateInstance(): void {
+        console.log("updateInstance called");
+        this.updateInstanceForm.show();
     }
 
     openInstance(instance): void {
@@ -65,12 +71,12 @@ export class Instances {
     }
 
     refresh(): void {
-        setTimeout(() => {
+        this.loading = true;
 
+        setTimeout(() => {
             this.client.fetch('provider')
                 .then(d => d.json() as any)
                 .then(d => {
-                    this.loading = false;
                     this.providers = d;
                     console.log("Providers", d);
                     for (let provider of d) {
@@ -79,8 +85,9 @@ export class Instances {
                             this.client.fetch(`compute/${provider.id}/${this.channelSet.sessionId}/instances/synchronize`)
                                 .then(d => d.json() as any)
                                 .then(d => {
-                                    this.instances = d
+                                    this.instances = d;
                                     this.instances = this.createMockInstances();
+                                    this.loading = false;
                                 })
                         }
                     }
