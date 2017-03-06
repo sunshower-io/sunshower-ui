@@ -50,10 +50,6 @@ export class CreateInstanceWizard {
     private container:HTMLElement;
 
     attached() : void {
-        console.log("Got one");
-        setTimeout(() => {
-            $(this.container).modal('show');
-        }, 1000);
-
+        $(this.container).modal('show');
     }
 }

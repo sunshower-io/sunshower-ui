@@ -30,6 +30,7 @@ interface CircularChartData {
 }
 
 interface ChartSettings {
+    legend: any;
     title: any;
     defaultFontStyle: string;
     defaultFontSize: string;

@@ -2,11 +2,6 @@
  * Created by dustinlish on 2/6/17.
  */
 
-import "chart.js";
-import {autoinject} from "aurelia-framework";
-import {Workspace} from "apps/workspaces/routes/workspace/index";
-
-@autoinject
 export class Dashboard {
 
     totalInstancesData;
