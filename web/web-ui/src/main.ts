@@ -40,12 +40,14 @@ export function param(name) {
 }
 
 export function configure(aurelia: Aurelia) {
+    console.log("Starting...");
 
     aurelia.use
         .standardConfiguration()
         .globalResources([
             'common/lib/widget/menu/menu',
-            'common/resources/custom-elements/tree/tree'
+            'common/resources/custom-elements/tree/tree',
+            'common/resources/nested-application/nested-application'
         ])
         .plugin('aurelia-validation')
         .plugin('aurelia-animator-velocity')
@@ -116,7 +118,7 @@ export function configure(aurelia: Aurelia) {
                             .withInterceptor(container.get(FetchClientInterceptor));
                     });
 
-                    let channelSet = new ChannelSet(`ws://${location.host}/hasli/api/events`);
+                    let channelSet = new ChannelSet(`ws://${location.host}/hasli/api/events?${encodeURIComponent(token)}`);
                     tokenHolder.set(context, false);
                     container.registerInstance(HttpClient, authenticatedClient);
                     container.registerInstance(BasicHttpClient, basicClient);

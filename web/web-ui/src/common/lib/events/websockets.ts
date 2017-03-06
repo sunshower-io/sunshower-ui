@@ -78,6 +78,7 @@ export class ChannelSet {
     };
 
     private open = (e: E) => {
+        console.log("CONNECTED");
         let msg = (e as any).data;
         this.lifecycle.next({
             type: Type.ChannelConnected
