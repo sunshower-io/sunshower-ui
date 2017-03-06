@@ -4,6 +4,8 @@ import io.hasli.common.configuration.ConfigurationSource;
 import io.hasli.common.configuration.MapConfigurationSource;
 import io.hasli.common.rs.MoxyProvider;
 import io.hasli.core.ApplicationService;
+import io.hasli.hal.HALConfiguration;
+import io.hasli.hal.aws.HALAwsConfiguration;
 import io.hasli.jpa.flyway.FlywayConfiguration;
 import io.hasli.model.core.Application;
 import io.hasli.model.core.PersistenceConfiguration;
@@ -23,11 +25,16 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
+
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ForkJoinPool;
 import java.util.logging.Logger;
 
 /**
@@ -40,10 +47,10 @@ import java.util.logging.Logger;
         DatabaseConfiguration.class,
         HibernateConfiguration.class,
         SecurityConfiguration.class,
-//        HALConfiguration.class,
+        HALConfiguration.class,
 //        SearchConfiguration.class,
 //        HFSConfiguration.class,
-//        HALAwsConfiguration.class,
+        HALAwsConfiguration.class,
 //        DockerConfiguration.class,
         PersistenceConfiguration.class,
 //        HALPersistenceConfiguration.class,
@@ -100,6 +107,22 @@ public class BootstrapConfiguration {
         return new MapConfigurationSource(values);
     }
 
+
+    @Bean
+    public ExecutorService executorService() {
+        try {
+            log.info("Attempting to resolve managed executor service...");
+            ExecutorService service = InitialContext.doLookup(
+                    "java:jboss/ee/concurrency/executor/default"
+            );
+            log.info("Successfully resolve managed executor service");
+            return service;
+        } catch(NamingException ex) {
+            log.info("Failed to resolve managed executor service.  " +
+                    "Defaulting to fork-join pool.  Not all features may be available");
+            return new ForkJoinPool(Runtime.getRuntime().availableProcessors());
+        }
+    }
 
 
     @EventListener

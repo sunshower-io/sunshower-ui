@@ -68,7 +68,6 @@
         <hasli-hfs.version>1.0.22.Final</hasli-hfs.version>
         <!--<hasli-persist.version>1.0.67.Final</hasli-persist.version>-->
 
-        <!--<hasli-hal.version>${snapshot-version}</hasli-hal.version>-->
         <!--<hasli-api.version>${snapshot-version}</hasli-api.version>-->
         <!--<hasli-schemata.version>${snapshot-version}</hasli-schemata.version>-->
         <!--<hasli-service.version>${snapshot-version}</hasli-service.version>-->
@@ -86,13 +85,16 @@
         <hasli-test.version>1.0.34.Final</hasli-test.version>
 
         <hasli-api.version>1.0.45.Final</hasli-api.version>
-        <hasli-schemata.version>1.0.4.Final</hasli-schemata.version>
 
+        <hasli-hal.version>${snapshot-version}</hasli-hal.version>
+        <hasli-schemata.version>${snapshot-version}</hasli-schemata.version>
+        <hasli-service.version>${snapshot-version}</hasli-service.version>
+        <hasli-persist.version>${snapshot-version}</hasli-persist.version>
+        <!--<hasli-persist.version>1.0.71.Final</hasli-persist.version>-->
 
-        <hasli-service.version>1.0.39.Final</hasli-service.version>
+        <!--<hasli-service.version>1.0.39.Final</hasli-service.version>-->
         <hasli-common.version>1.0.3.Final</hasli-common.version>
         <hasli-test.version>1.0.34.Final</hasli-test.version>
-        <hasli-persist.version>1.0.71.Final</hasli-persist.version>
     </properties>
 
     <dependencyManagement>
@@ -100,13 +102,13 @@
 
         <dependencies>
 
-            <!--<dependency>-->
-                <!--<groupId>io.hasli.hal</groupId>-->
-                <!--<artifactId>bom-exported</artifactId>-->
-                <!--<version>${hasli-hal.version}</version>-->
-                <!--<type>pom</type>-->
-                <!--<scope>import</scope>-->
-            <!--</dependency>-->
+            <dependency>
+                <groupId>io.hasli.hal</groupId>
+                <artifactId>bom-exported</artifactId>
+                <version>${hasli-hal.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
             <dependency>
                 <groupId>io.hasli.schemata</groupId>

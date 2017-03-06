@@ -1,0 +1,10 @@
+template
+    .header Instances
+    .content
+        //todo put in loader while waiting for instances
+        .ui.basic.segment(if.bind="instances.length == 0")
+            .widget-table-empty-alert You have no instances available
+        .ui.link.centered.four.cards(if.bind="instances.length > 0")
+            .card(repeat.for="instance of instances" click.delegate="save(instance)")
+                //.image
+                .content ${instance.name}

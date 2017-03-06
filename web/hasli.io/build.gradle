@@ -14,6 +14,9 @@ configurations {
 
     earlib.exclude group: 'org.infinispan'
     earlib.exclude group: 'org.hibernate'
+    earlib.exclude group: 'org.eclipselink'
+    earlib.exclude group: 'org.springframework'
+    earlib.exclude group: 'org.jboss.resteasy'
 
     earlib.exclude group: 'dom4j'
     earlib.exclude group: 'org.junit'
@@ -31,8 +34,10 @@ dependencies {
 //    earlib "io.hasli.search:search-es"
 //    earlib "io.hasli.hfs:hfs-service"
 //    earlib "io.hasli.service:service-vault"
-//    earlib "io.hasli.hal:hal-docker"
-//    earlib "io.hasli.hal:hal-service"
+    earlib "io.hasli.hal:hal-docker"
+    earlib "io.hasli.hal:hal-service"
+
+    earlib "io.hasli.hal:hal-aws"
     earlib "io.hasli.service:service-csp"
     earlib "io.hasli.service:service-core"
     earlib "io.hasli.service:service-security"

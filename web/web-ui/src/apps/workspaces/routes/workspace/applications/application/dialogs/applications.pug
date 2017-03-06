@@ -1,0 +1,10 @@
+template
+    .header Applications
+    .content
+        //todo put in loader while waiting for applications
+        .ui.basic.segment(if.bind="applications.length == 0")
+            .widget-table-empty-alert You have no applications available
+        .ui.link.centered.four.cards(if.bind="applications.length > 0")
+            .card(repeat.for="application of applications" click.delegate="save(application)")
+                //.image
+                .content ${application.name}

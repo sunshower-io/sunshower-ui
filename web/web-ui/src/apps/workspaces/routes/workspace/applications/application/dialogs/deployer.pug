@@ -1,0 +1,7 @@
+template
+    .header Select Deployer
+    .content
+        .ui.link.centered.four.cards
+            .card(repeat.for="deployer of deployers" click.delegate="save(deployer)")
+                .image
+                    img(src="${deployer.icon}" alt="${deployer.name}")

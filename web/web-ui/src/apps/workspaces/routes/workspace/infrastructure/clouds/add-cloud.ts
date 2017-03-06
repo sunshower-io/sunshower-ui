@@ -78,7 +78,14 @@ export class AddCloud {
                 this.client.fetch('providers', {
                     method: 'post',
                     body: JSON.stringify(this.provider)
-                }).then(t => this.close());
+                }).then(t => t.json() as any).then(t => {
+                    this.close()
+                    this.client.fetch(`compute/${t.value}/provider/index`, {
+                        method: 'put'
+                    }).then(u => {
+                            console.log("Indexing provider");
+                    });
+                });
             }
         });
     }
