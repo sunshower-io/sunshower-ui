@@ -28,12 +28,6 @@ export class ActivityMonitorDropdown {
         $(this.activityDD).find('.selected').removeClass('selected');
     }
 
-    updateProgress(activity: Activity, progressBar: HTMLElement) : void {
-        $(progressBar).progress({
-            percent: activity.progress
-        });
-    }
-
 
 }
 

@@ -3,6 +3,8 @@ template
     .ui.inline.pointing.dropdown.top.right(ref="activityDD")
         i.large.inverted.ion-ios-pulse-strong.icon
         .ui.menu.inverted.content-dropdown
+            .header
+                | Activity Monitor
             .item(if.bind="activities.length == 0")
                 | You have no activity to view
             .item(repeat.for="activity of activities")

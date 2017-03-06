@@ -150,10 +150,25 @@ body {
       width:400px;
       min-width:400px;
 
-      .ui.progress>.label {
+      .header {
+        text-transform:uppercase;
         color: @hasliLightGrey;
         font-weight:normal;
-        //todo move above progress bar
+        padding-bottom: 1rem;
+        margin-bottom:0;
+        border-bottom: 1px solid @hasliGrey;
+      }
+
+      .ui.inverted.progress {
+        .bar {
+          background: @primarycolor;
+        }
+
+        &>.label {
+          color: @hasliLightGrey;
+          font-weight:normal;
+          //todo move above progress bar
+        }
       }
     }
   }
