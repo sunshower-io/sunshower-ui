@@ -32,4 +32,18 @@ template
     td
         | ${model.containers}
     td.right.aligned
-        i.link.ion-ios-gear-outline.big.blue.icon
+        .ui.inline.pointing.top.right.dropdown
+            i.link.ion-ios-gear-outline.big.blue.icon
+            .menu
+                .item
+                    i.ion-power.large.green.icon
+                    | Poweron
+                .item
+                    i.ion-stop.large.grey.icon
+                    | Poweroff
+                .item
+                    i.ion-ios-reload.large.grey.icon
+                    | Restart
+                .item
+                    i.ion-ios-close-outline.large.red.icon
+                    | Force Terminate

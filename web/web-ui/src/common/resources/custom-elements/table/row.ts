@@ -52,6 +52,10 @@ export class Row {
                 }
             })
         ;
+
+        $('.ui.dropdown')
+            .dropdown({
+            });
     }
 
 }
