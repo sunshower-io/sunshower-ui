@@ -97,8 +97,7 @@ export class Applications {
     }
 
     open(application: Application) : void {
-        let id = application.id;
-        this.client.fetch(`applications/${id}`)
+        this.client.fetch(`applications/${application.id}`)
             .then(t => t.json() as any)
             .then(t => {
                 this.parent.router.navigate(`applications/${t.application.id}/application`);

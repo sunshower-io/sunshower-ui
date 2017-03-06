@@ -1,82 +1,81 @@
 import {bindable} from "aurelia-framework";
 import "chart.js";
+import {Workspace} from "../../../../index";
+import {HttpClient} from "aurelia-fetch-client";
 
 /**
  * Created by dustinlish on 2/28/17.
  */
 
 export class Overview {
-    @bindable canvasElement1;
 
-    @bindable isEmpty;
+    @bindable instances;
+    @bindable loading;
 
-    attached() {
-        this.isEmpty = false;
-
-        let primaryColor = "rgba(56, 155, 255, .8)";
-        let backgroundColor = "rgba(246, 249, 255, 0.4)";
-
-        var lineData = {
-            labels: ["Nov'16'", "Dec'16'", "Jan'17'", "Feb'17'"],
-            datasets: [
-                {
-                    label: "Commits",
-                    lineTension: 0.1,
-                    fill: true,
-                    borderJoinStyle: 'miter',
-                    borderCapStyle: 'butt',
-                    borderDash: [],
-                    borderDashOffset: 0.0,
-                    borderWidth: 1.5,
-                    borderColor: primaryColor,
-                    backgroundColor: backgroundColor,
-                    pointBorderColor: primaryColor,
-                    pointBackgroundColor: '#ffffff',
-                    pointBorderWidth: 2,
-                    pointHoverRadius: 5,
-                    pointHoverBackgroundColor: primaryColor,
-                    pointHoverBorderColor: '#fff',
-                    pointHoverBorderWidth: 1,
-                    data: [8, 10, 4, 5]
-                }
-            ]
-        };
-
-        new Chart(this.canvasElement1, {type: 'line', data: lineData, options: getDefaultLineOptions()});
+    constructor(private parent: Workspace, private client: HttpClient) {
+        this.instances = [];
     }
 
-}
+    attached() {
+        this.refresh();
+    }
 
-function getDefaultLineOptions() {
-    return {
-        scales: {
-            xAxes: [{
-                display: true,
-                gridLines: {
-                    display: false
-                }
-            }],
-            yAxes: [{
-                scaleLabel: {
-                    display: true,
-                    labelString: 'probability'
-                },
-                stacked: true,
-                gridLines: {
-                    display: false
-                }
-            }]
-        },
-        hover: {
-            mode: 'point',
-            intersect: true
-        },
-        legend: {
-            display: false
-        },
-        scaleLabel: {
-            display: true
+    refresh(): void {
+        this.loading = true;
+        setTimeout(() => {
+            this.instances = this.createMockInstances();
+            this.loading = false;
+        }, 500)
+    }
+
+    // TODO create as custom attribute
+    computeStatus(instance: Instance): string {
+        if (instance.state == 'running') {
+            return 'circle green';
         }
-    };
+        else if (instance.state == 'stopped') {
+            return 'circle red';
+        }
+        else if (instance.state == 'starting' || instance.state == 'deploying' || instance.state == 'stopping') {
+            return 'notched circle loading';
+            //return 'ion-ios-loop-strong loading'
+        }
+        else {
+            return 'circle yellow';
+        }
+    }
 
+
+    // TODO delete after plugging into real service
+    createMockInstances(): Array<Instance> {
+        let instances = [];
+        for (var num in [1, 2, 3]) {
+            var i = new Instance();
+            i.id = `1${num}`;
+            i.logo = 'styles/themes/hasli/assets/images/logos/ca-logo.png';
+            i.name = `CA UIM Server ${num}`;
+            i.version = "8.47";
+            i.state = "running";
+            i.ip = `54.183.158.11${num}`;
+            i.cpu = {labels: ["used", "free"], datasets: [{data: [30, 100], backgroundColor: ["#1EC38A", "#ECF0F1"], hoverBackgroundColor: ["#1EC38A"]}]};
+            i.mem = {labels: ["used", "free"], datasets: [{data: [10, 100], backgroundColor: ["#1EC38A", "#ECF0F1"], hoverBackgroundColor: ["#1EC38A"]}]};
+            i.disk = {labels: ["used", "free"], datasets: [{data: [34, 100], backgroundColor: ["#1EC38A", "#ECF0F1"], hoverBackgroundColor: ["#1EC38A"]}]};
+            instances.push(i)
+        }
+
+        return instances;
+    }
 }
+
+export class Instance {
+    id          ?: string;
+    logo        ?: string;
+    name        ?: string;
+    version     ?: string;
+    state       ?: string; //Running, Stopped, Stopping, Restart, Terminating, Deploying, Starting
+    ip          ?: string;
+    cpu         ?: any;
+    mem         ?: any;
+    disk        ?: any;
+}
+

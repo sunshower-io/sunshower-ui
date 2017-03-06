@@ -102,8 +102,8 @@ export class Clouds {
         this.parent.router.navigate('clouds/new');
     }
 
-    openEnvironment() : void {
-        //
+    openEnvironment(provider) : void {
+        // TODO route to proper environment
         this.parent.router.navigate('environment');
     }
 
