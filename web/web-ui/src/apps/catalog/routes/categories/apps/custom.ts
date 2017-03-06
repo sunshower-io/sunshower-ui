@@ -2,21 +2,36 @@
  * Created by dustinlish on 2/27/17.
  */
 import {Catalog} from "apps/catalog/index";
-import {autoinject} from "aurelia-dependency-injection";
+import {HttpClient} from "aurelia-fetch-client";
+import {bindable, autoinject} from "aurelia-framework";
+import {Application} from "common/model/api/core/application";
 
 @autoinject
 export class Custom {
 
-    constructor(private parent: Catalog) {
+
+    @bindable
+    applications: Application[];
+
+    @bindable
+    loading: boolean;
+    constructor(private parent: Catalog, private client:HttpClient) {
     }
 
-    activate(id: any, p:any, q:any) {
-        console.log("Got", id)
-        console.log("Got", p)
-        console.log("Got", q)
-    }
 
-    open() : void {
-        this.parent.router.navigate('/workspace/4/applications/4/application')
+    attached() : void {
+        this.loading = true;
+        setTimeout(() => {
+            this.client.fetch(`workspaces/${this.parent.id}/applications/heads`)
+                .then(d => d.json() as any)
+                .then(d => {
+                    this.loading = false;
+                    this.applications = d;
+                })
+                .catch(err => {
+                    console.log("Err");
+                    this.loading = false;
+                });
+        }, 500)
     }
 }

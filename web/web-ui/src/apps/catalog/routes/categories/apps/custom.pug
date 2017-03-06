@@ -8,11 +8,11 @@ template
         .ui.hidden.divider
         .ui.basic.segment
             .ui.cards
-                .card
+                .card(repeat.for="application of applications")
                     .content
                         img.right.floated.mini.ui.image(src='styles/themes/hasli/assets/images/logos/ca-logo.png')
                         .header
-                            | CA UIM
+                            | ${application.name}
                         .meta
                             | Docker Compose
                         .description
@@ -21,43 +21,3 @@ template
                         .ui.two.buttons
                             .ui.basic.secondary.button Add
                             .ui.basic.blue.button(click.delegate="open()") View
-                .card
-                    .content
-                        img.right.floated.mini.ui.image(src='styles/themes/hasli/assets/images/logos/ca-logo.png')
-                        .header
-                            | CA Robot
-                        .meta
-                            | Container
-                        .description
-                            | Deploys CA Robot
-                    .extra.content
-                        .ui.two.buttons
-                            .ui.basic.secondary.button Add
-                            .ui.basic.blue.button View
-                .card
-                    .content
-                        img.right.floated.mini.ui.image(src='styles/themes/hasli/assets/images/logos/ca-logo.png')
-                        .header
-                            | CA Azure Probe
-                        .meta
-                            | Container
-                        .description
-                            | Deploys and configures Azure probe to UIM instance
-                    .extra.content
-                        .ui.two.buttons
-                            .ui.basic.secondary.button Add
-                            .ui.basic.blue.button View
-                .card
-                    .content
-                        img.right.floated.mini.ui.image(src='styles/themes/hasli/assets/images/logos/ca-logo.png')
-                        .header
-                            | CA AWS Probe
-                        .meta
-                            | Container
-                        .description
-                            | Deploys and configures AWS probe to UIM instance
-                    .extra.content
-                        .ui.two.buttons
-                            .ui.basic.secondary.button Add
-                            .ui.basic.blue.button View
-

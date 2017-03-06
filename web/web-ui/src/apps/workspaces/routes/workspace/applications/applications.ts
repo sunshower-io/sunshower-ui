@@ -1,11 +1,12 @@
 
 import {HttpClient} from 'aurelia-fetch-client';
 import {bindable} from "aurelia-framework";
+
+import {ApplicationContext} from "apps/workspaces/model/application-context";
 import {Workspace as WorkspaceRoute} from "apps/workspaces/routes/workspace/index";
 import {WorkspaceRevision} from "apps/workspaces/model/workspaces/workspace";
 import {autoinject} from "aurelia-dependency-injection";
 import {Application} from "common/model/api/core/application";
-import {User} from "../../../../../common/model/security/user";
 
 
 @autoinject
@@ -29,6 +30,7 @@ export class Applications {
     constructor(
         public parent:WorkspaceRoute,
         private client:HttpClient,
+        private context:ApplicationContext,
     ) {
         this.applications = [];
     }
@@ -62,11 +64,12 @@ export class Applications {
     refresh(): void {
         this.loading = true;
         setTimeout(() => {
-            this.client.fetch(`workspaces/${this.parent.hostWorkspace.id}/applications/heads`)
+            this.client.fetch(`workspaces/${this.context.workspace.id}/applications/heads`)
                 .then(d => d.json() as any)
                 .then(d => {
                     this.loading = false;
                     this.applications = d;
+                    console.log("WSID", this.parent.hostWorkspace.id);
 
                     // // TODO plug into application service
                     // let user = new User();
@@ -97,7 +100,8 @@ export class Applications {
     }
 
     open(application: Application) : void {
-        this.client.fetch(`applications/${application.id}`)
+        let id = application.id as any;
+        this.client.fetch(`applications/${id.id}`)
             .then(t => t.json() as any)
             .then(t => {
                 this.parent.router.navigate(`applications/${t.application.id}/application`);

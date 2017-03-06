@@ -1,9 +1,16 @@
 import {RouterConfiguration} from "aurelia-router";
 import {Router} from "aurelia-router";
+import {Workspace} from "apps/workspaces/routes/workspace/index";
+import {autoinject} from "aurelia-framework";
+@autoinject
 export class CreateInstanceWizard {
 
     router: Router;
 
+
+    constructor(private workspace:Workspace) {
+
+    }
 
 
     public configureRouter(config: RouterConfiguration, router: Router) {
@@ -15,7 +22,7 @@ export class CreateInstanceWizard {
                 route: 'catalog',
                 name: 'catalog',
                 moduleId: 'apps/catalog/index',
-                nav: true,
+                nav: false,
                 title: 'Catalog'
             },
 
@@ -50,6 +57,12 @@ export class CreateInstanceWizard {
     private container:HTMLElement;
 
     attached() : void {
-        $(this.container).modal('show');
+        setTimeout(() => {
+
+            this.router.navigateToRoute('catalog', {
+                id: 'fuck',
+            }, {replace:true});
+            $(this.container).modal('show');
+        });
     }
 }

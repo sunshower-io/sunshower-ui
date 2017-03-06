@@ -8,7 +8,6 @@ import {HttpClient} from 'aurelia-fetch-client';
 import {Provider} from "common/model/api/hal/api";
 import {ChannelSet} from "common/lib/events/websockets";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
-import {Provisioning} from "../provisioning";
 import {autoinject} from "aurelia-dependency-injection";
 
 
@@ -28,7 +27,6 @@ export class Instances {
 
     constructor(private parent: Workspace,
                 private client: HttpClient,
-                private provisioning:Provisioning,
                 private channelSet: ChannelSet
     ) {
         this.instances = [];

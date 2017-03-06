@@ -28,6 +28,15 @@ export class Catalog {
         this.router = router;
     }
 
+
+    public id: string;
+
+    activate(workspace: any) {
+        if(workspace.id != null) {
+            this.id = workspace.id;
+        }
+    }
+
     deploy(): void {
         this.router.navigate('/workspace/4/instances/new')
     }
