@@ -1,0 +1,17 @@
+template
+    .ui.inline.pointing.dropdown.top.right(ref="alertDD")
+        i.large.green.icon(class="${alerts.length > 0 ? 'ion-android-notifications' : 'ion-android-notifications-none'}")
+        .ui.menu.inverted.content-dropdown
+            .item(if.bind="alerts.length == 0")
+                | You have no alerts
+            .item.alert-item(repeat.for="alert of alerts")
+                .ui.grid
+                    .row
+                        .two.wide.column
+                            i(class="${alert.icon} icon alert-type-icon")
+                        .twelve.wide.middle.aligned.column
+                            .clickable(click.delegate="view(alert)")
+                                | ${alert.message}
+                            .meta ${alert.time}
+                        .two.wide.middle.aligned.column
+                            i.remove.link.icon(click.delegate="remove(alert)")

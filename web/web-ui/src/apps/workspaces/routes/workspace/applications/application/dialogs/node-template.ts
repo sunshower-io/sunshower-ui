@@ -1,5 +1,5 @@
 import {DialogController} from "aurelia-dialog";
-import {inject} from "aurelia-framework";
+import {inject, bindable} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
 import {
     ComputeTemplate,
@@ -34,7 +34,11 @@ export class NodeTemplateDialog {
     private operatingSystems        : OperatingSystem[];
     private locations               : AWSRegion[];
 
-    //may need to have an OS and location field and wire together in selectNodeTemplate()
+    //wire together?
+    @bindable
+    private os_id                   : string;
+    @bindable
+    private location_id             : string;
 
     constructor(
         private controller:DialogController,
@@ -49,12 +53,16 @@ export class NodeTemplateDialog {
         setTimeout(() => {
             this.applicationRevision = applicationRevision;
             this.operatingSystems = this.osService.list();
+            this.locations = AWSRegion.get();
             $(this.list).dropdown({
                 action: 'activate',
                 onChange: this.osChanged,
             });
-            $(this.locationList).dropdown();
-
+            $(this.locationList).dropdown({
+                action: 'activate',
+                onChange: this.locationChanged,
+            });
+            //todo fix multicard dropdowns
         }, 1000);
     }
 
@@ -62,7 +70,9 @@ export class NodeTemplateDialog {
         this.template.operatingSystem = this.osService.get(UUID.fromString(value));
     };
 
-
+    locationChanged = (value: string, text: any, item: any) => {
+        this.template.location = AWSRegion.find(value);
+    };
 
     toggleTemplate(state : boolean) : void {
         this.selectingTemplate = state;
@@ -73,6 +83,7 @@ export class NodeTemplateDialog {
                 .then(t => {
                     this.templates = t;
                     this.loading = false;
+
                 });
         };
     }
@@ -91,6 +102,8 @@ export class NodeTemplateDialog {
     }
 
     selectNodeTemplate(template: any) : void {
+        console.log('os', this.os_id);
+        console.log('location', this.location_id);
         //todo attach OS and location to template, if needed
         this.template = template;
         this.selectCredential();

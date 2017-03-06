@@ -13,9 +13,16 @@ import {HttpClient} from "aurelia-http-client";
 import {WorkspaceRevision} from "apps/workspaces/model/workspaces/workspace";
 import {Applications} from "apps/workspaces/routes/workspace/applications/applications";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
+import {ApplicationContext} from "apps/workspaces/model/application-context";
 
 
-@inject(Workspace, Applications, HttpClient, NewInstance.of(ValidationController))
+@inject(
+    Workspace,
+    Applications,
+    HttpClient,
+    ApplicationContext,
+    NewInstance.of(ValidationController)
+)
 @customElement('create-app')
 export class CreateApp {
 
@@ -46,7 +53,9 @@ export class CreateApp {
     constructor(private workspaceVm: Workspace,
                 private parent: Applications,
                 private client: HttpClient,
-                private controller: ValidationController) {
+                private context:ApplicationContext,
+                private controller: ValidationController
+    ) {
         this.templates = [
             new Template('styles/themes/hasli/assets/images/blue-plus.svg', 'Custom Application'),
             new Template('styles/themes/hasli/assets/images/block.svg', 'Create New Container'),
@@ -90,7 +99,7 @@ export class CreateApp {
                 request.append('image', image);
                 request.append('repository', file);
                 request.append('image-name', image.name);
-                client.createRequest(`workspaces/${workspace.workspace.id}`)
+                client.createRequest(`workspaces/${this.context.workspace.id}`)
                     .asPost()
                     .withProgressCallback(c => {
 

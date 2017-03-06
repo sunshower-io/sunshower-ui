@@ -1,0 +1,20 @@
+template
+    require(from="./activity-progress-bar")
+    .ui.inline.pointing.dropdown.top.right(ref="activityDD")
+        i.large.inverted.ion-ios-pulse-strong.icon
+        .ui.menu.inverted.content-dropdown
+            .header
+                | Activity Monitor
+            .item(if.bind="activities.length == 0")
+                | You have no activity to view
+            .item.activity-item(repeat.for="activity of activities")
+                .ui.grid
+                    .row
+                        .two.wide.column
+                            img.ui.image.small(src="${activity.icon()}")
+                        .six.wide.middle.aligned.column
+                            .clickable
+                                | ${activity.name}
+                            .meta ${activity.meta}
+                        .eight.wide.middle.aligned.column
+                            activity-progress-bar(activity.bind="activity")
