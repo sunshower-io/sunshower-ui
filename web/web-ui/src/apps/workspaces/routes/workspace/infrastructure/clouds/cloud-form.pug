@@ -1,0 +1,42 @@
+//
+   Created by dustinlish on 3/3/17.
+
+template
+    .ui.small.modal.transition(ref="modal")
+        i.close.icon
+        .ui.center.aligned.header
+            | ADD NEW CLOUD
+        .content
+            .ui.form
+                .field
+                    label Name
+                    .field
+                        input(type='text', placeholder='Name')
+                    label Description
+                    .field
+                        input(type='text', placeholder='1.0.0')
+                    label Tag
+                    .field
+                        input(type='text', placeholder='tag')
+                h4.ui.dividing.header Billing Information
+                .field
+                    label Card Type
+                    .ui.selection.dropdown
+                        input(type='hidden', name='card[type]')
+                        .default.text Type
+                        i.dropdown.icon
+                        .menu
+                            .item(data-value='visa')
+                                i.visa.icon
+                                |           Visa
+                            .item(data-value='amex')
+                                i.amex.icon
+                                |           American Express
+                            .item(data-value='discover')
+                                i.discover.icon
+                                |           Discover
+
+
+        .actions
+            .ui.right.primary.button(type='button', click.delegate='step("second")')
+                | Create

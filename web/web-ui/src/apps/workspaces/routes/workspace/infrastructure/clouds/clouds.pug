@@ -115,9 +115,8 @@ template
                         tr(
                             show.bind="providers.length > 0 && !loading",
                             as-element="compose",
-                            view-model="apps/workspaces/resources/custom-elements/table/row",
+                            view-model="common/resources/custom-elements/table/row",
                             view="apps/workspaces/resources/custom-elements/table/provider-row.html"
                             repeat.for='provider of providers',
-                            model.bind="provider",
-                            click.delegate="openEnvironment()"
+                            model.bind="provider"
                         )

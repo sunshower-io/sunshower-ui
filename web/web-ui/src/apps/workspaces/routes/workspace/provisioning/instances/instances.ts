@@ -41,6 +41,8 @@ export class Instances {
     }
 
     attached(): void {
+        $('.ui.dropdown').dropdown();
+
         this.refresh();
 
         this.channelSet.subscribe({
@@ -58,13 +60,12 @@ export class Instances {
         this.createInstanceForm.show();
     }
 
-    openInstance(): void {
-        this.parent.router.navigate('instances/:id/instance');
+    openInstance(instance): void {
+        this.parent.router.navigate(`instances/${instance.id}/instance`);
     }
 
     refresh(): void {
         setTimeout(() => {
-
 
             this.client.fetch('provider')
                 .then(d => d.json() as any)
@@ -77,12 +78,16 @@ export class Instances {
                             this.provider = provider;
                             this.client.fetch(`compute/${provider.id}/${this.channelSet.sessionId}/instances/synchronize`)
                                 .then(d => d.json() as any)
-                                .then(d => this.instances = d);
+                                .then(d => {
+                                    this.instances = d
+                                    this.instances = this.createMockInstances();
+                                })
                         }
                     }
                 })
                 .catch(err => {
                     this.loading = false;
+                    this.instances = this.createMockInstances();
                 });
         }, 500)
     }
@@ -130,8 +135,25 @@ export class Instances {
         else {
             return 'circle yellow';
         }
+    }
 
+    createMockInstances(): Array<Instance> {
+        let instances = [];
+        for (var num in [1, 2, 3, 4]) {
+            var i = new Instance();
+            i.id = `1${num}`;
+            i.logo = 'styles/themes/hasli/assets/images/logos/ca-logo.png';
+            i.name = `CA UIM Server ${num}`;
+            i.version = "8.47";
+            i.state = "running";
+            i.environment = "Hasli aws dev";
+            i.vms = 3;
+            i.containers = 3;
 
+            instances.push(i)
+        }
+
+        return instances;
     }
 }
 
@@ -139,8 +161,9 @@ export class Instance {
     id          ?: string;
     logo        ?: string;
     name        ?: string;
+    version     ?: string;
     state       ?: string; //Running, Stopped, Stopping, Restart, Terminating, Deploying, Starting
-    publicIp    ?: string;
-    ports       ?: string;
-
+    environment ?: string;
+    vms         ?: number;
+    containers  ?: number;
 }
