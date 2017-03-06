@@ -23,6 +23,9 @@ export class Applications {
     @bindable
     workspace: WorkspaceRevision;
 
+    @bindable
+    private id: any;
+
     constructor(
         public parent:WorkspaceRoute,
         private client:HttpClient,
@@ -63,22 +66,21 @@ export class Applications {
                 .then(d => d.json() as any)
                 .then(d => {
                     this.loading = false;
-                    // this.applications = d;
-                    // // this.applications = d;
-                    //
+                    this.applications = d;
+
                     // // TODO plug into application service
-                    let user = new User();
-                    user.firstname = "Dustin";
-                    user.lastname = "Lish";
-                    this.applications = [
-                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Full Stack", "8.47", "running", 5, 4, this.getDate(), user),
-                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA UIM", "8.47", "running", 1, 1, this.getDate(), user),
-                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA UMP", "8.47", "running", 1, 1, this.getDate(), user),
-                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA MySql", "5.6", "running", 1, 1, this.getDate(), user),
-                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Robot", "8.47", "running", 5, 1, this.getDate(), user),
-                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Azure Probe", "8.47", "running", 5, 1, this.getDate(), user),
-                        new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA AWS Probe", "8.47", "running", 5, 1, this.getDate(), user)
-                    ];
+                    // let user = new User();
+                    // user.firstname = "Dustin";
+                    // user.lastname = "Lish";
+                    // this.applications = [
+                    //     new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Full Stack", "8.47", "running", 5, 4, this.getDate(), user),
+                    //     new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA UIM", "8.47", "running", 1, 1, this.getDate(), user),
+                    //     new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA UMP", "8.47", "running", 1, 1, this.getDate(), user),
+                    //     new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA MySql", "5.6", "running", 1, 1, this.getDate(), user),
+                    //     new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Robot", "8.47", "running", 5, 1, this.getDate(), user),
+                    //     new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA Azure Probe", "8.47", "running", 5, 1, this.getDate(), user),
+                    //     new Application("styles/themes/hasli/assets/images/logos/ca-logo.png", "CA AWS Probe", "8.47", "running", 5, 1, this.getDate(), user)
+                    // ];
                 })
                 .catch(err => {
                     this.loading = false;
@@ -92,6 +94,18 @@ export class Applications {
 
     addApplication() : void {
         this.parent.router.navigate('applications/new');
+    }
+
+    open(application: Application) : void {
+        let id = application.id;
+        this.client.fetch(`applications/${id}`)
+            .then(t => t.json() as any)
+            .then(t => {
+                this.parent.router.navigate(`applications/${t.application.id}/application`);
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 
     checkbox() {
