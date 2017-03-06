@@ -16,14 +16,22 @@ import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.persistence.annotations.CacheMode;
 import io.hasli.security.api.SecurityPersistenceConfiguration;
 import io.hasli.service.CoreServiceConfiguration;
+import io.hasli.service.events.ReactiveEventService;
 import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.web.preferences.DefaultPreferencesService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 import javax.inject.Inject;
@@ -33,8 +41,7 @@ import javax.naming.NamingException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.*;
 import java.util.logging.Logger;
 
 /**
@@ -48,24 +55,20 @@ import java.util.logging.Logger;
         HibernateConfiguration.class,
         SecurityConfiguration.class,
         HALConfiguration.class,
-//        SearchConfiguration.class,
-//        HFSConfiguration.class,
         HALAwsConfiguration.class,
-//        DockerConfiguration.class,
         PersistenceConfiguration.class,
-//        HALPersistenceConfiguration.class,
         SecurityPersistenceConfiguration.class,
         CoreServiceConfiguration.class,
-//        HypervisorAbstractionLayerServiceConfiguration.class
 })
 @CacheMode(CacheMode.Mode.Grid)
-public class BootstrapConfiguration {
+public class BootstrapConfiguration  {
 
     static final Logger log = Logger.getLogger(BootstrapConfiguration.class.getName());
 
     @Inject
     @Named("createMigrations")
     private String flyway;
+
 
 
     public BootstrapConfiguration() {
@@ -82,18 +85,20 @@ public class BootstrapConfiguration {
 //        return new AwsComputeService();
 //    }
 
+
+
     @Bean
     public ServerEndpointExporter serverEndpointExporter() {
         return new ServerEndpointExporter();
     }
-
-
 
     @Bean
     public MoxyProvider moxyProvider() {
         MoxyProvider provider = new MoxyProvider();
         return provider;
     }
+
+
 
 
     @Bean

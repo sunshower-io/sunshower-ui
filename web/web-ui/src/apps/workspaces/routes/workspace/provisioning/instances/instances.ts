@@ -8,13 +8,10 @@ import {HttpClient} from 'aurelia-fetch-client';
 import {Provider} from "common/model/api/hal/api";
 import {ChannelSet} from "common/lib/events/websockets";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
+import {autoinject} from "aurelia-dependency-injection";
 
 
-@inject(
-    Workspace,
-    HttpClient,
-    ChannelSet
-)
+@autoinject
 export class Instances {
 
     @bindable
@@ -53,7 +50,7 @@ export class Instances {
 
 
     createInstance(): void {
-        this.parent.router.navigate('/catalog');
+        this.parent.router.navigate('provisioning/wizard/catalog');
     }
 
     openInstance(): void {

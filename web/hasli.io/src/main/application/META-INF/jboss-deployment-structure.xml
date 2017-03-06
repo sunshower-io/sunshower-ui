@@ -58,6 +58,7 @@
                     name="org.springframework.aop"
             />
 
+
             <module
                     export="true"
                     name="org.springframework.tx"

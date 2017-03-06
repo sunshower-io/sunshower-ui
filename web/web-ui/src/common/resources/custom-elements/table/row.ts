@@ -1,8 +1,6 @@
 
-import {Workspace} from "apps/workspaces/routes/workspace/index";
 import {bindable, noView} from "aurelia-framework";
 import {autoinject} from "aurelia-dependency-injection";
-import {HttpClient} from "aurelia-fetch-client";
 
 /**
  * Created by dustinlish on 3/2/17.
@@ -14,15 +12,6 @@ export class Row {
 
     @bindable
     private model: any;
-
-    @bindable
-    private route: string;
-
-    @bindable
-    private id: any;
-
-    constructor(private parent: Workspace, private client:HttpClient) {
-    }
 
     activate(model) {
         this.model = model;
@@ -63,20 +52,10 @@ export class Row {
                 }
             })
         ;
-    }
 
-    open() : void {
-        // TODO use app service
-        // this.parent.router.navigateToRoute(this.router, id)
-        let id = this.model.id;
-
-        this.client.fetch(`applications/${id.id}`)
-            .then(t => t.json() as any)
-            .then(t => {
-
-                this.parent.router.navigate(`applications/${t.application.id}/application`);
+        $('.ui.dropdown')
+            .dropdown({
             });
-
     }
 
 }

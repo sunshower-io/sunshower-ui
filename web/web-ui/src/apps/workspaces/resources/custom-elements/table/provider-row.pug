@@ -9,7 +9,7 @@ template
     // name
     td
         .ui.link.items
-            .item(click.delegate="open()")
+            .item(click.delegate="openEnvironment()")
                 .ui.middle.aligned.mini.image
                     img(src="${model.icon}")
                 .content
@@ -29,9 +29,9 @@ template
         | ${model.vms}
     // bare metal
     td
-        |   ${model.owner.username}
+        |   ${model.bareMetal}
     // owner
     td
-        |  ${model.owner.emailAddress}
+        | ${model.owner.firstname} ${model.owner.lastname}
     td.right.aligned
         i.link.ion-ios-gear-outline.big.blue.icon(click.delegate="configure(provider.id)")

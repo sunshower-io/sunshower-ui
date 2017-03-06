@@ -46,10 +46,10 @@ export class App {
         },
         ]);
 
-        config.mapUnknownRoutes({
-            route: 'workspaces',
-            redirect: 'workspaces'
-        });
+        // config.mapUnknownRoutes({
+        //     route: 'workspaces',
+        //     redirect: 'workspaces'
+        // });
 
         this.router = router;
     }
@@ -78,51 +78,4 @@ class SecurityStep implements PipelineStep {
     }
 
 }
-
-//     {
-//         route: '',
-//         redirect: 'workspaces',
-//     }, {
-//         route: 'workspaces',
-//         name: 'workspaces',
-//         moduleId: 'main/workspaces/workspaces',
-//         nav: false,
-//         title: 'Workspaces',
-//     },
-//     {
-//         route: 'workspace',
-//         name: 'workspace',
-//         moduleId: 'main/workspaces/workspace/workspace',
-//         nav: false,
-//         title: 'Workspace',
-//     }, {
-//         route: 'settings',
-//         name: 'settings',
-//         moduleId: './main/settings/settings',
-//         nav: false,
-//         title: 'Settings',
-//         settings: {}
-//     }, {
-//         route: 'designer',
-//         name: 'designer',
-//         moduleId: 'main/designer/workspace',
-//         nav: false,
-//         title: 'Designer',
-//         settings: {}
-//     }, {
-//         route: 'overview',
-//         name: 'overview',
-//         moduleId: 'main/overview/overview',
-//         nav: false,
-//         title: 'Overview',
-//         settings: {}
-//     }, {
-//         route: 'deployments',
-//         name: 'deployments',
-//         moduleId: 'main/deployment/deployment',
-//         nav: true,
-//         title: 'Deployments',
-//         settings: {}
-//     }
-// ]);
 

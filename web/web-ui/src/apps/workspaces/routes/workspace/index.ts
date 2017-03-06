@@ -14,6 +14,7 @@ import {
 } from "apps/workspaces/model/workspaces/workspace";
 
 import {HttpClient} from "aurelia-fetch-client";
+import {ApplicationContext} from "apps/workspaces/model/application-context";
 
 type Mode = 'full' | 'partial';
 export interface MenuAware {
@@ -29,16 +30,18 @@ export class Workspace {
     private mode: Mode;
     private subscription: Subscription;
 
-    public hostWorkspace        : WS;
-    private id                  : Identifier;
-    private loading             : boolean = false;
+    public hostWorkspace: WS;
+    private id: Identifier;
+    private loading: boolean = false;
 
     //TODO: rename revision
     public workspace: WorkspaceRevision;
 
 
     constructor(private client: HttpClient,
-                private eventAggregator: EventAggregator) {
+                private context:ApplicationContext,
+                private eventAggregator: EventAggregator,
+    ) {
         this.setMenuVisible(true);
     }
 
@@ -64,13 +67,6 @@ export class Workspace {
                 title: 'Dashboard'
             },
 
-            {
-                route: 'create',
-                name: 'create',
-                moduleId: './create/create',
-                nav: false,
-                title: 'Create'
-            },
             // Application Routes
             {
                 route: 'applications',
@@ -117,6 +113,13 @@ export class Workspace {
                 nav: false,
                 title: 'Add Cloud Credential'
             },
+            {
+                route: 'environment',
+                name: 'environment',
+                moduleId: './infrastructure/clouds/environment/environment',
+                nav: false,
+                title: 'Environment'
+            },
 
             // Provisioning Routes
             {
@@ -154,6 +157,8 @@ export class Workspace {
             // Settings
             {route: 'settings', name: 'settings', moduleId: './settings/settings', nav: true, title: 'Settings'},
 
+            // Workspace
+            {route: 'create', name: 'create', moduleId: './create/create', nav: false, title: 'Create'},
 
         ]);
 
@@ -171,22 +176,29 @@ export class Workspace {
     detached(): void {
     }
 
-    attached() : void {
-        this.client.fetch(`workspaces/revision/${this.id.id}`)
-            .then(ws => ws.json() as any)
-            .then(ws => {
-                this.loading = false;
-                this.workspace = ws;
-                this.hostWorkspace = ws.workspace;
-            })
-            .catch(err => {
-                console.log(err);
-            });
+    attached(): void {
+
+        // this.context.workspaceRevision.id = this.id;
+        // this.client.fetch(`workspaces/revision/${this.id.id}/workspace`)
+        //     .then(t => t.json() as any).then(t => {
+        //     this.context.workspace = t;
+        // });
+        // this.client.fetch(`workspaces/${this.id.id}`)
+        //     .then(ws => ws.json() as any)
+        //     .then(ws => {
+        //         this.loading = false;
+        //         this.workspace = ws;
+        //         this.hostWorkspace = ws.workspace;
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     });
     }
 
 
     activate(id: Identifier): void {
         this.id = id;
         this.loading = true;
+        console.log("ID", id);
     }
 }

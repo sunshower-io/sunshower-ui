@@ -1,17 +1,14 @@
-import {containerless} from "aurelia-framework";
 /**
- * Created by dustinlish on 3/1/17.
+ * Created by dustinlish on 11/8/16.
  */
 
-@containerless
-export class Wizard {
+export class CreateWorkspaceWizard {
 
     attached() {
         $('.coupled.modal')
             .modal({
                 allowMultiple: false,
-                detachable: false,
-                observeChanges: true
+                detachable: false
             });
 
         $('.ui.accordion')
@@ -25,23 +22,23 @@ export class Wizard {
     }
 
     step(to) {
-        $(`.${to}.modal`)
+        $(`.create-wizard.${to}.modal`)
             .modal('show');
     }
 
     show() {
-        $('.ui.first.modal')
+        $('.create-wizard.ui.first.modal')
             .modal('show');
     }
 
     hide() {
-        $('.ui.modal')
-            .modal('hideDimmer')
+        $('.create-wizard.ui.modal')
+            .modal('hide')
     }
 
     submit() {
         this.hide();
-        location.assign('#/workspaces')
+        location.assign('#/main/workspaces/workspace')
     }
 
     createApplication() {

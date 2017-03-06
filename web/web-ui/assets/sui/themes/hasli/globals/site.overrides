@@ -34,10 +34,10 @@
 
 body {
   height: 100%;
-  display: flex;
+  display: flex;;
   min-height: 100vh;
   flex-direction: column;
-  overflow:hidden;
+  overflow:auto;
 }
 
 .main-container {
@@ -259,6 +259,11 @@ body {
 
 .full-screen {
 
+}
+
+.form--field {
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
 }
 
 .version-segment {

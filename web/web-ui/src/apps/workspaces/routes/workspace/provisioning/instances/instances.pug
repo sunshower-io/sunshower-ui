@@ -28,7 +28,7 @@ template
                                 | Clone
                             .item
                                 i.ion-arrow-right-a.large.grey.icon
-                                | Deploy
+                                | Update Instance
                             .item
                                 i.ion-trash-a.large.grey.icon
                                 | Delete
@@ -42,7 +42,9 @@ template
                             .item(data-value="3") Docker Compose
                 .four.wide.right.aligned.column
                     span.widget-icons
-                        .ui.small.button.primary(click.delegate="createInstance()") + Create New
+                        .ui.small.button.primary(click.delegate="createInstance()")
+                            | + Create New
+                        compose(view-model='./create/create-instance')
                 table.ui.very.basic.very.padded.selectable.table
                     thead
                         tr
@@ -51,11 +53,11 @@ template
                                     input(type='checkbox', name='master')
                                     label
                             th Name
+                            th Version
                             th Status
-                            th IP
-                            th CPU
-                            th Memory
-                            th Disk
+                            th Environment
+                            th VMs
+                            th Containers
                             th.right.aligned
                                 i.link.big.blue.ion-ios-loop-strong.icon(
                                 class="${loading ? 'loading' : ''}"
@@ -66,7 +68,7 @@ template
                             td.widget-table-reloading(colspan='10')
                                 .ui.active.inverted.dimmer
                                     .ui.huge.loader
-                        tr(if.bind="(!applications || applications.length == 0) && !loading")
+                        tr(if.bind="(!instances || instances.length == 0) && !loading")
                             td.widget-table-reloading(colspan='10')
                                 .ui.hidden.divider
                                 h2.ui.center.aligned.icon.header
@@ -78,9 +80,9 @@ template
                                         | Create Instance
                                     .ui.hidden.divider
                         tr(
-                            show.bind="instances.length > 0 && !loading",
+                            if.bind="instances.length > 0 && !loading",
                             as-element="compose",
-                            view-model="apps/workspaces/resources/custom-elements/table/row",
+                            view-model="common/resources/custom-elements/table/row",
                             view="apps/workspaces/resources/custom-elements/table/instance-row.html"
                             repeat.for='instance of instances',
                             model.bind="instance",
