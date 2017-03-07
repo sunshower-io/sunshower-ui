@@ -22,9 +22,9 @@ export class ActivityMonitorDropdown {
             let activity = {
                 id: e.id,
                 type: 'generic',
-                name: 'Some sort of file',
-                meta: '2TB',
-                status: "Fucking pro",
+                name: 'File upload',
+                meta: '100GB',
+                status: "Uploading",
                 progress: 50,
                 topicId: e.id,
                 channel: channels
