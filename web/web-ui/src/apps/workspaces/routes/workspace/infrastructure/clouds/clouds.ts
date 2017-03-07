@@ -82,7 +82,6 @@ export class Clouds {
                     // TODO change back after testing
                     this.providers = r.map(r => {
                         r.icon = "styles/themes/hasli/assets/images/logos/aws-logo-2.svg";
-                        r.name = "Provider";
                         return r;
                     });
                     // this.providers = this.createMockProviders();

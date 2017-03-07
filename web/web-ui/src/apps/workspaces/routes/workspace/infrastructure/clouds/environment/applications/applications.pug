@@ -4,422 +4,118 @@ template
     .ui.hidden.divider
     .ui.container
         .ui.basic.segment
-            .ui.internally.celled.grid
-                .row
-                    .column
+            h2.ui.header
+                .content
+                    |   Applications
+            .ui.hidden.divider
+            .ui.link.cards
+                .active.card
+                    .content
+                        img.right.floated.mini.ui.image(src='styles/themes/hasli/assets/images/logos/docker-icon.svg')
+                        .header
+                            .ui.checked.checkbox
+                                input(type='checkbox', checked="")
+                                label Custom Docker Application
+    .ui.hidden.divider
+    .ui.container
+        .ui.basic.segment
+            h4.ui.header
+                .content
+                    |   Deployed
+        .ui.basic.segment
+            .ui.grid
+                .four.wide.column
+                    .ui.small.icon.fluid.input
+                        input(type='text', placeholder='Filter')
+                        i.search.icon
+                .twelve.wide.right.aligned.column
+                    span.widget-icons
+                        .ui.small.button.primary Update
+        table.ui.very.basic.very.padded.selectable.table
+            thead
+                tr
+                    th.right.aligned
+                        .ui.master.checkbox
+                            input(type='checkbox', name='master')
+                            label
+                    th Name
+                    th Version
+                    th State
+                    th IP
+                    th Ports
+                    th CPUs
+                    th Memory
+                    th Disk
+                    th.right.aligned
+                        i.link.big.blue.ion-ios-loop-strong.icon(
+                        class="${loading ? 'loading' : ''}"
+                        click.delegate="refresh()"
+                        )
+            tbody
+                tr(if.bind="loading")
+                    td.widget-table-reloading(colspan='10')
+                        .ui.active.inverted.dimmer
+                            .ui.huge.loader
+                tr(if.bind="(!isDeployed || isDeployed.length == 0) && !loading")
+                    td.widget-table-reloading(colspan='10')
                         .ui.hidden.divider
-                        .ui.internally.celled.grid
-                            .row
-                                .ui.fluid.styled.accordion.no--boxshadow
-                                    .title
-                                        .ui.right.floated.small.horizontal.list
-                                            .clickable.item
-                                                .content Version: 1.0.0
-                                            .clickable.item
-                                                .content Applications: 3
-                                            .clickable.item
-                                                .content # of Instances: 5
-                                            .item
-                                                .ui.primary.small.basic.button(type='button', click.trigger='deploy()')
-                                                    | Deploy
-                                        img.clickable.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
-                                        |     Dustin's Awesome App
-                                    .content
-                                        .ui.container
-                                            .ui.top.attached.tabular.menu
-                                                a.tab.item.active(data-tab='summary') Summary
-                                                a.tab.item(data-tab='files') Files
-                                                a.tab.item(data-tab='applications') Applications
-                                                a.tab.item(data-tab='revisions') Revisions
-                                                a.tab.item(data-tab='advanced') Advanced
-                                            .ui.bottom.attached.tab.segment.active(data-tab='summary')
-                                                .ui.basic.segment
-                                                    .ui.grid
-                                                        .two.column.row
-                                                            .four.wide.column
-                                                                h5.ui.header
-                                                                    | Minimum System Requirements
-                                                                .ui.list
-                                                                    .item CPU: 4
-                                                                    .item Memory: 4gb
-                                                                    .item OS: Ubuntu 16.04
-                                                                    .item Storage: 10gb
-                                                            .twelve.wide.column
-                                                                h5.ui.header
-                                                                    | Running Instances
-                                                                .ui.image
-                                                                    img(src='styles/themes/hasli/assets/images/sample-chart2.svg')
-                                            .ui.bottom.attached.tab.segment(data-tab='files')
-                                                .ui.basic.segment
-                                                    h4.ui.left.floated.header
-                                                        | All Files
-                                                    .ui.right.floated.horizontal.list
-                                                        .item
-                                                            a.content + CREATE NEW DIRECTORY
-                                                        .item
-                                                            a.content + CREATE NEW FILE
-                                                table.ui.bottom.attached.files.single.line.unstackable.selectable.table
-                                                    tbody
-                                                        tr
-                                                            td.single.line.five.wide
-                                                                i.blue.folder.icon
-                                                                a(href='#')
-                                                                    | dist
-                                                            td Build 2.0.7
-                                                            td.right.aligned.collapsing 5 days ago
-                                                        tr
-                                                            td
-                                                                i.blue.folder.icon
-                                                                a(href='#')
-                                                                    | examples
-                                                            td Update homepage.html
-                                                            td.right.aligned 5 days ago
-                                                        tr
-                                                            td
-                                                                i.blue.folder.icon
-                                                                a(href='#')
-                                                                    | src
-                                                            td Clean up logic in onComplete
-                                                            td.right.aligned 5 days ago
-                                                        tr
-                                                            td
-                                                                i.blue.folder.icon
-                                                                a(href='#')
-                                                                    | docs
-                                                            td Initial commit
-                                                            td.right.aligned 5 days ago
-                                                        tr
-                                                            td
-                                                                i.blue.folder.icon
-                                                                a(href='#')
-                                                                    | tasks
-                                                            td Updated browser prefix config
-                                                            td.right.aligned 5 days ago
-                                                        tr
-                                                            td
-                                                                i.blue.folder.icon
-                                                                a(href='#')
-                                                                    | test
-                                                            td  Restructure test/ for meteor #1607
-                                                            td.right.aligned 10 months ago
-                                                        tr
-                                                            td
-                                                                i.grey.file.outline.icon
-                                                                a(href='#')
-                                                                    | .csscomb.json
-                                                            td Iteration on regex for comment replacement
-                                                            td.right.aligned 10 months ago
-                                                        tr
-                                                            td
-                                                                i.grey.file.outline.icon
-                                                                a(href='#')
-                                                                    | .csslintrc
-                                                            td Add csslintrc
-                                                            td.right.aligned 5 months ago
-                                                        tr
-                                                            td
-                                                                i.grey.file.outline.icon
-                                                                a(href='#')
-                                                                    | CONTRIBUTING.md
-                                                            td Update CONTRIBUTING.md
-                                                            td.right.aligned 8 months ago
-                                                        tr
-                                                            td
-                                                                i.grey.file.outline.icon
-                                                                a(href='#')
-                                                                    | LICENSE.md
-                                                            td Remove execute permission
-                                                            td.right.aligned 7 days ago
-                                                        tr
-                                                            td
-                                                                i.grey.file.outline.icon
-                                                                a(href='#')
-                                                                    | README.md
-                                                            td Update README.md
-                                                            td.right.aligned 7 days ago
-                                                        tr
-                                                            td
-                                                                i.grey.file.outline.icon
-                                                                a(href='#')
-                                                                    | RELEASE-NOTES.md
-                                                            td Fix date
-                                                            td.right.aligned 7 days ago
-                                                        tr
-                                                            td
-                                                                i.grey.file.outline.icon
-                                                                a(href='#')
-                                                                    | bower.json
-                                                            td main: semantic.css => semantic.less
-                                                            td.right.aligned 3 months ago
-                                                        tr
-                                                            td
-                                                                i.grey.file.outline.icon
-                                                                a(href='#')
-                                                                    | composer.json
-                                                            td #1853 Fix some composer.json fields
-                                                            td.right.aligned 5 months ago
-                                                        tr
-                                                            td
-                                                                i.grey.file.outline.icon
-                                                                a(href='#')
-                                                                    | gulpfile.js
-                                                            td Update gulpfile
-                                                            td.right.aligned 4 months ago
-                                                        tr
-                                                            td
-                                                                i.grey.file.outline.icon
-                                                                a(href='#')
-                                                                    | karma.conf.js
-                                                            td Remove execute permission.
-                                                            td.right.aligned 8 months ago
-                                                        tr
-                                                            td
-                                                                i.grey.file.outline.icon
-                                                                a(href='#')
-                                                                    | logo.png
-                                                            td Remove execute permission.
-                                                            td.right.aligned 8 months ago
-                                                        tr
-                                                            td
-                                                                i.grey.file.outline.icon
-                                                                a(href='#')
-                                                                    | package.json
-                                                            td Build 2.0.7
-                                                            td.right.aligned 5 days ago
-                                                        tr
-                                                            td
-                                                                i.grey.file.outline.icon
-                                                                a(href='#')
-                                                                    | semantic.json.example
-                                                            td Fix admin flag set in example json! #2453
-                                                            td.right.aligned 28 days ago
-                                            .ui.bottom.attached.tab.segment(data-tab='applications')
-                                                .ui.basic.segment
-                                                    h4.ui.left.floated.header
-                                                        | All Files
-                                                    .ui.right.floated.horizontal.list
-                                                        .item
-                                                            a.content + CREATE NEW DIRECTORY
-                                                        .item
-                                                            a.content + CREATE NEW FILE
-                                                .fluid.styled.accordion
-                                                    .title
-                                                        i.dropdown.icon
-                                                        .ui.tiny.image
-                                                            img(src='styles/themes/hasli/assets/images/logos/nodejs-logo.svg')
-                                                    .content
-                                                        .ui.container
-                                                            .ui.pointing.secondary.tabular.menu
-                                                                a.active.item(data-tab="general")
-                                                                    | General
-                                                                a.item(data-tab="ports")
-                                                                    | Ports
-                                                                a.item(data-tab="volumes")
-                                                                    | Volumes
-                                                                a.item(data-tab="container-advanced")
-                                                                    | Advanced
-                                                            .ui.active.tab(data-tab='general')
-                                                                .ui.basic.segment
-                                                                    .ui.grid
-                                                                        .row
-                                                                            .fourteen.wide.column
-                                                                                h5.ui.header
-                                                                                    | Name
-                                                                        .two.column.row
-                                                                            .four.wide.column
-                                                                                .ui.transparent.input
-                                                                                    input(type="text" value="nodejs")
-                                                                                .ui.fitted.divider
-                                                                            .two.wide.column
-                                                                                .ui.small.basic.primary.button
-                                                                                    | Save
-                                                                        .row
-                                                                            .fourteen.wide.column
-                                                                                h5.ui.header
-                                                                                    | Environment Variables
-                                                                        .three.column.row
-                                                                            .four.wide.column
-                                                                                .ui.transparent.input
-                                                                                    input(type="text" value="PATH")
-                                                                                .ui.fitted.divider
-                                                                            .ten.wide.column
-                                                                                .ui.transparent.input
-                                                                                    input(type="text" value="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/nodejs/bin")
-                                                                                .ui.fitted.divider
-                                                                            .one.wide.column
-                                                                                img(src='styles/themes/hasli/assets/images/icons/x-circle.svg')
-                                                                        .three.column.row
-                                                                            .four.wide.column
-                                                                                .ui.transparent.input
-                                                                                    input(type="text" placeholder="key")
-                                                                                .ui.divider
-                                                                            .ten.wide.column
-                                                                                .ui.transparent.input
-                                                                                    input(type="text" placeholder="value")
-                                                                                .ui.divider
-                                                                            .one.wide.column
-                                                                                img(src='styles/themes/hasli/assets/images/icons/plus-green-circle.svg')
-                                                                        .row
-                                                                            .column
-                                                                                .ui.small.basic.primary.button
-                                                                                    | Delete Application
-                                                            .ui.tab(data-tab='ports')
-                                                                .ui.basic.segment
-                                                                    .ui.grid
-                                                                        .row
-                                                                            .fourteen.wide.column
-                                                                                h5.ui.header
-                                                                                    | Port Settings
-                                                                        .three.column.row
-                                                                            .four.wide.column
-                                                                                .ui.transparent.input
-                                                                                    input(type="text" value="9000")
-                                                                                .ui.fitted.divider
-                                                                            .ten.wide.column
-                                                                                .ui.transparent.input
-                                                                                    input(type="text" value="10.238.0.53:8080")
-                                                                                .ui.fitted.divider
-                                                                            .one.wide.column
-                                                                                img(src='styles/themes/hasli/assets/images/icons/x-circle.svg')
-                                                                        .three.column.row
-                                                                            .four.wide.column
-                                                                                .ui.transparent.input
-                                                                                    input(type="text" placeholder="port")
-                                                                                .ui.divider
-                                                                            .ten.wide.column
-                                                                                .ui.transparent.input
-                                                                                    input(type="text" placeholder="ip:port")
-                                                                                .ui.divider
-                                                                            .one.wide.column
-                                                                                img(src='styles/themes/hasli/assets/images/icons/plus-green-circle.svg')
-                                                            .ui.tab(data-tab='volumes')
-                                                                .ui.basic.segment
-                                                                    .ui.grid
-                                                                        .row
-                                                                            .fourteen.wide.column
-                                                                                h5.ui.header
-                                                                                    | Volumes
-                                                                        .three.column.row
-                                                                            .four.wide.column
-                                                                                .ui.transparent.input
-                                                                                    input(type="text" value="/usr/src")
-                                                                                .ui.fitted.divider
-                                                                            .ten.wide.column
-                                                                                .ui.transparent.input
-                                                                                    input(type="text" value="/root/")
-                                                                                .ui.fitted.divider
-                                                                            .one.wide.column
-                                                                                img(src='styles/themes/hasli/assets/images/icons/x-circle.svg')
-                                                                        .three.column.row
-                                                                            .four.wide.column
-                                                                                .ui.transparent.input
-                                                                                    input(type="text" placeholder="local folder")
-                                                                                .ui.divider
-                                                                            .ten.wide.column
-                                                                                .ui.transparent.input
-                                                                                    input(type="text" placeholder="docker folder")
-                                                                                .ui.divider
-                                                                            .one.wide.column
-                                                                                img(src='styles/themes/hasli/assets/images/icons/plus-green-circle.svg')
-                                                            .ui.tab(data-tab='container-advanced')
-                                                                .ui.form
-                                                                    h4.ui.dividing.header General Information
-                                                                    .field
-                                                                        .ui.checkbox
-                                                                            input.hidden(type='checkbox', tabindex='0')
-                                                                            label Some Advanced Setting 1
-                                                                    .field
-                                                                        .ui.checkbox
-                                                                            input.hidden(type='checkbox', tabindex='0')
-                                                                            label Some Advanced Setting 1
-                                                                    button.ui.basic.primary.button(type='submit') Save
-                                                .fluid.styled.accordion
-                                                    .title
-                                                        i.dropdown.icon
-                                                        .ui.tiny.image
-                                                            img(src='styles/themes/hasli/assets/images/logos/mysql-logo.svg')
-                                                    .content
-                                                        .ui.secondary.pointing.menu
-                                                            a.active.item
-                                                                | General
-                                                            a.item
-                                                                | Ports
-                                                            a.item
-                                                                | Volumes
-                                                            a.item
-                                                                | Advanced
-                                                .fluid.styled.accordion
-                                                    .title
-                                                        i.dropdown.icon
-                                                        .ui.tiny.image
-                                                            img(src='styles/themes/hasli/assets/images/logos/redis-logo.svg')
-                                                    .content
-                                                        .ui.secondary.pointing.menu
-                                                            a.active.item
-                                                                | General
-                                                            a.item
-                                                                | Ports
-                                                            a.item
-                                                                | Volumes
-                                                            a.item
-                                                                | Advanced
-                                            .ui.bottom.attached.tab.segment(data-tab='revisions')
-                                                .ui.left.floated.header
-                                                    | Recent Activity
-                                                a.pull-right
-                                                    | show all
-                                                img(src='styles/themes/hasli/assets/images/recent-activity.svg')
-                                            .ui.bottom.attached.tab.segment(data-tab='advanced')
-                                                .ui.form
-                                                    h4.ui.dividing.header General Information
-                                                    .field
-                                                        .ui.checkbox
-                                                            input.hidden(type='checkbox', tabindex='0')
-                                                            label Some Advanced Setting 1
-                                                    .field
-                                                        .ui.checkbox
-                                                            input.hidden(type='checkbox', tabindex='0')
-                                                            label Some Advanced Setting 1
-                                                    h4.ui.dividing.header Some Additional Advanced Stuff
-                                                    .field
-                                                        .ui.checkbox
-                                                            input.hidden(type='checkbox', tabindex='0')
-                                                            label Some Advanced Setting 1
-                                                    .field
-                                                        .ui.checkbox
-                                                            input.hidden(type='checkbox', tabindex='0')
-                                                            label Some Advanced Setting 1
-                            .row
-                                .ui.fluid.styled.accordion.no--boxshadow
-                                    .title
-                                        .ui.right.floated.small.horizontal.list
-                                            .item
-                                                .content Version: 1.0.0
-                                            .item
-                                                .content Applications: 3
-                                            .item
-                                                .content # of Instances: 5
-                                            .item
-                                                .ui.primary.small.basic.button
-                                                    | Deploy
-                                        img.toggle--icon(src='styles/themes/hasli/assets/images/icons/plus-circle.svg')
-                                        |     Dustin's Awesome App
-                                    .content
-                                        .ui.container
-                                            .ui.top.attached.tabular.menu
-                                                a.tab.item.active(data-tab='summary') Summary
-                                                a.tab.item(data-tab='files') Files
-                                                a.tab.item(data-tab='applications') Applications
-                                                a.tab.item(data-tab='revisions') Revisions
-                                                a.tab.item(data-tab='advanced') Advanced
-                                            .ui.bottom.attached.tab.segment.active(data-tab='summary')
-                                                | Summary
-                                            .ui.bottom.attached.tab.segment(data-tab='files')
-                                                | Files
-                                            .ui.bottom.attached.tab.segment(data-tab='applications')
-                                                | Applications
-                                            .ui.bottom.attached.tab.segment(data-tab='revisions')
-                                                | Revisions
-                                            .ui.bottom.attached.tab.segment(data-tab='advanced')
-                                                | Advanced
+                        h2.ui.center.aligned.icon.header
+                            |   This application is not deployed to any hosts in this environment
+                tr(
+                show.bind="isDeployed.length > 0 && !loading",
+                as-element="compose",
+                view-model="common/resources/custom-elements/table/row",
+                view="apps/workspaces/resources/custom-elements/table/host-row.html"
+                repeat.for='host of isDeployed',
+                model.bind="host"
+                )
 
+        .ui.basic.segment
+            .ui.basic.segment
+                .ui.grid
+                    .four.wide.column
+                        h4.ui.header
+                            .content
+                                |   Not Deployed
+                    .twelve.wide.right.aligned.column
+                        span.widget-icons
+                            .ui.small.button.primary Deploy
+            table.ui.very.basic.very.padded.selectable.table
+                thead
+                    tr
+                        th.right.aligned
+                            .ui.master.checkbox
+                                input(type='checkbox', name='master')
+                                label
+                        th Name
+                        th Version
+                        th State
+                        th IP
+                        th Ports
+                        th CPUs
+                        th Memory
+                        th Disk
+                        th.right.aligned
+                            i.link.big.blue.ion-ios-loop-strong.icon(
+                            class="${loading ? 'loading' : ''}"
+                            click.delegate="refresh()"
+                            )
+                tbody
+                    tr(if.bind="loading")
+                        td.widget-table-reloading(colspan='10')
+                            .ui.active.inverted.dimmer
+                                .ui.huge.loader
+                    tr(if.bind="(!isNotDeployed || isNotDeployed.length == 0) && !loading")
+                        td.widget-table-reloading(colspan='10')
+                            .ui.hidden.divider
+                            h2.ui.center.aligned.icon.header
+                                |   There aren't any available hosts that aren't running this application
+                    tr(
+                    show.bind="isNotDeployed.length > 0 && !loading",
+                    as-element="compose",
+                    view-model="common/resources/custom-elements/table/row",
+                    view="apps/workspaces/resources/custom-elements/table/host-row.html"
+                    repeat.for='host of isNotDeployed',
+                    model.bind="host"
+                    showVersion.bind="true"
+                    )
