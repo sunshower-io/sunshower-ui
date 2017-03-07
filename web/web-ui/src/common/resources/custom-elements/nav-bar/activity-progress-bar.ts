@@ -22,7 +22,7 @@ export class ActivityProgressBar {
             text: ''
         });
 
-        this.activity.channel.subscribe(t => {
+        this.activity.channel.getSubscription(this.activity.id).subscribe(t => {
             this.activity.progress += 17;
             this.updateBar();
         }, e => {

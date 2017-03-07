@@ -184,6 +184,7 @@ export class CreateInstanceWizard {
                 this.credential = response[0];
                 let reqId = this.createRequest();
 
+                console.log("Reqid", reqId);
                 this.eventAggregator.publish(
                     Activities.started, {
                         id: reqId

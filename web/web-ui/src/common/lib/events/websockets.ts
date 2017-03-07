@@ -34,6 +34,8 @@ export class ChannelSet {
     private readonly socket: WebSocket;
     private readonly subject: Subject<Event>;
     private readonly lifecycle: Subject<Lifecycle>;
+    private subscriptions: Map<string, Observable<Event>> =
+        new Map<string, Observable<Event>>();
 
     constructor(public endpoint: string, token:string) {
         this.socket = new WebSocket(`${endpoint}?${token}`);
@@ -47,12 +49,19 @@ export class ChannelSet {
         return this.lifecycle;
     }
 
+
+    getSubscription(id: string) : Observable <Event> {
+        return this.subscriptions[id];
+    }
+
     subscribe(subscription: Subscription): Observable<Event> {
         this.socket.send(subscription.id);
-        return this.subject.map(t => {
+        let result = this.subject.map(t => {
             console.log("GOT ONE: ", t);
             return t as Event
         }).filter(t => t.topicId === subscription.id);
+        this.subscriptions[subscription.id] = result;
+        return result;
     }
 
     private onMessage = (e: E) => {

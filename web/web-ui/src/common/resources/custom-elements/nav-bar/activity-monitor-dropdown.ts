@@ -26,8 +26,10 @@ export class ActivityMonitorDropdown {
                 meta: '2TB',
                 status: "Fucking pro",
                 progress: 50,
-                channel: channels.subscribe(e.id)
+                topicId: e.id,
+                channel: channels
             };
+            console.log("Subscribed");
             this.activities.push(activity as Activity);
 
 
@@ -53,6 +55,18 @@ export class ActivityMonitorDropdown {
 export class Activities {
     public static readonly started : string = 'activities::started';
 
+    public static icon(activity:Activity): string {
+        if (activity.type == 'vmware') {
+            return 'styles/themes/hasli/assets/images/activity--VMware_logo.png'
+        }
+        else if (activity.type == 'javascript') {
+            return 'styles/themes/hasli/assets/images/activity--javascript-file-icon.svg'
+        }
+        else {
+            return 'styles/themes/hasli/assets/images/activity--generic-file-icon.svg'
+        }
+
+    }
 }
 
 
@@ -63,20 +77,8 @@ export class Activity {
     meta                ?: string;
     progress            ?: number; //percentage
     status              ?: string;
-    channel             ?: Observable<any>;
-    subscription        ?: Subscription;
+    topicId             ?: string;
+    channel             ?: ChannelSet;
 
-    icon(): string {
-        if (this.type == 'vmware') {
-            return 'styles/themes/hasli/assets/images/activity--VMware_logo.png'
-        }
-        else if (this.type == 'javascript') {
-            return 'styles/themes/hasli/assets/images/activity--javascript-file-icon.svg'
-        }
-        else {
-            return 'styles/themes/hasli/assets/images/activity--generic-file-icon.svg'
-        }
-
-    }
 
 }
