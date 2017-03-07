@@ -56,8 +56,8 @@ export class ActivityProgressBar {
     }
 
     updateBar() : void {
-        $(this.element).find('.ui.progress')
-            .progress("set percent", this.activity.progress);
+        // $(this.element).find('.ui.progress')
+        //     .progress("set percent", this.activity.progress);
         if (this.activity.progress == 100) {
             this.activity.status = 'done';
         }
