@@ -24,12 +24,10 @@ export class CreateInstanceWizard {
 
     loading: boolean;
 
-    constructor(
-        private client: HttpClient,
-        private workspace: Workspace,
-        private channels:ChannelSet ,
-        private eventAggregator: EventAggregator
-    ) {
+    constructor(private client: HttpClient,
+                private workspace: Workspace,
+                private channels: ChannelSet,
+                private eventAggregator: EventAggregator) {
 
     }
 
@@ -53,10 +51,8 @@ export class CreateInstanceWizard {
     }
 
 
-    public configureRouter(
-        config: RouterConfiguration,
-        router: Router
-    ) {
+    public configureRouter(config: RouterConfiguration,
+                           router: Router) {
         config.title = '';
         config.map([
 
@@ -126,9 +122,10 @@ export class CreateInstanceWizard {
         });
     }
 
-    createRequest(): string {
+    createRequest(): [string, string] {
 
-        let requestId = UUID.randomUUID().value;
+        let requestId = UUID.randomUUID().value,
+            activityTopicId = UUID.randomUUID().value;
         this.ec2Deploy = {
             "type": "request",
             "operation": "io.hasli.hal.aws.ec2.operations.Ec2Deploy",
@@ -147,6 +144,12 @@ export class CreateInstanceWizard {
                         "value": {
                             "value": UUID.randomUUID().value,
                             "type": "java.lang.String"
+                        }
+                    }, {
+                        "name": "activity-topic-id",
+                        "value": {
+                            "value": activityTopicId,
+                            "type": "java.util.UUID"
                         }
                     },
                     {
@@ -171,7 +174,7 @@ export class CreateInstanceWizard {
                 ]
             }
         };
-        return requestId;
+        return [requestId, activityTopicId];
     }
 
     complete(): void {
@@ -182,17 +185,29 @@ export class CreateInstanceWizard {
             .then(response => response.json() as any)
             .then(response => {
                 this.credential = response[0];
-                let reqId = this.createRequest();
+                let [reqId, activityId] = this.createRequest();
 
-                console.log("Reqid", reqId);
                 this.eventAggregator.publish(
                     Activities.started, {
                         id: reqId
                     });
+
+                this.eventAggregator.publish(
+                    'logs::added', {
+                        id: activityId
+                    });
+
+                this.eventAggregator.publish(
+                    Activities.started, {
+                        id: activityId
+                    });
                 this.channels.subscribe({id: reqId}).forEach(t => {
-                    console.log("Got an event", t);
                 });
 
+                this.channels.subscribe({id: activityId}).forEach(t => {
+
+
+                });
                 this.client.fetch(`hal/compute/${this.providerId}/execute`, {
                     method: 'post',
                     body: JSON.stringify(this.ec2Deploy)

@@ -8,6 +8,7 @@ import {DialogService} from "aurelia-dialog";
 
 import {autoinject} from "aurelia-dependency-injection";
 import {UpdateInstance} from "./update/update-instance";
+import {EventAggregator} from "aurelia-event-aggregator";
 
 
 @autoinject
@@ -33,9 +34,19 @@ export class Instances {
     constructor(private parent: Workspace,
                 private client: HttpClient,
                 private channelSet: ChannelSet,
+                private aggregator:EventAggregator,
                 private dialogService: DialogService
     ) {
         this.instances = [];
+    }
+
+    newLog() : void {
+        let i = 0;
+        console.log("COol");
+        this.aggregator.publish('logs::added', {
+            id: "cool" + i
+
+        });
     }
 
     activate(): void {

@@ -3,6 +3,7 @@ import {Observable} from 'rxjs/Observable';
 import {Event as E} from 'core-js/library';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
+import {EventAggregator} from "aurelia-event-aggregator";
 export enum Type {
     ChannelBound,
     ChannelConnected,
@@ -37,7 +38,7 @@ export class ChannelSet {
     private subscriptions: Map<string, Observable<Event>> =
         new Map<string, Observable<Event>>();
 
-    constructor(public endpoint: string, token:string) {
+    constructor(public endpoint: string, token:string, private aggregator:EventAggregator) {
         this.socket = new WebSocket(`${endpoint}?${token}`);
         this.subject = new Subject<Event>();
         this.lifecycle = new Subject<Lifecycle>();
@@ -51,23 +52,17 @@ export class ChannelSet {
 
 
     getSubscription(id: string) : Observable <Event> {
-        return this.subscriptions[id];
+        return this.subject;
     }
 
     subscribe(subscription: Subscription): Observable<Event> {
         this.socket.send(subscription.id);
-        let result = this.subject.map(t => {
-            console.log("GOT ONE: ", t);
-            return t as Event
-        }).filter(t => t.topicId === subscription.id);
-        this.subscriptions[subscription.id] = result;
-        return result;
+        return this.subject;
     }
 
     private onMessage = (e: E) => {
         let msg = JSON.parse((e as any).data);
-        this.checkSessionId(msg);
-        this.subject.next(msg as any);
+        this.aggregator.publish("logs", msg);
     };
 
     private checkSessionId(msg: any) {
@@ -88,7 +83,6 @@ export class ChannelSet {
     };
 
     private open = (e: E) => {
-        console.log("CONNECTED");
         let msg = (e as any).data;
         this.lifecycle.next({
             type: Type.ChannelConnected

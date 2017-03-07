@@ -19,6 +19,7 @@ export class Provisioning {
             // Images Route
             {route: 'images', name: 'provisioning/images', moduleId: './images/images', nav: true, title: 'Images', settings: {icon: "ion-monitor"}},
 
+            {route: 'logs', name: 'provisioning/logs', moduleId: './logs/logs', nav: true, title: 'Logs', settings: {icon: "ion-code"}},
             // Design Route
             {route: 'design', name: 'provisioning/design', moduleId: './design/design', nav: true, title: 'Design', settings: {icon: "database"}},
 

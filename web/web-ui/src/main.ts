@@ -30,6 +30,7 @@ import {
 import {ChannelSet} from "common/lib/events";
 import {FetchClientInterceptor} from
     "./common/resources/custom-components/fetch-client-errors";
+import {EventAggregator} from "aurelia-event-aggregator";
 
 
 
@@ -124,7 +125,8 @@ export function configure(aurelia: Aurelia) {
 
                     let channelSet = new ChannelSet(
                             `ws://${location.host}/hasli/api/events`,
-                            encodeURIComponent(token)
+                            encodeURIComponent(token),
+                            container.get(EventAggregator)
                     );
                     tokenHolder.set(context, false);
                     container.registerInstance(HttpClient, authenticatedClient);
