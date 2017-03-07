@@ -38,6 +38,7 @@ export class ActivityMonitorDropdown {
                 this.newActivity = false;
             }, 5000);
         });
+
     }
 
     attached() {
@@ -50,7 +51,6 @@ export class ActivityMonitorDropdown {
     }
 
     cleanDD(): void {
-        this.newActivity = false;
         $(this.activityDD).find('.active').removeClass('active');
         $(this.activityDD).find('.selected').removeClass('selected');
     }

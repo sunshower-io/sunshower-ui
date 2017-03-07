@@ -2,7 +2,8 @@ import {inject, customElement, bindable} from "aurelia-framework";
 import {Activity} from "./activity-monitor-dropdown";
 import {Observable} from "rxjs/Observable";
 import {Subscription} from "aurelia-event-aggregator";
-
+import * as PNotify from 'pnotify';
+import 'pnotify.callbacks';
 
 @inject(Element)
 @customElement('activity-progress-bar')
@@ -24,7 +25,25 @@ export class ActivityProgressBar {
         });
 
         this.activity.channel.getSubscription(this.activity.id).subscribe(t => {
-            this.activity.progress += 17;
+            if (t.type == "topicFinishedEvent") {
+                //make pnotify
+                this.activity.progress = 100;
+                let notice = new PNotify({
+                        before_open: null,
+                        context: null,
+                        hide: true,
+                        title: 'Task Complete',
+                        text: '',
+                        shadow: false,
+                        icon: false,
+                        addclass: 'hasli-success'
+                    });
+                notice.get().click(() => {
+                    notice.remove();
+                })
+            } else {
+                this.activity.progress += 17;
+            }
             this.updateBar();
         }, e => {
         }, () => {
