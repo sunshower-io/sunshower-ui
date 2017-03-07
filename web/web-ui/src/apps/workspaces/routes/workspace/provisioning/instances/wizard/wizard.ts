@@ -40,6 +40,7 @@ export class CreateInstanceWizard {
         config.map([
 
             // Instances Route
+            //replaces instance-type-form
             {
                 route: 'catalog',
                 name: 'catalog',
@@ -48,23 +49,47 @@ export class CreateInstanceWizard {
                 title: 'Catalog'
             },
 
-            // Images Route
             {
-                route: 'cloud',
-                name: 'cloud',
-                moduleId: './cloud',
-                nav: true,
-                title: 'Select Cloud',
+                route: 'details',
+                name: 'details',
+                moduleId: 'apps/workspaces/routes/workspace/provisioning/instances/create/forms/instance-details-form',
+                nav: false,
+                title: 'Details'
             },
 
-            // Design Route
             {
-                route: 'design',
-                name: 'provisioning/design',
-                moduleId: './configure',
-                nav: true,
-                title: 'Configure',
+                route: 'customize',
+                name: 'customize',
+                moduleId: 'apps/workspaces/routes/workspace/provisioning/instances/create/forms/app-customize-form',
+                nav: false,
+                title: 'Customize'
             },
+
+            {
+                route: 'summary',
+                name: 'summary',
+                moduleId: 'apps/workspaces/routes/workspace/provisioning/instances/create/forms/summary-form',
+                nav: false,
+                title: 'Summary'
+            },
+
+            // // Images Route
+            // {
+            //     route: 'cloud',
+            //     name: 'cloud',
+            //     moduleId: './cloud',
+            //     nav: true,
+            //     title: 'Select Cloud',
+            // },
+            //
+            // // Design Route
+            // {
+            //     route: 'design',
+            //     name: 'provisioning/design',
+            //     moduleId: './configure',
+            //     nav: true,
+            //     title: 'Configure',
+            // },
 
         ]);
 
@@ -79,15 +104,30 @@ export class CreateInstanceWizard {
     private container:HTMLElement;
 
     attached() : void {
-        setTimeout(() => {
+        //todo close when we're not on one of these routes
 
+        setTimeout(() => {
+            this.router.routes[0].navModel.isActive = true;
             this.router.navigateToRoute('catalog', {
-                id: 'fuck',
+                id: 'boop',
             }, {replace:true});
+
+            console.log(this.router);
+            $(this.container).modal({
+                onHide: () => {
+                    console.log('I should redirect back to instances');
+                    this.workspace.router.navigateToRoute('provisioning');
+                }
+            });
+
             $(this.container).modal('show');
         });
     }
 
+    complete() : void {
+        //todo save something
+        $(this.container).modal('hide');
+    }
 
     /**
      * Copied from:
@@ -96,8 +136,8 @@ export class CreateInstanceWizard {
      * @returns {string}
      */
     getActiveRouteIndex() : number {
-        for (var routeIndex in this.router.navigation) {
-            var route = this.router.navigation[routeIndex];
+        for (var routeIndex in this.router.routes) {
+            var route = this.router.routes[routeIndex].navModel;
             if (route.isActive) {
                 return parseInt(routeIndex);
             }
@@ -106,9 +146,16 @@ export class CreateInstanceWizard {
 
     next() {
         let currentIndex = this.getActiveRouteIndex();
-        if (currentIndex < this.router.navigation.length - 1) {
+        // console.log('currentIndex is', currentIndex);
+        // if (currentIndex == 3) {
+        //     console.log('my index is 3 and I should be closing because last', (this.router.routes.length - 1))
+        // }
+        if (currentIndex < (this.router.routes.length - 1)) {
             currentIndex++;
-            this.router.navigate((<any>this).router.navigation[currentIndex].config.route, true);
+            // console.log('new index is', currentIndex);
+            this.router.navigate((<any>this).router.routes[currentIndex].navModel.config.route, true);
+        } else {
+            this.complete();
         }
     }
 

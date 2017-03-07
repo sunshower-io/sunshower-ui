@@ -6,8 +6,6 @@ import {ChannelSet} from "common/lib/events/websockets";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
 import {DialogService} from "aurelia-dialog";
 
-
-import {CreateInstance} from "./create/create-instance";
 import {autoinject} from "aurelia-dependency-injection";
 import {UpdateInstance} from "./update/update-instance";
 
@@ -32,8 +30,6 @@ export class Instances {
     constructor(private parent: Workspace,
                 private client: HttpClient,
                 private channelSet: ChannelSet,
-                private createInstanceForm: CreateInstance,
-                private updateInstanceForm: UpdateInstance,
                 private dialogService: DialogService
     ) {
         this.instances = [];
@@ -59,10 +55,7 @@ export class Instances {
 
 
     createInstance(): void {
-        // this.parent.router.navigate('/catalog');
-        //todo switch to wizard
-        console.log('i need to see a wizard')
-        //this.createInstanceForm.show();
+        this.parent.router.navigate('provisioning/wizard/catalog');
     }
 
     updateInstance(): void {
