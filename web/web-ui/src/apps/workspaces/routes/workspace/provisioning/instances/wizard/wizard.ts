@@ -7,6 +7,8 @@ import {CredentialSecret} from "common/model/security";
 import {Subscription, EventAggregator} from "aurelia-event-aggregator";
 import {ApplicationRevision} from "apps/workspaces/model/application/application";
 import {UUID} from "common/lib/utils/uuid";
+import {ChannelSet} from "common/lib/events/websockets";
+import {Activities} from "../../../../../../../common/resources/custom-elements/nav-bar/activity-monitor-dropdown";
 @autoinject
 export class CreateInstanceWizard {
 
@@ -22,7 +24,13 @@ export class CreateInstanceWizard {
 
     loading: boolean;
 
-    constructor(private client: HttpClient, private workspace: Workspace, private eventAggregator: EventAggregator) {
+    constructor(
+        private client: HttpClient,
+        private workspace: Workspace,
+        private channels:ChannelSet ,
+        private eventAggregator: EventAggregator
+    ) {
+
     }
 
 
@@ -45,7 +53,10 @@ export class CreateInstanceWizard {
     }
 
 
-    public configureRouter(config: RouterConfiguration, router: Router) {
+    public configureRouter(
+        config: RouterConfiguration,
+        router: Router
+    ) {
         config.title = '';
         config.map([
 
@@ -115,8 +126,9 @@ export class CreateInstanceWizard {
         });
     }
 
-    createRequest(): any {
+    createRequest(): string {
 
+        let requestId = UUID.randomUUID().value;
         this.ec2Deploy = {
             "type": "request",
             "operation": "io.hasli.hal.aws.ec2.operations.Ec2Deploy",
@@ -125,7 +137,7 @@ export class CreateInstanceWizard {
                     {
                         "name": "request-id",
                         "value": {
-                            "value": UUID.randomUUID().value,
+                            "value": requestId,
                             "type": "java.util.UUID"
                         }
 
@@ -159,7 +171,7 @@ export class CreateInstanceWizard {
                 ]
             }
         };
-
+        return requestId;
     }
 
     complete(): void {
@@ -170,7 +182,16 @@ export class CreateInstanceWizard {
             .then(response => response.json() as any)
             .then(response => {
                 this.credential = response[0];
-                this.createRequest();
+                let reqId = this.createRequest();
+
+                console.log("Reqid", reqId);
+                this.eventAggregator.publish(
+                    Activities.started, {
+                        id: reqId
+                    });
+                this.channels.subscribe({id: reqId}).forEach(t => {
+                    console.log("Got an event", t);
+                });
 
                 this.client.fetch(`hal/compute/${this.providerId}/execute`, {
                     method: 'post',
@@ -180,36 +201,6 @@ export class CreateInstanceWizard {
                         console.log("Deploying...");
                     });
 
-
-                //
-                //
-                // this.ec2Deploy['type'] = 'request';
-                // this.ec2Deploy["operation"] = "io.hasli.hal.aws.ec2.operations.Ec2Deploy";
-                // this.ec2Deploy["arguments"] = {};
-                // this.ec2Deploy["arguments"]["argument"] = [];
-                // this.ec2Deploy["arguments"]["argument"].push({
-                //     "name": "create-keypair",
-                //     "value": {
-                //         "value": "test",
-                //         "type": "java.lang.String"
-                //     }
-                // });
-                // this.ec2Deploy["arguments"]["argument"].push({
-                //     "type": "EntityReference",
-                //     "entity-id": this.policyId,
-                //     "name": "compute-template",
-                //     "entity-type": "io.hasli.service.model.compute.ComputeTemplate"
-                // });
-                // this.ec2Deploy["arguments"]["argument"].push({
-                //     "type": "EntityReference",
-                //     "entity-id": this.credential.id,
-                //     "name": "credential",
-                //     "entity-type": "io.hasli.model.core.auth.Credential"
-                // });
-                // //todo save this booper
-                // console.log("deploy me, Josiah; you're my only hope", this.ec2Deploy);
-
-                //todo probably put in a loader
 
                 this.loading = false;
                 $(this.container).modal('hide');
