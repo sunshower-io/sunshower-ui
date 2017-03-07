@@ -19,14 +19,18 @@ import {
     AuthenticationContext
 } from "common/model/security";
 
+
 import {DialogConfiguration} from "aurelia-dialog";
 
+import {Activity, Activities} from 'common/resources/custom-elements/nav-bar/activity-monitor-dropdown';
 
 import {
     SemanticUIRenderer
 } from "common/resources/custom-components/semantic-ui-renderer";
 import {ChannelSet} from "common/lib/events";
-import {FetchClientInterceptor} from "./common/resources/custom-components/fetch-client-errors";
+import {FetchClientInterceptor} from
+    "./common/resources/custom-components/fetch-client-errors";
+
 
 
 export function param(name) {
@@ -118,7 +122,10 @@ export function configure(aurelia: Aurelia) {
                             .withInterceptor(container.get(FetchClientInterceptor));
                     });
 
-                    let channelSet = new ChannelSet(`ws://${location.host}/hasli/api/events?${encodeURIComponent(token)}`);
+                    let channelSet = new ChannelSet(
+                            `ws://${location.host}/hasli/api/events`,
+                            encodeURIComponent(token)
+                    );
                     tokenHolder.set(context, false);
                     container.registerInstance(HttpClient, authenticatedClient);
                     container.registerInstance(BasicHttpClient, basicClient);

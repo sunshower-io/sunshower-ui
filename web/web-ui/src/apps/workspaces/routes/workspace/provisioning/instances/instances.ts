@@ -45,12 +45,13 @@ export class Instances {
 
         this.refresh();
 
-        this.channelSet.subscribe({
-            type: 'compute',
-            category: 'deployment'
-        }).forEach(t => {
-            this.refresh();
-        });
+        // this.channelSet.subscribe({
+        //     id:
+        //     type: 'compute',
+        //     category: 'deployment'
+        // }).forEach(t => {
+        //     this.refresh();
+        // });
     };
 
 

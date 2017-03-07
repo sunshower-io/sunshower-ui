@@ -1,5 +1,7 @@
 import {inject, customElement, bindable} from "aurelia-framework";
 import {Activity} from "./activity-monitor-dropdown";
+import {Observable} from "rxjs/Observable";
+import {Subscription} from "aurelia-event-aggregator";
 
 
 @inject(Element)
@@ -18,6 +20,15 @@ export class ActivityProgressBar {
         $(this.element).find('.ui.progress').progress({
             percent: this.activity.progress,
             text: ''
+        });
+
+        this.activity.channel.subscribe(t => {
+            this.activity.progress += 17;
+            this.updateBar();
+        }, e => {
+        }, () => {
+            this.activity.progress = 100;
+            this.updateBar();
         });
 
         // setTimeout(() => {
