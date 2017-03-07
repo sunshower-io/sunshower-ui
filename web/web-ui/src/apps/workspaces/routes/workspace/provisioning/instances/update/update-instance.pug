@@ -26,51 +26,27 @@ template
                     th Author
                     th Created At
             tbody
-                tr
+                tr(repeat.for='version of currentVersions')
                     td
                         .ui.radio.checkbox
-                            input(type='radio', name='example2', checked='checked')
+                            input(
+                                type='radio',
+                                name="appOptions",
+                                model.bind='version',
+                                checked.bind="$parent.selectedVersion",
+                                click.delegate="selected()"
+                            )
                             label
-                    td 4.0.0
-                    td commit message
-                    td Dustin Lish
-                    td 03/05/2017
-                tr
                     td
-                        .ui.radio.checkbox
-                            input(type='radio', name='example2', checked='checked')
-                            label
-                    td 3.0.0
-                    td commit message
-                    td Dustin Lish
-                    td 03/05/2017
-                tr
-                    td
-                        .ui.radio.checkbox
-                            input(type='radio', name='example2', checked='checked')
-                            label
-                    td 2.0.0
-                    td commit message
-                    td Dustin Lish
-                    td 03/05/2017
-                tr
-                    td
-                        .ui.radio.checkbox
-                            input(type='radio', name='example2', checked='checked')
-                            label
-                    td 1.1.0
-                    td commit message
-                    td Dustin Lish
-                    td 03/05/2017
-                tr
-                    td
-                        .ui.radio.checkbox
-                            input(type='radio', name='example2', checked='checked')
-                            label
-                    td 1.0.0
-                    td commit message
-                    td Dustin Lish
-                    td 03/05/2017
+                        .ui.divided.selection.list
+                            a.item
+                                | ${version.version}
+                                // TODO tag with LATEST
+                                a.ui.green.horizontal.label
+                                    | LATEST
+                    td ${version.description}
+                    td ${version.owner}
+                    td ${version.date}
         .ui.segment
             h3.ui.dividing.header Changes
     .actions
