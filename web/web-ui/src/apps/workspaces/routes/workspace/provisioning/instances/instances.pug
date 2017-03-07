@@ -74,11 +74,61 @@ template
                                     .ui.secondary.button(click.delegate="createInstance()")
                                         | Create Instance
                                     .ui.hidden.divider
-                        tr(
-                            show.bind="instances.length > 0 && !loading",
-                            as-element="compose",
-                            view-model="apps/workspaces/resources/custom-elements/table/instance-row"
-                            repeat.for='instance of instances',
-                            model.bind="instance",
-                        )
-
+                        //tr(
+                        //    show.bind="instances.length > 0 && !loading",
+                        //    as-element="compose",
+                        //    view-model="apps/workspaces/resources/custom-elements/table/instance-row"
+                        //    repeat.for='instance of instances',
+                        //    model.bind="instance",
+                        //)
+                        tr(show.bind="instances.length > 0 && !loading", repeat.for='instance of instances')
+                            td.right.aligned
+                                .ui.child.green.checkbox
+                                    input(
+                                        type='radio',
+                                        name="appOptions",
+                                        model.bind='instance',
+                                        checked.bind="$parent.selectedApp",
+                                        click.delegate="selected()"
+                                    )
+                                    label
+                            // name
+                            td
+                                .ui.link.items
+                                    .item(click.delegate="openInstance(instance)")
+                                        .ui.middle.aligned.mini.image
+                                            img(src="${instance.logo}")
+                                        .content
+                                            | ${instance.name}
+                            // version
+                            td
+                                | ${instance.version}
+                            // Status
+                            td
+                                i.icon.status-circle(class="${computeStatus(instance)}")
+                                | ${instance.state}
+                            // environment
+                            td
+                                | ${instance.environment}
+                            // vms
+                            td
+                                | ${instance.vms}
+                            // containers
+                            td
+                                | ${instance.containers}
+                            td.right.aligned
+                                .ui.inline.pointing.top.right.dropdown
+                                    i.link.ion-ios-gear-outline.big.blue.icon
+                                    .menu
+                                        .item
+                                            i.ion-power.large.green.icon
+                                            | Poweron
+                                        .item
+                                            i.ion-stop.large.grey.icon
+                                            | Poweroff
+                                        .item
+                                            i.ion-ios-reload.large.grey.icon
+                                            | Restart
+                                        .item
+                                            i.ion-ios-close-outline.large.red.icon
+                                            | Force Terminate
