@@ -29,6 +29,7 @@ export class Version {
     activate(model) {
         this.currentVersions = model.currentVersions;
         this.applicationId = model.applicationId;
+        console.log("ApplicationId: " + this.applicationId);
     }
 
     save() {

@@ -27,6 +27,9 @@ export class Instances {
     @bindable
     showModal;
 
+    @bindable
+    selectedApp;
+
     constructor(private parent: Workspace,
                 private client: HttpClient,
                 private channelSet: ChannelSet,
@@ -60,7 +63,11 @@ export class Instances {
 
     updateInstance(): void {
         this.dialogService.open({
-            viewModel: UpdateInstance
+            viewModel: UpdateInstance,
+
+            // TODO get id from selected row in table
+            model: this.selectedApp
+            // model: "d75e4367-3502-44d5-a651-6c6ad3b2f3e9"
         }).then(t => {
         });
         console.log("updateInstance called");
@@ -143,6 +150,12 @@ export class Instances {
         else {
             return 'circle yellow';
         }
+    }
+
+    // TODO saves current selectedAppInstance
+    selected() {
+        console.log(this.selectedApp);
+        return true;
     }
 
     createMockInstances(): Array<Instance> {
