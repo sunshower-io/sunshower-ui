@@ -57,8 +57,16 @@ export class ActivityProgressBar {
     }
 
     updateBar() : void {
-        // $(this.element).find('.ui.progress')
-        //     .progress("set percent", this.activity.progress);
+        //these two conditionals shouldn't be necessary but limitValues isn't working
+        if (this.activity.progress > 100) {
+            this.activity.progress = 100;
+        }
+        if (this.activity.progress < 0) {
+            this.activity.progress = 0;
+        }
+
+        $(this.element).find('.ui.progress')
+            .progress("set percent", this.activity.progress);
         if (this.activity.progress == 100) {
             this.activity.status = 'done';
         }

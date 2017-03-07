@@ -21,10 +21,10 @@ export class ActivityMonitorDropdown {
             Activities.started, e => {
             let activity = {
                 id: e.id,
-                type: 'generic',
-                name: 'Some sort of file',
-                meta: '2TB',
-                status: "Fucking pro",
+                type: 'deployment',
+                name: 'Deploying Instance',
+                meta: 'AWS Deployment',
+                status: "in progress",
                 progress: 50,
                 topicId: e.id,
                 channel: channels

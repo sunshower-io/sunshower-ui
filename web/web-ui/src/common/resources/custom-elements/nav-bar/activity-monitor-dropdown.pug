@@ -11,7 +11,8 @@ template
                 .ui.grid
                     .row
                         .two.wide.column
-                            img.ui.image.small(src="${activity.icon()}")
+                            img.ui.image.small(if.bind="activity.type != 'deployment'" src="${activity.icon()}")
+                            i.yellow.ion-android-cloud.icon(if.bind="activity.type == 'deployment'" style="font-size:3em !important")
                         .six.wide.middle.aligned.column
                             .clickable
                                 | ${activity.name}
