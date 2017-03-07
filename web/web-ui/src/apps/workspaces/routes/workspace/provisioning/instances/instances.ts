@@ -94,7 +94,7 @@ export class Instances {
         this.loading = true;
 
         setTimeout(() => {
-            this.client.fetch('provider')
+            this.client.fetch('providers')
                 .then(d => d.json() as any)
                 .then(d => {
                     this.providers = d;
@@ -102,13 +102,15 @@ export class Instances {
                     for (let provider of d) {
                         if (provider.key == 'aws') {
                             this.provider = provider;
-                            this.client.fetch(`compute/${provider.id}/${this.channelSet.sessionId}/instances/synchronize`)
-                                .then(d => d.json() as any)
-                                .then(d => {
-                                    this.instances = d;
-                                    this.instances = this.createMockInstances();
-                                    this.loading = false;
-                                })
+                            this.instances = this.createMockInstances();
+                            this.loading = false;
+                            // this.client.fetch(`compute/${provider.id}/${this.channelSet.sessionId}/instances/synchronize`)
+                            //     .then(d => d.json() as any)
+                            //     .then(d => {
+                            //         this.instances = d;
+                            //         this.instances = this.createMockInstances();
+                            //         this.loading = false;
+                            //     })
                         }
                     }
                 })

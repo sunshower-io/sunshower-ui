@@ -2,7 +2,8 @@ import {inject, customElement, bindable} from "aurelia-framework";
 import {Activity} from "./activity-monitor-dropdown";
 import {Observable} from "rxjs/Observable";
 import {Subscription} from "aurelia-event-aggregator";
-
+import * as PNotify from 'pnotify';
+import 'pnotify.callbacks';
 
 @inject(Element)
 @customElement('activity-progress-bar')
@@ -19,11 +20,30 @@ export class ActivityProgressBar {
     attached() : void {
         $(this.element).find('.ui.progress').progress({
             percent: this.activity.progress,
-            text: ''
+            text: '',
+            limitValues: true
         });
 
         this.activity.channel.getSubscription(this.activity.id).subscribe(t => {
-            this.activity.progress += 17;
+            if (t.type == "topicFinishedEvent") {
+                //make pnotify
+                this.activity.progress = 100;
+                let notice = new PNotify({
+                        before_open: null,
+                        context: null,
+                        hide: true,
+                        title: 'Task Complete',
+                        text: '',
+                        shadow: false,
+                        icon: false,
+                        addclass: 'hasli-success'
+                    });
+                notice.get().click(() => {
+                    notice.remove();
+                })
+            } else {
+                this.activity.progress += 17;
+            }
             this.updateBar();
         }, e => {
         }, () => {
@@ -56,8 +76,16 @@ export class ActivityProgressBar {
     }
 
     updateBar() : void {
-        // $(this.element).find('.ui.progress')
-        //     .progress("set percent", this.activity.progress);
+        //these two conditionals shouldn't be necessary but limitValues isn't working
+        if (this.activity.progress > 100) {
+            this.activity.progress = 100;
+        }
+        if (this.activity.progress < 0) {
+            this.activity.progress = 0;
+        }
+
+        $(this.element).find('.ui.progress')
+            .progress("set percent", this.activity.progress);
         if (this.activity.progress == 100) {
             this.activity.status = 'done';
         }

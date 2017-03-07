@@ -1136,6 +1136,9 @@ table tr.inactive {
       color: #9F3A38;
     }
   }
+  &.hasli-success {
+    background-color: lighten(@hasliGreen, 25%);
+  }
 
   .ui-pnotify-text {
     word-wrap: break-word;

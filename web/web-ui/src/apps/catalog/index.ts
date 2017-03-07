@@ -21,7 +21,7 @@ export class Catalog {
 
                 name: 'catalog',
                 moduleId: './routes/categories/categories',
-                title: 'My Apps',
+                title: '',
                 settings: {category: 'Applications'}
             }
         ]);
