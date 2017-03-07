@@ -14,12 +14,12 @@ export class AlertsDropdown {
         });
 
         //just some test stuff
-        let alert = new Alert();
-        alert.icon = 'blue ion-ionic';
-        alert.message = 'Hasli is great. I have a lot of fun working here, and it is an interesting project.';
-        alert.url = '/';
-        alert.time = 'Just Now';
-        this.alerts.push(alert);
+        // let alert = new Alert();
+        // alert.icon = 'blue ion-ionic';
+        // alert.message = 'Hasli is great. I have a lot of fun working here, and it is an interesting project.';
+        // alert.url = '/';
+        // alert.time = 'Just Now';
+        // this.alerts.push(alert);
     }
 
     view(alert : Alert) : void {

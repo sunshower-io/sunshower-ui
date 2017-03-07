@@ -17,7 +17,8 @@ export class ActivityProgressBar {
     attached() : void {
         $(this.element).find('.ui.progress').progress({
             percent: this.activity.progress,
-            text: ''
+            text: '',
+            limitValues: true
         });
 
         // setTimeout(() => {
