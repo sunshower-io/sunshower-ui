@@ -56,6 +56,7 @@ export class ChannelSet {
 
     private onMessage = (e: E) => {
         let msg = JSON.parse((e as any).data);
+        console.log("message", msg);
         this.checkSessionId(msg);
         this.subject.next(msg as any);
     };

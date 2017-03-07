@@ -6,6 +6,8 @@ import {ApplicationContext} from 'apps/workspaces/model/application-context';
 
 import {Identifier} from "common/lib/lang";
 import {Workspace as WorkspaceModel} from "./model/workspaces/workspace";
+import {UUID} from "common/lib/utils/uuid";
+import {ChannelSet} from "../../common/lib/events/websockets";
 
 @autoinject
 export class Workspace {
@@ -26,6 +28,7 @@ export class Workspace {
 
 
     }
+
 
     delete(id: string): void {
         this.client.fetch(`workspaces/${id}`, {method: 'delete'})
