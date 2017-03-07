@@ -72,8 +72,8 @@ export class Categories {
         ]);
 
         config.mapUnknownRoutes({
-            route: 'apps/containers',
-            redirect: 'apps/containers'
+            route: 'apps/custom',
+            redirect: 'apps/custom'
         });
 
         this.router = router;

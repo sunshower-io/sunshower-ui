@@ -6,13 +6,14 @@ import {HttpClient} from "aurelia-fetch-client";
 import {CredentialSecret} from "common/model/security";
 import {Subscription, EventAggregator} from "aurelia-event-aggregator";
 import {ApplicationRevision} from "apps/workspaces/model/application/application";
+import {UUID} from "common/lib/utils/uuid";
 @autoinject
 export class CreateInstanceWizard {
 
     router: Router;
     subscription: Subscription;
 
-    applicationRevision:ApplicationRevision;
+    applicationRevision: ApplicationRevision;
 
     ec2Deploy: {} = {};
     policyId: string;
@@ -21,25 +22,26 @@ export class CreateInstanceWizard {
 
     loading: boolean;
 
-    constructor(private client:HttpClient, private workspace:Workspace, private eventAggregator:EventAggregator) {
+    constructor(private client: HttpClient, private workspace: Workspace, private eventAggregator: EventAggregator) {
     }
 
 
-    activate() : void {
+    activate(): void {
 
         this.subscription = this.eventAggregator.subscribe(
             'application::selected', e => {
                 this.select(e);
 
-        });
+            });
     }
-    deactivate() : void {
+
+    deactivate(): void {
         this.subscription.dispose();
     }
 
-    select(revision:any) : void {
+    select(revision: any): void {
         this.applicationRevision = revision;
-        this.router.navigate('cloud');
+        this.router.navigate('details');
     }
 
 
@@ -81,24 +83,6 @@ export class CreateInstanceWizard {
                 title: 'Summary'
             },
 
-            // // Images Route
-            // {
-            //     route: 'cloud',
-            //     name: 'cloud',
-            //     moduleId: './cloud',
-            //     nav: true,
-            //     title: 'Select Cloud',
-            // },
-            //
-            // // Design Route
-            // {
-            //     route: 'design',
-            //     name: 'provisioning/design',
-            //     moduleId: './configure',
-            //     nav: true,
-            //     title: 'Configure',
-            // },
-
         ]);
 
         config.mapUnknownRoutes({
@@ -109,16 +93,16 @@ export class CreateInstanceWizard {
         this.router = router;
     }
 
-    private container:HTMLElement;
+    private container: HTMLElement;
 
-    attached() : void {
+    attached(): void {
         //todo close when we're not on one of these routes
 
         setTimeout(() => {
             this.router.routes[0].navModel.isActive = true;
             this.router.navigateToRoute('catalog', {
                 id: 'boop',
-            }, {replace:true});
+            }, {replace: true});
 
             console.log(this.router);
             $(this.container).modal({
@@ -131,7 +115,54 @@ export class CreateInstanceWizard {
         });
     }
 
-    complete() : void {
+    createRequest(): any {
+
+        this.ec2Deploy = {
+            "type": "request",
+            "operation": "io.hasli.hal.aws.ec2.operations.Ec2Deploy",
+            "arguments": {
+                "argument": [
+                    {
+                        "name": "request-id",
+                        "value": {
+                            "value": UUID.randomUUID().value,
+                            "type": "java.util.UUID"
+                        }
+
+                    },
+                    {
+                        "name": "keypair-name",
+                        "value": {
+                            "value": UUID.randomUUID().value,
+                            "type": "java.lang.String"
+                        }
+                    },
+                    {
+                        "name": "create-keypair",
+                        "value": {
+                            "value": UUID.randomUUID().value,
+                            "type": "java.lang.String"
+                        }
+                    },
+                    {
+                        "type": "EntityReference",
+                        "entity-id": this.policyId,
+                        "name": "compute-template",
+                        "entity-type": "io.hasli.service.model.compute.ComputeTemplate"
+                    },
+                    {
+                        "type": "EntityReference",
+                        "entity-id": this.credential.id,
+                        "name": "credential",
+                        "entity-type": "io.hasli.model.core.auth.Credential"
+                    }
+                ]
+            }
+        };
+
+    }
+
+    complete(): void {
         this.loading = true;
         console.log('providerId', this.providerId);
         console.log('policyId', this.policyId);
@@ -139,34 +170,44 @@ export class CreateInstanceWizard {
             .then(response => response.json() as any)
             .then(response => {
                 this.credential = response[0];
-                console.log('fetched credential', this.credential);
+                this.createRequest();
+
+                this.client.fetch(`hal/compute/${this.providerId}/execute`, {
+                    method: 'post',
+                    body: JSON.stringify(this.ec2Deploy)
+                }).then(r => r.json() as any)
+                    .then(r => {
+                        console.log("Deploying...");
+                    });
 
 
-
-                this.ec2Deploy["operation"] = "io.hasli.hal.aws.ec2.operations.Ec2Deploy";
-                this.ec2Deploy["arguments"] = {};
-                this.ec2Deploy["arguments"]["argument"] = [];
-                this.ec2Deploy["arguments"]["argument"].push({
-                    "name": "create-keypair",
-                    "value": {
-                        "value": "test",
-                        "type": "java.lang.String"
-                    }
-                });
-                this.ec2Deploy["arguments"]["argument"].push({
-                    "type": "EntityReference",
-                    "entity-id": this.policyId,
-                    "name": "compute-template",
-                    "entity-type": "io.hasli.service.model.compute.ComputeTemplate"
-                });
-                this.ec2Deploy["arguments"]["argument"].push({
-                    "type": "EntityReference",
-                    "entity-id": this.credential.id,
-                    "name": "credential",
-                    "entity-type": "io.hasli.model.core.auth.Credential"
-                });
-                //todo save this booper
-                console.log("deploy me, Josiah; you're my only hope", this.ec2Deploy);
+                //
+                //
+                // this.ec2Deploy['type'] = 'request';
+                // this.ec2Deploy["operation"] = "io.hasli.hal.aws.ec2.operations.Ec2Deploy";
+                // this.ec2Deploy["arguments"] = {};
+                // this.ec2Deploy["arguments"]["argument"] = [];
+                // this.ec2Deploy["arguments"]["argument"].push({
+                //     "name": "create-keypair",
+                //     "value": {
+                //         "value": "test",
+                //         "type": "java.lang.String"
+                //     }
+                // });
+                // this.ec2Deploy["arguments"]["argument"].push({
+                //     "type": "EntityReference",
+                //     "entity-id": this.policyId,
+                //     "name": "compute-template",
+                //     "entity-type": "io.hasli.service.model.compute.ComputeTemplate"
+                // });
+                // this.ec2Deploy["arguments"]["argument"].push({
+                //     "type": "EntityReference",
+                //     "entity-id": this.credential.id,
+                //     "name": "credential",
+                //     "entity-type": "io.hasli.model.core.auth.Credential"
+                // });
+                // //todo save this booper
+                // console.log("deploy me, Josiah; you're my only hope", this.ec2Deploy);
 
                 //todo probably put in a loader
 
@@ -181,7 +222,7 @@ export class CreateInstanceWizard {
      *
      * @returns {string}
      */
-    getActiveRouteIndex() : number {
+    getActiveRouteIndex(): number {
         for (var routeIndex in this.router.routes) {
             var route = this.router.routes[routeIndex].navModel;
             if (route.isActive) {
