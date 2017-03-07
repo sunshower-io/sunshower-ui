@@ -13,9 +13,10 @@ template
                     .required.field
                         label Cloud
                 .twelve.wide.column
-                    select.ui.fluid.dropdown
-                        option(value='') cloud
-                        option(value='new') create new +
+                    select.ui.fluid.dropdown(value.bind="providerId")
+                        option(value='') Select cloud
+                        option(repeat.for="provider of providers" value="${provider.id}")
+                            | ${provider.name}
             .row.form--field
                 .three.wide.right.aligned.middle.aligned.column
                     .field

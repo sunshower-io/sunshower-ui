@@ -2,7 +2,6 @@
    Created by dustinlish on 2/6/17.
 template
     .ui.hidden.divider
-    compose(view-model='./update/update-instance')
     .ui.container
         .ui.basic.segment
             h2.ui.header
@@ -41,7 +40,6 @@ template
                     span.widget-icons
                         .ui.small.button.primary(click.delegate="createInstance()")
                             | + Create New
-                        //compose(view-model='./create/create-instance')
                 table.ui.very.basic.very.padded.selectable.table
                     thead
                         tr

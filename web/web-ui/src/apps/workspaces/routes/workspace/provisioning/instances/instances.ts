@@ -1,14 +1,13 @@
-import {
-    bindable,
-    inject,
-    CompositionTransaction
-} from "aurelia-framework";
+import {bindable} from "aurelia-framework";
 import "chart.js";
 import {HttpClient} from 'aurelia-fetch-client';
 import {Provider} from "common/model/api/hal/api";
 import {ChannelSet} from "common/lib/events/websockets";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
+import {DialogService} from "aurelia-dialog";
+
 import {autoinject} from "aurelia-dependency-injection";
+import {UpdateInstance} from "./update/update-instance";
 
 
 @autoinject
@@ -25,9 +24,13 @@ export class Instances {
     @bindable
     loading: boolean;
 
+    @bindable
+    showModal;
+
     constructor(private parent: Workspace,
                 private client: HttpClient,
-                private channelSet: ChannelSet
+                private channelSet: ChannelSet,
+                private dialogService: DialogService
     ) {
         this.instances = [];
     }
@@ -38,6 +41,8 @@ export class Instances {
     }
 
     attached(): void {
+        $('.ui.dropdown').dropdown();
+
         this.refresh();
 
         this.channelSet.subscribe({
@@ -53,18 +58,26 @@ export class Instances {
         this.parent.router.navigate('provisioning/wizard/catalog');
     }
 
-    openInstance(): void {
-        this.parent.router.navigate('instances/:id/instance');
+    updateInstance(): void {
+        this.dialogService.open({
+            viewModel: UpdateInstance
+        }).then(t => {
+        });
+        console.log("updateInstance called");
+        //this.updateInstanceForm.show();
+    }
+
+    openInstance(instance): void {
+        this.parent.router.navigate(`instances/${instance.id}/instance`);
     }
 
     refresh(): void {
+        this.loading = true;
+
         setTimeout(() => {
-
-
             this.client.fetch('provider')
                 .then(d => d.json() as any)
                 .then(d => {
-                    this.loading = false;
                     this.providers = d;
                     console.log("Providers", d);
                     for (let provider of d) {
@@ -72,12 +85,17 @@ export class Instances {
                             this.provider = provider;
                             this.client.fetch(`compute/${provider.id}/${this.channelSet.sessionId}/instances/synchronize`)
                                 .then(d => d.json() as any)
-                                .then(d => this.instances = d);
+                                .then(d => {
+                                    this.instances = d;
+                                    this.instances = this.createMockInstances();
+                                    this.loading = false;
+                                })
                         }
                     }
                 })
                 .catch(err => {
                     this.loading = false;
+                    this.instances = this.createMockInstances();
                 });
         }, 500)
     }
@@ -98,7 +116,6 @@ export class Instances {
 
     restart(instance: Instance): void {
     }
-
 
     statusButtons(instance: Instance): string[] {
         if (instance.state == 'running') {
@@ -126,8 +143,25 @@ export class Instances {
         else {
             return 'circle yellow';
         }
+    }
 
+    createMockInstances(): Array<Instance> {
+        let instances = [];
+        for (var num in [1, 2, 3, 4]) {
+            var i = new Instance();
+            i.id = `1${num}`;
+            i.logo = 'styles/themes/hasli/assets/images/logos/ca-logo.png';
+            i.name = `CA UIM Server ${num}`;
+            i.version = "8.47";
+            i.state = "running";
+            i.environment = "Hasli aws dev";
+            i.vms = 3;
+            i.containers = 3;
 
+            instances.push(i)
+        }
+
+        return instances;
     }
 }
 
@@ -135,8 +169,9 @@ export class Instance {
     id          ?: string;
     logo        ?: string;
     name        ?: string;
+    version     ?: string;
     state       ?: string; //Running, Stopped, Stopping, Restart, Terminating, Deploying, Starting
-    publicIp    ?: string;
-    ports       ?: string;
-
+    environment ?: string;
+    vms         ?: number;
+    containers  ?: number;
 }

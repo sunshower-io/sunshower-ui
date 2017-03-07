@@ -16,11 +16,10 @@ template
                         label Deployment Policy
                 .twelve.wide.column
                     .field
-                        select.ui.fluid.dropdown
+                        select.ui.fluid.dropdown(value.bind="policyId")
                             option(value='') Select Policy
-                            option(value='new') default-micro-us-west-1
-                            option(value='new') default-small-us-west-1
-                            option(value='new') default-medium-us-west-1
+                            option(repeat.for="policy of policies" value="${policy.id}")
+                                | ${policy.name}
         .field
 
     .ui.hidden.divider

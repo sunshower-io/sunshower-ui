@@ -1,4 +1,9 @@
+import {CreateInstanceWizard} from "../../wizard/wizard";
+import {autoinject, bindable} from "aurelia-framework";
+import {HttpClient} from "aurelia-fetch-client";
+import {Provider} from "common/model/api/hal/api";
 
+@autoinject
 export class DeployInfoForm {
 
     name: String;
@@ -6,9 +11,15 @@ export class DeployInfoForm {
     selectedTags: Array<String>;
     tagDropdown: any;
 
+    providers: Provider[];
 
-    constructor() {
+    @bindable
+    providerID: string = '';
+
+
+    constructor(private wizard:CreateInstanceWizard, private client:HttpClient) {
         this.selectedTags = [];
+        this.wizard.providerId = this.providerID;
     }
 
     attached() {
@@ -25,6 +36,12 @@ export class DeployInfoForm {
                 }
             }
         });
+
+        this.client.fetch('providers')
+            .then(r => r.json() as any)
+            .then(r => {
+                this.providers = r;
+            })
 
     }
 

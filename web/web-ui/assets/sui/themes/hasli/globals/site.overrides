@@ -630,6 +630,9 @@ body {
 
 .modal {
   margin-top:-250px !important;
+  height: auto !important;
+
+
   .ui.card>.image, .ui.cards>.card>.image {
     background: inherit !important;
   }

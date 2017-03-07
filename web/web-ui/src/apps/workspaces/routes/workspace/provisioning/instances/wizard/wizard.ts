@@ -2,6 +2,8 @@ import {RouterConfiguration} from "aurelia-router";
 import {Router} from "aurelia-router";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
 import {autoinject} from "aurelia-framework";
+import {HttpClient} from "aurelia-fetch-client";
+import {CredentialSecret} from "common/model/security";
 import {Subscription, EventAggregator} from "aurelia-event-aggregator";
 import {ApplicationRevision} from "apps/workspaces/model/application/application";
 @autoinject
@@ -12,8 +14,14 @@ export class CreateInstanceWizard {
 
     applicationRevision:ApplicationRevision;
 
-    constructor(private workspace:Workspace, private eventAggregator:EventAggregator) {
+    ec2Deploy: {} = {};
+    policyId: string;
+    providerId: string;
+    credential: CredentialSecret = null;
 
+    loading: boolean;
+
+    constructor(private client:HttpClient, private workspace:Workspace, private eventAggregator:EventAggregator) {
     }
 
 
@@ -40,6 +48,7 @@ export class CreateInstanceWizard {
         config.map([
 
             // Instances Route
+            //replaces instance-type-form
             {
                 route: 'catalog',
                 name: 'catalog',
@@ -48,23 +57,47 @@ export class CreateInstanceWizard {
                 title: 'Catalog'
             },
 
-            // Images Route
             {
-                route: 'cloud',
-                name: 'cloud',
-                moduleId: './cloud',
-                nav: true,
-                title: 'Select Cloud',
+                route: 'details',
+                name: 'details',
+                moduleId: 'apps/workspaces/routes/workspace/provisioning/instances/create/forms/instance-details-form',
+                nav: false,
+                title: 'Details'
             },
 
-            // Design Route
             {
-                route: 'design',
-                name: 'provisioning/design',
-                moduleId: './configure',
-                nav: true,
-                title: 'Configure',
+                route: 'customize',
+                name: 'customize',
+                moduleId: 'apps/workspaces/routes/workspace/provisioning/instances/create/forms/app-customize-form',
+                nav: false,
+                title: 'Customize'
             },
+
+            {
+                route: 'summary',
+                name: 'summary',
+                moduleId: 'apps/workspaces/routes/workspace/provisioning/instances/create/forms/summary-form',
+                nav: false,
+                title: 'Summary'
+            },
+
+            // // Images Route
+            // {
+            //     route: 'cloud',
+            //     name: 'cloud',
+            //     moduleId: './cloud',
+            //     nav: true,
+            //     title: 'Select Cloud',
+            // },
+            //
+            // // Design Route
+            // {
+            //     route: 'design',
+            //     name: 'provisioning/design',
+            //     moduleId: './configure',
+            //     nav: true,
+            //     title: 'Configure',
+            // },
 
         ]);
 
@@ -79,15 +112,68 @@ export class CreateInstanceWizard {
     private container:HTMLElement;
 
     attached() : void {
-        setTimeout(() => {
+        //todo close when we're not on one of these routes
 
+        setTimeout(() => {
+            this.router.routes[0].navModel.isActive = true;
             this.router.navigateToRoute('catalog', {
-                id: 'fuck',
+                id: 'boop',
             }, {replace:true});
+
+            console.log(this.router);
+            $(this.container).modal({
+                onHide: () => {
+                    this.workspace.router.navigateToRoute('provisioning');
+                }
+            });
+
             $(this.container).modal('show');
         });
     }
 
+    complete() : void {
+        this.loading = true;
+        console.log('providerId', this.providerId);
+        console.log('policyId', this.policyId);
+        this.client.fetch(`providers/${this.providerId}/credentials`)
+            .then(response => response.json() as any)
+            .then(response => {
+                this.credential = response[0];
+                console.log('fetched credential', this.credential);
+
+
+
+                this.ec2Deploy["operation"] = "io.hasli.hal.aws.ec2.operations.Ec2Deploy";
+                this.ec2Deploy["arguments"] = {};
+                this.ec2Deploy["arguments"]["argument"] = [];
+                this.ec2Deploy["arguments"]["argument"].push({
+                    "name": "create-keypair",
+                    "value": {
+                        "value": "test",
+                        "type": "java.lang.String"
+                    }
+                });
+                this.ec2Deploy["arguments"]["argument"].push({
+                    "type": "EntityReference",
+                    "entity-id": this.policyId,
+                    "name": "compute-template",
+                    "entity-type": "io.hasli.service.model.compute.ComputeTemplate"
+                });
+                this.ec2Deploy["arguments"]["argument"].push({
+                    "type": "EntityReference",
+                    "entity-id": this.credential.id,
+                    "name": "credential",
+                    "entity-type": "io.hasli.model.core.auth.Credential"
+                });
+                //todo save this booper
+                console.log("deploy me, Josiah; you're my only hope", this.ec2Deploy);
+
+                //todo probably put in a loader
+
+                this.loading = false;
+                $(this.container).modal('hide');
+            });
+    }
 
     /**
      * Copied from:
@@ -96,8 +182,8 @@ export class CreateInstanceWizard {
      * @returns {string}
      */
     getActiveRouteIndex() : number {
-        for (var routeIndex in this.router.navigation) {
-            var route = this.router.navigation[routeIndex];
+        for (var routeIndex in this.router.routes) {
+            var route = this.router.routes[routeIndex].navModel;
             if (route.isActive) {
                 return parseInt(routeIndex);
             }
@@ -106,9 +192,11 @@ export class CreateInstanceWizard {
 
     next() {
         let currentIndex = this.getActiveRouteIndex();
-        if (currentIndex < this.router.navigation.length - 1) {
+        if (currentIndex < (this.router.routes.length - 1)) {
             currentIndex++;
-            this.router.navigate((<any>this).router.navigation[currentIndex].config.route, true);
+            this.router.navigate((<any>this).router.routes[currentIndex].navModel.config.route, true);
+        } else {
+            this.complete();
         }
     }
 

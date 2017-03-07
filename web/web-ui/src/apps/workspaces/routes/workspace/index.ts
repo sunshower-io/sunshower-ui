@@ -36,6 +36,7 @@ export class Workspace {
 
     //TODO: rename revision
     public workspace: WorkspaceRevision;
+    //todo reconcile WorkspaceRevision and WorkspaceModel;
 
 
     constructor(private client: HttpClient,
