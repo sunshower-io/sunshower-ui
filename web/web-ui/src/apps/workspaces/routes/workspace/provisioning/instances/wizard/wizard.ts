@@ -2,6 +2,8 @@ import {RouterConfiguration} from "aurelia-router";
 import {Router} from "aurelia-router";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
 import {autoinject} from "aurelia-framework";
+import {HttpClient} from "aurelia-fetch-client";
+import {CredentialSecret} from "common/model/security";
 import {Subscription, EventAggregator} from "aurelia-event-aggregator";
 import {ApplicationRevision} from "apps/workspaces/model/application/application";
 @autoinject
@@ -12,8 +14,14 @@ export class CreateInstanceWizard {
 
     applicationRevision:ApplicationRevision;
 
-    constructor(private workspace:Workspace, private eventAggregator:EventAggregator) {
+    ec2Deploy: {} = {};
+    policyId: string;
+    providerId: string;
+    credential: CredentialSecret = null;
 
+    loading: boolean;
+
+    constructor(private client:HttpClient, private workspace:Workspace, private eventAggregator:EventAggregator) {
     }
 
 
@@ -115,7 +123,6 @@ export class CreateInstanceWizard {
             console.log(this.router);
             $(this.container).modal({
                 onHide: () => {
-                    console.log('I should redirect back to instances');
                     this.workspace.router.navigateToRoute('provisioning');
                 }
             });
@@ -125,8 +132,47 @@ export class CreateInstanceWizard {
     }
 
     complete() : void {
-        //todo save something
-        $(this.container).modal('hide');
+        this.loading = true;
+        console.log('providerId', this.providerId);
+        console.log('policyId', this.policyId);
+        this.client.fetch(`providers/${this.providerId}/credentials`)
+            .then(response => response.json() as any)
+            .then(response => {
+                this.credential = response[0];
+                console.log('fetched credential', this.credential);
+
+
+
+                this.ec2Deploy["operation"] = "io.hasli.hal.aws.ec2.operations.Ec2Deploy";
+                this.ec2Deploy["arguments"] = {};
+                this.ec2Deploy["arguments"]["argument"] = [];
+                this.ec2Deploy["arguments"]["argument"].push({
+                    "name": "create-keypair",
+                    "value": {
+                        "value": "test",
+                        "type": "java.lang.String"
+                    }
+                });
+                this.ec2Deploy["arguments"]["argument"].push({
+                    "type": "EntityReference",
+                    "entity-id": this.policyId,
+                    "name": "compute-template",
+                    "entity-type": "io.hasli.service.model.compute.ComputeTemplate"
+                });
+                this.ec2Deploy["arguments"]["argument"].push({
+                    "type": "EntityReference",
+                    "entity-id": this.credential.id,
+                    "name": "credential",
+                    "entity-type": "io.hasli.model.core.auth.Credential"
+                });
+                //todo save this booper
+                console.log("deploy me, Josiah; you're my only hope", this.ec2Deploy);
+
+                //todo probably put in a loader
+
+                this.loading = false;
+                $(this.container).modal('hide');
+            });
     }
 
     /**
@@ -146,13 +192,8 @@ export class CreateInstanceWizard {
 
     next() {
         let currentIndex = this.getActiveRouteIndex();
-        // console.log('currentIndex is', currentIndex);
-        // if (currentIndex == 3) {
-        //     console.log('my index is 3 and I should be closing because last', (this.router.routes.length - 1))
-        // }
         if (currentIndex < (this.router.routes.length - 1)) {
             currentIndex++;
-            // console.log('new index is', currentIndex);
             this.router.navigate((<any>this).router.routes[currentIndex].navModel.config.route, true);
         } else {
             this.complete();

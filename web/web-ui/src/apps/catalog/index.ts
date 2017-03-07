@@ -1,10 +1,16 @@
 import {Router} from "aurelia-router";
 import {RouterConfiguration} from "aurelia-router";
 import {autoinject} from "aurelia-framework";
+import {CreateInstanceWizard} from "apps/workspaces/routes/workspace/provisioning/instances/wizard/wizard";
 
 @autoinject
 export class Catalog {
     public router: Router;
+
+
+    constructor(private wizard:CreateInstanceWizard) {
+
+    }
 
     public configureRouter(config: RouterConfiguration, router: Router) {
         config.map([
