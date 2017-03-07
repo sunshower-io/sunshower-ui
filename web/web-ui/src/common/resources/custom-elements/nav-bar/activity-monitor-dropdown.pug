@@ -1,7 +1,7 @@
 template
     require(from="./activity-progress-bar")
     .ui.inline.pointing.dropdown.top.right(ref="activityDD")
-        i.large.inverted.ion-ios-pulse-strong.icon
+        i.large.inverted.ion-ios-pulse-strong.icon(class="${newActivity ? 'orange' : ''}")
         .ui.menu.inverted.content-dropdown
             .header
                 | Activity Monitor

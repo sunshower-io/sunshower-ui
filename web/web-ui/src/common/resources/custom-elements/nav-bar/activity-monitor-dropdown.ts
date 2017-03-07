@@ -11,6 +11,8 @@ export class ActivityMonitorDropdown {
     activityDD: HTMLElement;
     activities: Activity[];
 
+    newActivity:boolean;
+
     private    subscription:Subscription;
 
     constructor(private channels: ChannelSet,
@@ -31,19 +33,24 @@ export class ActivityMonitorDropdown {
             };
             console.log("Subscribed");
             this.activities.push(activity as Activity);
-
-
+            this.newActivity = true;
+            setTimeout(() => {
+                this.newActivity = false;
+            }, 5000);
         });
     }
 
     attached() {
+        //onShow isn't happening
         $(this.activityDD).dropdown({
-            action: 'activate',
-            onChange: this.cleanDD()
+            onShow: () => {
+                this.cleanDD();
+            }
         });
     }
 
     cleanDD(): void {
+        this.newActivity = false;
         $(this.activityDD).find('.active').removeClass('active');
         $(this.activityDD).find('.selected').removeClass('selected');
     }
