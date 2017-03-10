@@ -1137,6 +1137,11 @@ table tr.inactive {
       color: #9F3A38;
     }
   }
+
+  &.hasli-incomplete {
+    background-color: lighten(@primarycolor, 25%);
+  }
+
   &.hasli-success {
     background-color: lighten(@hasliGreen, 25%);
   }

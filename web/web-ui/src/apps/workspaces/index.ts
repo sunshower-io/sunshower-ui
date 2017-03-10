@@ -8,6 +8,7 @@ import {Identifier} from "common/lib/lang";
 import {Workspace as WorkspaceModel} from "./model/workspaces/workspace";
 import {UUID} from "common/lib/utils/uuid";
 import {ChannelSet} from "../../common/lib/events/websockets";
+import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
 
 @autoinject
 export class Workspace {
@@ -17,15 +18,15 @@ export class Workspace {
 
     constructor(public router: Router,
                 private client: HttpClient,
-                private context: ApplicationContext) {
+                private context: ApplicationContext,
+                private incompleteFeature: IncompleteFeature) {
 
     }
 
     attached(): void {
         this.client.fetch('workspaces/head')
             .then(t => t.json() as any)
-            .then(workspaces => this.workspaces = workspaces)
-
+            .then(workspaces => this.workspaces = workspaces);
 
     }
 
