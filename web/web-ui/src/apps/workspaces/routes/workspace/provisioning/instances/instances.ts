@@ -9,7 +9,7 @@ import {DialogService} from "aurelia-dialog";
 import {autoinject} from "aurelia-dependency-injection";
 import {UpdateInstance} from "./update/update-instance";
 import {EventAggregator} from "aurelia-event-aggregator";
-
+import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
 
 @autoinject
 export class Instances {
@@ -35,7 +35,8 @@ export class Instances {
                 private client: HttpClient,
                 private channelSet: ChannelSet,
                 private aggregator:EventAggregator,
-                private dialogService: DialogService
+                private dialogService: DialogService,
+                private incompleteFeature: IncompleteFeature
     ) {
         this.instances = [];
     }

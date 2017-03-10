@@ -11,7 +11,7 @@ export class IncompleteFeature {
         let notice = new PNotify({
             before_open: null,
             context: null,
-            hide: false,
+            hide: true,
             title: 'Incomplete Feature',
             text: 'This feature has not yet been implemented',
             shadow: false,

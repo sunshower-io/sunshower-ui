@@ -821,6 +821,10 @@ body {
   position: relative;
   height: @trheight;
   box-sizing:border-box;
+
+  .ui.dimmer {
+    z-index: 1;
+  }
 }
 
 //refactor to somewhere else for reuse
