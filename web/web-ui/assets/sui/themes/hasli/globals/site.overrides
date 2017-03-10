@@ -697,7 +697,7 @@ body {
   }
 }
 
-.overlay-form {
+.overlay-form, .hasli-form {
   .ui.dividing.header {
     font-weight:normal;
     color: @hasliGrey;
@@ -721,13 +721,14 @@ body {
   }
 
 
-  .field.overlay-field {
+  .field.overlay-field, .field.hasli-field {
     margin: @hasliem 0 !important;
     &>* {
       box-sizing:border-box;
       float:left;
     }
-    .overlay-label {
+
+    .overlay-label, .hasli-label {
       color: @hasliGrey;
       text-align:right;
       padding-right:1em;
@@ -735,7 +736,7 @@ body {
       padding-top:@hasliem/2;
       font-size: 1.2em;
     }
-    .overlay-input {
+    .overlay-input, .hasli-input {
       width:75% !important;
     }
     .overlay-help {

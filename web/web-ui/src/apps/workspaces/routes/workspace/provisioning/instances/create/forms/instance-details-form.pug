@@ -1,34 +1,31 @@
 template
     .ui.hidden.divider
-    form.ui.form
-        .ui.stackable.grid
-            .row.form--field
-                .three.wide.right.aligned.middle.aligned.column
-                    .required.field
-                        label Name
-                .twelve.wide.column
-                    input(type='text', name='name', placeholder='instance name')
-            .row.form--field
-                .three.wide.right.aligned.middle.aligned.column
-                    .required.field
-                        label Cloud
-                .twelve.wide.column
-                    select.ui.fluid.dropdown(value.bind="providerId")
-                        option(value='') Select cloud
-                        option(repeat.for="provider of providers" value="${provider.id}")
-                            | ${provider.name}
-            .row.form--field
-                .three.wide.right.aligned.middle.aligned.column
-                    .field
-                        label Tag
-                .twelve.wide.column
-                    .ui.fluid.multiple.search.selection.dropdown(ref="tagDropdown", value.bind="selectedTags")
-                        input(name='tags', type='hidden')
-                        i.dropdown.icon
-                        .default.text Tags
-                        .menu
-                            .item(data-value='production') Production
-                            .item(data-value='staging') Staging
-                            .item(data-value='dev') Dev
-                            .item(data-value='qa') QA
+    form.ui.form.hasli-form
+        .ui.field.hasli-field
+            .hasli-label.required
+                label Name
+            .hasli-input.ui.input
+                input(type='text', name='name', placeholder='instance name')
+        .ui.field.hasli-field
+            .hasli-label.required
+                label Cloud
+            .hasli-input.ui.input
+                select.ui.fluid.dropdown(value.bind="providerId")
+                    option(value='') Select cloud
+                    option(repeat.for="provider of providers" value="${provider.id}")
+                        | ${provider.name}
+        .ui.field.hasli-field
+            .hasli-label.required
+                label Tag
+            .hasli-input.ui.input
+                .ui.fluid.multiple.search.selection.dropdown(ref="tagDropdown", value.bind="selectedTags")
+                    input(name='tags', type='hidden')
+                    i.dropdown.icon
+                    .default.text Tags
+                    .menu
+                        .item(data-value='production') Production
+                        .item(data-value='staging') Staging
+                        .item(data-value='dev') Dev
+                        .item(data-value='qa') QA
+
     .ui.hidden.divider

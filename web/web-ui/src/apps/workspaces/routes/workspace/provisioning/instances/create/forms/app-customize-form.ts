@@ -10,6 +10,8 @@ export class AppCustomizeForm {
 
     policies: ComputeTemplate[];
 
+    applications: {name: string, id: string, logo: string}[]; //todo make this a real thing
+
     @bindable
     policyID: string = '';
 
