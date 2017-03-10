@@ -8,6 +8,7 @@ import {Application} from "common/model/api/core/application";
 
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {Identifier} from "common/lib/lang";
+import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
 
 @autoinject
 export class Custom {
@@ -21,7 +22,8 @@ export class Custom {
     constructor(
         private parent: Catalog,
         private client:HttpClient,
-        private eventAggregator: EventAggregator
+        private eventAggregator: EventAggregator,
+        private incompleteFeature: IncompleteFeature
     ) {
     }
 
@@ -31,6 +33,10 @@ export class Custom {
             applicationRevision
         );
 
+    }
+
+    open($event: Event) : void {
+        this.incompleteFeature.notify($event);
     }
 
 

@@ -1,16 +1,18 @@
 import {EventAggregator} from "aurelia-event-aggregator";
-import {inject, bindable} from "aurelia-framework";
+import {autoinject, bindable} from "aurelia-framework";
 import * as PNotify from 'pnotify';
 import 'pnotify.callbacks';
+import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
 
 
-@inject(EventAggregator)
+@autoinject
 export class Footer {
 
     @bindable
     errors      : any[];
 
-    constructor(private eventAgg:EventAggregator) {
+    constructor(private eventAgg:EventAggregator,
+                private incompleteFeature:IncompleteFeature) {
         this.errors = [];
         this.eventAgg.subscribe('fetchError', response => this.displayError(response));
     }
