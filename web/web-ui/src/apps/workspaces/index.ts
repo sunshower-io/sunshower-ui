@@ -23,6 +23,10 @@ export class Workspace {
 
     }
 
+    testfunction() : void {
+        console.log('booping from index.ts');
+    }
+
     attached(): void {
         this.client.fetch('workspaces/head')
             .then(t => t.json() as any)
@@ -42,12 +46,12 @@ export class Workspace {
     }
 
     activate(id: any) {
-        console.log("ID", id);
+        //console.log("ID", id);
     }
 
 
     open(id: Identifier): void {
-        console.log("OPEN", id);
+        //console.log("OPEN", id);
         this.context.workspaceRevision.id = id;
         this.client.fetch(`workspaces/${id.id}`)
             .then(t => t.json() as any).then(t => {

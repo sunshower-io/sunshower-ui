@@ -13,7 +13,7 @@ export class IncompleteFeature {
             context: null,
             hide: false,
             title: 'Incomplete Feature',
-            text: 'This feature has not been implemented yet',
+            text: 'This feature has not yet been implemented',
             shadow: false,
             icon: false,
             addclass: 'hasli-incomplete'
@@ -21,8 +21,7 @@ export class IncompleteFeature {
         notice.get().click(() => {
             notice.remove();
         });
-        console.log(closingFunction);
-        //closingFunction();
+        closingFunction();
     }
 
 }
