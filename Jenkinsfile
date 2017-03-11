@@ -228,3 +228,11 @@ def dockerRun(String image, String name, String args, String cmd, boolean rm) {
 def convertBranchName(String name) {
     return name.replaceAll('/', '_')
 }
+
+
+def valueOf(path) {
+    Jenkins
+            .instance
+            .getItemByFullName(path)
+            .getNextBuildNumber() - 1
+}
