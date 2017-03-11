@@ -18,7 +18,7 @@ def gradleTasks = []
 
 // Dependencies
 def wildflyVersion = '1.0.15.Final'
-
+def versionString = "$majorVersion.$minorVersion.$buildNumber.$buildSuffix"
 // TODO: enable integrationTests by default
 if (env.BRANCH_NAME == "master") {
     buildNumber = env.BUILD_NUMBER
