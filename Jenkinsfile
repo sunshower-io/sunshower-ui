@@ -114,24 +114,26 @@ node('docker-registry') {
             stage('Build Container') {
                 sh "docker build -t hasli.io/build:$version.$buildNumber ."
                 sh "chmod +x gradlew"
+
+
+
+                sh "./gradlew uMV -Pprojects=" +
+                        "hasli-schemata.version:${params.HASLI_SCHEMATA_VERSION}" +
+                        ",hasli-test.version:${params.HASLI_TEST_VERSION}" +
+                        ",hasli-common.version:${params.HASLI_COMMON_VERSION}" +
+                        ",hasli-api.version:${params.HASLI_API_VERSION}" +
+                        ",hasli-service.version:${params.HASLI_SERVICE_VERSION}" +
+                        ",hasli-persist.version:${params.HASLI_PERSIST_VERSION}" +
+                        ",hasli-hali.version:${params.HASLI_HAL_VERSION}"
             }
 
             stage('Gradle Build / Test') {
                 try {
-
-//                    dockerRun(
-//                            "hasli.io/build:$version.$buildNumber",
-//                            "$version.$buildNumber",
-//                            "-v `pwd`:/usr/src/ -v ~/.gradle/gradle.properties:/root/.gradle/gradle.properties -v ~/.jspm:/root/.jspm",
-//                            "sh -c '/usr/src/gradlew uMV " +
-//                                    "-Pprojects=hasli-schemata.version:${props.HASLI_SCHEMATA_VERSION}'" +
-//                            ",hasli-test.version:${props.HASLI_TEST.VERSION}",
-//                            true)
                     dockerRun(
                             "hasli.io/build:$version.$buildNumber",
                             "$version.$buildNumber",
                             "-v `pwd`:/usr/src/ -v ~/.gradle/gradle.properties:/root/.gradle/gradle.properties -v ~/.jspm:/root/.jspm",
-                            "sh -c '/usr/src/gradlew uMV -Pprojects=hasli-schemata.version:${props.HASLI_SCHEMATA_VERSION}                       /usr/src/gradlew ${bomTask} && /usr/src/gradlew ${gradleTasks.join(" ")}'",
+                            "sh -c '/usr/src/gradlew ${bomTask} && /usr/src/gradlew ${gradleTasks.join(" ")}'",
                             true)
                 } catch (Exception e) {
                     error "Failed: ${e}"
