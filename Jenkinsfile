@@ -97,6 +97,8 @@ node('docker-registry') {
             ])
     ])
 
+
+
     stage('Checkout') {
         checkout scm
 
