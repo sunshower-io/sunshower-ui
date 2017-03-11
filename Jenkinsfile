@@ -119,19 +119,19 @@ node('docker-registry') {
             stage('Gradle Build / Test') {
                 try {
 
+//                    dockerRun(
+//                            "hasli.io/build:$version.$buildNumber",
+//                            "$version.$buildNumber",
+//                            "-v `pwd`:/usr/src/ -v ~/.gradle/gradle.properties:/root/.gradle/gradle.properties -v ~/.jspm:/root/.jspm",
+//                            "sh -c '/usr/src/gradlew uMV " +
+//                                    "-Pprojects=hasli-schemata.version:${props.HASLI_SCHEMATA_VERSION}'" +
+//                            ",hasli-test.version:${props.HASLI_TEST.VERSION}",
+//                            true)
                     dockerRun(
                             "hasli.io/build:$version.$buildNumber",
                             "$version.$buildNumber",
                             "-v `pwd`:/usr/src/ -v ~/.gradle/gradle.properties:/root/.gradle/gradle.properties -v ~/.jspm:/root/.jspm",
-                            "sh -c '/usr/src/gradlew uMV " +
-                                    "-Pprojects=hasli-schemata.version:${props.HASLI_SCHEMATA_VERSION}'" +
-                            ",hasli-test.version:${props.HASLI_TEST.VERSION}",
-                            true)
-                    dockerRun(
-                            "hasli.io/build:$version.$buildNumber",
-                            "$version.$buildNumber",
-                            "-v `pwd`:/usr/src/ -v ~/.gradle/gradle.properties:/root/.gradle/gradle.properties -v ~/.jspm:/root/.jspm",
-                            "sh -c '/usr/src/gradlew ${bomTask} && /usr/src/gradlew ${gradleTasks.join(" ")}'",
+                            "sh -c '/usr/src/gradlew uMV -Pprojects=hasli-schemata.version:${props.HASLI_SCHEMATA_VERSION}                       /usr/src/gradlew ${bomTask} && /usr/src/gradlew ${gradleTasks.join(" ")}'",
                             true)
                 } catch (Exception e) {
                     error "Failed: ${e}"
