@@ -30,7 +30,8 @@
         color @defaultDuration @defaultEasing
 ;
 @itemFontWeight: normal;
-@itemTextColor: #A8B0BD;
+//@itemTextColor: #A8B0BD;
+@itemTextColor: #6F727F;
 
 
 /* Divider */
@@ -223,15 +224,15 @@
 //@secondaryHoverItemBackground: @transparentBlack;
 //@secondaryHoverItemColor: @selectedTextColor;
 @secondaryHoverItemBackground: none;
-@secondaryHoverItemColor: @selectedTextColor;
+@secondaryHoverItemColor: none;
 
-@secondaryActiveItemBackground: @transparentBlack;
-@secondaryActiveItemColor: @selectedTextColor;
-@secondaryActiveHoverItemBackground: @transparentBlack;
-@secondaryActiveHoverItemColor: @selectedTextColor;
+@secondaryActiveItemBackground: none;
+@secondaryActiveItemColor: @primaryColor;
+@secondaryActiveHoverItemBackground: none;
+@secondaryActiveHoverItemColor: @primaryColor;
 
-@secondaryActiveHoveredItemBackground: @transparentBlack;
-@secondaryActiveHoveredItemColor: @selectedTextColor;
+@secondaryActiveHoveredItemBackground: none;
+@secondaryActiveHoveredItemColor: @primaryColor;
 
 @secondaryHeaderBackground: none transparent;
 @secondaryHeaderBorder: none;

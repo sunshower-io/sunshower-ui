@@ -1,0 +1,70 @@
+template
+    .overlay
+        .ui.container
+            .overlay-close(click.delegate="close()")
+                i.icon.ion-close-round
+                span close
+            h2.ui.center.aligned.grey.header Add New Cloud
+            //.ui.basic.segment
+                h2.ui.header
+                    img.ui.image.small.middle.aligned(src="${provider.icon}" alt="${provider.name}" if.bind="providerSelected")
+                    i.circular.blue.ion-ios-cloud-outline.icon.circular--icon.circular--icon_blue(if.bind="!providerSelected")
+                    .content
+                        |  New Cloud
+            //.ui.divider(style="margin-bottom:16px")
+            template(if.bind="!providerSelected")
+                .overlay-action-menu
+                    .ui.small.icon.input
+                        input(type='text', placeholder='Search')
+                        i.search.icon
+                    .ui.small.basic.button.primary
+                        | Recent
+                        i.dropdown.icon
+                    span.overlay-icons
+                        i.icon.list.layout.large
+                        i.icon.grid.layout.large
+                .ui.hidden.divider
+                .overlay-cards.ui.four.stackable.cards
+                    .card.clickable(
+                        repeat.for="provider of providers",
+                        click.delegate="selectProvider(provider)"
+                        )
+                        img.overlay-card--image(src="${provider.icon}" alt="${provider.name}")
+                        .overlay-card--label ${provider.name}
+
+            template(if.bind="providerSelected")
+                .ui.form.ui.two.column.centered.grid.ui.form.overlay-form
+
+                    .row
+                        h4.ui.dividing.header.column Details
+                    .row
+                        .column
+                            .ui.field.overlay-field
+                                .overlay-label
+                                    label Name
+                                .overlay-input.ui.input
+                                    input(type="text" value.bind="provider.name & validate")
+                            .ui.field.overlay-field
+                                .overlay-label
+                                    label Description
+                                .overlay-input.ui.input
+                                    textarea(value.bind="provider.description")
+                            .ui.field.overlay-field(if.bind="provider.key == 'aws'")
+                                .overlay-label
+                                    label Region
+                                .overlay-input.ui.input
+                                    .ui.fluid.search.selection.dropdown(ref="region")
+                                        input(type="hidden" value.bind="provider.awsRegion & validate")
+                                        i.dropdown.icon
+                                        .default.text Select Region
+                                        .menu
+                                            .item(repeat.for="region of regions", data-value="${region.name}")
+                                                | ${region.region} (${region.name})
+
+
+                    .field
+                        button.ui.pull-right.button.primary(
+                            type="submit",
+                            click.delegate="saveProvider()"
+                        )
+                            | Save Provider

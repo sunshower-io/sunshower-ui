@@ -12,6 +12,9 @@ publishing {
 configurations {
     site
 
+    earlib.exclude group: 'org.infinispan'
+    earlib.exclude group: 'org.hibernate'
+
     earlib.exclude group: 'dom4j'
     earlib.exclude group: 'org.junit'
 }
@@ -20,16 +23,16 @@ configurations {
 
 
 dependencies {
-    earlib "io.hasli.api:schemata"
+    earlib "io.hasli.schemata:schemata"
     earlib "io.hasli.api:core-api"
     earlib "io.hasli.api:common-api"
     earlib "io.hasli.api:security-api"
-    earlib "io.hasli.api:vault-api"
-    earlib "io.hasli.search:search-es"
-    earlib "io.hasli.hfs:hfs-service"
-    earlib "io.hasli.service:service-vault"
-    earlib "io.hasli.hal:hal-docker"
-    earlib "io.hasli.hal:hal-service"
+//    earlib "io.hasli.api:vault-api"
+//    earlib "io.hasli.search:search-es"
+//    earlib "io.hasli.hfs:hfs-service"
+//    earlib "io.hasli.service:service-vault"
+//    earlib "io.hasli.hal:hal-docker"
+//    earlib "io.hasli.hal:hal-service"
     earlib "io.hasli.service:service-csp"
     earlib "io.hasli.service:service-core"
     earlib "io.hasli.service:service-security"

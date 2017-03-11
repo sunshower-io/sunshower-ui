@@ -20,7 +20,8 @@
 @padding: 0em;
 @width: 290px;
 @borderWidth: 1px;
-@borderShadow: 0px 0px 0px @borderWidth @solidBorderColor;
+//@borderShadow: 0px 0px 0px @borderWidth @solidBorderColor;
+@borderShadow: 0px 0px 0px @borderWidth #F8F9FB;
 @boxShadow:
   @shadowBoxShadow,
   @borderShadow

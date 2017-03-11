@@ -17,8 +17,9 @@ import {MenuItem} from 'common/elements/menu';
 import Menu from 'common/elements/menu';
 import {Breadcrumb} from "./breadcrumb/breadcrumb";
 import {PreferenceManager} from "storage/application-state";
+import {Workspaces} from "apps/workspaces/routes/workspace/index";
 
-@inject(Menu, PreferenceManager)
+@inject(Workspaces, Menu, PreferenceManager)
 export class Draftboard {
 
     public router: Router;
@@ -40,7 +41,11 @@ export class Draftboard {
         rightToggled: true
     };
 
-    constructor(private menu : Menu, private preferenceManager : PreferenceManager) {
+    constructor(
+        private parent: Workspaces,
+        private menu : Menu,
+        private preferenceManager : PreferenceManager
+    ) {
         this.preferences = this.preferenceManager.get(
             Draftboard.draftboardPath,
             Draftboard.draftboardDefaults
@@ -62,7 +67,8 @@ export class Draftboard {
     }
 
     attached() : void {
-
+        console.log("frap");
+        this.parent.setMenuVisible(false);
     }
 
     set(child: NavigationAware): void {

@@ -23,12 +23,13 @@
     "aurelia-templating": "github:aurelia/templating",
     "aurelia-templating-binding": "github:aurelia/templating-binding",
     "aurelia-templating-resources": "github:aurelia/templating-resources",
-    "aurelia-templating-router": "github:aurelia/templating-router"
+    "aurelia-templating-router": "github:aurelia/templating-router",
+    "aurelia-validation": "github:aurelia/validation#1.0.0-beta.1.0.1"
   },
   "globalDevDependencies": {},
   "globalDependencies": {
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
-    "url": "github:aurelia/fetch-client/doc/url.d.ts#bbe0777ef710d889a05759a65fa2c9c3865fc618",
-    "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20160524142046"
+    "url-search-params-typing": "github:RomkeVdMeulen/URLSearchParams",
+    "whatwg-streams": "registry:dt/whatwg-streams#0.0.0+20161214010628"
   }
 }

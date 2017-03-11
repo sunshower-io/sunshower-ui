@@ -40,6 +40,11 @@ export class RightSidebar extends Sidebar {
         }]);
         this.activeTop = this.componentsTop[0];
         this.activeBottom = this.componentsBottom[0];
+        this.componentsBottom[0].active = true;
+    }
+
+    attached() : void {
+
     }
 
 

@@ -48,14 +48,14 @@ export class ApplicationDeployment extends
     applicationId: string;
     applicationName: string;
 
-    static readonly editors: Map<string, ElementEditor<ApplicationDeployment>> = ApplicationDeployment.initialize();
-
     static initialize():Map<string, ElementEditor<ApplicationDeployment>> {
         let result = new Map<string, ElementEditor<ApplicationDeployment>>();
         result['basic'] = BasicApplicationDeploymentEditor;
         result['full'] =  FullApplicationDeploymentEditor;
         return result;
     }
+
+    static readonly editors: Map<string, ElementEditor<ApplicationDeployment>> = ApplicationDeployment.initialize();
 
     constructor() {
         super();

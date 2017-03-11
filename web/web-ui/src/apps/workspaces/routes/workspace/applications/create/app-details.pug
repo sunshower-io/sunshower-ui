@@ -1,0 +1,63 @@
+//
+   Created by dustinlish on 2/19/17.
+template
+    .overlay.au-animate
+        .ui.container
+            .ui.secondary.menu
+                .right.menu
+                    a.item
+                        i.huge.ion-ios-close-empty.icon(click.delegate="cancel()")
+            .ui.middle.aligned.center.aligned.grid
+                .two.column.centered.row
+                    .column
+                        h3.ui.center.aligned.header
+                            | CREATE NEW APPLICATION
+                        .ui.hidden.divider
+                        .ui.hidden.divider
+
+                        .fluid.field
+                            .ui.fluid.transparent.input
+                                input.overlay-input-centered(
+                                type='text'
+                                placeholder='Add application name'
+                                value.bind="name & validate"
+                                )
+                            .ui.divider
+                        .big-divider
+
+                        .ui.basic.center.aligned.segment
+                            .fluid.field
+                                h1.ui.center.aligned.header(ref="imageUploader")
+                                    label.clickable
+                                        input.upload-box__file(type="file" name="image" ref="imageInput" files.bind="image & validate")
+                                        i.circular.blue.ion-image.icon.circular--icon
+                                        span(style="margin-left:1em;") Add Photo
+                                        .upload-box__file-label
+                        .big-divider
+
+
+                        .fluid.field.ui.basic.center.aligned.segment
+                            //todo center align menu
+                            .ui.secondary.pointing.menu
+                                .item.clickable(class="${!appType ? 'active' : ''}" click.delegate="switchTab(false)") Upload Application
+                                .item.clickable(class="${appType ? 'active' : ''}" click.delegate="switchTab(true)") Select Template
+                            .ui.hidden.divider
+                            h1.ui.center.aligned.header(ref="fileUploader" if.bind="!appType")
+                                label.clickable
+                                    input.upload-box__file(type="file" name="file" ref="fileInput" files.bind="file & validate")
+                                    i.circular.blue.ion-ios-folder.icon.circular--icon
+                                    span(style="margin-left:1em;") Upload Application
+                                    .upload-box__file-label
+                            .ui.four.link.cards(if.bind="appType")
+                                //todo make selecting a card work
+                                .new-app_type.card.hvr-glow(repeat.for="template of templates")
+                                    .content
+                                        .header
+                                            img(src="${template.icon}")
+                                        .description
+                                            | ${template.description}
+                        .big-divider
+
+                        .ui.basic.center.aligned.segment
+                            button.ui.secondary.button(click.delegate="create()")
+                                | Get Started

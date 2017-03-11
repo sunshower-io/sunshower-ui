@@ -32,4 +32,8 @@ export class ProfileDropdown {
         this.authHolder.clear();
         window.location.reload();
     }
+
+    openSettings() {
+        location.assign('#/admin');
+    }
 }

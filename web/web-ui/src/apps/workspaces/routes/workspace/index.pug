@@ -1,26 +1,22 @@
 template
-    .ui.hidden.divider
-    .ui.container
-        .ui.items
-            .item
-                .ui.small.image
-                    img(src='styles/themes/hasli/assets/images/logos/aws-logo.svg')
-                .middle.aligned.content
-                    a.header Workspace Name
-                    .meta
-                        span description
-                    .description
-                        p
-                    .extra
-                        | Last Updated: February 11th, 2017
+    template(if.bind="mode === 'partial'")
         .ui.hidden.divider
-        .ui.secondary.pointing.menu
-            a.item(
-                repeat.for='row of router.navigation',
-                class="${row.isActive ? 'active' : ''}"
-                href.bind='row.href'
-            )
-                | ${row.title}
-    .ui.fluid.container.workspace--content-view
+        .ui.container
+            .ui.items
+                .item
+                    .ui.workspace-image.image
+                        img(src='/hasli/api/v1/files/${workspace.picture.id}')
+                    .middle.aligned.content
+                        a.header ${workspace.name}
+                        .extra
+                            | ${workspace.workspace.updated}
+            .ui.secondary.pointing.menu
+                a.item(
+                    repeat.for='row of router.navigation',
+                    class="${row.isActive ? 'active' : ''}"
+                    href.bind='row.href'
+                )
+                    | ${row.title}
+    .ui.fluid.container.workspace--content-view.au-animate
         .ui.fitted.divider
         router-view

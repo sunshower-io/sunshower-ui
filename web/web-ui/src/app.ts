@@ -22,25 +22,35 @@ export class App {
     public configureRouter(config: RouterConfiguration, router: Router) {
         config.title = 'Hasli.io';
         config.addPipelineStep('authorize', new SecurityStep(this.tokenHolder));
-
-        this.router = router;
-        config.title = '';
         config.map([{
             route: '',
             redirect: 'workspaces'
         }, {
-                route: 'workspaces',
-                name: 'workspaces',
-                moduleId: 'apps/workspaces/index',
-                nav: false,
-                title: 'Workspaces',
-            },
+            route: 'workspaces',
+            name: 'workspaces',
+            moduleId: 'apps/workspaces/index',
+            nav: false,
+            title: 'Workspaces',
+        }, {
+            route: 'workspace/:id',
+            name: 'workspace',
+            title: 'Workspace',
+            moduleId: 'apps/workspaces/routes/workspace/index',
+            nav: false
+        }, {
+            route: 'catalog',
+            name: 'catalog',
+            moduleId: 'apps/catalog/index',
+            nav: false,
+            title: 'Catalog',
+        },
         ]);
 
         config.mapUnknownRoutes({
             route: 'workspaces',
             redirect: 'workspaces'
         });
+
         this.router = router;
     }
 

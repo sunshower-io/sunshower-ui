@@ -1,0 +1,180 @@
+//
+   Created by dustinlish on 2/20/17.
+template
+    .ui.hidden.divider
+    .ui.grid
+        .four.wide.column
+            .ui.grid
+                .row
+                    .column
+                        .ui.segment
+                            .ui.text.menu
+                                .item
+                                    | Details
+                                .right.menu
+                                    a.item
+                                        i.big.ion-ios-gear-outline.icon
+                            .segment-header_divider
+                .row
+                    .column
+                        .ui.segment
+                            .ui.text.menu.summary-segment_header
+                                .item
+                                    | Requirements
+                                .right.menu
+                                    span.item.ui.icon.top.right.pointing.dropdown(ref="requirementDD")
+                                        i.big.ion-ios-gear-outline.icon
+                                        .menu
+                                            .item(click.delegate="openPopup('deployer')") Deployer
+                                            .item(click.delegate="openPopup('nodeTemplate')")  Node Template
+                                            .item(click.delegate="openPopup('applications')")  Applications
+                                            .item(click.delegate="openPopup('operatingSystem')")  Operating System
+                                            .item(click.delegate="openPopup('service')")  Service
+                                            .item(click.delegate="openPopup('instances')")  Instances
+
+                            .segment-header_divider
+                            .ui.horizontal.list
+                                .item(if.bind="deployer && deployer != ''")
+                                    .ui.basic.tiny.primary.button
+                                        | ${deployer}
+                                .item(if.bind="os && os != ''")
+                                    .ui.basic.tiny.primary.button
+                                        | ${os}
+                                .item
+                                    .ui.basic.tiny.primary.button
+                                        | Primary Hub
+                                .item
+                                    .ui.basic.tiny.primary.button
+                                        | UIM
+                                //todo write out buttons based on template
+                .row
+                    .column
+                        .ui.segment
+                            .ui.text.menu.summary-segment_header
+                                .item
+                                    | Contributors
+                                .right.menu
+                                    a.item
+                                        i.big.ion-ios-gear-outline.icon
+                            .segment-header_divider
+        .twelve.wide.column
+            .ui.segment
+                h1.ui.header Readme
+                div(ref="summary")
+
+
+
+    .ui.long.modal(ref="requirementPopup")
+        template(if.bind="popupState == 'deployer'")
+            .header Select Deployer
+            .content
+                .ui.link.centered.four.cards
+                    //todo unjack styles
+                    .card(click.delegate="selectDeployer('HFS')")
+                        .image
+                            img(src="styles/themes/hasli/assets/images/logos/hasli-icon.svg")
+                    .card(click.delegate="selectDeployer('Docker')")
+                        .image
+                            img(src="styles/themes/hasli/assets/images/logos/docker-icon.svg")
+        template(if.bind="popupState == 'nodeTemplate'")
+            .header Node Template
+            .content
+                .ui.secondary.pointing.menu
+                    .item.clickable(class="${!selectingTemplate ? 'active' : ''}" click.delegate="toggleTemplate(false)") Create New Template
+                    .item.clickable(class="${selectingTemplate ? 'active' : ''}" click.delegate="toggleTemplate(true)") Select Existing Template
+                .ui.hidden.divider
+                .ui.form.overlay-form(if.bind="!selectingTemplate")
+                    .field.overlay-field
+                        .overlay-label
+                            label Template Name
+                        .ui.input.overlay-input
+                            input(type="text" name="name")
+                    .field.overlay-field
+                        .overlay-label
+                            label Description
+                        .ui.input.overlay-input
+                            textarea(name="description", rows="2")
+                    .field.overlay-field
+                        .overlay-label
+                            label Operating System
+                        .ui.input.overlay-input
+                            .ui.fluid.search.selection.dropdown(style="line-height: 24px;" ref="list")
+                                input(type="hidden" name="operatingSystem")
+                                i.dropdown.icon
+                                .default.text Select OS
+                                .menu
+                                    .item(repeat.for="os of osService.list()" data-value="${os.id}")
+                                        image.ui.image(src='${os.icon}')
+                                        | ${os.name}
+                    .field.overlay-field
+                        .overlay-label
+                            label Instance Count
+                        .ui.input.overlay-input
+                            input(
+                            type="number"
+                            name="instanceCount"
+                            min="0"
+                            step="1"
+                            )
+                    .field.overlay-field
+                        .overlay-label
+                            label CPU
+                        .ui.input.overlay-input
+                            input(
+                            type="number"
+                            name="cpu"
+                            min="0"
+                            step="1"
+                            )
+                    .field.overlay-field
+                        .overlay-label
+                            label Disk
+                        .ui.input.overlay-input
+                            input(
+                            type="text"
+                            name="disk"
+                            )
+                    .field.overlay-field
+                        .overlay-label
+                            label Memory
+                        .ui.input.overlay-input
+                            input(
+                            type="text"
+                            name="memory"
+                            )
+
+                    button.ui.pull-right.primary.button(click.delegate="saveNodeTemplate()") Save
+                    //based on apps/workspaces/resources/editors/infrastructure-node/basic
+                .ui.link.centered.four.cards(if.bind="selectingTemplate")
+                    .card(repeat.for="template of templates" click.delegate="selectNodeTemplate(template)")
+                        //.image
+                        .content ${template.name}
+        template(if.bind="popupState == 'applications'")
+            .header Applications
+            .content
+                .ui.link.centered.four.cards
+                    .card(repeat.for="application of applications" click.delegate="selectApplication(application)")
+                        //.image
+                        .content ${application.name}
+        template(if.bind="popupState == 'operatingSystem'")
+            .header Operating System
+            .content
+                .ui.link.centered.four.cards
+                    .card(repeat.for="os of osService.list()" click.delegate="selectOS(os.name)")
+                        .content
+                            img.ui.huge.avatar.image(src="${os.icon}")
+                            | ${os.name}
+        template(if.bind="popupState == 'service'")
+            .header Service
+            .content
+                .ui.form.overlay-form
+                    .field
+                        textarea
+                    button.ui.button.primary.pull-right(click.delegate="saveService()") Save
+        template(if.bind="popupState == 'instances'")
+            .header Instances
+            .content
+                .ui.link.centered.four.cards
+                    .card(repeat.for="instance of instances" click.delegate="selectInstance(instance)")
+                        //.image
+                        .content ${instance.name}

@@ -1,0 +1,23 @@
+//
+   Created by dustinlish on 2/22/17.
+
+template
+    .ui.basic.segment
+        .ui.text.menu
+            .item
+                h4.ui.header
+                    | All Files
+            .right.menu
+                a.item
+                    | + NEW DIRECTORY
+                a.item
+                    | + NEW FILE
+        table.ui.very.basic.files.single.line.unstackable.selectable.table
+            tbody
+                tr(repeat.for="file of files")
+                    td
+                        i(class="${style(file)}")
+                        a(href='#')
+                            | ${name(file)}
+                    td Clean up logic in onComplete
+                    td.right.aligned 5 days ago

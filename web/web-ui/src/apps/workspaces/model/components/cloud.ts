@@ -36,16 +36,16 @@ export class VirtualCloud extends
         EditableElement<VirtualCloud, ElementEditor<VirtualCloud>>
 {
 
-
-    static readonly editors: Map<string, ElementEditor<VirtualCloud>> = VirtualCloud.initialize();
-
-
     static initialize():Map<string, ElementEditor<VirtualCloud>> {
         let result = new Map<string, ElementEditor<VirtualCloud>>();
         result['basic'] = BasicVirtualCloudEditor;
         result['full'] =  FullVirtualCloudEditor;
         return result;
     }
+
+
+    static readonly editors: Map<string, ElementEditor<VirtualCloud>> = VirtualCloud.initialize();
+
 
 
 

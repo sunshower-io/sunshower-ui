@@ -7,11 +7,11 @@ template(bindable="router")
         i.large.inverted.ion-person.icon
         i.inverted.dropdown.icon
         .menu
-            .user.header
+            .item
                 i.large.ion-image.icon
                 | ${user.username}
             .divider
-            .item(click.delegate="router.navigate('#/main/settings')")
+            .item(click.delegate="openSettings()")
                 i.ion-ios-settings-strong.icon
                 | Account Settings
             .item

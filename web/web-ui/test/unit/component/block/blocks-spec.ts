@@ -2,8 +2,8 @@ import {} from 'jasmine';
 import any = jasmine.any;
 import 'aurelia-polyfills';
 import {Container} from "aurelia-framework";
-import {BlockManager} from 'component/blocks/block';
-import {BlockType, BlockElement} from "component/model/block";
+import {BlockManager} from 'apps/workspaces/services/blocks';
+import {BlockType, BlockElement} from "apps/workspaces/model/blocks";
 
 
 describe('a block manager', () => {

@@ -17,13 +17,17 @@
     "baseUrl": "./src",
     "paths": {
 //      "src/*": ["src/*"]
-      "*" : ["*"]
+      "*" : ["*"],
+      "rxjs/*": [
+        "../jspm_packages/npm/rxjs@5.2.0/*"
+      ]
     }
   },
   "filesGlob": [
     "!./typings/globals/angular-protractor/**",
     "./src/**/*.ts",
 //    "./test/**/*.ts",
+//    "./jspm_packages/npm/@reactivex/rxjs@5.2.0/dist/**/*.d.ts",
     "!./node_modules/**/*.d.ts",
     "./typings/index.d.ts",
     "./tsd/**/*.d.ts",
