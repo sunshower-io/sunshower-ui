@@ -186,15 +186,6 @@ node('docker-registry') {
     stage('update-versions') {
         if(env.BRANCH_NAME == 'master') {
             timeout(time: 60, unit: 'MINUTES') {
-
-                sh "./gradlew uMV -Pprojects=" +
-                        "hasli-schemata.version:${params.HASLI_SCHEMATA_VERSION}" +
-                        ",hasli-test.version:${params.HASLI_TEST_VERSION}" +
-                        ",hasli-common.version:${params.HASLI_COMMON_VERSION}" +
-                        ",hasli-api.version:${params.HASLI_API_VERSION}" +
-                        ",hasli-service.version:${params.HASLI_SERVICE_VERSION}" +
-                        ",hasli-hal.version:${params.HASLI_HAL_VERSION}" +
-                        ",hasli-persist.version:${params.HASLI_PERSIST_VERSION}"
                 withCredentials([[
                                          $class          : 'UsernamePasswordMultiBinding',
                                          credentialsId   : '7064ef40-7456-45ec-a543-32e5c68cca91',
@@ -203,7 +194,7 @@ node('docker-registry') {
 
                     sh "git tag -a release-${versionString} -m 'Updating upstream versions'"
 
-                    sh("git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/hasli-projects/hasli-hal --tags")
+                    sh("git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/hasli-projects/hasli-ui --tags")
 
                 }
             }
