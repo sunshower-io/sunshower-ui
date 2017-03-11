@@ -114,6 +114,7 @@ node('docker-registry') {
             stage('Build Container') {
                 sh "docker build -t hasli.io/build:$version.$buildNumber ."
                 sh "chmod +x gradlew"
+                sh "mvn clean install -f bom ${props.join(' ')}"
             }
 
             stage('Gradle Build / Test') {
@@ -122,7 +123,7 @@ node('docker-registry') {
                             "hasli.io/build:$version.$buildNumber",
                             "$version.$buildNumber",
                             "-v `pwd`:/usr/src/ -v ~/.gradle/gradle.properties:/root/.gradle/gradle.properties -v ~/.jspm:/root/.jspm",
-                            "sh -c '/usr/src/gradlew ${bomTask} ${props.join(' ')} && /usr/src/gradlew ${gradleTasks.join(" ")}'",
+                            "sh -c '/usr/src/gradlew ${bomTask} && /usr/src/gradlew ${gradleTasks.join(" ")}'",
                             true)
                 } catch (Exception e) {
                     error "Failed: ${e}"
