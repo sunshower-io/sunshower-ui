@@ -1,4 +1,5 @@
 import {User} from 'common/model/security'
+import {ApplicationRevision} from "../../../../apps/workspaces/model/application/application";
 
 
 export class Application {
@@ -20,9 +21,8 @@ export class Application {
     instanceStarted:Date;
     administrators: User[];
 
-    // constructor() {
-    //     this.administrators = [];
-    // }
+    revisions   ?: ApplicationRevision;
+
 
     constructor(logo: string, name: string, version: string, status: string, instances: number, containers: number, modified: string, user: User) {
         this.logo = logo;

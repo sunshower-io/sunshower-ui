@@ -11,7 +11,7 @@ export class IncompleteFeature {
         let notice = new PNotify({
             before_open: null,
             context: null,
-            hide: true,
+            hide: false,
             title: 'Incomplete Feature',
             text: 'This feature has not yet been implemented',
             shadow: false,
@@ -21,7 +21,9 @@ export class IncompleteFeature {
         notice.get().click(() => {
             notice.remove();
         });
-        closingFunction();
+        if (closingFunction) {
+            closingFunction();
+        }
     }
 
 }

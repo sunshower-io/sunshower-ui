@@ -20,7 +20,7 @@ template
     .ui.hidden.divider
     h4.ui.dividing.header Configure Applications
     .ui.fluid.styled.accordion
-        template(repeat.for="application of applications")
+        template(repeat.for="application of wizard.applications")
             .active.title
                 i.dropdown.icon
                 img.ui.tiny.image(src='${application.logo}')

@@ -1,5 +1,4 @@
-import {RouterConfiguration} from "aurelia-router";
-import {Router} from "aurelia-router";
+import {Router, RouterConfiguration} from "aurelia-router";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
 import {autoinject} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
@@ -8,7 +7,9 @@ import {Subscription, EventAggregator} from "aurelia-event-aggregator";
 import {ApplicationRevision} from "apps/workspaces/model/application/application";
 import {UUID} from "common/lib/utils/uuid";
 import {ChannelSet} from "common/lib/events/websockets";
-import {Activities} from "../../../../../../../common/resources/custom-elements/nav-bar/activity-monitor-dropdown";
+import {Activities} from "common/resources/custom-elements/nav-bar/activity-monitor-dropdown";
+import {Application} from "common/model/api/core/application";
+
 @autoinject
 export class CreateInstanceWizard {
 
@@ -22,13 +23,17 @@ export class CreateInstanceWizard {
     providerId: string;
     credential: CredentialSecret = null;
 
+    //todo save applications selected in catalog into this array
+    applications: Application[];
+
+
     loading: boolean;
 
     constructor(private client: HttpClient,
                 private workspace: Workspace,
                 private channels: ChannelSet,
                 private eventAggregator: EventAggregator) {
-
+        this.applications = [];
     }
 
 
@@ -46,8 +51,9 @@ export class CreateInstanceWizard {
     }
 
     select(revision: any): void {
+        this.applications.push(revision.application);
         this.applicationRevision = revision;
-        this.router.navigate('details');
+        //this.router.navigate('details');
     }
 
 

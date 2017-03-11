@@ -17,10 +17,10 @@ template
             .column
                 h4.ui.dividing.header
                     | Applications
-        .two.column.row
-            .column
+        .two.column.grid
+            .column(repeat.for="application of wizard.applications")
                 .ui.tiny.image
-                    img(src='styles/themes/hasli/assets/images/logos/nodejs-logo.svg')
+                    img(src='${application.logo}')
                 .ui.items
                     .item
                         .content
@@ -28,19 +28,6 @@ template
                                 span Details
                             .description
                                 p
-                                    | Name: Node.js
-                                P
-                                    | Size: t2.micro 1 cpu, 1 gb memory
-            .column
-                .ui.tiny.image
-                    img(src='styles/themes/hasli/assets/images/logos/mysql-logo.svg')
-                .ui.items
-                    .item
-                        .content
-                            .meta
-                                span Details
-                            .description
-                                p
-                                    | Name: MySql
+                                    | Name: ${application.name}
                                 P
                                     | Size: t2.micro 1 cpu, 1 gb memory

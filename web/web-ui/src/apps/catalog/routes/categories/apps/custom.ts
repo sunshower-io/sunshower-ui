@@ -28,6 +28,7 @@ export class Custom {
     }
 
     select(applicationRevision:any) : void {
+        //todo make its button look selected
         this.eventAggregator.publish(
             'application::selected',
             applicationRevision
