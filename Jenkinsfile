@@ -22,6 +22,7 @@ def versionString = "$majorVersion.$minorVersion.$buildNumber.$buildSuffix"
 // TODO: enable integrationTests by default
 if (env.BRANCH_NAME == "master") {
     buildNumber = env.BUILD_NUMBER
+    bomTask = "releaseBom -Pversion=$majorVersion.$minorVersion.$buildNumber.$buildSuffix"
     gradleTasks = [
             "installEnvironment",
             "clean",
@@ -100,16 +101,15 @@ node('docker-registry') {
 
     stage('Checkout') {
         checkout scm
-        gradleTasks.add("-Phasli-schemata.version=${params.HASLI_SCHEMATA_VERSION}")
-        gradleTasks.add("-Phasli-persist.version=${params.HASLI_PERSIST_VERSION}")
-        gradleTasks.add("-Phasli-test.version=${params.HASLI_TEST_VERSION}")
-        gradleTasks.add("-Phasli-api.version=${params.HASLI_API_VERSION}")
-        gradleTasks.add("-Phasli-service.version=${params.HASLI_SERVICE_VERSION}")
-        gradleTasks.add("-Phasli-common.version=${params.HASLI_COMMON_VERSION}")
-        gradleTasks.add("-Phasli-hal.version=${params.HASLI_HAL_VERSION}")
+        props = []
+        props.add("-Phasli-schemata.version=${params.HASLI_SCHEMATA_VERSION}")
+        props.add("-Phasli-persist.version=${params.HASLI_PERSIST_VERSION}")
+        props.add("-Phasli-test.version=${params.HASLI_TEST_VERSION}")
+        props.add("-Phasli-api.version=${params.HASLI_API_VERSION}")
+        props.add("-Phasli-service.version=${params.HASLI_SERVICE_VERSION}")
+        props.add("-Phasli-common.version=${params.HASLI_COMMON_VERSION}")
+        props.add("-Phasli-hal.version=${params.HASLI_HAL_VERSION}")
 
-        mvnVersions = "-Pversion=$majorVersion.$minorVersion.$buildNumber.$buildSuffix ${gradleTasks.join(' ')}"
-        bomTask = "releaseBom $mvnVersions"
         timeout(time: 60, unit: 'MINUTES') {
             stage('Build Container') {
                 sh "docker build -t hasli.io/build:$version.$buildNumber ."
@@ -122,7 +122,7 @@ node('docker-registry') {
                             "hasli.io/build:$version.$buildNumber",
                             "$version.$buildNumber",
                             "-v `pwd`:/usr/src/ -v ~/.gradle/gradle.properties:/root/.gradle/gradle.properties -v ~/.jspm:/root/.jspm",
-                            "sh -c '/usr/src/gradlew ${bomTask} && /usr/src/gradlew ${gradleTasks.join(" ")}'",
+                            "sh -c '/usr/src/gradlew ${bomTask} ${props.join(' ')} && /usr/src/gradlew ${gradleTasks.join(" ")} ${props.join(' ')}'",
                             true)
                 } catch (Exception e) {
                     error "Failed: ${e}"
