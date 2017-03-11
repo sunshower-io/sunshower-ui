@@ -124,7 +124,7 @@ node('docker-registry') {
                         ",hasli-api.version:${params.HASLI_API_VERSION}" +
                         ",hasli-service.version:${params.HASLI_SERVICE_VERSION}" +
                         ",hasli-persist.version:${params.HASLI_PERSIST_VERSION}" +
-                        ",hasli-hali.version:${params.HASLI_HAL_VERSION}"
+                        ",hasli-hal.version:${params.HASLI_HAL_VERSION}"
             }
 
             stage('Gradle Build / Test') {
