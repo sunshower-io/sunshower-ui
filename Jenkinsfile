@@ -101,6 +101,13 @@ node('docker-registry') {
 
     stage('Checkout') {
         checkout scm
+        gradleTasks.add("-Phasli-schemata.version=${params.HASLI_SCHEMATA_VERSION}")
+        gradleTasks.add("-Phasli-persist.version=${params.HASLI_PERSIST_VERSION}")
+        gradleTasks.add("-Phasli-test.version=${params.HASLI_TEST_VERSION}")
+        gradleTasks.add("-Phasli-api.version=${params.HASLI_API_VERSION}")
+        gradleTasks.add("-Phasli-service.version=${params.HASLI_SERVICE_VERSION}")
+        gradleTasks.add("-Phasli-common.version=${params.HASLI_COMMON_VERSION}")
+        gradleTasks.add("-Phasli-hal.version=${params.HASLI_HAL_VERSION}")
 
         timeout(time: 60, unit: 'MINUTES') {
             stage('Build Container') {
