@@ -102,13 +102,13 @@ node('docker-registry') {
     stage('Checkout') {
         checkout scm
         props = []
-        props.add("-Phasli-schemata.version=${params.HASLI_SCHEMATA_VERSION}")
-        props.add("-Phasli-persist.version=${params.HASLI_PERSIST_VERSION}")
-        props.add("-Phasli-test.version=${params.HASLI_TEST_VERSION}")
-        props.add("-Phasli-api.version=${params.HASLI_API_VERSION}")
-        props.add("-Phasli-service.version=${params.HASLI_SERVICE_VERSION}")
-        props.add("-Phasli-common.version=${params.HASLI_COMMON_VERSION}")
-        props.add("-Phasli-hal.version=${params.HASLI_HAL_VERSION}")
+        props.add("-Dhasli-schemata.version=${params.HASLI_SCHEMATA_VERSION}")
+        props.add("-Dhasli-persist.version=${params.HASLI_PERSIST_VERSION}")
+        props.add("-Dhasli-test.version=${params.HASLI_TEST_VERSION}")
+        props.add("-Dhasli-api.version=${params.HASLI_API_VERSION}")
+        props.add("-Dhasli-service.version=${params.HASLI_SERVICE_VERSION}")
+        props.add("-Dhasli-common.version=${params.HASLI_COMMON_VERSION}")
+        props.add("-Dhasli-hal.version=${params.HASLI_HAL_VERSION}")
 
         timeout(time: 60, unit: 'MINUTES') {
             stage('Build Container') {
