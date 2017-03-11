@@ -1,0 +1,21 @@
+[submodule "hasli-ui"]
+	path = hasli-ui
+	url = git@github.com:hasli-projects/hasli-ui.git
+[submodule "hasli-schemata"]
+	path = hasli-schemata
+	url = git@github.com:hasli-projects/hasli-schemata.git
+[submodule "hasli-persist"]
+	path = hasli-persist
+	url = git@github.com:hasli-projects/hasli-persist.git
+[submodule "hasli-api"]
+	path = hasli-api
+	url = git@github.com:hasli-projects/hasli-api.git
+[submodule "hasli-service"]
+	path = hasli-service
+	url = git@github.com:hasli-projects/hasli-service.git
+[submodule "hasli-hal"]
+	path = hasli-hal
+	url = git@github.com:hasli-projects/hasli-hal.git
+[submodule "hasli-sdk"]
+	path = hasli-sdk
+	url = git@github.com:hasli-projects/hasli-sdk.git

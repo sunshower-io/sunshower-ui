@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/barometer.iml" filepath="$PROJECT_DIR$/.idea/modules/barometer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/barometer-core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/barometer-core.iml" group="core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/barometer-core_main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/barometer-core_main.iml" group="core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/barometer-core_test.iml" filepath="$PROJECT_DIR$/.idea/modules/core/barometer-core_test.iml" group="core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/barometer-modules.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/barometer-modules.iml" group="modules" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/barometer-modules_main.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/barometer-modules_main.iml" group="modules" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/barometer-modules_test.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/barometer-modules_test.iml" group="modules" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/providers/barometer-providers.iml" filepath="$PROJECT_DIR$/.idea/modules/providers/barometer-providers.iml" group="providers" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/providers/barometer-providers_main.iml" filepath="$PROJECT_DIR$/.idea/modules/providers/barometer-providers_main.iml" group="providers" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/providers/barometer-providers_test.iml" filepath="$PROJECT_DIR$/.idea/modules/providers/barometer-providers_test.iml" group="providers" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-api.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/audit-api/hasli-api-audit-api.iml" filepath="$PROJECT_DIR$/.idea/modules/audit-api/hasli-api-audit-api.iml" group="audit-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/audit-api/hasli-api-audit-api_main.iml" filepath="$PROJECT_DIR$/.idea/modules/audit-api/hasli-api-audit-api_main.iml" group="audit-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/audit-api/hasli-api-audit-api_test.iml" filepath="$PROJECT_DIR$/.idea/modules/audit-api/hasli-api-audit-api_test.iml" group="audit-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common-api/hasli-api-common-api.iml" filepath="$PROJECT_DIR$/.idea/modules/common-api/hasli-api-common-api.iml" group="common-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common-api/hasli-api-common-api_main.iml" filepath="$PROJECT_DIR$/.idea/modules/common-api/hasli-api-common-api_main.iml" group="common-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common-api/hasli-api-common-api_test.iml" filepath="$PROJECT_DIR$/.idea/modules/common-api/hasli-api-common-api_test.iml" group="common-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core-api/hasli-api-core-api.iml" filepath="$PROJECT_DIR$/.idea/modules/core-api/hasli-api-core-api.iml" group="core-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core-api/hasli-api-core-api_main.iml" filepath="$PROJECT_DIR$/.idea/modules/core-api/hasli-api-core-api_main.iml" group="core-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core-api/hasli-api-core-api_test.iml" filepath="$PROJECT_DIR$/.idea/modules/core-api/hasli-api-core-api_test.iml" group="core-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/draftboard-api/hasli-api-draftboard-api.iml" filepath="$PROJECT_DIR$/.idea/modules/draftboard-api/hasli-api-draftboard-api.iml" group="draftboard-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/draftboard-api/hasli-api-draftboard-api_main.iml" filepath="$PROJECT_DIR$/.idea/modules/draftboard-api/hasli-api-draftboard-api_main.iml" group="draftboard-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/draftboard-api/hasli-api-draftboard-api_test.iml" filepath="$PROJECT_DIR$/.idea/modules/draftboard-api/hasli-api-draftboard-api_test.iml" group="draftboard-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/security-api/hasli-api-security-api.iml" filepath="$PROJECT_DIR$/.idea/modules/security-api/hasli-api-security-api.iml" group="security-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/security-api/hasli-api-security-api_main.iml" filepath="$PROJECT_DIR$/.idea/modules/security-api/hasli-api-security-api_main.iml" group="security-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/security-api/hasli-api-security-api_test.iml" filepath="$PROJECT_DIR$/.idea/modules/security-api/hasli-api-security-api_test.iml" group="security-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-api_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-api_main.iml" group="hasli-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-api_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-api_test.iml" group="hasli-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-common.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common-api/hasli-common-common-api.iml" filepath="$PROJECT_DIR$/.idea/modules/common-api/hasli-common-common-api.iml" group="common-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common-api/hasli-common-common-api_main.iml" filepath="$PROJECT_DIR$/.idea/modules/common-api/hasli-common-common-api_main.iml" group="common-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common-api/hasli-common-common-api_test.iml" filepath="$PROJECT_DIR$/.idea/modules/common-api/hasli-common-common-api_test.iml" group="common-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-common_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-common_main.iml" group="hasli-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-common_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-common_test.iml" group="hasli-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-hal.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-hal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hal-api/hasli-hal-hal-api.iml" filepath="$PROJECT_DIR$/.idea/modules/hal-api/hasli-hal-hal-api.iml" group="hal-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hal-api/hasli-hal-hal-api_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hal-api/hasli-hal-hal-api_main.iml" group="hal-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hal-api/hasli-hal-hal-api_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hal-api/hasli-hal-hal-api_test.iml" group="hal-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hal-aws/hasli-hal-hal-aws.iml" filepath="$PROJECT_DIR$/.idea/modules/hal-aws/hasli-hal-hal-aws.iml" group="hal-aws" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hal-aws/hasli-hal-hal-aws_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hal-aws/hasli-hal-hal-aws_main.iml" group="hal-aws" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hal-aws/hasli-hal-hal-aws_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hal-aws/hasli-hal-hal-aws_test.iml" group="hal-aws" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hal-common/hasli-hal-hal-common.iml" filepath="$PROJECT_DIR$/.idea/modules/hal-common/hasli-hal-hal-common.iml" group="hal-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hal-common/hasli-hal-hal-common_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hal-common/hasli-hal-hal-common_main.iml" group="hal-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hal-common/hasli-hal-hal-common_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hal-common/hasli-hal-hal-common_test.iml" group="hal-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hal-core/hasli-hal-hal-core.iml" filepath="$PROJECT_DIR$/.idea/modules/hal-core/hasli-hal-hal-core.iml" group="hal-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hal-core/hasli-hal-hal-core_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hal-core/hasli-hal-hal-core_main.iml" group="hal-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hal-core/hasli-hal-hal-core_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hal-core/hasli-hal-hal-core_test.iml" group="hal-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hal-docker/hasli-hal-hal-docker.iml" filepath="$PROJECT_DIR$/.idea/modules/hal-docker/hasli-hal-hal-docker.iml" group="hal-docker" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hal-docker/hasli-hal-hal-docker_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hal-docker/hasli-hal-hal-docker_main.iml" group="hal-docker" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hal-docker/hasli-hal-hal-docker_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hal-docker/hasli-hal-hal-docker_test.iml" group="hal-docker" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hal-service/hasli-hal-hal-service.iml" filepath="$PROJECT_DIR$/.idea/modules/hal-service/hasli-hal-hal-service.iml" group="hal-service" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hal-service/hasli-hal-hal-service_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hal-service/hasli-hal-hal-service_main.iml" group="hal-service" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hal-service/hasli-hal-hal-service_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hal-service/hasli-hal-hal-service_test.iml" group="hal-service" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-hal_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-hal_main.iml" group="hasli-hal" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-hal_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-hal_test.iml" group="hasli-hal" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-hfs.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-hfs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hfs-api/hasli-hfs-hfs-api.iml" filepath="$PROJECT_DIR$/.idea/modules/hfs-api/hasli-hfs-hfs-api.iml" group="hfs-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hfs-api/hasli-hfs-hfs-api_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hfs-api/hasli-hfs-hfs-api_main.iml" group="hfs-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hfs-api/hasli-hfs-hfs-api_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hfs-api/hasli-hfs-hfs-api_test.iml" group="hfs-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hfs-common/hasli-hfs-hfs-common.iml" filepath="$PROJECT_DIR$/.idea/modules/hfs-common/hasli-hfs-hfs-common.iml" group="hfs-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hfs-common/hasli-hfs-hfs-common_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hfs-common/hasli-hfs-hfs-common_main.iml" group="hfs-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hfs-common/hasli-hfs-hfs-common_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hfs-common/hasli-hfs-hfs-common_test.iml" group="hfs-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hfs-core/hasli-hfs-hfs-core.iml" filepath="$PROJECT_DIR$/.idea/modules/hfs-core/hasli-hfs-hfs-core.iml" group="hfs-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hfs-core/hasli-hfs-hfs-core_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hfs-core/hasli-hfs-hfs-core_main.iml" group="hfs-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hfs-core/hasli-hfs-hfs-core_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hfs-core/hasli-hfs-hfs-core_test.iml" group="hfs-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hfs-service/hasli-hfs-hfs-service.iml" filepath="$PROJECT_DIR$/.idea/modules/hfs-service/hasli-hfs-hfs-service.iml" group="hfs-service" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hfs-service/hasli-hfs-hfs-service_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hfs-service/hasli-hfs-hfs-service_main.iml" group="hfs-service" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hfs-service/hasli-hfs-hfs-service_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hfs-service/hasli-hfs-hfs-service_test.iml" group="hfs-service" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-hfs_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-hfs_main.iml" group="hasli-hfs" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-hfs_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-hfs_test.iml" group="hasli-hfs" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-persist.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-persist.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persist-api/hasli-persist-persist-api.iml" filepath="$PROJECT_DIR$/.idea/modules/persist-api/hasli-persist-persist-api.iml" group="persist-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persist-api/hasli-persist-persist-api_main.iml" filepath="$PROJECT_DIR$/.idea/modules/persist-api/hasli-persist-persist-api_main.iml" group="persist-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persist-api/hasli-persist-persist-api_test.iml" filepath="$PROJECT_DIR$/.idea/modules/persist-api/hasli-persist-persist-api_test.iml" group="persist-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persist-core/hasli-persist-persist-core.iml" filepath="$PROJECT_DIR$/.idea/modules/persist-core/hasli-persist-persist-core.iml" group="persist-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persist-core/hasli-persist-persist-core_main.iml" filepath="$PROJECT_DIR$/.idea/modules/persist-core/hasli-persist-persist-core_main.iml" group="persist-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persist-core/hasli-persist-persist-core_test.iml" filepath="$PROJECT_DIR$/.idea/modules/persist-core/hasli-persist-persist-core_test.iml" group="persist-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persist-hibernate/hasli-persist-persist-hibernate.iml" filepath="$PROJECT_DIR$/.idea/modules/persist-hibernate/hasli-persist-persist-hibernate.iml" group="persist-hibernate" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persist-hibernate/hasli-persist-persist-hibernate_main.iml" filepath="$PROJECT_DIR$/.idea/modules/persist-hibernate/hasli-persist-persist-hibernate_main.iml" group="persist-hibernate" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persist-hibernate/hasli-persist-persist-hibernate_test.iml" filepath="$PROJECT_DIR$/.idea/modules/persist-hibernate/hasli-persist-persist-hibernate_test.iml" group="persist-hibernate" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persist-infinispan/hasli-persist-persist-infinispan.iml" filepath="$PROJECT_DIR$/.idea/modules/persist-infinispan/hasli-persist-persist-infinispan.iml" group="persist-infinispan" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persist-infinispan/hasli-persist-persist-infinispan_main.iml" filepath="$PROJECT_DIR$/.idea/modules/persist-infinispan/hasli-persist-persist-infinispan_main.iml" group="persist-infinispan" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persist-infinispan/hasli-persist-persist-infinispan_test.iml" filepath="$PROJECT_DIR$/.idea/modules/persist-infinispan/hasli-persist-persist-infinispan_test.iml" group="persist-infinispan" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persist-jpa/hasli-persist-persist-jpa.iml" filepath="$PROJECT_DIR$/.idea/modules/persist-jpa/hasli-persist-persist-jpa.iml" group="persist-jpa" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persist-jpa/hasli-persist-persist-jpa_main.iml" filepath="$PROJECT_DIR$/.idea/modules/persist-jpa/hasli-persist-persist-jpa_main.iml" group="persist-jpa" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persist-jpa/hasli-persist-persist-jpa_test.iml" filepath="$PROJECT_DIR$/.idea/modules/persist-jpa/hasli-persist-persist-jpa_test.iml" group="persist-jpa" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-schemata.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-schemata.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/schemata/hasli-schemata-schemata.iml" filepath="$PROJECT_DIR$/.idea/modules/schemata/hasli-schemata-schemata.iml" group="schemata" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/schemata/hasli-schemata-schemata_main.iml" filepath="$PROJECT_DIR$/.idea/modules/schemata/hasli-schemata-schemata_main.iml" group="schemata" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/schemata/hasli-schemata-schemata_test.iml" filepath="$PROJECT_DIR$/.idea/modules/schemata/hasli-schemata-schemata_test.iml" group="schemata" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-schemata_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-schemata_main.iml" group="hasli-schemata" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-schemata_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-schemata_test.iml" group="hasli-schemata" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-search.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-search.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/search-api/hasli-search-search-api.iml" filepath="$PROJECT_DIR$/.idea/modules/search-api/hasli-search-search-api.iml" group="search-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/search-api/hasli-search-search-api_main.iml" filepath="$PROJECT_DIR$/.idea/modules/search-api/hasli-search-search-api_main.iml" group="search-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/search-api/hasli-search-search-api_test.iml" filepath="$PROJECT_DIR$/.idea/modules/search-api/hasli-search-search-api_test.iml" group="search-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/search-common/hasli-search-search-common.iml" filepath="$PROJECT_DIR$/.idea/modules/search-common/hasli-search-search-common.iml" group="search-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/search-common/hasli-search-search-common_main.iml" filepath="$PROJECT_DIR$/.idea/modules/search-common/hasli-search-search-common_main.iml" group="search-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/search-common/hasli-search-search-common_test.iml" filepath="$PROJECT_DIR$/.idea/modules/search-common/hasli-search-search-common_test.iml" group="search-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/search-core/hasli-search-search-core.iml" filepath="$PROJECT_DIR$/.idea/modules/search-core/hasli-search-search-core.iml" group="search-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/search-core/hasli-search-search-core_main.iml" filepath="$PROJECT_DIR$/.idea/modules/search-core/hasli-search-search-core_main.iml" group="search-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/search-core/hasli-search-search-core_test.iml" filepath="$PROJECT_DIR$/.idea/modules/search-core/hasli-search-search-core_test.iml" group="search-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/search-es/hasli-search-search-es.iml" filepath="$PROJECT_DIR$/.idea/modules/search-es/hasli-search-search-es.iml" group="search-es" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/search-es/hasli-search-search-es_main.iml" filepath="$PROJECT_DIR$/.idea/modules/search-es/hasli-search-search-es_main.iml" group="search-es" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/search-es/hasli-search-search-es_test.iml" filepath="$PROJECT_DIR$/.idea/modules/search-es/hasli-search-search-es_test.iml" group="search-es" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-search_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-search_main.iml" group="hasli-search" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-search_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-search_test.iml" group="hasli-search" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-service.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service-api/hasli-service-service-api.iml" filepath="$PROJECT_DIR$/.idea/modules/service-api/hasli-service-service-api.iml" group="service-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service-api/hasli-service-service-api_main.iml" filepath="$PROJECT_DIR$/.idea/modules/service-api/hasli-service-service-api_main.iml" group="service-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service-api/hasli-service-service-api_test.iml" filepath="$PROJECT_DIR$/.idea/modules/service-api/hasli-service-service-api_test.iml" group="service-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service-common/hasli-service-service-common.iml" filepath="$PROJECT_DIR$/.idea/modules/service-common/hasli-service-service-common.iml" group="service-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service-common/hasli-service-service-common_main.iml" filepath="$PROJECT_DIR$/.idea/modules/service-common/hasli-service-service-common_main.iml" group="service-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service-common/hasli-service-service-common_test.iml" filepath="$PROJECT_DIR$/.idea/modules/service-common/hasli-service-service-common_test.iml" group="service-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service-core/hasli-service-service-core.iml" filepath="$PROJECT_DIR$/.idea/modules/service-core/hasli-service-service-core.iml" group="service-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service-core/hasli-service-service-core_main.iml" filepath="$PROJECT_DIR$/.idea/modules/service-core/hasli-service-service-core_main.iml" group="service-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service-core/hasli-service-service-core_test.iml" filepath="$PROJECT_DIR$/.idea/modules/service-core/hasli-service-service-core_test.iml" group="service-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service-csp/hasli-service-service-csp.iml" filepath="$PROJECT_DIR$/.idea/modules/service-csp/hasli-service-service-csp.iml" group="service-csp" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service-csp/hasli-service-service-csp_main.iml" filepath="$PROJECT_DIR$/.idea/modules/service-csp/hasli-service-service-csp_main.iml" group="service-csp" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service-csp/hasli-service-service-csp_test.iml" filepath="$PROJECT_DIR$/.idea/modules/service-csp/hasli-service-service-csp_test.iml" group="service-csp" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service-security/hasli-service-service-security.iml" filepath="$PROJECT_DIR$/.idea/modules/service-security/hasli-service-service-security.iml" group="service-security" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service-security/hasli-service-service-security_main.iml" filepath="$PROJECT_DIR$/.idea/modules/service-security/hasli-service-service-security_main.iml" group="service-security" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service-security/hasli-service-service-security_test.iml" filepath="$PROJECT_DIR$/.idea/modules/service-security/hasli-service-service-security_test.iml" group="service-security" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-test.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/test-common/hasli-test-test-common.iml" filepath="$PROJECT_DIR$/.idea/modules/test-common/hasli-test-test-common.iml" group="test-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/test-common/hasli-test-test-common_main.iml" filepath="$PROJECT_DIR$/.idea/modules/test-common/hasli-test-test-common_main.iml" group="test-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/test-common/hasli-test-test-common_test.iml" filepath="$PROJECT_DIR$/.idea/modules/test-common/hasli-test-test-common_test.iml" group="test-common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/test-persist/hasli-test-test-persist.iml" filepath="$PROJECT_DIR$/.idea/modules/test-persist/hasli-test-test-persist.iml" group="test-persist" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/test-persist/hasli-test-test-persist_main.iml" filepath="$PROJECT_DIR$/.idea/modules/test-persist/hasli-test-test-persist_main.iml" group="test-persist" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/test-persist/hasli-test-test-persist_test.iml" filepath="$PROJECT_DIR$/.idea/modules/test-persist/hasli-test-test-persist_test.iml" group="test-persist" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/test-serialization/hasli-test-test-serialization.iml" filepath="$PROJECT_DIR$/.idea/modules/test-serialization/hasli-test-test-serialization.iml" group="test-serialization" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/test-serialization/hasli-test-test-serialization_main.iml" filepath="$PROJECT_DIR$/.idea/modules/test-serialization/hasli-test-test-serialization_main.iml" group="test-serialization" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/test-serialization/hasli-test-test-serialization_test.iml" filepath="$PROJECT_DIR$/.idea/modules/test-serialization/hasli-test-test-serialization_test.iml" group="test-serialization" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/test-service/hasli-test-test-service.iml" filepath="$PROJECT_DIR$/.idea/modules/test-service/hasli-test-test-service.iml" group="test-service" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/test-service/hasli-test-test-service_main.iml" filepath="$PROJECT_DIR$/.idea/modules/test-service/hasli-test-test-service_main.iml" group="test-service" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/test-service/hasli-test-test-service_test.iml" filepath="$PROJECT_DIR$/.idea/modules/test-service/hasli-test-test-service_test.iml" group="test-service" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/test-ws/hasli-test-test-ws.iml" filepath="$PROJECT_DIR$/.idea/modules/test-ws/hasli-test-test-ws.iml" group="test-ws" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/test-ws/hasli-test-test-ws_main.iml" filepath="$PROJECT_DIR$/.idea/modules/test-ws/hasli-test-test-ws_main.iml" group="test-ws" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/test-ws/hasli-test-test-ws_test.iml" filepath="$PROJECT_DIR$/.idea/modules/test-ws/hasli-test-test-ws_test.iml" group="test-ws" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-test_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-test_main.iml" group="hasli-test" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-test_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-test_test.iml" group="hasli-test" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-wildfly.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-wildfly.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-wildfly_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-wildfly_main.iml" group="hasli-wildfly" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hasli-wildfly_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hasli-wildfly_test.iml" group="hasli-wildfly" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/jaxrs/modules-jaxrs.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/jaxrs/modules-jaxrs.iml" group="modules/jaxrs" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/jaxrs/modules-jaxrs_main.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/jaxrs/modules-jaxrs_main.iml" group="modules/jaxrs" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/jaxrs/modules-jaxrs_test.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/jaxrs/modules-jaxrs_test.iml" group="modules/jaxrs" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/zmq/modules-zmq.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/zmq/modules-zmq.iml" group="modules/zmq" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/zmq/modules-zmq_main.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/zmq/modules-zmq_main.iml" group="modules/zmq" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/modules/zmq/modules-zmq_test.iml" filepath="$PROJECT_DIR$/.idea/modules/modules/zmq/modules-zmq_test.iml" group="modules/zmq" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/providers/guice/providers-guice.iml" filepath="$PROJECT_DIR$/.idea/modules/providers/guice/providers-guice.iml" group="providers/guice" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/providers/guice/providers-guice_main.iml" filepath="$PROJECT_DIR$/.idea/modules/providers/guice/providers-guice_main.iml" group="providers/guice" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/providers/guice/providers-guice_test.iml" filepath="$PROJECT_DIR$/.idea/modules/providers/guice/providers-guice_test.iml" group="providers/guice" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/providers/spring/providers-spring.iml" filepath="$PROJECT_DIR$/.idea/modules/providers/spring/providers-spring.iml" group="providers/spring" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/providers/spring/providers-spring_main.iml" filepath="$PROJECT_DIR$/.idea/modules/providers/spring/providers-spring_main.iml" group="providers/spring" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/providers/spring/providers-spring_test.iml" filepath="$PROJECT_DIR$/.idea/modules/providers/spring/providers-spring_test.iml" group="providers/spring" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/wildfly-dist/wildfly-dist.iml" filepath="$PROJECT_DIR$/.idea/modules/wildfly-dist/wildfly-dist.iml" group="wildfly-dist" />
+    </modules>
+  </component>
+</project>
