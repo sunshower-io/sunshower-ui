@@ -14,9 +14,8 @@ import {
 import {HttpClient} from "aurelia-fetch-client";
 import {CredentialSecret} from "common/model/security/credentials";
 import {
-    newNodeTemplate,
-    ComputeNodeTemplate,
-    ComputeNodeTemplateMarshaller
+    ComputeTemplate,
+    ComputeTemplateMarshaller
 } from "common/model/api/hal/compute";
 import {ChannelSet} from "common/lib/events";
 import {
@@ -47,7 +46,7 @@ export class NewInstance {
     private addingCredential    : boolean = false;
     private credentials         : CredentialSecret[];
 
-    private template            : ComputeNodeTemplate;
+    private template            : ComputeTemplate;
 
     private cloudProviders      : Provider[];
     private provider            : Provider;
@@ -66,7 +65,7 @@ export class NewInstance {
         private controller:ValidationController
     ) {
         this.controller.addRenderer(new BootstrapFormRenderer());
-        this.template = newNodeTemplate();
+        this.template = null;
     }
 
     setupValidation() : void {
@@ -78,8 +77,8 @@ export class NewInstance {
             .ensure((inst:NewInstance) => inst.instanceType).displayName('Instance').required()
             .on(NewInstance);
         let validationRules = ValidationRules
-             .ensure((temp:ComputeNodeTemplate) => temp.name).required()
-             .ensure((temp:ComputeNodeTemplate) => temp.operatingSystem).required()
+             .ensure((temp:ComputeTemplate) => temp.name).required()
+             .ensure((temp:ComputeTemplate) => temp.operatingSystem).required()
              .rules;
         this.controller.addObject(this.template, validationRules);
         //name, credential, provider, OS and instance all required
@@ -144,7 +143,7 @@ export class NewInstance {
     }
 
     imageChanged = (value: string, text:any, item:any) => {
-        this.template.image.instanceType = value;
+        // this.template.image.instanceType = value;
     };
 
 
@@ -160,7 +159,7 @@ export class NewInstance {
     osChanged = (value: string, text: any, item: any) => {
         let os = this.osService.get(UUID.fromString(value));
         this.template.operatingSystem = os;
-        this.template.image.imageId = os.provider.imageId;
+        // this.template.image.imageId = os.provider.imageId;
     };
 
     attached(): void {
@@ -205,7 +204,7 @@ export class NewInstance {
         this.controller.validate().then(result => {
             if (result.valid) {
                 console.log('deploying');
-                let payload = JSON.stringify(new ComputeNodeTemplateMarshaller()
+                let payload = JSON.stringify(new ComputeTemplateMarshaller()
                     .write(this.template)),
                     credentialId = this.credentialId,
                     providerId = this.providerId;

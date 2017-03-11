@@ -81,11 +81,11 @@ template
                                         | Create Application
                                     .ui.hidden.divider
                         tr(
-                            show.bind="applications.length > 0 && !loading",
+                            if.bind="applications.length > 0 && !loading",
                             as-element="compose",
-                            view-model="apps/workspaces/resources/custom-elements/table/row",
+                            view-model="common/resources/custom-elements/table/row",
                             view="apps/workspaces/resources/custom-elements/table/application-row.html"
                             repeat.for='application of applications',
-                            model.bind="application",
+                            model.bind="application"
                         )
 

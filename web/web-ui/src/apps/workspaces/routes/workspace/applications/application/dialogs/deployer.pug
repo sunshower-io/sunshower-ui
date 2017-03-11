@@ -1,0 +1,13 @@
+template
+    .header Select Deployer
+    .content
+        .ui.basic.segment.inline-loader-holder(if.bind="loading")
+            .ui.active.inverted.dimmer.inline-loader
+                .ui.large.loader
+        template(if.bind="!loading")
+            .ui.basic.segment(if.bind="deployers.length == 0")
+                .widget-table-empty-alert You have no deployers available
+            .ui.link.centered.four.cards(if.bind="deployers.length > 0")
+                .card(repeat.for="deployer of deployers" click.delegate="save(deployer)")
+                    .image
+                        img(src="${deployer.icon}" alt="${deployer.name}")

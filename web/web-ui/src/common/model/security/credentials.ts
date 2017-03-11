@@ -16,5 +16,5 @@ export class CredentialSecret {
 
     user:User;
 
-    type: string = Secrets.Credential
+    //type: string = Secrets.Credential
 }

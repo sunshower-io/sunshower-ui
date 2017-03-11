@@ -4,6 +4,8 @@ import io.hasli.common.configuration.ConfigurationSource;
 import io.hasli.common.configuration.MapConfigurationSource;
 import io.hasli.common.rs.MoxyProvider;
 import io.hasli.core.ApplicationService;
+import io.hasli.hal.HALConfiguration;
+import io.hasli.hal.aws.HALAwsConfiguration;
 import io.hasli.jpa.flyway.FlywayConfiguration;
 import io.hasli.model.core.Application;
 import io.hasli.model.core.PersistenceConfiguration;
@@ -14,20 +16,41 @@ import io.hasli.persist.hibernate.HibernateConfiguration;
 import io.hasli.persistence.annotations.CacheMode;
 import io.hasli.security.api.SecurityPersistenceConfiguration;
 import io.hasli.service.CoreServiceConfiguration;
+import io.hasli.service.events.ReactiveEventService;
 import io.hasli.service.security.SecurityConfiguration;
 import io.hasli.web.preferences.DefaultPreferencesService;
+import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.annotation.AsyncConfigurer;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+import org.springframework.security.concurrent.DelegatingSecurityContextScheduledExecutorService;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
+
+import javax.enterprise.concurrent.ManagedExecutorService;
+import javax.enterprise.concurrent.ManagedScheduledExecutorService;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.*;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -40,19 +63,15 @@ import java.util.logging.Logger;
         DatabaseConfiguration.class,
         HibernateConfiguration.class,
         SecurityConfiguration.class,
-//        HALConfiguration.class,
-//        SearchConfiguration.class,
-//        HFSConfiguration.class,
-//        HALAwsConfiguration.class,
-//        DockerConfiguration.class,
+        HALConfiguration.class,
+        HALAwsConfiguration.class,
         PersistenceConfiguration.class,
-//        HALPersistenceConfiguration.class,
         SecurityPersistenceConfiguration.class,
         CoreServiceConfiguration.class,
-//        HypervisorAbstractionLayerServiceConfiguration.class
 })
+@EnableAsync
 @CacheMode(CacheMode.Mode.Grid)
-public class BootstrapConfiguration {
+public class BootstrapConfiguration  implements AsyncConfigurer {
 
     static final Logger log = Logger.getLogger(BootstrapConfiguration.class.getName());
 
@@ -61,7 +80,10 @@ public class BootstrapConfiguration {
     private String flyway;
 
 
+
     public BootstrapConfiguration() {
+
+        SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_GLOBAL);
         log.info("Starting Hasli.io");
     }
 
@@ -75,18 +97,20 @@ public class BootstrapConfiguration {
 //        return new AwsComputeService();
 //    }
 
+
+
     @Bean
     public ServerEndpointExporter serverEndpointExporter() {
         return new ServerEndpointExporter();
     }
-
-
 
     @Bean
     public MoxyProvider moxyProvider() {
         MoxyProvider provider = new MoxyProvider();
         return provider;
     }
+
+
 
 
     @Bean
@@ -100,6 +124,24 @@ public class BootstrapConfiguration {
         return new MapConfigurationSource(values);
     }
 
+
+    @Bean
+    public ScheduledExecutorService executorService() {
+        try {
+            log.info("Attempting to resolve managed executor service...");
+            ManagedScheduledExecutorService service = InitialContext.doLookup(
+                    "java:comp/DefaultManagedScheduledExecutorService"
+            );
+            log.info("Successfully resolve managed executor service");
+            return service;
+        } catch(NamingException ex) {
+            log.info("Failed to resolve managed executor service.  " +
+                    "Defaulting to fork-join pool.  Not all features may be available");
+            return Executors.newScheduledThreadPool(
+                    Runtime.getRuntime().availableProcessors()
+            );
+        }
+    }
 
 
     @EventListener
@@ -126,5 +168,19 @@ public class BootstrapConfiguration {
     }
 
 
+    @Override
+    public Executor getAsyncExecutor() {
+        return new DelegatingSecurityContextScheduledExecutorService(
+                executorService(),
+                SecurityContextHolder.getContext()
+        );
+    }
 
+    @Override
+    public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
+        return (ex, method, params) -> {
+            log.log(Level.WARNING, "Caught exception {0} while processing task", ex.getMessage());
+            log.log(Level.INFO, "Full stack trace", ex);
+        };
+    }
 }

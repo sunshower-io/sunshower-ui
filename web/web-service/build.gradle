@@ -13,9 +13,9 @@ dependencies {
     provided 'org.flywaydb:flyway-core'
 
 
-//    provided "io.hasli.hal:hal-aws"
-//    provided "io.hasli.hal:hal-docker"
-//    provided "io.hasli.hal:hal-service"
+    provided "io.hasli.hal:hal-aws"
+    provided "io.hasli.hal:hal-docker"
+    provided "io.hasli.hal:hal-service"
 //    provided "io.hasli.hfs:hfs-service"
 //    provided "io.hasli.search:search-es"
 //    provided "io.hasli.service:service-vault"

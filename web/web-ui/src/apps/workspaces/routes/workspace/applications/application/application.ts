@@ -9,15 +9,25 @@ import {NavigationInstruction} from "aurelia-router";
 
 import {Identifier} from "common/lib/lang";
 import {HttpClient} from "aurelia-fetch-client";
-import {ApplicationRevision} from "apps/workspaces/model/application";
+import {
+    Application as App,
+    ApplicationRevision
+} from "apps/workspaces/model/application";
 
 
 @autoinject
 export class Application {
 
-    public router: Router;
-    private lastLocation : NavigationInstruction;
-    applicationRevision: ApplicationRevision;
+    private loaded                  : boolean;
+
+    public router                   : Router;
+    private lastLocation            : NavigationInstruction;
+
+
+    application                     : App;
+    applicationRevision             : ApplicationRevision;
+    private id: string;
+
 
     constructor(private client:HttpClient) {
     }
@@ -40,19 +50,21 @@ export class Application {
 
 
     attached(identifier: Identifier) : void {
+        this.client.fetch(`applications/${this.id}/base`)
+            .then(t => t.json() as any)
+            .then(t => {
+                this.applicationRevision = t;
+                this.application = t.application;
+                this.loaded = true;
+            });
 
     }
 
 
     activate(identifier: Identifier) {
+        this.loaded = false;
 
-        let id = identifier.id;
-
-        this.client.fetch(`applications/${id}`)
-            .then(t => t.json() as any)
-            .then(t => {
-                this.applicationRevision = t;
-            });
+        this.id = identifier.id;
 
     }
 

@@ -1,11 +1,7 @@
 //
    Created by dustinlish on 2/6/17.
 template
-    require(from="apps/workspaces/resources/custom-elements/charts/line-chart")
-    require(from="apps/workspaces/resources/custom-elements/charts/chart-stat.html")
-
     .ui.hidden.divider
-
     .ui.container
         .ui.basic.segment
             h2.ui.header
@@ -26,9 +22,9 @@ template
                             .item
                                 i.ion-ios-copy.large.grey.icon
                                 | Clone
-                            .item
+                            .item(click.delegate="updateInstance()")
                                 i.ion-arrow-right-a.large.grey.icon
-                                | Deploy
+                                | Update Instance
                             .item
                                 i.ion-trash-a.large.grey.icon
                                 | Delete
@@ -42,7 +38,8 @@ template
                             .item(data-value="3") Docker Compose
                 .four.wide.right.aligned.column
                     span.widget-icons
-                        .ui.small.button.primary(click.delegate="createInstance()") + Create New
+                        .ui.small.button.primary(click.delegate="createInstance()")
+                            | + Create New
                 table.ui.very.basic.very.padded.selectable.table
                     thead
                         tr
@@ -51,22 +48,22 @@ template
                                     input(type='checkbox', name='master')
                                     label
                             th Name
+                            th Version
                             th Status
-                            th IP
-                            th CPU
-                            th Memory
-                            th Disk
+                            th Environment
+                            th VMs
+                            th Containers
                             th.right.aligned
                                 i.link.big.blue.ion-ios-loop-strong.icon(
                                 class="${loading ? 'loading' : ''}"
                                 click.delegate="refresh()"
-                            )
+                                )
                     tbody
                         tr(if.bind="loading")
                             td.widget-table-reloading(colspan='10')
                                 .ui.active.inverted.dimmer
                                     .ui.huge.loader
-                        tr(if.bind="(!applications || applications.length == 0) && !loading")
+                        tr(if.bind="(!instances || instances.length == 0) && !loading")
                             td.widget-table-reloading(colspan='10')
                                 .ui.hidden.divider
                                 h2.ui.center.aligned.icon.header
@@ -77,12 +74,61 @@ template
                                     .ui.secondary.button(click.delegate="createInstance()")
                                         | Create Instance
                                     .ui.hidden.divider
-                        tr(
-                            show.bind="instances.length > 0 && !loading",
-                            as-element="compose",
-                            view-model="apps/workspaces/resources/custom-elements/table/row",
-                            view="apps/workspaces/resources/custom-elements/table/instance-row.html"
-                            repeat.for='instance of instances',
-                            model.bind="instance",
-                        )
-
+                        //tr(
+                        //    show.bind="instances.length > 0 && !loading",
+                        //    as-element="compose",
+                        //    view-model="apps/workspaces/resources/custom-elements/table/instance-row"
+                        //    repeat.for='instance of instances',
+                        //    model.bind="instance",
+                        //)
+                        tr(show.bind="instances.length > 0 && !loading", repeat.for='instance of instances')
+                            td.right.aligned
+                                .ui.child.green.checkbox
+                                    input(
+                                        type='radio',
+                                        name="appOptions",
+                                        model.bind='instance',
+                                        checked.bind="$parent.selectedApp",
+                                        click.delegate="selected()"
+                                    )
+                                    label
+                            // name
+                            td
+                                .ui.link.items
+                                    .item(click.delegate="openInstance(instance)")
+                                        .ui.middle.aligned.mini.image
+                                            img(src="${instance.logo}")
+                                        .content
+                                            | ${instance.name}
+                            // version
+                            td
+                                | ${instance.version}
+                            // Status
+                            td
+                                i.icon.status-circle(class="${computeStatus(instance)}")
+                                | ${instance.state}
+                            // environment
+                            td
+                                | ${instance.environment}
+                            // vms
+                            td
+                                | ${instance.vms}
+                            // containers
+                            td
+                                | ${instance.containers}
+                            td.right.aligned
+                                .ui.inline.pointing.top.right.dropdown
+                                    i.link.ion-ios-gear-outline.big.blue.icon
+                                    .menu
+                                        .item
+                                            i.ion-power.large.green.icon
+                                            | Poweron
+                                        .item
+                                            i.ion-stop.large.grey.icon
+                                            | Poweroff
+                                        .item
+                                            i.ion-ios-reload.large.grey.icon
+                                            | Restart
+                                        .item
+                                            i.ion-ios-close-outline.large.red.icon
+                                            | Force Terminate

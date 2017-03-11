@@ -1,27 +1,11 @@
-
-import {Workspace} from "apps/workspaces/routes/workspace/index";
-import {bindable, noView} from "aurelia-framework";
-import {autoinject} from "aurelia-dependency-injection";
-
+import {bindable} from "aurelia-framework";
 /**
- * Created by dustinlish on 3/2/17.
+ * Created by dustinlish on 3/5/17.
  */
 
-@noView
-@autoinject
-export class Row {
-
+export class InstanceRow {
     @bindable
     private model: any;
-
-    @bindable
-    private route: string;
-
-    @bindable
-    private id: any;
-
-    constructor(private parent: Workspace) {
-    }
 
     activate(model) {
         this.model = model;
@@ -62,12 +46,9 @@ export class Row {
                 }
             })
         ;
-    }
 
-    open() : void {
-        // TODO use app service
-        // this.parent.router.navigateToRoute(this.router, id)
-        this.parent.router.navigate('applications/4/application')
+        $('.ui.dropdown')
+            .dropdown({
+            });
     }
-
 }

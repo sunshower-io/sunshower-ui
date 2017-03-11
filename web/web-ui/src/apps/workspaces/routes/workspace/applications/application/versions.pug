@@ -8,18 +8,18 @@ template
     .ui.grid
         .left.floated.eight.wide.column
             h3.ui.grey.header
-                | Latest: 8.47
+                | Latest: ${latestVersion}
         .right.floated.eight.wide.column
-            .ui.secondary.right.floated.button
+            .ui.secondary.right.floated.button(click.delegate="newVersion()")
                 | New Version
 
 
     .ui.segment.version-segment
         .ui.middle.aligned.grid
-            .row
+            .row(repeat.for='version of currentVersions')
                 .three.wide.center.aligned.column
                     h4.ui.header
-                        | February 23rd, 1:00PM
+                        | ${version.date}
                     span
                         svg(width='54px', height='51px', viewbox='52 44 54 51', version='1.1', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink')
                             defs
@@ -29,50 +29,19 @@ template
                                     tspan(x='19.2598919', y='28') DL
                 .six.wide.column
                     p
-                        | Commit description
+                        | ${version.description}
                 .two.wide.column
                     .ui.header
                         | Status
                         .ui.sub.green.header.version-status_header
-                            | Successful
+                            | ${version.status}
                 .two.wide.column
                     .ui.header
                         | Version
                         .ui.sub.grey.header.version-status_header
-                            | 2.0.0
+                            | ${version.version}
                 .three.wide.column
                     .ui.header
                         | Tags
                         .ui.sub.green.header.version-status_header
-                            a.ui.green.horizontal.label LATEST
-    .ui.segment.version-segment
-        .ui.middle.aligned.grid
-            .row
-                .three.wide.center.aligned.column
-                    h4.ui.header
-                        | February 23rd, 1:00PM
-                    span
-                        svg(width='54px', height='51px', viewbox='52 44 54 51', version='1.1', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink')
-                            defs
-                            g#user-icon(stroke='none', stroke-width='1', fill='none', fill-rule='evenodd', transform='translate(52.000000, 44.000000)')
-                                ellipse#Circle(fill='#CDCDD3', cx='26.8587096', cy='25.5', rx='26.7567568', ry='25.5')
-                                text#DL(font-family='AvenirNext-Medium, Avenir Next', font-size='12', font-weight='400', fill='#FFFFFF')
-                                    tspan(x='19.2598919', y='28') DL
-                .six.wide.column
-                    p
-                        | Commit description
-                .two.wide.column
-                    .ui.header
-                        | Status
-                        .ui.sub.green.header.version-status_header
-                            | Successful
-                .two.wide.column
-                    .ui.header
-                        | Version
-                        .ui.sub.grey.header.version-status_header
-                            | 2.0.0
-                .three.wide.column
-                    .ui.header
-                        | Tags
-                        .ui.sub.header.version-status_header
-                            | none
+                            a.ui.green.horizontal.label ${version.tags[0]}

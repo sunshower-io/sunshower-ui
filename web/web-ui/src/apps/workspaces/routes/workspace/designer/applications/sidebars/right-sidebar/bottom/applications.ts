@@ -65,7 +65,6 @@ export class Applications {
             else {
                 for (let i = 0; i < searchOptions.length; i++) {
                     let thisItem = $(searchOptions[i]);
-                    //TODO account for casing?
                     if (thisItem.attr('data-value').toLowerCase().indexOf(searchTerm) == -1) {
                         thisItem.addClass('inactive');
                     } else {

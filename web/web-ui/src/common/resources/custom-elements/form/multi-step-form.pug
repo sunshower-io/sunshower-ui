@@ -1,0 +1,17 @@
+//
+   Created by dustinlish on 3/5/17.
+
+template
+    .multi-step-form.ui.large.first.coupled.modal.transition(ref="modal")
+        i.large.close.icon(click.delegate="hide()")
+        .ui.center.aligned.header(style="background-color: #F8F9FB")
+            | ${header}
+        .content
+            compose(view-model="${currentViewModelPath}" model.bind="model" compose.ref="composeRef" containerless)
+        .actions
+            .ui.right.primary.button(if.bind='backButtonActive', type='button', click.delegate='back()')
+                | Prev
+            .ui.right.primary.button(if.bind='nextButtonActive', type='button', click.delegate='next()')
+                | Next
+            .ui.right.primary.button(if.bind='completeButtonActive', type='button', click.delegate="complete({multiStepViewData: model})")
+                | Create

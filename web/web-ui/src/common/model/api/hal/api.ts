@@ -1,8 +1,13 @@
+import {UUID} from "common/lib/utils";
 import {Copyable} from "common/lib/lang";
-import {UUID} from "common/lib/utils/uuid";
-import {User} from "../../security/user";
+import {User} from "common/model/security/user";
 
 export class Provider {
+
+    readonly type ?: string = 'provider';
+
+
+
     id          ?: string;
     key         ?: string;
     name        ?: string;
@@ -16,6 +21,10 @@ export class Provider {
     description ?: string;
     imageId     ?: string;
     awsRegion   ?: AWSRegion;
+
+
+
+
 }
 
 export class AWSRegion {
@@ -27,6 +36,16 @@ export class AWSRegion {
 
     }
 
+    static find(name : string) : AWSRegion {
+        let regions = this.get();
+        for (let i = 0; i < regions.length; i++) {
+            let region = regions[i];
+            if (name == region.name) {
+                return region;
+            }
+        }
+        return null;
+    }
 
     static get() : Array<AWSRegion> {
 

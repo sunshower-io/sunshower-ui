@@ -1,10 +1,11 @@
+import {HttpClient} from "aurelia-fetch-client";
+import {Workspace as WorkspaceRoute} from "apps/workspaces/routes/workspace/index";
+import {autoinject} from "aurelia-dependency-injection";
+import {bindable} from "aurelia-framework";
+
 /**
  * Created by dustinlish on 2/6/17.
  */
-
-import "chart.js";
-import {autoinject} from "aurelia-framework";
-import {Workspace} from "apps/workspaces/routes/workspace/index";
 
 @autoinject
 export class Dashboard {
@@ -12,7 +13,11 @@ export class Dashboard {
     totalInstancesData;
     totalInstanceStatuses;
 
+    constructor(public parent:WorkspaceRoute, private client:HttpClient) {
+    }
+
     activate(id:any) : void {
+        this.parent.setMenuVisible(true);
         this.totalInstancesData = this.getInstancesData();
         this.totalInstanceStatuses = this.getInstanceStatuses();
     }

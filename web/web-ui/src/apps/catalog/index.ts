@@ -1,25 +1,29 @@
 import {Router} from "aurelia-router";
 import {RouterConfiguration} from "aurelia-router";
 import {autoinject} from "aurelia-framework";
+import {CreateInstanceWizard} from "apps/workspaces/routes/workspace/provisioning/instances/wizard/wizard";
 
 @autoinject
 export class Catalog {
     public router: Router;
 
+
+    constructor(private wizard:CreateInstanceWizard) {
+
+    }
+
     public configureRouter(config: RouterConfiguration, router: Router) {
         config.map([
             // Applications
-            {route: 'apps/custom', name: 'Custom', moduleId: './routes/categories/apps/custom', nav: true, title: 'My Apps', settings: {category: 'Applications'}},
-            {route: 'apps/containers', name: 'Containers', moduleId: './routes/categories/apps/containers', nav: true, title: 'Containers', settings: {category: 'Applications'}},
+            {
+                route: [':id', ':id/apps/custom'],
+                nav:false,
 
-            // Services
-            {route: 'services/analytics', name: 'Analytics', moduleId: './routes/categories/services/analytics', nav: true, title: 'Analytics', settings: {category: 'Services'} },
-            {route: 'services/monitoring', name: 'Monitoring', moduleId: './routes/categories/services/monitoring', nav: true, title: 'Monitoring', settings: {category: 'Services'} },
-
-            // Infrastructure
-            {route: 'infrastructure/compute', name: 'Compute', moduleId: './routes/categories/infrastructure/compute', nav: true, title: 'Compute', settings: {category: 'Infrastructure'} },
-            {route: 'infrastructure/network', name: 'Network', moduleId: './routes/categories/infrastructure/network', nav: true, title: 'Network', settings: {category: 'Infrastructure'} },
-            {route: 'infrastructure/storage', name: 'Storage', moduleId: './routes/categories/infrastructure/storage', nav: true, title: 'Storage', settings: {category: 'Infrastructure'} },
+                name: 'catalog',
+                moduleId: './routes/categories/categories',
+                title: '',
+                settings: {category: 'Applications'}
+            }
         ]);
 
         config.mapUnknownRoutes({
@@ -30,11 +34,20 @@ export class Catalog {
         this.router = router;
     }
 
-    deploy() : void {
+
+    public id: string;
+
+    activate(workspace: any) {
+        if(workspace.id != null) {
+            this.id = workspace.id;
+        }
+    }
+
+    deploy(): void {
         this.router.navigate('/workspace/4/instances/new')
     }
 
-    close() : void {
+    close(): void {
         this.router.navigateBack();
     }
 }

@@ -10,10 +10,10 @@ template
     // name
     td
         .ui.link.items
-            .item(click.delegate="open()")
+            .item(click.delegate="open(model)")
                 .ui.middle.aligned.mini.image
-                    img(src="${model.logo}")
-                .content
+                    img(src="${model.logo ? model.logo : '/hasli/api/v1/applications/' + model.picture.id + '/picture'}")
+                .middle.aligned.content
                     | ${model.name}
     // version
     td

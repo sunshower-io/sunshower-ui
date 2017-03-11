@@ -46,7 +46,7 @@ export class Admin {
 
     refresh(): void {
         this.loading = true;
-        this.client.fetch('provider')
+        this.client.fetch('providers')
             .then(r => r.json() as any)
             .then(r => {
                 this.providers = r;
@@ -70,7 +70,7 @@ export class Admin {
     saveProvider() : void {
         //this.controller.validate().then(result => {
         //    if (result.valid) {
-                this.client.fetch('provider', {
+                this.client.fetch('providers', {
                     method: 'post',
                     body: JSON.stringify(this.provider)
                 }).then(t => {

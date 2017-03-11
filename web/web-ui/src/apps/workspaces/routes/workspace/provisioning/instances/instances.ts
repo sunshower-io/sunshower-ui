@@ -1,20 +1,17 @@
-import {
-    bindable,
-    inject,
-    CompositionTransaction
-} from "aurelia-framework";
+import {bindable} from "aurelia-framework";
 import "chart.js";
 import {HttpClient} from 'aurelia-fetch-client';
 import {Provider} from "common/model/api/hal/api";
 import {ChannelSet} from "common/lib/events/websockets";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
+import {DialogService} from "aurelia-dialog";
+
+import {autoinject} from "aurelia-dependency-injection";
+import {UpdateInstance} from "./update/update-instance";
+import {EventAggregator} from "aurelia-event-aggregator";
 
 
-@inject(
-    Workspace,
-    HttpClient,
-    ChannelSet
-)
+@autoinject
 export class Instances {
 
     @bindable
@@ -28,11 +25,28 @@ export class Instances {
     @bindable
     loading: boolean;
 
+    @bindable
+    showModal;
+
+    @bindable
+    selectedApp;
+
     constructor(private parent: Workspace,
                 private client: HttpClient,
-                private channelSet: ChannelSet
+                private channelSet: ChannelSet,
+                private aggregator:EventAggregator,
+                private dialogService: DialogService
     ) {
         this.instances = [];
+    }
+
+    newLog() : void {
+        let i = 0;
+        console.log("COol");
+        this.aggregator.publish('logs::added', {
+            id: "cool" + i
+
+        });
     }
 
     activate(): void {
@@ -41,46 +55,68 @@ export class Instances {
     }
 
     attached(): void {
+        $('.ui.dropdown').dropdown();
+
         this.refresh();
 
-        this.channelSet.subscribe({
-            type: 'compute',
-            category: 'deployment'
-        }).forEach(t => {
-            this.refresh();
-        });
+        // this.channelSet.subscribe({
+        //     id:
+        //     type: 'compute',
+        //     category: 'deployment'
+        // }).forEach(t => {
+        //     this.refresh();
+        // });
     };
 
 
     createInstance(): void {
-        this.parent.router.navigate('/catalog');
+        this.parent.router.navigate('provisioning/wizard/catalog');
     }
 
-    openInstance(): void {
-        this.parent.router.navigate('instances/:id/instance');
+    updateInstance(): void {
+        this.dialogService.open({
+            viewModel: UpdateInstance,
+
+            // TODO get id from selected row in table
+            model: this.selectedApp
+            // model: "d75e4367-3502-44d5-a651-6c6ad3b2f3e9"
+        }).then(t => {
+        });
+        console.log("updateInstance called");
+        //this.updateInstanceForm.show();
+    }
+
+    openInstance(instance): void {
+        this.parent.router.navigate(`instances/${instance.id}/instance`);
     }
 
     refresh(): void {
+        this.loading = true;
+
         setTimeout(() => {
-
-
-            this.client.fetch('provider')
+            this.client.fetch('providers')
                 .then(d => d.json() as any)
                 .then(d => {
-                    this.loading = false;
                     this.providers = d;
                     console.log("Providers", d);
                     for (let provider of d) {
                         if (provider.key == 'aws') {
                             this.provider = provider;
-                            this.client.fetch(`compute/${provider.id}/${this.channelSet.sessionId}/instances/synchronize`)
-                                .then(d => d.json() as any)
-                                .then(d => this.instances = d);
+                            this.instances = this.createMockInstances();
+                            this.loading = false;
+                            // this.client.fetch(`compute/${provider.id}/${this.channelSet.sessionId}/instances/synchronize`)
+                            //     .then(d => d.json() as any)
+                            //     .then(d => {
+                            //         this.instances = d;
+                            //         this.instances = this.createMockInstances();
+                            //         this.loading = false;
+                            //     })
                         }
                     }
                 })
                 .catch(err => {
                     this.loading = false;
+                    this.instances = this.createMockInstances();
                 });
         }, 500)
     }
@@ -101,7 +137,6 @@ export class Instances {
 
     restart(instance: Instance): void {
     }
-
 
     statusButtons(instance: Instance): string[] {
         if (instance.state == 'running') {
@@ -129,8 +164,31 @@ export class Instances {
         else {
             return 'circle yellow';
         }
-        //returns class name for circle
+    }
 
+    // TODO saves current selectedAppInstance
+    selected() {
+        console.log(this.selectedApp);
+        return true;
+    }
+
+    createMockInstances(): Array<Instance> {
+        let instances = [];
+        for (var num in [1, 2, 3, 4]) {
+            var i = new Instance();
+            i.id = `1${num}`;
+            i.logo = 'styles/themes/hasli/assets/images/logos/ca-logo.png';
+            i.name = `CA UIM Server ${num}`;
+            i.version = "8.47";
+            i.state = "running";
+            i.environment = "Hasli aws dev";
+            i.vms = 3;
+            i.containers = 3;
+
+            instances.push(i)
+        }
+
+        return instances;
     }
 }
 
@@ -138,8 +196,9 @@ export class Instance {
     id          ?: string;
     logo        ?: string;
     name        ?: string;
+    version     ?: string;
     state       ?: string; //Running, Stopped, Stopping, Restart, Terminating, Deploying, Starting
-    publicIp    ?: string;
-    ports       ?: string;
-
+    environment ?: string;
+    vms         ?: number;
+    containers  ?: number;
 }

@@ -1,26 +1,27 @@
-import {ComputeProfile, OperatingSystem} from "./api";
+import {
+    ComputeProfile,
+    OperatingSystem,
+    MemoryProfile,
+    StorageProfile, AWSRegion
+} from "./api";
 import {Marshaller} from "common/lib/io/marshalling/marshaller";
-import {UUID} from "common/lib/utils";
 
-export function newNodeTemplate() : ComputeNodeTemplate {
-    return {
-        id: UUID.randomUUID().value,
-        name: "",
-        image: {
-            imageId: "",
-            instanceType: ""
-        }
-    }
-}
 
-export interface ComputeNodeTemplate {
+export interface ComputeTemplate {
 
     id                  : string;
     name                : string;
+    providerKey         : string;
 
-    image               : ComputeImage;
-    profile             ?: ComputeProfile;
-    operatingSystem     ?: OperatingSystem;
+
+    memoryProfile       : MemoryProfile;
+    storageProfile      : StorageProfile;
+    computeProfile      : ComputeProfile;
+
+    operatingSystem     : OperatingSystem;
+
+    location            ?: AWSRegion; //will need to figure out better way to do this
+
 }
 
 export interface ComputeImage {
@@ -28,21 +29,16 @@ export interface ComputeImage {
     instanceType        : string;
 }
 
-export class ComputeNodeTemplateMarshaller implements Marshaller<ComputeNodeTemplate> {
-    write(data: ComputeNodeTemplate): {} {
+export class ComputeTemplateMarshaller implements Marshaller<ComputeTemplate> {
+    write(data: ComputeTemplate): {} {
         return {
             id: data.id,
             name: data.name,
-            image:
-                new ComputeImageMarshaller()
-                    .write(data.image),
-            "operating-system":
-                new OperatingSystemMarshaller()
-                    .write(data.operatingSystem)
-
+            "provider-key"      : data.providerKey,
+            "memory-profile"    : data.memoryProfile,
+            "compute-profile"   : data.computeProfile
         }
     }
-
 }
 
 
