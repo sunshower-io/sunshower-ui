@@ -33,7 +33,7 @@ dependencies {
 //    earlib "io.hasli.service:service-vault"
 //    earlib "io.hasli.hal:hal-docker"
 //    earlib "io.hasli.hal:hal-service"
-    earlib "io.hasli.service:service-csp"
+//    earlib "io.hasli.service:service-csp"
     earlib "io.hasli.service:service-core"
     earlib "io.hasli.service:service-security"
     earlib "io.hasli.persist:persist-api"
