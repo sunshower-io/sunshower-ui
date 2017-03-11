@@ -114,7 +114,6 @@ node('docker-registry') {
             stage('Build Container') {
                 sh "docker build -t hasli.io/build:$version.$buildNumber ."
                 sh "chmod +x gradlew"
-                sh "mvn clean install -f bom ${props.join(' ')}"
             }
 
             stage('Gradle Build / Test') {
