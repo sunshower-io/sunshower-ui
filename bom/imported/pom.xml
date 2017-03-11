@@ -60,7 +60,7 @@
         <elastic-search.version>5.0.0</elastic-search.version>
 
 
-        <hasli-hal.version>${snapshot-version}</hasli-hal.version>
+        <hasli-hal.version>1.00.000.000-SNAPSHOT</hasli-hal.version>
         <hasli-persist.version>${snapshot-version}</hasli-persist.version>
         <hasli-api.version>${snapshot-version}</hasli-api.version>
         <hasli-service.version>${snapshot-version}</hasli-service.version>

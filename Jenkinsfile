@@ -22,7 +22,6 @@ def versionString = "$majorVersion.$minorVersion.$buildNumber.$buildSuffix"
 // TODO: enable integrationTests by default
 if (env.BRANCH_NAME == "master") {
     buildNumber = env.BUILD_NUMBER
-    bomTask = "releaseBom -Pversion=$majorVersion.$minorVersion.$buildNumber.$buildSuffix"
     gradleTasks = [
             "installEnvironment",
             "clean",
@@ -109,6 +108,8 @@ node('docker-registry') {
         gradleTasks.add("-Phasli-common.version=${params.HASLI_COMMON_VERSION}")
         gradleTasks.add("-Phasli-hal.version=${params.HASLI_HAL_VERSION}")
 
+        mvnVersions = "-Pversion=$majorVersion.$minorVersion.$buildNumber.$buildSuffix ${gradleTasks.join(' ')}"
+        bomTask = "releaseBom $mvnVersions"
         timeout(time: 60, unit: 'MINUTES') {
             stage('Build Container') {
                 sh "docker build -t hasli.io/build:$version.$buildNumber ."
@@ -121,7 +122,7 @@ node('docker-registry') {
                             "hasli.io/build:$version.$buildNumber",
                             "$version.$buildNumber",
                             "-v `pwd`:/usr/src/ -v ~/.gradle/gradle.properties:/root/.gradle/gradle.properties -v ~/.jspm:/root/.jspm",
-                            "sh -c '/usr/src/gradlew ${bomTask} && /usr/src/gradlew ${gradleTasks.join(" ")}'",
+                            "sh -c mvn clean install -f /usr/src/bom $mvnVersions && '/usr/src/gradlew ${bomTask} && /usr/src/gradlew ${gradleTasks.join(" ")}'",
                             true)
                 } catch (Exception e) {
                     error "Failed: ${e}"
