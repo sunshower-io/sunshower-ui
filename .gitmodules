@@ -19,3 +19,6 @@
 [submodule "hasli-sdk"]
 	path = hasli-sdk
 	url = git@github.com:hasli-projects/hasli-sdk.git
+[submodule "hasli-docs"]
+	path = hasli-docs
+	url = git@github.com:hasli-projects/hasli-docs.git
