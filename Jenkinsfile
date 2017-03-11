@@ -122,7 +122,7 @@ node('docker-registry') {
                             "hasli.io/build:$version.$buildNumber",
                             "$version.$buildNumber",
                             "-v `pwd`:/usr/src/ -v ~/.gradle/gradle.properties:/root/.gradle/gradle.properties -v ~/.jspm:/root/.jspm",
-                            "sh -c mvn clean install -f /usr/src/bom $mvnVersions && '/usr/src/gradlew ${bomTask} && /usr/src/gradlew ${gradleTasks.join(" ")}'",
+                            "mvn clean install -f /usr/src/bom $mvnVersions && sh -c '/usr/src/gradlew ${bomTask} && /usr/src/gradlew ${gradleTasks.join(" ")}'",
                             true)
                 } catch (Exception e) {
                     error "Failed: ${e}"
