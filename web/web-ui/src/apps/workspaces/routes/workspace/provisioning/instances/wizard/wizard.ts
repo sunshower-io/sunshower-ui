@@ -8,13 +8,14 @@ import {ApplicationRevision} from "apps/workspaces/model/application/application
 import {UUID} from "common/lib/utils/uuid";
 import {ChannelSet} from "common/lib/events/websockets";
 import {Activities} from "common/resources/custom-elements/nav-bar/activity-monitor-dropdown";
-import {Application} from "common/model/api/core/application";
+//import {Application} from "common/model/api/core/application";
 
 @autoinject
 export class CreateInstanceWizard {
 
     router: Router;
     subscription: Subscription;
+    deselectSubscription: Subscription;
 
     applicationRevision: ApplicationRevision;
 
@@ -23,8 +24,7 @@ export class CreateInstanceWizard {
     providerId: string;
     credential: CredentialSecret = null;
 
-    //todo save applications selected in catalog into this array
-    applications: Application[];
+    applications: ApplicationRevision[];
 
 
     loading: boolean;
@@ -44,16 +44,30 @@ export class CreateInstanceWizard {
                 this.select(e);
 
             });
+
+        this.deselectSubscription = this.eventAggregator.subscribe(
+            'application::deselected', e => {
+                this.deselect(e);
+            });
+
     }
 
     deactivate(): void {
         this.subscription.dispose();
+        this.deselectSubscription.dispose();
     }
 
     select(revision: any): void {
-        this.applications.push(revision.application);
+        this.applications.push(revision);
         this.applicationRevision = revision;
-        //this.router.navigate('details');
+        console.log('selected', this.applications);
+    }
+
+    deselect(revision: any): void {
+        let indexOf = this.applications.indexOf(revision);
+        this.applications.splice(indexOf, 1);
+        this.applicationRevision = null;
+        console.log('deselected', this.applications);
     }
 
 

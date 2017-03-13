@@ -23,7 +23,7 @@ template
         template(repeat.for="application of wizard.applications")
             .active.title
                 i.dropdown.icon
-                img.ui.tiny.image(src='${application.logo}')
+                img.ui.tiny.image(src='/hasli/api/v1/applications/${application.picture.id}/picture')
                 | ${application.name}
             .active.content
                 .ui.basic.segment
@@ -41,12 +41,14 @@ template
                                 .hasli-label.required
                                     label Name
                                 .hasli-input.ui.input
-                                    input(type='text', name='name', value='MySql')
+                                    //todo bind this
+                                    input(type='text', name='name', value='${application.name}')
                             .ui.field.hasli-field
                                 .hasli-label.required
                                     label Version
                                 .ui.input.hasli-input
                                     select.ui.fluid.dropdown
+                                        //todo get real versions
                                         option(value='6.10.0 LTS') 5.6
                                         option(value='new') 5.5
                                         option(value='new') 4.4
@@ -55,12 +57,13 @@ template
                                     label Deployment Policy
                                 .ui.input.hasli-input
                                     select.ui.fluid.dropdown
+                                        //todo determine what this should be
                                         option(value='') Select Policy
                                         option(value='new') default-micro-us-west-1
                                         option(value='new') default-small-us-west-1
                                         option(value='new') default-medium-us-west-1
                         .ui.hidden.divider
-                    .ui.tab(data-tab='configuration-app-#{application.id}')
+                    .ui.tab(data-tab='configuration-app-${application.id}')
                         .ui.hidden.divider
                         .ui.form
                             // TODO dynamic fields based on application

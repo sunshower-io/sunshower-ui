@@ -17,10 +17,10 @@ template
             .column
                 h4.ui.dividing.header
                     | Applications
-        .two.column.grid
+        .row.two.column.grid
             .column(repeat.for="application of wizard.applications")
                 .ui.tiny.image
-                    img(src='${application.logo}')
+                    img(src='/hasli/api/v1/applications/${application.picture.id}/picture')
                 .ui.items
                     .item
                         .content

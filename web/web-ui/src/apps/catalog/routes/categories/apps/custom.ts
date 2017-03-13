@@ -4,18 +4,18 @@
 import {Catalog} from "apps/catalog/index";
 import {HttpClient} from "aurelia-fetch-client";
 import {bindable, autoinject} from "aurelia-framework";
-import {Application} from "common/model/api/core/application";
 
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {Identifier} from "common/lib/lang";
 import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
+import {ApplicationRevision} from "apps/workspaces/model/application/application";
 
 @autoinject
 export class Custom {
 
 
     @bindable
-    applications: Application[];
+    applications: ApplicationRevision[];
 
     @bindable
     loading: boolean;
@@ -27,13 +27,22 @@ export class Custom {
     ) {
     }
 
-    select(applicationRevision:any) : void {
-        //todo make its button look selected
-        this.eventAggregator.publish(
-            'application::selected',
-            applicationRevision
-        );
-
+    select(applicationRevision:any, $event:Event) : void {
+        let button = $($event.target);
+        if (button.hasClass('basic')) {
+            this.eventAggregator.publish(
+                'application::selected',
+                applicationRevision
+            );
+            button.removeClass('basic').text('Added');
+        }
+        else {
+            this.eventAggregator.publish(
+                'application::deselected',
+                applicationRevision
+            );
+            button.addClass('basic').text('Add');
+        }
     }
 
     open($event: Event) : void {
@@ -49,6 +58,7 @@ export class Custom {
                 .then(d => {
                     this.loading = false;
                     this.applications = d;
+                    console.log(d);
                 })
                 .catch(err => {
                     console.log("Err");

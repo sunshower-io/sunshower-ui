@@ -629,8 +629,9 @@ body {
 }
 
 .modal {
-  margin-top:-250px !important;
-  height: auto !important;
+  margin-top: 0px!important;
+  top: 100px !important;
+  //height: auto !important;
 
 
   .ui.card>.image, .ui.cards>.card>.image {
