@@ -8,11 +8,14 @@ template
                     | Summary
                 .ui.basic.segment
                     p
-                        | Name: Dustin's Awesome App
+                        | Name: ${wizard.name}
                     p
-                        | Cloud: Dustin's AWS
+                        | Cloud: ${wizard.providerId}
                     p
                         | Tag: Production
+                        //todo hook up tags
+                    p
+                        | Deployment Policy: ${wizard.policyId}
         .row
             .column
                 h4.ui.dividing.header
@@ -31,3 +34,4 @@ template
                                     | Name: ${application.name}
                                 P
                                     | Size: t2.micro 1 cpu, 1 gb memory
+                                    //todo hook up size

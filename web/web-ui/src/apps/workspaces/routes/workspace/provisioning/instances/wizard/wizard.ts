@@ -23,8 +23,11 @@ export class CreateInstanceWizard {
     policyId: string;
     providerId: string;
     credential: CredentialSecret = null;
+    name: string;
 
     applications: ApplicationRevision[];
+
+    selectedTags: string[];
 
 
     loading: boolean;
@@ -60,14 +63,12 @@ export class CreateInstanceWizard {
     select(revision: any): void {
         this.applications.push(revision);
         this.applicationRevision = revision;
-        console.log('selected', this.applications);
     }
 
     deselect(revision: any): void {
         let indexOf = this.applications.indexOf(revision);
         this.applications.splice(indexOf, 1);
         this.applicationRevision = null;
-        console.log('deselected', this.applications);
     }
 
 

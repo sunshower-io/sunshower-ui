@@ -6,10 +6,8 @@ import {Provider} from "common/model/api/hal/api";
 @autoinject
 export class DeployInfoForm {
 
-    name: String;
     cloud: any;
-    selectedTags: Array<String>;
-    tagDropdown: any;
+    tagDropdown: HTMLElement;
 
     providers: Provider[];
 
@@ -18,11 +16,12 @@ export class DeployInfoForm {
 
 
     constructor(private wizard:CreateInstanceWizard, private client:HttpClient) {
-        this.selectedTags = [];
+        this.wizard.selectedTags = [];
         this.wizard.providerId = this.providerID;
     }
 
     attached() {
+        //todo save tags to wizard
         $(this.tagDropdown)
             .dropdown({
                 allowAdditions: true
@@ -30,10 +29,8 @@ export class DeployInfoForm {
 
         $(this.tagDropdown).on('change', (e) => {
             if (e.target.className !== 'search') {
-                this.selectedTags = $(e.target).val().split(',');
-                for (let tag of this.selectedTags) {
-                    console.log(`Tags selected: ${tag}`)
-                }
+                this.wizard.selectedTags = $(e.target).val().split(',');
+                console.log('selectedTags', this.wizard.selectedTags);
             }
         });
 

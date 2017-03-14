@@ -5,7 +5,11 @@ template
             .hasli-label.required
                 label Name
             .hasli-input.ui.input
-                input(type='text', name='name', placeholder='instance name')
+                input(type='text',
+                    name='name',
+                    placeholder='instance name',
+                    value.bind="wizard.name"
+                )
         .ui.field.hasli-field
             .hasli-label.required
                 label Cloud

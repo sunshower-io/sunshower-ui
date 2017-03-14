@@ -27,6 +27,8 @@ export class AppCustomizeForm {
                 exclusive: false
             });
 
+        $('.ui.modal').modal('refresh');
+
         $('.ui.checkbox')
             .checkbox();
 
