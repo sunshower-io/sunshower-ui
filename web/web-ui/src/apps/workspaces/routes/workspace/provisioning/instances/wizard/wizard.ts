@@ -132,7 +132,6 @@ export class CreateInstanceWizard {
                 id: 'boop',
             }, {replace: true});
 
-            console.log(this.router);
             $(this.container).modal({
                 onHide: () => {
                     this.workspace.router.navigateToRoute('provisioning');

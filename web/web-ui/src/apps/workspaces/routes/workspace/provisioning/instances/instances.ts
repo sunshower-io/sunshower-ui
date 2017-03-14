@@ -99,7 +99,7 @@ export class Instances {
                 .then(d => d.json() as any)
                 .then(d => {
                     this.providers = d;
-                    console.log("Providers", d);
+                    // console.log("Providers", d);
                     for (let provider of d) {
                         if (provider.key == 'aws') {
                             this.provider = provider;

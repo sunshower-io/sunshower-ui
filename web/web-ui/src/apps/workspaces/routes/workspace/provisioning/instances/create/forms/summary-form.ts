@@ -11,6 +11,10 @@ export class SummaryForm {
 
     }
 
+    attached() {
+        console.log(this.wizard)
+    }
+
     activate(model) {
         this.model = model;
     }

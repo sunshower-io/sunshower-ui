@@ -12,8 +12,8 @@ template
                     p
                         | Cloud: ${wizard.providerId}
                     p
-                        | Tag: Production
-                        //todo hook up tags
+                        | Tag:
+                        template(repeat.for="tag of wizard.selectedTags") ${tag}${$last ? '' : ', '}
                     p
                         | Deployment Policy: ${wizard.policyId}
         .row
