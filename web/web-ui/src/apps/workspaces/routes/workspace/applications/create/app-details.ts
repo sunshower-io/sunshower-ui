@@ -65,6 +65,7 @@ export class CreateApp {
             new Template('styles/themes/hasli/assets/images/cd-build-environment.svg', 'CD Build Environment'),
             new Template('styles/themes/hasli/assets/images/ms-architecture.svg', 'Microservices Architecture'),
             new Template('styles/themes/hasli/assets/images/java-ee.svg', 'Java EE Enterprise'),
+            new Template('styles/themes/hasli/assets/images/github-mark.svg', 'Github Integration')
         ]
         this.controller.addRenderer(new BootstrapFormRenderer());
     }
