@@ -41,16 +41,17 @@ template
                         .fluid.field.ui.basic.center.aligned.segment
                             //todo center align menu
                             .ui.secondary.pointing.menu
-                                .item.clickable(class="${!appType ? 'active' : ''}" click.delegate="switchTab(false)") Upload Application
-                                .item.clickable(class="${appType ? 'active' : ''}" click.delegate="switchTab(true)") Select Template
+                                .item.clickable(class="${appType == 'upload' ? 'active' : ''}" click.delegate="switchTab('upload')") Upload Application
+                                .item.clickable(class="${appType == 'select' ? 'active' : ''}" click.delegate="switchTab('select')") Select Template
+                                .item.clickable(class="${appType == 'github' ? 'active' : ''}" click.delegate="switchTab('github')") Clone Repository
                             .ui.hidden.divider
-                            h1.ui.center.aligned.header(ref="fileUploader" if.bind="!appType")
+                            h1.ui.center.aligned.header(ref="fileUploader" if.bind="appType == 'upload'")
                                 label.clickable
                                     input.upload-box__file(type="file" name="file" ref="fileInput" files.bind="file & validate")
                                     i.circular.blue.ion-ios-folder.icon.circular--icon
                                     span(style="margin-left:1em;") Upload Application
                                     .upload-box__file-label
-                            .ui.four.link.cards(if.bind="appType")
+                            .ui.four.link.cards(if.bind="appType == 'select'")
                                 //todo make selecting a card work
                                 .new-app_type.card.hvr-glow(repeat.for="template of templates")
                                     .content
@@ -58,6 +59,35 @@ template
                                             img(src="${template.icon}")
                                         .description
                                             | ${template.description}
+                            .ui.grid.hasli-form.ui.form(if.bind="appType == 'github'")
+                                .row
+                                    .four.wide.column
+                                        img.ui.image.small(src="styles/themes/hasli/assets/images/github-mark.svg")
+                                    .twelve.wide.column.middle.aligned
+                                        .hasli-field.ui.field
+                                            .hasli-label
+                                                label Repository
+                                            .hasli-input.ui.input
+                                                input(type="text" name="repository")
+                                .row
+                                    .sixteen.wide.column
+                                        .hasli-field.ui.field
+                                            .hasli-label
+                                                label Username
+                                            .hasli-input.ui.input
+                                                input(type="text" name="username")
+                                        .hasli-field.ui.field
+                                            .hasli-label
+                                                label Password
+                                            .hasli-input.ui.input
+                                                input(type="password" name="password")
+                                        .ui.horizontal.divider
+                                            | OR
+                                        .hasli-field.ui.field
+                                            .hasli-label
+                                                label Key
+                                            .hasli-input.ui.input
+                                                textarea
                         .big-divider
 
                         .ui.basic.center.aligned.segment
