@@ -4,7 +4,7 @@
 
     <groupId>io.hasli.ui</groupId>
     <artifactId>bom</artifactId>
-    <version>1.00.000.000-SNAPSHOT</version>
+    <version>1.0.1-141636613-FEATURE</version>
     <packaging>pom</packaging>
 
     <name>bom</name>
