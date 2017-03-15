@@ -1,0 +1,49 @@
+//
+   Created by dustinlish on 3/6/17.
+template
+    .header
+        .center.aligned
+            | UPDATE INSTANCE
+    .content
+        .ui.grid
+            .row
+                .two.wide.center.aligned.column
+                    span
+                        svg(width='54px', height='51px', viewbox='52 44 54 51', version='1.1', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink')
+                            defs
+                            g#user-icon(stroke='none', stroke-width='1', fill='none', fill-rule='evenodd', transform='translate(52.000000, 44.000000)')
+                                ellipse#Circle(fill='#CDCDD3', cx='26.8587096', cy='25.5', rx='26.7567568', ry='25.5')
+                                text#DL(font-family='AvenirNext-Medium, Avenir Next', font-size='12', font-weight='400', fill='#FFFFFF')
+                                    tspan(x='19.2598919', y='28') DL
+                .fourteen.wide.column
+                    form.ui.form(role='form')
+                        .field
+                            label Version
+                            input(type='text', value.bind='version', placeholder='${currentVersion}')
+                        .field
+                            label Description
+                            textarea(value.bind='description')
+        table.ui.striped.table
+            thead
+                tr
+                    th Version
+                    th Description
+                    th Author
+                    th Created At
+            tbody
+                tr(repeat.for='version of currentVersions')
+                    td
+                        .ui.divided.selection.list
+                            a.item
+                                | ${version.version}
+                                // TODO tag with LATEST
+                                a.ui.green.horizontal.label
+                                    | LATEST
+                    td ${version.description}
+                    td ${version.owner}
+                    td ${version.date}
+        .ui.segment
+            h3.ui.dividing.header Changes
+    .actions
+        button.ui.right.primary.button(click.delegate="save()")
+            | Save

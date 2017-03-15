@@ -1,0 +1,16 @@
+template
+    require(from="./bottom/layers")
+    .ui.vertical.sticky.left.menu.fixed.left--menu.no--boxshadow
+        .ui.menu--header
+            .ui.sidebar-header
+                span.pull-left
+                    | Draftboards
+                .ui.right.floated.image.middle.aligned.header-icon
+                    img(src='styles/themes/hasli/assets/images/icons/plus-green-icon.svg')
+        .ui.basic.secondary.segment.property--menu
+            .item
+                .menu
+                    a.item(repeat.for="board of draftboards", click.delegate="open(board.id)")
+                        | ${board.name}
+        layers
+

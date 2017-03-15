@@ -1,0 +1,9 @@
+template
+    .banner-menu(click.delegate="toggle()")
+        span.text ${label}
+        i.caret.down.icon
+    .banner-container(ref="container")
+        carousel(
+            items.bind="carouselItems",
+            view-model.ref="carousel",
+        )

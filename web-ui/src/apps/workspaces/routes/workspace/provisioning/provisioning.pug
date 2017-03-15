@@ -1,0 +1,18 @@
+//
+   Created by dustinlish on 3/1/17.
+
+template
+    .ui.hidden.divider
+    .ui.container
+        .ui.basic.segment
+            .ui.secondary.menu
+                a.item(
+                repeat.for='row of router.navigation',
+                class="${row.isActive ? 'active' : ''}"
+                href.bind='row.href'
+                )
+                    i(class="${row.settings.icon}").circular.large.icon.circular--icon_no-box
+                    .content
+                        | ${row.title}
+        .ui.hidden.divider
+    router-view

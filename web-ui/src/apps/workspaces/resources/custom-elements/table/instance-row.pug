@@ -1,0 +1,49 @@
+//
+   Created by dustinlish on 3/2/17.
+
+template
+    // checkbox
+    td.right.aligned
+        .ui.child.green.checkbox
+            input(name='child', type='checkbox')
+            label
+    // name
+    td
+        .ui.link.items
+            .item(click.delegate="openInstance(model)")
+                .ui.middle.aligned.mini.image
+                    img(src="${model.logo}")
+                .content
+                    | ${model.name}
+    // version
+    td
+        | ${model.version}
+    // Status
+    td
+        i.icon.status-circle(class="${computeStatus(instance)}")
+        | ${model.state}
+    // environment
+    td
+        | ${model.environment}
+    // vms
+    td
+        | ${model.vms}
+    // containers
+    td
+        | ${model.containers}
+    td.right.aligned
+        .ui.inline.pointing.top.right.dropdown
+            i.link.ion-ios-gear-outline.big.blue.icon
+            .menu
+                .item
+                    i.ion-power.large.green.icon
+                    | Poweron
+                .item
+                    i.ion-stop.large.grey.icon
+                    | Poweroff
+                .item
+                    i.ion-ios-reload.large.grey.icon
+                    | Restart
+                .item
+                    i.ion-ios-close-outline.large.red.icon
+                    | Force Terminate

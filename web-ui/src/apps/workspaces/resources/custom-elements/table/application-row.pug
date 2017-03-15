@@ -1,0 +1,38 @@
+//
+   Created by dustinlish on 3/2/17.
+
+template
+    // checkbox
+    td.right.aligned
+        .ui.child.green.checkbox
+            input(name='child', type='checkbox')
+            label
+    // name
+    td
+        .ui.link.items
+            .item(click.delegate="open(model)")
+                .ui.middle.aligned.mini.image
+                    img(src="${model.logo ? model.logo : '/hasli/api/v1/applications/' + model.picture.id + '/picture'}")
+                .middle.aligned.content
+                    | ${model.name}
+    // version
+    td
+        | ${model.version}
+    // status
+    td
+        .status-circle.green
+        | ${model.status}
+    // instances
+    td
+        | ${model.instances}
+    // containers
+    td
+        | ${model.containers}
+    // modified
+    td
+        | ${model.modified}
+    // owner
+    td
+        | ${model.owner.firstname} ${model.owner.lastname}
+    td.right.aligned
+        i.link.ion-ios-gear-outline.big.blue.icon

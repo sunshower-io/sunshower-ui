@@ -1,0 +1,107 @@
+template
+    .ui.center.aligned.container(style="margin-top:1em; margin-bottom:1em;")
+        div
+            .center.aligned.ui
+                    h1
+                        | Welcome to Hasli Meteorology!
+                    p
+                        | Meteorology has not been configured yet.  Let's take a moment to do that!
+
+            .ui.hidden.divider
+            .center.aligned.ui
+                h2
+                    | General information
+                p
+                    | Just a few questions about your installation
+            .ui.small.form.message
+
+                .field
+                    label.pull-left Installation Name
+                    input(
+                        type='text',
+                        placeholder='Installation Name',
+                        value.bind='application.name'
+                    )
+
+                .field
+                    label.pull-left Installation Location (e.g. meteorology.hasli.io)
+                    input(
+                        type='text',
+                        placeholder='Installation Location (e.g. meteorology.hasli.io)',
+                        value.bind='application.location'
+                    )
+
+            .ui.hidden.divider
+            .center.aligned.ui
+                h2
+                    | Administrative users
+                p
+                    | We need at least one administrative user.  These users will have access to all
+                    | non-encrypted data within the system.  These users may be changed at any time.
+                    | administrative users may change aspects of Meteorology, but they cannot see non-public user's data
+                    | We recommend keeping as few administrators as possible, for security reasons.
+
+            .ui.small.form.message(repeat.for="administrator of application.administrators", style="margin-bottom:10px;")
+                h3 ${current.username || 'Username'}
+                .two.fields
+                    .field
+                        label.pull-left First Name
+                        input(
+                            type='text',
+                            placeholder='First Name',
+                            value.bind='current.firstname'
+                        )
+                    .field
+                        label.pull-left Last Name
+                        input(
+                            type='text',
+                            placeholder='Last Name',
+                            value.bind='current.lastname'
+                        )
+
+                .two.fields
+                    .field
+                        label.pull-left Username
+                        input(
+                            type='text',
+                            placeholder='Username',
+                            value.bind='current.username'
+                        )
+
+                    .field
+                        label.pull-left E-Mail
+                        input(
+                            type='text',
+                            placeholder='E-Mail',
+                            value.bind='current.emailAddress'
+                        )
+
+                .two.fields
+                    .field
+                        label.pull-left Password
+                        input(
+                            type='password',
+                            placeholder='Password',
+                            value.bind='current.password'
+                        )
+                    .field
+                        label.pull-left Confirm Password
+                        input(
+                            type='password',
+                            placeholder='Confirm Password',
+                            value.bind='current.password'
+                        )
+
+            .ui.grid.stackable.equal.width
+                input.ui.button.secondary.column(
+                    style="margin-top:10px",
+                    type='button',
+                    value='Add Another Administrator',
+                    click.delegate="addUser()")
+                input.ui.button.primary.column(
+                    style="margin-top:10px;"
+                    type='button',
+                    value='Save and Continue',
+                    show.bind="current"
+                    click.delegate="submit()"
+                )

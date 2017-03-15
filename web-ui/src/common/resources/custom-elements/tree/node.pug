@@ -1,0 +1,24 @@
+template(bindable="node")
+    li
+        .icell(id="${node.id}")
+            i.caret.down.icon(show.bind="node.hasChildren()", click.delegate="toggle($event)")
+            .nodeicon(if.bind="node.icon")
+                img(
+                src="${node.icon}",
+                width="16px" height="16px"
+                )
+            a(click.delegate="onClick(node)") ${node.name}
+            i.r.hide.icon
+        ul(if.bind="node.hasChildren()")
+            li(repeat.for="child of node.getChildren()" )
+                .icell(id="${child.id}")
+                    i.caret.down.icon(show.bind="child.getChildren()", click.delegate="toggle($event)")
+                    .nodeicon(if.bind="child.icon")
+                        img(
+                        src="${child.icon}",
+                        width="16px" height="16px"
+                        )
+                    a(click.delegate="onClick(child)") ${child.name}
+                    i.r.hide.icon
+                ul(if.bind="child.hasChildren()" repeat.for="c of child.getChildren()")
+                    node(node.bind="c", tree.bind="tree")

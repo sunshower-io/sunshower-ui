@@ -1,0 +1,13 @@
+template
+    .ui.padded.two.column.grid
+        h1 Admin
+
+        h2.ui.horizontal.divider.header
+            i.settings.icon
+            | Indexing
+
+        .row
+            .column
+            .column
+                .ui.button.primary.right.floated(click.delegate="indexImages()" class="${indexingImages ? 'loading' : ''}") Index Images
+                .ui.button.primary.right.floated(click.delegate="indexAWS()" class="${indexingAWS ? 'loading' : ''}") Index AWS

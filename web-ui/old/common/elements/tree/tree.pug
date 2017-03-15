@@ -1,0 +1,9 @@
+template(bindable="nodes")
+    require(from="./node")
+    .tree
+        ul(repeat.for="node of nodes")
+            node(
+                tree.bind="self"
+                node.bind="node"
+            )
+

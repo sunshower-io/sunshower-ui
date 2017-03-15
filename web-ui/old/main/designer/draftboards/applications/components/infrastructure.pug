@@ -1,0 +1,67 @@
+template(bindable="task")
+    form
+        .ui.form
+            .field
+                    label Name
+                    input(
+                    type="text",
+                    placeholder="Configuration Name",
+                    value.bind="task.name"
+                )
+            .field
+                .ui.fluid.search.selection.dropdown(ref="osSelect")
+                    input(type='hidden', name='operatingSystem')
+                    i.dropdown.icon
+                    .default.text Select Operating System
+                    .menu
+                        .item(repeat.for='os of operatingSystems' data-value="${os.id}")
+                            image.ui.image(src='assets/sui/themes/hasli/assets/images/logos/os/${os.icon}')
+                            |  ${os.name} (${os.family})
+
+            .field
+                label Instances
+                input(type='number', placeholder='Instances to provision')
+
+            .field
+                label CPUs
+                input(
+                    type='number',
+                    placeholder='Number of CPUs',
+                    value.bind="task.deploymentTarget.cpu"
+                )
+            .field
+                label Memory
+                .fields
+                    .eight.wide.field
+                        input(
+                        type='number',
+                        placeholder='Number',
+                        value.bind="task.deploymentTarget.memory"
+                        )
+                    .eight.wide.field
+                        select
+                            option B
+                            option KB
+                            option MB
+                            option(selected='selected') GB
+                            option TB
+                            option EiB
+            .field
+                label Storage
+                .fields
+                    .eight.wide.field
+                        input(
+                        type='number',
+                        placeholder='Number',
+                        value.bind="task.deploymentTarget.disk"
+                        )
+                    .eight.wide.field
+                        select
+                            option B
+                            option KB
+                            option MB
+                            option(selected='selected') GB
+                            option TB
+                            option EiB
+
+
