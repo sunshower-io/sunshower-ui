@@ -1,7 +1,0 @@
-
-dependencies {
-
-    testCompile 'javax.ws.rs:javax.ws.rs-api'
-    testCompile "io.hasli.api:security-api"
-    testCompile "org.jboss.resteasy:resteasy-client"
-}
