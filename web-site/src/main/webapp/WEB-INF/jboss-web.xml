@@ -1,0 +1,3 @@
+<jboss-web>
+    <context-root>hasli</context-root>
+</jboss-web>
