@@ -34,7 +34,7 @@ export class CreateApp {
     private loading: boolean = false;
 
     @bindable
-    private appType: boolean = false;
+    private appType: string = 'upload'; //alternately select, github
 
     @bindable
     templates: Template[];
@@ -65,7 +65,7 @@ export class CreateApp {
             new Template('styles/themes/hasli/assets/images/cd-build-environment.svg', 'CD Build Environment'),
             new Template('styles/themes/hasli/assets/images/ms-architecture.svg', 'Microservices Architecture'),
             new Template('styles/themes/hasli/assets/images/java-ee.svg', 'Java EE Enterprise'),
-        ]
+        ];
         this.controller.addRenderer(new BootstrapFormRenderer());
     }
 
@@ -125,7 +125,7 @@ export class CreateApp {
         this.parent.showModal = false;
     }
 
-    switchTab(tab: boolean): void {
+    switchTab(tab: string): void {
         this.appType = tab;
     }
 

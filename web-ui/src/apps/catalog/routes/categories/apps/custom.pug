@@ -4,20 +4,20 @@
 template
     .ui.grid
         h5.ui.header
-            | 1 - 4 of 4 available images.
+            | 1 - ${applications.length} of ${applications.length} available images.
         .ui.hidden.divider
         .ui.basic.segment
             .ui.cards
                 .card(repeat.for="application of applications")
                     .content
-                        img.right.floated.mini.ui.image(src='styles/themes/hasli/assets/images/logos/ca-logo.png')
+                        img.right.floated.mini.ui.image(src='/hasli/api/v1/applications/${application.picture.id}/picture')
                         .header
                             | ${application.name}
-                        .meta
-                            | Docker Compose
+                        //.meta
+                        //    | Docker Compose
                         .description
                             | ${application.description}
                     .extra.content
                         .ui.two.buttons
-                            .ui.basic.secondary.button(click.delegate="select(application)") Add
-                            .ui.basic.blue.button(click.delegate="open()") View
+                            .ui.basic.secondary.button(click.delegate="select(application, $event)") Add
+                            .ui.basic.blue.button(click.delegate="open($event)") View

@@ -629,8 +629,9 @@ body {
 }
 
 .modal {
-  margin-top:-250px !important;
-  height: auto !important;
+  margin-top: 0px!important;
+  top: 100px !important;
+  //height: auto !important;
 
 
   .ui.card>.image, .ui.cards>.card>.image {
@@ -697,7 +698,7 @@ body {
   }
 }
 
-.overlay-form {
+.overlay-form, .hasli-form {
   .ui.dividing.header {
     font-weight:normal;
     color: @hasliGrey;
@@ -721,13 +722,14 @@ body {
   }
 
 
-  .field.overlay-field {
+  .field.overlay-field, .field.hasli-field {
     margin: @hasliem 0 !important;
     &>* {
       box-sizing:border-box;
       float:left;
     }
-    .overlay-label {
+
+    .overlay-label, .hasli-label {
       color: @hasliGrey;
       text-align:right;
       padding-right:1em;
@@ -735,7 +737,7 @@ body {
       padding-top:@hasliem/2;
       font-size: 1.2em;
     }
-    .overlay-input {
+    .overlay-input, .hasli-input {
       width:75% !important;
     }
     .overlay-help {
@@ -820,6 +822,10 @@ body {
   position: relative;
   height: @trheight;
   box-sizing:border-box;
+
+  .ui.dimmer {
+    z-index: 1;
+  }
 }
 
 //refactor to somewhere else for reuse
@@ -1136,6 +1142,11 @@ table tr.inactive {
       color: #9F3A38;
     }
   }
+
+  &.hasli-incomplete {
+    background-color: lighten(@primarycolor, 25%);
+  }
+
   &.hasli-success {
     background-color: lighten(@hasliGreen, 25%);
   }

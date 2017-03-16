@@ -3,7 +3,8 @@ import {Provider} from "common/model/api/hal/api";
 import {autoinject} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
-import {User} from "../../../../../../common/model/security/user";
+import {User} from "common/model/security/user";
+import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
 
 @autoinject
 export class Clouds {
@@ -19,6 +20,7 @@ export class Clouds {
     constructor(
         private parent:Workspace,
         private client:HttpClient,
+        private incompleteFeature:IncompleteFeature
     ) {
     }
 

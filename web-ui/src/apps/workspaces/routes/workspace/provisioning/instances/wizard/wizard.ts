@@ -1,5 +1,4 @@
-import {RouterConfiguration} from "aurelia-router";
-import {Router} from "aurelia-router";
+import {Router, RouterConfiguration} from "aurelia-router";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
 import {autoinject} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
@@ -8,12 +7,15 @@ import {Subscription, EventAggregator} from "aurelia-event-aggregator";
 import {ApplicationRevision} from "apps/workspaces/model/application/application";
 import {UUID} from "common/lib/utils/uuid";
 import {ChannelSet} from "common/lib/events/websockets";
-import {Activities} from "../../../../../../../common/resources/custom-elements/nav-bar/activity-monitor-dropdown";
+import {Activities} from "common/resources/custom-elements/nav-bar/activity-monitor-dropdown";
+//import {Application} from "common/model/api/core/application";
+
 @autoinject
 export class CreateInstanceWizard {
 
     router: Router;
     subscription: Subscription;
+    deselectSubscription: Subscription;
 
     applicationRevision: ApplicationRevision;
 
@@ -21,6 +23,12 @@ export class CreateInstanceWizard {
     policyId: string;
     providerId: string;
     credential: CredentialSecret = null;
+    name: string;
+
+    applications: ApplicationRevision[];
+
+    selectedTags: string[];
+
 
     loading: boolean;
 
@@ -28,7 +36,7 @@ export class CreateInstanceWizard {
                 private workspace: Workspace,
                 private channels: ChannelSet,
                 private eventAggregator: EventAggregator) {
-
+        this.applications = [];
     }
 
 
@@ -39,15 +47,28 @@ export class CreateInstanceWizard {
                 this.select(e);
 
             });
+
+        this.deselectSubscription = this.eventAggregator.subscribe(
+            'application::deselected', e => {
+                this.deselect(e);
+            });
+
     }
 
     deactivate(): void {
         this.subscription.dispose();
+        this.deselectSubscription.dispose();
     }
 
     select(revision: any): void {
+        this.applications.push(revision);
         this.applicationRevision = revision;
-        this.router.navigate('details');
+    }
+
+    deselect(revision: any): void {
+        let indexOf = this.applications.indexOf(revision);
+        this.applications.splice(indexOf, 1);
+        this.applicationRevision = null;
     }
 
 
@@ -111,7 +132,6 @@ export class CreateInstanceWizard {
                 id: 'boop',
             }, {replace: true});
 
-            console.log(this.router);
             $(this.container).modal({
                 onHide: () => {
                     this.workspace.router.navigateToRoute('provisioning');

@@ -8,19 +8,22 @@ template
                     | Summary
                 .ui.basic.segment
                     p
-                        | Name: Dustin's Awesome App
+                        | Name: ${wizard.name}
                     p
-                        | Cloud: Dustin's AWS
+                        | Cloud: ${wizard.providerId}
                     p
-                        | Tag: Production
+                        | Tag:
+                        template(repeat.for="tag of wizard.selectedTags") ${tag}${$last ? '' : ', '}
+                    p
+                        | Deployment Policy: ${wizard.policyId}
         .row
             .column
                 h4.ui.dividing.header
                     | Applications
-        .two.column.row
-            .column
+        .row.two.column.grid
+            .column(repeat.for="application of wizard.applications")
                 .ui.tiny.image
-                    img(src='styles/themes/hasli/assets/images/logos/nodejs-logo.svg')
+                    img(src='/hasli/api/v1/applications/${application.picture.id}/picture')
                 .ui.items
                     .item
                         .content
@@ -28,19 +31,7 @@ template
                                 span Details
                             .description
                                 p
-                                    | Name: Node.js
+                                    | Name: ${application.name}
                                 P
                                     | Size: t2.micro 1 cpu, 1 gb memory
-            .column
-                .ui.tiny.image
-                    img(src='styles/themes/hasli/assets/images/logos/mysql-logo.svg')
-                .ui.items
-                    .item
-                        .content
-                            .meta
-                                span Details
-                            .description
-                                p
-                                    | Name: MySql
-                                P
-                                    | Size: t2.micro 1 cpu, 1 gb memory
+                                    //todo hook up size

@@ -6,6 +6,7 @@ import {CreateInstanceWizard} from "apps/workspaces/routes/workspace/provisionin
 @autoinject
 export class Catalog {
     public router: Router;
+    public id: string;
 
 
     constructor(private wizard:CreateInstanceWizard) {
@@ -35,7 +36,6 @@ export class Catalog {
     }
 
 
-    public id: string;
 
     activate(workspace: any) {
         if(workspace.id != null) {
