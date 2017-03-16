@@ -11,7 +11,6 @@
 /// <reference path="globals/plotly/index.d.ts" />
 /// <reference path="globals/showdown/index.d.ts" />
 /// <reference path="globals/url-search-params-typing/index.d.ts" />
-/// <reference path="globals/url/index.d.ts" />
 /// <reference path="globals/velocity-animate/index.d.ts" />
 /// <reference path="globals/whatwg-fetch/index.d.ts" />
 /// <reference path="globals/whatwg-streams/index.d.ts" />
