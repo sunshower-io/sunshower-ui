@@ -1,0 +1,37 @@
+template
+    .ui.vertical.center.aligned.divided.segment.title-bar
+        .ui.container
+            .ui.text.menu
+                .ui.header.item.light-font-weight
+                    h2 Workspaces
+                .right.compact.menu
+                    .ui.fitted.item
+                        .ui.primary.button(click.delegate="newWorkspace()")
+                            | New Workspace
+    .ui.vertical.center.aligned.segment
+        .ui.container
+            .ui.hidden.divider
+            .ui.stackable.cards
+                .ui.centered.link.card(type='button', repeat.for="workspace of workspaces")
+                    .content
+                        .ui.centered.grid
+                            .center.aligned.column
+                                .ui.compact.secondary.menu
+                                    a.fitted.item(click.delegate="incompleteFeature.notify($event)")
+                                        i.big.ion-ios-star-outline.icon
+                                    a.fitted.item(click.delegate="incompleteFeature.notify($event)")
+                                        i.big.ion-ios-cloud-download-outline.icon
+                                    a.fitted.item(click.delegate="incompleteFeature.notify($event)")
+                                        i.big.ion-ios-browsers-outline.icon
+                                    a.fitted.item(click.delegate="delete(workspace.workspace.id)")
+                                        i.big.ion-ios-trash-outline.icon
+                    .content(click.trigger="open(workspace.id)")
+                        .ui.container.workspaces--image_container
+                            //img(src='styles/themes/hasli/assets/images/logos/ca-logo.png').workspaces--image_size
+                            img(src='/hasli/api/v1/files/${workspace.picture.id}').workspaces--image_size
+                        .header
+                        .meta
+                            .ui.hidden.divider
+                            .workspace-name
+                                | ${workspace.name}
+                        .description

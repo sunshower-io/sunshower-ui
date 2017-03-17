@@ -1,0 +1,24 @@
+//
+   Created by dustinlish on 10/21/16.
+
+template(bindable="router")
+    .ui.inline.pointing.dropdown.top.right
+        i.large.inverted.ion-person.icon
+        i.inverted.dropdown.icon
+        .menu
+            .item.disabled
+                i.large.ion-image.icon
+                | ${user.username}
+            .divider
+            .item(click.delegate="openSettings()")
+                i.ion-ios-settings-strong.icon
+                | Account Settings
+            .item(click.delegate="incompleteFeature.notify($event)")
+                i.ion-help.icon
+                | Help
+            .divider
+            .item(click.delegate="logout()")
+                i.ion-log-out.icon
+                | Sign out
+
+

@@ -1,7 +1,4 @@
 include(
-        'logging',
-        'web:hasli.io',
-        'web:web-ui',
-        'web:web-site',
-        'web:web-service',
+        'web-ui',
+        'web-site',
 )
