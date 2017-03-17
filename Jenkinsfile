@@ -71,7 +71,8 @@ node('docker-registry') {
                 stage('Deploy to Staging') {
                     sh "sed -i.bak 's/^HASLI_NAME=.*/HASLI_NAME=$name-wildfly/' ./resources/.env"
                     sh "sed -i.bak 's/^HASLI_VERSION=.*/HASLI_VERSION=$version.$buildNumber/' ./resources/.env"
-                    sh "sed -i.bak 's/^HASLI_IMAGE=.*/HASLI_IMAGE=hasli.io\\/ui/' ./resources/.env"
+                    sh "sed -i.bak 's/^HASLI_IMAGE=.*/HASLI_IMAGE=hasli-ui\\/ui/' ./resources/.env"
+                    sh "sed -i.bak 's/^HASLI_PORTS=.*/HASLI_PORTS=8080' ./resources/.env"
 
                     sh "docker build --build-arg WILDFLY_VERSION=$wildflyVersion -t $hasliImage:$version.$buildNumber -f resources/Dockerfile.prod ."
                     sh "cd resources && docker-compose -f docker-compose.yml -p $name up -d"
