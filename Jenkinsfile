@@ -53,7 +53,7 @@ node('docker-registry') {
                 dockerRun(
                         "hasli-ui/build-env:$version.$buildNumber",
                         "$version.$buildNumber",
-                        "-v `pwd`:/usr/src/ -v ~/.gradle/caches:/root/.gradle/caches -v ~/.gradle/wrapper:/root/.gradle/wrapper -v ~/.gradle/gradle.properties:/root/.gradle/gradle.properties -v ~/.jspm:/root/.jspm",
+                        "-v `pwd`:/usr/src/ -v ~/.gradle/wrapper:/root/.gradle/wrapper -v ~/.gradle/gradle.properties:/root/.gradle/gradle.properties -v ~/.jspm:/root/.jspm",
                         "sh -c '/usr/src/gradlew ${gradleTasks.join(" ")}'",
                         true
                 )
