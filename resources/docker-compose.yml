@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+
+  hasli-ui:
+    container_name: "${HASLI_UI_NAME}"
+    image: "${HASLI_UI_IMAGE}:${HASLI_UI_VERSION}"
+    ports:
+      - 8080:8080
+    links:
+      - agent
+
+  hasli-web:
+    container_name: "hasli-web-${HASLI_UI_NAME}"
+    image: "10.0.4.51:5000/hasli-web/web:latest"
+    ports:
+      - 5001:5001
