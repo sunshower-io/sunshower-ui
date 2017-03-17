@@ -10,6 +10,8 @@ def hasliImage     = "hasli-ui/ui"
 def runSystemTests = false
 def gradleTasks    = []
 
+def wildflyVersion = "1.0.23.Final"
+
 if (env.BRANCH_NAME == "master") {
     buildNumber = env.BUILD_NUMBER
     buildSuffix = "Final"
