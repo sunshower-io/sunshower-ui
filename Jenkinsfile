@@ -75,6 +75,11 @@ node('docker-registry') {
                     sh "sed -i.bak 's/^HASLI_UI_PORTS=.*/HASLI_UI_PORTS=8080/' ./resources/.env"
 
                     sh "docker build --build-arg WILDFLY_VERSION=$wildflyVersion -t $hasliImage:$version.$buildNumber -f resources/Dockerfile.prod ."
+                    sh "docker tag $hasliImage:$version.$buildNumber $registry/$hasliImage:$version.$buildNumber"
+                    sh "docker tag $hasliImage:$version.$buildNumber $registry/$hasliImage:latest"
+                    sh "docker push $registry/$hasliImage:$version.$buildNumber"
+                    sh "docker push $registry/$hasliImage:latest"
+
                     sh "cd resources && docker-compose -f docker-compose.yml -p $name up -d"
                 }
 
@@ -89,16 +94,8 @@ node('docker-registry') {
 
                     echo "Port Mapping: $portMapping"
                 }
-            } else {
-                sh "docker build --build-arg WILDFLY_VERSION=$wildflyVersion --build-arg HASLI_VERSION=$majorVersion.$minorVersion.$buildNumber.$buildSuffix -t $hasliImage:$version.$buildNumber ."
-                sh "docker tag $hasliImage:$version.$buildNumber $registry/$hasliImage:$version.$buildNumber"
-                sh "docker tag $hasliImage:$version.$buildNumber $registry/$hasliImage:latest"
-                sh "docker push $registry/$hasliImage:$version.$buildNumber"
-                sh "docker push $registry/$hasliImage:latest"
             }
-
         }
-
     }
 }
 
