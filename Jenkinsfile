@@ -43,7 +43,7 @@ node('docker-registry') {
 
     timeout(time: 60, unit: 'MINUTES') {
         stage('Build Container') {
-            sh "docker build -t hasli-ui/build-env:$version.$buildNumber ."
+            sh "docker build -t hasli-ui/build-env:$version.$buildNumber -f resources/Dockerfile.build ."
         }
 
         stage('Gradle Build / Test') {
@@ -73,7 +73,7 @@ node('docker-registry') {
                     sh "sed -i.bak 's/^HASLI_VERSION=.*/HASLI_VERSION=$version.$buildNumber/' ./resources/.env"
                     sh "sed -i.bak 's/^HASLI_IMAGE=.*/HASLI_IMAGE=hasli.io\\/ui/' ./resources/.env"
 
-                    sh "docker build --build-arg WILDFLY_VERSION=$wildflyVersion -t $hasliImage:$version.$buildNumber -f ./resources/Dockerfile.prod ."
+                    sh "docker build --build-arg WILDFLY_VERSION=$wildflyVersion -t $hasliImage:$version.$buildNumber -f resources/Dockerfile.prod ."
                     sh "cd resources && docker-compose -f docker-compose.yml -p $name up -d"
                 }
 
