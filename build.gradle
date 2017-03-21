@@ -33,4 +33,34 @@ task wrapper(type: Wrapper) {
     gradleVersion = gradleWrapperVersion
 }
 
+apply plugin: 'com.bmuschko.docker-remote-api'
+
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+
+task buildEnvImage(type: DockerBuildImage) {
+    group "Docker"
+    dockerFile = new File("./resources/Dockerfile.build")
+    inputDir = new File(".")
+    tag = "hasli-ui/build-env"
+}
+
+task buildDevImage(type: DockerBuildImage) {
+    group "Docker"
+    dockerFile = new File("./resources/Dockerfile.dev")
+    inputDir = new File(".")
+    tag = "hasli-ui/ui-dev"
+}
+
+task buildProdImage(type: DockerBuildImage) {
+    group "Docker"
+    dockerFile = new File("./resources/Dockerfile.prod")
+    inputDir = new File(".")
+    tag = "hasli-ui/ui"
+}
+
+task buildImages() {
+    group "Docker"
+    dependsOn buildEnvImage, buildDevImage, buildProdImage
+}
+
 defaultTasks "clean", "build"
