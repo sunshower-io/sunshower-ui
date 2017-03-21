@@ -28,6 +28,8 @@ export class Workspace {
     public router: Router;
 
     private mode: Mode;
+
+
     private subscription: Subscription;
 
     public hostWorkspace: WS;

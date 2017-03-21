@@ -28,7 +28,7 @@ template
                     .content(click.trigger="open(workspace.id)")
                         .ui.container.workspaces--image_container
                             //img(src='styles/themes/hasli/assets/images/logos/ca-logo.png').workspaces--image_size
-                            img(src='/hasli/api/v1/files/${workspace.picture.id}').workspaces--image_size
+                            img(src='/hasli/api/v1/workspaces/${workspace.id}/image').workspaces--image_size
                         .header
                         .meta
                             .ui.hidden.divider

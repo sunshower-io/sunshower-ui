@@ -6,30 +6,29 @@ import {
     ValidationRules
 } from 'aurelia-validation';
 import {BootstrapFormRenderer} from 'common/resources/custom-components/bootstrap-form-renderer';
-import {UUID} from "common/lib/utils/uuid";
 
 @inject(Workspace, HttpClient, NewInstance.of(ValidationController))
 export class Create {
 
     private uploader: HTMLElement;
 
-    private name:string;
-    private loading:boolean;
-    private description:string;
-    private imageElement:HTMLInputElement;
+    private name: string;
+    private loading: boolean;
+    private description: string;
+    private imageElement: HTMLInputElement;
 
     @bindable
     private files: FileList;
 
 
-    constructor(private parent: Workspace, private client: HttpClient, private controller:ValidationController) {
+    constructor(private parent: Workspace, private client: HttpClient, private controller: ValidationController) {
         this.controller.addRenderer(new BootstrapFormRenderer());
     }
 
-    attached() : void {
+    attached(): void {
         this.setupFileUpload();
         ValidationRules
-            .ensure((wsp:Create) => wsp.name).required()
+            .ensure((wsp: Create) => wsp.name).required()
             .on(Create);
     }
 
@@ -44,20 +43,27 @@ export class Create {
                 if (result.valid) {
                     this.loading = true;
                     let form = new FormData();
-                    let fd = form as any;
 
                     form.append('name', this.name);
-                    fd.append('image', this.files != null ? this.files[0] : "");
-                    form.append('image-name', this.files != null ? this.files[0].name : "");
-                    form.append('image-type', this.files != null ? this.files[0].type : "");
-                    form.append('description', this.description != null ? this.description : "No description");
+                    form.append('key', this.name);
 
-                    this.client.post('workspaces/save', form)
+
+                    this.client.put('workspaces', form)
+                        .then(t => t.content as any)
                         .then(t => {
-                            // console.log(t);
-                            this.loading = false;
-                            this.parent.router.navigate('/');
-                            //todo redirect to this workspace?
+                            if (this.files && this.files.length) {
+                                let file = new FormData();
+
+                                file.append('file-data', this.files != null ? this.files[0] : "");
+                                file.append('image-name', this.files != null ? this.files[0].name : "");
+                                file.append('image-type', this.files != null ? this.files[0].type : "");
+                                this.client.put(`workspaces/${t.id}/image`, file).then(t => {
+                                    this.loading = false;
+                                    this.parent.router.navigate('/');
+                                });
+                            } else {
+                                this.parent.router.navigate('/');
+                            }
                         });
                 }
             })
@@ -66,7 +72,7 @@ export class Create {
             });
     }
 
-    cancel() : void {
+    cancel(): void {
         this.parent.router.navigate('/')
     }
 
@@ -74,38 +80,38 @@ export class Create {
         console.log(this.files);
     }
 
-    setupFileUpload() : void {
+    setupFileUpload(): void {
         let $form = $(this.uploader),
-            $input    = $form.find('input[type="file"]'),
-            $label    = $form.find('.upload-box__file-label'),
-            showFiles = function(files) {
+            $input = $form.find('input[type="file"]'),
+            $label = $form.find('.upload-box__file-label'),
+            showFiles = function (files) {
                 $label.text(files[0].name);
             },
-            isAdvancedUpload = function() {
+            isAdvancedUpload = function () {
                 let div = document.createElement('div');
                 return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
             }();
         if (isAdvancedUpload) {
             //$form.addClass('has-advanced-upload');
 
-            $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
+            $form.on('drag dragstart dragend dragover dragenter dragleave drop', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
             })
-                .on('dragover dragenter', function() {
+                .on('dragover dragenter', function () {
                     $form.addClass('is-dragover');
                 })
-                .on('dragleave dragend drop', function() {
+                .on('dragleave dragend drop', function () {
                     $form.removeClass('is-dragover');
                 })
                 .on('drop', (e) => {
                     this.files = (e.originalEvent as DragEvent).dataTransfer.files;
-                    showFiles( this.files );
+                    showFiles(this.files);
                     console.log(this.files && this.files.length > 0)
                 });
         }
 
-        $input.on('change', function(e) {
+        $input.on('change', function (e) {
             showFiles((e as any).target.files);
             console.log(this.files[0].type.name)
         });

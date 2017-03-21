@@ -1101,7 +1101,6 @@ System.config({
       "common/model/security/user.js",
       "common/resources/custom-components/bootstrap-form-renderer.js",
       "common/resources/custom-components/fetch-client-errors.js",
-      "common/resources/custom-components/incomplete-feature.js",
       "common/resources/custom-components/semantic-ui-renderer.js",
       "common/resources/custom-elements/footer/footer.html!github:systemjs/plugin-text@0.0.9.js",
       "common/resources/custom-elements/footer/footer.js",
@@ -1171,19 +1170,11 @@ System.config({
       "aurelia-framework",
       "apps/workspaces/routes/workspace/provisioning/instances/wizard/wizard"
     ],
-    "apps/catalog/routes/categories/apps/containers.js": [
-      "common/resources/custom-components/incomplete-feature",
-      "aurelia-fetch-client",
-      "aurelia-framework",
-      "aurelia-event-aggregator",
-      "apps/catalog/index"
-    ],
     "apps/catalog/routes/categories/apps/custom.js": [
       "apps/catalog/index",
       "aurelia-fetch-client",
       "aurelia-framework",
-      "aurelia-event-aggregator",
-      "common/resources/custom-components/incomplete-feature"
+      "aurelia-event-aggregator"
     ],
     "apps/catalog/routes/categories/categories.js": [
       "aurelia-framework"
@@ -1192,8 +1183,7 @@ System.config({
       "aurelia-router",
       "aurelia-framework",
       "aurelia-fetch-client",
-      "apps/workspaces/model/application-context",
-      "common/resources/custom-components/incomplete-feature"
+      "apps/workspaces/model/application-context"
     ],
     "apps/workspaces/model/application-context.js": [
       "./workspaces/workspace",
@@ -1478,8 +1468,7 @@ System.config({
       "apps/workspaces/model/application-context",
       "apps/workspaces/routes/workspace/index",
       "apps/workspaces/model/workspaces/workspace",
-      "aurelia-dependency-injection",
-      "common/resources/custom-components/incomplete-feature"
+      "aurelia-dependency-injection"
     ],
     "apps/workspaces/routes/workspace/applications/create/app-details.js": [
       "aurelia-framework",
@@ -1762,8 +1751,7 @@ System.config({
       "common/model/api/hal/api",
       "aurelia-fetch-client",
       "apps/workspaces/routes/workspace/index",
-      "common/model/security/user",
-      "common/resources/custom-components/incomplete-feature"
+      "../../../../../../common/model/security/user"
     ],
     "apps/workspaces/routes/workspace/infrastructure/clouds/environment/applications/applications.js": [
       "../hosts/hosts",
@@ -1792,10 +1780,6 @@ System.config({
       "aurelia-framework",
       "aurelia-fetch-client"
     ],
-    "apps/workspaces/routes/workspace/provisioning/instances/create/forms/summary-form.js": [
-      "../../wizard/wizard",
-      "aurelia-framework"
-    ],
     "apps/workspaces/routes/workspace/provisioning/instances/instance/instance.js": [
       "apps/workspaces/routes/workspace/index",
       "aurelia-dependency-injection"
@@ -1813,7 +1797,6 @@ System.config({
       "aurelia-dependency-injection",
       "./update/update-instance",
       "aurelia-event-aggregator",
-      "common/resources/custom-components/incomplete-feature",
       "chart.js"
     ],
     "apps/workspaces/routes/workspace/provisioning/instances/new.js": [
@@ -1845,7 +1828,7 @@ System.config({
       "aurelia-event-aggregator",
       "common/lib/utils/uuid",
       "common/lib/events/websockets",
-      "common/resources/custom-elements/nav-bar/activity-monitor-dropdown"
+      "../../../../../../../common/resources/custom-elements/nav-bar/activity-monitor-dropdown"
     ],
     "apps/workspaces/routes/workspace/provisioning/logs/logs.js": [
       "aurelia-framework",
@@ -2039,10 +2022,6 @@ System.config({
       "aurelia-event-aggregator",
       "aurelia-framework"
     ],
-    "common/resources/custom-components/incomplete-feature.js": [
-      "pnotify",
-      "pnotify.callbacks"
-    ],
     "common/resources/custom-components/semantic-ui-renderer.js": [
       "aurelia-pal"
     ],
@@ -2050,7 +2029,6 @@ System.config({
       "aurelia-event-aggregator",
       "aurelia-framework",
       "pnotify",
-      "common/resources/custom-components/incomplete-feature",
       "pnotify.callbacks"
     ],
     "common/resources/custom-elements/form/multi-step-form.js": [
@@ -2071,7 +2049,6 @@ System.config({
       "common/model/security",
       "aurelia-framework",
       "aurelia-router",
-      "common/resources/custom-components/incomplete-feature",
       "jquery"
     ],
     "common/resources/custom-elements/table/row.js": [

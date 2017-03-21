@@ -6,8 +6,6 @@ import {ApplicationContext} from 'apps/workspaces/model/application-context';
 
 import {Identifier} from "common/lib/lang";
 import {Workspace as WorkspaceModel} from "./model/workspaces/workspace";
-import {UUID} from "common/lib/utils/uuid";
-import {ChannelSet} from "../../common/lib/events/websockets";
 import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
 
 @autoinject
@@ -23,12 +21,8 @@ export class Workspace {
 
     }
 
-    testfunction() : void {
-        console.log('booping from index.ts');
-    }
-
     attached(): void {
-        this.client.fetch('workspaces/head')
+        this.client.fetch('workspaces')
             .then(t => t.json() as any)
             .then(workspaces => this.workspaces = workspaces);
 
@@ -36,13 +30,9 @@ export class Workspace {
 
 
     delete(id: string): void {
-        this.client.fetch(`workspaces/${id}`, {method: 'delete'})
-            .then(t => {
-                this.client.fetch('workspaces/head')
-                    .then(t => t.json() as any)
-                    .then(workspaces => this.workspaces = workspaces)
-
-            });
+        this.client.fetch('workspaces')
+            .then(t => t.json() as any)
+            .then(workspaces => this.workspaces = workspaces)
     }
 
     activate(id: any) {
