@@ -33,7 +33,7 @@ export class Workspace {
     private subscription: Subscription;
 
     public hostWorkspace: WS;
-    private id: Identifier;
+    private value : any;
     private loading: boolean = false;
 
     //TODO: rename revision
@@ -180,28 +180,20 @@ export class Workspace {
     }
 
     attached(): void {
-
-        // this.context.workspaceRevision.id = this.id;
-        // this.client.fetch(`workspaces/revision/${this.id.id}/workspace`)
-        //     .then(t => t.json() as any).then(t => {
-        //     this.context.workspace = t;
-        // });
-        // this.client.fetch(`workspaces/${this.id.id}`)
-        //     .then(ws => ws.json() as any)
-        //     .then(ws => {
-        //         this.loading = false;
-        //         this.workspace = ws;
-        //         this.hostWorkspace = ws.workspace;
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //     });
+        this.client.fetch(`workspaces/${this.value.id}`)
+            .then(ws => ws.json() as any)
+            .then(ws => {
+                this.loading = false;
+                this.workspace = ws;
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 
 
-    activate(id: Identifier): void {
-        this.id = id;
+    activate(value: any): void {
+        this.value = value;
         this.loading = true;
-        console.log("ID", id);
     }
 }
