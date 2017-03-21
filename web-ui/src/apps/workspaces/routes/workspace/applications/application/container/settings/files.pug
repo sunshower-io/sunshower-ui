@@ -41,5 +41,5 @@ template
                     .field(style="position:relative;")
                         .ui.active.inverted.dimmer(if.bind="loadingFile", style="position:absolute; top:0px; left:0; right:0; bottom:0;")
                             .ui.loader
-                        textarea(value.bind="activeFileText")
+                        textarea(rows="15" value.bind="activeFileText")
                     button.ui.button.primary.pull-right(click.delegate="saveFile(activeFile)") Save

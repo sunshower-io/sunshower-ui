@@ -8,6 +8,7 @@ import {Identifier} from "common/lib/lang";
 import {Workspace as WorkspaceModel} from "./model/workspaces/workspace";
 import {UUID} from "common/lib/utils/uuid";
 import {ChannelSet} from "../../common/lib/events/websockets";
+import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
 
 @autoinject
 export class Workspace {
@@ -17,15 +18,19 @@ export class Workspace {
 
     constructor(public router: Router,
                 private client: HttpClient,
-                private context: ApplicationContext) {
+                private context: ApplicationContext,
+                private incompleteFeature: IncompleteFeature) {
 
+    }
+
+    testfunction() : void {
+        console.log('booping from index.ts');
     }
 
     attached(): void {
         this.client.fetch('workspaces/head')
             .then(t => t.json() as any)
-            .then(workspaces => this.workspaces = workspaces)
-
+            .then(workspaces => this.workspaces = workspaces);
 
     }
 
@@ -41,12 +46,12 @@ export class Workspace {
     }
 
     activate(id: any) {
-        console.log("ID", id);
+        //console.log("ID", id);
     }
 
 
     open(id: Identifier): void {
-        console.log("OPEN", id);
+        //console.log("OPEN", id);
         this.context.workspaceRevision.id = id;
         this.client.fetch(`workspaces/${id.id}`)
             .then(t => t.json() as any).then(t => {

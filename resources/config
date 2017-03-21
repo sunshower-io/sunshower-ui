@@ -1,0 +1,21 @@
+{
+  "defaultTranspiler": "babel",
+  "defaultRegistry": "jspm",
+  "strictSSL": true,
+  "registries": {
+    "github": {
+      "remote": "https://github.jspm.io",
+      "auth": "aGFzbGktYm90OmVmYzRlMGIxOWE1ZDgxYjllMWE5MDlmZTc4ZTdmMDY1NWJmMTA5YTE=",
+      "maxRepoSize": 0,
+      "handler": "jspm-github"
+    },
+    "npm": {
+      "handler": "jspm-npm",
+      "remote": "https://npm.jspm.io"
+    },
+    "jspm": {
+      "handler": "jspm-registry",
+      "remote": "https://registry.jspm.io"
+    }
+  }
+}

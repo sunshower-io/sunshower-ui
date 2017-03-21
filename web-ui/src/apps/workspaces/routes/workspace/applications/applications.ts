@@ -7,7 +7,7 @@ import {Workspace as WorkspaceRoute} from "apps/workspaces/routes/workspace/inde
 import {WorkspaceRevision} from "apps/workspaces/model/workspaces/workspace";
 import {autoinject} from "aurelia-dependency-injection";
 import {Application} from "common/model/api/core/application";
-
+import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
 
 @autoinject
 export class Applications {
@@ -31,6 +31,7 @@ export class Applications {
         public parent:WorkspaceRoute,
         private client:HttpClient,
         private context:ApplicationContext,
+        private incompleteFeature:IncompleteFeature
     ) {
         this.applications = [];
     }

@@ -19,13 +19,13 @@ template
                         | Actions
                         i.dropdown.icon
                         .menu
-                            .item
+                            .item(click.delegate="incompleteFeature.notify($event)")
                                 i.ion-ios-copy.large.grey.icon
                                 | Clone
                             .item(click.delegate="updateInstance()")
                                 i.ion-arrow-right-a.large.grey.icon
                                 | Update Instance
-                            .item
+                            .item(click.delegate="incompleteFeature.notify($event)")
                                 i.ion-trash-a.large.grey.icon
                                 | Delete
                     .ui.hasli--basic_blue.hasli--blue.selection.dropdown
@@ -33,9 +33,12 @@ template
                         .default.text.hasli--blue Select: Type
                         i.dropdown.icon
                         .menu
-                            .item(data-value="1") All
-                            .item(data-value="2") Docker
-                            .item(data-value="3") Docker Compose
+                            .item(click.delegate="incompleteFeature.notify($event)"
+                                data-value="1") All
+                            .item(click.delegate="incompleteFeature.notify($event)"
+                                data-value="2") Docker
+                            .item(click.delegate="incompleteFeature.notify($event)"
+                                data-value="3") Docker Compose
                 .four.wide.right.aligned.column
                     span.widget-icons
                         .ui.small.button.primary(click.delegate="createInstance()")

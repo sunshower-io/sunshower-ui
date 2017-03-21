@@ -27,44 +27,10 @@ subprojects {
     apply from: "$rootDir/gradle/jacoco.gradle"
     apply from: "$rootDir/gradle/publishing.gradle"
     apply from: "$rootDir/gradle/test.gradle"
-
-    dependencies {
-        provided('org.apache.logging.log4j:log4j-api')
-        provided('org.apache.logging.log4j:log4j-core')
-        provided('org.jboss.spec:jboss-javaee-7.0')
-
-        [
-                'orm',
-                'context'
-        ].each{
-            provided("org.springframework:spring-$it")
-        }
-
-        provided('org.springframework:spring-context')
-        [
-                'core',
-                'config',
-                'acl',
-                'crypto',
-                'aspects',
-                'ldap'
-        ].each {
-            provided("org.springframework.security:spring-security-$it")
-        }
-        provided group: 'org.eclipse.persistence', name: 'org.eclipse.persistence.moxy'
-
-        testCompile("org.springframework:spring-test")
-        testCompile("org.springframework.security:spring-security-test")
-    }
-
-
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = gradleWrapperVersion
 }
 
-apply from: "$rootDir/gradle/tasks.gradle"
-apply from: "$rootDir/gradle/bom.gradle"
-
-defaultTasks "installBillOfMaterials", "clean", "build"
+defaultTasks "clean", "build"
