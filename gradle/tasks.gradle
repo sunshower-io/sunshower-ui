@@ -44,6 +44,14 @@ task listUpstream() {
 
 task setUpstream() {
     if(project.properties.containsKey('upstreamVersion')) {
+        
+        def include = [] as Set;
+
+        if(project.properties.containsKey('includeProjects')) {
+            include = (project.properties.includeProjects.split(",") as Set).collect {"${it}.version".toString()}
+            println("Including projects: ${include}")
+        }
+
         def pomFile = file("${project.rootDir}/bom/imported/pom.xml")
         def pom = new XmlSlurper(false, false).parse(pomFile)
 
@@ -61,7 +69,7 @@ task setUpstream() {
 
         println("Updating upstream version to: ${upstreamVersion}")
         pom.properties.childNodes().findAll { t ->
-            t.name.startsWith('hasli-')
+            t.name.startsWith('hasli-') && (include.isEmpty() ? true : include.contains(t.name))
         }.each { t ->
             t.replaceBody(upstreamVersion)
         }
