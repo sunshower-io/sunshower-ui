@@ -27,15 +27,10 @@ subprojects {
     apply from: "$rootDir/gradle/jacoco.gradle"
     apply from: "$rootDir/gradle/publishing.gradle"
     apply from: "$rootDir/gradle/test.gradle"
-
-
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = gradleWrapperVersion
 }
 
-apply from: "$rootDir/gradle/tasks.gradle"
-apply from: "$rootDir/gradle/bom.gradle"
-
-defaultTasks "installBillOfMaterials", "clean", "build"
+defaultTasks "clean", "build"
