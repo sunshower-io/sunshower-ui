@@ -69,10 +69,9 @@ node('docker-registry') {
             if (staging) {
 
                 stage('Deploy to Staging') {
-                    sh "sed -i.bak 's/^HASLI_UI_NAME=.*/HASLI_UI_NAME=$name-wildfly/' ./resources/.env"
+                    sh "sed -i.bak 's/^HASLI_UI_NAME=.*/HASLI_UI_NAME=$name/' ./resources/.env"
                     sh "sed -i.bak 's/^HASLI_UI_VERSION=.*/HASLI_UI_VERSION=$version.$buildNumber/' ./resources/.env"
                     sh "sed -i.bak 's/^HASLI_UI_IMAGE=.*/HASLI_UI_IMAGE=hasli-ui\\/ui/' ./resources/.env"
-                    sh "sed -i.bak 's/^HASLI_UI_PORTS=.*/HASLI_UI_PORTS=8080/' ./resources/.env"
 
                     sh "docker build --build-arg WILDFLY_VERSION=$wildflyVersion -t $hasliImage:$version.$buildNumber -f resources/Dockerfile.prod ."
                     sh "docker tag $hasliImage:$version.$buildNumber $registry/$hasliImage:$version.$buildNumber"
@@ -80,18 +79,21 @@ node('docker-registry') {
                     sh "docker push $registry/$hasliImage:$version.$buildNumber"
                     sh "docker push $registry/$hasliImage:latest"
 
-                    sh "cd resources && docker-compose -f docker-compose.yml -p $name up -d"
+                    sh "cd resources && docker-compose -f docker-compose-staging.yml -p $name up -d"
                 }
 
                 stage('Deployment Summary') {
                     try {
-                        def portMapping = sh returnStdout: true, script: "docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' $name-wildfly"
+                        def portMapping = sh returnStdout: true, script: "docker port proxy-$name"
                         portMapping = portMapping.trim()
-                        def port = portMapping.split(/\s->\s/)[1]
+
+                        def https = portMapping.trim().split(/\n/)[0].split(/->/)[1].trim().split(/:/)[1]
+                        def http  = portMapping.trim().split(/\n/)[1].split(/->/)[1].trim().split(/:/)[1]
+
                         def pr = env.BRANCH_NAME.split("-")[1].trim()
                         def pat = readFile('/root/.pat').trim()
 
-                        sh "curl -H \"Content-Type: application/json\" -u dlish:$pat -X POST -d '{\"body\": \"${JOB_NAME}, build [#${env.BUILD_NUMBER}](${env.BUILD_URL}) - Deployment can be viewed at: [10.0.4.51:$port](http://10.0.4.51:$port)\"}' https://api.github.com/repos/hasli-projects/hasli-ui/issues/$pr/comments"
+                        sh "curl -H \"Content-Type: application/json\" -u hasli-bot:$pat -X POST -d '{\"body\": \"${JOB_NAME}, build [#${env.BUILD_NUMBER}](${env.BUILD_URL}) - Deployment can be viewed at: [10.0.4.51:$http](http://10.0.4.51:$http)\"}' https://api.github.com/repos/hasli-projects/hasli-ui/issues/$pr/comments"
 
                         echo "Port Mapping: $portMapping"
                     } catch (Exception e) {
@@ -106,8 +108,8 @@ if (env.BRANCH_NAME == "master") {
     node('webserver') {
         stage('Deploy to Production') {
             checkout scm
-            sh "docker pull $registry/$hasliImage:latest"
-            sh "cd resources && docker-compose up -d --no-deps --build hasli-ui"
+            sh "docker -f resources/docker-compose-prod.yml pull"
+            sh "cd resources && docker-compose -f docker-compose-prod.yml up -d"
         }
     }
 }
