@@ -87,7 +87,9 @@ node('docker-registry') {
                     try {
                         def portMapping = sh returnStdout: true, script: "docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf)}} {{end}}' proxy-$name"
                         portMapping = portMapping.trim()
+                        echo "$portMapping"
                         def port = portMapping.split(/\s0.0.0.0\s/)[1]
+                        echo "$port"
                         def pr = env.BRANCH_NAME.split("-")[1].trim()
                         def pat = readFile('/root/.pat').trim()
 
