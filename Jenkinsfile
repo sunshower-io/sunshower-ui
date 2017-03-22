@@ -108,8 +108,7 @@ if (env.BRANCH_NAME == "master") {
     node('webserver') {
         stage('Deploy to Production') {
             checkout scm
-            sh "docker-compose -f resources/docker-compose-prod.yml pull"
-            sh "cd resources && docker-compose -f docker-compose-prod.yml up -d"
+            sh "cd resources && docker-compose -f docker-compose-prod.yml pull && docker-compose -f docker-compose-prod.yml up -d"
         }
     }
 }
