@@ -85,13 +85,13 @@ node('docker-registry') {
 
                 stage('Deployment Summary') {
                     try {
-                        def portMapping = sh returnStdout: true, script: "docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' $name"
+                        def portMapping = sh returnStdout: true, script: "docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' proxy-$name"
                         portMapping = portMapping.trim()
                         def port = portMapping.split(/\s->\s/)[1]
                         def pr = env.BRANCH_NAME.split("-")[1].trim()
                         def pat = readFile('/root/.pat').trim()
 
-                        sh "curl -H \"Content-Type: application/json\" -u dlish:$pat -X POST -d '{\"body\": \"${JOB_NAME}, build [#${env.BUILD_NUMBER}](${env.BUILD_URL}) - Deployment can be viewed at: [10.0.4.51:$port](http://10.0.4.51:$port)\"}' https://api.github.com/repos/hasli-projects/hasli-ui/issues/$pr/comments"
+                        sh "curl -H \"Content-Type: application/json\" -u hasli-bot:$pat -X POST -d '{\"body\": \"${JOB_NAME}, build [#${env.BUILD_NUMBER}](${env.BUILD_URL}) - Deployment can be viewed at: [10.0.4.51:$port](http://10.0.4.51:$port)\"}' https://api.github.com/repos/hasli-projects/hasli-ui/issues/$pr/comments"
 
                         echo "Port Mapping: $portMapping"
                     } catch (Exception e) {
