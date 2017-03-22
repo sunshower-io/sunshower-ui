@@ -21,4 +21,4 @@ services:
 
   hasli-web:
     container_name: "hasli-web-${HASLI_UI_NAME}"
-    image: "10.0.4.51:5000/hasli-web/web:latest"
+    image: "${HASLI_WEB_IMAGE}:${HASLI_WEB_VERSION}"

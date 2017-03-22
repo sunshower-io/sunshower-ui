@@ -80,7 +80,7 @@ node('docker-registry') {
                     sh "docker push $registry/$hasliImage:$version.$buildNumber"
                     sh "docker push $registry/$hasliImage:latest"
 
-                    sh "cd resources && docker-compose -f docker-compose.yml -p $name up -d"
+                    sh "cd resources && docker-compose -f docker-compose-staging.yml -p $name up -d"
                 }
 
                 stage('Deployment Summary') {
@@ -107,7 +107,7 @@ if (env.BRANCH_NAME == "master") {
         stage('Deploy to Production') {
             checkout scm
             sh "docker pull $registry/$hasliImage:latest"
-            sh "cd resources && docker-compose up -d --no-deps --build hasli-ui"
+            sh "cd resources && docker-compose -f docker-compose-prod.yml up -d"
         }
     }
 }
