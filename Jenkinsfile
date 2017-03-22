@@ -72,7 +72,7 @@ node('docker-registry') {
                     sh "sed -i.bak 's/^HASLI_UI_NAME=.*/HASLI_UI_NAME=$name/' ./resources/.env"
                     sh "sed -i.bak 's/^HASLI_UI_VERSION=.*/HASLI_UI_VERSION=$version.$buildNumber/' ./resources/.env"
                     sh "sed -i.bak 's/^HASLI_UI_IMAGE=.*/HASLI_UI_IMAGE=hasli-ui\\/ui/' ./resources/.env"
-                    sh "sed -i.bak 's/^HASLI_UI_PORTS=.*/PROXY_PORTS=80/' ./resources/.env"
+                    sh "sed -i.bak 's/^PROXY_PORTS=.*/PROXY_PORTS=80/' ./resources/.env"
 
                     sh "docker build --build-arg WILDFLY_VERSION=$wildflyVersion -t $hasliImage:$version.$buildNumber -f resources/Dockerfile.prod ."
                     sh "docker tag $hasliImage:$version.$buildNumber $registry/$hasliImage:$version.$buildNumber"
