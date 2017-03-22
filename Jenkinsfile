@@ -72,7 +72,6 @@ node('docker-registry') {
                     sh "sed -i.bak 's/^HASLI_UI_NAME=.*/HASLI_UI_NAME=$name/' ./resources/.env"
                     sh "sed -i.bak 's/^HASLI_UI_VERSION=.*/HASLI_UI_VERSION=$version.$buildNumber/' ./resources/.env"
                     sh "sed -i.bak 's/^HASLI_UI_IMAGE=.*/HASLI_UI_IMAGE=hasli-ui\\/ui/' ./resources/.env"
-                    sh "sed -i.bak 's/^PROXY_PORTS=.*/PROXY_PORTS=80/' ./resources/.env"
 
                     sh "docker build --build-arg WILDFLY_VERSION=$wildflyVersion -t $hasliImage:$version.$buildNumber -f resources/Dockerfile.prod ."
                     sh "docker tag $hasliImage:$version.$buildNumber $registry/$hasliImage:$version.$buildNumber"
@@ -85,15 +84,16 @@ node('docker-registry') {
 
                 stage('Deployment Summary') {
                     try {
-                        def portMapping = sh returnStdout: true, script: "docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf)}} {{end}}' proxy-$name"
+                        def portMapping = sh returnStdout: true, script: "docker port proxy-$name"
                         portMapping = portMapping.trim()
-                        echo "$portMapping"
-                        def port = portMapping.split(/\s0.0.0.0\s/)[1]
-                        echo "$port"
+
+                        def https = portMapping.trim().split(/\n/)[0].split(/->/)[1].trim().split(/:/)[1]
+                        def http  = portMapping.trim().split(/\n/)[1].split(/->/)[1].trim().split(/:/)[1]
+
                         def pr = env.BRANCH_NAME.split("-")[1].trim()
                         def pat = readFile('/root/.pat').trim()
 
-                        sh "curl -H \"Content-Type: application/json\" -u hasli-bot:$pat -X POST -d '{\"body\": \"${JOB_NAME}, build [#${env.BUILD_NUMBER}](${env.BUILD_URL}) - Deployment can be viewed at: [10.0.4.51:$port](http://10.0.4.51:$port)\"}' https://api.github.com/repos/hasli-projects/hasli-ui/issues/$pr/comments"
+                        sh "curl -H \"Content-Type: application/json\" -u hasli-bot:$pat -X POST -d '{\"body\": \"${JOB_NAME}, build [#${env.BUILD_NUMBER}](${env.BUILD_URL}) - Deployment can be viewed at: [10.0.4.51:$http](http://10.0.4.51:$http)\"}' https://api.github.com/repos/hasli-projects/hasli-ui/issues/$pr/comments"
 
                         echo "Port Mapping: $portMapping"
                     } catch (Exception e) {

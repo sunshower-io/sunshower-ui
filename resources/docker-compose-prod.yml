@@ -6,7 +6,8 @@ services:
       container_name: "proxy"
       image: "nginx:1.11.1"
       ports:
-        - "${PROXY_PORTS}"
+        - "80:80"
+        - "443:443"
       links:
         - hasli-ui
         - hasli-web
