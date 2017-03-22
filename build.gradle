@@ -45,6 +45,7 @@ task buildEnvImage(type: DockerBuildImage) {
 }
 
 task buildDevImage(type: DockerBuildImage) {
+    dependsOn buildEnvImage
     group "Docker"
     dockerFile = new File("./resources/Dockerfile.dev")
     inputDir = new File(".")

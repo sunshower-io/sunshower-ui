@@ -20,12 +20,13 @@ ADD ./resources/config /root/.jspm/
 
 EXPOSE 8080
 
-ENV UI_DEVELOPMENT_ROOT /usr/src/
+ENV UI_DEVELOPMENT_ROOT /usr/src/web-ui
 
 WORKDIR /usr/src/
 
 CMD chmod +x /usr/src/gradlew  \
 	&& cd /usr/src/ \
-	&& ./gradlew installEnvironment clean build -x test \
+	&& ./gradlew installEnvironment \
+	&& ./gradlew clean build -x test \
     && cp /usr/src/web-site/build/libs/web-site*.war /opt/wildfly/standalone/deployments/ \
 	&& /opt/wildfly/bin/standalone.sh -b 0.0.0.0

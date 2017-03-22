@@ -69,10 +69,10 @@ node('docker-registry') {
             if (staging) {
 
                 stage('Deploy to Staging') {
-                    sh "sed -i.bak 's/^HASLI_UI_NAME=.*/HASLI_UI_NAME=$name-wildfly/' ./resources/.env"
+                    sh "sed -i.bak 's/^HASLI_UI_NAME=.*/HASLI_UI_NAME=$name/' ./resources/.env"
                     sh "sed -i.bak 's/^HASLI_UI_VERSION=.*/HASLI_UI_VERSION=$version.$buildNumber/' ./resources/.env"
                     sh "sed -i.bak 's/^HASLI_UI_IMAGE=.*/HASLI_UI_IMAGE=hasli-ui\\/ui/' ./resources/.env"
-                    sh "sed -i.bak 's/^HASLI_UI_PORTS=.*/HASLI_UI_PORTS=8080/' ./resources/.env"
+                    sh "sed -i.bak 's/^HASLI_UI_PORTS=.*/PROXY_PORTS=80/' ./resources/.env"
 
                     sh "docker build --build-arg WILDFLY_VERSION=$wildflyVersion -t $hasliImage:$version.$buildNumber -f resources/Dockerfile.prod ."
                     sh "docker tag $hasliImage:$version.$buildNumber $registry/$hasliImage:$version.$buildNumber"
@@ -85,7 +85,7 @@ node('docker-registry') {
 
                 stage('Deployment Summary') {
                     try {
-                        def portMapping = sh returnStdout: true, script: "docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' $name-wildfly"
+                        def portMapping = sh returnStdout: true, script: "docker inspect --format='{{range \$p, \$conf := .NetworkSettings.Ports}} {{\$p}} -> {{(index \$conf 0).HostPort}} {{end}}' $name"
                         portMapping = portMapping.trim()
                         def port = portMapping.split(/\s->\s/)[1]
                         def pr = env.BRANCH_NAME.split("-")[1].trim()
