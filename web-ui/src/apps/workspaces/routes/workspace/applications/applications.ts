@@ -94,14 +94,7 @@ export class Applications {
 
     open(application: Application) : void {
         let id = application.id as any;
-        this.client.fetch(`applications/${id.id}`)
-            .then(t => t.json() as any)
-            .then(t => {
-                this.parent.router.navigate(`applications/${t.application.id}/application`);
-            })
-            .catch(err => {
-                console.log(err);
-            });
+        this.parent.router.navigate(`applications/${id}/application`);
     }
 
     checkbox() {

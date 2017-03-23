@@ -13,16 +13,16 @@ template
                             .ui.tiny.image
                                 img(
                                     if.bind="loaded"
-                                    src='/hasli/api/v1/applications/${applicationRevision.picture.id}/picture'
+                                    src='/hasli/api/v1/workspaces/${workspaceId}/applications/${id}/image'
                                 )
                             .middle.aligned.content
-                                a.header ${applicationRevision.name}
+                                a.header ${application.name}
                                 .meta
-                                    span Deploys CA UIM, UMP, and monitoring probes
+                                    span ${application.description}
                                 .description
                                     p
                                 .extra
-                                    | Version: 8.47
+                                    | Version: ${application.version}
                     .right.menu
                         a.item
                             i.huge.ion-ios-close-empty.icon(click.delegate="close()")

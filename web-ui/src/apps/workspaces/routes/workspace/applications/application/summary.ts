@@ -58,17 +58,16 @@ export class Summary {
         });
 
 
-        this.client.fetch(`applications/${this.id}/base`)
-            .then(t => t.json() as any)
-            .then(t => {
-                this.applicationRevision = t;
-                this.parent.applicationRevision = t;
-                if (typeof this.applicationRevision.requirements == 'undefined') {
-                    this.applicationRevision.requirements = [];
-                }
-                this.load(this.id);
-                this.loading = false;
-            });
+        // this.client.fetch(`applications/${this.id}/base`)
+        //     .then(t => t.json() as any)
+        //     .then(t => {
+        //         this.applicationRevision = t;
+        //         if (typeof this.applicationRevision.requirements == 'undefined') {
+        //             this.applicationRevision.requirements = [];
+        //         }
+        //         this.load(this.id);
+        //         this.loading = false;
+        //     });
     }
 
     activate(identifier: Identifier) {
