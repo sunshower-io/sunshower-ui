@@ -26,6 +26,7 @@
     "e2e": "gulp serve e2e"
   },
   "devDependencies": {
+    "@types/lodash": "4.14.50",
     "aurelia-bundler": "^0.4.0",
     "aurelia-tools": "^0.2.4",
     "better-console": "^0.2.4",
@@ -83,7 +84,7 @@
     "run-sequence": "^1.2.2",
     "systemjs": "0.19.35",
     "tslint": "^3.13.0",
-    "typescript": "^2.0.0",
+    "typescript": "2.1.6",
     "typings": "^2.0.0",
     "vinyl-paths": "^2.1.0",
     "yargs": "^4.8.1"
