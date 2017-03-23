@@ -1,11 +1,11 @@
 import {Marshaller} from "io/marshalling/marshaller";
 import Deployment from "./deployment";
-import {CredentialSecret} from "model/core/secret/credentials";
+import {Credential} from "model/core/secret/credentials";
 import DraftboardMarshaller from "component/draftboard/marshallers/marshaller";
 
 
-class SecretMarshaller implements Marshaller<CredentialSecret> {
-    write(data: CredentialSecret): {} {
+class SecretMarshaller implements Marshaller<Credential> {
+    write(data: Credential): {} {
         return {
             id: data.id,
             type: 'io.hasli.vault.api.secrets.CredentialSecret'

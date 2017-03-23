@@ -1,4 +1,5 @@
-//
+// TODO Break each tab out into its own component.  Fuck.
+
    Created by dustinlish on 2/19/17.
 template
     .ui.active.inverted.dimmer(if.bind="loading", style="position:absolute; top:0px; left:0; right:0; bottom:0;")
@@ -22,74 +23,43 @@ template
                                 input.overlay-input-centered(
                                 type='text'
                                 placeholder='Add application name'
-                                value.bind="name & validate"
+                                value.bind="application.name"
+                                )
+                            .ui.fluid.transparent.input
+                                input.overlay-input-centered(
+                                type='text'
+                                placeholder='Github Repository'
+                                value.bind="application.repository.remote.location"
                                 )
                             .ui.divider
-                        .big-divider
-
-                        .ui.basic.center.aligned.segment
-                            .fluid.field
-                                h1.ui.center.aligned.header(ref="imageUploader")
-                                    label.clickable
-                                        input.upload-box__file(type="file" name="image" ref="imageInput" files.bind="image & validate")
-                                        i.circular.blue.ion-image.icon.circular--icon
-                                        span(style="margin-left:1em;") Add Photo
-                                        .upload-box__file-label
-                        .big-divider
-
-
-                        .fluid.field.ui.basic.center.aligned.segment
-                            //todo center align menu
-                            .ui.secondary.pointing.menu
-                                .item.clickable(class="${appType == 'upload' ? 'active' : ''}" click.delegate="switchTab('upload')") Upload Application
-                                .item.clickable(class="${appType == 'select' ? 'active' : ''}" click.delegate="switchTab('select')") Select Template
-                                .item.clickable(class="${appType == 'github' ? 'active' : ''}" click.delegate="switchTab('github')") Clone Repository
-                            .ui.hidden.divider
-                            h1.ui.center.aligned.header(ref="fileUploader" if.bind="appType == 'upload'")
-                                label.clickable
-                                    input.upload-box__file(type="file" name="file" ref="fileInput" files.bind="file & validate")
-                                    i.circular.blue.ion-ios-folder.icon.circular--icon
-                                    span(style="margin-left:1em;") Upload Application
-                                    .upload-box__file-label
-                            .ui.four.link.cards(if.bind="appType == 'select'")
-                                //todo make selecting a card work
-                                .new-app_type.card.hvr-glow(repeat.for="template of templates")
-                                    .content
-                                        .header
-                                            img(src="${template.icon}")
-                                        .description
-                                            | ${template.description}
-                            .ui.grid.hasli-form.ui.form(if.bind="appType == 'github'")
-                                .row
-                                    .four.wide.column
-                                        img.ui.image.small(src="styles/themes/hasli/assets/images/github-mark.svg")
-                                    .twelve.wide.column.middle.aligned
-                                        .hasli-field.ui.field
-                                            .hasli-label
-                                                label Repository
-                                            .hasli-input.ui.input
-                                                input(type="text" name="repository")
-                                .row
-                                    .sixteen.wide.column
-                                        .hasli-field.ui.field
-                                            .hasli-label
-                                                label Username
-                                            .hasli-input.ui.input
-                                                input(type="text" name="username")
-                                        .hasli-field.ui.field
-                                            .hasli-label
-                                                label Password
-                                            .hasli-input.ui.input
-                                                input(type="password" name="password")
-                                        .ui.horizontal.divider
-                                            | OR
-                                        .hasli-field.ui.field
-                                            .hasli-label
-                                                label Key
-                                            .hasli-input.ui.input
-                                                textarea
-                        .big-divider
-
-                        .ui.basic.center.aligned.segment
-                            button.ui.secondary.button(click.delegate="create()")
-                                | Get Started
+                                .ui.button.primary(click.delegate="submit()") Save
+                        //.big-divider
+                        //    .ui.grid.hasli-form.ui.form
+                        //        .row
+                        //            .four.wide.column
+                        //                img.ui.image.small(src="styles/themes/hasli/assets/images/github-mark.svg")
+                        //            .twelve.wide.column.middle.aligned
+                        //                .hasli-field.ui.field
+                        //                    .hasli-label
+                        //                        label Repository
+                        //                    .hasli-input.ui.input
+                        //                        input(type="text" name="repository", value.bind="repository")
+                        //        .row
+                        //            .sixteen.wide.column
+                        //                .hasli-field.ui.field
+                        //                    .hasli-label
+                        //                        label Username
+                        //                    .hasli-input.ui.input
+                        //                        input(type="text" name="username", value.bind="username")
+                        //                .hasli-field.ui.field
+                        //                    .hasli-label
+                        //                        label Password
+                        //                    .hasli-input.ui.input
+                        //                        input(type="password" name="password", value.bind="password")
+                        //                .ui.horizontal.divider
+                        //                    | OR
+                        //                .hasli-field.ui.field
+                        //                    .hasli-label
+                        //                        label Key
+                        //                    .hasli-input.ui.input
+                        //                        textarea

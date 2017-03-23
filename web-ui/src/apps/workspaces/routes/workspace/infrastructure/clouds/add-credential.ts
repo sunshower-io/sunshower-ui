@@ -4,7 +4,7 @@ import {
     NewInstance
 } from "aurelia-framework";
 import {Provider} from "common/model/api/hal/api";
-import {CredentialSecret} from "common/model/security/credentials";
+import {Credential} from "common/model/security/credentials";
 import {HttpClient} from "aurelia-fetch-client";
 import {
     ValidationController,
@@ -22,14 +22,14 @@ export class AddCredential {
     private visible: boolean;
 
     @bindable
-    private credential          :CredentialSecret;
+    private credential          :Credential;
 
     @bindable
     private loading             : boolean;
 
     private providerId          : string;
 
-    private credentials         : CredentialSecret[];
+    private credentials         : Credential[];
 
     private filterHolder        : HTMLElement;
     private credentialSearch    : HTMLElement;
@@ -55,7 +55,7 @@ export class AddCredential {
     }
 
     open() : void {
-        this.credential = new CredentialSecret;
+        this.credential = new Credential;
         this.setupValidation();
         this.refresh();
         this.setupSearch();
@@ -69,9 +69,9 @@ export class AddCredential {
             `\${$displayName} must be at least three characters.`
         );
         let validationRules = ValidationRules
-            .ensure((c:CredentialSecret) => c.name).required().satisfiesRule('atleastthreechars')
-            .ensure((c:CredentialSecret) => c.credential).required().satisfiesRule('atleastthreechars')
-            .ensure((c:CredentialSecret) => c.secret).required().satisfiesRule('atleastthreechars')
+            .ensure((c:Credential) => c.name).required().satisfiesRule('atleastthreechars')
+            .ensure((c:Credential) => c.credential).required().satisfiesRule('atleastthreechars')
+            .ensure((c:Credential) => c.secret).required().satisfiesRule('atleastthreechars')
             .rules;
         this.controller.addObject(this.credential, validationRules);
     }
@@ -121,14 +121,14 @@ export class AddCredential {
                     this.addingCredential = false;
                     this.refresh();
                     this.controller.reset();
-                    this.credential = new CredentialSecret;
+                    this.credential = new Credential;
                 });
             } else {
             }
         });
     }
 
-    removeCredential(credential:CredentialSecret) : void {
+    removeCredential(credential:Credential) : void {
         this.client.fetch(`providers/${this.providerId}/credential/${credential.id}`, {
             method: 'delete'
         }).then(t => this.refresh());

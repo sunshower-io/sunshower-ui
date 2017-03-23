@@ -5,7 +5,7 @@ import {
 
 import {HttpClient} from "aurelia-fetch-client";
 import {json} from "aurelia-fetch-client";
-import {CredentialSecret} from "common/model/security";
+import {Credential} from "common/model/security";
 import {VirtualCloud} from "apps/workspaces/model/components/cloud";
 
 @inject(HttpClient)
@@ -16,10 +16,10 @@ export class Credentials {
 
     private loading             : boolean = true;
 
-    private credential          : CredentialSecret;
+    private credential          : Credential;
 
     private addingCredential    : boolean = false;
-    private credentials         : CredentialSecret[];
+    private credentials         : Credential[];
 
 
     constructor(private client:HttpClient) {
@@ -28,7 +28,7 @@ export class Credentials {
 
     addCredential() {
         this.addingCredential = true;
-        this.credential = new CredentialSecret();
+        this.credential = new Credential();
     }
 
     save() : void {
@@ -47,7 +47,7 @@ export class Credentials {
     }
 
     private listCredentials() {
-        this.client.fetch('secrets/vault/io.hasli.vault.api.secrets.CredentialSecret/list')
+        this.client.fetch('secrets/vault/io.hasli.vault.api.secrets.Credential/list')
             .then(response => response.json() as any)
             .then(data => {
                 this.credentials = data;

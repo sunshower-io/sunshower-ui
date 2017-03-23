@@ -12,7 +12,7 @@ import {
     Provider
 } from "common/model/api/hal/api";
 import {HttpClient} from "aurelia-fetch-client";
-import {CredentialSecret} from "common/model/security/credentials";
+import {Credential} from "common/model/security/credentials";
 import {
     ComputeTemplate,
     ComputeTemplateMarshaller
@@ -42,9 +42,9 @@ export class NewInstance {
     private searching           : boolean;
 
     private loading             : boolean = true;
-    private credential          : CredentialSecret;
+    private credential          : Credential;
     private addingCredential    : boolean = false;
-    private credentials         : CredentialSecret[];
+    private credentials         : Credential[];
 
     private template            : ComputeTemplate;
 
@@ -87,7 +87,7 @@ export class NewInstance {
 
     addCredential() {
         this.addingCredential = true;
-        this.credential = new CredentialSecret();
+        this.credential = new Credential();
     }
 
     save() : void {

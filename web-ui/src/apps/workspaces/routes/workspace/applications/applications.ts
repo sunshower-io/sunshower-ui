@@ -2,7 +2,6 @@
 import {HttpClient} from 'aurelia-fetch-client';
 import {bindable} from "aurelia-framework";
 
-import {ApplicationContext} from "apps/workspaces/model/application-context";
 import {Workspace as WorkspaceRoute} from "apps/workspaces/routes/workspace/index";
 import {WorkspaceRevision} from "apps/workspaces/model/workspaces/workspace";
 import {autoinject} from "aurelia-dependency-injection";
@@ -25,19 +24,24 @@ export class Applications {
     workspace: WorkspaceRevision;
 
     @bindable
-    private id: any;
+    private id: string;
+
 
     constructor(
         public parent:WorkspaceRoute,
         private client:HttpClient,
-        private context:ApplicationContext,
         private incompleteFeature:IncompleteFeature
     ) {
         this.applications = [];
     }
 
+    close() : void {
+        this.showModal = false;
+        this.refresh();
+    }
 
-    activate(id:any) : void {
+    activate(params:any) : void {
+        this.id = params.id;
         this.parent.setMenuVisible(true);
     }
 
@@ -65,11 +69,14 @@ export class Applications {
     refresh(): void {
         this.loading = true;
         setTimeout(() => {
-            this.client.fetch(`workspaces/${this.context.workspace.id}/applications/heads`)
+            this.client.fetch(`workspaces/${this.id}/applications`)
                 .then(d => d.json() as any)
                 .then(d => {
                     this.loading = false;
-                    this.applications = d;
+                    this.applications = d.map(t => {
+                        t.workspaceId = this.id;
+                        return t;
+                    });
                 })
                 .catch(err => {
                     this.loading = false;

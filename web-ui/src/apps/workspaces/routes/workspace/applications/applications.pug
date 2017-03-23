@@ -1,11 +1,16 @@
 //
    Created by dustinlish on 2/6/17.
 template
-    //compose(if.bind="showModal", view-model='./create/wizard')
 
     .ui.hidden.divider
 
-    compose(show.bind="showModal", view-model='./create/app-details')
+    // probably want this as a route (for navigation purposes) or using the modal
+    // plugin
+    compose(
+        show.bind="showModal",
+        view-model='./create/app-details',
+        model.bind="id"
+    )
 
     .ui.container
         .ui.basic.segment
