@@ -4,6 +4,7 @@ import {Version} from "./dialogs/version";
 import {bindable} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
 import {Identifier} from "../../../../../../common/lib/lang";
+import {NavigationInstruction} from "aurelia-router";
 
 /**
  * Created by dustinlish on 2/20/17.
@@ -12,8 +13,9 @@ import {Identifier} from "../../../../../../common/lib/lang";
 @autoinject
 export class Versions {
 
-    private latestVersion: string;
+    private workspaceId : string;
     private id: string;
+    private latestVersion: string;
 
     @bindable
     currentVersions: Array<Version>;
@@ -29,16 +31,23 @@ export class Versions {
         this.refresh();
     }
 
-    activate(id: Identifier) {
-        this.id = id.id;
-    }
 
+    private path() : string {
+        return `workspaces/${this.workspaceId}/applications/${this.id}`
+    }
     refresh() {
-        this.client.fetch(`applications/${this.id}/revisions`)
+        this.client.fetch(`${this.path()}/workspace/log`)
             .then(t => t.json() as any)
             .then(t => {
                 this.currentVersions = t;
             });
+    }
+
+
+    activate(params: any, a: any, workspace: NavigationInstruction) {
+        this.id = params.id;
+        this.workspaceId = workspace.parentInstruction.parentInstruction.params.id;
+        this.refresh();
     }
 
     newVersion(): void {

@@ -180,11 +180,15 @@ export class Workspace {
     }
 
     attached(): void {
+        this.refresh();
+    }
+
+    refresh() : void {
         this.client.fetch(`workspaces/${this.value.id}`)
             .then(ws => ws.json() as any)
             .then(ws => {
-                this.loading = false;
                 this.workspace = ws;
+                this.loading = false;
             })
             .catch(err => {
                 console.log(err);

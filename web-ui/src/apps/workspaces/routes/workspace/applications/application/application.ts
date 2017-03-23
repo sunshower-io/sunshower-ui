@@ -43,7 +43,7 @@ export class Application {
     }
 
     close() : void {
-        this.router.navigateBack();
+        this.router.navigate(`#/workspace/${this.workspaceId}/applications`);
     }
 
 

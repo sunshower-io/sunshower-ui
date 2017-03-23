@@ -6,7 +6,7 @@ template
 
                 .item
                     .ui.workspace-image.image
-                        img(src='/hasli/api/v1/workspaces/${workspace.id}/image')
+                        img(src='/hasli/api/v1/workspaces/${workspace.id}/image', if.bind="workspace")
                     .middle.aligned.content
                         a.header ${workspace.name}
                         .extra

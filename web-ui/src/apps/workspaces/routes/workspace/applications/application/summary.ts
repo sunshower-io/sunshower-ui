@@ -70,8 +70,12 @@ export class Summary {
         //     });
     }
 
+    private path() : string {
+        return `workspaces/${this.workspaceId}/applications/${this.id}`
+    }
+
     refresh() : void {
-        this.client.fetch(`workspaces/${this.workspaceId}/applications/${this.id}/workspace/file`, {
+        this.client.fetch(`${this.path()}/workspace/file`, {
             method: 'put',
             body: JSON.stringify({
                 path: 'README.md'
@@ -81,8 +85,7 @@ export class Summary {
         .then(t => {
             if(t.children.child && t.children.child.length > 0) {
                 let child = t.children.child[0];
-                console.log(child.revision);
-                this.client.fetch(`workspaces/${this.workspaceId}/applications/${this.id}/workspace/${child.revision}`)
+                this.client.fetch(`${this.path()}/workspace/${child.revision}`)
                     .then(t => t.json())
                     .then(t => {
                         let converter = new showdown.Converter();
