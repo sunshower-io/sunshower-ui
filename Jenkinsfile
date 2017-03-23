@@ -95,10 +95,11 @@ node('docker-registry') {
                         def pr = env.BRANCH_NAME.split("-")[1].trim()
                         def pat = readFile('/root/.pat').trim()
 
-                        String comment = "${JOB_NAME}, build [#${env.BUILD_NUMBER}](${env.BUILD_URL}) - Deployment can be viewed at: [10.0.4.51:$http](http://10.0.4.51:$http"
+                        String githubComment = "${JOB_NAME}, build [#${env.BUILD_NUMBER}](${env.BUILD_URL}) - Staged deployment can be viewed at: [10.0.4.51:$http](http://10.0.4.51:$http"
+                        String slackNotification = "${JOB_NAME}, build #${env.BUILD_NUMBER} ${env.BUILD_URL} - Staged deployment can be viewed at: http://10.0.4.51:$http"
 
-                        sh "curl -H \"Content-Type: application/json\" -u hasli-bot:$pat -X POST -d '{\"body\": \"$comment)\"}' https://api.github.com/repos/hasli-projects/hasli-ui/issues/$pr/comments"
-                        slackSend (color: 'good', message: comment)
+                        sh "curl -H \"Content-Type: application/json\" -u hasli-bot:$pat -X POST -d '{\"body\": \"$githubComment)\"}' https://api.github.com/repos/hasli-projects/hasli-ui/issues/$pr/comments"
+                        slackSend (color: 'good', message: slackNotification)
 
                         echo "Port Mapping: $portMapping"
                     }
