@@ -35,31 +35,8 @@ allprojects {
 
     plugins.withType(JavaPlugin) {
 
-
-//        task testJar(type:Jar) {
-//            classifier 'test'
-//            from sourceSets.test.output
-//        }
-
-
-//        configurations {
-//            tests.extendsFrom testRuntime
-//        }
-//
-//
-//        artifacts {
-//            tests testJar
-//        }
-
         dependencies {
 
-
-            testCompile('org.jboss.weld:weld-core')
-            testCompile('org.mockito:mockito-core')
-
-            testCompile('org.junit.jupiter:junit-jupiter-engine')
-            testCompile('org.junit.vintage:junit-vintage-engine')
-            testCompile('org.jboss.arquillian.junit:arquillian-junit-container')
         }
     }
 

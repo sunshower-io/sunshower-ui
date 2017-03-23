@@ -14,15 +14,14 @@ RUN mkdir /opt/wildfly \
     && wget -q http://repo.hasli.io/artifactory/libs-release-local/io/hasli/wildfly/wildfly-dist/$WILDFLY_VERSION/wildfly-dist-$WILDFLY_VERSION.zip \
     && unzip wildfly-dist-$WILDFLY_VERSION.zip \
     && mv hasli-wildfly*/* /opt/wildfly/ \
-    && rm -rf hasli-wildfly*
+    && rm -rf hasli-wildfly* \
+    && rm -rf wildfly-dist*.zip
 
 ADD ./resources/config /root/.jspm/
 
 EXPOSE 8080
 
 ENV UI_DEVELOPMENT_ROOT /usr/src/web-ui
-
-WORKDIR /usr/src/
 
 CMD chmod +x /usr/src/gradlew  \
 	&& cd /usr/src/ \
