@@ -6,7 +6,7 @@ import {
 } from "aurelia-framework";
 import * as _ from 'lodash';
 import {json, HttpClient} from "aurelia-fetch-client";
-import {CredentialSecret} from "common/model/security/credentials";
+import {Credential} from "common/model/security/credentials";
 import Deployment from "apps/workspaces/model/deployment/deployment";
 import {DraftboardManager} from "apps/workspaces/services/draftboard/draftboard";
 import {InfrastructureNode} from "apps/workspaces/model/components/infrastructure-node";
@@ -20,10 +20,10 @@ export class DeployDialog {
 
     private loading             : boolean = true;
 
-    private credential          : CredentialSecret;
+    private credential          : Credential;
 
     private addingCredential    : boolean = false;
-    private credentials         : CredentialSecret[];
+    private credentials         : Credential[];
 
     private dropdown:HTMLElement;
 
@@ -37,7 +37,7 @@ export class DeployDialog {
 
     addCredential() {
         this.addingCredential = true;
-        this.credential = new CredentialSecret();
+        this.credential = new Credential();
     }
 
     save() : void {
@@ -77,7 +77,7 @@ export class DeployDialog {
     }
 
     private listCredentials() {
-        this.client.fetch('secrets/vault/io.hasli.vault.api.secrets.CredentialSecret/list')
+        this.client.fetch('secrets/vault/io.hasli.vault.api.secrets.Credential/list')
             .then(response => response.json() as any)
             .then(data => {
                 this.credentials = data;

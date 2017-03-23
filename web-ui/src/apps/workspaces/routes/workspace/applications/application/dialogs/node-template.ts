@@ -8,7 +8,7 @@ import {
 import {OperatingSystemService} from "common/model/api/hal/os";
 import {OperatingSystem, AWSRegion} from "common/model/api/hal/api";
 import {UUID} from "common/lib/utils/uuid";
-import {CredentialSecret} from "common/model/security/credentials";
+import {Credential} from "common/model/security/credentials";
 import {ApplicationRevision} from "apps/workspaces/model/application";
 
 
@@ -28,8 +28,8 @@ export class NodeTemplateDialog {
     private template                : ComputeTemplate;
     private templates               : ComputeTemplate[];
     private marshaller              : ComputeTemplateMarshaller;
-    private credential              : CredentialSecret;
-    private credentials             : CredentialSecret[];
+    private credential              : Credential;
+    private credentials             : Credential[];
     private applicationRevision     : ApplicationRevision;
     private operatingSystems        : OperatingSystem[];
     private locations               : AWSRegion[];

@@ -4,7 +4,7 @@ export class Secrets {
     static Credential =
         "io.hasli.vault.api.secrets.CredentialSecret"
 }
-export class CredentialSecret {
+export class Credential {
 
     id: string;
 

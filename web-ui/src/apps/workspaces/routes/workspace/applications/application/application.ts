@@ -22,9 +22,9 @@ export class Application {
     private lastLocation            : NavigationInstruction;
 
 
-    application                     : App;
-    applicationRevision             : ApplicationRevision;
-    private id: string;
+    private application             : App;
+    private id                      : string;
+    private workspaceId             : string;
 
 
     constructor(private client:HttpClient) {
@@ -43,27 +43,24 @@ export class Application {
     }
 
     close() : void {
-        this.router.navigateBack();
+        this.router.navigate(`#/workspace/${this.workspaceId}/applications`);
     }
 
 
-    attached(identifier: Identifier) : void {
-        this.client.fetch(`applications/${this.id}/base`)
+    attached() : void {
+        this.client.fetch(`workspaces/${this.workspaceId}/applications/${this.id}`)
             .then(t => t.json() as any)
             .then(t => {
-                this.applicationRevision = t;
-                this.application = t.application;
                 this.loaded = true;
+                this.application = t;
             });
 
     }
 
 
-    activate(identifier: Identifier) {
-        this.loaded = false;
-
-        this.id = identifier.id;
-
+    activate(params: any, a: any, workspace: NavigationInstruction) {
+        this.id = params.id;
+        this.workspaceId = workspace.parentInstruction.params.id;
     }
 
 

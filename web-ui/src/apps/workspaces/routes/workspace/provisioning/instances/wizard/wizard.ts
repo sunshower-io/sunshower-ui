@@ -2,7 +2,7 @@ import {Router, RouterConfiguration} from "aurelia-router";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
 import {autoinject} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
-import {CredentialSecret} from "common/model/security";
+import {Credential} from "common/model/security";
 import {Subscription, EventAggregator} from "aurelia-event-aggregator";
 import {ApplicationRevision} from "apps/workspaces/model/application/application";
 import {UUID} from "common/lib/utils/uuid";
@@ -22,7 +22,7 @@ export class CreateInstanceWizard {
     ec2Deploy: {} = {};
     policyId: string;
     providerId: string;
-    credential: CredentialSecret = null;
+    credential: Credential = null;
     name: string;
 
     applications: ApplicationRevision[];

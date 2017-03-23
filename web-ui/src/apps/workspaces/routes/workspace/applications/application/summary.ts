@@ -12,44 +12,44 @@ import {OperatingSystem} from "common/model/api/hal/api";
 import {ApplicationDialog} from "./dialogs/applications";
 import {ServiceDialog} from "./dialogs/service";
 import {InstancesDialog} from "./dialogs/instances";
+import {NavigationInstruction} from "aurelia-router";
 /**
  * Created by dustinlish on 2/20/17.
  */
 
 @autoinject
 export class Summary {
-    loading             : boolean;
+    loading: boolean;
 
-    requirementDD       : HTMLElement;
-    requirementPopup    : HTMLElement;
-
-    @bindable
-    popupState          : string;
+    requirementDD: HTMLElement;
+    requirementPopup: HTMLElement;
 
     @bindable
-    instance            : any;
+    popupState: string;
 
     @bindable
-    instances           : any[];
+    instance: any;
 
-
-    private applicationRevision     : ApplicationRevision;
-
-    private summary                 : HTMLElement;
     @bindable
-    private loadingSummary          : boolean;
-    private  id                     : string;
+    instances: any[];
 
 
-    constructor(
-        private client: HttpClient,
-        private parent: Application,
-        private dialogService:DialogService
-    ) {
+    private applicationRevision: ApplicationRevision;
+
+    private summary: HTMLElement;
+    @bindable
+    private loadingSummary: boolean;
+    private id: string;
+    private workspaceId: string;
+
+
+    constructor(private client: HttpClient,
+                private parent: Application,
+                private dialogService: DialogService) {
 
     }
 
-    attached() : void {
+    attached(): void {
         $(this.requirementDD).dropdown();
         $(this.requirementPopup).modal({
             onHide: () => {
@@ -58,22 +58,49 @@ export class Summary {
         });
 
 
-        this.client.fetch(`applications/${this.id}/base`)
-            .then(t => t.json() as any)
-            .then(t => {
-                this.applicationRevision = t;
-                this.parent.applicationRevision = t;
-                if (typeof this.applicationRevision.requirements == 'undefined') {
-                    this.applicationRevision.requirements = [];
-                }
-                this.load(this.id);
-                this.loading = false;
-            });
+        // this.client.fetch(`applications/${this.id}/base`)
+        //     .then(t => t.json() as any)
+        //     .then(t => {
+        //         this.applicationRevision = t;
+        //         if (typeof this.applicationRevision.requirements == 'undefined') {
+        //             this.applicationRevision.requirements = [];
+        //         }
+        //         this.load(this.id);
+        //         this.loading = false;
+        //     });
     }
 
-    activate(identifier: Identifier) {
-        this.id = identifier.id;
-        this.loading = true;
+    private path() : string {
+        return `workspaces/${this.workspaceId}/applications/${this.id}`
+    }
+
+    refresh() : void {
+        this.client.fetch(`${this.path()}/workspace/file`, {
+            method: 'put',
+            body: JSON.stringify({
+                path: 'README.md'
+            })
+        })
+        .then(t => t.json() as any)
+        .then(t => {
+            if(t.children.child && t.children.child.length > 0) {
+                let child = t.children.child[0];
+                this.client.fetch(`${this.path()}/workspace/${child.revision}`)
+                    .then(t => t.json())
+                    .then(t => {
+                        let converter = new showdown.Converter();
+                        converter.setFlavor('github');
+                        this.summary.innerHTML = converter.makeHtml((t as any).text as string);
+                        this.loadingSummary = false;
+                    });
+            }
+        });
+    }
+
+    activate(params: any, a: any, workspace: NavigationInstruction) {
+        this.id = params.id;
+        this.workspaceId = workspace.parentInstruction.parentInstruction.params.id;
+        this.refresh();
     }
 
     openNodeTemplate() {
@@ -97,7 +124,7 @@ export class Summary {
     openDeployer() {
         this.popupCleanup();
         this.dialogService.open({
-           viewModel: DeployerDialog,
+            viewModel: DeployerDialog,
             model: this.applicationRevision
         }).then(t => {
         });
@@ -130,7 +157,7 @@ export class Summary {
         });
     }
 
-    openDialog(requirement : any) {
+    openDialog(requirement: any) {
         //console.log('requirement', requirement);
         if (typeof requirement.type != 'undefined' && requirement.type == 'computeTemplate') {
             this.openNodeTemplate();
@@ -144,17 +171,17 @@ export class Summary {
         //todo check type and open relevant popup for applications, service and instances
     }
 
-    clearRequirement(requirement: any) : void {
+    clearRequirement(requirement: any): void {
         let index = this.applicationRevision.requirements.indexOf(requirement);
         this.applicationRevision.requirements.splice(index, 1);
     }
 
-    popupCleanup() : void {
+    popupCleanup(): void {
         $(this.requirementDD).find('.active').removeClass('active');
         $(this.requirementDD).find('.selected').removeClass('selected');
     }
 
-    private load(appId:string): void {
+    private load(appId: string): void {
         this.loadingSummary = true;
         let revision = this.applicationRevision,
             readme = revision.readme;

@@ -22,6 +22,7 @@ module.exports = {
         'jspm_packages/github/jspm/**/*',
         'jspm_packages/npm/buffer@3.6.0.js',
         'jspm_packages/npm/buffer@3.6.0/**/*',
+        'jspm_packages/npm/showdown@1.6.4.js',
         'jspm_packages/github/canvg/canvg@master.js',
         'jspm_packages/npm/chart.js@2.5.0.js',
         'styles/styles.css'
@@ -32,6 +33,10 @@ module.exports = {
     // must be 'normalized' by jspm to get the proper
     // path.
     'normalize': [
+        [
+         'showdown', [
+             '/dist/*.js'
+        ]],
         [
             'rxjs', [
                 '/**/*.js',

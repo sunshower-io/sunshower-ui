@@ -1,6 +1,6 @@
 import {bindable, inject, NewInstance} from "aurelia-framework";
 import {Provider, AWSRegion} from "common/model/api/hal/api";
-import {CredentialSecret} from "common/model/security/credentials";
+import {Credential} from "common/model/security/credentials";
 import {HttpClient} from "aurelia-fetch-client";
 import {
     ValidationController,
@@ -33,7 +33,7 @@ export class Admin {
     region:             HTMLElement;
 
     @bindable
-    credential:         CredentialSecret;
+    credential:         Credential;
 
 
     constructor(private client: HttpClient, private controller:ValidationController) {
@@ -104,9 +104,9 @@ export class Admin {
             `\${$displayName} must be at least three characters.`
         );
         let validationRules = ValidationRules
-            .ensure((c:CredentialSecret) => c.name).required().satisfiesRule('atleastthreechars')
-            .ensure((c:CredentialSecret) => c.credential).required().satisfiesRule('atleastthreechars')
-            .ensure((c:CredentialSecret) => c.secret).required().satisfiesRule('atleastthreechars')
+            .ensure((c:Credential) => c.name).required().satisfiesRule('atleastthreechars')
+            .ensure((c:Credential) => c.credential).required().satisfiesRule('atleastthreechars')
+            .ensure((c:Credential) => c.secret).required().satisfiesRule('atleastthreechars')
             .rules;
         this.controller.addObject(this.credential, validationRules);
     }

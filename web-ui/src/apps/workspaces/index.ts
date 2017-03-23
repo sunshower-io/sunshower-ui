@@ -30,9 +30,10 @@ export class Workspace {
 
 
     delete(id: string): void {
-        this.client.fetch('workspaces')
-            .then(t => t.json() as any)
-            .then(workspaces => this.workspaces = workspaces)
+        this.client.fetch(`workspaces/${id}`, {
+            method: 'delete'
+        }).then(t => t.json() as any)
+          .then(workspaces => this.workspaces = workspaces)
     }
 
     activate(id: any) {
@@ -41,9 +42,7 @@ export class Workspace {
 
 
     open(id: Identifier): void {
-        //console.log("OPEN", id);
-        this.context.workspaceRevision.id = id;
-        this.client.fetch(`workspaces/${id.id}`)
+        this.client.fetch(`workspaces/${id}`)
             .then(t => t.json() as any).then(t => {
             this.context.workspace = t;
             this.router.navigate(`workspace/${t.id}/applications`);
