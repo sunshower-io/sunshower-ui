@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+
+  proxy:
+      container_name: "proxy-${HASLI_UI_NAME}"
+      image: "nginx:1.11.1"
+      ports:
+        - "80"
+        - "443"
+      links:
+        - hasli-ui
+        - hasli-web
+      volumes:
+        - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+
+  hasli-ui:
+    container_name: "hasli-ui-${HASLI_UI_NAME}"
+    image: "${HASLI_UI_IMAGE}:${HASLI_UI_VERSION}"
+    links:
+      - hasli-web
+
+  hasli-web:
+    container_name: "hasli-web-${HASLI_UI_NAME}"
+    image: "${HASLI_WEB_IMAGE}:${HASLI_WEB_VERSION}"
