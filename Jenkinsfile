@@ -98,7 +98,7 @@ node('docker-registry') {
                         String comment = "${JOB_NAME}, build [#${env.BUILD_NUMBER}](${env.BUILD_URL}) - Deployment can be viewed at: [10.0.4.51:$http](http://10.0.4.51:$http"
 
                         sh "curl -H \"Content-Type: application/json\" -u hasli-bot:$pat -X POST -d '{\"body\": \"$comment)\"}' https://api.github.com/repos/hasli-projects/hasli-ui/issues/$pr/comments"
-                        slackSend (color: color, message: comment)
+                        slackSend (color: 'good', message: comment)
 
                         echo "Port Mapping: $portMapping"
                     }
@@ -157,7 +157,7 @@ def valueOf(path) {
             .getNextBuildNumber() - 1
 }
 
-def notifyBuild(String buildStatus = 'STARTED') {
+def notifyBuild(String buildStatus) {
     buildStatus = buildStatus ?: 'SUCCESS'
 
     def color = 'danger'
