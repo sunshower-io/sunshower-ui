@@ -147,6 +147,9 @@
       "github:Semantic-Org/Semantic-UI@2.2.4": {
         "shim": {}
       },
+      "npm:chart.js@2.5.0": {
+        "main": "dist/Chart.min.js"
+      },
       "npm:lodash@4.17.4": {
         "main": "lodash.js"
       },
