@@ -36,6 +36,18 @@ By default it will only expose the proxy container ports on your system (default
  
 If everything built without errors, you can pull up a browser and navigate to: [http://localhost:32770/dev/](http://localhost:32770/dev/)
 
+### Watching changes with Gulp
+
+To watch any changes made and automatically deploy the changes, we use `gulp`.  If you have npm and gulp installed locally on your system, you can just cd into `hasli-ui/web-ui` and run `gulp`.  This will automatically build and watch for changes to markup, styles, code etc. and redeploy the changes.
+
+If you don't have npm or gulp installed locally, you can run it from the running container.
+
+1. `docker exec -it hasli-ui /bin/bash`
+2. `cd /usr/src/web-ui`
+3. `gulp`
+
+That will run gulp inside the container so no dependencies are required locally on your system.
+
 ### Stopping and removing containers
 
 `docker-compose -f docker-compose-dev.yml down`
