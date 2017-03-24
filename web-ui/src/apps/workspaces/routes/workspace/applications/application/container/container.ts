@@ -34,5 +34,9 @@ export class Container {
         this.router = router;
     }
 
+    buildContainer() : void {
+        this.router.navigate('output');
+    }
+
 
 }
