@@ -15,21 +15,30 @@ export class Output {
 
     activate(items:any, p:any, c:any) : void {
         this.lines = [];
-        let id = c.queryParams.id;
+        let ls = docs.split('\n'),
+            count = 0,
+            interval = setInterval(() => {
+                if(count < ls.length) {
+                    this.lines.push(ls[count]);
+                } else {
+                    return clearInterval(interval);
+                }
+                count++;
 
-        let websocket = new WebSocket(`ws://${location.host}/hasli/api/docker/events`);
-        if(id) {
-            websocket.onopen = (e:Event) => {
-                this.client.fetch(`docker/${id}/deploy`, {
-                    method: 'post'
-                }).then(r => r.json() as any)
-                    .then(r => this.lines.push(r.payload));
-            };
-        }
-        websocket.onmessage = (e:Event) => {
-            let data = JSON.parse((e as any).data);
-            this.lines.push(data.payload);
-        }
+            }, 1000);
     }
 
 }
+
+
+let docs = `
+Digest: sha256:39d4b2f8d3f37bc1321b04ca9bca0681c6ba65ef5a8610793383710e3aecf8b5
+Digest: sha256:39d4b2f8d3f37bc1321b04ca9bca0681c6ba65ef5a8610793383710e3aecf8b5
+Digest: sha256:39d4b2f8d3f37bc1321b04ca9bca0681c6ba65ef5a8610793383710e3aecf8b5
+Digest: sha256:39d4b2f8d3f37bc1321b04ca9bca0681c6ba65ef5a8610793383710e3aecf8b5
+Digest: sha256:39d4b2f8d3f37bc1321b04ca9bca0681c6ba65ef5a8610793383710e3aecf8b5
+Digest: sha256:39d4b2f8d3f37bc1321b04ca9bca0681c6ba65ef5a8610793383710e3aecf8b5
+Digest: sha256:39d4b2f8d3f37bc1321b04ca9bca0681c6ba65ef5a8610793383710e3aecf8b5
+Digest: sha256:39d4b2f8d3f37bc1321b04ca9bca0681c6ba65ef5a8610793383710e3aecf8b5
+
+`;

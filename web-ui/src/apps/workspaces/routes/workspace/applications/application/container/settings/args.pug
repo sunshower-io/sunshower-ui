@@ -2,3 +2,20 @@
    Created by dustinlish on 2/21/17.
 
 template
+    .ui.basic.segment
+        .ui.grid
+            .row
+                .fourteen.wide.column
+                    h5.ui.header
+                        | Port Settings
+            .three.column.row(repeat.for="arg of arguments")
+                .three.wide.column
+                    .ui.transparent.input
+                        input(type="text" placeholder="${arg.type}")
+                    .ui.divider
+                .seven.wide.column
+                    .ui.transparent.input
+                        input(type="text" placeholder="${arg.args.join(' ')}")
+                    .ui.divider
+                .five.wide.column
+                    i.ui.ion-ios-plus-outline.big.green.icon
