@@ -25,6 +25,7 @@ module.exports = {
         'jspm_packages/npm/showdown@1.6.4.js',
         'jspm_packages/github/canvg/canvg@master.js',
         'jspm_packages/npm/chart.js@2.5.0.js',
+        'jspm_packages/npm/terminal-js@1.0.2.js',
         'styles/styles.css'
     ],
     // this section lists any jspm packages that have
@@ -46,6 +47,10 @@ module.exports = {
         [
             'chart.js', [
                 '/dist/Chart.min.js'
+        ]],
+        [
+            'terminal-js', [
+            '/dist/terminal.min.js'
         ]],
         [
             'lodash', [

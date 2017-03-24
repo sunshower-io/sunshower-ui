@@ -138,6 +138,7 @@
       "rxjs": "npm:rxjs@^5.2.0",
       "semantic-ui": "github:Semantic-Org/Semantic-UI@^2.2.4",
       "showdown": "npm:showdown@^1.6.4",
+      "terminal-js": "npm:terminal-js@^1.0.2",
       "text": "github:systemjs/plugin-text@^0.0.9",
       "topojson/topojson": "github:topojson/topojson@^2.2.0",
       "velocity": "github:julianshapiro/velocity@^1.4.1"
