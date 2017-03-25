@@ -1,3 +1,4 @@
+import {Credential} from "common/model/security/credentials";
 
 export enum RepositoryType {
     Workspace,
@@ -19,7 +20,6 @@ export class Remote {
 
     name            :   string;
     location        :   string;
-
-
+    credential      :   Credential;
 
 }

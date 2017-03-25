@@ -11,6 +11,6 @@ template
                 )
                     | ${errors && errors.length > 0 ? errors.length : ''}
             .ui.horizontal.list
-                a.item(click.delegate="incompleteFeature.notify($event)") Docs
+                a.item(href="/docs/api") Docs
                 a.item(click.delegate="incompleteFeature.notify($event)") Blogs
                 a.item(click.delegate="incompleteFeature.notify($event)") Help & Support
