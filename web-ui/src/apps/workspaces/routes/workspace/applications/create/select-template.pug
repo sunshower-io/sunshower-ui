@@ -1,0 +1,11 @@
+template
+    .ui.four.link.cards
+        .new-app_type.card.hvr-glow(
+        repeat.for="template of templates",
+        click.delegate="incompleteFeature.notify($event)"
+        )
+            .content
+                .header
+                    img(src="${template.icon}")
+                .description
+                    | ${template.description}
