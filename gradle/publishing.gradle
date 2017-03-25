@@ -3,9 +3,9 @@ apply plugin: 'maven-publish'
 
 
 ext {
-    repoKey = version =~ /(?i)SNAPSHOT/ ?
-            'libs-snapshot-local' :
-            'libs-release-local'
+    repoKey = version =~ /(?i)Final/ ?
+            'libs-release-local' :
+            'libs-snapshot-local'
 }
 
 
