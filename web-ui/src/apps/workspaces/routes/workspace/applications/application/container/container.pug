@@ -12,7 +12,7 @@ template
                 href.bind='row.href'
                 )
                     | ${row.title}
-            .ui.primary.basic.button
+            .ui.primary.basic.button(click.delegate="buildContainer()")
                 | Build
         .ui.twelve.wide.column
             router-view
