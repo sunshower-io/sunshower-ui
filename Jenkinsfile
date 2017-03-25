@@ -11,7 +11,7 @@ def runSystemTests = false
 def gradleTasks    = []
 def notifySlack    = false
 
-def wildflyVersion = "1.0.23.Final"
+def wildflyVersion = "1.0.24.Final"
 
 if (env.BRANCH_NAME == "master") {
     buildNumber = env.BUILD_NUMBER
