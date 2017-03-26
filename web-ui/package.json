@@ -141,7 +141,8 @@
       "terminal-js": "npm:terminal-js@^1.0.2",
       "text": "github:systemjs/plugin-text@^0.0.9",
       "topojson/topojson": "github:topojson/topojson@^2.2.0",
-      "velocity": "github:julianshapiro/velocity@^1.4.1"
+      "velocity": "github:julianshapiro/velocity@^1.4.1",
+      "xterm": "npm:xterm@^2.4.0"
     },
     "devDependencies": {},
     "overrides": {
