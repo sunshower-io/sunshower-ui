@@ -6,7 +6,7 @@ import {NavigationInstruction} from "aurelia-router";
  */
 
 @autoinject
-export class Args {
+export class Variables {
 
     private id: string;
     private workspaceId: string;
@@ -43,7 +43,6 @@ export class Args {
     }
 
     private parseAndGenerate(text: string) {
-
         text.split("\n").map(t => t.trim()).filter(t => t != "").forEach(t => {
             let values = t.split(/\s+/);
             this.add(values[0], values.splice(1));
