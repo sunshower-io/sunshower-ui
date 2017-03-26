@@ -34,9 +34,9 @@ export class Application {
         config.map([
             {route: ['', 'summary'], name: 'Summary', moduleId: './summary', nav: true, title: 'Summary'},
             {route: 'container', name: 'Container', moduleId: './container/container', nav: true, title: 'Container'},
-            {route: 'tasks', name: 'Tasks', moduleId: './tasks', nav: true, title: 'Tasks'},
             {route: 'versions', name: 'Versions', moduleId: './versions', nav: true, title: 'Versions'},
             {route: 'activity', name: 'Activity', moduleId: './activity', nav: true, title: 'Activity'},
+            {route: 'settings', name: 'Settings', moduleId: './settings', nav: true, title: 'Settings'},
         ]);
 
         this.router = router;
