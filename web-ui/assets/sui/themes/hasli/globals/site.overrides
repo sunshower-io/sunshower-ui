@@ -319,6 +319,14 @@ body {
   margin-top: -11px;
 }
 
+.no-border {
+  border: 0px !important;
+}
+
+.input-divider {
+  margin: 1rem 0 0 0 !important;
+}
+
 .file-icons_small {
   font-size: 1.3em !important;
 }

@@ -6,26 +6,56 @@ template
         h2.ui.header
             | Variables
         .ui.hidden.divider
-        .ui.grid
-            .three.column.row(repeat.for="arg of arguments")
-                .four.wide.column
-                    .ui.transparent.fluid.input
-                        input(type="text" value="${arg.type}")
-                    .ui.divider
-                .eleven.wide.column
-                    .ui.transparent.fluid.input
-                        input(type="text" value="${arg.args}")
-                    .ui.divider
-                .one.wide.column
-                    i.link.ui.ion-ios-close-outline.big.red.icon
-            .three.column.row
-                .four.wide.column
-                    .ui.transparent.fluid.input
-                        input(type="text" placeholder="KEY")
-                    .ui.divider
-                .eleven.wide.column
-                    .ui.transparent.fluid.input
-                        input(type="text" placeholder="VALUE")
-                    .ui.divider
-                .one.wide.column
-                    i.link.ui.ion-ios-plus-outline.big.green.icon
+        .ui.hidden.divider
+        table.ui.very.padded.very.basic.table
+            thead
+                tr
+                    th.center.aligned.one.wide.no-border TYPE
+                    th.three.wide.no-border NAME
+                    th.nine.wide.no-border VALUE
+                    th.one.wide.no-border REQUIRED
+                    th.one.wide.no-border PRIVATE
+                    th.one.wide.no-border
+            tbody
+                tr(repeat.for="arg of arguments")
+                    td.center.aligned.top.aligned.no-border
+                        i.link.ui.lock.icon
+                    td.no-border
+                        .ui.transparent.fluid.input
+                            input(type="text" value="${arg.type}")
+                        .ui.divider.input-divider
+                    td.no-border
+                        .ui.transparent.fluid.input
+                            input(type="text" value="${arg.args}")
+                        .ui.divider.input-divider
+                    td.center.aligned.no-border
+                        .ui.checkbox
+                            input(type='checkbox', name='master')
+                            label
+                    td.center.aligned.no-border
+                        .ui.checkbox
+                            input(type='checkbox', name='master')
+                            label
+                    td.center.aligned.no-border
+                        i.link.ui.ion-ios-close-outline.big.red.icon
+                tr
+                    td.center.aligned.top.aligned.no-border
+                        i.link.ui.lock.icon
+                    td.no-border
+                        .ui.transparent.fluid.input
+                            input(type="text" placeholder="NAME")
+                        .ui.divider.input-divider
+                    td.no-border
+                        .ui.transparent.fluid.input
+                            input(type="text" placeholder="VALUE")
+                        .ui.divider.input-divider
+                    td.center.aligned.no-border
+                        .ui.checkbox
+                            input(type='checkbox', name='master')
+                            label
+                    td.center.aligned.no-border
+                        .ui.checkbox
+                            input(type='checkbox', name='master')
+                            label
+                    td.center.aligned.no-border
+                        i.link.ui.ion-ios-plus-outline.big.green.icon
