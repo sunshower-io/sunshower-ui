@@ -66,7 +66,7 @@ export class AddCloud {
     deselectProvider() : void {
         this.providerSelected = false;
         this.provider = null;
-}
+    }
 
     selectProvider(provider: Provider): void {
         this.providerSelected = true;

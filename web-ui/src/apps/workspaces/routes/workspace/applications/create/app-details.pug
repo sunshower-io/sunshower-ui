@@ -24,7 +24,7 @@ template
                                 input.overlay-input-centered(
                                 type='text'
                                 placeholder='Add application name'
-                                value.bind="application.name"
+                                value.bind="application.name & validate"
                                 )
                             .ui.divider
 
@@ -35,7 +35,9 @@ template
                         //            label.clickable
                         //                input.upload-box__file(type="file" name="image" ref="imageInput" files.bind="image")
                         //                i.circular.blue.ion-image.icon.circular--icon
-                        //                span(style="margin-left:1em;") Add Image
+                        //                span(style="margin-left:1em;")
+                        //                    .ui.basic.primary.button
+                        //                        | Add Image
                         //                .upload-box__file-label
                         .big-divider
 

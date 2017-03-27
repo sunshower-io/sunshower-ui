@@ -21,14 +21,16 @@ export class Create {
     private files: FileList;
 
 
-    constructor(private parent: Workspace, private client: HttpClient, private controller: ValidationController) {
+    constructor(private parent: Workspace,
+                private client: HttpClient,
+                private controller: ValidationController) {
         this.controller.addRenderer(new BootstrapFormRenderer());
     }
 
     attached(): void {
         this.setupFileUpload();
         ValidationRules
-            .ensure((wsp: Create) => wsp.name).required()
+            .ensure((wsp: Create) => wsp.name).minLength(3).maxLength(20)
             .on(Create);
     }
 

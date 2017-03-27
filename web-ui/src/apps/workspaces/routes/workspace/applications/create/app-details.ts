@@ -3,19 +3,24 @@
  */
 
 import {
-    autoinject,
+    inject,
     bindable,
-    customElement
+    customElement,
+    NewInstance
 } from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client"; //will this actually work with image upload now?
-
-
 import {Application} from "common/model/api/sdk";
 import {Router} from "aurelia-router";
 import {Applications} from "apps/workspaces/routes/workspace/applications/applications";
 import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
+import {
+    ValidationController,
+    ValidationRules
+} from 'aurelia-validation';
+import {BootstrapFormRenderer} from 'common/resources/custom-components/bootstrap-form-renderer';
 
-@autoinject
+
+@inject(HttpClient, Router, Applications, IncompleteFeature, NewInstance.of(ValidationController))
 @customElement('create-app')
 export class CreateApp {
 
@@ -33,8 +38,10 @@ export class CreateApp {
         private client:HttpClient,
         private router:Router,
         private applications:Applications,
-        private incompleteFeature: IncompleteFeature
+        private incompleteFeature: IncompleteFeature,
+        private controller: ValidationController
     ) {
+        this.controller.addRenderer(new BootstrapFormRenderer());
         this.application = new Application();
 
         // this.templates = [
@@ -55,33 +62,47 @@ export class CreateApp {
     }
 
     submit() : void {
-
-        this.loading = true;
-        let app = this.application;
-
-        if (app.repository.remote.location) {
-            if (app.repository.remote.credential.credential == '' && app.repository.remote.credential.secret == '') {
-                app.repository.remote.credential = null;
-            }
-        }
-
-
-        this.client.fetch(`workspaces/${this.workspaceId}/applications`, {
-            method: 'put',
-            body: JSON.stringify(app)
-        }).then(t => t.json() as any).then(t => {
-            this.loading = false;
-            this.cancel();
-        })
+        this.controller.validate()
+            .then(result => {
+                if (result.valid) {
+                    this.loading = true;
+                    let app = this.application;
+                    if (app && app.repository && app.repository.remote && app.repository.remote.location) {
+                        if (app.repository.remote.credential.credential == '' && app.repository.remote.credential.secret == '') {
+                            app.repository.remote.credential = null;
+                        }
+                    }
+                    this.client.fetch(`workspaces/${this.workspaceId}/applications`, {
+                        method: 'put',
+                        body: JSON.stringify(app)
+                    }).then(t => t.json() as any).then(t => {
+                        this.loading = false;
+                        this.cancel();
+                    })
+                }
+            });
     }
 
     cancel() : void {
         this.applications.close();
     }
 
+    setupValidation() : void {
+        let appRules = ValidationRules
+            .ensure((app: Application) => app.name).required()
+            .rules;
+
+        //todo require credential if secret is provided & vice versa
+        this.controller.addObject(this.application, appRules);
+        console.log(appRules);
+    }
+
     activate(id: any) {
         this.workspaceId = id;
-        this.application = null;
+        this.application = new Application();
+
+        this.setupValidation();
+
     }
 
 }
