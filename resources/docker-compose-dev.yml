@@ -16,10 +16,7 @@ services:
 
   hasli-web:
     container_name: "hasli-web"
-    image: "hasli-web/web-dev:latest"
-    volumes:
-      - ../../hasli-web/:/usr/src/hasli-web
-      - ~/.gradle/wrapper:/root/.gradle/wrapper
+    image: "hasli-web/web:latest"
     links:
       - hasli-ui
 
