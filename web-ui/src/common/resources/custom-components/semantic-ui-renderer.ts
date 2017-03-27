@@ -29,8 +29,6 @@ export class SemanticUIRenderer {
 
     getDialogContainer(): HTMLElement {
         let result = DOM.createElement('div') as HTMLElement;
-        $(result).width(900);
-        $(result).height(900);
         return result;
     }
 

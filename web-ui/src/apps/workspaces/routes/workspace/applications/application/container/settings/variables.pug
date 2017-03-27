@@ -5,7 +5,10 @@ template
     .ui.basic.segment
         h2.ui.header
             | Variables
+            .ui.right.floated.basic.primary.button
+                | NEW
         .ui.hidden.divider
+        .ui.divider
         .ui.hidden.divider
         table.ui.very.padded.very.basic.table
             thead
@@ -15,11 +18,11 @@ template
                     th.nine.wide.no-border VALUE
                     th.one.wide.no-border REQUIRED
                     th.one.wide.no-border PRIVATE
-                    th.one.wide.no-border
+                    th.one.wide.no-border.right.aligned
             tbody
                 tr(repeat.for="arg of arguments")
                     td.center.aligned.top.aligned.no-border
-                        i.link.ui.lock.icon
+                        i.ion-ios-locked-outline.large.icon
                     td.no-border
                         .ui.transparent.fluid.input
                             input(type="text" value="${arg.type}")
@@ -38,24 +41,3 @@ template
                             label
                     td.center.aligned.no-border
                         i.link.ui.ion-ios-close-outline.big.red.icon
-                tr
-                    td.center.aligned.top.aligned.no-border
-                        i.link.ui.lock.icon
-                    td.no-border
-                        .ui.transparent.fluid.input
-                            input(type="text" placeholder="NAME")
-                        .ui.divider.input-divider
-                    td.no-border
-                        .ui.transparent.fluid.input
-                            input(type="text" placeholder="VALUE")
-                        .ui.divider.input-divider
-                    td.center.aligned.no-border
-                        .ui.checkbox
-                            input(type='checkbox', name='master')
-                            label
-                    td.center.aligned.no-border
-                        .ui.checkbox
-                            input(type='checkbox', name='master')
-                            label
-                    td.center.aligned.no-border
-                        i.link.ui.ion-ios-plus-outline.big.green.icon
