@@ -19,6 +19,9 @@ export class AddCloud {
     visible: boolean;
 
     @bindable
+    loading: boolean;
+
+    @bindable
     providerSelected: boolean;
 
     @bindable
@@ -60,6 +63,11 @@ export class AddCloud {
         this.parent.setMenuVisible(false);
     }
 
+    deselectProvider() : void {
+        this.providerSelected = false;
+        this.provider = null;
+}
+
     selectProvider(provider: Provider): void {
         this.providerSelected = true;
         this.provider = provider;
@@ -75,10 +83,12 @@ export class AddCloud {
     saveProvider(): void {
         this.controller.validate().then(result => {
             if (result.valid) {
+                this.loading = true;
                 this.client.fetch('providers', {
                     method: 'post',
                     body: JSON.stringify(this.provider)
                 }).then(t => t.json() as any).then(t => {
+                    this.loading = false;
                     this.close()
                     this.client.fetch(`compute/${t.value}/provider/index`, {
                         method: 'put'

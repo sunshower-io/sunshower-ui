@@ -1,12 +1,16 @@
 template
-    //todo add loader
+    .ui.active.inverted.dimmer(if.bind="loading", style="position:absolute; top:0px; left:0; right:0; bottom:0;")
+        .ui.large.loader
     .overlay.au-animate
+        template(if.bind="providerSelected")
+            .overlay-back.overlay-nav(click.delegate="deselectProvider()")
+                i.ion-ios-arrow-thin-left.icon
+                span back
+        .overlay-close.overlay-nav(click.delegate="close()")
+            i.ion-ios-close-empty.icon
+            span esc
         .ui.container
-            .ui.secondary.menu
-                .right.menu
-                    a.item
-                        i.huge.ion-ios-close-empty.icon(click.delegate="close()")
-            .ui.middle.aligned.center.aligned.grid
+            .ui.center.aligned.grid
                 .two.column.centered.row
                     .column
                         h3.ui.center.aligned.header

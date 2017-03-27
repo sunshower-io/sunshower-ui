@@ -46,6 +46,10 @@ export class Application {
         this.router.navigate(`#/workspace/${this.workspaceId}/applications`);
     }
 
+    back() : void {
+        this.router.navigateBack();
+    }
+
 
     attached() : void {
         this.client.fetch(`workspaces/${this.workspaceId}/applications/${this.id}`)

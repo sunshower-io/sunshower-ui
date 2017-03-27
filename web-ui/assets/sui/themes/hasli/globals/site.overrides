@@ -450,6 +450,42 @@ body {
 @hasliem: 16px;
 @sidenavwidth: 25%;
 
+
+.overlay-nav {
+  position: absolute;
+  top:20px;
+  height:64px;
+  width:64px;
+  text-align:center;
+  color: @hasliGrey;
+  border-radius:100%;
+  box-sizing:border-box;
+  padding-top:10px;
+  &.overlay-back {
+    left:20px;
+  }
+  &.overlay-close {
+    right:20px;
+  }
+  i.icon {
+    margin:0;
+    font-size:36px;
+  }
+  span {
+    display:block;
+    font-size: .75em;
+    text-transform: uppercase;
+    margin-top:-10px;
+    letter-spacing:1px;
+  }
+
+  &:hover {
+    background-color:@hasliLightGrey;
+  }
+
+  .clickable
+}
+
 .overlay {
   position: fixed;
   left: 0;
@@ -460,6 +496,7 @@ body {
   overflow-x: hidden;
   background-color: white;
   z-index:1;
+  padding-top:100px;
 
   & > .ui.container {
     position:relative;
@@ -468,28 +505,6 @@ body {
   h2.center.aligned.header {
     margin-bottom:2.5em;
   }
-}
-
-.overlay-close {
-  position:absolute;
-  top:0;
-  right:0;
-  text-align:center;
-  font-weight:bold;
-  color: @hasliStandardGrey;
-  * {
-    display: block;
-  }
-  i.icon {
-    margin:0;
-    font-size:1.75em;
-  }
-  span {
-    margin-top: .25em;
-    font-size: 1.25em;
-  }
-
-  .clickable
 }
 
 //@cardmargin:120px;

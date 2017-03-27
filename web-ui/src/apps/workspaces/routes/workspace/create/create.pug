@@ -1,13 +1,16 @@
 template
     .ui.active.dimmer(if.bind="loading")
-        .ui.loader
+        .ui.large.loader
 
     form.overlay(enctype="multipart/form-data" if.bind="!loading")
+        //.overlay-back.overlay-nav(click.delegate="cancel()")
+        //    i.ion-ios-arrow-thin-left.icon
+        //    span back
+        .overlay-close.overlay-nav(click.delegate="cancel()")
+            i.ion-ios-close-empty.icon
+            span esc
+
         .ui.container
-            .ui.secondary.menu
-                .right.menu
-                    a.item
-                        i.huge.ion-ios-close-empty.icon(click.delegate="cancel()")
             .ui.center.aligned.grid
                 .two.column.centered.row
                     .column

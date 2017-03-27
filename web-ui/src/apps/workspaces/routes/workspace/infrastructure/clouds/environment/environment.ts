@@ -42,6 +42,10 @@ export class Environment {
         this.router = router;
     }
 
+    back(): void {
+        this.router.navigateBack();
+    }
+
     close(): void {
         this.parent.router.navigateBack();
     }
