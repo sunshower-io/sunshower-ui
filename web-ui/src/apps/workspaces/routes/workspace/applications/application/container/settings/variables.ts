@@ -1,6 +1,9 @@
 import {autoinject} from "aurelia-dependency-injection";
 import {HttpClient} from "aurelia-fetch-client";
 import {NavigationInstruction} from "aurelia-router";
+
+var parser = require('dockerfile-parser');
+
 /**
  * Created by dustinlish on 2/21/17.
  */
@@ -36,17 +39,26 @@ export class Variables {
                     this.client.fetch(`${this.path()}/workspace/${child.revision}`)
                         .then(t => t.json())
                         .then(t => {
-                            this.parseAndGenerate((t as any).text);
+                            var options = { includeComments: false };
+                            var commands = parser.parse(t.text, options);
+                            for (let cmd of commands) {
+                                if (cmd.args instanceof Array) {
+                                    this.add(cmd.name, cmd.args.join(' '));
+                                } else if (cmd.args instanceof Object) {
+                                    let values = [];
+
+                                    for (let key in cmd.args) {
+                                        values.push(`${key} ${cmd.args[key]}`)
+                                    }
+
+                                    this.add(cmd.name, values);
+                                } else {
+                                    this.add(cmd.name, cmd.args.replace(/\s+/g, " "));
+                                }
+                            }
                         });
                 }
             });
-    }
-
-    private parseAndGenerate(text: string) {
-        text.split("\n").map(t => t.trim()).filter(t => t != "").forEach(t => {
-            let values = t.split(/\s+/);
-            this.add(values[0], values.splice(1));
-        });
     }
 
     attached(): void {
