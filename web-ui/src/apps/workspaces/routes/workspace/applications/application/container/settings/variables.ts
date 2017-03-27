@@ -44,7 +44,8 @@ export class Variables {
                             for (let cmd of commands) {
                                 if (cmd.args instanceof Array) {
                                     this.add(cmd.name, cmd.args.join(' '));
-                                } else if (cmd.args instanceof Object) {
+                                }
+                                else if (cmd.args instanceof Object) {
                                     let values = [];
 
                                     for (let key in cmd.args) {
@@ -52,7 +53,8 @@ export class Variables {
                                     }
 
                                     this.add(cmd.name, values);
-                                } else {
+                                }
+                                else {
                                     this.add(cmd.name, cmd.args.replace(/\s+/g, " "));
                                 }
                             }
@@ -76,7 +78,9 @@ export class Variables {
 }
 
 class Argument {
-    constructor(public type: string, public args: string[]) {
+    constructor(
+        public type: string,
+        public args: string[]) {
 
     }
 }
