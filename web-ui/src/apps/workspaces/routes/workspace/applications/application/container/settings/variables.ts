@@ -1,6 +1,8 @@
 import {autoinject} from "aurelia-dependency-injection";
 import {HttpClient} from "aurelia-fetch-client";
 import {NavigationInstruction} from "aurelia-router";
+import {VariableDialog} from "./dialogs/variable";
+import {DialogService} from "aurelia-dialog";
 
 var parser = require('dockerfile-parser');
 
@@ -16,8 +18,8 @@ export class Variables {
 
     private arguments: Argument[];
 
-    constructor(private client: HttpClient) {
-
+    constructor(private client: HttpClient,
+                private dialogService: DialogService) {
     }
 
     private path(): string {
@@ -63,9 +65,6 @@ export class Variables {
             });
     }
 
-    attached(): void {
-    }
-
     activate(params: any, a: any, workspace: NavigationInstruction) {
         this.id = params.id;
         this.workspaceId = workspace.parentInstruction.parentInstruction.parentInstruction.params.id;
@@ -74,6 +73,19 @@ export class Variables {
 
     private add(type: string, args: string[]) {
         this.arguments.push(new Argument(type, args));
+    }
+
+    newVariable(): void {
+        this.dialogService.open({
+            viewModel: VariableDialog,
+            model: {}
+        }).then(response => {
+            if (!response.wasCancelled) {
+                this.refresh();
+            } else {
+
+            }
+        });
     }
 }
 
