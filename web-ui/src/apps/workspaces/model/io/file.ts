@@ -2,6 +2,8 @@ export class File {
     id              :   string;
     path            :   string;
     directory       :   boolean;
+    name            :   string;
+    //todo add commit info
 }
 
 export module Files {

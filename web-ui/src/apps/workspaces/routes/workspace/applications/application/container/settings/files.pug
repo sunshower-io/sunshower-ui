@@ -10,28 +10,28 @@ template
                 h4.ui.header
                     | All Files
             .right.menu
-                a.item
+                a.item(click.delegate="incompleteFeature.notify($event)")
                     | + NEW DIRECTORY
-                a.item
+                a.item(click.delegate="incompleteFeature.notify($event)")
                     | + NEW FILE
-        table.ui.very.basic.files.single.line.unstackable.selectable.table
+        table.ui.very.basic.files.unstackable.selectable.table
             thead
                 tr.breadcrumb
                     td(colspan="3")
                         a.clickable(click.delegate="openRoot()")
                             i.ion-home.icon
                             | Root
-                        a.clickable(repeat.for="parent of parentList" click.delegate="openFile(parent)")
+                        a.clickable(repeat.for="parent of parentList" click.delegate="openFile(parent, $event)")
                             i.ion-ios-arrow-right.icon
                             | ${name(parent)}
             tbody
-                tr.clickable.file(repeat.for="file of files" click.delegate="openFile(file)" data-id="${file.id}")
+                tr.clickable.file(repeat.for="file of files" click.delegate="openFile(file, $event)" data-id="${file.id}")
                     td.fileName
                         i(class="${style(file)}")
                         a(href='#')
-                            | ${name(file)}
-                    td.commitMsg Clean up logic in onComplete
-                    td.right.aligned.commitTime 5 days ago
+                            | ${file.name}
+                    td.commitMsg
+                    td.right.aligned.commitTime
 
     .ui.long.modal(ref="filePopup")
         template(if.bind="activeFile")

@@ -22,7 +22,7 @@ export class Application {
     private lastLocation            : NavigationInstruction;
 
 
-    private application             : App;
+    public application             : App;
     private id                      : string;
     private workspaceId             : string;
 
