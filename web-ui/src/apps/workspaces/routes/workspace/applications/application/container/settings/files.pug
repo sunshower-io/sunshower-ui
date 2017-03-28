@@ -23,7 +23,7 @@ template
                             | Root
                         a.clickable(repeat.for="parent of parentList" click.delegate="openFile(parent, $event)")
                             i.ion-ios-arrow-right.icon
-                            | ${name(parent)}
+                            | ${parent.name}
             tbody
                 tr.clickable.file(repeat.for="file of files" click.delegate="openFile(file, $event)" data-id="${file.id}")
                     td.fileName
@@ -35,7 +35,7 @@ template
 
     .ui.long.modal(ref="filePopup")
         template(if.bind="activeFile")
-            .header ${name(activeFile)}
+            .header ${activeFile.name}
             .content
                 .ui.form.overlay-form
                     .field(style="position:relative;")
