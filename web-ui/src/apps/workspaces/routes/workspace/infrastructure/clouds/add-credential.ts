@@ -63,15 +63,10 @@ export class AddCredential {
 
 
     setupValidation() : void {
-        ValidationRules.customRule(
-            'atleastthreechars',
-            (value, obj) => value === null || value === undefined || value.length > 2,
-            `\${$displayName} must be at least three characters.`
-        );
         let validationRules = ValidationRules
-            .ensure((c:Credential) => c.name).required().satisfiesRule('atleastthreechars')
-            .ensure((c:Credential) => c.credential).required().satisfiesRule('atleastthreechars')
-            .ensure((c:Credential) => c.secret).required().satisfiesRule('atleastthreechars')
+            .ensure((c:Credential) => c.name).required().minLength(3)
+            .ensure((c:Credential) => c.credential).required().minLength(3)
+            .ensure((c:Credential) => c.secret).required().minLength(3)
             .rules;
         this.controller.addObject(this.credential, validationRules);
     }

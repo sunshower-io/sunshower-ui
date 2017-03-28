@@ -22,7 +22,7 @@ export class Application {
     private lastLocation            : NavigationInstruction;
 
 
-    private application             : App;
+    public application             : App;
     private id                      : string;
     private workspaceId             : string;
 
@@ -44,6 +44,10 @@ export class Application {
 
     close() : void {
         this.router.navigate(`#/workspace/${this.workspaceId}/applications`);
+    }
+
+    back() : void {
+        this.router.navigateBack();
     }
 
 

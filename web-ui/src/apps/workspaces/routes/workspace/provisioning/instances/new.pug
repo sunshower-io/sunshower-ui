@@ -1,11 +1,13 @@
 template
     .overlay.au-animate
+        //.overlay-back.overlay-nav(click.delegate="back()")
+        //    i.ion-ios-arrow-thin-left.icon
+        //    span back
+        .overlay-close.overlay-nav(click.delegate="close()")
+            i.ion-ios-close-empty.icon
+            span esc
         .ui.container
-            .ui.secondary.menu
-                .right.menu
-                    a.item
-                        i.huge.ion-ios-close-empty.icon(click.delegate="close()")
-            .ui.middle.aligned.center.aligned.grid
+            .ui.center.aligned.grid
                 .two.column.centered.row
                     .column
                         h3.ui.center.aligned.header

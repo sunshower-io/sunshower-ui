@@ -4,12 +4,14 @@ template
     .ui.active.inverted.dimmer(if.bind="loading", style="position:absolute; top:0px; left:0; right:0; bottom:0;")
         .ui.large.loader
     .overlay.au-animate
+        //.overlay-back.overlay-nav(click.delegate="cancel()")
+        //    i.ion-ios-arrow-thin-left.icon
+        //    span back
+        .overlay-close.overlay-nav(click.delegate="cancel()")
+            i.ion-ios-close-empty.icon
+            span esc
         .ui.container
-            .ui.secondary.menu
-                .right.menu
-                    a.item
-                        i.huge.ion-ios-close-empty.icon(click.delegate="cancel()")
-            .ui.middle.aligned.center.aligned.grid
+            .ui.center.aligned.grid
                 .two.column.centered.row
                     .column
                         h3.ui.center.aligned.header
@@ -22,7 +24,7 @@ template
                                 input.overlay-input-centered(
                                 type='text'
                                 placeholder='Add application name'
-                                value.bind="application.name"
+                                value.bind="application.name & validate"
                                 )
                             .ui.divider
 
@@ -33,7 +35,9 @@ template
                         //            label.clickable
                         //                input.upload-box__file(type="file" name="image" ref="imageInput" files.bind="image")
                         //                i.circular.blue.ion-image.icon.circular--icon
-                        //                span(style="margin-left:1em;") Add Image
+                        //                span(style="margin-left:1em;")
+                        //                    .ui.basic.primary.button
+                        //                        | Add Image
                         //                .upload-box__file-label
                         .big-divider
 
