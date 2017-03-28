@@ -14,22 +14,22 @@ template
             thead
                 tr
                     th.center.aligned.one.wide.no-border TYPE
-                    th.three.wide.no-border NAME
-                    th.nine.wide.no-border VALUE
+                    th.five.wide.no-border NAME
+                    th.seven.wide.no-border VALUE
                     th.one.wide.no-border REQUIRED
                     th.one.wide.no-border PRIVATE
                     th.one.wide.no-border.right.aligned
             tbody
-                tr(repeat.for="arg of arguments")
+                tr(repeat.for="variable of variables")
                     td.center.aligned.top.aligned.no-border
                         i.ion-ios-locked-outline.large.icon
                     td.no-border
                         .ui.transparent.fluid.input
-                            input(type="text" value="${arg.type}")
+                            input(type="text" value="${variable.name}")
                         .ui.divider.input-divider
                     td.no-border
                         .ui.transparent.fluid.input
-                            input(type="text" value="${arg.args}")
+                            input(type="text" value="${variable.value}")
                         .ui.divider.input-divider
                     td.center.aligned.no-border
                         .ui.checkbox

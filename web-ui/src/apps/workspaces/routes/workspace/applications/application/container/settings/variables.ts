@@ -3,6 +3,7 @@ import {HttpClient} from "aurelia-fetch-client";
 import {NavigationInstruction} from "aurelia-router";
 import {VariableDialog} from "./dialogs/variable";
 import {DialogService} from "aurelia-dialog";
+import {Instruction, InstructionParser} from "../../../../../../../../common/lib/utils/instruction-parser";
 
 var parser = require('dockerfile-parser');
 
@@ -16,10 +17,11 @@ export class Variables {
     private id: string;
     private workspaceId: string;
 
-    private arguments: Argument[];
+    private variables: Array<Instruction>;
 
     constructor(private client: HttpClient,
-                private dialogService: DialogService) {
+                private dialogService: DialogService,
+                private parser: InstructionParser ) {
     }
 
     private path(): string {
@@ -35,31 +37,14 @@ export class Variables {
         })
             .then(t => t.json() as any)
             .then(t => {
-                this.arguments = [];
+                this.variables = [];
                 if (t.children.child && t.children.child.length > 0) {
                     let child = t.children.child[0];
                     this.client.fetch(`${this.path()}/workspace/${child.revision}`)
                         .then(t => t.json())
                         .then(t => {
                             var options = { includeComments: false };
-                            var commands = parser.parse(t.text, options);
-                            for (let cmd of commands) {
-                                if (cmd.args instanceof Array) {
-                                    this.add(cmd.name, cmd.args.join(' '));
-                                }
-                                else if (cmd.args instanceof Object) {
-                                    let values = [];
-
-                                    for (let key in cmd.args) {
-                                        values.push(`${key} ${cmd.args[key]}`)
-                                    }
-
-                                    this.add(cmd.name, values);
-                                }
-                                else {
-                                    this.add(cmd.name, cmd.args.replace(/\s+/g, " "));
-                                }
-                            }
+                            this.variables = this.parser.parseInstructionSet(parser.parse(t.text, options));
                         });
                 }
             });
@@ -71,11 +56,7 @@ export class Variables {
         this.refresh();
     }
 
-    private add(type: string, args: string[]) {
-        this.arguments.push(new Argument(type, args));
-    }
-
-    newVariable(): void {
+    private newVariable(): void {
         this.dialogService.open({
             viewModel: VariableDialog,
             model: {}
@@ -87,12 +68,6 @@ export class Variables {
             }
         });
     }
+
 }
 
-class Argument {
-    constructor(
-        public type: string,
-        public args: string[]) {
-
-    }
-}
