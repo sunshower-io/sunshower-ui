@@ -1179,6 +1179,10 @@ table tr.inactive {
   }
 }
 
+.hasli-incomplete {
+  background-color: lighten(@primarycolor, 25%) !important;
+}
+
 //todo put places
 .inline-loader-holder {
   position:relative;

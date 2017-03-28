@@ -116,7 +116,7 @@ export class Files {
                 this.client.fetch(`${this.path()}/workspace/file`, {
                     method: 'put',
                     body: JSON.stringify({
-                        path: `${file.name}`
+                        path: `${file.name}/`
                     })
                 })
                     .then(t => t.json() as any)
