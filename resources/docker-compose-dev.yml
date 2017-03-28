@@ -2,8 +2,8 @@ version: '3'
 
 services:
 
-  proxy:
-    container_name: "proxy"
+  proxy-dev:
+    container_name: "proxy-dev"
     image: "nginx:1.11.1"
     ports:
       - "32770:80"
@@ -14,14 +14,14 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
 
-  hasli-web:
-    container_name: "hasli-web"
+  hasli-web-dev:
+    container_name: "hasli-web-dev"
     image: "hasli-web/web:latest"
     links:
       - hasli-ui
 
-  hasli-ui:
-    container_name: "hasli-ui"
+  hasli-ui-dev:
+    container_name: "hasli-ui-dev"
     image: "hasli-ui/ui-dev:latest"
     volumes:
       - ../:/usr/src/
