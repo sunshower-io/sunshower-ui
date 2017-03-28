@@ -6,6 +6,7 @@ import * as ace from 'ace';
 import {autoinject} from "aurelia-framework";
 import {NavigationInstruction} from "aurelia-router";
 import {HttpClient} from "aurelia-fetch-client";
+import Editor = AceAjax.Editor;
 
 
 @autoinject
@@ -14,8 +15,9 @@ export class Dockerfile {
     private id: string;
     private workspaceId: string;
 
-
     private editor:HTMLElement;
+
+    private aceEditor:Editor;
 
     constructor(private client:HttpClient) {
         let a = ace as any;
@@ -40,16 +42,15 @@ export class Dockerfile {
                     this.client.fetch(`${this.path()}/workspace/${child.revision}`)
                         .then(t => t.json())
                         .then(t => {
-                            let editor = ace.edit('editor');
-                            editor.setTheme('ace/theme/clouds_midnight');
-                            editor.getSession().setMode('ace/mode/yaml');
-                            editor.setValue((t as any).text);
+                            this.aceEditor.setValue((t as any).text, -1);
                         });
                 }
             });
     }
 
     attached() : void {
+        this.aceEditor = ace.edit('editor');
+        this.aceEditor.getSession().setMode('ace/mode/yaml');
         this.refresh();
     }
 
