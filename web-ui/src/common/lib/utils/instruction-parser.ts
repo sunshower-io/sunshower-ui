@@ -1,5 +1,6 @@
 
 
+import {Type, Variable} from "../../model/common/variable";
 export class InstructionParser {
 
     private instructions = [
@@ -10,7 +11,7 @@ export class InstructionParser {
     ];
 
     public parseInstructionSet(commands) {
-        let parsedInstructions: Array<Instruction> = [];
+        let parsedInstructions: Array<Variable> = [];
 
         for (let cmd of commands) {
             if (this.contains(cmd.name)) {
@@ -25,7 +26,7 @@ export class InstructionParser {
         return parsedInstructions;
     }
 
-    public parseInstruction(cmd): Array<Instruction> {
+    public parseInstruction(cmd): Array<Variable> {
         switch (cmd.name.toLowerCase()) {
             case "arg":
                 return this.parseArgInstruction(cmd);
@@ -43,13 +44,13 @@ export class InstructionParser {
     /**
      * ARG <name>[=<default value>]
      */
-    private parseArgInstruction(cmd): Array<Instruction> {
+    private parseArgInstruction(cmd): Array<Variable> {
         if (!cmd.args[0].includes("=")) {
-            return [new Instruction(cmd.args[0], "")]
+            return [new Variable(cmd.args[0], "", Type.Text)]
         }
 
         let values = cmd.args[0].split("=", 2);
-        return [new Instruction(values[0], values[1])];
+        return [new Variable(values[0], values[1], Type.Text)];
     }
 
     /**
@@ -61,11 +62,11 @@ export class InstructionParser {
      *
      *     Allows for multiple variables to be set at one time
      */
-    private parseEnvInstruction(cmd): Array<Instruction> {
-        let values: Array<Instruction> = [];
+    private parseEnvInstruction(cmd): Array<Variable> {
+        let values: Array<Variable> = [];
 
         for (let key in cmd.args) {
-            values.push(new Instruction(key, cmd.args[key]))
+            values.push(new Variable(key, cmd.args[key], Type.Text))
         }
 
         return values
@@ -74,10 +75,10 @@ export class InstructionParser {
     /**
      * EXPOSE <port> [<port>...]
      */
-    private parseExposeInstruction(cmd): Array<Instruction> {
-        let values: Array<Instruction> = [];
+    private parseExposeInstruction(cmd): Array<Variable> {
+        let values: Array<Variable> = [];
         for (let value of cmd.args) {
-            values.push(new Instruction("<expose>", value))
+            values.push(new Variable("<expose>", value, Type.Port))
         }
         return values;
     }
@@ -89,10 +90,10 @@ export class InstructionParser {
      * /var/log or VOLUME /var/log /var/db
      *
      */
-    private parseVolumeInstruction(cmd): Array<Instruction> {
-        let values: Array<Instruction> = [];
+    private parseVolumeInstruction(cmd): Array<Variable> {
+        let values: Array<Variable> = [];
         for (let value of cmd.args) {
-            values.push(new Instruction("<volume>", value))
+            values.push(new Variable("<volume>", value, Type.Text))
         }
         return values;
     }
@@ -103,12 +104,3 @@ export class InstructionParser {
 
 }
 
-export class Instruction {
-    name: string;
-    value: string;
-
-    constructor(name: string, value: string) {
-        this.name = name;
-        this.value = value;
-    }
-}

@@ -3,7 +3,8 @@ import {HttpClient} from "aurelia-fetch-client";
 import {NavigationInstruction} from "aurelia-router";
 import {VariableDialog} from "./dialogs/variable";
 import {DialogService} from "aurelia-dialog";
-import {Instruction, InstructionParser} from "../../../../../../../../common/lib/utils/instruction-parser";
+import {InstructionParser} from "../../../../../../../../common/lib/utils/instruction-parser";
+import {Variable} from "../../../../../../../../common/model/common/variable";
 
 var parser = require('dockerfile-parser');
 
@@ -17,7 +18,7 @@ export class Variables {
     private id: string;
     private workspaceId: string;
 
-    private variables: Array<Instruction>;
+    private variables: Array<Variable>;
 
     constructor(private client: HttpClient,
                 private dialogService: DialogService,
