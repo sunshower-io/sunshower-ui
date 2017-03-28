@@ -27,6 +27,7 @@ module.exports = {
         'jspm_packages/github/joyent/node-docker-file-parser@master.js',
         'jspm_packages/npm/chart.js@2.5.0.js',
         'jspm_packages/npm/xterm@2.4.0.js',
+        'jspm_packages/github/ajaxorg/ace-builds@1.2.6.js',
         'styles/styles.css'
     ],
     // this section lists any jspm packages that have
@@ -36,6 +37,19 @@ module.exports = {
     // path.
     'normalize': [
         [
+            'ace', [
+            '/*.js'
+        ]],
+        [
+            'node-docker-file-parser', [
+            '/*.js'
+        ]],
+        [
+            'xterm', [
+            '/**/*.js',
+            '/**/*.css'
+        ]],
+        [
          'showdown', [
              '/dist/*.js'
         ]],
@@ -43,7 +57,6 @@ module.exports = {
             'rxjs', [
                 '/**/*.js',
                 '/*.js'
-
         ]],
         [
             'chart.js', [

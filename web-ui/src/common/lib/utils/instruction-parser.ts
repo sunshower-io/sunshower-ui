@@ -10,7 +10,7 @@ export class InstructionParser {
         "VOLUME"
     ];
 
-    public parseInstructionSet(commands) {
+    public parseInstructionSet(commands: any) {
         let parsedInstructions: Array<Variable> = [];
 
         for (let cmd of commands) {

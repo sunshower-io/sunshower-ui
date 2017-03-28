@@ -19,7 +19,7 @@ export class Dockerfile {
 
     constructor(private client:HttpClient) {
         let a = ace as any;
-        a.config.set('basePath', '/dev/jspm_packages/github/ajaxorg/ace-builds@1.2.6');
+        a.config.set('basePath', '/jspm_packages/github/ajaxorg/ace-builds@1.2.6');
     }
 
     private path() : string {

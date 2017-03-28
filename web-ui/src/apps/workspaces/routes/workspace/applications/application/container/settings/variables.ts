@@ -3,10 +3,9 @@ import {HttpClient} from "aurelia-fetch-client";
 import {NavigationInstruction} from "aurelia-router";
 import {VariableDialog} from "./dialogs/variable";
 import {DialogService} from "aurelia-dialog";
-import {InstructionParser} from "../../../../../../../../common/lib/utils/instruction-parser";
-import {Variable} from "../../../../../../../../common/model/common/variable";
-
-var parser = require('dockerfile-parser');
+import {InstructionParser} from "common/lib/utils/instruction-parser";
+import {Variable} from "common/model/common/variable";
+import * as parser from 'node-docker-file-parser';
 
 /**
  * Created by dustinlish on 2/21/17.
