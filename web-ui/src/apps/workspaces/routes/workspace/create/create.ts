@@ -30,7 +30,7 @@ export class Create {
     attached(): void {
         this.setupFileUpload();
         ValidationRules
-            .ensure((wsp: Create) => wsp.name).minLength(3).maxLength(20)
+            .ensure((wsp: Create) => wsp.name).required().minLength(3).maxLength(20)
             .on(Create);
     }
 

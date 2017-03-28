@@ -14,7 +14,7 @@ template
                 .two.column.centered.row
                     .column
                         h3.ui.center.aligned.header
-                            | CREATE NEW APPLICATION
+                            | CREATE NEW CLOUD
                         .ui.hidden.divider
                         .ui.hidden.divider
 
@@ -44,7 +44,7 @@ template
                             .ui.form.overlay-form
                                 .ui.field.overlay-field
                                     .overlay-label
-                                        label Name
+                                        label Cloud Name
                                     .overlay-input.ui.input
                                         input(type="text" value.bind="provider.name & validate")
                                 .ui.field.overlay-field
@@ -52,17 +52,38 @@ template
                                         label Description
                                     .overlay-input.ui.input
                                         textarea(value.bind="provider.description")
-                                .ui.field.overlay-field(if.bind="provider.key == 'aws'")
+                                //.ui.field.overlay-field(if.bind="provider.key == 'aws'")
+                                //    .overlay-label
+                                //        label Region
+                                //    .overlay-input.ui.input
+                                //        .ui.fluid.search.selection.dropdown(ref="region")
+                                //            input(type="hidden" value.bind="provider.awsRegion & validate")
+                                //            i.dropdown.icon
+                                //            .default.text Select Region
+                                //            .menu
+                                //                .item(repeat.for="region of regions", data-value="${region.name}")
+                                //                    | ${region.region} (${region.name})
+
+                            h4.ui.dividing.header Credential
+                            .ui.form.overlay-form
+                                .ui.field.overlay-field
                                     .overlay-label
-                                        label Region
+                                        label Credential Name
                                     .overlay-input.ui.input
-                                        .ui.fluid.search.selection.dropdown(ref="region")
-                                            input(type="hidden" value.bind="provider.awsRegion & validate")
-                                            i.dropdown.icon
-                                            .default.text Select Region
-                                            .menu
-                                                .item(repeat.for="region of regions", data-value="${region.name}")
-                                                    | ${region.region} (${region.name})
+                                        input(type="text", value.bind="credential.name & validate")
+
+                                .ui.field.overlay-field
+                                    .overlay-label
+                                        label Credential
+                                    .overlay-input.ui.input
+                                        input(type="text", value.bind="credential.credential & validate")
+
+                                .ui.field.overlay-field
+                                    .overlay-label
+                                        label Secret
+                                    .overlay-input.ui.input
+                                        input(type="text", value.bind="credential.secret & validate")
+
 
                                 .ui.basic.center.aligned.segment
                                     button.ui.secondary.button(
