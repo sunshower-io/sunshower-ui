@@ -9,16 +9,14 @@ services:
       - "32770:80"
       - "32771:443"
     links:
-      - hasli-ui
-      - hasli-web
+      - hasli-ui-dev
+      - hasli-web-dev
     volumes:
       - ./nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
 
   hasli-web-dev:
     container_name: "hasli-web-dev"
     image: "hasli-web/web:latest"
-    links:
-      - hasli-ui
 
   hasli-ui-dev:
     container_name: "hasli-ui-dev"
