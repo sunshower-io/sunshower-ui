@@ -2,29 +2,24 @@ version: '3'
 
 services:
 
-  proxy:
-    container_name: "proxy"
+  proxy-dev:
+    container_name: "proxy-dev"
     image: "nginx:1.11.1"
     ports:
       - "32770:80"
       - "32771:443"
     links:
-      - hasli-ui
-      - hasli-web
+      - hasli-ui-dev
+      - hasli-web-dev
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
 
-  hasli-web:
-    container_name: "hasli-web"
-    image: "hasli-web/web-dev:latest"
-    volumes:
-      - ../../hasli-web/:/usr/src/hasli-web
-      - ~/.gradle/wrapper:/root/.gradle/wrapper
-    links:
-      - hasli-ui
+  hasli-web-dev:
+    container_name: "hasli-web-dev"
+    image: "hasli-web/web:latest"
 
-  hasli-ui:
-    container_name: "hasli-ui"
+  hasli-ui-dev:
+    container_name: "hasli-ui-dev"
     image: "hasli-ui/ui-dev:latest"
     volumes:
       - ../:/usr/src/

@@ -1,16 +1,17 @@
-// TODO Break each tab out into its own component.  Fuck.
-
-   Created by dustinlish on 2/19/17.
 template
+    require(from="./select-template")
+    require(from="./git-integration")
     .ui.active.inverted.dimmer(if.bind="loading", style="position:absolute; top:0px; left:0; right:0; bottom:0;")
         .ui.large.loader
     .overlay.au-animate
+        //.overlay-back.overlay-nav(click.delegate="cancel()")
+        //    i.ion-ios-arrow-thin-left.icon
+        //    span back
+        .overlay-close.overlay-nav(click.delegate="cancel()")
+            i.ion-ios-close-empty.icon
+            span esc
         .ui.container
-            .ui.secondary.menu
-                .right.menu
-                    a.item
-                        i.huge.ion-ios-close-empty.icon(click.delegate="cancel()")
-            .ui.middle.aligned.center.aligned.grid
+            .ui.center.aligned.grid
                 .two.column.centered.row
                     .column
                         h3.ui.center.aligned.header
@@ -23,43 +24,35 @@ template
                                 input.overlay-input-centered(
                                 type='text'
                                 placeholder='Add application name'
-                                value.bind="application.name"
-                                )
-                            .ui.fluid.transparent.input
-                                input.overlay-input-centered(
-                                type='text'
-                                placeholder='Github Repository'
-                                value.bind="application.repository.remote.location"
+                                value.bind="application.name & validate"
                                 )
                             .ui.divider
-                                .ui.button.primary(click.delegate="submit()") Save
-                        //.big-divider
-                        //    .ui.grid.hasli-form.ui.form
-                        //        .row
-                        //            .four.wide.column
-                        //                img.ui.image.small(src="styles/themes/hasli/assets/images/github-mark.svg")
-                        //            .twelve.wide.column.middle.aligned
-                        //                .hasli-field.ui.field
-                        //                    .hasli-label
-                        //                        label Repository
-                        //                    .hasli-input.ui.input
-                        //                        input(type="text" name="repository", value.bind="repository")
-                        //        .row
-                        //            .sixteen.wide.column
-                        //                .hasli-field.ui.field
-                        //                    .hasli-label
-                        //                        label Username
-                        //                    .hasli-input.ui.input
-                        //                        input(type="text" name="username", value.bind="username")
-                        //                .hasli-field.ui.field
-                        //                    .hasli-label
-                        //                        label Password
-                        //                    .hasli-input.ui.input
-                        //                        input(type="password" name="password", value.bind="password")
-                        //                .ui.horizontal.divider
-                        //                    | OR
-                        //                .hasli-field.ui.field
-                        //                    .hasli-label
-                        //                        label Key
-                        //                    .hasli-input.ui.input
-                        //                        textarea
+
+                        //todo uncomment when sdk says we can upload w/ image
+                        //.ui.basic.center.aligned.segment
+                        //    .fluid.field
+                        //        h1.ui.center.aligned.header(ref="imageUploader")
+                        //            label.clickable
+                        //                input.upload-box__file(type="file" name="image" ref="imageInput" files.bind="image")
+                        //                i.circular.blue.ion-image.icon.circular--icon
+                        //                span(style="margin-left:1em;")
+                        //                    .ui.basic.primary.button
+                        //                        | Add Image
+                        //                .upload-box__file-label
+                        .big-divider
+
+
+                        .fluid.field.ui.basic.center.aligned.segment
+                            .ui.secondary.pointing.menu
+                                .item.clickable(class="${appType == 'select' ? 'active' : ''}" click.delegate="switchTab('select')") Select Template
+                                .item.clickable(class="${appType == 'git' ? 'active' : ''}" click.delegate="switchTab('git')") Clone Git Repo
+                            .ui.hidden.divider
+                            template(if.bind="appType == 'select'")
+                                add-application-select-template(application.bind="application")
+                            template(if.bind="appType == 'git'")
+                                add-application-git-integration(application.bind="application")
+                        .big-divider
+
+                        .ui.basic.center.aligned.segment
+                            button.ui.secondary.button(click.delegate="submit()")
+                                | Save

@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@types/lodash": "4.14.50",
+    "@types/node": "^7.0.11",
     "aurelia-bundler": "^0.4.0",
     "aurelia-tools": "^0.2.4",
     "better-console": "^0.2.4",
@@ -121,6 +122,7 @@
       "d3": "npm:d3@^3.2.0",
       "d3/d3-geo-projection": "github:d3/d3-geo-projection@^1.2.1",
       "datamaps": "github:markmarkoh/datamaps@^0.5.8",
+      "dockerfile-parser": "github:joyent/node-docker-file-parser@master",
       "edge-editiation": "github:frankiex/cytoscape.js-edge-editation@master",
       "element-queries": "github:marcj/css-element-queries@^0.3.2",
       "enyo/dropzone": "github:enyo/dropzone@^4.3.0",
@@ -131,6 +133,7 @@
       "markmarkoh/datamaps": "github:markmarkoh/datamaps@^0.5.8.js",
       "maskedinput": "github:digitalBush/jquery.maskedinput@^1.4.1",
       "mxgraph": "github:jgraph/mxgraph-js@master",
+      "node-docker-file-parser": "github:joyent/node-docker-file-parser@master",
       "ocanvas": "npm:ocanvas@^2.8.6",
       "plotly/plotly.js": "github:plotly/plotly.js@^1.21.3",
       "plugin-text": "npm:systemjs-plugin-text@^0.0.9",
@@ -138,9 +141,11 @@
       "rxjs": "npm:rxjs@^5.2.0",
       "semantic-ui": "github:Semantic-Org/Semantic-UI@^2.2.4",
       "showdown": "npm:showdown@^1.6.4",
+      "terminal-js": "npm:terminal-js@^1.0.2",
       "text": "github:systemjs/plugin-text@^0.0.9",
       "topojson/topojson": "github:topojson/topojson@^2.2.0",
-      "velocity": "github:julianshapiro/velocity@^1.4.1"
+      "velocity": "github:julianshapiro/velocity@^1.4.1",
+      "xterm": "npm:xterm@^2.4.0"
     },
     "devDependencies": {},
     "overrides": {

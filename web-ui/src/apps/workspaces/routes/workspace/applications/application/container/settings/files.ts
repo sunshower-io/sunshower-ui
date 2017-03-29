@@ -2,10 +2,12 @@ import {autoinject, bindable} from "aurelia-framework";
 /**
  * Created by dustinlish on 2/22/17.
  */
-import {Application} from 'apps/workspaces/routes/workspace/applications/application/application';
+import {Application} from "common/model/api/core/application";
 import {Identifier} from "common/lib/lang";
 import {HttpClient} from "aurelia-fetch-client";
-import {File, Files as Fs} from 'apps/workspaces/model/io';
+import {File} from 'apps/workspaces/model/io';
+import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
+import {NavigationInstruction} from "aurelia-router";
 
 @autoinject
 export class Files {
@@ -16,7 +18,9 @@ export class Files {
     @bindable
     loadingFile : boolean;
 
-    id: string;
+    private id: string;
+    private application: Application;
+    private workspaceId: string;
 
     @bindable
     parentList : File[];
@@ -29,31 +33,63 @@ export class Files {
 
     filePopup : HTMLElement;
 
-    files : File; //hey Josiah, shouldn't this be an array? typing is weird
+    files : File[];
+
+
     constructor(
-        private parent:Application,
-        private client:HttpClient
+        private client:HttpClient,
+        private incompleteFeature:IncompleteFeature
     ) {
 
     }
 
     attached() : void {
-        this.openRoot();
+        //this.getApplication();
+    }
+
+    private path() : string {
+        return `workspaces/${this.workspaceId}/applications/${this.id}`
+    }
+
+    private getApplication() : void {
+        this.loadingTable = true;
+        this.client.fetch(`workspaces/${this.workspaceId}/applications/${this.id}`)
+            .then(t => t.json() as any)
+            .then(t => {
+                this.application = t;
+                this.openRoot();
+            });
     }
 
     openRoot() : void {
         this.parentList = [];
         this.loadingTable = true;
-        // let parent = this.parent,
-        //     rev = parent.applicationRevision,
-        //     id = rev.id.id;
-        //
-        // this.client.fetch(`applications/${this.id}/files`)
-        //     .then(t => t.json() as any)
-        //     .then(t => {
-        //         this.files = t;
-        //         this.loadingTable = false;
-        //     });
+
+        if (this.application.repository) {
+            this.client.fetch(`${this.path()}/workspace/file`, {
+                method: 'put',
+                body: JSON.stringify({
+                    path: ''
+                })
+            })
+                .then(t => t.json() as any)
+                .then(t => {
+                    this.files = t.children.child;
+                    this.loadingTable = false;
+                });
+        } else {
+            // let parent = this.parent,
+            //     rev = parent.applicationRevision,
+            //     id = rev.id.id;
+            //
+            // this.client.fetch(`applications/${this.id}/files`)
+            //     .then(t => t.json() as any)
+            //     .then(t => {
+            //         this.files = t;
+            //         this.loadingTable = false;
+            //     });
+        }
+
     }
 
     style(file: File) : string {
@@ -61,35 +97,46 @@ export class Files {
             return "blue ion-ios-folder-outline icon file-icons_small";
         } else {
             return "grey file outline icon"
-
         }
     }
 
-    name(file:File) : string {
-        return Fs.getName(file);
-    }
 
-    openFile(file:File) : void {
-        // console.log(this.parentList);
-        // if (file.directory) {
-        //     let parentIndex = this.parentList.indexOf(file);
-        //     if (parentIndex == -1) {
-        //         this.parentList.push(file);
-        //     } else {
-        //         this.parentList = this.parentList.slice(0, parentIndex+1);
-        //     }
-        //
-        //     this.loadingTable = true;
-        //     this.client.fetch(`applications/${this.id}/files/${file.id}/list`)
-        //         .then(t => t.json() as any)
-        //         .then(t => {
-        //             this.files = t;
-        //             this.loadingTable = false;
-        //         });
-        // } else {
-        //     console.log('someday I will open', file);
-        //     this.setActiveFile(file);
-        // }
+    openFile(file:File, $event: Event) : void {
+        // this.incompleteFeature.notify($event);
+        if (file.directory) {
+            let parentIndex = this.parentList.indexOf(file);
+            if (parentIndex == -1) {
+                this.parentList.push(file);
+            } else {
+                this.parentList = this.parentList.slice(0, parentIndex+1);
+            }
+
+            this.loadingTable = true;
+            if (this.application.repository) {
+                this.client.fetch(`${this.path()}/workspace/file`, {
+                    method: 'put',
+                    body: JSON.stringify({
+                        path: `${file.name}/`
+                    })
+                })
+                    .then(t => t.json() as any)
+                    .then(t => {
+                        this.files = t.children.child;
+                        this.loadingTable = false;
+                    });
+            } else {
+                this.incompleteFeature.notify($event);
+                // this.client.fetch(`applications/${this.id}/files/${file.id}/list`)
+                //     .then(t => t.json() as any)
+                //     .then(t => {
+                //         this.files = t;
+                //         this.loadingTable = false;
+                //     });
+            }
+        } else {
+            this.incompleteFeature.notify($event);
+            // this.setActiveFile(file);
+        }
     }
 
     setActiveFile(file:File) : void {
@@ -119,7 +166,10 @@ export class Files {
         //     });
     }
 
-    activate(revid: Identifier) {
+    activate(params: any, a: any, workspace: NavigationInstruction) {
+        this.id = params.id;
+        this.workspaceId = workspace.parentInstruction.parentInstruction.parentInstruction.params.id;
+        this.getApplication();
     }
 
 }
