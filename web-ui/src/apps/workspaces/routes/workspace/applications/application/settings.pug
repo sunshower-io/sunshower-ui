@@ -1,3 +1,33 @@
 //
    Created by dustinlish on 2/21/17.
 template
+    | Change Application Name
+    | Change Image
+    | Change Description
+
+    .ui.divider
+
+    .ui.grid.hasli-form.ui.form
+        .row
+            .twelve.wide.column
+                .hasli-field.ui.field
+                    .hasli-label
+                        label Repository
+                    .hasli-input.ui.input
+                        input(type="text" name="repository", value.bind="application.repository.remote.location")
+                .hasli-field.ui.field
+                    .hasli-label
+                        label Username
+                    .hasli-input.ui.input
+                        input(type="text" name="username", value.bind="application.repository.remote.credential.credential")
+                .hasli-field.ui.field
+                    .hasli-label
+                        label Password
+                    .hasli-input.ui.input
+                        input(type="password" name="password", value.bind="application.repository.remote.credential.secret")
+                .hasli-field.ui.field.right.aligned
+                    button.ui.secondary.button(click.delegate="saveRepository()")
+                        | Save
+            .four.wide.column.middle.aligned
+                img.ui.image.small(src="styles/themes/hasli/assets/images/github-mark.svg")
+
