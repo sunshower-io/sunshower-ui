@@ -28,6 +28,8 @@ export class CreateApp {
 
     private workspaceId: string;
     private application: Application;
+    private uploader: HTMLElement;
+    private imageElement: HTMLInputElement;
 
     @bindable
     private files: FileList;
@@ -46,6 +48,9 @@ export class CreateApp {
 
     }
 
+    attached(): void {
+        this.setupFileUpload();
+    }
 
     switchTab(tab: string): void {
         this.appType = tab;
@@ -113,6 +118,43 @@ export class CreateApp {
 
         this.setupValidation();
 
+    }
+
+    setupFileUpload(): void {
+        let $form = $(this.uploader),
+            $input = $form.find('input[type="file"]'),
+            $label = $form.find('.upload-box__file-label'),
+            showFiles = function (files) {
+                $label.text(files[0].name);
+            },
+            isAdvancedUpload = function () {
+                let div = document.createElement('div');
+                return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
+            }();
+        if (isAdvancedUpload) {
+            //$form.addClass('has-advanced-upload');
+
+            $form.on('drag dragstart dragend dragover dragenter dragleave drop', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            })
+                .on('dragover dragenter', function () {
+                    $form.addClass('is-dragover');
+                })
+                .on('dragleave dragend drop', function () {
+                    $form.removeClass('is-dragover');
+                })
+                .on('drop', (e) => {
+                    this.files = (e.originalEvent as DragEvent).dataTransfer.files;
+                    showFiles(this.files);
+                    console.log(this.files && this.files.length > 0)
+                });
+        }
+
+        $input.on('change', function (e) {
+            showFiles((e as any).target.files);
+            console.log(this.files[0].type.name)
+        });
     }
 
 }
