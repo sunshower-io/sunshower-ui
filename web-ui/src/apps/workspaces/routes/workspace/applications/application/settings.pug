@@ -7,8 +7,7 @@ template
     .ui.grid.hasli-form.ui.form
         .row
             .thirteen.wide.column
-                p
-                    strong Change Name
+                h3 Change Name
             .three.wide.column
                 button.ui.primary.basic.button(click.delegate="incompleteFeature.notify($event)")
                     | Edit
@@ -16,8 +15,7 @@ template
             .ui.divider.sixteen.wide.column
         .row
             .thirteen.wide.column
-                p
-                    strong Change Application
+                h3 Change Application
             .three.wide.column
                 button.ui.primary.basic.button(click.delegate="incompleteFeature.notify($event)")
                     | Edit
@@ -25,8 +23,7 @@ template
             .ui.divider.sixteen.wide.column
         .row
             .thirteen.wide.column
-                p
-                    strong Change Description
+                h3 Change Description
             .three.wide.column
                 button.ui.primary.basic.button(click.delegate="incompleteFeature.notify($event)")
                     | Edit
@@ -34,9 +31,10 @@ template
             .ui.divider.sixteen.wide.column
         .row
             .twelve.wide.column
+                h3 Add Github Repository
                 .hasli-field.ui.field
                     .hasli-label
-                        label Repository
+                        label Repository Url
                     .hasli-input.ui.input
                         input(type="text" name="repository", value.bind="application.repository.remote.location")
                 .hasli-field.ui.field
