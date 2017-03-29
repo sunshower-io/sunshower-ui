@@ -27,18 +27,16 @@ template
                                 value.bind="application.name & validate"
                                 )
                             .ui.divider
-
-                        //todo uncomment when sdk says we can upload w/ image
-                        //.ui.basic.center.aligned.segment
-                        //    .fluid.field
-                        //        h1.ui.center.aligned.header(ref="imageUploader")
-                        //            label.clickable
-                        //                input.upload-box__file(type="file" name="image" ref="imageInput" files.bind="image")
-                        //                i.circular.blue.ion-image.icon.circular--icon
-                        //                span(style="margin-left:1em;")
-                        //                    .ui.basic.primary.button
-                        //                        | Add Image
-                        //                .upload-box__file-label
+                        .ui.basic.center.aligned.segment
+                            .fluid.field
+                                h1.ui.center.aligned.header(ref="imageUploader")
+                                    label.clickable
+                                        input.upload-box__file(type="file" name="image" ref="imageInput" files.bind="files")
+                                        i.circular.blue.ion-image.icon.circular--icon
+                                        span(style="margin-left:1em;")
+                                            .ui.basic.primary.button
+                                                | Add Image
+                                        .upload-box__file-label
                         .big-divider
 
 
