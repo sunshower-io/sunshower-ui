@@ -1,3 +1,4 @@
+import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
 import {inject} from "aurelia-framework";
 import {Router} from "aurelia-router";
 import {HttpClient} from "aurelia-http-client";
@@ -14,7 +15,8 @@ export class Settings {
 
     constructor(private client: HttpClient,
                 private router: Router,
-                private applications: Applications) {
+                private applications: Applications,
+                private incompleteFeature: IncompleteFeature) {
 
     }
 
@@ -28,7 +30,7 @@ export class Settings {
         }
 
         let form = new FormData();
-        form.append('name', app.name);
+        // form.append('name', app.name);
         //TODO Josiah fill this out
 
         this.client.put(`workspaces/${this.workspaceId}/applications`, form)

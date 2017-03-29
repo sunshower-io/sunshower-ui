@@ -1,13 +1,37 @@
 //
    Created by dustinlish on 2/21/17.
 template
-    | Change Application Name
-    | Change Image
-    | Change Description
-
-    .ui.divider
-
+    .ui.hidden.divider
+    .ui.hidden.divider
+    .ui.hidden.divider
     .ui.grid.hasli-form.ui.form
+        .row
+            .thirteen.wide.column
+                p
+                    strong Change Name
+            .three.wide.column
+                button.ui.primary.basic.button(click.delegate="incompleteFeature.notify($event)")
+                    | Edit
+        .row
+            .ui.divider.sixteen.wide.column
+        .row
+            .thirteen.wide.column
+                p
+                    strong Change Application
+            .three.wide.column
+                button.ui.primary.basic.button(click.delegate="incompleteFeature.notify($event)")
+                    | Edit
+        .row
+            .ui.divider.sixteen.wide.column
+        .row
+            .thirteen.wide.column
+                p
+                    strong Change Description
+            .three.wide.column
+                button.ui.primary.basic.button(click.delegate="incompleteFeature.notify($event)")
+                    | Edit
+        .row
+            .ui.divider.sixteen.wide.column
         .row
             .twelve.wide.column
                 .hasli-field.ui.field
@@ -25,9 +49,8 @@ template
                         label Password
                     .hasli-input.ui.input
                         input(type="password" name="password", value.bind="application.repository.remote.credential.secret")
-                .hasli-field.ui.field.right.aligned
-                    button.ui.secondary.button(click.delegate="saveRepository()")
+                .hasli-field.ui.field
+                    button.ui.secondary.button.right.floated(click.delegate="saveRepository()")
                         | Save
-            .four.wide.column.middle.aligned
+            .four.wide.column
                 img.ui.image.small(src="styles/themes/hasli/assets/images/github-mark.svg")
-
