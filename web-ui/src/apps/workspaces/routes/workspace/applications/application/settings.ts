@@ -31,7 +31,7 @@ export class Settings {
 
         let form = new FormData();
         form.append('name', app.name);
-        form.append('repository', JSON.stringify(app.repository));
+        form.append('repository', app.repository);
 
         console.log('posting this', form);
 
@@ -50,7 +50,6 @@ export class Settings {
             .then(t => {
                 this.loading = false;
                 this.application = t;
-                console.log('this.application', this.application);
             });
     }
 
