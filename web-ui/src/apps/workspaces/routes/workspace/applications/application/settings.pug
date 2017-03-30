@@ -37,19 +37,22 @@ template
                     .hasli-label
                         label Repository Url
                     .hasli-input.ui.input
-                        input(type="text" name="repository", value.bind="application.repository.remote.location")
+                        input(type="text" name="repository", value.bind="remote.location")
                 .hasli-field.ui.field
                     .hasli-label
                         label Username
                     .hasli-input.ui.input
-                        input(type="text" name="username", value.bind="application.repository.remote.credential.credential")
+                        input(type="text" name="username", value.bind="remote.credential.credential")
                 .hasli-field.ui.field
                     .hasli-label
                         label Password
                     .hasli-input.ui.input
-                        input(type="password" name="password", value.bind="application.repository.remote.credential.secret")
+                        input(type="password" name="password", value.bind="remote.credential.secret")
+
             .four.wide.column
                 img.ui.image.small(src="styles/themes/hasli/assets/images/github-mark.svg")
             .sixteen.wide.column.center.aligned
                 button.ui.secondary.button(type="submit" click.delegate="saveRepository()")
                     | Save
+        .ui.bottom.attached.error.message(if.bind="message") ${message.message}
+

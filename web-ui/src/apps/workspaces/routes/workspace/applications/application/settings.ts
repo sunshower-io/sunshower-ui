@@ -1,21 +1,28 @@
 import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
-import {inject} from "aurelia-framework";
+import {bindable, autoinject} from "aurelia-framework";
 import {Router} from "aurelia-router";
-import {HttpClient} from "aurelia-http-client";
-import {HttpClient as FetchClient} from "aurelia-fetch-client";
 import {Applications} from "apps/workspaces/routes/workspace/applications/applications";
 import {Application} from "common/model/api/sdk";
 import {NavigationInstruction} from "aurelia-router";
+import {RemoteService, Remote} from "common/model/api/revision/revisions";
+import {HttpClient} from "aurelia-fetch-client";
 
-@inject(HttpClient, FetchClient, Router, Applications)
+@autoinject
 export class Settings {
 
+
+    private remote          : Remote;
     private workspaceId     : string;
+
+    @bindable
     private application     : Application;
     private loading         : boolean;
 
-    constructor(private client: HttpClient,
-                private fetchClient: FetchClient,
+    @bindable
+    private message:any;
+    constructor(
+                private client:HttpClient,
+                private remoteService:RemoteService,
                 private router: Router,
                 private applications: Applications,
                 private incompleteFeature: IncompleteFeature) {
@@ -24,28 +31,29 @@ export class Settings {
 
     saveRepository() : void {
         this.loading = true;
-        let app = this.application;
-        if (app.repository.remote.credential.credential == '' && app.repository.remote.credential.secret == '') {
-            app.repository.remote.credential = null;
-        }
-
-        let form = new FormData();
-        form.append('name', app.name);
-        form.append('repository', app.repository);
-
-        console.log('posting this', form);
-
-        this.client.put(`workspaces/${this.workspaceId}/applications`, form)
-            .then(t => JSON.parse(t.response))
-            .then(t => {
+        this.remoteService.save(
+            this.workspaceId,
+            this.application.id,
+            this.remote
+        ).then(t => {
                 this.loading = false;
+                if(t) {
+                    this.message = null;
+                    this.application = t;
+                }
+            }
+        )
+        .catch(r => {
+            r.then(t => {
+                this.message = t;
             })
+        });
     }
 
     activate(params: any, a: any, workspace: NavigationInstruction) {
         this.loading = true;
         this.workspaceId = workspace.parentInstruction.parentInstruction.params.id;
-        this.fetchClient.fetch(`workspaces/${this.workspaceId}/applications/${params.id}`)
+        this.client.fetch(`workspaces/${this.workspaceId}/applications/${params.id}`)
             .then(t => t.json() as any)
             .then(t => {
                 this.loading = false;

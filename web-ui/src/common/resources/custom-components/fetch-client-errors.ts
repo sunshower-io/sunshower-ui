@@ -15,8 +15,7 @@ export class FetchClientInterceptor implements Interceptor {
 
     requestError(error: any) : Request | Response | Promise<Request | Response> {
         this.publish(error);
-        //todo figure out how to return request?
-        return null;
+        return error;
     }
 
     response(response) : Response | Promise<Response> {
@@ -25,8 +24,7 @@ export class FetchClientInterceptor implements Interceptor {
 
     responseError(error: any) : Response | Promise<Response> {
         this.publish(error);
-        //todo figure out how to return request?
-        return null;
+        return error;
     }
 
     publish(error: any) : void {
