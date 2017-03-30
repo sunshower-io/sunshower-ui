@@ -158,17 +158,20 @@ def valueOf(path) {
             .getNextBuildNumber() - 1
 }
 
-def getMappedPort(String portMapping, int port) {
+def getPort(String portMapping, int port) {
     List<String> ports = portMapping.trim().split(/\n/)
-    def mappedPort = ports.find {it =~ /$port/}
 
-    if (mappedPort == null || mappedPort == "")
-        return ""
+    for (int i = 0; i < ports.size(); i++) {
+        if (ports[i] =~ /$port/)
+            return ports[i].split(/->/)[1].trim().split(/:/)[1]
+    }
 
-    return mappedPort.split(/->/)[1].trim().split(/:/)[1]
+    return ""
 }
 
 def notifyBuild(String buildStatus) {
+    echo "currentBuild.result=$buildStatus"
+
     // null means success
     if (buildStatus == null || buildStatus == "") {
         buildStatus = 'SUCCESS'
