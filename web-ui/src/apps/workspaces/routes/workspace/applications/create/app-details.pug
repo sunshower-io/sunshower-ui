@@ -1,6 +1,4 @@
 template
-    require(from="./select-template")
-    require(from="./git-integration")
     .ui.active.inverted.dimmer(if.bind="loading", style="position:absolute; top:0px; left:0; right:0; bottom:0;")
         .ui.large.loader
     .overlay.au-animate
@@ -40,15 +38,17 @@ template
                                                 | Add Icon Image
                                         .upload-box__file-label
 
-                        .fluid.field.ui.basic.center.aligned.segment
-                            .ui.secondary.pointing.menu
-                                .item.clickable(class="${appType == 'select' ? 'active' : ''}" click.delegate="switchTab('select')") Select Template
-                                .item.clickable(class="${appType == 'git' ? 'active' : ''}" click.delegate="switchTab('git')") Clone Git Repo
-                            .ui.hidden.divider
-                            template(if.bind="appType == 'select'")
-                                add-application-select-template(application.bind="application")
-                            template(if.bind="appType == 'git'")
-                                add-application-git-integration(application.bind="application")
+                        .big-divider
+                        .ui.four.link.cards
+                            .new-app_type.card.hvr-glow(
+                            repeat.for="template of templates",
+                            click.delegate="incompleteFeature.notify($event)"
+                            )
+                                .content
+                                    .header
+                                        img(src="${template.icon}")
+                                    .description
+                                        | ${template.description}
                         .big-divider
 
                         .ui.basic.center.aligned.segment

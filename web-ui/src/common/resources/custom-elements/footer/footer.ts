@@ -29,8 +29,8 @@ export class Footer {
                 before_open: null,
                 context: null,
                 hide: false,
-                title: response.status.toString() + ' ' + response.statusText,
-                text: response.url,
+                title: (response.status ? response.status.toString() + ' ' : '') + response.statusText,
+                text: (response.url ? response.url : ''),
                 shadow: false,
                 icon: false,
                 addclass: 'hasli-error'
