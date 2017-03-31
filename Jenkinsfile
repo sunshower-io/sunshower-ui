@@ -158,7 +158,7 @@ def valueOf(path) {
             .getNextBuildNumber() - 1
 }
 
-def getPort(String portMapping, int port) {
+def getMappedPort(String portMapping, int port) {
     List<String> ports = portMapping.trim().split(/\n/)
 
     for (int i = 0; i < ports.size(); i++) {
