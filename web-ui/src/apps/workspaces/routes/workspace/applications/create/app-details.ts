@@ -36,7 +36,7 @@ export class CreateApp {
     private appType: string = 'select'; //git, select
 
     // @bindable
-    // templates: {icon: string, description: string}[];
+    templates: {icon: string, description: string}[];
 
     constructor(private client: HttpClient,
                 private router: Router,
@@ -45,6 +45,17 @@ export class CreateApp {
                 private controller: ValidationController) {
         this.controller.addRenderer(new BootstrapFormRenderer());
         this.application = new Application();
+        this.templates = [
+            {icon: 'styles/themes/hasli/assets/images/blue-plus.svg', description: 'Custom Application'},
+            {icon: 'styles/themes/hasli/assets/images/block.svg', description: 'Create New Container'},
+            {icon: 'styles/themes/hasli/assets/images/multi-block.svg', description: 'Docker Compose'},
+            {icon: 'styles/themes/hasli/assets/images/docker-swarm.svg', description: 'Docker Swarm'},
+        ]
+
+        // {icon: 'styles/themes/hasli/assets/images/multi-tier-webapp.svg', description: '3 Tier Web App'},
+        // {icon: 'styles/themes/hasli/assets/images/cd-build-environment.svg', description: 'CD Build Environment'},
+        // {icon: 'styles/themes/hasli/assets/images/ms-architecture.svg', description: 'Microservices Architecture'},
+        // {icon: 'styles/themes/hasli/assets/images/java-ee.svg', description: 'Java EE Enterprise'},
 
     }
 
@@ -62,16 +73,9 @@ export class CreateApp {
                 if (result.valid) {
                     this.loading = true;
                     let app = this.application;
-                    if (app && app.repository && app.repository.remote && app.repository.remote.location) {
-                        if (app.repository.remote.credential.credential == '' && app.repository.remote.credential.secret == '') {
-                            app.repository.remote.credential = null;
-                        }
-                    }
-
 
                     let form = new FormData();
                     form.append('name', app.name);
-
 
                     this.client.put(`workspaces/${this.workspaceId}/applications`, form)
                         .then(t => JSON.parse(t.response))
@@ -106,10 +110,7 @@ export class CreateApp {
         let appRules = ValidationRules
             .ensure((app: Application) => app.name).required()
             .rules;
-
-        //todo require credential if secret is provided & vice versa
         this.controller.addObject(this.application, appRules);
-        console.log(appRules);
     }
 
     activate(id: any) {
