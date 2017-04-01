@@ -5,26 +5,26 @@ import {HttpClient} from "aurelia-fetch-client";
 import {ApplicationContext} from 'apps/workspaces/model/application-context';
 
 import {Identifier} from "common/lib/lang";
-import {Workspace as WorkspaceModel} from "./model/workspaces/workspace";
-import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
+import {
+    Workspace as WorkspaceElement,
+    WorkspaceService
+} from "common/model/api/core/workspace";
 
 @autoinject
 export class Workspace {
 
 
-    private workspaces: WorkspaceModel[];
+    private workspaces: WorkspaceElement[];
 
     constructor(public router: Router,
                 private client: HttpClient,
                 private context: ApplicationContext,
-                private incompleteFeature: IncompleteFeature) {
+                private workspaceService: WorkspaceService) {
 
     }
 
     attached(): void {
-        this.client.fetch('workspaces')
-            .then(t => t.json() as any)
-            .then(workspaces => this.workspaces = workspaces);
+        this.workspaceService.list().then(t => this.workspaces = t);
 
     }
 
@@ -33,7 +33,7 @@ export class Workspace {
         this.client.fetch(`workspaces/${id}`, {
             method: 'delete'
         }).then(t => t.json() as any)
-          .then(workspaces => this.workspaces = workspaces)
+            .then(workspaces => this.workspaces = workspaces)
     }
 
     activate(id: any) {

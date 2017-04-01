@@ -9,7 +9,8 @@ import {
 
 import {
     LocalStorage,
-    createStorage
+    createStorage,
+    Map
 } from "common/lib/storage/local/local-storage";
 
 
@@ -22,8 +23,6 @@ import {
 
 import {DialogConfiguration} from "aurelia-dialog";
 
-import {Activity, Activities} from 'common/resources/custom-elements/nav-bar/activity-monitor-dropdown';
-
 import {
     SemanticUIRenderer
 } from "common/resources/custom-components/semantic-ui-renderer";
@@ -31,6 +30,8 @@ import {ChannelSet} from "common/lib/events";
 import {FetchClientInterceptor} from
     "./common/resources/custom-components/fetch-client-errors";
 import {EventAggregator} from "aurelia-event-aggregator";
+import {ContextResolver} from "common/model/common";
+import {Container} from "aurelia-dependency-injection";
 
 
 
@@ -44,9 +45,38 @@ export function param(name) {
         [null, ''])[1].replace(/\+/g, '%20')) || null;
 }
 
+
 export function configure(aurelia: Aurelia) {
     console.log("Starting...");
 
+
+    configureResources(aurelia);
+
+    let container = aurelia.container,
+        http = new HttpClient();
+
+    configureHttpClient(http);
+
+
+    let storage = createStorage(),
+        tokenHolder = new AuthenticationContextHolder(http, storage);
+
+
+    container.registerInstance(
+        LocalStorage,
+        storage
+    );
+
+    http.fetch('initialize/active')
+        .then(data => data.json() as any)
+        .then(data => {
+            doConfigure(data, http, container, aurelia, storage, tokenHolder);
+        });
+}
+
+
+
+function configureResources(aurelia:Aurelia) {
     aurelia.use
         .standardConfiguration()
         .globalResources([
@@ -59,9 +89,56 @@ export function configure(aurelia: Aurelia) {
         .plugin('aurelia-dialog', (config: DialogConfiguration) => {
             config.useRenderer(SemanticUIRenderer);
         }).developmentLogging();
+}
 
-    let container = aurelia.container,
-        http = new HttpClient();
+
+function doConfigure(
+    data:any,
+    http:HttpClient,
+    container:Container,
+    aurelia:Aurelia,
+    storage:Map<string, string>,
+    tokenHolder:AuthenticationContextHolder
+) {
+
+    if (!data.value) {
+        container.registerInstance(HttpClient, http);
+        aurelia.start().then(() => aurelia.setRoot('initialize/initialize'))
+    } else {
+        let token = storage.get('X-AUTH-TOKEN') || param('token');
+        tokenHolder.validate(token).then(context => {
+            container.registerInstance(User, context.user);
+            container.registerInstance(AuthenticationContext, context);
+            http.defaults.headers['X-AUTH-TOKEN'] = token;
+            let authenticatedClient = new HttpClient(),
+                basicClient = new BasicHttpClient();
+
+
+            configureBasicClient(basicClient, container, token);
+
+
+            configureAuthenticatedClient(authenticatedClient, container, token);
+
+
+            let channelSet = new ChannelSet(
+                `ws://${location.host}/hasli/api/events`,
+                encodeURIComponent(token),
+                container.get(EventAggregator)
+            );
+            tokenHolder.set(context, false);
+            container.registerInstance(HttpClient, authenticatedClient);
+            container.registerInstance(BasicHttpClient, basicClient);
+            container.registerInstance(ChannelSet, channelSet);
+            aurelia.start().then(() => aurelia.setRoot('app'));
+        }).catch(a => {
+            container.registerInstance(HttpClient, http);
+            aurelia.start().then(() => aurelia.setRoot('apps/auth/auth'));
+        });
+
+    } //end
+}
+
+function configureHttpClient(http:HttpClient) {
     http.configure(config => {
         config
             .useStandardConfiguration()
@@ -73,71 +150,33 @@ export function configure(aurelia: Aurelia) {
                 }
             });
     });
+}
 
+function configureAuthenticatedClient(authenticatedClient:HttpClient, container:Container, token:String) {
 
-    let storage = createStorage(),
-        tokenHolder = new AuthenticationContextHolder(http, storage);
+    authenticatedClient.configure(config => {
+        config
+            .useStandardConfiguration()
+            .withBaseUrl('/hasli/api/v1/')
+            .withDefaults({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'X-AUTH-TOKEN': token
+                }
+            })
+            .withInterceptor(container.get(FetchClientInterceptor))
+    });
 
+}
 
-    container.registerInstance(
-        LocalStorage,
-        createStorage()
+function configureBasicClient(basicClient:BasicHttpClient, container: Container, token:string) {
+
+    basicClient.configure(config => {
+            config.withBaseUrl('/hasli/api/v1/')
+                .withInterceptor(
+                    container.get(FetchClientInterceptor)
+                ).withHeader('X-AUTH-TOKEN', token);
+        }
     );
-
-    http.fetch('initialize/active')
-        .then(data => data.json() as any)
-        .then(data => {
-            if (!data.value) {
-                container.registerInstance(HttpClient, http);
-                aurelia.start().then(() => aurelia.setRoot('initialize/initialize'))
-            } else {
-                let token = storage.get('X-AUTH-TOKEN') || param('token');
-                tokenHolder.validate(token).then(context => {
-                    container.registerInstance(User, context.user);
-                    container.registerInstance(AuthenticationContext, context);
-                    http.defaults.headers['X-AUTH-TOKEN'] = token;
-                    let authenticatedClient = new HttpClient(),
-                        basicClient = new BasicHttpClient();
-
-
-
-                    basicClient.configure(config => {
-                            config.withBaseUrl('/hasli/api/v1/')
-                                .withInterceptor(
-                                    container.get(FetchClientInterceptor)
-                                ).withHeader('X-AUTH-TOKEN', token);
-                        }
-                    );
-
-                    authenticatedClient.configure(config => {
-                        config
-                            .useStandardConfiguration()
-                            .withBaseUrl('/hasli/api/v1/')
-                            .withDefaults({
-                                headers: {
-                                    'Accept': 'application/json',
-                                    'Content-Type': 'application/json',
-                                    'X-AUTH-TOKEN': token
-                                }
-                            })
-                            .withInterceptor(container.get(FetchClientInterceptor));
-                    });
-
-                    let channelSet = new ChannelSet(
-                            `ws://${location.host}/hasli/api/events`,
-                            encodeURIComponent(token),
-                            container.get(EventAggregator)
-                    );
-                    tokenHolder.set(context, false);
-                    container.registerInstance(HttpClient, authenticatedClient);
-                    container.registerInstance(BasicHttpClient, basicClient);
-                    container.registerInstance(ChannelSet, channelSet);
-                    aurelia.start().then(() => aurelia.setRoot('app'));
-                }).catch(a => {
-                    container.registerInstance(HttpClient, http);
-                    aurelia.start().then(() => aurelia.setRoot('apps/auth/auth'));
-                });
-
-            }
-        });
 }

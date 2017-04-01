@@ -3,10 +3,8 @@ import {
     Router,
     RouterConfiguration
 } from "aurelia-router";
-import {Identifier} from "common/lib/lang";
 import {
     Subscription,
-    EventAggregator
 } from "aurelia-event-aggregator";
 import {
     Workspace as WS,
@@ -14,7 +12,8 @@ import {
 } from "apps/workspaces/model/workspaces/workspace";
 
 import {HttpClient} from "aurelia-fetch-client";
-import {ApplicationContext} from "apps/workspaces/model/application-context";
+
+import {WorkspaceService} from "common/model/api/core/workspace";
 
 type Mode = 'full' | 'partial';
 export interface MenuAware {
@@ -42,8 +41,7 @@ export class Workspace {
 
 
     constructor(private client: HttpClient,
-                private context:ApplicationContext,
-                private eventAggregator: EventAggregator,
+                private workspaceService:WorkspaceService
     ) {
         this.setMenuVisible(true);
     }
@@ -184,15 +182,19 @@ export class Workspace {
     }
 
     refresh() : void {
-        this.client.fetch(`workspaces/${this.value.id}`)
-            .then(ws => ws.json() as any)
-            .then(ws => {
-                this.workspace = ws;
-                this.loading = false;
-            })
-            .catch(err => {
-                console.log(err);
-            });
+        console.log(this.workspaceService.workspace);
+        // this.workspaceService.list().then(t => {
+        //     this.worspa
+        // })
+        // this.client.fetch(`workspaces/${this.value.id}`)
+        //     .then(ws => ws.json() as any)
+        //     .then(ws => {
+        //         this.workspace = ws;
+        //         this.loading = false;
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     });
     }
 
 
