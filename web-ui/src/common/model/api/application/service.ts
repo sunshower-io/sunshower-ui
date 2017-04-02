@@ -4,11 +4,12 @@ import {HttpClient as HttpFetchClient} from 'aurelia-fetch-client';
 import {autoinject} from 'aurelia-framework';
 import {Service} from "common/model/service";
 import {WorkspaceService} from "common/model/api/workspace/service";
-import {Application, SaveApplicationRequest} from './model'
+import {Application, SaveApplicationRequest, ApplicationTemplate} from './model'
 import {ServiceManager} from "common/model/common/service-manager";
 import {Identifier} from "common/lib/lang";
 import {ConstraintViolationException} from "common/model/service/service";
 import {NavigationInstruction} from "aurelia-router";
+import {Remote} from "../revision/revisions";
 
 
 @autoinject
@@ -20,6 +21,23 @@ export class ApplicationService implements Service<Application> {
                 private serviceManager: ServiceManager,
                 private workspaceService: WorkspaceService) {
         serviceManager.register('applicationId', this);
+
+    }
+
+    open(filePath:string) : Promise<any> {
+        return this.fetchClient.fetch(`${this.path()}/workspace/file`, {
+            method: 'put',
+            body: JSON.stringify({
+                path: filePath
+            })
+        }).then(t => t.json() as any)
+            .then(t => {
+                if (t.children.child && t.children.child.length > 0) {
+                    let child = t.children.child[0];
+                    return this.fetchClient.fetch(`${this.path()}/workspace/${child.revision}`)
+                }
+        })
+        .then(t => t.json() as any)
 
     }
 
@@ -54,9 +72,23 @@ export class ApplicationService implements Service<Application> {
             });
     }
 
+    public saveRemote(remote: Remote): Promise<ApplicationTemplate> {
+        return this.fetchClient.fetch(
+            this.remoteUrl(this.workspaceId(), this.application.id, 'remote'), {
+            method: 'put',
+            body: JSON.stringify(this.cleanse(remote))
+        })
+            .then(t => {
+                if (!t.ok) {
+                    throw t.json() as any;
+                }
+                t.json() as any
+            })
+            .then(t => new Application(t));
+    }
 
 
-    bind(key: string): Promise<Application> {
+    public bind(key: string): Promise<Application> {
         if (Identifier.isIdentifier(key)) {
             this.fetchClient.fetch(this.workspaceScopedUrl(key))
                 .then(t => t.json() as any)
@@ -88,4 +120,27 @@ export class ApplicationService implements Service<Application> {
     }
 
 
+    private cleanse(remote: Remote): Remote {
+        let credential = remote.credential;
+        if (credential && (this.isEmpty(credential.secret)
+            || this.isEmpty(credential.credential))) {
+            remote.credential = null;
+        }
+        return remote;
+    }
+
+    private isEmpty(st: string): boolean {
+        return !st || st.trim().length == 0;
+    }
+
+    private remoteUrl(workspaceId: string, applicationId: string, subpath?: string): string {
+        if (subpath) {
+            return `workspaces/${workspaceId}/applications/${applicationId}/${subpath}`
+        }
+        return `workspaces/${workspaceId}/applications/${applicationId}`
+    }
+
+    private path() : string {
+        return `workspaces/${this.workspaceId()}/applications/${this.application.id}`;
+    }
 }

@@ -20,19 +20,19 @@ import {ApplicationService} from "common/model/api/application/service";
 
 @autoinject
 export class Summary {
-    loading             : boolean;
+    loading: boolean;
 
-    requirementDD       : HTMLElement;
-    requirementPopup    : HTMLElement;
-
-    @bindable
-    popupState          : string;
+    requirementDD: HTMLElement;
+    requirementPopup: HTMLElement;
 
     @bindable
-    instance            : any;
+    popupState: string;
 
     @bindable
-    instances           : any[];
+    instance: any;
+
+    @bindable
+    instances: any[];
 
 
     private application: ApplicationTemplate;
@@ -49,8 +49,7 @@ export class Summary {
     constructor(private client: HttpClient,
                 private parent: Application,
                 private dialogService: DialogService,
-                private applicationService : ApplicationService
-    ) {
+                private applicationService: ApplicationService) {
 
     }
 
@@ -63,7 +62,7 @@ export class Summary {
         });
 
         this.application = this.applicationService.application;
-
+        this.refresh();
         // this.client.fetch(`applications/${this.id}/base`)
         //     .then(t => t.json() as any)
         //     .then(t => {
@@ -76,31 +75,16 @@ export class Summary {
         //     });
     }
 
-    private path() : string {
-        return `workspaces/${this.workspaceId}/applications/${this.id}`
-    }
 
-    refresh() : void {
-        // this.client.fetch(`${this.path()}/workspace/file`, {
-        //     method: 'put',
-        //     body: JSON.stringify({
-        //         path: 'README.md'
-        //     })
-        // })
-        // .then(t => t.json() as any)
-        // .then(t => {
-        //     if(t.children.child && t.children.child.length > 0) {
-        //         let child = t.children.child[0];
-        //         this.client.fetch(`${this.path()}/workspace/${child.revision}`)
-        //             .then(t => t.json())
-        //             .then(t => {
-        //                 let converter = new showdown.Converter();
-        //                 converter.setFlavor('github');
-        //                 this.summary.innerHTML = converter.makeHtml((t as any).text as string);
-        //                 this.loadingSummary = false;
-        //             });
-        //     }
-        // });
+    refresh(): void {
+        this.applicationService.open('README.md')
+            .then(t => {
+                let converter = new showdown.Converter();
+                converter.setFlavor('github');
+                console.log("T", t);
+                this.summary.innerHTML = converter.makeHtml((t as any).text as string);
+                this.loadingSummary = false;
+            });
     }
 
 
