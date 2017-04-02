@@ -7,14 +7,9 @@ import {
     bindable,
     customElement
 } from "aurelia-framework";
-// import {HttpClient} from "aurelia-http-client";
-// import {Router} from "aurelia-router";
-// import {Applications} from "apps/workspaces/routes/workspace/applications/applications";
-// import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
-// import {WorkspaceService} from "common/model/api/core/workspace";
-import {Container} from "aurelia-dependency-injection";
 import {ApplicationService} from "common/model/api/application/service";
 import {SaveApplicationRequest} from "common/model/api/application/model";
+import {Applications} from "apps/workspaces/routes/workspace/applications/applications";
 
 
 @autoinject
@@ -27,21 +22,17 @@ export class CreateApp {
     private imageElement            : HTMLInputElement;
     private application             : SaveApplicationRequest;
 
-    @bindable
-    private files: FileList;
-    private appType: string = 'select'; //git, select
+    // @bindable
+    private files           : FileList;
+    private appType         : string = 'select'; //git, select
 
     // @bindable
     templates: {icon: string, description: string}[];
 
     constructor(
-        // private client: HttpClient,
-        //         private router: Router,
-        //         private applications: Applications,
-        //         private incompleteFeature: IncompleteFeature,
-        private applicationService:ApplicationService
+        private applications            : Applications,
+        private applicationService      : ApplicationService
     ) {
-        this.application = new SaveApplicationRequest();
         this.templates = [
             {icon: 'styles/themes/hasli/assets/images/blue-plus.svg', description: 'Custom Application'},
             {icon: 'styles/themes/hasli/assets/images/block.svg', description: 'Create New Container'},
@@ -60,55 +51,20 @@ export class CreateApp {
     }
 
     submit(): void {
-        // this.applicationService.save(this.application).then(t => {
-        //     console.log("Got one", t);
-        // });
+        this.application.bindFiles(this.files);
+        this.applicationService.save(this.application).then(t => {
+            this.applications.close();
 
-
-
-
-
-
-        // this.controller.validate()
-        //     .then(result => {
-        //         if (result.valid) {
-        //             this.loading = true;
-        //             let app = this.application;
-        //
-        //             let form = new FormData();
-        //             form.append('name', app.name);
-        //
-        //             this.client.put(`workspaces/${this.workspaceId}/applications`, form)
-        //                 .then(t => JSON.parse(t.response))
-        //                 .then(t => {
-        //
-        //                     if (this.files && this.files.length) {
-        //                         let file = new FormData();
-        //                         file.append('file-data', this.files != null ? this.files[0] : "");
-        //                         file.append('image-name', this.files != null ? this.files[0].name : "");
-        //                         file.append('image-type', this.files != null ? this.files[0].type : "");
-        //
-        //                         this.client.post(
-        //                             `workspaces/${this.workspaceId}/applications/${t.id}/image`, file)
-        //                             .then(t => {
-        //                                 this.loading = false;
-        //                                 this.cancel();
-        //                             });
-        //                     } else {
-        //                         this.loading = false;
-        //                         this.cancel();
-        //                     }
-        //                 })
-        //         }
-        //     });
+        });
     }
 
     cancel(): void {
-        // this.applications.close();
+        this.applications.close();
     }
 
 
     activate(id: any) {
+        this.application = new SaveApplicationRequest();
     }
 
     setupFileUpload(): void {
@@ -144,7 +100,6 @@ export class CreateApp {
 
         $input.on('change', function (e) {
             showFiles((e as any).target.files);
-            console.log(this.files[0].type.name)
         });
     }
 

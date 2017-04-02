@@ -6,9 +6,10 @@ export type ApplicationTemplate = Application;
 
 
 export class Application {
-    id: string;
-    name: string;
-    repository: Repository;
+    id                  : string;
+    name                : string;
+    image               : string;
+    repository          : Repository;
 
 
     constructor(data?: any) {

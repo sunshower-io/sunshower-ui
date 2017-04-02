@@ -60,10 +60,18 @@ export class WorkspaceService implements Service<Workspace> {
     getApplications(): Promise<Application[]> {
         return this.client.fetch(`workspaces/${this.workspace.id}/applications`)
             .then(t => t.json() as any)
-            .then(t => t.map(u => new Application(u)));
+            .then(t => t.map(u => {
+                let a = new Application(u);
+                a.image = this.imageUrl(a);
+                return a;
+            }));
 
     }
 
+
+    public imageUrl(application): string {
+        return `/hasli/api/v1/workspaces/${this.workspace.id}/applications/${application.id}/image`;
+    }
 
     list(): Promise<Workspace[]> {
         return this.client.fetch('workspaces')

@@ -17,15 +17,15 @@ export class ApplicationService implements Service<Application> {
     constructor(private basicClient: HttpBasicClient,
                 private fetchClient: HttpFetchClient,
                 private serviceManager: ServiceManager,
-                private workspaceService: WorkspaceService
-    ) {
+                private workspaceService: WorkspaceService) {
         serviceManager.register('applicationId', this);
 
     }
 
 
     save(application: SaveApplicationRequest): Promise<Application> {
-        return this.basicClient.createRequest(this.workspaceScopedUrl())
+        let ws = this.workspaceService.workspace;
+        return this.basicClient.createRequest(`workspaces/${ws.id}/applications`)
             .asPut()
             .withHeader('accept', 'application/json')
             .withContent(application.toFormData())
@@ -40,6 +40,14 @@ export class ApplicationService implements Service<Application> {
             })
             .then(t => t.content as any)
             .then(t => {
+                let file = application.imageToFormData();
+                if (file) {
+                    let url = this.imageUrl(t.id);
+                    return this.basicClient.post(url, file)
+                        .then(u => {
+                            return t;
+                        });
+                }
                 this.application = new Application(t);
                 return this.application;
             });
@@ -67,5 +75,13 @@ export class ApplicationService implements Service<Application> {
         return `workspace/${ws.id}/applications`;
     }
 
-}
+    private workspaceId(): string {
+        return this.workspaceService.workspace.id;
+    }
 
+    public imageUrl(applicationId: string): string {
+        return `workspaces/${this.workspaceId()}/applications/${applicationId}/image`;
+    }
+
+
+}
