@@ -23,15 +23,15 @@ template
                             | Root
                         a.clickable(repeat.for="parent of parentList" click.delegate="openFile(parent, $event)")
                             i.ion-ios-arrow-right.icon
-                            | ${parent.name}
+                            | ${name(parent.name)}
             tbody
                 tr.clickable.file(repeat.for="file of files" click.delegate="openFile(file, $event)" data-id="${file.id}")
                     td.fileName
                         i(class="${style(file)}")
                         a(href='#')
-                            | ${file.name}
+                            | ${name(file.name)}
                     td.commitMsg
-                    td.right.aligned.commitTime
+                    td.right.aligned.commitTime(if.bind="!file.directory") ${file.revision}
 
     .ui.long.modal(ref="filePopup")
         template(if.bind="activeFile")

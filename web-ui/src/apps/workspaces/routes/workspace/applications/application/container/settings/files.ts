@@ -6,6 +6,7 @@ import {File} from 'common/lib/io';
 import {HttpClient} from "aurelia-fetch-client";
 import {NavigationInstruction} from "aurelia-router";
 import {Application} from "common/model/api/application/model";
+import {ApplicationService} from "common/model/api/application/service";
 import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
 
 @autoinject
@@ -24,6 +25,7 @@ export class Files {
     @bindable
     parentList : File[];
 
+
     @bindable
     activeFile : File;
 
@@ -35,60 +37,29 @@ export class Files {
     files : File[];
 
 
+    private names:Map<string, boolean>;
+
+
+
     constructor(
-        private client:HttpClient,
-        private incompleteFeature:IncompleteFeature
+        private applicationService: ApplicationService
     ) {
 
     }
 
     attached() : void {
-        //this.getApplication();
+        this.openRoot();
     }
 
-    private path() : string {
-        return `workspaces/${this.workspaceId}/applications/${this.id}`
-    }
-
-    private getApplication() : void {
-        this.loadingTable = true;
-        this.client.fetch(`workspaces/${this.workspaceId}/applications/${this.id}`)
-            .then(t => t.json() as any)
-            .then(t => {
-                this.application = t;
-                this.openRoot();
-            });
-    }
 
     openRoot() : void {
+        this.names = new Map<string, boolean>();
         this.parentList = [];
         this.loadingTable = true;
-
-        if (this.application.repository) {
-            this.client.fetch(`${this.path()}/workspace/file`, {
-                method: 'put',
-                body: JSON.stringify({
-                    path: ''
-                })
-            })
-                .then(t => t.json() as any)
-                .then(t => {
-                    this.files = t.children.child;
-                    this.loadingTable = false;
-                });
-        } else {
-            // let parent = this.parent,
-            //     rev = parent.applicationRevision,
-            //     id = rev.id.id;
-            //
-            // this.client.fetch(`applications/${this.id}/files`)
-            //     .then(t => t.json() as any)
-            //     .then(t => {
-            //         this.files = t;
-            //         this.loadingTable = false;
-            //     });
-        }
-
+        this.applicationService.ls('/').then(t => {
+            this.files = t.filter(u => !this.names.has(this.name(u.name)));
+            this.loadingTable = false;
+        });
     }
 
     style(file: File) : string {
@@ -101,41 +72,31 @@ export class Files {
 
 
     openFile(file:File, $event: Event) : void {
-        // this.incompleteFeature.notify($event);
+        let name = this.name(file.name);
         if (file.directory) {
             let parentIndex = this.parentList.indexOf(file);
             if (parentIndex == -1) {
-                this.parentList.push(file);
+                if(!this.names.has(name)) {
+                    this.names.set(name, true);
+                    this.parentList.push(file);
+                }
             } else {
-                this.parentList = this.parentList.slice(0, parentIndex+1);
+                this.names.delete(name);
+                this.parentList = this.parentList.slice(0, parentIndex + 1);
             }
 
             this.loadingTable = true;
-            if (this.application.repository) {
-                this.client.fetch(`${this.path()}/workspace/file`, {
-                    method: 'put',
-                    body: JSON.stringify({
-                        path: `${file.name}/`
-                    })
-                })
-                    .then(t => t.json() as any)
-                    .then(t => {
-                        this.files = t.children.child;
-                        this.loadingTable = false;
-                    });
-            } else {
-                this.incompleteFeature.notify($event);
-                // this.client.fetch(`applications/${this.id}/files/${file.id}/list`)
-                //     .then(t => t.json() as any)
-                //     .then(t => {
-                //         this.files = t;
-                //         this.loadingTable = false;
-                //     });
-            }
-        } else {
-            this.incompleteFeature.notify($event);
-            // this.setActiveFile(file);
+
+            this.applicationService.ls(file.name).then(t => {
+                this.files = t;
+                this.loadingTable = false;
+
+            });
         }
+    }
+
+    private name(file:string) : string {
+        return file.split('/').pop();
     }
 
     setActiveFile(file:File) : void {
@@ -165,10 +126,6 @@ export class Files {
         //     });
     }
 
-    activate(params: any, a: any, workspace: NavigationInstruction) {
-        this.id = params.id;
-        this.workspaceId = workspace.parentInstruction.parentInstruction.parentInstruction.params.id;
-        this.getApplication();
-    }
 
 }
+

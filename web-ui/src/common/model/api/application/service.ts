@@ -24,20 +24,34 @@ export class ApplicationService implements Service<Application> {
 
     }
 
-    open(filePath:string) : Promise<any> {
+    ls(filePath: string) : Promise<any> {
+        return this.fetchClient.fetch(`${this.path()}/workspace/children`, {
+            method: 'put',
+            body: JSON.stringify({
+                path: filePath
+            })
+        }).then(t => t.json() as any);
+    }
+
+    open(filePath: string): Promise<any> {
         return this.fetchClient.fetch(`${this.path()}/workspace/file`, {
             method: 'put',
             body: JSON.stringify({
                 path: filePath
             })
-        }).then(t => t.json() as any)
-            .then(t => {
-                if (t.children.child && t.children.child.length > 0) {
-                    let child = t.children.child[0];
-                    return this.fetchClient.fetch(`${this.path()}/workspace/${child.revision}`)
-                }
         })
         .then(t => t.json() as any)
+        .then(t => {
+            if (t.children.child && t.children.child.length > 0) {
+                let child = t.children.child[0];
+                return this.fetchClient
+                    .fetch(`${this.path()}/workspace/${child.revision}`)
+                    .then(u => u.json() as any);
+            } else {
+                return Promise.reject("no thing");
+            }
+        });
+
 
     }
 
@@ -75,16 +89,20 @@ export class ApplicationService implements Service<Application> {
     public saveRemote(remote: Remote): Promise<ApplicationTemplate> {
         return this.fetchClient.fetch(
             this.remoteUrl(this.workspaceId(), this.application.id, 'remote'), {
-            method: 'put',
-            body: JSON.stringify(this.cleanse(remote))
-        })
+                method: 'put',
+                body: JSON.stringify(this.cleanse(remote))
+            })
             .then(t => {
                 if (!t.ok) {
                     throw t.json() as any;
                 }
-                t.json() as any
+                return t.json() as any
             })
-            .then(t => new Application(t));
+            .then(t => {
+                this.application = new Application(t);
+                this.application.image = `/hasli/api/v1/workspaces/${this.workspaceId()}/applications/${this.application.id}/image`;
+                return this.application;
+            });
     }
 
 
@@ -140,7 +158,7 @@ export class ApplicationService implements Service<Application> {
         return `workspaces/${workspaceId}/applications/${applicationId}`
     }
 
-    private path() : string {
+    private path(): string {
         return `workspaces/${this.workspaceId()}/applications/${this.application.id}`;
     }
 }

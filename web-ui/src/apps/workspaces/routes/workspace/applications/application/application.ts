@@ -2,7 +2,7 @@
  * Created by dustinlish on 2/20/17.
  */
 
-import {autoinject} from "aurelia-framework";
+import {autoinject, bindable} from "aurelia-framework";
 import {Router} from "aurelia-router";
 import {RouterConfiguration} from "aurelia-router";
 import {NavigationInstruction} from "aurelia-router";
@@ -21,7 +21,8 @@ export class Application {
     private lastLocation            : NavigationInstruction;
 
 
-    public application             : App;
+    @bindable
+    public application              : App;
     private id                      : string;
     private workspaceId             : string;
 
@@ -45,7 +46,7 @@ export class Application {
     }
 
     close() : void {
-        this.router.navigate(`#/workspace/${this.workspaceId}/applications`);
+        this.router.navigate(`#/workspace/${this.workspaceService.workspace.id}/applications`);
     }
 
     back() : void {
@@ -56,6 +57,11 @@ export class Application {
     attached() : void {
         this.application = this.applicationService.application;
         this.loaded = true;
+    }
+
+    activate() : void {
+        this.application = this.applicationService.application;
+
     }
 
 

@@ -63,16 +63,6 @@ export class Summary {
 
         this.application = this.applicationService.application;
         this.refresh();
-        // this.client.fetch(`applications/${this.id}/base`)
-        //     .then(t => t.json() as any)
-        //     .then(t => {
-        //         this.application = t;
-        //         if (typeof this.application.requirements == 'undefined') {
-        //             this.application.requirements = [];
-        //         }
-        //         this.load(this.id);
-        //         this.loading = false;
-        //     });
     }
 
 
@@ -84,7 +74,9 @@ export class Summary {
                 console.log("T", t);
                 this.summary.innerHTML = converter.makeHtml((t as any).text as string);
                 this.loadingSummary = false;
-            });
+            }).catch(t => {
+                // no readme found
+        })
     }
 
 
