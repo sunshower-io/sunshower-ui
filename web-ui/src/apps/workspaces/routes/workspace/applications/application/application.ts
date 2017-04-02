@@ -7,8 +7,9 @@ import {Router} from "aurelia-router";
 import {RouterConfiguration} from "aurelia-router";
 import {NavigationInstruction} from "aurelia-router";
 
-import {HttpClient} from "aurelia-fetch-client";
 import {Application as App} from "common/model/api/application/model"
+import {WorkspaceService} from "common/model/api/workspace/service";
+import {ApplicationService} from "common/model/api/application/service";
 
 
 @autoinject
@@ -25,7 +26,10 @@ export class Application {
     private workspaceId             : string;
 
 
-    constructor(private client:HttpClient) {
+    constructor(
+        private workspaceService: WorkspaceService,
+        private applicationService:ApplicationService
+    ) {
     }
 
     public configureRouter(config: RouterConfiguration, router: Router) {
@@ -50,20 +54,10 @@ export class Application {
 
 
     attached() : void {
-        this.client.fetch(`workspaces/${this.workspaceId}/applications/${this.id}`)
-            .then(t => t.json() as any)
-            .then(t => {
-                this.loaded = true;
-                this.application = t;
-            });
-
+        this.application = this.applicationService.application;
+        this.loaded = true;
     }
 
-
-    activate(params: any, a: any, workspace: NavigationInstruction) {
-        this.id = params.id;
-        this.workspaceId = workspace.parentInstruction.params.id;
-    }
 
 
 }

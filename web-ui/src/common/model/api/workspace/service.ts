@@ -85,6 +85,7 @@ export class WorkspaceService implements Service<Workspace> {
             return this.client.fetch(`workspaces/${key}`)
                 .then(t => t.json() as any)
                 .then(t => {
+                    console.log("WS", t);
                     this.workspace = new Workspace(t);
                     return this.workspace;
                 });

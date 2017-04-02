@@ -8,6 +8,7 @@ import {Application, SaveApplicationRequest} from './model'
 import {ServiceManager} from "common/model/common/service-manager";
 import {Identifier} from "common/lib/lang";
 import {ConstraintViolationException} from "common/model/service/service";
+import {NavigationInstruction} from "aurelia-router";
 
 
 @autoinject
@@ -54,13 +55,16 @@ export class ApplicationService implements Service<Application> {
     }
 
 
+
     bind(key: string): Promise<Application> {
         if (Identifier.isIdentifier(key)) {
             this.fetchClient.fetch(this.workspaceScopedUrl(key))
                 .then(t => t.json() as any)
                 .then(t => {
-                    this.application = new Application(t);
-                    return this.application;
+                    let app = new Application(t);
+                    app.image = `/hasli/api/v1/workspaces/${this.workspaceId()}/applications/${t.id}/image`;
+                    this.application = app;
+                    return app;
                 });
         } else {
             return Promise.resolve(this.application);
@@ -70,9 +74,9 @@ export class ApplicationService implements Service<Application> {
     private workspaceScopedUrl(...values: string[]): string {
         let ws = this.workspaceService.workspace;
         if (values && values.length) {
-            return `workspace/${ws.id}/applications/${values.join('/')}`;
+            return `workspaces/${ws.id}/applications/${values.join('/')}`;
         }
-        return `workspace/${ws.id}/applications`;
+        return `workspaces/${ws.id}/applications`;
     }
 
     private workspaceId(): string {

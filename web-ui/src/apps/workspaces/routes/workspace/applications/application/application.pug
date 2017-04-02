@@ -16,7 +16,7 @@ template
                         .ui.tiny.image
                             img(
                                 if.bind="loaded"
-                                src='/hasli/api/v1/workspaces/${workspaceId}/applications/${id}/image'
+                                src.bind='application.image'
                             )
                         .middle.aligned.content
                             a.header ${application.name}

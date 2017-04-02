@@ -1,5 +1,6 @@
 import * as _ from 'lodash';
 import {Service} from "common/model/service";
+import {NavigationInstruction} from "aurelia-router";
 
 
 export class ServiceManager {
@@ -10,8 +11,8 @@ export class ServiceManager {
         this.serviceBindings = new Map<string, Service<any>>();
     }
 
-    bindServices(params: any) : Promise<any>[] {
-        return _.flatMap(_.keys(params), (t => {
+    bindServices(params: any, instruction: NavigationInstruction) : Promise<any>[] {
+        let a = _.flatMap(_.keys(params), (t => {
             let resolution = this.serviceBindings.get(t);
             if(resolution) {
                 return [resolution.bind(params[t])];
@@ -19,6 +20,8 @@ export class ServiceManager {
                 return [];
             }
         }));
+        console.log("AS", a);
+        return a;
     }
 
 

@@ -13,6 +13,7 @@ import {InstancesDialog} from "./dialogs/instances";
 import {NavigationInstruction} from "aurelia-router";
 
 import {ApplicationTemplate} from "common/model/api/application/model"
+import {ApplicationService} from "common/model/api/application/service";
 /**
  * Created by dustinlish on 2/20/17.
  */
@@ -37,6 +38,8 @@ export class Summary {
     private application: ApplicationTemplate;
 
     private summary: HTMLElement;
+
+
     @bindable
     private loadingSummary: boolean;
     private id: string;
@@ -45,7 +48,9 @@ export class Summary {
 
     constructor(private client: HttpClient,
                 private parent: Application,
-                private dialogService: DialogService) {
+                private dialogService: DialogService,
+                private applicationService : ApplicationService
+    ) {
 
     }
 
@@ -57,6 +62,7 @@ export class Summary {
             }
         });
 
+        this.application = this.applicationService.application;
 
         // this.client.fetch(`applications/${this.id}/base`)
         //     .then(t => t.json() as any)
@@ -75,33 +81,28 @@ export class Summary {
     }
 
     refresh() : void {
-        this.client.fetch(`${this.path()}/workspace/file`, {
-            method: 'put',
-            body: JSON.stringify({
-                path: 'README.md'
-            })
-        })
-        .then(t => t.json() as any)
-        .then(t => {
-            if(t.children.child && t.children.child.length > 0) {
-                let child = t.children.child[0];
-                this.client.fetch(`${this.path()}/workspace/${child.revision}`)
-                    .then(t => t.json())
-                    .then(t => {
-                        let converter = new showdown.Converter();
-                        converter.setFlavor('github');
-                        this.summary.innerHTML = converter.makeHtml((t as any).text as string);
-                        this.loadingSummary = false;
-                    });
-            }
-        });
+        // this.client.fetch(`${this.path()}/workspace/file`, {
+        //     method: 'put',
+        //     body: JSON.stringify({
+        //         path: 'README.md'
+        //     })
+        // })
+        // .then(t => t.json() as any)
+        // .then(t => {
+        //     if(t.children.child && t.children.child.length > 0) {
+        //         let child = t.children.child[0];
+        //         this.client.fetch(`${this.path()}/workspace/${child.revision}`)
+        //             .then(t => t.json())
+        //             .then(t => {
+        //                 let converter = new showdown.Converter();
+        //                 converter.setFlavor('github');
+        //                 this.summary.innerHTML = converter.makeHtml((t as any).text as string);
+        //                 this.loadingSummary = false;
+        //             });
+        //     }
+        // });
     }
 
-    activate(params: any, a: any, workspace: NavigationInstruction) {
-        this.id = params.id;
-        this.workspaceId = workspace.parentInstruction.parentInstruction.params.id;
-        this.refresh();
-    }
 
     openNodeTemplate() {
         this.popupCleanup();

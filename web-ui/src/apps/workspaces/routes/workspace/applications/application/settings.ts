@@ -50,15 +50,15 @@ export class Settings {
         });
     }
 
-    activate(params: any, a: any, workspace: NavigationInstruction) {
-        this.loading = true;
-        this.workspaceId = workspace.parentInstruction.parentInstruction.params.id;
-        this.client.fetch(`workspaces/${this.workspaceId}/applications/${params.id}`)
-            .then(t => t.json() as any)
-            .then(t => {
-                this.loading = false;
-                this.application = t;
-            });
-    }
+    // activate(params: any, a: any, workspace: NavigationInstruction) {
+    //     this.loading = true;
+    //     this.workspaceId = workspace.parentInstruction.parentInstruction.params.id;
+    //     this.client.fetch(`workspaces/${this.workspaceId}/applications/${params.id}`)
+    //         .then(t => t.json() as any)
+    //         .then(t => {
+    //             this.loading = false;
+    //             this.application = t;
+    //         });
+    // }
 
 }
