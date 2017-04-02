@@ -1,7 +1,7 @@
 import {autoinject} from "aurelia-framework";
 import {Credential} from "common/model/security/credentials";
 import {HttpClient} from "aurelia-fetch-client";
-import {ApplicationTemplate, Application} from "common/model/api/core/application";
+import {ApplicationTemplate, Application} from "common/model/api/application/model";
 
 export enum RepositoryType {
     Workspace,

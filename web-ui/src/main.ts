@@ -84,7 +84,6 @@ function configureResources(aurelia:Aurelia) {
             'common/resources/custom-elements/tree/tree',
             'common/resources/nested-application/nested-application'
         ])
-        .plugin('aurelia-validation')
         .plugin('aurelia-animator-velocity')
         .plugin('aurelia-dialog', (config: DialogConfiguration) => {
             config.useRenderer(SemanticUIRenderer);

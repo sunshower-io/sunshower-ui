@@ -2,8 +2,7 @@ import {autoinject, bindable} from "aurelia-framework";
 /**
  * Created by dustinlish on 2/22/17.
  */
-import {Application} from "common/model/api/core/application";
-import {Identifier} from "common/lib/lang";
+import {Application} from "common/model/api/application/model";
 import {HttpClient} from "aurelia-fetch-client";
 import {File} from 'apps/workspaces/model/io';
 import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";

@@ -7,10 +7,8 @@ import {Router} from "aurelia-router";
 import {RouterConfiguration} from "aurelia-router";
 import {NavigationInstruction} from "aurelia-router";
 
-import {Identifier} from "common/lib/lang";
 import {HttpClient} from "aurelia-fetch-client";
-import {ApplicationRevision} from "apps/workspaces/model/application";
-import {Application as App} from "common/model/api/core/application"
+import {Application as App} from "common/model/api/application/model"
 
 
 @autoinject

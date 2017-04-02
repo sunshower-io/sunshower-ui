@@ -1,6 +1,6 @@
 import {File} from 'apps/workspaces/model/io'
 import {Identifier} from "common/lib/lang";
-import {Application} from "common/model/api/core/application";
+import {Application} from "common/model/api/application/model";
 
 
 export class ApplicationRevision {

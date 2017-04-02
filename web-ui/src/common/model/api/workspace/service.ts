@@ -1,76 +1,30 @@
-
 import {HttpClient} from "aurelia-fetch-client";
 import {
     HttpClient as HttpBasicClient
 } from 'aurelia-http-client';
 
 
-import {Application} from './application';
 import {Identifier} from "common/lib/lang";
+import {Application} from 'common/model/api/application/model';
+import {Workspace, SaveWorkspaceRequest} from './model';
 import {autoinject} from "aurelia-dependency-injection";
 import {Service, ServiceManager} from "common/model/service";
 import {ConstraintViolationException} from "common/model/service";
 
 
-
-export class Workspace {
-    public id: string;
-    constructor(data:any) {
-        Object.assign(this, data);
-    }
-}
-
-export class SaveWorkspaceRequest {
-    key         : string;
-    name        : string;
-    file        : File;
-
-    bindFiles(files:FileList) {
-        if(files && files.length) {
-            this.file = files[0];
-        }
-    }
-
-
-    toFormData() : FormData {
-        let formData = new FormData();
-        formData.append('name', this.name || '');
-        formData.append('key', this.key || this.name || '');
-        return formData;
-    }
-
-    imageToFormData() : FormData {
-        if(this.file) {
-            let formData = new FormData(),
-                file = this.file;
-            formData.append('file-data', file);
-            formData.append('image-name', file.name);
-            formData.append('image-type', file.type);
-            return formData;
-        }
-        return null;
-
-
-    }
-
-
-}
-
 @autoinject
 export class WorkspaceService implements Service<Workspace> {
 
-    public workspace:Workspace;
+    public workspace: Workspace;
 
-    constructor(
-        private client:HttpClient,
-        private httpClient: HttpBasicClient,
-        private serviceManager: ServiceManager
-    ) {
+    constructor(private client: HttpClient,
+                private httpClient: HttpBasicClient,
+                private serviceManager: ServiceManager,) {
         serviceManager.register('workspaceId', this);
     }
 
 
-    public save(workspaceRequest: SaveWorkspaceRequest) : Promise<Workspace> {
+    public save(workspaceRequest: SaveWorkspaceRequest): Promise<Workspace> {
         return this.httpClient
             .createRequest('workspaces')
             .asPut()
@@ -79,7 +33,7 @@ export class WorkspaceService implements Service<Workspace> {
             .skipContentProcessing()
             .send()
             .then(t => {
-                if(!t.isSuccess) {
+                if (!t.isSuccess) {
                     throw new ConstraintViolationException(t.content);
                 } else {
                     return t;
@@ -89,7 +43,7 @@ export class WorkspaceService implements Service<Workspace> {
             .then(t => {
                 this.workspace = new Workspace(t);
                 let file = workspaceRequest.imageToFormData();
-                if(file) {
+                if (file) {
                     return this.httpClient.put(`workspaces/${t.id}/image`, file)
                         .then(t => t.content as any)
                         .then(t => {
@@ -103,8 +57,7 @@ export class WorkspaceService implements Service<Workspace> {
     }
 
 
-    getApplications() : Promise<Application[]> {
-
+    getApplications(): Promise<Application[]> {
         return this.client.fetch(`workspaces/${this.workspace.id}/applications`)
             .then(t => t.json() as any)
             .then(t => t.map(u => new Application(u)));
@@ -112,7 +65,7 @@ export class WorkspaceService implements Service<Workspace> {
     }
 
 
-    list() : Promise<Workspace[]> {
+    list(): Promise<Workspace[]> {
         return this.client.fetch('workspaces')
             .then(t => t.json() as any)
             .then(t => t.map(u => new Workspace(u)));
@@ -132,5 +85,3 @@ export class WorkspaceService implements Service<Workspace> {
         }
     }
 }
-
-

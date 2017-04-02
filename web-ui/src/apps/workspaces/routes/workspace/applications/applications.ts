@@ -3,12 +3,18 @@ import {HttpClient} from 'aurelia-fetch-client';
 import {bindable} from "aurelia-framework";
 
 import {autoinject} from "aurelia-dependency-injection";
-import {Application} from "common/model/api/core/application";
-import {Workspace as WorkspaceRoute} from "apps/workspaces/routes/workspace/index";
+import {Application} from "common/model/api/application/model";
+import {
+    Workspace as WorkspaceElement
+} from "common/model/api/workspace/model";
+
 import {
     WorkspaceService,
-    Workspace as WorkspaceElement
-} from "common/model/api/core/workspace";
+} from "common/model/api/workspace/service";
+
+import {
+    Workspace as WorkspaceRoute
+} from "apps/workspaces/routes/workspace/index";
 
 @autoinject
 export class Applications {

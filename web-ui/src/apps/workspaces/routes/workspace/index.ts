@@ -7,9 +7,11 @@ import {
 import {HttpClient} from "aurelia-fetch-client";
 
 import {
-    WorkspaceService,
+    WorkspaceService
+} from "common/model/api/workspace/service";
+import {
     Workspace as WorkspaceElement
-} from "common/model/api/core/workspace";
+} from "common/model/api/workspace/model";
 
 type Mode = 'full' | 'partial';
 export interface MenuAware {

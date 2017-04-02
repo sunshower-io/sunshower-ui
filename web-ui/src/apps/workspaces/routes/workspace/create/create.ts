@@ -1,15 +1,13 @@
-import {autoinject, bindable, NewInstance} from 'aurelia-framework';
+import {autoinject, bindable} from 'aurelia-framework';
 import {Workspace} from "apps/workspaces/routes/workspace/index";
-import {HttpClient} from "aurelia-http-client";
 import {
-    ValidationController,
-    ValidationRules
-} from 'aurelia-validation';
-import {BootstrapFormRenderer} from 'common/resources/custom-components/bootstrap-form-renderer';
-import {
-    WorkspaceService,
     SaveWorkspaceRequest
-} from "common/model/api/core/workspace";
+} from "common/model/api/workspace/model";
+
+import {
+    WorkspaceService
+} from "common/model/api/workspace/service";
+
 import {ConstraintViolationException} from "common/model/service/service";
 import {Router} from "aurelia-router";
 
@@ -30,9 +28,8 @@ export class Create {
 
     constructor(private parent: Workspace,
                 private router: Router,
-                private workspaceService: WorkspaceService,
-                private controller: ValidationController) {
-        this.controller.addRenderer(new BootstrapFormRenderer());
+                private workspaceService: WorkspaceService
+    ) {
     }
 
     attached(): void {

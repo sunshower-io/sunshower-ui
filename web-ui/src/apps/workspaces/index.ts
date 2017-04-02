@@ -2,13 +2,17 @@ import {Router} from "aurelia-router";
 import {autoinject} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
 
-import {ApplicationContext} from 'apps/workspaces/model/application-context';
 
 import {Identifier} from "common/lib/lang";
+
+
+import {
+    WorkspaceService ,
+} from "common/model/api/workspace/service";
+
 import {
     Workspace as WorkspaceElement,
-    WorkspaceService
-} from "common/model/api/core/workspace";
+} from "common/model/api/workspace/model";
 
 @autoinject
 export class Workspace {
@@ -18,7 +22,6 @@ export class Workspace {
 
     constructor(public router: Router,
                 private client: HttpClient,
-                private context: ApplicationContext,
                 private workspaceService: WorkspaceService) {
 
     }
@@ -44,7 +47,6 @@ export class Workspace {
     open(id: Identifier): void {
         this.client.fetch(`workspaces/${id}`)
             .then(t => t.json() as any).then(t => {
-            this.context.workspace = t;
             this.router.navigate(`workspace/${t.id}/applications`);
         });
     }

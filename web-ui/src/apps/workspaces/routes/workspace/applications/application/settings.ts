@@ -2,7 +2,7 @@ import {IncompleteFeature} from "common/resources/custom-components/incomplete-f
 import {bindable, autoinject} from "aurelia-framework";
 import {Router} from "aurelia-router";
 import {Applications} from "apps/workspaces/routes/workspace/applications/applications";
-import {Application} from "common/model/api/sdk";
+import {Application} from "common/model/api/application/model";
 import {NavigationInstruction} from "aurelia-router";
 import {RemoteService, Remote} from "common/model/api/revision/revisions";
 import {HttpClient} from "aurelia-fetch-client";

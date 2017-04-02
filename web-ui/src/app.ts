@@ -39,8 +39,7 @@ export class App {
             name: 'workspace',
             title: 'Workspace',
             moduleId: 'apps/workspaces/routes/workspace/index',
-            nav: false,
-            navigationStrategy: this.workspaceResolutionStrategy
+            nav: false
         }, {
             route: 'catalog',
             name: 'catalog',
@@ -48,16 +47,9 @@ export class App {
             nav: false,
             title: 'Catalog',
         }]);
-
-
-
-
         this.router = router;
     }
 
-    workspaceResolutionStrategy = (instruction:NavigationInstruction) => {
-        console.log(instruction)
-    }
 
 }
 
