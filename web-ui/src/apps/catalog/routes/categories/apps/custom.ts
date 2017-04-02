@@ -6,16 +6,15 @@ import {HttpClient} from "aurelia-fetch-client";
 import {bindable, autoinject} from "aurelia-framework";
 
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {Identifier} from "common/lib/lang";
 import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
-import {ApplicationRevision} from "apps/workspaces/model/application/application";
+import {ApplicationTemplate} from "common/model/api/application/model"
 
 @autoinject
 export class Custom {
 
 
     @bindable
-    applications: ApplicationRevision[];
+    applications: ApplicationTemplate[];
 
     @bindable
     loading: boolean;

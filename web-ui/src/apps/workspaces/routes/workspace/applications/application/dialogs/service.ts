@@ -1,8 +1,7 @@
 import {DialogController} from "aurelia-dialog";
 import {inject, bindable} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
-import {ApplicationRevision} from "apps/workspaces/model/application";
-import {OperatingSystem} from "common/model/api/hal/api";
+import {ApplicationTemplate} from "common/model/api/application/model"
 
 @inject(DialogController, HttpClient)
 export class ServiceDialog {
@@ -10,7 +9,7 @@ export class ServiceDialog {
     @bindable
     service                         : string;
 
-    private applicationRevision     : ApplicationRevision;
+    private application             : ApplicationTemplate;
 
     constructor(
         private controller:DialogController,
@@ -19,17 +18,17 @@ export class ServiceDialog {
 
     }
 
-    activate(applicationRevision : ApplicationRevision) : void {
+    activate(application : ApplicationTemplate) : void {
         setTimeout(() => {
-            this.applicationRevision = applicationRevision;
+            this.application = application;
         }, 1000);
     }
 
 
     save()  : void {
-        this.applicationRevision.requirements.push(this.service);
-        //todo save applicationRevision
-        this.controller.ok(this.applicationRevision);
+        // this.application.requirements.push(this.service);
+        //todo save application
+        this.controller.ok(this.application);
     }
 
 }

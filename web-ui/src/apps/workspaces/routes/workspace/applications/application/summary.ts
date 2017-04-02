@@ -1,8 +1,6 @@
 import * as showdown from 'showdown';
-import {Identifier} from "common/lib/lang";
 import {HttpClient} from "aurelia-fetch-client";
 import {Application} from './application';
-import {ApplicationRevision, ApplicationRevisionDeployer} from "apps/workspaces/model/application";
 import {bindable, autoinject} from "aurelia-framework";
 import {DialogService} from "aurelia-dialog";
 import {NodeTemplateDialog} from "./dialogs/node-template";
@@ -13,28 +11,30 @@ import {ApplicationDialog} from "./dialogs/applications";
 import {ServiceDialog} from "./dialogs/service";
 import {InstancesDialog} from "./dialogs/instances";
 import {NavigationInstruction} from "aurelia-router";
+
+import {ApplicationTemplate} from "common/model/api/application/model"
 /**
  * Created by dustinlish on 2/20/17.
  */
 
 @autoinject
 export class Summary {
-    loading: boolean;
+    loading             : boolean;
 
-    requirementDD: HTMLElement;
-    requirementPopup: HTMLElement;
-
-    @bindable
-    popupState: string;
+    requirementDD       : HTMLElement;
+    requirementPopup    : HTMLElement;
 
     @bindable
-    instance: any;
+    popupState          : string;
 
     @bindable
-    instances: any[];
+    instance            : any;
+
+    @bindable
+    instances           : any[];
 
 
-    private applicationRevision: ApplicationRevision;
+    private application: ApplicationTemplate;
 
     private summary: HTMLElement;
     @bindable
@@ -61,9 +61,9 @@ export class Summary {
         // this.client.fetch(`applications/${this.id}/base`)
         //     .then(t => t.json() as any)
         //     .then(t => {
-        //         this.applicationRevision = t;
-        //         if (typeof this.applicationRevision.requirements == 'undefined') {
-        //             this.applicationRevision.requirements = [];
+        //         this.application = t;
+        //         if (typeof this.application.requirements == 'undefined') {
+        //             this.application.requirements = [];
         //         }
         //         this.load(this.id);
         //         this.loading = false;
@@ -107,7 +107,7 @@ export class Summary {
         this.popupCleanup();
         this.dialogService.open({
             viewModel: NodeTemplateDialog,
-            model: this.applicationRevision
+            model: this.application
         }).then(t => {
         });
     }
@@ -116,7 +116,7 @@ export class Summary {
         this.popupCleanup();
         this.dialogService.open({
             viewModel: OperatingSystemDialog,
-            model: this.applicationRevision
+            model: this.application
         }).then(t => {
         })
     }
@@ -125,7 +125,7 @@ export class Summary {
         this.popupCleanup();
         this.dialogService.open({
             viewModel: DeployerDialog,
-            model: this.applicationRevision
+            model: this.application
         }).then(t => {
         });
     }
@@ -134,7 +134,7 @@ export class Summary {
         this.popupCleanup();
         this.dialogService.open({
             viewModel: ApplicationDialog,
-            model: this.applicationRevision
+            model: this.application
         }).then(t => {
         });
     }
@@ -143,7 +143,7 @@ export class Summary {
         this.popupCleanup();
         this.dialogService.open({
             viewModel: ServiceDialog,
-            model: this.applicationRevision
+            model: this.application
         }).then(t => {
         });
     }
@@ -152,7 +152,7 @@ export class Summary {
         this.popupCleanup();
         this.dialogService.open({
             viewModel: InstancesDialog,
-            model: this.applicationRevision
+            model: this.application
         }).then(t => {
         });
     }
@@ -162,9 +162,9 @@ export class Summary {
         if (typeof requirement.type != 'undefined' && requirement.type == 'computeTemplate') {
             this.openNodeTemplate();
         }
-        if (requirement instanceof ApplicationRevisionDeployer) {
-            this.openDeployer();
-        }
+        // if (requirement instanceof ApplicationRevisionDeployer) {
+        //     this.openDeployer();
+        // }
         if (requirement instanceof OperatingSystem) {
             this.openOperatingSystem();
         }
@@ -172,8 +172,8 @@ export class Summary {
     }
 
     clearRequirement(requirement: any): void {
-        let index = this.applicationRevision.requirements.indexOf(requirement);
-        this.applicationRevision.requirements.splice(index, 1);
+        // let index = this.application.requirements.indexOf(requirement);
+        // this.application.requirements.splice(index, 1);
     }
 
     popupCleanup(): void {
@@ -182,18 +182,17 @@ export class Summary {
     }
 
     private load(appId: string): void {
-        this.loadingSummary = true;
-        let revision = this.applicationRevision,
-            readme = revision.readme;
-        this.client
-            .fetch(`applications/${appId}/readme`)
-            .then(t => t.json() as any)
-            .then(t => {
-                let converter = new showdown.Converter();
-                converter.setFlavor('github');
-                this.summary.innerHTML = converter.makeHtml(t.data);
-                this.loadingSummary = false;
-            });
+        // this.loadingSummary = true;
+        // let revision = this.application,
+        // this.client
+        //     .fetch(`applications/${appId}/readme`)
+        //     .then(t => t.json() as any)
+        //     .then(t => {
+        //         let converter = new showdown.Converter();
+        //         converter.setFlavor('github');
+        //         this.summary.innerHTML = converter.makeHtml(t.data);
+        //         this.loadingSummary = false;
+        //     });
     }
 
 }

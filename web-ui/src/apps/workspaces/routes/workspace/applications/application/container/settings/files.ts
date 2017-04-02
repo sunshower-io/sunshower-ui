@@ -2,11 +2,11 @@ import {autoinject, bindable} from "aurelia-framework";
 /**
  * Created by dustinlish on 2/22/17.
  */
-import {Application} from "common/model/api/application/model";
+import {File} from 'common/lib/io';
 import {HttpClient} from "aurelia-fetch-client";
-import {File} from 'apps/workspaces/model/io';
-import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
 import {NavigationInstruction} from "aurelia-router";
+import {Application} from "common/model/api/application/model";
+import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
 
 @autoinject
 export class Files {

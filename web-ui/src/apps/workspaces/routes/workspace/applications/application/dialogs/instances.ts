@@ -1,7 +1,7 @@
 import {DialogController} from "aurelia-dialog";
 import {inject} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
-import {ApplicationRevision} from "apps/workspaces/model/application";
+import {ApplicationTemplate} from "common/model/api/application/model"
 
 @inject(
     DialogController,
@@ -12,7 +12,7 @@ export class InstancesDialog {
 
     private loading                 : boolean;
 
-    private applicationRevision     : ApplicationRevision;
+    private application     : ApplicationTemplate;
     private instances               : any[];
 
 
@@ -22,9 +22,9 @@ export class InstancesDialog {
     ) {
     }
 
-    activate(applicationRevision : ApplicationRevision) : void {
+    activate(application : ApplicationTemplate) : void {
         setTimeout(() => {
-            this.applicationRevision = applicationRevision;
+            this.application = application;
             this.loading = true;
             this.instances = [];
             this.loading = false;
@@ -32,9 +32,9 @@ export class InstancesDialog {
     }
 
     save(instance : any) : void {
-        this.applicationRevision.requirements.push(instance);
-        //todo save applicationRevision
-        this.controller.ok(this.applicationRevision);
+        // this.application.requirements.push(instance);
+        //todo save application
+        this.controller.ok(this.application);
     }
 
 }
