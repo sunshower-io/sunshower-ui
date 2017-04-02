@@ -26,10 +26,16 @@ template
                                     type='text',
                                     name='name',
                                     placeholder='Add workspace name',
-                                    value.bind="name & validate",
+                                    value.bind="workspaceRequest.name",
                                     autocomplete="off"
                                 )
+
+
                             .ui.divider
+                        .ui.error.message(if.bind="constraintViolations")
+                            .header Error on workspace name
+                            ul.list
+                                | ${constraintViolations.getPropertyViolation('name').message}
                         .big-divider
                         .ui.basic.center.aligned.segment
                             .fluid.field
@@ -43,14 +49,6 @@ template
                                         .upload-box__file-label
 
                             .big-divider
-                            //.ui.form
-                            //    .field
-                            //        textarea(
-                            //        name='description',
-                            //        placeholder='Add a description',
-                            //        value.bind="description & validate"
-                            //        )
-                            //.big-divider
 
                             button.ui.secondary.button(click.delegate="create()")
                                 | Get Started

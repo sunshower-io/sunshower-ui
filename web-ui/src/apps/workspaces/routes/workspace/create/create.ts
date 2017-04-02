@@ -1,4 +1,4 @@
-import {inject, bindable, NewInstance} from 'aurelia-framework';
+import {autoinject, bindable, NewInstance} from 'aurelia-framework';
 import {Workspace} from "apps/workspaces/routes/workspace/index";
 import {HttpClient} from "aurelia-http-client";
 import {
@@ -6,71 +6,55 @@ import {
     ValidationRules
 } from 'aurelia-validation';
 import {BootstrapFormRenderer} from 'common/resources/custom-components/bootstrap-form-renderer';
+import {
+    WorkspaceService,
+    SaveWorkspaceRequest
+} from "common/model/api/core/workspace";
+import {ConstraintViolationException} from "common/model/service/service";
+import {Router} from "aurelia-router";
 
-@inject(Workspace, HttpClient, NewInstance.of(ValidationController))
+
+@autoinject
 export class Create {
 
-    private uploader: HTMLElement;
 
-    private name: string;
     private loading: boolean;
-    private description: string;
+    private uploader: HTMLElement;
     private imageElement: HTMLInputElement;
+    private workspaceRequest: SaveWorkspaceRequest;
+    private constraintViolations: ConstraintViolationException;
 
     @bindable
     private files: FileList;
 
 
     constructor(private parent: Workspace,
-                private client: HttpClient,
+                private router: Router,
+                private workspaceService: WorkspaceService,
                 private controller: ValidationController) {
         this.controller.addRenderer(new BootstrapFormRenderer());
     }
 
     attached(): void {
         this.setupFileUpload();
-        ValidationRules
-            .ensure((wsp: Create) => wsp.name).required().minLength(3).maxLength(20)
-            .on(Create);
     }
 
     activate(): void {
         this.parent.setMenuVisible(false);
+        this.workspaceRequest = new SaveWorkspaceRequest();
     }
 
 
     create(): void {
-        this.controller.validate()
-            .then(result => {
-                if (result.valid) {
-                    this.loading = true;
-                    let form = new FormData();
-
-                    form.append('name', this.name);
-                    form.append('key', this.name);
-
-
-                    this.client.put('workspaces', form)
-                        .then(t => t.content as any)
-                        .then(t => {
-                            if (this.files && this.files.length) {
-                                let file = new FormData();
-
-                                file.append('file-data', this.files != null ? this.files[0] : "");
-                                file.append('image-name', this.files != null ? this.files[0].name : "");
-                                file.append('image-type', this.files != null ? this.files[0].type : "");
-                                this.client.put(`workspaces/${t.id}/image`, file).then(t => {
-                                    this.loading = false;
-                                    this.parent.router.navigate('/');
-                                });
-                            } else {
-                                this.parent.router.navigate('/');
-                            }
-                        });
-                }
-            })
+        this.workspaceRequest.bindFiles(this.files);
+        this.workspaceService.save(this.workspaceRequest)
             .catch(err => {
-                console.log("Caught error: " + err.toString())
+                this.constraintViolations = err;
+            })
+            .then(result => {
+                if(result) {
+                    this.router.navigate(`/workspace/${result.id}/applications`)
+                }
             });
     }
 
@@ -79,7 +63,6 @@ export class Create {
     }
 
     onchange(): void {
-        console.log(this.files);
     }
 
     setupFileUpload(): void {

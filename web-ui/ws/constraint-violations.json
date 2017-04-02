@@ -1,0 +1,20 @@
+{
+  "fieldViolations": [],
+  "propertyViolations": [
+    {
+      "constraintType": "PROPERTY",
+      "path": "name",
+      "message": "size must be between 3 and 20",
+      "value": ""
+    },
+    {
+      "constraintType": "PROPERTY",
+      "path": "key",
+      "message": "size must be between 3 and 20",
+      "value": ""
+    }
+  ],
+  "classViolations": [],
+  "parameterViolations": [],
+  "returnValueViolations": []
+}
