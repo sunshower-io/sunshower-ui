@@ -3,11 +3,8 @@ import {autoinject, bindable} from "aurelia-framework";
  * Created by dustinlish on 2/22/17.
  */
 import {File} from 'common/lib/io';
-import {HttpClient} from "aurelia-fetch-client";
-import {NavigationInstruction} from "aurelia-router";
 import {Application} from "common/model/api/application/model";
 import {ApplicationService} from "common/model/api/application/service";
-import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
 
 @autoinject
 export class Files {
