@@ -89,8 +89,8 @@ node('docker-registry') {
                         def portMapping = sh returnStdout: true, script: "docker port proxy-$name"
                         portMapping = portMapping.trim()
 
-                        def https = portMapping.trim().split(/\n/)[0].split(/->/)[1].trim().split(/:/)[1]
-                        def http  = portMapping.trim().split(/\n/)[1].split(/->/)[1].trim().split(/:/)[1]
+                        def https = getMappedPort(portMapping, 443)
+                        def http = getMappedPort(portMapping, 80)
 
                         def pr = env.BRANCH_NAME.split("-")[1].trim()
                         def pat = readFile('/root/.pat').trim()
@@ -158,8 +158,24 @@ def valueOf(path) {
             .getNextBuildNumber() - 1
 }
 
+def getMappedPort(String portMapping, int port) {
+    List<String> ports = portMapping.trim().split(/\n/)
+
+    for (int i = 0; i < ports.size(); i++) {
+        if (ports[i] =~ /$port/)
+            return ports[i].split(/->/)[1].trim().split(/:/)[1]
+    }
+
+    return ""
+}
+
 def notifyBuild(String buildStatus) {
-    buildStatus = buildStatus ?: 'SUCCESS'
+    echo "currentBuild.result=$buildStatus"
+
+    // null means success
+    if (buildStatus == null || buildStatus == "") {
+        buildStatus = 'SUCCESS'
+    }
 
     def color = 'danger'
     def subject = "${buildStatus}: Job '${env.JOB_NAME}, build #${env.BUILD_NUMBER}'"
