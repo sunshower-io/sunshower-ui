@@ -22,22 +22,22 @@ import {ApplicationService} from "common/model/api/application/service";
 export class Summary {
     loading: boolean;
 
-    requirementDD: HTMLElement;
-    requirementPopup: HTMLElement;
+    requirementDD               : HTMLElement;
+    requirementPopup            : HTMLElement;
 
     @bindable
-    popupState: string;
+    popupState                  : string;
 
     @bindable
-    instance: any;
+    instance                    : any;
 
     @bindable
-    instances: any[];
+    instances                   : any[];
 
 
-    private application: ApplicationTemplate;
 
-    private summary: HTMLElement;
+    private summary             : HTMLElement;
+    private application         : ApplicationTemplate;
 
 
     @bindable
