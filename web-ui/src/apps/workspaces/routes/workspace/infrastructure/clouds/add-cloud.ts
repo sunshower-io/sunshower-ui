@@ -4,7 +4,6 @@ import {
 } from "aurelia-framework";
 import {HttpClient} from 'aurelia-fetch-client';
 import {Provider} from "common/model/api/hal/api";
-import {BootstrapFormRenderer} from 'common/resources/custom-components/bootstrap-form-renderer';
 import {Credential} from "common/model/security/credentials";
 import {Workspace} from "apps/workspaces/routes/workspace/index";
 
@@ -12,27 +11,27 @@ import {Workspace} from "apps/workspaces/routes/workspace/index";
 export class AddCloud {
 
     @bindable
-    visible: boolean;
+    visible             : boolean;
 
     @bindable
-    loading: boolean;
+    loading             : boolean;
 
     @bindable
-    providerSelected: boolean;
+    providerSelected    : boolean;
 
-    private credential: Credential;
-
-    @bindable
-    providers: Provider[];
+    private credential  : Credential;
 
     @bindable
-    private provider: Provider;
+    providers           : Provider[];
 
     @bindable
-    regions: any[];
+    private provider    : Provider;
 
     @bindable
-    region: HTMLElement;
+    regions             : any[];
+
+    @bindable
+    region              : HTMLElement;
 
 
     constructor(private parent: Workspace,
