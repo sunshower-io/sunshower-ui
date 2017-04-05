@@ -23,7 +23,7 @@ export class Dockerfile {
 
     refresh() : void {
 
-        this.applicationService.open('README.md')
+        this.applicationService.open('Dockerfile')
             .then(t => {
                 let editor = ace.edit('editor');
                 editor.setTheme('ace/theme/clouds_midnight');
