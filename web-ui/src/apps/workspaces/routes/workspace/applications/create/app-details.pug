@@ -41,8 +41,9 @@ template
                         .big-divider
                         .ui.four.link.cards
                             .new-app_type.card.hvr-glow(
+                            style="${template.selected ? 'border:2px solid #239ae8' : ''}"
                             repeat.for="template of templates",
-                            click.delegate="incompleteFeature.notify($event)"
+                            click.delegate="select(template)"
                             )
                                 .content
                                     .header

@@ -1,3 +1,8 @@
+export class Tag {
+    id              : string;
+    name            : string;
+}
+
 
 export interface FormDataProvider {
     toFormData() : FormData;
@@ -6,6 +11,7 @@ export interface FormDataProvider {
 export class ImageDataProvider {
 
     public file: File;
+
 
     bindFiles(files:FileList) {
         if(files && files.length) {

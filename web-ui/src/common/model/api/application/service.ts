@@ -58,20 +58,24 @@ export class ApplicationService implements Service<Application> {
 
     save(application: SaveApplicationRequest): Promise<Application> {
         let ws = this.workspaceService.workspace;
-        return this.basicClient.createRequest(`workspaces/${ws.id}/applications`)
-            .asPut()
-            .withHeader('accept', 'application/json')
-            .withContent(application.toFormData())
-            .skipContentProcessing()
-            .send()
-            .then(t => {
-                if (t.isSuccess) {
-                    return t;
-                } else {
-                    throw new ConstraintViolationException(t.content);
-                }
+        // return this.basicClient.createRequest(`workspaces/${ws.id}/applications`)
+        //     .asPut()
+        //     .withHeader('accept', 'application/json')
+        //     .withContent(application.toFormData())
+        //     .skipContentProcessing()
+        //     .send()
+        //     .then(t => {
+        //         if (t.isSuccess) {
+        //             return t;
+        //         } else {
+        //             throw new ConstraintViolationException(t.content);
+        //         }
+        //     })
+            return this.fetchClient.fetch(`workspaces/${ws.id}/applications`, {
+                method: 'put',
+                body: JSON.stringify(application)
             })
-            .then(t => t.content as any)
+            .then(t => t.json() as any)
             .then(t => {
                 let file = application.imageToFormData();
                 if (file) {
