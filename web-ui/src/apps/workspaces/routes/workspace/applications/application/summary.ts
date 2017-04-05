@@ -34,16 +34,16 @@ export class Summary {
     @bindable
     instances                   : any[];
 
+    @bindable
+    private loadingSummary      : boolean;
 
 
     private summary             : HTMLElement;
+
+    @bindable
     private application         : ApplicationTemplate;
 
 
-    @bindable
-    private loadingSummary: boolean;
-    private id: string;
-    private workspaceId: string;
 
 
     constructor(private client: HttpClient,

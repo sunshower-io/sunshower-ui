@@ -14,7 +14,9 @@ import {Remote} from "../revision/revisions";
 
 @autoinject
 export class ApplicationService implements Service<Application> {
-    public application: Application;
+    public application                  : Application;
+
+    private applicationPromise          : Promise<Application>;
 
     constructor(private basicClient: HttpBasicClient,
                 private fetchClient: HttpFetchClient,
@@ -58,19 +60,6 @@ export class ApplicationService implements Service<Application> {
 
     save(application: SaveApplicationRequest): Promise<Application> {
         let ws = this.workspaceService.workspace;
-        // return this.basicClient.createRequest(`workspaces/${ws.id}/applications`)
-        //     .asPut()
-        //     .withHeader('accept', 'application/json')
-        //     .withContent(application.toFormData())
-        //     .skipContentProcessing()
-        //     .send()
-        //     .then(t => {
-        //         if (t.isSuccess) {
-        //             return t;
-        //         } else {
-        //             throw new ConstraintViolationException(t.content);
-        //         }
-        //     })
             return this.fetchClient.fetch(`workspaces/${ws.id}/applications`, {
                 method: 'put',
                 body: JSON.stringify(application)
@@ -110,9 +99,10 @@ export class ApplicationService implements Service<Application> {
     }
 
 
+
     public bind(key: string): Promise<Application> {
         if (Identifier.isIdentifier(key)) {
-            this.fetchClient.fetch(this.workspaceScopedUrl(key))
+            return this.fetchClient.fetch(this.workspaceScopedUrl(key))
                 .then(t => t.json() as any)
                 .then(t => {
                     let app = new Application(t);
