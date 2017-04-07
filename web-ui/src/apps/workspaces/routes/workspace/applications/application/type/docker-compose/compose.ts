@@ -28,7 +28,7 @@ export class Compose {
 
     refresh() : void {
         let editor = ace.edit('editor');
-        // editor.setTheme('ace/theme/clouds_midnight');
+        editor.setTheme('ace/theme/xcode');
         editor.getSession().setMode('ace/mode/yaml');
 
         var yaml = `

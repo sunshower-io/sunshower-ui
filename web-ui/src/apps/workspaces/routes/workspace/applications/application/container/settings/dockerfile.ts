@@ -30,8 +30,8 @@ export class Dockerfile {
 
     attached() : void {
         this.aceEditor = ace.edit('editor');
-        this.aceEditor.setTheme('ace/theme/terminal');
-        this.aceEditor.getSession().setMode('ace/mode/yaml');
+        this.aceEditor.setTheme('ace/theme/xcode');
+        this.aceEditor.getSession().setMode('ace/mode/dockerfile');
         this.refresh();
     }
 
