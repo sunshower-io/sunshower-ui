@@ -10,7 +10,7 @@ template
             .ui.cards
                 .card(repeat.for="application of applications")
                     .content
-                        img.right.floated.mini.ui.image(src='/hasli/api/v1/applications/${application.picture.id}/picture')
+                        img.right.floated.mini.ui.image(src='${application.image}')
                         .header
                             | ${application.name}
                         //.meta

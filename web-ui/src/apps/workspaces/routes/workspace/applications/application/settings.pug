@@ -52,7 +52,7 @@ template
             .four.wide.column
                 img.ui.image.small(src="styles/themes/hasli/assets/images/github-mark.svg")
             .sixteen.wide.column.center.aligned
-                button.ui.secondary.button(type="submit" click.delegate="saveRepository()")
+                button.ui.secondary.button(type="submit" click.delegate="saveRepository()", class="${loading ? 'loading' : ''}")
                     | Save
         .ui.bottom.attached.error.message(if.bind="message") ${message.message}
 

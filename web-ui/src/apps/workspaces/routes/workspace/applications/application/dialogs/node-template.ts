@@ -9,7 +9,8 @@ import {OperatingSystemService} from "common/model/api/hal/os";
 import {OperatingSystem, AWSRegion} from "common/model/api/hal/api";
 import {UUID} from "common/lib/utils/uuid";
 import {Credential} from "common/model/security/credentials";
-import {ApplicationRevision} from "apps/workspaces/model/application";
+// import {ApplicationTemplate} from "apps/workspaces/model/application";
+import {ApplicationTemplate} from "common/model/api/application/model"
 
 
 @inject(
@@ -30,7 +31,7 @@ export class NodeTemplateDialog {
     private marshaller              : ComputeTemplateMarshaller;
     private credential              : Credential;
     private credentials             : Credential[];
-    private applicationRevision     : ApplicationRevision;
+    private applicationRevision     : ApplicationTemplate;
     private operatingSystems        : OperatingSystem[];
     private locations               : AWSRegion[];
 
@@ -49,7 +50,7 @@ export class NodeTemplateDialog {
         this.marshaller = new ComputeTemplateMarshaller();
     }
 
-    activate(applicationRevision : ApplicationRevision) : void {
+    activate(applicationRevision : ApplicationTemplate) : void {
         setTimeout(() => {
             this.applicationRevision = applicationRevision;
             this.operatingSystems = this.osService.list();
@@ -118,12 +119,12 @@ export class NodeTemplateDialog {
 
     save() : void {
         //todo require a credential and a node template
-        if (typeof this.template != 'undefined') {
-            this.applicationRevision.requirements.push(this.template);
-        }
-        if (typeof this.credential != 'undefined') {
-            this.applicationRevision.requirements.push(this.credential);
-        }
+        // if (typeof this.template != 'undefined') {
+        //     this.applicationRevision.requirements.push(this.template);
+        // }
+        // if (typeof this.credential != 'undefined') {
+        //     this.applicationRevision.requirements.push(this.credential);
+        // }
         this.controller.ok(this.applicationRevision);
     }
 

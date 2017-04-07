@@ -4,33 +4,32 @@ import {autoinject} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
 import {Credential} from "common/model/security";
 import {Subscription, EventAggregator} from "aurelia-event-aggregator";
-import {ApplicationRevision} from "apps/workspaces/model/application/application";
+import {ApplicationTemplate} from "common/model/api/application/model"
 import {UUID} from "common/lib/utils/uuid";
 import {ChannelSet} from "common/lib/events/websockets";
 import {Activities} from "common/resources/custom-elements/nav-bar/activity-monitor-dropdown";
-//import {Application} from "common/model/api/core/application";
 
 @autoinject
 export class CreateInstanceWizard {
 
-    router: Router;
-    subscription: Subscription;
-    deselectSubscription: Subscription;
-
-    applicationRevision: ApplicationRevision;
-
-    ec2Deploy: {} = {};
-    policyId: string;
-    providerId: string;
-    credential: Credential = null;
-    name: string;
-
-    applications: ApplicationRevision[];
-
-    selectedTags: string[];
+    router                  : Router;
+    subscription            : Subscription;
+    deselectSubscription    : Subscription;
 
 
-    loading: boolean;
+    ec2Deploy               : {} = {};
+    policyId                : string;
+    providerId              : string;
+    name                    : string;
+
+
+    credential              : Credential = null;
+    loading                 : boolean;
+    selectedTags            : string[];
+
+
+    applications            : ApplicationTemplate[];
+    applicationRevision     : ApplicationTemplate;
 
     constructor(private client: HttpClient,
                 private workspace: Workspace,

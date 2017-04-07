@@ -4,24 +4,27 @@ import {Router, RouterConfiguration} from 'aurelia-router';
 import {PipelineStep} from "aurelia-router";
 import {NavigationInstruction} from "aurelia-router";
 import {Next} from "aurelia-router";
-import {inject} from "aurelia-framework";
+import {autoinject} from "aurelia-framework";
 import {RedirectToRoute} from "aurelia-router";
 
 import {
     AuthenticationContextHolder
 } from "common/model/security";
+import {Container} from "aurelia-dependency-injection";
+import {ContextResolver} from "common/model/common/context-resolver";
 
 
-@inject(AuthenticationContextHolder)
+@autoinject
 export class App {
     public router: Router;
 
-    constructor(private tokenHolder: AuthenticationContextHolder) {
+    constructor(private tokenHolder: AuthenticationContextHolder, private container:Container) {
     }
 
     public configureRouter(config: RouterConfiguration, router: Router) {
         config.title = 'Hasli.io';
         config.addPipelineStep('authorize', new SecurityStep(this.tokenHolder));
+        config.addPipelineStep('preActivate', new ContextResolver(this.container));
         config.map([{
             route: '',
             redirect: 'workspaces'
@@ -32,7 +35,7 @@ export class App {
             nav: false,
             title: 'Workspaces',
         }, {
-            route: 'workspace/:id',
+            route: 'workspace/:workspaceId',
             name: 'workspace',
             title: 'Workspace',
             moduleId: 'apps/workspaces/routes/workspace/index',
@@ -43,16 +46,10 @@ export class App {
             moduleId: 'apps/catalog/index',
             nav: false,
             title: 'Catalog',
-        },
-        ]);
-
-        // config.mapUnknownRoutes({
-        //     route: 'workspaces',
-        //     redirect: 'workspaces'
-        // });
-
+        }]);
         this.router = router;
     }
+
 
 }
 

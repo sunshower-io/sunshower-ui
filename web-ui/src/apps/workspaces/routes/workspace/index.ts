@@ -3,18 +3,16 @@ import {
     Router,
     RouterConfiguration
 } from "aurelia-router";
-import {Identifier} from "common/lib/lang";
-import {
-    Subscription,
-    EventAggregator
-} from "aurelia-event-aggregator";
-import {
-    Workspace as WS,
-    WorkspaceRevision
-} from "apps/workspaces/model/workspaces/workspace";
 
 import {HttpClient} from "aurelia-fetch-client";
-import {ApplicationContext} from "apps/workspaces/model/application-context";
+
+import {
+    WorkspaceService
+} from "common/model/api/workspace/service";
+import {
+    Workspace as WorkspaceElement
+} from "common/model/api/workspace/model";
+import {ApplicationService} from "../../../../common/model/api/application/service";
 
 type Mode = 'full' | 'partial';
 export interface MenuAware {
@@ -30,20 +28,16 @@ export class Workspace {
     private mode: Mode;
 
 
-    private subscription: Subscription;
 
-    public hostWorkspace: WS;
     private value : any;
     private loading: boolean = false;
 
-    //TODO: rename revision
-    public workspace: WorkspaceRevision;
-    //todo reconcile WorkspaceRevision and WorkspaceModel;
+    public workspace: WorkspaceElement;
 
 
     constructor(private client: HttpClient,
-                private context:ApplicationContext,
-                private eventAggregator: EventAggregator,
+                private workspaceService:WorkspaceService,
+                private applicationService: ApplicationService
     ) {
         this.setMenuVisible(true);
     }
@@ -79,11 +73,11 @@ export class Workspace {
                 title: 'Applications'
             },
             {
-                route: 'applications/:id/application',
+                route: 'applications/:applicationId/application',
                 name: 'application',
                 moduleId: './applications/application/application',
                 nav: false,
-                title: 'Application'
+                title: 'Application',
             },
             {
                 route: 'applications/new',
@@ -110,11 +104,11 @@ export class Workspace {
                 title: 'Clouds'
             },
             {
-                route: 'clouds/:id/credential/new',
+                route: 'clouds/:applicationId/credential/new',
                 name: 'add-cloud-credential',
                 moduleId: './infrastructure/clouds/add-credential',
                 nav: false,
-                title: 'Add Cloud Credential'
+                title: 'Add Cloud Credential',
             },
             {
                 route: 'environment',
@@ -147,11 +141,11 @@ export class Workspace {
                 title: 'New Instance'
             },
             {
-                route: 'instances/:id/instance',
+                route: 'instances/:applicationId/instance',
                 name: 'instance',
                 moduleId: './provisioning/instances/instance/instance',
                 nav: false,
-                title: 'Instance'
+                title: 'Instance',
             },
 
             // Designer
@@ -164,6 +158,8 @@ export class Workspace {
             {route: 'create', name: 'create', moduleId: './create/create', nav: false, title: 'Create'},
 
         ]);
+
+
 
         // TODO: Create 404 page
         // config.mapUnknownRoutes({
@@ -184,15 +180,7 @@ export class Workspace {
     }
 
     refresh() : void {
-        this.client.fetch(`workspaces/${this.value.id}`)
-            .then(ws => ws.json() as any)
-            .then(ws => {
-                this.workspace = ws;
-                this.loading = false;
-            })
-            .catch(err => {
-                console.log(err);
-            });
+        this.workspace = this.workspaceService.workspace;
     }
 
 

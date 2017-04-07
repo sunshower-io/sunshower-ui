@@ -2,11 +2,19 @@
 import {HttpClient} from 'aurelia-fetch-client';
 import {bindable} from "aurelia-framework";
 
-import {Workspace as WorkspaceRoute} from "apps/workspaces/routes/workspace/index";
-import {WorkspaceRevision} from "apps/workspaces/model/workspaces/workspace";
 import {autoinject} from "aurelia-dependency-injection";
-import {Application} from "common/model/api/core/application";
-import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
+import {Application} from "common/model/api/application/model";
+import {
+    Workspace as WorkspaceElement
+} from "common/model/api/workspace/model";
+
+import {
+    WorkspaceService,
+} from "common/model/api/workspace/service";
+
+import {
+    Workspace as WorkspaceRoute
+} from "apps/workspaces/routes/workspace/index";
 
 @autoinject
 export class Applications {
@@ -21,7 +29,7 @@ export class Applications {
     showModal: boolean;
 
     @bindable
-    workspace: WorkspaceRevision;
+    workspace: WorkspaceElement;
 
     @bindable
     private id: string;
@@ -30,7 +38,7 @@ export class Applications {
     constructor(
         public parent:WorkspaceRoute,
         private client:HttpClient,
-        private incompleteFeature:IncompleteFeature
+        private workspaceManager:WorkspaceService
     ) {
         this.applications = [];
     }
@@ -68,21 +76,12 @@ export class Applications {
 
     refresh(): void {
         this.loading = true;
-        setTimeout(() => {
-            this.client.fetch(`workspaces/${this.id}/applications`)
-                .then(d => d.json() as any)
-                .then(d => {
-                    this.loading = false;
-                    this.applications = d.map(t => {
-                        t.workspaceId = this.id;
-                        return t;
-                    });
-                })
-                .catch(err => {
-                    this.loading = false;
-                });
-        }, 500)
-    }
+        this.workspaceManager.getApplications().then(d => {
+            this.loading = false;
+            this.applications = d;
+        });
+        this.workspace = this.workspaceManager.workspace;
+   }
 
     create() : void {
         this.showModal = true;

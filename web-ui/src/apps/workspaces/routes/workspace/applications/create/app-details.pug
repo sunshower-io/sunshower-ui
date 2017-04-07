@@ -22,7 +22,7 @@ template
                                 input.overlay-input-centered(
                                 type='text'
                                 placeholder='Add application name'
-                                value.bind="application.name & validate"
+                                value.bind="application.name"
                                 )
                             .ui.divider
 
@@ -31,7 +31,7 @@ template
                             .fluid.field
                                 h1.ui.center.aligned.header(ref="uploader")
                                     label.clickable
-                                        input.upload-box__file(type="file" name="image" change.delegate="onchange()" ref="imageElement" files.bind="files")
+                                        input.upload-box__file(type="file" name="image" ref="imageElement" files.bind="files")
                                         i.circular.blue.large.ion-image.icon.circular--icon
                                         span(style="margin-left:1em;")
                                             .ui.basic.primary.button
@@ -41,8 +41,9 @@ template
                         .big-divider
                         .ui.four.link.cards
                             .new-app_type.card.hvr-glow(
+                            style="${template.selected ? 'border:2px solid #239ae8' : ''}"
                             repeat.for="template of templates",
-                            click.delegate="incompleteFeature.notify($event)"
+                            click.delegate="select(template)"
                             )
                                 .content
                                     .header
