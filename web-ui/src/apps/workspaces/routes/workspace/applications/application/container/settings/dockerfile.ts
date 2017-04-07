@@ -5,16 +5,14 @@
 import * as ace from 'ace';
 import {autoinject} from "aurelia-framework";
 import {ApplicationService} from "common/model/api/application/service";
+import Editor = AceAjax.Editor;
 
 
 @autoinject
 export class Dockerfile {
 
-    private id                  : string;
-    private workspaceId         : string;
-
-
-    private editor              :HTMLElement;
+    private editor       : HTMLElement;
+    private aceEditor    : Editor;
 
     constructor(private applicationService: ApplicationService) {
         let a = ace as any;
@@ -25,15 +23,15 @@ export class Dockerfile {
 
         this.applicationService.open('Dockerfile')
             .then(t => {
-                let editor = ace.edit('editor');
-                editor.setTheme('ace/theme/clouds_midnight');
-                editor.getSession().setMode('ace/mode/yaml');
-                editor.setValue((t as any).text);
+                this.aceEditor.setValue((t as any).text, -1);
             }).catch(t => {
         });
     }
 
     attached() : void {
+        this.aceEditor = ace.edit('editor');
+        this.aceEditor.setTheme('ace/theme/terminal');
+        this.aceEditor.getSession().setMode('ace/mode/yaml');
         this.refresh();
     }
 
