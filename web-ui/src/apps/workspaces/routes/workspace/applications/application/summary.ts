@@ -1,8 +1,6 @@
 import * as showdown from 'showdown';
-import {Identifier} from "common/lib/lang";
 import {HttpClient} from "aurelia-fetch-client";
 import {Application} from './application';
-import {ApplicationRevision, ApplicationRevisionDeployer} from "apps/workspaces/model/application";
 import {bindable, autoinject} from "aurelia-framework";
 import {DialogService} from "aurelia-dialog";
 import {NodeTemplateDialog} from "./dialogs/node-template";
@@ -13,6 +11,9 @@ import {ApplicationDialog} from "./dialogs/applications";
 import {ServiceDialog} from "./dialogs/service";
 import {InstancesDialog} from "./dialogs/instances";
 import {NavigationInstruction} from "aurelia-router";
+
+import {ApplicationTemplate} from "common/model/api/application/model"
+import {ApplicationService} from "common/model/api/application/service";
 /**
  * Created by dustinlish on 2/20/17.
  */
@@ -21,31 +22,34 @@ import {NavigationInstruction} from "aurelia-router";
 export class Summary {
     loading: boolean;
 
-    requirementDD: HTMLElement;
-    requirementPopup: HTMLElement;
+    requirementDD               : HTMLElement;
+    requirementPopup            : HTMLElement;
 
     @bindable
-    popupState: string;
+    popupState                  : string;
 
     @bindable
-    instance: any;
+    instance                    : any;
 
     @bindable
-    instances: any[];
+    instances                   : any[];
 
-
-    private applicationRevision: ApplicationRevision;
-
-    private summary: HTMLElement;
     @bindable
-    private loadingSummary: boolean;
-    private id: string;
-    private workspaceId: string;
+    private loadingSummary      : boolean;
+
+
+    private summary             : HTMLElement;
+
+    @bindable
+    private application         : ApplicationTemplate;
+
+
 
 
     constructor(private client: HttpClient,
                 private parent: Application,
-                private dialogService: DialogService) {
+                private dialogService: DialogService,
+                private applicationService: ApplicationService) {
 
     }
 
@@ -57,57 +61,30 @@ export class Summary {
             }
         });
 
-
-        // this.client.fetch(`applications/${this.id}/base`)
-        //     .then(t => t.json() as any)
-        //     .then(t => {
-        //         this.applicationRevision = t;
-        //         if (typeof this.applicationRevision.requirements == 'undefined') {
-        //             this.applicationRevision.requirements = [];
-        //         }
-        //         this.load(this.id);
-        //         this.loading = false;
-        //     });
-    }
-
-    private path() : string {
-        return `workspaces/${this.workspaceId}/applications/${this.id}`
-    }
-
-    refresh() : void {
-        this.client.fetch(`${this.path()}/workspace/file`, {
-            method: 'put',
-            body: JSON.stringify({
-                path: 'README.md'
-            })
-        })
-        .then(t => t.json() as any)
-        .then(t => {
-            if(t.children.child && t.children.child.length > 0) {
-                let child = t.children.child[0];
-                this.client.fetch(`${this.path()}/workspace/${child.revision}`)
-                    .then(t => t.json())
-                    .then(t => {
-                        let converter = new showdown.Converter();
-                        converter.setFlavor('github');
-                        this.summary.innerHTML = converter.makeHtml((t as any).text as string);
-                        this.loadingSummary = false;
-                    });
-            }
-        });
-    }
-
-    activate(params: any, a: any, workspace: NavigationInstruction) {
-        this.id = params.id;
-        this.workspaceId = workspace.parentInstruction.parentInstruction.params.id;
+        this.application = this.applicationService.application;
         this.refresh();
     }
+
+
+    refresh(): void {
+        this.applicationService.open('README.md')
+            .then(t => {
+                let converter = new showdown.Converter();
+                converter.setFlavor('github');
+                console.log("T", t);
+                this.summary.innerHTML = converter.makeHtml((t as any).text as string);
+                this.loadingSummary = false;
+            }).catch(t => {
+                // no readme found
+        })
+    }
+
 
     openNodeTemplate() {
         this.popupCleanup();
         this.dialogService.open({
             viewModel: NodeTemplateDialog,
-            model: this.applicationRevision
+            model: this.application
         }).then(t => {
         });
     }
@@ -116,7 +93,7 @@ export class Summary {
         this.popupCleanup();
         this.dialogService.open({
             viewModel: OperatingSystemDialog,
-            model: this.applicationRevision
+            model: this.application
         }).then(t => {
         })
     }
@@ -125,7 +102,7 @@ export class Summary {
         this.popupCleanup();
         this.dialogService.open({
             viewModel: DeployerDialog,
-            model: this.applicationRevision
+            model: this.application
         }).then(t => {
         });
     }
@@ -134,7 +111,7 @@ export class Summary {
         this.popupCleanup();
         this.dialogService.open({
             viewModel: ApplicationDialog,
-            model: this.applicationRevision
+            model: this.application
         }).then(t => {
         });
     }
@@ -143,7 +120,7 @@ export class Summary {
         this.popupCleanup();
         this.dialogService.open({
             viewModel: ServiceDialog,
-            model: this.applicationRevision
+            model: this.application
         }).then(t => {
         });
     }
@@ -152,7 +129,7 @@ export class Summary {
         this.popupCleanup();
         this.dialogService.open({
             viewModel: InstancesDialog,
-            model: this.applicationRevision
+            model: this.application
         }).then(t => {
         });
     }
@@ -162,9 +139,9 @@ export class Summary {
         if (typeof requirement.type != 'undefined' && requirement.type == 'computeTemplate') {
             this.openNodeTemplate();
         }
-        if (requirement instanceof ApplicationRevisionDeployer) {
-            this.openDeployer();
-        }
+        // if (requirement instanceof ApplicationRevisionDeployer) {
+        //     this.openDeployer();
+        // }
         if (requirement instanceof OperatingSystem) {
             this.openOperatingSystem();
         }
@@ -172,8 +149,8 @@ export class Summary {
     }
 
     clearRequirement(requirement: any): void {
-        let index = this.applicationRevision.requirements.indexOf(requirement);
-        this.applicationRevision.requirements.splice(index, 1);
+        // let index = this.application.requirements.indexOf(requirement);
+        // this.application.requirements.splice(index, 1);
     }
 
     popupCleanup(): void {
@@ -182,18 +159,17 @@ export class Summary {
     }
 
     private load(appId: string): void {
-        this.loadingSummary = true;
-        let revision = this.applicationRevision,
-            readme = revision.readme;
-        this.client
-            .fetch(`applications/${appId}/readme`)
-            .then(t => t.json() as any)
-            .then(t => {
-                let converter = new showdown.Converter();
-                converter.setFlavor('github');
-                this.summary.innerHTML = converter.makeHtml(t.data);
-                this.loadingSummary = false;
-            });
+        // this.loadingSummary = true;
+        // let revision = this.application,
+        // this.client
+        //     .fetch(`applications/${appId}/readme`)
+        //     .then(t => t.json() as any)
+        //     .then(t => {
+        //         let converter = new showdown.Converter();
+        //         converter.setFlavor('github');
+        //         this.summary.innerHTML = converter.makeHtml(t.data);
+        //         this.loadingSummary = false;
+        //     });
     }
 
 }

@@ -2,7 +2,6 @@ import {CreateInstanceWizard} from "../../wizard/wizard";
 import {autoinject, bindable} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
 import {ComputeTemplate} from "common/model/api/hal/compute";
-import {Application} from "common/model/api/core/application";
 
 
 

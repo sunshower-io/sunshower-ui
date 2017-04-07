@@ -12,7 +12,8 @@ template
         .ui.link.items
             .item(click.delegate="open(model)")
                 .ui.middle.aligned.mini.image
-                    img(src="${model.logo ? model.logo : '/hasli/api/v1/workspaces/' + model.workspaceId + '/applications/' + model.id + '/image'}")
+                    img(src="${model.image}")
+                    //img(src="${model.logo ? model.logo : '/hasli/api/v1/workspaces/' + model.workspaceId + '/applications/' + model.id + '/image'}")
                 .middle.aligned.content
                     | ${model.name}
     td

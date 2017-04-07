@@ -227,6 +227,9 @@ body {
   box-shadow: none !important;
   -webkit-box-shadow: none !important;
   -moz-box-shadow: none !important;
+
+  .content {  text-align:center;  }
+  img {  max-width:100%;  }
 }
 
 .catalog--sidebar {
