@@ -42,12 +42,34 @@ template
                             .segment-header_divider
 
                             .ui.horizontal.list.pills
-                                .item.closeable(repeat.for="requirement of applicationRevision.requirements")
+                                .item.closeable(repeat.for="requirement of application.requirements")
                                     .ui.basic.primary.button(
                                         title="Edit"
                                         click.delegate="openDialog(requirement)"
                                     )
                                         | ${requirement.name}
+                                    .hover-close
+                                        i.circular.inverted.red.remove.link.icon(
+                                            title="Remove"
+                                            click.delegate="clearRequirement(requirement)"
+                                        )
+                .row
+                    .column
+                        .ui.segment
+                            .ui.text.menu.summary-segment_header
+                                .item
+                                    | Tags
+                                .right.menu
+                                    span.item.ui.icon.top.right.pointing.dropdown
+                                        i.big.ion-ios-gear-outline.icon
+                            .segment-header_divider
+                            .ui.horizontal.list.pills
+                                .item.closeable(repeat.for="tag of application.tags")
+                                    .ui.basic.primary.button(
+                                            title="Edit"
+                                            click.delegate="openDialog(tag)"
+                                    )
+                                        | ${tag.name}
                                     .hover-close
                                         i.circular.inverted.red.remove.link.icon(
                                             title="Remove"

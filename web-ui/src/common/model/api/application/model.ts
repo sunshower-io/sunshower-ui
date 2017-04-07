@@ -1,5 +1,11 @@
+
 import {Repository} from "common/model/api/revision/revisions";
-import {ImageDataProvider, FormDataProvider} from "common/model/api/core";
+
+import {
+    Tag,
+    ImageDataProvider,
+    FormDataProvider
+} from "common/model/api/core";
 
 
 export type ApplicationTemplate = Application;
@@ -11,17 +17,27 @@ export class Application {
     image               : string;
     repository          : Repository;
 
+    tags                : Tag[];
+
 
     constructor(data?: any) {
         if (data) {
             Object.assign(this, data);
         }
     }
+
+    addTag(tag: Tag) {
+        (this.tags = this.tags || []).push(tag);
+    }
 }
 
 export class SaveApplicationRequest extends ImageDataProvider implements FormDataProvider {
 
-    name: string;
+    name    : string;
+
+    tags    :   Tag[];
+
+
 
     toFormData(): FormData {
         let fd = new FormData();

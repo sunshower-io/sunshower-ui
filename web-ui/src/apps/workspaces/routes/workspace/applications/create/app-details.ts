@@ -7,6 +7,7 @@ import {
     bindable,
     customElement
 } from "aurelia-framework";
+import {Tag} from "common/model/api/core";
 import {ApplicationService} from "common/model/api/application/service";
 import {SaveApplicationRequest} from "common/model/api/application/model";
 import {Applications} from "apps/workspaces/routes/workspace/applications/applications";
@@ -16,28 +17,46 @@ import {Applications} from "apps/workspaces/routes/workspace/applications/applic
 @customElement('create-app')
 export class CreateApp {
 
-    private loading                 : boolean;
+    private loading: boolean;
 
-    private uploader                : HTMLElement;
-    private imageElement            : HTMLInputElement;
-    private application             : SaveApplicationRequest;
-
-    // @bindable
-    private files           : FileList;
-    private appType         : string = 'select'; //git, select
+    private uploader: HTMLElement;
+    private imageElement: HTMLInputElement;
+    private application: SaveApplicationRequest;
 
     // @bindable
-    templates: {icon: string, description: string}[];
+    private files: FileList;
+    private appType: string = 'select'; //git, select
 
-    constructor(
-        private applications            : Applications,
-        private applicationService      : ApplicationService
-    ) {
+    // @bindable
+    templates: Template[];
+
+    constructor(private applications: Applications,
+                private applicationService: ApplicationService) {
         this.templates = [
-            {icon: 'styles/themes/hasli/assets/images/blue-plus.svg', description: 'Custom Application'},
-            {icon: 'styles/themes/hasli/assets/images/block.svg', description: 'Create New Container'},
-            {icon: 'styles/themes/hasli/assets/images/multi-block.svg', description: 'Docker Compose'},
-            {icon: 'styles/themes/hasli/assets/images/docker-swarm.svg', description: 'Docker Swarm'},
+            {
+                selected: false,
+                tagName : 'custom',
+                icon: 'styles/themes/hasli/assets/images/blue-plus.svg',
+                description: 'Custom Application'
+            },
+            {
+                icon: 'styles/themes/hasli/assets/images/block.svg',
+                description: 'Create New Container',
+                selected: false,
+                tagName : 'docker'
+            },
+            {
+                selected: false,
+                icon: 'styles/themes/hasli/assets/images/multi-block.svg',
+                description: 'Docker Compose',
+                tagName: 'docker-compose'
+            },
+            {
+                selected: false,
+                icon: 'styles/themes/hasli/assets/images/docker-swarm.svg',
+                description: 'Docker Swarm',
+                tagName: 'docker-swarm'
+            },
         ];
 
     }
@@ -48,6 +67,16 @@ export class CreateApp {
 
     switchTab(tab: string): void {
         this.appType = tab;
+    }
+
+    select(template: Template): void {
+        this.templates.forEach(t => t.selected = false);
+        template.selected = true;
+        this.application.tags = [{
+            id: null,
+            name: template.tagName
+        }];
+
     }
 
     submit(): void {
@@ -105,3 +134,10 @@ export class CreateApp {
 
 }
 
+
+interface Template {
+    icon: string;
+    tagName: string;
+    selected: boolean;
+    description: string;
+}

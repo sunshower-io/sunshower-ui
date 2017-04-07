@@ -79,13 +79,11 @@ export class WorkspaceService implements Service<Workspace> {
             .then(t => t.map(u => new Workspace(u)));
     }
 
-
     bind(key: string): Promise<Workspace> {
         if(Identifier.isIdentifier(key)) {
             return this.client.fetch(`workspaces/${key}`)
                 .then(t => t.json() as any)
                 .then(t => {
-                    console.log("WS", t);
                     this.workspace = new Workspace(t);
                     return this.workspace;
                 });

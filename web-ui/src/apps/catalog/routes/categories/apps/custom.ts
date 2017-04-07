@@ -6,8 +6,9 @@ import {HttpClient} from "aurelia-fetch-client";
 import {bindable, autoinject} from "aurelia-framework";
 
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
+import {WorkspaceService} from "common/model/api/workspace/service";
 import {ApplicationTemplate} from "common/model/api/application/model"
+import {IncompleteFeature} from "common/resources/custom-components/incomplete-feature";
 
 @autoinject
 export class Custom {
@@ -22,6 +23,7 @@ export class Custom {
         private parent: Catalog,
         private client:HttpClient,
         private eventAggregator: EventAggregator,
+        private workspaceService: WorkspaceService,
         private incompleteFeature: IncompleteFeature
     ) {
     }
@@ -51,18 +53,23 @@ export class Custom {
 
     attached() : void {
         this.loading = true;
-        setTimeout(() => {
-            this.client.fetch(`workspaces/${this.parent.id}/applications/heads`)
-                .then(d => d.json() as any)
-                .then(d => {
-                    this.loading = false;
-                    this.applications = d;
-                    console.log(d);
-                })
-                .catch(err => {
-                    console.log("Err");
-                    this.loading = false;
-                });
-        }, 500)
+        this.workspaceService
+            .getApplications().then(d => {
+                this.loading = false;
+                this.applications = d;
+        });
+        // setTimeout(() => {
+        //     this.client.fetch(`workspaces/${this.parent.id}/applications/heads`)
+        //         .then(d => d.json() as any)
+        //         .then(d => {
+        //             this.loading = false;
+        //             this.applications = d;
+        //             console.log(d);
+        //         })
+        //         .catch(err => {
+        //             console.log("Err");
+        //             this.loading = false;
+        //         });
+        // }, 500)
     }
 }

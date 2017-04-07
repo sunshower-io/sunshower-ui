@@ -22,28 +22,28 @@ import {ApplicationService} from "common/model/api/application/service";
 export class Summary {
     loading: boolean;
 
-    requirementDD: HTMLElement;
-    requirementPopup: HTMLElement;
+    requirementDD               : HTMLElement;
+    requirementPopup            : HTMLElement;
 
     @bindable
-    popupState: string;
+    popupState                  : string;
 
     @bindable
-    instance: any;
+    instance                    : any;
 
     @bindable
-    instances: any[];
-
-
-    private application: ApplicationTemplate;
-
-    private summary: HTMLElement;
-
+    instances                   : any[];
 
     @bindable
-    private loadingSummary: boolean;
-    private id: string;
-    private workspaceId: string;
+    private loadingSummary      : boolean;
+
+
+    private summary             : HTMLElement;
+
+    @bindable
+    private application         : ApplicationTemplate;
+
+
 
 
     constructor(private client: HttpClient,

@@ -46,7 +46,7 @@ template
                                     .overlay-label
                                         label Cloud Name
                                     .overlay-input.ui.input
-                                        input(type="text" value.bind="provider.name & validate")
+                                        input(type="text" value.bind="provider.name")
                                 .ui.field.overlay-field
                                     .overlay-label
                                         label Description
@@ -70,19 +70,19 @@ template
                                     .overlay-label
                                         label Credential Name
                                     .overlay-input.ui.input
-                                        input(type="text", value.bind="credential.name & validate")
+                                        input(type="text", value.bind="credential.name")
 
                                 .ui.field.overlay-field
                                     .overlay-label
                                         label Credential
                                     .overlay-input.ui.input
-                                        input(type="text", value.bind="credential.credential & validate")
+                                        input(type="text", value.bind="credential.credential")
 
                                 .ui.field.overlay-field
                                     .overlay-label
                                         label Secret
                                     .overlay-input.ui.input
-                                        input(type="text", value.bind="credential.secret & validate")
+                                        input(type="text", value.bind="credential.secret")
 
 
                                 .ui.basic.center.aligned.segment
