@@ -1,24 +1,54 @@
 template
-    .ui.center.aligned.grid
-        .column.five.wide
-            h2.center.aligned.header
-                | Enter credentials
-            .ui.hidden.divider
-            form.ui.small.form
-                .field
-                    label.pull-left Username
-                    input(type='text', placeholder='Enter your username', value.bind='user.username')
-                .field
-                    label.pull-left Password
-                    input(type='password', placeholder='Enter your password', value.bind='user.password')
+    .row
+        form.col.s12
+            .row
+                .input-field.col.s6
+                    input#first_name.validate(placeholder='Placeholder', type='text')
+                    label(for='first_name') First Name
+                .input-field.col.s6
+                    input#last_name.validate(type='text')
+                    label(for='last_name') Last Name
+            .row
+                .input-field.col.s12
+                    input#disabled.validate(disabled='', value='I am not editable', type='text')
+                    label(for='disabled') Disabled
+            .row
+                .input-field.col.s12
+                    input#password.validate(type='password')
+                    label(for='password') Password
+            .row
+                .input-field.col.s12
+                    input#email.validate(type='email')
+                    label(for='email') Email
+            .row
+                .col.s12
+                    | This is an inline input field:
+                    .input-field.inline
+                        input#email.validate(type='email')
+                        label(for='email', data-error='wrong', data-success='right') Email
 
-                .ui.error.message.left(show.bind="credentialsInvalid" style="margin-top:10px")
-                    p Username/password combination was not recognized
 
-                button.ui.field.button.fluid.primary(type='submit', click.delegate="login()") Sign In
-                .field
-                    .ui.checkbox.pull-left
-                        input(type='checkbox', value.bind='remember')
-                        label Remember me
 
+    //.ui.center.aligned.grid
+    //    .column.five.wide
+    //        h2.center.aligned.header
+    //            | Enter credentials
+    //        .ui.hidden.divider
+    //        form.ui.small.form
+    //            .field
+    //                label.pull-left Username
+    //                input(type='text', placeholder='Enter your username', value.bind='user.username')
+    //            .field
+    //                label.pull-left Password
+    //                input(type='password', placeholder='Enter your password', value.bind='user.password')
+    //
+    //            .ui.error.message.left(show.bind="credentialsInvalid" style="margin-top:10px")
+    //                p Username/password combination was not recognized
+    //
+    //            button.ui.field.button.fluid.primary(type='submit', click.delegate="login()") Sign In
+    //            .field
+    //                .ui.checkbox.pull-left
+    //                    input(type='checkbox', value.bind='remember')
+    //                    label Remember me
+    //
 

@@ -4,6 +4,8 @@ import {inject} from "aurelia-dependency-injection";
 import {User} from "common/model/security";
 import {LocalStorage} from "common/lib/storage/local";
 
+import * as materialize from 'materialize-css';
+
 import {
     Aurelia,
     Container
