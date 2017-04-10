@@ -1,6 +1,4 @@
 var gulp = require('gulp'),
-    suiwatch = require('../sui/watch'),
-    suibuild = require('../sui/build'),
     karma = require('./test'),
     Karma = require('karma').Server,
     paths = require('../paths');
@@ -17,10 +15,10 @@ function reportChange(event) {
 // to js, html, and css files and call the
 // reportChange method. Also, by depending on the
 // serve task, it will instantiate a browserSync session
-gulp.task('watch', ['serve', 'watch-less', 'build-assets'], function () {
+gulp.task('watch', ['serve' ], function () {
     gulp.watch(paths.source, ['build-system', browserSync.reload]).on('change', reportChange);
     gulp.watch(paths.html, ['build-html', browserSync.reload]).on('change', reportChange);
-    gulp.watch(paths.css, ['build-css', browserSync.reload]).on('change', reportChange);
+    //gulp.watch(paths.css, ['build-css', browserSync.reload]).on('change', reportChange);
     gulp.watch(paths.pug, ['build-pug', browserSync.reload]).on('change', reportChange);
 
     gulp.watch(paths.inlineLess,
