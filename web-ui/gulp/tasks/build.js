@@ -1,17 +1,18 @@
-var gulp = require('gulp');
-var runSequence = require('run-sequence');
-var changed = require('gulp-changed');
-var plumber = require('gulp-plumber');
-var sourcemaps = require('gulp-sourcemaps');
-var paths = require('../paths');
-var assign = Object.assign || require('object.assign');
-var notify = require('gulp-notify');
-var browserSync = require('browser-sync');
-var typescript = require('gulp-typescript');
-var htmlmin = require('gulp-htmlmin');
-var pug = require('gulp-pug');
-var concat = require('gulp-concat');
-var less = require('gulp-less');
+var gulp = require('gulp'),
+     runSequence = require('run-sequence'),
+     changed = require('gulp-changed'),
+     plumber = require('gulp-plumber'),
+     sourcemaps = require('gulp-sourcemaps'),
+     paths = require('../paths'),
+     assign = Object.assign || require('object.assign'),
+     notify = require('gulp-notify'),
+     typescript = require('gulp-typescript'),
+     htmlmin = require('gulp-htmlmin'),
+     pug = require('gulp-pug'),
+     concat = require('gulp-concat'),
+     less = require('gulp-less'),
+     sass = require('gulp-sass'),
+     sassJspm = require('sass-jspm-importer');
 
 // transpiles changed es6 files to SystemJS format
 // the plumber() call prevents 'pipe breaking' caused
@@ -34,6 +35,25 @@ gulp.task('build-system', function() {
     .pipe(gulp.dest(paths.output));
 });
 
+
+gulp.task('copy-fonts', function() {
+    return gulp.src('jspm_packages/npm/materialize-css@0.98.1/fonts/**/*')
+        .pipe(gulp.dest('dist/fonts'));
+
+});
+
+gulp.task('build-sass', function() {
+    return gulp.src('assets/styles/main.scss')
+        .pipe(sass({
+            errLogToConsole: true,
+            functions: sassJspm.resolve_function('/jspm_packages/'),
+            importer: sassJspm.importer
+        }))
+        .pipe(concat('styles.min.css'))
+        .pipe(gulp.dest('dist/css'));
+});
+
+
 // copies changed html files to the output directory
 gulp.task('build-html', function() {
   return gulp.src(paths.html)
@@ -55,6 +75,8 @@ gulp.task('build-less', function() {
 });
 
 
+
+
 gulp.task('build-pug', function() {
   return gulp.src(paths.pug)
       .pipe(pug({pretty: true}).on('error', function(er){
@@ -71,7 +93,7 @@ gulp.task('build-pug', function() {
 gulp.task('build', function(callback) {
   return runSequence(
     'clean',
-    ['build-system', 'build-html', 'build-css', 'build-less', 'build-pug', 'build-assets'],
+    ['build-system', 'build-html', 'build-pug', 'build-sass', 'copy-fonts'],
     callback
   );
 });
