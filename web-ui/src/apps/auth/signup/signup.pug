@@ -1,33 +1,34 @@
 template
-    .ui.center.aligned.grid
-        .column.eight.wide.form-holder
-            h2.center.aligned.header.form-head
-                | Create Account
-            .ui.hidden.divider
-            form.ui.small.form
-                .two.fields
-                    .field
-                        label.pull-left First Name
-                        input(type='text', placeholder='Enter your First Name', value.bind='user.firstname')
-                    .field
-                        label.pull-left Last Name
-                        input(type='text', placeholder='Enter your Last Name', value.bind='user.lastname')
-                .two.fields
-                    .field
-                        label.pull-left Username
-                        input(type='text', placeholder='Enter your username', value.bind='user.username')
-                    .field
-                        label.pull-left Email
-                        input(type='text', placeholder='Email@domain.com', value.bind='user.emailAddress')
-                .two.fields
-                    .field
-                        label.pull-left Password
-                        input(type='password', placeholder='Enter your password', value.bind='user.password')
-                    .field
-                        label.pull-left Confirm Password
-                        input(type='password', placeholder='Re-enter your password', value.bind='user.password')
-                .ui.error.message.left(show.bind="showError" style="margin-top:10px")
-                    p Username or email already exists
 
-                button.ui.field.button.fluid.primary(type='submit', click.delegate="signup()") Sign Up
+    .auth-toggle
+        | Already have an account?
+        a.btn-flat(click.delegate="signIn()") Sign In
 
+    h1 Create Hasli.io account
+
+    .input-field
+        input(type='text' id="${firstnameId}" value.bind='user.firstname')
+        label(for="${firstnameId}") First Name
+    .input-field
+        input(type='text' id="${lastnameId}" value.bind="user.lastname")
+        label(for="${lastnameId}") Last Name
+    .input-field
+        input(type="text" id="${usernameId}" value.bind="user.username")
+        label(for="${usernameId}") Username
+    .input-field
+        input(type='text' id="${emailId}" value.bind='user.emailAddress')
+        label(for="${emailId}") Email
+
+    .row
+        .col.m6.input-field
+            input(type='password' id="${passwordId}" value.bind='user.password')
+            label(for="${passwordId}") Password
+        .col.m6.input-field
+            input(type='password' id="${confirmId}" value.bind='user.password')
+            label(for="${confirmId}") Confirm Password
+
+    .auth-submit
+        button.waves-effect.btn(type="submit" click.delegate="signup()") Sign Up
+
+//.ui.error.message.left(show.bind="showError" style="margin-top:10px")
+//    p Username or email already exists

@@ -1,19 +1,20 @@
 template
 
-    .row
-        .col.m3.offset-m9
-            | Don't have an account yet?
-            a.btn-flat() SIGN UP
+    .auth-toggle
+        | Don't have an account yet?
+        a.btn-flat(click.delegate="signUp()") Sign Up
+
     h1 Sign in to Hasli.io
 
     .input-field
-        input(type="text" id="auth-login-username" value.bind='user.username')
-        label(for="auth-login-username") Username
+        input(type="text" id="${usernameId}" value.bind='user.username')
+        label(for="${usernameId}") Username
     .input-field
-        input(type="password" id="auth-login-password" value.bind='user.password')
-        label(for="auth-login-password") Password
+        input(type="password" id="${passwordId}" value.bind='user.password')
+        label(for="${passwordId}") Password
 
-    button.waves-effect.btn(type="submit" click.delegate="login()") Log In
+    .auth-submit
+        button.waves-effect.btn(type="submit" click.delegate="login()") Log In
 
 
     //            .ui.error.message.left(show.bind="credentialsInvalid" style="margin-top:10px")
