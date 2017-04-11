@@ -162,6 +162,15 @@
       },
       "github:plotly/plotly.js@1.21.3": {
         "main": "dist/plotly.js"
+      },
+      "npm:materialize-css@0.98.1": {
+        "format": "global",
+        "main": "bin/materialize.js",
+        "shim": {
+          "bin/materialize": [
+            "jquery"
+          ]
+        }
       }
     }
   },

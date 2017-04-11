@@ -7,13 +7,13 @@ template
     h1 Sign in to Hasli.io
 
     .input-field
-        input(type="text" id="auth-login-username")
+        input(type="text" id="auth-login-username" value.bind='user.username')
         label(for="auth-login-username") Username
     .input-field
-        input(type="password" id="auth-login-password")
+        input(type="password" id="auth-login-password" value.bind='user.password')
         label(for="auth-login-password") Password
 
-    button.waves-effect.btn(type="submit" click.delegate="login") Log In
+    button.waves-effect.btn(type="submit" click.delegate="login()") Log In
 
 
     //            .ui.error.message.left(show.bind="credentialsInvalid" style="margin-top:10px")
