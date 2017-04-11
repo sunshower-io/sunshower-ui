@@ -40,7 +40,6 @@ export class Workspace {
     }
 
     activate(id: any) {
-        //console.log("ID", id);
     }
 
 

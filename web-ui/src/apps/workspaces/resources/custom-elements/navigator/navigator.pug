@@ -1,0 +1,34 @@
+template
+    ul(id="${controlId}").side-nav
+        li
+            .userView
+                .background
+                    img(src='images/office.jpg')
+                |
+                a(href='#!user')
+                    img.circle(src='images/yuna.jpg')
+                |
+                a(href='#!name')
+                    span.white-text.name John Doe
+                |
+                a(href='#!email')
+                    span.white-text.email jdandturk@gmail.com
+        li
+            a(href='#!')
+                i.material-icons cloud
+                | First Link With Icon
+        li
+            a(href='#!') Second Link
+        li
+            .divider
+        li
+            a.subheader Subheader
+        li
+            a.waves-effect(href='#!') Third Link With Waves
+    |
+    a.button-collapse(
+        href='#',
+        data-activates='${controlId}',
+        ref="navigatorControl"
+    )
+        i.material-icons menu
