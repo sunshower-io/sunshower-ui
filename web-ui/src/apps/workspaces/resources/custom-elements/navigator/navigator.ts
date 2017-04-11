@@ -19,7 +19,6 @@ export class Navigator {
 
     attached() : void {
         $(this.navigatorControl).sideNav();
-
     }
 
 }
