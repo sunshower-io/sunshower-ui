@@ -5,12 +5,13 @@ template
             input#autocomplete-input.autocomplete(type='text')
             label(for='autocomplete-input') Autocomplete
 
-        li(repeat.for="level of currentLevels")
+        li.mdi.mdi-android.mdi-24px(repeat.for="level of currentLevels")
             a(click.delegate="level.href()")
                 i.material-icons ${level.name}
             ul
                 li(repeat.for="child of level.children")
-                    i.material-icons ${child.name}
+                    i.material-icons add
+                    //| ${child.name}
         //li
         //    a(href='#!')
         //        i.material-icons Applications

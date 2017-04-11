@@ -6,6 +6,7 @@ System.config({
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
+
   meta: {
     "bootstrap": {
       "deps": [
@@ -30,6 +31,7 @@ System.config({
       "deps": "ace"
     }
   },
+
   map: {
     "ace": "github:ajaxorg/ace-builds@1.2.6",
     "aurelia-animator-css": "npm:aurelia-animator-css@1.0.1",
@@ -67,7 +69,7 @@ System.config({
     "canvg": "github:canvg/canvg@master",
     "canvg/canvg": "github:canvg/canvg@master",
     "chart.js": "npm:chart.js@2.5.0",
-    "css": "github:systemjs/plugin-css@0.1.32",
+    "css": "github:systemjs/plugin-css@0.1.33",
     "cytoscape": "npm:cytoscape@2.7.13",
     "cytoscape-edgehandles": "npm:cytoscape-edgehandles@2.7.1",
     "cytoscape-grid-guide": "npm:cytoscape-grid-guide@1.0.4",
@@ -91,6 +93,7 @@ System.config({
     "markmarkoh/datamaps": "github:markmarkoh/datamaps@0.5.8",
     "maskedinput": "github:digitalBush/jquery.maskedinput@1.4.1",
     "materialize-css": "npm:materialize-css@0.98.1",
+    "mdi": "npm:mdi@1.9.33",
     "mxgraph": "github:jgraph/mxgraph-js@master",
     "node-docker-file-parser": "github:joyent/node-docker-file-parser@master",
     "ocanvas": "npm:ocanvas@2.8.7",
@@ -111,7 +114,7 @@ System.config({
     "velocity-ui": "github:julianshapiro/velocity@1.4.1/velocity.ui.js",
     "xterm": "npm:xterm@2.4.0",
     "github:Semantic-Org/Semantic-UI@2.2.7": {
-      "css": "github:systemjs/plugin-css@0.1.32",
+      "css": "github:systemjs/plugin-css@0.1.33",
       "jquery": "npm:jquery@2.2.4"
     },
     "github:jspm/nodelibs-assert@0.1.0": {
@@ -409,7 +412,7 @@ System.config({
       "pinkie-promise": "npm:pinkie-promise@2.0.1"
     },
     "npm:font-awesome@4.6.3": {
-      "css": "github:systemjs/plugin-css@0.1.32"
+      "css": "github:systemjs/plugin-css@0.1.33"
     },
     "npm:fs.realpath@1.0.0": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",

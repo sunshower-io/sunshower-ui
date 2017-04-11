@@ -1,4 +1,5 @@
 import 'materialize-css';
+import 'mdi/css/materialdesignicons.css!'
 import {UUID} from "common/lib/utils/uuid";
 import {autoinject} from 'aurelia-framework';
 import {NavigatorLevel} from "./navigator-element";
