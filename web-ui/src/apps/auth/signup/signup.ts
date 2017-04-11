@@ -3,13 +3,19 @@ import {bindable} from "aurelia-framework";
 import {Auth} from "apps/auth/auth";
 import {User} from "common/model/security";
 import {Router} from "aurelia-router";
+import {UUID} from "common/lib/utils/uuid";
 
 import {HttpClient} from 'aurelia-fetch-client';
 
 @inject(HttpClient, Auth, Router)
 export class Signup {
 
-
+    private firstnameId: string       =  UUID.random();
+    private lastnameId: string       =  UUID.random();
+    private usernameId: string       =  UUID.random();
+    private emailId: string       =  UUID.random();
+    private passwordId: string       =  UUID.random();
+    private confirmId: string       =  UUID.random();
 
 
     @bindable
@@ -31,11 +37,15 @@ export class Signup {
             body: JSON.stringify(this.user)
         }).then(response => response.json())
         .then(data => {
-            this.router.navigateToRoute('login');
+            this.signIn();
         }).catch(er => {
             console.log("ERROR", er);
             this.showError = true;
         });
+    }
+
+    signIn() : void {
+        this.router.navigateToRoute('login')
     }
 
 }

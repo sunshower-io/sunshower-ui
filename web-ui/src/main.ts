@@ -1,5 +1,6 @@
 import 'jquery'
 import 'fetch';
+import 'materialize-css';
 import {Aurelia} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
 
@@ -23,16 +24,15 @@ import {
 
 import {DialogConfiguration} from "aurelia-dialog";
 
+import {ChannelSet} from "common/lib/events";
+import {EventAggregator} from "aurelia-event-aggregator";
+import {Container} from "aurelia-dependency-injection";
+import {FetchClientInterceptor} from
+    "./common/resources/custom-components/fetch-client-errors";
+
 import {
     SemanticUIRenderer
 } from "common/resources/custom-components/semantic-ui-renderer";
-import {ChannelSet} from "common/lib/events";
-import {FetchClientInterceptor} from
-    "./common/resources/custom-components/fetch-client-errors";
-import {EventAggregator} from "aurelia-event-aggregator";
-import {ContextResolver} from "common/model/common";
-import {Container} from "aurelia-dependency-injection";
-
 
 
 export function param(name) {
@@ -82,7 +82,8 @@ function configureResources(aurelia:Aurelia) {
         .globalResources([
             'common/lib/widget/menu/menu',
             'common/resources/custom-elements/tree/tree',
-            'common/resources/nested-application/nested-application'
+            'common/resources/nested-application/nested-application',
+            'apps/workspaces/resources/custom-elements/navigator/navigator'
         ])
         .plugin('aurelia-animator-velocity')
         .plugin('aurelia-dialog', (config: DialogConfiguration) => {

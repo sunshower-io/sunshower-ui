@@ -9,6 +9,10 @@ export class UUID {
         return new UUID(str);
     }
 
+    static random() : string {
+        return UUID.randomUUID().value;
+    }
+
     static randomUUID(): UUID {
         let d = new Date().getTime();
         if (window.performance && typeof window.performance.now === "function") {
