@@ -1,27 +1,23 @@
 template
     ul(id="${controlId}").side-nav
-        li.search.input-field
-            i.material-icons.prefix textsms
-            input#autocomplete-input.autocomplete(type='text')
-            label(for='autocomplete-input') Autocomplete
-
+        li.search
+            .search-wrapper.card
+                input#autocomplete-input.autocomplete(type='text')
+                span.mdi.mdi-magnify
         li.no-padding(repeat.for="level of currentLevels")
             ul.collapsible.collapsible-accordion
                 li
                     a.collapsible-header(click.delegate="level.href()")
                         | ${level.name}
-                        i.material-icons arrow_drop_down
+                        //span.mdi.mdi-menu-down //rotate
                     .collapsible-body
                         ul
                             li(repeat.for="child of level.children")
                                 | ${child.name}
-        //li
-        //    a(href='#!')
-        //        i.material-icons Applications
-    |
+
     a.button-collapse(
         href='#',
         data-activates='${controlId}',
         ref="navigatorControl"
     )
-        i.material-icons menu
+        span.mdi.mdi-menu.mdi-24px
