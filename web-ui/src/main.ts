@@ -1,5 +1,6 @@
 import 'jquery'
 import 'fetch';
+import 'materialize-css';
 import {Aurelia} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
 

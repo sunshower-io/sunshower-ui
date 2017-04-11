@@ -477,8 +477,7 @@ System.config({
     "npm:materialize-css@0.98.1": {
       "hammerjs": "npm:hammerjs@2.0.8",
       "jquery": "npm:jquery@2.2.4",
-      "node-archiver": "npm:node-archiver@0.3.0",
-      "process": "github:jspm/nodelibs-process@0.1.2"
+      "node-archiver": "npm:node-archiver@0.3.0"
     },
     "npm:minimatch@3.0.3": {
       "brace-expansion": "npm:brace-expansion@1.1.7",
