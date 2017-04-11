@@ -1,6 +1,6 @@
 .auth-side {
   background: $almostblack;
-  width: 40%;
+  width: 35%;
   top:0;
   left:0;
   bottom:0;
@@ -8,13 +8,28 @@
   box-sizing:border-box;
 }
 
-
 .auth-main {
-  padding: 300px 300px 100px 100px;
+  padding: 150px 300px 150px 150px;
   box-sizing:border-box;
-  width:60%;
+  width:65%;
   top:0;
   right:0;
   bottom:0;
   position:absolute;
+}
+
+.auth-toggle {
+  text-align: right;
+
+  .btn-flat {
+    margin-left: 1em;
+  }
+}
+
+h1 {
+  margin:3rem 0 3rem 0;
+}
+
+.auth-submit {
+  text-align:center;
 }

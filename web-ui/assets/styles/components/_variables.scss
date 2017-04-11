@@ -1,6 +1,13 @@
 $almostblack: #171b26;
 $logoblue: #239ae8;
-$midgrey: #{map-get($blue-grey, "base")};
+//$midgrey: #{map-get($blue-grey, "base")};
+$midgrey: #607d8b;
+
+$primary-color: $logoblue;
+
+$button-border: 1px solid $primary-color;
+$button-raised-background: $primary-color;
+$button-flat-color: $primary-color;
 
 $placeholder-text-color: $midgrey;
 
