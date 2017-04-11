@@ -1,5 +1,10 @@
 template
     ul(id="${controlId}").side-nav
+        li.search
+            i.material-icons.prefix textsms
+            input#autocomplete-input.autocomplete(type='text')
+            label(for='autocomplete-input') Autocomplete
+
         li(repeat.for="level of currentLevels")
             a(click.delegate="level.href()")
                 i.material-icons ${level.name}
