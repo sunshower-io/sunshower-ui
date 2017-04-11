@@ -1,30 +1,14 @@
 template
     ul(id="${controlId}").side-nav
-        li
-            .userView
-                .background
-                    img(src='images/office.jpg')
-                |
-                a(href='#!user')
-                    img.circle(src='images/yuna.jpg')
-                |
-                a(href='#!name')
-                    span.white-text.name John Doe
-                |
-                a(href='#!email')
-                    span.white-text.email jdandturk@gmail.com
-        li
-            a(href='#!')
-                i.material-icons cloud
-                | First Link With Icon
-        li
-            a(href='#!') Second Link
-        li
-            .divider
-        li
-            a.subheader Subheader
-        li
-            a.waves-effect(href='#!') Third Link With Waves
+        li(repeat.for="level of currentLevels")
+            a(click.delegate="level.href()")
+                i.material-icons ${level.name}
+            ul
+                li(repeat.for="child of level.children")
+                    i.material-icons ${child.name}
+        //li
+        //    a(href='#!')
+        //        i.material-icons Applications
     |
     a.button-collapse(
         href='#',
