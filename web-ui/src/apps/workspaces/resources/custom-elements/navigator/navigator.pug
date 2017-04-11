@@ -1,16 +1,20 @@
 template
     ul(id="${controlId}").side-nav
-        li.search
+        li.search.input-field
             i.material-icons.prefix textsms
             input#autocomplete-input.autocomplete(type='text')
             label(for='autocomplete-input') Autocomplete
 
-        li(repeat.for="level of currentLevels")
-            a(click.delegate="level.href()")
-                i.material-icons ${level.name}
-            ul
-                li(repeat.for="child of level.children")
-                    i.material-icons ${child.name}
+        li.no-padding(repeat.for="level of currentLevels")
+            ul.collapsible.collapsible-accordion
+                li
+                    a.collapsible-header(click.delegate="level.href()")
+                        | ${level.name}
+                        i.material-icons arrow_drop_down
+                    .collapsible-body
+                        ul
+                            li(repeat.for="child of level.children")
+                                | ${child.name}
         //li
         //    a(href='#!')
         //        i.material-icons Applications
