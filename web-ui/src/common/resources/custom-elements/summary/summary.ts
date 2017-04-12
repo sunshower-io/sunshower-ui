@@ -21,7 +21,8 @@ export class Summary {
 
 
     constructor() {
-        this.size = 64;
+        this.size = 50;
+        this.stroke = "#239ae8";
     }
 
     public scale() : number {

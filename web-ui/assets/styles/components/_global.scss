@@ -3,6 +3,10 @@ body {
   overflow: hidden !important;
 }
 
+.body {
+  margin-left:$small-nav-width;
+}
+
 
 .mdi.activity-icon {
   color: green;
