@@ -13,7 +13,6 @@ export class Navigator {
     private navigator               : HTMLElement;
     private navigatorControl        : HTMLElement;
 
-
     private currentLevels           : NavigatorLevel[];
 
 
