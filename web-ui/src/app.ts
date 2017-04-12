@@ -12,14 +12,17 @@ import {
 } from "common/model/security";
 import {Container} from "aurelia-dependency-injection";
 import {ContextResolver} from "common/model/common/context-resolver";
+import {WorkspaceNavigator} from "apps/workspaces/resources/custom-elements/navigator/workspace/workspace-navigator";
 
 
 @autoinject
 export class App {
-    public router: Router;
+
+    public router           : Router;
 
     constructor(
         private tokenHolder: AuthenticationContextHolder,
+        private context: WorkspaceNavigator,
         private container:Container
     ) {
 
@@ -66,6 +69,7 @@ export class App {
             title: 'Workspaces'
         }]);
         this.router = router;
+        this.context.router = router;
     }
 
 

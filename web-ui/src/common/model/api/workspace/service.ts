@@ -24,6 +24,11 @@ export class WorkspaceService implements Service<Workspace> {
     }
 
 
+    public initial() : Promise<Workspace> {
+        return this.client.fetch('workspaces/initial')
+            .then(t => new Workspace(t));
+    }
+
     public save(workspaceRequest: SaveWorkspaceRequest): Promise<Workspace> {
         return this.httpClient
             .createRequest('workspaces')

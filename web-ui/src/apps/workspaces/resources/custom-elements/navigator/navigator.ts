@@ -5,14 +5,11 @@ import {
     autoinject,
     bindable
 } from 'aurelia-framework';
-import {NavigatorLevel} from "./navigator-element";
 import {Router} from "aurelia-router";
+import {NavigationContext, ElementGroup} from "./navigator-element";
 
 @autoinject
 export class Navigator {
-
-    @bindable
-    private router                  : Router;
 
 
     private controlId               : string       =  UUID.random();
@@ -20,11 +17,17 @@ export class Navigator {
     private navigator               : HTMLElement;
     private navigatorControl        : HTMLElement;
 
-    private currentLevel            : NavigatorLevel;
+    @bindable
+    private context                 : NavigationContext;
+
+    @bindable
+    private groups                  : ElementGroup[];
+
 
 
     constructor() {
     }
+
 
 
     open() : void {
@@ -35,8 +38,14 @@ export class Navigator {
 
     }
 
+    contextChanged(newVal: NavigationContext, old: NavigationContext) {
+        newVal.load().then(t => {
+            this.groups = newVal.children;
+            console.log("Groups", this.groups);
+        });
+    }
+
     attached() : void {
-        console.log("NAV",  this.router);
         $(this.navigatorControl).sideNav();
         $(document).ready(function(){
             $('.collapsible').collapsible();
