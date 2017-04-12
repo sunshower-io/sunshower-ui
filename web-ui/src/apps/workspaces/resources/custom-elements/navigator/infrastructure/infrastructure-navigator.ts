@@ -6,4 +6,6 @@ import {
 
 export class InfrastructureNavigator extends AbstractNavigatorLevel {
     name                = "Infrastructure";
+    icon                = "mdi-cloud";
+    color               = "teal";
 }

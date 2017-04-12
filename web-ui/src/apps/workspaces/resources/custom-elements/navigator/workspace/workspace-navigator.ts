@@ -12,6 +12,7 @@ import {InfrastructureNavigator} from "apps/workspaces/resources/custom-elements
 export class WorkspaceNavigator extends AbstractNavigatorLevel {
 
     name            : string = "Workspaces";
+    icon            : string = "mdi-android-studio";
 
 
     children        : NavigatorLevel[];
@@ -24,8 +25,8 @@ export class WorkspaceNavigator extends AbstractNavigatorLevel {
         super();
         this.children = [
             applicationNavigator,
-            provisioningNavigator,
-            infrastructureNavigator
+            infrastructureNavigator,
+            provisioningNavigator
         ]
     }
 }

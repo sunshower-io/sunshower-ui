@@ -6,4 +6,6 @@ import {
 
 export class ProvisioningNavigator extends AbstractNavigatorLevel {
     name                = "Provisioning";
+    icon                = "mdi-cube-send"; //"mdi-cloud-tags"
+    color               = "amber";
 }

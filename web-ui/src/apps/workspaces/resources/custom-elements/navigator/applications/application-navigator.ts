@@ -7,5 +7,7 @@ import {
 export class ApplicationNavigator extends AbstractNavigatorLevel {
 
     name                 = "Applications";
+    icon                 = "mdi-code-tags";
+    color                = "pink";
 
 }
