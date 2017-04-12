@@ -22,8 +22,11 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
 }
 
 .side-nav .mdi, .side-nav-small .mdi {
-  color: $sidenav-font-color;
   font-size: $default-icon-size;
+}
+
+.side-nav-small .mdi {
+  color: $sidenav-font-color;
 }
 
 .side-nav .mdi {
@@ -38,10 +41,6 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
 .side-nav .collapsible-body {
   background: $sidenav-bg-color;
   color: $sidenav-font-color;
-}
-
-.side-nav .collapsible-body li {
-  padding: 0px 16px;
 }
 
 .collapsible li.active .dropdown {

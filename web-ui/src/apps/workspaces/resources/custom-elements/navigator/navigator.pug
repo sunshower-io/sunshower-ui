@@ -9,17 +9,18 @@ template
             li.no-padding(if.bind="level.children")
                 ul.collapsible
                     li
-                        a.collapsible-header.waves-effect
+                        a.collapsible-header.waves-effect(class="${level.color}-text")
                             span.mdi(if.bind="level.icon" class="${level.icon}")
                             | ${level.name}
-                            span.mdi.mdi-menu-right.dropdown
+                            span.mdi.mdi-chevron-right.dropdown
                         .collapsible-body
                             ul
                                 li(repeat.for="child of level.children")
-                                    span.mdi(if.bind="child.icon" class="${child.icon}")
-                                    | ${child.name}
+                                    a(class="${child.color}-text")
+                                        span.mdi(if.bind="child.icon" class="${child.icon}")
+                                        | ${child.name}
             li(if.bind="!level.children")
-                a
+                a(class="${level.color}-text")
                     span.mdi(if.bind="level.icon" class="${level.icon}")
                     | ${level.name}
 

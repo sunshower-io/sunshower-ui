@@ -25,8 +25,8 @@ export class WorkspaceNavigator extends AbstractNavigatorLevel {
         super();
         this.children = [
             applicationNavigator,
-            provisioningNavigator,
-            infrastructureNavigator
+            infrastructureNavigator,
+            provisioningNavigator
         ]
     }
 }
