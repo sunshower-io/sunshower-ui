@@ -25,6 +25,9 @@ export class Navigator {
         ]
     }
 
+    // makeActive($event: Event) : void {
+    //     $($event.target).closest('li').toggleClass('active');
+    // }
 
     open() : void {
 
@@ -36,6 +39,9 @@ export class Navigator {
 
     attached() : void {
         $(this.navigatorControl).sideNav();
+        $(document).ready(function(){
+            $('.collapsible').collapsible();
+        });
     }
 
 }

@@ -26,6 +26,30 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
   font-size: $default-icon-size;
 }
 
+.side-nav .mdi {
+  margin-right: .5em;
+
+  &.dropdown {
+    position:absolute;
+    right:0;
+  }
+}
+
+.side-nav .collapsible-body {
+  background: $sidenav-bg-color;
+  color: $sidenav-font-color;
+}
+
+.side-nav .collapsible-body li {
+  padding: 0px 16px;
+}
+
+.collapsible li.active .dropdown {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+  transform: rotate(90deg);
+}
+
 .search.input-field label {
   color: $sidenav-font-color;
   top: .5rem;
