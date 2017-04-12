@@ -7,10 +7,23 @@ template
                 .mdi.mdi-filter-outline.sidebar-search-filter
                 input(type="text" placeholder="Search")
 
-        
 
-        li.no-padding(repeat.for="nav of router.navigation")
-            a(href.bind="nav.href") ${nav.title}
+        li.waves-effect.current(class="${context.color ? context.color : 'default-color'}")
+            a(href="${current.href ? current.href : '/'}")
+                summary-icon(stroke="white", text="${context.title}", size="24")
+                | ${context.title}
+        li.no-padding
+            ul.collapsible
+                li(repeat.for="group of groups")
+                    a.collapsible-header.waves-effect
+                        //(click.delegate="context.navigate(nav)")
+                        | ${group.name}
+                        span.mdi.mdi-chevron-right.dropdown
+                    .collapsible-body
+                        ul
+                            li(repeat.for="element of group.elements")
+                                a ${element.title}
+
 
         //todo child implementation; possible is below
         //template(repeat.for="level of currentLevels")
@@ -27,10 +40,6 @@ template
         //                            a(class="${child.color}-text")
         //                                span.mdi(if.bind="child.icon" class="${child.icon}")
         //                                | ${child.name}
-        //    li(if.bind="!level.children")
-        //        a(class="${level.color}-text")
-        //            span.mdi(if.bind="level.icon" class="${level.icon}")
-        //            | ${level.name}
 
     ul.side-nav-small
         //todo toasts instead of titles
@@ -42,7 +51,7 @@ template
             //span.mdi.mdi-menu
         li(repeat.for="nav of router.navigation" title="${nav.title}")
             //todo get icons and colors back
-            a(href.bind="nav.href")
-                summary(text="${nav.title}")
+            a(href="${nav.href ? nav.href : '/'}")
+                summary-icon(text="${nav.title}")
             //span.mdi(if.bind="level.icon" class="${level.icon}" title="${level.name}")
 

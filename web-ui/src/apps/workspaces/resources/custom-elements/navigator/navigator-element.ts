@@ -18,6 +18,8 @@ export interface ElementGroup {
 
 export interface NavigationContext {
 
+    color                                   ?: string;
+    icon                                    ?: string;
     loading                                 : boolean;
     children                                : ElementGroup[];
     load()                                  : Promise<boolean>;
