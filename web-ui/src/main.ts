@@ -82,6 +82,7 @@ function configureResources(aurelia:Aurelia) {
         .globalResources([
             'common/lib/widget/menu/menu',
             'common/resources/custom-elements/tree/tree',
+            'common/resources/custom-elements/summary/summary',
             'common/resources/nested-application/nested-application',
             'apps/workspaces/resources/custom-elements/navigator/navigator'
         ])

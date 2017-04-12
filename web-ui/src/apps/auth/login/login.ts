@@ -83,6 +83,7 @@ export class Login {
                     window.location.reload(true);
                 } else {
                     this.setParam("token", data.token.token);
+                    window.location.reload(true);
                 }
             }).catch(e => {
             this.credentialsInvalid = true;
