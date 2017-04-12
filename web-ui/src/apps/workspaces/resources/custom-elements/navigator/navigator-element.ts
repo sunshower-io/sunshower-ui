@@ -3,6 +3,8 @@ export interface NavigatorLevel {
     icon                ?: string;
     color               ?: string;
 
+
+    breadcrumbs         ?: NavigatorLevel[];
     children            ?: NavigatorLevel[];
 
 }
