@@ -7,8 +7,10 @@ template
                 .mdi.mdi-filter-outline.sidebar-search-filter
                 input(type="text" placeholder="Search")
 
+
         li.no-padding(repeat.for="nav of router.navigation")
             a(href.bind="nav.href") ${nav.title}
+
 
         //todo child implementation; possible is below
         //template(repeat.for="level of currentLevels")
