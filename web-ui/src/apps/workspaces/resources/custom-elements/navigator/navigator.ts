@@ -1,6 +1,11 @@
 import 'materialize-css';
+import 'mdi/css/materialdesignicons.css!'
 import {UUID} from "common/lib/utils/uuid";
+import {autoinject} from 'aurelia-framework';
+import {NavigatorLevel} from "./navigator-element";
+import {WorkspaceNavigator} from "./workspace/workspace-navigator";
 
+@autoinject
 export class Navigator {
 
     private controlId: string       =  UUID.random();
@@ -8,6 +13,20 @@ export class Navigator {
     private navigator               : HTMLElement;
     private navigatorControl        : HTMLElement;
 
+    private currentLevels           : NavigatorLevel[];
+
+
+    constructor(
+        workspaceNavigator:WorkspaceNavigator
+    ) {
+        this.currentLevels = [
+            workspaceNavigator
+        ]
+    }
+
+    // makeActive($event: Event) : void {
+    //     $($event.target).closest('li').toggleClass('active');
+    // }
 
     open() : void {
 
@@ -19,6 +38,9 @@ export class Navigator {
 
     attached() : void {
         $(this.navigatorControl).sideNav();
+        $(document).ready(function(){
+            $('.collapsible').collapsible();
+        });
     }
 
 }

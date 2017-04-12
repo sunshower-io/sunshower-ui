@@ -1,0 +1,79 @@
+$small-nav-width: $navbar-height; //setting it to navbar height makes it align nicely with the logo
+
+.side-nav-small {
+  background: $sidenav-bg-color;
+  position:absolute;
+  top: $navbar-height;
+  left:0;
+  bottom:0;
+  margin:0;
+  width:$small-nav-width;
+  overflow:hidden;
+  cursor: pointer;
+
+  li {
+    text-align: center;
+    height: $small-nav-width;
+    line-height: $small-nav-width;
+  }
+
+  @media #{$medium-and-down} {
+    top: $navbar-height-mobile;
+  }
+}
+
+.side-nav .mdi, .side-nav-small .mdi {
+  font-size: $default-icon-size;
+}
+
+.side-nav-small .mdi {
+  color: $sidenav-font-color;
+}
+
+.side-nav .mdi {
+  margin-right: .5em;
+
+  &.dropdown {
+    position:absolute;
+    right:0;
+  }
+}
+
+.side-nav .collapsible-body {
+  background: $sidenav-bg-color;
+  color: $sidenav-font-color;
+}
+
+.collapsible li.active .dropdown {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+  transform: rotate(90deg);
+}
+
+
+li.search .search-wrapper {
+  margin: 12px 12px 24px 12px;
+  transition: margin .25s ease;
+  background: rgba(white, 0.25);;
+  position:relative;
+  box-shadow:0;
+
+  input[type="text"] {
+    display: block;
+    font-size: 16px;
+    font-weight: 300;
+    width: 100%;
+    height: 45px;
+    margin: 0;
+    padding: 0 45px 0 15px;
+    border: 0;
+    box-sizing:border-box;
+  }
+
+  .mdi {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+  }
+}

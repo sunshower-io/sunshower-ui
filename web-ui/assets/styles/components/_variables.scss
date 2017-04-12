@@ -2,6 +2,7 @@ $almostblack: #171b26;
 $logoblue: #239ae8;
 //$midgrey: #{map-get($blue-grey, "base")};
 $midgrey: #607d8b;
+$offwhite: #eceff1;
 
 $primary-color: $logoblue;
 
@@ -12,3 +13,14 @@ $button-flat-color: $primary-color;
 $placeholder-text-color: $midgrey;
 
 $input-focus-color: $logoblue;
+
+$sidenav-bg-color: $almostblack;
+$sidenav-font-color: white;
+
+$default-icon-size: 24px;
+
+$default-background-color: $offwhite;
+
+$navbar-font-color: $midgrey;
+
+$navbar-font-size: 14px;

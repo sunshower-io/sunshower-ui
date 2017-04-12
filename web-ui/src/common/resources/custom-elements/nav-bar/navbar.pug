@@ -1,15 +1,29 @@
 template(bindable="router")
-    require(from="./profile-dropdown")
-    require(from="./alerts-dropdown")
-    require(from="./activity-monitor-dropdown")
-    .ui.secondary.menu.navbar(ref="element")
-        img.ui.image.item.header.clickable(src="styles/themes/hasli/assets/images/logos/hasli-logo.svg", click.delegate="openWorkspaces()")
-        .right.compact.menu
-            a.fitted.item(click.delegate="openWorkspaces()")
-                i.large.inverted.ion-grid.icon
-            a.fitted.item
-                activity-monitor-dropdown
-            a.fitted.item
-                alerts-dropdown
-            a.item
-                profile-dropdown
+    nav
+        .nav-wrapper
+            a.brand-logo()
+                img(src="dist/icons/hasli-icon.svg", alt="Hasli.io")
+            ul.right
+                li
+                    a.mdi.mdi-pulse.activity-icon
+                li
+                    a.mdi.mdi-bell.activity-icon
+                li
+                    a
+                        span.mdi.mdi-account-circle
+                        span.mdi.mdi-menu-down
+
+    //require(from="./profile-dropdown")
+    //require(from="./alerts-dropdown")
+    //require(from="./activity-monitor-dropdown")
+    //.ui.secondary.menu.navbar(ref="element")
+    //    img.ui.image.item.header.clickable(src="styles/themes/hasli/assets/images/logos/hasli-logo.svg", click.delegate="openWorkspaces()")
+    //    .right.compact.menu
+    //        a.fitted.item(click.delegate="openWorkspaces()")
+    //            i.large.inverted.ion-grid.icon
+    //        a.fitted.item
+    //            activity-monitor-dropdown
+    //        a.fitted.item
+    //            alerts-dropdown
+    //        a.item
+    //            profile-dropdown
