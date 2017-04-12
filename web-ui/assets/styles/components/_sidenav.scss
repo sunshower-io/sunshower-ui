@@ -1,4 +1,27 @@
-.side-nav .mdi {
+$small-nav-width: $navbar-height; //setting it to navbar height makes it align nicely with the logo
+
+.side-nav-small {
+  background: $sidenav-bg-color;
+  position:absolute;
+  top: $navbar-height;
+  left:0;
+  bottom:0;
+  margin:0;
+  width:$small-nav-width;
+  overflow:hidden;
+
+  li {
+    text-align: center;
+    height: $small-nav-width;
+    line-height: $small-nav-width;
+  }
+
+  @media #{$medium-and-down} {
+    top: $navbar-height-mobile;
+  }
+}
+
+.side-nav .mdi, .side-nav-small .mdi {
   color: $sidenav-font-color;
   font-size: $default-icon-size;
 }

@@ -1,5 +1,6 @@
 export interface NavigatorLevel {
     name                : string;
+    icon                ?: string;
 
     children            ?: NavigatorLevel[];
 
