@@ -4,33 +4,18 @@ template
             .search-wrapper.card
                 input(type='text')
                 span.mdi.mdi-magnify
-        //todo put in dashboard
-        template(repeat.for="level of currentLevels")
-            li.no-padding(if.bind="level.children")
-                ul.collapsible
-                    li
-                        a.collapsible-header.waves-effect(class="${level.color}-text")
-                            span.mdi(if.bind="level.icon" class="${level.icon}")
-                            | ${level.name}
-                            span.mdi.mdi-chevron-right.dropdown
-                        .collapsible-body
-                            ul
-                                li(repeat.for="child of level.children")
-                                    a(class="${child.color}-text")
-                                        span.mdi(if.bind="child.icon" class="${child.icon}")
-                                        | ${child.name}
-            li(if.bind="!level.children")
-                a(class="${level.color}-text")
-                    span.mdi(if.bind="level.icon" class="${level.icon}")
-                    | ${level.name}
+
+        li.no-padding(repeat.for="nav of router.navigation")
+            a(href.bind="nav.href") ${nav.title}
 
     ul.side-nav-small(
         href='#',
         data-activates='${controlId}',
         ref="navigatorControl"
-        )
+    )
         li
             span.mdi.mdi-menu
-        li(repeat.for="level of currentLevels")
-            span.mdi(if.bind="level.icon" class="${level.icon}" title="${level.name}")
+        li(repeat.for="nav of router.navigation")
+            a(href.bind="nav.href") ${nav.title}
+            //span.mdi(if.bind="level.icon" class="${level.icon}" title="${level.name}")
 

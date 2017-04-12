@@ -18,13 +18,43 @@ import {ContextResolver} from "common/model/common/context-resolver";
 export class App {
     public router: Router;
 
-    constructor(private tokenHolder: AuthenticationContextHolder, private container:Container) {
+    constructor(
+        private tokenHolder: AuthenticationContextHolder,
+        private container:Container
+    ) {
+
     }
 
-    public configureRouter(config: RouterConfiguration, router: Router) {
+    public configureRouter(
+        config: RouterConfiguration,
+        router: Router
+    ) {
         config.title = 'Hasli.io';
         config.addPipelineStep('authorize', new SecurityStep(this.tokenHolder));
         config.addPipelineStep('preActivate', new ContextResolver(this.container));
+        // config.map([{
+        //     route: '',
+        //     redirect: 'workspaces'
+        // }, {
+        //     route: 'workspaces',
+        //     name: 'workspaces',
+        //     moduleId: 'apps/workspaces/index',
+        //     nav: false,
+        //     title: 'Workspaces',
+        // }, {
+        //     route: 'workspace/:workspaceId',
+        //     name: 'workspace',
+        //     title: 'Workspace',
+        //     moduleId: 'apps/workspaces/routes/workspace/index',
+        //     nav: false
+        // }, {
+        //     route: 'catalog',
+        //     name: 'catalog',
+        //     moduleId: 'apps/catalog/index',
+        //     nav: false,
+        //     title: 'Catalog',
+        // }]);
+
         config.map([{
             route: '',
             redirect: 'workspaces'
@@ -32,20 +62,8 @@ export class App {
             route: 'workspaces',
             name: 'workspaces',
             moduleId: 'apps/workspaces/index',
-            nav: false,
-            title: 'Workspaces',
-        }, {
-            route: 'workspace/:workspaceId',
-            name: 'workspace',
-            title: 'Workspace',
-            moduleId: 'apps/workspaces/routes/workspace/index',
-            nav: false
-        }, {
-            route: 'catalog',
-            name: 'catalog',
-            moduleId: 'apps/catalog/index',
-            nav: false,
-            title: 'Catalog',
+            nav: true,
+            title: 'Workspaces'
         }]);
         this.router = router;
     }
