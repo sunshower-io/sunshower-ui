@@ -5,6 +5,10 @@ nav ul a:hover {
 nav {
   background-color: white;
   box-shadow:none;
+  position:absolute;
+  left: $small-nav-width;
+  top:0;
+  right:0;
 }
 
 nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {

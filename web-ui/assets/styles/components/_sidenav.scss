@@ -3,7 +3,7 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
 .side-nav-small {
   background: $sidenav-bg-color;
   position:absolute;
-  top: $navbar-height;
+  top: 0;
   left:0;
   bottom:0;
   margin:0;
@@ -19,6 +19,29 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
 
   @media #{$medium-and-down} {
     top: $navbar-height-mobile;
+  }
+}
+
+.brand-logo {
+  height: $navbar-height;
+  box-sizing: border-box;
+  text-align:center;
+  padding-top: $sidenav-font-size/2;
+
+  img {
+    max-height: $navbar-height - $sidenav-font-size;
+    max-width: $small-nav-width - $sidenav-font-size;
+    width:100%;
+
+    @media #{$medium-and-down} {
+      max-height: $navbar-height-mobile - $sidenav-font-size;
+    }
+  }
+  //todo set max-height and width of logo
+
+
+  @media #{$medium-and-down} {
+    height: $navbar-height-mobile;
   }
 }
 

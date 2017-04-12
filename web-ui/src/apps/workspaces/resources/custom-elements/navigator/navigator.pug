@@ -29,8 +29,9 @@ template
         data-activates='${controlId}',
         ref="navigatorControl"
         )
-        li
-            span.mdi.mdi-menu
+        li.brand-logo
+            img(src="dist/icons/hasli-icon.svg", alt="Hasli.io")
+            //span.mdi.mdi-menu
         li(repeat.for="level of currentLevels")
             span.mdi(if.bind="level.icon" class="${level.icon}" title="${level.name}")
 
