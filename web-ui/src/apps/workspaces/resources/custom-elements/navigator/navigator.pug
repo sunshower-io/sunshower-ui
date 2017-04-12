@@ -1,26 +1,46 @@
 template
     ul(id="${controlId}").side-nav
-        li.search
-            .search-wrapper.card
-                input(type='text')
-                span.mdi.mdi-magnify
+        li.side-nav-header
+            .sidebar-toggle
+                span.mdi.mdi-view-quilt
+            .sidebar-search
+                .mdi.mdi-filter-outline.sidebar-search-filter
+                input(type="text" placeholder="Search")
 
-        li.no-padding.current
-            a(href.bind="context.href") ${context.title}
-        li.no-padding(repeat.for="group of groups")
-            a(click.delegate="context.navigate(nav)") ${group.name}
+        li.no-padding(repeat.for="nav of router.navigation")
+            a(href.bind="nav.href") ${nav.title}
 
-            //ul
-            //    li(repeat.for="context.children()" if.bind="context.hasChildren()")
+        //todo child implementation; possible is below
+        //template(repeat.for="level of currentLevels")
+        //    li.no-padding(if.bind="level.children")
+        //        ul.collapsible
+        //            li
+        //                a.collapsible-header.waves-effect(class="${level.color}-text")
+        //                    span.mdi(if.bind="level.icon" class="${level.icon}")
+        //                    | ${level.name}
+        //                    span.mdi.mdi-chevron-right.dropdown
+        //                .collapsible-body
+        //                    ul
+        //                        li(repeat.for="child of level.children")
+        //                            a(class="${child.color}-text")
+        //                                span.mdi(if.bind="child.icon" class="${child.icon}")
+        //                                | ${child.name}
+        //    li(if.bind="!level.children")
+        //        a(class="${level.color}-text")
+        //            span.mdi(if.bind="level.icon" class="${level.icon}")
+        //            | ${level.name}
 
-    ul.side-nav-small(
-        href='#',
-        data-activates='${controlId}',
-        ref="navigatorControl"
-    )
-        li
-            span.mdi.mdi-menu
-        li(repeat.for="nav of context.navigationElements()")
-            a(click.delegate="context.navigate(nav)") ${nav.title}
-            span.mdi(if.bind="level.icon" class="${level.icon}" title="${level.name}")
+    ul.side-nav-small
+        //todo toasts instead of titles
+        li.brand-logo(title="Show navigation")
+            img(src="dist/icons/hasli-icon.svg", alt="Hasli.io"
+            data-activates='${controlId}',
+            ref="navigatorControl"
+            )
+            //span.mdi.mdi-menu
+        li(repeat.for="nav of router.navigation" title="${nav.title}")
+            //todo get icons and colors back
+            a(href.bind="nav.href")
+                summary(text="${nav.title}")
+            //span.mdi(if.bind="level.icon" class="${level.icon}" title="${level.name}")
 

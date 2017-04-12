@@ -2,15 +2,22 @@ nav ul a:hover {
   background-color: inherit;
 }
 
+nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+  display: inline-block;
+}
+
 nav {
   background-color: white;
   box-shadow:none;
+  position:absolute;
+  left: $small-nav-width;
+  top:0;
+  right:0;
 }
 
-nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
-  height: auto;
-  line-height: inherit;
-  display: inline;
+nav .nav-wrapper {
+  width: 100%;
+  padding-right: $small-nav-width;
 }
 
 nav .brand-logo {

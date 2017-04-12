@@ -6,16 +6,29 @@
   bottom:0;
   position:absolute;
   box-sizing:border-box;
+
+  @media #{$medium-and-down} {
+    width:10%;
+  }
 }
 
 .auth-main {
-  padding: 150px 300px 150px 150px;
+  padding: 150px;
   box-sizing:border-box;
   width:65%;
   top:0;
   right:0;
   bottom:0;
   position:absolute;
+
+  @media #{$medium-and-down} {
+    width:90%;
+    padding:75px;
+  }
+
+  @media #{$extra-large-and-up} {
+    padding: 150px 300px 150px 150px;
+  }
 }
 
 .auth-toggle {
