@@ -41,7 +41,6 @@ export class Navigator {
     contextChanged(newVal: NavigationContext, old: NavigationContext) {
         newVal.load().then(t => {
             this.groups = newVal.children;
-            console.log("Groups", this.groups);
         });
     }
 

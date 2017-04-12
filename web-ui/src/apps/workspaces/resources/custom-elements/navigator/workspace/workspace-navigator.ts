@@ -31,12 +31,13 @@ export class WorkspaceNavigator extends RouterNavigationContext {
         this.loading = true;
         let children = [];
         return this.workspaceService.initial().then(t => {
+            (t as any).key = 'Initial';
             children.push(t);
         }).then(u => {
             return this.workspaceService.list().then(t => {
-                children.push(children);
+                children = children.concat(t);
                 this.loading = false;
-                this.children = this.partition(children, 'Workspaces');
+                this.children = this.partition(children, 'Initial');
                 console.log(this.children);
             }).then(t => true);
         });
