@@ -1,9 +1,11 @@
 template
     ul(id="${controlId}").side-nav
-        li.search
-            .search-wrapper.card
-                input(type='text')
-                span.mdi.mdi-magnify
+        li.side-nav-header
+            .sidebar-toggle
+                button.mdi.mdi-view-quilt
+            .sidebar-search
+                button.mdi.mdi-filter-outline.sidebar-search-filter
+                input(type="text" placeholder="Search")
         //todo put in dashboard
         template(repeat.for="level of currentLevels")
             li.no-padding(if.bind="level.children")

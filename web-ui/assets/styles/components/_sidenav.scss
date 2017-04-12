@@ -28,6 +28,10 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
   text-align:center;
   padding-top: $sidenav-font-size/2;
 
+  @media #{$medium-and-down} {
+    height: $navbar-height-mobile;
+  }
+
   img {
     max-height: $navbar-height - $sidenav-font-size;
     max-width: $small-nav-width - $sidenav-font-size;
@@ -36,12 +40,6 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
     @media #{$medium-and-down} {
       max-height: $navbar-height-mobile - $sidenav-font-size;
     }
-  }
-  //todo set max-height and width of logo
-
-
-  @media #{$medium-and-down} {
-    height: $navbar-height-mobile;
   }
 }
 
@@ -73,30 +71,46 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
   transform: rotate(90deg);
 }
 
+.side-nav-header {
+  background: #3c3c54;
+  height: $navbar-height;
+  padding:0 1rem;
 
-li.search .search-wrapper {
-  margin: 12px 12px 24px 12px;
-  transition: margin .25s ease;
-  background: rgba(white, 0.25);;
+  @media #{$medium-and-down} {
+    height: $navbar-height-mobile;
+  }
+
+}
+
+.sidebar-toggle {
+  border-radius: 3px;
+  height: 2.5rem;
+  position: absolute;
+  top: .75rem;
+  left: .75rem;
+  background: hsla(0,0%,100%,.1);
+  font-size: 1rem;
+}
+
+.sidebar-search {
   position:relative;
-  box-shadow:0;
+  margin: 0 0 0 4rem;
 
-  input[type="text"] {
-    display: block;
-    font-size: 16px;
-    font-weight: 300;
-    width: 100%;
-    height: 45px;
-    margin: 0;
-    padding: 0 45px 0 15px;
-    border: 0;
-    box-sizing:border-box;
+  input {
+    margin: .75rem 0;
+    padding: .5rem 30px .5rem 0;
+    height: 2.5rem;
+    color: white;
   }
+}
 
-  .mdi {
-    position: absolute;
-    top: 0;
-    right: 0;
-    cursor: pointer;
-  }
+.sidebar-search-filter {
+  position: absolute;
+  right: .25rem;
+  top: .25rem;
+  width: 2rem;
+  height: 2rem;
+  color: #767593;
+  transition: color .3s;
+  font-size: 1rem;
 }
