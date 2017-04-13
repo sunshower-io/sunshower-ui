@@ -1,15 +1,14 @@
 template
     ul(id="${controlId}").side-nav
         li.side-nav-header
-            .sidebar-toggle
+            .side-nav-toggle
                 span.mdi.mdi-view-quilt
-            .sidebar-search
-                .mdi.mdi-filter-outline.sidebar-search-filter
+            .side-nav-search
+                .mdi.mdi-filter-outline.side-nav-search-icon
                 input(type="text" placeholder="Search")
 
-
-        li.waves-effect.current(class="${context.color ? context.color : 'default-color'}")
-            a(href="${current.href ? current.href : '/'}")
+        li.current-context(class="${context.color ? context.color : 'default-color'}")
+            a.waves-effect(href="${current.href ? current.href : '/'}")
                 summary-icon(stroke="white", text="${context.title}", size="24")
                 | ${context.title}
         li.no-padding
@@ -23,35 +22,18 @@ template
                         ul
                             li(repeat.for="element of group.elements")
                                 a ${element.title}
-
-
-        //todo child implementation; possible is below
-        //template(repeat.for="level of currentLevels")
-        //    li.no-padding(if.bind="level.children")
-        //        ul.collapsible
-        //            li
-        //                a.collapsible-header.waves-effect(class="${level.color}-text")
-        //                    span.mdi(if.bind="level.icon" class="${level.icon}")
-        //                    | ${level.name}
-        //                    span.mdi.mdi-chevron-right.dropdown
-        //                .collapsible-body
-        //                    ul
-        //                        li(repeat.for="child of level.children")
-        //                            a(class="${child.color}-text")
-        //                                span.mdi(if.bind="child.icon" class="${child.icon}")
-        //                                | ${child.name}
+        //todo get create check hooked up
+        li.create-context
+            //(if.bind="create")
+            a.btn.waves-effect(href="" class="${context.color ? context.color : 'default-color'}") Create
 
     ul.side-nav-small
-        //todo toasts instead of titles
         li.brand-logo(title="Show navigation")
             img(src="dist/icons/hasli-icon.svg", alt="Hasli.io"
             data-activates='${controlId}',
             ref="navigatorControl"
             )
             //span.mdi.mdi-menu
-        li(repeat.for="nav of router.navigation" title="${nav.title}")
-            //todo get icons and colors back
-            a(href="${nav.href ? nav.href : '/'}")
-                summary-icon(text="${nav.title}")
-            //span.mdi(if.bind="level.icon" class="${level.icon}" title="${level.name}")
-
+        li
+            a(href="${current.href ? current.href : '/'}")
+                summary-icon(stroke="${context.color ? context.color : 'default-color'}", text="${context.title}", size="24")

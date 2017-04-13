@@ -20,10 +20,6 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
       margin-bottom: $sidenav-font-size/2;
     }
   }
-
-  @media #{$medium-and-down} {
-    top: $navbar-height-mobile;
-  }
 }
 
 .brand-logo {
@@ -80,6 +76,7 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
   background: #3c3c54;
   height: $navbar-height;
   padding:0 1rem;
+  margin-bottom: $navbar-height-mobile/2;
 
   @media #{$medium-and-down} {
     height: $navbar-height-mobile;
@@ -88,7 +85,7 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
 }
 
 $side-nav-search-color: #767593;
-.sidebar-toggle {
+.side-nav-toggle {
   border-radius: 3px;
   height: 38px;
   width: 38px;
@@ -98,17 +95,16 @@ $side-nav-search-color: #767593;
   background: $side-nav-search-color;
   font-size: 1rem;
 
-  //todo position this better
   .mdi {
     color: white;
     margin: 0;
     position: absolute;
-    top: -3px;
-    left: 7.5px;
+    top: -5px;
+    left: 7px;
   }
 }
 
-.sidebar-search {
+.side-nav-search {
   position:relative;
   margin: 0 0 0 45px;
 
@@ -134,24 +130,36 @@ $side-nav-search-color: #767593;
   }
 }
 
-.sidebar-search-filter {
+.side-nav-search-icon {
   position: absolute;
   right: 0;
   top: 4px;
   color: $side-nav-search-color;
   transition: color .3s;
-  margin-right:0 !important;
+  margin-right: 0 !important;
 }
 
-.side-nav .current.default-color {
-  background: $primary-color;
-}
+.side-nav li.current-context {
+  margin-bottom: $navbar-height-mobile/2;
 
-.side-nav li.current a .summary-icon {
-  margin-top: .5em;
-  vertical-align: top;
+  &.default-color {
+    background: $primary-color;
+  }
+
+  a .summary-icon {
+    margin-top: .5em;
+    vertical-align: top;
+  }
 }
 
 .side-nav li > a {
   padding: 0 16px;
+}
+
+.side-nav li.create-context {
+  position: absolute;
+  right: 0;
+  bottom: 68px;
+  left: 0;
+  height: 68px;
 }

@@ -9,6 +9,7 @@ import {WorkspaceService} from "common/model/api/workspace/service";
 @autoinject
 export class WorkspaceNavigator extends RouterNavigationContext {
 
+    private create         : boolean = true;
     private title          : string = 'Workspaces';
     private name           : string = 'Workspaces';
 
@@ -34,6 +35,7 @@ export class WorkspaceNavigator extends RouterNavigationContext {
             (t as any).key = 'Initial';
             children.push(t);
         }).then(u => {
+            console.log('this', this);
             return this.workspaceService.list().then(t => {
                 children = children.concat(t);
                 this.loading = false;

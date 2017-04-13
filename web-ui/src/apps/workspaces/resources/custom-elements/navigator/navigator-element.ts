@@ -18,6 +18,7 @@ export interface ElementGroup {
 
 export interface NavigationContext {
 
+    create                                  ?: boolean;
     color                                   ?: string;
     icon                                    ?: string;
     loading                                 : boolean;
