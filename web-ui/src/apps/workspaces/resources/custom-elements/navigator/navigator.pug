@@ -21,7 +21,7 @@ template
                     .collapsible-body
                         ul
                             li(repeat.for="element of group.elements")
-                                a ${element.title}
+                                a ${element.name}
         li.create-context(if.bind="context.create")
             a.btn.waves-effect(href="#" class="${context.color ? context.color : 'default-color'}")
                 | Create ${context.title.slice(0, -1)}

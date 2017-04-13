@@ -37,10 +37,14 @@ body {
   }
 }
 
-.dropdown-content li:not('.divider')  {
+.dropdown-content li  {
   color: $midgrey;
   padding: 8px 16px;
   min-height: 0;
+
+  &.divider {
+    padding:0;
+  }
 
   & > span.mdi {
     color: inherit;

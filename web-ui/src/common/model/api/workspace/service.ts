@@ -26,6 +26,7 @@ export class WorkspaceService implements Service<Workspace> {
 
     public initial() : Promise<Workspace> {
         return this.client.fetch('workspaces/initial')
+            .then(t=> t.json() as any)
             .then(t => new Workspace(t));
     }
 

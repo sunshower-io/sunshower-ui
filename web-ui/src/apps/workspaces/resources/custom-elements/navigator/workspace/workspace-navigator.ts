@@ -6,6 +6,7 @@ import {autoinject} from "aurelia-framework";
 import {Router} from "aurelia-router";
 import {WorkspaceService} from "common/model/api/workspace/service";
 import {bindable} from "aurelia-framework";
+import * as _ from "lodash";
 
 @autoinject
 export class WorkspaceNavigator extends RouterNavigationContext {
@@ -41,8 +42,7 @@ export class WorkspaceNavigator extends RouterNavigationContext {
             return this.workspaceService.list().then(t => {
                 children = children.concat(t);
                 this.loading = false;
-                this.children = this.partition(children, 'Initial');
-                console.log(this.children);
+                this.children = this.partition(_.uniqBy(children, 'id'), 'Initial');
             }).then(t => true);
         });
     }
