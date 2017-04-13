@@ -6,6 +6,7 @@ System.config({
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
+
   meta: {
     "bootstrap": {
       "deps": [
@@ -30,6 +31,7 @@ System.config({
       "deps": "ace"
     }
   },
+
   map: {
     "ace": "github:ajaxorg/ace-builds@1.2.6",
     "aurelia-animator-css": "npm:aurelia-animator-css@1.0.1",

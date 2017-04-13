@@ -1,6 +1,6 @@
 import {
-    RouterNavigationContext,
-    NavigationElement
+    NavigationElement,
+    RouterNavigationContext
 } from "../navigator-element";
 import {autoinject} from "aurelia-framework";
 import {Router} from "aurelia-router";
