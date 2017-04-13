@@ -45,7 +45,7 @@ System.config({
     "aurelia-framework": "npm:aurelia-framework@1.1.2",
     "aurelia-history": "npm:aurelia-history@1.0.0",
     "aurelia-history-browser": "npm:aurelia-history-browser@1.0.0",
-    "aurelia-http-client": "npm:aurelia-http-client@1.0.4",
+    "aurelia-http-client": "npm:aurelia-http-client@1.1.1",
     "aurelia-loader": "npm:aurelia-loader@1.0.0",
     "aurelia-loader-default": "npm:aurelia-loader-default@1.0.2",
     "aurelia-logging": "npm:aurelia-logging@1.3.1",
@@ -230,7 +230,7 @@ System.config({
       "aurelia-history": "npm:aurelia-history@1.0.0",
       "aurelia-pal": "npm:aurelia-pal@1.3.0"
     },
-    "npm:aurelia-http-client@1.0.4": {
+    "npm:aurelia-http-client@1.1.1": {
       "aurelia-pal": "npm:aurelia-pal@1.3.0",
       "aurelia-path": "npm:aurelia-path@1.1.1"
     },
