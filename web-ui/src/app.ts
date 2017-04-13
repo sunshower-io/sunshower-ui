@@ -1,5 +1,4 @@
 import 'jquery'
-import 'semantic-ui'
 import {Router, RouterConfiguration} from 'aurelia-router';
 import {PipelineStep} from "aurelia-router";
 import {NavigationInstruction} from "aurelia-router";

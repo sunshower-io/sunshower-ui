@@ -22,10 +22,9 @@ template
                         ul
                             li(repeat.for="element of group.elements")
                                 a ${element.title}
-        //todo get create check hooked up
-        li.create-context
-            //(if.bind="create")
-            a.btn.waves-effect(href="" class="${context.color ? context.color : 'default-color'}") Create
+        li.create-context(if.bind="context.create")
+            a.btn.waves-effect(href="#" class="${context.color ? context.color : 'default-color'}")
+                | Create ${context.title.slice(0, -1)}
 
     ul.side-nav-small
         li.brand-logo(title="Show navigation")

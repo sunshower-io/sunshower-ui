@@ -1,24 +1,48 @@
-//
-   Created by dustinlish on 10/21/16.
+template
+    a(
+        class="dropdown-button"
+        href="#"
+        data-hover="true"
+        data-beloworigin="true"
+        data-activates="${controlId}"
+        data-constrainwidth="false"
+        ref="profileDD")
+        span.mdi.mdi-account-circle
+        span.mdi.mdi-menu-down
+    ul(id="${controlId}" class="dropdown-content")
+        li
+            span.mdi.mdi-account-circle
+            | ${user.username}
+        li.divider
+        li(click.delegate="openSettings()")
+            span.mdi.mdi-account-settings-variant
+            | Account Settings
+        li(click.delegate="incompleteFeature.notify($event)")
+            span.mdi.mdi-help-circle
+            | Help
+        li.divider
+        li(click.delegate="logout()")
+            span.mdi.mdi-logout-variant
+            | Sign Out
 
-template(bindable="router")
-    .ui.inline.pointing.dropdown.top.right
-        i.large.inverted.ion-person.icon
-        i.inverted.dropdown.icon
-        .menu
-            .item.disabled
-                i.large.ion-image.icon
-                | ${user.username}
-            .divider
-            .item(click.delegate="openSettings()")
-                i.ion-ios-settings-strong.icon
-                | Account Settings
-            .item(click.delegate="incompleteFeature.notify($event)")
-                i.ion-help.icon
-                | Help
-            .divider
-            .item(click.delegate="logout()")
-                i.ion-log-out.icon
-                | Sign out
+
+    //.ui.inline.pointing.dropdown.top.right
+    //    i.large.inverted.ion-person.icon
+    //    i.inverted.dropdown.icon
+    //    .menu
+    //        .item.disabled
+    //            i.large.ion-image.icon
+    //            | ${user.username}
+    //        .divider
+    //        .item(click.delegate="openSettings()")
+    //            i.ion-ios-settings-strong.icon
+    //            | Account Settings
+    //        .item(click.delegate="incompleteFeature.notify($event)")
+    //            i.ion-help.icon
+    //            | Help
+    //        .divider
+    //        .item(click.delegate="logout()")
+    //            i.ion-log-out.icon
+    //            | Sign out
 
 

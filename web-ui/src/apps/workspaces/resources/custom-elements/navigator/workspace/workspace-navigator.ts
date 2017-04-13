@@ -5,10 +5,12 @@ import {
 import {autoinject} from "aurelia-framework";
 import {Router} from "aurelia-router";
 import {WorkspaceService} from "common/model/api/workspace/service";
+import {bindable} from "aurelia-framework";
 
 @autoinject
 export class WorkspaceNavigator extends RouterNavigationContext {
 
+    @bindable
     private create         : boolean = true;
     private title          : string = 'Workspaces';
     private name           : string = 'Workspaces';
