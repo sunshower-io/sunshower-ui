@@ -62,7 +62,7 @@ System.config({
     "aurelia-templating-binding": "npm:aurelia-templating-binding@1.3.0",
     "aurelia-templating-resources": "npm:aurelia-templating-resources@1.4.0",
     "aurelia-templating-router": "npm:aurelia-templating-router@1.1.0",
-    "aurelia-validation": "npm:aurelia-validation@1.0.0-beta.1.0.1",
+    "aurelia-validation": "npm:aurelia-validation@1.0.0",
     "bluebird": "npm:bluebird@3.4.1",
     "bootstrap": "github:twbs/bootstrap@3.3.7",
     "buffer": "github:jspm/nodelibs-buffer@0.1.1",
@@ -305,7 +305,7 @@ System.config({
       "aurelia-path": "npm:aurelia-path@1.1.1",
       "aurelia-task-queue": "npm:aurelia-task-queue@1.2.0"
     },
-    "npm:aurelia-validation@1.0.0-beta.1.0.1": {
+    "npm:aurelia-validation@1.0.0": {
       "aurelia-binding": "npm:aurelia-binding@1.2.1",
       "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.3.1",
       "aurelia-logging": "npm:aurelia-logging@1.3.1",
