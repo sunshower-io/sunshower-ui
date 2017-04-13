@@ -3,7 +3,7 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
 .side-nav-small {
   background: $sidenav-bg-color;
   position:absolute;
-  top: $navbar-height;
+  top: 0;
   left:0;
   bottom:0;
   margin:0;
@@ -17,8 +17,34 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
     line-height: $small-nav-width;
   }
 
+  li .summary-icon {
+      margin-top: $sidenav-font-size/2;
+      margin-bottom: $sidenav-font-size/2;
+  }
+
   @media #{$medium-and-down} {
     top: $navbar-height-mobile;
+  }
+}
+
+.brand-logo {
+  height: $navbar-height;
+  box-sizing: border-box;
+  text-align:center;
+  padding-top: $sidenav-font-size/2;
+
+  @media #{$medium-and-down} {
+    height: $navbar-height-mobile;
+  }
+
+  img {
+    max-height: $navbar-height - $sidenav-font-size;
+    max-width: $small-nav-width - $sidenav-font-size;
+    width:100%;
+
+    @media #{$medium-and-down} {
+      max-height: $navbar-height-mobile - $sidenav-font-size;
+    }
   }
 }
 
@@ -50,30 +76,71 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
   transform: rotate(90deg);
 }
 
+.side-nav-header {
+  background: #3c3c54;
+  height: $navbar-height;
+  padding:0 1rem;
 
-li.search .search-wrapper {
-  margin: 12px 12px 24px 12px;
-  transition: margin .25s ease;
-  background: rgba(white, 0.25);;
-  position:relative;
-  box-shadow:0;
-
-  input[type="text"] {
-    display: block;
-    font-size: 16px;
-    font-weight: 300;
-    width: 100%;
-    height: 45px;
-    margin: 0;
-    padding: 0 45px 0 15px;
-    border: 0;
-    box-sizing:border-box;
+  @media #{$medium-and-down} {
+    height: $navbar-height-mobile;
   }
 
+}
+
+$side-nav-search-color: #767593;
+
+//todo don't make dependent upon font-size
+.sidebar-toggle {
+  border-radius: 3px;
+  height: 38px;
+  width: 38px;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: $side-nav-search-color;
+  font-size: 1rem;
+
+  //todo position this better
   .mdi {
+    color: white;
+    margin: 0;
     position: absolute;
-    top: 0;
-    right: 0;
-    cursor: pointer;
+    top: -3px;
+    left: 7.5px;
   }
+}
+
+.sidebar-search {
+  position:relative;
+  margin: 0 0 0 45px;
+
+  input {
+    margin: .75rem 0;
+    padding: .5rem 30px .5rem 0;
+    height: 2.5rem;
+    color: white;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    width:100%;
+    box-sizing: border-box;
+
+    &::-webkit-input-placeholder {
+      color:$side-nav-search-color;
+    }
+    &::-moz-placeholder {
+      color:$side-nav-search-color;
+    }
+    &:-ms-input-placeholder {
+      color:$side-nav-search-color;
+    }
+  }
+}
+
+.sidebar-search-filter {
+  position: absolute;
+  right: 0;
+  top: 4px;
+  color: $side-nav-search-color;
+  transition: color .3s;
+  margin-right:0 !important;
 }

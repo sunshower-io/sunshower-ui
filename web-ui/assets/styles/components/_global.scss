@@ -5,6 +5,11 @@ body {
 
 .body {
   margin-left:$small-nav-width;
+  margin-top: $navbar-height;
+
+  @media #{$medium-and-down} {
+    margin-top: $navbar-height-mobile;
+  }
 }
 
 

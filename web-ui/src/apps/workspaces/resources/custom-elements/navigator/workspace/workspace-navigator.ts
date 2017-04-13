@@ -1,32 +1,46 @@
-import {autoinject} from 'aurelia-framework';
 import {
-    NavigatorLevel,
-    AbstractNavigatorLevel
-} from "apps/workspaces/resources/custom-elements/navigator/navigator-element";
-import {ApplicationNavigator} from "apps/workspaces/resources/custom-elements/navigator/applications/application-navigator";
-import {ProvisioningNavigator} from "apps/workspaces/resources/custom-elements/navigator/provisioning/provisioning-navigator";
-import {InfrastructureNavigator} from "apps/workspaces/resources/custom-elements/navigator/infrastructure/infrastructure-navigator";
-
+    NavigationElement,
+    RouterNavigationContext
+} from "../navigator-element";
+import {autoinject} from "aurelia-framework";
+import {Router} from "aurelia-router";
+import {WorkspaceService} from "common/model/api/workspace/service";
 
 @autoinject
-export class WorkspaceNavigator extends AbstractNavigatorLevel {
+export class WorkspaceNavigator extends RouterNavigationContext {
 
-    name            : string = "Workspaces";
-    icon            : string = "mdi-android-studio";
-
-
-    children        : NavigatorLevel[];
+    private title          : string = 'Workspaces';
+    private name           : string = 'Workspaces';
 
     constructor(
-        applicationNavigator:ApplicationNavigator,
-        provisioningNavigator: ProvisioningNavigator,
-        infrastructureNavigator: InfrastructureNavigator
+        private workspaceService: WorkspaceService
     ) {
         super();
-        this.children = [
-            applicationNavigator,
-            infrastructureNavigator,
-            provisioningNavigator
-        ]
     }
+
+    public navigate(e:NavigationElement) : void {
+        this.router.navigate(e.href);
+    }
+
+    hasChildren(): boolean {
+        return true;
+    }
+
+
+    load(): Promise<boolean> {
+        this.loading = true;
+        let children = [];
+        return this.workspaceService.initial().then(t => {
+            (t as any).key = 'Initial';
+            children.push(t);
+        }).then(u => {
+            return this.workspaceService.list().then(t => {
+                children = children.concat(t);
+                this.loading = false;
+                this.children = this.partition(children, 'Initial');
+                console.log(this.children);
+            }).then(t => true);
+        });
+    }
+
 }

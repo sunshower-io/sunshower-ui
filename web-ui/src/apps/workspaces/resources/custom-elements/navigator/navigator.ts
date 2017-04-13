@@ -1,32 +1,34 @@
 import 'materialize-css';
 import 'mdi/css/materialdesignicons.css!'
 import {UUID} from "common/lib/utils/uuid";
-import {autoinject} from 'aurelia-framework';
-import {NavigatorLevel} from "./navigator-element";
-import {WorkspaceNavigator} from "./workspace/workspace-navigator";
+import {
+    autoinject,
+    bindable
+} from 'aurelia-framework';
+import {Router} from "aurelia-router";
+import {NavigationContext, ElementGroup} from "./navigator-element";
 
 @autoinject
 export class Navigator {
 
-    private controlId: string       =  UUID.random();
+
+    private controlId               : string       =  UUID.random();
 
     private navigator               : HTMLElement;
     private navigatorControl        : HTMLElement;
 
-    private currentLevels           : NavigatorLevel[];
+    @bindable
+    private context                 : NavigationContext;
+
+    @bindable
+    private groups                  : ElementGroup[];
 
 
-    constructor(
-        workspaceNavigator:WorkspaceNavigator
-    ) {
-        this.currentLevels = [
-            workspaceNavigator
-        ]
+
+    constructor() {
     }
 
-    // makeActive($event: Event) : void {
-    //     $($event.target).closest('li').toggleClass('active');
-    // }
+
 
     open() : void {
 
@@ -34,6 +36,12 @@ export class Navigator {
 
     close() : void {
 
+    }
+
+    contextChanged(newVal: NavigationContext, old: NavigationContext) {
+        newVal.load().then(t => {
+            this.groups = newVal.children;
+        });
     }
 
     attached() : void {
