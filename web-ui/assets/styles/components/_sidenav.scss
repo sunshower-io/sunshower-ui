@@ -12,8 +12,16 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
 
   li {
     text-align: center;
-    height: $small-nav-width;
-    line-height: $small-nav-width;
+    margin-bottom:20px;
+
+    &.side-nav-header {
+      height: $small-nav-width;
+      line-height: $small-nav-width;
+
+      .mdi {
+        font-size: 35px;
+      }
+    }
 
     a {
       color: white;
@@ -32,16 +40,16 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
 
 }
 
-.side-nav li.active.default-color, .side-nav-small li.active.default-color {
-  background: $secondary-color;
-}
+.side-nav, .side-nav-small {
 
-.side-nav .mdi, .side-nav-small .mdi {
-  font-size: $default-icon-size;
-}
+  .mdi {
+    font-size: $default-icon-size;
+    color: $sidenav-font-color;
+  }
 
-.side-nav-small .mdi {
-  color: $sidenav-font-color;
+  li.active.default-color {
+    background: $secondary-color;
+  }
 }
 
 .side-nav .mdi {
@@ -56,12 +64,6 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
 .side-nav .collapsible-body {
   background: $sidenav-bg-color;
   color: $sidenav-font-color;
-}
-
-.collapsible li.active .dropdown {
-  -ms-transform: rotate(90deg); /* IE 9 */
-  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
-  transform: rotate(90deg);
 }
 
 .side-nav-header {
@@ -151,10 +153,15 @@ $side-nav-search-color: #767593;
   bottom: 68px;
   left: 0;
   height: 68px;
+  margin-bottom:0;
 
   a.btn {
     margin: 10px 50px;
     border-radius: 25px;
+
+    &.default-color {
+      background: $secondary-color;
+    }
   }
 
 }

@@ -50,6 +50,13 @@ body {
     color: inherit;
     display: inline;
     padding:0;
-    margin-right: 1em;
+    margin-right: .5em;
   }
+}
+
+
+.collapsible li.active .dropdown {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+  transform: rotate(90deg);
 }

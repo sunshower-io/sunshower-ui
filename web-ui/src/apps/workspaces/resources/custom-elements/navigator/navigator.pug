@@ -24,7 +24,7 @@ template
                     .collapsible-body
                         ul
                             li(repeat.for="element of group.elements")
-                                a ${element.name}
+                                a.waves-effect ${element.name}
         li.create-context(if.bind="context.create")
             a.btn.waves-effect(href="#" class="${context.color ? context.color : 'default-color'}")
                 | Create ${context.title.slice(0, -1)}
@@ -37,9 +37,8 @@ template
         //todo determine whether it should be active or not
         li.dashboard(class="active ${context.color ? context.color : 'default-color'}")
             a.waves-effect(href="${current.href ? current.href : '/'}")
-                summary-icon(stroke="none" fill="#239ae8" textColor="white" text="${context.title}")
+                summary-icon(stroke="none" fill="#239ae8" textColor="white" text="${context.title}" size="32")
         li(repeat.for="group of groups")
             a.waves-effect(href="#")
                 i.material-icons.mdi(if.bind="group.icon" class="${group.icon}")
-                //todo group icon
                 | ${group.name}
