@@ -12,7 +12,6 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
 
   li {
     text-align: center;
-    margin-bottom:20px;
 
     &.side-nav-header {
       height: $small-nav-width;
@@ -42,6 +41,10 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
 
 .side-nav, .side-nav-small {
 
+  li {
+    margin-bottom:20px;
+  }
+
   .mdi {
     font-size: $default-icon-size;
     color: $sidenav-font-color;
@@ -54,11 +57,6 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
 
 .side-nav .mdi {
   margin-right: .5em;
-
-  &.dropdown {
-    position:absolute;
-    right:0;
-  }
 }
 
 .side-nav .collapsible-body {

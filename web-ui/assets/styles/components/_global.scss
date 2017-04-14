@@ -4,8 +4,9 @@ body {
 }
 
 .body {
-  margin-left:$small-nav-width;
+  margin-left:300px;
   margin-top: $navbar-height;
+  padding: 20px 200px 20px 20px; //temporary, just need breathing room
 
   @media #{$medium-and-down} {
     margin-top: $navbar-height-mobile;
@@ -55,8 +56,10 @@ body {
 }
 
 
-.collapsible li.active .dropdown {
+.collapsible li.active .dropdown-icon {
   -ms-transform: rotate(90deg); /* IE 9 */
   -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
   transform: rotate(90deg);
+  position:absolute;
+  right:0;
 }

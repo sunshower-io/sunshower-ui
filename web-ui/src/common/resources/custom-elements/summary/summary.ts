@@ -16,7 +16,7 @@ export class Summary {
     public fill     : string;
 
     @bindable
-    public textColor    : string;
+    public textcolor    : string;
 
     @bindable
     public size     : number;
@@ -29,7 +29,7 @@ export class Summary {
     constructor() {
         this.size = 50;
         this.stroke = "#239ae8";
-        this.textColor = "white";
+        this.textcolor = "#239ae8";
         this.fill = "none";
     }
 
