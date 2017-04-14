@@ -14,7 +14,7 @@ body {
 
 
 .mdi.activity-icon {
-  color: green;
+  color: $brightgreen;
 }
 
 
@@ -46,7 +46,7 @@ body {
     padding:0;
   }
 
-  & > span.mdi {
+  & > .mdi {
     color: inherit;
     display: inline;
     padding:0;

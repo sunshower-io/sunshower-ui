@@ -13,6 +13,8 @@ export class WorkspaceNavigator extends RouterNavigationContext {
 
     @bindable
     private create         : boolean = true;
+    private icon           : string = "mdi-android-studio";
+    private color          : string = "default-color";
     private title          : string = 'Workspaces';
     private name           : string = 'Workspaces';
 

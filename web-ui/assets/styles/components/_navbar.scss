@@ -20,22 +20,29 @@ nav .nav-wrapper {
   padding-right: $small-nav-width;
 }
 
+//todo fix re-centering in small sizes
 nav .brand-logo {
   height: $navbar-height;
   box-sizing: border-box;
+  padding-top: $navbar-font-size;
+  padding-left: $navbar-font-size;
 
   @media #{$medium-and-down} {
     height: $navbar-height-mobile;
   }
-}
 
-nav .brand-logo img {
-  height: $navbar-height - $navbar-font-size;
-  margin-top: ceil($navbar-font-size/2);
-  margin-left: ceil($navbar-font-size/2);
+  img {
+    vertical-align: middle;
+    margin-right: $navbar-font-size/2;
+    height: $navbar-height - ($navbar-font-size*2);
 
-  @media #{$medium-and-down} {
-    height: $navbar-height-mobile - $navbar-font-size;
-    margin-left: 0;
+    @media #{$medium-and-down} {
+      height: $navbar-height-mobile - ($navbar-font-size*2);
+    }
+  }
+
+  span {
+    line-height:1em;
+    font-size: 1.5rem;
   }
 }
