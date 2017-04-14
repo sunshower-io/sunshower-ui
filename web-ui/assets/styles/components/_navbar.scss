@@ -20,15 +20,18 @@ nav .nav-wrapper {
   padding-right: $small-nav-width;
 }
 
-//todo fix re-centering in small sizes
+
 nav .brand-logo {
   height: $navbar-height;
   box-sizing: border-box;
   padding-top: $navbar-font-size;
   padding-left: $navbar-font-size;
+  line-height:1em;
 
   @media #{$medium-and-down} {
     height: $navbar-height-mobile;
+    left: 0;
+    transform: none;
   }
 
   img {
@@ -42,7 +45,15 @@ nav .brand-logo {
   }
 
   span {
+    font-size: 1.25rem;
     line-height:1em;
-    font-size: 1.5rem;
+    font-weight:400;
+    text-transform:uppercase;
   }
+}
+
+nav .dropdown-content li .mdi {
+  height: auto;
+  line-height: inherit;
+  vertical-align: middle;
 }

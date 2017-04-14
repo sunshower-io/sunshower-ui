@@ -10,22 +10,22 @@ template
 
         //todo check for active
         .navigator-content.au-animate.active(ref="rootElement", anim-enter="wipeLeftToRight", style="border:1px solid red; height:100%")
-            li.dashboard("${context.color ? context.color : 'default-color'}")
+            li.dashboard(class="active ${context.color ? context.color : 'default-color'}")
                 a.waves-effect(href="${current.href ? current.href : '/'}")
                     summary-icon(stroke="none" fill="#239ae8" textColor="white" text="${context.title}", size="36")
-                    | ${context.name}
-                    //| Dashboard
+                    //| ${context.title}
+                    | Dashboard
             li.no-padding
                 ul.collapsible
                     li(repeat.for="group of groups")
                         a.collapsible-header.waves-effect
                             //(click.delegate="context.navigate(nav)")
                             | ${group.name}
-                            i.material-icons.mdi.mdi-chevron-right.dropdown
+                            i.material-icons.mdi.mdi-chevron-right.dropdown-icon
                         .collapsible-body
                             ul
                                 li(repeat.for="element of group.elements")
-                                    a(click.delegate="context.navigate(element)") ${element.name}
+                                    a.waves-effect ${element.name}
             li.create-context(if.bind="context.create")
                 a.btn.waves-effect.waves-teal(href="#" class="${context.color ? context.color : 'default-color'}")
                     | Create ${context.title.slice(0, -1)}
@@ -38,9 +38,8 @@ template
         //todo determine whether it should be active or not
         li.dashboard(class="active ${context.color ? context.color : 'default-color'}")
             a.waves-effect(href="${current.href ? current.href : '/'}")
-                summary-icon(stroke="none" fill="#239ae8" textColor="white" text="${context.title}")
+                summary-icon(stroke="none" fill="#239ae8" textColor="white" text="${context.title}" size="32")
         li(repeat.for="group of groups")
             a.waves-effect.waves-teal.waves-circle(href="#")
                 i.material-icons.mdi(if.bind="group.icon" class="${group.icon}")
-                //todo group icon
                 | ${group.name}
