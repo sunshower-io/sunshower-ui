@@ -26,7 +26,7 @@ template
                             li(repeat.for="element of group.elements")
                                 a.waves-effect ${element.name}
         li.create-context(if.bind="context.create")
-            a.btn.waves-effect(href="#" class="${context.color ? context.color : 'default-color'}")
+            a.btn.waves-effect.waves-teal(href="#" class="${context.color ? context.color : 'default-color'}")
                 | Create ${context.title.slice(0, -1)}
 
     ul.side-nav-small
@@ -39,6 +39,6 @@ template
             a.waves-effect(href="${current.href ? current.href : '/'}")
                 summary-icon(stroke="none" fill="#239ae8" textColor="white" text="${context.title}" size="32")
         li(repeat.for="group of groups")
-            a.waves-effect(href="#")
+            a.waves-effect.waves-teal.waves-circle(href="#")
                 i.material-icons.mdi(if.bind="group.icon" class="${group.icon}")
                 | ${group.name}

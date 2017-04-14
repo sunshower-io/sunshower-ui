@@ -28,5 +28,4 @@ declare module 'materialize-css' {
     export = Materialize;
 
 
-
 }
