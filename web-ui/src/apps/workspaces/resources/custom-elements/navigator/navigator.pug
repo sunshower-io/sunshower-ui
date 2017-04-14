@@ -9,25 +9,26 @@ template
                 input(type="text" placeholder="Search")
 
         //todo check for active
-        li.dashboard(class="active ${context.color ? context.color : 'default-color'}")
-            a.waves-effect(href="${current.href ? current.href : '/'}")
-                summary-icon(stroke="none" fill="#239ae8" textColor="white" text="${context.title}", size="36")
-                //| ${context.title}
-                | Dashboard
-        li.no-padding
-            ul.collapsible
-                li(repeat.for="group of groups")
-                    a.collapsible-header.waves-effect
-                        //(click.delegate="context.navigate(nav)")
-                        | ${group.name}
-                        i.material-icons.mdi.mdi-chevron-right.dropdown
-                    .collapsible-body
-                        ul
-                            li(repeat.for="element of group.elements")
-                                a ${element.name}
-        li.create-context(if.bind="context.create")
-            a.btn.waves-effect.waves-teal(href="#" class="${context.color ? context.color : 'default-color'}")
-                | Create ${context.title.slice(0, -1)}
+        .navigator-content.au-animate.active(ref="rootElement", anim-enter="wipeLeftToRight", style="border:1px solid red; height:100%")
+            li.dashboard("${context.color ? context.color : 'default-color'}")
+                a.waves-effect(href="${current.href ? current.href : '/'}")
+                    summary-icon(stroke="none" fill="#239ae8" textColor="white" text="${context.title}", size="36")
+                    | ${context.name}
+                    //| Dashboard
+            li.no-padding
+                ul.collapsible
+                    li(repeat.for="group of groups")
+                        a.collapsible-header.waves-effect
+                            //(click.delegate="context.navigate(nav)")
+                            | ${group.name}
+                            i.material-icons.mdi.mdi-chevron-right.dropdown
+                        .collapsible-body
+                            ul
+                                li(repeat.for="element of group.elements")
+                                    a(click.delegate="context.navigate(element)") ${element.name}
+            li.create-context(if.bind="context.create")
+                a.btn.waves-effect.waves-teal(href="#" class="${context.color ? context.color : 'default-color'}")
+                    | Create ${context.title.slice(0, -1)}
 
     ul.side-nav-small
         li.side-nav-header(title="Show navigation"

@@ -4,13 +4,13 @@ import {
     RouterNavigationContext
 } from "../navigator-element";
 import {autoinject} from "aurelia-framework";
+import {Router} from "aurelia-router";
 import {WorkspaceService} from "common/model/api/workspace/service";
 import {bindable} from "aurelia-framework";
 import * as _ from "lodash";
 
 @autoinject
-export class WorkspaceNavigator extends RouterNavigationContext {
-    name            : string = 'frapper';
+export class ApplicationNavigator extends RouterNavigationContext {
 
 
     hasChildren(): boolean {
@@ -18,11 +18,10 @@ export class WorkspaceNavigator extends RouterNavigationContext {
     }
 
     load(): Promise<boolean> {
-        return Promise.resolve(true);
+        return undefined;
     }
 
     navigate(e: NavigationElement): void {
-
     }
 
 }

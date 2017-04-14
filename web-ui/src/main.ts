@@ -27,7 +27,9 @@ import {DialogConfiguration} from "aurelia-dialog";
 import {ChannelSet} from "common/lib/events";
 import {EventAggregator} from "aurelia-event-aggregator";
 import {Container} from "aurelia-dependency-injection";
-import {FetchClientInterceptor} from
+import {
+    FetchClientInterceptor
+} from
     "./common/resources/custom-components/fetch-client-errors";
 
 import {
@@ -75,8 +77,7 @@ export function configure(aurelia: Aurelia) {
 }
 
 
-
-function configureResources(aurelia:Aurelia) {
+function configureResources(aurelia: Aurelia) {
     aurelia.use
         .standardConfiguration()
         .globalResources([
@@ -86,21 +87,31 @@ function configureResources(aurelia:Aurelia) {
             'common/resources/nested-application/nested-application',
             'apps/workspaces/resources/custom-elements/navigator/navigator'
         ])
-        .plugin('aurelia-animator-velocity')
+        .plugin('aurelia-animator-velocity', cfg => {
+            cfg.registerEffect("wipeLeftToRight", {
+                defaultDuration: 1950,
+                calls: [
+                    [{translateX: ['0%', '-100%']}, 1],
+                    // [{rotateZ: -10}, 0.20],
+                    // [{rotateZ: 5}, 0.20],
+                    // [{rotateZ: -5}, 0.20],
+                    // [{rotateZ: 0}, 0.20]
+                ]
+            });
+            return cfg;
+        })
         .plugin('aurelia-dialog', (config: DialogConfiguration) => {
             config.useRenderer(SemanticUIRenderer);
         }).developmentLogging();
 }
 
 
-function doConfigure(
-    data:any,
-    http:HttpClient,
-    container:Container,
-    aurelia:Aurelia,
-    storage:Map<string, string>,
-    tokenHolder:AuthenticationContextHolder
-) {
+function doConfigure(data: any,
+                     http: HttpClient,
+                     container: Container,
+                     aurelia: Aurelia,
+                     storage: Map<string, string>,
+                     tokenHolder: AuthenticationContextHolder) {
 
     if (!data.value) {
         container.registerInstance(HttpClient, http);
@@ -139,7 +150,7 @@ function doConfigure(
     } //end
 }
 
-function configureHttpClient(http:HttpClient) {
+function configureHttpClient(http: HttpClient) {
     http.configure(config => {
         config
             .useStandardConfiguration()
@@ -153,7 +164,7 @@ function configureHttpClient(http:HttpClient) {
     });
 }
 
-function configureAuthenticatedClient(authenticatedClient:HttpClient, container:Container, token:String) {
+function configureAuthenticatedClient(authenticatedClient: HttpClient, container: Container, token: String) {
 
     authenticatedClient.configure(config => {
         config
@@ -171,7 +182,7 @@ function configureAuthenticatedClient(authenticatedClient:HttpClient, container:
 
 }
 
-function configureBasicClient(basicClient:BasicHttpClient, container: Container, token:string) {
+function configureBasicClient(basicClient: BasicHttpClient, container: Container, token: string) {
 
     basicClient.configure(config => {
             config.withBaseUrl('/hasli/api/v1/')

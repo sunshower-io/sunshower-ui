@@ -1,38 +1,62 @@
 import * as _ from 'lodash';
 import {Router} from "aurelia-router";
 import {bindable} from 'aurelia-framework';
+import {Subject} from "rxjs/Subject";
 
 export interface NavigationElement {
-    href            : string;
-    title           : string;
-    settings        : any;
+    id              ?: string;
+    href: string;
+    title: string;
+    settings: any;
 }
 
 export interface ElementGroup {
-    key             : string;
-    name            : string;
+    key: string;
+    name: string;
     icon            ?: string;
     color           ?: string;
     create          ?: string;
 
-    elements        : NavigationElement[]
+    elements: NavigationElement[]
 
 }
+
+
+export class ContextChangedEvent {
+    constructor(public readonly context: NavigationContext) {
+
+    };
+}
+
+export class NavigatorManager {
+
+    public readonly subject: Subject<ContextChangedEvent>;
+
+    constructor() {
+        this.subject = new Subject();
+    }
+
+    public change(e: ContextChangedEvent) {
+        this.subject.next(e);
+    }
+
+}
+
 
 export interface NavigationContext {
 
     create                                  ?: boolean;
     color                                   ?: string;
     icon                                    ?: string;
-    loading                                 : boolean;
-    children                                : ElementGroup[];
-    load()                                  : Promise<boolean>;
-    hasChildren()                           : boolean;
+    loading: boolean;
+    children: ElementGroup[];
+    load(): Promise<boolean>;
+    hasChildren(): boolean;
 
-    navigate(e : NavigationElement)         : void;
+    navigate(e: NavigationElement): void;
 
 
-    navigationElements(defaultGroup:string) : ElementGroup[];
+    navigationElements(defaultGroup: string): ElementGroup[];
 
 
 }
@@ -40,35 +64,38 @@ export interface NavigationContext {
 export abstract class RouterNavigationContext implements NavigationContext {
 
     @bindable
-    public  loading             : boolean;
-    public  router              : Router;
+    public loading: boolean;
+    public router: Router;
 
     @bindable
-    public  children            : ElementGroup[];
+    public children: ElementGroup[];
+
     constructor() {
 
     }
 
-    abstract hasChildren()                           : boolean;
-    abstract load()                                  : Promise<boolean>;
-    abstract navigate(e : NavigationElement)         : void;
+    abstract hasChildren(): boolean;
 
-    protected partition(navigationElements: NavigationElement[], group:string) : ElementGroup[] {
+    abstract load(): Promise<boolean>;
+
+    abstract navigate(e: NavigationElement): void;
+
+    protected partition(navigationElements: NavigationElement[], group: string): ElementGroup[] {
 
         let result = navigationElements.reduce((acc, val) => {
-            let k : string;
-            if(val.settings && val.settings.groupKey) {
+            let k: string;
+            if (val.settings && val.settings.groupKey) {
                 k = val.settings.groupKey;
             } else {
                 k = group;
             }
             let gkey = k,
                 current = acc[gkey];
-            if(!current) {
+            if (!current) {
                 current = {
-                    name            : gkey,
-                    key             : gkey,
-                    elements        : [val]
+                    name: gkey,
+                    key: gkey,
+                    elements: [val]
                 };
                 acc[gkey] = current;
             } else {
@@ -79,7 +106,7 @@ export abstract class RouterNavigationContext implements NavigationContext {
         return _.values(result) as ElementGroup[];
     }
 
-    navigationElements(defaultGroup:string): ElementGroup[] {
+    navigationElements(defaultGroup: string): ElementGroup[] {
         return this.partition(this.router.navigation, 'Workspaces');
     }
 

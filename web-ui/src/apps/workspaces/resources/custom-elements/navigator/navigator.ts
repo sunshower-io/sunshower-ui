@@ -5,15 +5,24 @@ import {
     autoinject,
     bindable
 } from 'aurelia-framework';
-import {Router} from "aurelia-router";
-import {NavigationContext, ElementGroup} from "./navigator-element";
+import {
+    ElementGroup,
+    NavigationContext,
+    ContextChangedEvent,
+    NavigatorManager
+} from "./navigator-element";
+import {EventAggregator} from "aurelia-event-aggregator";
+import {VelocityAnimator} from 'aurelia-animator-velocity';
+
 
 @autoinject
 export class Navigator {
 
+    public static readonly CONTEXT_CHANGED_EVENT = 'navigator:context:changed';
 
     private controlId               : string       =  UUID.random();
 
+    private rootElement             : HTMLElement;
     private navigator               : HTMLElement;
     private navigatorControl        : HTMLElement;
 
@@ -24,7 +33,13 @@ export class Navigator {
     private groups                  : ElementGroup[]; //can we make this actually a collection of NavigationContexts?
 
 
-    constructor() {
+    constructor(
+        private navigatorManager: NavigatorManager,
+        private velocityAnimator: VelocityAnimator
+    ) {
+        navigatorManager.subject.subscribe(t => {
+            this.context = t.context;
+        });
     }
 
 
@@ -40,7 +55,8 @@ export class Navigator {
     contextChanged(newVal: NavigationContext, old: NavigationContext) {
         newVal.load().then(t => {
             this.groups = newVal.children;
-            console.log('this.groups', this.groups);
+        }).then(t => {
+            this.velocityAnimator.enter(this.rootElement);
         });
     }
 
