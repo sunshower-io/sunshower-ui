@@ -6,11 +6,25 @@ body {
 .body {
   margin-left:300px;
   margin-top: $navbar-height;
-  padding: 20px 200px 20px 20px; //temporary, just need breathing room
+  position: relative;
 
   @media #{$medium-and-down} {
     margin-top: $navbar-height-mobile;
   }
+}
+
+.body-content {
+  padding: 20px;
+  margin-right: 250px;
+}
+
+.body-menu {
+  position: absolute;
+  right:0;
+  width: 250px;
+  top: 0;
+  padding: 30px 30px 0 0;
+  box-sizing: border-box;
 }
 
 
@@ -56,10 +70,14 @@ body {
 }
 
 
-.collapsible li.active .dropdown-icon {
+.collapsible .dropdown-icon {
+  position:absolute;
+  right:0;
+  top: 0;
+}
+
+.collapsible .active .dropdown-icon {
   -ms-transform: rotate(90deg); /* IE 9 */
   -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
   transform: rotate(90deg);
-  position:absolute;
-  right:0;
 }

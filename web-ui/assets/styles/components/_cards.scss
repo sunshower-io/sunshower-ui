@@ -4,7 +4,6 @@
   border-radius:0;
   position:relative;
 
-
   .card-content {
     padding:20px;
 
@@ -13,9 +12,11 @@
     }
 
     .card-title {
-      display:inline-block;
-      margin-left: 1em;
       font-weight:400;
+      position: absolute;
+      top: 40px;
+      left: 100px;
+      margin: 0;
     }
 
     .card-button {
@@ -23,7 +24,7 @@
       right:20px;
       border-radius:0;
       box-shadow:none;
-      top:20%;
+      top:40px;
       font-size:.75rem;
       height:30px;
       line-height:30px;

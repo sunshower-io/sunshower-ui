@@ -57,6 +57,11 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
 
 .side-nav .mdi {
   margin-right: .5em;
+
+}
+
+.side-nav .collapsible .dropdown-icon {
+  color: white;
 }
 
 .side-nav .collapsible-body {
@@ -82,7 +87,7 @@ $side-nav-search-color: #767593;
   height: 38px;
   width: 38px;
   position: absolute;
-  top: 12px;
+  top: 24px;
   left: 12px;
   background: $side-nav-search-color;
   font-size: 1rem;
@@ -99,6 +104,7 @@ $side-nav-search-color: #767593;
 .side-nav-search {
   position:relative;
   margin: 0 0 0 45px;
+  padding-top: 12px;
 
   input {
     margin: .75rem 0;
@@ -125,7 +131,7 @@ $side-nav-search-color: #767593;
 .side-nav-search-icon {
   position: absolute;
   right: 0;
-  top: 4px;
+  top: 20px;
   color: $side-nav-search-color;
   transition: color .3s;
   margin-right: 0 !important;
@@ -156,6 +162,7 @@ $side-nav-search-color: #767593;
   a.btn {
     margin: 10px 50px;
     border-radius: 25px;
+    border: 0;
 
     &.default-color {
       background: $secondary-color;
