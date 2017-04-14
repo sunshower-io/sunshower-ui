@@ -4,7 +4,7 @@ import {
 } from 'aurelia-framework';
 
 
-@customElement('summary')
+@customElement('summary-icon')
 export class Summary {
 
 

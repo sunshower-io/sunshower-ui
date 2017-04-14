@@ -8,7 +8,7 @@ nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
 
 nav {
   background-color: white;
-  box-shadow:none;
+  box-shadow:none; //consider removing to keep navbar & body distinct
   position:absolute;
   left: $small-nav-width;
   top:0;
