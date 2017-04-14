@@ -21,8 +21,7 @@ export class Navigator {
     private context                 : NavigationContext;
 
     @bindable
-    private groups                  : ElementGroup[];
-
+    private groups                  : ElementGroup[]; //can we make this actually a collection of NavigationContexts?
 
 
     constructor() {

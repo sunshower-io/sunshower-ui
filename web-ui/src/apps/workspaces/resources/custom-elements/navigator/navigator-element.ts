@@ -11,6 +11,9 @@ export interface NavigationElement {
 export interface ElementGroup {
     key             : string;
     name            : string;
+    icon            ?: string;
+    color           ?: string;
+    create          ?: string;
 
     elements        : NavigationElement[]
 

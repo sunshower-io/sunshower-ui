@@ -13,6 +13,12 @@ export class Summary {
     public stroke   : string;
 
     @bindable
+    public fill     : string;
+
+    @bindable
+    public textColor    : string;
+
+    @bindable
     public size     : number;
 
 
@@ -23,6 +29,8 @@ export class Summary {
     constructor() {
         this.size = 50;
         this.stroke = "#239ae8";
+        this.textColor = "white";
+        this.fill = "none";
     }
 
     public scale() : number {

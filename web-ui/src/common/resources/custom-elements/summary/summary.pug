@@ -11,7 +11,7 @@ template
                 width="${computeWidth()}"
                 height="${computeHeight()}"
                 stroke="${stroke}"
-                fill="none"
+                fill="${fill}"
                 transform="rotate(45 ${computeWidth() / 2} ${computeHeight() / 2})"
                 rx="${size/10}"
                 ry="${size/10}"
@@ -28,7 +28,7 @@ template
             text(
                 x="50%"
                 y="${50 + size/25}%"
-                stroke="${stroke}"
+                stroke="${textColor}"
                 alignment-baseline="middle"
                 text-anchor="middle"
                 font-size="${size/3}"
