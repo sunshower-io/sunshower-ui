@@ -1,20 +1,38 @@
 body {
   background: $offwhite;
   overflow: hidden !important;
+  width: 100% !important;
 }
 
 .body {
-  margin-left:$small-nav-width;
+  padding-left:300px;
   margin-top: $navbar-height;
+  position: relative;
+  box-sizing: border-box;
+  width:100%;
 
   @media #{$medium-and-down} {
     margin-top: $navbar-height-mobile;
   }
 }
 
+.body-content {
+  padding: 20px;
+  margin-right: 250px;
+}
+
+.body-menu {
+  position: absolute;
+  right:0;
+  width: 250px;
+  top: 0;
+  padding: 30px 30px 0 0;
+  box-sizing: border-box;
+}
+
 
 .mdi.activity-icon {
-  color: green;
+  color: $brightgreen;
 }
 
 
@@ -46,10 +64,23 @@ body {
     padding:0;
   }
 
-  & > span.mdi {
+  & > .mdi {
     color: inherit;
     display: inline;
     padding:0;
-    margin-right: 1em;
+    margin-right: .5em;
   }
+}
+
+
+.collapsible .dropdown-icon {
+  position:absolute;
+  right:0;
+  top: 0;
+}
+
+.collapsible .active .dropdown-icon {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+  transform: rotate(90deg);
 }

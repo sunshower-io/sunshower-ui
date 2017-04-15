@@ -12,7 +12,13 @@ import {
 import {
     Workspace as WorkspaceElement
 } from "common/model/api/workspace/model";
-import {ApplicationService} from "../../../../common/model/api/application/service";
+import {
+    WorkspaceNavigator
+} from "apps/workspaces/resources/custom-elements/navigator/workspace/workspace-navigator";
+import {
+    NavigatorManager,
+    ContextChangedEvent
+} from "apps/workspaces/resources/custom-elements/navigator/navigator-element";
 
 type Mode = 'full' | 'partial';
 export interface MenuAware {
@@ -28,18 +34,17 @@ export class Workspace {
     private mode: Mode;
 
 
-
-    private value : any;
+    private value: any;
     private loading: boolean = false;
 
     public workspace: WorkspaceElement;
 
 
-    constructor(private client: HttpClient,
-                private workspaceService:WorkspaceService,
-                private applicationService: ApplicationService
+    constructor(
+        private navigatorManager : NavigatorManager,
+        private workspaceService: WorkspaceService,
+        private workspaceNavigator: WorkspaceNavigator
     ) {
-        this.setMenuVisible(true);
     }
 
     setMenuVisible(visible: boolean): void {
@@ -160,7 +165,6 @@ export class Workspace {
         ]);
 
 
-
         // TODO: Create 404 page
         // config.mapUnknownRoutes({
         //     route: 'dashboard',
@@ -168,7 +172,8 @@ export class Workspace {
         // });
 
         this.router = router;
-
+        this.workspaceNavigator.router = router;
+        config.options.navigationContext = this.workspaceNavigator;
     }
 
 
@@ -179,12 +184,13 @@ export class Workspace {
         this.refresh();
     }
 
-    refresh() : void {
+    refresh(): void {
         this.workspace = this.workspaceService.workspace;
     }
 
 
     activate(value: any): void {
+
         this.value = value;
         this.loading = true;
     }

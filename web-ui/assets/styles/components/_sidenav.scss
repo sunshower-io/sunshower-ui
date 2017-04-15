@@ -1,4 +1,7 @@
 $small-nav-width: $navbar-height; //setting it to navbar height makes it align nicely with the logo
+$sidenav-alternate-bg: #3c3c54;
+$sidenav-search-color: #767593;
+$sidenav-li-margin-bottom: 30px;
 
 .side-nav-small {
   background: $sidenav-bg-color;
@@ -12,53 +15,96 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
 
   li {
     text-align: center;
-    height: $small-nav-width;
-    line-height: $small-nav-width;
+    margin-bottom: $sidenav-li-margin-bottom;
+
+    &.side-nav-header {
+      height: $small-nav-width;
+      line-height: $small-nav-width;
+      cursor: pointer;
+
+      .mdi {
+        font-size: 35px;
+      }
+    }
+
+    a {
+      color: white;
+      font-size: 10px;
+    }
 
     .summary-icon {
       margin-top: $sidenav-font-size/2;
       margin-bottom: $sidenav-font-size/2;
     }
   }
+
 }
 
-.brand-logo {
-  cursor: pointer;
-  height: $navbar-height;
-  box-sizing: border-box;
-  text-align:center;
-  padding-top: $sidenav-font-size/2;
 
-  @media #{$medium-and-down} {
-    height: $navbar-height-mobile;
-  }
+.side-nav {
 
-  img {
-    max-height: $navbar-height - $sidenav-font-size;
-    max-width: $small-nav-width - $sidenav-font-size;
-    width:100%;
+  .breadcrumb-container {
+    background: $sidenav-search-color;
+    line-height: $sidenav-li-margin-bottom;
+    height:$sidenav-li-margin-bottom;
 
-    @media #{$medium-and-down} {
-      max-height: $navbar-height-mobile - $sidenav-font-size;
+    .breadcrumb {
+      display: inline;
+      padding: 0;
+      line-height: 2em;
+      height: auto !important;
+      font-size: 12px;
+      color: white;
+      font-weight: 400;
+      cursor: pointer;
+
+      &:hover {
+        background-color:transparent;
+        color: $sidenav-alternate-bg;
+      }
+
+      &:first-child {
+        padding-left: 16px;
+      }
+      &:last-child {
+        font-weight: 700;
+      }
+
+      &:before {
+        font: normal normal normal 24px/1 "Material Design Icons";
+        content: "\F142";
+        margin: 3px 0 0 0 !important;
+        color: inherit !important;
+      }
     }
   }
+
 }
 
-.side-nav .mdi, .side-nav-small .mdi {
-  font-size: $default-icon-size;
-}
+.side-nav, .side-nav-small {
 
-.side-nav-small .mdi {
-  color: $sidenav-font-color;
+  .mdi {
+    font-size: $default-icon-size;
+    color: $sidenav-font-color;
+  }
+
+  li.active.default-color {
+    background: $secondary-color;
+  }
 }
 
 .side-nav .mdi {
   margin-right: .5em;
 
-  &.dropdown {
-    position:absolute;
-    right:0;
-  }
+}
+
+//todo set this based on context color
+.side-nav .collapsible .active .collapsible-header {
+  background: $secondary-color;
+}
+
+.side-nav .collapsible .dropdown-icon {
+  color: white;
 }
 
 .side-nav .collapsible-body {
@@ -66,17 +112,11 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
   color: $sidenav-font-color;
 }
 
-.collapsible li.active .dropdown {
-  -ms-transform: rotate(90deg); /* IE 9 */
-  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
-  transform: rotate(90deg);
-}
-
 .side-nav-header {
-  background: #3c3c54;
+  background: $sidenav-alternate-bg;
   height: $navbar-height;
   padding:0 1rem;
-  margin-bottom: $navbar-height-mobile/2;
+  width:100%;
 
   @media #{$medium-and-down} {
     height: $navbar-height-mobile;
@@ -84,15 +124,14 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
 
 }
 
-$side-nav-search-color: #767593;
 .side-nav-toggle {
   border-radius: 3px;
   height: 38px;
   width: 38px;
   position: absolute;
-  top: 12px;
+  top: 24px;
   left: 12px;
-  background: $side-nav-search-color;
+  background: $sidenav-search-color;
   font-size: 1rem;
 
   .mdi {
@@ -107,6 +146,7 @@ $side-nav-search-color: #767593;
 .side-nav-search {
   position:relative;
   margin: 0 0 0 45px;
+  padding-top: 12px;
 
   input {
     margin: .75rem 0;
@@ -119,13 +159,28 @@ $side-nav-search-color: #767593;
     box-sizing: border-box;
 
     &::-webkit-input-placeholder {
-      color:$side-nav-search-color;
+      color: $sidenav-search-color;
     }
     &::-moz-placeholder {
-      color:$side-nav-search-color;
+      color: $sidenav-search-color;
     }
     &:-ms-input-placeholder {
-      color:$side-nav-search-color;
+      color: $sidenav-search-color;
+    }
+  }
+
+  .search-results {
+    background: $sidenav-search-color;
+    color: white;
+    position: absolute;
+    top: $navbar-height;
+    left: -60px;
+    right: -15px;
+    z-index:1000;
+    padding: 0 1rem;
+
+    a {
+      color: white;
     }
   }
 }
@@ -133,21 +188,17 @@ $side-nav-search-color: #767593;
 .side-nav-search-icon {
   position: absolute;
   right: 0;
-  top: 4px;
-  color: $side-nav-search-color;
+  top: 20px;
+  color: $sidenav-search-color;
   transition: color .3s;
   margin-right: 0 !important;
 }
 
-.side-nav li.current-context {
-  margin-bottom: $navbar-height-mobile/2;
-
-  &.default-color {
-    background: $primary-color;
-  }
-
-  a .summary-icon {
+.side-nav li.dashboard a {
+  font-size:1.2em;
+  .summary-icon {
     margin-top: .5em;
+    margin-right: .5em;
     vertical-align: top;
   }
 }
@@ -159,7 +210,42 @@ $side-nav-search-color: #767593;
 .side-nav li.create-context {
   position: absolute;
   right: 0;
-  bottom: 68px;
+  bottom: 15px;
   left: 0;
   height: 68px;
+  margin-bottom:0;
+
+  a.btn {
+    margin: 10px 50px;
+    border-radius: 25px;
+    border: 0;
+
+    &.default-color {
+      background: $secondary-color;
+    }
+  }
+
+}
+
+
+.navigator-content {
+  height: -webkit-calc(100% - #{$navbar-height});
+  height: -moz-calc(100% - #{$navbar-height});
+  height: calc(100% - #{$navbar-height});
+
+
+  @media #{$medium-and-down} {
+    height: -webkit-calc(100% - #{$navbar-height-mobile});
+    height: -moz-calc(100% - #{$navbar-height-mobile});
+    height: calc(100% - #{$navbar-height-mobile});
+
+  }
+
+  .dashboard {
+    margin-bottom: $sidenav-li-margin-bottom;
+  }
+}
+
+#sidenav-overlay {
+  display:none;
 }

@@ -2,37 +2,48 @@ template
     ul(id="${controlId}").side-nav
         li.side-nav-header
             .side-nav-toggle
-                span.mdi.mdi-view-quilt
-            .side-nav-search
-                .mdi.mdi-filter-outline.side-nav-search-icon
-                input(type="text" placeholder="Search")
+                i.material-icons.mdi.mdi-view-quilt
+                //span.mdi.mdi-code-less-than-or-equal
+            .side-nav-search.search-wrapper
+                i.material-icons.mdi.mdi.mdi-filter-outline.side-nav-search-icon
+                input(type="text" placeholder="Search", ref="searchField")
+                .search-results(show.bind="searchResults")
+                    a.href(repeat.for="obj of searchResults" click.delegate="openObject(obj)") ${obj.name}
 
-        li.current-context(class="${context.color ? context.color : 'default-color'}")
-            a.waves-effect(href="${current.href ? current.href : '/'}")
-                summary-icon(stroke="white", text="${context.title}", size="24")
-                | ${context.title}
-        li.no-padding
-            ul.collapsible
-                li(repeat.for="group of groups")
-                    a.collapsible-header.waves-effect
-                        //(click.delegate="context.navigate(nav)")
-                        | ${group.name}
-                        span.mdi.mdi-chevron-right.dropdown
-                    .collapsible-body
-                        ul
-                            li(repeat.for="element of group.elements")
-                                a ${element.name}
-        li.create-context(if.bind="context.create")
-            a.btn.waves-effect(href="#" class="${context.color ? context.color : 'default-color'}")
-                | Create ${context.title.slice(0, -1)}
+        .navigator-content.au-animate.active(ref="rootElement", anim-enter="wipeLeftToRight")
+            .breadcrumb-container
+                a.breadcrumb(repeat.for="ctx of context.chain()", click.delegate="ctx.open()") ${ctx.name}
+            //todo check for active link
+
+            li.dashboard(class="active ${context.color ? context.color : 'default-color'}")
+                a.waves-effect(href="${current.href ? current.href : '/'}")
+                    summary-icon(stroke="none" fill="#239ae8" textColor="white" text="${context.title}", size="36")
+                    //| ${context.title}
+                    | Dashboard
+            li.no-padding
+                ul.collapsible
+                    li(repeat.for="group of groups")
+                        a.collapsible-header.waves-effect
+                            | ${group.name}
+                            i.material-icons.mdi.mdi-chevron-right.dropdown-icon
+                        .collapsible-body
+                            ul
+                                li(repeat.for="element of group.elements" click.delegate="context.navigate(element)")
+                                    a.waves-effect ${element.name}
+            li.create-context(if.bind="context.create")
+                a.btn.waves-effect.waves-teal(href="#" class="${context.color ? context.color : 'default-color'}")
+                    | Create ${context.title.slice(0, -1)}
 
     ul.side-nav-small
-        li.brand-logo(title="Show navigation")
-            img(src="dist/icons/hasli-icon.svg", alt="Hasli.io"
+        li.side-nav-header(title="Show navigation"
             data-activates='${controlId}',
-            ref="navigatorControl"
-            )
-            //span.mdi.mdi-menu
-        li
-            a(href="${current.href ? current.href : '/'}")
-                summary-icon(stroke="${context.color ? context.color : 'default-color'}", text="${context.title}", size="24")
+            ref="navigatorControl")
+            i.material-icons.mdi.mdi-view-quilt
+        //todo determine whether it should be active or not
+        li.dashboard(class="active ${context.color ? context.color : 'default-color'}")
+            a.waves-effect(href="${current.href ? current.href : '/'}")
+                summary-icon(stroke="none" fill="#239ae8" textColor="white" text="${context.title}" size="32")
+        li(repeat.for="group of groups")
+            a.waves-effect.waves-teal.waves-circle(href="#")
+                i.material-icons.mdi(if.bind="group.icon" class="${group.icon}")
+                | ${group.name}

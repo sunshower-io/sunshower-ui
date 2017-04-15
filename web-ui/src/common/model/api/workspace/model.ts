@@ -2,7 +2,9 @@
 import {ImageDataProvider} from "common/model/api/core";
 
 export class Workspace {
-    public id: string;
+    public id           : string;
+    public key          : string;
+    public name         : string;
     constructor(data?:any) {
         Object.assign(this, data);
     }
@@ -11,8 +13,12 @@ export class Workspace {
 export class SaveWorkspaceRequest extends ImageDataProvider {
     key         : string;
     name        : string;
-    file        : File;
+    file        ?: File;
 
+    constructor(data?:any) {
+        super();
+        Object.assign(this, data);
+    }
 
 
     toFormData() : FormData {

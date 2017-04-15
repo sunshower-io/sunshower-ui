@@ -7,22 +7,22 @@ template
         data-activates="${controlId}"
         data-constrainwidth="false"
         ref="profileDD")
-        span.mdi.mdi-account-circle
-        span.mdi.mdi-menu-down
+        i.material-icons.mdi.mdi-account-circle
+        i.material-icons.mdi.mdi-menu-down
     ul(id="${controlId}" class="dropdown-content")
         li
-            span.mdi.mdi-account-circle
+            i.material-icons.mdi.mdi-account-circle
             | ${user.username}
         li.divider
         li(click.delegate="openSettings()")
-            span.mdi.mdi-account-settings-variant
+            i.material-icons.mdi.mdi-account-settings-variant
             | Account Settings
         li(click.delegate="incompleteFeature.notify($event)")
-            span.mdi.mdi-help-circle
+            i.material-icons.mdi.mdi-help-circle
             | Help
         li.divider
         li(click.delegate="logout()")
-            span.mdi.mdi-logout-variant
+            i.material-icons.mdi.mdi-logout-variant
             | Sign Out
 
 

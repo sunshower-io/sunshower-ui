@@ -1,0 +1,61 @@
+//todo make responsive
+
+.card {
+  box-shadow:none;
+  border: 1px solid $border-color;
+  border-radius:0;
+  position:relative;
+
+  .card-content {
+    padding:20px;
+
+    .summary-icon {
+      vertical-align: middle;
+    }
+
+    //todo figure out wrapping and such
+    .card-title {
+      font-weight:400;
+      position: absolute;
+      top: 40px;
+      left: 100px;
+      margin: 0;
+
+      @media #{$medium-and-down} {
+        font-size: 20px;
+        top: 20px;
+      }
+    }
+
+    .card-button {
+      position: absolute;
+      right:20px;
+      border-radius:0;
+      box-shadow:none;
+      top:40px;
+      font-size:.75rem;
+      height:30px;
+      line-height:30px;
+      padding: 0 1.5rem;
+
+      @media #{$medium-and-down} {
+        position:relative;
+        right:auto;
+        top:auto;
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+      }
+
+    }
+  }
+
+  .card-action {
+    border-top: 1px solid $border-color;
+    background-color: #eceff1; //blue-grey lighten-5
+    color: #90a4ae; //blue-grey lighten-2
+    padding: 10px 20px;
+    font-size: .75rem;
+  }
+
+}

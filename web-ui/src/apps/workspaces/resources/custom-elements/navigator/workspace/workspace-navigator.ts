@@ -1,50 +1,66 @@
+import {Materialize} from 'materialize-css';
+
 import {
     NavigationElement,
-    RouterNavigationContext
+    RouterNavigationContext, LinkObject
 } from "../navigator-element";
 import {autoinject} from "aurelia-framework";
-import {Router} from "aurelia-router";
-import {WorkspaceService} from "common/model/api/workspace/service";
 import {bindable} from "aurelia-framework";
-import * as _ from "lodash";
+import {RootNavigator} from "./root-navigator";
+import {Workspace, SaveWorkspaceRequest} from "common/model/api/workspace/model";
+import {WorkspaceService} from "common/model/api/workspace/service";
+import {Router} from "aurelia-router";
+import {CreateWorkspaceObject, WorkspaceLinkObject} from "./workspace-elements";
 
 @autoinject
 export class WorkspaceNavigator extends RouterNavigationContext {
 
     @bindable
-    private create         : boolean = true;
-    private title          : string = 'Workspaces';
-    private name           : string = 'Workspaces';
+    name: string = '';
 
-    constructor(
-        private workspaceService: WorkspaceService
-    ) {
+    constructor(public parent: RootNavigator,
+                public workspaceService: WorkspaceService) {
         super();
+        this.searchable = true;
     }
 
-    public navigate(e:NavigationElement) : void {
-        this.router.navigate(e.href);
+    createRef(input: string): LinkObject {
+        return new CreateWorkspaceObject(
+            this.workspaceService,
+            input,
+            this.router
+        );
     }
+
+    search(input: string): Promise<LinkObject[]> {
+        return this.workspaceService.search(input)
+            .then(t => t.map(u => new WorkspaceLinkObject(
+                u,
+                this.router.parent,
+                this.workspaceService
+            )));
+    }
+
 
     hasChildren(): boolean {
         return true;
     }
 
-
     load(): Promise<boolean> {
-        this.loading = true;
-        let children = [];
-        return this.workspaceService.initial().then(t => {
-            (t as any).key = 'Initial';
-            children.push(t);
-        }).then(u => {
-            console.log('this', this);
-            return this.workspaceService.list().then(t => {
-                children = children.concat(t);
-                this.loading = false;
-                this.children = this.partition(_.uniqBy(children, 'id'), 'Initial');
-            }).then(t => true);
-        });
+        this.name = this.workspaceService.workspace.name;
+        return Promise.resolve(true);
     }
 
+    navigate(e: NavigationElement): void {
+
+    }
+
+    open(): Promise<any> {
+        return Promise.resolve(this
+            .router
+            .parent
+            .navigate(`workspace/${this.workspaceService.workspace.id}`)
+        );
+    }
 }
+

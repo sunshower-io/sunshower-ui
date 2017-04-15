@@ -5,16 +5,17 @@ template(bindable="router")
 
     nav
         .nav-wrapper
-            //a.brand-logo()
-            //    img(src="dist/icons/hasli-icon.svg", alt="Hasli.io")
+            a.brand-logo(href="/")
+                img(src="dist/icons/hasli-icon.svg", alt="Hasli.io")
+                span Hasli.io
             ul.right
                 li
                     a
-                        span.mdi.mdi-pulse.activity-icon
+                        i.material-icons.mdi.mdi-pulse.activity-icon
                     // alerts-dropdown
                 li
                     a
-                        span.mdi.mdi-bell.activity-icon
+                        i.material-icons.mdi.mdi-bell.activity-icon
                     // activity-monitor-dropdown
                 li
                     profile-dropdown
