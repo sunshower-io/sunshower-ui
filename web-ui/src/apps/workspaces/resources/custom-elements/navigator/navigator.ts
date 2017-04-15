@@ -75,6 +75,19 @@ export class Navigator {
         this.configureSideNav();
         this.configureCollapsibles();
     }
+
+
+
+    openObject(o : LinkObject) : void {
+        o.open().then(t => {
+            this.context.load().then(u => {
+                this.searchResults = null;
+                this.searchField.value = "";
+                this.groups = this.context.children;
+            });
+        });
+    }
+
     private configureSideNav() {
         $(this.navigatorControl).sideNav();
         if(this.showing) {
@@ -92,14 +105,19 @@ export class Navigator {
             .forEach(t => {
                 if(this.context && this.context.searchable) {
                     let v = this.searchField.value;
-                    this.context.search(v).then(l => {
-                        if(l && l.length) {
-                            this.searchResults = l;
-                        } else {
-                            this.searchResults = [this.context.createRef(v)];
+                    if(v) {
+                        if(v.length > 2) {
+                            this.context.search(v).then(l => {
+                                if (l && l.length) {
+                                    this.searchResults = l;
+                                } else {
+                                    this.searchResults = [this.context.createRef(v)];
+                                }
+                            });
                         }
-
-                    });
+                    } else {
+                        this.searchResults = null;
+                    }
                 }
         });
 

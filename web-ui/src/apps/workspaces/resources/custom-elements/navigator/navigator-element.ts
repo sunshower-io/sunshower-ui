@@ -67,7 +67,7 @@ export interface NavigationContext {
 
     createRef(name:string)                  : LinkObject;
 
-    load()                                  : Promise<boolean>;
+    load<T>()                               : Promise<T>;
     hasChildren()                           : boolean;
 
     navigate(e: NavigationElement)          : void;

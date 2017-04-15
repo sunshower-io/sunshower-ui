@@ -1,3 +1,4 @@
+import * as _ from "lodash";
 import {
     NavigationElement,
     RouterNavigationContext, LinkObject
@@ -5,8 +6,10 @@ import {
 import {autoinject} from "aurelia-framework";
 import {WorkspaceService} from "common/model/api/workspace/service";
 import {bindable} from "aurelia-framework";
-import * as _ from "lodash";
-import {WorkspaceLinkObject} from "./workspace-navigator";
+import {
+    WorkspaceLinkObject,
+    CreateWorkspaceObject
+} from "./workspace-elements";
 
 @autoinject
 export class RootNavigator extends RouterNavigationContext {
@@ -22,22 +25,34 @@ export class RootNavigator extends RouterNavigationContext {
         private workspaceService: WorkspaceService
     ) {
         super();
+        this.searchable = true;
     }
 
 
     createRef(input: string): LinkObject {
-        return undefined;
+        return new CreateWorkspaceObject(
+            this.workspaceService,
+            input,
+            this.router
+        );
     }
 
     search(input: string): Promise<LinkObject[]> {
-        return null;
+        return this.workspaceService.search(input)
+            .then(t => t.map(u => new WorkspaceLinkObject(
+                u,
+                this.router,
+                this.workspaceService
+            )));
     }
+
 
     public open(): Promise<any> {
         return Promise.resolve(this.router.navigate('#/workspaces'));
     }
 
     public navigate(e:NavigationElement) : void {
+        console.log("NAV", e);
         this.router.navigate(`workspace/${e.id}`);
     }
 
@@ -46,7 +61,7 @@ export class RootNavigator extends RouterNavigationContext {
     }
 
 
-    load(): Promise<boolean> {
+    load(): Promise<any> {
         this.loading = true;
         let children = [];
         return this.workspaceService.initial().then(t => {
@@ -58,7 +73,7 @@ export class RootNavigator extends RouterNavigationContext {
                 children = children.concat(t);
                 this.loading = false;
                 this.children = this.partition(_.uniqBy(children, 'id'), 'Initial');
-            }).then(t => true);
+            }).then(t => this.children);
         });
     }
 

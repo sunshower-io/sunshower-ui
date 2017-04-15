@@ -1,3 +1,4 @@
+import {Materialize} from 'materialize-css';
 
 import {
     NavigationElement,
@@ -6,30 +7,38 @@ import {
 import {autoinject} from "aurelia-framework";
 import {bindable} from "aurelia-framework";
 import {RootNavigator} from "./root-navigator";
-import {Workspace} from "common/model/api/workspace/model";
+import {Workspace, SaveWorkspaceRequest} from "common/model/api/workspace/model";
 import {WorkspaceService} from "common/model/api/workspace/service";
+import {Router} from "aurelia-router";
+import {CreateWorkspaceObject, WorkspaceLinkObject} from "./workspace-elements";
 
 @autoinject
 export class WorkspaceNavigator extends RouterNavigationContext {
 
     @bindable
-    name            : string = '';
+    name: string = '';
 
-    constructor(
-        private workspaceService:WorkspaceService,
-        public parent:RootNavigator
-    ) {
+    constructor(public parent: RootNavigator,
+                public workspaceService: WorkspaceService) {
         super();
         this.searchable = true;
     }
 
     createRef(input: string): LinkObject {
-        return new CreateWorkspaceObject(this, input);
+        return new CreateWorkspaceObject(
+            this.workspaceService,
+            input,
+            this.router
+        );
     }
 
     search(input: string): Promise<LinkObject[]> {
         return this.workspaceService.search(input)
-            .then(t => t.map(u => new WorkspaceLinkObject(u, this)));
+            .then(t => t.map(u => new WorkspaceLinkObject(
+                u,
+                this.router.parent,
+                this.workspaceService
+            )));
     }
 
 
@@ -49,36 +58,9 @@ export class WorkspaceNavigator extends RouterNavigationContext {
     open(): Promise<any> {
         return Promise.resolve(this
             .router
+            .parent
             .navigate(`workspace/${this.workspaceService.workspace.id}`)
         );
     }
 }
 
-export class CreateWorkspaceObject implements LinkObject {
-    name                : string;
-
-    constructor(nav: WorkspaceNavigator, name:string) {
-        this.name = `Nothing named ${name} found.  Create it?`
-    }
-
-    open(): Promise<any> {
-        return undefined;
-    }
-}
-
-export class WorkspaceLinkObject implements LinkObject {
-    name            : string;
-
-
-    constructor(
-        private workspace:Workspace,
-        private navigator:WorkspaceNavigator
-    ) {
-        this.name = `${workspace.name} (key: ${workspace.key})`;
-    }
-
-    open() : Promise<any> {
-        return Promise.resolve([]);
-    }
-
-}

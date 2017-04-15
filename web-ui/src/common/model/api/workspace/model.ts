@@ -13,8 +13,12 @@ export class Workspace {
 export class SaveWorkspaceRequest extends ImageDataProvider {
     key         : string;
     name        : string;
-    file        : File;
+    file        ?: File;
 
+    constructor(data?:any) {
+        super();
+        Object.assign(this, data);
+    }
 
 
     toFormData() : FormData {

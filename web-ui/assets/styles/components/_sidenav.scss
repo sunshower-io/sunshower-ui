@@ -131,6 +131,21 @@ $side-nav-search-color: #767593;
       color:$side-nav-search-color;
     }
   }
+
+  .search-results {
+    background: $side-nav-search-color;
+    color: white;
+    position: absolute;
+    top: $navbar-height;
+    left: -60px;
+    right: -15px;
+    z-index:1000;
+    padding: 0 1rem;
+
+    a {
+      color: white;
+    }
+  }
 }
 
 .side-nav-search-icon {

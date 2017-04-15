@@ -25,7 +25,12 @@ interface MaterializeConstructor {
 declare var Materialize : MaterializeConstructor;
 
 declare module 'materialize-css' {
-    export = Materialize;
+
+    export module Materialize {
+        function toast(value:string, time:number, style?:string) : void;
+    }
+
+
 
 
 }
