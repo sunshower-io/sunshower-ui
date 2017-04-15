@@ -6,9 +6,9 @@ template
                 //span.mdi.mdi-code-less-than-or-equal
             .search-wrapper.card.focused
                 i.material-icons.mdi.mdi.mdi-filter-outline.side-nav-search-icon
-                input(type="text" placeholder="Search")
-                .search-results(show.bind="true")
-                    a.href("frapper") FUck
+                input(type="text" placeholder="Search", ref="searchField")
+                .search-results(show.bind="searchResults")
+                    a.href(repeat.for="obj of searchResults" click.delegate="obj.open()") ${obj.name}
 
         .navigator-content.au-animate.active(ref="rootElement", anim-enter="wipeLeftToRight")
             .breadcrumb-container

@@ -1,7 +1,7 @@
 
 import {
     NavigationElement,
-    RouterNavigationContext
+    RouterNavigationContext, LinkObject
 } from "../navigator-element";
 import {autoinject} from "aurelia-framework";
 import {Router} from "aurelia-router";
@@ -11,6 +11,13 @@ import * as _ from "lodash";
 
 @autoinject
 export class ApplicationNavigator extends RouterNavigationContext {
+    createRef(input: string): LinkObject {
+        return undefined;
+    }
+
+    search(input: string): Promise<LinkObject[]> {
+        return undefined;
+    }
     open(): Promise<any> {
         return undefined;
     }

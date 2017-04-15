@@ -1,11 +1,12 @@
 import {
     NavigationElement,
-    RouterNavigationContext
+    RouterNavigationContext, LinkObject
 } from "../navigator-element";
 import {autoinject} from "aurelia-framework";
 import {WorkspaceService} from "common/model/api/workspace/service";
 import {bindable} from "aurelia-framework";
 import * as _ from "lodash";
+import {WorkspaceLinkObject} from "./workspace-navigator";
 
 @autoinject
 export class RootNavigator extends RouterNavigationContext {
@@ -21,6 +22,15 @@ export class RootNavigator extends RouterNavigationContext {
         private workspaceService: WorkspaceService
     ) {
         super();
+    }
+
+
+    createRef(input: string): LinkObject {
+        return undefined;
+    }
+
+    search(input: string): Promise<LinkObject[]> {
+        return null;
     }
 
     public open(): Promise<any> {

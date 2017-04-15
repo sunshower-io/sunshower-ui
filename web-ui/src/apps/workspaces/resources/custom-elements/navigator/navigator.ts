@@ -9,10 +9,12 @@ import {
     ElementGroup,
     NavigationContext,
     ContextChangedEvent,
-    NavigatorManager
+    NavigatorManager, LinkObject
 } from "./navigator-element";
-import {EventAggregator} from "aurelia-event-aggregator";
 import {VelocityAnimator} from 'aurelia-animator-velocity';
+import {Observable} from "rxjs/Observable";
+import "rxjs/add/observable/fromEvent";
+import "rxjs/add/operator/debounceTime";
 
 
 @autoinject
@@ -25,6 +27,10 @@ export class Navigator {
     private rootElement             : HTMLElement;
     private navigator               : HTMLElement;
     private navigatorControl        : HTMLElement;
+    private searchField             : HTMLInputElement;
+
+    @bindable
+    private  searchResults          : LinkObject[];
 
     @bindable
     private context                 : NavigationContext;
@@ -65,15 +71,44 @@ export class Navigator {
 
 
     attached(p:any) : void {
+        this.configureSearch();
+        this.configureSideNav();
+        this.configureCollapsibles();
+    }
+    private configureSideNav() {
         $(this.navigatorControl).sideNav();
         if(this.showing) {
             this.open();
         } else {
             this.close();
         }
+
+    }
+
+
+    private configureSearch() {
+        Observable.fromEvent(this.searchField, 'keydown')
+            .debounceTime(250)
+            .forEach(t => {
+                if(this.context && this.context.searchable) {
+                    let v = this.searchField.value;
+                    this.context.search(v).then(l => {
+                        if(l && l.length) {
+                            this.searchResults = l;
+                        } else {
+                            this.searchResults = [this.context.createRef(v)];
+                        }
+
+                    });
+                }
+        });
+
+
+    }
+
+    private configureCollapsibles() {
         $(document).ready(function(){
             $('.collapsible').collapsible();
         });
     }
-
 }

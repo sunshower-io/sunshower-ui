@@ -3,6 +3,12 @@ import {Router} from "aurelia-router";
 import {bindable} from 'aurelia-framework';
 import {Subject} from "rxjs/Subject";
 
+
+export interface LinkObject {
+    name            : string;
+    open()          : Promise<any>;
+}
+
 export interface NavigationElement {
     id              ?: string;
     href: string;
@@ -48,6 +54,8 @@ export class NavigatorManager {
 
 export interface NavigationContext {
 
+    searchable                              : boolean;
+
     create                                  ?: boolean;
     color                                   ?: string;
     icon                                    ?: string;
@@ -56,6 +64,8 @@ export interface NavigationContext {
 
     parent                                  ?: NavigationContext;
 
+
+    createRef(name:string)                  : LinkObject;
 
     load()                                  : Promise<boolean>;
     hasChildren()                           : boolean;
@@ -67,6 +77,7 @@ export interface NavigationContext {
 
 
     open()                                  : Promise<any>;
+    search(input:string)                    : Promise<LinkObject[]>;
 }
 
 export abstract class RouterNavigationContext implements NavigationContext {
@@ -77,12 +88,14 @@ export abstract class RouterNavigationContext implements NavigationContext {
 
     public parent               ?: NavigationContext;
 
+    public searchable           : boolean;
     @bindable
     public children: ElementGroup[];
 
     constructor() {
 
     }
+
 
 
     public chain() : NavigationContext[] {
@@ -95,6 +108,8 @@ export abstract class RouterNavigationContext implements NavigationContext {
         return ch.reverse();
     }
 
+    public abstract createRef(input:string)          : LinkObject;
+
     abstract open()                                  : Promise<any>;
 
     abstract hasChildren()                           : boolean;
@@ -102,6 +117,7 @@ export abstract class RouterNavigationContext implements NavigationContext {
     abstract load()                                  : Promise<boolean>;
 
     abstract navigate(e: NavigationElement)          : void;
+    abstract search(input:string)                    : Promise<LinkObject[]>;
 
     protected partition(
         navigationElements: NavigationElement[],

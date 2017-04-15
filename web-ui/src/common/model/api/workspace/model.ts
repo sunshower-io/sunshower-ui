@@ -3,6 +3,7 @@ import {ImageDataProvider} from "common/model/api/core";
 
 export class Workspace {
     public id           : string;
+    public key          : string;
     public name         : string;
     constructor(data?:any) {
         Object.assign(this, data);
