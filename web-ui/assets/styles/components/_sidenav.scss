@@ -1,5 +1,9 @@
 $small-nav-width: $navbar-height; //setting it to navbar height makes it align nicely with the logo
 
+.side-nav {
+
+}
+
 .side-nav-small {
   background: $sidenav-bg-color;
   position:absolute;
@@ -41,7 +45,7 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
 
 .side-nav, .side-nav-small {
 
-  li {
+  & > li, .navigator-content > li {
     margin-bottom:20px;
   }
 
@@ -74,6 +78,7 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
   height: $navbar-height;
   padding:0 1rem;
   margin-bottom: $navbar-height-mobile/2;
+  width:100%;
 
   @media #{$medium-and-down} {
     height: $navbar-height-mobile;
@@ -138,7 +143,6 @@ $side-nav-search-color: #767593;
 }
 
 .side-nav li.dashboard {
-  margin-bottom: $navbar-height-mobile/2;
 
   a .summary-icon {
     margin-top: .5em;
@@ -154,7 +158,7 @@ $side-nav-search-color: #767593;
 .side-nav li.create-context {
   position: absolute;
   right: 0;
-  bottom: 68px;
+  bottom: 0;
   left: 0;
   height: 68px;
   margin-bottom:0;
@@ -169,4 +173,19 @@ $side-nav-search-color: #767593;
     }
   }
 
+}
+
+
+.navigator-content {
+  height: -webkit-calc(100% - #{$navbar-height} - #{$navbar-height-mobile/4});
+  height: -moz-calc(100% - #{$navbar-height} - #{$navbar-height-mobile/4});
+  height: calc(100% - #{$navbar-height} - #{$navbar-height-mobile/4});
+
+
+  @media #{$medium-and-down} {
+    height: -webkit-calc(100% - #{$navbar-height-mobile} - #{$navbar-height-mobile/4});
+    height: -moz-calc(100% - #{$navbar-height-mobile} - #{$navbar-height-mobile/4});
+    height: calc(100% - #{$navbar-height-mobile} - #{$navbar-height-mobile/4});
+
+  }
 }

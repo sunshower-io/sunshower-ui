@@ -8,8 +8,10 @@ template
                 i.material-icons.mdi.mdi.mdi-filter-outline.side-nav-search-icon
                 input(type="text" placeholder="Search")
 
-        //todo check for active
-        .navigator-content.au-animate.active(ref="rootElement", anim-enter="wipeLeftToRight", style="border:1px solid red; height:100%")
+        .navigator-content.au-animate.active(ref="rootElement", anim-enter="wipeLeftToRight")
+
+            //todo check for active link
+
             li.dashboard(class="active ${context.color ? context.color : 'default-color'}")
                 a.waves-effect(href="${current.href ? current.href : '/'}")
                     summary-icon(stroke="none" fill="#239ae8" textColor="white" text="${context.title}", size="36")
