@@ -11,6 +11,9 @@ import * as _ from "lodash";
 
 @autoinject
 export class ApplicationNavigator extends RouterNavigationContext {
+    open(): Promise<any> {
+        return undefined;
+    }
 
 
     hasChildren(): boolean {

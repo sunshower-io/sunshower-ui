@@ -50,22 +50,29 @@ export interface NavigationContext {
     icon                                    ?: string;
     loading: boolean;
     children: ElementGroup[];
-    load(): Promise<boolean>;
-    hasChildren(): boolean;
 
-    navigate(e: NavigationElement): void;
+    parent                                  ?: NavigationContext;
+
+
+    load()                                  : Promise<boolean>;
+    hasChildren()                           : boolean;
+
+    navigate(e: NavigationElement)          : void;
 
 
     navigationElements(defaultGroup: string): ElementGroup[];
 
 
+    open()                                  : Promise<any>;
 }
 
 export abstract class RouterNavigationContext implements NavigationContext {
 
     @bindable
-    public loading: boolean;
-    public router: Router;
+    public loading              : boolean;
+    public router               : Router;
+
+    public parent               ?: NavigationContext;
 
     @bindable
     public children: ElementGroup[];
@@ -74,13 +81,29 @@ export abstract class RouterNavigationContext implements NavigationContext {
 
     }
 
-    abstract hasChildren(): boolean;
 
-    abstract load(): Promise<boolean>;
+    public chain() : NavigationContext[] {
+        let current = this as NavigationContext,
+            ch = [];
+        while(current) {
+            ch.push(current);
+            current = current.parent as NavigationContext;
+        }
+        return ch.reverse();
+    }
 
-    abstract navigate(e: NavigationElement): void;
+    abstract open()                                  : Promise<any>;
 
-    protected partition(navigationElements: NavigationElement[], group: string): ElementGroup[] {
+    abstract hasChildren()                           : boolean;
+
+    abstract load()                                  : Promise<boolean>;
+
+    abstract navigate(e: NavigationElement)          : void;
+
+    protected partition(
+        navigationElements: NavigationElement[],
+        group: string
+    ): ElementGroup[] {
 
         let result = navigationElements.reduce((acc, val) => {
             let k: string;

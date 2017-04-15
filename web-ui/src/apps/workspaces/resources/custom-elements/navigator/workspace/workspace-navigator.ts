@@ -6,11 +6,20 @@ import {
 import {autoinject} from "aurelia-framework";
 import {WorkspaceService} from "common/model/api/workspace/service";
 import {bindable} from "aurelia-framework";
-import * as _ from "lodash";
+import {RootNavigator} from "./root-navigator";
 
 @autoinject
 export class WorkspaceNavigator extends RouterNavigationContext {
-    name            : string = 'frapper';
+
+    @bindable
+    name            : string = '';
+
+    constructor(
+        private workspaceService:WorkspaceService,
+        public parent:RootNavigator
+    ) {
+        super();
+    }
 
 
     hasChildren(): boolean {
@@ -18,6 +27,7 @@ export class WorkspaceNavigator extends RouterNavigationContext {
     }
 
     load(): Promise<boolean> {
+        this.name = this.workspaceService.workspace.name;
         return Promise.resolve(true);
     }
 
@@ -25,4 +35,10 @@ export class WorkspaceNavigator extends RouterNavigationContext {
 
     }
 
+    open(): Promise<any> {
+        return Promise.resolve(this
+            .router
+            .navigate(`workspace/${this.workspaceService.workspace.id}`)
+        );
+    }
 }

@@ -23,6 +23,10 @@ export class RootNavigator extends RouterNavigationContext {
         super();
     }
 
+    public open(): Promise<any> {
+        return Promise.resolve(this.router.navigate('#/workspaces'));
+    }
+
     public navigate(e:NavigationElement) : void {
         this.router.navigate(`workspace/${e.id}`);
     }
