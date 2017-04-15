@@ -1,8 +1,7 @@
 $small-nav-width: $navbar-height; //setting it to navbar height makes it align nicely with the logo
-
-.side-nav {
-
-}
+$sidenav-alternate-bg: #3c3c54;
+$sidenav-search-color: #767593;
+$sidenav-li-margin-bottom: 30px;
 
 .side-nav-small {
   background: $sidenav-bg-color;
@@ -16,10 +15,12 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
 
   li {
     text-align: center;
+    margin-bottom: $sidenav-li-margin-bottom;
 
     &.side-nav-header {
       height: $small-nav-width;
       line-height: $small-nav-width;
+      cursor: pointer;
 
       .mdi {
         font-size: 35px;
@@ -37,17 +38,50 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
     }
   }
 
-  .side-nav-header {
-    cursor: pointer;
+}
+
+
+.side-nav {
+
+  .breadcrumb-container {
+    background: $sidenav-search-color;
+    line-height: $sidenav-li-margin-bottom;
+    height:$sidenav-li-margin-bottom;
+
+    .breadcrumb {
+      display: inline;
+      padding: 0;
+      line-height: 2em;
+      height: auto !important;
+      font-size: 12px;
+      color: white;
+      font-weight: 400;
+      cursor: pointer;
+
+      &:hover {
+        background-color:transparent;
+        color: $sidenav-alternate-bg;
+      }
+
+      &:first-child {
+        padding-left: 16px;
+      }
+      &:last-child {
+        font-weight: 700;
+      }
+
+      &:before {
+        font: normal normal normal 24px/1 "Material Design Icons";
+        content: "\F142";
+        margin: 3px 0 0 0 !important;
+        color: inherit !important;
+      }
+    }
   }
 
 }
 
 .side-nav, .side-nav-small {
-
-  & > li, .navigator-content > li {
-    margin-bottom:20px;
-  }
 
   .mdi {
     font-size: $default-icon-size;
@@ -64,6 +98,11 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
 
 }
 
+//todo set this based on context color
+.side-nav .collapsible .active .collapsible-header {
+  background: $secondary-color;
+}
+
 .side-nav .collapsible .dropdown-icon {
   color: white;
 }
@@ -74,10 +113,9 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
 }
 
 .side-nav-header {
-  background: #3c3c54;
+  background: $sidenav-alternate-bg;
   height: $navbar-height;
   padding:0 1rem;
-  margin-bottom: $navbar-height-mobile/2;
   width:100%;
 
   @media #{$medium-and-down} {
@@ -86,7 +124,6 @@ $small-nav-width: $navbar-height; //setting it to navbar height makes it align n
 
 }
 
-$side-nav-search-color: #767593;
 .side-nav-toggle {
   border-radius: 3px;
   height: 38px;
@@ -94,7 +131,7 @@ $side-nav-search-color: #767593;
   position: absolute;
   top: 24px;
   left: 12px;
-  background: $side-nav-search-color;
+  background: $sidenav-search-color;
   font-size: 1rem;
 
   .mdi {
@@ -122,18 +159,18 @@ $side-nav-search-color: #767593;
     box-sizing: border-box;
 
     &::-webkit-input-placeholder {
-      color:$side-nav-search-color;
+      color: $sidenav-search-color;
     }
     &::-moz-placeholder {
-      color:$side-nav-search-color;
+      color: $sidenav-search-color;
     }
     &:-ms-input-placeholder {
-      color:$side-nav-search-color;
+      color: $sidenav-search-color;
     }
   }
 
   .search-results {
-    background: $side-nav-search-color;
+    background: $sidenav-search-color;
     color: white;
     position: absolute;
     top: $navbar-height;
@@ -152,14 +189,14 @@ $side-nav-search-color: #767593;
   position: absolute;
   right: 0;
   top: 20px;
-  color: $side-nav-search-color;
+  color: $sidenav-search-color;
   transition: color .3s;
   margin-right: 0 !important;
 }
 
-.side-nav li.dashboard {
-
-  a .summary-icon {
+.side-nav li.dashboard a {
+  font-size:1.2em;
+  .summary-icon {
     margin-top: .5em;
     margin-right: .5em;
     vertical-align: top;
@@ -173,7 +210,7 @@ $side-nav-search-color: #767593;
 .side-nav li.create-context {
   position: absolute;
   right: 0;
-  bottom: 0;
+  bottom: 15px;
   left: 0;
   height: 68px;
   margin-bottom:0;
@@ -192,15 +229,23 @@ $side-nav-search-color: #767593;
 
 
 .navigator-content {
-  height: -webkit-calc(100% - #{$navbar-height} - #{$navbar-height-mobile/4});
-  height: -moz-calc(100% - #{$navbar-height} - #{$navbar-height-mobile/4});
-  height: calc(100% - #{$navbar-height} - #{$navbar-height-mobile/4});
+  height: -webkit-calc(100% - #{$navbar-height});
+  height: -moz-calc(100% - #{$navbar-height});
+  height: calc(100% - #{$navbar-height});
 
 
   @media #{$medium-and-down} {
-    height: -webkit-calc(100% - #{$navbar-height-mobile} - #{$navbar-height-mobile/4});
-    height: -moz-calc(100% - #{$navbar-height-mobile} - #{$navbar-height-mobile/4});
-    height: calc(100% - #{$navbar-height-mobile} - #{$navbar-height-mobile/4});
+    height: -webkit-calc(100% - #{$navbar-height-mobile});
+    height: -moz-calc(100% - #{$navbar-height-mobile});
+    height: calc(100% - #{$navbar-height-mobile});
 
   }
+
+  .dashboard {
+    margin-bottom: $sidenav-li-margin-bottom;
+  }
+}
+
+#sidenav-overlay {
+  display:none;
 }
