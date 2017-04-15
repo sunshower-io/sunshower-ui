@@ -32,23 +32,27 @@ export class Navigator {
     @bindable
     private groups                  : ElementGroup[]; //can we make this actually a collection of NavigationContexts?
 
+    @bindable
+    private showing                 : boolean;
 
     constructor(
         private navigatorManager: NavigatorManager,
         private velocityAnimator: VelocityAnimator
     ) {
         navigatorManager.subject.subscribe(t => {
+            this.showing = t.open;
             this.context = t.context;
         });
     }
 
     open() : void {
-
+        $(this.navigatorControl).sideNav('show');
     }
 
     close() : void {
-
+        $(this.navigatorControl).sideNav('hide');
     }
+
 
     contextChanged(newVal: NavigationContext, old: NavigationContext) {
         newVal.load().then(t => {
@@ -58,8 +62,15 @@ export class Navigator {
         });
     }
 
-    attached() : void {
+
+
+    attached(p:any) : void {
         $(this.navigatorControl).sideNav();
+        if(this.showing) {
+            this.open();
+        } else {
+            this.close();
+        }
         $(document).ready(function(){
             $('.collapsible').collapsible();
         });

@@ -23,13 +23,15 @@ export class ContextResolver implements PipelineStep {
         let instructions = instruction.getAllInstructions(),
             manager = this.serviceManager;
 
+        let navigating = instruction.params.navigation;
+
 
         return instructions.reduce((p: Promise<any>, instr: NavigationInstruction) => {
             return p.then(t => {
                 return Promise.all(manager.bindServices(instr.params, instr)).then(u => {
                     let context = instr.router.options.navigationContext;
                     if(context) {
-                        this.navigationManager.change(new ContextChangedEvent(context));
+                        this.navigationManager.change(new ContextChangedEvent(context, navigating));
                     }
                 });
             });

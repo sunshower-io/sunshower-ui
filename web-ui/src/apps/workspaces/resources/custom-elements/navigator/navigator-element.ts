@@ -23,7 +23,10 @@ export interface ElementGroup {
 
 
 export class ContextChangedEvent {
-    constructor(public readonly context: NavigationContext) {
+    constructor(
+        public readonly context: NavigationContext,
+        public readonly open:boolean = true
+    ) {
 
     };
 }
