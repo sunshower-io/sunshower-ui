@@ -7,11 +7,11 @@ template
             .side-nav-search.search-wrapper
                 i.material-icons.mdi.mdi.mdi-filter-outline.side-nav-search-icon
                 input(type="text" placeholder="Search")
-                .search-results(show.bind="true")
+                .search-results(show.bind="false")
                     a.href("frapper") Watch your mouth, wabber
 
         .navigator-content.au-animate.active(ref="rootElement", anim-enter="wipeLeftToRight")
-            .breadcrumb-container
+            li.breadcrumb-container
                 a.breadcrumb(repeat.for="ctx of context.chain()", click.delegate="ctx.open()") ${ctx.name}
             //todo check for active link
 
