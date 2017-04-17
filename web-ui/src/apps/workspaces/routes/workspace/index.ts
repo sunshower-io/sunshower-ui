@@ -92,6 +92,15 @@ export class Workspace {
                 title: 'Applications'
             },
 
+            // TODO need to address routing structure with introduction of application types
+            {
+                route: 'applications/dockercompose',
+                name: 'docker-compose',
+                moduleId: './applications/application/type/docker-compose/docker-compose',
+                nav: false,
+                title: 'Docker Compose'
+            },
+
             // Infrastructure Routes
             {
                 route: 'infrastructure',

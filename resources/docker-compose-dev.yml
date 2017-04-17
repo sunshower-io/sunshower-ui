@@ -11,6 +11,7 @@ services:
     links:
       - hasli-ui-dev
       - hasli-web-dev
+      - hasli-docs-dev
     volumes:
       - ./nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
 
@@ -25,3 +26,7 @@ services:
       - ../:/usr/src/
       - ~/.jspm:/root/.jspm
       - ~/.gradle/wrapper:/root/.gradle/wrapper
+
+  hasli-docs-dev:
+    container_name: "hasli-docs-${HASLI_DOCS_NAME}"
+    image: "hasli-docs/docs:latest"
