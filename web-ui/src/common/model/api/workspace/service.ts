@@ -24,6 +24,24 @@ export class WorkspaceService implements Service<Workspace> {
     }
 
 
+    search(input: string) : Promise<Workspace[]> {
+        return this.client.fetch('workspaces/search', {
+            method: 'put',
+            body: JSON.stringify({
+                name: input,
+                key : input
+            })
+        })
+        .then(t => t.json() as any)
+        .then(t => t.map(u => new Workspace(u)));
+    }
+
+    public initial() : Promise<Workspace> {
+        return this.client.fetch('workspaces/initial')
+            .then(t=> t.json() as any)
+            .then(t => new Workspace(t));
+    }
+
     public save(workspaceRequest: SaveWorkspaceRequest): Promise<Workspace> {
         return this.httpClient
             .createRequest('workspaces')

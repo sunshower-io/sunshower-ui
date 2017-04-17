@@ -10,7 +10,7 @@ export interface FormDataProvider {
 
 export class ImageDataProvider {
 
-    public file: File;
+    public file?: File;
 
 
     bindFiles(files:FileList) {

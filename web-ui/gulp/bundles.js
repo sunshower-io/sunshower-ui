@@ -32,7 +32,6 @@ module.exports = {
                 "aurelia-http-client",
                 "aurelia-logging-console",
                 "aurelia-validation",
-                "semantic-ui",
                 "fetch",
                 "jquery"
             ],

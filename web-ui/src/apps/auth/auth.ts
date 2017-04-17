@@ -1,5 +1,5 @@
 import 'jquery'
-import 'semantic-ui'
+
 import {Router, RouterConfiguration} from 'aurelia-router';
 import {Aurelia} from "aurelia-framework";
 import {inject} from "aurelia-dependency-injection";

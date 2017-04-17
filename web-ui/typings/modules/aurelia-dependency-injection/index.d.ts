@@ -271,7 +271,7 @@ export function registration(value: Registration): any;
 */
 export function transient(key?: any): any;
 /**
-* Decorator: Specifies to register the decorated item with a "singleton" lieftime.
+* Decorator: Specifies to register the decorated item with a "singleton" lifetime.
 */
 export function singleton(keyOrRegisterInChild?: any, registerInChild?: boolean): any;
 /**

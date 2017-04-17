@@ -1,24 +1,29 @@
 template
-    .ui.center.aligned.grid
-        .column.five.wide
-            h2.center.aligned.header
-                | Enter credentials
-            .ui.hidden.divider
-            form.ui.small.form
-                .field
-                    label.pull-left Username
-                    input(type='text', placeholder='Enter your username', value.bind='user.username')
-                .field
-                    label.pull-left Password
-                    input(type='password', placeholder='Enter your password', value.bind='user.password')
 
-                .ui.error.message.left(show.bind="credentialsInvalid" style="margin-top:10px")
-                    p Username/password combination was not recognized
+    .auth-toggle
+        | Don't have an account yet?
+        a.btn-flat(click.delegate="signUp()") Sign Up
 
-                button.ui.field.button.fluid.primary(type='submit', click.delegate="login()") Sign In
-                .field
-                    .ui.checkbox.pull-left
-                        input(type='checkbox', value.bind='remember')
-                        label Remember me
+    h1 Sign in to Hasli.io
 
+    .input-field
+        input(type="text" id="${usernameId}" value.bind='user.username')
+        label(for="${usernameId}") Username
+    .input-field
+        input(type="password" id="${passwordId}" value.bind='user.password')
+        label(for="${passwordId}") Password
+
+    .auth-submit
+        button.waves-effect.btn(type="submit" click.delegate="login()") Log In
+
+
+    //            .ui.error.message.left(show.bind="credentialsInvalid" style="margin-top:10px")
+    //                p Username/password combination was not recognized
+    //
+    //            button.ui.field.button.fluid.primary(type='submit', click.delegate="login()") Sign In
+    //            .field
+    //                .ui.checkbox.pull-left
+    //                    input(type='checkbox', value.bind='remember')
+    //                    label Remember me
+    //
 

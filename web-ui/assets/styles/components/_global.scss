@@ -1,0 +1,86 @@
+body {
+  background: $offwhite;
+  overflow: hidden !important;
+  width: 100% !important;
+}
+
+.body {
+  padding-left:300px;
+  margin-top: $navbar-height;
+  position: relative;
+  box-sizing: border-box;
+  width:100%;
+
+  @media #{$medium-and-down} {
+    margin-top: $navbar-height-mobile;
+  }
+}
+
+.body-content {
+  padding: 20px;
+  margin-right: 250px;
+}
+
+.body-menu {
+  position: absolute;
+  right:0;
+  width: 250px;
+  top: 0;
+  padding: 30px 30px 0 0;
+  box-sizing: border-box;
+}
+
+
+.mdi.activity-icon {
+  color: $brightgreen;
+}
+
+
+.fullscreen {
+  position:absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  .preloader-wrapper {
+    width:64px;
+    height:64px;
+    position: absolute;
+    top :0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+}
+
+.dropdown-content li  {
+  color: $midgrey;
+  padding: 8px 16px;
+  min-height: 0;
+
+  &.divider {
+    padding:0;
+  }
+
+  & > .mdi {
+    color: inherit;
+    display: inline;
+    padding:0;
+    margin-right: .5em;
+  }
+}
+
+
+.collapsible .dropdown-icon {
+  position:absolute;
+  right:0;
+  top: 0;
+}
+
+.collapsible .active .dropdown-icon {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+  transform: rotate(90deg);
+}

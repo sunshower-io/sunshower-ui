@@ -3,6 +3,9 @@ import {HttpClient} from "aurelia-fetch-client";
 import {inject} from "aurelia-dependency-injection";
 import {User} from "common/model/security";
 import {LocalStorage} from "common/lib/storage/local";
+import {UUID} from "common/lib/utils/uuid";
+
+import * as materialize from 'materialize-css';
 
 import {
     Aurelia,
@@ -14,6 +17,7 @@ import {
     Token,
     AuthenticationContextHolder
 } from "common/model/security";
+import {Router} from "aurelia-router";
 
 
 @inject(
@@ -22,10 +26,13 @@ import {
     AuthenticationContextHolder,
     LocalStorage,
     Auth,
-    Container
+    Container,
+    Router
 )
 export class Login {
 
+    private usernameId: string       =  UUID.random();
+    private passwordId: string       =  UUID.random();
 
     @bindable
     private remember: boolean = true;
@@ -42,11 +49,11 @@ export class Login {
                 private holder: AuthenticationContextHolder,
                 private storage: LocalStorage,
                 private auth: Auth,
-                private container: Container,) {
+                private container: Container,
+                private router: Router) {
     }
 
     attached(): void {
-        $('.ui.checkbox').checkbox();
         let token = this.storage.get("X-AUTH-TOKEN");
         if (token) {
             this.client.fetch('authenticate/validate', {
@@ -76,6 +83,7 @@ export class Login {
                     window.location.reload(true);
                 } else {
                     this.setParam("token", data.token.token);
+                    window.location.reload(true);
                 }
             }).catch(e => {
             this.credentialsInvalid = true;
@@ -99,6 +107,10 @@ export class Login {
                 window.location.href = `${location}?${name}=${value}`;
             }
         }
+    }
+
+    signUp() : void {
+        this.router.navigateToRoute('signup')
     }
 
 
