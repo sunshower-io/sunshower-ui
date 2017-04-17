@@ -1,0 +1,37 @@
+
+template
+    .overlay.au-animate
+        .overlay-back.overlay-nav(click.delegate="back()")
+            i.ion-ios-arrow-thin-left.icon
+            span back
+        .overlay-close.overlay-nav(click.delegate="close()")
+            i.ion-ios-close-empty.icon
+            span esc
+
+        .ui.container
+            .ui.secondary.menu
+                .ui.items
+                    .item
+                        .ui.tiny.image
+                            img(
+                            if.bind="loaded"
+                            src='/hasli/api/v1/workspaces/${workspaceId}/applications/${id}/image'
+                            )
+                        .middle.aligned.content
+                            a.header ${application.name}
+                            .meta
+                                span ${application.description}
+                            .description
+                                p
+                            .extra
+                                | Version: ${application.version}
+            .ui.secondary.pointing.menu
+                a.item(
+                repeat.for='row of router.navigation',
+                class="${row.isActive ? 'active' : ''}"
+                href.bind='row.href'
+                )
+                    | ${row.title}
+        .ui.container
+            .ui.fitted.divider
+            router-view
