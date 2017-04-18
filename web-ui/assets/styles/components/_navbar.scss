@@ -13,6 +13,7 @@ nav {
   left: $small-nav-width;
   top:0;
   right:0;
+  border-bottom: 1px solid $border-color;
 }
 
 nav .nav-wrapper {
@@ -23,13 +24,16 @@ nav .nav-wrapper {
 
 nav .brand-logo {
   height: $navbar-height;
+  line-height: $navbar-height;
   box-sizing: border-box;
-  padding-top: $navbar-font-size;
   padding-left: $navbar-font-size;
-  line-height:1em;
+  font-size: 1.5rem;
+  font-weight: 300;
+  text-transform: uppercase;
 
   @media #{$medium-and-down} {
     height: $navbar-height-mobile;
+    line-height: $navbar-height-mobile;
     left: 0;
     transform: none;
   }
@@ -44,12 +48,6 @@ nav .brand-logo {
     }
   }
 
-  span {
-    font-size: 1.25rem;
-    line-height:1em;
-    font-weight:400;
-    text-transform:uppercase;
-  }
 }
 
 nav .dropdown-content li .mdi {

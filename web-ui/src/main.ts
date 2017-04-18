@@ -72,7 +72,8 @@ function configureResources(aurelia: Aurelia) {
         .standardConfiguration()
         .globalResources([
             'apps/workspaces/resources/custom-elements/navigator/navigator',
-            'lib/common/resources/custom-elements/summary-icon/summary-icon'
+            'lib/common/resources/custom-elements/summary-icon/summary-icon',
+            'lib/common/resources/custom-elements/nav-bar/navbar'
         ])
         .plugin('aurelia-animator-velocity', cfg => {
             cfg.registerEffect("wipeLeftToRight", {
