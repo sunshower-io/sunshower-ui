@@ -1,6 +1,6 @@
 template
-    ul(id.bind="controlId").side-nav
-        li.side-nav-header Frap
+    ui.side-nav(id.bind="controlId")
+        li Frap
     ul.side-nav-small
         li.side-nav-header
             a
@@ -13,3 +13,4 @@ template
             ref="navigationControl"
             data-activates="${controlId}"
         )
+            i.material-icons.mdi(class="${opened ? 'mdi-chevron-double-left' : 'mdi-chevron-double-right'}")

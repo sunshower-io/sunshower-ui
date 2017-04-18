@@ -6,9 +6,12 @@ import {
 import 'materialize-css';
 import 'mdi/css/materialdesignicons.css!'
 
-import {Router} from "aurelia-router";
+import {Router, NavModel} from "aurelia-router";
 
-import {NavigatorManager} from "apps/workspaces/resources/custom-elements/navigator";
+import {
+    NavigationComponent,
+    NavigatorManager
+} from "apps/workspaces/resources/custom-elements/navigator";
 
 
 @autoinject
@@ -18,7 +21,14 @@ export class Navigator {
     @bindable
     private controlId               : string;
 
+    @bindable
+    private opened                  : boolean;
+
+
     private navigationControl       : HTMLElement;
+
+    @bindable
+    private currentComponent        : NavigationComponent;
 
     constructor(private navigatorManager: NavigatorManager) {
         this.controlId = UUID.randomUUID().value;
@@ -26,6 +36,14 @@ export class Navigator {
 
     public attached() : void {
         $(this.navigationControl).sideNav();
+        $(this.navigationControl).sideNav('show');
+    }
 
+    private open(model:NavModel) {
+        let settings = model.settings;
+        if(settings && settings.contextComponent) {
+            this.currentComponent = settings.contextComponent;
+            this.currentComponent.active = true;
+        }
     }
 }

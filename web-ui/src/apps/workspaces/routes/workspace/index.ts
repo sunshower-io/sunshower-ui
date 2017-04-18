@@ -34,17 +34,23 @@ export class WorkspaceContext {
             nav: true,
             title: 'Dashboard',
             settings: {
-                icon: 'mdi-view-dashboard'
+                icon: 'mdi-view-dashboard',
+                contextComponent: {
+                    reference: '/apps/workspaces/routes/workspace/applications/context'
+                }
+            }
+        }, {
+            route: 'applications',
+            moduleId: './applications/index',
+            name: 'applications',
+            title: 'Applications',
+            settings: {
+                contextComponent: {
+                    reference: '/apps/workspaces/routes/workspace/applications/context'
+                }
             }
         }]);
         this.navigatorManager.bind(router);
-
-
-
-        //applications: mdi-code-tags
-        //infrastructure: mdi-cloud
-        //provisioning: mdi-cube-send
-        //designer: mdi-android-studio
     }
 
 
