@@ -1,6 +1,13 @@
 template
+    ul(id.bind="controlId").side-nav
+        li.side-nav-header Frap
     ul.side-nav-small
         li.side-nav-header boop
         li(repeat.for="nav of navigatorManager.router.navigation")
             a(href.bind="nav.href") ${nav.title}
-        li.side-nav-toggle(data-activates="${controlId}")
+
+        li.side-nav-toggle(
+            ref="navigationControl"
+            data-activates="${controlId}"
+            style="border:1px solid red"
+        )
