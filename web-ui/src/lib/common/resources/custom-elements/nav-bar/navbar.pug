@@ -5,25 +5,29 @@ template
             a.brand-logo(href="/")
                 | Hasli.io
             //ul.breadcrumb
-                //li.breacrumb WorkspaceName
+                //li.breadcrumb WorkspaceName
                 //li.breadcrumb Dashboard
+            //.input-field
+            //    input(type="search" id="navbarSearch")
+            //    label(class="label-icon" for="navbarSearch")
+            //        i.material-icons.mdi.mdi-search
+            //    i.material-icons.mdi.mdi-close
             ul.right.user-menu
                 li
-                    a
-                        i.material-icons.mdi.mdi-bell.activity-icon
+                    i.material-icons.mdi.mdi-bell
                     // activity-monitor-dropdown
-                li
-                    a(
+                li(
                     class="dropdown-button"
-                    href="#"
                     data-hover="true"
                     data-beloworigin="true"
-                    data-activates="${controlId}"
+                    data-activates="${dropdownId}"
                     data-constrainwidth="false"
-                    ref="profileDD")
+                    ref="profileDD"
+                    )
+                    span
                         | ${user.username}
                         i.material-icons.mdi.mdi-menu-down
-                    ul(id="${controlId}" class="dropdown-content")
+                    ul(id="${dropdownId}" class="dropdown-content")
                         //li
                         //    i.material-icons.mdi.mdi-account-circle
                         //    | ${user.username}
@@ -39,5 +43,7 @@ template
                             i.material-icons.mdi.mdi-logout-variant
                             | Sign Out
                 li
-                    a
+                    template(if.bind="user.image")
+                        img(src="${user.image}")
+                    template(if.bind="!user.image")
                         i.material-icons.mdi.mdi-account-circle

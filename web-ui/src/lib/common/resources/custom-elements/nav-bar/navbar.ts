@@ -12,7 +12,7 @@ import {bindable} from "aurelia-framework";
 export class Navbar {
 
     @bindable
-    private controlId               : string       =  UUID.random();
+    private dropdownId               : string       =  UUID.random();
     private profileDD               : HTMLElement;
 
     constructor(

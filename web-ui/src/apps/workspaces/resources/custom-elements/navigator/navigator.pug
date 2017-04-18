@@ -8,7 +8,7 @@ template
     ul.side-nav-small
         li.side-nav-header
             a
-                summary-icon(text="Hasli.io" fill="#239ae8" textColor="white" stroke="none" size="60")
+                summary-icon(text="Hasli.io" fill="#239ae8" textColor="white" stroke="none" size="50")
                 //img(src="dist/icons/hasli-icon.svg", alt="Hasli.io")
         li(repeat.for="nav of navigatorManager.router.navigation" class="${nav.isActive ? 'active' : ''}")
             a(href.bind="nav.href" click.delegate="open(nav)")
