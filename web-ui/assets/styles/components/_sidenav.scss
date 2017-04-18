@@ -12,12 +12,12 @@ $sidenav-li-margin-bottom: 30px;
   margin:0;
   width:$small-nav-width;
   overflow:hidden;
+  z-index: 1000;
 
   li {
     text-align: center;
     height: $small-nav-width;
     line-height: $small-nav-width;
-    font-size: 35px;
     cursor: pointer;
 
     &.side-nav-header {
@@ -30,7 +30,10 @@ $sidenav-li-margin-bottom: 30px;
     }
 
     &.side-nav-toggle {
-
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
     }
 
     &.active {
@@ -39,6 +42,7 @@ $sidenav-li-margin-bottom: 30px;
 
     a i.material-icons {
       color: white;
+      font-size: 35px;
     }
 
   }
@@ -49,74 +53,58 @@ $sidenav-li-margin-bottom: 30px;
 .side-nav {
   left: $small-nav-width;
 
-  .breadcrumb-container {
-    background: $sidenav-search-color;
-    line-height: $sidenav-li-margin-bottom;
-    height:$sidenav-li-margin-bottom;
-
-    .breadcrumb {
-      display: inline;
-      padding: 0;
-      line-height: 2em;
-      height: auto !important;
-      font-size: 12px;
-      color: white;
-      font-weight: 400;
-      cursor: pointer;
-
-      &:hover {
-        background-color:transparent;
-        color: $sidenav-alternate-bg;
-      }
-
-      &:first-child {
-        padding-left: 16px;
-      }
-      &:last-child {
-        font-weight: 700;
-      }
-
-      &:before {
-        font: normal normal normal 24px/1 "Material Design Icons";
-        content: "\F142";
-        margin: 3px 0 0 0 !important;
-        color: inherit !important;
-      }
-    }
-  }
-
-}
-
-.side-nav, .side-nav-small {
-
-  .mdi {
-    font-size: $default-icon-size;
-    color: $sidenav-font-color;
-  }
-
-  li.active.default-color {
-    background: $secondary-color;
-  }
-}
-
-.side-nav .mdi {
-  margin-right: .5em;
+  //.breadcrumb-container {
+  //  background: $sidenav-search-color;
+  //  line-height: $sidenav-li-margin-bottom;
+  //  height:$sidenav-li-margin-bottom;
+  //
+  //  .breadcrumb {
+  //    display: inline;
+  //    padding: 0;
+  //    line-height: 2em;
+  //    height: auto !important;
+  //    font-size: 12px;
+  //    color: white;
+  //    font-weight: 400;
+  //    cursor: pointer;
+  //
+  //    &:hover {
+  //      background-color:transparent;
+  //      color: $sidenav-alternate-bg;
+  //    }
+  //
+  //    &:first-child {
+  //      padding-left: 16px;
+  //    }
+  //    &:last-child {
+  //      font-weight: 700;
+  //    }
+  //
+  //    &:before {
+  //      font: normal normal normal 24px/1 "Material Design Icons";
+  //      content: "\F142";
+  //      margin: 3px 0 0 0 !important;
+  //      color: inherit !important;
+  //    }
+  //  }
+  //}
 
 }
 
-//todo set this based on context color
-.side-nav .collapsible .active .collapsible-header {
-  background: $secondary-color;
-}
 
-.side-nav .collapsible .dropdown-icon {
-  color: white;
-}
-
-.side-nav .collapsible-body {
-  background: $sidenav-bg-color;
-  color: $sidenav-font-color;
-}
+////todo set this based on context color
+//.side-nav .collapsible .active .collapsible-header {
+//  background: $secondary-color;
+//}
+//
+//.side-nav .collapsible .dropdown-icon {
+//  color: white;
+//}
+//
+//.side-nav .collapsible-body {
+//  background: $sidenav-bg-color;
+//  color: $sidenav-font-color;
+//}
 
 //.side-nav-header {
 //  background: $sidenav-alternate-bg;

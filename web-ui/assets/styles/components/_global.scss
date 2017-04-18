@@ -5,7 +5,7 @@ body {
 }
 
 .body {
-  padding-left:300px;
+  padding-left:300px + $small-nav-width;
   margin-top: $navbar-height;
   position: relative;
   box-sizing: border-box;
