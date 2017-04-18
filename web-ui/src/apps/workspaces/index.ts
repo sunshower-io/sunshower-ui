@@ -1,25 +1,35 @@
+import {autoinject} from "aurelia-framework";
+
+import {
+    NavigatorManager
+} from 'apps/workspaces/resources/custom-elements/navigator'
+
+
 import {
     Router,
     RouterConfiguration
 } from "aurelia-router";
+
+@autoinject
 export class WorkspaceApplication {
 
+    constructor(private navigatorManager: NavigatorManager) {
 
 
-    // configureRouter(
-    //     config: RouterConfiguration,
-    //     router: Router
-    // ) {
-    //
-    //     config.map([{
-    //         route: '',
-    //         moduleId: './'
-    //     }, {
-    //         route: 'workspaces',
-    //
-    //
-    //     }])
-    //
-    // }
+    }
+
+
+    public configureRouter(
+        cfg: RouterConfiguration,
+        router: Router
+    ): void {
+
+        cfg.map([{
+            route: ':workspaceId',
+            moduleId: './routes/workspace/index'
+        }]);
+
+    }
+
 
 }
