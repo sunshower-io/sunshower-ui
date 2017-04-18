@@ -24,7 +24,6 @@ import {
 
 import {DialogConfiguration} from "aurelia-dialog";
 
-import {EventAggregator} from "aurelia-event-aggregator";
 import {Container} from "aurelia-dependency-injection";
 
 
@@ -72,11 +71,7 @@ function configureResources(aurelia: Aurelia) {
     aurelia.use
         .standardConfiguration()
         .globalResources([
-            'common/lib/widget/menu/menu',
-            'common/resources/custom-elements/tree/tree',
-            'common/resources/custom-elements/summary/summary',
-            'common/resources/nested-application/nested-application',
-            'apps/workspaces/resources/custom-elements/navigator/navigator'
+            //todo add
         ])
         .plugin('aurelia-animator-velocity', cfg => {
             cfg.registerEffect("wipeLeftToRight", {

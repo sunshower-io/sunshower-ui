@@ -1,20 +1,25 @@
 import 'jquery'
-import {Router, RouterConfiguration} from 'aurelia-router';
-import {PipelineStep} from "aurelia-router";
-import {NavigationInstruction} from "aurelia-router";
 import {Next} from "aurelia-router";
+import {PipelineStep} from "aurelia-router";
 import {autoinject} from "aurelia-framework";
-import {RedirectToRoute} from "aurelia-router";
+
+import {
+    Router,
+    RedirectToRoute,
+    RouterConfiguration,
+    NavigationInstruction
+} from 'aurelia-router';
 
 import {
     AuthenticationContextHolder
 } from "lib/common/security";
-import {Container} from "aurelia-dependency-injection";
+import {bindable} from "aurelia-templating";
 
 @autoinject
 export class App {
 
-    public router: Router;
+    @bindable
+    private router: Router;
 
     constructor(private tokenHolder: AuthenticationContextHolder) {
 
@@ -24,6 +29,15 @@ export class App {
                            router: Router) {
         config.title = 'Hasli.io';
         config.addPipelineStep('authorize', new SecurityStep(this.tokenHolder));
+
+        config.map([{
+            route: '',
+            redirect: 'workspaces'
+        }, {
+            route: 'workspaces',
+            moduleId: './apps/workspaces/index'
+        }]);
+        this.router = router;
     }
 
 
