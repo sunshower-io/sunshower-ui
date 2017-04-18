@@ -32,9 +32,19 @@ export class WorkspaceContext {
             moduleId: './dashboard/index',
             name: 'dashboard',
             nav: true,
-            title: 'Dashboard'
+            title: 'Dashboard',
+            settings: {
+                icon: 'mdi-view-dashboard'
+            }
         }]);
         this.navigatorManager.bind(router);
+
+
+
+        //applications: mdi-code-tags
+        //infrastructure: mdi-cloud
+        //provisioning: mdi-cube-send
+        //designer: mdi-android-studio
     }
 
 

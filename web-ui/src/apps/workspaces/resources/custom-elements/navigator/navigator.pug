@@ -1,6 +1,9 @@
 template
     ul.side-nav-small
-        li.side-nav-header boop
+        li.side-nav-header
+            a
+                summary-icon(text="Hasli.io" fill="#239ae8" textColor="white" stroke="none" size="60")
         li(repeat.for="nav of navigatorManager.router.navigation")
-            a(href.bind="nav.href") ${nav.title}
+            a(href.bind="nav.href")
+                i.material-icons.mdi(class="${nav.settings.icon}")
         li.side-nav-toggle(data-activates="${controlId}")
