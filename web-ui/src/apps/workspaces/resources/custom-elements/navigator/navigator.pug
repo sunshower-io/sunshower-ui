@@ -1,10 +1,14 @@
 template
     ul(id.bind="controlId").side-nav
         li.side-nav-header Frap
+            compose(
+                view-model="currentComponent.reference"
+                if.bind="currentComponent.active"
+            )
     ul.side-nav-small
         li.side-nav-header boop
         li(repeat.for="nav of navigatorManager.router.navigation")
-            a(href.bind="nav.href") ${nav.title}
+            a(href.bind="nav.href" click.delegate="open(nav.component)") ${nav.title}
 
         li.side-nav-toggle(
             ref="navigationControl"

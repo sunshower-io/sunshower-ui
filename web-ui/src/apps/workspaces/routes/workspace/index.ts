@@ -7,7 +7,10 @@ import {
 } from 'aurelia-router';
 
 
-import {NavigatorManager} from 'apps/workspaces/resources/custom-elements/navigator';
+import {
+    NavigatorManager,
+    NavigationComponent
+} from 'apps/workspaces/resources/custom-elements/navigator';
 
 @autoinject
 export class WorkspaceContext {
@@ -32,7 +35,22 @@ export class WorkspaceContext {
             moduleId: './dashboard/index',
             name: 'dashboard',
             nav: true,
-            title: 'Dashboard'
+            title: 'Dashboard',
+            settings: {
+                contextComponent: {
+                    reference: '/apps/workspaces/routes/workspace/applications/context'
+                }
+            }
+        }, {
+            route: 'applications',
+            moduleId: './applications/index',
+            name: 'applications',
+            title: 'Applications',
+            settings: {
+                contextComponent: {
+                    reference: '/apps/workspaces/routes/workspace/applications/context'
+                }
+            }
         }]);
         this.navigatorManager.bind(router);
     }
