@@ -1,61 +1,149 @@
-//todo make responsive
+$card-margin-left: 20px;
+$card-margin-right: 40px;
+$card-content-height: 100px;
+$card-border-width: 1px;
+$card-border-style: $card-border-width solid $border-color;
+
+
+//.card
+//  summary-icon(text="Default Workspace" textColor="#239ae8" fill="white" size="40")
+//  .card-expand
+//    i.material-icons.mdi.mdi-dots-vertical
+//  .card-content
+//    h2 Default Workspace
+//    p Actual content goes here. Gastropub blog portland ugh dolore, nesciunt ethical in exercitation placeat magna voluptate. Organic adipisicing poutine narwhal polaroid qui coloring book edison bulb.
+//  .card-extra.active
+//    p Paleo flannel gentrify banh mi stumptown craft beer marfa church-key aliquip, placeat pariatur williamsburg normcore selvage. Nisi waistcoat flexitarian cray XOXO.
+//  .card-contract
+//    i.material-icons.mdi.mdi-dots-vertical
 
 .card {
   box-shadow:none;
-  border: 1px solid $border-color;
+  border: $card-border-style;
   border-radius:0;
   position:relative;
+  //margin: 20px $card-margin-right 20px $card-margin-left;
+  box-sizing: border-box;
 
-  .card-content {
-    padding:20px;
 
-    .summary-icon {
-      vertical-align: middle;
-    }
+  //.summary-icon {
+  //  position: absolute;
+  //  left: -$card-margin-left;
+  //  top: ($card-content-height/2) - $card-margin-left;
+  //}
+  //
+  //h2 {
+  //  font-size: 1.5rem;
+  //  line-height: 1rem;
+  //  margin: 0 0 .5rem 0;
+  //}
+  //
+  //.card-content, .card-extra {
+  //  height: $card-content-height;
+  //  box-sizing: border-box;
+  //}
+  //
+  //.card-content {
+  //  padding: $card-margin-left $card-margin-left $card-margin-left ($card-margin-left*2);
+  //}
+  //
+  //.card-extra {
+  //  display: none;
+  //  border-top: $card-border-style;
+  //  padding: $card-margin-left ($card-margin-left + $card-margin-right) $card-margin-left $card-margin-left;
+  //  position: relative;
+  //
+  //  &.active {
+  //    display: block;
+  //  }
+  //
+  //}
+  //
+  //.card-expand, .card-contract {
+  //  position: absolute;
+  //  width: $card-margin-right;
+  //
+  //  i.material-icons {
+  //    font-size:25px;
+  //    position: absolute;
+  //    left: $card-margin-right/5;
+  //  }
+  //}
+  //
+  //.card-expand {
+  //  background: $lightgrey;
+  //  top: -$card-border-width;
+  //  height: $card-content-height + ($card-border-width*2);
+  //  right: -$card-margin-right;
+  //
+  //  i.material-icons {
+  //    color: white;
+  //    top: ($card-content-height + ($card-border-width*2))/2.75;
+  //  }
+  //}
+  //
+  //.card-contract {
+  //  background: $offwhite;
+  //  height: $card-content-height - $card-border-width;
+  //  top: 0;
+  //  right: 0;
+  //
+  //  i.material-icons {
+  //    color: $lightgrey;
+  //    top: $card-content-height/2.75;
+  //  }
+  //}
 
-    //todo figure out wrapping and such
-    .card-title {
-      font-weight:400;
-      position: absolute;
-      top: 40px;
-      left: 100px;
-      margin: 0;
-
-      @media #{$medium-and-down} {
-        font-size: 20px;
-        top: 20px;
-      }
-    }
-
-    .card-button {
-      position: absolute;
-      right:20px;
-      border-radius:0;
-      box-shadow:none;
-      top:40px;
-      font-size:.75rem;
-      height:30px;
-      line-height:30px;
-      padding: 0 1.5rem;
-
-      @media #{$medium-and-down} {
-        position:relative;
-        right:auto;
-        top:auto;
-        display: block;
-        width: 100%;
-        margin-top: 20px;
-      }
-
-    }
-  }
-
-  .card-action {
-    border-top: 1px solid $border-color;
-    background-color: #eceff1; //blue-grey lighten-5
-    color: #90a4ae; //blue-grey lighten-2
-    padding: 10px 20px;
-    font-size: .75rem;
-  }
+  //.card-content {
+  //  padding:20px;
+  //
+  //  .summary-icon {
+  //    vertical-align: middle;
+  //  }
+  //
+  //  //todo figure out wrapping and such
+  //  .card-title {
+  //    font-weight:400;
+  //    position: absolute;
+  //    top: 40px;
+  //    left: 100px;
+  //    margin: 0;
+  //
+  //    @media #{$medium-and-down} {
+  //      font-size: 20px;
+  //      top: 20px;
+  //    }
+  //  }
+  //
+  //  .card-button {
+  //    position: absolute;
+  //    right:20px;
+  //    border-radius:0;
+  //    box-shadow:none;
+  //    top:40px;
+  //    font-size:.75rem;
+  //    height:30px;
+  //    line-height:30px;
+  //    padding: 0 1.5rem;
+  //
+  //    @media #{$medium-and-down} {
+  //      position:relative;
+  //      right:auto;
+  //      top:auto;
+  //      display: block;
+  //      width: 100%;
+  //      margin-top: 20px;
+  //    }
+  //
+  //  }
+  //}
+  //
+  //.card-action {
+  //  border-top: 1px solid $border-color;
+  //  background-color: #eceff1; //blue-grey lighten-5
+  //  color: #90a4ae; //blue-grey lighten-2
+  //  padding: 10px 20px;
+  //  font-size: .75rem;
+  //}
 
 }

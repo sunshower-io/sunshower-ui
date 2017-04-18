@@ -7,10 +7,7 @@ import {
 } from 'aurelia-router';
 
 
-import {
-    NavigatorManager,
-    NavigationComponent
-} from 'apps/workspaces/resources/custom-elements/navigator';
+import {NavigatorManager} from 'apps/workspaces/resources/custom-elements/navigator';
 
 @autoinject
 export class WorkspaceContext {
@@ -35,6 +32,10 @@ export class WorkspaceContext {
             moduleId: './dashboard/index',
             name: 'dashboard',
             nav: true,
+            title: 'Dashboard',
+            settings: {
+                icon: 'mdi-view-dashboard'
+            }
             title: 'Dashboard',
             settings: {
                 contextComponent: {
