@@ -1,4 +1,6 @@
 template
+    ui.side-nav(id.bind="controlId")
+        li Frap
     ul.side-nav-small
         li.side-nav-header
             a
@@ -6,4 +8,7 @@ template
         li(repeat.for="nav of navigatorManager.router.navigation")
             a(href.bind="nav.href")
                 i.material-icons.mdi(class="${nav.settings.icon}")
-        li.side-nav-toggle(data-activates="${controlId}")
+        li.side-nav-toggle(
+            data-activates="${controlId}"
+            ref="navigationControl"
+        ) coolbeans

@@ -33,16 +33,14 @@ export class Navigator {
 
     public attached() : void {
         $(this.navigationControl).sideNav();
+        $(this.navigationControl).sideNav('show');
     }
 
     private open(model:NavModel) {
-
         let settings = model.settings;
         if(settings && settings.contextComponent) {
             this.currentComponent = settings.contextComponent;
             this.currentComponent.active = true;
         }
-
-
     }
 }

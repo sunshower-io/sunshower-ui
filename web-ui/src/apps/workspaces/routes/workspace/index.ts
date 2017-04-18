@@ -34,10 +34,7 @@ export class WorkspaceContext {
             nav: true,
             title: 'Dashboard',
             settings: {
-                icon: 'mdi-view-dashboard'
-            }
-            title: 'Dashboard',
-            settings: {
+                icon: 'mdi-view-dashboard',
                 contextComponent: {
                     reference: '/apps/workspaces/routes/workspace/applications/context'
                 }
