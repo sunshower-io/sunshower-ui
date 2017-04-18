@@ -21,6 +21,8 @@ export class Navigator {
     @bindable
     private controlId               : string;
 
+    @bindable
+    private opened                  : boolean;
 
     private navigationControl       : HTMLElement;
 
@@ -33,11 +35,29 @@ export class Navigator {
 
     public attached() : void {
         $(this.navigationControl).sideNav();
-        $(this.navigationControl).sideNav('show');
+        this.currentComponent = this.navigatorManager.getCurrent();
     }
 
+    public show() : void {
+        $(this.navigationControl).sideNav('show');
+        this.opened = true;
+    }
+
+    public hide() : void {
+        $(this.navigationControl).sideNav('hide');
+        this.opened = false;
+    }
+
+    private toggle() : void {
+        if(this.opened) {
+            this.hide();
+        } else {
+            this.show();
+        }
+    }
+
+
     private open(model:NavModel) {
-        console.log("OPEN");
         let settings = model.settings;
         if(settings && settings.contextComponent) {
             this.currentComponent = settings.contextComponent;

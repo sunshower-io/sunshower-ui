@@ -3,7 +3,8 @@ template
         li
             div
                 compose(
-                    view-model.bind="currentComponent.reference"
+                    view-model.bind="currentComponent.reference",
+                    if.bind="opened"
                 )
 
     ul.side-nav-small
@@ -14,6 +15,7 @@ template
             a(href.bind="nav.href" click.delegate="open(nav)")
                 i.material-icons.mdi(class="${nav.settings.icon}")
         li.side-nav-toggle(
-            data-activates="${controlId}"
+
+            click.delegate="openSidenav()"
             ref="navigationControl"
         ) coolbeans
