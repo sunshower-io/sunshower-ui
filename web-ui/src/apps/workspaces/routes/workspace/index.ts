@@ -36,17 +36,19 @@ export class WorkspaceContext {
             settings: {
                 icon: 'mdi-view-dashboard',
                 contextComponent: {
-                    reference: '/apps/workspaces/routes/workspace/applications/context'
+                    reference: 'apps/workspaces/routes/workspace/dashboard/context-menu'
                 }
             }
         }, {
             route: 'applications',
             moduleId: './applications/index',
             name: 'applications',
+            nav: true,
             title: 'Applications',
             settings: {
+                icon: 'mdi-view-dashboard',
                 contextComponent: {
-                    reference: '/apps/workspaces/routes/workspace/applications/context'
+                    reference: 'apps/workspaces/routes/workspace/applications/context-menu'
                 }
             }
         }]);

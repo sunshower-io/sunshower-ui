@@ -37,6 +37,7 @@ export class Navigator {
     }
 
     private open(model:NavModel) {
+        console.log("OPEN");
         let settings = model.settings;
         if(settings && settings.contextComponent) {
             this.currentComponent = settings.contextComponent;
