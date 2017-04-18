@@ -29,6 +29,9 @@ export class WorkspaceApplication {
             moduleId: './routes/workspace/index'
         }]);
 
+
+        this.navigatorManager.bind(router);
+
     }
 
 
