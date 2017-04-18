@@ -1,10 +1,9 @@
 template
-    ui.side-nav(id="${controlId}")
-        li.no-padding
-            compose(
-                view-model.bind="currentComponent.reference",
-                if.bind="opened"
-            )
+    .side-nav-context(id="${controlId}")
+        compose(
+            view-model.bind="currentComponent.reference",
+            if.bind="opened"
+        )
 
     ul.side-nav-small
         li.side-nav-header

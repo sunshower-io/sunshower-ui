@@ -6,7 +6,7 @@ $sidenav-li-margin-bottom: 30px;
 .side-nav-context {
   background-color: $sidenav-bg-color;
   position: absolute;
-  left: $small-nav-width;
+  left: $small-nav-width + $side-nav-width;
   top:0;
   bottom:0;
   width: $side-nav-width;
@@ -66,7 +66,6 @@ $sidenav-li-margin-bottom: 30px;
 
 
 .side-nav {
-  left: $small-nav-width;
 
   //.breadcrumb-container {
   //  background: $sidenav-search-color;
