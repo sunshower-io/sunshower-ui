@@ -19,47 +19,51 @@ export class Navigator {
 
 
     @bindable
-    private controlId               : string;
+    private controlId: string;
 
     @bindable
-    private opened                  : boolean;
+    private opened: boolean;
 
-    private navigationControl       : HTMLElement;
+
+    private navigationControl: HTMLElement;
+
 
     @bindable
-    private currentComponent        : NavigationComponent;
+    private currentComponent: NavigationComponent;
+
 
     constructor(private navigatorManager: NavigatorManager) {
         this.controlId = UUID.randomUUID().value;
     }
 
-    public attached() : void {
+    public attached(): void {
         $(this.navigationControl).sideNav();
-        this.currentComponent = this.navigatorManager.getCurrent();
     }
 
-    public show() : void {
-        $(this.navigationControl).sideNav('show');
+    public show(): void {
         this.opened = true;
+        $(this.navigationControl).sideNav('show');
     }
 
-    public hide() : void {
-        $(this.navigationControl).sideNav('hide');
+    public hide(): void {
         this.opened = false;
+        $(this.navigationControl).sideNav('hide');
     }
 
-    private toggle() : void {
-        if(this.opened) {
+    public toggle(): void {
+        if (this.opened) {
             this.hide();
+            console.log("hide");
         } else {
+            console.log("show");
             this.show();
         }
     }
 
 
-    private open(model:NavModel) {
+    private open(model: NavModel) {
         let settings = model.settings;
-        if(settings && settings.contextComponent) {
+        if (settings && settings.contextComponent) {
             this.currentComponent = settings.contextComponent;
             this.currentComponent.active = true;
             this.opened = true;

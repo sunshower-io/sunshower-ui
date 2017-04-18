@@ -2,10 +2,9 @@ template
     ui.side-nav(id="${controlId}")
         li
             div
-                compose(
-                    view-model.bind="currentComponent.reference",
-                    if.bind="opened"
-                )
+                compose(view-model.bind="currentComponent.reference")
+
+
 
     ul.side-nav-small
         li.side-nav-header
@@ -14,10 +13,6 @@ template
         li(repeat.for="nav of navigatorManager.router.navigation" class="${nav.isActive ? 'active' : ''}")
             a(href.bind="nav.href" click.delegate="open(nav)")
                 i.material-icons.mdi(class="${nav.settings.icon}")
-        li.side-nav-toggle(
-            click.delegate="toggle()"
-            ref="navigationControl"
-            data-activates="${controlId}"
-        )
-            a(href="#")
-                i.material-icons.mdi(class="${opened ? 'mdi-chevron-double-left' : 'mdi-chevron-double-right'}")
+        li.side-nav-toggle
+            a
+                i.material-icons.mdi(class="${opened ? 'mdi-chevron-double-left' : 'mdi-chevron-double-right'}", click.delegate="toggle()")
