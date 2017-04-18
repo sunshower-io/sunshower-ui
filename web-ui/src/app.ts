@@ -8,28 +8,15 @@ import {RedirectToRoute} from "aurelia-router";
 
 import {
     AuthenticationContextHolder
-} from "common/model/security";
+} from "lib/common/security";
 import {Container} from "aurelia-dependency-injection";
-import {ContextResolver} from "common/model/common/context-resolver";
-import {
-    RootNavigator
-} from "apps/workspaces/resources/custom-elements/navigator/workspace/root-navigator";
-import {
-    NavigatorManager,
-    ContextChangedEvent
-} from "./apps/workspaces/resources/custom-elements/navigator/navigator-element";
-
 
 @autoinject
 export class App {
 
     public router: Router;
 
-    constructor(
-        private navigationManager: NavigatorManager,
-        private tokenHolder: AuthenticationContextHolder,
-        private context: RootNavigator,
-        private container: Container) {
+    constructor(private tokenHolder: AuthenticationContextHolder) {
 
     }
 
@@ -37,49 +24,6 @@ export class App {
                            router: Router) {
         config.title = 'Hasli.io';
         config.addPipelineStep('authorize', new SecurityStep(this.tokenHolder));
-        config.addPipelineStep('preActivate', new ContextResolver(this.container));
-        // config.map([{
-        //     route: '',
-        //     redirect: 'workspaces'
-        // }, {
-        //     route: 'workspaces',
-        //     name: 'workspaces',
-        //     moduleId: 'apps/workspaces/index',
-        //     nav: false,
-        //     title: 'Workspaces',
-        // }, {
-        //     route: 'workspace/:workspaceId',
-        //     name: 'workspace',
-        //     title: 'Workspace',
-        //     moduleId: 'apps/workspaces/routes/workspace/index',
-        //     nav: false
-        // }, {
-        //     route: 'catalog',
-        //     name: 'catalog',
-        //     moduleId: 'apps/catalog/index',
-        //     nav: false,
-        //     title: 'Catalog',
-        // }]);
-
-        config.map([{
-            route: '',
-            redirect: 'workspaces'
-        }, {
-            route: 'workspaces',
-            name: 'workspaces',
-            moduleId: 'apps/workspaces/index',
-            nav: true,
-            title: 'Workspaces'
-        }, {
-            route: 'workspace/:workspaceId',
-            name: 'workspace',
-            title: 'Workspace',
-            moduleId: 'apps/workspaces/routes/workspace/index',
-            nav: false
-        }]);
-        this.router = router;
-        this.context.router = router;
-        config.options.navigationContext = this.context;
     }
 
 

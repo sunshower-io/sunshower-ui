@@ -12,29 +12,20 @@ import {
     LocalStorage,
     createStorage,
     Map
-} from "common/lib/storage/local/local-storage";
+} from "lib/common/storage";
 
 
 import {
     AuthenticationContextHolder,
     User,
     AuthenticationContext
-} from "common/model/security";
+} from "lib/common/security";
 
 
 import {DialogConfiguration} from "aurelia-dialog";
 
-import {ChannelSet} from "common/lib/events";
 import {EventAggregator} from "aurelia-event-aggregator";
 import {Container} from "aurelia-dependency-injection";
-import {
-    FetchClientInterceptor
-} from
-    "./common/resources/custom-components/fetch-client-errors";
-
-import {
-    SemanticUIRenderer
-} from "common/resources/custom-components/semantic-ui-renderer";
 
 
 export function param(name) {
@@ -101,7 +92,6 @@ function configureResources(aurelia: Aurelia) {
             return cfg;
         })
         .plugin('aurelia-dialog', (config: DialogConfiguration) => {
-            config.useRenderer(SemanticUIRenderer);
         }).developmentLogging();
 }
 
@@ -132,15 +122,9 @@ function doConfigure(data: any,
             configureAuthenticatedClient(authenticatedClient, container, token);
 
 
-            let channelSet = new ChannelSet(
-                `ws://${location.host}/hasli/api/events`,
-                encodeURIComponent(token),
-                container.get(EventAggregator)
-            );
             tokenHolder.set(context, false);
             container.registerInstance(HttpClient, authenticatedClient);
             container.registerInstance(BasicHttpClient, basicClient);
-            container.registerInstance(ChannelSet, channelSet);
             aurelia.start().then(() => aurelia.setRoot('app'));
         }).catch(a => {
             container.registerInstance(HttpClient, http);
@@ -176,8 +160,7 @@ function configureAuthenticatedClient(authenticatedClient: HttpClient, container
                     'Content-Type': 'application/json',
                     'X-AUTH-TOKEN': token
                 }
-            })
-            .withInterceptor(container.get(FetchClientInterceptor))
+            });
     });
 
 }
@@ -186,9 +169,7 @@ function configureBasicClient(basicClient: BasicHttpClient, container: Container
 
     basicClient.configure(config => {
             config.withBaseUrl('/hasli/api/v1/')
-                .withInterceptor(
-                    container.get(FetchClientInterceptor)
-                ).withHeader('X-AUTH-TOKEN', token);
+                .withHeader('X-AUTH-TOKEN', token);
         }
     );
 }
