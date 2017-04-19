@@ -76,5 +76,6 @@ export class Navigator {
             this.currentComponent.active = true;
             this.opened = true;
         }
+        return true;
     }
 }

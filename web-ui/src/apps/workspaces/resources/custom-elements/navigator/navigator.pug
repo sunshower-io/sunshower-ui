@@ -23,7 +23,7 @@ template
             repeat.for="nav of navigatorManager.router.navigation"
             class="${nav.isActive ? 'active' : ''}"
         )
-            a(href.bind="nav.href")
+            a(href.bind="nav.href" click.delegate="open(nav)")
                 i.material-icons.mdi(class="${nav.settings.icon}")
         li.side-nav-toggle(
             click.delegate="toggle()"
