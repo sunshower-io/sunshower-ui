@@ -12,6 +12,7 @@ import {
     NavigationComponent,
     NavigatorManager
 } from "apps/workspaces/resources/custom-elements/navigator";
+import {VelocityAnimator} from "aurelia-animator-velocity";
 
 
 @autoinject
@@ -19,45 +20,52 @@ export class Navigator {
 
 
     @bindable
-    private controlId: string;
+    private controlId                       : string;
 
     @bindable
-    private opened: boolean;
+    private opened                          : boolean;
 
-
-    private navigationControl: HTMLElement;
+    private navigationContainer             : HTMLElement;
+    private navigationControl               : HTMLElement;
 
 
     @bindable
-    private currentComponent: NavigationComponent;
+    private currentComponent                 : NavigationComponent;
 
 
-    constructor(private navigatorManager: NavigatorManager) {
+    constructor(
+        private animator        : VelocityAnimator,
+        private navigatorManager: NavigatorManager
+    ) {
         this.controlId = UUID.randomUUID().value;
     }
 
     public attached(): void {
-        $(this.navigationControl).sideNav();
+        this.hide();
     }
 
     public show(): void {
-        this.opened = true;
-        $(this.navigationControl).sideNav('show');
+
+        Promise.all([
+            this.animator.enter(this.navigationContainer),
+            this.animator.enter(this.navigationControl)
+        ]);
     }
 
     public hide(): void {
-        this.opened = false;
-        $(this.navigationControl).sideNav('hide');
+        Promise.all([
+            this.animator.leave(this.navigationContainer),
+            this.animator.leave(this.navigationControl)
+        ]);
     }
 
     public toggle(): void {
-        if (this.opened) {
+        if(this.opened) {
             this.hide();
-            console.log("hide");
         } else {
-            console.log("show");
             this.show();
         }
+        this.opened = !this.opened;
     }
 
 

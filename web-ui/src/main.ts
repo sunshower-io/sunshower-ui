@@ -67,24 +67,48 @@ export function configure(aurelia: Aurelia) {
 }
 
 
+function registerAnimations(cfg) {
+    cfg.registerEffect("slideOut", {
+        defaultDuration: 1950,
+        calls: [
+            [{translateX: ['-100%', '0%']}, 1],
+        ]
+    });
+
+    cfg.registerEffect('slideIn', {
+        defaultDuration: 1950,
+        calls: [
+            [{translateX: ['0%', '-100%']}, 1],
+        ]
+    });
+
+
+    cfg.registerEffect('rotateNeg180', {
+        defaultDuration: 1950,
+        calls: [
+            [{rotateZ: [180, 360]}, 1],
+        ]
+    });
+
+    cfg.registerEffect('rotate180', {
+        defaultDuration: 1950,
+        calls: [
+            [{rotateZ: [180, 0]}, 1],
+        ]
+    });
+}
+
+
 function configureResources(aurelia: Aurelia) {
     aurelia.use
         .standardConfiguration()
         .globalResources([
             'apps/workspaces/resources/custom-elements/navigator/navigator',
-            'lib/common/resources/custom-elements/summary-icon/summary-icon'
+            'lib/common/resources/custom-elements/summary-icon/summary-icon',
+            'lib/common/resources/custom-elements/nav-bar/navbar'
         ])
         .plugin('aurelia-animator-velocity', cfg => {
-            cfg.registerEffect("wipeLeftToRight", {
-                defaultDuration: 1950,
-                calls: [
-                    [{translateX: ['0%', '-100%']}, 1],
-                    // [{rotateZ: -10}, 0.20],
-                    // [{rotateZ: 5}, 0.20],
-                    // [{rotateZ: -5}, 0.20],
-                    // [{rotateZ: 0}, 0.20]
-                ]
-            });
+            registerAnimations(cfg);
             return cfg;
         })
         .plugin('aurelia-dialog', (config: DialogConfiguration) => {

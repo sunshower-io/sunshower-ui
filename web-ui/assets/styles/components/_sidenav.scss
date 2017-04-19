@@ -3,6 +3,21 @@ $sidenav-alternate-bg: #3c3c54;
 $sidenav-search-color: #767593;
 $sidenav-li-margin-bottom: 30px;
 
+.side-nav-context {
+  background-color: $sidenav-bg-color;
+  position: absolute;
+  left: $small-nav-width;
+  top:0;
+  bottom:0;
+  width: $side-nav-width;
+  z-index: 999;
+  margin: 0;
+  height: 100%;
+  overflow-y: auto;
+
+  @extend .z-depth-1;
+}
+
 .side-nav-small {
   background: $sidenav-bg-color;
   position:absolute;
@@ -51,7 +66,6 @@ $sidenav-li-margin-bottom: 30px;
 
 
 .side-nav {
-  left: $small-nav-width;
 
   //.breadcrumb-container {
   //  background: $sidenav-search-color;

@@ -1,18 +1,30 @@
 template
-    ui.side-nav(id="${controlId}")
-        li
-            div
-                compose(view-model.bind="currentComponent.reference")
-
-
+    .side-nav-context(
+        id="${controlId}"
+        ref="navigationContainer"
+            anim-enter="slideOut"
+            anim-leave="slideIn"
+        )
+        compose(
+            view-model.bind="currentComponent.reference",
+            if.bind="opened"
+        )
 
     ul.side-nav-small
         li.side-nav-header
             a
                 summary-icon(text="Hasli.io" fill="#239ae8" textColor="white" stroke="none" size="60")
+                //img(src="dist/icons/hasli-icon.svg", alt="Hasli.io")
         li(repeat.for="nav of navigatorManager.router.navigation" class="${nav.isActive ? 'active' : ''}")
             a(href.bind="nav.href" click.delegate="open(nav)")
                 i.material-icons.mdi(class="${nav.settings.icon}")
-        li.side-nav-toggle
-            a
-                i.material-icons.mdi(class="${opened ? 'mdi-chevron-double-left' : 'mdi-chevron-double-right'}", click.delegate="toggle()")
+        li.side-nav-toggle(
+            click.delegate="toggle()"
+            ref="navigationControl"
+            anim-enter="rotate180"
+            anim-leave="rotateNeg180"
+
+        )
+            a(href="#")
+                i.material-icons.mdi(
+                    class="${opened ? 'mdi-chevron-double-left' : 'mdi-chevron-double-right'}")
