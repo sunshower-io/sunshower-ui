@@ -18,45 +18,58 @@ import {Identifier} from "lib/common/lang/identifier";
 export class WorkspaceService implements Service<Workspace> {
 
     public workspace: Workspace;
+    private initialized: boolean;
 
     constructor(private client: HttpClient,
                 private httpClient: HttpBasicClient,
-                private serviceManager: ServiceManager
-    ) {
+                private serviceManager: ServiceManager) {
+        console.log("construct");
         serviceManager.register('workspaceId', this);
-        this.initial().then(t => {
 
-        });
     }
 
 
-    search(input: string) : Promise<Workspace[]> {
+    search(input: string): Promise<Workspace[]> {
         return this.client.fetch('workspaces/search', {
             method: 'put',
             body: JSON.stringify({
                 name: input,
-                key : input
+                key: input
             })
         })
-        .then(t => t.json() as any)
-        .then(t => t.map(u => new Workspace(u)));
+            .then(t => t.json() as any)
+            .then(t => t.map(u => new Workspace(u)));
     }
 
-    public initial() : Promise<Workspace> {
+    public initial(): Promise<Workspace> {
         return this.client.fetch('workspaces/initial')
-            .then(t=> t.json() as any)
+            .then(t => t.json() as any)
             .then(t => new Workspace(t));
     }
 
 
     list(): Promise<Workspace[]> {
+        if (!this.initialized) {
+            return this.initialize().then(t => this.listAll());
+        } else {
+            return this.listAll();
+        }
+    }
+
+    initialize(): Promise<Workspace> {
+        return this.initial();
+    }
+
+    private listAll() : Promise<Workspace[]> {
         return this.client.fetch('workspaces')
             .then(t => t.json() as any)
             .then(t => t.map(u => new Workspace(u)));
+
     }
 
+
     bind(key: string): Promise<Workspace> {
-        if(Identifier.isIdentifier(key)) {
+        if (Identifier.isIdentifier(key)) {
             return this.client.fetch(`workspaces/${key}`)
                 .then(t => t.json() as any)
                 .then(t => {

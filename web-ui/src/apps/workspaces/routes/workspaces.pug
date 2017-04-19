@@ -1,2 +1,5 @@
 template
     h1 Workspaces
+    ul
+        li(repeat.for="workspace of workspaces")
+            | ${workspace.name}

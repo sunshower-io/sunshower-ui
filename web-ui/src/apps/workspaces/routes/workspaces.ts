@@ -1,15 +1,24 @@
-import {autoinject} from 'aurelia-framework';
-import {WorkspaceService} from "apps/workspaces/lib/model/core/workspace/service";
+import {
+    autoinject,
+    bindable
+} from 'aurelia-framework';
+import {
+    Workspace,
+    WorkspaceService
+} from "apps/workspaces/lib/model/core/workspace";
+
 
 @autoinject
 export class WorkspacesOverview {
 
+    @bindable
+    private workspaces: Workspace[];
     constructor(private workspaceService:WorkspaceService) {
 
     }
 
     attached() : void {
-        this.workspaceService.list().then(t => console.log(t));
+        this.workspaceService.list().then(t => this.workspaces = t);
     }
 
 }
