@@ -14,6 +14,8 @@ import {
     AuthenticationContextHolder
 } from "lib/common/security";
 import {bindable} from "aurelia-templating";
+import {Container} from 'aurelia-dependency-injection';
+import {ContextResolver} from "lib/common/service/context-resolver";
 
 @autoinject
 export class App {
@@ -21,7 +23,10 @@ export class App {
     @bindable
     private router: Router;
 
-    constructor(private tokenHolder: AuthenticationContextHolder) {
+    constructor(
+        private container: Container,
+        private tokenHolder: AuthenticationContextHolder
+    ) {
 
     }
 
@@ -29,6 +34,7 @@ export class App {
                            router: Router) {
         config.title = 'Hasli.io';
         config.addPipelineStep('authorize', new SecurityStep(this.tokenHolder));
+        config.addPipelineStep('preActivate', new ContextResolver(this.container));
 
         config.map([{
             route: '',
