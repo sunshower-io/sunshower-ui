@@ -5,14 +5,13 @@ nav {
   background-color: white;
   box-shadow:none; //consider removing to keep navbar & body distinct
   position:absolute;
-  left: $small-nav-width;
+  left:0;
   top:0;
   right:0;
   border-bottom: 1px solid $border-color;
 
   .nav-wrapper {
     width: 100%;
-    padding-right: $small-nav-width;
   }
 
   i, [class^="mdi-"], [class*="mdi-"], i.material-icons {
@@ -23,6 +22,7 @@ nav {
     height: $navbar-height;
     line-height: $navbar-height;
     box-sizing: border-box;
+    margin-left: $small-nav-width + $navbar-font-size;
     padding-left: $navbar-font-size;
     font-size: 1.5rem;
     font-weight: 300;
@@ -31,13 +31,53 @@ nav {
     @media #{$medium-and-down} {
       height: $navbar-height-mobile;
       line-height: $navbar-height-mobile;
-      left: 0;
+      left: auto;
       transform: none;
+    }
+  }
+
+  .breadcrumb-container {
+    position: absolute;
+    left: $side-nav-width + $small-nav-width + $standard-padding;
+
+    a {
+      color: $midgrey;
+      font-size: 1em;
+      cursor: pointer;
+
+      &:last-child {
+        color: $primary-color;
+        font-size:1.25em;
+      }
+
+      &:before {
+        font: inherit;
+        content: "/";
+        margin: 0 !important;
+        padding: 0 .25em;
+        color: $midgrey !important;
+      }
     }
   }
 
   ul.user-menu {
     width: $body-panel-width;
+
+    & > li {
+      box-sizing: border-box;
+      background: $primary-color;
+      height: $navbar-height;
+      width: $body-panel-width - ($navbar-height*2);
+      cursor: pointer;
+      color: white;
+      text-align: center;
+
+      &:first-child, &:last-child {
+        width: $navbar-height;
+        text-align: center;
+        background: $primary-color-dark;
+      }
+    }
   }
 
 

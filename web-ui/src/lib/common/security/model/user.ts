@@ -20,4 +20,6 @@ export class User {
     token:Token;
 
     emailAddress:string;
+
+    image:string;
 }

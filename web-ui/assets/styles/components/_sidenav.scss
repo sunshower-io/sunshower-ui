@@ -1,10 +1,9 @@
-$small-nav-width: $navbar-height; //setting it to navbar height makes it align nicely with the logo
-$sidenav-alternate-bg: #3c3c54;
+$sidenav-alternate-bg: #29324B;
 $sidenav-search-color: #767593;
 $sidenav-li-margin-bottom: 30px;
 
 .side-nav-context {
-  background-color: $sidenav-bg-color;
+  background-color: $sidenav-alternate-bg;
   position: absolute;
   left: $small-nav-width;
   top:0;
@@ -15,7 +14,67 @@ $sidenav-li-margin-bottom: 30px;
   height: 100%;
   overflow-y: auto;
 
-  @extend .z-depth-1;
+  //@extend .z-depth-1;
+
+  .side-nav-search {
+    height: $small-nav-width*2;
+    padding-top: $small-nav-width;
+    box-sizing: border-box;
+    background-color: $sidenav-search-color;
+    position:relative;
+
+    input {
+      margin: $navbar-font-size;
+      padding: $navbar-font-size/2 30px $navbar-font-size/2 $navbar-font-size/2;
+      height: $small-nav-width - $navbar-font-size*2;
+      color: white;
+      border-bottom: none !important;
+      box-shadow: none !important;
+      width: -webkit-calc(100% - #{$navbar-font-size*2});
+      width: -moz-calc(100% - #{$navbar-font-size*2});
+      width: calc(100% - #{$navbar-font-size*2});
+      box-sizing: border-box;
+      background-color: $sidenav-alternate-bg;
+
+      &::-webkit-input-placeholder {
+        color: $sidenav-search-color;
+      }
+      &::-moz-placeholder {
+        color: $sidenav-search-color;
+      }
+      &:-ms-input-placeholder {
+        color: $sidenav-search-color;
+      }
+
+    }
+
+    .side-nav-search-icon {
+      position: absolute;
+      right: $navbar-font-size + 5px;
+      bottom: $navbar-font-size + 3px;
+      font-size:20px;
+      color: $sidenav-search-color;
+      transition: color .3s;
+      margin-right: 0 !important;
+    }
+
+    .search-results {
+      background: $sidenav-search-color;
+      color: white;
+      position: absolute;
+      top: $small-nav-width*2;
+      width:0;
+      box-sizing: border-box;
+      z-index:1000;
+      padding: 1rem;
+
+      a {
+        color: white;
+      }
+    }
+
+  }
+
 }
 
 .side-nav-small {
@@ -38,8 +97,12 @@ $sidenav-li-margin-bottom: 30px;
     &.side-nav-header {
       margin-bottom: $small-nav-width;
 
-      .summary-icon {
+      .summary-icon, img {
         vertical-align:middle;
+      }
+
+      img {
+        width:50px;
       }
 
     }
@@ -106,7 +169,6 @@ $sidenav-li-margin-bottom: 30px;
 }
 
 
-////todo set this based on context color
 //.side-nav .collapsible .active .collapsible-header {
 //  background: $secondary-color;
 //}
@@ -132,108 +194,59 @@ $sidenav-li-margin-bottom: 30px;
 //
 //}
 
-.side-nav-search {
-  position:relative;
-  margin: 0 0 0 45px;
-  padding-top: 12px;
-
-  input {
-    margin: .75rem 0;
-    padding: .5rem 30px .5rem 0;
-    height: 2.5rem;
-    color: white;
-    border-bottom: none !important;
-    box-shadow: none !important;
-    width:100%;
-    box-sizing: border-box;
-
-    &::-webkit-input-placeholder {
-      color: $sidenav-search-color;
-    }
-    &::-moz-placeholder {
-      color: $sidenav-search-color;
-    }
-    &:-ms-input-placeholder {
-      color: $sidenav-search-color;
-    }
-  }
-
-  .search-results {
-    background: $sidenav-search-color;
-    color: white;
-    position: absolute;
-    top: $navbar-height;
-    left: -60px;
-    right: -15px;
-    z-index:1000;
-    padding: 0 1rem;
-
-    a {
-      color: white;
-    }
-  }
-}
-
-.side-nav-search-icon {
-  position: absolute;
-  right: 0;
-  top: 20px;
-  color: $sidenav-search-color;
-  transition: color .3s;
-  margin-right: 0 !important;
-}
-
-.side-nav li.dashboard a {
-  font-size:1.2em;
-  .summary-icon {
-    margin-top: .5em;
-    margin-right: .5em;
-    vertical-align: top;
-  }
-}
-
-.side-nav li > a {
-  padding: 0 16px;
-}
-
-.side-nav li.create-context {
-  position: absolute;
-  right: 0;
-  bottom: 15px;
-  left: 0;
-  height: 68px;
-  margin-bottom:0;
-
-  a.btn {
-    margin: 10px 50px;
-    border-radius: 25px;
-    border: 0;
-
-    &.default-color {
-      background: $secondary-color;
-    }
-  }
-
-}
+//
+//
+//.side-nav li.dashboard a {
+//  font-size:1.2em;
+//  .summary-icon {
+//    margin-top: .5em;
+//    margin-right: .5em;
+//    vertical-align: top;
+//  }
+//}
+//
+//.side-nav li > a {
+//  padding: 0 16px;
+//}
+//
+//.side-nav li.create-context {
+//  position: absolute;
+//  right: 0;
+//  bottom: 15px;
+//  left: 0;
+//  height: 68px;
+//  margin-bottom:0;
+//
+//  a.btn {
+//    margin: 10px 50px;
+//    border-radius: 25px;
+//    border: 0;
+//
+//    &.default-color {
+//      background: $secondary-color;
+//    }
+//  }
+//
+//}
 
 
-.navigator-content {
-  height: -webkit-calc(100% - #{$navbar-height});
-  height: -moz-calc(100% - #{$navbar-height});
-  height: calc(100% - #{$navbar-height});
-
-
-  @media #{$medium-and-down} {
-    height: -webkit-calc(100% - #{$navbar-height-mobile});
-    height: -moz-calc(100% - #{$navbar-height-mobile});
-    height: calc(100% - #{$navbar-height-mobile});
-
-  }
-
-  .dashboard {
-    margin-bottom: $sidenav-li-margin-bottom;
-  }
-}
+//.navigator-content {
+//  height: -webkit-calc(100% - #{$navbar-height});
+//  height: -moz-calc(100% - #{$navbar-height});
+//  height: calc(100% - #{$navbar-height});
+//
+//
+//  @media #{$medium-and-down} {
+//    height: -webkit-calc(100% - #{$navbar-height-mobile});
+//    height: -moz-calc(100% - #{$navbar-height-mobile});
+//    height: calc(100% - #{$navbar-height-mobile});
+//
+//  }
+//
+//  .dashboard {
+//    margin-bottom: $sidenav-li-margin-bottom;
+//  }
+//}
 
 #sidenav-overlay {
   display:none;
