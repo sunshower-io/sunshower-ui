@@ -9,7 +9,6 @@ nav {
   top:0;
   right:0;
   border-bottom: 1px solid $border-color;
-  padding-left: $small-nav-width;
 
   .nav-wrapper {
     width: 100%;
@@ -23,6 +22,7 @@ nav {
     height: $navbar-height;
     line-height: $navbar-height;
     box-sizing: border-box;
+    margin-left: $small-nav-width + $navbar-font-size;
     padding-left: $navbar-font-size;
     font-size: 1.5rem;
     font-weight: 300;
@@ -31,8 +31,32 @@ nav {
     @media #{$medium-and-down} {
       height: $navbar-height-mobile;
       line-height: $navbar-height-mobile;
-      left: 0;
+      left: auto;
       transform: none;
+    }
+  }
+
+  .breadcrumb-container {
+    position: absolute;
+    left: $side-nav-width + $small-nav-width + $standard-padding;
+
+    a {
+      color: $midgrey;
+      font-size: 1em;
+      cursor: pointer;
+
+      &:last-child {
+        color: $primary-color;
+        font-size:1.25em;
+      }
+
+      &:before {
+        font: inherit;
+        content: "/";
+        margin: 0 !important;
+        padding: 0 .25em;
+        color: $midgrey !important;
+      }
     }
   }
 
