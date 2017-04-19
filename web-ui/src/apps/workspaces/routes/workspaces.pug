@@ -1,5 +1,8 @@
 template
-    h1 Workspaces
-    ul
-        li(repeat.for="workspace of workspaces")
+    .body-content
+        h1 Workspaces
+        .card(repeat.for="workspace of workspaces")
             | ${workspace.name}
+    .body-panel
+        .body-panel-top
+        .body-panel-bottom
