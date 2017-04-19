@@ -1,8 +1,10 @@
 template
+    require(from="lib/common/resources/custom-elements/body-panel/body-panel")
+    require(from="lib/common/resources/custom-elements/fab/fab")
     .body-content
         h1 Workspaces
         .card(repeat.for="workspace of workspaces")
-            | ${workspace.name}
-    .body-panel
-        .body-panel-top
-        .body-panel-bottom
+            .card-content
+                h2.card-title ${workspace.name}
+    body-panel(sections="true")
+    fab(active="true")
