@@ -19,15 +19,19 @@ export class WorkspaceApplication {
     }
 
 
-    public configureRouter(
-        cfg: RouterConfiguration,
-        router: Router
-    ): void {
+    public configureRouter(cfg: RouterConfiguration,
+                           router: Router): void {
 
         cfg.map([{
-            route: ':workspaceId',
-            moduleId: './routes/workspace/index'
-        }]);
+            route: ['', 'list'],
+            moduleId: './routes/workspaces'
+
+
+        }, {
+                route: ':workspaceId',
+                moduleId: './routes/workspace/index'
+            }
+        ]);
 
 
         this.navigatorManager.bind(router);
