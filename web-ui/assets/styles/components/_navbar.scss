@@ -5,14 +5,14 @@ nav {
   background-color: white;
   box-shadow:none; //consider removing to keep navbar & body distinct
   position:absolute;
-  left: $small-nav-width;
+  left:0;
   top:0;
   right:0;
   border-bottom: 1px solid $border-color;
+  padding-left: $small-nav-width;
 
   .nav-wrapper {
     width: 100%;
-    padding-right: $small-nav-width;
   }
 
   i, [class^="mdi-"], [class*="mdi-"], i.material-icons {

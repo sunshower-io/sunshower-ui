@@ -97,8 +97,12 @@ $sidenav-li-margin-bottom: 30px;
     &.side-nav-header {
       margin-bottom: $small-nav-width;
 
-      .summary-icon {
+      .summary-icon, img {
         vertical-align:middle;
+      }
+
+      img {
+        width:50px;
       }
 
     }
