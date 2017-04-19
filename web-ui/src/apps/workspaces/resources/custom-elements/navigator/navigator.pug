@@ -1,5 +1,8 @@
 template
     .side-nav-context(id="${controlId}")
+        .side-nav-search
+            input(type="text" placeholder="Filter")
+            i.material-icons.mdi.mdi-filter-outline.side-nav-search-icon
         compose(
             view-model.bind="currentComponent.reference",
             if.bind="opened"
@@ -8,6 +11,7 @@ template
     ul.side-nav-small
         li.side-nav-header
             a
+                //todo switch to logo
                 summary-icon(text="Hasli.io" fill="#239ae8" textColor="white" stroke="none" size="50")
                 //img(src="dist/icons/hasli-icon.svg", alt="Hasli.io")
         li(repeat.for="nav of navigatorManager.router.navigation" class="${nav.isActive ? 'active' : ''}")
