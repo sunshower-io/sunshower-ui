@@ -25,8 +25,8 @@ export class Navigator {
     @bindable
     private opened                          : boolean;
 
-    private navigationContainer             : HTMLElement;
     private navigationControl               : HTMLElement;
+    private navigationContainer             : HTMLElement;
 
 
     @bindable
