@@ -1,5 +1,8 @@
 template
-    h1 Workspaces
-    ul
-        li(repeat.for="workspace of workspaces")
-            | ${workspace.name}
+    require(from="lib/common/resources/custom-elements/body-panel/body-panel")
+    .body-content(ref="content")
+        h1 Workspaces
+        .card(repeat.for="workspace of workspaces")
+            .card-content
+                h2.card-title ${workspace.name}
+    body-panel(active.bind="panelActive" sections.bind="true" content.bind="content")
