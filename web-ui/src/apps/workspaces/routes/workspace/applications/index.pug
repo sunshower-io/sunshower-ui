@@ -1,2 +1,5 @@
 template
-    h1 Applications
+    require(from="lib/common/resources/custom-elements/body-panel/body-panel")
+    .body-content
+        h1 Applications
+    body-panel(active.bind="panelActive" sections.bind="true" content.bind="content")
