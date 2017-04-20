@@ -28,6 +28,10 @@ body {
 .body-content {
   padding: $standard-padding;
   margin-right: $body-panel-width;
+
+  &.body-content-full {
+    margin-right: 0;
+  }
 }
 
 .body-panel {

@@ -6,5 +6,20 @@ export class BodyPanel {
     @bindable
     sections: boolean;
 
+    @bindable
+    active: boolean;
+
+    // @bindable
+    // content: HTMLElement;
+
+    activate(active, sections) {
+
+    }
+
+
+    togglePanel() : void {
+        this.active = !this.active;
+    }
+
 
 }
