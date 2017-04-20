@@ -1,8 +1,8 @@
 template
     require(from="lib/common/resources/custom-elements/body-panel/body-panel")
-    .body-content
+    .body-content(ref="content")
         h1 Workspaces
         .card(repeat.for="workspace of workspaces")
             .card-content
                 h2.card-title ${workspace.name}
-    body-panel(active.bind="false" sections.bind="true")
+    body-panel(active.bind="panelActive" sections.bind="true" content.bind="content")

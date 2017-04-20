@@ -9,16 +9,17 @@ export class BodyPanel {
     @bindable
     active: boolean;
 
-    // @bindable
-    // content: HTMLElement;
+    @bindable
+    content: HTMLElement;
 
-    activate(active, sections) {
+    activate(active, sections, content) {
 
     }
 
 
     togglePanel() : void {
         this.active = !this.active;
+        $(this.content).toggleClass('body-content-full');
     }
 
 
