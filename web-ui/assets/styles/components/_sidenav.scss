@@ -53,7 +53,9 @@ $sidenav-li-margin-bottom: 30px;
       right: $navbar-font-size + 5px;
       bottom: $navbar-font-size + 3px;
       font-size:20px;
-      color: $sidenav-search-color;
+      //color: $sidenav-search-color;
+      color: white;
+      opacity: .75;
       transition: color .3s;
       margin-right: 0 !important;
     }
