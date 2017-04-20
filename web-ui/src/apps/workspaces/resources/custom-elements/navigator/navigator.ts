@@ -32,6 +32,9 @@ export class Navigator {
     @bindable
     private currentComponent                 : NavigationComponent;
 
+    @bindable
+    private title                            : string;
+
 
     constructor(
         private animator        : VelocityAnimator,
@@ -42,7 +45,9 @@ export class Navigator {
 
     public attached(): void {
         this.hide();
+        this.open(this.navigatorManager.router.currentInstruction.config.navModel);
     }
+
 
     public show(): void {
 
@@ -75,6 +80,7 @@ export class Navigator {
             this.currentComponent = settings.contextComponent;
             this.currentComponent.active = true;
             this.opened = true;
+            this.title = model.title;
         }
         return true;
     }

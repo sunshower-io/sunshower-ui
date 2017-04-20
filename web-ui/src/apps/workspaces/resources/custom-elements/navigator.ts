@@ -7,14 +7,24 @@ export interface NavigationComponent {
 }
 
 
+type Listener = (Router) => void;
+
+
 export class NavigatorManager {
 
     @bindable
-    private router: Router;
+    public router: Router;
+
+    private listeners: Listener[];
+
+    constructor() {
+        this.listeners = [];
+    }
 
 
     public bind(router: Router): void {
         this.router = router;
+        this.listeners.forEach(t => t(router));
     }
 
     public getCurrent(): NavigationComponent {
@@ -26,4 +36,8 @@ export class NavigatorManager {
             .contextComponent;
     }
 
+
+    public onBind(f : (Router) => void) {
+        this.listeners.push(f);
+    }
 }

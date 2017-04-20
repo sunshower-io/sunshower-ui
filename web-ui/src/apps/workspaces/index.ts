@@ -24,12 +24,14 @@ export class WorkspaceApplication {
 
         cfg.map([{
             route: ['', 'list'],
-            moduleId: './routes/workspaces'
+            moduleId: './routes/workspaces',
+            title: 'Workspaces'
 
 
         }, {
                 route: ':workspaceId',
-                moduleId: './routes/workspace/index'
+                moduleId: './routes/workspace/index',
+                title: 'Workspace'
             }
         ]);
 
