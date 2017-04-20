@@ -8,6 +8,7 @@ module.exports = {
         'favicon.ico',
         'LICENSE',
         'assets/**/*',
+        'dist/css/*',
         "jspm_packages/npm/bluebird@3.4.1/js/browser/bluebird.min.js",
         "jspm_packages/npm/jquery@2.2.4/dist/jquery.js",
         'jspm_packages/system.js',
@@ -15,10 +16,17 @@ module.exports = {
         'jspm_packages/system-csp-production.js',
         'jspm_packages/github/sciactive/pnotify@3.0.0.js',
         'jspm_packages/github/jgraph/mxgraph-js@master.js',
+        'jspm_packages/npm/materialize-css@0.98.1.js',
         'jspm_packages/npm/aurelia-animator-velocity@1.0.1',
         'jspm_packages/npm/lodash@4.17.4.js',
         'jspm_packages/npm/rxjs@5.0.3.js',
+        'jspm_packages/npm/mdi@1.9.33',
+        'jspm_packages/github/systemjs/plugin-css@0.1.33.js',
+        'jspm_packages/github/systemjs/plugin-css@0.1.33/css.js',
+        'jspm_packages/github/systemjs/plugin-json@0.1.33.js',
+        'jspm_packages/github/systemjs/plugin-text@0.1.33.js',
         'jspm_packages/github/jspm/**/*',
+        'jspm_packages/npm/mdi@1.9.33/css/materialdesignicons.css',
         'jspm_packages/npm/buffer@3.6.0.js',
         'jspm_packages/npm/buffer@3.6.0/**/*',
         'jspm_packages/npm/showdown@1.6.4.js',
@@ -35,6 +43,13 @@ module.exports = {
     // must be 'normalized' by jspm to get the proper
     // path.
     'normalize': [
+        ['mdi', ['/css/*.css', '/fonts/*.eot', '/fonts/*.svg', '/fonts/**']],
+        ['plugin-css', ['/css.js']],
+        [
+            'materialize-css', [
+                '/bin/materialize.js',
+                '/bin/materialize.css'
+        ]],
         [
             'ace', [
             '/*.js'
