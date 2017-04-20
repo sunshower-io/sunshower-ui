@@ -39,7 +39,6 @@ gulp.task('build-system', function() {
 gulp.task('copy-fonts', function() {
     return gulp.src('jspm_packages/npm/materialize-css@0.98.1/fonts/**/*')
         .pipe(gulp.dest('dist/fonts'));
-
 });
 
 gulp.task('copy-icons', function() {

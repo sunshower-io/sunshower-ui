@@ -9,6 +9,7 @@ module.exports = {
         'LICENSE',
         'assets/**/*',
         'dist/css/*',
+        'dist/fonts/**/*',
         "jspm_packages/npm/bluebird@3.4.1/js/browser/bluebird.min.js",
         "jspm_packages/npm/jquery@2.2.4/dist/jquery.js",
         'jspm_packages/system.js',
