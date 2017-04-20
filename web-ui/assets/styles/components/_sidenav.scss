@@ -1,5 +1,5 @@
 $sidenav-alternate-bg: #29324B;
-$sidenav-search-color: #767593;
+$sidenav-search-color: #4A5166;
 $sidenav-li-margin-bottom: 30px;
 
 .side-nav-context {
@@ -116,13 +116,16 @@ $sidenav-li-margin-bottom: 30px;
 
     &.active {
       background-color: $secondary-color;
+      i.material-icons {
+        opacity: .85;
+      }
     }
 
     a i.material-icons {
       color: white;
-      //fill-opacity: 0.75;
+      opacity: 0.75;
       //todo make thin
-      font-size: 35px;
+      font-size: 30px;
     }
 
   }
