@@ -21,48 +21,52 @@ $sidenav-li-margin-bottom: 30px;
     height: $small-nav-width;
     box-sizing: border-box;
     background-color: $sidenav-search-color;
-    color: white;
-    text-align: center;
-    padding-top: $sidenav-font-size;
-    font-size: 1.5rem;
+    padding: 0 $sidenav-font-size;
+    font-size: 1.25rem;
+    line-height: $small-nav-width;
     font-weight: 300;
-    text-transform: uppercase;
+    span {
+      opacity: .85;
+      color: white;
+    }
   }
 
   .side-nav-search {
     height: $small-nav-width;
     box-sizing: border-box;
-    background-color: $sidenav-search-color;
+    padding: $navbar-font-size/2 30px $navbar-font-size/2 $navbar-font-size;
     position:relative;
+    background-color: #3C4253;
 
     input {
-      margin: $navbar-font-size;
-      padding: $navbar-font-size/2 30px $navbar-font-size/2 $navbar-font-size/2;
-      height: $small-nav-width - $navbar-font-size*2;
+      //margin: $navbar-font-size;
+      //height: $small-nav-width - $navbar-font-size*2;
       color: white;
       border-bottom: none !important;
       box-shadow: none !important;
-      width: -webkit-calc(100% - #{$navbar-font-size*2});
-      width: -moz-calc(100% - #{$navbar-font-size*2});
-      width: calc(100% - #{$navbar-font-size*2});
+      //width: -webkit-calc(100% - #{$navbar-font-size*2});
+      //width: -moz-calc(100% - #{$navbar-font-size*2});
+      //width: calc(100% - #{$navbar-font-size*2});
       box-sizing: border-box;
-      background-color: $sidenav-alternate-bg;
 
       &::-webkit-input-placeholder {
-        color: $sidenav-search-color;
+        color: white;
+        opacity: .75;
       }
       &::-moz-placeholder {
-        color: $sidenav-search-color;
+        color: white;
+        opacity: .75;
       }
       &:-ms-input-placeholder {
-        color: $sidenav-search-color;
+        color: white;
+        opacity: .75;
       }
 
     }
 
     .side-nav-search-icon {
       position: absolute;
-      right: $navbar-font-size + 5px;
+      right: $navbar-font-size - 3px;
       bottom: $navbar-font-size + 3px;
       font-size:20px;
       //color: $sidenav-search-color;
@@ -87,6 +91,20 @@ $sidenav-li-margin-bottom: 30px;
       }
     }
 
+  }
+
+  .side-nav-body {
+    padding: $standard-padding;
+    color: white;
+    overflow-y: auto;
+    position: relative;
+    height: -webkit-calc(100% - #{$small-nav-width*2});
+    height: -moz-calc(100% - #{$small-nav-width*2});
+    height: calc(100% - #{$small-nav-width*2});
+
+    h1, h2, h3, h4, h5, h6 {
+      font-size: 18px;
+    }
   }
 
 }

@@ -21,6 +21,10 @@
   bottom:0;
   position:absolute;
 
+  h1 {
+    margin:3rem 0 3rem 0;
+  }
+
   @media #{$medium-and-down} {
     width:90%;
     padding:75px;
@@ -37,10 +41,6 @@
   .btn-flat {
     margin-left: 1em;
   }
-}
-
-h1 {
-  margin:3rem 0 3rem 0;
 }
 
 .auth-submit {
