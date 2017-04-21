@@ -55,7 +55,7 @@ export class WorkspaceContext {
             settings: {
                 icon: 'mdi-apps',
                 contextComponent: {
-                    reference: 'apps/workspaces/routes/workspace/designer/context-menu'
+                    reference: 'apps/workspaces/routes/workspace/infrastructure/context-menu'
                 }
             }
         }]);
