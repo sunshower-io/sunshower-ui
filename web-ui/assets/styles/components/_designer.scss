@@ -9,17 +9,61 @@ $designer-header-height: 40px;
   box-sizing: border-box;
 }
 
-.designer-editor-panel {
-  position: absolute;
+.designer-menu-bar {
+  background: white;
   top: 0;
   right: 0;
+  left: $small-nav-width;
+  height: $designer-header-height;
+  box-sizing: border-box;
+  border-bottom: $default-border;
+  padding-right: $body-panel-width;
+  padding-left: $side-nav-width;
+  line-height: $designer-header-height;
+
+  .designer-menu-bar-utilities {
+    float: right;
+    .material-icons {
+      color: $lightgrey;
+      font-size: 30px;
+    }
+  }
+
+  &:after {
+    content: " ";
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+  }
+}
+
+.designer-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
   width: $body-panel-width;
   box-sizing: border-box;
-  bottom: 0;
-  border-left: $default-border;
   background: white;
 
-  .designer-header {
+  &.designer-panel-right {
+    border-left: $default-border;
+    right: 0;
+  }
+
+  &.designer-panel-left {
+    border-right: $default-border;
+    left: 0;
+  }
+}
+
+.designer-header {
+  height: $designer-header-height;
+  box-sizing: border-box;
+  line-height: $designer-header-height;
+  border-bottom: $default-border;
+
+  &.designer-panel-menu {
     text-align: center;
 
     .material-icons {
@@ -32,24 +76,5 @@ $designer-header-height: 40px;
       }
     }
   }
-}
 
-.designer-menu-bar {
-  background: white;
-  top: 0;
-  right: 0;
-  left: $small-nav-width;
-  height: $designer-header-height;
-  box-sizing: border-box;
-  border-bottom: $default-border;
-  padding-right: $body-panel-width;
-  padding-left: $side-nav-width;
-  line-height: $designer-header-height;
-}
-
-.designer-header {
-  height: $designer-header-height;
-  box-sizing: border-box;
-  line-height: $designer-header-height;
-  border-bottom: $default-border;
 }
