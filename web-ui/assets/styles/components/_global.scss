@@ -6,19 +6,10 @@ body {
 
 .body {
   position: absolute;
-  left: 0;
+  left: $small-nav-width;
   right: 0;
   top: $navbar-height;
   bottom: 0;
-
-  padding-left: $small-nav-width;
-  //margin-top: $navbar-height;
-  //position: relative;
-  box-sizing: border-box;
-  //width:100%;
-  //height: -webkit-calc(100% - #{$navbar-height});
-  //height: -moz-calc(100% - #{$navbar-height});
-  //height: calc(100% - #{$navbar-height});
 
   @media #{$medium-and-down} {
     top: $navbar-height-mobile;
