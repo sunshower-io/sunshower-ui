@@ -3,7 +3,6 @@ import {CanvasModel} from 'lib/designer/model';
 import {mxRubberband} from "mxgraph";
 import {Grid} from "./grid";
 
-
 export class Designer {
 
 

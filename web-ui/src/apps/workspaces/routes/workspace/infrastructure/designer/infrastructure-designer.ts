@@ -33,15 +33,15 @@ export default class InfrastructureDesigner {
         let designer = new Designer(this.element),
             canvas = designer.getCanvas();
 
-        canvas.addGrid(new Grid(canvas, {
-            strokeStyle: '#E2E2E2',
-            gridSize   : 30,
-        }));
-
-        canvas.addGrid(new Grid(canvas, {
-            strokeStyle: '#A0A0A0',
-            gridSize   : 90,
-        }));
+        // canvas.addGrid(new Grid(canvas, {
+        //     strokeStyle: '#E2E2E2',
+        //     gridSize   : 30,
+        // }));
+        //
+        // canvas.addGrid(new Grid(canvas, {
+        //     strokeStyle: '#A0A0A0',
+        //     gridSize   : 90,
+        // }));
 
 
 
