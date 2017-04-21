@@ -53,7 +53,7 @@ export class WorkspaceContext {
             nav: true,
             title: 'Infrastructure Designer',
             settings: {
-                icon: 'mdi-apps',
+                icon: 'mdi-cloud-outline',
                 contextComponent: {
                     reference: 'apps/workspaces/routes/workspace/infrastructure/context-menu'
                 }

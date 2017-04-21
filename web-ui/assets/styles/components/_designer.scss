@@ -1,3 +1,5 @@
+$designer-header-height: 36px;
+
 .designer-container {
   position:absolute;
   top:0;
@@ -6,3 +8,15 @@
   right:0;
   box-sizing: border-box;
 }
+
+.designer-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: $body-panel-width;
+  box-sizing: border-box;
+  bottom: 0;
+  border-left: 1px solid $border-color;
+  background: white;
+}
+
