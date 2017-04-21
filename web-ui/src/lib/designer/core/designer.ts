@@ -1,5 +1,7 @@
 import {Canvas} from 'lib/designer/canvas';
 import {CanvasModel} from 'lib/designer/model';
+import {mxRubberband} from "mxgraph";
+import {Grid} from "./grid";
 
 
 export class Designer {
@@ -12,12 +14,17 @@ export class Designer {
         private readonly container: HTMLElement,
         model: CanvasModel = new CanvasModel()
     ) {
-        this.canvas = new Canvas(container, model);
-        this.canvas.gridSize = 60;
+        let canvas = new Canvas(container, model);
+        new mxRubberband(canvas);
+
+        this.canvas = canvas;
     }
+
+
 
     getCanvas() : Canvas {
         return this.canvas;
     }
 
 }
+

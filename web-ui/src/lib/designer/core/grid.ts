@@ -5,10 +5,22 @@ import {
     mxEvent
 } from "mxgraph";
 
+
+export interface GridOptions {
+    strokeStyle ?: string;
+
+    dash        ?: number[];
+
+    gridSize    ?: number;
+}
+
 export class Grid {
     private canvas: HTMLCanvasElement;
 
-    constructor(private graph: mxGraph) {
+    constructor(
+        private readonly graph: mxGraph,
+        private readonly options: GridOptions
+    ) {
         this.canvas = document.createElement('canvas');
         this.canvas.style.position = 'absolute';
         this.canvas.style.top = '0px';
@@ -20,7 +32,7 @@ export class Grid {
 
     public draw(): void {
         let scale = 0,
-            gridSize = 0,
+            gridSize = this.options.gridSize,
             width = 0,
             height = 0,
             translate = {x:null, y:null},
@@ -28,6 +40,7 @@ export class Grid {
             canvas = this.canvas,
             isContainerEvent = mxGraphView.prototype.isContainerEvent;
 
+        context.fillStyle = "rgba(255, 255, 255, 0.5)";
 
 
 
@@ -46,6 +59,7 @@ export class Grid {
                       context: CanvasRenderingContext2D): void {
 
         let graph = this.graph,
+            options = this.options,
             bounds = graph.getGraphBounds(),
             width = Math.max(bounds.x + bounds.width, graph.container.clientWidth),
             height = Math.max(bounds.y + bounds.height, graph.container.clientHeight),
@@ -60,7 +74,7 @@ export class Grid {
 
             scale = graph.view.scale;
             translate = graph.view.translate.clone();
-            gridSize = graph.gridSize;
+            gridSize = options.gridSize;
             currentWidth = width;
             currentHeight = height;
 
@@ -73,7 +87,7 @@ export class Grid {
 
             let translateX = translate.x,
                 translateY = translate.y,
-                minStep = Math.round(graph.gridSize / 2),
+                minStep = Math.round(gridSize / 2),
                 stepping = minStep * scale;
 
             if (stepping < minStep) {
@@ -96,12 +110,11 @@ export class Grid {
                 iye = Math.round(ye);
 
 
-            context.strokeStyle = '#f0f0f0';
+            context.strokeStyle = options.strokeStyle;
 
-            // context.setLineDash([2, 5]);
             context.beginPath();
 
-            for (var x = xs; x <= xe; x += stepping) {
+            for (let x = xs; x <= xe; x += stepping) {
                 x = Math.round((x - translateX) / stepping) * stepping + translateX;
                 var ix = Math.round(x);
 
@@ -109,9 +122,9 @@ export class Grid {
                 context.lineTo(ix + 0.5, iye + 0.5);
             }
 
-            for (var y = ys; y <= ye; y += stepping) {
+            for (let y = ys; y <= ye; y += stepping) {
                 y = Math.round((y - translateY) / stepping) * stepping + translateY;
-                var iy = Math.round(y);
+                let iy = Math.round(y);
 
                 context.moveTo(ixs + 0.5, iy + 0.5);
                 context.lineTo(ixe + 0.5, iy + 0.5);
