@@ -1,4 +1,3 @@
-
 import {autoinject} from 'aurelia-framework';
 
 import {
@@ -16,17 +15,13 @@ export class WorkspaceContext {
      *
      * @param navigatorManager
      */
-    constructor(
-        private navigatorManager: NavigatorManager
-    ) {
+    constructor(private navigatorManager: NavigatorManager) {
 
     }
 
 
-    configureRouter(
-        config: RouterConfiguration,
-        router:Router
-    ) {
+    configureRouter(config: RouterConfiguration,
+                    router: Router) {
         config.map([{
             route: 'dashboard',
             moduleId: './dashboard/index',
@@ -51,11 +46,21 @@ export class WorkspaceContext {
                     reference: 'apps/workspaces/routes/workspace/applications/context-menu'
                 }
             }
+        }, {
+            route: 'infrastructure',
+            moduleId: './infrastructure/index',
+            name: 'infrastructure',
+            nav: true,
+            title: 'Infrastructure Designer',
+            settings: {
+                icon: 'mdi-apps',
+                contextComponent: {
+                    reference: 'apps/workspaces/routes/workspace/designer/context-menu'
+                }
+            }
         }]);
         this.navigatorManager.bind(router);
     }
-
-
 
 
 }
