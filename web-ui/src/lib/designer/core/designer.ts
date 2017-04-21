@@ -16,7 +16,6 @@ export class Designer {
     ) {
         let canvas = new Canvas(container, model);
         new mxRubberband(canvas);
-
         this.canvas = canvas;
     }
 
