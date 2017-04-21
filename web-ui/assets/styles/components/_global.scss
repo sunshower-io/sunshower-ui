@@ -42,7 +42,7 @@ body {
   bottom: 0;
   padding: $standard-padding;
   box-sizing: border-box;
-  border-left: 1px solid $border-color;
+  border-left: $default-border;
   background: white;
 
   .body-panel-top, .body-panel-bottom {
@@ -50,7 +50,7 @@ body {
     height: 50%;
   }
   .body-panel-top {
-    border-bottom: 1px solid $border-color;
+    border-bottom: $default-border;
     padding-bottom: $standard-padding;
   }
   .body-panel-bottom {

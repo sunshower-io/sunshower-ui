@@ -1,4 +1,4 @@
-$designer-header-height: 36px;
+$designer-header-height: 40px;
 
 .designer-container {
   position:absolute;
@@ -9,14 +9,47 @@ $designer-header-height: 36px;
   box-sizing: border-box;
 }
 
-.designer-panel {
+.designer-editor-panel {
   position: absolute;
   top: 0;
   right: 0;
   width: $body-panel-width;
   box-sizing: border-box;
   bottom: 0;
-  border-left: 1px solid $border-color;
+  border-left: $default-border;
   background: white;
+
+  .designer-header {
+    text-align: center;
+
+    .material-icons {
+      padding: 0 .25em;
+      color: $almostblack;
+      font-size: 20px;
+
+      &.active {
+        color: $primary-color;
+      }
+    }
+  }
 }
 
+.designer-menu-bar {
+  background: white;
+  top: 0;
+  right: 0;
+  left: $small-nav-width;
+  height: $designer-header-height;
+  box-sizing: border-box;
+  border-bottom: $default-border;
+  padding-right: $body-panel-width;
+  padding-left: $side-nav-width;
+  line-height: $designer-header-height;
+}
+
+.designer-header {
+  height: $designer-header-height;
+  box-sizing: border-box;
+  line-height: $designer-header-height;
+  border-bottom: $default-border;
+}

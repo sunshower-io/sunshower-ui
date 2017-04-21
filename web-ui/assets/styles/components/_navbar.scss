@@ -8,7 +8,7 @@ nav {
   left:0;
   top:0;
   right:0;
-  border-bottom: 1px solid $border-color;
+  border-bottom: $default-border;
 
   .nav-wrapper {
     width: 100%;
@@ -72,7 +72,7 @@ nav {
       cursor: pointer;
       color: white;
       text-align: center;
-      //border-left: 1px solid $border-color;
+      //border-left: $default-border;
 
       &:first-child, &:last-child {
         width: $navbar-height;

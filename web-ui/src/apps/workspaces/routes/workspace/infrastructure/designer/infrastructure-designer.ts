@@ -2,7 +2,8 @@
 import {
     autoinject,
     containerless,
-    customElement
+    customElement,
+    bindable
 } from "aurelia-framework";
 import {
     Grid,
@@ -24,23 +25,27 @@ export default class InfrastructureDesigner {
     private canvas              : Canvas;
     private element             : HTMLElement;
 
+    @bindable
+    private panelActive         : boolean;
+
     constructor() {
 
 
     }
 
     attached() : void {
+        this.panelActive = true;
         let designer = new Designer(this.element),
             canvas = designer.getCanvas();
 
-        canvas.addGrid(new Grid(canvas, {
-            strokeStyle: '#E2E2E2',
-            gridSize   : 30,
-        }));
+        // canvas.addGrid(new Grid(canvas, {
+        //     strokeStyle: '#E2E2E2',
+        //     gridSize   : 30,
+        // }));
 
         canvas.addGrid(new Grid(canvas, {
-            strokeStyle: '#A0A0A0',
-            gridSize   : 90,
+            strokeStyle: 'white',
+            gridSize   : 64,
         }));
 
 
