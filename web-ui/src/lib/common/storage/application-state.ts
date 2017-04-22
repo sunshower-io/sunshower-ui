@@ -17,7 +17,7 @@ export class PreferenceManager {
         this.savedPreferences = []
     }
 
-    preference(key:string) : any {
+    preference(key: string): any {
         for (let prefs of this.savedPreferences) {
             if (prefs.region === key) {
                 return prefs
@@ -25,7 +25,7 @@ export class PreferenceManager {
         }
     }
 
-    put(key:string, value:any) : void {
+    put(key: string, value: any): void {
         let thisPreference = this.preference(key);
         if (thisPreference) {
             thisPreference.values = value;
@@ -34,7 +34,7 @@ export class PreferenceManager {
         }
     }
 
-    get(key:string, defaults:any) : any {
+    get(key: string, defaults: any): any {
         let thisPreference = this.preference(key),
             savedPrefs = thisPreference ? thisPreference.values : {},
             mergedPrefs = {};
@@ -63,9 +63,9 @@ export class Parameters {
         Object.assign(this.store, p);
     }
 
-    isTruthy(key:string) : boolean {
+    isTruthy(key: string): boolean {
         let v = this.store[key];
-        return v && v == 'true' || v == '1' || v.toLowerCase() == 'true';
+        return v && (v == 'true' || v == '1' || v.toLowerCase() == 'true');
     }
 }
 
@@ -74,21 +74,21 @@ export class ApplicationState {
 
     private queryParameters: Parameters;
 
-    private pathParameters:  Parameters;
+    private pathParameters: Parameters;
 
     constructor() {
         this.reset();
     }
 
-    queryParams() : Parameters {
+    queryParams(): Parameters {
         return this.queryParameters;
     }
 
-    pathParams() : Parameters {
+    pathParams(): Parameters {
         return this.pathParameters;
     }
 
-    reset() : void {
+    reset(): void {
         this.pathParameters = new Parameters();
         this.queryParameters = new Parameters();
     }

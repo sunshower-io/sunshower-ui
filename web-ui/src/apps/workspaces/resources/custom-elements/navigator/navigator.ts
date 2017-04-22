@@ -51,6 +51,9 @@ export class Navigator {
         this.opened = this.navigatorManager.open;
         if(!this.opened) {
             this.hide();
+        } else {
+            this.open(this.navigatorManager.currentInstruction.config.navModel);
+            this.show();
         }
 
     }

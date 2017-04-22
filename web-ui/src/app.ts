@@ -44,9 +44,6 @@ export class App {
                            router: Router) {
         config.title = 'Hasli.io';
 
-        // let instructions = router.currentInstruction.getAllInstructions();
-        // instructions.forEach(t => this.applicationState.merge(t.params, t.queryParams));
-
 
         config.addPipelineStep('authorize', new SecurityStep(this.tokenHolder));
         config.addPipelineStep('preActivate', new StateResolver(this.container));

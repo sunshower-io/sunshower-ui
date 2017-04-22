@@ -1,4 +1,4 @@
-import {Router} from "aurelia-router";
+import {NavigationInstruction, Router} from "aurelia-router";
 import {Navigator} from './navigator/navigator';
 import {bindable, autoinject} from 'aurelia-framework';
 import {BindingEngine, PropertyObserver} from "aurelia-binding";
@@ -17,11 +17,15 @@ type Listener = (Router) => void;
 export class NavigatorManager {
 
     @bindable
-    public router           : Router;
+    public router                   : Router;
 
-    public  open            : boolean;
-    private listeners       : Listener[];
-    private observer        : PropertyObserver;
+    @bindable
+    public currentInstruction      : NavigationInstruction;
+
+    public  open                    : boolean;
+    private listeners               : Listener[];
+    private observer                : PropertyObserver;
+
 
     constructor(
         private bindingEngine: BindingEngine,
@@ -33,12 +37,11 @@ export class NavigatorManager {
 
 
     public bind(router: Router): void {
-        console.log("R", router);
-
         this.observer = this.bindingEngine
             .propertyObserver(router, 'currentInstruction');
         let state = this.applicationState;
         this.observer.subscribe(instr => {
+            this.currentInstruction = instr;
             state.merge(instr.params, instr.queryParams);
             this.open = state.queryParams().isTruthy('navigator');
         });
