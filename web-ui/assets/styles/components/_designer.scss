@@ -87,6 +87,18 @@ $designer-collapsible-padding: $standard-padding;
 }
 
 .designer-panel-body {
+  //todo set height;
+  overflow-y: auto;
+
+  .designer-form {
+    padding: $standard-padding/2 $standard-padding;
+
+    select {
+      color: $midgrey;
+      height: 2rem;
+      font-size: 12px;
+    }
+  }
 
   .collapsible {
     font-size: 12px;
@@ -151,6 +163,29 @@ $designer-collapsible-padding: $standard-padding;
     }
 
 
+  }
+
+  .designer-cards {
+    padding: $standard-padding/2 $standard-padding;
+
+    .designer-card {
+      display: inline-block;
+      padding: $standard-padding/2;
+      box-sizing: border-box;
+      width: ($body-panel-width - $standard-padding*2)/2 - 3;
+      text-align: center;
+
+      img {
+        width: 50%;
+      }
+
+      span {
+        display: inline-block;
+        font-weight: 500;
+        color: $midgrey;
+        font-size: 11px;
+      }
+    }
   }
 
 }
