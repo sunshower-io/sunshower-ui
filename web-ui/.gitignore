@@ -49,3 +49,4 @@ dist
 
 .idea
 
+!/src/lib/designer/elements/designer/right-panel.pug

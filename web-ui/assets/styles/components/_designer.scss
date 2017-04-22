@@ -9,17 +9,19 @@ $designer-collapsible-padding: $standard-padding;
   right:0;
   box-sizing: border-box;
 
-  .designer {
+  .canvas {
     position:absolute;
     top:0;
     bottom:0;
     right:0;
     left:0;
     box-sizing: border-box;
+    z-index: 99;
   }
 
 
   .panel {
+    z-index: 100;
     position: absolute;
     top: 0;
     bottom: 0;
