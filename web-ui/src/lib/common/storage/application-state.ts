@@ -2,10 +2,6 @@ import {LocalStorage} from "./local";
 
 import {inject} from "aurelia-framework";
 
-import {User} from "lib/common/security";
-
-
-
 export type ViewState = LocalStorage;
 
 export type Preferences = JSON;
@@ -55,10 +51,51 @@ export class PreferenceManager {
 
 }
 
+export class Parameters {
+
+    private store: any;
+
+    constructor() {
+        this.store = {};
+    }
+
+    assign(p: any) {
+        Object.assign(this.store, p);
+    }
+
+    isTruthy(key:string) : boolean {
+        let v = this.store[key];
+        return v && v == 'true' || v == '1' || v.toLowerCase() == 'true';
+    }
+}
+
+
 export class ApplicationState {
 
-    currentUser: User;
+    private queryParameters: Parameters;
 
-    currentElement: Element;
+    private pathParameters:  Parameters;
+
+    constructor() {
+        this.reset();
+    }
+
+    queryParams() : Parameters {
+        return this.queryParameters;
+    }
+
+    pathParams() : Parameters {
+        return this.pathParameters;
+    }
+
+    reset() : void {
+        this.pathParameters = new Parameters();
+        this.queryParameters = new Parameters();
+    }
+
+    merge(params: any, queryParams: any) {
+        this.pathParameters.assign(params);
+        this.queryParameters.assign(queryParams);
+    }
 }
 

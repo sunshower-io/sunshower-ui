@@ -15,7 +15,13 @@ import {
 } from "lib/common/security";
 import {bindable} from "aurelia-templating";
 import {Container} from 'aurelia-dependency-injection';
-import {ContextResolver} from "lib/common/service/context-resolver";
+import {
+    StateResolver,
+    ContextResolver
+} from "lib/common/pipeline";
+import {ApplicationState} from "lib/common/storage/application-state";
+import {BindingEngine} from "aurelia-binding";
+import {NavigatorManager} from "./apps/workspaces/resources/custom-elements/navigator";
 
 @autoinject
 export class App {
@@ -25,15 +31,25 @@ export class App {
 
     constructor(
         private container: Container,
+        private navManager: NavigatorManager,
+        private bindingEngine: BindingEngine,
+        private applicationState: ApplicationState,
         private tokenHolder: AuthenticationContextHolder
     ) {
 
     }
 
+
     public configureRouter(config: RouterConfiguration,
                            router: Router) {
         config.title = 'Hasli.io';
+
+        // let instructions = router.currentInstruction.getAllInstructions();
+        // instructions.forEach(t => this.applicationState.merge(t.params, t.queryParams));
+
+
         config.addPipelineStep('authorize', new SecurityStep(this.tokenHolder));
+        config.addPipelineStep('preActivate', new StateResolver(this.container));
         config.addPipelineStep('preActivate', new ContextResolver(this.container));
 
         config.map([{
