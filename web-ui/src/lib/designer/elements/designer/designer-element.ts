@@ -27,9 +27,6 @@ export class DesignerElement {
     attached() : void {
         let designer = new Designer(this.element),
             canvas = designer.getCanvas();
-
-
-
         this.setCanvas(canvas);
         this.setDesigner(designer);
     }

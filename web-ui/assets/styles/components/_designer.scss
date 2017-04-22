@@ -7,16 +7,26 @@ $designer-header-height: 36px;
   bottom:0;
   right:0;
   box-sizing: border-box;
-}
 
-.designer-panel {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: $body-panel-width;
-  box-sizing: border-box;
-  bottom: 0;
-  border-left: 1px solid $border-color;
-  background: white;
+  .panel {
+
+    .right {
+      position: absolute;
+      top: 0px;
+      right:0px;
+      bottom:0px;
+      width:450px;
+      border:1px solid green;
+    }
+    .left {
+      position: absolute;
+      top: 0px;
+      left:0px;
+      bottom:0px;
+      width:450px;
+      border:1px solid red;
+    }
+
+  }
 }
 
