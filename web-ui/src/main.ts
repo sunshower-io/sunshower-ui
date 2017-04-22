@@ -105,6 +105,9 @@ function configureResources(aurelia: Aurelia) {
         .globalResources([
             'lib/designer/elements/designer/left-panel',
             'lib/designer/elements/designer/right-panel',
+            'lib/resources/custom-elements/misc/top-element',
+            'lib/resources/custom-elements/misc/bottom-element',
+            'lib/resources/custom-elements/misc/full-element',
             'lib/designer/elements/designer/designer-element',
             'lib/common/resources/custom-elements/nav-bar/navbar',
             'apps/workspaces/resources/custom-elements/navigator/navigator',
