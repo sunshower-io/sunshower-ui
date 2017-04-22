@@ -1,16 +1,26 @@
 template
     .designer-menu-bar
         .template-info
-            .dropdown-button
+            .dropdown-button(
+                data-constrainwidth="false"
+                data-beloworigin="true"
+                data-activates="${controlId}"
+                )
                 | Template Name
+                i.material-icons.mdi.mdi-chevron-right
+            ul.dropdown-content(id="${controlId}")
+                li Last Edited Nevar
+                li Last Released Nevar Evar
+                li.divider
+                li Other boops
 
         ul.tab-menu
             li.tab.active
-                a.material-icons.mdi.mdi-checkbox-multiple-blank
+                a.material-icons.mdi.mdi-checkbox-multiple-blank(title="Incomplete Feature")
             li.tab
-                a.material-icons.mdi.mdi-source-branch
+                a.material-icons.mdi.mdi-source-branch(title="Incomplete Feature")
         .utilities
-            i.material-icons.mdi.mdi-content-save
-            i.material-icons.mdi.mdi-undo-variant
-            i.material-icons.mdi.mdi-redo-variant
+            i.material-icons.mdi.mdi-content-save(title="Incomplete Feature")
+            i.material-icons.mdi.mdi-undo-variant(title="Incomplete Feature")
+            i.material-icons.mdi.mdi-redo-variant(title="Incomplete Feature")
             //only adding these for now since we know we'll use them

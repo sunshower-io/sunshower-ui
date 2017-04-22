@@ -3,7 +3,6 @@ interface SidenavOptions {
 }
 
 interface CollapsibleOptions {
-
 }
 
 interface DropdownOptions {

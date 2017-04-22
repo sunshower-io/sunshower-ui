@@ -1,11 +1,8 @@
 template
-    require(from="lib/designer/elements/menu-bar/menu-bar")
     .designer-container
         menu-bar
-        .panel.left
-            slot(name="left-panel")
-        .designer(ref="element")
-        .panel.right
-            slot(name="right-panel")
+        slot(name="left-panel")
+        .container(ref="element")
+        slot(name="right-panel")
 
 
