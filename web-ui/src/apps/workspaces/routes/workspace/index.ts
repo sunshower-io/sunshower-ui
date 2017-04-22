@@ -51,7 +51,7 @@ export class WorkspaceContext {
             moduleId: './infrastructure/index',
             name: 'infrastructure',
             nav: true,
-            title: 'Infrastructure Designer',
+            title: 'Infrastructure',
             settings: {
                 icon: 'mdi-cloud-outline',
                 contextComponent: {
