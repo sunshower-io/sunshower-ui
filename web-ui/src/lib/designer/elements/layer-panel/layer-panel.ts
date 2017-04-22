@@ -4,7 +4,9 @@ import {containerless, customElement} from "aurelia-framework";
 @customElement('layer-panel')
 export class LayerPanel {
 
+    layerPanelCollapsible: HTMLElement;
+
     attached() {
-        $('.collapsible').collapsible();
+        $(this.layerPanelCollapsible).find('.collapsible').collapsible();
     }
 }

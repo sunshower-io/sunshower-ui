@@ -100,13 +100,13 @@ body {
   box-shadow:none;
 
 
-  .dropdown-icon {
-    position:absolute;
-    right:0;
-    top: 0;
-  }
+  //.dropdown-icon {
+  //  position:absolute;
+  //  right:0;
+  //  top: 0;
+  //}
 
-  .active .dropdown-icon {
+  .active > .dropdown-icon:before {
     -ms-transform: rotate(90deg); /* IE 9 */
     -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
     transform: rotate(90deg);
