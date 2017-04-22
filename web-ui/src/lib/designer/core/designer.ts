@@ -1,7 +1,9 @@
+import {Grid} from "./grid";
+import {mxGraphBounds, mxRubberband} from "mxgraph";
+import {Point2D} from "lib/common/math";
 import {Canvas} from 'lib/designer/canvas';
 import {CanvasModel} from 'lib/designer/model';
-import {mxRubberband} from "mxgraph";
-import {Grid} from "./grid";
+import {CanvasSelector} from "./selector";
 
 export class Designer {
 
@@ -11,13 +13,15 @@ export class Designer {
 
     constructor(
         private readonly container: HTMLElement,
-        model: CanvasModel = new CanvasModel()
+        model: CanvasModel = new CanvasModel(),
+        options?: DesignerOptions
     ) {
-        let canvas = new Canvas(container, model);
-        new mxRubberband(canvas);
+        let canvas = new Canvas(container, model),
+            selector = new CanvasSelector(canvas, container);
         this.canvas = canvas;
-    }
 
+
+    }
 
 
     getCanvas() : Canvas {
@@ -26,3 +30,12 @@ export class Designer {
 
 }
 
+
+export class DesignerOptions {
+
+    width                   ?: number;
+    height                  ?: number;
+
+
+    relativeLocation        ?: Point2D;
+}
