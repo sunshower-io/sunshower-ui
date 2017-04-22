@@ -77,6 +77,10 @@ $designer-header-height: 40px;
       .material-icons {
         font-size: 35px;
         color: $midgrey;
+
+        &:hover {
+          color: $primary-color;
+        }
       }
     }
   }

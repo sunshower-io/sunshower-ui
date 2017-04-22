@@ -1,17 +1,13 @@
 
 import {
     customElement,
+    autoinject,
     containerless,
 } from "aurelia-framework";
 
 
 @containerless
-@customElement("right-panel")
-export class DesignerRightPanel {
+@customElement("bottom")
+export class BottomElement {
 
-
-    attached() {
-
-
-    }
 }
