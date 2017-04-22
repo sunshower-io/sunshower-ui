@@ -1,2 +1,24 @@
 template
-    h1 Layer Panel
+    .designer-panel-header
+        h2 Layers
+        a.material-icons.mdi.mdi-plus(title="Incomplete Feature")
+    .designer-panel-body
+        ul.collapsible
+            li
+                .collapsible-header
+                    | Infrastructure
+                    i.material-icons.mdi.mdi-eye-outline(title="Incomplete Feature")
+                .collapsible-body.has-collapsible
+                    ul.collapsible
+                        li
+                            .collapsible-header Security Group
+                            .collapsible-body.has-collapsible
+                                ul.collapsible
+                                    li
+                                        .collapsible-header Blorp
+                                        .collapsible-body Booping blorp
+            li
+                .collapsible-header Applications
+                .collapsible-body Some other stuff
+
+

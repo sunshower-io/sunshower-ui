@@ -30,8 +30,92 @@ $designer-header-height: 40px;
     h1, h2, h3, h4, h5, h6 {
       color: $primary-color;
       font-size: 15px;
+      margin: 0;
     }
+
+    .designer-panel-header {
+      height: $designer-header-height;
+      box-sizing: border-box;
+      line-height: $designer-header-height;
+      border-bottom: $default-border;
+      padding: 0 $standard-padding;
+      position: relative;
+
+      h1, h2, h3, h4, h5, h6 {
+        color: $almostblack;
+        line-height: $designer-header-height;
+        font-weight: 400;
+      }
+
+      .material-icons.mdi-plus {
+        color: $secondary-color;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      &.icon-menu {
+        text-align: center;
+
+        .material-icons {
+          padding: 0 .25em;
+          color: $almostblack;
+          font-size: 20px;
+
+          &.active {
+            color: $primary-color;
+          }
+        }
+      }
+
+    }
+
   }
+
+}
+
+.designer-panel-body {
+
+  .collapsible {
+
+    .collapsible-header {
+      min-height: 2rem;
+      line-height: 2rem;
+      position: relative;
+      padding: 0 $standard-padding;
+
+      i.material-icons {
+        color: $lightgrey;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 15px;
+      }
+    }
+
+    .has-collapsible {
+      padding: 0;
+      border-bottom: none;
+    }
+
+    .collapsible-body .collapsible-header {
+      padding-left: $standard-padding*2;
+    }
+
+    .collapsible-body .collapsible-body .collapsible-header {
+      padding-left: $standard-padding*3;
+    }
+
+    //todo adjust padding
+
+  }
+
+
+
+
+
 }
 
 .designer-menu-bar {
@@ -97,28 +181,6 @@ $designer-header-height: 40px;
       padding-left: .25em;
       cursor: pointer;
       &:hover {
-        color: $primary-color;
-      }
-    }
-  }
-
-}
-
-.designer-header {
-  height: $designer-header-height;
-  box-sizing: border-box;
-  line-height: $designer-header-height;
-  border-bottom: $default-border;
-
-  &.designer-panel-menu {
-    text-align: center;
-
-    .material-icons {
-      padding: 0 .25em;
-      color: $almostblack;
-      font-size: 20px;
-
-      &.active {
         color: $primary-color;
       }
     }
