@@ -212,6 +212,13 @@ $designer-collapsible-padding: $standard-padding;
     color: $almostblack;
     cursor: pointer;
 
+    .version {
+      color: $midgrey;
+      letter-spacing: 1px;
+      display: inline;
+      margin-left: 1em;
+    }
+
     .dropdown-button.active  > .dropdown-icon {
       -ms-transform: rotate(90deg); /* IE 9 */
       -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
