@@ -26,8 +26,8 @@ $designer-header-height: 40px;
       left: 0;
     }
 
-
-    h2 {
+    //don't use an h1. but if you do ...
+    h1, h2, h3, h4, h5, h6 {
       color: $primary-color;
       font-size: 15px;
     }
@@ -46,7 +46,7 @@ $designer-header-height: 40px;
   padding-left: $side-nav-width;
   line-height: $designer-header-height;
 
-  .designer-menu-bar-template-info {
+  .template-info {
     position: absolute;
     top: 0;
     left: $body-panel-width + $standard-padding;
@@ -54,22 +54,34 @@ $designer-header-height: 40px;
     color: $almostblack;
   }
 
-  .designer-menu-bar-menu {
+  .tab-menu {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    .designer-menu-bar-menu-tab {
-      display: inline-block;
+    margin:0;
+    .tab {
+      width: $designer-header-height;
       border-bottom: $default-border;
-
+      height: $designer-header-height;
+      box-sizing: border-box;
+      text-align: center;
+      display: inline-block;
+      margin:0 1em;
+      cursor: pointer;
       &.active {
-        color: $primary-color;
-        border-bottom-color: $primary-color;
+        border-bottom: 2px solid $primary-color;
+        .material-icons {
+          color: $primary-color;
+        }
+      }
+      .material-icons {
+        font-size: 35px;
+        color: $midgrey;
       }
     }
   }
 
-  .designer-menu-bar-utilities {
+  .utilities {
     position: absolute;
     top: 0;
     right: $body-panel-width + $standard-padding;
@@ -77,6 +89,11 @@ $designer-header-height: 40px;
     .material-icons {
       color: $lightgrey;
       font-size: 30px;
+      padding-left: .25em;
+      cursor: pointer;
+      &:hover {
+        color: $primary-color;
+      }
     }
   }
 
