@@ -1,2 +1,9 @@
 template
-    .designer-container(ref="element")
+    .designer-container
+        .panel.left
+            slot(name="left-panel")
+        .container(ref="element")
+        .panel.right
+            slot(name="right-panel")
+
+

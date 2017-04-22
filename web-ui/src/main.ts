@@ -103,6 +103,8 @@ function configureResources(aurelia: Aurelia) {
     aurelia.use
         .standardConfiguration()
         .globalResources([
+            'lib/designer/elements/designer/left-panel',
+            'lib/designer/elements/designer/right-panel',
             'lib/designer/elements/designer/designer-element',
             'lib/common/resources/custom-elements/nav-bar/navbar',
             'apps/workspaces/resources/custom-elements/navigator/navigator',
