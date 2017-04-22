@@ -12,8 +12,7 @@ template
             i.material-icons.mdi.mdi-filter-outline.side-nav-search-icon
         .side-nav-body
             compose(
-                view-model.bind="currentComponent.reference",
-                if.bind="opened"
+                view-model.bind="currentComponent.reference"
             )
 
     ul.side-nav-small
@@ -29,8 +28,8 @@ template
         li.side-nav-toggle(
             click.delegate="toggle()"
             ref="navigationControl"
-            anim-enter="rotate180"
-            anim-leave="rotateNeg180"
+            anim-enter="rotateNeg180"
+            anim-leave="rotate180"
         )
             a(href="#")
                 i.material-icons.mdi(

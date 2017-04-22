@@ -2,10 +2,6 @@ import {LocalStorage} from "./local";
 
 import {inject} from "aurelia-framework";
 
-import {User} from "lib/common/security";
-
-
-
 export type ViewState = LocalStorage;
 
 export type Preferences = JSON;
@@ -21,7 +17,7 @@ export class PreferenceManager {
         this.savedPreferences = []
     }
 
-    preference(key:string) : any {
+    preference(key: string): any {
         for (let prefs of this.savedPreferences) {
             if (prefs.region === key) {
                 return prefs
@@ -29,7 +25,7 @@ export class PreferenceManager {
         }
     }
 
-    put(key:string, value:any) : void {
+    put(key: string, value: any): void {
         let thisPreference = this.preference(key);
         if (thisPreference) {
             thisPreference.values = value;
@@ -38,7 +34,7 @@ export class PreferenceManager {
         }
     }
 
-    get(key:string, defaults:any) : any {
+    get(key: string, defaults: any): any {
         let thisPreference = this.preference(key),
             savedPrefs = thisPreference ? thisPreference.values : {},
             mergedPrefs = {};
@@ -55,10 +51,51 @@ export class PreferenceManager {
 
 }
 
+export class Parameters {
+
+    private store: any;
+
+    constructor() {
+        this.store = {};
+    }
+
+    assign(p: any) {
+        Object.assign(this.store, p);
+    }
+
+    isTruthy(key: string): boolean {
+        let v = this.store[key];
+        return v && (v == 'true' || v == '1' || v.toLowerCase() == 'true');
+    }
+}
+
+
 export class ApplicationState {
 
-    currentUser: User;
+    private queryParameters: Parameters;
 
-    currentElement: Element;
+    private pathParameters: Parameters;
+
+    constructor() {
+        this.reset();
+    }
+
+    queryParams(): Parameters {
+        return this.queryParameters;
+    }
+
+    pathParams(): Parameters {
+        return this.pathParameters;
+    }
+
+    reset(): void {
+        this.pathParameters = new Parameters();
+        this.queryParameters = new Parameters();
+    }
+
+    merge(params: any, queryParams: any) {
+        this.pathParameters.assign(params);
+        this.queryParameters.assign(queryParams);
+    }
 }
 

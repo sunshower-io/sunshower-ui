@@ -1,5 +1,8 @@
-import {Router} from "aurelia-router";
-import {bindable} from 'aurelia-framework';
+import {NavigationInstruction, Router} from "aurelia-router";
+import {Navigator} from './navigator/navigator';
+import {bindable, autoinject} from 'aurelia-framework';
+import {BindingEngine, PropertyObserver} from "aurelia-binding";
+import {ApplicationState} from "lib/common/storage/application-state";
 
 export interface NavigationComponent {
     reference: string;
@@ -10,19 +13,38 @@ export interface NavigationComponent {
 type Listener = (Router) => void;
 
 
+@autoinject
 export class NavigatorManager {
 
     @bindable
-    public router: Router;
+    public router                   : Router;
 
-    private listeners: Listener[];
+    @bindable
+    public currentInstruction      : NavigationInstruction;
 
-    constructor() {
+    public  open                    : boolean;
+    private listeners               : Listener[];
+    private observer                : PropertyObserver;
+
+
+    constructor(
+        private bindingEngine: BindingEngine,
+        private applicationState: ApplicationState
+    ) {
         this.listeners = [];
     }
 
 
+
     public bind(router: Router): void {
+        this.observer = this.bindingEngine
+            .propertyObserver(router, 'currentInstruction');
+        let state = this.applicationState;
+        this.observer.subscribe(instr => {
+            this.currentInstruction = instr;
+            state.merge(instr.params, instr.queryParams);
+            this.open = state.queryParams().isTruthy('navigator');
+        });
         this.router = router;
         this.listeners.forEach(t => t(router));
     }

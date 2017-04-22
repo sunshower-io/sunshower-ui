@@ -1,7 +1,8 @@
 import {UUID} from 'lib/common/lang';
 import {
     bindable,
-    autoinject
+    autoinject,
+    customElement
 } from "aurelia-framework";
 import 'materialize-css';
 import 'mdi/css/materialdesignicons.css!'
@@ -13,59 +14,73 @@ import {
     NavigatorManager
 } from "apps/workspaces/resources/custom-elements/navigator";
 import {VelocityAnimator} from "aurelia-animator-velocity";
+import {ApplicationState} from "lib/common/storage/application-state";
 
 
 @autoinject
+@customElement('navigator')
 export class Navigator {
 
 
     @bindable
-    private controlId                       : string;
+    private controlId: string;
 
     @bindable
-    private opened                          : boolean;
+    private opened: boolean;
 
-    private navigationControl               : HTMLElement;
-    private navigationContainer             : HTMLElement;
+    private navigationControl: HTMLElement;
+    private navigationContainer: HTMLElement;
 
 
     @bindable
-    private currentComponent                 : NavigationComponent;
+    private currentComponent: NavigationComponent;
 
     @bindable
-    private title                            : string;
+    private title: string;
 
 
-    constructor(
-        private animator        : VelocityAnimator,
-        private navigatorManager: NavigatorManager
+
+    constructor(private animator: VelocityAnimator,
+                private state: ApplicationState,
+                private navigatorManager:NavigatorManager
     ) {
-        this.controlId = UUID.randomUUID().value;
     }
+
 
     public attached(): void {
-        this.hide();
-        this.open(this.navigatorManager.router.currentInstruction.config.navModel);
+        this.opened = this.navigatorManager.open;
+        if(!this.opened) {
+            this.hide();
+        } else {
+            this.open(this.navigatorManager.currentInstruction.config.navModel);
+            this.show();
+        }
+
     }
 
 
-    public show(): void {
+    setOpen(open: boolean) {
+        this.opened = open;
+    }
 
+    public show(): void {
         Promise.all([
-            this.animator.enter(this.navigationContainer),
-            this.animator.enter(this.navigationControl)
+            this.navigationContainer ? this.animator.leave(this.navigationContainer) : Promise.resolve(true),
+            this.animator.leave(this.navigationControl)
         ]);
     }
 
     public hide(): void {
         Promise.all([
-            this.animator.leave(this.navigationContainer),
-            this.animator.leave(this.navigationControl)
+            this.navigationContainer ? this.animator.enter(this.navigationContainer) : Promise.resolve(true),
+            this.animator.enter(this.navigationControl)
         ]);
     }
 
+
+
     public toggle(): void {
-        if(this.opened) {
+        if (this.opened) {
             this.hide();
         } else {
             this.show();
@@ -84,4 +99,6 @@ export class Navigator {
         }
         return true;
     }
+
+
 }
