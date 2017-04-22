@@ -163,6 +163,7 @@ declare module 'mxgraph' {
         constrainRelativeChildren           : boolean;
         mouseListeners                      : {[name: string]: any};
 
+        maximumGraphBounds                  : mxGraphBounds;
         isCellSelectable(cell:Layer) : boolean;
 
         /**

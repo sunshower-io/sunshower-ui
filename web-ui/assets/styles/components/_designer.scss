@@ -8,6 +8,16 @@ $designer-header-height: 40px;
   right:0;
   box-sizing: border-box;
 
+  .designer {
+    position:absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    box-sizing: border-box;
+  }
+
+
   .panel {
     position: absolute;
     top: 0;
