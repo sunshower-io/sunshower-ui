@@ -114,7 +114,8 @@ function configureResources(aurelia: Aurelia) {
             'lib/common/resources/custom-elements/summary-icon/summary-icon',
             'lib/designer/elements/menu-bar/menu-bar',
             'lib/designer/elements/layer-panel/layer-panel',
-            'lib/designer/elements/element-panel/element-panel'
+            'lib/designer/elements/element-panel/element-panel',
+            'lib/designer/elements/property-panel/property-panel'
         ])
         .plugin('aurelia-animator-velocity', cfg => {
             registerAnimations(cfg);
