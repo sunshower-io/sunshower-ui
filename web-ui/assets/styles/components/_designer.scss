@@ -82,13 +82,31 @@ $designer-collapsible-padding: $standard-padding;
 }
 
 .designer-panel-body {
-  //todo set height;
+  //todo set height? would require a header everywhere;
   overflow-y: auto;
 
   .designer-form {
     padding: $standard-padding;
     font-size: 12px;
     color: $midgrey;
+
+    .input-field.locking {
+      position: relative;
+
+      label {
+        font-size: 12px;
+      }
+
+      input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea, select {
+        width: 85%;
+        height: 2.5rem;
+      }
+      .locking-icon {
+        position: absolute;
+        right: 0;
+        top: 25%;
+      }
+    }
 
     select {
       color: $midgrey;
@@ -119,12 +137,11 @@ $designer-collapsible-padding: $standard-padding;
           line-height: 2rem;
           margin: 0;
           float: none;
-          text-align:inherit;
           position: absolute;
           right: 0;
           top: 50%;
           transform: translateY(-50%);
-
+          text-align: right;
         }
       }
 
@@ -240,6 +257,7 @@ $designer-collapsible-padding: $standard-padding;
     bottom: 0;
     color: $almostblack;
     cursor: pointer;
+    font-size: 13px;
 
     .version {
       color: $midgrey;

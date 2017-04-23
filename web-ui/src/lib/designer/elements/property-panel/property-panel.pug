@@ -9,12 +9,14 @@ template
                         | Details
                         i.material-icons.mdi.mdi-chevron-right.dropdown-icon
                     .collapsible-body
-                        | Form
+                        .input-field.locking
+                            input(type="text" id="boopTest")
+                            label(for="boopTest") Boop Test
+                            i.materialize-icon.mdi.mdi-lock-open-outline.locking-icon(title="Incomplete Feature")
                 li
                     .collapsible-header
                         | Resource Requirements
                         i.material-icons.mdi.mdi-chevron-right.dropdown-icon
                     .collapsible-body
-                        | Form
 
             //todo save button or nah?
