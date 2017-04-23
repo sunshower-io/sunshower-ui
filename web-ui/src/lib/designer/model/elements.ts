@@ -1,29 +1,37 @@
 import {
     Layer,
     mxCell,
-    mxEdge
+    mxCellOverlay
 } from 'mxgraph';
 
 
+
+export class Overlay extends mxCellOverlay {
+
+}
+
 export interface Drawable extends Layer {
-
-
+    overlays() : Overlay[];
 }
 
 
-export class Element extends mxCell implements Drawable {
-
-    constructor() {
-        super();
-    }
-}
-
-export class Edge extends mxEdge implements Drawable {
+export abstract class RenderableElement extends mxCell implements Drawable {
 
     constructor() {
         super();
     }
 
 
+    overlays() : Overlay[] {
+        return [];
+    }
+
+
+
+
+
+
+
 }
+
 
