@@ -39,13 +39,6 @@ $designer-collapsible-padding: $standard-padding;
       left: 0;
     }
 
-    //don't use an h1. but if you do ...
-    h1, h2, h3, h4, h5, h6 {
-      color: $primary-color;
-      font-size: 15px;
-      margin: 0;
-    }
-
     .designer-panel-header {
       height: $designer-header-height;
       box-sizing: border-box;
@@ -58,6 +51,8 @@ $designer-collapsible-padding: $standard-padding;
         color: $almostblack;
         line-height: $designer-header-height;
         font-weight: 400;
+        margin: 0;
+        font-size: 15px;
       }
 
       .material-icons.mdi-plus {
@@ -89,20 +84,73 @@ $designer-collapsible-padding: $standard-padding;
 }
 
 .designer-panel-body {
-  //todo set height;
+  //todo set height? would require a header everywhere;
   overflow-y: auto;
 
   .designer-form {
-    padding: $standard-padding/2 $standard-padding;
+    padding: $standard-padding;
+    font-size: 12px;
+    color: $midgrey;
+
+    .input-field.locking {
+      position: relative;
+
+      label {
+        font-size: 12px;
+      }
+
+      input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea, select {
+        width: 85%;
+        height: 2.5rem;
+      }
+      .locking-icon {
+        position: absolute;
+        right: 0;
+        top: 25%;
+      }
+    }
 
     select {
       color: $midgrey;
       height: 2rem;
       font-size: 12px;
     }
+
+    .collapsible {
+
+      .collapsible-body {
+        border-bottom: none;
+        padding: 0 0 1rem 0;
+      }
+
+      .collapsible-header {
+        color: $primary-color;
+        font-size: 12px;
+        font-weight: 400;
+        padding: 0;
+        position: relative;
+        line-height: 2rem;
+        min-height: 2rem;
+        border-bottom: none;
+
+        .dropdown-icon {
+          color: $midgrey;
+          font-size: 15px;
+          line-height: 2rem;
+          margin: 0;
+          float: none;
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          text-align: right;
+        }
+      }
+
+    }
   }
 
-  .collapsible {
+  .collapsible.layer-collapsible {
     font-size: 12px;
     color: $midgrey;
 
@@ -211,6 +259,7 @@ $designer-collapsible-padding: $standard-padding;
     bottom: 0;
     color: $almostblack;
     cursor: pointer;
+    font-size: 13px;
 
     .version {
       color: $midgrey;
