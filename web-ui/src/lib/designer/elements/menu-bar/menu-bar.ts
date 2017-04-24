@@ -14,7 +14,6 @@ export class MenuBar {
     }
 
     attached() {
-        //why not working?
         $(this.templateDD).dropdown();
     }
 
