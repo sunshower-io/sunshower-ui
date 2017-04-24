@@ -6,19 +6,10 @@ body {
 
 .body {
   position: absolute;
-  left: 0;
+  left: $small-nav-width;
   right: 0;
   top: $navbar-height;
   bottom: 0;
-
-  padding-left: $small-nav-width;
-  //margin-top: $navbar-height;
-  //position: relative;
-  box-sizing: border-box;
-  //width:100%;
-  //height: -webkit-calc(100% - #{$navbar-height});
-  //height: -moz-calc(100% - #{$navbar-height});
-  //height: calc(100% - #{$navbar-height});
 
   @media #{$medium-and-down} {
     top: $navbar-height-mobile;
@@ -99,6 +90,11 @@ body {
   margin:0;
   box-shadow:none;
 
+.collapsible .dropdown-icon {
+  position:absolute;
+  right:0;
+  top: 0;
+}
 
   //.dropdown-icon {
   //  position:absolute;
@@ -115,6 +111,11 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
+}
+
+.button-holder {
+  padding-top: 1rem;
+  text-align: center;
 }
 
 .util-top-slot {
