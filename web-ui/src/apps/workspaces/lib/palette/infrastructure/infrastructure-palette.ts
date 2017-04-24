@@ -2,7 +2,7 @@ import {
     ElementFactory,
     ElementFactoryProvider
 } from "lib/designer/canvas/palette";
-import {ComputeNodeTemplateElement} from "./compute-node-template";
+import {ComputeNodeTemplateElement, ComputeNodeTemplateElementFactory} from "./compute-node-template";
 
 
 
