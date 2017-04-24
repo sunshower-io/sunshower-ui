@@ -105,6 +105,20 @@ $sidenav-li-margin-bottom: 30px;
     h1, h2, h3, h4, h5, h6 {
       font-size: 18px;
     }
+
+
+    .button-holder {
+      position: absolute;
+      left: $standard-padding;
+      right: $standard-padding;
+      bottom: $standard-padding;
+
+      .btn {
+        width: 100%;
+      }
+
+    }
+
   }
 
 }

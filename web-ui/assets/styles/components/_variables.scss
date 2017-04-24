@@ -23,9 +23,10 @@ $collapsible-border-color: $border-color;
 
 $standard-padding: 20px;
 
-$button-border: 1px solid $primary-color;
-$button-raised-background: $primary-color;
+$button-height: 36px;
+$button-raised-background: $secondary-color;
 $button-flat-color: $primary-color;
+$button-radius: $button-height;
 
 $placeholder-text-color: $midgrey;
 

@@ -1,11 +1,8 @@
-
-<svg width="50px" height="50px" viewBox="-2 -2 36 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
-    <!--<desc>Created with Sketch.</desc>-->
-    <defs></defs>
-    <!--<rect y="0" width="35.35533905932737" height="35.35533905932737" stroke="none" fill="#239ae8" transform="rotate(45 17.677669529663685 17.677669529663685)" rx="5" ry="5" x="10"></rect>-->
-    <path d="M13.2014134,1.35191338 C14.6869704,-0.117569448 17.1017754,-0.111395688 18.581091,1.35191338 L30.4163818,13.0591431 C31.9019388,14.5286259 31.8956975,16.9173021 30.4163818,18.3806111 L18.581091,30.0878408 C17.0955341,31.5573237 14.6807291,31.5511499 13.2014134,30.0878408 L1.36612264,18.3806111 C-0.119434317,16.9111283 -0.113193025,14.5224522 1.36612264,13.0591431 L13.2014134,1.35191338 Z" id="Combined-Shape" stroke="none" fill="#239AE8" fill-rule="evenodd"></path>
-    <path d="M10.5,7.5 L10.5,23.5" id="Line" stroke="#FFFFFF" stroke-width="1" stroke-linecap="square" fill="none"></path>
-    <path d="M10.5,15.5224609 L21.5,15.5224609" id="Line" stroke="#FFFFFF" stroke-width="1" stroke-linecap="square" fill="none"></path>
-    <path d="M21.5,7.5 L21.5,23.5" id="Line" stroke="#FFFFFF" stroke-width="1" stroke-linecap="square" fill="none"></path>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 36 36" style="enable-background:new 0 0 36 36;" xml:space="preserve">
+<path fill="#239AE8" d="M15,1.9c1.6-1.6,4.2-1.6,5.8,0l12.9,12.9c1.6,1.6,1.6,4.2,0,5.8L20.8,33.5
+	c-1.6,1.6-4.2,1.6-5.8,0L2.1,20.6c-1.6-1.6-1.6-4.2,0-5.8L15,1.9z"/>
+<path fill="none" stroke="#FFFFFF" d="M12,8.7v17.6"/>
+<path fill="none" stroke="#FFFFFF" d="M12,17.5h12"/>
+<path fill="none" stroke="#FFFFFF" d="M24,8.7v17.6"/>
 </svg>
