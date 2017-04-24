@@ -1,11 +1,14 @@
-import {inject} from "aurelia-dependency-injection";
-import {bindable} from "aurelia-framework";
+import {UUID} from "lib/common/lang";
 import {Auth} from "apps/auth/auth";
-import {User} from "common/model/security";
 import {Router} from "aurelia-router";
-import {UUID} from "common/lib/utils/uuid";
+import {User} from "lib/common/security";
 
 import {HttpClient} from 'aurelia-fetch-client';
+
+
+
+import {bindable} from "aurelia-framework";
+import {inject} from "aurelia-dependency-injection";
 
 @inject(HttpClient, Auth, Router)
 export class Signup {

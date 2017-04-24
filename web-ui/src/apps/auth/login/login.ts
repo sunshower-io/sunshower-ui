@@ -1,10 +1,8 @@
 import {bindable} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
 import {inject} from "aurelia-dependency-injection";
-import {User} from "common/model/security";
-import {LocalStorage} from "common/lib/storage/local";
-import {UUID} from "common/lib/utils/uuid";
-
+import {User} from "lib/common/security";
+import {LocalStorage} from "lib/common/storage";
 import * as materialize from 'materialize-css';
 
 import {
@@ -16,9 +14,9 @@ import {Auth} from "apps/auth/auth";
 import {
     Token,
     AuthenticationContextHolder
-} from "common/model/security";
+} from "lib/common/security";
 import {Router} from "aurelia-router";
-
+import {UUID} from 'lib/common/lang';
 
 @inject(
     Aurelia,

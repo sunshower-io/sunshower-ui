@@ -1,132 +1,87 @@
+import {UUID} from 'lib/common/lang';
+import {
+    bindable,
+    autoinject
+} from "aurelia-framework";
 import 'materialize-css';
 import 'mdi/css/materialdesignicons.css!'
-import {UUID} from "common/lib/utils/uuid";
+
+import {Router, NavModel} from "aurelia-router";
+
 import {
-    autoinject,
-    bindable
-} from 'aurelia-framework';
-import {
-    ElementGroup,
-    NavigationContext,
-    ContextChangedEvent,
-    NavigatorManager, LinkObject
-} from "./navigator-element";
-import {VelocityAnimator} from 'aurelia-animator-velocity';
-import {Observable} from "rxjs/Observable";
-import "rxjs/add/observable/fromEvent";
-import "rxjs/add/operator/debounceTime";
+    NavigationComponent,
+    NavigatorManager
+} from "apps/workspaces/resources/custom-elements/navigator";
+import {VelocityAnimator} from "aurelia-animator-velocity";
 
 
 @autoinject
 export class Navigator {
 
-    public static readonly CONTEXT_CHANGED_EVENT = 'navigator:context:changed';
-
-    private controlId               : string       =  UUID.random();
-
-    private rootElement             : HTMLElement;
-    private navigator               : HTMLElement;
-    private navigatorControl        : HTMLElement;
-    private searchField             : HTMLInputElement;
 
     @bindable
-    private  searchResults          : LinkObject[];
+    private controlId                       : string;
 
     @bindable
-    private context                 : NavigationContext;
+    private opened                          : boolean;
+
+    private navigationControl               : HTMLElement;
+    private navigationContainer             : HTMLElement;
+
 
     @bindable
-    private groups                  : ElementGroup[]; //can we make this actually a collection of NavigationContexts?
+    private currentComponent                 : NavigationComponent;
 
     @bindable
-    private showing                 : boolean;
+    private title                            : string;
+
 
     constructor(
-        private navigatorManager: NavigatorManager,
-        private velocityAnimator: VelocityAnimator
+        private animator        : VelocityAnimator,
+        private navigatorManager: NavigatorManager
     ) {
-        navigatorManager.subject.subscribe(t => {
-            this.showing = t.open;
-            this.context = t.context;
-        });
+        this.controlId = UUID.randomUUID().value;
     }
 
-    open() : void {
-        $(this.navigatorControl).sideNav('show');
-    }
-
-    close() : void {
-        $(this.navigatorControl).sideNav('hide');
+    public attached(): void {
+        this.hide();
+        this.open(this.navigatorManager.router.currentInstruction.config.navModel);
     }
 
 
-    contextChanged(newVal: NavigationContext, old: NavigationContext) {
-        newVal.load().then(t => {
-            this.groups = newVal.children;
-        }).then(t => {
-            this.velocityAnimator.enter(this.rootElement);
-        });
+    public show(): void {
+
+        Promise.all([
+            this.animator.enter(this.navigationContainer),
+            this.animator.enter(this.navigationControl)
+        ]);
     }
 
-
-
-    attached(p:any) : void {
-        this.configureSearch();
-        this.configureSideNav();
-        this.configureCollapsibles();
+    public hide(): void {
+        Promise.all([
+            this.animator.leave(this.navigationContainer),
+            this.animator.leave(this.navigationControl)
+        ]);
     }
 
-
-
-    openObject(o : LinkObject) : void {
-        o.open().then(t => {
-            this.context.load().then(u => {
-                this.searchResults = null;
-                this.searchField.value = "";
-                this.groups = this.context.children;
-            });
-        });
-    }
-
-    private configureSideNav() {
-        $(this.navigatorControl).sideNav();
-        if(this.showing) {
-            this.open();
+    public toggle(): void {
+        if(this.opened) {
+            this.hide();
         } else {
-            this.close();
+            this.show();
         }
-
+        this.opened = !this.opened;
     }
 
 
-    private configureSearch() {
-        Observable.fromEvent(this.searchField, 'keydown')
-            .debounceTime(250)
-            .forEach(t => {
-                if(this.context && this.context.searchable) {
-                    let v = this.searchField.value;
-                    if(v) {
-                        if(v.length > 2) {
-                            this.context.search(v).then(l => {
-                                if (l && l.length) {
-                                    this.searchResults = l;
-                                } else {
-                                    this.searchResults = [this.context.createRef(v)];
-                                }
-                            });
-                        }
-                    } else {
-                        this.searchResults = null;
-                    }
-                }
-        });
-
-
-    }
-
-    private configureCollapsibles() {
-        $(document).ready(function(){
-            $('.collapsible').collapsible();
-        });
+    private open(model: NavModel) {
+        let settings = model.settings;
+        if (settings && settings.contextComponent) {
+            this.currentComponent = settings.contextComponent;
+            this.currentComponent.active = true;
+            this.opened = true;
+            this.title = model.title;
+        }
+        return true;
     }
 }

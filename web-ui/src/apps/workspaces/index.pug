@@ -1,17 +1,5 @@
 template
-    .body-content
-        .card
-            .card-content
-                summary-icon(text="Lisa's Card" textColor="#239ae8" size="64")
-                .card-title Lisa's Card
-                button.card-button.btn Deploy
-            .card-action Down here is where we'll put extra info; waiting to style specifics till we know more
-        .card
-            .card-content
-                summary-icon(text="Lisa's Other Card" textColor="#239ae8" size="64")
-                .card-title Lisa's Other Card With a Long Title
-                button.card-button.btn Deploy
-            .card-action Down here is where we'll put extra info
-    ul.body-menu
-        li
-            a(href="#") + Create New Workspace
+    navbar
+    navigator
+    .body
+        router-view

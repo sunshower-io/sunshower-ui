@@ -1,57 +1,44 @@
-import {Router} from "aurelia-router";
 import {autoinject} from "aurelia-framework";
-import {HttpClient} from "aurelia-fetch-client";
 
-
-import {Identifier} from "common/lib/lang";
+import {
+    NavigatorManager
+} from 'apps/workspaces/resources/custom-elements/navigator'
 
 
 import {
-    WorkspaceService ,
-} from "common/model/api/workspace/service";
-
-import {
-    Workspace as WorkspaceElement,
-} from "common/model/api/workspace/model";
+    Router,
+    RouterConfiguration
+} from "aurelia-router";
 
 @autoinject
-export class Workspace {
+export class WorkspaceApplication {
 
+    constructor(private navigatorManager: NavigatorManager) {
 
-    private workspaces: WorkspaceElement[];
-
-    constructor(public router: Router,
-                private client: HttpClient,
-                private workspaceService: WorkspaceService) {
-
-    }
-
-    attached(): void {
-        this.workspaceService.list().then(t => this.workspaces = t);
 
     }
 
 
-    delete(id: string): void {
-        this.client.fetch(`workspaces/${id}`, {
-            method: 'delete'
-        }).then(t => t.json() as any)
-            .then(workspaces => this.workspaces = workspaces)
-    }
+    public configureRouter(cfg: RouterConfiguration,
+                           router: Router): void {
 
-    activate(id: any) {
-    }
+        cfg.map([{
+            route: ['', 'list'],
+            moduleId: './routes/workspaces',
+            title: 'Workspaces'
 
 
-    open(id: Identifier): void {
-        this.client.fetch(`workspaces/${id}`)
-            .then(t => t.json() as any).then(t => {
-            this.router.navigate(`workspace/${t.id}/applications`);
-        });
+        }, {
+                route: ':workspaceId',
+                moduleId: './routes/workspace/index',
+                title: 'Workspace'
+            }
+        ]);
+
+
+        this.navigatorManager.bind(router);
+
     }
 
-    newWorkspace(): void {
-        this.router.navigate('workspace/workspace/create');
-    }
 
 }

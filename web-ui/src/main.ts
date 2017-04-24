@@ -12,29 +12,19 @@ import {
     LocalStorage,
     createStorage,
     Map
-} from "common/lib/storage/local/local-storage";
+} from "lib/common/storage";
 
 
 import {
     AuthenticationContextHolder,
     User,
     AuthenticationContext
-} from "common/model/security";
+} from "lib/common/security";
 
 
 import {DialogConfiguration} from "aurelia-dialog";
 
-import {ChannelSet} from "common/lib/events";
-import {EventAggregator} from "aurelia-event-aggregator";
 import {Container} from "aurelia-dependency-injection";
-import {
-    FetchClientInterceptor
-} from
-    "./common/resources/custom-components/fetch-client-errors";
-
-import {
-    SemanticUIRenderer
-} from "common/resources/custom-components/semantic-ui-renderer";
 
 
 export function param(name) {
@@ -77,31 +67,51 @@ export function configure(aurelia: Aurelia) {
 }
 
 
+function registerAnimations(cfg) {
+    cfg.registerEffect("slideOut", {
+        defaultDuration: 1950,
+        calls: [
+            [{translateX: ['-100%', '0%']}, 1],
+        ]
+    });
+
+    cfg.registerEffect('slideIn', {
+        defaultDuration: 1950,
+        calls: [
+            [{translateX: ['0%', '-100%']}, 1],
+        ]
+    });
+
+
+    cfg.registerEffect('rotateNeg180', {
+        defaultDuration: 1950,
+        calls: [
+            [{rotateZ: [180, 360]}, 1],
+        ]
+    });
+
+    cfg.registerEffect('rotate180', {
+        defaultDuration: 1950,
+        calls: [
+            [{rotateZ: [180, 0]}, 1],
+        ]
+    });
+}
+
+
 function configureResources(aurelia: Aurelia) {
     aurelia.use
         .standardConfiguration()
         .globalResources([
-            'common/lib/widget/menu/menu',
-            'common/resources/custom-elements/tree/tree',
-            'common/resources/custom-elements/summary/summary',
-            'common/resources/nested-application/nested-application',
-            'apps/workspaces/resources/custom-elements/navigator/navigator'
+            'apps/workspaces/resources/custom-elements/navigator/navigator',
+            'lib/common/resources/custom-elements/summary-icon/summary-icon',
+            'lib/common/resources/custom-elements/nav-bar/navbar'
         ])
         .plugin('aurelia-animator-velocity', cfg => {
-            cfg.registerEffect("wipeLeftToRight", {
-                defaultDuration: 1950,
-                calls: [
-                    [{translateX: ['0%', '-100%']}, 1],
-                    // [{rotateZ: -10}, 0.20],
-                    // [{rotateZ: 5}, 0.20],
-                    // [{rotateZ: -5}, 0.20],
-                    // [{rotateZ: 0}, 0.20]
-                ]
-            });
+            registerAnimations(cfg);
             return cfg;
         })
         .plugin('aurelia-dialog', (config: DialogConfiguration) => {
-            config.useRenderer(SemanticUIRenderer);
         }).developmentLogging();
 }
 
@@ -132,15 +142,9 @@ function doConfigure(data: any,
             configureAuthenticatedClient(authenticatedClient, container, token);
 
 
-            let channelSet = new ChannelSet(
-                `ws://${location.host}/hasli/api/events`,
-                encodeURIComponent(token),
-                container.get(EventAggregator)
-            );
             tokenHolder.set(context, false);
             container.registerInstance(HttpClient, authenticatedClient);
             container.registerInstance(BasicHttpClient, basicClient);
-            container.registerInstance(ChannelSet, channelSet);
             aurelia.start().then(() => aurelia.setRoot('app'));
         }).catch(a => {
             container.registerInstance(HttpClient, http);
@@ -176,8 +180,7 @@ function configureAuthenticatedClient(authenticatedClient: HttpClient, container
                     'Content-Type': 'application/json',
                     'X-AUTH-TOKEN': token
                 }
-            })
-            .withInterceptor(container.get(FetchClientInterceptor))
+            });
     });
 
 }
@@ -186,9 +189,7 @@ function configureBasicClient(basicClient: BasicHttpClient, container: Container
 
     basicClient.configure(config => {
             config.withBaseUrl('/hasli/api/v1/')
-                .withInterceptor(
-                    container.get(FetchClientInterceptor)
-                ).withHeader('X-AUTH-TOKEN', token);
+                .withHeader('X-AUTH-TOKEN', token);
         }
     );
 }

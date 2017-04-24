@@ -1,35 +1,32 @@
 import 'jquery'
-import {Router, RouterConfiguration} from 'aurelia-router';
-import {PipelineStep} from "aurelia-router";
-import {NavigationInstruction} from "aurelia-router";
 import {Next} from "aurelia-router";
+import {PipelineStep} from "aurelia-router";
 import {autoinject} from "aurelia-framework";
-import {RedirectToRoute} from "aurelia-router";
+
+import {
+    Router,
+    RedirectToRoute,
+    RouterConfiguration,
+    NavigationInstruction
+} from 'aurelia-router';
 
 import {
     AuthenticationContextHolder
-} from "common/model/security";
-import {Container} from "aurelia-dependency-injection";
-import {ContextResolver} from "common/model/common/context-resolver";
-import {
-    RootNavigator
-} from "apps/workspaces/resources/custom-elements/navigator/workspace/root-navigator";
-import {
-    NavigatorManager,
-    ContextChangedEvent
-} from "./apps/workspaces/resources/custom-elements/navigator/navigator-element";
-
+} from "lib/common/security";
+import {bindable} from "aurelia-templating";
+import {Container} from 'aurelia-dependency-injection';
+import {ContextResolver} from "lib/common/service/context-resolver";
 
 @autoinject
 export class App {
 
-    public router: Router;
+    @bindable
+    private router: Router;
 
     constructor(
-        private navigationManager: NavigatorManager,
-        private tokenHolder: AuthenticationContextHolder,
-        private context: RootNavigator,
-        private container: Container) {
+        private container: Container,
+        private tokenHolder: AuthenticationContextHolder
+    ) {
 
     }
 
@@ -38,48 +35,15 @@ export class App {
         config.title = 'Hasli.io';
         config.addPipelineStep('authorize', new SecurityStep(this.tokenHolder));
         config.addPipelineStep('preActivate', new ContextResolver(this.container));
-        // config.map([{
-        //     route: '',
-        //     redirect: 'workspaces'
-        // }, {
-        //     route: 'workspaces',
-        //     name: 'workspaces',
-        //     moduleId: 'apps/workspaces/index',
-        //     nav: false,
-        //     title: 'Workspaces',
-        // }, {
-        //     route: 'workspace/:workspaceId',
-        //     name: 'workspace',
-        //     title: 'Workspace',
-        //     moduleId: 'apps/workspaces/routes/workspace/index',
-        //     nav: false
-        // }, {
-        //     route: 'catalog',
-        //     name: 'catalog',
-        //     moduleId: 'apps/catalog/index',
-        //     nav: false,
-        //     title: 'Catalog',
-        // }]);
 
         config.map([{
             route: '',
             redirect: 'workspaces'
         }, {
             route: 'workspaces',
-            name: 'workspaces',
-            moduleId: 'apps/workspaces/index',
-            nav: true,
-            title: 'Workspaces'
-        }, {
-            route: 'workspace/:workspaceId',
-            name: 'workspace',
-            title: 'Workspace',
-            moduleId: 'apps/workspaces/routes/workspace/index',
-            nav: false
+            moduleId: './apps/workspaces/index'
         }]);
         this.router = router;
-        this.context.router = router;
-        config.options.navigationContext = this.context;
     }
 
 

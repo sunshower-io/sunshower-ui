@@ -5,15 +5,26 @@ $midgrey: #9e9e9e;
 $lightgrey: #e0e0e0;
 $offwhite: #f5f5f5; //grey lighten-4
 $brightgreen: #1EC38A;
+$darkblue: #3576B7;
+
+$navbar-height: 64px;
+$navbar-height-mobile: $navbar-height;
+$small-nav-width: $navbar-height; //setting it to navbar height makes it align nicely with the logo
+$body-panel-width: 300px;
+$side-nav-width: $body-panel-width - $small-nav-width;
 
 $primary-color: $logoblue;
 $secondary-color: $brightgreen;
+$primary-color-dark: $darkblue;
 
 $border-color: $lightgrey;
 
-$button-border: 1px solid $primary-color;
-$button-raised-background: $primary-color;
+$standard-padding: 20px;
+
+$button-height: 36px;
+$button-raised-background: $secondary-color;
 $button-flat-color: $primary-color;
+$button-radius: $button-height;
 
 $placeholder-text-color: $midgrey;
 
@@ -29,7 +40,3 @@ $default-background-color: $offwhite;
 $navbar-font-color: $midgrey;
 
 $navbar-font-size: 14px;
-
-$navbar-height: 80px;
-
-$navbar-height-mobile: $navbar-height;

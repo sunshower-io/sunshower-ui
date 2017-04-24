@@ -1,49 +1,37 @@
 template
-    ul(id="${controlId}").side-nav
-        li.side-nav-header
-            .side-nav-toggle
-                i.material-icons.mdi.mdi-view-quilt
-                //span.mdi.mdi-code-less-than-or-equal
-            .side-nav-search.search-wrapper
-                i.material-icons.mdi.mdi.mdi-filter-outline.side-nav-search-icon
-                input(type="text" placeholder="Search", ref="searchField")
-                .search-results(show.bind="searchResults")
-                    a.href(repeat.for="obj of searchResults" click.delegate="openObject(obj)") ${obj.name}
-
-        .navigator-content.au-animate.active(ref="rootElement", anim-enter="wipeLeftToRight")
-            .breadcrumb-container
-                a.breadcrumb(repeat.for="ctx of context.chain()", click.delegate="ctx.open()") ${ctx.name}
-            //todo check for active link
-
-            li.dashboard(class="active ${context.color ? context.color : 'default-color'}")
-                a.waves-effect(href="${current.href ? current.href : '/'}")
-                    summary-icon(stroke="none" fill="#239ae8" textColor="white" text="${context.title}", size="36")
-                    //| ${context.title}
-                    | Dashboard
-            li.no-padding
-                ul.collapsible
-                    li(repeat.for="group of groups")
-                        a.collapsible-header.waves-effect
-                            | ${group.name}
-                            i.material-icons.mdi.mdi-chevron-right.dropdown-icon
-                        .collapsible-body
-                            ul
-                                li(repeat.for="element of group.elements" click.delegate="context.navigate(element)")
-                                    a.waves-effect ${element.name}
-            li.create-context(if.bind="context.create")
-                a.btn.waves-effect.waves-teal(href="#" class="${context.color ? context.color : 'default-color'}")
-                    | Create ${context.title.slice(0, -1)}
+    .side-nav-context(
+        id="${controlId}"
+        ref="navigationContainer"
+            anim-enter="slideOut"
+            anim-leave="slideIn"
+        )
+        .side-nav-header
+            span ${title}
+        .side-nav-search
+            input(type="text" placeholder="Filter")
+            i.material-icons.mdi.mdi-filter-outline.side-nav-search-icon
+        .side-nav-body
+            compose(
+                view-model.bind="currentComponent.reference",
+                if.bind="opened"
+            )
 
     ul.side-nav-small
-        li.side-nav-header(title="Show navigation"
-            data-activates='${controlId}',
-            ref="navigatorControl")
-            i.material-icons.mdi.mdi-view-quilt
-        //todo determine whether it should be active or not
-        li.dashboard(class="active ${context.color ? context.color : 'default-color'}")
-            a.waves-effect(href="${current.href ? current.href : '/'}")
-                summary-icon(stroke="none" fill="#239ae8" textColor="white" text="${context.title}" size="32")
-        li(repeat.for="group of groups")
-            a.waves-effect.waves-teal.waves-circle(href="#")
-                i.material-icons.mdi(if.bind="group.icon" class="${group.icon}")
-                | ${group.name}
+        li.side-nav-header
+            a(href="#/")
+                img(src="assets/icons/hasli-icon.svg", alt="Hasli.io")
+        li(
+            repeat.for="nav of navigatorManager.router.navigation"
+            class="${nav.isActive ? 'active' : ''}"
+        )
+            a(href.bind="nav.href" click.delegate="open(nav)")
+                i.material-icons.mdi(class="${nav.settings.icon}")
+        li.side-nav-toggle(
+            click.delegate="toggle()"
+            ref="navigationControl"
+            anim-enter="rotate180"
+            anim-leave="rotateNeg180"
+        )
+            a(href="#")
+                i.material-icons.mdi(
+                    class="${opened ? 'mdi-chevron-left' : 'mdi-chevron-right'}")

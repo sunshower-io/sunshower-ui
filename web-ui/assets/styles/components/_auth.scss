@@ -13,7 +13,7 @@
 }
 
 .auth-main {
-  padding: 150px;
+  padding: 100px;
   box-sizing:border-box;
   width:65%;
   top:0;
@@ -21,13 +21,17 @@
   bottom:0;
   position:absolute;
 
+  h1 {
+    margin:5rem 0 3rem 0;
+  }
+
   @media #{$medium-and-down} {
     width:90%;
-    padding:75px;
+    padding:50px;
   }
 
   @media #{$extra-large-and-up} {
-    padding: 150px 300px 150px 150px;
+    padding: 100px 200px 100px 100px;
   }
 }
 
@@ -37,12 +41,4 @@
   .btn-flat {
     margin-left: 1em;
   }
-}
-
-h1 {
-  margin:3rem 0 3rem 0;
-}
-
-.auth-submit {
-  text-align:center;
 }

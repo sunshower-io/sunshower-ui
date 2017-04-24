@@ -39,13 +39,11 @@ gulp.task('build-system', function() {
 gulp.task('copy-fonts', function() {
     return gulp.src('jspm_packages/npm/materialize-css@0.98.1/fonts/**/*')
         .pipe(gulp.dest('dist/fonts'));
-
 });
 
 gulp.task('copy-icons', function() {
     return gulp.src('assets/icons/**/*')
-        .pipe(gulp.dest('dist/icons'));
-
+        .pipe(gulp.dest('dist/assets/icons'));
 });
 
 gulp.task('build-sass', function() {
@@ -99,7 +97,14 @@ gulp.task('build-pug', function() {
 gulp.task('build', function(callback) {
   return runSequence(
     'clean',
-    ['build-system', 'build-html', 'build-pug', 'copy-icons', 'build-sass', 'copy-fonts'],
+    [
+        'build-system',
+        'build-html',
+        'build-pug',
+        'build-sass',
+        'copy-fonts',
+        'copy-icons'
+    ],
     callback
   );
 });
