@@ -1,5 +1,6 @@
-$designer-header-height: 40px;
+$designer-header-height: 36px;
 $designer-collapsible-padding: $standard-padding;
+$designer-button-height: 100px;
 
 .designer-container {
   position:absolute;
@@ -52,7 +53,7 @@ $designer-collapsible-padding: $standard-padding;
         line-height: $designer-header-height;
         font-weight: 400;
         margin: 0;
-        font-size: 15px;
+        font-size: 12px;
       }
 
       .material-icons.mdi-plus {
@@ -261,7 +262,7 @@ $designer-collapsible-padding: $standard-padding;
     bottom: 0;
     color: $almostblack;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 12px;
 
     .version {
       color: $midgrey;
@@ -298,7 +299,7 @@ $designer-collapsible-padding: $standard-padding;
         }
       }
       .material-icons {
-        font-size: 35px;
+        font-size: 30px;
         color: $midgrey;
 
         &:hover {
@@ -315,8 +316,8 @@ $designer-collapsible-padding: $standard-padding;
     bottom: 0;
     .material-icons {
       color: $lightgrey;
-      font-size: 30px;
-      padding-left: .25em;
+      font-size: 25px;
+      padding-left: 5px;
       cursor: pointer;
       &:hover {
         color: $primary-color;
@@ -324,4 +325,45 @@ $designer-collapsible-padding: $standard-padding;
     }
   }
 
+}
+
+.designer-button {
+  right: 23px + $body-panel-width;
+
+  &.panel-closed {
+    right: 23px;
+  }
+
+  .btn-floating {
+    box-sizing: border-box;
+    width: $designer-button-height;
+    height: $designer-button-height;
+    line-height: $designer-button-height;
+    background: $midgrey;
+    border: none;
+    //text-align: center;
+
+    &.active {
+      background: $secondary-color;
+    }
+
+    span {
+      display: inline;
+      line-height: $designer-button-height;
+      letter-spacing: 2px;
+      font-size: 10px;
+      color: white;
+      text-transform: uppercase;
+      margin-left: 25px;
+    }
+
+    i.material-icons {
+      display: inline;
+      width: auto;
+      vertical-align: middle;
+      line-height: $designer-button-height;
+      color: white;
+    }
+
+  }
 }

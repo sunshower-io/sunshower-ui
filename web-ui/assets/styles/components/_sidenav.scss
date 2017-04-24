@@ -134,7 +134,7 @@ $sidenav-li-margin-bottom: 30px;
       }
 
       img {
-        width:50px;
+        width:$small-nav-width - $sidenav-font-size/2;
       }
 
     }
@@ -156,8 +156,7 @@ $sidenav-li-margin-bottom: 30px;
     a i.material-icons {
       color: white;
       opacity: 0.75;
-      //todo make thin
-      font-size: 30px;
+      font-size: 25px;
     }
 
   }

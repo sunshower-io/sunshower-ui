@@ -6,12 +6,16 @@ export class MenuBar {
     @bindable
     private controlId                       : string;
 
+    @bindable
+    private templateDD                      : HTMLElement;
+
     constructor() {
         this.controlId = UUID.randomUUID().value;
     }
 
     attached() {
-        $('.dropdown-button').dropdown();
+        //why not working?
+        $(this.templateDD).dropdown();
     }
 
 }
