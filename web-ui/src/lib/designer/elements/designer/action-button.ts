@@ -12,6 +12,9 @@ import {
 @customElement("action-button")
 export class DesignerActionButton {
 
+    @bindable
+    active: boolean;
+
     attached() {
 
 

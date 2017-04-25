@@ -102,24 +102,45 @@ $card-border-style: $card-border-width solid $border-color;
     .card-icon {
       width: 90px;
       float: left;
+
+      @media #{$small-and-down} {
+        width: auto;
+        float: none;
+        text-align: center;
+      }
     }
 
     .card-title {
       font-weight:400;
       margin: 0;
       float: left;
-      padding-top: 30px;
-      padding-left: $standard-padding;
+      padding: 30px $standard-padding 0 $standard-padding;
       box-sizing: border-box;
       width: -webkit-calc(100% - 180px);
       width: -moz-calc(100% - 180px);
       width: calc(100% - 180px);
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+
+      @media #{$small-and-down} {
+        width: 100%;
+        float: none;
+        text-align: center;
+        padding: $standard-padding;
+      }
     }
 
     .card-button {
       width: 90px;
       float: right;
       padding-top: 30px;
+
+      @media #{$small-and-down} {
+        width: 100%;
+        float: none;
+        padding-top: 0;
+      }
 
       .btn {
         border-radius:0;
@@ -131,14 +152,10 @@ $card-border-style: $card-border-width solid $border-color;
         background: $primary-color;
 
 
-        //@media #{$medium-and-down} {
-        //  position:relative;
-        //  right:auto;
-        //  top:auto;
-        //  display: block;
-        //  width: 100%;
-        //  margin-top: 20px;
-        //}
+        @media #{$small-and-down} {
+          display: block;
+          width: 100%;
+        }
 
       }
     }
@@ -167,7 +184,7 @@ $card-border-style: $card-border-width solid $border-color;
       text-align: center;
 
       &.state-good {
-        @extend .green
+        @extend .light-green
       }
 
       &.state-pending {
