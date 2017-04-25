@@ -67,14 +67,23 @@ $designer-button-height: 100px;
       &.icon-menu {
         text-align: center;
 
+        .tabs, .tab {
+          line-height: $designer-header-height - 1px;
+          height: $designer-header-height - 1px;
+
+          a {
+            padding: 0;
+          }
+        }
+
         .material-icons {
           padding: 0 .25em;
           color: $almostblack;
           font-size: 20px;
+        }
 
-          &.active {
-            color: $primary-color;
-          }
+        a.active .material-icons {
+          color: $primary-color;
         }
       }
 

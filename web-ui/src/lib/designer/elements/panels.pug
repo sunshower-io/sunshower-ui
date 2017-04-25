@@ -1,9 +1,9 @@
 template
 
-    .row(ref="panel")
-        .col.s12
+    div(ref="panel")
+        .designer-panel-header.icon-menu
             ul.tabs
-                .li.tab.col.s3(repeat.for="child of children")
+                li.tab(repeat.for="child of children")
                     a(href="#" click.delegate="open(child.id)" class="${child.active ? 'active' : ''}")
                         i.material-icons.mdi.mdi-cloud-outline
 
