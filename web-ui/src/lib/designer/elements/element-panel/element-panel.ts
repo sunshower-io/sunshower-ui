@@ -20,16 +20,18 @@ import {DesignerManager} from "lib/designer/core";
 export class ElementPanel {
 
     @bindable
-    public active           : boolean = true;
+    public active                   : boolean = true;
 
     @bindable
-    private loading         : boolean;
+    private loading                 : boolean;
 
     @bindable
-    public model : ElementFactoryProvider;
+    public model                    : ElementFactoryProvider;
 
     @bindable
-    private factories : ElementFactory[];
+    private factories               : ElementFactory[];
+
+    private canvas                  : Canvas;
 
 
     constructor(
@@ -40,6 +42,10 @@ export class ElementPanel {
 
     activate(provider: ElementFactoryProvider) {
         this.model = provider;
+    }
+
+    attached() : void {
+        this.canvas = this.designerManager.getCurrentCanvas();
         if(this.model) {
             this.loading = true;
             this.model.load().then(t => {

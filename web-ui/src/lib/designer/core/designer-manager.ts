@@ -2,6 +2,7 @@
 
 import {Designer} from "./designer";
 import {autoinject} from "aurelia-framework";
+import {Canvas} from "../canvas/canvas";
 
 @autoinject
 export class DesignerManager {
@@ -15,6 +16,10 @@ export class DesignerManager {
 
     public getCurrent() : Designer {
         return this.currentDesigner;
+    }
+
+    public getCurrentCanvas() : Canvas {
+        return this.currentDesigner.getCanvas();
     }
 
 }

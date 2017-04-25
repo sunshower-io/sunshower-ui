@@ -1,4 +1,5 @@
 template
+    require(from='./palette-icon')
     .designer-panel-body
         .designer-form
             label Type
@@ -11,6 +12,12 @@ template
                 i.material-icons.mdi.mdi-plus-circle-outline
                 | Create
         .designer-cards
-            .designer-card(repeat.for="factory of factories")
-                img(src="${factory.displayIcon}")
-                span ${factory.elementName}
+            palette-icon(
+                repeat.for="factory of factories"
+                factory.bind="factory"
+                canvas.bind="canvas"
+            )
+
+            //.designer-card(repeat.for="factory of factories")
+            //    img(src="${factory.displayIcon}")
+            //    span ${factory.elementName}

@@ -164,6 +164,12 @@ declare module 'mxgraph' {
         mouseListeners                      : {[name: string]: any};
 
         maximumGraphBounds                  : mxGraphBounds;
+
+        canImportCell(cell:Layer) : boolean;
+        /**
+         *
+         * @param cell
+         */
         isCellSelectable(cell:Layer) : boolean;
 
         /**
