@@ -7,15 +7,17 @@ $offwhite: #f5f5f5; //grey lighten-4
 $brightgreen: #1EC38A;
 $darkblue: #3576B7;
 
+$primary-color: $logoblue;
+$secondary-color: $brightgreen;
+$primary-color-dark: $darkblue;
+
+$progress-bar-color: $primary-color;
+
 $navbar-height: 50px;
 $navbar-height-mobile: $navbar-height;
 $small-nav-width: $navbar-height; //setting it to navbar height makes it align nicely with the logo
 $body-panel-width: 300px;
 $side-nav-width: $body-panel-width - $small-nav-width;
-
-$primary-color: $logoblue;
-$secondary-color: $brightgreen;
-$primary-color-dark: $darkblue;
 
 $border-color: $lightgrey;
 $default-border: 1px solid $border-color;
