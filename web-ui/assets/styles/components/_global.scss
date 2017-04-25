@@ -20,6 +20,10 @@ body {
   padding: $standard-padding;
   margin-right: $body-panel-width;
 
+  @media #{$medium-and-down} {
+    margin-right: $body-panel-width - $navbar-height;
+  }
+
   &.body-content-full {
     margin-right: 0;
   }
@@ -35,6 +39,10 @@ body {
   box-sizing: border-box;
   border-left: $default-border;
   background: white;
+
+  @media #{$medium-and-down} {
+    width: $body-panel-width - $navbar-height;
+  }
 
   .body-panel-top, .body-panel-bottom {
     box-sizing: border-box;
