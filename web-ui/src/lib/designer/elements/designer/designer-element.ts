@@ -12,6 +12,7 @@ import {
 import {
     Designer
 } from "lib/designer/core";
+import {DesignerManager} from "lib/designer/core";
 
 @autoinject
 @containerless
@@ -23,12 +24,18 @@ export class DesignerElement {
     private element             : HTMLElement;
 
 
+    constructor(private designerManager: DesignerManager) {
+
+
+    }
+
 
     attached() : void {
         let designer = new Designer(this.element),
             canvas = designer.getCanvas();
         this.setCanvas(canvas);
         this.setDesigner(designer);
+        this.designerManager.setCurrent(designer);
     }
 
 

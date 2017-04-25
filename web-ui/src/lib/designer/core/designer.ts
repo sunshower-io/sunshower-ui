@@ -9,11 +9,10 @@ export class Designer {
 
 
     private canvas : Canvas;
-    private model  : CanvasModel;
 
     constructor(
         private readonly container: HTMLElement,
-        model: CanvasModel = new CanvasModel(),
+        private readonly model: CanvasModel = new CanvasModel(),
         options?: DesignerOptions
     ) {
         let canvas = new Canvas(container, model),

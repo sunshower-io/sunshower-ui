@@ -19,11 +19,6 @@ import {
 @customElement('infrastructure-designer')
 export default class InfrastructureDesigner {
 
-
-    private designer            : Designer;
-    private canvas              : Canvas;
-    private element             : HTMLElement;
-
     constructor() {
 
 

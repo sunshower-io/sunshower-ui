@@ -5,23 +5,28 @@ import {Palette} from "lib/designer/canvas/palette";
 import {
     containerless,
     customElement,
-    bindable
+    bindable,
+    autoinject
 } from "aurelia-framework";
+import {DesignerManager} from "../../core/designer-manager";
 
 
+@autoinject
 @customElement('element-panel')
 export class ElementPanel {
 
-
-    private canvas          : Canvas;
-
-
-    name         : string = "whatever";
     @bindable
     public active: boolean = true;
 
-    setCanvas(canvas:Canvas) : void {
-        this.canvas = canvas;
+
+    constructor(private readonly designerManager: DesignerManager) {
+
     }
+
+
+    attached() {
+        console.log("DES", this.designerManager);
+    }
+
 
 }
