@@ -68,6 +68,8 @@ export abstract class DefaultElementFactory implements ElementFactory {
         mxUtils.makeDraggable(element, canvas, this.importFunction, dragImage);
         // document.body.appendChild(img);
     }
+    
+
 
 }
 
