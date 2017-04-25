@@ -1,5 +1,6 @@
-$designer-header-height: 40px;
+$designer-header-height: 36px;
 $designer-collapsible-padding: $standard-padding;
+$designer-button-height: 100px;
 
 .designer-container {
   position:absolute;
@@ -11,7 +12,7 @@ $designer-collapsible-padding: $standard-padding;
 
   .canvas {
     position:absolute;
-    top:0;
+    top:$designer-header-height;
     bottom:0;
     right:0;
     left:0;
@@ -52,13 +53,13 @@ $designer-collapsible-padding: $standard-padding;
         line-height: $designer-header-height;
         font-weight: 400;
         margin: 0;
-        font-size: 15px;
+        font-size: 12px;
       }
 
       .material-icons.mdi-plus {
         color: $secondary-color;
         position: absolute;
-        right: 20px;
+        right: $designer-collapsible-padding - 5px;
         top: 50%;
         transform: translateY(-50%);
       }
@@ -88,7 +89,7 @@ $designer-collapsible-padding: $standard-padding;
   overflow-y: auto;
 
   .designer-form {
-    padding: $standard-padding;
+    padding: $standard-padding/2 $standard-padding;
     font-size: 12px;
     color: $midgrey;
 
@@ -100,14 +101,21 @@ $designer-collapsible-padding: $standard-padding;
       }
 
       input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea, select {
-        width: 85%;
+        width: 90%;
         height: 2.5rem;
       }
+
       .locking-icon {
         position: absolute;
         right: 0;
         top: 25%;
+        font-size: 17px;
+
+        &.active {
+          color: $primary-color;
+        }
       }
+
     }
 
     select {
@@ -162,7 +170,7 @@ $designer-collapsible-padding: $standard-padding;
 
     .collapsible-header {
       position: relative;
-      padding: 0 $designer-collapsible-padding;
+      padding: 0 $designer-collapsible-padding*2 0 $designer-collapsible-padding;
 
       i.material-icons {
         color: $lightgrey;
@@ -189,16 +197,16 @@ $designer-collapsible-padding: $standard-padding;
 
     }
 
-    .collapsible-body {
-      padding: 0 $designer-collapsible-padding;
-    }
-
     li.has-collapsible > .collapsible-body {
       padding: 0;
       border-bottom: none;
     }
 
-    //todo make this biz prettier -- right now it's just organized for my brain
+    .collapsible-body {
+      padding: 0 $designer-collapsible-padding;
+    }
+
+    //yes, this looks terrible
 
     .collapsible-body .collapsible-header, .collapsible-body .collapsible-body {
       padding-left: $designer-collapsible-padding*2;
@@ -212,6 +220,13 @@ $designer-collapsible-padding: $standard-padding;
       padding-left: $designer-collapsible-padding*4;
     }
 
+    .collapsible-body .collapsible-body .collapsible-body .collapsible-body .collapsible-header, .collapsible-body .collapsible-body .collapsible-body .collapsible-body .collapsible-body {
+      padding-left: $designer-collapsible-padding*5;
+    }
+
+    .collapsible-body .collapsible-body .collapsible-body .collapsible-body .collapsible-body .collapsible-header, .collapsible-body .collapsible-body .collapsible-body .collapsible-body .collapsible-body .collapsible-body {
+      padding-left: $designer-collapsible-padding*6;
+    }
 
   }
 
@@ -242,24 +257,31 @@ $designer-collapsible-padding: $standard-padding;
 
 .designer-menu-bar {
   background: white;
+  position: absolute;
   top: 0;
-  right: 0;
-  left: $small-nav-width;
+  right: $body-panel-width;
+  left: $body-panel-width;
   height: $designer-header-height;
   box-sizing: border-box;
   border-bottom: $default-border;
-  padding-right: $body-panel-width;
-  padding-left: $side-nav-width;
   line-height: $designer-header-height;
+
+  &.right-panel-closed {
+    right: 0;
+  }
+
+  &.left-panel-closed {
+    left: 0;
+  }
 
   .template-info {
     position: absolute;
     top: 0;
-    left: $body-panel-width + $standard-padding;
+    left: $standard-padding;
     bottom: 0;
     color: $almostblack;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 12px;
 
     .version {
       color: $midgrey;
@@ -296,7 +318,7 @@ $designer-collapsible-padding: $standard-padding;
         }
       }
       .material-icons {
-        font-size: 35px;
+        font-size: 30px;
         color: $midgrey;
 
         &:hover {
@@ -309,12 +331,12 @@ $designer-collapsible-padding: $standard-padding;
   .utilities {
     position: absolute;
     top: 0;
-    right: $body-panel-width + $standard-padding;
+    right: $standard-padding;
     bottom: 0;
     .material-icons {
       color: $lightgrey;
-      font-size: 30px;
-      padding-left: .25em;
+      font-size: 25px;
+      padding-left: 5px;
       cursor: pointer;
       &:hover {
         color: $primary-color;
@@ -322,4 +344,45 @@ $designer-collapsible-padding: $standard-padding;
     }
   }
 
+}
+
+.designer-button {
+  right: 23px + $body-panel-width;
+
+  &.right-panel-closed {
+    right: 23px;
+  }
+
+  .btn-floating {
+    box-sizing: border-box;
+    width: $designer-button-height;
+    height: $designer-button-height;
+    line-height: $designer-button-height;
+    background: $midgrey;
+    border: none;
+    //text-align: center;
+
+    &.active {
+      background: $secondary-color;
+    }
+
+    span {
+      display: inline;
+      line-height: $designer-button-height;
+      letter-spacing: 2px;
+      font-size: 10px;
+      color: white;
+      text-transform: uppercase;
+      margin-left: 25px;
+    }
+
+    i.material-icons {
+      display: inline;
+      width: auto;
+      vertical-align: middle;
+      line-height: $designer-button-height;
+      color: white;
+    }
+
+  }
 }

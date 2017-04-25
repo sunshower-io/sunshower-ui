@@ -1,7 +1,5 @@
 template
-    //.designer-panel-header
-        h2 Elements
-    .designer-panel-body.active
+    .designer-panel-body
         .designer-form
             label Type
             select.browser-default
@@ -13,9 +11,6 @@ template
                 i.material-icons.mdi.mdi-plus-circle-outline
                 | Create
         .designer-cards
-            .designer-card(repeat.for="element of palette.elements")
-                img(src="element.icons.display")
-                span ${element.name}
             .designer-card
                 img(src="assets/icons/designer/virtual-machine.svg")
                 span Virtual Machine

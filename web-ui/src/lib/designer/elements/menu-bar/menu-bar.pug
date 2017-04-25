@@ -2,13 +2,14 @@ template
     .designer-menu-bar
         .template-info
             .dropdown-button(
+                ref="templateDD"
                 data-constrainwidth="false"
                 data-beloworigin="true"
                 data-activates="${controlId}"
                 )
                 | Template Name
                 span.version v1.0
-                i.material-icons.mdi.mdi-chevron-right
+                i.material-icons.mdi.mdi-chevron-right.dropdown-icon
             ul.dropdown-content(id="${controlId}")
                 li Last Edited Nevar
                 li Last Released Nevar Evar

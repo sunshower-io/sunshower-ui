@@ -6,12 +6,15 @@ export class MenuBar {
     @bindable
     private controlId                       : string;
 
+    @bindable
+    private templateDD                      : HTMLElement;
+
     constructor() {
         this.controlId = UUID.randomUUID().value;
     }
 
     attached() {
-        $('.dropdown-button').dropdown();
+        $(this.templateDD).dropdown();
     }
 
 }

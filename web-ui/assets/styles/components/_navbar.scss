@@ -22,44 +22,71 @@ nav {
     height: $navbar-height;
     line-height: $navbar-height;
     box-sizing: border-box;
-    margin-left: $small-nav-width + $navbar-font-size;
-    padding-left: $navbar-font-size;
-    font-size: 1.5rem;
+    margin-left: $small-nav-width;
+    padding-left: $standard-padding;
     font-weight: 300;
-    text-transform: uppercase;
+
+    &.side-nav-open {
+      margin-left: $small-nav-width + $side-nav-width;
+    }
 
     @media #{$medium-and-down} {
-      height: $navbar-height-mobile;
-      line-height: $navbar-height-mobile;
+      //height: $navbar-height-mobile;
+      //line-height: $navbar-height-mobile;
       left: auto;
       transform: none;
     }
-  }
-
-  .breadcrumb-container {
-    position: absolute;
-    left: $side-nav-width + $small-nav-width;
-    padding-left: $standard-padding;
 
     a {
+      font-size: 1.25rem;
+      vertical-align: middle;
+    }
+
+    .breadcrumb {
       color: $midgrey;
-      font-size: 1em;
       cursor: pointer;
 
       &:last-child {
         color: $primary-color;
-        font-size:1.25em;
       }
 
       &:before {
         font: inherit;
         content: "/";
-        margin: 0 !important;
+        font-size: 20px;
+        margin: -3px 0 0 0 !important;
         padding: 0 .25em;
         color: $midgrey !important;
+        vertical-align:middle;
       }
     }
+
   }
+
+  //.breadcrumb-container {
+  //  position: absolute;
+  //  left: $side-nav-width + $small-nav-width;
+  //  padding-left: $standard-padding;
+  //
+  //  a {
+  //    color: $midgrey;
+  //    font-size: 1em;
+  //    cursor: pointer;
+  //
+  //    &:last-child {
+  //      color: $primary-color;
+  //      font-size:1.25em;
+  //    }
+  //
+  //    &:before {
+  //      font: inherit;
+  //      content: "/";
+  //      margin: 0 !important;
+  //      padding: 0 .25em;
+  //      color: $midgrey !important;
+  //    }
+  //  }
+  //}
 
   ul.user-menu {
     width: $body-panel-width;
@@ -78,6 +105,11 @@ nav {
         width: $navbar-height;
         text-align: center;
         background: $primary-color-dark;
+      }
+
+      i.material-icons {
+        vertical-align: middle;
+        font-size: 20px;
       }
     }
   }

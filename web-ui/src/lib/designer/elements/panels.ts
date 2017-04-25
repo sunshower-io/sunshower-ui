@@ -24,12 +24,15 @@ export class Panels {
     attached() : void {
     }
 
-
     open(id: string) {
+        return this.openChild(this.children, id);
+    }
+
+    private openChild(children: Panel[], id: string) {
         if(this.current) {
             this.current.active = false;
         }
-        let panel = this.children.find(t => t.id == id);
+        let panel = children.find(t => t.id == id);
         panel.active = true;
         this.current = panel;
         $(this.panel).tabs('select_tab', id);
@@ -37,9 +40,10 @@ export class Panels {
     }
 
 
+
     childrenChanged(nv:Panel[], ov: Panel[]) {
-        this.children[0].active = true;
         $(this.panel).tabs();
+        this.openChild(nv, nv[0].id);
     }
 
 }
