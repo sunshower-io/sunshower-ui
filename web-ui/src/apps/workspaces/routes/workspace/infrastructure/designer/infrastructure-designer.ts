@@ -2,24 +2,28 @@
 import {
     autoinject,
     containerless,
-    customElement
+    customElement,
+    bindable
 } from "aurelia-framework";
-import {
-    Grid,
-    Designer
-} from 'lib/designer/core'
+
 
 import {
-    Canvas
-} from 'lib/designer/canvas';
+    InfrastructureFactoryProvider
+} from "apps/workspaces/lib/palette/infrastructure/infrastructure-palette";
 
 
 @autoinject
-@containerless
 @customElement('infrastructure-designer')
 export default class InfrastructureDesigner {
 
-    constructor() {
+    @bindable
+    private infrastructureElementFactory: InfrastructureFactoryProvider;
+
+    constructor(
+        infrastructureElementFactory: InfrastructureFactoryProvider
+    ) {
+        this.infrastructureElementFactory = infrastructureElementFactory;
+        console.log("infr", infrastructureElementFactory);
 
 
     }

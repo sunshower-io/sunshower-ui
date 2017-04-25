@@ -2,6 +2,7 @@ template
     div.__panel(id="${id}")
         compose(
             if.bind="active"
+            model.bind="model"
             view-model.bind="viewModel"
             view-model.ref="contents"
         )

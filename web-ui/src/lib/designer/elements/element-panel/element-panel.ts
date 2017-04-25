@@ -1,5 +1,9 @@
 import {Canvas} from "lib/designer/canvas/canvas";
-import {Palette} from "lib/designer/canvas/palette";
+
+import {
+    Palette,
+    ElementFactoryProvider, ElementFactory
+} from "lib/designer/canvas/palette";
 
 
 import {
@@ -8,7 +12,7 @@ import {
     bindable,
     autoinject
 } from "aurelia-framework";
-import {DesignerManager} from "../../core/designer-manager";
+import {DesignerManager} from "lib/designer/core";
 
 
 @autoinject
@@ -16,17 +20,37 @@ import {DesignerManager} from "../../core/designer-manager";
 export class ElementPanel {
 
     @bindable
-    public active: boolean = true;
+    public active           : boolean = true;
+
+    @bindable
+    private loading         : boolean;
+
+    @bindable
+    public model : ElementFactoryProvider;
+
+    @bindable
+    private factories : ElementFactory[];
 
 
-    constructor(private readonly designerManager: DesignerManager) {
+    constructor(
+        private readonly designerManager: DesignerManager
+    ) {
 
     }
 
-
-    attached() {
-        console.log("DES", this.designerManager);
+    activate(provider: ElementFactoryProvider) {
+        this.model = provider;
+        if(this.model) {
+            this.loading = true;
+            this.model.load().then(t => {
+                this.factories = t;
+                this.loading = false
+            });
+        }
     }
+
+
+
 
 
 }

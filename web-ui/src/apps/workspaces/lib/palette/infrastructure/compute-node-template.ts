@@ -11,8 +11,13 @@ export class ComputeNodeTemplateElement extends Element implements ComputeNodeTe
 
 }
 
+export class SecurityGroupElementFactory implements ElementFactory {
+    elementName         : string = 'Security Group';
+    displayIcon         : string = 'assets/icons/designer/security-group.svg';
+}
+
+
 export class ComputeNodeTemplateElementFactory implements ElementFactory {
-
-
-
+    elementName         : string = 'Node Template';
+    displayIcon         : string = 'assets/icons/designer/virtual-machine.svg'
 }

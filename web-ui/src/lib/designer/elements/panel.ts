@@ -30,6 +30,9 @@ export class Panel {
     @bindable
     public  active              : boolean;
 
+    @bindable
+    private model               : any;
+
 
     private currentViewModel    : PanelAware;
 

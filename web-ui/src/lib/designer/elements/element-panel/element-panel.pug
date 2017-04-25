@@ -11,9 +11,6 @@ template
                 i.material-icons.mdi.mdi-plus-circle-outline
                 | Create
         .designer-cards
-            .designer-card
-                img(src="assets/icons/designer/virtual-machine.svg")
-                span Virtual Machine
-            .designer-card
-                img(src="assets/icons/designer/security-group.svg")
-                span Security Group
+            .designer-card(repeat.for="factory of factories")
+                img(src="${factory.displayIcon}")
+                span ${factory.elementName}

@@ -2,6 +2,8 @@ import {} from 'jasmine';
 import {Cloneable} from 'lib/common/lang';
 
 import {Stack} from 'lib/common/util/stack';
+
+
 import {
     Command,
     CommandManager
@@ -49,7 +51,6 @@ describe('a command manager', () => {
         expect(stack.peek()).toBe(1);
         manager.undo();
         expect(stack.peek()).toBeUndefined();
-
     });
 
 });

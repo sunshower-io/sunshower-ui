@@ -12,7 +12,8 @@ export interface ElementFactoryProvider {
 
 
 export interface ElementFactory {
-
+    elementName         : string;
+    displayIcon         : string;
 }
 
 
@@ -30,8 +31,5 @@ export class Palette {
     public bind(canvas : Canvas) : void {
         this.canvas = canvas;
     }
-
-
-
 
 }

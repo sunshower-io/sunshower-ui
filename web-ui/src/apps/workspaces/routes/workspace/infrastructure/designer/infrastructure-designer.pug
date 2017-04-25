@@ -5,9 +5,10 @@ template
                 layer-panel
             bottom
                 panels
-                    panel(view-model="lib/designer/elements/element-panel/element-panel")
-                    panel(view-model="lib/designer/elements/element-panel/element-panel")
-                    panel(view-model="lib/designer/elements/element-panel/element-panel")
+                    panel(
+                        model.bind="infrastructureElementFactory",
+                        view-model="lib/designer/elements/element-panel/element-panel"
+                    )
         right-panel
             full
                 property-panel
