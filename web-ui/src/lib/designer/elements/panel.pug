@@ -1,0 +1,8 @@
+template
+    div.col.s12.__panel(id="${id}")
+        compose(
+            if.bind="active"
+            view-model.bind="viewModel"
+            view-model.ref="contents"
+        )
+

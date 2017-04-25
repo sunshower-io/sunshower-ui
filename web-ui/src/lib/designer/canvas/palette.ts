@@ -19,6 +19,7 @@ export interface ElementFactory {
 
 export class Palette {
 
+    private canvas          : Canvas;
 
     constructor(
         private factoryProvider: ElementFactoryProvider
@@ -27,7 +28,10 @@ export class Palette {
     }
 
     public bind(canvas : Canvas) : void {
-
+        this.canvas = canvas;
     }
+
+
+
 
 }

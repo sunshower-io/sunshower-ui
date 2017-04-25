@@ -103,6 +103,8 @@ function configureResources(aurelia: Aurelia) {
     aurelia.use
         .standardConfiguration()
         .globalResources([
+            'lib/designer/elements/panel',
+            'lib/designer/elements/panels',
             'lib/designer/elements/designer/left-panel',
             'lib/designer/elements/designer/right-panel',
             'lib/resources/custom-elements/misc/top-element',
