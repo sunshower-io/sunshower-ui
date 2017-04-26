@@ -1,25 +1,50 @@
 template
     require(from="lib/common/resources/custom-elements/body-panel/body-panel")
-    .body-content(ref="content")
+    .body-content.with-tabs(ref="content")
         h1 Applications
-        .card
-            .card-content
-                .card-icon
-                    summary-icon(text="Docker Swarm Template" size="90")
-                h2.card-title Docker Swarm Template
-                .card-button
-                    a.btn.waves-effect Deploy
-            .card-action
-                .chip.state-good Release
-                .version Version 1.0.23
-        .card
-            .card-content
-                .card-icon
-                    summary-icon(text="Docker Swarm Template" size="90")
-                h2.card-title Docker Swarm Template With A Super Super Super Super Super Long Name
-                .card-button
-                    a.btn.waves-effect Deploy
-            .card-action
-                .chip.state-good Release
-                .version Version 1.0.23
+
+        .body-tab-menu
+            .tabs(ref="tabHolder")
+                li.tab
+                    a.active(href="#tempCardHolder")
+                        | Temporary Cards
+                        span.badge 2
+                li.tab
+                    a(href="#anotherHolder")
+                        | A Different Tab
+                        span.badge 1
+            a.btn-floating.waves-effect
+                i.material-icons.mdi.mdi-plus
+        .body-tab-holder(id="tempCardHolder")
+            .card
+                .card-content
+                    .card-icon
+                        summary-icon(text="Docker Swarm Template" size="90")
+                    h2.card-title Docker Swarm Template
+                    .card-button
+                        a.btn.waves-effect Deploy
+                .card-action
+                    .chip.state-good Release
+                    .version Version 1.0.23
+            .card
+                .card-content
+                    .card-icon
+                        summary-icon(text="Docker Swarm Template" size="90")
+                    h2.card-title Docker Swarm Template With A Super Super Super Super Super Long Name
+                    .card-button
+                        a.btn.waves-effect Deploy
+                .card-action
+                    .chip.state-good Release
+                    .version Version 1.0.23
+        .body-tab-holder(id="anotherHolder")
+            .card
+                .card-content
+                    .card-icon
+                        summary-icon(text="Hi" size="90")
+                    h2.card-title Hi
+                    .card-button
+                        a.btn.waves-effect Deploy
+                .card-action
+                    .chip.state-pending Pending
+                    .version Version 1
     body-panel(active.bind="panelActive" sections.bind="true" content.bind="content")

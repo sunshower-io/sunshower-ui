@@ -10,6 +10,9 @@ export class WorkspaceApplications {
     @bindable
     private panelActive: boolean;
 
+    @bindable
+    private tabHolder: HTMLElement;
+
 
     attached() : void {
 
@@ -18,6 +21,8 @@ export class WorkspaceApplications {
         } else {
             $(this.content).addClass('body-content-full')
         }
+
+        $(this.tabHolder).tabs();
     }
 
 }
