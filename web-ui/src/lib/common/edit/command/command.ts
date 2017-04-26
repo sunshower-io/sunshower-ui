@@ -12,12 +12,12 @@ export interface Redoable {
 
 
 export class CommandManager {
-    private undoStack : Stack<Command>;
-    private redoStack : Stack<Command>;
+    private undoStack : Command[];
+    private redoStack : Command[];
 
     constructor() {
-        this.undoStack = new Stack<Command>();
-        this.redoStack = new Stack<Command>();
+        this.undoStack = [];
+        this.redoStack = [];
     }
 
 
@@ -34,7 +34,7 @@ export class CommandManager {
         if(this.canUndo()) {
             let toUndo = this.undoStack.pop();
             toUndo.undo();
-            this.redoStack.replace(toUndo);
+            this.redoStack.push(toUndo);
         }
     }
 
@@ -43,23 +43,24 @@ export class CommandManager {
         if(this.canRedo()) {
             let toRedo = this.redoStack.pop();
             toRedo.redo();
-            this.undoStack.replace(toRedo);
+            this.undoStack.push(toRedo);
         }
     }
 
 
     canUndo() : boolean {
-        return !this.undoStack.isEmpty();
+        return this.undoStack.length > 0;
     }
 
     canRedo() : boolean  {
-        return !this.redoStack.isEmpty();
+        return this.redoStack.length > 0;
     }
 
 
 }
 
 export interface Command extends Cloneable<Command>, Undoable, Redoable {
+    readonly id: string;
 
     redo(): void;
 

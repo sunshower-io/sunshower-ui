@@ -8,5 +8,4 @@ export class CanvasModel extends mxGraphModel {
 
 
 
-
 }

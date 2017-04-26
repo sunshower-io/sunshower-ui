@@ -45,7 +45,12 @@ export abstract class RenderableElement extends mxCell implements Drawable {
     }
 
     addTo(canvas:Canvas) : boolean {
-        canvas.addCell(this, null);
+        canvas.getModel().beginUpdate();
+        try {
+            canvas.addCell(this, null);
+        } finally {
+            canvas.getModel().endUpdate();
+        }
         return true;
     }
 }

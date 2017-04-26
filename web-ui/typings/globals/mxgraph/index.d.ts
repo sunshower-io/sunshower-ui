@@ -92,6 +92,7 @@ declare module 'mxgraph' {
 
         constructor(root?: Layer);
 
+        addListener(k:string, v:any) : void;
 
         remove(cell:Layer) : Layer;
 

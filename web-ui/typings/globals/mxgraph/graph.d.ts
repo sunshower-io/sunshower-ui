@@ -44,6 +44,7 @@ declare module 'mxgraph' {
         currentRoot: Layer;
         translate: mxGraphBounds;
 
+        addListener(l:string, m:any) : void;
 
         getCanvas(): Element;
 
@@ -193,6 +194,7 @@ declare module 'mxgraph' {
          */
         getBoundingBox(children: Layer[]): mxRectangle;
 
+        getSelectionCellsForChanges(changes:any);
         /**
          *
          * @param back
@@ -628,5 +630,20 @@ declare module 'mxgraph' {
         getCellsForGroup(cells: Layer[]): Layer[];
 
 
+    }
+
+    export class mxUndoManager {
+        size                                    : number;
+        history                                 : number;
+        isEmpty()                               : boolean;
+        clear()                                 : void;
+        undo()                                  : void;
+        canUndo()                               : boolean;
+        redo()                                  : boolean;
+        canRedo()                               : boolean;
+
+        undoableEditHappened(event:any)         :  void;
+
+        addListener(a:any, b:any)               : void;
     }
 }
