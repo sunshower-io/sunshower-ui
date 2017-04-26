@@ -1,23 +1,33 @@
-import {DefaultElementFactory, ElementFactory} from "lib/designer/canvas/palette";
-import {RenderableElement as Element} from 'lib/designer/model';
-import {ComputeNodeTemplate} from 'lib/hal/infrastructure/compute';
+import {
+    DefaultElementFactory
+} from "lib/designer/canvas/palette";
+import {
+    Canvas
+} from "lib/designer/canvas/canvas";
 
 
-export class ComputeNodeTemplateElement extends Element implements ComputeNodeTemplate {
+import {
+    Drawable,
+    RenderableVertex as Vertex
+} from 'lib/designer/model';
 
-    constructor() {
-        super();
-    }
+import {
+    ComputeNodeTemplate
+} from 'lib/hal/infrastructure/compute';
 
-}
 
-export class SecurityGroupElementFactory extends DefaultElementFactory {
-    elementName         : string = 'Security Group';
-    displayIcon         : string = 'assets/icons/designer/security-group.svg';
+export class ComputeNodeTemplateElement extends Vertex implements ComputeNodeTemplate {
+
+
 }
 
 
 export class ComputeNodeTemplateElementFactory extends DefaultElementFactory {
     elementName         : string = 'Node Template';
-    displayIcon         : string = 'assets/icons/designer/virtual-machine.svg'
+    displayIcon         : string = 'assets/icons/designer/virtual-machine.svg';
+
+
+    newElement(x: number, y: number, event: Event, canvas: Canvas, target: any): Drawable {
+        return new ComputeNodeTemplateElement('node', x, y, 300, 300);
+    }
 }

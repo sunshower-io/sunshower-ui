@@ -3,8 +3,11 @@ import {
     ElementFactoryProvider
 } from "lib/designer/canvas/palette";
 import {
-    ComputeNodeTemplateElementFactory, SecurityGroupElementFactory
+    ComputeNodeTemplateElementFactory
 } from "./compute-node-template";
+import {
+    SecurityGroupElementFactory
+} from "./security-group";
 
 
 

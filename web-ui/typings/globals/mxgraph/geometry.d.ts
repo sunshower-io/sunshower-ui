@@ -172,11 +172,11 @@ declare module 'mxgraph' {
     }
 
     export class mxGeometry {
-        x:number;
-        y:number;
-        width:number;
-        height:number;
-        relative:boolean;
+        x               ?:number;
+        y               ?:number;
+        width           ?:number;
+        height          ?:number;
+        relative        ?:boolean;
 
         points: mxPoint[];
 
