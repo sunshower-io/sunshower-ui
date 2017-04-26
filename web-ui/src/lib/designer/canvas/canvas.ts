@@ -1,24 +1,24 @@
 import {
     mxGraph,
-    mxClient, Layer, mxConstants, mxUndoManager, mxEvent, mxUtils
+    mxClient,
+    mxUndoManager,
+    mxEvent,
+    mxUtils
 } from "mxgraph";
 import {Grid} from 'lib/designer/core';
 import {CanvasModel} from 'lib/designer/model';
+import {KeyHandler} from "./key-handler";
 
-
-mxConstants.VERTEX_SELECTION_COLOR = '#000000';
-
-
-mxConstants.HANDLE_FILLCOLOR = '#FF0000';
 
 
 export class Canvas extends mxGraph {
 
 
-    private grids: Grid[];
-    private undoListener: any;
+    private grids               : Grid[];
+    private undoListener        : any;
 
-    private historyManager: mxUndoManager;
+    private keyHandler          : KeyHandler;
+    private historyManager      : mxUndoManager;
 
     constructor(public readonly container: HTMLElement,
                 model: CanvasModel) {
@@ -30,10 +30,19 @@ export class Canvas extends mxGraph {
             );
         }
 
+        this.keyHandler =  this.createKeyHandler();
         this.historyManager = this.createUndoManager();
+
     }
 
-    private createUndoManager() {
+
+    protected createKeyHandler() : KeyHandler {
+        let kh = new KeyHandler(this);
+        return kh;
+    }
+
+
+    protected createUndoManager() {
         let undoMgr = new mxUndoManager();
         this.undoListener = function (sender, evt) {
             undoMgr.undoableEditHappened(evt.getProperty('edit'));
@@ -51,7 +60,10 @@ export class Canvas extends mxGraph {
                 model = this.getModel(),
                 cells = [];
             for (var i = 0; i < cand.length; i++) {
-                if ((model.isVertex(cand[i]) || model.isEdge(cand[i])) && this.view.getState(cand[i]) != null) {
+                if ((model.isVertex(cand[i]) ||
+                    model.isEdge(cand[i])) &&
+                    this.view.getState(cand[i]) != null
+                ) {
                     cells.push(cand[i]);
                 }
             }

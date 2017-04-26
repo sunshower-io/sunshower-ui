@@ -1,5 +1,8 @@
 declare module 'mxgraph' {
 
+
+
+
     type ImportFunction = (
         graph:mxGraph,
         event:any,
