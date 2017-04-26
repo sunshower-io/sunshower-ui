@@ -7,6 +7,7 @@ import {
 
 
 import {NavigatorManager} from 'apps/workspaces/resources/custom-elements/navigator';
+import {WorkspaceService} from "../../lib/model/core/workspace/service";
 
 @autoinject
 export class WorkspaceContext {
@@ -15,8 +16,15 @@ export class WorkspaceContext {
      *
      * @param navigatorManager
      */
-    constructor(private navigatorManager: NavigatorManager) {
+    constructor(
+        private workspaceService: WorkspaceService,
+        private navigatorManager: NavigatorManager
+    ) {
 
+    }
+
+    activate(params: any) {
+        console.log(params);
     }
 
 
