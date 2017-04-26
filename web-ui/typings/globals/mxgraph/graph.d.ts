@@ -611,6 +611,13 @@ declare module 'mxgraph' {
 
         /**
          *
+         * @param cells
+         */
+        cellsRemoved(cells:Layer[]) : void;
+
+
+        /**
+         *
          */
         createHandler(): mxGraphHandler;
 

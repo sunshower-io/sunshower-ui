@@ -20,6 +20,11 @@ export class CommandManager {
         this.redoStack = new Stack<Command>();
     }
 
+
+    record(cmd: Command) : void {
+        this.undoStack.push(cmd);
+    }
+
     execute(cmd: Command) : void {
         cmd.execute();
         this.undoStack.push(cmd);
@@ -29,7 +34,7 @@ export class CommandManager {
         if(this.canUndo()) {
             let toUndo = this.undoStack.pop();
             toUndo.undo();
-            this.redoStack.push(toUndo);
+            this.redoStack.replace(toUndo);
         }
     }
 
@@ -38,7 +43,7 @@ export class CommandManager {
         if(this.canRedo()) {
             let toRedo = this.redoStack.pop();
             toRedo.redo();
-            this.undoStack.push(toRedo);
+            this.undoStack.replace(toRedo);
         }
     }
 

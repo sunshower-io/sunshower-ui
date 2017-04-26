@@ -15,6 +15,18 @@ export class Stack<T> {
         return undefined;
     }
 
+    replace(t: T)  : void {
+        // let u = this.top;
+        // while(u) {
+        //     let next = u && u.next ? u.next : null;
+        //     if(u.data === t) {
+        //         u.next.next = next;
+        //     }
+        //     u = u.next;
+        // }
+        this.push(t);
+    }
+
     pop() : T {
         if(!this.top) {
             throw new Error("Stack underflow");
@@ -35,7 +47,7 @@ class StackNode<T> {
 
     constructor(
         readonly data: T,
-        readonly next:StackNode<T>
+        public next:StackNode<T>
     ) {
 
     }

@@ -44,6 +44,22 @@ describe('a linked stack', () => {
         expect(n).toBe(1);
     });
 
+    it('should replace the top of the stack correctly', () => {
+        stack.push(1);
+        stack.replace(1);
+        expect(stack.pop()).toBe(1);
+    });
+
+
+    it('should replace the bottom of the stack correctly', () => {
+        stack.push(1);
+        stack.push(2);
+        stack.replace(1);
+        expect(stack.pop()).toBe(1);
+        expect(stack.pop()).toBe(2);
+    });
+
+
     it('should push and pop many numbers', () => {
         stack.push(1);
         stack.push(2);

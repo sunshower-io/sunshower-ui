@@ -1,6 +1,6 @@
 import {
     mxGraph,
-    mxClient, Layer
+    mxClient, Layer, mxConstants
 } from "mxgraph";
 import {Grid} from 'lib/designer/core';
 import {CanvasModel} from 'lib/designer/model';
@@ -9,7 +9,15 @@ import {CommandManager} from "lib/common/edit/command/command";
 import {RenderableElement} from "lib/designer/model/elements";
 
 
+mxConstants.VERTEX_SELECTION_COLOR = '#000000';
+
+
+mxConstants.HANDLE_FILLCOLOR = '#FF0000';
+
+
 export class Canvas extends mxGraph {
+
+
 
     private grids: Grid[];
 
@@ -25,21 +33,45 @@ export class Canvas extends mxGraph {
             );
         }
 
+
         this.commandManager = new CommandManager();
     }
 
-    addAndRecord(cell: Layer, parent: Layer, index?: number, source?: Layer, target?: Layer): Layer {
-        this.commandManager.execute(new AddCellAction(cell as RenderableElement, this));
-        return cell;
+
+    cellsAdded(cells: Layer[],
+               parent: Layer,
+               index: number,
+               source: Layer,
+               target: Layer,
+               absolute?: boolean,
+               constrain?: boolean): void {
+        super.cellsAdded(cells, parent, index, source, target, absolute, constrain);
+        this.commandManager.record(
+            new AddCellAction(
+                cells as RenderableElement[],
+                this,
+                parent
+            ));
+    }
+
+
+
+
+    undo(): void {
+        this.commandManager.undo();
+    }
+
+    redo(): void {
+        this.commandManager.redo();
     }
 
     public addGrid(grid: Grid): void {
-        if(!this.grids) {
+        if (!this.grids) {
             this.grids = [grid];
         } else {
             this.grids.push(grid);
         }
-        for(let grid of this.grids) {
+        for (let grid of this.grids) {
             grid.draw();
         }
     }

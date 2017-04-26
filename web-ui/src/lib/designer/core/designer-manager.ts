@@ -22,4 +22,12 @@ export class DesignerManager {
         return this.currentDesigner.getCanvas();
     }
 
+
+    undo() : void {
+        this.currentDesigner.undo();
+    }
+
+    redo() : void {
+        this.currentDesigner.redo();
+    }
 }

@@ -9,7 +9,7 @@ export class AddCellAction implements Command {
 
 
     constructor(
-        private cell: RenderableElement,
+        private cells: RenderableElement[],
         private canvas: Canvas,
         private parent ?: Layer
     ) {
@@ -19,12 +19,18 @@ export class AddCellAction implements Command {
 
 
     redo(): void {
-        this.canvas.addCell(this.cell, null);
-        // this.cell.addTo(this.canvas);
+        this.canvas.getModel().beginUpdate();
+        try {
+            for (let cell of this.cells) {
+                cell.addTo(this.canvas);
+            }
+        } finally {
+            this.canvas.getModel().endUpdate();
+        }
     }
 
     undo(): void {
-        this.canvas.removeCells([this.cell]);
+        this.canvas.removeCells(this.cells);
     }
 
     execute(): void {

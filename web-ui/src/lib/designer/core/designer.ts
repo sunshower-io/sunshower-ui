@@ -23,6 +23,14 @@ export class Designer {
     }
 
 
+    undo() : void {
+        this.canvas.undo();
+    }
+
+    redo() : void {
+        this.canvas.redo();
+    }
+
     getCanvas() : Canvas {
         return this.canvas;
     }
