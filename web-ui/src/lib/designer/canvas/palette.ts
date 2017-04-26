@@ -78,11 +78,9 @@ export abstract class DefaultElementFactory implements ElementFactory {
                         target: any): Drawable;
 
     initialize(canvas: Canvas, element: HTMLElement): void {
-        let image: HTMLImageElement = document.createElement('img');
-        image.src = this.displayIcon;
-        image.width = 37;
-        image.height = 37;
-        let dragSource = mxUtils.makeDraggable(
+        let
+            image = this.createInitialImage(),
+            dragSource = mxUtils.makeDraggable(
             element,
             canvas,
             this.importFunction,
@@ -97,6 +95,15 @@ export abstract class DefaultElementFactory implements ElementFactory {
         }
     }
 
+
+    createInitialImage() : HTMLElement {
+
+        let image: HTMLImageElement = document.createElement('img');
+        image.src = this.displayIcon;
+        image.width = 37;
+        image.height = 37;
+        return image;
+    }
 
     createAnimation() : [any, any]{
         return [{
