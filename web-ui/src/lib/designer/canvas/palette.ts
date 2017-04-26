@@ -45,23 +45,17 @@ export let DefaultCellFactory : CellFactory = (factory: ElementFactory) => {
         y: number
     ) => {
         if (canvas.canImportCell(target)) {
-            let parent = canvas.getDefaultParent(),
-                vertex = null;
-
             canvas.getModel().beginUpdate();
-
+            let renderable: Drawable = null;
             try {
-
-                let renderable = factory.newElement(x, y, event, canvas, target);
+                renderable = factory.newElement(x, y, event, canvas, target);
                 renderable.addTo(canvas);
             }
             finally {
                 canvas.getModel().endUpdate();
             }
-            canvas.setSelectionCell(vertex);
+            canvas.setSelectionCell(renderable);
         }
-
-
     };
 
 
@@ -89,20 +83,10 @@ export abstract class DefaultElementFactory implements ElementFactory {
     ) : Drawable;
 
     initialize(canvas: Canvas, element: HTMLElement): void {
-        // let img = document.createElement('img');
-        // img.setAttribute('src', this.displayIcon);
-        // img.style.position = 'absolute';
-        // img.style.left = '0px';
-        // img.style.top = '0px';
-        // img.style.width = '500px';
-        // img.style.height = '500px';
-        // img.style.zIndex = '112341341325';
-        //
         let dragImage = element.cloneNode(true) as any;
         dragImage.style.width = '32px';
         dragImage.style.height = '32px';
         mxUtils.makeDraggable(element, canvas, this.importFunction, dragImage);
-        // document.body.appendChild(img);
     }
 
 

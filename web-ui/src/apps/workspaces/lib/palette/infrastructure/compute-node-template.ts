@@ -14,11 +14,15 @@ import {
 import {
     ComputeNodeTemplate
 } from 'lib/hal/infrastructure/compute';
+import {
+    mxPerimeter,
+    mxConstants
+} from "mxgraph";
 
 
 export class ComputeNodeTemplateElement extends Vertex implements ComputeNodeTemplate {
 
-
+    style: string = 'compute-node-template-style';
 }
 
 
@@ -27,7 +31,28 @@ export class ComputeNodeTemplateElementFactory extends DefaultElementFactory {
     displayIcon         : string = 'assets/icons/designer/virtual-machine.svg';
 
 
+
+    initialize(canvas: Canvas, element: HTMLElement): void {
+        super.initialize(canvas, element);
+        this.createStyle(canvas);
+    }
+
+
     newElement(x: number, y: number, event: Event, canvas: Canvas, target: any): Drawable {
-        return new ComputeNodeTemplateElement('node', x, y, 300, 300);
+        return new ComputeNodeTemplateElement('node', x, y, 124, 124);
+    }
+
+    protected createStyle(canvas:Canvas) : void {
+        let style = {};
+        style[mxConstants.STYLE_FONTCOLOR] = '#FFFFFF';
+        style[mxConstants.STYLE_IMAGE] = this.displayIcon;
+        style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_IMAGE;
+        style[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
+        canvas
+            .getStylesheet()
+            .putCellStyle(
+                'compute-node-template-style',
+                style
+            );
     }
 }
