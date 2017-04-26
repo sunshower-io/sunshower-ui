@@ -1,42 +1,41 @@
 template
     nav
         .nav-wrapper
-            a.brand-logo(href="/")
-                | Hasli.io
-            .breadcrumb-container
+            .brand-logo
+                a(href="/") Hasli.io
                 a.breadcrumb WorkspaceName
                 a.breadcrumb Dashboard
             ul.right.user-menu
-                li
+                li.alert-tab
                     i.material-icons.mdi.mdi-bell
                     // activity-monitor-dropdown
-                li(
-                    class="dropdown-button"
-                    data-hover="true"
-                    data-beloworigin="true"
-                    data-activates="${dropdownId}"
-                    data-constrainwidth="true"
-                    ref="profileDD"
-                    )
-                    span
-                        | ${user.username}
-                        i.material-icons.mdi.mdi-menu-down
-                    ul(id="${dropdownId}" class="dropdown-content")
-                        //li
-                        //    i.material-icons.mdi.mdi-account-circle
-                        //    | ${user.username}
-                        //li.divider
-                        //li(click.delegate="openSettings()")
-                        //    i.material-icons.mdi.mdi-account-settings-variant
-                        //    | Account Settings
-                        //li(click.delegate="incompleteFeature.notify($event)")
-                        //    i.material-icons.mdi.mdi-help-circle
-                        //    | Help
-                        //li.divider
-                        li(click.delegate="logout()")
-                            i.material-icons.mdi.mdi-logout-variant
-                            | Sign Out
-                li
+                li.dropdown-tab(
+                class="dropdown-button"
+                data-hover="true"
+                data-beloworigin="true"
+                data-activates="${dropdownId}"
+                data-constrainwidth="true"
+                ref="profileDD"
+                )
+                    i.material-icons.mdi.mdi-account-circle.profile-image
+                    span ${user.username}
+                    i.material-icons.mdi.mdi-menu-down
+                ul(id="${dropdownId}" class="dropdown-content")
+                    //li
+                    //    i.material-icons.mdi.mdi-account-circle
+                    //    | ${user.username}
+                    //li.divider
+                    //li(click.delegate="openSettings()")
+                    //    i.material-icons.mdi.mdi-account-settings-variant
+                    //    | Account Settings
+                    //li(click.delegate="incompleteFeature.notify($event)")
+                    //    i.material-icons.mdi.mdi-help-circle
+                    //    | Help
+                    //li.divider
+                    li(click.delegate="logout()")
+                        i.material-icons.mdi.mdi-logout-variant
+                        | Sign Out
+                li.user-tab
                     template(if.bind="user.image")
                         img(src="${user.image}")
                     template(if.bind="!user.image")

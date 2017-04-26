@@ -1,0 +1,26 @@
+template
+    .designer-panel-header.icon-menu
+        i.material-icons.mdi.mdi-cloud-outline
+    .designer-panel-body(ref="propertyPanel")
+        .designer-form
+            ul.collapsible(data-collapsible="expandable")
+                li
+                    .collapsible-header
+                        | Details
+                        i.material-icons.mdi.mdi-chevron-right.dropdown-icon
+                    .collapsible-body
+                        .input-field.locking
+                            input(type="text" id="boopTest")
+                            label(for="boopTest") Boop Test
+                            i.materialize-icon.mdi.mdi-lock-open-outline.locking-icon(title="Incomplete Feature")
+                li
+                    .collapsible-header
+                        | Resource Requirements
+                        i.material-icons.mdi.mdi-chevron-right.dropdown-icon
+                    .collapsible-body
+                        .input-field.locking
+                            input(type="text" id="woopTest")
+                            label(for="woopTest") Woop Test
+                            i.materialize-icon.mdi.mdi-lock-outline.locking-icon.active(title="Incomplete Feature")
+
+            //todo save button or nah?

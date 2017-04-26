@@ -3,7 +3,6 @@ interface SidenavOptions {
 }
 
 interface CollapsibleOptions {
-
 }
 
 interface DropdownOptions {
@@ -14,6 +13,8 @@ interface JQuery {
     sideNav(opts ?: SidenavOptions) : JQuery;
     collapsible(opts ?: CollapsibleOptions) : JQuery;
     dropdown(opts ?: DropdownOptions) : JQuery;
+
+    tabs(...opts:any[]);
 }
 
 interface MaterializeConstructor {

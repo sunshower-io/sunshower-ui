@@ -96,7 +96,7 @@ export class Grid {
                 iye = Math.round(ye);
 
 
-            context.strokeStyle = '#f0f0f0';
+            context.strokeStyle = '#FF0000';
 
             // context.setLineDash([2, 5]);
             context.beginPath();

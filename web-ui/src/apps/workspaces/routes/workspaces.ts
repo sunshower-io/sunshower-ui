@@ -6,6 +6,7 @@ import {
     Workspace,
     WorkspaceService
 } from "apps/workspaces/lib/model/core/workspace";
+import {Router} from "aurelia-router";
 
 
 @autoinject
@@ -21,7 +22,12 @@ export class WorkspacesOverview {
     @bindable
     private panelActive: boolean;
 
-    constructor(private workspaceService:WorkspaceService) {
+    constructor(private workspaceService:WorkspaceService, private router:Router) {
+    }
+
+
+    open(id:string) {
+        this.router.navigate(`${id}/dashboard`);
     }
 
     attached() : void {

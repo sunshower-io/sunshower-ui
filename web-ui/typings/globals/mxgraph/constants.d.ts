@@ -2,8 +2,16 @@
 
 declare module 'mxgraph' {
 
+    export class mxPerimeter {
+        static RectanglePerimeter                : string;
+    }
 
     export class mxConstants {
+        static STYLE_SHAPE                      : string;
+        static SHAPE_IMAGE                      : string;
+        static STYLE_PERIMETER                  : string;
+        static STYLE_IMAGE                      : string;
+        static STYLE_FONTCOLOR                  : string;
         static NS_XLINK                         : string;
         static NS_SVG                           : string;
         static HANDLE_FILLCOLOR                 : string;

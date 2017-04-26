@@ -1,0 +1,10 @@
+template
+
+    div(ref="panel")
+        .designer-panel-header.icon-menu
+            ul.tabs
+                li.tab(repeat.for="child of children")
+                    a(href="#" click.delegate="open(child.id)" class="${child.active ? 'active' : ''}")
+                        i.material-icons.mdi.mdi-cloud-outline
+
+        slot

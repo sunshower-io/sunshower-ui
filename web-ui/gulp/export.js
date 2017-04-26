@@ -26,6 +26,7 @@ module.exports = {
         'jspm_packages/github/systemjs/plugin-css@0.1.33/css.js',
         'jspm_packages/github/systemjs/plugin-json@0.1.33.js',
         'jspm_packages/github/systemjs/plugin-text@0.1.33.js',
+        'jspm_packages/github/julianshapiro/velocity@1.4.1.js',
         'jspm_packages/github/jspm/**/*',
         'jspm_packages/npm/mdi@1.9.33/css/materialdesignicons.css',
         'jspm_packages/npm/buffer@3.6.0.js',
@@ -44,6 +45,7 @@ module.exports = {
     // must be 'normalized' by jspm to get the proper
     // path.
     'normalize': [
+        ['velocity', ['/**/*']],
         ['mdi', ['/css/*.css', '/fonts/*.eot', '/fonts/*.svg', '/fonts/**']],
         ['plugin-css', ['/css.js']],
         [

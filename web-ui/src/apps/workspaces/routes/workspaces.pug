@@ -3,6 +3,6 @@ template
     .body-content(ref="content")
         h1 Workspaces
         .card(repeat.for="workspace of workspaces")
-            .card-content
+            .card-content(click.delegate="open(workspace.id)")
                 h2.card-title ${workspace.name}
     body-panel(active.bind="panelActive" sections.bind="true" content.bind="content")

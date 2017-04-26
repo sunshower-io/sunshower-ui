@@ -163,6 +163,13 @@ declare module 'mxgraph' {
         constrainRelativeChildren           : boolean;
         mouseListeners                      : {[name: string]: any};
 
+        maximumGraphBounds                  : mxGraphBounds;
+
+        canImportCell(cell:Layer) : boolean;
+        /**
+         *
+         * @param cell
+         */
         isCellSelectable(cell:Layer) : boolean;
 
         /**
@@ -600,6 +607,13 @@ declare module 'mxgraph' {
                    target: Layer,
                    absolute?: boolean,
                    constrain?: boolean): void ;
+
+
+        /**
+         *
+         * @param cells
+         */
+        cellsRemoved(cells:Layer[]) : void;
 
 
         /**

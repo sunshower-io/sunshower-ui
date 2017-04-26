@@ -13,7 +13,9 @@ export class Navbar {
 
     @bindable
     private dropdownId               : string       =  UUID.random();
+    private smallddId                : string       = UUID.random();
     private profileDD               : HTMLElement;
+    private smallDD                 : HTMLElement;
 
     constructor(
         private user:User,
@@ -24,6 +26,7 @@ export class Navbar {
 
     attached() : void {
         $(this.profileDD).dropdown();
+        $(this.smallDD).dropdown();
     }
 
     profile() {

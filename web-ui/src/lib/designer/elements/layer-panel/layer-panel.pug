@@ -1,0 +1,36 @@
+template
+    .designer-panel-header
+        h2 Layers
+        a.material-icons.mdi.mdi-plus(title="Incomplete Feature")
+    .designer-panel-body(ref="layerPanelCollapsible")
+        ul.collapsible.layer-collapsible(data-collapsible="expandable")
+            li.has-collapsible
+                .collapsible-header
+                    i.material-icons.mdi.mdi-chevron-right.dropdown-icon
+                    | Infrastructure
+                    i.material-icons.mdi.mdi-eye-outline.visibility-icon(title="Incomplete Feature")
+                .collapsible-body
+                    ul.collapsible(data-collapsible="expandable")
+                        li.has-collapsible
+                            .collapsible-header
+                                i.material-icons.mdi.mdi-chevron-right.dropdown-icon
+                                | Security Group
+                            .collapsible-body
+                                ul.collapsible(data-collapsible="expandable")
+                                    li
+                                        .collapsible-header
+                                            i.material-icons.mdi.mdi-chevron-right.dropdown-icon
+                                            | Blorp
+                                        .collapsible-body Booping blorp
+                                    li
+                                        .collapsible-header Childless-boop
+                        li
+                            .collapsible-header Childless Group
+            li
+                .collapsible-header
+                    i.material-icons.mdi.mdi-chevron-right.dropdown-icon
+                    | Applications
+                    i.material-icons.mdi.mdi-eye-outline.visibility-icon(title="Incomplete Feature")
+                .collapsible-body Some other stuff
+
+

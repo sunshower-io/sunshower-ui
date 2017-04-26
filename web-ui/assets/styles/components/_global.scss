@@ -20,6 +20,10 @@ body {
   padding: $standard-padding;
   margin-right: $body-panel-width;
 
+  @media #{$medium-and-down} {
+    margin-right: $body-panel-width - $navbar-height;
+  }
+
   &.body-content-full {
     margin-right: 0;
   }
@@ -33,15 +37,19 @@ body {
   bottom: 0;
   padding: $standard-padding;
   box-sizing: border-box;
-  border-left: 1px solid $border-color;
+  border-left: $default-border;
   background: white;
+
+  @media #{$medium-and-down} {
+    width: $body-panel-width - $navbar-height;
+  }
 
   .body-panel-top, .body-panel-bottom {
     box-sizing: border-box;
     height: 50%;
   }
   .body-panel-top {
-    border-bottom: 1px solid $border-color;
+    border-bottom: $default-border;
     padding-bottom: $standard-padding;
   }
   .body-panel-bottom {
@@ -49,22 +57,20 @@ body {
   }
 }
 
-.fullscreen {
+.fullscreen{
   position:absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  box-sizing: border-box;
 
-  .preloader-wrapper {
-    width:64px;
-    height:64px;
-    position: absolute;
-    top :0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
+  &.loader {
+    z-index: 2000;
+    background: $offwhite;
+    opacity: .75;
+    padding: 25% 25% 0 25%;
+    text-align: center;
   }
 }
 
@@ -85,6 +91,10 @@ body {
   }
 }
 
+.collapsible {
+  border: none;
+  margin:0;
+  box-shadow:none;
 
 .collapsible .dropdown-icon {
   position:absolute;
@@ -92,10 +102,17 @@ body {
   top: 0;
 }
 
-.collapsible .active .dropdown-icon {
-  -ms-transform: rotate(90deg); /* IE 9 */
-  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
-  transform: rotate(90deg);
+  //.dropdown-icon {
+  //  position:absolute;
+  //  right:0;
+  //  top: 0;
+  //}
+
+  .active > .dropdown-icon:before {
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -105,4 +122,33 @@ h1, h2, h3, h4, h5, h6 {
 .button-holder {
   padding-top: 1rem;
   text-align: center;
+}
+
+.util-top-slot {
+  border-bottom: $default-border;
+  height: 50%;
+  box-sizing: border-box;
+}
+
+.util-bottom-slot {
+  height: 50%;
+  box-sizing: border-box;
+}
+
+.util-full-slot {}
+
+
+a.create-link {
+  color: $midgrey;
+  margin-top: 1em;
+  font-size: 13px;
+  display: block;
+
+  i.material-icons {
+    color: $primary-color;
+    margin-right: .5em;
+    font-size: 20px;
+    line-height: 13px;
+    vertical-align: middle;
+  }
 }

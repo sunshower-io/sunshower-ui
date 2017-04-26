@@ -8,7 +8,7 @@ nav {
   left:0;
   top:0;
   right:0;
-  border-bottom: 1px solid $border-color;
+  border-bottom: $default-border;
 
   .nav-wrapper {
     width: 100%;
@@ -22,71 +22,124 @@ nav {
     height: $navbar-height;
     line-height: $navbar-height;
     box-sizing: border-box;
-    margin-left: $small-nav-width + $navbar-font-size;
-    padding-left: $navbar-font-size;
-    font-size: 1.5rem;
+    margin-left: $small-nav-width;
+    padding-left: $standard-padding;
     font-weight: 300;
-    text-transform: uppercase;
+
+    &.side-nav-open {
+      margin-left: $small-nav-width + $side-nav-width;
+    }
 
     @media #{$medium-and-down} {
-      height: $navbar-height-mobile;
-      line-height: $navbar-height-mobile;
       left: auto;
       transform: none;
     }
-  }
-
-  .breadcrumb-container {
-    position: absolute;
-    left: $side-nav-width + $small-nav-width;
-    padding-left: $standard-padding;
 
     a {
+      font-size: 1.25rem;
+      vertical-align: middle;
       color: $midgrey;
-      font-size: 1em;
-      cursor: pointer;
+
+    }
+
+    .breadcrumb {
+      font-size: 1rem;
+
+      @media #{$small-and-down} {
+        display: none;
+      }
 
       &:last-child {
         color: $primary-color;
-        font-size:1.25em;
       }
 
       &:before {
         font: inherit;
         content: "/";
-        margin: 0 !important;
+        font-size: 20px;
+        margin: -3px 0 0 0 !important;
         padding: 0 .25em;
         color: $midgrey !important;
+        vertical-align:middle;
       }
     }
+
   }
 
   ul.user-menu {
     width: $body-panel-width;
 
+    @media #{$medium-only} {
+      width: $body-panel-width - $navbar-height;
+    }
+    @media #{$small-and-down} {
+      width: auto;
+    }
+
+
     & > li {
       box-sizing: border-box;
-      background: $primary-color;
       height: $navbar-height;
-      width: $body-panel-width - ($navbar-height*2);
       cursor: pointer;
       color: white;
       text-align: center;
-      //border-left: 1px solid $border-color;
 
-      &:first-child, &:last-child {
+      &.dropdown-tab {
+        width: $body-panel-width - ($navbar-height*2);
+        background: $primary-color;
+
+        @media #{$small-and-down} {
+          width: $navbar-height*2;
+        }
+
+        i.material-icons.profile-image {
+          display: none;
+
+          @media #{$small-and-down} {
+            display: inline;
+          }
+        }
+
+        span {
+          @media #{$small-and-down} {
+            display: none;
+          }
+        }
+
+      }
+
+      &.alert-tab, &.user-tab {
         width: $navbar-height;
         text-align: center;
         background: $primary-color-dark;
       }
+
+      &.user-tab {
+        @media #{$medium-and-down} {
+          display: none;
+        }
+      }
+
+      i.material-icons {
+        vertical-align: middle;
+        font-size: 20px;
+      }
     }
-  }
 
+    ul.dropdown-content {
+      @media #{$small-and-down} {
+        width: $navbar-height*3 !important;
+        left: auto !important;
+        right: 0 !important;
+      }
 
-  .dropdown-content li i.material-icons {
-    height: auto;
-    line-height: inherit;
-    vertical-align: middle;
+      li i.material-icons {
+        height: auto;
+        line-height: inherit;
+        vertical-align: middle;
+      }
+
+    }
   }
 
 }

@@ -1,8 +1,8 @@
 import {} from 'jasmine';
 import * as _ from 'lodash';
-import {Graph, Node, copy} from 'common/lib/algorithms/graph/graph';
-import {TopologicalSort, ParallelSchedule, CGraph} from "common/lib/algorithms/graph/scheduling";
-import {TarjansStronglyConnectedComponents} from 'common/lib/algorithms/graph/tarjans';
+import {Graph, Node, copy} from 'lib/common/algorithms/graph/graph';
+import {TarjansStronglyConnectedComponents} from 'lib/common/algorithms/graph/tarjans';
+import {TopologicalSort, ParallelSchedule, CGraph} from "lib/common/algorithms/graph/scheduling";
 
 function n(data: number): Node<string> {
     return new Node('' + data, '' + data);

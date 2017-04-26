@@ -103,9 +103,22 @@ function configureResources(aurelia: Aurelia) {
     aurelia.use
         .standardConfiguration()
         .globalResources([
+            'lib/designer/elements/panel',
+            'lib/designer/elements/panels',
+            'lib/designer/elements/designer/left-panel',
+            'lib/designer/elements/designer/right-panel',
+            'lib/designer/elements/designer/action-button',
+            'lib/resources/custom-elements/misc/top-element',
+            'lib/resources/custom-elements/misc/bottom-element',
+            'lib/resources/custom-elements/misc/full-element',
+            'lib/designer/elements/designer/designer-element',
+            'lib/common/resources/custom-elements/nav-bar/navbar',
             'apps/workspaces/resources/custom-elements/navigator/navigator',
             'lib/common/resources/custom-elements/summary-icon/summary-icon',
-            'lib/common/resources/custom-elements/nav-bar/navbar'
+            'lib/designer/elements/menu-bar/menu-bar',
+            'lib/designer/elements/layer-panel/layer-panel',
+            'lib/designer/elements/element-panel/element-panel',
+            'lib/designer/elements/property-panel/property-panel'
         ])
         .plugin('aurelia-animator-velocity', cfg => {
             registerAnimations(cfg);
