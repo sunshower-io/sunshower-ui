@@ -3,7 +3,9 @@ import {
     User,
     AuthenticationContextHolder
 } from 'lib/common/security';
+import { EventAggregator } from 'aurelia-event-aggregator';
 import {autoinject} from "aurelia-framework";
+import {VelocityAnimator} from "aurelia-animator-velocity";
 // import {Router} from "aurelia-router";
 import {UUID} from 'lib/common/lang';
 import {bindable} from "aurelia-framework";
@@ -16,10 +18,12 @@ export class Navbar {
     private smallddId                : string       = UUID.random();
     private profileDD               : HTMLElement;
     private smallDD                 : HTMLElement;
+    private brandLogo               : HTMLElement;
 
-    constructor(
+    constructor(private animator: VelocityAnimator,
         private user:User,
-        private authHolder:AuthenticationContextHolder
+        private authHolder:AuthenticationContextHolder,
+        private ea:EventAggregator
     ) {
 
     }
@@ -27,8 +31,24 @@ export class Navbar {
     attached() : void {
         $(this.profileDD).dropdown();
         $(this.smallDD).dropdown();
+
+        this.ea.subscribe('sideNav', response => {
+            if (response.navState) {
+                this.slideInBreadcrumb();
+            } else {
+                this.slideOutBreadcrumb();
+            }
+        });
     }
 
+    public slideInBreadcrumb() : void {
+        this.brandLogo ? this.animator.enter(this.brandLogo) : Promise.resolve(true)
+    }
+    
+    public slideOutBreadcrumb() : void {
+        this.brandLogo ? this.animator.leave(this.brandLogo) : Promise.resolve(true)
+    }
+    
     profile() {
         // this.router.navigateToRoute('profile');
     }

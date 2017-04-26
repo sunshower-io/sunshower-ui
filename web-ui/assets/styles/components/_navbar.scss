@@ -4,7 +4,7 @@
 nav {
   background-color: $offwhite;
   position:absolute;
-  left:0;
+  left:$small-nav-width;
   top:0;
   right:0;
   border-bottom: $default-border;
@@ -23,13 +23,8 @@ nav {
     height: $navbar-height;
     line-height: $navbar-height;
     box-sizing: border-box;
-    margin-left: $small-nav-width;
     padding-left: $standard-padding;
     font-weight: 300;
-
-    &.side-nav-open {
-      margin-left: $small-nav-width + $side-nav-width;
-    }
 
     @media #{$medium-and-down} {
       left: auto;

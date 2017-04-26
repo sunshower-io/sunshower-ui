@@ -1,7 +1,11 @@
 template
     nav
         .nav-wrapper
-            .brand-logo
+            .brand-logo(
+                ref="brandLogo"
+                anim-enter="slideOver"
+                anim-leave="slideBack"
+                )
                 a(href="/") Hasli.io
                 a.breadcrumb WorkspaceName
                 a.breadcrumb Dashboard
