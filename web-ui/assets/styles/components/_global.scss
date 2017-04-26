@@ -20,6 +20,10 @@ body {
   padding: $standard-padding;
   margin-right: $body-panel-width;
 
+  @media #{$medium-and-down} {
+    margin-right: $body-panel-width - $navbar-height;
+  }
+
   &.body-content-full {
     margin-right: 0;
   }
@@ -36,6 +40,10 @@ body {
   border-left: $default-border;
   background: white;
 
+  @media #{$medium-and-down} {
+    width: $body-panel-width - $navbar-height;
+  }
+
   .body-panel-top, .body-panel-bottom {
     box-sizing: border-box;
     height: 50%;
@@ -49,22 +57,20 @@ body {
   }
 }
 
-.fullscreen {
+.fullscreen{
   position:absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  box-sizing: border-box;
 
-  .preloader-wrapper {
-    width:64px;
-    height:64px;
-    position: absolute;
-    top :0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
+  &.loader {
+    z-index: 2000;
+    background: $offwhite;
+    opacity: .75;
+    padding: 25% 25% 0 25%;
+    text-align: center;
   }
 }
 

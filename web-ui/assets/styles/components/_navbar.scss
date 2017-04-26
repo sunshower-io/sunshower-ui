@@ -31,8 +31,6 @@ nav {
     }
 
     @media #{$medium-and-down} {
-      //height: $navbar-height-mobile;
-      //line-height: $navbar-height-mobile;
       left: auto;
       transform: none;
     }
@@ -40,11 +38,16 @@ nav {
     a {
       font-size: 1.25rem;
       vertical-align: middle;
+      color: $midgrey;
+
     }
 
     .breadcrumb {
-      color: $midgrey;
-      cursor: pointer;
+      font-size: 1rem;
+
+      @media #{$small-and-down} {
+        display: none;
+      }
 
       &:last-child {
         color: $primary-color;
@@ -63,48 +66,58 @@ nav {
 
   }
 
-  //.breadcrumb-container {
-  //  position: absolute;
-  //  left: $side-nav-width + $small-nav-width;
-  //  padding-left: $standard-padding;
-  //
-  //  a {
-  //    color: $midgrey;
-  //    font-size: 1em;
-  //    cursor: pointer;
-  //
-  //    &:last-child {
-  //      color: $primary-color;
-  //      font-size:1.25em;
-  //    }
-  //
-  //    &:before {
-  //      font: inherit;
-  //      content: "/";
-  //      margin: 0 !important;
-  //      padding: 0 .25em;
-  //      color: $midgrey !important;
-  //    }
-  //  }
-  //}
-
   ul.user-menu {
     width: $body-panel-width;
 
+    @media #{$medium-only} {
+      width: $body-panel-width - $navbar-height;
+    }
+    @media #{$small-and-down} {
+      width: auto;
+    }
+
+
     & > li {
       box-sizing: border-box;
-      background: $primary-color;
       height: $navbar-height;
-      width: $body-panel-width - ($navbar-height*2);
       cursor: pointer;
       color: white;
       text-align: center;
-      //border-left: $default-border;
 
-      &:first-child, &:last-child {
+      &.dropdown-tab {
+        width: $body-panel-width - ($navbar-height*2);
+        background: $primary-color;
+
+        @media #{$small-and-down} {
+          width: $navbar-height*2;
+        }
+
+        i.material-icons.profile-image {
+          display: none;
+
+          @media #{$small-and-down} {
+            display: inline;
+          }
+        }
+
+        span {
+          @media #{$small-and-down} {
+            display: none;
+          }
+        }
+
+      }
+
+      &.alert-tab, &.user-tab {
         width: $navbar-height;
         text-align: center;
         background: $primary-color-dark;
+      }
+
+      &.user-tab {
+        @media #{$medium-and-down} {
+          display: none;
+        }
       }
 
       i.material-icons {
@@ -112,13 +125,21 @@ nav {
         font-size: 20px;
       }
     }
-  }
 
+    ul.dropdown-content {
+      @media #{$small-and-down} {
+        width: $navbar-height*3 !important;
+        left: auto !important;
+        right: 0 !important;
+      }
 
-  .dropdown-content li i.material-icons {
-    height: auto;
-    line-height: inherit;
-    vertical-align: middle;
+      li i.material-icons {
+        height: auto;
+        line-height: inherit;
+        vertical-align: middle;
+      }
+
+    }
   }
 
 }

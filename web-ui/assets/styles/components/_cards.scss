@@ -105,7 +105,7 @@ $card-border-style: $card-border-width solid $border-color;
       width: 90px;
       float: left;
 
-      @media #{$small-and-down} {
+      @media #{$medium-and-down} {
         width: auto;
         float: none;
         text-align: center;
@@ -125,7 +125,7 @@ $card-border-style: $card-border-width solid $border-color;
       overflow: hidden;
       white-space: nowrap;
 
-      @media #{$small-and-down} {
+      @media #{$medium-and-down} {
         width: 100%;
         float: none;
         text-align: center;
@@ -138,7 +138,7 @@ $card-border-style: $card-border-width solid $border-color;
       float: right;
       padding-top: 30px;
 
-      @media #{$small-and-down} {
+      @media #{$medium-and-down} {
         width: 100%;
         float: none;
         padding-top: 0;
@@ -154,7 +154,7 @@ $card-border-style: $card-border-width solid $border-color;
         background: $primary-color;
 
 
-        @media #{$small-and-down} {
+        @media #{$medium-and-down} {
           display: block;
           width: 100%;
         }
