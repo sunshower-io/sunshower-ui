@@ -13,6 +13,8 @@ export class WorkspaceApplications {
     @bindable
     private tabHolder: HTMLElement;
 
+    @bindable
+    private createModal: HTMLElement;
 
     attached() : void {
 
@@ -23,6 +25,7 @@ export class WorkspaceApplications {
         }
 
         $(this.tabHolder).tabs();
+        $(this.createModal).modal();
     }
 
 }

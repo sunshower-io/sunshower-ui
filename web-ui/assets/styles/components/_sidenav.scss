@@ -39,14 +39,9 @@ $sidenav-li-margin-bottom: 30px;
     background-color: #3C4253;
 
     input {
-      //margin: $navbar-font-size;
-      //height: $small-nav-width - $navbar-font-size*2;
       color: white;
       border-bottom: none !important;
       box-shadow: none !important;
-      //width: -webkit-calc(100% - #{$navbar-font-size*2});
-      //width: -moz-calc(100% - #{$navbar-font-size*2});
-      //width: calc(100% - #{$navbar-font-size*2});
       box-sizing: border-box;
 
       &::-webkit-input-placeholder {

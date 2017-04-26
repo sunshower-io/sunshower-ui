@@ -151,7 +151,8 @@ body {
 .collapsible {
   border: none;
   margin:0;
-  box-shadow:none;
+
+  @extend .z-depth-0;
 
   .collapsible .dropdown-icon {
     position:absolute;

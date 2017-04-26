@@ -13,7 +13,7 @@ template
                     a(href="#anotherHolder")
                         | A Different Tab
                         span.badge 1
-            a.btn-floating.waves-effect
+            a.btn-floating.waves-effect(href="#testModal")
                 i.material-icons.mdi.mdi-plus
         .body-tab-holder(id="tempCardHolder")
             .card
@@ -47,4 +47,14 @@ template
                 .card-action
                     .chip.state-pending Pending
                     .version Version 1
+
+        .modal(id="testModal" ref="createModal")
+            .modal-header Create Application Template
+            .modal-content
+                form
+                    .input-field
+                        input(type="text" id="applicationName")
+                        label(for="applicationName") Application Name
+                    .button-holder
+                        button.waves-effect.btn(type="submit") Create
     body-panel(active.bind="panelActive" sections.bind="true" content.bind="content")

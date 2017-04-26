@@ -3,12 +3,13 @@
 
 nav {
   background-color: $offwhite;
-  box-shadow:none; //consider removing to keep navbar & body distinct
   position:absolute;
   left:0;
   top:0;
   right:0;
   border-bottom: $default-border;
+
+  @extend .z-depth-0;
 
   .nav-wrapper {
     width: 100%;
