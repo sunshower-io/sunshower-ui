@@ -88,9 +88,6 @@ export abstract class DefaultElementFactory implements ElementFactory {
             this.importFunction,
             image
         );
-        dragSource.guidesEnabled = true;
-        dragSource.gridEnabled = true;
-
         (dragSource as any).createDragElement = () => {
             let i = image.cloneNode(true);
             $(i).velocity({

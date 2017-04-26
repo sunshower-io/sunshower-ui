@@ -23,9 +23,6 @@ export default class InfrastructureDesigner {
         infrastructureElementFactory: InfrastructureFactoryProvider
     ) {
         this.infrastructureElementFactory = infrastructureElementFactory;
-        console.log("infr", infrastructureElementFactory);
-
-
     }
 
 
