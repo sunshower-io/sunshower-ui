@@ -56,7 +56,7 @@ export class SecurityGroupElementFactory extends DefaultElementFactory {
 
     protected createStyle(canvas:Canvas) : void {
         let style = {};
-        style[mxConstants.STYLE_FONTCOLOR] = '#FFFFFF';
+        style[mxConstants.STYLE_FONTCOLOR] = '#ff0000';
         style[mxConstants.STYLE_IMAGE] = this.displayIcon;
         style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_IMAGE;
         style[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
