@@ -8,6 +8,8 @@ module.exports = {
         'favicon.ico',
         'LICENSE',
         'assets/**/*',
+        'mx/css/**/*',
+        'mx/resources/**/*',
         'dist/css/*',
         'dist/fonts/**/*',
         "jspm_packages/npm/bluebird@3.4.1/js/browser/bluebird.min.js",
