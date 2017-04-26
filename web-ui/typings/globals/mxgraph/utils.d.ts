@@ -11,6 +11,8 @@ declare module 'mxgraph' {
 
     export module mxUtils {
 
+        function bind(a: any, b:any) : void;
+
 
         function indexOf(cells:Layer[], parent:Layer) : number;
         /**
@@ -81,6 +83,8 @@ declare module 'mxgraph' {
                                highlightDropTargets?: boolean,
                                getDropTarget?: () => void): mxDragSource;
     }
+
+
 
 
 }

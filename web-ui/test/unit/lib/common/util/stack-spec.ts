@@ -60,6 +60,23 @@ describe('a linked stack', () => {
     });
 
 
+    it('should replace a complex stack correctly', () => {
+
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(1);
+        stack.push(4);
+        stack.push(1);
+
+        stack.replace(1);
+
+        expect(stack.toArray()).toEqual([1, 4, 3, 2]);
+
+
+    });
+
+
     it('should push and pop many numbers', () => {
         stack.push(1);
         stack.push(2);
