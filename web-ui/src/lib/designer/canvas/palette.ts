@@ -88,19 +88,24 @@ export abstract class DefaultElementFactory implements ElementFactory {
             this.importFunction,
             image
         );
+
+        const [fst, snd] = this.createAnimation();
         (dragSource as any).createDragElement = () => {
             let i = image.cloneNode(true);
-            $(i).velocity({
-                    scale: 2
-                },
-                {
-                    duration: 250,
-                    delay: 150,
-                });
+            $(i).velocity(fst, snd);
             return i;
         }
     }
 
+
+    createAnimation() : [any, any]{
+        return [{
+            scale: 2,
+        }, {
+            duration: 250,
+            delay: 150
+        }]
+    }
 }
 
 
