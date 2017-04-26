@@ -1,9 +1,11 @@
 import {Canvas} from './canvas';
 import {
-    ImportFunction,
+    ImportFunction, mxDragSource,
     mxUtils
 } from 'mxgraph';
 import {Drawable} from "lib/designer/elements";
+
+import 'velocity-ui';
 
 
 export interface ElementFactoryProvider {
@@ -22,28 +24,24 @@ export interface ElementFactory {
 
     initialize(canvas: Canvas, element: HTMLElement): void;
 
-    newElement(
-        x:number,
-        y: number,
-        event: Event,
-        canvas: Canvas,
-        target:any
-    ) : Drawable;
+    newElement(x: number,
+               y: number,
+               event: Event,
+               canvas: Canvas,
+               target: any): Drawable;
 
 
 }
 
 export type CellFactory = (factory: ElementFactory) => ImportFunction;
 
-export let DefaultCellFactory : CellFactory = (factory: ElementFactory) => {
+export let DefaultCellFactory: CellFactory = (factory: ElementFactory) => {
 
-    return (
-        canvas: Canvas,
-        event: any,
-        target: any,
-        x: number,
-        y: number
-    ) => {
+    return (canvas: Canvas,
+            event: any,
+            target: any,
+            x: number,
+            y: number) => {
         if (canvas.canImportCell(target)) {
             canvas.getModel().beginUpdate();
             let renderable: Drawable = null;
@@ -73,24 +71,41 @@ export abstract class DefaultElementFactory implements ElementFactory {
     }
 
 
-
-    abstract newElement(
-        x:number,
-        y: number,
-        event: Event,
-        canvas: Canvas,
-        target:any
-    ) : Drawable;
+    abstract newElement(x: number,
+                        y: number,
+                        event: Event,
+                        canvas: Canvas,
+                        target: any): Drawable;
 
     initialize(canvas: Canvas, element: HTMLElement): void {
-        let dragImage = element.cloneNode(true) as any;
-        dragImage.style.width = '32px';
-        dragImage.style.height = '32px';
-        mxUtils.makeDraggable(element, canvas, this.importFunction, dragImage);
+        let image: HTMLImageElement = document.createElement('img');
+        image.src = this.displayIcon;
+        image.width = 20;
+        image.height = 20;
+        let dragSource = mxUtils.makeDraggable(
+            element,
+            canvas,
+            this.importFunction,
+            image
+        );
+        dragSource.guidesEnabled = true;
+        dragSource.gridEnabled = true;
+
+        (dragSource as any).createDragElement = () => {
+            let i = image.cloneNode(true);
+            $(i).velocity({
+                    scale: 5
+                },
+                {
+                    duration: 250,
+                    delay: 450,
+                });
+            return i;
+        }
     }
 
-
 }
+
 
 
 export class Palette {

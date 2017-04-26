@@ -37,6 +37,7 @@ export class Canvas extends mxGraph {
         return this.model;
     }
 
+
 }
 
 export class CanvasOptions {

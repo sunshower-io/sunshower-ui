@@ -31,7 +31,6 @@ export class ComputeNodeTemplateElementFactory extends DefaultElementFactory {
     displayIcon         : string = 'assets/icons/designer/virtual-machine.svg';
 
 
-
     initialize(canvas: Canvas, element: HTMLElement): void {
         super.initialize(canvas, element);
         this.createStyle(canvas);
