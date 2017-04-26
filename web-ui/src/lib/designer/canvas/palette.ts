@@ -80,8 +80,8 @@ export abstract class DefaultElementFactory implements ElementFactory {
     initialize(canvas: Canvas, element: HTMLElement): void {
         let image: HTMLImageElement = document.createElement('img');
         image.src = this.displayIcon;
-        image.width = 20;
-        image.height = 20;
+        image.width = 37;
+        image.height = 37;
         let dragSource = mxUtils.makeDraggable(
             element,
             canvas,
@@ -91,11 +91,11 @@ export abstract class DefaultElementFactory implements ElementFactory {
         (dragSource as any).createDragElement = () => {
             let i = image.cloneNode(true);
             $(i).velocity({
-                    scale: 5
+                    scale: 2
                 },
                 {
                     duration: 250,
-                    delay: 450,
+                    delay: 150,
                 });
             return i;
         }

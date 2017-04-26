@@ -38,7 +38,7 @@ export class ComputeNodeTemplateElementFactory extends DefaultElementFactory {
 
 
     newElement(x: number, y: number, event: Event, canvas: Canvas, target: any): Drawable {
-        return new ComputeNodeTemplateElement('node', x, y, 124, 124);
+        return new ComputeNodeTemplateElement('node', x, y, 74, 74);
     }
 
     protected createStyle(canvas:Canvas) : void {
