@@ -27,6 +27,8 @@ body {
       padding-left: $standard-padding;
     }
 
+    //todo fix tabs on $medium-and-down
+
     .body-tab-holder {
       padding: $standard-padding;
     }
@@ -34,6 +36,7 @@ body {
     .body-tab-menu {
       border-bottom: $default-border;
       padding-left: $standard-padding;
+      padding-right: $standard-padding + 40px;
       position: relative;
 
       .btn-floating {
