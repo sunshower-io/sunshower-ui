@@ -22,6 +22,17 @@ export class Designer {
 
     }
 
+    activate() : void {
+        this.canvas.activate();
+    }
+
+    deactivate() : void {
+        this.canvas.deactivate();
+    }
+
+
+
+
 
     undo() : void {
         this.canvas.undo();

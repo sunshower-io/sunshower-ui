@@ -36,6 +36,12 @@ export class DesignerElement {
         this.setCanvas(canvas);
         this.setDesigner(designer);
         this.designerManager.setCurrent(designer);
+        this.designer.activate();
+    }
+
+    detached() : void {
+        console.log("F");
+        this.designer.deactivate();
     }
 
 

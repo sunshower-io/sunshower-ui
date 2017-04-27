@@ -35,6 +35,38 @@ export class Canvas extends mxGraph {
 
     }
 
+    deactivate() {
+        // this.keyHandler.stop();
+    }
+
+    activate() : void {
+
+    }
+
+
+
+    undo(): void {
+        this.historyManager.undo();
+    }
+
+    redo(): void {
+        this.historyManager.redo();
+    }
+
+    public addGrid(grid: Grid): void {
+        if (!this.grids) {
+            this.grids = [grid];
+        } else {
+            this.grids.push(grid);
+        }
+        for (let grid of this.grids) {
+            grid.draw();
+        }
+    }
+
+    public getModel(): CanvasModel {
+        return this.model;
+    }
 
     protected createKeyHandler() : KeyHandler {
         let kh = new KeyHandler(this);
@@ -69,40 +101,10 @@ export class Canvas extends mxGraph {
             }
             this.setSelectionCells(cells);
         };
-
         undoMgr.addListener(mxEvent.UNDO, undoHandler);
         undoMgr.addListener(mxEvent.REDO, undoHandler);
         return undoMgr;
     }
-
-    listener: (a, b) => void = (e: any, f: any) => {
-        this.historyManager.undoableEditHappened(f.getProperty('edit'));
-    };
-
-
-    undo(): void {
-        this.historyManager.undo();
-    }
-
-    redo(): void {
-        this.historyManager.redo();
-    }
-
-    public addGrid(grid: Grid): void {
-        if (!this.grids) {
-            this.grids = [grid];
-        } else {
-            this.grids.push(grid);
-        }
-        for (let grid of this.grids) {
-            grid.draw();
-        }
-    }
-
-    public getModel(): CanvasModel {
-        return this.model;
-    }
-
 
 }
 

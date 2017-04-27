@@ -29,6 +29,7 @@
   "globalDevDependencies": {},
   "globalDependencies": {
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
+    "keypress": "registry:dt/keypress#2.0.3+20160510002910",
     "url-search-params-typing": "github:RomkeVdMeulen/URLSearchParams",
     "whatwg-streams": "registry:dt/whatwg-streams#0.0.0+20161214010628"
   }
