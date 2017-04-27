@@ -8,6 +8,8 @@ import {
 import {Grid} from 'lib/designer/core';
 import {CanvasModel} from 'lib/designer/model';
 import {KeyHandler} from "./key-handler";
+import {Chord} from "./chord";
+import {Action} from "./action";
 
 
 
@@ -17,8 +19,9 @@ export class Canvas extends mxGraph {
     private grids               : Grid[];
     private undoListener        : any;
 
+
     private keyHandler          : KeyHandler;
-    private historyManager      : mxUndoManager;
+    readonly historyManager      : mxUndoManager;
 
     constructor(public readonly container: HTMLElement,
                 model: CanvasModel) {
@@ -35,8 +38,17 @@ export class Canvas extends mxGraph {
 
     }
 
+    public register(chord: Chord, action: Action) : void {
+        this.keyHandler.bind(chord, action);
+    }
+
+    public unregister(chord: Chord) : void {
+        this.keyHandler.unbind(chord);
+
+    }
+
     deactivate() {
-        // this.keyHandler.stop();
+        this.keyHandler.stop();
     }
 
     activate() : void {

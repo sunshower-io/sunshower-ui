@@ -26,7 +26,6 @@ export class DesignerElement {
 
     constructor(private designerManager: DesignerManager) {
 
-
     }
 
 
@@ -40,7 +39,6 @@ export class DesignerElement {
     }
 
     detached() : void {
-        console.log("F");
         this.designer.deactivate();
     }
 
