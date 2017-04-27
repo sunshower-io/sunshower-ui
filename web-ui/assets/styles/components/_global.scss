@@ -20,6 +20,66 @@ body {
   padding: $standard-padding;
   margin-right: $body-panel-width;
 
+  &.with-tabs {
+    padding: $standard-padding 0;
+
+    h1 {
+      padding-left: $standard-padding;
+    }
+
+    //todo fix tabs on $medium-and-down
+
+    .body-tab-holder {
+      padding: $standard-padding;
+    }
+
+    .body-tab-menu {
+      border-bottom: $default-border;
+      padding-left: $standard-padding;
+      padding-right: $standard-padding + 40px;
+      position: relative;
+
+      .btn-floating {
+        position: absolute;
+        right: $standard-padding;
+        bottom: -$standard-padding;
+        background: $primary-color;
+      }
+
+      .tabs {
+        background-color: transparent;
+      }
+
+      li.tab {
+        text-transform: none;
+        margin: 0 $standard-padding;
+
+        a {
+          color: $midgrey;
+          font-size: 12px;
+          padding: 0;
+
+          &.active {
+            font-weight: 500;
+          }
+
+          .badge {
+            background-color: $secondary-color;
+            border-radius: 8px;
+            margin-top: 14px;
+            color: white;
+            font-size: 0.7rem;
+            min-width: 0;
+            line-height: 18px;
+            height: 18px;
+            padding: 0 8px;
+          }
+
+        }
+      }
+    }
+  }
+
   @media #{$medium-and-down} {
     margin-right: $body-panel-width - $navbar-height;
   }
@@ -94,13 +154,14 @@ body {
 .collapsible {
   border: none;
   margin:0;
-  box-shadow:none;
 
-.collapsible .dropdown-icon {
-  position:absolute;
-  right:0;
-  top: 0;
-}
+  @extend .z-depth-0;
+
+  .collapsible .dropdown-icon {
+    position:absolute;
+    right:0;
+    top: 0;
+  }
 
   //.dropdown-icon {
   //  position:absolute;

@@ -3,12 +3,13 @@
 
 nav {
   background-color: $offwhite;
-  box-shadow:none; //consider removing to keep navbar & body distinct
   position:absolute;
-  left:0;
+  left:$small-nav-width;
   top:0;
   right:0;
   border-bottom: $default-border;
+
+  @extend .z-depth-0;
 
   .nav-wrapper {
     width: 100%;
@@ -22,13 +23,8 @@ nav {
     height: $navbar-height;
     line-height: $navbar-height;
     box-sizing: border-box;
-    margin-left: $small-nav-width;
     padding-left: $standard-padding;
     font-weight: 300;
-
-    &.side-nav-open {
-      margin-left: $small-nav-width + $side-nav-width;
-    }
 
     @media #{$medium-and-down} {
       left: auto;
@@ -68,6 +64,7 @@ nav {
 
   ul.user-menu {
     width: $body-panel-width;
+    margin-right: $navbar-height; //fixes weirdness with float
 
     @media #{$medium-only} {
       width: $body-panel-width - $navbar-height;

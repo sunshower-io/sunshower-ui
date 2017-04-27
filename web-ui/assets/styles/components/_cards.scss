@@ -18,13 +18,12 @@ $card-border-style: $card-border-width solid $border-color;
 //    i.material-icons.mdi.mdi-dots-vertical
 
 .card {
-  box-shadow:none;
   border: $card-border-style;
   border-radius:0;
   position:relative;
-  //margin: 20px $card-margin-right 20px $card-margin-left;
   box-sizing: border-box;
 
+  @extend .z-depth-0;
 
   //.summary-icon {
   //  position: absolute;
@@ -146,13 +145,13 @@ $card-border-style: $card-border-width solid $border-color;
 
       .btn {
         border-radius:0;
-        box-shadow:none;
         font-size:.75rem;
         height:30px;
         line-height:30px;
         padding: 0 1.5rem;
         background: $primary-color;
 
+        @extend .z-depth-0;
 
         @media #{$medium-and-down} {
           display: block;
