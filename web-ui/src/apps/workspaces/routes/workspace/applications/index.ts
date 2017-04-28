@@ -14,9 +14,9 @@ export class WorkspaceApplications {
     attached() : void {
 
         if (this.panelActive) {
-            $(this.content).removeClass('body-content-full')
+            $(this.content).addClass('body-content-partial')
         } else {
-            $(this.content).addClass('body-content-full')
+            $(this.content).removeClass('body-content-partial')
         }
     }
 

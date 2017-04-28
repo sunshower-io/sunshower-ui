@@ -19,7 +19,7 @@ export class BodyPanel {
 
     togglePanel() : void {
         this.active = !this.active;
-        $(this.content).toggleClass('body-content-full');
+        $(this.content).toggleClass('body-content-partial');
     }
 
 

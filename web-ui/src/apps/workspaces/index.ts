@@ -37,6 +37,7 @@ export class WorkspaceApplication {
             title: 'Approvals'
         }
         ]);
+        //todo move approvals route
 
 
         this.navigatorManager.bind(router);

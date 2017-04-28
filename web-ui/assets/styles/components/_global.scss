@@ -18,14 +18,14 @@ body {
 
 .body-content {
   padding: $standard-padding;
-  margin-right: $body-panel-width;
+  margin-right: 0;
 
   @media #{$medium-and-down} {
     margin-right: $body-panel-width - $navbar-height;
   }
 
-  &.body-content-full {
-    margin-right: 0;
+  &.body-content-partial {
+    margin-right: $body-panel-width;
   }
 }
 
@@ -150,5 +150,14 @@ a.create-link {
     font-size: 20px;
     line-height: 13px;
     vertical-align: middle;
+  }
+}
+
+.loader-holder {
+  position: relative;
+  min-height: 100px;
+
+  .loader {
+    padding-top: $standard-padding;
   }
 }

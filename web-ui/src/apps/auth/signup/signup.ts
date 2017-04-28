@@ -41,6 +41,7 @@ export class Signup {
         }).then(response => response.json())
         .then(data => {
             this.signIn();
+            //todo redirect with message?
         }).catch(er => {
             console.log("ERROR", er);
             this.showError = true;

@@ -44,7 +44,7 @@ export class Navbar {
     }
 
     approvals() {
-        console.log('router', this.router);
+        //todo change route
         this.router.navigateToRoute('approvals');
         // location.assign('#/approvals');
     }
