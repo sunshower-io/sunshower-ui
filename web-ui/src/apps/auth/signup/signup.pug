@@ -5,6 +5,7 @@ template
         a.btn-flat(click.delegate="signIn()") Sign In
 
     h1 Create Hasli.io account
+    //todo make fields required
 
     .input-field
         input(type='text' id="${firstnameId}" value.bind='user.firstname')
@@ -15,16 +16,20 @@ template
     .input-field
         input(type="text" id="${usernameId}" value.bind="user.username")
         label(for="${usernameId}") Username
-    .input-field
-        input(type='text' id="${emailId}" value.bind='user.emailAddress')
-        label(for="${emailId}") Email
+    .row
+        .col.m6.input-field
+            input(type='text' id="${emailId}" value.bind='user.emailAddress')
+            label(for="${emailId}") Email
+        .col.m6.input-field
+            input(type='text' id="${phoneId}" value.bind='user.phoneNumber')
+            label(for="${phoneId}") Phone Number
 
     .row
         .col.m6.input-field
-            input(type='password' id="${passwordId}" value.bind='user.password')
+            input(ref="password" type='password' id="${passwordId}" value.bind='user.password')
             label(for="${passwordId}") Password
         .col.m6.input-field
-            input(type='password' id="${confirmId}" value.bind='user.password')
+            input(ref="confirmPassword" type='password' id="${confirmId}")
             label(for="${confirmId}") Confirm Password
 
     .button-holder

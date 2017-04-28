@@ -29,6 +29,8 @@ export class User {
 
     emailAddress:string;
 
+    phoneNumber:string;
+
     image:string;
 
     roles?: Roles
