@@ -4,7 +4,7 @@ import {
     AuthenticationContextHolder
 } from 'lib/common/security';
 import {autoinject} from "aurelia-framework";
-// import {Router} from "aurelia-router";
+ import {Router} from "aurelia-router";
 import {UUID} from 'lib/common/lang';
 import {bindable} from "aurelia-framework";
 
@@ -19,9 +19,10 @@ export class Navbar {
 
     constructor(
         private user:User,
-        private authHolder:AuthenticationContextHolder
+        private authHolder:AuthenticationContextHolder,
+        private router:Router
     ) {
-
+        //make sure we get the right router
     }
 
     attached() : void {
@@ -40,6 +41,12 @@ export class Navbar {
 
     openSettings() {
         // location.assign('#/admin');
+    }
+
+    approvals() {
+        console.log('router', this.router);
+        this.router.navigateToRoute('approvals');
+        // location.assign('#/approvals');
     }
 
 }

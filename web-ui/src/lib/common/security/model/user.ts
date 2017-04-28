@@ -5,6 +5,14 @@ export class AuthenticationContext {
     token       :Token;
 }
 
+export class Role {
+    authority:string;
+}
+
+export class Roles {
+    roles ?: Role[];
+}
+
 export class User {
 
     id:string;
@@ -22,4 +30,6 @@ export class User {
     emailAddress:string;
 
     image:string;
+
+    roles?: Roles
 }

@@ -1,0 +1,18 @@
+template
+    .body-content(roles-allowed.bind="roles")
+        h1 Approvals
+        div(if.bind="approvals.length == 0")
+            | No approvals
+        template(if.bind="approvals.length > 0")
+            table
+                thead
+                    tr
+                        th First Name
+                        th Last Name
+                        th Email
+                        th Phone
+                        th Username
+                        th Password
+                        th Approve
+                tbody
+                    tr(repeat.for="user of approvals")

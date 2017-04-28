@@ -26,13 +26,16 @@ export class WorkspaceApplication {
             route: ['', 'list'],
             moduleId: './routes/workspaces',
             title: 'Workspaces'
-
-
         }, {
-                route: ':workspaceId',
-                moduleId: './routes/workspace/index',
-                title: 'Workspace'
-            }
+            route: ':workspaceId',
+            moduleId: './routes/workspace/index',
+            title: 'Workspace'
+        }, {
+            route: 'approvals',
+            moduleId: '../admin/approvals/approvals',
+            name: 'approvals',
+            title: 'Approvals'
+        }
         ]);
 
 

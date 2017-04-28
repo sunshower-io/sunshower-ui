@@ -103,6 +103,7 @@ function configureResources(aurelia: Aurelia) {
     aurelia.use
         .standardConfiguration()
         .globalResources([
+            'lib/common/resources/custom-attributes/roles-allowed',
             'lib/designer/elements/panel',
             'lib/designer/elements/panels',
             'lib/designer/elements/designer/left-panel',

@@ -3,6 +3,7 @@ template
         .nav-wrapper
             .brand-logo
                 a(href="/") Hasli.io
+                //todo make dynamic
                 a.breadcrumb WorkspaceName
                 a.breadcrumb Dashboard
             ul.right.user-menu
@@ -31,6 +32,9 @@ template
                     //li(click.delegate="incompleteFeature.notify($event)")
                     //    i.material-icons.mdi.mdi-help-circle
                     //    | Help
+                    li(roles-allowed="admin" click.delegate="approvals()")
+                        i.material-icons.mdi.mdi-account-check
+                        | Approvals
                     //li.divider
                     li(click.delegate="logout()")
                         i.material-icons.mdi.mdi-logout-variant
