@@ -21,12 +21,19 @@ export class Signup {
     private password: HTMLElement;
     private confirmPassword: HTMLElement;
 
+    @bindable
+    private showError:boolean;
+
+    @bindable
+    private error: string;
+
+    @bindable
+    private showSuccess:boolean;
+
 
     @bindable
     private user: User = new User();
 
-    @bindable
-    private showError:boolean = false;
 
     constructor(
         private client: HttpClient,
@@ -36,22 +43,18 @@ export class Signup {
     }
 
     signup(): void {
-        if ($(this.password).val() == $(this.confirmPassword).val()) {
-            this.client.fetch('signup/signup', {
-                method: 'post',
-                body: JSON.stringify(this.user)
-            }).then(response => response.json())
-                .then(data => {
-                    //todo redirect with message
-                    this.signIn();
-                }).catch(er => {
-                console.log("ERROR", er);
-                this.showError = true;
-            });
-        } else {
-            //todo return error
+        this.client.fetch('signup/signup', {
+            method: 'post',
+            body: JSON.stringify(this.user)
+        }).then(response => response.json())
+            .then(data => this.showSuccess = true)
+            .catch(er => {
+            console.log("ERROR", er);
             this.showError = true;
-        }
+            //todo return a proper error
+            this.error = "Username or email already exists";
+        });
+
     }
 
     signIn() : void {

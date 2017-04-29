@@ -20,7 +20,7 @@ export class Auth {
                 name: 'login',
                 moduleId: 'apps/auth/login/login',
                 nav: true,
-                title: 'Login',
+                title: 'Log In',
                 settings : {
                     isActive:true,
                 }
@@ -29,7 +29,7 @@ export class Auth {
                 name: 'signup',
                 moduleId: 'apps/auth/signup/signup',
                 nav: true,
-                title: 'Signup'
+                title: 'Sign Up'
             }
         ]);
 

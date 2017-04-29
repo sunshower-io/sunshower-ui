@@ -5,6 +5,7 @@ import {HttpClient} from 'aurelia-fetch-client';
 export class Approvals {
 
     approvals: any[];
+    users: any[];
 
     @bindable
     loading: boolean;
@@ -13,6 +14,7 @@ export class Approvals {
 
     constructor(private client: HttpClient) {
         this.approvals = [];
+        this.users = []
     }
 
     attached() {
@@ -25,6 +27,17 @@ export class Approvals {
             .then(response => response.json() as any)
             .then(response => {
                 this.approvals = response;
+                this.getApproved();
+                this.loading = false;
+            });
+    }
+
+    getApproved() : void {
+        this.loading = true;
+        this.client.fetch('signup/list')
+            .then(response => response.json() as any)
+            .then(response => {
+                this.users = response;
                 this.loading = false;
             });
     }

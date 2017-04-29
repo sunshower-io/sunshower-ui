@@ -15,6 +15,7 @@ import {
 } from "apps/workspaces/resources/custom-elements/navigator";
 import {VelocityAnimator} from "aurelia-animator-velocity";
 import {ApplicationState} from "lib/common/storage/application-state";
+import {EventAggregator} from "aurelia-event-aggregator";
 
 
 @autoinject
@@ -26,7 +27,7 @@ export class Navigator {
     private controlId: string;
 
     @bindable
-    private opened: boolean;
+    public opened: boolean;
 
     private navigationControl: HTMLElement;
     private navigationContainer: HTMLElement;
@@ -42,7 +43,8 @@ export class Navigator {
 
     constructor(private animator: VelocityAnimator,
                 private state: ApplicationState,
-                private navigatorManager:NavigatorManager
+                private navigatorManager:NavigatorManager,
+                private ea:EventAggregator
     ) {
     }
 
@@ -51,6 +53,7 @@ export class Navigator {
         this.opened = this.navigatorManager.open;
         if(!this.opened) {
             this.hide();
+            this.opened = false; //to ensure it's not undefined ever
         } else {
             this.open(this.navigatorManager.currentInstruction.config.navModel);
             this.show();
@@ -77,8 +80,6 @@ export class Navigator {
         ]);
     }
 
-
-
     public toggle(): void {
         if (this.opened) {
             this.hide();
@@ -86,6 +87,7 @@ export class Navigator {
             this.show();
         }
         this.opened = !this.opened;
+        this.fireEvent();
     }
 
 
@@ -96,9 +98,14 @@ export class Navigator {
             this.currentComponent.active = true;
             this.opened = true;
             this.title = model.title;
+            this.fireEvent();
         }
         return true;
     }
+
+    private fireEvent() : void {
+        this.ea.publish('sideNav', {navState: this.opened});
+    };
 
 
 }

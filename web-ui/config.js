@@ -77,6 +77,7 @@ System.config({
     "d3-geo-projection": "github:d3/d3-geo-projection@1.2.1",
     "d3/d3-geo-projection": "github:d3/d3-geo-projection@1.2.1",
     "datamaps": "github:markmarkoh/datamaps@0.5.8",
+    "dmauro/Keypress": "github:dmauro/Keypress@2.1.4",
     "dockerfile-parse": "npm:dockerfile-parse@0.2.0",
     "dockerfile-parser": "github:joyent/node-docker-file-parser@master",
     "dropzone": "github:enyo/dropzone@4.3.0",
@@ -87,6 +88,7 @@ System.config({
     "font-awesome": "npm:font-awesome@4.6.3",
     "joyent/node-docker-file-parser": "github:joyent/node-docker-file-parser@master",
     "jquery": "npm:jquery@2.2.4",
+    "keypress": "github:dmauro/Keypress@2.1.4",
     "lodash": "npm:lodash@4.17.4",
     "markmarkoh/datamaps": "github:markmarkoh/datamaps@0.5.8",
     "maskedinput": "github:digitalBush/jquery.maskedinput@1.4.1",
@@ -129,7 +131,7 @@ System.config({
       "path-browserify": "npm:path-browserify@0.0.0"
     },
     "github:jspm/nodelibs-process@0.1.2": {
-      "process": "npm:process@0.11.9"
+      "process": "npm:process@0.11.10"
     },
     "github:jspm/nodelibs-stream@0.1.0": {
       "stream-browserify": "npm:stream-browserify@1.0.0"
@@ -554,7 +556,7 @@ System.config({
     "npm:process-nextick-args@1.0.7": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:process@0.11.9": {
+    "npm:process@0.11.10": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "vm": "github:jspm/nodelibs-vm@0.1.0"

@@ -10,6 +10,7 @@ body {
   right: 0;
   top: $navbar-height;
   bottom: 0;
+  overflow-y: auto;
 
   @media #{$medium-and-down} {
     top: $navbar-height-mobile;
@@ -19,6 +20,66 @@ body {
 .body-content {
   padding: $standard-padding;
   margin-right: 0;
+
+  &.with-tabs {
+    padding: $standard-padding 0;
+
+    h1 {
+      padding-left: $standard-padding;
+    }
+
+    //todo fix tabs on $medium-and-down
+
+    .body-tab-holder {
+      padding: $standard-padding;
+    }
+
+    .body-tab-menu {
+      border-bottom: $default-border;
+      padding-left: $standard-padding;
+      padding-right: $standard-padding + 40px;
+      position: relative;
+
+      .btn-floating {
+        position: absolute;
+        right: $standard-padding;
+        bottom: -$standard-padding;
+        background: $primary-color;
+      }
+
+      .tabs {
+        background-color: transparent;
+      }
+
+      li.tab {
+        text-transform: none;
+        margin: 0 $standard-padding;
+
+        a {
+          color: $midgrey;
+          font-size: 12px;
+          padding: 0;
+
+          &.active {
+            font-weight: 500;
+          }
+
+          .badge {
+            background-color: $secondary-color;
+            border-radius: 8px;
+            margin-top: 14px;
+            color: white;
+            font-size: 0.7rem;
+            min-width: 0;
+            line-height: 18px;
+            height: 18px;
+            padding: 0 8px;
+          }
+
+        }
+      }
+    }
+  }
 
   @media #{$medium-and-down} {
     margin-right: $body-panel-width - $navbar-height;
@@ -94,13 +155,14 @@ body {
 .collapsible {
   border: none;
   margin:0;
-  box-shadow:none;
 
-.collapsible .dropdown-icon {
-  position:absolute;
-  right:0;
-  top: 0;
-}
+  @extend .z-depth-0;
+
+  .collapsible .dropdown-icon {
+    position:absolute;
+    right:0;
+    top: 0;
+  }
 
   //.dropdown-icon {
   //  position:absolute;
@@ -117,6 +179,26 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: .5rem;
+}
+
+h3 {
+  font-size: 2.25rem;
+}
+
+h4 {
+  font-size: 2rem;
+}
+
+h5 {
+  font-size: 1.75rem;
+}
+h6 {
+  font-size: 1.5rem;
 }
 
 .util-top-slot {
@@ -154,5 +236,18 @@ a.create-link {
 
   .loader {
     padding-top: $standard-padding;
+  }
+}
+
+table {
+  margin-bottom: $standard-padding;
+
+  td, th {
+    padding: 10px;
+  }
+
+  th {
+    font-weight: 400;
+    color: $midgrey;
   }
 }

@@ -96,6 +96,21 @@ function registerAnimations(cfg) {
             [{rotateZ: [180, 0]}, 1],
         ]
     });
+
+    cfg.registerEffect("slideOver", {
+        defaultDuration: 1950,
+        calls: [
+            [{translateX: '250px'}]
+        ]
+    });
+
+    cfg.registerEffect("slideBack", {
+        defaultDuration: 1950,
+        calls: [
+            [{translateX: '0px'}]
+        ]
+    });
+
 }
 
 

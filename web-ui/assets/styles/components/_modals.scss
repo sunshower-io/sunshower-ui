@@ -1,4 +1,25 @@
-.modal form {
-  margin: $standard-padding;
-  border-bottom: 2px solid $primary-color;
+.modal {
+  background: none;
+
+  form {
+    padding: $standard-padding;
+  }
+
+  .modal-header {
+    background: $primary-color;
+    color: white;
+    font-weight: 400;
+    height: 50px;
+    padding: 0 $standard-padding;
+    line-height: 50px;
+    font-size: 1.25rem;
+  }
+
+  .modal-content {
+    background: $offwhite;
+    padding: $standard-padding*2;
+  }
+
+  @extend .z-depth-0;
+
 }

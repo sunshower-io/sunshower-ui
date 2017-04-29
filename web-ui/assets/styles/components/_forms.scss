@@ -22,3 +22,39 @@ form {
   padding-top: $standard-padding;
   text-align: center;
 }
+
+.body-content form, .modal form {
+  @extend .z-depth-1;
+}
+
+
+.form-message {
+  padding: $standard-padding;
+  margin-top: $standard-padding;
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+  }
+
+  h5, h6 {
+    font-size: 1.1rem;
+  }
+
+  &.success {
+    border: 1px solid $success-color;
+    background: lighten($success-color, 25%);
+  }
+
+  &.error {
+    border: 1px solid $error-color;
+    background: lighten($error-color, 50%);
+  }
+}

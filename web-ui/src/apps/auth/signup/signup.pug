@@ -5,35 +5,36 @@ template
         a.btn-flat(click.delegate="signIn()") Sign In
 
     h1 Create Hasli.io account
-    //todo make fields required
 
-    .input-field
-        input(type='text' id="${firstnameId}" value.bind='user.firstname')
-        label(for="${firstnameId}") First Name
-    .input-field
-        input(type='text' id="${lastnameId}" value.bind="user.lastname")
-        label(for="${lastnameId}") Last Name
-    .input-field
-        input(type="text" id="${usernameId}" value.bind="user.username")
-        label(for="${usernameId}") Username
-    .row
-        .col.m6.input-field
-            input(type='text' id="${emailId}" value.bind='user.emailAddress')
-            label(for="${emailId}") Email
-        .col.m6.input-field
-            input(type='text' id="${phoneId}" value.bind='user.phoneNumber')
-            label(for="${phoneId}") Phone Number
+    form(if.bind="!showSuccess")
+        .input-field
+            input(type='text' id="${firstnameId}" value.bind='user.firstname' class="validate" required="required")
+            label(for="${firstnameId}") First Name
+        .input-field
+            input(type='text' id="${lastnameId}" value.bind="user.lastname" class="validate" required="required")
+            label(for="${lastnameId}") Last Name
+        .input-field
+            input(type="text" id="${usernameId}" value.bind="user.username" class="validate" required="required")
+            label(for="${usernameId}") Username
+        .row
+            .col.m6.input-field
+                input(type='email' id="${emailId}" value.bind='user.emailAddress' class="validate" required="required")
+                label(for="${emailId}") Email
+            .col.m6.input-field
+                input(type='tel' id="${phoneId}" value.bind='user.phoneNumber' class="validate" required="required")
+                label(for="${phoneId}") Phone Number
 
-    .row
-        .col.m6.input-field
-            input(ref="password" type='password' id="${passwordId}" value.bind='user.password')
-            label(for="${passwordId}") Password
-        .col.m6.input-field
-            input(ref="confirmPassword" type='password' id="${confirmId}")
-            label(for="${confirmId}") Confirm Password
+        .row
+            .col.m6.input-field
+                input(ref="password" type='password' id="${passwordId}" value.bind='user.password' required="required")
+                label(for="${passwordId}") Password
+            .col.m6.input-field
+                input(ref="confirmPassword" type='password' id="${confirmId}" required="required")
+                label(for="${confirmId}") Confirm Password
 
-    .button-holder
-        button.waves-effect.btn(type="submit" click.delegate="signup()") Sign Up
-
-//.ui.error.message.left(show.bind="showError" style="margin-top:10px")
-//    p Username or email already exists
+        .button-holder
+            button.waves-effect.btn(type="submit" click.delegate="signup()") Sign Up
+        .form-message.error(if.bind="showError") ${error}
+    .form-message.success(if.bind="showSuccess")
+        h2 Thanks for signing up!
+        p We'll be in touch once you're approved.

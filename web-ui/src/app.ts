@@ -55,7 +55,15 @@ export class App {
         }, {
             route: 'workspaces',
             moduleId: './apps/workspaces/index'
+        }, , {
+            route: 'approvals',
+            moduleId: './apps/admin/approvals/approvals',
+            name: 'approvals',
+            title: 'Approvals'
         }]);
+
+        config.mapUnknownRoutes('./apps/workspaces/index');
+
         this.router = router;
     }
 

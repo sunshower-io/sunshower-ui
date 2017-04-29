@@ -1,10 +1,39 @@
 template
-    .body-content(roles-allowed.bind="roles")
-        h1 Approvals
-        div(if.bind="approvals.length == 0")
-            | No approvals
-        template(if.bind="approvals.length > 0")
-            table.highlight
+    navbar
+    navigator
+    .body
+        .body-content(roles-allowed.bind="roles")
+            h1 Users
+
+            h2 Pending Approvals
+            div(if.bind="approvals.length == 0")
+                | No approvals
+            template(if.bind="approvals.length > 0")
+                table.highlight.bordered
+                    thead
+                        tr
+                            th First Name
+                            th Last Name
+                            th Email
+                            th Phone
+                            th Username
+                            th
+                    tbody
+                        tr(if.bind="loading")
+                            td.loader-holder(colspan="6")
+                                loader
+                        tr(if.bind="!loading" repeat.for="approval of approvals")
+                            td ${approval.user.firstname}
+                            td ${approval.user.lastname}
+                            td ${approval.user.emailAddress}
+                            td ${approval.user.phoneNumber}
+                            td ${approval.user.username}
+                            td
+                                input(type="checkbox" id="${approval.requestId}" click.delegate="approve(approval.requestId)")
+                                label(for="${approval.requestId}") Approve
+
+            h2 Approved Users
+            table.highlight.bordered
                 thead
                     tr
                         th First Name
@@ -17,12 +46,12 @@ template
                     tr(if.bind="loading")
                         td.loader-holder(colspan="6")
                             loader
-                    tr(if.bind="!loading" repeat.for="approval of approvals")
-                        td ${approval.user.firstname}
-                        td ${approval.user.lastname}
-                        td ${approval.user.emailAddress}
-                        td ${approval.user.phoneNumber}
-                        td ${approval.user.username}
+                    tr(if.bind="!loading" repeat.for="user of users")
+                        td ${user.firstname}
+                        td ${user.lastname}
+                        td ${user.emailAddress}
+                        td ${user.phoneNumber}
+                        td ${user.username}
                         td
-                            input(type="checkbox" id="${approval.requestId}" click.delegate="approve(approval.requestId)")
-                            label(for="${approval.requestId}") Approve
+                            input(type="checkbox" id="${user.id}" checked)
+                            label(for="${user.id}") Approved

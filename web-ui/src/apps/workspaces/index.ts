@@ -30,14 +30,7 @@ export class WorkspaceApplication {
             route: ':workspaceId',
             moduleId: './routes/workspace/index',
             title: 'Workspace'
-        }, {
-            route: 'approvals',
-            moduleId: '../admin/approvals/approvals',
-            name: 'approvals',
-            title: 'Approvals'
-        }
-        ]);
-        //todo move approvals route
+        }]);
 
 
         this.navigatorManager.bind(router);

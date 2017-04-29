@@ -26,7 +26,6 @@ export class DesignerElement {
 
     constructor(private designerManager: DesignerManager) {
 
-
     }
 
 
@@ -36,6 +35,11 @@ export class DesignerElement {
         this.setCanvas(canvas);
         this.setDesigner(designer);
         this.designerManager.setCurrent(designer);
+        this.designer.activate();
+    }
+
+    detached() : void {
+        this.designer.deactivate();
     }
 
 

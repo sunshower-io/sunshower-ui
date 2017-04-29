@@ -11,8 +11,11 @@ $primary-color: $logoblue;
 $secondary-color: $brightgreen;
 $primary-color-dark: $darkblue;
 
+$success-color: #1B5E20; //darken-4
+$error-color: #a21318; //darken-3
 $progress-bar-color: $primary-color;
 $table-striped-color: $lightgrey;
+$table-border-color: $lightgrey;
 
 $navbar-height: 50px;
 $navbar-height-mobile: $navbar-height;

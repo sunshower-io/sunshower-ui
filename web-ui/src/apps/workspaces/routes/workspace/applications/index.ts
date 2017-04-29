@@ -10,6 +10,11 @@ export class WorkspaceApplications {
     @bindable
     private panelActive: boolean;
 
+    @bindable
+    private tabHolder: HTMLElement;
+
+    @bindable
+    private createModal: HTMLElement;
 
     attached() : void {
 
@@ -18,6 +23,9 @@ export class WorkspaceApplications {
         } else {
             $(this.content).removeClass('body-content-partial')
         }
+
+        $(this.tabHolder).tabs();
+        $(this.createModal).modal();
     }
 
 }
