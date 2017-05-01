@@ -6,7 +6,7 @@ template
 
     h1 Sign in to Hasli.io
 
-    form
+    form(submit.delegate="login()")
         .input-field
             input(type="text" id="${usernameId}" value.bind='user.username')
             label(for="${usernameId}") Username
@@ -15,7 +15,7 @@ template
             label(for="${passwordId}") Password
 
         .button-holder
-            button.waves-effect.btn(type="submit" click.delegate="login()") Log In
+            button.waves-effect.btn(type="submit") Log In
 
 
     //            .ui.error.message.left(show.bind="credentialsInvalid" style="margin-top:10px")

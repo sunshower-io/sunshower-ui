@@ -6,35 +6,66 @@ template
 
     h1 Create Hasli.io account
 
-    form(if.bind="!showSuccess")
+    form(if.bind="!showSuccess" submit.delegate="signup()")
         .input-field
-            input(type='text' id="${firstnameId}" value.bind='user.firstname' class="validate" required="required")
+            input(type='text'
+                id="${firstnameId}"
+                value.bind='user.firstname'
+                class="validate"
+                required="required")
             label(for="${firstnameId}") First Name
         .input-field
-            input(type='text' id="${lastnameId}" value.bind="user.lastname" class="validate" required="required")
+            input(type='text'
+                id="${lastnameId}"
+                value.bind="user.lastname"
+                class="validate"
+                required="required")
             label(for="${lastnameId}") Last Name
         .input-field
-            input(type="text" id="${usernameId}" value.bind="user.username" class="validate" required="required")
+            input(type="text"
+                id="${usernameId}"
+                value.bind="user.username"
+                class="validate"
+                required="required")
             label(for="${usernameId}") Username
         .row
             .col.m6.input-field
-                input(type='email' id="${emailId}" value.bind='user.emailAddress' class="validate" required="required")
+                input(type='email'
+                    id="${emailId}"
+                    value.bind='user.emailAddress'
+                    class="validate"
+                    required="required")
                 label(for="${emailId}") Email
             .col.m6.input-field
-                input(type='tel' id="${phoneId}" value.bind='user.phoneNumber' class="validate" required="required")
+                input(type='tel'
+                    id="${phoneId}"
+                    value.bind='user.phoneNumber'
+                    class="validate"
+                    required="required")
                 label(for="${phoneId}") Phone Number
 
         .row
             .col.m6.input-field
-                input(ref="password" type='password' id="${passwordId}" value.bind='user.password' required="required")
+                input(ref="passwordInput"
+                    type='password'
+                    class="${validationClass}"
+                    id="${passwordId}"
+                    value.bind='password'
+                    required="required"
+                    keyup.delegate="checkPasswords()")
                 label(for="${passwordId}") Password
             .col.m6.input-field
-                input(ref="confirmPassword" type='password' id="${confirmId}" required="required")
+                input(ref="confirmPasswordInput"
+                    type='password'
+                    class="${validationClass}"
+                    id="${confirmId}"
+                    value.bind='confirmPassword'
+                    required="required"
+                    keyup.delegate="checkPasswords()")
                 label(for="${confirmId}") Confirm Password
-
-        .button-holder
-            button.waves-effect.btn(type="submit" click.delegate="signup()") Sign Up
         .form-message.error(if.bind="showError") ${error}
+        .button-holder
+            button.waves-effect.btn(type="submit") Sign Up
     .form-message.success(if.bind="showSuccess")
         h2 Thanks for signing up!
         p We'll be in touch once you're approved.

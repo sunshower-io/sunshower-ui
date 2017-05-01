@@ -18,8 +18,12 @@ export class Signup {
     private passwordId: string       =  UUID.random();
     private confirmId: string        =  UUID.random();
 
-    private password: HTMLElement;
-    private confirmPassword: HTMLElement;
+    private passwordInput: HTMLInputElement;
+    private confirmPasswordInput: HTMLInputElement;
+
+    private password: string;
+    private confirmPassword: string;
+    private validationClass: string;
 
     @bindable
     private showError:boolean;
@@ -43,22 +47,41 @@ export class Signup {
     }
 
     signup(): void {
-        this.client.fetch('signup/signup', {
-            method: 'post',
-            body: JSON.stringify(this.user)
-        }).then(response => response.json())
-            .then(data => this.showSuccess = true)
-            .catch(er => {
-            console.log("ERROR", er);
-            this.showError = true;
-            //todo return a proper error
-            this.error = "Username or email already exists";
-        });
+        this.showError = false;
+        if (this.checkPasswords()) {
+            this.user.password = this.password;
 
+            this.client.fetch('signup/signup', {
+                method: 'post',
+                body: JSON.stringify(this.user)
+            }).then(response => response.json())
+                .then(data => this.showSuccess = true)
+                .catch(er => {
+                console.log("ERROR", er);
+                this.showError = true;
+                this.error = "Username or email already exists";
+            });
+        } else {
+            this.showError = true;
+            this.error = "Please enter and confirm a password"
+        }
     }
 
     signIn() : void {
         this.router.navigateToRoute('login')
+    }
+
+    checkPasswords() : boolean {
+        if (this.password == this.confirmPassword && this.password) {
+            this.validationClass = 'valid';
+            return true;
+        } else if (this.password == '') {
+            this.validationClass = '';
+            return false;
+        } else {
+            this.validationClass = 'invalid';
+            return false;
+        }
     }
 
 }

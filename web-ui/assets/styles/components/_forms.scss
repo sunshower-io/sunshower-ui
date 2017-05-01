@@ -30,7 +30,7 @@ form {
 
 .form-message {
   padding: $standard-padding;
-  margin-top: $standard-padding;
+  margin: $standard-padding 0;
 
   h2 {
     font-size: 2rem;
@@ -50,7 +50,7 @@ form {
 
   &.success {
     border: 1px solid $success-color;
-    background: lighten($success-color, 25%);
+    background: $success-color;
   }
 
   &.error {
