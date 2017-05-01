@@ -3,6 +3,7 @@ $card-margin-right: 40px;
 $card-content-height: 100px;
 $card-border-width: 1px;
 $card-border-style: $card-border-width solid $border-color;
+$workspace-card-icon-size: 80px;
 
 
 //.card
@@ -16,6 +17,70 @@ $card-border-style: $card-border-width solid $border-color;
 //    p Paleo flannel gentrify banh mi stumptown craft beer marfa church-key aliquip, placeat pariatur williamsburg normcore selvage. Nisi waistcoat flexitarian cray XOXO.
 //  .card-contract
 //    i.material-icons.mdi.mdi-dots-vertical
+
+
+.workspace-card {
+  width: $body-panel-width;
+  margin: ($workspace-card-icon-size/2 + $standard-padding) $standard-padding $standard-padding $standard-padding;
+  float: left;
+  border: $card-border-style;
+  border-radius:0;
+  position:relative;
+  box-sizing: border-box;
+  background-color: $card-bg-color;
+  transition: box-shadow .25s;
+
+  @extend .z-depth-0;
+
+  .card-content {
+    padding: $workspace-card-icon-size/2 $standard-padding $standard-padding $standard-padding;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .summary-icon {
+    //size: 100
+    position: absolute;
+    left: $body-panel-width/2 - $workspace-card-icon-size/2;
+    top: -$workspace-card-icon-size/2;
+  }
+
+  .card-title {
+    font-weight:300;
+    font-size: 1.4rem;
+    margin: 0;
+    padding: $standard-padding 0;
+    box-sizing: border-box;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .card-updated {
+    color: $midgrey;
+    text-align: center;
+    font-size: .8rem;
+  }
+
+  .card-action {
+    padding: $standard-padding/2;
+    text-align: center;
+    border-top: $default-border;
+
+    a {
+      color: $midgrey;
+      padding: 0 $standard-padding/2;
+      font-size: 20px;
+      cursor: pointer;
+
+      &:hover {
+        color: $lightgrey;
+      }
+    }
+  }
+}
 
 .card {
   border: $card-border-style;

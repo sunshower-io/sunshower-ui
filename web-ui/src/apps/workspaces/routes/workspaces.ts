@@ -13,7 +13,7 @@ import {Router} from "aurelia-router";
 export class WorkspacesOverview {
 
     @bindable
-    private workspaces: Workspace[];
+    private workspaces: any[];//Workspace[];
 
 
     @bindable
@@ -23,6 +23,7 @@ export class WorkspacesOverview {
     private panelActive: boolean;
 
     constructor(private workspaceService:WorkspaceService, private router:Router) {
+        this.workspaces = [];
     }
 
 
@@ -31,12 +32,16 @@ export class WorkspacesOverview {
     }
 
     attached() : void {
-        this.workspaceService.list().then(t => this.workspaces = t);
+        //this.workspaceService.list().then(t => this.workspaces = t);
         if (this.panelActive) {
             $(this.content).addClass('body-content-partial')
         } else {
             $(this.content).removeClass('body-content-partial')
         }
+        this.workspaces.push({name: 'Boop', id: 'boop'});
+        this.workspaces.push({name: 'Schloop', id: 'schloop'});
+        this.workspaces.push({name: 'Beeping Boops', id: 'beeping-boops'});
+        this.workspaces.push({name: 'glarbin', id: 'glarbin'});
     }
 
 }
