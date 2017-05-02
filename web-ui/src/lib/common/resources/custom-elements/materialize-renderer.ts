@@ -39,7 +39,6 @@ export class MaterializeRenderer {
         let body = DOM.querySelectorAll('body')[0] as HTMLElement;
         this.anchor = dialogController.slot.anchor;
         this.anchor.classList.add('modal');
-        console.log('this.anchor', $(this.anchor));
         body.appendChild(this.anchor);
 
         return new Promise((resolve) => {

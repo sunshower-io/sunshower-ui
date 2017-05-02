@@ -1,7 +1,7 @@
 template
     require(from="lib/common/resources/custom-elements/body-panel/body-panel")
     .body-content(ref="content")
-        .btn-floating.btn-floating-add(click.delegate="create()")
+        .btn-floating.btn-floating-add(ref="createBtn" click.delegate="create()" title="Create a New Workspace")
             i.material-icons.large.mdi.mdi-plus
         h1 Workspaces
         .workspace-card(repeat.for="workspace of workspaces")
@@ -12,4 +12,4 @@ template
             .card-action
                 a.material-icons.mdi.mdi-web(click.delegate="open(workspace.id)")
                 a.material-icons.mdi.mdi-delete(href="#" title="Incomplete Feature")
-    body-panel(active.bind="panelActive" sections.bind="true" content.bind="content")
+    body-panel(active.bind="panelActive" sections.bind="true" content.bind="content" button.bind="createBtn")

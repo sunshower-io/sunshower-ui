@@ -11,4 +11,8 @@
   position: absolute;
   top: $standard-padding;
   right: $standard-padding;
+
+  &.body-panel-open {
+    right: $body-panel-width + $standard-padding;
+  }
 }

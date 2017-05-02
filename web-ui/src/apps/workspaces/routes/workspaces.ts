@@ -16,29 +16,35 @@ export class WorkspacesOverview {
     private content: HTMLElement;
 
     @bindable
+    private createBtn: HTMLElement;
+
+    @bindable
     private panelActive: boolean;
 
     constructor(private workspaceService:WorkspaceService,
                 private router:Router,
                 private dialogService:DialogService) {
         this.workspaces = [];
+        // this.panelActive = true;
     }
 
 
-    open(id:string) {
+    open(id:string) : void {
         this.router.navigate(`${id}/dashboard`);
     }
 
     attached() : void {
         this.workspaceService.list().then(t => this.workspaces = t);
         if (this.panelActive) {
-            $(this.content).addClass('body-content-partial')
+            this.content.classList.add('body-content-partial');
+            this.createBtn.classList.add('body-panel-open');
         } else {
-            $(this.content).removeClass('body-content-partial')
+            this.content.classList.remove('body-content-partial');
+            this.createBtn.classList.remove('body-panel-open');
         }
     }
 
-    create() {
+    create() : void {
         this.dialogService.open({
             viewModel: CreateWorkspace
         }).then(t => {

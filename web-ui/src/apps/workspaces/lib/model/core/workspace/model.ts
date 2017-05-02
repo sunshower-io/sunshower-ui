@@ -47,7 +47,7 @@ export class SaveWorkspaceRequest extends ImageDataProvider {
     }
 
 
-    toFormData() : FormData {
+    public toFormData() : FormData {
         let formData = new FormData();
         formData.append('name', this.name || '');
         formData.append('key', this.key || this.name || '');

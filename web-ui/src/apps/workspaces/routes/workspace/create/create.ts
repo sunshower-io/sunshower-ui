@@ -18,7 +18,7 @@ export class CreateWorkspace {
     constructor (private controller:DialogController,
         private workspaceService:WorkspaceService,
         private router:Router) {
-
+        this.workspace = new SaveWorkspaceRequest();
     }
 
     activate() : void {
@@ -32,11 +32,10 @@ export class CreateWorkspace {
                 this.constraintViolation = err;
             })
             .then(result => {
-                console.log(result);
-                // if(result) {
-                //     this.complete();
-                //     this.router.navigate(`${result.id}`)
-                // }
+                if(result) {
+                    this.complete();
+                    this.router.navigate(`workspaces/${result.id}/dashboard`)
+                }
             });
     }
 
