@@ -14,7 +14,7 @@ interface JQuery {
     sideNav(opts ?: SidenavOptions) : JQuery;
     collapsible(opts ?: CollapsibleOptions) : JQuery;
     dropdown(opts ?: DropdownOptions) : JQuery;
-    modal(opts?: ModalOptions) : JQuery;
+    modal(opts?: ModalOptions, method ?: string) : JQuery;
     tabs(...opts:any[]);
 }
 

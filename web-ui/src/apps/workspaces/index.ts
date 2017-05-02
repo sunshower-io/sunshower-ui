@@ -27,6 +27,10 @@ export class WorkspaceApplication {
             moduleId: './routes/workspaces',
             title: 'Workspaces'
         }, {
+           route: 'create',
+            moduleId: './routes/workspace/create/create',
+            title: 'Create New Workspace'
+        }, {
             route: ':workspaceId',
             moduleId: './routes/workspace/index',
             title: 'Workspace'

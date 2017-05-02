@@ -25,6 +25,7 @@ import {
 import {DialogConfiguration} from "aurelia-dialog";
 
 import {Container} from "aurelia-dependency-injection";
+import {MaterializeRenderer} from "./lib/common/resources/custom-elements/materialize-renderer";
 
 
 export function param(name) {
@@ -142,7 +143,9 @@ function configureResources(aurelia: Aurelia) {
             return cfg;
         })
         .plugin('aurelia-dialog', (config: DialogConfiguration) => {
-        }).developmentLogging();
+            config.useRenderer(MaterializeRenderer)
+        })
+        .developmentLogging();
 }
 
 

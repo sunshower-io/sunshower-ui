@@ -21,7 +21,7 @@ $workspace-card-icon-size: 80px;
 
 .workspace-card {
   width: $body-panel-width;
-  margin: ($workspace-card-icon-size/2 + $standard-padding) $standard-padding $standard-padding $standard-padding;
+  margin: $workspace-card-icon-size/2 $standard-padding $standard-padding*2 $standard-padding;
   float: left;
   border: $card-border-style;
   border-radius:0;

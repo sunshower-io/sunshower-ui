@@ -1,14 +1,14 @@
 template
     require(from="lib/common/resources/custom-elements/body-panel/body-panel")
     .body-content(ref="content")
-        .btn-floating.btn-floating-add
+        .btn-floating.btn-floating-add(click.delegate="create()")
             i.material-icons.large.mdi.mdi-plus
         h1 Workspaces
         .workspace-card(repeat.for="workspace of workspaces")
             .card-content(click.delegate="open(workspace.id)")
                 summary-icon(stroke="none" fill="#239ae8" textColor="white" text="${workspace.name}" size="80")
                 h2.card-title ${workspace.name}
-                .card-updated Last Updated TODO
+                .card-updated Last Updated ${workspace.modified}
             .card-action
                 a.material-icons.mdi.mdi-web(click.delegate="open(workspace.id)")
                 a.material-icons.mdi.mdi-delete(href="#" title="Incomplete Feature")

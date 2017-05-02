@@ -4,11 +4,12 @@ import {
 import {HttpClient} from "aurelia-fetch-client";
 
 
-import {Workspace} from './model';
-import {autoinject} from "aurelia-dependency-injection";
+import {Workspace, SaveWorkspaceRequest} from './model';
+import {autoinject} from "aurelia-framework";
 import {
     Service,
-    ServiceManager
+    ServiceManager,
+    ConstraintViolationException
 } from "lib/common/service";
 
 import {Identifier} from "lib/common/lang/identifier";
@@ -80,4 +81,37 @@ export class WorkspaceService implements Service<Workspace> {
             return Promise.resolve(this.workspace);
         }
     }
+
+    public save(workspaceRequest: SaveWorkspaceRequest): Promise<Workspace> {
+        return this.httpClient
+            .createRequest('workspaces')
+            .asPut()
+            .withHeader('accept', 'application/json')
+            .withContent(workspaceRequest.toFormData())
+            .skipContentProcessing()
+            .send()
+            .then(t => {
+                if (!t.isSuccess) {
+                    throw new ConstraintViolationException(t.content);
+                } else {
+                    return t;
+                }
+            })
+            .then(t => t.content as any)
+            .then(t => {
+                this.workspace = new Workspace(t);
+                let file = workspaceRequest.imageToFormData();
+                if (file) {
+                    return this.httpClient.put(`workspaces/${t.id}/image`, file)
+                        .then(t => t.content as any)
+                        .then(t => {
+                            this.workspace = t;
+                            return this.workspace
+                        });
+                } else {
+                    return this.workspace;
+                }
+            });
+    }
+
 }

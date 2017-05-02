@@ -1,19 +1,15 @@
-import {
-    autoinject,
-    bindable
-} from 'aurelia-framework';
-import {
-    Workspace,
-    WorkspaceService
-} from "apps/workspaces/lib/model/core/workspace";
+import {autoinject, bindable} from 'aurelia-framework';
+import {Workspace, WorkspaceService} from "apps/workspaces/lib/model/core/workspace";
 import {Router} from "aurelia-router";
+import {DialogService} from "aurelia-dialog";
+import {CreateWorkspace} from "./workspace/create/create";
 
 
 @autoinject
 export class WorkspacesOverview {
 
     @bindable
-    private workspaces: any[];//Workspace[];
+    private workspaces: Workspace[];
 
 
     @bindable
@@ -22,7 +18,9 @@ export class WorkspacesOverview {
     @bindable
     private panelActive: boolean;
 
-    constructor(private workspaceService:WorkspaceService, private router:Router) {
+    constructor(private workspaceService:WorkspaceService,
+                private router:Router,
+                private dialogService:DialogService) {
         this.workspaces = [];
     }
 
@@ -32,16 +30,21 @@ export class WorkspacesOverview {
     }
 
     attached() : void {
-        //this.workspaceService.list().then(t => this.workspaces = t);
+        this.workspaceService.list().then(t => this.workspaces = t);
         if (this.panelActive) {
             $(this.content).addClass('body-content-partial')
         } else {
             $(this.content).removeClass('body-content-partial')
         }
-        this.workspaces.push({name: 'Boop', id: 'boop'});
-        this.workspaces.push({name: 'Schloop', id: 'schloop'});
-        this.workspaces.push({name: 'Beeping Boops', id: 'beeping-boops'});
-        this.workspaces.push({name: 'glarbin', id: 'glarbin'});
+    }
+
+    create() {
+        this.dialogService.open({
+            viewModel: CreateWorkspace
+        }).then(t => {
+            console.log(t);
+            // this.open(t.id);
+        });
     }
 
 }
