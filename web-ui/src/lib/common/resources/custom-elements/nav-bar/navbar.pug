@@ -6,9 +6,11 @@ template
                 anim-enter="slideOver"
                 anim-leave="slideBack"
                 )
-                a(href="/") Hasli.io
-                a.breadcrumb WorkspaceName
-                a.breadcrumb Dashboard
+                a(href="#/workspaces") Hasli.io
+                a.breadcrumb(repeat.for="breadcrumb of breadcrumbs"
+                    href="${breadcrumb.href}"
+                      )
+                    | ${breadcrumb.title}
             ul.right.user-menu
                 li.alert-tab
                     i.material-icons.mdi.mdi-bell

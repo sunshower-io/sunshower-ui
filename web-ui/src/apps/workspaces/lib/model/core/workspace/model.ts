@@ -2,6 +2,7 @@ export class Workspace {
 
     id          ?: string;
     modified    ?: string;
+    name        ?: string;
 
     constructor(data?:any) {
         Object.assign(this, data);

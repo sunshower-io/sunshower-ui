@@ -18,20 +18,21 @@ export class WorkspaceContext {
      */
     constructor(
         private workspaceService: WorkspaceService,
-        private navigatorManager: NavigatorManager
+        private navigatorManager: NavigatorManager,
+        private router: Router
     ) {
 
     }
 
     activate(params: any) {
-        console.log(params);
+        (this.router as any).title = this.workspaceService.workspace.name;
     }
 
 
     configureRouter(config: RouterConfiguration,
                     router: Router) {
         config.map([{
-            route: 'dashboard',
+            route: ['', 'dashboard'],
             moduleId: './dashboard/index',
             name: 'dashboard',
             nav: true,
