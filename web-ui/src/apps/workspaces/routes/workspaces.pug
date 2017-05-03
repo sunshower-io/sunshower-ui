@@ -5,5 +5,6 @@ template
         .btn-floating.btn-floating-add(ref="createBtn" click.delegate="create()" title="Create a New Workspace")
             i.material-icons.large.mdi.mdi-plus
         h1 Workspaces
-        workspace-card(repeat.for="workspace of workspaces" workspace.bind="workspace")
+        loader(if.bind="loading")
+        workspace-card(if.bind="!loading" repeat.for="workspace of workspaces" workspace.bind="workspace")
     body-panel(active.bind="panelActive" sections.bind="true" content.bind="content" button.bind="createBtn")

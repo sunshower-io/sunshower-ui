@@ -45,7 +45,10 @@ export class Navbar {
         });
 
         this.breadcrumbs = this.buildBreadcrumb(this.router.currentInstruction).reverse();
-        //todo: fix on router-view change; peek at navigator to fix
+
+        this.ea.subscribe('router:navigation:complete', response => {
+            this.breadcrumbs = this.buildBreadcrumb(this.router.currentInstruction).reverse();
+        });
 
     }
 
@@ -104,7 +107,6 @@ export class Navbar {
                 title: instruction.router.transformTitle((instruction.router as any).title),
                 href: '#' + instruction.router.baseUrl + instruction.router.currentInstruction.params.workspaceId
             });
-            console.log('instruction.router', instruction.router);
         }
 
         return breadcrumbs;

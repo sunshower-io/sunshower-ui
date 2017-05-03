@@ -23,6 +23,9 @@ export class WorkspacesOverview {
     @bindable
     private panelActive: boolean;
 
+    @bindable
+    private loading: boolean;
+
     constructor(private workspaceService:WorkspaceService,
                 private router:Router,
                 private dialogService:DialogService,
@@ -47,8 +50,11 @@ export class WorkspacesOverview {
     }
 
     loadWorkspaces() : void {
-        //todo show loading?
-        this.workspaceService.list().then(t => this.workspaces = t);
+        this.loading = true;
+        this.workspaceService.list().then(t => {
+            this.workspaces = t;
+            this.loading = false;
+        });
     }
 
     create() {
