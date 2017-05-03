@@ -6,4 +6,4 @@ template
             .card-updated Last Updated ${workspace.modified}
         .card-action
             a.material-icons.mdi.mdi-web(click.delegate="open(workspace.id)")
-            a.material-icons.mdi.mdi-delete(href="#" title="Incomplete Feature")
+            a.material-icons.mdi.mdi-delete(click.delegate="destroy(workspace.id)")

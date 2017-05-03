@@ -16,6 +16,7 @@ import {
 import {VelocityAnimator} from "aurelia-animator-velocity";
 import {ApplicationState} from "lib/common/storage/application-state";
 import {EventAggregator} from "aurelia-event-aggregator";
+import {SideNavEvents} from "../events";
 
 
 @autoinject
@@ -104,7 +105,7 @@ export class Navigator {
     }
 
     private fireEvent() : void {
-        this.ea.publish('sideNav', {navState: this.opened});
+        this.ea.publish(SideNavEvents.TOGGLED, {navState: this.opened});
     };
 
 

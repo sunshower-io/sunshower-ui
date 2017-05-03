@@ -82,6 +82,14 @@ export class WorkspaceService implements Service<Workspace> {
         }
     }
 
+    public destroy(id: string) : Promise<any> {
+        return this.client.fetch(`workspaces/${id}`, {
+            method: 'delete'
+        })
+            .then(t => t.json() as any)
+            .then(t => {return t});
+    }
+
     public save(workspaceRequest: SaveWorkspaceRequest): Promise<Workspace> {
         return this.httpClient
             .createRequest('workspaces')

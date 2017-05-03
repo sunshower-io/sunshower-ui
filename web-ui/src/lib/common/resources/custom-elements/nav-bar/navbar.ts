@@ -9,6 +9,7 @@ import {VelocityAnimator} from "aurelia-animator-velocity";
 import {Router, NavigationInstruction} from "aurelia-router";
 import {UUID} from 'lib/common/lang';
 import {bindable} from "aurelia-framework";
+import {SideNavEvents} from "apps/workspaces/resources/custom-elements/events";
 
 @autoinject
 export class Navbar {
@@ -35,7 +36,7 @@ export class Navbar {
         $(this.profileDD).dropdown();
         $(this.smallDD).dropdown();
 
-        this.ea.subscribe('sideNav', response => {
+        this.ea.subscribe(SideNavEvents.TOGGLED, response => {
             if (response.navState) {
                 this.slideInBreadcrumb();
             } else {
@@ -44,8 +45,7 @@ export class Navbar {
         });
 
         this.breadcrumbs = this.buildBreadcrumb(this.router.currentInstruction).reverse();
-        //todo update when viewModel changes
-        console.log(this.breadcrumbs);
+        //todo: fix on router-view change; peek at navigator to fix
 
     }
 
