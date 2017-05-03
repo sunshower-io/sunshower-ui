@@ -28,11 +28,6 @@ export class WorkspacesOverview {
         // this.panelActive = true;
     }
 
-
-    open(id:string) : void {
-        this.router.navigate(`${id}/dashboard`);
-    }
-
     attached() : void {
         this.workspaceService.list().then(t => this.workspaces = t);
         if (this.panelActive) {
@@ -44,7 +39,7 @@ export class WorkspacesOverview {
         }
     }
 
-    create() : void {
+    create() {
         this.dialogService.open({
             viewModel: CreateWorkspace
         }).then(t => {

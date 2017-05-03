@@ -1,0 +1,9 @@
+template
+    .workspace-card
+        .card-content(click.delegate="open(workspace.id)")
+            summary-icon(stroke="none" fill="#239ae8" textColor="white" text="${workspace.name}" size="80")
+            h2.card-title ${workspace.name}
+            .card-updated Last Updated ${workspace.modified}
+        .card-action
+            a.material-icons.mdi.mdi-web(click.delegate="open(workspace.id)")
+            a.material-icons.mdi.mdi-delete(href="#" title="Incomplete Feature")

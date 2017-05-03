@@ -1,15 +1,9 @@
 template
     require(from="lib/common/resources/custom-elements/body-panel/body-panel")
+    require(from="apps/workspaces/resources/custom-elements/workspace-card/workspace-card")
     .body-content(ref="content")
         .btn-floating.btn-floating-add(ref="createBtn" click.delegate="create()" title="Create a New Workspace")
             i.material-icons.large.mdi.mdi-plus
         h1 Workspaces
-        .workspace-card(repeat.for="workspace of workspaces")
-            .card-content(click.delegate="open(workspace.id)")
-                summary-icon(stroke="none" fill="#239ae8" textColor="white" text="${workspace.name}" size="80")
-                h2.card-title ${workspace.name}
-                .card-updated Last Updated ${workspace.modified}
-            .card-action
-                a.material-icons.mdi.mdi-web(click.delegate="open(workspace.id)")
-                a.material-icons.mdi.mdi-delete(href="#" title="Incomplete Feature")
+        workspace-card(repeat.for="workspace of workspaces" workspace.bind="workspace")
     body-panel(active.bind="panelActive" sections.bind="true" content.bind="content" button.bind="createBtn")
