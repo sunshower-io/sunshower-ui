@@ -1,5 +1,5 @@
 apply plugin: 'war'
-apply plugin: 'java'
+apply plugin: 'application'
 apply plugin: 'maven-publish'
 
 repositories {
@@ -8,43 +8,35 @@ repositories {
 }
 
 configurations {
-    web
+    ui
 }
 
 dependencies {
-    if(!fast()) {
-        web project(path:":web-ui", configuration:'uiPackage')
-    }
+
+    ui project(path: ':web-ui', configuration: 'uiPackage')
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-undertow"
 }
 
 
 war {
-    from "${project.buildDir}/src"
+    from "${project.buildDir}/generated/static"
 }
 
-def fast() {
-    final boolean fast = System.getProperty("fast") != null
-    if(fast) {
-        logger.info("Running in fast mode (will not bundle UI)")
+
+task extractUi(type: Copy) {
+
+    dependsOn configurations.ui
+    includeEmptyDirs = false
+
+    into "${project.buildDir}/generated/static"
+    from {
+        configurations.ui.collect {
+            zipTree(it)
+        }
     }
-    return fast
-}
-
-task extractUi(type:Copy) {
-
-    if(!fast()) {
-        dependsOn configurations.web
-        includeEmptyDirs = false
-
-        into "${project.buildDir}/src"
-        from {
-            configurations.web.collect {
-                zipTree(it)
-            }
-        }
-        eachFile {
-            it.path = it.path - "assembly/"
-        }
+    eachFile {
+        it.path = it.path - "assembly/"
     }
 }
 
@@ -52,12 +44,14 @@ compileJava.dependsOn extractUi
 
 
 
+//publishing {
+//    publications {
+//        mavenWeb(MavenPublication) {
+//            from components.ui
+//        }
+//    }
+//}
 
-publishing {
-    publications {
-        mavenWeb(MavenPublication) {
-            from components.web
-        }
-    }
+bootRepackage {
+    mainClass = 'io.hasli.ui.UiConfiguration'
 }
-
