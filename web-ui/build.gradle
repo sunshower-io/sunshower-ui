@@ -19,8 +19,7 @@ publishing {
         }
     }
 }
-bootRepackage {
-    enabled = false
-}
+
+
 
 build.dependsOn assembleAll

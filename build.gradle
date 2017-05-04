@@ -32,8 +32,11 @@ subprojects {
     apply from: "$rootDir/gradle/jacoco.gradle"
     apply from: "$rootDir/gradle/publishing.gradle"
     apply from: "$rootDir/gradle/test.gradle"
+}
+configure(allprojects - project(':web-ui')) {
     apply plugin: 'org.springframework.boot'
 }
+
 
 bootRepackage {
     enabled = false
