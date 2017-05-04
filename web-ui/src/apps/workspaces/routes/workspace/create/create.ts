@@ -15,6 +15,12 @@ export class CreateWorkspace {
     @bindable
     private workspace: SaveWorkspaceRequest;
 
+    @bindable
+    private showError:boolean;
+
+    @bindable
+    private error: string;
+
     constructor (private controller:DialogController,
         private workspaceService:WorkspaceService,
         private router:Router) {
@@ -29,8 +35,11 @@ export class CreateWorkspace {
         // this.workspace.bindFiles(this.files);
         this.workspaceService.save(this.workspace)
             .catch(err => {
+                //todo get proper errors
                 this.constraintViolation = err;
                 console.log(err);
+                this.showError = true;
+                this.error = 'Oops, something is amiss.';
             })
             .then(result => {
                 if(result) {

@@ -2,7 +2,7 @@ template
     .modal-header Create New Workspace
     .modal-content
         form(submit.delegate="save()")
-            //todo icon
+            //todo icon once not mvp
             .input-field
                 input(type='text'
                     id="${nameId}"
@@ -15,5 +15,6 @@ template
                     value.bind='workspace.description'
                     class="materialize-textarea")
                 label(for="${descriptionId}") Description
+            .form-message.error(if.bind="showError") ${error}
             .button-holder
                 button.waves-effect.btn(type="submit") Create
