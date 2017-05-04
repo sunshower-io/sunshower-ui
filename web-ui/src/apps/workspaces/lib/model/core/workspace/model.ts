@@ -3,6 +3,7 @@ export class Workspace {
     id          ?: string;
     modified    ?: string;
     name        ?: string;
+    description ?: string;
 
     constructor(data?:any) {
         Object.assign(this, data);
@@ -10,7 +11,7 @@ export class Workspace {
 
 }
 
-//todo move
+
 export class ImageDataProvider {
 
     public file?: File;

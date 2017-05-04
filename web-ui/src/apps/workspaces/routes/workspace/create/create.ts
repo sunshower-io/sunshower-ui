@@ -30,6 +30,7 @@ export class CreateWorkspace {
         this.workspaceService.save(this.workspace)
             .catch(err => {
                 this.constraintViolation = err;
+                console.log(err);
             })
             .then(result => {
                 if(result) {
