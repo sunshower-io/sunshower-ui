@@ -156,9 +156,9 @@ function doConfigure(data: any,
                      storage: Map<string, string>,
                      tokenHolder: AuthenticationContextHolder) {
 
-    if (!data.value) {
+    if (!data) {
         container.registerInstance(HttpClient, http);
-        aurelia.start().then(() => aurelia.setRoot('initialize/initialize'))
+        aurelia.start().then(() => aurelia.setRoot('apps/auth/auth'))
     } else {
         let token = storage.get('X-AUTH-TOKEN') || param('token');
         tokenHolder.validate(token).then(context => {

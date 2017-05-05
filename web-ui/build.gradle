@@ -20,4 +20,6 @@ publishing {
     }
 }
 
+
+
 build.dependsOn assembleAll

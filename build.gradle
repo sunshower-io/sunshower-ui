@@ -7,9 +7,14 @@ buildscript {
     apply from: 'gradle/buildscript.gradle', to: buildscript
 }
 
+plugins {
+    id 'org.springframework.boot' version '1.5.3.RELEASE'
+}
+
 allprojects {
     apply plugin: 'java'
 }
+
 
 
 /**
@@ -28,7 +33,14 @@ subprojects {
     apply from: "$rootDir/gradle/publishing.gradle"
     apply from: "$rootDir/gradle/test.gradle"
 }
+configure(allprojects - project(':web-ui')) {
+    apply plugin: 'org.springframework.boot'
+}
 
+
+bootRepackage {
+    enabled = false
+}
 task wrapper(type: Wrapper) {
     gradleVersion = gradleWrapperVersion
 }
