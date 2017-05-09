@@ -7,27 +7,22 @@ template
     h1 Create Hasli.io account
 
     form(if.bind="!showSuccess" submit.delegate="signup()")
-        .input-field
-            input(type='text'
-                id="${firstnameId}"
-                value.bind='user.firstname'
-                class="validate"
-                required="required")
-            label(for="${firstnameId}") First Name
-        .input-field
-            input(type='text'
-                id="${lastnameId}"
-                value.bind="user.lastname"
-                class="validate"
-                required="required")
-            label(for="${lastnameId}") Last Name
-        .input-field
-            input(type="text"
-                id="${usernameId}"
-                value.bind="user.username"
-                class="validate"
-                required="required")
-            label(for="${usernameId}") Username
+        .form-message.error(if.bind="showError") ${error}
+        .row
+            .col.m6.input-field
+                input(type='text'
+                    id="${firstnameId}"
+                    value.bind='user.firstname'
+                    class="validate"
+                    required="required")
+                label(for="${firstnameId}") First Name
+            .col.m6.input-field
+                input(type='text'
+                    id="${lastnameId}"
+                    value.bind="user.lastname"
+                    class="validate"
+                    required="required")
+                label(for="${lastnameId}") Last Name
         .row
             .col.m6.input-field
                 input(type='email'
@@ -43,7 +38,13 @@ template
                     class="validate"
                     required="required")
                 label(for="${phoneId}") Phone Number
-
+        .input-field
+            input(type="text"
+                id="${usernameId}"
+                value.bind="user.username"
+                class="validate"
+                required="required")
+            label(for="${usernameId}") Username
         .row
             .col.m6.input-field
                 input(ref="passwordInput"
@@ -63,7 +64,6 @@ template
                     required="required"
                     keyup.delegate="checkPasswords()")
                 label(for="${confirmId}") Confirm Password
-        .form-message.error(if.bind="showError") ${error}
         .button-holder
             button.waves-effect.btn(type="submit") Sign Up
     .form-message.success(if.bind="showSuccess")
