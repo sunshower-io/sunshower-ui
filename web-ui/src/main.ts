@@ -60,11 +60,11 @@ export function configure(aurelia: Aurelia) {
         storage
     );
 
-    http.fetch('initialize/active')
-        .then(data => data.json() as any)
-        .then(data => {
-            doConfigure(data, http, container, aurelia, storage, tokenHolder);
-        });
+    // http.fetch('initialize/active')
+    //     .then(data => data.json() as any)
+    //     .then(data => {
+            doConfigure(true, http, container, aurelia, storage, tokenHolder);
+        // });
 }
 
 
