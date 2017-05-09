@@ -20,6 +20,7 @@ interface JQuery {
 
 interface MaterializeConstructor {
     new() : JQuery;
+    updateTextFields() : void;
 }
 
 
