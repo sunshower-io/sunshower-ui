@@ -4,10 +4,10 @@ import {Router} from "aurelia-router";
 import {User} from "lib/common/security";
 
 import {HttpClient} from 'aurelia-fetch-client';
-import {bindable} from "aurelia-framework";
-import {inject} from "aurelia-dependency-injection";
+import {bindable, autoinject} from "aurelia-framework";
+import {SignupService} from "lib/common/security/service/signup";
 
-@inject(HttpClient, Auth, Router)
+@autoinject
 export class Signup {
 
     private firstnameId: string      =  UUID.random();
@@ -42,25 +42,36 @@ export class Signup {
     constructor(
         private client: HttpClient,
         private auth: Auth,
-        private router:Router
+        private router:Router,
+        private signupService:SignupService
     ) {
     }
 
     signup(): void {
         this.showError = false;
+
         if (this.checkPasswords()) {
             this.user.password = this.password;
 
-            this.client.fetch('signup/signup', {
-                method: 'post',
-                body: JSON.stringify(this.user)
-            }).then(response => response.json())
-                .then(data => this.showSuccess = true)
-                .catch(er => {
-                console.log("ERROR", er);
+            this.signupService.create(this.user).then(response => {
+                this.showSuccess = true;
+
+            }).catch(er => {
                 this.showError = true;
-                this.error = "Username or email already exists";
+                this.error = er.statusText;
             });
+
+
+            // this.client.fetch('signup/signup', {
+            //     method: 'post',
+            //     body: JSON.stringify(this.user)
+            // }).then(response => response.json())
+            //     .then(data => this.showSuccess = true)
+            //     .catch(er => {
+            //     console.log("ERROR", er);
+            //     this.showError = true;
+            //     this.error = "Username or email already exists";
+            // });
         } else {
             this.showError = true;
             this.error = "Please enter and confirm a password"

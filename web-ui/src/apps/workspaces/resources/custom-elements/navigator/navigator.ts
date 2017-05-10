@@ -54,10 +54,12 @@ export class Navigator {
         this.opened = this.navigatorManager.open;
         if(!this.opened) {
             this.hide();
-            this.opened = false; //to ensure it's not undefined ever
+            this.opened = false;
+            this.fireEvent();
         } else {
             this.open(this.navigatorManager.currentInstruction.config.navModel);
             this.show();
+            this.fireEvent();
         }
 
     }
@@ -83,11 +85,11 @@ export class Navigator {
 
     public toggle(): void {
         if (this.opened) {
+            this.opened = false;
             this.hide();
         } else {
             this.show();
         }
-        this.opened = !this.opened;
         this.fireEvent();
     }
 
@@ -99,7 +101,6 @@ export class Navigator {
             this.currentComponent.active = true;
             this.opened = true;
             this.title = model.title;
-            this.fireEvent();
         }
         return true;
     }

@@ -54,8 +54,8 @@ export class AuthenticationContextHolder {
         let t = token || this.token();
         if(t) {
             let tok = new Token(t, new Date());
-            return this.client.fetch('authenticate/validate', {
-                method: 'post',
+            return this.client.fetch('security/validate', {
+                method: 'put',
                 body: JSON.stringify(tok)
             }).then(response => response.json() as any);
         } else {
@@ -67,8 +67,8 @@ export class AuthenticationContextHolder {
         if (AuthenticationContextHolder.context) {
             return  AuthenticationContextHolder.context;
         } else if (this.storage.get(HEADER)) {
-            this.client.fetch('authentication/validate', {
-                method:'post',
+            this.client.fetch('security/validate', {
+                method:'put',
                 body: JSON.stringify(this.storage.get(HEADER))
             }).then(response => response.json() as any)
                 .then(data => {

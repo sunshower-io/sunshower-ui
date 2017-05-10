@@ -52,11 +52,11 @@ export class Login {
     }
 
     attached(): void {
-        // Materialize.updateTextFields();
+        Materialize.updateTextFields();
         let token = this.storage.get("X-AUTH-TOKEN");
         if (token) {
-            this.client.fetch('authenticate/validate', {
-                method: 'post',
+            this.client.fetch('security/validate', {
+                method: 'put',
                 body: JSON.stringify(new Token(token, null))
             }).then(response => response.json())
                 .then(data => {
@@ -72,8 +72,8 @@ export class Login {
 
 
     login(): void {
-        this.client.fetch('authenticate/authenticate', {
-            method: 'post',
+        this.client.fetch('security/authenticate', {
+            method: 'put',
             body: JSON.stringify(this.user)
         }).then(response => response.json() as any)
             .then(data => {

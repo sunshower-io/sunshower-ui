@@ -54,6 +54,7 @@ export class WorkspacesOverview {
         this.workspaceService.list().then(t => {
             this.workspaces = t;
             this.loading = false;
+            console.log('this.workspaces', this.workspaces);
         });
     }
 

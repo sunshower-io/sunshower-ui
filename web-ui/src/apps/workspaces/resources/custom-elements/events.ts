@@ -1,5 +1,5 @@
 export class SideNavEvents {
-    static readonly TOGGLED : string = 'sidenav-opened';
+    static readonly TOGGLED : string = 'navigator-toggled';
 
 }
 
