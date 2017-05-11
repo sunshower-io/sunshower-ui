@@ -1,11 +1,11 @@
 import {UUID} from "lib/common/lang";
 import {Auth} from "apps/auth/auth";
 import {Router} from "aurelia-router";
-import {User} from "lib/common/security";
 
 import {HttpClient} from 'aurelia-fetch-client';
 import {bindable, autoinject} from "aurelia-framework";
 import {SignupService} from "lib/common/security/service/signup";
+import {RegistrationRequest} from "lib/common/security/model/user";
 
 @autoinject
 export class Signup {
@@ -36,7 +36,7 @@ export class Signup {
 
 
     @bindable
-    private user: User = new User();
+    private user: RegistrationRequest = new RegistrationRequest();
 
 
     constructor(

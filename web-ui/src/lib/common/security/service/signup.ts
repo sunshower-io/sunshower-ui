@@ -1,15 +1,13 @@
 import {HttpClient} from "aurelia-fetch-client";
 
 
-import {autoinject, bindable} from "aurelia-framework";
+import {autoinject} from "aurelia-framework";
 import {
     Service,
-    ServiceManager,
-    ConstraintViolationException
+    ServiceManager
 } from "lib/common/service";
 
-import {Identifier} from "lib/common/lang/identifier";
-import {User} from "lib/common/security/model/user";
+import {Principal as User, RegistrationRequest} from "lib/common/security/model/user";
 
 
 @autoinject
@@ -18,7 +16,8 @@ export class SignupService implements Service<User> {
 
     constructor(private user: User,
                 private client: HttpClient,
-                private serviceManager: ServiceManager) {
+                private serviceManager: ServiceManager
+    ) {
 
     }
 
@@ -26,7 +25,7 @@ export class SignupService implements Service<User> {
         return Promise.resolve(this.user)
     }
 
-    create(user: User) : Promise<Response> {
+    create(user: RegistrationRequest) : Promise<Response> {
         return this.client.fetch('signup', {
                 method: 'post',
                 body: JSON.stringify(this.user)

@@ -2,18 +2,18 @@ import {inject} from "aurelia-framework";
 import {
     LocalStorage, Map
 } from "lib/common/storage";
+
+import {Authentication} from "./user";
 import {HttpClient} from "aurelia-fetch-client";
-import {
-    AuthenticationContext
-} from "lib/common/security";
 
 export const HEADER = "X-AUTH-TOKEN";
 
 export class Token {
+    public readonly value       : string;
+    public readonly expiration  : string;
 
-    constructor(public token: string,
-                public expiration: Date) {
-
+    constructor(value: any) {
+        Object.assign(this, value);
     }
 
 }
@@ -21,65 +21,65 @@ export class Token {
 @inject(HttpClient, LocalStorage)
 export class AuthenticationContextHolder {
 
-    private static context: AuthenticationContext;
+    private static context: Authentication;
 
 
-    constructor(
-        private client:HttpClient,
-        private storage: Map<string, string>
-    ) {
+    constructor(private client: HttpClient,
+                private storage: Map<string, string>) {
 
     }
 
 
-
-    public clear() : void {
+    public clear(): void {
         AuthenticationContextHolder.context = null;
         this.storage.remove('X-AUTH-TOKEN');
     }
 
 
-    public token() :string {
+    public token(): string {
 
-        if(AuthenticationContextHolder.context) {
+        if (AuthenticationContextHolder.context) {
             let ctx = AuthenticationContextHolder.context;
-            if(ctx.token) {
-                return ctx.token.token;
+            if (ctx.token) {
+                return ctx.token.value;
             }
         }
         return null;
     }
 
-    public validate(token?:string) : Promise<AuthenticationContext> {
+    public validate(token?: string): Promise<Authentication> {
         let t = token || this.token();
-        if(t) {
-            let tok = new Token(t, new Date());
+        if (t) {
+            let tok = new Token({
+                value:t,
+                expiration:new Date()
+            });
             return this.client.fetch('security/validate', {
                 method: 'put',
                 body: JSON.stringify(tok)
-            }).then(response => response.json() as any);
+            }).then(response => this.get());
         } else {
             return Promise.reject("No token");
         }
     }
 
-    public get(): AuthenticationContext {
+    public get(): Promise<Authentication> {
         if (AuthenticationContextHolder.context) {
-            return  AuthenticationContextHolder.context;
+            return Promise.resolve(AuthenticationContextHolder.context);
         } else if (this.storage.get(HEADER)) {
-            this.client.fetch('security/validate', {
-                method:'put',
-                body: JSON.stringify(this.storage.get(HEADER))
+            return this.client.fetch('security/token/authenticate', {
+                method: 'put',
+                body: JSON.stringify(new Token({value:this.storage.get(HEADER)}))
             }).then(response => response.json() as any)
                 .then(data => {
-                    AuthenticationContextHolder.context = data;
+                    let result = new Authentication(data);
+                    AuthenticationContextHolder.context = result;
+                    return result;
                 });
-            return AuthenticationContextHolder.context;
         }
-        return undefined;
     }
 
-    public set(t: AuthenticationContext, remember: boolean) {
+    public set(t: Authentication, remember: boolean) {
         AuthenticationContextHolder.context = t;
         if (remember) {
             this.storage.put(HEADER, this.token());

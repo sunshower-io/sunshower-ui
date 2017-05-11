@@ -17,8 +17,8 @@ import {
 
 import {
     AuthenticationContextHolder,
-    User,
-    AuthenticationContext
+    Principal,
+    Authentication
 } from "lib/common/security";
 
 
@@ -162,17 +162,21 @@ function doConfigure(data: any,
     } else {
         let token = storage.get('X-AUTH-TOKEN') || param('token');
         tokenHolder.validate(token).then(context => {
-            container.registerInstance(User, context.user);
-            container.registerInstance(AuthenticationContext, context);
+
+                let user = context.user,
+                token = context.token;
+
+            container.registerInstance(Principal , user);
+            container.registerInstance(Authentication, context);
             http.defaults.headers['X-AUTH-TOKEN'] = token;
             let authenticatedClient = new HttpClient(),
                 basicClient = new BasicHttpClient();
 
 
-            configureBasicClient(basicClient, container, token);
+            configureBasicClient(basicClient, container, token.value);
 
 
-            configureAuthenticatedClient(authenticatedClient, container, token);
+            configureAuthenticatedClient(authenticatedClient, container, token.value);
 
 
             tokenHolder.set(context, false);

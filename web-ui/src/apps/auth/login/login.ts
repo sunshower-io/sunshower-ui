@@ -1,7 +1,7 @@
 import {bindable} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
 import {inject} from "aurelia-dependency-injection";
-import {User} from "lib/common/security";
+import {Principal} from "lib/common/security";
 import {LocalStorage} from "lib/common/storage";
 import * as materialize from 'materialize-css';
 
@@ -39,7 +39,7 @@ export class Login {
     private credentialsInvalid: boolean = false;
 
     @bindable
-    private user: User = new User();
+    private user: Principal = new Principal();
 
 
     constructor(private aurelia: Aurelia,
@@ -57,16 +57,8 @@ export class Login {
         if (token) {
             this.client.fetch('security/validate', {
                 method: 'put',
-                body: JSON.stringify(new Token(token, null))
-            }).then(response => response.json())
-                .then(data => {
-                    // this.holder.set(data, true);
-                    // console.log("USER1", data.user)
-                    // this.container.registerInstance(User, data.user);
-                    // let headers = this.client.defaults.headers as Object;
-                    // headers['X-AUTH-TOKEN'] = data.token.token;
-                    // this.auth.setAppRoot();
-                })
+                body: JSON.stringify(new Token({value:token}))
+            });
         }
     }
 
@@ -78,10 +70,10 @@ export class Login {
         }).then(response => response.json() as any)
             .then(data => {
                 if (this.remember) {
-                    this.storage.put('X-AUTH-TOKEN', data.token.token);
+                    this.storage.put('X-AUTH-TOKEN', data.token.value);
                     window.location.reload(true);
                 } else {
-                    this.setParam("token", data.token.token);
+                    this.setParam("token", data.token.value);
                     window.location.reload(true);
                 }
             }).catch(e => {

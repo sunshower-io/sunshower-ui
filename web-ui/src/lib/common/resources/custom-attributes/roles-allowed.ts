@@ -1,7 +1,12 @@
-import {bindable, BoundViewFactory, ViewSlot, customAttribute, templateController, autoinject} from 'aurelia-framework';
-import {BindingEngine} from 'aurelia-binding';
-import {User} from 'lib/common/security';
+import {
+    BoundViewFactory,
+    ViewSlot,
+    customAttribute,
+    templateController,
+    autoinject
+} from 'aurelia-framework';
 import {OverrideContext} from "aurelia-binding";
+import {Principal as User} from 'lib/common/security/model'
 
 import {View} from "aurelia-templating";
 
@@ -63,7 +68,7 @@ export class RolesAllowed {
 
     private isAllowed() : boolean {
         let allowedRoles = this.value ? this.value.split(/[\s,]+/) : [''];
-        let userRoles = this.user.roles.roles.map((r) => { return r.authority });
+        let userRoles = this.user.roles.map((r) => { return r.authority });
 
         return allowedRoles.filter((n) => {
             return userRoles.indexOf(n) !== -1

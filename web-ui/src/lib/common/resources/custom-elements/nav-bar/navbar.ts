@@ -1,6 +1,6 @@
 import 'jquery';
 import {
-    User,
+    Principal as User,
     AuthenticationContextHolder
 } from 'lib/common/security';
 import { EventAggregator } from 'aurelia-event-aggregator';
