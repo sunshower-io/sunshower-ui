@@ -6,5 +6,8 @@ template
             i.material-icons.large.mdi.mdi-plus
         h1 Workspaces
         loader(if.bind="loading")
-        workspace-card(if.bind="!loading" repeat.for="workspace of workspaces" workspace.bind="workspace")
+        template(if.bind="workspaces.length > 0")
+            workspace-card(if.bind="!loading" repeat.for="workspace of workspaces" workspace.bind="workspace")
+        template(if.bind="workspaces.length == 0")
+            p You have no workspaces. Go make one!
     body-panel(active.bind="panelActive" sections.bind="true" content.bind="content" button.bind="createBtn")

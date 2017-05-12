@@ -18,13 +18,50 @@ $workspace-card-icon-size: 80px;
 //  .card-contract
 //    i.material-icons.mdi.mdi-dots-vertical
 
+.chart-card {
+  width:20%;
+  margin: $standard-padding 2.5%;
+  float: left;
+  border: $card-border-style;
+  box-sizing: border-box;
+
+  @media #{$medium-and-down} {
+    width: 45%;
+  }
+
+  @media #{$small-and-down} {
+    width: 100%;
+    float: none;
+    margin: 0;
+  }
+
+
+  .card-header {
+    padding: 0 $standard-padding;
+    line-height: 30px;
+    height: 30px;
+    background: $primary-color;
+    color: $lightgrey;
+    border-bottom: $card-border-style;
+
+  }
+  .card-content {
+    background: white;
+
+    .chart {
+      background: $offwhite;
+      padding: $standard-padding;
+      height: 300px;
+      box-sizing: border-box;
+    }
+  }
+}
 
 .workspace-card {
   width: $body-panel-width;
   margin: $workspace-card-icon-size/2 $standard-padding $standard-padding*2 $standard-padding;
   float: left;
   border: $card-border-style;
-  border-radius:0;
   position:relative;
   box-sizing: border-box;
   background-color: $card-bg-color;
@@ -228,14 +265,27 @@ $workspace-card-icon-size: 80px;
   }
 
 
-  //todo row-ify
   .card-action {
     border-top: $default-border;
     background-color: #eceff1; //blue-grey lighten-5
     color: #90a4ae; //blue-grey lighten-2
-    padding: 10px 20px;
+    padding: 10px 0;
     font-size: .75rem;
     position: relative;
+
+    .action {
+      display: inline-block;
+      line-height: 20px;
+      padding: 0 $standard-padding;
+
+      &.left {
+        float: left;
+      }
+
+      &.right {
+        float: right;
+      }
+    }
 
     .chip {
       margin: 0;
@@ -262,11 +312,6 @@ $workspace-card-icon-size: 80px;
       }
     }
 
-    .version {
-      float: right;
-      line-height: 20px;
-      letter-spacing: 1px;
-    }
 
   }
 
