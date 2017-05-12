@@ -1,8 +1,5 @@
 import {UUID} from "lib/common/lang";
-import {Auth} from "apps/auth/auth";
 import {Router} from "aurelia-router";
-
-import {HttpClient} from 'aurelia-fetch-client';
 import {bindable, autoinject} from "aurelia-framework";
 import {SignupService} from "lib/common/security/service/signup";
 import {RegistrationRequest} from "lib/common/security/model/user";
@@ -40,8 +37,6 @@ export class Signup {
 
 
     constructor(
-        private client: HttpClient,
-        private auth: Auth,
         private router:Router,
         private signupService:SignupService
     ) {
@@ -52,7 +47,7 @@ export class Signup {
 
         if (this.checkPasswords()) {
             this.user.password = this.password;
-
+            console.log(this.user);
             this.signupService.create(this.user).then(response => {
                 this.showSuccess = true;
 

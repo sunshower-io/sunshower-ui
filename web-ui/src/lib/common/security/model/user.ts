@@ -4,16 +4,23 @@ import {Token} from './token';
 export class Principal {
     id                  : string;
     active              : boolean;
+    lastName            : string;
+    firstName           : string;
     username            : string;
     emailAddress        : string;
+    phoneNumber         : string;
     roles               : Role[];
 
     constructor(value?: any) {
         Object.assign(this, value);
-        if(value) {
+        if (value) {
             this.emailAddress = value["email-address"];
+            this.phoneNumber = value["phone-number"];
+            this.firstName = value["first-name"];
+            this.lastName = value["last-name"];
         }
     }
+
 }
 
 
@@ -37,7 +44,7 @@ export class Role {
 
 export class RegistrationRequest {
 
-
+    id                  : string;
     username            : string;
     password            : string;
     phoneNumber         : string;
@@ -47,11 +54,19 @@ export class RegistrationRequest {
 
     constructor(value ?: any) {
         Object.assign(this, value);
+        if (value) {
+            this.emailAddress = value["email-address"];
+            this.phoneNumber = value["phone-number"];
+            this.firstName = value["first-name"];
+            this.lastName = value["last-name"];
+            this.id = value["registration-id"]
+        }
     }
 
 
-    toJson() {
+    toJSON() {
         return {
+            "registration-id": this.id,
             username: this.username,
             password: this.password,
             "phone-number": this.phoneNumber,

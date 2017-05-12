@@ -27,36 +27,38 @@ export class SignupService implements Service<User> {
 
     create(user: RegistrationRequest) : Promise<Response> {
         return this.client.fetch('signup', {
-                method: 'post',
-                body: JSON.stringify(this.user)
-            }).then(response => response.json() as any)
-            .then(response => {
-                return null;
-            }).catch(er => {
-                return er;
-        });
+                method: 'put',
+                body: JSON.stringify(user.toJSON())
+            })
     }
 
-    list() : Promise<User[]> {
+    listPending() : Promise<RegistrationRequest[]> {
         return this.client.fetch('signup')
             .then(response => response.json() as any)
-            .then(response => {
-                return response;
-                });
+            .then(data => data.map(t => new RegistrationRequest(t)))
+    }
+
+    listActive() : Promise<User[]> {
+        return this.client.fetch('security/users/status/true')
+            .then(response => response.json() as any)
+            .then(data => data.map(t => new User(t)))
+    }
+
+    listInactive() : Promise<User[]> {
+        return this.client.fetch('security/users/status/false')
+            .then(response => response.json() as any)
     }
 
     approve(requestId: string) : Promise<void> {
-        return this.client.fetch(`signup/${requestId}/approve`, {
-            method: 'post'
-        }).then(response => {
+        return this.client.fetch(`signup/${requestId}/approve`)
+            .then(response => {
             return null;
         })
     }
 
     revoke(userId: string) : Promise<void> {
-        return this.client.fetch(`signup/${userId}/revoke`, {
-            method: 'post'
-        }).then(response => {
+        return this.client.fetch(`signup/${userId}/revoke`)
+            .then(response => {
             return null;
         })
     }

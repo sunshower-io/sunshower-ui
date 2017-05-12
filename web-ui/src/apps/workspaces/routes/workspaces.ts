@@ -35,7 +35,7 @@ export class WorkspacesOverview {
     }
 
     attached() : void {
-        this.loadWorkspaces();
+        // this.loadWorkspaces();
         if (this.panelActive) {
             this.content.classList.add('body-content-partial');
             this.createBtn.classList.add('body-panel-open');

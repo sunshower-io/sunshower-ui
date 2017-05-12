@@ -1,18 +1,19 @@
-import { inject, bindable } from 'aurelia-framework';
-import {HttpClient} from 'aurelia-fetch-client';
+import { autoinject, bindable } from 'aurelia-framework';
+import {SignupService} from "lib/common/security/service/signup";
+import {RegistrationRequest, Principal as User} from "lib/common/security/model/user";
 
-@inject(HttpClient)
+@autoinject
 export class Approvals {
 
-    approvals: any[];
-    users: any[];
+    approvals: RegistrationRequest[];
+    users: User[];
 
     @bindable
     loading: boolean;
 
     roles = 'admin';
 
-    constructor(private client: HttpClient) {
+    constructor(private signupService: SignupService) {
         this.approvals = [];
         this.users = []
     }
@@ -23,19 +24,17 @@ export class Approvals {
 
     getPending() : void {
         this.loading = true;
-        this.client.fetch('signup/pending')
-            .then(response => response.json() as any)
+        this.signupService.listPending()
             .then(response => {
                 this.approvals = response;
-                this.getApproved();
+                this.getActive();
                 this.loading = false;
             });
     }
 
-    getApproved() : void {
+    getActive() : void {
         this.loading = true;
-        this.client.fetch('signup/list')
-            .then(response => response.json() as any)
+        this.signupService.listActive()
             .then(response => {
                 this.users = response;
                 this.loading = false;
@@ -44,12 +43,19 @@ export class Approvals {
 
     approve(requestId : string) : void {
         this.loading = true;
-        this.client.fetch(`signup/${requestId}/approve`, {
-            method: 'post'
-        }).then(response => response.json() as any)
+        this.signupService.approve(requestId)
             .then(response => {
-                this.getPending();
+                this.getPending()}
+            );
+    }
+
+    revoke(userId: string) : void {
+        this.loading = true;
+        this.signupService.revoke(userId)
+            .then(response => {
+                this.getActive()
             })
+
     }
 
 
