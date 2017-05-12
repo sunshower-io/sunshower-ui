@@ -3,52 +3,19 @@ template
     .body-content.with-tabs(ref="content")
         h1 Dashboard
 
-        //todo actually make this a router-view probably
         .body-tab-menu
             .tabs(ref="tabHolder")
-                li.tab
-                    a.active(href="#dashboard-${workspaceId}")
-                        | Dashboard
-                li.tab
-                    a(href="#instances-${workspaceId}")
-                        span.badge 0
-                        //todo make this the number of deployed instances
-            a.btn-floating.waves-effect(href="#createNewOrchestration")
+                li.tab(repeat.for="route of router.navigation")
+                    a(class.bind="route.isActive ? 'active' : ''"
+                        href.bind='route.href')
+                        | ${route.title}
+                        span.badge(if.bind="route.settings.badge")
+                            | ${route.settings.badge}
+            a.btn-floating.waves-effect(title="Incomplete Feature")
                 i.material-icons.mdi.mdi-plus
-        .body-tab-holder(id="dashboard-${workspaceId}")
-            .chart-card
-                .card-header Servers
-                .card-content
-                    .chart
-            .chart-card
-                .card-header Storage
-                .card-content
-                    .chart
-            .chart-card
-                .card-header Networks
-                .card-content
-                    .chart
-            .chart-card
-                .card-header Regions
-                .card-content
-                    .chart
-        .body-tab-holder(id="instances-${workspaceId}")
-            .card(repeat.for="instance of instances")
-                .card-content
-                    .card-icon
-                        summary-icon(text="${instance.name}" size="90")
-                    h2.card-title ${instance.name}
-                    .card-button
-                        a.btn.waves-effect(title="Incomplete Feature") Deploy
-                .card-action
-                    //todo slotify
-                    .action.left
-                        .chip(class.bind="instance.state == 'Stopped' ? 'state-bad' : 'state-good' ") ${instance.state}
-                    .action.left Nodes: ${instance.nodes}
-                    .action.left ${instance.state} for ${instance.time}
-                    .action.right.version Version: ${instance.version}
-                    .action.right Containers: ${instance.containers}
+                //todo make this a route
 
-
+        .body-tab-holder
+            router-view
 
     body-panel(active.bind="panelActive" sections.bind="true" content.bind="content")

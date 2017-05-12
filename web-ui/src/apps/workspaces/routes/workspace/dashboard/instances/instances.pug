@@ -1,0 +1,16 @@
+template
+    //todo make component & slotify once we know what's actually going in here
+    .card(repeat.for="instance of instances")
+        .card-content
+            .card-icon
+                summary-icon(text="${instance.name}" size="90")
+            h2.card-title ${instance.name}
+            .card-button
+                a.btn.waves-effect(title="Incomplete Feature") Deploy
+        .card-action
+            .action.left
+                .chip(class.bind="instance.state == 'Stopped' ? 'state-bad' : 'state-good' ") ${instance.state}
+            .action.left Nodes: ${instance.nodes}
+            .action.left ${instance.state} for ${instance.time}
+            .action.right.version Version: ${instance.version}
+            .action.right Containers: ${instance.containers}
