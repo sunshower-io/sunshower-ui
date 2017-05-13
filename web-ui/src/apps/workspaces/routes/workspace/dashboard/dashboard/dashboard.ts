@@ -18,25 +18,50 @@ export class WorkspaceDashboardCharts {
     }
 
     attached() {
-        // console.log(Plotly);
-        this.chart(this.chart1id, 'Servers');
-        this.chart(this.chart2id, 'Storage');
-        this.chart(this.chart3id, 'Networks');
-        this.chart(this.chart4id, 'Regions');
+        this.chart(this.chart1id);
+        this.chart(this.chart2id);
+        this.chart(this.chart3id);
+        this.chart(this.chart4id);
 
     }
 
-    chart(chartId:string, chartTitle:string) {
+    chart(chartId:string) {
+        //will probably have to do label not via plotly to get screenshot formatting
+
         let values = [];
-        for (let i = 0; i < 7; i++) {
-            values.push(Math.random())
+        let times = Math.round(Math.random()*10) + 2;
+        for (let i = 0; i < times; i++) {
+            values.push(Math.random()*10)
         }
+        let colors = [
+            "#e51c23",
+            "#9c27b0",
+            "#2196F3",
+            "#009688",
+            "#cddc39",
+            "#ff9800",
+            "#F44336",
+            "#673ab7",
+            "#03a9f4",
+            "#4CAF50",
+            "#ffeb3b",
+            "#ff5722",
+            "#e91e63",
+            "#3f51b5",
+            "#00bcd4",
+            "#8bc34a",
+            "#ffc107"
+        ];
 
         let data = [{
             values: values,
+            marker: {
+                colors: colors
+            },
             hoverinfo: 'percent',
-            hole: .5,
-            type: 'pie'
+            hole: .65,
+            type: 'pie',
+            sort: false,
         }];
 
         //todo colorscale
@@ -44,10 +69,11 @@ export class WorkspaceDashboardCharts {
             annotations: [
                 {
                     font: {
-                        size: 12
+                        size: 15,
+                        color: '#9e9e9e'
                     },
                     showarrow: false,
-                    text: chartTitle,
+                    text: Math.ceil(values.reduce((a, b) => a + b, 0)).toString(),
                     x: 0.5,
                     y: 0.5
                 }
@@ -56,15 +82,14 @@ export class WorkspaceDashboardCharts {
             width: 200,
             height: 200,
             margin: {
-                l: 40,
-                r: 40,
-                b: 40,
-                t: 40,
+                l: 30,
+                r: 30,
+                b: 30,
+                t: 30,
                 pad: 0
             },
             showlegend: false,
             font: {
-                family: 'Roboto, sans serif',
                 size: 10,
                 color: '#171b26'
             }

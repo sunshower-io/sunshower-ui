@@ -20,13 +20,16 @@ $workspace-card-icon-size: 80px;
   }
 
   .card-header {
-    padding: 0 $standard-padding;
+    padding: 0 $standard-padding/2;
     line-height: 30px;
     height: 30px;
     background: $primary-color;
     color: white;
     border-bottom: $card-border-style;
 
+    i.material-icons {
+      float: right;
+    }
   }
   .card-content {
     background-color: #eceff1; //blue-grey lighten-5
