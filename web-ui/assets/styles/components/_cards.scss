@@ -8,7 +8,7 @@ $workspace-card-icon-size: 80px;
 
 
 .chart-card {
-  width:$body-panel-width;
+  width:220px;
   margin: $standard-padding $standard-padding/4 0 $standard-padding/4;
   float: left;
   border: $card-border-style;
@@ -34,8 +34,13 @@ $workspace-card-icon-size: 80px;
 
     .chart {
       background: white;
-      height: $body-panel-width - $standard-padding;
+      height: 220px - $standard-padding;
       box-sizing: border-box;
+    }
+    .extra-info {
+      background: white;
+      margin-top: $standard-padding/2;
+      padding: $standard-padding;
     }
   }
 }

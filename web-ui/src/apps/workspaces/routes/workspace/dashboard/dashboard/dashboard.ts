@@ -44,7 +44,7 @@ export class WorkspaceDashboardCharts {
             annotations: [
                 {
                     font: {
-                        size: 20
+                        size: 12
                     },
                     showarrow: false,
                     text: chartTitle,
@@ -53,8 +53,8 @@ export class WorkspaceDashboardCharts {
                 }
             ],
             autosize: false,
-            width: 280,
-            height: 280,
+            width: 200,
+            height: 200,
             margin: {
                 l: 40,
                 r: 40,
