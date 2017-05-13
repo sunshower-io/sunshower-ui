@@ -9,7 +9,7 @@ $workspace-card-icon-size: 80px;
 
 .chart-card {
   width:$body-panel-width;
-  margin: $standard-padding $standard-padding/2;
+  margin: $standard-padding $standard-padding/4 0 $standard-padding/4;
   float: left;
   border: $card-border-style;
   box-sizing: border-box;
