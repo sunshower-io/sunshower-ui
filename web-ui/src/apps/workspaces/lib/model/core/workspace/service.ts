@@ -70,16 +70,18 @@ export class WorkspaceService implements Service<Workspace> {
 
 
     bind(key: string): Promise<Workspace> {
-        if (Identifier.isIdentifier(key)) {
-            return this.client.fetch(`workspaces/${key}`)
-                .then(t => t.json() as any)
-                .then(t => {
-                    this.workspace = new Workspace(t);
-                    return this.workspace;
-                });
-        } else {
-            return Promise.resolve(this.workspace);
-        }
+        // if (Identifier.isIdentifier(key)) {
+        //     return this.client.fetch(`workspaces/${key}`)
+        //         .then(t => t.json() as any)
+        //         .then(t => {
+        //             this.workspace = new Workspace(t);
+        //             return this.workspace;
+        //         });
+        // } else {
+        //     return Promise.resolve(this.workspace);
+        // }
+        this.workspace = new Workspace({id: 'floop', name: 'Fauxspace', modified: 'Just Meow', description: 'Blorp'});
+        return Promise.resolve(this.workspace);
     }
 
     public destroy(id: string) : Promise<any> {

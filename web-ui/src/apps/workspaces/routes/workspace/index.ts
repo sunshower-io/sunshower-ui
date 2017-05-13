@@ -7,7 +7,7 @@ import {
 
 
 import {NavigatorManager} from 'apps/workspaces/resources/custom-elements/navigator';
-import {WorkspaceService} from "../../lib/model/core/workspace/service";
+import {WorkspaceService} from "apps/workspaces/lib/model/core/workspace/service";
 
 @autoinject
 export class WorkspaceContext {

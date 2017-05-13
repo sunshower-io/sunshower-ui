@@ -6,14 +6,13 @@ template
         .body-tab-menu
             .tabs(ref="tabHolder")
                 li.tab(repeat.for="route of router.navigation")
-                    a(class.bind="route.isActive ? 'active' : ''"
-                        href.bind='route.href')
+                    a(href.bind='route.href' class.bind="route.isActive ? 'active' : ''")
                         | ${route.title}
                         span.badge(if.bind="route.settings.badge")
                             | ${route.settings.badge}
             a.btn-floating.waves-effect(title="Incomplete Feature")
                 i.material-icons.mdi.mdi-plus
-                //todo make this a route
+                //todo make this a route once we have a plan
 
         .body-tab-holder
             router-view

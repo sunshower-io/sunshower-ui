@@ -5,10 +5,14 @@ import {Router, RouterConfiguration} from "aurelia-router";
 @autoinject
 export class WorkspaceDashboard {
 
+    private router: Router;
+    private tabHolder: HTMLElement;
 
-    constructor(private workspaceService:WorkspaceService,
-                private router: Router) {
+    constructor(private workspaceService:WorkspaceService) {
 
+    }
+
+    attached() {
     }
 
     configureRouter(config: RouterConfiguration, router: Router) {
@@ -31,6 +35,7 @@ export class WorkspaceDashboard {
                 }
             }
         ]);
+        this.router = router;
         //todo make badge reflect # of instances
         //todo add route for creating new orchestration
     }
