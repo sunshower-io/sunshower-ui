@@ -93,13 +93,10 @@ export class Navbar {
         for (let viewPortName in instruction.viewPortInstructions) {
             let _viewPortInstruction = instruction.viewPortInstructions[viewPortName];
 
-            //todo fix ordering
-
             if (_viewPortInstruction.childNavigationInstruction) {
                 let childRoute = this.buildBreadcrumb(_viewPortInstruction.childNavigationInstruction);
                 if (childRoute) {
                     for (let route in childRoute) {
-                        // console.log(childRoute);
                         breadcrumbs.push(childRoute[route]);
                         childCrumbs.push(childRoute[route]);
                     }
@@ -114,8 +111,6 @@ export class Navbar {
             });
         }
 
-        console.log('breadcrumbs', breadcrumbs);
-        console.log('childcrumbs', childCrumbs);
         return breadcrumbs;
     };
 
