@@ -44,10 +44,10 @@ export class Navbar {
             }
         });
 
-        this.breadcrumbs = this.buildBreadcrumb(this.router.currentInstruction).reverse();
-
         this.ea.subscribe('router:navigation:complete', response => {
-            this.breadcrumbs = this.buildBreadcrumb(this.router.currentInstruction).reverse();
+            this.breadcrumbs = this.buildBreadcrumb(this.router.currentInstruction)
+                .sort(function(a,b) {return (a.href.length > b.href.length) ? 1 : ((b.href.length > a.href.length) ? -1 : 0);} );
+            //I acknowledge that there are certainly better ways to sort them, but I can't determine it at the moment and this works
         });
 
     }
@@ -79,7 +79,9 @@ export class Navbar {
 
     //inspired by _buildTitle on NavigationInstruction in aurelia-router
     buildBreadcrumb(instruction : NavigationInstruction) : any[] {
+
         let breadcrumbs = [];
+        let childCrumbs = [];
 
         if (instruction.config.navModel.title) {
             breadcrumbs.push({
@@ -91,24 +93,29 @@ export class Navbar {
         for (let viewPortName in instruction.viewPortInstructions) {
             let _viewPortInstruction = instruction.viewPortInstructions[viewPortName];
 
+            //todo fix ordering
+
             if (_viewPortInstruction.childNavigationInstruction) {
                 let childRoute = this.buildBreadcrumb(_viewPortInstruction.childNavigationInstruction);
                 if (childRoute) {
                     for (let route in childRoute) {
+                        // console.log(childRoute);
                         breadcrumbs.push(childRoute[route]);
+                        childCrumbs.push(childRoute[route]);
                     }
                 }
             }
         }
 
         if ((instruction.router as any).title) {
-            //todo fix when we have nested routers
             breadcrumbs.push({
                 title: instruction.router.transformTitle((instruction.router as any).title),
                 href: '#' + instruction.router.baseUrl + instruction.router.currentInstruction.params.workspaceId
             });
         }
 
+        console.log('breadcrumbs', breadcrumbs);
+        console.log('childcrumbs', childCrumbs);
         return breadcrumbs;
     };
 

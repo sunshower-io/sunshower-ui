@@ -39,6 +39,7 @@ export class WorkspaceDashboardCharts {
             type: 'pie'
         }];
 
+        //todo colorscale
         let layout = {
             annotations: [
                 {
