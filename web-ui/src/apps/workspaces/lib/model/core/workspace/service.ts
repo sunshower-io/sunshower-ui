@@ -77,7 +77,7 @@ export class WorkspaceService implements Service<Workspace> {
             body: JSON.stringify(workspaceRequest)
         }).then(w => w.json() as any)
             .then(w => {
-                return new Identifier(w.value);
+                return new Identifier(w.val);
             });
 
 

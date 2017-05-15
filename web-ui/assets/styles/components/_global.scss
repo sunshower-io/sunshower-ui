@@ -140,20 +140,25 @@ body {
   }
 }
 
-.dropdown-content li  {
-  color: $midgrey;
-  padding: 8px 16px;
-  min-height: 0;
 
-  &.divider {
-    padding:0;
-  }
+.dropdown-content {
+  z-index: 2001; //one higher than loader
 
-  & > .mdi {
-    color: inherit;
-    display: inline;
-    padding:0;
-    margin-right: .5em;
+  li  {
+    color: $midgrey;
+    padding: 8px 16px;
+    min-height: 0;
+
+    &.divider {
+      padding:0;
+    }
+
+    & > .mdi {
+      color: inherit;
+      display: inline;
+      padding:0;
+      margin-right: .5em;
+    }
   }
 }
 
