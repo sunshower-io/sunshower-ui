@@ -49,7 +49,8 @@ export class WorkspaceService implements Service<Workspace> {
 
 
     bind(key: string): Promise<Workspace> {
-        if (Identifier.isIdentifier(key)) {
+        console.log("WSSERVICE" + key);
+        if (!this.workspace && Identifier.isIdentifier(key)) {
             return this.client.fetch(`workspaces/${key}`)
                 .then(t => t.json() as any)
                 .then(t => {
@@ -69,16 +70,14 @@ export class WorkspaceService implements Service<Workspace> {
             .then(t => {return t});
     }
 
-    public save(workspaceRequest: SaveWorkspaceRequest): Promise<Workspace> {
+    public save(workspaceRequest: SaveWorkspaceRequest): Promise<Identifier> {
         workspaceRequest.key = workspaceRequest.name;
         return this.client.fetch('workspaces', {
             method: 'put',
             body: JSON.stringify(workspaceRequest)
         }).then(w => w.json() as any)
             .then(w => {
-                console.log(w);
-                this.workspace = new Workspace(w);
-                return this.workspace;
+                return new Identifier(w.value);
             });
 
 

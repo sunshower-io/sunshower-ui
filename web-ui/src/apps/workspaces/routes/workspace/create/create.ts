@@ -42,7 +42,9 @@ export class CreateWorkspace {
             .then(result => {
                 if(result) {
                     this.complete();
-                    this.router.navigate(`workspaces/${result.id}/dashboard`)
+                    console.log("OTHERR" + result.value);
+
+                    this.router.navigate(`workspaces/${result.value}/dashboard`)
                 }
             });
     }

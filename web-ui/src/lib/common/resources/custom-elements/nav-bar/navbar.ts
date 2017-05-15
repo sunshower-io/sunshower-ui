@@ -10,6 +10,7 @@ import {Router, NavigationInstruction} from "aurelia-router";
 import {UUID} from 'lib/common/lang';
 import {bindable} from "aurelia-framework";
 import {SideNavEvents} from "apps/workspaces/resources/custom-elements/events";
+import {NavigatorManager} from "apps/workspaces/resources/custom-elements/navigator";
 
 @autoinject
 export class Navbar {
@@ -27,11 +28,23 @@ export class Navbar {
                 private user:User,
                 private authHolder:AuthenticationContextHolder,
                 private ea:EventAggregator,
-                private router:Router
+                private router:Router,
+                private navigationManager: NavigatorManager
     ) {
 
     }
 
+    private buildInstructionHierarchy() : NavigationInstruction[] {
+        let current = this.navigationManager.router,
+            results = [];
+        while(current) {
+
+            results.push(current.currentInstruction);
+            current = current.parent;
+        }
+
+        return results.reverse();
+    }
     attached() : void {
         $(this.profileDD).dropdown();
         $(this.smallDD).dropdown();
@@ -45,9 +58,9 @@ export class Navbar {
         });
 
         this.ea.subscribe('router:navigation:complete', response => {
-            this.breadcrumbs = this.buildBreadcrumb(this.router.currentInstruction)
-                .sort(function(a,b) {return (a.href.length > b.href.length) ? 1 : ((b.href.length > a.href.length) ? -1 : 0);} );
-            //I acknowledge that there are certainly better ways to sort them, but I can't determine it at the moment and this works
+            let navigationInstructions = this.buildInstructionHierarchy();
+
+            this.breadcrumbs = this.buildBreadcrumb(navigationInstructions);
         });
 
     }
@@ -60,17 +73,10 @@ export class Navbar {
         this.brandLogo ? this.animator.leave(this.brandLogo) : Promise.resolve(true)
     }
 
-    profile() {
-        // this.router.navigateToRoute('profile');
-    }
 
     logout() {
         this.authHolder.clear();
         window.location.reload();
-    }
-
-    openSettings() {
-        // location.assign('#/admin');
     }
 
     approvals() {
@@ -78,38 +84,44 @@ export class Navbar {
     }
 
     //inspired by _buildTitle on NavigationInstruction in aurelia-router
-    buildBreadcrumb(instruction : NavigationInstruction) : any[] {
+    buildBreadcrumb(instructions : NavigationInstruction[]) : any[] {
+
 
         let breadcrumbs = [];
         let childCrumbs = [];
+        for(let instruction of instructions) {
 
-        if (instruction.config.navModel.title) {
-            breadcrumbs.push({
-                title: instruction.router.transformTitle(instruction.config.navModel.title),
-                href: '#' + instruction.config.navModel.router.baseUrl + instruction.config.navModel.relativeHref
-            });
-        }
 
-        for (let viewPortName in instruction.viewPortInstructions) {
-            let _viewPortInstruction = instruction.viewPortInstructions[viewPortName];
 
-            if (_viewPortInstruction.childNavigationInstruction) {
-                let childRoute = this.buildBreadcrumb(_viewPortInstruction.childNavigationInstruction);
-                if (childRoute) {
-                    for (let route in childRoute) {
-                        breadcrumbs.push(childRoute[route]);
-                        childCrumbs.push(childRoute[route]);
+            if (instruction.config.navModel.title) {
+                breadcrumbs.push({
+                    title: instruction.router.transformTitle(instruction.config.navModel.title),
+                    href: '#' + instruction.config.navModel.router.baseUrl + instruction.config.navModel.relativeHref
+                });
+            }
+
+            for (let viewPortName in instruction.viewPortInstructions) {
+                let _viewPortInstruction = instruction.viewPortInstructions[viewPortName];
+
+                if (_viewPortInstruction.childNavigationInstruction) {
+                    let childRoute = this.buildBreadcrumb(_viewPortInstruction.childNavigationInstruction);
+                    if (childRoute) {
+                        for (let route in childRoute) {
+                            breadcrumbs.push(childRoute[route]);
+                            childCrumbs.push(childRoute[route]);
+                        }
                     }
                 }
             }
+
+            if ((instruction.router as any).title) {
+                breadcrumbs.push({
+                    title: instruction.router.transformTitle((instruction.router as any).title),
+                    href: '#' + instruction.router.baseUrl + instruction.router.currentInstruction.params.workspaceId
+                });
+            }
         }
 
-        if ((instruction.router as any).title) {
-            breadcrumbs.push({
-                title: instruction.router.transformTitle((instruction.router as any).title),
-                href: '#' + instruction.router.baseUrl + instruction.router.currentInstruction.params.workspaceId
-            });
-        }
 
         return breadcrumbs;
     };

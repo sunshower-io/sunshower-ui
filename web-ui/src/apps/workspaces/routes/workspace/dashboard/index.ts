@@ -1,6 +1,7 @@
 import {autoinject} from "aurelia-framework";
 import {WorkspaceService} from "apps/workspaces/lib/model/core/workspace";
 import {Router, RouterConfiguration} from "aurelia-router";
+import {NavigatorManager} from "apps/workspaces/resources/custom-elements/navigator";
 
 @autoinject
 export class WorkspaceDashboard {
@@ -8,7 +9,7 @@ export class WorkspaceDashboard {
     private router: Router;
     private tabHolder: HTMLElement;
 
-    constructor(private workspaceService:WorkspaceService) {
+    constructor(private workspaceService:WorkspaceService, private navigatorManager:NavigatorManager) {
 
     }
 
@@ -35,6 +36,9 @@ export class WorkspaceDashboard {
                 }
             }
         ]);
+
+        this.navigatorManager.bind(router);
+
         this.router = router;
         //todo make badge reflect # of instances
         //todo add route for creating new orchestration
