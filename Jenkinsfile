@@ -59,7 +59,7 @@ node('docker-registry') {
         try {
 
             stage('Build Env Container') {
-                sh "docker build -t hasli/ui-build-env:$version -f resources/Dockerfile.build ."
+                sh "docker build -t hasli/ui-build-env:$version -f resources/Dockerfile.build ./resources/"
             }
 
             stage('Gradle Build / Test') {
@@ -83,7 +83,7 @@ node('docker-registry') {
                         sh "sed -i.bak 's/^UI_VERSION=.*/UI_VERSION=$version.$buildNumber/' ./resources/.env"
                         sh "sed -i.bak 's/^UI_IMAGE=.*/UI_IMAGE=hasli\\/ui/' ./resources/.env"
 
-                        sh "docker build -t $hasliImage:$version.$buildNumber -f resources/Dockerfile.prod ."
+                        sh "docker build -t $hasliImage:$version.$buildNumber -f resources/Dockerfile.prod ./resources/"
                         sh "docker tag $hasliImage:$version.$buildNumber $registry/$hasliImage:$version.$buildNumber"
                         sh "docker tag $hasliImage:$version.$buildNumber $registry/$hasliImage:latest"
                         sh "docker push $registry/$hasliImage:$version.$buildNumber"
