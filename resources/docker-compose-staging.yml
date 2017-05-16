@@ -31,4 +31,4 @@ services:
 
   docs:
     container_name: "docs-${DOCS_NAME}"
-    image: "hasli/docs:latest"
+    image: "${DOCS_IMAGE}:${DOCS_VERSION}"

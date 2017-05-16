@@ -11,6 +11,7 @@ services:
       links:
         - ui
         - web-services
+        - docs
       volumes:
         - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
 
@@ -30,4 +31,4 @@ services:
 
   docs:
     container_name: "docs"
-    image: "hasli/docs:latest"
+    image: "${DOCS_IMAGE}:${DOCS_VERSION}"
