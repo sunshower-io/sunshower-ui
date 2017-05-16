@@ -1,6 +1,6 @@
 import {autoinject} from "aurelia-framework";
 import {WorkspaceService} from "apps/workspaces/lib/model/core/workspace";
-import {NavigationAware} from "../../../../resources/custom-elements/navigator";
+import {NavigationAware} from "apps/workspaces/resources/custom-elements/navigator";
 
 @autoinject
 @NavigationAware
@@ -8,10 +8,24 @@ export class WorkspaceDashboardInstances {
 
     private instances: any[];
 
-    constructor(private workspaceService:WorkspaceService) {
+    constructor(private workspaceService: WorkspaceService) {
         this.instances = [
-            {name: 'Fake Instance', state: 'Released', nodes: '2', containers: '7', time: '7 days', version: '1.0.23'},
-            {name: 'Another Fake Instance', state: 'Stopped', nodes: '2', containers: '7', time: '5 minutes', version: '1.0.23'}
+            {
+                name: 'Fake Instance',
+                state: 'Released',
+                nodes: '2',
+                containers: '7',
+                time: '7 days',
+                version: '1.0.23'
+            },
+            {
+                name: 'Another Fake Instance',
+                state: 'Stopped',
+                nodes: '2',
+                containers: '7',
+                time: '5 minutes',
+                version: '1.0.23'
+            }
         ];
     }
 

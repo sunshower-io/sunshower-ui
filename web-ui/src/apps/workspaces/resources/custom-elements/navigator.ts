@@ -2,7 +2,6 @@ import {bindable, autoinject} from 'aurelia-framework';
 import {NavigationInstruction, RouteConfig, Router} from "aurelia-router";
 import {BindingEngine, PropertyObserver} from "aurelia-binding";
 import {ApplicationState} from "lib/common/storage/application-state";
-import {EventAggregator} from "aurelia-event-aggregator";
 
 export interface NavigationComponent {
     reference: string;
@@ -16,17 +15,17 @@ type Listener = (Router) => void;
 @autoinject
 export class NavigatorManager {
 
-    static instance: NavigatorManager;
+    static instance                 : NavigatorManager;
 
     @bindable
-    public router: Router;
+    public router                   : Router;
 
     @bindable
-    public currentInstruction: NavigationInstruction;
+    public currentInstruction       : NavigationInstruction;
 
-    public open: boolean;
-    private listeners: Listener[];
-    private observer: PropertyObserver;
+    public open                     : boolean;
+    private listeners               : Listener[];
+    private observer                : PropertyObserver;
 
 
     constructor(private bindingEngine: BindingEngine,

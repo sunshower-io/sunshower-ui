@@ -8,11 +8,11 @@ import {Workspace, SaveWorkspaceRequest} from './model';
 import {autoinject} from "aurelia-framework";
 import {
     Service,
-    ServiceManager,
-    ConstraintViolationException
+    ServiceManager
 } from "lib/common/service";
 
 import {Identifier} from "lib/common/lang/identifier";
+import {Subject} from "rxjs/Subject";
 
 
 @autoinject
@@ -20,25 +20,19 @@ export class WorkspaceService implements Service<Workspace> {
 
     public workspace: Workspace;
 
+    static readonly paramName: string = 'workspaceId';
+
+    private currentId: string;
+
+    private subject: Subject<Workspace>;
+
     constructor(private client: HttpClient,
                 private httpClient: HttpBasicClient,
                 private serviceManager: ServiceManager) {
-        serviceManager.register('workspaceId', this);
+        serviceManager.register(WorkspaceService.paramName, this);
+        this.subject = new Subject();
 
     }
-
-
-    // search(input: string): Promise<Workspace[]> {
-    //     return this.client.fetch('workspaces/search', {
-    //         method: 'put',
-    //         body: JSON.stringify({
-    //             name: input,
-    //             key: input
-    //         })
-    //     })
-    //         .then(t => t.json() as any)
-    //         .then(t => t.map(u => new Workspace(u)));
-    // }
 
 
     list(): Promise<Workspace[]> {
@@ -47,27 +41,38 @@ export class WorkspaceService implements Service<Workspace> {
             .then(t => t.map(u => new Workspace(u)));
     }
 
-
-    bind(key: string): Promise<Workspace> {
-        console.log("WSSERVICE" + key);
-        if (!this.workspace && Identifier.isIdentifier(key)) {
-            return this.client.fetch(`workspaces/${key}`)
+    current(): Promise<Workspace> {
+        let ws = this.workspace;
+        if (ws && ws.id === this.currentId) {
+            return Promise.resolve(ws);
+        } else {
+            return this.client.fetch(`workspaces/${this.currentId}`)
                 .then(t => t.json() as any)
                 .then(t => {
                     this.workspace = new Workspace(t);
+                    this.subject.next(this.workspace);
                     return this.workspace;
                 });
+        }
+
+    }
+
+
+    bind(key: string): Promise<Workspace> {
+        if (Identifier.isIdentifier(key)) {
+            this.currentId = key;
+            return this.current();
         } else {
             return Promise.resolve(this.workspace);
         }
     }
 
-    public destroy(id: string) : Promise<any> {
+    public destroy(id: string): Promise<any> {
         return this.client.fetch(`workspaces/${id}`, {
             method: 'delete'
-        })
-            .then(t => t.json() as any)
-            .then(t => {return t});
+        }).then(t => t.json() as any).then(t => {
+            return t
+        });
     }
 
     public save(workspaceRequest: SaveWorkspaceRequest): Promise<Identifier> {
@@ -79,37 +84,6 @@ export class WorkspaceService implements Service<Workspace> {
             .then(w => {
                 return new Identifier(w.val);
             });
-
-
-        // return this.httpClient
-        //     .createRequest('workspaces')
-        //     .asPut()
-        //     .withHeader('accept', 'application/json')
-        //     .withContent(workspaceRequest.toFormData())
-        //     .skipContentProcessing()
-        //     .send()
-        //     .then(t => {
-        //         if (!t.isSuccess) {
-        //             throw new ConstraintViolationException(t.content);
-        //         } else {
-        //             return t;
-        //         }
-        //     })
-        //     .then(t => t.content as any)
-        //     .then(t => {
-        //         this.workspace = new Workspace(t);
-        //         let file = workspaceRequest.imageToFormData();
-        //         if (file) {
-        //             return this.httpClient.put(`workspaces/${t.id}/image`, file)
-        //                 .then(t => t.content as any)
-        //                 .then(t => {
-        //                     this.workspace = t;
-        //                     return this.workspace
-        //                 });
-        //         } else {
-        //             return this.workspace;
-        //         }
-        //     });
     }
 
 }
