@@ -1,9 +1,10 @@
 import {autoinject} from "aurelia-framework";
 import {WorkspaceService} from "apps/workspaces/lib/model/core/workspace";
 import {Router, RouterConfiguration} from "aurelia-router";
-import {NavigatorManager} from "apps/workspaces/resources/custom-elements/navigator";
+import {NavigationAware, NavigatorManager} from "apps/workspaces/resources/custom-elements/navigator";
 
 @autoinject
+@NavigationAware
 export class WorkspaceDashboard {
 
     private router: Router;
@@ -17,13 +18,17 @@ export class WorkspaceDashboard {
     }
 
     configureRouter(config: RouterConfiguration, router: Router) {
+        config.options.breadcrumb = true;
         config.map([
             {
                 route: ['', 'dashboard'],
                 moduleId: './dashboard/dashboard',
                 name: 'dashboard',
                 nav: true,
-                title: 'Dashboard'
+                title: 'Dashboard',
+                settings: {
+                    hideInBreadcrumb: true
+                }
             },
             {
                 route: 'instances',

@@ -21,9 +21,13 @@ import {
 } from "lib/common/pipeline";
 import {ApplicationState} from "lib/common/storage/application-state";
 import {BindingEngine} from "aurelia-binding";
-import {NavigatorManager} from "./apps/workspaces/resources/custom-elements/navigator";
+import {
+    NavigationAware,
+    NavigatorManager
+} from "./apps/workspaces/resources/custom-elements/navigator";
 
 @autoinject
+@NavigationAware
 export class App {
 
     @bindable
@@ -66,7 +70,6 @@ export class App {
 
         this.router = router;
     }
-
 
 
 }

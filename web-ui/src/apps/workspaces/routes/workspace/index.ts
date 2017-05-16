@@ -6,8 +6,10 @@ import {
 } from 'aurelia-router';
 
 
-import {NavigatorManager} from 'apps/workspaces/resources/custom-elements/navigator';
-import {WorkspaceService} from "apps/workspaces/lib/model/core/workspace/service";
+import {
+    WorkspaceService
+} from "apps/workspaces/lib/model/core/workspace/service";
+import {NavigationAware} from "../../resources/custom-elements/navigator";
 
 @autoinject
 export class WorkspaceContext {
@@ -16,10 +18,8 @@ export class WorkspaceContext {
      *
      * @param navigatorManager
      */
-    constructor(
-        private workspaceService: WorkspaceService,
-        private navigatorManager: NavigatorManager,
-        private router: Router
+    constructor(private router: Router,
+                private workspaceService: WorkspaceService
     ) {
 
     }
@@ -31,6 +31,7 @@ export class WorkspaceContext {
 
     configureRouter(config: RouterConfiguration,
                     router: Router) {
+        config.options.breadcrumb = true;
         config.map([{
             route: ['', 'dashboard'],
             moduleId: './dashboard/index',
@@ -68,7 +69,6 @@ export class WorkspaceContext {
                 }
             }
         }]);
-        this.navigatorManager.bind(router);
     }
 
 

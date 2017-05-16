@@ -1,7 +1,9 @@
 import {autoinject} from "aurelia-framework";
 import {WorkspaceService} from "apps/workspaces/lib/model/core/workspace";
+import {NavigationAware} from "../../../../resources/custom-elements/navigator";
 
 @autoinject
+@NavigationAware
 export class WorkspaceDashboardInstances {
 
     private instances: any[];
