@@ -1,0 +1,48 @@
+buildscript {
+    apply from: 'gradle/buildscript.gradle', to: buildscript
+}
+
+apply plugin: com.bmuschko.gradle.docker.DockerRemoteApiPlugin
+
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+
+task copyWar(type: Copy) {
+    dependsOn ':web-site:build'
+    from 'web-site/build/libs'
+    include 'web-site*.war'
+    into "resources/libs"
+}
+
+task deleteLibs(type: Delete) {
+    delete 'resources/libs'
+}
+
+task buildEnvImage(type: DockerBuildImage) {
+    group "Docker"
+    dockerFile = new File("$projectDir/resources/Dockerfile.build")
+    inputDir = new File("$projectDir/resources/")
+    tag = "hasli/ui-build-env"
+}
+
+task buildDevImage(type: DockerBuildImage) {
+    group "Docker"
+    dependsOn buildEnvImage
+    dockerFile = new File("$projectDir/resources/Dockerfile.dev")
+    inputDir = new File("$projectDir/resources/")
+    tag = "hasli/ui-dev"
+}
+
+task buildProdImage(type: DockerBuildImage) {
+    group "Docker"
+    dependsOn copyWar
+    dockerFile = new File("$projectDir/resources/Dockerfile.prod")
+    inputDir = new File("$projectDir/resources/")
+    tag = "hasli/ui"
+    finalizedBy deleteLibs
+}
+
+task buildImages() {
+    group "Docker"
+    dependsOn buildEnvImage, buildDevImage, buildProdImage
+}
+
