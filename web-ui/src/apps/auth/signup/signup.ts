@@ -21,6 +21,7 @@ export class Signup {
     private password: string;
     private confirmPassword: string;
     private validationClass: string;
+    private phoneValidationClass: string;
 
     @bindable
     private showError:boolean;
@@ -45,7 +46,7 @@ export class Signup {
     signup(): void {
         this.showError = false;
 
-        if (this.checkPasswords()) {
+        if (this.checkPasswords() && this.checkPhoneNumber()) {
             this.user.password = this.password;
             console.log(this.user);
             this.signupService.create(this.user).then(response => {
@@ -68,8 +69,14 @@ export class Signup {
             //     this.error = "Username or email already exists";
             // });
         } else {
+            this.error = '';
+            if (!this.checkPhoneNumber()) {
+                this.error = this.error + 'Please enter a valid phone number. '
+            }
+            if (!this.checkPasswords()) {
+                this.error = this.error + 'Please enter and confirm a password.'
+            }
             this.showError = true;
-            this.error = "Please enter and confirm a password"
         }
     }
 
@@ -86,6 +93,24 @@ export class Signup {
             return false;
         } else {
             this.validationClass = 'invalid';
+            return false;
+        }
+    }
+
+    checkPhoneNumber() : boolean {
+        let length = this.user.phoneNumber.replace(/[^0-9a-z]/gi, '').length;
+        // any more involved check locks us out of getting international numbers,
+        // unless we want to pull in
+        // https://github.com/googlei18n/libphonenumber
+        // which we may
+        if (length >= 9) {
+            this.phoneValidationClass = 'valid';
+            return true; }
+        else if (this.user.phoneNumber == '') {
+            this.phoneValidationClass = '';
+            return false;
+        } else {
+            this.phoneValidationClass = 'invalid';
             return false;
         }
     }
