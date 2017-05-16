@@ -16,12 +16,12 @@ import {Action} from "./action";
 export class Canvas extends mxGraph {
 
 
-    private grids               : Grid[];
-    private undoListener        : any;
+    private grids                   : Grid[];
+    private undoListener            : any;
 
 
-    private keyHandler          : KeyHandler;
-    readonly historyManager      : mxUndoManager;
+    private keyHandler              : KeyHandler;
+    readonly historyManager         : mxUndoManager;
 
     constructor(public readonly container: HTMLElement,
                 model: CanvasModel) {
