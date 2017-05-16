@@ -6,12 +6,10 @@ def buildNumber    = ""
 def buildSuffix    = "Final"
 def version        = "$majorVersion.$minorVersion"
 def registry       = "10.0.4.51:5000"
-def hasliImage     = "hasli-ui/ui"
+def hasliImage     = "hasli/ui"
 def runSystemTests = false
 def gradleTasks    = []
 def notifySlack    = false
-
-def wildflyVersion = "1.0.24.Final"
 
 if (env.BRANCH_NAME == "master") {
     buildNumber = env.BUILD_NUMBER
@@ -22,6 +20,14 @@ if (env.BRANCH_NAME == "master") {
             "build",
             "artifactoryPublish",
             "-Pversion=$majorVersion.$minorVersion.$buildNumber.$buildSuffix"
+    ]
+} else if (env.BRANCH_NAME =~ /(?i)^pr-/) {
+    buildNumber = "${env.BUILD_NUMBER}.${convertBranchName(env.BRANCH_NAME)}"
+    gradleTasks = [
+            "clean",
+            "installEnvironment",
+            "build",
+            "copyWar"
     ]
 } else {
     if (buildSuffix == "FEATURE" && env.BRANCH_NAME.contains(buildNumber)) {
@@ -40,7 +46,7 @@ if (env.BRANCH_NAME == "master") {
 
 node('docker-registry') {
 
-    if (env.BRANCH_NAME =~ /(?i)^pr-/ || env.BRANCH_NAME == "master" || env.BRANCH_NAME =~ /(?i)FEATURE/) {
+    if (env.BRANCH_NAME =~ /(?i)^pr-/ || env.BRANCH_NAME == "master") {
         notifySlack = true
         notifyBuild('STARTED')
     }
@@ -51,13 +57,14 @@ node('docker-registry') {
 
     timeout(time: 60, unit: 'MINUTES') {
         try {
-            stage('Build Container') {
-                sh "docker build -t hasli-ui/build-env:$version.$buildNumber -f resources/Dockerfile.build ."
+
+            stage('Build Env Container') {
+                sh "docker build -t hasli/ui-build-env:$version -f resources/Dockerfile.build ."
             }
 
             stage('Gradle Build / Test') {
                 dockerRun(
-                        "hasli-ui/build-env:$version.$buildNumber",
+                        "hasli/ui-build-env:$version",
                         "$version.$buildNumber",
                         "-v `pwd`:/usr/src/ -v ~/.gradle/wrapper:/root/.gradle/wrapper -v ~/.gradle/gradle.properties:/root/.gradle/gradle.properties -v ~/.jspm:/root/.jspm",
                         "sh -c '/usr/src/gradlew ${gradleTasks.join(" ")}'",
@@ -72,11 +79,11 @@ node('docker-registry') {
                 if (staging) {
 
                     stage('Deploy to Staging') {
-                        sh "sed -i.bak 's/^HASLI_UI_NAME=.*/HASLI_UI_NAME=$name/' ./resources/.env"
-                        sh "sed -i.bak 's/^HASLI_UI_VERSION=.*/HASLI_UI_VERSION=$version.$buildNumber/' ./resources/.env"
-                        sh "sed -i.bak 's/^HASLI_UI_IMAGE=.*/HASLI_UI_IMAGE=hasli-ui\\/ui/' ./resources/.env"
+                        sh "sed -i.bak 's/^UI_NAME=.*/UI_NAME=$name/' ./resources/.env"
+                        sh "sed -i.bak 's/^UI_VERSION=.*/UI_VERSION=$version.$buildNumber/' ./resources/.env"
+                        sh "sed -i.bak 's/^UI_IMAGE=.*/UI_IMAGE=hasli\\/ui/' ./resources/.env"
 
-                        sh "docker build --build-arg WILDFLY_VERSION=$wildflyVersion -t $hasliImage:$version.$buildNumber -f resources/Dockerfile.prod ."
+                        sh "docker build -t $hasliImage:$version.$buildNumber -f resources/Dockerfile.prod ."
                         sh "docker tag $hasliImage:$version.$buildNumber $registry/$hasliImage:$version.$buildNumber"
                         sh "docker tag $hasliImage:$version.$buildNumber $registry/$hasliImage:latest"
                         sh "docker push $registry/$hasliImage:$version.$buildNumber"
