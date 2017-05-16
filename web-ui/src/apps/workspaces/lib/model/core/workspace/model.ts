@@ -1,13 +1,47 @@
 export class Workspace {
 
     id          ?: string;
-    modified    ?: string;
+    key         ?: string;
     name        ?: string;
     description ?: string;
+    modified    ?: string;
+    created     ?: string;
 
     constructor(data?:any) {
         Object.assign(this, data);
+        if (data) {
+            let modified = new Date,
+                created = new Date;
+            modified.setTime(Date.parse(data["modified-on"]));
+            created.setTime(Date.parse(data["created-on"]));
+            this.modified = this.month(modified.getMonth()) +
+                " " +
+                modified.getDate().toString() +
+                ", " +
+                modified.getFullYear().toString();
+            this.created = created.getMonth().toString() +
+                " " +
+                created.getDate().toString() +
+                ", " +
+                created.getFullYear().toString();
+        }
     }
+
+    month(num: number) : string {
+        let monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        return monthNames[num];
+    }
+
+    toJSON() {
+        return {
+            "id": this.id,
+            "key": this.key,
+            "name": this.name
+        };
+    }
+    //"type": "io.hasli.sdk.v1.ext.hasli.model.WorkspaceElement"
 
 }
 

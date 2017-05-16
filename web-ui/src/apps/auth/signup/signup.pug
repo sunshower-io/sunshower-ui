@@ -34,9 +34,11 @@ template
             .col.m6.input-field
                 input(type='tel'
                     id="${phoneId}"
+                    class="${phoneValidationClass}"
                     value.bind='user.phoneNumber'
                     class="validate"
-                    required="required")
+                    required="required"
+                    keyup.delegate="checkPhoneNumber()")
                 label(for="${phoneId}") Phone Number
         .input-field
             input(type="text"
