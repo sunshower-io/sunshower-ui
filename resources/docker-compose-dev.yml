@@ -9,24 +9,30 @@ services:
       - "32770:80"
       - "32771:443"
     links:
-      - hasli-ui-dev
-      - hasli-web-dev
-      - hasli-docs-dev
+      - ui-dev
+      - web-services-dev
+      - docs-dev
     volumes:
       - ./nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
 
-  hasli-web-dev:
-    container_name: "hasli-web-dev"
-    image: "hasli-web/web:latest"
-
-  hasli-ui-dev:
-    container_name: "hasli-ui-dev"
-    image: "hasli-ui/ui-dev:latest"
+  ui-dev:
+    container_name: "ui-dev"
+    image: "hasli/ui-dev:latest"
     volumes:
       - ../:/usr/src/
       - ~/.jspm:/root/.jspm
       - ~/.gradle/wrapper:/root/.gradle/wrapper
 
-  hasli-docs-dev:
-    container_name: "hasli-docs-${HASLI_DOCS_NAME}"
-    image: "hasli-docs/docs:latest"
+  docs:
+    container_name: "hasli-${DOCS_NAME}"
+    image: "hasli/docs:latest"
+
+  web-services:
+    container_name: "web-services-dev"
+    image: "hasli/web-services:latest"
+    links:
+      - db
+
+  db:
+    container_name: "db"
+    image: "postgres:9.6"

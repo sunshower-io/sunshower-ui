@@ -3,23 +3,32 @@ version: '3'
 services:
 
   proxy:
-      container_name: "proxy-${HASLI_UI_NAME}"
+      container_name: "proxy-${UI_NAME}"
       image: "nginx:1.11.1"
       ports:
         - "80"
         - "443"
       links:
-        - hasli-ui
-        - hasli-web
+        - ui
+        - web-services
+        - docs
       volumes:
         - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
 
-  hasli-ui:
-    container_name: "hasli-ui-${HASLI_UI_NAME}"
-    image: "${HASLI_UI_IMAGE}:${HASLI_UI_VERSION}"
-    links:
-      - hasli-web
+  ui:
+    container_name: "ui-${UI_NAME}"
+    image: "${UI_IMAGE}:${UI_VERSION}"
 
-  hasli-web:
-    container_name: "hasli-web-${HASLI_UI_NAME}"
-    image: "${HASLI_WEB_IMAGE}:${HASLI_WEB_VERSION}"
+  web-services:
+    container_name: "web-services-${UI_NAME}"
+    image: "${WEB_IMAGE}:${WEB_VERSION}"
+    links:
+      - db
+
+  db:
+    container_name: "db"
+    image: "postgres:9.6"
+
+  docs:
+    container_name: "docs-${DOCS_NAME}"
+    image: "hasli/docs:latest"

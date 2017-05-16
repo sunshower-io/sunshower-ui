@@ -9,17 +9,25 @@ services:
         - "80:80"
         - "443:443"
       links:
-        - hasli-ui
-        - hasli-web
+        - ui
+        - web-services
       volumes:
         - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
 
-  hasli-ui:
-    container_name: "hasli-ui"
-    image: "${HASLI_UI_IMAGE}:${HASLI_UI_VERSION}"
-    links:
-      - hasli-web
+  ui:
+    container_name: "ui"
+    image: "${UI_IMAGE}:${UI_VERSION}"
 
-  hasli-web:
-    container_name: "hasli-web"
-    image: "${HASLI_WEB_IMAGE}:${HASLI_WEB_VERSION}"
+  web-services:
+    container_name: "web-services"
+    image: "${WEB_IMAGE}:${WEB_VERSION}"
+    links:
+      - db
+
+  db:
+    container_name: "db"
+    image: "postgres:9.6"
+
+  docs:
+    container_name: "docs"
+    image: "hasli/docs:latest"
