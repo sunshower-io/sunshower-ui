@@ -1,31 +1,12 @@
-FROM hasli-ui/build-env:latest
+FROM hasli/ui-build-env:latest
 
-RUN apt-get update && apt-get -y upgrade && apt-get install -y \
-	unzip \
-	git \
-	wget \
-  && rm -rf /var/lib/apt/lists/*
+ADD config /root/.jspm/
 
-
-ARG WILDFLY_VERSION=1.0.24.Final
-ENV JBOSS_HOME /opt/wildfly
-RUN mkdir /opt/wildfly \
-    && cd /opt/wildfly \
-    && wget -q http://repo.hasli.io/artifactory/libs-release-local/io/hasli/wildfly/wildfly-dist/$WILDFLY_VERSION/wildfly-dist-$WILDFLY_VERSION.zip \
-    && unzip wildfly-dist-$WILDFLY_VERSION.zip \
-    && mv hasli-wildfly*/* /opt/wildfly/ \
-    && rm -rf hasli-wildfly* \
-    && rm -rf wildfly-dist*.zip
-
-ADD ./resources/config /root/.jspm/
-
-EXPOSE 8080
-
-ENV UI_DEVELOPMENT_ROOT /usr/src/web-ui
+EXPOSE 8081
 
 CMD chmod +x /usr/src/gradlew  \
 	&& cd /usr/src/ \
 	&& ./gradlew installEnvironment \
 	&& ./gradlew clean build -x test \
-    && cp /usr/src/web-site/build/libs/web-site*.war /opt/wildfly/standalone/deployments/ \
-	&& /opt/wildfly/bin/standalone.sh -b 0.0.0.0
+    && cp /usr/src/web-site/build/libs/web-site*.jar /web-site.jar \
+    && java -jar /web-site.jar
