@@ -26,7 +26,7 @@ services:
       - db
 
   db:
-    container_name: "db"
+    container_name: "db-${UI_NAME}"
     image: "postgres:9.6"
 
   docs:
