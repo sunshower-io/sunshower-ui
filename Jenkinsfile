@@ -88,7 +88,7 @@ try {
 
                     }
 
-                    notifyGithub()
+                    notifyGithub(name)
                 }
             }
 
@@ -116,7 +116,7 @@ try {
 }
 
 
-def notifyGithub() {
+def notifyGithub(String name) {
     def portMapping = sh returnStdout: true, script: "docker port proxy-$name"
     portMapping = portMapping.trim()
 
