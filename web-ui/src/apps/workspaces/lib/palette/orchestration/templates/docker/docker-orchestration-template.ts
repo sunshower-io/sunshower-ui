@@ -23,7 +23,9 @@ export class DockerOrchestrationTemplateProviderElement extends Vertex {
 
 export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFactory {
     elementName         : string = 'Docker Swarm';
-    displayIcon         : string = 'assets/icons/hal/orchestration/providers/docker-logo.svg';
+    displayIcon         : string = 'assets/icons/hal/orchestration/providers/docker-single.svg';
+    paletteIcon         : string = 'assets/icons/hal/orchestration/providers/docker-expanded.svg';
+    // displayIcon         : string = 'assets/icons/hal/orchestration/providers/docker-single.svg';
 
 
 

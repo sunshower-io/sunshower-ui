@@ -24,6 +24,7 @@ export class NomadOrchestrationTemplateProviderElement extends Vertex {
 export class NomadOrchestrationTemplateProviderFactory extends DefaultElementFactory {
     elementName         : string = 'Nomad';
     displayIcon         : string = 'assets/icons/hal/orchestration/providers/nomad-logo.svg';
+    paletteIcon         : string = 'assets/icons/hal/orchestration/providers/nomad-logo.svg';
 
 
 

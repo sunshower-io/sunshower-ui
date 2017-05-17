@@ -24,6 +24,7 @@ export class HasliOrchestrationTemplateProviderElement extends Vertex {
 export class HasliOrchestrationTemplateProviderFactory extends DefaultElementFactory {
     elementName         : string = 'Hasli';
     displayIcon         : string = 'assets/icons/hal/orchestration/providers/hasli-logo.svg';
+    paletteIcon         : string = 'assets/icons/hal/orchestration/providers/hasli-logo.svg';
 
 
 

@@ -18,9 +18,10 @@ export interface ElementFactoryProvider {
 
 
 export interface ElementFactory {
-    elementName: string;
-    displayIcon: string;
-    importFunction: ImportFunction;
+    elementName             : string;
+    displayIcon             : string;
+    paletteIcon             : string;
+    importFunction          : ImportFunction;
 
     initialize(canvas: Canvas, element: HTMLElement): void;
 
@@ -63,6 +64,7 @@ export let DefaultCellFactory: CellFactory = (factory: ElementFactory) => {
 export abstract class DefaultElementFactory implements ElementFactory {
     elementName: string;
     displayIcon: string;
+    paletteIcon: string;
 
     importFunction: ImportFunction;
 
@@ -99,7 +101,7 @@ export abstract class DefaultElementFactory implements ElementFactory {
     createInitialImage() : HTMLElement {
 
         let image: HTMLImageElement = document.createElement('img');
-        image.src = this.displayIcon;
+        image.src = this.paletteIcon;
         image.width = 37;
         image.height = 37;
         return image;
@@ -107,7 +109,7 @@ export abstract class DefaultElementFactory implements ElementFactory {
 
     createAnimation() : [any, any]{
         return [{
-            scale: 2,
+            scale: 10,
         }, {
             duration: 250,
             delay: 150
