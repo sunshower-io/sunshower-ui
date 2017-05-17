@@ -30,5 +30,5 @@ services:
     image: "postgres:9.6"
 
   docs:
-    container_name: "docs-${DOCS_NAME}"
+    container_name: "docs-${UI_NAME}"
     image: "${DOCS_IMAGE}:${DOCS_VERSION}"
