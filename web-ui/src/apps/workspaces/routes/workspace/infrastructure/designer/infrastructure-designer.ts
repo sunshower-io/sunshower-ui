@@ -10,6 +10,7 @@ import {
 import {
     InfrastructureFactoryProvider
 } from "apps/workspaces/lib/palette/infrastructure/infrastructure-palette";
+import {OrchestrationProviderFactory} from "apps/workspaces/lib/palette/orchestration/templates/provider-factory";
 
 
 @autoinject
@@ -17,10 +18,10 @@ import {
 export default class InfrastructureDesigner {
 
     @bindable
-    private infrastructureElementFactory: InfrastructureFactoryProvider;
+    private infrastructureElementFactory: OrchestrationProviderFactory;
 
     constructor(
-        infrastructureElementFactory: InfrastructureFactoryProvider
+        infrastructureElementFactory: OrchestrationProviderFactory
     ) {
         this.infrastructureElementFactory = infrastructureElementFactory;
     }
