@@ -19,6 +19,9 @@ import {
 
 export class HasliOrchestrationTemplateProviderElement extends Vertex {
     style: string = 'hal-hasli-orchestration-template-provider-style';
+
+
+
 }
 
 export class HasliOrchestrationTemplateProviderFactory extends DefaultElementFactory {

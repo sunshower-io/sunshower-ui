@@ -16,24 +16,30 @@ import {
     mxPerimeter,
     mxConstants
 } from "mxgraph";
+import {DockerManagerNode, DockerWorkerNode} from "./docker-nodes";
 
 export class DockerOrchestrationTemplateProviderElement extends Vertex {
     style: string = 'hal-docker-orchestration-template-provider-style';
+
+    constructor(x: number, y: number) {
+        super('Docker', x, y, 600, 100);
+        this.addChild(new DockerManagerNode('manager', 10, 30, 40, 40));
+        this.addChild(new DockerWorkerNode('worker', 500, 30, 40, 40));
+    }
 }
 
 export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFactory {
-    elementName         : string = 'Docker Swarm';
-    displayIcon         : string = 'assets/icons/hal/orchestration/providers/docker-single.svg';
-    paletteIcon         : string = 'assets/icons/hal/orchestration/providers/docker-expanded.svg';
+    elementName: string = 'Docker Swarm';
+    displayIcon: string = 'assets/icons/hal/orchestration/providers/docker-single.svg';
+    paletteIcon: string = 'assets/icons/hal/orchestration/providers/docker-expanded.svg';
     // displayIcon         : string = 'assets/icons/hal/orchestration/providers/docker-single.svg';
-
-
 
 
     initialize(canvas: Canvas, element: HTMLElement): void {
         super.initialize(canvas, element);
         this.createStyle(canvas);
     }
+
     /**
      *
      * @param x
@@ -44,27 +50,38 @@ export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFa
      * @returns {SecurityGroupElement}
      */
 
-    newElement(
-        x: number,
-        y: number,
-        event: Event,
-        canvas: Canvas,
-        target: any
-    ): Drawable {
-        return new DockerOrchestrationTemplateProviderElement('Docker', x, y, 124, 124);
+    newElement(x: number,
+               y: number,
+               event: Event,
+               canvas: Canvas,
+               target: any): Drawable {
+        return new DockerOrchestrationTemplateProviderElement(x, y);
     }
 
 
-    protected createStyle(canvas:Canvas) : void {
+    protected createStyle(canvas: Canvas): void {
+        let style = {};
+        style[mxConstants.STYLE_FONTCOLOR] = '#ff0000';
+        style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_IMAGE;
+        style[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
+        canvas.getStylesheet()
+            .putCellStyle(
+                'hal-docker-orchestration-template-provider-style',
+                style
+            );
+        this.createDockerNodeStyle(canvas);
+    }
+
+    private createDockerNodeStyle(canvas: Canvas) {
         let style = {};
         style[mxConstants.STYLE_FONTCOLOR] = '#ff0000';
         style[mxConstants.STYLE_IMAGE] = this.displayIcon;
         style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_IMAGE;
-        style[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
-        canvas
-            .getStylesheet()
+        style[mxConstants.STYLE_PERIMETER] =
+            mxPerimeter.HexagonPerimeter;
+        canvas.getStylesheet()
             .putCellStyle(
-                'compute-security-group-style',
+                'docker-node-style',
                 style
             );
     }

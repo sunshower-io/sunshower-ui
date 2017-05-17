@@ -53,6 +53,13 @@ export abstract class RenderableElement extends mxCell implements Drawable {
         }
         return true;
     }
+    addChild(v:RenderableElement) : void {
+        v.setParent(this);
+        if(!this.children) {
+            this.children = [];
+        }
+        this.children.push(v);
+    }
 }
 
 

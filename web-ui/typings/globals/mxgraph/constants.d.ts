@@ -4,6 +4,7 @@ declare module 'mxgraph' {
 
     export class mxPerimeter {
         static RectanglePerimeter                : string;
+        static HexagonPerimeter                  : string;
     }
 
     export class mxConstants {
