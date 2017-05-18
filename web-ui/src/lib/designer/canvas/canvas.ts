@@ -32,6 +32,7 @@ export class Canvas extends mxGraph {
                 "Please upgrade to a modern browser"
             );
         }
+        this.foldingEnabled = false;
 
         this.keyHandler =  this.createKeyHandler();
         this.historyManager = this.createUndoManager();

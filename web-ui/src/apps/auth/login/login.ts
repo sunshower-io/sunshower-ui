@@ -17,6 +17,7 @@ import {
 } from "lib/common/security";
 import {Router} from "aurelia-router";
 import {UUID} from 'lib/common/lang';
+import {Generated} from "lib/common/lang/uuid";
 
 @inject(
     Aurelia,
@@ -29,7 +30,8 @@ import {UUID} from 'lib/common/lang';
 )
 export class Login {
 
-    private usernameId: string       =  UUID.random();
+    @Generated
+    private usernameId: string;
     private passwordId: string       =  UUID.random();
 
     @bindable
