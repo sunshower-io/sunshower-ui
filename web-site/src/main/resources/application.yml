@@ -1,4 +1,10 @@
 server:
-  port: 8081
+  port: 8443
   servlet-path: /
   context-path: /
+  ssl:
+    key-store: classpath:keystore.jks
+    key-store-type: JKS
+    key-alias: hasli.io
+    key-store-path: classpath:keystore.jks
+    key-store-password: h4s1!43v3r!
