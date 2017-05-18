@@ -52,7 +52,9 @@ export class Login {
     }
 
     attached(): void {
-        Materialize.updateTextFields();
+        setTimeout(() => {
+            Materialize.updateTextFields();
+        }, 100);
         let token = this.storage.get("X-AUTH-TOKEN");
         if (token) {
             this.client.fetch('security/validate', {

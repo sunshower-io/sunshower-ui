@@ -70,6 +70,15 @@ export class WorkspaceContext {
                     reference: 'apps/workspaces/routes/workspace/infrastructure/context-menu'
                 }
             }
+        }, {
+            route: 'orchestration',
+            moduleId: './orchestration/index',
+            name: 'orchestration',
+            nav: false,
+            title: 'Orchestration',
+            settings: {
+                icon: 'mdi-android-studio'
+            }
         }]);
     }
 

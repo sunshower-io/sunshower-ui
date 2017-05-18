@@ -13,6 +13,7 @@ import {
 
 import {Identifier} from "lib/common/lang/identifier";
 import {Subject} from "rxjs/Subject";
+import {OrchestrationTemplate} from "../orchestration-template/model";
 
 
 @autoinject
@@ -70,9 +71,7 @@ export class WorkspaceService implements Service<Workspace> {
     public destroy(id: string): Promise<any> {
         return this.client.fetch(`workspaces/${id}`, {
             method: 'delete'
-        }).then(t => t.json() as any).then(t => {
-            return t
-        });
+        }).then(t => t.json() as any);
     }
 
     public save(workspaceRequest: SaveWorkspaceRequest): Promise<Identifier> {
@@ -82,7 +81,23 @@ export class WorkspaceService implements Service<Workspace> {
             body: JSON.stringify(workspaceRequest)
         }).then(w => w.json() as any)
             .then(w => {
-                return new Identifier(w.val);
+                return new Identifier(w.value);
+            });
+    }
+
+    public getTemplates(workspaceId: string) : Promise<OrchestrationTemplate[]> {
+        return this.client.fetch(`workspaces/${workspaceId}/templates`)
+            .then(t => t.json() as any)
+            .then(t => t.map(u => new OrchestrationTemplate(u)));
+    }
+
+    public addTemplate(workspaceId: string, orchestrationTemplate: OrchestrationTemplate): Promise<Identifier> {
+        return this.client.fetch(`workspaces/${workspaceId}/templates`, {
+            method: 'put',
+            body: JSON.stringify(orchestrationTemplate.toJSON())
+        }).then(t => t.json() as any)
+            .then(t => {
+                return new Identifier(t.value);
             });
     }
 

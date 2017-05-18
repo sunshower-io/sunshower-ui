@@ -38,10 +38,14 @@ export class SummaryIcon {
     }
 
     public summary() : string {
-        return this.text.split(" ")
-            .splice(0, 2)
-            .map(t => t.charAt(0).toUpperCase())
-            .join('');
+        if (this.text) {
+            return this.text.split(" ")
+                .splice(0, 2)
+                .map(t => t.charAt(0).toUpperCase())
+                .join('');
+        } else {
+            return '';
+        }
     }
 
 

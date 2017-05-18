@@ -10,9 +10,8 @@ template
                         | ${route.title}
                         span.badge(if.bind="route.settings.badge")
                             | ${route.settings.badge}
-            a.btn-floating.waves-effect(title="Incomplete Feature")
+            a.btn-floating.waves-effect(click.delegate="createOrchestration()")
                 i.material-icons.mdi.mdi-plus
-                //todo make this a route once we have a plan
 
         .body-tab-holder
             router-view
