@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import {UUID} from "lib/common/lang/uuid";
 import {bindable, autoinject} from "aurelia-framework";
 import {DialogController} from "aurelia-dialog";
@@ -30,7 +31,8 @@ export class CreateOrchestration {
             major: 1,
             minor: 0,
             "minor-minor": 0,
-            extension: "DRAFT"});
+            extension: "DRAFT"
+        });
         this.stringVersion = this.orchestrationTemplate.version.name();
     }
 
@@ -40,33 +42,35 @@ export class CreateOrchestration {
         }, 100);
     }
 
+    validate(str: string) : boolean {
+        let digits = str && str.split('\.');
+        if(
+            digits == null ||
+            typeof digits === 'undefined' ||
+            digits.length !== 3
+        ) {
+            return false;
+        }
+        let extPart = digits[2].split("-"),
+            major = digits[0],
+            minor = digits[1],
+            minorMinor = extPart[0];
+        return extPart.length == 2 &&
+            _.every([major, minor, minorMinor], t => {
+                return parseInt(t) != NaN;
+            });
+    }
+
     versionValid() : boolean {
-        //todo make this less lame
-        if(this.stringVersion) {
-            let nums = this.stringVersion.split('.');
-            if(nums[2]) {
-                let nums2 = nums[2].split('-'),
-                    major = nums[0],
-                    minor = nums[1];
-                if (nums2[1]) {
-                    let minorMinor = nums2[0],
-                        extension = nums2[1],
-                        numRegex = new RegExp("^(0|[1-9][0-9]*)$");
-                    if (major.match(numRegex) && minor.match(numRegex) && minorMinor.match(numRegex)) {
-                        this.versionValidationClass = 'valid';
-                        return true;
-                    } else {
-                        return this.setVersionInvalid();
-                    }
-                } else {
-                    return this.setVersionInvalid();
-                }
-            } else {
-                return this.setVersionInvalid();
-            }
-        } else {
+        if(this.stringVersion == '') {
             this.versionValidationClass = '';
             return false;
+        }
+        if(this.validate(this.stringVersion)) {
+            this.versionValidationClass = 'valid';
+            return true;
+        } else {
+            this.setVersionInvalid();
         }
     }
 
