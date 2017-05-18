@@ -29,7 +29,7 @@ export class HasliOrchestrationTemplateProviderFactory extends DefaultElementFac
     elementName         : string = 'Hasli';
     rolesAllowed        : Role[] = [new Role('admin')];
     displayIcon         : string = 'assets/icons/hal/orchestration/providers/hasli-logo.svg';
-    paletteIcon         : string = 'assets/icons/hal/orchestration/providers/hasli-logo.svg';
+    paletteIcon         : string = 'assets/icons/hal/orchestration/providers/hasli-swarm.svg';
 
 
 
