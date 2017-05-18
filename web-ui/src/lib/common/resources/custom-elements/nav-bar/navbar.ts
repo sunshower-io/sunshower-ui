@@ -45,6 +45,11 @@ export class Navbar {
 
         return results.reverse();
     }
+
+
+
+
+
     attached() : void {
         $(this.profileDD).dropdown();
         $(this.smallDD).dropdown();
@@ -58,11 +63,15 @@ export class Navbar {
         });
 
         this.ea.subscribe('router:navigation:complete', response => {
-            let navigationInstructions = this.buildInstructionHierarchy();
-
-            this.breadcrumbs = navigationInstructions;
+            this.refresh();
         });
+        this.refresh();
 
+    }
+
+    private refresh() : void {
+        let navigationInstructions = this.buildInstructionHierarchy();
+        this.breadcrumbs = navigationInstructions;
     }
 
     public slideInBreadcrumb() : void {
