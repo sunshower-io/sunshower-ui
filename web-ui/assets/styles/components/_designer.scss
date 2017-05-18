@@ -243,6 +243,9 @@ $designer-button-height: 100px;
     padding: $standard-padding/2 $standard-padding;
 
     .designer-card {
+      &.disabled > img {
+        filter: grayscale(100%);
+      }
       display: inline-block;
       padding: $standard-padding/2;
       box-sizing: border-box;
@@ -254,7 +257,8 @@ $designer-button-height: 100px;
       }
 
       span {
-        display: inline-block;
+        display: block;
+        text-align: center;
         font-weight: 500;
         color: $midgrey;
         font-size: 11px;

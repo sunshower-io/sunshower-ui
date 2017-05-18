@@ -17,11 +17,16 @@ import {
     mxConstants
 } from "mxgraph";
 
+import {
+    Role
+} from "lib/common/security/model/user";
+
 export class KubernetesOrchestrationTemplateProviderElement extends Vertex {
     style: string = 'hal-hasli-orchestration-template-provider-style';
 }
 
 export class KubernetesOrchestrationTemplateProviderFactory extends DefaultElementFactory {
+    rolesAllowed        : Role[] = [new Role('admin')];
     elementName         : string = 'Kubernetes';
     displayIcon         : string = 'assets/icons/hal/orchestration/providers/kubernetes-logo.svg';
     paletteIcon         : string = 'assets/icons/hal/orchestration/providers/kubernetes-logo.svg';

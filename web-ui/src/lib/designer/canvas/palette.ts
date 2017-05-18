@@ -1,11 +1,12 @@
 import {Canvas} from './canvas';
 import {
-    ImportFunction, mxDragSource,
+    ImportFunction,
     mxUtils
 } from 'mxgraph';
 import {Drawable} from "lib/designer/elements";
 
 import 'velocity-ui';
+import {ProtectedObject, Role} from "lib/common/security/model/user";
 
 
 export interface ElementFactoryProvider {
@@ -17,7 +18,10 @@ export interface ElementFactoryProvider {
 }
 
 
-export interface ElementFactory {
+export interface ElementFactory extends ProtectedObject {
+
+    rolesDenied             : Role[];
+    rolesAllowed            : Role[];
     elementName             : string;
     displayIcon             : string;
     paletteIcon             : string;
@@ -61,12 +65,17 @@ export let DefaultCellFactory: CellFactory = (factory: ElementFactory) => {
 };
 
 
-export abstract class DefaultElementFactory implements ElementFactory {
-    elementName: string;
-    displayIcon: string;
-    paletteIcon: string;
+export abstract class DefaultElementFactory implements
+    ElementFactory,
+    ProtectedObject
+{
+    elementName                : string;
+    displayIcon                : string;
+    paletteIcon                : string;
+    rolesAllowed               : Role[] = [];
+    rolesDenied                : Role[] = [];
 
-    importFunction: ImportFunction;
+    importFunction             : ImportFunction;
 
     constructor() {
         this.importFunction = DefaultCellFactory(this);

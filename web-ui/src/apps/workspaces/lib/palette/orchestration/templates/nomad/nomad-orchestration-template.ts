@@ -16,12 +16,14 @@ import {
     mxPerimeter,
     mxConstants
 } from "mxgraph";
+import {Role} from "lib/common/security/model/user";
 
 export class NomadOrchestrationTemplateProviderElement extends Vertex {
     style: string = 'hal-hasli-orchestration-template-provider-style';
 }
 
 export class NomadOrchestrationTemplateProviderFactory extends DefaultElementFactory {
+    rolesAllowed        : Role[] = [new Role('admin')];
     elementName         : string = 'Nomad';
     displayIcon         : string = 'assets/icons/hal/orchestration/providers/nomad-logo.svg';
     paletteIcon         : string = 'assets/icons/hal/orchestration/providers/nomad-logo.svg';

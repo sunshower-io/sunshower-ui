@@ -16,7 +16,12 @@ import {
     mxPerimeter,
     mxConstants
 } from "mxgraph";
-import {DockerManagerNode, DockerWorkerNode} from "./docker-nodes";
+import {
+    DockerManagerNode,
+    DockerWorkerNode
+} from "./docker-nodes";
+
+import {Role} from "lib/common/security/model/user";
 
 export class DockerOrchestrationTemplateProviderElement extends Vertex {
     style: string = 'hal-docker-orchestration-template-provider-style';
@@ -29,9 +34,10 @@ export class DockerOrchestrationTemplateProviderElement extends Vertex {
 }
 
 export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFactory {
-    elementName: string = 'Docker Swarm';
-    displayIcon: string = 'assets/icons/hal/orchestration/providers/docker-single.svg';
-    paletteIcon: string = 'assets/icons/hal/orchestration/providers/docker-expanded.svg';
+    rolesAllowed        : Role[] = [new Role('admin'), new Role('tenant:user')];
+    elementName         : string = 'Docker Swarm';
+    displayIcon         : string = 'assets/icons/hal/orchestration/providers/docker-single.svg';
+    paletteIcon         : string = 'assets/icons/hal/orchestration/providers/docker-expanded.svg';
     // displayIcon         : string = 'assets/icons/hal/orchestration/providers/docker-single.svg';
 
 

@@ -1,4 +1,7 @@
 template
-    .designer-card
-        img(src="${factory.displayIcon}" ref="element")
+    .designer-card(ref="container")
+        img(
+            src="${factory.displayIcon}"
+            ref="element"
+        )
         span ${factory.elementName}

@@ -16,6 +16,7 @@ import {
     mxPerimeter,
     mxConstants
 } from "mxgraph";
+import {Role} from "lib/common/security/model/user";
 
 export class HasliOrchestrationTemplateProviderElement extends Vertex {
     style: string = 'hal-hasli-orchestration-template-provider-style';
@@ -26,6 +27,7 @@ export class HasliOrchestrationTemplateProviderElement extends Vertex {
 
 export class HasliOrchestrationTemplateProviderFactory extends DefaultElementFactory {
     elementName         : string = 'Hasli';
+    rolesAllowed        : Role[] = [new Role('admin')];
     displayIcon         : string = 'assets/icons/hal/orchestration/providers/hasli-logo.svg';
     paletteIcon         : string = 'assets/icons/hal/orchestration/providers/hasli-logo.svg';
 

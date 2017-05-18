@@ -2,16 +2,18 @@
 
 import {
     customElement,
-    containerless
+    containerless,
+    autoinject
 } from "aurelia-framework";
 import {bindable} from "aurelia-templating";
 import {
     ElementFactory
-} from "../../canvas/palette";
-import {Canvas} from "../../canvas/canvas";
-import {autoinject} from "aurelia-dependency-injection";
+} from "lib/designer/canvas/palette";
+import {Canvas} from "lib/designer/canvas/canvas";
+import {AuthenticationContextHolder} from "lib/common/security/model/token";
 
 
+@autoinject
 @containerless
 @customElement('palette-icon')
 export class PaletteIcon {
@@ -23,17 +25,31 @@ export class PaletteIcon {
     @bindable
     factory             : ElementFactory;
 
+    container           : HTMLElement;
+
 
     element             : HTMLElement;
 
-    constructor() {
+    constructor(
+        private contextHolder: AuthenticationContextHolder
+    ) {
 
     }
 
 
+    private setEnabled(t: boolean) : void {
+        if(!t) {
+            $(this.container).addClass('disabled');
+        }
+    }
+
     attached() {
-        console.log("CAN", this.canvas);
-        this.factory.initialize(this.canvas, this.element);
+        this.contextHolder.hasPermission(this.factory).then(t => {
+            if(t) {
+                this.factory.initialize(this.canvas, this.element);
+            }
+            this.setEnabled(t)
+        });
     }
 
 
