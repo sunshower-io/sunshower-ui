@@ -3,7 +3,9 @@ import {HttpClient} from "aurelia-fetch-client";
 import {OrchestrationTemplate} from "./model";
 import {Identifier} from "lib/common/lang/identifier";
 import {Subject} from "rxjs/Subject";
+import {autoinject} from "aurelia-framework";
 
+@autoinject
 export class OrchestrationTemplateService implements Service<OrchestrationTemplate> {
 
     public orchestrationTemplate    : OrchestrationTemplate;
@@ -17,6 +19,7 @@ export class OrchestrationTemplateService implements Service<OrchestrationTempla
     constructor(private client: HttpClient,
         private serviceManager: ServiceManager) {
         serviceManager.register(OrchestrationTemplateService.paramName, this);
+        this.subject = new Subject();
     }
 
     bind(key: string): Promise<OrchestrationTemplate> {
@@ -33,7 +36,7 @@ export class OrchestrationTemplateService implements Service<OrchestrationTempla
         if (ot && ot.id === this.currentId) {
             return Promise.resolve(ot);
         } else {
-            return this.client.fetch(`orchestrations/templates/${this.currentId}`)
+            return this.client.fetch(`templates/orchestrations/${this.currentId}`)
                 .then(t => t.json() as any)
                 .then(t => {
                     this.orchestrationTemplate = new OrchestrationTemplate(t);
