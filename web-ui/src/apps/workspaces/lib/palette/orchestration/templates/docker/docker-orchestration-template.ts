@@ -37,8 +37,7 @@ export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFa
     rolesAllowed        : Role[] = [new Role('admin'), new Role('tenant:user')];
     elementName         : string = 'Docker Swarm';
     displayIcon         : string = 'assets/icons/hal/orchestration/providers/docker-single.svg';
-    paletteIcon         : string = 'assets/icons/hal/orchestration/providers/docker-expanded.svg';
-    // displayIcon         : string = 'assets/icons/hal/orchestration/providers/docker-single.svg';
+    paletteIcon         : string = 'assets/icons/hal/orchestration/providers/docker-swarm.svg';
 
 
     initialize(canvas: Canvas, element: HTMLElement): void {

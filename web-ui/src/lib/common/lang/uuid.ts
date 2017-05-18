@@ -1,3 +1,9 @@
+
+
+export function Generated(target, key?:any, descriptor?:any) {
+    target[key] = UUID.random();
+}
+
 export class UUID {
     public readonly value:string;
     constructor(value: string) {

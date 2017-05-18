@@ -120,8 +120,8 @@ export abstract class DefaultElementFactory implements
         return [{
             scale: 10,
         }, {
-            duration: 250,
-            delay: 150
+            duration: 300,
+            delay: 250
         }]
     }
 }

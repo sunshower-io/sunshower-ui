@@ -48,26 +48,12 @@ export class Signup {
 
         if (this.checkPasswords() && this.checkPhoneNumber()) {
             this.user.password = this.password;
-            console.log(this.user);
             this.signupService.create(this.user).then(response => {
                 this.showSuccess = true;
-
             }).catch(er => {
                 this.showError = true;
                 this.error = er.statusText;
             });
-
-
-            // this.client.fetch('signup/signup', {
-            //     method: 'post',
-            //     body: JSON.stringify(this.user)
-            // }).then(response => response.json())
-            //     .then(data => this.showSuccess = true)
-            //     .catch(er => {
-            //     console.log("ERROR", er);
-            //     this.showError = true;
-            //     this.error = "Username or email already exists";
-            // });
         } else {
             this.error = '';
             if (!this.checkPhoneNumber()) {
@@ -98,20 +84,22 @@ export class Signup {
     }
 
     checkPhoneNumber() : boolean {
-        let length = this.user.phoneNumber.replace(/[^0-9a-z]/gi, '').length;
-        // any more involved check locks us out of getting international numbers,
-        // unless we want to pull in
-        // https://github.com/googlei18n/libphonenumber
-        // which we may
-        if (length >= 9) {
-            this.phoneValidationClass = 'valid';
-            return true; }
-        else if (this.user.phoneNumber == '') {
+        if (this.user.phoneNumber == '') {
             this.phoneValidationClass = '';
             return false;
         } else {
-            this.phoneValidationClass = 'invalid';
-            return false;
+            let length = this.user.phoneNumber.replace(/[^0-9a-z]/gi, '').length;
+            // any more involved check locks us out of getting international numbers,
+            // unless we want to pull in
+            // https://github.com/googlei18n/libphonenumber
+            // which we may
+            if (length >= 9) {
+                this.phoneValidationClass = 'valid';
+                return true;
+            } else {
+                this.phoneValidationClass = 'invalid';
+                return false;
+            }
         }
     }
 

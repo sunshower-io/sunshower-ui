@@ -29,7 +29,7 @@ export class KubernetesOrchestrationTemplateProviderFactory extends DefaultEleme
     rolesAllowed        : Role[] = [new Role('admin')];
     elementName         : string = 'Kubernetes';
     displayIcon         : string = 'assets/icons/hal/orchestration/providers/kubernetes-logo.svg';
-    paletteIcon         : string = 'assets/icons/hal/orchestration/providers/kubernetes-logo.svg';
+    paletteIcon         : string = 'assets/icons/hal/orchestration/providers/kubernetes.svg';
 
 
 

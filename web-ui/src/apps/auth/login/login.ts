@@ -17,6 +17,7 @@ import {
 } from "lib/common/security";
 import {Router} from "aurelia-router";
 import {UUID} from 'lib/common/lang';
+import {Generated} from "lib/common/lang/uuid";
 
 @inject(
     Aurelia,
@@ -29,7 +30,8 @@ import {UUID} from 'lib/common/lang';
 )
 export class Login {
 
-    private usernameId: string       =  UUID.random();
+    @Generated
+    private usernameId: string;
     private passwordId: string       =  UUID.random();
 
     @bindable
@@ -37,6 +39,9 @@ export class Login {
 
     @bindable
     private credentialsInvalid: boolean = false;
+
+    @bindable
+    private error: string;
 
     @bindable
     private user: Principal = new Principal();
@@ -80,6 +85,13 @@ export class Login {
                 }
             }).catch(e => {
             this.credentialsInvalid = true;
+
+            if (e.status == 401) {
+                this.error = "You have not been approved. We will contact you when you can sign in"
+            } else {
+                this.error = "We did not recognize this username/password combination. Please try again."
+            }
+            //may need other message some day
         });
     }
 
