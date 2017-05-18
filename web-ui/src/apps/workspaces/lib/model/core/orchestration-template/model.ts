@@ -1,13 +1,13 @@
 import {Workspace} from "../workspace/model";
 
 export class OrchestrationTemplate {
-    id ?:           string;
-    key ?:          string;
-    name ?:         string;
-    description ?:  string;
-    modified ?:     string;
-    created ?:      string;
-    version ?:      Version;
+    id ?: string;
+    key ?: string;
+    name ?: string;
+    description ?: string;
+    modified ?: string;
+    created ?: string;
+    version ?: Version;
     workspace       ?: Workspace;
 
     constructor(data?: any) {
@@ -41,12 +41,23 @@ export class OrchestrationTemplate {
         }
     }
 
-    month(num: number) : string {
-        let monthNames = ["January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
+    month(num: number): string {
+        let monthNames = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
         ];
         return monthNames[num];
-    } //todo refactor to make this a utility
+    }
 }
 
 export class Version {
@@ -57,16 +68,16 @@ export class Version {
 
     constructor(data ?: any) {
         Object.assign(this, data);
-        if(data) {
+        if (data) {
             this.minorMinor = data["minor-minor"];
         }
     }
 
     name() {
         return this.major.toString() + "." +
-                this.minor.toString() + "." +
-                this.minorMinor.toString() + "-" +
-                this.extension;
+            this.minor.toString() + "." +
+            this.minorMinor.toString() + "-" +
+            this.extension;
     }
 
     toJSON() {

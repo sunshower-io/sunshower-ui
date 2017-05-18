@@ -28,8 +28,8 @@ export class KubernetesOrchestrationTemplateProviderElement extends Vertex {
 export class KubernetesOrchestrationTemplateProviderFactory extends DefaultElementFactory {
     rolesAllowed        : Role[] = [new Role('admin')];
     elementName         : string = 'Kubernetes';
-    displayIcon         : string = 'assets/icons/hal/orchestration/providers/kubernetes-logo.svg';
     paletteIcon         : string = 'assets/icons/hal/orchestration/providers/kubernetes.svg';
+    displayIcon         : string = 'assets/icons/hal/orchestration/providers/kubernetes-logo.svg';
 
 
 
