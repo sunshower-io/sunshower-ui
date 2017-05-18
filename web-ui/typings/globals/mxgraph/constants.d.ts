@@ -8,6 +8,7 @@ declare module 'mxgraph' {
     }
 
     export class mxConstants {
+        static STYLE_STROKECOLOR                : string;
         static STYLE_SHAPE                      : string;
         static SHAPE_IMAGE                      : string;
         static STYLE_PERIMETER                  : string;

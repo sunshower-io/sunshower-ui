@@ -77,8 +77,7 @@ export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFa
         style[mxConstants.STYLE_FONTCOLOR] = '#ff0000';
         style[mxConstants.STYLE_IMAGE] = this.displayIcon;
         style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_IMAGE;
-        style[mxConstants.STYLE_PERIMETER] =
-            mxPerimeter.HexagonPerimeter;
+        style[mxConstants.STYLE_PERIMETER] = mxPerimeter.HexagonPerimeter;
         canvas.getStylesheet()
             .putCellStyle(
                 'docker-node-style',
