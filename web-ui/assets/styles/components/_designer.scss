@@ -10,6 +10,18 @@ $designer-button-height: 100px;
   right:0;
   box-sizing: border-box;
 
+  .default-label {
+    background: $lightgrey;
+    color: darken($midgrey, 10%);
+    height: 16px;
+    line-height: 16px;
+    border-radius:8px;
+    min-width: 70px;
+    text-align: center;
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+
   .canvas {
     position:absolute;
     top:$designer-header-height;
