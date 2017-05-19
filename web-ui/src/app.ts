@@ -1,4 +1,8 @@
 import 'jquery'
+
+import {
+    Materialize
+} from 'materialize-css';
 import {Next} from "aurelia-router";
 import {PipelineStep} from "aurelia-router";
 import {autoinject} from "aurelia-framework";
@@ -21,9 +25,13 @@ import {
 } from "lib/common/pipeline";
 import {ApplicationState} from "lib/common/storage/application-state";
 import {BindingEngine} from "aurelia-binding";
-import {NavigatorManager} from "./apps/workspaces/resources/custom-elements/navigator";
+import {
+    NavigationAware,
+    NavigatorManager
+} from "./apps/workspaces/resources/custom-elements/navigator";
 
 @autoinject
+@NavigationAware
 export class App {
 
     @bindable
@@ -55,21 +63,26 @@ export class App {
         }, {
             route: 'workspaces',
             moduleId: './apps/workspaces/index'
-        }, , {
+        }, {
             route: 'approvals',
             moduleId: './apps/admin/approvals/approvals',
             name: 'approvals',
             title: 'Approvals'
         }]);
 
-        config.mapUnknownRoutes('./apps/workspaces/index');
+        config.mapUnknownRoutes((r: NavigationInstruction) => {
+            return './apps/404/index';
+        });
+
+        // config.mapUnknownRoutes('./apps/workspaces/index');
 
         this.router = router;
     }
 
 
-
 }
+
+
 
 
 class SecurityStep implements PipelineStep {

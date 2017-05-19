@@ -6,25 +6,53 @@ $card-border-style: $card-border-width solid $border-color;
 $workspace-card-icon-size: 80px;
 
 
-//.card
-//  summary-icon(text="Default Workspace" textColor="#239ae8" fill="white" size="40")
-//  .card-expand
-//    i.material-icons.mdi.mdi-dots-vertical
-//  .card-content
-//    h2 Default Workspace
-//    p Actual content goes here. Gastropub blog portland ugh dolore, nesciunt ethical in exercitation placeat magna voluptate. Organic adipisicing poutine narwhal polaroid qui coloring book edison bulb.
-//  .card-extra.active
-//    p Paleo flannel gentrify banh mi stumptown craft beer marfa church-key aliquip, placeat pariatur williamsburg normcore selvage. Nisi waistcoat flexitarian cray XOXO.
-//  .card-contract
-//    i.material-icons.mdi.mdi-dots-vertical
 
+.chart-card {
+  width:220px;
+  margin: $standard-padding $standard-padding/4 0 $standard-padding/4;
+  float: left;
+  border: $card-border-style;
+  box-sizing: border-box;
+
+  @media #{$small-and-down} {
+    width: 100%;
+    margin: 0;
+  }
+
+  .card-header {
+    padding: 0 $standard-padding/2;
+    line-height: 30px;
+    height: 30px;
+    background: $primary-color;
+    color: white;
+    border-bottom: $card-border-style;
+
+    i.material-icons {
+      float: right;
+    }
+  }
+  .card-content {
+    background-color: #eceff1; //blue-grey lighten-5
+    padding: $standard-padding/2;
+
+    .chart {
+      background: white;
+      height: 220px - $standard-padding;
+      box-sizing: border-box;
+    }
+    .extra-info {
+      background: white;
+      margin-top: $standard-padding/2;
+      padding: $standard-padding;
+    }
+  }
+}
 
 .workspace-card {
   width: $body-panel-width;
   margin: $workspace-card-icon-size/2 $standard-padding $standard-padding*2 $standard-padding;
   float: left;
   border: $card-border-style;
-  border-radius:0;
   position:relative;
   box-sizing: border-box;
   background-color: $card-bg-color;
@@ -87,6 +115,7 @@ $workspace-card-icon-size: 80px;
   border-radius:0;
   position:relative;
   box-sizing: border-box;
+  margin: $standard-padding 0;
 
   @extend .z-depth-0;
 
@@ -228,14 +257,29 @@ $workspace-card-icon-size: 80px;
   }
 
 
-  //todo row-ify
   .card-action {
     border-top: $default-border;
     background-color: #eceff1; //blue-grey lighten-5
     color: #90a4ae; //blue-grey lighten-2
-    padding: 10px 20px;
+    padding: 10px 0;
     font-size: .75rem;
     position: relative;
+
+    @extend %clearfix;
+
+    .action {
+      display: inline-block;
+      line-height: 20px;
+      padding: 0 $standard-padding;
+
+      &.left {
+        float: left;
+      }
+
+      &.right {
+        float: right;
+      }
+    }
 
     .chip {
       margin: 0;
@@ -262,11 +306,6 @@ $workspace-card-icon-size: 80px;
       }
     }
 
-    .version {
-      float: right;
-      line-height: 20px;
-      letter-spacing: 1px;
-    }
 
   }
 

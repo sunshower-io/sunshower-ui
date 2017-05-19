@@ -1,3 +1,9 @@
+export class Identifier {
+
+    constructor(public readonly value: string) {
+
+    }
+}
 
 export module Identifier {
     export function isIdentifier(key:string) : boolean {
@@ -5,3 +11,5 @@ export module Identifier {
     }
 
 }
+
+

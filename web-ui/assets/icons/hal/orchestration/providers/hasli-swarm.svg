@@ -1,0 +1,72 @@
+
+<svg width="509px" height="130px" viewBox="0 0 509 130" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Orchestration" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="hasli" transform="translate(-1250.000000, -702.000000)">
+            <g id="model" transform="translate(834.000000, 376.000000)">
+                <g id="hasli-initiator" transform="translate(417.000000, 327.000000)">
+                    <g>
+                        <g id="label" transform="translate(0.000000, 110.000000)">
+                            <rect id="Rectangle" fill="#D8D8D8" x="0" y="0" width="89" height="19" rx="9.5"></rect>
+                            <text id="Initiator" font-family="OpenSans-Semibold, Open Sans" font-size="13" font-weight="500" letter-spacing="1.238095" fill="#6F727F">
+                                <tspan x="15" y="14">Initiator</tspan>
+                            </text>
+                        </g>
+                        <g id="hasli-node">
+                            <g>
+                                <g id="designer-virtual-machine" stroke="#63ABFF" fill="#FFFFFF">
+                                    <polygon id="Polygon" points="45 0 90.0603843 22.5 90.0603843 67.5 45 90 -0.0603842907 67.5 -0.0603842907 22.5"></polygon>
+                                </g>
+                                <g id="hasli-logo" transform="translate(16.000000, 16.000000)">
+                                    <g id="Hasli-Logo">
+                                        <g id="Logo">
+                                            <path d="M26.3721499,1.73507756 C27.8673494,0.269444472 30.2822587,0.260340123 31.7867462,1.73507756 L56.5796481,26.0377193 C58.0748475,27.5033524 58.0841355,29.8705088 56.5796481,31.3452462 L31.7867462,55.6478879 C30.2915467,57.113521 27.8766374,57.1226254 26.3721499,55.6478879 L1.57924807,31.3452462 C0.0840485825,29.8796131 0.0747605704,27.5124567 1.57924807,26.0377193 L26.3721499,1.73507756 Z" id="Combined-Shape" fill="#239AE8"></path>
+                                            <path d="M19.6192947,14.3984375 L19.6192947,42.2198661" id="Line" stroke="#FFFFFF" stroke-linecap="square"></path>
+                                            <path d="M19.6192947,28.3482077 L38.9212459,28.3482077" id="Line" stroke="#FFFFFF" stroke-linecap="square"></path>
+                                            <path d="M38.9212459,14.3984375 L38.9212459,42.2198661" id="Line" stroke="#FFFFFF" stroke-linecap="square"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g id="hasli-agent" transform="translate(834.000000, 327.000000)">
+                    <g>
+                        <g id="label" transform="translate(0.000000, 110.000000)">
+                            <rect id="Rectangle" fill="#D8D8D8" x="0" y="0" width="89" height="19" rx="9.5"></rect>
+                            <text id="Agent" font-family="OpenSans-Semibold, Open Sans" font-size="13" font-weight="500" letter-spacing="1.238095" fill="#6F727F">
+                                <tspan x="25" y="14">Agent</tspan>
+                            </text>
+                        </g>
+                        <g id="hasli-node">
+                            <g>
+                                <g id="designer-virtual-machine" stroke="#63ABFF" fill="#FFFFFF">
+                                    <polygon id="Polygon" points="45 0 90.0603843 22.5 90.0603843 67.5 45 90 -0.0603842907 67.5 -0.0603842907 22.5"></polygon>
+                                </g>
+                                <g id="hasli-logo" transform="translate(16.000000, 16.000000)">
+                                    <g id="Hasli-Logo">
+                                        <g id="Logo">
+                                            <path d="M26.3721499,1.73507756 C27.8673494,0.269444472 30.2822587,0.260340123 31.7867462,1.73507756 L56.5796481,26.0377193 C58.0748475,27.5033524 58.0841355,29.8705088 56.5796481,31.3452462 L31.7867462,55.6478879 C30.2915467,57.113521 27.8766374,57.1226254 26.3721499,55.6478879 L1.57924807,31.3452462 C0.0840485825,29.8796131 0.0747605704,27.5124567 1.57924807,26.0377193 L26.3721499,1.73507756 Z" id="Combined-Shape" fill="#239AE8"></path>
+                                            <path d="M19.6192947,14.3984375 L19.6192947,42.2198661" id="Line" stroke="#FFFFFF" stroke-linecap="square"></path>
+                                            <path d="M19.6192947,28.3482077 L38.9212459,28.3482077" id="Line" stroke="#FFFFFF" stroke-linecap="square"></path>
+                                            <path d="M38.9212459,14.3984375 L38.9212459,42.2198661" id="Line" stroke="#FFFFFF" stroke-linecap="square"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g id="two-way-edge-copy-5" transform="translate(527.000000, 364.000000)" stroke="#389BFF" stroke-width="2" stroke-linecap="square" stroke-dasharray="5,7">
+                    <path d="M0,1 L295,1" id="Line-Copy"></path>
+                    <path id="Line-Copy-decoration-1" d="M295,1 L284.2,-2 L284.2,4 L295,1 Z"></path>
+                    <path d="M295,15 L0,15" id="Line"></path>
+                    <path id="Line-decoration-1" d="M0,15 L10.8,18 L10.8,12 L0,15 Z"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,32 @@
+template
+    .modal-header Create New Orchestration
+    .modal-content
+        form(submit.delegate="save()")
+            .row
+                //.col.s2
+                //    summary-icon(text.bind="orchestrationTemplate.name")
+                .col.s6
+                    .input-field
+                        input(type="text"
+                            id="${nameId}"
+                            value.bind="orchestrationTemplate.name"
+                            class="validate"
+                            required="required")
+                        label(for="${nameId}") Name
+                    .input-field
+                        textarea(id="${descriptionId}"
+                            value.bind='orchestrationTemplate.description'
+                            class="materialize-textarea")
+                        label(for="${descriptionId}") Description
+                .col.s6
+                    .input-field
+                        input(type="text"
+                                id="${versionId}"
+                                value.bind="stringVersion"
+                                class.bind="versionValidationClass"
+                                required="required"
+                                keyup.delegate="versionValid()")
+                        label(for="${versionId}") Version
+            .form-message.error(if.bind="error") ${error}
+            .button-holder
+                button.waves-effect.btn(type="submit") Create

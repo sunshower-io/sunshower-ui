@@ -3,25 +3,26 @@ import {
     mxClient,
     mxUndoManager,
     mxEvent,
-    mxUtils
+    mxUtils, Layer
 } from "mxgraph";
 import {Grid} from 'lib/designer/core';
 import {CanvasModel} from 'lib/designer/model';
 import {KeyHandler} from "./key-handler";
 import {Chord} from "./chord";
 import {Action} from "./action";
+import {RenderableElement} from "../model/elements";
 
 
 
 export class Canvas extends mxGraph {
 
 
-    private grids               : Grid[];
-    private undoListener        : any;
+    private grids                   : Grid[];
+    private undoListener            : any;
 
 
-    private keyHandler          : KeyHandler;
-    readonly historyManager      : mxUndoManager;
+    private keyHandler              : KeyHandler;
+    readonly historyManager         : mxUndoManager;
 
     constructor(public readonly container: HTMLElement,
                 model: CanvasModel) {
@@ -32,6 +33,7 @@ export class Canvas extends mxGraph {
                 "Please upgrade to a modern browser"
             );
         }
+        this.foldingEnabled = false;
 
         this.keyHandler =  this.createKeyHandler();
         this.historyManager = this.createUndoManager();
@@ -56,6 +58,16 @@ export class Canvas extends mxGraph {
     }
 
 
+    getLabel(a:Layer) : HTMLElement {
+        if(a instanceof RenderableElement) {
+            let re = <RenderableElement> a;
+            if(re.labelVisible) {
+                let label = super.getLabel(a);
+                return $(`<div class="default-label">${label}</div>`).get(0);
+            }
+        }
+        return null;
+    }
 
     undo(): void {
         this.historyManager.undo();

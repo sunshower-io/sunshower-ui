@@ -10,6 +10,18 @@ $designer-button-height: 100px;
   right:0;
   box-sizing: border-box;
 
+  .default-label {
+    background: $lightgrey;
+    color: darken($midgrey, 10%);
+    height: 16px;
+    line-height: 16px;
+    border-radius:8px;
+    min-width: 70px;
+    text-align: center;
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+
   .canvas {
     position:absolute;
     top:$designer-header-height;
@@ -243,6 +255,9 @@ $designer-button-height: 100px;
     padding: $standard-padding/2 $standard-padding;
 
     .designer-card {
+      &.disabled > img {
+        filter: grayscale(100%);
+      }
       display: inline-block;
       padding: $standard-padding/2;
       box-sizing: border-box;
@@ -254,7 +269,8 @@ $designer-button-height: 100px;
       }
 
       span {
-        display: inline-block;
+        display: block;
+        text-align: center;
         font-weight: 500;
         color: $midgrey;
         font-size: 11px;

@@ -1,11 +1,12 @@
 import {Canvas} from './canvas';
 import {
-    ImportFunction, mxDragSource,
+    ImportFunction,
     mxUtils
 } from 'mxgraph';
 import {Drawable} from "lib/designer/elements";
 
 import 'velocity-ui';
+import {ProtectedObject, Role} from "lib/common/security/model/user";
 
 
 export interface ElementFactoryProvider {
@@ -17,10 +18,14 @@ export interface ElementFactoryProvider {
 }
 
 
-export interface ElementFactory {
-    elementName: string;
-    displayIcon: string;
-    importFunction: ImportFunction;
+export interface ElementFactory extends ProtectedObject {
+
+    rolesDenied             : Role[];
+    rolesAllowed            : Role[];
+    elementName             : string;
+    displayIcon             : string;
+    paletteIcon             : string;
+    importFunction          : ImportFunction;
 
     initialize(canvas: Canvas, element: HTMLElement): void;
 
@@ -60,11 +65,17 @@ export let DefaultCellFactory: CellFactory = (factory: ElementFactory) => {
 };
 
 
-export abstract class DefaultElementFactory implements ElementFactory {
-    elementName: string;
-    displayIcon: string;
+export abstract class DefaultElementFactory implements
+    ElementFactory,
+    ProtectedObject
+{
+    elementName                : string;
+    displayIcon                : string;
+    paletteIcon                : string;
+    rolesAllowed               : Role[] = [];
+    rolesDenied                : Role[] = [];
 
-    importFunction: ImportFunction;
+    importFunction             : ImportFunction;
 
     constructor() {
         this.importFunction = DefaultCellFactory(this);
@@ -99,7 +110,7 @@ export abstract class DefaultElementFactory implements ElementFactory {
     createInitialImage() : HTMLElement {
 
         let image: HTMLImageElement = document.createElement('img');
-        image.src = this.displayIcon;
+        image.src = this.paletteIcon;
         image.width = 37;
         image.height = 37;
         return image;
@@ -107,10 +118,10 @@ export abstract class DefaultElementFactory implements ElementFactory {
 
     createAnimation() : [any, any]{
         return [{
-            scale: 2,
+            scale: 10,
         }, {
-            duration: 250,
-            delay: 150
+            duration: 300,
+            delay: 250
         }]
     }
 }

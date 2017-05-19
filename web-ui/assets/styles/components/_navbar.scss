@@ -31,18 +31,17 @@ nav {
       transform: none;
     }
 
-    a {
-      font-size: 1.25rem;
+    .breadcrumb {
+      font-size: 1rem;
       vertical-align: middle;
       color: $midgrey;
 
-    }
-
-    .breadcrumb {
-      font-size: 1rem;
-
       @media #{$small-and-down} {
         display: none;
+      }
+
+      &:first-child {
+        font-size: 1.25rem;
       }
 
       &:last-child {

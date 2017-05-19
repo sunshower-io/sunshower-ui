@@ -1,16 +1,19 @@
 import {autoinject} from "aurelia-framework";
-
+import {Materialize} from 'materialize-css';
 import {
+    NavigationAware,
     NavigatorManager
 } from 'apps/workspaces/resources/custom-elements/navigator'
 
 
 import {
+    NavigationInstruction,
     Router,
     RouterConfiguration
 } from "aurelia-router";
 
 @autoinject
+@NavigationAware
 export class WorkspaceApplication {
 
     constructor(private navigatorManager: NavigatorManager) {
@@ -35,9 +38,10 @@ export class WorkspaceApplication {
             moduleId: './routes/workspace/index'
         }]);
 
-
-        this.navigatorManager.bind(router);
-
+        cfg.mapUnknownRoutes((r: NavigationInstruction) => {
+            Materialize.toast(`No router ${r.getBaseUrl()} found`, 2000);
+            return './apps/workspaces/index';
+        });
     }
 
 

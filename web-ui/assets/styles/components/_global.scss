@@ -28,10 +28,10 @@ body {
       padding-left: $standard-padding;
     }
 
-    //todo fix tabs on $medium-and-down
-
     .body-tab-holder {
       padding: $standard-padding;
+
+      @extend %clearfix;
     }
 
     .body-tab-menu {
@@ -49,30 +49,34 @@ body {
 
       .tabs {
         background-color: transparent;
+        height: 30px;
       }
 
       li.tab {
         text-transform: none;
-        margin: 0 $standard-padding;
+        height: 30px;
+        line-height: 30px;
+        //margin: 0 $standard-padding;
 
         a {
           color: $midgrey;
           font-size: 12px;
-          padding: 0;
+          //padding: 0;
 
           &.active {
             font-weight: 500;
+            border-bottom: 2px solid $primary-color;
           }
 
           .badge {
             background-color: $secondary-color;
             border-radius: 8px;
-            margin-top: 14px;
+            margin-top: 7px;
             color: white;
             font-size: 0.7rem;
             min-width: 0;
-            line-height: 18px;
-            height: 18px;
+            line-height: 15px;
+            height: 15px;
             padding: 0 8px;
           }
 
@@ -81,12 +85,12 @@ body {
     }
   }
 
-  @media #{$medium-and-down} {
-    margin-right: $body-panel-width - $navbar-height;
-  }
-
   &.body-content-partial {
     margin-right: $body-panel-width;
+
+    @media #{$medium-and-down} {
+      margin-right: $body-panel-width - $navbar-height;
+    }
   }
 
 }
@@ -136,20 +140,25 @@ body {
   }
 }
 
-.dropdown-content li  {
-  color: $midgrey;
-  padding: 8px 16px;
-  min-height: 0;
 
-  &.divider {
-    padding:0;
-  }
+.dropdown-content {
+  z-index: 2001; //one higher than loader
 
-  & > .mdi {
-    color: inherit;
-    display: inline;
-    padding:0;
-    margin-right: .5em;
+  li  {
+    color: $midgrey;
+    padding: 8px 16px;
+    min-height: 0;
+
+    &.divider {
+      padding:0;
+    }
+
+    & > .mdi {
+      color: inherit;
+      display: inline;
+      padding:0;
+      margin-right: .5em;
+    }
   }
 }
 
