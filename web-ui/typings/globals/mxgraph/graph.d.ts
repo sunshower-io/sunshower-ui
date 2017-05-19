@@ -200,6 +200,21 @@ declare module 'mxgraph' {
          */
         getLabel(cell:Layer) : string | HTMLElement;
 
+
+        /**
+         * @param edge
+         * @param source
+         * @param target
+         * @param index
+         */
+        addEdge(
+            edge        : Edge,
+            parent      : Layer,
+            source      : Layer,
+            target      : Layer,
+            index      ?: number
+        ) : void;
+
         /**
          *
          * @param changes
@@ -572,10 +587,12 @@ declare module 'mxgraph' {
          */
 
         insertEdge(parent: Layer,
-                   id: string,
-                   value: any,
-                   source: Vertex,
-                   target: Vertex): Edge ;
+                   id           : string,
+                   value        : any,
+                   source       : Vertex,
+                   target       : Vertex,
+                   style        ?: string
+        ): Edge ;
 
         /**
          *

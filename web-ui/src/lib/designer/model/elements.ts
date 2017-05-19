@@ -54,12 +54,18 @@ export abstract class RenderableElement extends mxCell implements Drawable {
     addTo(canvas:Canvas) : boolean {
         canvas.getModel().beginUpdate();
         try {
-            canvas.addCell(this, null);
+            this.doInsert(canvas);
         } finally {
             canvas.getModel().endUpdate();
         }
         return true;
     }
+
+    protected doInsert(canvas: Canvas) : void {
+        canvas.addCell(this, null);
+    }
+
+
     addChild(v:RenderableElement) : void {
         v.setParent(this);
         if(!this.children) {

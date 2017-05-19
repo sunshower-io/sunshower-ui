@@ -14,7 +14,7 @@ import {
 
 import {
     mxPerimeter,
-    mxConstants
+    mxConstants, mxEdge, mxCell
 } from "mxgraph";
 import {
     DockerManagerNode,
@@ -33,20 +33,38 @@ export class DockerOrchestrationTemplateProviderElement extends Vertex {
     labelVisible = false;
 
     style: string = "docker-group-style";
+
     constructor(x: number, y: number) {
-        super('', x - 160, y, 320, 100);
-        this.addChild(new DockerManagerNode('manager', 10, 30, 70, 70));
-        this.addChild(new DockerWorkerNode('worker', 300, 30, 70, 70));
+        super('', x - 160, y, 380, 100);
+        let manager = new DockerManagerNode('manager', 10, 15, 70, 70),
+            worker = new DockerWorkerNode('worker', 300, 15, 70, 70);
+        this.addChild(worker);
+        this.addChild(manager);
+
+
     }
 
+
+    addTo(canvas: Canvas): boolean {
+        let a = super.addTo(canvas);
+        return a;
+    }
+
+    protected doInsert(canvas: Canvas): void {
+        canvas.addCell(this, null);
+        let edge = new mxCell(),
+            manager = this.children[0],
+            worker = this.children[1];
+        canvas.insertEdge(this, 'frap', 'fap', worker, manager, 'strokeColor=#0087c9;dashed=1;strokeWidth=2');
+    }
 
 }
 
 export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFactory {
-    rolesAllowed        : Role[] = [new Role('admin'), new Role('tenant:user')];
-    elementName         : string = 'Docker Swarm';
-    displayIcon         : string = 'assets/icons/hal/orchestration/providers/docker-single.svg';
-    paletteIcon         : string = 'assets/icons/hal/orchestration/providers/docker-swarm.svg';
+    rolesAllowed: Role[] = [new Role('admin'), new Role('tenant:user')];
+    elementName: string = 'Docker Swarm';
+    displayIcon: string = 'assets/icons/hal/orchestration/providers/docker-single.svg';
+    paletteIcon: string = 'assets/icons/hal/orchestration/providers/docker-swarm.svg';
 
 
     initialize(canvas: Canvas, element: HTMLElement): void {
@@ -75,7 +93,8 @@ export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFa
 
     protected createStyle(canvas: Canvas): void {
         let style = {};
-        mxConstants.VERTEX_SELECTION_COLOR = 'none';
+        // mxConstants.VERTEX_SELECTION_COLOR = 'none';
+        style[mxConstants.VERTEX_SELECTION_COLOR] = 'none';
         style[mxConstants.STYLE_FILLCOLOR] = 'none';
         style[mxConstants.STYLE_STROKECOLOR] = 'none';
 
@@ -95,7 +114,8 @@ export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFa
         style[mxConstants.STYLE_LABEL_BACKGROUNDCOLOR] = '#000000';
         style[mxConstants.STYLE_LABEL_PADDING] = 8;
         style[mxConstants.STYLE_SPACING_TOP] = -64;
-        style[mxConstants.STYLE_VERTICAL_LABEL_POSITION] =  mxConstants.ALIGN_BOTTOM;
+        style[mxConstants.STYLE_PERIMETER_SPACING] = 8;
+        style[mxConstants.STYLE_VERTICAL_LABEL_POSITION] = mxConstants.ALIGN_BOTTOM;
         canvas.getStylesheet()
             .putCellStyle(
                 'docker-node-style',
