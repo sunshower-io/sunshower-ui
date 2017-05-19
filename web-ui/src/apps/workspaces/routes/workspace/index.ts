@@ -71,11 +71,17 @@ export class WorkspaceContext {
                 }
             }
         }, {
-            route: 'orchestration/:orchestrationTemplateId',
+            route: 'orchestration',
             moduleId: './orchestration/index',
             name: 'orchestration',
-            nav: false,
-            title: 'Orchestration'
+            nav: true,
+            title: 'Orchestration',
+            settings: {
+                icon: 'mdi-android-studio',
+                contextComponent: {
+                    reference: 'apps/workspaces/routes/workspace/orchestration/context-menu'
+                }
+            }
         }]);
     }
 
