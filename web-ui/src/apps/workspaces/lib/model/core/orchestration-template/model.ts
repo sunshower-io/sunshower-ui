@@ -1,16 +1,20 @@
 import {Workspace} from "../workspace/model";
 
-export class OrchestrationTemplate {
+export class VersionedItem {
+    version ?: Version
+}
+
+export class OrchestrationTemplate extends VersionedItem {
     id ?: string;
     key ?: string;
     name ?: string;
     description ?: string;
     modified ?: string;
     created ?: string;
-    version ?: Version;
     workspace       ?: Workspace;
 
     constructor(data?: any) {
+        super();
         Object.assign(this, data);
         if (data) {
             let modified = new Date,
@@ -27,7 +31,7 @@ export class OrchestrationTemplate {
                 created.getDate().toString() +
                 ", " +
                 created.getFullYear().toString();
-            //todo version biz
+            this.version = new Version(data["version"]);
         }
     }
 
@@ -65,6 +69,7 @@ export class Version {
     minor       ?: number;
     minorMinor  ?: number;
     extension   ?: string;
+    id          ?: string;
 
     constructor(data ?: any) {
         Object.assign(this, data);
@@ -85,7 +90,8 @@ export class Version {
             "major": this.major,
             "minor": this.minor,
             "minor-minor": this.minorMinor,
-            "extension": this.extension
+            "extension": this.extension,
+            "id": this.id
         }
     }
 
