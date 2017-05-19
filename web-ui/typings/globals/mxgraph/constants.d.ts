@@ -8,6 +8,13 @@ declare module 'mxgraph' {
     }
 
     export class mxConstants {
+        static STYLE_SPACING_TOP                : string;
+        static STYLE_LABEL_PADDING              : string;
+        static STYLE_LABEL_BACKGROUNDCOLOR      : string;
+        static STYLE_STROKEWIDTH                : string;
+        static OUTLINE_HIGHLIGHT_COLOR          : string;
+        static SELECTION_DASHED                 : string;
+        static OUTLINE_STROKEWIDTH              : string;
         static STYLE_STROKECOLOR                : string;
         static STYLE_SHAPE                      : string;
         static SHAPE_IMAGE                      : string;
@@ -19,6 +26,10 @@ declare module 'mxgraph' {
         static HANDLE_FILLCOLOR                 : string;
         static HANDLE_STROKECOLOR               : string;
         static VERTEX_SELECTION_COLOR           : string;
+        static VERTEX_SELECTION_STROKEWIDTH     : string;
+        static STYLE_STROKE_OPACITY             : string;
+        static HIGHLIGHT_OPACITY                : string;
+
 
         static STYLE_FONTFAMILY                 : string;
         static STYLE_FONTSTYLE                  : string;
@@ -31,6 +42,7 @@ declare module 'mxgraph' {
         static DEFAULT_FONTSTYLE                : string;
         static FONT_BOLD                        : number;
         static OUTLINE_COLOR                    : string;
+        static STYLE_DASHED                     : string;
         static ALIGN_BOTTOM                     : string;
         static ALIGN_RIGHT                      : string;
         static STYLE_VERTICAL_LABEL_POSITION    : string;

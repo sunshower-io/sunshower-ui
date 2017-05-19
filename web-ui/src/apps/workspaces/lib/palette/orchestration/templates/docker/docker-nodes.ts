@@ -5,9 +5,8 @@ import {
 
 
 export class DockerNode extends Vertex {
-
     style: string = 'docker-node-style';
-
+    displayIcon         : string = 'assets/icons/hal/orchestration/providers/docker-single.svg';
 }
 
 

@@ -14,6 +14,10 @@ export class Overlay extends mxCellOverlay {
 }
 
 export interface Drawable extends Layer {
+
+    labelVisible : boolean;
+    labelClass   : string;
+
     getLabel() : string;
     overlays() : Overlay[];
     addTo(canvas: Canvas) : boolean;
@@ -22,6 +26,9 @@ export interface Drawable extends Layer {
 
 
 export abstract class RenderableElement extends mxCell implements Drawable {
+
+    labelVisible            : boolean  = true;
+    labelClass              : string = 'default-label';
 
     constructor(
         label: string,

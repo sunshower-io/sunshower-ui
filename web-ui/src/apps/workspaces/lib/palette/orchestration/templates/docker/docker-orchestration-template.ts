@@ -23,14 +23,23 @@ import {
 
 import {Role} from "lib/common/security/model/user";
 
-export class DockerOrchestrationTemplateProviderElement extends Vertex {
-    style: string = 'hal-docker-orchestration-template-provider-style';
+mxConstants.VERTEX_SELECTION_COLOR = 'none';
+mxConstants.HANDLE_FILLCOLOR = 'none';
+mxConstants.HANDLE_STROKECOLOR = 'none';
 
+
+export class DockerOrchestrationTemplateProviderElement extends Vertex {
+
+    labelVisible = false;
+
+    style: string = "docker-group-style";
     constructor(x: number, y: number) {
-        super('Docker', x, y, 600, 100);
-        this.addChild(new DockerManagerNode('manager', 10, 30, 40, 40));
-        this.addChild(new DockerWorkerNode('worker', 500, 30, 40, 40));
+        super('', x - 160, y, 320, 100);
+        this.addChild(new DockerManagerNode('manager', 10, 30, 70, 70));
+        this.addChild(new DockerWorkerNode('worker', 300, 30, 70, 70));
     }
+
+
 }
 
 export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFactory {
@@ -66,12 +75,13 @@ export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFa
 
     protected createStyle(canvas: Canvas): void {
         let style = {};
-        style[mxConstants.STYLE_FONTCOLOR] = '#ff0000';
-        style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_IMAGE;
-        style[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
+        mxConstants.VERTEX_SELECTION_COLOR = 'none';
+        style[mxConstants.STYLE_FILLCOLOR] = 'none';
+        style[mxConstants.STYLE_STROKECOLOR] = 'none';
+
         canvas.getStylesheet()
             .putCellStyle(
-                'hal-docker-orchestration-template-provider-style',
+                'docker-group-style',
                 style
             );
         this.createDockerNodeStyle(canvas);
@@ -79,10 +89,13 @@ export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFa
 
     private createDockerNodeStyle(canvas: Canvas) {
         let style = {};
-        style[mxConstants.STYLE_FONTCOLOR] = '#ff0000';
         style[mxConstants.STYLE_IMAGE] = this.displayIcon;
         style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_IMAGE;
         style[mxConstants.STYLE_PERIMETER] = mxPerimeter.HexagonPerimeter;
+        style[mxConstants.STYLE_LABEL_BACKGROUNDCOLOR] = '#000000';
+        style[mxConstants.STYLE_LABEL_PADDING] = 8;
+        style[mxConstants.STYLE_SPACING_TOP] = -64;
+        style[mxConstants.STYLE_VERTICAL_LABEL_POSITION] =  mxConstants.ALIGN_BOTTOM;
         canvas.getStylesheet()
             .putCellStyle(
                 'docker-node-style',

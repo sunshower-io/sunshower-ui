@@ -194,6 +194,17 @@ declare module 'mxgraph' {
          */
         getBoundingBox(children: Layer[]): mxRectangle;
 
+        /**
+         *
+         * @param cell
+         */
+        getLabel(cell:Layer) : string | HTMLElement;
+
+        /**
+         *
+         * @param changes
+         */
+
         getSelectionCellsForChanges(changes:any);
         /**
          *
