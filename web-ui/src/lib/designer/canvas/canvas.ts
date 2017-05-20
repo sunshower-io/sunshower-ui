@@ -34,6 +34,7 @@ export class Canvas extends mxGraph {
             );
         }
         this.foldingEnabled = false;
+        this.setConnectable(true);
 
         this.keyHandler =  this.createKeyHandler();
         this.historyManager = this.createUndoManager();

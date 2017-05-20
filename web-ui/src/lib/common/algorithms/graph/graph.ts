@@ -200,6 +200,7 @@ export abstract class Graph<T> {
     }
 
     get(id: string): Vertex<T> {
+        this.check();
         return this.nodes[id];
     }
 

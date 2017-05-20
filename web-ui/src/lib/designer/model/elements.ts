@@ -75,6 +75,18 @@ export abstract class RenderableElement extends mxCell implements Drawable {
     }
 }
 
+export abstract class Edge extends mxCell {
+    constructor(
+        public source: RenderableVertex,
+        public target: RenderableVertex
+    ) {
+        super();
+
+        this.id = UUID.random();
+    }
+
+}
+
 
 export abstract class RenderableVertex extends RenderableElement {
 
@@ -87,5 +99,6 @@ export abstract class RenderableVertex extends RenderableElement {
     ) {
         super(label, x, y, width, height);
         this.setVertex(true);
+        this.id = UUID.random();
     }
 }

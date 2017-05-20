@@ -47,12 +47,15 @@ declare module 'mxgraph' {
     }
 
     export class mxCell implements Connectable, SceneGraphElement, Layer {
+        source          : Layer;
+        target          : Layer;
         parent          :Layer;
         id              :string;
         value           :any;
         geometry        :mxGeometry;
         style           :string;
         shape           :mxShape;
+        edges           : Layer[];
 
         children        :Layer[];
 

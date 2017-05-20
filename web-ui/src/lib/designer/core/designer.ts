@@ -5,6 +5,7 @@ import {CanvasSelector} from "./selector";
 import {DeleteSelectionAction} from "../canvas/actions/delete-action";
 import {UndoAction} from "../canvas/actions/undo-action";
 import {RedoAction} from "../canvas/actions/redo-action";
+import {SaveAction} from "../canvas/actions/save-action";
 
 export class Designer {
 
@@ -19,6 +20,13 @@ export class Designer {
         let canvas = new Canvas(container, model),
             selector = new CanvasSelector(canvas, container);
         this.canvas = canvas;
+
+
+        this.canvas.register({
+            key: 'save-all',
+            name: 'save',
+            values: ['ctrl', 's']
+        }, new SaveAction());
 
         this.canvas.register({
             key: 'delete-selected',

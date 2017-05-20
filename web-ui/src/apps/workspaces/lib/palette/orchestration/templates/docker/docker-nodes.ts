@@ -1,7 +1,9 @@
 import {
     Drawable,
+    Edge,
     RenderableVertex as Vertex
 } from 'lib/designer/model';
+import {mxEdge} from "mxgraph";
 
 
 export class DockerNode extends Vertex {
@@ -16,5 +18,14 @@ export class DockerManagerNode extends DockerNode {
 
 
 export class DockerWorkerNode extends DockerNode {
+
+}
+
+
+export class ManagerToWorkerConnection extends Edge {
+
+    constructor(manager: DockerNode, worker: DockerNode) {
+        super(manager, worker);
+    }
 
 }
