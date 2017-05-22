@@ -8,10 +8,12 @@ import {
 
 import {OrchestrationProviderFactory} from "apps/workspaces/lib/palette/orchestration/templates/provider-factory";
 import {OrchestrationTemplate, OrchestrationTemplateService} from "apps/workspaces/lib/model/core/orchestration-template";
+import {NavigationAware} from "apps/workspaces/resources/custom-elements/navigator";
+import {RouteConfig} from "aurelia-router";
 
 
 @autoinject
-@customElement('orchestration-designer')
+@NavigationAware
 export default class OrchestrationDesigner {
 
     @bindable
@@ -22,12 +24,19 @@ export default class OrchestrationDesigner {
 
     constructor(
         elementFactory: OrchestrationProviderFactory,
-        orchestrationService: OrchestrationTemplateService
+        private orchestrationService: OrchestrationTemplateService
     ) {
         this.elementFactory = elementFactory;
-        this.orchestration = orchestrationService.orchestrationTemplate;
     }
 
+    activate(params:string, routeConfig:RouteConfig) {
+        console.log(routeConfig);
+        // routeConfig.navModel.setTitle(this.orchestration.name);
+    }
+
+    attached() {
+        this.orchestration = this.orchestrationService.orchestrationTemplate;
+    }
 
 
 }

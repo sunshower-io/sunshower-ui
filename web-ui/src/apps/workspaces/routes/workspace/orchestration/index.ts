@@ -38,8 +38,10 @@ export class WorkspaceOrchestrations {
             title: 'Orchestration Designer'
         }]);
 
-        this.navigatorManager.bind(router);
+        // this.navigatorManager.bind(router);
         this.router = router;
+
+        //todo make the title of orchestration designer be the title of the orchestration
     }
 
 }

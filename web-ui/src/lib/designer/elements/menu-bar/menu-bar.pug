@@ -8,7 +8,7 @@ template
                     data-activates="${controlId}"
                 )
                 | ${model.name}
-                span.version v ${version.name()}
+                span.version v ${model.version.name()}
                 i.material-icons.mdi.mdi-chevron-right.dropdown-icon
             ul.dropdown-content(id="${controlId}")
                 li Last Edited ${model.modified}
