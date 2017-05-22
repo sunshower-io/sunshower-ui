@@ -3,7 +3,7 @@ import {
     LocalStorage, Map
 } from "lib/common/storage";
 
-import {Authentication} from "./user";
+import {Authentication, ProtectedObject} from "./user";
 import {HttpClient} from "aurelia-fetch-client";
 
 export const HEADER = "X-AUTH-TOKEN";
@@ -25,8 +25,24 @@ export class AuthenticationContextHolder {
 
 
     constructor(private client: HttpClient,
-                private storage: Map<string, string>) {
+                private storage: Map<string, string>
+    ) {
 
+
+    }
+
+
+    public hasPermission(r: ProtectedObject) : Promise<boolean> {
+        return this.get().then(t => {
+            for(let role of r.rolesAllowed) {
+                for(let allowedRole of t.user.roles) {
+                    if(allowedRole.authority === role.authority) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        });
     }
 
 

@@ -8,117 +8,96 @@ import {Workspace, SaveWorkspaceRequest} from './model';
 import {autoinject} from "aurelia-framework";
 import {
     Service,
-    ServiceManager,
-    ConstraintViolationException
+    ServiceManager
 } from "lib/common/service";
 
 import {Identifier} from "lib/common/lang/identifier";
+import {Subject} from "rxjs/Subject";
+import {OrchestrationTemplate} from "../orchestration-template/model";
 
 
 @autoinject
 export class WorkspaceService implements Service<Workspace> {
 
     public workspace: Workspace;
-    private initialized: boolean;
+
+    static readonly paramName: string = 'workspaceId';
+
+    private currentId: string;
+
+    private subject: Subject<Workspace>;
 
     constructor(private client: HttpClient,
                 private httpClient: HttpBasicClient,
                 private serviceManager: ServiceManager) {
-        console.log("construct");
-        serviceManager.register('workspaceId', this);
+        serviceManager.register(WorkspaceService.paramName, this);
+        this.subject = new Subject();
 
-    }
-
-
-    search(input: string): Promise<Workspace[]> {
-        return this.client.fetch('workspaces/search', {
-            method: 'put',
-            body: JSON.stringify({
-                name: input,
-                key: input
-            })
-        })
-            .then(t => t.json() as any)
-            .then(t => t.map(u => new Workspace(u)));
-    }
-
-    public initial(): Promise<Workspace> {
-        return this.client.fetch('workspaces/initial')
-            .then(t => t.json() as any)
-            .then(t => new Workspace(t));
     }
 
 
     list(): Promise<Workspace[]> {
-        if (!this.initialized) {
-            return this.initialize().then(t => this.listAll());
-        } else {
-            return this.listAll();
-        }
-    }
-
-    initialize(): Promise<Workspace> {
-        return this.initial();
-    }
-
-    private listAll() : Promise<Workspace[]> {
         return this.client.fetch('workspaces')
             .then(t => t.json() as any)
             .then(t => t.map(u => new Workspace(u)));
+    }
+
+    current(): Promise<Workspace> {
+        let ws = this.workspace;
+        if (ws && ws.id === this.currentId) {
+            return Promise.resolve(ws);
+        } else {
+            return this.client.fetch(`workspaces/${this.currentId}`)
+                .then(t => t.json() as any)
+                .then(t => {
+                    this.workspace = new Workspace(t);
+                    this.subject.next(this.workspace);
+                    return this.workspace;
+                });
+        }
 
     }
 
 
     bind(key: string): Promise<Workspace> {
         if (Identifier.isIdentifier(key)) {
-            return this.client.fetch(`workspaces/${key}`)
-                .then(t => t.json() as any)
-                .then(t => {
-                    this.workspace = new Workspace(t);
-                    return this.workspace;
-                });
+            this.currentId = key;
+            return this.current();
         } else {
             return Promise.resolve(this.workspace);
         }
     }
 
-    public destroy(id: string) : Promise<any> {
+    public destroy(id: string): Promise<any> {
         return this.client.fetch(`workspaces/${id}`, {
             method: 'delete'
-        })
-            .then(t => t.json() as any)
-            .then(t => {return t});
+        }).then(t => t.json() as any);
     }
 
-    public save(workspaceRequest: SaveWorkspaceRequest): Promise<Workspace> {
-        return this.httpClient
-            .createRequest('workspaces')
-            .asPut()
-            .withHeader('accept', 'application/json')
-            .withContent(workspaceRequest.toFormData())
-            .skipContentProcessing()
-            .send()
+    public save(workspaceRequest: SaveWorkspaceRequest): Promise<Identifier> {
+        workspaceRequest.key = workspaceRequest.name;
+        return this.client.fetch('workspaces', {
+            method: 'put',
+            body: JSON.stringify(workspaceRequest)
+        }).then(w => w.json() as any)
+            .then(w => {
+                return new Identifier(w.value);
+            });
+    }
+
+    public getTemplates(workspaceId: string) : Promise<OrchestrationTemplate[]> {
+        return this.client.fetch(`workspaces/${workspaceId}/templates`)
+            .then(t => t.json() as any)
+            .then(t => t.map(u => new OrchestrationTemplate(u)));
+    }
+
+    public addTemplate(workspaceId: string, orchestrationTemplate: OrchestrationTemplate): Promise<Identifier> {
+        return this.client.fetch(`workspaces/${workspaceId}/templates`, {
+            method: 'put',
+            body: JSON.stringify(orchestrationTemplate.toJSON())
+        }).then(t => t.json() as any)
             .then(t => {
-                if (!t.isSuccess) {
-                    throw new ConstraintViolationException(t.content);
-                } else {
-                    return t;
-                }
-            })
-            .then(t => t.content as any)
-            .then(t => {
-                this.workspace = new Workspace(t);
-                let file = workspaceRequest.imageToFormData();
-                if (file) {
-                    return this.httpClient.put(`workspaces/${t.id}/image`, file)
-                        .then(t => t.content as any)
-                        .then(t => {
-                            this.workspace = t;
-                            return this.workspace
-                        });
-                } else {
-                    return this.workspace;
-                }
+                return new Identifier(t.value);
             });
     }
 

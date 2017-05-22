@@ -1,0 +1,17 @@
+template
+    designer
+        menu-bar(model.bind="orchestration")
+        left-panel
+            top
+                layer-panel
+            bottom
+                panels
+                    panel(
+                        model.bind="elementFactory",
+                        view-model="lib/designer/elements/element-panel/element-panel"
+                    )
+        right-panel
+            full
+                property-panel
+        action-button
+

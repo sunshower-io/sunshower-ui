@@ -10,6 +10,8 @@ import {Router, NavigationInstruction} from "aurelia-router";
 import {UUID} from 'lib/common/lang';
 import {bindable} from "aurelia-framework";
 import {SideNavEvents} from "apps/workspaces/resources/custom-elements/events";
+import {NavigatorManager} from "apps/workspaces/resources/custom-elements/navigator";
+import {Breadcrumb} from "./breadcrumb";
 
 @autoinject
 export class Navbar {
@@ -27,7 +29,8 @@ export class Navbar {
                 private user:User,
                 private authHolder:AuthenticationContextHolder,
                 private ea:EventAggregator,
-                private router:Router
+                private router:Router,
+                private navigationManager: NavigatorManager
     ) {
 
     }
@@ -44,12 +47,27 @@ export class Navbar {
             }
         });
 
-        this.breadcrumbs = this.buildBreadcrumb(this.router.currentInstruction).reverse();
-
         this.ea.subscribe('router:navigation:complete', response => {
-            this.breadcrumbs = this.buildBreadcrumb(this.router.currentInstruction).reverse();
+            this.refresh();
         });
+        this.refresh();
 
+    }
+
+    private buildInstructionHierarchy() : Breadcrumb[] {
+        let current = this.navigationManager.router,
+            results = [];
+        while(current) {
+            results.push(new Breadcrumb(current, current.currentInstruction));
+            current = current.parent;
+        }
+
+        return results.reverse();
+    }
+
+    private refresh() : void {
+        let navigationInstructions = this.buildInstructionHierarchy();
+        this.breadcrumbs = navigationInstructions;
     }
 
     public slideInBreadcrumb() : void {
@@ -60,57 +78,16 @@ export class Navbar {
         this.brandLogo ? this.animator.leave(this.brandLogo) : Promise.resolve(true)
     }
 
-    profile() {
-        // this.router.navigateToRoute('profile');
-    }
 
     logout() {
         this.authHolder.clear();
         window.location.reload();
     }
 
-    openSettings() {
-        // location.assign('#/admin');
-    }
-
     approvals() {
         this.router.parent.navigateToRoute('approvals');
     }
 
-    //inspired by _buildTitle on NavigationInstruction in aurelia-router
-    buildBreadcrumb(instruction : NavigationInstruction) : any[] {
-        let breadcrumbs = [];
-
-        if (instruction.config.navModel.title) {
-            breadcrumbs.push({
-                title: instruction.router.transformTitle(instruction.config.navModel.title),
-                href: '#' + instruction.config.navModel.router.baseUrl + instruction.config.navModel.relativeHref
-            });
-        }
-
-        for (let viewPortName in instruction.viewPortInstructions) {
-            let _viewPortInstruction = instruction.viewPortInstructions[viewPortName];
-
-            if (_viewPortInstruction.childNavigationInstruction) {
-                let childRoute = this.buildBreadcrumb(_viewPortInstruction.childNavigationInstruction);
-                if (childRoute) {
-                    for (let route in childRoute) {
-                        breadcrumbs.push(childRoute[route]);
-                    }
-                }
-            }
-        }
-
-        if ((instruction.router as any).title) {
-            //todo fix when we have nested routers
-            breadcrumbs.push({
-                title: instruction.router.transformTitle((instruction.router as any).title),
-                href: '#' + instruction.router.baseUrl + instruction.router.currentInstruction.params.workspaceId
-            });
-        }
-
-        return breadcrumbs;
-    };
 
 
 }

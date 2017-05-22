@@ -38,9 +38,18 @@ export class Authentication {
 }
 
 export class Role {
-    authority:string;
+    constructor(
+        public readonly authority ?:string
+    ) {
+
+    }
 }
 
+
+export interface ProtectedObject {
+    rolesAllowed            : Role[];
+    rolesDenied             : Role[];
+}
 
 export class RegistrationRequest {
 
@@ -55,11 +64,11 @@ export class RegistrationRequest {
     constructor(value ?: any) {
         Object.assign(this, value);
         if (value) {
-            this.emailAddress = value["email-address"];
-            this.phoneNumber = value["phone-number"];
-            this.firstName = value["first-name"];
+            this.id = value["registration-id"];
             this.lastName = value["last-name"];
-            this.id = value["registration-id"]
+            this.firstName = value["first-name"];
+            this.phoneNumber = value["phone-number"];
+            this.emailAddress = value["email-address"];
         }
     }
 

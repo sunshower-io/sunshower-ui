@@ -10,6 +10,18 @@ $designer-button-height: 100px;
   right:0;
   box-sizing: border-box;
 
+  .default-label {
+    background: $lightgrey;
+    color: darken($midgrey, 10%);
+    height: 16px;
+    line-height: 16px;
+    border-radius:8px;
+    min-width: 70px;
+    text-align: center;
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+
   .canvas {
     position:absolute;
     top:$designer-header-height;
@@ -38,6 +50,20 @@ $designer-button-height: 100px;
     &.left {
       border-right: $default-border;
       left: 0;
+    }
+
+    .__panel {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .__panel-body {
+      //calculate height; assumes header
+      height: -moz-calc(100% - #{$designer-header-height});
+      height: -webkit-calc(100% - #{$designer-header-height});
+      height: calc(100% - #{$designer-header-height});
+      overflow-y: auto;
+      overflow-x: hidden;
     }
 
     .designer-panel-header {
@@ -244,17 +270,26 @@ $designer-button-height: 100px;
 
     .designer-card {
       display: inline-block;
-      padding: $standard-padding/2;
+      padding: 0 $standard-padding/2 $standard-padding/2;
       box-sizing: border-box;
-      width: ($body-panel-width - $standard-padding*2)/2 - 3;
+      width: 49%;
       text-align: center;
+      cursor: move;
+
+      &.disabled {
+        cursor: not-allowed;
+        & > img {
+          filter: grayscale(100%);
+        }
+      }
 
       img {
         width: 50%;
       }
 
       span {
-        display: inline-block;
+        display: block;
+        text-align: center;
         font-weight: 500;
         color: $midgrey;
         font-size: 11px;

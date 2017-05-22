@@ -35,16 +35,16 @@ export class CreateWorkspace {
         // this.workspace.bindFiles(this.files);
         this.workspaceService.save(this.workspace)
             .catch(err => {
-                //todo get proper errors
-                this.constraintViolation = err;
-                console.log(err);
+                // this.constraintViolation = err;
                 this.showError = true;
-                this.error = 'Oops, something is amiss.';
+                this.error = err.statusText;
             })
             .then(result => {
                 if(result) {
                     this.complete();
-                    this.router.navigate(`workspaces/${result.id}/dashboard`)
+                    console.log("OTHERR" + result.value);
+
+                    this.router.navigate(`workspaces/${result.value}/dashboard`)
                 }
             });
     }
