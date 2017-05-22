@@ -93,7 +93,7 @@ function onActivation(activate: ActivateFunction, self: any): ActivateFunction {
 export function NavigationAware(target: any): void {
 
     let self = target as any,
-        activate = self.activate;
+        activate = self.prototype.activate;
 
     self.prototype.activate = onActivation(activate, self);
 }

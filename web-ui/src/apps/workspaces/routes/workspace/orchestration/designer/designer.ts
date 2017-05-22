@@ -1,11 +1,9 @@
-
 import {
     autoinject,
     containerless,
     customElement,
     bindable
 } from "aurelia-framework";
-
 import {OrchestrationProviderFactory} from "apps/workspaces/lib/palette/orchestration/templates/provider-factory";
 import {OrchestrationTemplate, OrchestrationTemplateService} from "apps/workspaces/lib/model/core/orchestration-template";
 import {NavigationAware} from "apps/workspaces/resources/custom-elements/navigator";
@@ -14,7 +12,7 @@ import {RouteConfig} from "aurelia-router";
 
 @autoinject
 @NavigationAware
-export default class OrchestrationDesigner {
+export class OrchestrationDesigner {
 
     @bindable
     private elementFactory: OrchestrationProviderFactory;
@@ -22,20 +20,22 @@ export default class OrchestrationDesigner {
     @bindable
     private orchestration: OrchestrationTemplate;
 
-    constructor(
-        elementFactory: OrchestrationProviderFactory,
-        private orchestrationService: OrchestrationTemplateService
+    private routeConfig: RouteConfig;
+
+    constructor(private orchestrationService: OrchestrationTemplateService,
+        elementFactory: OrchestrationProviderFactory
     ) {
         this.elementFactory = elementFactory;
     }
 
     activate(params:string, routeConfig:RouteConfig) {
-        console.log(routeConfig);
-        // routeConfig.navModel.setTitle(this.orchestration.name);
+        //prototype required because of NavigationAware
+        (this as any).prototype.routeConfig = routeConfig;
     }
 
     attached() {
         this.orchestration = this.orchestrationService.orchestrationTemplate;
+        this.routeConfig.navModel.setTitle(this.orchestration.name);
     }
 
 

@@ -14,10 +14,7 @@ import {NavigationAware} from "../../resources/custom-elements/navigator";
 @autoinject
 export class WorkspaceContext {
 
-    /**
-     *
-     * @param navigatorManager
-     */
+
     constructor(private router: Router,
                 private workspaceService: WorkspaceService
     ) {

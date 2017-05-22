@@ -38,7 +38,6 @@ export class OrchestrationDashboard {
         this.loading = true;
         this.workspaceService.getTemplates(this.workspaceService.workspace.id).then(o => {
             this.orchestrations = o;
-            console.log(this.orchestrations);
             this.loading = false;
         }).catch(err => {
             console.log(err);
