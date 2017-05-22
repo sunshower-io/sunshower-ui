@@ -2,6 +2,7 @@ import {autoinject, bindable} from "aurelia-framework";
 import {NavigationAware, NavigatorManager} from "apps/workspaces/resources/custom-elements/navigator";
 import {Router} from "aurelia-router";
 import {RouterConfiguration} from "aurelia-router";
+import {OrchestrationTemplateService} from "apps/workspaces/lib/model/core/orchestration-template/service";
 
 @autoinject
 @NavigationAware
@@ -9,7 +10,8 @@ export class WorkspaceOrchestrations {
 
     private router: Router;
 
-    constructor(private navigatorManager:NavigatorManager) {
+    constructor(private navigatorManager:NavigatorManager,
+                private orchestrationService:OrchestrationTemplateService) {
 
     }
 
@@ -38,10 +40,7 @@ export class WorkspaceOrchestrations {
             title: 'Orchestration Designer'
         }]);
 
-        // this.navigatorManager.bind(router);
         this.router = router;
-
-        //todo make the title of orchestration designer be the title of the orchestration
     }
 
 }
