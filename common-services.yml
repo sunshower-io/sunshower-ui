@@ -11,6 +11,7 @@ services:
 
 
   ui:
+    build: .
     image: "hasli/ui:${UI_VERSION}"
 
 
@@ -20,3 +21,33 @@ services:
 
   db:
     image: "postgres:9.6"
+
+
+  build-env:
+    build:
+      context: .
+      dockerfile: Dockerfile.build
+    image: hasli/ui-build-env
+    volumes:
+      - ~/.jspm:/root/.jspm
+      - ~/.gradle/wrapper:/root/.gradle/wrapper
+      - ~/.gradle/gradle.properties:/root/.gradle/gradle.properties
+
+
+  build-war:
+    image: java:8u111-jre
+    volumes:
+      - ./:/usr/src/
+      - ~/.gradle/wrapper:/root/.gradle/wrapper
+      - ~/.gradle/gradle.properties:/root/.gradle/gradle.properties
+    working_dir: /usr/src/
+    command: bash -c "chmod +x gradlew && ./gradlew clean build"
+
+
+  test:
+    extends:
+      service: build-env
+    volumes:
+      - ./:/usr/src/
+    working_dir: /usr/src/
+    command: bash -c "chmod +x gradlew && ./gradlew installEnvironment && gulp test"
