@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+
+  proxy:
+    image: "nginx:1.11.1"
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - proxy
+    volumes:
+      - ./resources/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./resources/nginx/certs/hasli.io.crt:/etc/nginx/hasli.io.crt:ro
+      - ./resources/nginx/certs/hasli.io.key:/etc/nginx/hasli.io.key:ro
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+  ui:
+    image: "hasli/ui:latest"
+    networks:
+      - proxy
+      - default
+    deploy:
+      placement:
+        constraints: [node.id == oyq0dv0xyihgdztxemr0n8j1g]
+
+  web-services:
+    image: "hasli/web-services:latest"
+    links:
+      - db
+    networks:
+      - proxy
+      - default
+    deploy:
+      placement:
+        constraints: [node.id == rquvq4kbd9ts9v832d89b6gbh]
+
+  db:
+    image: "postgres:9.6"
+    networks:
+      - default
+
+networks:
+  default:
+    external: false
+  proxy:
+    external: true

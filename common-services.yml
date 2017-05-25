@@ -1,0 +1,22 @@
+version: '2.1'
+
+services:
+
+  proxy:
+    image: nginx:1.11.1
+    volumes:
+      - ./resources/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./resources/nginx/certs/hasli.io.crt:/etc/nginx/hasli.io.crt:ro
+      - ./resources/nginx/certs/hasli.io.key:/etc/nginx/hasli.io.key:ro
+
+
+  ui:
+    image: "hasli/ui:${UI_VERSION}"
+
+
+  web-services:
+    image: "hasli/web-services:${WEB_VERSION}"
+
+
+  db:
+    image: "postgres:9.6"

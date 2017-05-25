@@ -1,0 +1,11 @@
+FROM hasli/ui-build-env:latest
+
+EXPOSE 9000
+
+CMD chmod +x /usr/src/gradlew  \
+	&& cd /usr/src/ \
+	&& ./gradlew installEnvironment \
+	&& cd ./web-ui \
+	&& gulp
+
+COPY ./resources/config /root/.jspm/
