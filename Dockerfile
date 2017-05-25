@@ -4,4 +4,4 @@ EXPOSE 8443
 
 CMD ["java", "-jar", "web-site.war"]
 
-COPY ./libs/web-site*.war /web-site.war
+COPY ./web-site/build/libs/web-site*.war /web-site.war
