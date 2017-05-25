@@ -1,7 +1,0 @@
-FROM java:8u111-jre-alpine
-
-ADD ./libs/web-site*.war /web-site.war
-
-EXPOSE 8443
-
-CMD ["java", "-jar", "web-site.war"]
