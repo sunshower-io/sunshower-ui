@@ -1,8 +1,2 @@
-.gradle
-.idea
-build
-web-ui/node_modules
-web-ui/jspm_packages
-web-ui/dist
-web-ui/export
-web-ui/build
+**
+!web-site/build/libs/*.war
