@@ -1,15 +1,10 @@
-#!/usr/bin/env groovy
+#!groovy
 
 def majorVersion   = "1"
 def minorVersion   = "0"
 def version        = "$majorVersion.$minorVersion.${env.BUILD_NUMBER}"
 def hasliImage     = "hasli/ui"
 
-if (env.BRANCH_NAME == "master") {
-    buildNumber = env.BUILD_NUMBER
-} else {
-    buildNumber = "${env.BUILD_NUMBER}.${convertBranchName(env.BRANCH_NAME)}"
-}
 
 try {
     node('docker-registry') {
@@ -28,8 +23,8 @@ try {
                 sh "docker-compose build build-env"
             }
 
-            stage('Unit') {
-                sh "docker-compose run --rm unit"
+            stage('Gulp Test') {
+                sh "docker-compose run --rm gulp-test"
             }
 
             stage('Integration') {
@@ -38,38 +33,41 @@ try {
 
             if (env.BRANCH_NAME =~ /(?i)^pr-/ || env.BRANCH_NAME == "master") {
 
-                stage('Build War') {
+                stage('Build UI') {
                     sh "docker-compose run --rm build-war"
+                    sh "sed -i.bak 's/^UI_VERSION=.*/UI_VERSION=$version/' ./resources/.env"
+                    sh "docker-compose build ui"
                 }
 
-                stage('Staging') {
-                    def staging = env.BRANCH_NAME != "master"
-                    def name = staging ? "staging-$version.$buildNumber" : "${version}.${buildNumber}"
+                if (env.BRANCH_NAME =~ /(?i)^pr-/) {
+                    stage('Staging') {
+                        sh "docker-compose -f docker-compose-staging.yml -p ${convertBranchName(env.BRANCH_NAME)} staging"
+                    }
 
-                    sh "sed -i.bak 's/^UI_NAME=.*/UI_NAME=$name/' ./resources/.env"
-                    sh "sed -i.bak 's/^UI_VERSION=.*/UI_VERSION=$version.$buildNumber/' ./resources/.env"
-                    sh "sed -i.bak 's/^UI_IMAGE=.*/UI_IMAGE=hasli\\/ui/' ./resources/.env"
-
-                    sh "docker-compose run --rm staging"
+                    notifyGithub(name)
                 }
+            }
 
+            if (env.BRANCH_NAME == "master") {
                 stage('Publish') {
-                    sh "docker tag $hasliImage:$version $hasliImage:$version"
-                    sh "docker tag $hasliImage:$version $hasliImage:latest"
-                    sh "docker push $registry/$hasliImage:$version"
-                    sh "docker push $registry/$hasliImage"
-                }
+                    sh "docker tag $hasliImage $hasliImage:$version"
 
-                notifyGithub(name)
+                    sh "docker push $hasliImage:$version"
+                    sh "docker push $hasliImage"
+
+                    sh "docker rmi $hasliImage:$version"
+                    sh "docker rmi $hasliImage"
+                }
             }
         }
     }
+
 
     if (env.BRANCH_NAME == "master") {
         node('manager') {
             stage('Production') {
                 checkout scm
-                sh "docker service update --image hasli/ui:$version ui"
+                sh "docker service update --image hasli/ui ui"
             }
         }
     }

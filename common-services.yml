@@ -16,7 +16,7 @@ services:
 
 
   web-services:
-    image: "hasli/web-services:${WEB_VERSION}"
+    image: "hasli/web-services"
 
 
   db:
@@ -41,10 +41,10 @@ services:
       - ~/.gradle/wrapper:/root/.gradle/wrapper
       - ~/.gradle/gradle.properties:/root/.gradle/gradle.properties
     working_dir: /usr/src/
-    command: bash -c "chmod +x gradlew && ./gradlew clean build"
+    command: bash -c "chmod +x gradlew && ./gradlew clean build -Pversion=${ARTIFACT_VERSION}"
 
 
-  test:
+  gulp-test:
     extends:
       service: build-env
     volumes:

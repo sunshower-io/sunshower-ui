@@ -23,8 +23,7 @@ services:
       - proxy
       - default
     deploy:
-      placement:
-        constraints: [node.id == oyq0dv0xyihgdztxemr0n8j1g]
+      replicas: 2
 
   web-services:
     image: "hasli/web-services:latest"
@@ -34,8 +33,7 @@ services:
       - proxy
       - default
     deploy:
-      placement:
-        constraints: [node.id == rquvq4kbd9ts9v832d89b6gbh]
+      replicas: 2
 
   db:
     image: "postgres:9.6"
