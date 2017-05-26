@@ -49,5 +49,5 @@ services:
       service: build-env
     volumes:
       - ./:/usr/src/
-    working_dir: /usr/src/
+    working_dir: /usr/src/web-ui
     command: bash -c "chmod +x gradlew && ./gradlew installEnvironment && gulp test"
