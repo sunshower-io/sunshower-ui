@@ -44,7 +44,7 @@ services:
 
 
   gulp-test:
-    image: node:7.10.0
+    image: node:6.10.3
     volumes:
       - ./:/usr/src/
     working_dir: /usr/src/web-ui
