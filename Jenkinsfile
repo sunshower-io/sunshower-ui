@@ -14,6 +14,10 @@ try {
 
             stage('Pull') {
                 checkout scm
+                echo "Change ID:     ${env.CHANGE_ID}"
+                echo "Change URL:    ${env.CHANGE_URL}"
+                echo "Change TARGET: ${env.CHANGE_ID}"
+                echo "Change TITLE:  ${env.CHANGE_TITLE}"
             }
 
             stage('Build Env Container') {
