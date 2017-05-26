@@ -4,52 +4,54 @@
 
 ## Building
 
-The easiest way to build and deploy hasli-ui is to use [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose/).  
+The recommended way to build and deploy hasli-ui is to use [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose/).  
 
-### Note
 
-Until we get an official Docker registry setup you'll have to manually build [hasli-web](https://github.com/hasli-projects/hasli-web) using a similar process so that the images are available locally on your system
 
-### Steps to build 
-1. cd into the hasli-ui directory and build all of the containers using Gradle. 
+### Steps to build for developing on hasli-ui
+1. cd into the hasli-ui respository and run: 
 
-    `./gradlew buildImages`
+    `docker-compose -f common-services.yml build build-env`
     
-    This will build 3 images, `hasli-ui/ui`, `hasli-ui/ui-dev`, and `hasli-ui/build-env`.  
+2. For now you need to authenticate your system with Dockerhub as the other images required are currently in private repositories:
 
-2. cd into the resources directory and run docker-compose (at this point if you haven't built the hasli-ui images, do so now)
+    `docker login`
 
-    `docker-compose -f docker-compose-dev.yml up -d`
+3. Now you can build the project and stand up the additional services required by running:
     
-3. Tail the logs to ensure everything is building properly
+    `docker-compose -f docker-compose-dev.yml -p dev up -d`
     
-    `docker-compose -f docker-compose-dev.yml logs -f`
+You can tail the build process by running `docker-compose -f docker-compose-dev.yml -p dev logs -f` which will tail the logs of all services. If you just want to see the build output run `docker-compose -f docker-compose-dev.yml -p dev logs -f ui`
     
-This will spin up three containers:
+If everything successfully built, you should have a running environment ready for development. This will spin up four services:
     
     1. proxy
-    2. hasli-ui
-    3. hasli-ui
+    2. ui
+    3. web-services
+    4. db
     
-By default it will only expose the proxy container ports on your system (defaults to port 32770 for http and 32771 for https). The proxy container is responsible for handling all requests.    
-
+You can view the service statuses by running `docker-compose -f docker-compose-dev.yml -p dev ps`. The ui service loads the hasli-ui src and executes `npm install && jspm install -y && gulp` for you, which is all that is required to spin up the ui.  Any changes at this point made to the src will be picked up and loaded automatically with gulp.
  
-If everything built without errors, you can pull up a browser and navigate to: [http://localhost:32770/dev/](http://localhost:32770/dev/)
+If everything built without errors, you can pull up a browser and navigate to: [http://localhost:32770/](http://localhost:32770/)
 
-### Watching changes with Gulp
+### Running production like builds locally (useful for testing the bundling process)
 
-To watch any changes made and automatically deploy the changes, we use `gulp`.  If you have npm and gulp installed locally on your system, you can just cd into `hasli-ui/web-ui` and run `gulp`.  This will automatically build and watch for changes to markup, styles, code etc. and redeploy the changes.
+1. First you need to build the war which will bundle the ui:
 
-If you don't have npm or gulp installed locally, you can run it from the running container.
+    `docker-compose -f common-services.yml run --rm build-war`
+    
+2. Now build the production Docker image which adds the war and runs it:
 
-1. `docker exec -it hasli-ui /bin/bash`
-2. `cd /usr/src/web-ui`
-3. `gulp`
+    `docker-compose -f common-services.yml build ui`
 
-That will run gulp inside the container so no dependencies are required locally on your system.
+3. Run a prod like deployment:
+
+    `docker-compose -p prod-like up -d`
+     
+This will spin up a prod like environment with the proxy listenting on ports 80 and  443. All traffic gets redirected over to https.
 
 ### Stopping and removing containers
 
-`docker-compose -f docker-compose-dev.yml down`
+`docker-compose -f docker-compose-dev.yml -p <dev|prod-like> down`
   
   
