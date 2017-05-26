@@ -83,21 +83,23 @@ export class JsonCodec {
             }, {}),
             parentEdges = (g.edges || []).filter(t => t.relationship === 'parent'),
             edges = _.reduce(parentEdges, (m, e) => {
-                m[e.id] = e;
-                return e;
+                m[e.target] = e;
+                return m;
             }, {}),
-            roots = _.map(_.values(nodes), (node) => {
+            roots = _.reduce(_.values(nodes), (r, node) => {
                 let n = node as GraphElement,
                     e = edges[n.id];
                 if (e) {
                     let p = nodes[e.target],
                         c = nodes[e.source];
-                    p.addChild(c);
-                    return [parent];
+                    p.value.addChild(c.value);
+                    r.children[c.value.id] = true;
+                    r.all[p.value.id] = p;
                 } else {
-                    return [node];
+                    r.all[(node as any).id] = node;
                 }
-            });
+                return r;
+            }, {children:{}, all:{}});
         return (roots as any) as Layer[];
     }
 

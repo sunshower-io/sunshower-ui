@@ -33,14 +33,19 @@ describe('a task-graph codec should', () => {
             parent = new Vertex(),
             child = new Vertex(),
             canvas = new MockCanvas(),
-            edge = new Edge()
+            edge = new Edge();
         tg.addVertex(parent);
         tg.addVertex(child);
-        edge.target = parent;
-        edge.source = child;
+        edge.target = parent.id;
+        edge.source = child.id;
+        edge.relationship = 'parent';
         edge.id = 'frap';
-        let roots = codec.resolveRoots(tg, canvas);
+        tg.addEdge(edge);
+        let roots = codec.resolveRoots(tg, canvas),
+            root = roots[0];
         expect(roots.length).toBe(1);
+        expect(root.children.length).toBe(1);
+
     });
 
 
@@ -51,6 +56,7 @@ class MockElementLoader implements ElementLoader {
     load(model:Canvas, v: Vertex) : void {
         let dmn = new DockerManagerNode();
         dmn.addTo(model);
+        return dmn;
     }
 
 }
@@ -64,6 +70,7 @@ export class MockModel {
     }
 }
 class MockCanvas {
+
     resolveElementLoader(key:string) : ElementLoader {
         return new MockElementLoader();
     }
@@ -73,7 +80,6 @@ class MockCanvas {
     }
 
     addCell(a, b, c, d) : void {
-        console.error("OMG", a);
     }
 
 }

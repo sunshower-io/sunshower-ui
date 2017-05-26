@@ -6,8 +6,16 @@ export class TaskGraph {
 
     edges           : Edge[];
 
-    vertices        : Vertex[]
+    vertices        : Vertex[];
 
+
+
+    addEdge(e: Edge) : void {
+        if(!this.edges) {
+            this.edges = [];
+        }
+        this.edges.push(e);
+    }
 
 
     addVertex(v: Vertex) : void {
@@ -16,8 +24,5 @@ export class TaskGraph {
         }
         this.vertices.push(v);
     }
-
-
-
 
 }

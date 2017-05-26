@@ -1,6 +1,6 @@
 module.exports = function (config) {
     config.set({
-        basePath: '.',
+        basePath: './',
         frameworks: ['systemjs', 'jasmine', 'karma-typescript'],
         preprocessors: {
             '**/*.ts': ['karma-typescript']
@@ -54,9 +54,7 @@ module.exports = function (config) {
         autoWatch: true,
         // browsers: ['Chrome'],
 
-        browsers: [
-            'ChromeSmall'
-        ],
+        browsers: ['Chrome'],
         customLaunchers: {
             ChromeSmall: {
                 base: 'Chrome',

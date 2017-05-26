@@ -24,9 +24,9 @@ import {
 
 import {Role} from "lib/common/security/model/user";
 
-// mxConstants.VERTEX_SELECTION_COLOR = 'none';
-// mxConstants.HANDLE_FILLCOLOR = 'none';
-// mxConstants.HANDLE_STROKECOLOR = 'none';
+mxConstants.VERTEX_SELECTION_COLOR = 'none';
+mxConstants.HANDLE_FILLCOLOR = 'none';
+mxConstants.HANDLE_STROKECOLOR = 'none';
 
 
 export class DockerOrchestrationTemplateProviderElement extends Vertex {
@@ -109,10 +109,10 @@ export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFa
 
     protected createStyle(canvas: Canvas): void {
         let style = {};
-        // mxConstants.VERTEX_SELECTION_COLOR = 'none';
-        // style[mxConstants.VERTEX_SELECTION_COLOR] = 'none';
-        // style[mxConstants.STYLE_FILLCOLOR] = 'none';
-        // style[mxConstants.STYLE_STROKECOLOR] = 'none';
+        mxConstants.VERTEX_SELECTION_COLOR = 'none';
+        style[mxConstants.VERTEX_SELECTION_COLOR] = 'none';
+        style[mxConstants.STYLE_FILLCOLOR] = 'none';
+        style[mxConstants.STYLE_STROKECOLOR] = 'none';
 
         canvas.getStylesheet()
             .putCellStyle(
