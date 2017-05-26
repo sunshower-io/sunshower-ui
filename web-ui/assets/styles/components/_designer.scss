@@ -20,6 +20,8 @@ $designer-button-height: 100px;
     text-align: center;
     font-size: 9px;
     letter-spacing: 1px;
+    padding: 0 5px;
+    box-sizing: border-box;
   }
 
   .canvas {
@@ -50,6 +52,19 @@ $designer-button-height: 100px;
     &.left {
       border-right: $default-border;
       left: 0;
+    }
+
+    .__panel {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .designer-panel-panel-holder {
+      height: -moz-calc(100% - #{$designer-header-height});
+      height: -webkit-calc(100% - #{$designer-header-height});
+      height: calc(100% - #{$designer-header-height});
+      overflow-y: auto;
+      overflow-x: hidden;
     }
 
     .designer-panel-header {
@@ -255,14 +270,19 @@ $designer-button-height: 100px;
     padding: $standard-padding/2 $standard-padding;
 
     .designer-card {
-      &.disabled > img {
-        filter: grayscale(100%);
-      }
       display: inline-block;
-      padding: $standard-padding/2;
+      padding: 0 $standard-padding/2 $standard-padding/2;
       box-sizing: border-box;
-      width: ($body-panel-width - $standard-padding*2)/2 - 3;
+      width: 49%;
       text-align: center;
+      cursor: move;
+
+      &.disabled {
+        cursor: not-allowed;
+        & > img {
+          filter: grayscale(100%);
+        }
+      }
 
       img {
         width: 50%;

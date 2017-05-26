@@ -20,9 +20,6 @@ export class MenuBar {
     @bindable
     private model                           : VersionedItem;
 
-    @bindable
-    private version                         : Version;
-
     constructor(private manager:DesignerManager) {
         this.controlId = UUID.randomUUID().value;
     }
@@ -33,7 +30,6 @@ export class MenuBar {
 
     attached() {
         $(this.templateDD).dropdown();
-        this.version = this.model.version;
     }
 
     undo() : void {

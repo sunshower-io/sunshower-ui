@@ -1,28 +1,24 @@
-
 import {
     autoinject,
     containerless,
     customElement,
     bindable
 } from "aurelia-framework";
-
-import {Designer} from "lib/designer/core/designer";
 import {OrchestrationProviderFactory} from "apps/workspaces/lib/palette/orchestration/templates/provider-factory";
-import {OrchestrationTemplate, OrchestrationTemplateService} from "apps/workspaces/lib/model/core/orchestration-template";
+import {OrchestrationTemplateService} from "apps/workspaces/lib/model/core/orchestration-template";
+import {RegistryProviderFactory} from "apps/workspaces/lib/palette/orchestration/registries/provider-factory";
 import {DesignerManager} from "lib/designer/core/designer-manager";
 
 
 @autoinject
-@customElement('orchestration-designer')
-export default class OrchestrationDesigner {
-
-
-    @bindable
-    private orchestration: OrchestrationTemplate;
-
+// @NavigationAware
+export class OrchestrationDesigner {
 
     @bindable
     private elementFactory: OrchestrationProviderFactory;
+
+    @bindable private
+    registryFactory: RegistryProviderFactory;
 
     constructor(
         elementFactory: OrchestrationProviderFactory,
@@ -30,7 +26,7 @@ export default class OrchestrationDesigner {
         private designerManager: DesignerManager
     ) {
         this.elementFactory = elementFactory;
-        this.orchestration = orchestrationService.orchestrationTemplate;
+        this.registryFactory = new RegistryProviderFactory();
     }
 
     attached() : void {

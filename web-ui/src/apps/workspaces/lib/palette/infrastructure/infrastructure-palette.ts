@@ -15,6 +15,9 @@ export class InfrastructureFactoryProvider implements ElementFactoryProvider {
     resolveElementLoader(key: string): ElementLoader {
         return undefined;
     }
+
+    icon: string = "mdi-chip";
+
     load(): Promise<ElementFactory[]> {
         return Promise.resolve([
             new ComputeNodeTemplateElementFactory(),

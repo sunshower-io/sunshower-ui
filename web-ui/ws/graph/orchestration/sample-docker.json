@@ -1,7 +1,7 @@
 {
   "vertices": [
     {
-      "id": "230dff14-72da-4154-8285-332e36868837",
+      "id": "23f54e74-0490-4858-a6e8-3c6d46d445bb",
       "type": "DockerWorkerNode",
       "layout": {
         "x": 300,
@@ -11,7 +11,7 @@
       }
     },
     {
-      "id": "7feb2793-7688-447d-8166-e5e2bfee42f5",
+      "id": "d4fbb1cf-722e-43ba-8b30-84d9a5efb504",
       "type": "DockerManagerNode",
       "layout": {
         "x": 10,
@@ -21,30 +21,157 @@
       }
     },
     {
-      "id": "20d23ed8-48f1-4c00-8be9-adce1c637fc7",
+      "id": "892cca3b-9e72-4c74-b0da-81b19f3393d1",
       "type": "DockerOrchestrationTemplateProviderElement",
       "layout": {
-        "x": 502,
-        "y": 381,
+        "x": 303,
+        "y": 362,
         "width": 380,
         "height": 100
+      }
+    },
+    {
+      "id": "e8052a64-268f-4ac2-9e40-513d7bfd7bc7",
+      "type": "DockerWorkerNode",
+      "layout": {
+        "x": 300,
+        "y": 15,
+        "width": 70,
+        "height": 70
+      }
+    },
+    {
+      "id": "1b45130a-faab-42bb-b2e3-0edacc1fe572",
+      "type": "DockerManagerNode",
+      "layout": {
+        "x": 10,
+        "y": 15,
+        "width": 70,
+        "height": 70
+      }
+    },
+    {
+      "id": "69c78d47-a26f-463d-8b3c-6a651503d043",
+      "type": "DockerOrchestrationTemplateProviderElement",
+      "layout": {
+        "x": 442,
+        "y": 602,
+        "width": 380,
+        "height": 100
+      }
+    },
+    {
+      "id": "ec187a74-64a2-4427-b477-bd4460dda6ab",
+      "type": "DockerWorkerNode",
+      "layout": {
+        "x": 300,
+        "y": 15,
+        "width": 70,
+        "height": 70
+      }
+    },
+    {
+      "id": "396d9506-057f-414d-b7d5-ce4efb071270",
+      "type": "DockerManagerNode",
+      "layout": {
+        "x": 10,
+        "y": 15,
+        "width": 70,
+        "height": 70
+      }
+    },
+    {
+      "id": "0a5202d3-1f65-4ae0-b926-b85068962666",
+      "type": "DockerOrchestrationTemplateProviderElement",
+      "layout": {
+        "x": 402,
+        "y": 100,
+        "width": 380,
+        "height": 100
+      }
+    },
+    {
+      "id": "844c3a4e-b6e4-41a6-a639-c1d748c05e5a",
+      "type": "DockerWorkerNode",
+      "layout": {
+        "x": 300,
+        "y": 15,
+        "width": 70,
+        "height": 70
+      }
+    },
+    {
+      "id": "6033a40b-5fc8-42b2-a142-5708dbe3827b",
+      "type": "DockerOrchestrationTemplateProviderElement",
+      "layout": {
+        "x": 763,
+        "y": 360,
+        "width": 380,
+        "height": 100
+      }
+    },
+    {
+      "id": "7dc4f0c1-b190-46cd-a30c-5407234f6398",
+      "type": "DockerManagerNode",
+      "layout": {
+        "x": 860,
+        "y": 30,
+        "width": 70,
+        "height": 70
       }
     }
   ],
   "edges": [
     {
-      "source": "7feb2793-7688-447d-8166-e5e2bfee42f5",
-      "target": "230dff14-72da-4154-8285-332e36868837"
+      "source": "d4fbb1cf-722e-43ba-8b30-84d9a5efb504",
+      "target": "23f54e74-0490-4858-a6e8-3c6d46d445bb"
     },
     {
-      "source": "20d23ed8-48f1-4c00-8be9-adce1c637fc7",
-      "target": "230dff14-72da-4154-8285-332e36868837",
+      "source": "892cca3b-9e72-4c74-b0da-81b19f3393d1",
+      "target": "23f54e74-0490-4858-a6e8-3c6d46d445bb",
       "relationship": "parent"
     },
     {
-      "source": "20d23ed8-48f1-4c00-8be9-adce1c637fc7",
-      "target": "7feb2793-7688-447d-8166-e5e2bfee42f5",
+      "source": "892cca3b-9e72-4c74-b0da-81b19f3393d1",
+      "target": "d4fbb1cf-722e-43ba-8b30-84d9a5efb504",
       "relationship": "parent"
+    },
+    {
+      "source": "1b45130a-faab-42bb-b2e3-0edacc1fe572",
+      "target": "e8052a64-268f-4ac2-9e40-513d7bfd7bc7"
+    },
+    {
+      "source": "69c78d47-a26f-463d-8b3c-6a651503d043",
+      "target": "e8052a64-268f-4ac2-9e40-513d7bfd7bc7",
+      "relationship": "parent"
+    },
+    {
+      "source": "69c78d47-a26f-463d-8b3c-6a651503d043",
+      "target": "1b45130a-faab-42bb-b2e3-0edacc1fe572",
+      "relationship": "parent"
+    },
+    {
+      "source": "396d9506-057f-414d-b7d5-ce4efb071270",
+      "target": "ec187a74-64a2-4427-b477-bd4460dda6ab"
+    },
+    {
+      "source": "0a5202d3-1f65-4ae0-b926-b85068962666",
+      "target": "ec187a74-64a2-4427-b477-bd4460dda6ab",
+      "relationship": "parent"
+    },
+    {
+      "source": "0a5202d3-1f65-4ae0-b926-b85068962666",
+      "target": "396d9506-057f-414d-b7d5-ce4efb071270",
+      "relationship": "parent"
+    },
+    {
+      "source": "6033a40b-5fc8-42b2-a142-5708dbe3827b",
+      "target": "844c3a4e-b6e4-41a6-a639-c1d748c05e5a",
+      "relationship": "parent"
+    },
+    {
+      "source": "7dc4f0c1-b190-46cd-a30c-5407234f6398",
+      "target": "844c3a4e-b6e4-41a6-a639-c1d748c05e5a"
     }
   ]
 }

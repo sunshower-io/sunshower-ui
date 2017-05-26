@@ -19,6 +19,7 @@ export interface ElementLoader {
 
 export interface ElementFactoryProvider {
 
+    icon : string;
 
     load(): Promise<ElementFactory[]>;
 

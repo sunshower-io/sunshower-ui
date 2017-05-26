@@ -35,21 +35,6 @@ export class Navbar {
 
     }
 
-    private buildInstructionHierarchy() : Breadcrumb[] {
-        let current = this.navigationManager.router,
-            results = [];
-        while(current) {
-            results.push(new Breadcrumb(current, current.currentInstruction));
-            current = current.parent;
-        }
-
-        return results.reverse();
-    }
-
-
-
-
-
     attached() : void {
         $(this.profileDD).dropdown();
         $(this.smallDD).dropdown();
@@ -67,6 +52,17 @@ export class Navbar {
         });
         this.refresh();
 
+    }
+
+    private buildInstructionHierarchy() : Breadcrumb[] {
+        let current = this.navigationManager.router,
+            results = [];
+        while(current) {
+            results.push(new Breadcrumb(current, current.currentInstruction));
+            current = current.parent;
+        }
+
+        return results.reverse();
     }
 
     private refresh() : void {
@@ -92,47 +88,6 @@ export class Navbar {
         this.router.parent.navigateToRoute('approvals');
     }
 
-    //inspired by _buildTitle on NavigationInstruction in aurelia-router
-    buildBreadcrumb(instructions : Breadcrumb[]) : any[] {
-
-
-        let breadcrumbs = [];
-        let childCrumbs = [];
-        // for(let instruction of instructions) {
-        //
-        //     if (instruction.config.navModel.title) {
-        //         breadcrumbs.push({
-        //             title: instruction.router.transformTitle(instruction.config.navModel.title),
-        //             href: '#' + instruction.config.navModel.router.baseUrl + instruction.config.navModel.relativeHref
-        //         });
-        //     }
-        //
-        //     for (let viewPortName in instruction.viewPortInstructions) {
-        //         let _viewPortInstruction = instruction.viewPortInstructions[viewPortName];
-        //
-        //         if (_viewPortInstruction.childNavigationInstruction) {
-        //             let childRoute = this.buildBreadcrumb(_viewPortInstruction.childNavigationInstruction);
-        //             if (childRoute) {
-        //                 for (let route in childRoute) {
-        //                     breadcrumbs.push(childRoute[route]);
-        //                     childCrumbs.push(childRoute[route]);
-        //                 }
-        //             }
-        //         }
-        //     }
-        //
-        //     if ((instruction.router as any).title) {
-        //         let wsid = instruction.router.currentInstruction.params.workspaceId;
-        //         breadcrumbs.push({
-        //             title: instruction.router.transformTitle((instruction.router as any).title),
-        //             href: '#' + instruction.router.baseUrl + (wsid ? "/" + wsid : "")
-        //         });
-        //     }
-        // }
-
-
-        return breadcrumbs;
-    };
 
 
 }

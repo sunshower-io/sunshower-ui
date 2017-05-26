@@ -13,6 +13,9 @@ import {DockerOrchestrationTemplateProviderFactory} from "./docker/docker-orches
 
 
 export class OrchestrationProviderFactory implements ElementFactoryProvider {
+
+    icon : string = 'mdi-cloud-outline';
+
     load(): Promise<ElementFactory[]> {
         return Promise.resolve([
             new NomadOrchestrationTemplateProviderFactory(),
