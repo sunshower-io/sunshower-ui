@@ -19,10 +19,6 @@ try {
                 checkout scm
             }
 
-            stage('Build Env Container') {
-                sh "docker-compose build build-env"
-            }
-
             stage('Gulp Test') {
                 sh "docker-compose run --rm gulp-test"
             }
@@ -32,6 +28,10 @@ try {
             }
 
             if (env.BRANCH_NAME =~ /(?i)^pr-/ || env.BRANCH_NAME == "master") {
+
+                stage('Build Env Container') {
+                    sh "docker-compose build build-env"
+                }
 
                 stage('Build UI') {
                     sh "docker-compose run --rm build-war"

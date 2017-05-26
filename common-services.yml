@@ -35,19 +35,17 @@ services:
 
 
   build-war:
-    image: java:8u111-jre
-    volumes:
-      - ./:/usr/src/
-      - ~/.gradle/wrapper:/root/.gradle/wrapper
-      - ~/.gradle/gradle.properties:/root/.gradle/gradle.properties
-    working_dir: /usr/src/
-    command: bash -c "chmod +x gradlew && ./gradlew clean build -Pversion=${ARTIFACT_VERSION}"
-
-
-  gulp-test:
     extends:
       service: build-env
     volumes:
       - ./:/usr/src/
     working_dir: /usr/src/
-    command: bash -c "chmod +x gradlew && ./gradlew installEnvironment && cd web-ui && gulp test"
+    command: bash -c "chmod +x gradlew && ./gradlew clean build"
+
+
+  gulp-test:
+    image: node:7.10.0
+    volumes:
+      - ./:/usr/src/
+    working_dir: /usr/src/web-ui
+    command: bash -c "npm install -g gulp jspm && gulp test"
