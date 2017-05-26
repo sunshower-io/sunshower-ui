@@ -24,8 +24,8 @@ services:
       - 9000
     volumes:
       - ./:/usr/src/
-      - ./resources/config:/root/.jspm/
-      - ~/.jspm:/root/.jspm
+      - ./resources/config:/root/.jspm/config
+      - ~/.jspm:/root/.jspm/
       - ~/.gradle/caches:/root/.gradle/caches
       - ~/.gradle/wrapper:/root/.gradle/wrapper
       - ~/.gradle/gradle.properties:/root/.gradle/gradle.properties
