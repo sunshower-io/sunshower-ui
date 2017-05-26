@@ -8,25 +8,29 @@ services:
     extends:
       file: common-services.yml
       service: proxy
+    links:
+      - ui
+      - web-services
     ports:
-      - 80
+      - 32770:80
     volumes:
       - ./resources/nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
 
   ui:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    image: hasli/ui-dev
+    extends:
+      file: common-services.yml
+      service: build-env
     ports:
       - 9000
     volumes:
       - ./:/usr/src/
+      - ./resources/config:/root/.jspm/
       - ~/.jspm:/root/.jspm
       - ~/.gradle/caches:/root/.gradle/caches
       - ~/.gradle/wrapper:/root/.gradle/wrapper
       - ~/.gradle/gradle.properties:/root/.gradle/gradle.properties
-
+    working_dir: /usr/src/web-ui
+    command: bash -c "npm install && jspm install -y && gulp"
 
   web-services:
     extends:
