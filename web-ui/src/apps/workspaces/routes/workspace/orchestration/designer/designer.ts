@@ -8,8 +8,8 @@ import {OrchestrationProviderFactory} from "apps/workspaces/lib/palette/orchestr
 import {OrchestrationTemplate, OrchestrationTemplateService} from "apps/workspaces/lib/model/core/orchestration-template";
 import {NavigationAware} from "apps/workspaces/resources/custom-elements/navigator";
 import {RouteConfig} from "aurelia-router";
-import {HttpClient} from "aurelia-fetch-client";
 import {ServiceManager} from "lib/common/service/service-manager";
+import {RegistryProviderFactory} from "apps/workspaces/lib/palette/orchestration/registries/provider-factory";
 
 
 @autoinject
@@ -20,14 +20,16 @@ export class OrchestrationDesigner {
     private elementFactory: OrchestrationProviderFactory;
 
     @bindable
-    private orchestration: OrchestrationTemplate;
+    private registryFactory: RegistryProviderFactory;
 
-    private routeConfig: RouteConfig;
+    @bindable
+    private orchestration: OrchestrationTemplate;
 
     constructor(private orchestrationService: OrchestrationTemplateService,
         elementFactory: OrchestrationProviderFactory
     ) {
         this.elementFactory = elementFactory;
+        this.registryFactory = new RegistryProviderFactory();
     }
 
     activate(params:string, routeConfig:RouteConfig) {

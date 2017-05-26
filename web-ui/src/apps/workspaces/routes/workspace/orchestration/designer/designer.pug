@@ -7,8 +7,14 @@ template
             bottom
                 panels
                     panel(
+                        icon.bind="elementFactory.icon",
                         model.bind="elementFactory",
                         view-model="lib/designer/elements/element-panel/element-panel"
+                    )
+                    panel(
+                        icon.bind="registryFactory.icon",
+                        model.bind="registryFactory",
+                        view-model="lib/designer/elements/registry-panel/registry-panel"
                     )
         right-panel
             full

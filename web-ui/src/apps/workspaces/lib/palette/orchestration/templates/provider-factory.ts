@@ -4,6 +4,9 @@ import {NomadOrchestrationTemplateProviderFactory} from "./nomad/nomad-orchestra
 import {KubernetesOrchestrationTemplateProviderFactory} from "./kubernetes/kubernetes-orchestration-template";
 import {DockerOrchestrationTemplateProviderFactory} from "./docker/docker-orchestration-template";
 export class OrchestrationProviderFactory implements ElementFactoryProvider {
+
+    icon : string = 'mdi-cloud-outline';
+
     load(): Promise<ElementFactory[]> {
         return Promise.resolve([
             new NomadOrchestrationTemplateProviderFactory(),

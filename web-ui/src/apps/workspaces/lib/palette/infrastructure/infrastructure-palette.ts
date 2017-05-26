@@ -12,6 +12,9 @@ import {
 
 
 export class InfrastructureFactoryProvider implements ElementFactoryProvider {
+
+    icon: string = "mdi-chip";
+
     load(): Promise<ElementFactory[]> {
         return Promise.resolve([
             new ComputeNodeTemplateElementFactory(),

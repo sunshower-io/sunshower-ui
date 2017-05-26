@@ -11,6 +11,7 @@ import {ProtectedObject, Role} from "lib/common/security/model/user";
 
 export interface ElementFactoryProvider {
 
+    icon : string;
 
     load(): Promise<ElementFactory[]>;
 
