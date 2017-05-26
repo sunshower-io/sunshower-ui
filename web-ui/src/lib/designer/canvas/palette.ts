@@ -12,8 +12,7 @@ import {Vertex} from "../model/graph/vertex";
 
 export interface ElementLoader {
 
-    load(model:Canvas, v: Vertex) : void;
-
+    load(model:Canvas, v: Vertex) : Drawable;
 
 
 }

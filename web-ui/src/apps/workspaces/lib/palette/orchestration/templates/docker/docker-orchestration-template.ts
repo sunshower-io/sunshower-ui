@@ -17,52 +17,17 @@ import {
     mxConstants, mxEdge, mxCell
 } from "mxgraph";
 import {
-    DockerManagerElementLoader,
-    DockerManagerNode,
-    DockerWorkerNode
+    dockerInitialLayout,
+    DockerManagerElementLoader
 } from "./docker-nodes";
 
 import {Role} from "lib/common/security/model/user";
 
-mxConstants.VERTEX_SELECTION_COLOR = 'none';
-mxConstants.HANDLE_FILLCOLOR = 'none';
-mxConstants.HANDLE_STROKECOLOR = 'none';
+// mxConstants.VERTEX_SELECTION_COLOR = 'none';
+// mxConstants.HANDLE_FILLCOLOR = 'none';
+// mxConstants.HANDLE_STROKECOLOR = 'none';
 
 
-export class DockerOrchestrationTemplateProviderElement extends Vertex {
-
-    labelVisible = false;
-
-    style: string = "docker-group-style";
-
-    constructor(x: number, y: number) {
-        super('', x - 160, y, 380, 100);
-        let manager = new DockerManagerNode('manager', 10, 15, 70, 70),
-            worker = new DockerWorkerNode('worker', 300, 15, 70, 70);
-        this.addChild(worker);
-        this.addChild(manager);
-
-
-    }
-
-
-    addTo(canvas: Canvas): boolean {
-        let a = super.addTo(canvas);
-        return a;
-    }
-
-    protected doInsert(canvas: Canvas): void {
-        canvas.addCell(this, null);
-        let edge = new mxCell(),
-            manager = this.children[0],
-            worker = this.children[1];
-
-
-        let e = canvas.insertEdge(this, 'frap', 'fap', worker, manager, 'strokeColor=#0087c9;dashed=1;strokeWidth=2');
-        e.setEdge(true);
-    }
-
-}
 
 export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFactory {
     rolesAllowed: Role[] = [new Role('admin'), new Role('tenant:user')];
@@ -103,7 +68,7 @@ export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFa
                canvas: Canvas,
                target: any
     ): Drawable {
-        return new DockerOrchestrationTemplateProviderElement(x, y);
+        return dockerInitialLayout(x, y);
     }
 
 
