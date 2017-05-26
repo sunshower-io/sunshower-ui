@@ -22,7 +22,6 @@ export class Panels {
 
 
     attached() : void {
-        console.log(this.children);
     }
 
     open(id: string) {

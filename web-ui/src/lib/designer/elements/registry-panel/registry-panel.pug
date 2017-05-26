@@ -1,4 +1,5 @@
 template
+    require(from='lib/designer/elements/element-panel/palette-icon')
     .designer-panel-body
         .designer-form
             label Registries
@@ -9,4 +10,8 @@ template
                 i.material-icons.mdi.mdi-plus-circle-outline
                 | Add Registry
         .designer-cards
-            .designer-card(repeat.for="container of containers")
+            palette-icon(
+                repeat.for="factory of factories"
+                factory.bind="factory"
+                canvas.bind="canvas"
+            )

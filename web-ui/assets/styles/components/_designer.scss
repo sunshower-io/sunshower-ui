@@ -57,8 +57,7 @@ $designer-button-height: 100px;
       overflow: hidden;
     }
 
-    .__panel-body {
-      //calculate height; assumes header
+    .designer-panel-panel-holder {
       height: -moz-calc(100% - #{$designer-header-height});
       height: -webkit-calc(100% - #{$designer-header-height});
       height: calc(100% - #{$designer-header-height});

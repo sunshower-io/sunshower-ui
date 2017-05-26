@@ -3,6 +3,8 @@ import {DockerRegistry, DockerContainer} from "lib/hal/docker/model";
 import {Canvas} from "lib/designer/canvas/canvas";
 import {DesignerManager} from "lib/designer/core";
 import {DockerRegistryService} from "lib/hal/docker/service";
+import {ElementFactoryProvider, ElementFactory} from "lib/designer/canvas/palette";
+import {RegistryElementFactory} from "apps/workspaces/lib/palette/orchestration/registries/provider-factory";
 
 @autoinject
 @customElement('registry-panel')
@@ -21,21 +23,26 @@ export class RegistryPanel {
     private activeRegistry          : DockerRegistry;
 
     @bindable
-    private containers              : DockerContainer[];
-
-    private icon                    : string = "mdi-apps";
+    private factories               : ElementFactory[];
 
     private canvas                  : Canvas;
+
+    private model                   : ElementFactoryProvider;
 
     constructor(private readonly designerManager: DesignerManager,
         private dockerRegistryService: DockerRegistryService) {
     }
 
+    activate(provider: ElementFactoryProvider) {
+        this.model = provider;
+
+    }
+
     attached() : void {
         this.canvas = this.designerManager.getCurrentCanvas();
-        this.containers = [];
+        this.factories = [];
         this.loadRegistries();
-        this.getContainers(null);
+        this.makeFactories('boop');
     }
 
     loadRegistries() : void {
@@ -53,14 +60,21 @@ export class RegistryPanel {
         this.dockerRegistryService.bind(id)
             .then(t => {
                 this.activeRegistry = t;
-                this.getContainers(id);
+                this.makeFactories(id);
             });
     }
 
-    getContainers(id: string) : void {
+    makeFactories(id: string) : void {
         this.loading = true;
         this.dockerRegistryService.getContainers(id).then(cs => {
-            this.containers = cs;
+
+            this.factories = cs.map(c => {
+                let factory = new RegistryElementFactory();
+                factory.elementName = c.name;
+                factory.displayIcon = c.logo_url.large;
+                factory.paletteIcon = factory.displayIcon;
+                return factory;
+            });
             this.loading = false;
         })
     }
