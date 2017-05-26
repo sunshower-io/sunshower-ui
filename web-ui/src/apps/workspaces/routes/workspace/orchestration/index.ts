@@ -1,9 +1,10 @@
 import {autoinject, bindable} from "aurelia-framework";
-import {OrchestrationTemplate, OrchestrationTemplateService} from "apps/workspaces/lib/model/core/orchestration-template";
-import {NavigationAware} from "apps/workspaces/resources/custom-elements/navigator";
+import {
+    OrchestrationTemplate,
+    OrchestrationTemplateService
+} from "apps/workspaces/lib/model/core/orchestration-template";
 
 @autoinject
-@NavigationAware
 export class OrchestrationDashboard {
 
     @bindable
@@ -11,5 +12,9 @@ export class OrchestrationDashboard {
 
     constructor(private orchestrationService: OrchestrationTemplateService) {
         this.orchestration = this.orchestrationService.orchestrationTemplate;
+    }
+
+    attached() : void {
+        console.log("Dashboard");
     }
 }

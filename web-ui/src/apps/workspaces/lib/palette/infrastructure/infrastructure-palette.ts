@@ -1,6 +1,6 @@
 import {
     ElementFactory,
-    ElementFactoryProvider
+    ElementFactoryProvider, ElementLoader
 } from "lib/designer/canvas/palette";
 import {
     ComputeNodeTemplateElementFactory
@@ -12,6 +12,9 @@ import {
 
 
 export class InfrastructureFactoryProvider implements ElementFactoryProvider {
+    resolveElementLoader(key: string): ElementLoader {
+        return undefined;
+    }
     load(): Promise<ElementFactory[]> {
         return Promise.resolve([
             new ComputeNodeTemplateElementFactory(),

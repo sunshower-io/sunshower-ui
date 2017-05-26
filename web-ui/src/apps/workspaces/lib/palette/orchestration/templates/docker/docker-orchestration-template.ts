@@ -1,5 +1,5 @@
 import {
-    DefaultElementFactory
+    DefaultElementFactory, ElementLoader
 } from "lib/designer/canvas/palette";
 import {
     Canvas
@@ -17,15 +17,16 @@ import {
     mxConstants, mxEdge, mxCell
 } from "mxgraph";
 import {
+    DockerManagerElementLoader,
     DockerManagerNode,
     DockerWorkerNode
 } from "./docker-nodes";
 
 import {Role} from "lib/common/security/model/user";
 
-mxConstants.VERTEX_SELECTION_COLOR = 'none';
-mxConstants.HANDLE_FILLCOLOR = 'none';
-mxConstants.HANDLE_STROKECOLOR = 'none';
+// mxConstants.VERTEX_SELECTION_COLOR = 'none';
+// mxConstants.HANDLE_FILLCOLOR = 'none';
+// mxConstants.HANDLE_STROKECOLOR = 'none';
 
 
 export class DockerOrchestrationTemplateProviderElement extends Vertex {
@@ -73,6 +74,17 @@ export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFa
     initialize(canvas: Canvas, element: HTMLElement): void {
         super.initialize(canvas, element);
         this.createStyle(canvas);
+        canvas.registerProvider(this);
+    }
+
+
+    handles(key: string): boolean {
+        return true;
+    }
+
+
+    resolveElementLoader(key: string): ElementLoader {
+        return new DockerManagerElementLoader();
     }
 
     /**
@@ -89,7 +101,8 @@ export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFa
                y: number,
                event: Event,
                canvas: Canvas,
-               target: any): Drawable {
+               target: any
+    ): Drawable {
         return new DockerOrchestrationTemplateProviderElement(x, y);
     }
 
@@ -97,9 +110,9 @@ export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFa
     protected createStyle(canvas: Canvas): void {
         let style = {};
         // mxConstants.VERTEX_SELECTION_COLOR = 'none';
-        style[mxConstants.VERTEX_SELECTION_COLOR] = 'none';
-        style[mxConstants.STYLE_FILLCOLOR] = 'none';
-        style[mxConstants.STYLE_STROKECOLOR] = 'none';
+        // style[mxConstants.VERTEX_SELECTION_COLOR] = 'none';
+        // style[mxConstants.STYLE_FILLCOLOR] = 'none';
+        // style[mxConstants.STYLE_STROKECOLOR] = 'none';
 
         canvas.getStylesheet()
             .putCellStyle(

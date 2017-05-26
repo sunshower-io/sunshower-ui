@@ -11,18 +11,22 @@ import {KeyHandler} from "./key-handler";
 import {Chord} from "./chord";
 import {Action} from "./action";
 import {RenderableElement} from "../model/elements";
-
+import {
+    ElementFactory, ElementLoader,
+} from "./palette";
 
 
 export class Canvas extends mxGraph {
 
 
-    private grids                   : Grid[];
-    private undoListener            : any;
+    private grids: Grid[];
+    private undoListener: any;
+
+    private providers: ElementFactory[];
 
 
-    private keyHandler              : KeyHandler;
-    readonly historyManager         : mxUndoManager;
+    private keyHandler: KeyHandler;
+    readonly historyManager: mxUndoManager;
 
     constructor(public readonly container: HTMLElement,
                 model: CanvasModel) {
@@ -36,16 +40,16 @@ export class Canvas extends mxGraph {
         this.foldingEnabled = false;
         this.setConnectable(true);
 
-        this.keyHandler =  this.createKeyHandler();
+        this.keyHandler = this.createKeyHandler();
         this.historyManager = this.createUndoManager();
 
     }
 
-    public register(chord: Chord, action: Action) : void {
+    public register(chord: Chord, action: Action): void {
         this.keyHandler.bind(chord, action);
     }
 
-    public unregister(chord: Chord) : void {
+    public unregister(chord: Chord): void {
         this.keyHandler.unbind(chord);
 
     }
@@ -54,15 +58,32 @@ export class Canvas extends mxGraph {
         this.keyHandler.stop();
     }
 
-    activate() : void {
+    activate(): void {
 
     }
 
+    resolveElementLoader(key: string): ElementLoader {
+        for(let provider of this.providers) {
+            if(provider.handles(key)) {
+                return provider.resolveElementLoader(key);
+            }
+        }
+        throw new Error("This canvas cannot handle any elements keyed by: " + key);
 
-    getLabel(a:Layer) : HTMLElement {
-        if(a instanceof RenderableElement) {
+    }
+
+    registerProvider(provider: ElementFactory): void {
+        if (!this.providers) {
+            this.providers = [];
+        }
+        this.providers.push(provider);
+    }
+
+
+    getLabel(a: Layer): HTMLElement {
+        if (a instanceof RenderableElement) {
             let re = <RenderableElement> a;
-            if(re.labelVisible) {
+            if (re.labelVisible) {
                 let label = super.getLabel(a);
                 return $(`<div class="default-label">${label}</div>`).get(0);
             }
@@ -93,7 +114,7 @@ export class Canvas extends mxGraph {
         return this.model;
     }
 
-    protected createKeyHandler() : KeyHandler {
+    protected createKeyHandler(): KeyHandler {
         let kh = new KeyHandler(this);
         return kh;
     }
@@ -133,7 +154,3 @@ export class Canvas extends mxGraph {
 
 }
 
-export class CanvasOptions {
-
-
-}
