@@ -1,0 +1,30 @@
+
+<svg width="74px" height="74px" viewBox="0 0 74 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="37" cy="37" r="37"></circle>
+    </defs>
+    <g id="Orchestration" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="U2-4-drag-and-drop-docs" transform="translate(-1460.000000, -356.000000)">
+            <g id="designer-layout" transform="translate(0.000000, -3.000000)">
+                <g id="model" transform="translate(766.000000, 359.000000)">
+                    <g id="web" transform="translate(687.000000, 0.000000)">
+                        <g id="docker-container-app" transform="translate(7.000000, 0.000000)">
+                            <mask id="mask-2" fill="white">
+                                <use xlink:href="#path-1"></use>
+                            </mask>
+                            <use id="Mask" fill="#389BFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                            <g id="docker-container" stroke-width="1" fill-rule="evenodd" mask="url(#mask-2)">
+                                <g transform="translate(0.725490, 1.450980)">
+                                    <path d="M59.5936377,71.9361949 L12.3531231,71.9361949 C5.56569282,71.9361949 0,66.3713194 0,59.5848859 L0,12.3513089 C0,5.56487545 5.56569282,0 12.3531231,0 L59.5936377,0 C66.381068,0 71.9467608,5.56487545 71.9467608,12.3513089 L71.9467608,59.5848859 C71.9467608,66.3713194 66.381068,71.9361949 59.5936377,71.9361949 L59.5936377,71.9361949 Z" id="Shape" stroke="#389BFF" stroke-width="2" fill="#389BFF" fill-rule="evenodd"></path>
+                                    <image id="mini-logo-white-inset" stroke="none" fill="none" x="14.5098039" y="14.5098039" width="43.5294118" height="43.5294118" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAABGdBTUEAA1teXP8meAAABRdJREFUaAXtmFuoVUUYgM8pK49dtAuVJnLKE1FRWZQF9VAEFfpQUD3Zg0VQRnQxCuqhJ1+6E/YQSOBDZDd66AJFItiNpBeR1CBKS6M6x+yqXaxO37dZA+Pa66yz2nuvcXNcP3x7Zv4165/55/9n1lp7cHx8fOBgkkMOJmf1tXF4qke8iXAT4Sm2Ak1KT7GAtrnTRLhtSaaYoolwjQG9BNs/wjbYDn/Bw5BUpiUcbYixZmWEYeeGSqoyZUoXfZbtTeVoGCelw2HMuDw0bqSop3T438yhPyndv4r1pDKY8A8A9/Cp8E/m4WGUoxmZqv6im0NrOtO7D84B9+JR8CmsgaUwH9QfAethHdwGRnUQZsKb8Dokk24dvo6ZXhjNdoT6+3A9nBHp3as+ju6KdFZN86QOd7OHnew+Zx2J6er+zJ/I6sIejroP/BE3UtS7cdioHZ6bZNCZsrGY1kVjua+ryml0fAsurXpDUb+iSRT1K9L9jdJDxz05Bkb3B9iTlUFv2+tG8/esvotSUV9VltFxEbwCF1W9Kd+vm1PaKB4DnramsItn6uqgB5jng3r76awL4EEV0t3+Hmr2n0x8Q9sMc7KOWygvh/+zYK1bqx5ad9L7CjBCpu1P8DRcBQtAvU46kVdhCQyDetP+A/gYHgCddxGOhVVZ+35K+5olR8KjYP8g86kcHxqUZ8FDcG+kq1b1OVyBtfSJZZTGYtgQK6lvgkXwWU7/Bu2rczqbD8KyAv1N6OJ5XUl7X67fVtozYAhmZmUrY6nH9+5XrxrhXbnlM0Km4m85vWn7M4S0DZf9SnLP58UtYLbkJX/628fox/OdR/tDOAXMru+z9hrKb2AjtElsoO1ipDCN8+IelFhciLzO60W6oC+6pp1YvqCh0ydFyhnUF0TtYeqyGDbANdAmRYO1dUJh5JSw8kZGwnPUumI/63G/oI91oW4Z6j6ng52g815FZx9r1Sb/eYQuKybqVvWUPhEDnrBOytU3PXfCCeBJbbqZBab5dzAbjIB6F9WU/hVMQ20oZpd9tTUH3Aaina8hLKaHnq+vHlBLoEwe56IH4IRSltJ3cNdc8LGzG4xeSDWdOBr2glFRryNOzlPWva0j6nViOvjy4f4ONuyvDW2pt1TUu4izwBT21XUEwn1UW+IYzsmF3AjPwjtQKmUR3sadw6V3H7iLOng3eJhuBxe+kpRFuJKBA9TJffpeJ2OHNCq615TsR/mESb3d6cTKHB7DaJnTHiovwkvgXkolTzCQp3ZHUpbSm7Ho4XF2gWX3zI3wUXbtecqXYShr11W8hmEXuGMpi/BarE60T1ZybSvszHBxnoE6ZQfGl3c7QJnD6zGu00UyitLHho8g8Rmtri4xo26Hr7odoOyxpG2dWQcLbUTyOfVr4TjwOeuLhX/VjEAdcjNGV/fCcFmEtb8HniwY6HR0OngunJfV63DWQ3MprIaeyGQRDoM8ReWe0EhU/sI4N8C7vRxvsgiHsZZTeSE0EpS+Il4MPXW2Ne+yj+XctWm0n4M6ZQfG/UNgv4/2XrarpnQc1FtorIDZsbLL+hbuN4NWQZ2n/UAnDuvbPHB/3QpnQifyJTf52PM10dT166d26dThMDE/7y6Ay+B88KQ+Gfwc9LvW72E/38bgW/Cfi03g144O74ak0q3DSSfbi8GqntK9GKsvbDQO90UYapxEE+EaF7cvTDcR7osw1DiJJsI1Lm5fmG4i3BdhqHESTYRrXNy+MP0f5JqlnNWeJ8EAAAAASUVORK5CYII="></image>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

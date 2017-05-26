@@ -43,6 +43,8 @@ export class RegistryPanel {
         this.factories = [];
         this.loadRegistries();
         this.makeFactories('boop');
+        console.log(this.canvas);
+        //todo detect if there is an orchestration on the board or else disable
     }
 
     loadRegistries() : void {
@@ -67,14 +69,7 @@ export class RegistryPanel {
     makeFactories(id: string) : void {
         this.loading = true;
         this.dockerRegistryService.getContainers(id).then(cs => {
-
-            this.factories = cs.map(c => {
-                let factory = new RegistryElementFactory();
-                factory.elementName = c.name;
-                factory.displayIcon = c.logo_url.large;
-                factory.paletteIcon = factory.displayIcon;
-                return factory;
-            });
+            this.factories = cs.map(c => new RegistryElementFactory(c.name, c.logo_url.large));
             this.loading = false;
         })
     }
