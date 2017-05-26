@@ -20,8 +20,6 @@ WORKDIR /usr/src
 
 CMD ["/bin/bash"]
 
-RUN npm install -g gulp jspm
-
 COPY resources/xvfb-chromium /usr/bin/xvfb-chromium
 
 RUN ln -s /usr/bin/xvfb-chromium /usr/bin/google-chrome && \

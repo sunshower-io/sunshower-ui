@@ -40,7 +40,7 @@ services:
       - ~/.gradle/wrapper:/root/.gradle/wrapper
       - ~/.gradle/gradle.properties:/root/.gradle/gradle.properties
     working_dir: /usr/src/
-    command: bash -c "chmod +x gradlew && ./gradlew clean build"
+    command: bash -c "chmod +x gradlew && ./gradlew installEnvironment && ./gradlew clean build"
 
 
   gulp-test:
