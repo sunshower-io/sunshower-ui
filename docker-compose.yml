@@ -6,6 +6,9 @@ services:
     extends:
       file: common-services.yml
       service: proxy
+    links:
+      - ui
+      - web-services
     ports:
       - 80:80
       - 443:443

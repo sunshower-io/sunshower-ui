@@ -1,10 +1,7 @@
 #!groovy
 
-def majorVersion   = "1"
-def minorVersion   = "0"
-def version        = "$majorVersion.$minorVersion.${env.BUILD_NUMBER}"
-def hasliImage     = "hasli/ui"
-
+def version    = "1.0.${env.BUILD_NUMBER}"
+def hasliImage = "hasli/ui"
 
 try {
     node('docker-registry') {
@@ -19,7 +16,12 @@ try {
                 checkout scm
             }
 
+            stage('Build Env Container') {
+                sh "docker-compose build build-env"
+            }
+
             stage('Gulp Test') {
+                echo "TODO: Fix gulp test stuff"
                 sh "docker-compose run --rm gulp-test"
             }
 
@@ -29,10 +31,6 @@ try {
 
             if (env.BRANCH_NAME =~ /(?i)^pr-/ || env.BRANCH_NAME == "master") {
 
-                stage('Build Env Container') {
-                    sh "docker-compose build build-env"
-                }
-
                 stage('Build UI') {
                     sh "docker-compose run --rm build-war"
                     sh "sed -i.bak 's/^UI_VERSION=.*/UI_VERSION=$version/' ./resources/.env"
@@ -40,11 +38,12 @@ try {
                 }
 
                 if (env.BRANCH_NAME =~ /(?i)^pr-/) {
+                    def name = ${convertBranchName(env.BRANCH_NAME)}
                     stage('Staging') {
-                        sh "docker-compose -f docker-compose-staging.yml -p ${convertBranchName(env.BRANCH_NAME)} staging"
+                        sh "docker-compose -f docker-compose-staging.yml -p $name up -d"
                     }
 
-                    notifyGithub(name)
+                    publishStagedInfo(name)
                 }
             }
 
@@ -82,18 +81,17 @@ try {
 }
 
 
-def notifyGithub(String name) {
-    def portMapping = sh returnStdout: true, script: "docker port proxy-$name"
-    portMapping = portMapping.trim()
-
-    def https = getMappedPort(portMapping, 443)
-    def http = getMappedPort(portMapping, 80)
+def publishStagedInfo(String name) {
+    def https = sh returnStdout: true, script: "docker-compose -f docker-compose-staging.yml -p $name port proxy 443"
+            .split(":")[1]
+    def http  = sh returnStdout: true, script: "docker-compose -f docker-compose-staging.yml -p $name port proxy 80"
+            .split(":")[1]
 
     def pr = env.BRANCH_NAME.split("-")[1].trim()
     def pat = readFile('/root/.pat').trim()
 
-    String githubComment = "${JOB_NAME}, build [#${env.BUILD_NUMBER}](${env.BUILD_URL}) - Staged deployment can be viewed at: [10.0.4.51:$http](http://10.0.4.51:$http"
-    String slackNotification = "${JOB_NAME}, build #${env.BUILD_NUMBER} ${env.BUILD_URL} - Staged deployment can be viewed at: http://10.0.4.51:$http"
+    String githubComment = "${JOB_NAME}, build [#${env.BUILD_NUMBER}](${env.BUILD_URL}) - Staged deployment can be viewed at: [https://10.0.4.51:$https](https://10.0.4.51:$https"
+    String slackNotification = "${JOB_NAME}, build #${env.BUILD_NUMBER} ${env.BUILD_URL} - Staged deployment can be viewed at: https://10.0.4.51:$https"
 
     sh "curl -H \"Content-Type: application/json\" -u hasli-bot:$pat -X POST -d '{\"body\": \"$githubComment)\"}' https://api.github.com/repos/hasli-projects/hasli-ui/issues/$pr/comments"
     slackSend (color: 'good', message: slackNotification)

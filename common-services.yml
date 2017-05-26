@@ -28,10 +28,7 @@ services:
       context: .
       dockerfile: Dockerfile.build
     image: hasli/ui-build-env
-    volumes:
-      - ~/.jspm:/root/.jspm
-      - ~/.gradle/wrapper:/root/.gradle/wrapper
-      - ~/.gradle/gradle.properties:/root/.gradle/gradle.properties
+
 
 
   build-war:
@@ -39,13 +36,18 @@ services:
       service: build-env
     volumes:
       - ./:/usr/src/
+      - ~/.jspm:/root/.jspm
+      - ~/.gradle/wrapper:/root/.gradle/wrapper
+      - ~/.gradle/gradle.properties:/root/.gradle/gradle.properties
     working_dir: /usr/src/
     command: bash -c "chmod +x gradlew && ./gradlew clean build"
 
 
   gulp-test:
-    image: node:6.10.3
+    extends:
+      service: build-env
     volumes:
       - ./:/usr/src/
+      - ~/.jspm:/root/.jspm
     working_dir: /usr/src/web-ui
-    command: bash -c "npm install -g gulp jspm && gulp test"
+    command: bash -c "npm install && jspm install -y && gulp build"

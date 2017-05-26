@@ -1,10 +1,16 @@
 FROM java:8u111-jre
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils && \
     apt-get install -y \
     build-essential \
-    git && \
-    rm -rf /var/lib/apt/lists/*
+    chromium \
+    git \
+    libxfont1 \
+    xvfb \
+    xorg \
+  && rm -rf /var/lib/apt/lists/*
 
 # Install Node.js
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
@@ -15,3 +21,8 @@ WORKDIR /usr/src
 CMD ["/bin/bash"]
 
 RUN npm install -g gulp jspm
+
+COPY resources/xvfb-chromium /usr/bin/xvfb-chromium
+
+RUN ln -s /usr/bin/xvfb-chromium /usr/bin/google-chrome && \
+    ln -s /usr/bin/xvfb-chromium /usr/bin/chromium-browser
