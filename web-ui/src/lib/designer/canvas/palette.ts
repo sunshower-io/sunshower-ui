@@ -7,13 +7,24 @@ import {Drawable} from "lib/designer/elements";
 
 import 'velocity-ui';
 import {ProtectedObject, Role} from "lib/common/security/model/user";
+import {Vertex} from "../model/graph/vertex";
 
+
+export interface ElementLoader {
+
+    load(model:Canvas, v: Vertex) : void;
+
+
+
+}
 
 export interface ElementFactoryProvider {
 
     icon : string;
 
     load(): Promise<ElementFactory[]>;
+
+
 
 
 }
@@ -28,13 +39,19 @@ export interface ElementFactory extends ProtectedObject {
     paletteIcon             : string;
     importFunction          : ImportFunction;
 
+    resolveElementLoader(key: string) : ElementLoader;
+
+    handles(key: string) : boolean;
+
+
     initialize(canvas: Canvas, element: HTMLElement): void;
 
     newElement(x: number,
                y: number,
                event: Event,
                canvas: Canvas,
-               target: any): Drawable;
+               target: any
+    ): Drawable;
 
 
 }
@@ -82,6 +99,15 @@ export abstract class DefaultElementFactory implements
         this.importFunction = DefaultCellFactory(this);
     }
 
+
+    handles(key: string) : boolean {
+        return false;
+    }
+
+
+    resolveElementLoader(key: string): ElementLoader {
+        return null;
+    }
 
     abstract newElement(x: number,
                         y: number,
@@ -133,7 +159,7 @@ export class Palette {
 
     private canvas: Canvas;
 
-    constructor(private factoryProvider: ElementFactoryProvider) {
+    constructor(public factoryProvider: ElementFactoryProvider) {
 
     }
 

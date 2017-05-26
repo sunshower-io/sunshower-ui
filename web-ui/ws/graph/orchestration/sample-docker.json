@@ -1,0 +1,56 @@
+{
+  "vertices": [
+    {
+      "id": "230dff14-72da-4154-8285-332e36868837",
+      "type": "DockerWorkerNode",
+      "layout": {
+        "x": 300,
+        "y": 15,
+        "width": 70,
+        "height": 70
+      }
+    },
+    {
+      "id": "7feb2793-7688-447d-8166-e5e2bfee42f5",
+      "type": "DockerManagerNode",
+      "layout": {
+        "x": 10,
+        "y": 15,
+        "width": 70,
+        "height": 70
+      }
+    },
+    {
+      "id": "20d23ed8-48f1-4c00-8be9-adce1c637fc7",
+      "type": "DockerOrchestrationTemplateProviderElement",
+      "layout": {
+        "x": 502,
+        "y": 381,
+        "width": 380,
+        "height": 100
+      }
+    }
+  ],
+  "edges": [
+    {
+      "edge": {
+        "source": "7feb2793-7688-447d-8166-e5e2bfee42f5",
+        "target": "230dff14-72da-4154-8285-332e36868837"
+      }
+    },
+    {
+      "edge": {
+        "source": "20d23ed8-48f1-4c00-8be9-adce1c637fc7",
+        "target": "230dff14-72da-4154-8285-332e36868837",
+        "relationship": "parent"
+      }
+    },
+    {
+      "edge": {
+        "source": "20d23ed8-48f1-4c00-8be9-adce1c637fc7",
+        "target": "7feb2793-7688-447d-8166-e5e2bfee42f5",
+        "relationship": "parent"
+      }
+    }
+  ]
+}

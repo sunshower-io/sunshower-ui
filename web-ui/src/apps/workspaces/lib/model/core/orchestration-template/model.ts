@@ -79,10 +79,11 @@ export class Version {
     }
 
     name() {
-        return this.major.toString() + "." +
-            this.minor.toString() + "." +
-            this.minorMinor.toString() + "-" +
-            this.extension;
+        // return this.major.toString() + "." +
+        //     this.minor.toString() + "." +
+        //     this.minorMinor.toString() + "-" +
+        //     this.extension;
+        return "1.0.0-FINAL";
     }
 
     toJSON() {

@@ -4,6 +4,7 @@ import {OrchestrationTemplate} from "./model";
 import {Identifier} from "lib/common/lang/identifier";
 import {Subject} from "rxjs/Subject";
 import {autoinject} from "aurelia-framework";
+import {TaskGraph} from "lib/designer/model/graph/graph-element";
 
 @autoinject
 export class OrchestrationTemplateService implements Service<OrchestrationTemplate> {
@@ -44,6 +45,13 @@ export class OrchestrationTemplateService implements Service<OrchestrationTempla
                     return this.orchestrationTemplate;
                 })
         }
+    }
+
+    currentGraph() : Promise<TaskGraph> {
+        return new HttpClient()
+            .fetch('/ws/graph/orchestration/sample-docker.json')
+            .then(t => t.json() as any).then(c => c);
+
     }
 
     save(orchestrationTemplate: OrchestrationTemplate) : Promise<Identifier> {

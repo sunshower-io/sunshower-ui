@@ -13,7 +13,6 @@ import {
 } from "aurelia-router";
 
 @autoinject
-@NavigationAware
 export class WorkspaceApplication {
 
     constructor(private navigatorManager: NavigatorManager) {
@@ -42,6 +41,10 @@ export class WorkspaceApplication {
             Materialize.toast(`No router ${r.getBaseUrl()} found`, 2000);
             return './apps/workspaces/index';
         });
+    }
+
+    attached() : void {
+        console.log("WS app");
     }
 
 

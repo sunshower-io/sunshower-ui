@@ -4,8 +4,11 @@ import {
     customElement,
     bindable
 } from "aurelia-framework";
+
+import {Designer} from "lib/designer/core/designer";
 import {OrchestrationProviderFactory} from "apps/workspaces/lib/palette/orchestration/templates/provider-factory";
 import {OrchestrationTemplate, OrchestrationTemplateService} from "apps/workspaces/lib/model/core/orchestration-template";
+import {DesignerManager} from "lib/designer/core/designer-manager";
 import {NavigationAware} from "apps/workspaces/resources/custom-elements/navigator";
 import {RouteConfig} from "aurelia-router";
 import {ServiceManager} from "lib/common/service/service-manager";
@@ -13,11 +16,9 @@ import {RegistryProviderFactory} from "apps/workspaces/lib/palette/orchestration
 
 
 @autoinject
-// @NavigationAware
-export class OrchestrationDesigner {
+@customElement('orchestration-designer')
+export default class OrchestrationDesigner {
 
-    @bindable
-    private elementFactory: OrchestrationProviderFactory;
 
     @bindable
     private registryFactory: RegistryProviderFactory;
@@ -25,8 +26,14 @@ export class OrchestrationDesigner {
     @bindable
     private orchestration: OrchestrationTemplate;
 
-    constructor(private orchestrationService: OrchestrationTemplateService,
-        elementFactory: OrchestrationProviderFactory
+
+    @bindable
+    private elementFactory: OrchestrationProviderFactory;
+
+    constructor(
+        elementFactory: OrchestrationProviderFactory,
+        private orchestrationService: OrchestrationTemplateService,
+        private designerManager: DesignerManager
     ) {
         this.elementFactory = elementFactory;
         this.registryFactory = new RegistryProviderFactory();
@@ -39,10 +46,17 @@ export class OrchestrationDesigner {
         });
 
     }
+    //
+    // attached() {
+    //     this.orchestration = this.orchestrationService.orchestrationTemplate;
+    // }
 
-    attached() {
-        this.orchestration = this.orchestrationService.orchestrationTemplate;
+    attached() : void {
+        this.orchestrationService.currentGraph().then(t => {
+            this.designerManager.getCurrent().setGraph(t);
+        });
     }
+
 
 
 }

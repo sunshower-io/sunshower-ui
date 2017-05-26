@@ -1,5 +1,5 @@
 import {
-    DefaultElementFactory
+    DefaultElementFactory, ElementLoader
 } from "lib/designer/canvas/palette";
 import {
     Canvas
@@ -17,6 +17,7 @@ import {
     mxConstants, mxEdge, mxCell
 } from "mxgraph";
 import {
+    DockerManagerElementLoader,
     DockerManagerNode,
     DockerWorkerNode
 } from "./docker-nodes";
@@ -55,7 +56,10 @@ export class DockerOrchestrationTemplateProviderElement extends Vertex {
         let edge = new mxCell(),
             manager = this.children[0],
             worker = this.children[1];
-        canvas.insertEdge(this, 'frap', 'fap', worker, manager, 'strokeColor=#0087c9;dashed=1;strokeWidth=2');
+
+
+        let e = canvas.insertEdge(this, 'frap', 'fap', worker, manager, 'strokeColor=#0087c9;dashed=1;strokeWidth=2');
+        e.setEdge(true);
     }
 
 }
@@ -70,6 +74,17 @@ export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFa
     initialize(canvas: Canvas, element: HTMLElement): void {
         super.initialize(canvas, element);
         this.createStyle(canvas);
+        canvas.registerProvider(this);
+    }
+
+
+    handles(key: string): boolean {
+        return true;
+    }
+
+
+    resolveElementLoader(key: string): ElementLoader {
+        return new DockerManagerElementLoader();
     }
 
     /**
@@ -86,14 +101,15 @@ export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFa
                y: number,
                event: Event,
                canvas: Canvas,
-               target: any): Drawable {
+               target: any
+    ): Drawable {
         return new DockerOrchestrationTemplateProviderElement(x, y);
     }
 
 
     protected createStyle(canvas: Canvas): void {
         let style = {};
-        // mxConstants.VERTEX_SELECTION_COLOR = 'none';
+        mxConstants.VERTEX_SELECTION_COLOR = 'none';
         style[mxConstants.VERTEX_SELECTION_COLOR] = 'none';
         style[mxConstants.STYLE_FILLCOLOR] = 'none';
         style[mxConstants.STYLE_STROKECOLOR] = 'none';
