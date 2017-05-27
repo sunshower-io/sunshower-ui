@@ -94,8 +94,6 @@ def publishStagedInfo(String name) {
 
     sh "curl -H \"Content-Type: application/json\" -u hasli-bot:$pat -X POST -d '{\"body\": \"$githubComment)\"}' https://api.github.com/repos/hasli-projects/hasli-ui/issues/$pr/comments"
     slackSend (color: 'good', message: slackNotification)
-
-    echo "Port Mapping: $portMapping"
 }
 
 
