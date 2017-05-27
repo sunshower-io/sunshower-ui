@@ -39,8 +39,9 @@ services:
       - ~/.jspm:/root/.jspm
       - ~/.gradle/wrapper:/root/.gradle/wrapper
       - ~/.gradle/gradle.properties:/root/.gradle/gradle.properties
-    working_dir: /usr/src/
-    command: bash -c "chmod +x gradlew && ./gradlew installEnvironment && ./gradlew clean build"
+      - ~/.gradle/caches:/root/.gradle/caches
+    working_dir: /usr/src/web-ui
+    command: bash -c "npm install && jspm install -y && npm rebuild node-sass && cd .. && chmod +x gradlew && ./gradlew clean build"
 
 
   gulp-test:
@@ -50,4 +51,4 @@ services:
       - ./:/usr/src/
       - ~/.jspm:/root/.jspm
     working_dir: /usr/src/web-ui
-    command: bash -c "npm install && jspm install -y && gulp build"
+    command: bash -c "npm install && jspm install -y && npm rebuild node-sass && gulp build"
