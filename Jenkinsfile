@@ -83,15 +83,14 @@ try {
 
 def publishStagedInfo(String name) {
     def https = sh returnStdout: true, script: "docker-compose -f docker-compose-staging.yml -p $name port proxy 443"
-            .split(":")[1]
-    def http  = sh returnStdout: true, script: "docker-compose -f docker-compose-staging.yml -p $name port proxy 80"
-            .split(":")[1]
+    echo "Name: $name, Output: $https"
+    def port = "$https".split(":")[1]
 
     def pr = env.BRANCH_NAME.split("-")[1].trim()
     def pat = readFile('/root/.pat').trim()
 
-    String githubComment = "${JOB_NAME}, build [#${env.BUILD_NUMBER}](${env.BUILD_URL}) - Staged deployment can be viewed at: [https://10.0.4.51:$https](https://10.0.4.51:$https"
-    String slackNotification = "${JOB_NAME}, build #${env.BUILD_NUMBER} ${env.BUILD_URL} - Staged deployment can be viewed at: https://10.0.4.51:$https"
+    String githubComment = "${JOB_NAME}, build [#${env.BUILD_NUMBER}](${env.BUILD_URL}) - Staged deployment can be viewed at: [https://10.0.4.51:$port](https://10.0.4.51:$port"
+    String slackNotification = "${JOB_NAME}, build #${env.BUILD_NUMBER} ${env.BUILD_URL} - Staged deployment can be viewed at: https://10.0.4.51:$port"
 
     sh "curl -H \"Content-Type: application/json\" -u hasli-bot:$pat -X POST -d '{\"body\": \"$githubComment)\"}' https://api.github.com/repos/hasli-projects/hasli-ui/issues/$pr/comments"
     slackSend (color: 'good', message: slackNotification)
