@@ -42,7 +42,7 @@ try {
                 }
 
                 if (env.BRANCH_NAME =~ /(?i)^pr-/) {
-                    def name = ${convertBranchName(env.BRANCH_NAME)}
+                    def name = convertBranchName(env.BRANCH_NAME)
                     stage('Staging') {
                         sh "docker-compose -f docker-compose-staging.yml -p $name up -d"
                     }
