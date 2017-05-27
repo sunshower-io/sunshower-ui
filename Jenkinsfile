@@ -14,10 +14,6 @@ try {
 
             stage('Pull') {
                 checkout scm
-                echo "Change ID:     ${env.CHANGE_ID}"
-                echo "Change URL:    ${env.CHANGE_URL}"
-                echo "Change TARGET: ${env.CHANGE_ID}"
-                echo "Change TITLE:  ${env.CHANGE_TITLE}"
             }
 
             stage('Build Env Container') {
@@ -45,9 +41,9 @@ try {
                     def name = convertBranchName(env.BRANCH_NAME)
                     stage('Staging') {
                         sh "docker-compose -f docker-compose-staging.yml -p $name up -d"
+                        publishStagedInfo(name)
                     }
 
-                    publishStagedInfo(name)
                 }
             }
 
