@@ -69,7 +69,11 @@ export class RegistryPanel {
     makeFactories(id: string) : void {
         this.loading = true;
         this.dockerRegistryService.getContainers(id).then(cs => {
-            this.factories = cs.map(c => new RegistryElementFactory(c.name, c.logo_url.large));
+            this.factories = cs.map(c => new RegistryElementFactory(
+                c.slug,
+                c.name,
+                c.logo_url.large ? c.logo_url.large : 'assets/icons/designer/docker-service.svg')
+            );
             this.loading = false;
         })
     }
