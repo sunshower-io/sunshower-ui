@@ -1,5 +1,6 @@
 import {autoinject, bindable, customElement} from "aurelia-framework";
-import {DockerRegistry, DockerContainer} from "lib/hal/docker/model";
+import {UUID} from "lib/common/lang/uuid";
+import {DockerRegistry, DockerCredential} from "lib/hal/docker/model";
 import {Canvas} from "lib/designer/canvas/canvas";
 import {DesignerManager} from "lib/designer/core";
 import {DockerRegistryService} from "lib/hal/docker/service";
@@ -20,7 +21,24 @@ export class RegistryPanel {
     private registries              : DockerRegistry[];
 
     @bindable
+    private activeRegistryId        : string;
+
+    @bindable
     private activeRegistry          : DockerRegistry;
+
+    @bindable
+    private newRegistry             : DockerRegistry;
+
+    @bindable
+    private credential              : DockerCredential;
+
+    @bindable
+    private addingRegistry          : boolean;
+
+    private nameId                  : string = UUID.random();
+    private pathId                  : string = UUID.random();
+    private usernameId              : string = UUID.random();
+    private passwordId              : string = UUID.random();
 
     @bindable
     private factories               : ElementFactory[];
@@ -42,28 +60,56 @@ export class RegistryPanel {
         this.canvas = this.designerManager.getCurrentCanvas();
         this.factories = [];
         this.loadRegistries();
-        this.makeFactories('boop');
+        // this.makeFactories('boop');
         console.log(this.canvas);
         //todo detect if there is an orchestration on the board or else disable
     }
 
+    addRegistry() : void {
+        this.newRegistry = new DockerRegistry();
+        this.addingRegistry = true;
+        this.activeRegistry = null;
+    }
+
+    saveRegistry() : void {
+        this.loading = true;
+        this.newRegistry.credential = this.credential;
+        this.dockerRegistryService.save(this.newRegistry)
+            .then(t => {
+                this.loadRegistries();
+                this.newRegistry = null;
+                this.addingRegistry = false;
+                this.dockerRegistryService.bind(t.value)
+                    .then(u => {
+                        this.activeRegistry = u;
+                        this.makeFactories(u.id);
+                    });
+            })
+    }
+
     loadRegistries() : void {
-        // this.loading = true;
-        // this.dockerRegistryService.list()
-        //     .then(t => {
-        //         this.registries = t;
-        //         this.loading = false;
-        //     });
+        this.loading = true;
+        this.dockerRegistryService.list()
+            .then(t => {
+                this.registries = t;
+                this.loading = false;
+            });
         this.registries = [];
     }
 
-    setActive(id: string) : void {
+    setActive() : void {
         this.loading = true;
-        this.dockerRegistryService.bind(id)
-            .then(t => {
-                this.activeRegistry = t;
-                this.makeFactories(id);
-            });
+        if(this.activeRegistryId) {
+            this.dockerRegistryService.bind(this.activeRegistryId)
+                .then(t => {
+                    this.activeRegistry = t;
+                    this.makeFactories(this.activeRegistryId);
+                });
+        } else {
+            this.activeRegistry = null;
+            this.factories = [];
+            this.loading = false;
+        }
     }
 
     makeFactories(id: string) : void {

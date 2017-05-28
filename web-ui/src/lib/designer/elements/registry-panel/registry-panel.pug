@@ -1,15 +1,49 @@
 template
     require(from='lib/designer/elements/element-panel/palette-icon')
     .designer-panel-body
-        .designer-form
-            label Registries
-            select.browser-default
-                option(value='', disabled='', selected='') Choose a registry
-                option(repeat.for="registry of registries" value="${registry.id}") ${registry.name}
-            a.create-link(title="Incomplete Feature")
-                i.material-icons.mdi.mdi-plus-circle-outline
-                | Add Registry
-        .designer-cards
+        loader(if.bind="loading")
+        .designer-form(if.bind="!loading")
+            template(if.bind="!addingRegistry")
+                label Registries
+                select.browser-default(value.bind="activeRegistryId" change.delegate="setActive()")
+                    option(value='') Choose a registry
+                    option(repeat.for="registry of registries" value="${registry.id}") ${registry.name}
+                a.create-link(click.delegate="addRegistry()" if.bind="!addingRegistry")
+                    i.material-icons.mdi.mdi-plus-circle-outline
+                    | Add Registry
+            form(submit.delegate="saveRegistry()" if.bind="addingRegistry")
+                .input-field
+                    input(type="text"
+                        id="${nameId}"
+                        value.bind="newRegistry.name"
+                        class="validate"
+                        required="required")
+                    label(for="${nameId}") Registry Name
+                .input-field
+                    input(type="text"
+                        id="${urlId}"
+                        value.bind="newRegistry.url"
+                        class="validate"
+                        required="required")
+                    label(for="${urlId}") Registry Url
+                .row
+                    .col.m6.input-field
+                        input(type="text"
+                            id="${usernameId}"
+                            value.bind="credential.username"
+                            class="validate"
+                            required="required")
+                        label(for="${usernameId}") Registry Username
+                    .col.m6.input-field
+                        input(type="password"
+                            id="${passwordId}"
+                            value.bind="credential.password"
+                            class="validate"
+                            required="required")
+                        label(for="${passwordId}") Registry Password
+                .button-holder
+                    button.waves-effect.btn(type="submit") Add Registry
+        .designer-cards(if.bind="activeRegistry && !loading")
             palette-icon(
                 repeat.for="factory of factories"
                 factory.bind="factory"

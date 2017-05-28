@@ -46,12 +46,9 @@ export default class OrchestrationDesigner {
         });
 
     }
-    //
-    // attached() {
-    //     this.orchestration = this.orchestrationService.orchestrationTemplate;
-    // }
 
     attached() : void {
+        this.orchestration = this.orchestrationService.orchestrationTemplate;
         this.orchestrationService.currentGraph().then(t => {
             this.designerManager.getCurrent().setGraph(t);
         });
