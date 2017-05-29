@@ -8,9 +8,9 @@ import {OrchestrationProviderFactory} from "apps/workspaces/lib/palette/orchestr
 import {OrchestrationTemplateService} from "apps/workspaces/lib/model/core/orchestration-template";
 import {RegistryProviderFactory} from "apps/workspaces/lib/palette/orchestration/registries/provider-factory";
 import {DesignerManager} from "lib/designer/core/designer-manager";
-import {OrchestrationTemplate} from "../../../../lib/model/core/orchestration-template/model";
+import {OrchestrationTemplate} from "apps/workspaces/lib/model/core/orchestration-template/model";
 import {RouteConfig} from "aurelia-router";
-
+import {Materialize} from 'materialize-css';
 
 @autoinject
 @customElement('orchestration-designer')
@@ -49,10 +49,13 @@ export default class OrchestrationDesigner {
         this.orchestrationService.currentGraph().then(t => {
             let canvas = this.designerManager.getCurrentCanvas();
             this.designerManager.getCurrent().setGraph(t);
-            this.designerManager.toggleLoading();
             canvas.listen('canvas-saved').forEach(t => {
-                this.orchestrationService.saveGraph(t.data);
+                this.orchestrationService.saveGraph(t.data)
+                    .then(t => {
+                        Materialize.toast(`Successfully saved designer`, 2000);
+                    });
             });
+            this.designerManager.toggleLoading();
         });
     }
 

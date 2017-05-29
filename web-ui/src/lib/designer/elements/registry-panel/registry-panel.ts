@@ -6,6 +6,7 @@ import {DesignerManager} from "lib/designer/core";
 import {DockerRegistryService} from "lib/hal/docker/service";
 import {ElementFactoryProvider, ElementFactory} from "lib/designer/canvas/palette";
 import {RegistryElementFactory} from "apps/workspaces/lib/palette/orchestration/registries/provider-factory";
+import {Materialize} from 'materialize-css';
 
 @autoinject
 @customElement('registry-panel')
@@ -22,9 +23,6 @@ export class RegistryPanel {
 
     @bindable
     private activeRegistryId        : string;
-
-    @bindable
-    private activeRegistry          : DockerRegistry;
 
     @bindable
     private newRegistry             : DockerRegistry;
@@ -66,7 +64,7 @@ export class RegistryPanel {
     addRegistry() : void {
         this.newRegistry = new DockerRegistry();
         this.addingRegistry = true;
-        this.activeRegistry = null;
+        this.activeRegistryId = null;
     }
 
     saveRegistry() : void {
@@ -74,15 +72,13 @@ export class RegistryPanel {
         this.newRegistry.credential = this.credential;
         this.dockerRegistryService.save(this.newRegistry)
             .then(t => {
+                Materialize.toast(`Successfully made registry`, 2000);
                 this.loadRegistries();
                 this.newRegistry = null;
                 this.addingRegistry = false;
-                this.dockerRegistryService.bind(t.value)
-                    .then(u => {
-                        this.activeRegistry = u;
-                        this.makeFactories(u.id);
-                    });
-            })
+                this.activeRegistryId = t.value;
+                this.makeActive();
+            }).catch(err => console.log(err));
     }
 
     loadRegistries() : void {
@@ -98,16 +94,17 @@ export class RegistryPanel {
     setActive() : void {
         this.loading = true;
         if(this.activeRegistryId) {
-            this.dockerRegistryService.bind(this.activeRegistryId)
-                .then(t => {
-                    this.activeRegistry = t;
-                    this.makeFactories(this.activeRegistryId);
-                });
+            this.makeActive();
         } else {
-            this.activeRegistry = null;
+            this.activeRegistryId = null;
             this.factories = [];
             this.loading = false;
         }
+    }
+
+    makeActive() : void {
+        this.dockerRegistryService.bind(this.activeRegistryId);
+        this.makeFactories(this.activeRegistryId);
     }
 
     makeFactories(id: string) : void {
