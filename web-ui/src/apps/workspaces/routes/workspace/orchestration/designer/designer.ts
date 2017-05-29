@@ -4,15 +4,12 @@ import {
     customElement,
     bindable
 } from "aurelia-framework";
-
-import {Designer} from "lib/designer/core/designer";
 import {OrchestrationProviderFactory} from "apps/workspaces/lib/palette/orchestration/templates/provider-factory";
-import {OrchestrationTemplate, OrchestrationTemplateService} from "apps/workspaces/lib/model/core/orchestration-template";
-import {DesignerManager} from "lib/designer/core/designer-manager";
-import {NavigationAware} from "apps/workspaces/resources/custom-elements/navigator";
-import {RouteConfig} from "aurelia-router";
-import {ServiceManager} from "lib/common/service/service-manager";
+import {OrchestrationTemplateService} from "apps/workspaces/lib/model/core/orchestration-template";
 import {RegistryProviderFactory} from "apps/workspaces/lib/palette/orchestration/registries/provider-factory";
+import {DesignerManager} from "lib/designer/core/designer-manager";
+import {OrchestrationTemplate} from "../../../../lib/model/core/orchestration-template/model";
+import {RouteConfig} from "aurelia-router";
 
 
 @autoinject
@@ -50,8 +47,12 @@ export default class OrchestrationDesigner {
         this.designerManager.toggleLoading();
         this.orchestration = this.orchestrationService.orchestrationTemplate;
         this.orchestrationService.currentGraph().then(t => {
+            let canvas = this.designerManager.getCurrentCanvas();
             this.designerManager.getCurrent().setGraph(t);
             this.designerManager.toggleLoading();
+            canvas.listen('canvas-saved').forEach(t => {
+                this.orchestrationService.saveGraph(t.data);
+            });
         });
     }
 

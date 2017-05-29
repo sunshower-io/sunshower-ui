@@ -8,6 +8,7 @@ import {RedoAction} from "../canvas/actions/redo-action";
 import {SaveAction} from "../canvas/actions/save-action";
 import {TaskGraph} from "../model/graph/graph-element";
 import {DesignerLoader} from "./loader";
+import {JsonCodec} from "../codec/json-codec";
 
 export class Designer {
 
@@ -65,9 +66,7 @@ export class Designer {
 
 
     setGraph(graph: TaskGraph) : void {
-        graph.vertices.forEach(t => {
-            this.canvas.resolveElementLoader(t.type).load(this.canvas, t);
-        });
+        new JsonCodec().import(this.canvas, graph);
     }
 
 

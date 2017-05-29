@@ -44,11 +44,15 @@ declare module 'mxgraph' {
         currentRoot: Layer;
         translate: mxGraphBounds;
 
+        getTranslate() : mxGraphBounds;
+
         addListener(l:string, m:any) : void;
 
         getCanvas(): Element;
 
         getGraphBounds(): mxRectangle;
+
+        setGraphBounds(bounds: mxRectangle) : void;
 
         getBounds(cells:Layer[]) : any;
 

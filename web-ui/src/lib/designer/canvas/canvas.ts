@@ -14,19 +14,33 @@ import {RenderableElement} from "../model/elements";
 import {
     ElementFactory, ElementLoader,
 } from "./palette";
+import "rxjs/add/operator/filter";
+import {Subject} from "rxjs/Subject";
+import {Observable} from "rxjs/Observable";
+
+
+export interface CanvasEvent<T> {
+    data        : T;
+    type        : string;
+}
+
+export interface CanvasEventListener {
+    on<T>(e: CanvasEvent<T>);
+}
 
 
 export class Canvas extends mxGraph {
 
 
-    private grids: Grid[];
-    private undoListener: any;
+    private grids           : Grid[];
+    private undoListener    : any;
 
-    private providers: ElementFactory[];
+    private providers       : ElementFactory[];
+    private subject         : Subject<CanvasEvent<any>>;
 
 
-    private keyHandler: KeyHandler;
-    readonly historyManager: mxUndoManager;
+    private keyHandler      : KeyHandler;
+    readonly historyManager : mxUndoManager;
 
     constructor(public readonly container: HTMLElement,
                 model: CanvasModel) {
@@ -39,10 +53,19 @@ export class Canvas extends mxGraph {
         }
         this.foldingEnabled = false;
         this.setConnectable(true);
+        this.subject = new Subject();
 
         this.keyHandler = this.createKeyHandler();
         this.historyManager = this.createUndoManager();
+    }
 
+
+    public listen<T>(key:string)  : Observable<CanvasEvent<T>> {
+        return this.subject.filter((v: CanvasEvent<any>, i:number) => v.type === key);
+    }
+
+    public dispatch<T>(e:CanvasEvent<T>) : void {
+        this.subject.next(e);
     }
 
     public register(chord: Chord, action: Action): void {

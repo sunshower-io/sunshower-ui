@@ -24,6 +24,8 @@ import {
 } from 'lib/designer/model/graph';
 
 import {Canvas} from "lib/designer/canvas/canvas";
+import {Edge} from "lib/designer/model/graph/edge";
+import {Drawable} from "../model/elements";
 
 
 export interface Encoder<T> {
@@ -71,39 +73,49 @@ export class JsonCodec {
 
 
     resolveRoots(g: TaskGraph, canvas: Canvas): Layer[] {
-
         let nodes = _.reduce(g.vertices, (m, v) => {
                 if (!m[v.id]) {
                     let e = canvas
                         .resolveElementLoader(v.type)
                         .load(canvas, v);
+                    (e as any).id = v.id;
                     m[v.id] = {id: v.id, value: e}
                 }
                 return m;
             }, {}),
             parentEdges = (g.edges || []).filter(t => t.relationship === 'parent'),
-            edges = _.reduce(parentEdges, (m, e) => {
-                m[e.target] = e;
-                return m;
-            }, {}),
-            roots = _.reduce(_.values(nodes), (r, node) => {
-                let n = node as GraphElement,
-                    e = edges[n.id];
-                if (e) {
-                    let p = nodes[e.target],
-                        c = nodes[e.source];
-                    p.value.addChild(c.value);
-                    r.children[c.value.id] = true;
-                    r.all[p.value.id] = p;
-                } else {
-                    r.all[(node as any).id] = node;
-                }
+            sets = _.reduce(_.values(parentEdges), (r, edge) => {
+                let e = edge as Edge,
+                    parent = nodes[e.source].value,
+                    child = nodes[e.target] .value;
+                parent.addChild(child);
+                r.children[child.id] = true;
                 return r;
-            }, {children:{}, all:{}});
-        return (roots as any) as Layer[];
+            }, {children:{}}),
+            rootKeys = _.difference(
+                _.keys(nodes),
+                _.keys(sets.children)
+            );
+        return _.map(rootKeys, (k) => nodes[k].value);
     }
 
+
     import(canvas: Canvas, graph: TaskGraph): void {
+        canvas.getModel().beginUpdate();
+        let defaultParent = canvas.getDefaultParent();
+        try {
+            let roots = this.resolveRoots(graph, canvas);
+            for(let root of roots) {
+                let r = root as any;
+                if(r.addTo) {
+                    r.addTo(canvas);
+                } else {
+                    canvas.addCell(r, defaultParent);
+                }
+            }
+        } finally {
+            canvas.getModel().endUpdate();
+        }
 
     }
 
@@ -114,10 +126,12 @@ export class JsonCodec {
             es = [],
             r = {vertices: vs, edges: es};
 
-        for (let t of v) {
-            let encoder = this.encoders.get(getClass(t.data)) || this.defaultEncoder;
-            vs.push(encoder.encode(t));
-            this.addEdges(es, t);
+        if(v) {
+            for (let t of v) {
+                let encoder = this.encoders.get(getClass(t.data)) || this.defaultEncoder;
+                vs.push(encoder.encode(t));
+                this.addEdges(es, t);
+            }
         }
         return r;
     }
@@ -146,6 +160,7 @@ export class JsonCodec {
         for (let cell of a) {
             this.write(cell, {}, values, graph);
         }
+        graph.nodes = graph.nodes || {};
         return graph;
     }
 

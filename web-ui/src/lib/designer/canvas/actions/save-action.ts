@@ -1,11 +1,14 @@
-import {Canvas} from '../canvas'
-import {JsonCodec} from "../../codec/json-codec";
+import {Canvas} from 'lib/designer/canvas'
+import {JsonCodec} from "lib/designer/codec/json-codec";
 export class SaveAction {
 
-
     run(canvas: Canvas) :void {
+        console.log(canvas.getView().getTranslate());
         let g = new JsonCodec().export(canvas.getModel(), canvas);
-        console.log(JSON.stringify(g));
+        canvas.dispatch({
+            type    : 'canvas-saved',
+            data    : g
+        });
     }
 
 }

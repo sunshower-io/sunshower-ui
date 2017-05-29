@@ -2,12 +2,27 @@
 import {Edge} from './edge';
 import {Vertex} from "./vertex";
 
+export class CanvasLayout {
+    x               : number;
+    y               : number;
+    translateX      : number;
+    translateY      : number;
+}
+
+
 export class TaskGraph {
 
     edges           : Edge[];
 
     vertices        : Vertex[];
 
+    layout          : CanvasLayout;
+
+
+
+    constructor(o?: any) {
+        Object.assign(this, o);
+    }
 
 
     addEdge(e: Edge) : void {
