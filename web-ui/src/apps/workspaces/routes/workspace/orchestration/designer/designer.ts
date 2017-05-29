@@ -17,24 +17,24 @@ export class OrchestrationDesigner {
     @bindable
     private elementFactory: OrchestrationProviderFactory;
 
-    @bindable private
-    registryFactory: RegistryProviderFactory;
+    @bindable private registryFactory: RegistryProviderFactory;
 
-    constructor(
-        elementFactory: OrchestrationProviderFactory,
-        private orchestrationService: OrchestrationTemplateService,
-        private designerManager: DesignerManager
-    ) {
+    constructor(elementFactory: OrchestrationProviderFactory,
+                private orchestrationService: OrchestrationTemplateService,
+                private designerManager: DesignerManager) {
         this.elementFactory = elementFactory;
         this.registryFactory = new RegistryProviderFactory();
     }
 
-    attached() : void {
+    attached(): void {
         this.orchestrationService.currentGraph().then(t => {
+            let canvas = this.designerManager.getCurrentCanvas();
             this.designerManager.getCurrent().setGraph(t);
+            canvas.listen('canvas-saved').forEach(t => {
+                this.orchestrationService.saveGraph(t.data);
+            });
         });
     }
-
 
 
 }

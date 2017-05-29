@@ -11,7 +11,7 @@ import {Canvas} from "lib/designer/canvas/canvas";
 import {mxCell} from "mxgraph";
 
 export function dockerInitialLayout(x: number, y: number): Vertex {
-    let parent = new DockerOrchestrationTemplateProviderElement('', x, y),
+    let parent = new DockerOrchestrationTemplateProviderElement('', x - 160, y),
         manager = new DockerManagerNode('manager', 10, 15, 70, 70),
         worker = new DockerWorkerNode('worker', 300, 15, 70, 70);
     parent.addChild(worker);
@@ -26,9 +26,7 @@ export class DockerOrchestrationTemplateProviderElement extends Vertex {
     style: string = "docker-group-style";
 
     constructor(label: string, x: number, y: number) {
-        super(label, x - 160, y, 380, 100);
-
-
+        super(label, x, y, 380, 100);
     }
 
 

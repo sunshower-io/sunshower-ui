@@ -126,10 +126,12 @@ export class JsonCodec {
             es = [],
             r = {vertices: vs, edges: es};
 
-        for (let t of v) {
-            let encoder = this.encoders.get(getClass(t.data)) || this.defaultEncoder;
-            vs.push(encoder.encode(t));
-            this.addEdges(es, t);
+        if(v) {
+            for (let t of v) {
+                let encoder = this.encoders.get(getClass(t.data)) || this.defaultEncoder;
+                vs.push(encoder.encode(t));
+                this.addEdges(es, t);
+            }
         }
         return r;
     }
@@ -158,6 +160,7 @@ export class JsonCodec {
         for (let cell of a) {
             this.write(cell, {}, values, graph);
         }
+        graph.nodes = graph.nodes || {};
         return graph;
     }
 
