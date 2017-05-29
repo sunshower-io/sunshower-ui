@@ -60,8 +60,6 @@ export class RegistryPanel {
         this.canvas = this.designerManager.getCurrentCanvas();
         this.factories = [];
         this.loadRegistries();
-        // this.makeFactories('boop');
-        console.log(this.canvas);
         //todo detect if there is an orchestration on the board or else disable
     }
 
