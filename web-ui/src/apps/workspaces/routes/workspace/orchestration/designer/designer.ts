@@ -19,7 +19,6 @@ import {RegistryProviderFactory} from "apps/workspaces/lib/palette/orchestration
 @customElement('orchestration-designer')
 export default class OrchestrationDesigner {
 
-
     @bindable
     private registryFactory: RegistryProviderFactory;
 
@@ -48,9 +47,11 @@ export default class OrchestrationDesigner {
     }
 
     attached() : void {
+        this.designerManager.toggleLoading();
         this.orchestration = this.orchestrationService.orchestrationTemplate;
         this.orchestrationService.currentGraph().then(t => {
             this.designerManager.getCurrent().setGraph(t);
+            this.designerManager.toggleLoading();
         });
     }
 

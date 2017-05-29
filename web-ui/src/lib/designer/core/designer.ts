@@ -7,9 +7,13 @@ import {UndoAction} from "../canvas/actions/undo-action";
 import {RedoAction} from "../canvas/actions/redo-action";
 import {SaveAction} from "../canvas/actions/save-action";
 import {TaskGraph} from "../model/graph/graph-element";
+import {DesignerLoader} from "./loader";
 
 export class Designer {
 
+    private loading: boolean;
+
+    private loader: DesignerLoader;
 
     private canvas : Canvas;
 
@@ -79,6 +83,15 @@ export class Designer {
 
     getCanvas() : Canvas {
         return this.canvas;
+    }
+
+    setLoading() : void {
+        this.loader = new DesignerLoader(this.container);
+        this.loader.setLoading();
+    }
+
+    removeLoading() : void {
+        this.loader.removeLoading();
     }
 
 }

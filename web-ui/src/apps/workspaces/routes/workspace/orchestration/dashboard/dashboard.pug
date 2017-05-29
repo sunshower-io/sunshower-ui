@@ -4,7 +4,8 @@ template
         h1 Orchestration Dashboard
         .btn-floating.btn-floating-add(ref="createBtn" click.delegate="create()" title="Create a New Workspace")
             i.material-icons.large.mdi.mdi-plus
-        .card(repeat.for="orchestration of orchestrations")
+        loader(if.bind="loading")
+        .card(if.bind="!loading" repeat.for="orchestration of orchestrations")
             .card-content
                 .card-icon
                     summary-icon(text="${orchestration.name}" size="90")

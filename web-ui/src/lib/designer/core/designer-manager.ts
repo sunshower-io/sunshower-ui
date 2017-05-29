@@ -9,8 +9,15 @@ export class DesignerManager {
 
     private currentDesigner : Designer;
 
+    private loading : boolean;
+
     setCurrent(designer: Designer) {
         this.currentDesigner = designer;
+        if (this.loading) {
+            this.currentDesigner.setLoading();
+        } else {
+            this.currentDesigner.removeLoading();
+        }
     }
 
 
@@ -29,5 +36,12 @@ export class DesignerManager {
 
     redo() : void {
         this.currentDesigner.redo();
+    }
+
+    toggleLoading() : void {
+        this.loading = !this.loading;
+        if (!this.loading && this.currentDesigner) {
+            this.currentDesigner.removeLoading();
+        }
     }
 }
