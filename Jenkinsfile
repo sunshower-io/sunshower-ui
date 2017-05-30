@@ -33,7 +33,6 @@ try {
 
                 stage('Build UI') {
                     sh "docker-compose run --rm build-war"
-                    sh "sed -i.bak 's/^UI_VERSION=.*/UI_VERSION=$version/' .env"
                     sh "docker-compose build ui"
                 }
 
