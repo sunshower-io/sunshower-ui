@@ -57,16 +57,11 @@ try {
                     sh "docker rmi $hasliImage:$version"
                     sh "docker rmi $hasliImage"
                 }
-            }
-        }
-    }
 
-
-    if (env.BRANCH_NAME == "master") {
-        node('manager') {
-            stage('Production') {
-                checkout scm
-                sh "docker service update --image hasli/ui ui"
+                stage('Production') {
+                    sh "scp -i ~/.ssh/aws-docker-swarm.pem docker-compose-stack.yml docker@52.53.220.216:/home/docker/docker-compose-stack.yml"
+                    sh "ssh -i ~/.ssh/aws-docker-swarm.pem docker@52.53.220.216 'docker stack deploy -c docker-compose-stack.yml hasli --with-registry-auth'"
+                }
             }
         }
     }
@@ -101,17 +96,6 @@ def convertBranchName(String name) {
     return name.replaceAll('/', '_')
 }
 
-
-def getMappedPort(String portMapping, int port) {
-    List<String> ports = portMapping.trim().split(/\n/)
-
-    for (int i = 0; i < ports.size(); i++) {
-        if (ports[i] =~ /$port/)
-            return ports[i].split(/->/)[1].trim().split(/:/)[1]
-    }
-
-    return ""
-}
 
 def notifySlack(String buildStatus) {
     if (env.BRANCH_NAME =~ /(?i)^pr-/ || env.BRANCH_NAME == "master") {
