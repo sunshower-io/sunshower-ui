@@ -12,8 +12,8 @@ import {mxCell} from "mxgraph";
 
 export function dockerInitialLayout(x: number, y: number): Vertex {
     let parent = new DockerOrchestrationTemplateProviderElement('', x - 160, y),
-        manager = new DockerManagerNode('manager', 10, 15, 70, 70),
-        worker = new DockerWorkerNode('worker', 300, 15, 70, 70);
+        manager = new DockerManagerNode('Manager', 10, 15, 70, 70),
+        worker = new DockerWorkerNode('Worker', 300, 15, 70, 70);
     parent.addChild(worker);
     parent.addChild(manager);
     return parent;

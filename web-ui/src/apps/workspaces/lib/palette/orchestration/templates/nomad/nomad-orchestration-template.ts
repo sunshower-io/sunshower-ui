@@ -25,8 +25,8 @@ export class NomadOrchestrationTemplateProviderElement extends Vertex {
 export class NomadOrchestrationTemplateProviderFactory extends DefaultElementFactory {
     rolesAllowed        : Role[] = [new Role('admin')];
     elementName         : string = 'Nomad';
-    displayIcon         : string = 'assets/icons/hal/orchestration/providers/nomad-logo.svg';
-    paletteIcon         : string = 'assets/icons/hal/orchestration/providers/nomad-logo.svg';
+    displayIcon         : string = 'assets/icons/hal/orchestration/providers/nomad-single.svg';
+    paletteIcon         : string = 'assets/icons/hal/orchestration/providers/nomad-swarm.svg';
 
 
 
