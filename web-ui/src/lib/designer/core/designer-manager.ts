@@ -11,6 +11,10 @@ export class DesignerManager {
 
     private loading : boolean;
 
+    fire(key: string) : void {
+        this.getCurrentCanvas().fire(key);
+    }
+
     setCurrent(designer: Designer) {
         this.currentDesigner = designer;
         if (this.loading) {

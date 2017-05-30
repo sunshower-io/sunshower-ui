@@ -32,6 +32,10 @@ export class MenuBar {
         $(this.templateDD).dropdown();
     }
 
+    save() : void {
+        this.manager.fire('save');
+    }
+
     undo() : void {
         this.manager.undo();
     }

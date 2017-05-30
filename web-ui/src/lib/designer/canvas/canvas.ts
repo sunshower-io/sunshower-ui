@@ -56,10 +56,10 @@ export class Canvas extends mxGraph {
         this.foldingEnabled = false;
         this.subject = new Subject();
         this.setConnectable(true);
-        this.keyHandler = this.createKeyHandler();
-        this.historyManager = this.createUndoManager();
         this.setAllowDanglingEdges(false);
         this.setDisconnectOnMove(false);
+        this.keyHandler = this.createKeyHandler();
+        this.historyManager = this.createUndoManager();
     }
 
     public createGraphHandler() : mxGraphHandler {
@@ -67,15 +67,14 @@ export class Canvas extends mxGraph {
     }
 
 
-    cellsMoved(cells: Layer[],
-               dx: number,
-               dy: number,
-               disconnect?: boolean,
-               constrain?: boolean,
-               extend?: boolean): void {
-        return super.cellsMoved(cells, dx, dy, false, true, true);
+    public fire(key: string) : void {
+        this.keyHandler.resolve(key).run(this);
     }
 
+
+    cellsMoved(cells: Layer[], dx: number, dy: number, disconnect?: boolean, constrain?: boolean, extend?: boolean): void {
+        super.cellsMoved(cells, dx, dy, false, false, true);
+    }
 
     public listen<T>(key: string): Observable<CanvasEvent<T>> {
         return this.subject.filter((v: CanvasEvent<any>, i: number) => v.type === key);
