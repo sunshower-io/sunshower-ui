@@ -14,6 +14,10 @@ export class Overlay extends mxCellOverlay {
 }
 
 export interface Drawable extends Layer {
+
+    labelVisible : boolean;
+    labelClass   : string;
+
     getLabel() : string;
     overlays() : Overlay[];
     addTo(canvas: Canvas) : boolean;
@@ -22,6 +26,9 @@ export interface Drawable extends Layer {
 
 
 export abstract class RenderableElement extends mxCell implements Drawable {
+
+    labelVisible            : boolean  = true;
+    labelClass              : string = 'default-label';
 
     constructor(
         label: string,
@@ -47,11 +54,24 @@ export abstract class RenderableElement extends mxCell implements Drawable {
     addTo(canvas:Canvas) : boolean {
         canvas.getModel().beginUpdate();
         try {
-            canvas.addCell(this, null);
+            this.doInsert(canvas);
         } finally {
             canvas.getModel().endUpdate();
         }
         return true;
+    }
+
+    protected doInsert(canvas: Canvas) : void {
+        canvas.addCell(this, null);
+    }
+
+
+    addChild(v:RenderableElement) : void {
+        v.setParent(this);
+        if(!this.children) {
+            this.children = [];
+        }
+        this.children.push(v);
     }
 }
 

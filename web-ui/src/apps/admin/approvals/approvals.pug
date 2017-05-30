@@ -1,0 +1,70 @@
+template
+    navbar
+    navigator
+    .body
+        .body-content(roles-allowed.bind="roles")
+            h1 Users
+
+            h2 Pending Approvals
+            p(if.bind="approvals.length == 0") No approvals
+            table.highlight.bordered(if.bind="approvals.length > 0")
+                thead
+                    tr
+                        th First Name
+                        th Last Name
+                        th Email
+                        th Phone
+                        th Username
+                        th
+                tbody
+                    tr(if.bind="loading")
+                        td.loader-holder(colspan="6")
+                            loader
+                    tr(if.bind="!loading" repeat.for="approval of approvals")
+                        td ${approval.firstName}
+                        td ${approval.lastName}
+                        td ${approval.emailAddress}
+                        td ${approval.phoneNumber}
+                        td ${approval.username}
+                        td
+                            input(type="checkbox"
+                                id="${approval.id}"
+                                click.delegate="approve(approval.id)")
+                            label(for="${approval.id}") Approve
+
+            h2 Approved Users
+            table.highlight.bordered
+                thead
+                    tr
+                        th First Name
+                        th Last Name
+                        th Email
+                        th Phone
+                        th Username
+                        th
+                tbody
+                    tr(if.bind="loading")
+                        td.loader-holder(colspan="6")
+                            loader
+                    tr(if.bind="!loading" repeat.for="user of users")
+                        td ${user.firstName}
+                        td ${user.lastName}
+                        td ${user.emailAddress}
+                        td ${user.phoneNumber}
+                        td ${user.username}
+                        td
+                            //todo disable this here checkbox if administrator
+                            template(if.bind="user.username != 'administrator'")
+                                input(type="checkbox"
+                                    id="${user.id}"
+                                    click.delegate="revoke(user.id)"
+                                    checked
+                                )
+                                label(for="${user.id}") Approved
+                            template(if.bind="user.username == 'administrator'")
+                                input(type="checkbox"
+                                id="administrator-${user.id}"
+                                checked
+                                disabled
+                                )
+                                label(for="administrator-${user.id}") Approved

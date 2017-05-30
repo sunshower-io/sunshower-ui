@@ -15,6 +15,8 @@ import {
 } from "apps/workspaces/resources/custom-elements/navigator";
 import {VelocityAnimator} from "aurelia-animator-velocity";
 import {ApplicationState} from "lib/common/storage/application-state";
+import {EventAggregator} from "aurelia-event-aggregator";
+import {SideNavEvents} from "../events";
 
 
 @autoinject
@@ -26,7 +28,7 @@ export class Navigator {
     private controlId: string;
 
     @bindable
-    private opened: boolean;
+    public opened: boolean;
 
     private navigationControl: HTMLElement;
     private navigationContainer: HTMLElement;
@@ -42,7 +44,8 @@ export class Navigator {
 
     constructor(private animator: VelocityAnimator,
                 private state: ApplicationState,
-                private navigatorManager:NavigatorManager
+                private navigatorManager:NavigatorManager,
+                private ea:EventAggregator
     ) {
     }
 
@@ -51,9 +54,12 @@ export class Navigator {
         this.opened = this.navigatorManager.open;
         if(!this.opened) {
             this.hide();
+            this.opened = false;
+            this.fireEvent();
         } else {
             this.open(this.navigatorManager.currentInstruction.config.navModel);
             this.show();
+            this.fireEvent();
         }
 
     }
@@ -77,15 +83,14 @@ export class Navigator {
         ]);
     }
 
-
-
     public toggle(): void {
         if (this.opened) {
+            this.opened = false;
             this.hide();
         } else {
             this.show();
         }
-        this.opened = !this.opened;
+        this.fireEvent();
     }
 
 
@@ -99,6 +104,10 @@ export class Navigator {
         }
         return true;
     }
+
+    private fireEvent() : void {
+        this.ea.publish(SideNavEvents.TOGGLED, {navState: this.opened});
+    };
 
 
 }

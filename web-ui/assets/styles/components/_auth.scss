@@ -13,16 +13,31 @@
 }
 
 .auth-main {
-  padding: 100px;
+  padding: 50px;
   box-sizing:border-box;
   width:65%;
   top:0;
   right:0;
   bottom:0;
   position:absolute;
+  overflow-y: auto;
+
+  form {
+    background: transparent;
+    padding: 0;
+  }
+
+  .button-holder {
+    padding-top: $standard-padding*2;
+  }
+
+  .row {
+    margin-bottom: 0;
+  }
 
   h1 {
-    margin:5rem 0 3rem 0;
+    margin: $standard-padding*3 0 $standard-padding 0;
+    font-size: 3rem;
   }
 
   @media #{$medium-and-down} {
@@ -31,7 +46,7 @@
   }
 
   @media #{$extra-large-and-up} {
-    padding: 100px 200px 100px 100px;
+    padding: 50px 100px;
   }
 }
 

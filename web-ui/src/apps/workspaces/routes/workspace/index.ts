@@ -6,32 +6,33 @@ import {
 } from 'aurelia-router';
 
 
-import {NavigatorManager} from 'apps/workspaces/resources/custom-elements/navigator';
-import {WorkspaceService} from "../../lib/model/core/workspace/service";
+import {
+    WorkspaceService
+} from "apps/workspaces/lib/model/core/workspace/service";
+import {NavigationAware} from "../../resources/custom-elements/navigator";
 
 @autoinject
 export class WorkspaceContext {
 
-    /**
-     *
-     * @param navigatorManager
-     */
-    constructor(
-        private workspaceService: WorkspaceService,
-        private navigatorManager: NavigatorManager
+
+    constructor(private router: Router,
+                private workspaceService: WorkspaceService
     ) {
 
     }
 
     activate(params: any) {
-        console.log(params);
+        this.workspaceService.current().then(t => {
+            (this.router as any).title = t.name;
+        });
     }
 
 
     configureRouter(config: RouterConfiguration,
                     router: Router) {
+        config.options.breadcrumb = true;
         config.map([{
-            route: 'dashboard',
+            route: ['', 'dashboard'],
             moduleId: './dashboard/index',
             name: 'dashboard',
             nav: true,
@@ -66,8 +67,19 @@ export class WorkspaceContext {
                     reference: 'apps/workspaces/routes/workspace/infrastructure/context-menu'
                 }
             }
+        }, {
+            route: 'orchestration',
+            moduleId: './orchestration/index',
+            name: 'orchestration',
+            nav: true,
+            title: 'Orchestration',
+            settings: {
+                icon: 'mdi-android-studio',
+                contextComponent: {
+                    reference: 'apps/workspaces/routes/workspace/orchestration/context-menu'
+                }
+            }
         }]);
-        this.navigatorManager.bind(router);
     }
 
 

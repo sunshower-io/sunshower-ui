@@ -29,6 +29,7 @@ export class ComputeNodeTemplateElement extends Vertex implements ComputeNodeTem
 export class ComputeNodeTemplateElementFactory extends DefaultElementFactory {
     elementName         : string = 'Node Template';
     displayIcon         : string = 'assets/icons/designer/virtual-machine.svg';
+    paletteIcon         : string = 'assets/icons/designer/virtual-machine.svg';
 
 
     initialize(canvas: Canvas, element: HTMLElement): void {

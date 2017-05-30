@@ -1,7 +1,7 @@
 import {bindable} from "aurelia-framework";
 import {HttpClient} from "aurelia-fetch-client";
 import {inject} from "aurelia-dependency-injection";
-import {User} from "lib/common/security";
+import {Principal} from "lib/common/security";
 import {LocalStorage} from "lib/common/storage";
 import * as materialize from 'materialize-css';
 
@@ -17,6 +17,7 @@ import {
 } from "lib/common/security";
 import {Router} from "aurelia-router";
 import {UUID} from 'lib/common/lang';
+import {Generated} from "lib/common/lang/uuid";
 
 @inject(
     Aurelia,
@@ -29,7 +30,8 @@ import {UUID} from 'lib/common/lang';
 )
 export class Login {
 
-    private usernameId: string       =  UUID.random();
+    @Generated
+    private usernameId: string;
     private passwordId: string       =  UUID.random();
 
     @bindable
@@ -39,7 +41,10 @@ export class Login {
     private credentialsInvalid: boolean = false;
 
     @bindable
-    private user: User = new User();
+    private error: string;
+
+    @bindable
+    private user: Principal = new Principal();
 
 
     constructor(private aurelia: Aurelia,
@@ -52,39 +57,41 @@ export class Login {
     }
 
     attached(): void {
+        setTimeout(() => {
+            Materialize.updateTextFields();
+        }, 100);
         let token = this.storage.get("X-AUTH-TOKEN");
         if (token) {
-            this.client.fetch('authenticate/validate', {
-                method: 'post',
-                body: JSON.stringify(new Token(token, null))
-            }).then(response => response.json())
-                .then(data => {
-                    // this.holder.set(data, true);
-                    // console.log("USER1", data.user)
-                    // this.container.registerInstance(User, data.user);
-                    // let headers = this.client.defaults.headers as Object;
-                    // headers['X-AUTH-TOKEN'] = data.token.token;
-                    // this.auth.setAppRoot();
-                })
+            this.client.fetch('security/validate', {
+                method: 'put',
+                body: JSON.stringify(new Token({value:token}))
+            });
         }
     }
 
 
     login(): void {
-        this.client.fetch('authenticate/authenticate', {
-            method: 'post',
+        this.client.fetch('security/authenticate', {
+            method: 'put',
             body: JSON.stringify(this.user)
         }).then(response => response.json() as any)
             .then(data => {
                 if (this.remember) {
-                    this.storage.put('X-AUTH-TOKEN', data.token.token);
+                    this.storage.put('X-AUTH-TOKEN', data.token.value);
                     window.location.reload(true);
                 } else {
-                    this.setParam("token", data.token.token);
+                    this.setParam("token", data.token.value);
                     window.location.reload(true);
                 }
             }).catch(e => {
             this.credentialsInvalid = true;
+
+            if (e.status == 401) {
+                this.error = "You have not been approved. We will contact you when you can sign in"
+            } else {
+                this.error = "We did not recognize this username/password combination. Please try again."
+            }
+            //may need other message some day
         });
     }
 

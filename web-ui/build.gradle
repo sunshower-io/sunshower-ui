@@ -1,4 +1,3 @@
-apply plugin: 'maven-publish'
 apply from: 'gradle/tasks.gradle'
 
 configurations {
@@ -7,17 +6,6 @@ configurations {
 
 artifacts {
     uiPackage assembleAll
-}
-
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact assembleAll {
-                classifier "package"
-            }
-        }
-    }
 }
 
 build.dependsOn assembleAll

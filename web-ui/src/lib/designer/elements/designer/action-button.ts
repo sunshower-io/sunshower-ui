@@ -17,7 +17,7 @@ export class DesignerActionButton {
 
     attached() {
 
-        // this.active = true;
+        this.active = true;
     }
 
 }

@@ -17,14 +17,15 @@ import {
 
 import {
     AuthenticationContextHolder,
-    User,
-    AuthenticationContext
+    Principal,
+    Authentication
 } from "lib/common/security";
 
 
 import {DialogConfiguration} from "aurelia-dialog";
 
 import {Container} from "aurelia-dependency-injection";
+import {MaterializeRenderer} from "./lib/common/resources/custom-elements/materialize-renderer";
 
 
 export function param(name) {
@@ -59,11 +60,11 @@ export function configure(aurelia: Aurelia) {
         storage
     );
 
-    http.fetch('initialize/active')
-        .then(data => data.json() as any)
-        .then(data => {
-            doConfigure(data, http, container, aurelia, storage, tokenHolder);
-        });
+    // http.fetch('initialize/active')
+    //     .then(data => data.json() as any)
+    //     .then(data => {
+            doConfigure(true, http, container, aurelia, storage, tokenHolder);
+        // });
 }
 
 
@@ -96,6 +97,21 @@ function registerAnimations(cfg) {
             [{rotateZ: [180, 0]}, 1],
         ]
     });
+
+    cfg.registerEffect("slideOver", {
+        defaultDuration: 1950,
+        calls: [
+            [{translateX: '250px'}]
+        ]
+    });
+
+    cfg.registerEffect("slideBack", {
+        defaultDuration: 1950,
+        calls: [
+            [{translateX: '0px'}]
+        ]
+    });
+
 }
 
 
@@ -103,6 +119,8 @@ function configureResources(aurelia: Aurelia) {
     aurelia.use
         .standardConfiguration()
         .globalResources([
+            'lib/resources/custom-elements/loader/loader',
+            'lib/common/resources/custom-attributes/roles-allowed',
             'lib/designer/elements/panel',
             'lib/designer/elements/panels',
             'lib/designer/elements/designer/left-panel',
@@ -125,7 +143,9 @@ function configureResources(aurelia: Aurelia) {
             return cfg;
         })
         .plugin('aurelia-dialog', (config: DialogConfiguration) => {
-        }).developmentLogging();
+            config.useRenderer(MaterializeRenderer)
+        })
+        .developmentLogging();
 }
 
 
@@ -136,23 +156,27 @@ function doConfigure(data: any,
                      storage: Map<string, string>,
                      tokenHolder: AuthenticationContextHolder) {
 
-    if (!data.value) {
+    if (!data) {
         container.registerInstance(HttpClient, http);
-        aurelia.start().then(() => aurelia.setRoot('initialize/initialize'))
+        aurelia.start().then(() => aurelia.setRoot('apps/auth/auth'))
     } else {
         let token = storage.get('X-AUTH-TOKEN') || param('token');
         tokenHolder.validate(token).then(context => {
-            container.registerInstance(User, context.user);
-            container.registerInstance(AuthenticationContext, context);
+
+                let user = context.user,
+                token = context.token;
+
+            container.registerInstance(Principal , user);
+            container.registerInstance(Authentication, context);
             http.defaults.headers['X-AUTH-TOKEN'] = token;
             let authenticatedClient = new HttpClient(),
                 basicClient = new BasicHttpClient();
 
 
-            configureBasicClient(basicClient, container, token);
+            configureBasicClient(basicClient, container, token.value);
 
 
-            configureAuthenticatedClient(authenticatedClient, container, token);
+            configureAuthenticatedClient(authenticatedClient, container, token.value);
 
 
             tokenHolder.set(context, false);

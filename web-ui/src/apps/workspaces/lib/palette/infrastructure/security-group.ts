@@ -25,6 +25,7 @@ export class SecurityGroupElement extends Vertex implements SecurityGroup {
 export class SecurityGroupElementFactory extends DefaultElementFactory {
     elementName         : string = 'Security Group';
     displayIcon         : string = 'assets/icons/designer/security-group.svg';
+    paletteIcon         : string = 'assets/icons/designer/security-group.svg';
 
 
 

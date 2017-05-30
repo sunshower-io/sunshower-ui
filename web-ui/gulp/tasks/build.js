@@ -31,7 +31,7 @@ gulp.task('build-system', function() {
     .pipe(sourcemaps.init({loadMaps: true}))
     // .pipe(typescript(typescriptCompiler))
     .pipe(typescriptCompiler())
-    .pipe(sourcemaps.write('.', {includeContent: false, sourceRoot: '/dev/src'}))
+    .pipe(sourcemaps.write('.', {includeContent: false, sourceRoot: '/src'}))
     .pipe(gulp.dest(paths.output));
 });
 

@@ -24,6 +24,8 @@ module.exports = {
         'jspm_packages/npm/lodash@4.17.4.js',
         'jspm_packages/npm/rxjs@5.0.3.js',
         'jspm_packages/npm/mdi@1.9.33',
+        'jspm_packages/github/plotly/plotly.js@1.21.3.js',
+        'jspm_packages/github/dmauro/Keypress@2.1.4.js',
         'jspm_packages/github/systemjs/plugin-css@0.1.33.js',
         'jspm_packages/github/systemjs/plugin-css@0.1.33/css.js',
         'jspm_packages/github/systemjs/plugin-json@0.1.33.js',
@@ -47,6 +49,8 @@ module.exports = {
     // must be 'normalized' by jspm to get the proper
     // path.
     'normalize': [
+        ['keypress', ['/**/*']],
+        ['plotly/plotly.js', ['/**/*']],
         ['velocity', ['/**/*']],
         ['mdi', ['/css/*.css', '/fonts/*.eot', '/fonts/*.svg', '/fonts/**']],
         ['plugin-css', ['/css.js']],

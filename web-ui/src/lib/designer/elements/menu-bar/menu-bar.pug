@@ -1,5 +1,5 @@
 template
-    .designer-menu-bar
+    .designer-menu-bar(slot="menu-bar")
         .template-info
             .dropdown-button(
                     ref="templateDD"
@@ -7,14 +7,12 @@ template
                     data-beloworigin="true"
                     data-activates="${controlId}"
                 )
-                | Template Name
-                span.version v1.0
+                | ${model.name}
+                span.version v ${model.version.name()}
                 i.material-icons.mdi.mdi-chevron-right.dropdown-icon
             ul.dropdown-content(id="${controlId}")
-                li Last Edited Nevar
-                li Last Released Nevar Evar
-                li.divider
-                li Other boops
+                li Last Edited ${model.modified}
+                li Last Released
 
         ul.tab-menu
             li.tab.active

@@ -1,10 +1,15 @@
 template
     nav
         .nav-wrapper
-            .brand-logo
-                a(href="/") Hasli.io
-                a.breadcrumb WorkspaceName
-                a.breadcrumb Dashboard
+            .brand-logo(
+                ref="brandLogo"
+                anim-enter="slideOver"
+                anim-leave="slideBack"
+                )
+                a.breadcrumb(repeat.for="breadcrumb of breadcrumbs"
+                    href="${breadcrumb.href}"
+                      )
+                    | ${breadcrumb.title}
             ul.right.user-menu
                 li.alert-tab
                     i.material-icons.mdi.mdi-bell
@@ -31,6 +36,9 @@ template
                     //li(click.delegate="incompleteFeature.notify($event)")
                     //    i.material-icons.mdi.mdi-help-circle
                     //    | Help
+                    li(roles-allowed="admin" click.delegate="approvals()")
+                        i.material-icons.mdi.mdi-account-check
+                        | Approvals
                     //li.divider
                     li(click.delegate="logout()")
                         i.material-icons.mdi.mdi-logout-variant
