@@ -43,9 +43,9 @@ export class HasliInitiatorElementLoader implements ElementLoader {
 
     static readonly types = {
         'HasliAgentNode' : HasliAgentNode,
-        'HasliIniatiatorNode': HasliInitiatorNode,
+        'HasliInitiatorNode': HasliInitiatorNode,
         'HasliOrchestrationTemplateProviderElement': HasliOrchestrationTemplateProviderElement
-    }
+    };
 
     load(canvas: Canvas, v: TaskVertex) : Drawable {
         let ctor = HasliInitiatorElementLoader.types[v.type];
