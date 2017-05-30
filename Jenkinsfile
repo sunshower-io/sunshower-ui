@@ -51,7 +51,7 @@ try {
                     sh "docker tag $hasliImage $hasliImage:$version"
 
                     sh "docker push $hasliImage:$version"
-                    sh "docker push $hasliImage"
+                    sh "docker push $hasliImage:latest"
 
                     sh "docker rmi $hasliImage:$version"
                 }
