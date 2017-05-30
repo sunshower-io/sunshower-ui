@@ -41,7 +41,6 @@ export class DockerOrchestrationTemplateProviderElement extends Vertex {
             manager = this.children[0],
             worker = this.children[1];
 
-
         let e = canvas.insertEdge(this, 'frap', 'fap', worker, manager, 'strokeColor=#0087c9;dashed=1;strokeWidth=2');
         e.setEdge(true);
     }

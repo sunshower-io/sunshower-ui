@@ -3,7 +3,7 @@ import {
     mxClient,
     mxUndoManager,
     mxEvent,
-    mxUtils, Layer
+    mxUtils, Layer, mxGraphHandler, mxCellState, mxVertexHandler, mxRectangle, mxConstants
 } from "mxgraph";
 import {Grid} from 'lib/designer/core';
 import {CanvasModel} from 'lib/designer/model';
@@ -17,11 +17,13 @@ import {
 import "rxjs/add/operator/filter";
 import {Subject} from "rxjs/Subject";
 import {Observable} from "rxjs/Observable";
+import {GraphHandler} from "./graph-handler";
+import {VertexHandler} from "./vertex-handler";
 
 
 export interface CanvasEvent<T> {
-    data        : T;
-    type        : string;
+    data: T;
+    type: string;
 }
 
 export interface CanvasEventListener {
@@ -32,15 +34,15 @@ export interface CanvasEventListener {
 export class Canvas extends mxGraph {
 
 
-    private grids           : Grid[];
-    private undoListener    : any;
+    private grids: Grid[];
+    private undoListener: any;
 
-    private providers       : ElementFactory[];
-    private subject         : Subject<CanvasEvent<any>>;
+    private providers: ElementFactory[];
+    private subject: Subject<CanvasEvent<any>>;
 
 
-    private keyHandler      : KeyHandler;
-    readonly historyManager : mxUndoManager;
+    private keyHandler: KeyHandler;
+    readonly historyManager: mxUndoManager;
 
     constructor(public readonly container: HTMLElement,
                 model: CanvasModel) {
@@ -52,19 +54,34 @@ export class Canvas extends mxGraph {
             );
         }
         this.foldingEnabled = false;
-        this.setConnectable(true);
         this.subject = new Subject();
-
+        this.setConnectable(true);
         this.keyHandler = this.createKeyHandler();
         this.historyManager = this.createUndoManager();
+        this.setAllowDanglingEdges(false);
+        this.setDisconnectOnMove(false);
+    }
+
+    public createGraphHandler() : mxGraphHandler {
+        return new GraphHandler(this);
     }
 
 
-    public listen<T>(key:string)  : Observable<CanvasEvent<T>> {
-        return this.subject.filter((v: CanvasEvent<any>, i:number) => v.type === key);
+    cellsMoved(cells: Layer[],
+               dx: number,
+               dy: number,
+               disconnect?: boolean,
+               constrain?: boolean,
+               extend?: boolean): void {
+        return super.cellsMoved(cells, dx, dy, false, true, true);
     }
 
-    public dispatch<T>(e:CanvasEvent<T>) : void {
+
+    public listen<T>(key: string): Observable<CanvasEvent<T>> {
+        return this.subject.filter((v: CanvasEvent<any>, i: number) => v.type === key);
+    }
+
+    public dispatch<T>(e: CanvasEvent<T>): void {
         this.subject.next(e);
     }
 
@@ -86,8 +103,8 @@ export class Canvas extends mxGraph {
     }
 
     resolveElementLoader(key: string): ElementLoader {
-        for(let provider of this.providers) {
-            if(provider.handles(key)) {
+        for (let provider of this.providers) {
+            if (provider.handles(key)) {
                 return provider.resolveElementLoader(key);
             }
         }
@@ -177,3 +194,8 @@ export class Canvas extends mxGraph {
 
 }
 
+
+interface ParentGrouping {
+    root: Layer;
+    children: Layer[];
+}

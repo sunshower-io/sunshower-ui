@@ -62,7 +62,7 @@ export class NomadOrchestrationTemplateProviderFactory extends DefaultElementFac
     }
 
     handles(key: string): boolean {
-        return true;
+        return NomadServerElementLoader.types[key];
     }
 
     resolveElementLoader(key: string): ElementLoader {

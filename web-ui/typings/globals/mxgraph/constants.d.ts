@@ -9,6 +9,8 @@ declare module 'mxgraph' {
     }
 
     export class mxConstants {
+
+        static STYLE_AUTOSIZE                   : number;
         static STYLE_PERIMETER_SPACING          : string;
         static STYLE_SPACING_TOP                : string;
         static STYLE_LABEL_PADDING              : string;

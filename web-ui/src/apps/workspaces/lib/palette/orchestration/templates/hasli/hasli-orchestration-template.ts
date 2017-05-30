@@ -20,34 +20,6 @@ import {Role} from "lib/common/security/model/user";
 import {hasliInitialLayout, HasliInitiatorElementLoader} from "./hasli-nodes";
 import {mxCell} from "mxgraph";
 
-export class HasliOrchestrationTemplateProviderElement extends Vertex {
-    labelVisible = false;
-    style: string = 'hasli-group-style';
-
-    constructor(label: string, x: number, y: number) {
-        super(label, x, y, 380, 100);
-    }
-
-    addTo(canvas: Canvas): boolean {
-        let a = super.addTo(canvas);
-        return a;
-    }
-
-    protected doInsert(canvas: Canvas): void {
-        canvas.addCell(this, null);
-        let edge = new mxCell(),
-            initiator = this.children[0],
-            agent = this.children[1];
-
-        let e = canvas.insertEdge(this, '', '', agent, initiator, 'strokeColor=#0087c9;dashed=1;strokeWidth=2');
-        e.setEdge(true);
-
-        let e2 = canvas.insertEdge(this, '', '', initiator, agent, 'strokeColor=#0087c9;dashed=1;strokeWidth=2');
-        e2.setEdge(true);
-    }
-
-
-}
 
 export class HasliOrchestrationTemplateProviderFactory extends DefaultElementFactory {
     elementName         : string = 'Hasli';
@@ -65,7 +37,7 @@ export class HasliOrchestrationTemplateProviderFactory extends DefaultElementFac
     }
 
     handles(key: string): boolean {
-        return true;
+        return HasliInitiatorElementLoader.types[key];
     }
 
     resolveElementLoader(key: string): ElementLoader {

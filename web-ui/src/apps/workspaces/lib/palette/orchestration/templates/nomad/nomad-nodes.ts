@@ -7,7 +7,6 @@ import {
 import {ElementLoader} from "lib/designer/canvas/palette";
 import {Vertex as TaskVertex} from 'lib/designer/model/graph';
 import {Canvas} from "lib/designer/canvas/canvas";
-import {mxCell} from "mxgraph";
 import {NomadOrchestrationTemplateProviderElement} from "./nomad-orchestration-template";
 
 export function nomadInitialLayout(x: number, y: number): Vertex {
@@ -42,12 +41,12 @@ export class ServerToClientConnection extends Edge {
 export class NomadServerElementLoader implements ElementLoader {
 
     static readonly types = {
-        'NomadClientNode' : NomadClientNode,
+        'NomadClientNode': NomadClientNode,
         'NomadServerNode': NomadServerNode,
         'NomadOrchestrationTemplateProviderElement': NomadOrchestrationTemplateProviderElement
     };
 
-    load(canvas: Canvas, v: TaskVertex) : Drawable {
+    load(canvas: Canvas, v: TaskVertex): Drawable {
         let ctor = NomadServerElementLoader.types[v.type];
         return new ctor('whatever', v.layout.x, v.layout.y, v.layout.width, v.layout.height);
     }

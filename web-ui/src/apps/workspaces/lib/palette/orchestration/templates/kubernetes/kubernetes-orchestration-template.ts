@@ -64,7 +64,7 @@ export class KubernetesOrchestrationTemplateProviderFactory extends DefaultEleme
     }
 
     handles(key: string): boolean {
-        return true;
+        return KubernetesMasterElementLoader.types[key];
     }
 
     resolveElementLoader(key: string): ElementLoader {

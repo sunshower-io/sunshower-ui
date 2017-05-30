@@ -44,7 +44,7 @@ export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFa
 
 
     handles(key: string): boolean {
-        return true;
+        return DockerManagerElementLoader.types[key];
     }
 
 
