@@ -104,6 +104,8 @@ export class KubernetesOrchestrationTemplateProviderFactory extends DefaultEleme
                 'kubernetes-group-style',
                 style
             );
+        console.log('looking at canvas stylesheet', canvas);
+
         this.createKubernetesNodeStyle(canvas);
     }
 

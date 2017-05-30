@@ -51,7 +51,6 @@ export class RegistryPanel {
 
     activate(provider: ElementFactoryProvider) {
         this.model = provider;
-
     }
 
     attached() : void {
@@ -61,10 +60,15 @@ export class RegistryPanel {
         //todo detect if there is an orchestration on the board or else disable
     }
 
+    unaddRegistry() : void {
+        this.addingRegistry = false;
+    }
+
     addRegistry() : void {
         this.newRegistry = new DockerRegistry();
+        this.credential = new DockerCredential();
         this.addingRegistry = true;
-        this.activeRegistryId = null;
+        //todo determine why active goes to false on parent Panel
     }
 
     saveRegistry() : void {

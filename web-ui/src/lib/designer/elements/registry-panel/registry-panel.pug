@@ -12,6 +12,9 @@ template
                     i.material-icons.mdi.mdi-plus-circle-outline
                     | Add Registry
             form(submit.delegate="saveRegistry()" if.bind="addingRegistry")
+                a.create-link(click.delegate="unaddRegistry()")
+                    i.material-icons.mdi.mdi-keyboard-backspace
+                    | Back to Registries
                 .input-field
                     input(type="text"
                         id="${nameId}"

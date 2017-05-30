@@ -2,7 +2,7 @@ template
     require(from="lib/common/resources/custom-elements/body-panel/body-panel")
     .body-content
         h1 Orchestration Dashboard
-        .btn-floating.btn-floating-add(ref="createBtn" click.delegate="create()" title="Create a New Workspace")
+        .btn-floating.btn-floating-add(ref="createBtn" click.delegate="create()" title="Create a New Orchestration")
             i.material-icons.large.mdi.mdi-plus
         loader(if.bind="loading")
         .card(if.bind="!loading" repeat.for="orchestration of orchestrations")
