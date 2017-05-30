@@ -43,6 +43,7 @@ export class HasliOrchestrationTemplateProviderElement extends Vertex {
         e.setEdge(true);
 
         let e2 = canvas.insertEdge(this, '', '', initiator, agent, 'strokeColor=#0087c9;dashed=1;strokeWidth=2');
+        e2.setEdge(true);
     }
 
 
