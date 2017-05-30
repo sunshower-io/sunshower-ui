@@ -1,9 +1,9 @@
 {
-  "page_size": 217,
+  "page_size": 216,
   "next": "",
   "previous": "",
   "page": 1,
-  "count": 217,
+  "count": 216,
   "summaries": [
     {
       "id": "docker-ee-azure",
@@ -821,7 +821,7 @@
       },
       "created_at": "2016-06-16T00:00:00Z",
       "updated_at": "2017-05-11T19:01:35.957031Z",
-      "short_description": "Sentry’s real-time error tracking gives you insight into production deployments and information to reproduce and fix crashes—before your users contact you.",
+      "short_description": "Sentryâ€™s real-time error tracking gives you insight into production deployments and information to reproduce and fix crashesâ€”before your users contact you.",
       "source": "publisher",
       "popularity": 0,
       "categories": [
@@ -891,7 +891,7 @@
       },
       "created_at": "2016-06-16T00:00:00Z",
       "updated_at": "2017-05-11T19:01:27.78022Z",
-      "short_description": "The buildkite-agent is a small, reliable, and cross-platform build runner that makes it easy to run automated builds on your own infrastructure. It’s main responsibilities are polling buildkite.com for work, running build jobs, reporting back the status code and output log of the job, and uploading the job's artifacts.",
+      "short_description": "The buildkite-agent is a small, reliable, and cross-platform build runner that makes it easy to run automated builds on your own infrastructure. Itâ€™s main responsibilities are polling buildkite.com for work, running build jobs, reporting back the status code and output log of the job, and uploading the job's artifacts.",
       "source": "publisher",
       "popularity": 0,
       "categories": [
@@ -957,7 +957,7 @@
       },
       "created_at": "2016-06-16T12:10:00Z",
       "updated_at": "2017-05-11T19:01:20.441117Z",
-      "short_description": "Everything you need to quickly get hands-on with Cloudera’s data management and analytics platform built on Apache Hadoop.",
+      "short_description": "Everything you need to quickly get hands-on with Clouderaâ€™s data management and analytics platform built on Apache Hadoop.",
       "source": "publisher",
       "popularity": 0,
       "categories": [
@@ -1392,7 +1392,7 @@
       },
       "created_at": "2016-06-15T00:00:00Z",
       "updated_at": "2017-05-11T18:59:41.484877Z",
-      "short_description": "Code coverage done right.®",
+      "short_description": "Code coverage done right.Â®",
       "source": "publisher",
       "popularity": 0,
       "categories": [
@@ -1836,7 +1836,7 @@
       },
       "created_at": "2016-06-12T00:00:00Z",
       "updated_at": "2017-05-11T18:58:37.239219Z",
-      "short_description": "Sonatype Nexus Repository Manager, the world’s only repository manager with free support for all popular formats.",
+      "short_description": "Sonatype Nexus Repository Manager, the worldâ€™s only repository manager with free support for all popular formats.",
       "source": "publisher",
       "popularity": 0,
       "categories": [
@@ -1871,7 +1871,7 @@
       },
       "created_at": "2016-06-16T00:00:00Z",
       "updated_at": "2017-05-11T18:58:35.743792Z",
-      "short_description": "Aerospike – the reliable, high performance, distributed database optimized for flash and RAM.",
+      "short_description": "Aerospike â€“ the reliable, high performance, distributed database optimized for flash and RAM.",
       "source": "publisher",
       "popularity": 0,
       "categories": [
@@ -2048,37 +2048,6 @@
       ],
       "logo_url": {
         "large": "https://d1q6f0aelx0por.cloudfront.net/product-logos/7fe079cd-2a1c-48c7-997e-ad42826c36de-83d7585a-11dc-492b-a7d2-13bccda7e05c-logo-large.png"
-      },
-      "certification_status": "not_certified"
-    },
-    {
-      "id": "5843161c-49bc-4d58-a6a2-396f21673dc9",
-      "name": "Logentries",
-      "slug": "logentries",
-      "type": "image",
-      "publisher": {
-        "id": "54b10b93-f003-4c6f-a63f-b7f926e8a403",
-        "name": "Logentries, Inc."
-      },
-      "created_at": "2016-06-16T00:00:00Z",
-      "updated_at": "2017-05-11T18:58:15.999079Z",
-      "short_description": "Collect and analyze real-time Docker logs with the Logentries Docker Container.",
-      "source": "publisher",
-      "popularity": 0,
-      "categories": [
-        {
-          "name": "application_infrastructure",
-          "label": "Application Infrastructure"
-        }
-      ],
-      "operating_systems": [
-        {
-          "name": "linux",
-          "label": "Linux"
-        }
-      ],
-      "logo_url": {
-        "large": "https://d1q6f0aelx0por.cloudfront.net/product-logos/69eb0f79-c7b8-406d-82af-4066379c847a-2a0689a9-8d14-4a2a-a8f1-37b7617b7ba2-6ff64b75-9083-43bd-8d24-230197d44c55-logo-large.png"
       },
       "certification_status": "not_certified"
     },
@@ -2659,7 +2628,7 @@
       },
       "created_at": "2017-03-01T19:58:16.773511Z",
       "updated_at": "2017-05-10T22:55:19.627602Z",
-      "short_description": "NFS Storage Volume Plug-In for Nexenta’s Scale-Up Enterprise Grade Unified File \u0026 Block Solution",
+      "short_description": "NFS Storage Volume Plug-In for Nexentaâ€™s Scale-Up Enterprise Grade Unified File \u0026 Block Solution",
       "source": "publisher",
       "popularity": 0,
       "categories": [
@@ -2755,7 +2724,7 @@
       },
       "created_at": "2017-03-13T18:57:56.436437Z",
       "updated_at": "2017-05-10T22:55:11.609635Z",
-      "short_description": "NFS Storage Volume Plug-In for Nexenta’s Scale-Out High Performance Multi-Service Solution with Cluster-Wide Deduplication and Compression",
+      "short_description": "NFS Storage Volume Plug-In for Nexentaâ€™s Scale-Out High Performance Multi-Service Solution with Cluster-Wide Deduplication and Compression",
       "source": "publisher",
       "popularity": 0,
       "categories": [
@@ -2819,7 +2788,7 @@
       },
       "created_at": "2016-06-16T00:00:00Z",
       "updated_at": "2017-05-10T22:45:21.888977Z",
-      "short_description": "Blackfire empowers devs and ops to continuously check and improve their app’s performance throughout its lifecycle",
+      "short_description": "Blackfire empowers devs and ops to continuously check and improve their appâ€™s performance throughout its lifecycle",
       "source": "publisher",
       "popularity": 0,
       "categories": [
@@ -4238,7 +4207,7 @@
       },
       "created_at": "2016-06-09T22:15:04.710148Z",
       "updated_at": "2017-05-18T03:01:35.540695Z",
-      "short_description": "Træfɪk, a modern reverse proxy",
+      "short_description": "TrÃ¦fÉªk, a modern reverse proxy",
       "source": "library",
       "popularity": 5768896,
       "categories": [
@@ -4970,7 +4939,7 @@
       },
       "created_at": "2016-06-01T23:28:19.03857Z",
       "updated_at": "2017-05-18T03:02:22.288336Z",
-      "short_description": "Solr is the popular, blazing-fast, open source enterprise search platform built on Apache Lucene™.",
+      "short_description": "Solr is the popular, blazing-fast, open source enterprise search platform built on Apache Luceneâ„¢.",
       "source": "library",
       "popularity": 1691269,
       "categories": [
@@ -6808,7 +6777,7 @@
       },
       "created_at": "2016-11-14T17:21:37.47309Z",
       "updated_at": "2017-05-18T03:01:56.503898Z",
-      "short_description": "Official IBM® SDK, Java™ Technology Edition Docker Image.",
+      "short_description": "Official IBMÂ® SDK, Javaâ„¢ Technology Edition Docker Image.",
       "source": "invalid",
       "popularity": 241591,
       "categories": [
