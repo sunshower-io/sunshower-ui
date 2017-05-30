@@ -65,6 +65,7 @@ $designer-button-height: 100px;
       height: calc(100% - #{$designer-header-height});
       overflow-y: auto;
       overflow-x: hidden;
+      position: relative;
     }
 
     .designer-panel-header {
@@ -128,6 +129,27 @@ $designer-button-height: 100px;
     padding: $standard-padding/2 $standard-padding;
     font-size: 12px;
     color: $midgrey;
+
+    form {
+      padding: 0;
+
+      input {
+        margin-bottom: 0;
+        height: 2rem;
+      }
+
+      label {
+        font-size: .8rem;
+      }
+
+      label.active {
+        transform: translateY(-120%);
+      }
+
+      .button-holder {
+        padding-top: 0;
+      }
+    }
 
     .input-field.locking {
       position: relative;

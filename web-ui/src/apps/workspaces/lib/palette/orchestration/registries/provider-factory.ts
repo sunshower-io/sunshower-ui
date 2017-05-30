@@ -23,16 +23,16 @@ export class RegistryProviderFactory implements ElementFactoryProvider {
 export class RegistryElementFactory extends DefaultElementFactory {
     rolesAllowed: Role[] = [new Role('admin'), new Role('tenant:user')];
     elementName: string;
-    displayIcon: string = 'assets/icons/designer/docker-service.svg';
-    paletteIcon: string = 'assets/icons/designer/docker-service.svg';
+    displayIcon: string;
+    paletteIcon: string;
+    slug: string;
 
-    constructor(elementName: string, icon?: string) {
+    constructor(slug: string, elementName: string, icon: string) {
         super();
+        this.slug = slug;
         this.elementName = elementName;
-        if (icon) {
-            this.displayIcon = icon;
-            this.paletteIcon = icon;
-        }
+        this.displayIcon = icon;
+        this.paletteIcon = icon;
     }
 
     initialize(canvas: Canvas, element: HTMLElement): void {
@@ -41,26 +41,24 @@ export class RegistryElementFactory extends DefaultElementFactory {
     }
 
     newElement(x: number, y: number, event: Event, canvas: Canvas, target: any): Drawable {
-        return new RegistryElement(this.elementName, x, y);
+        return new RegistryElement(this.elementName, this.slug, x, y);
     }
 
     protected createStyle(canvas: Canvas) : void {
         let style = {};
-        style[mxConstants.VERTEX_SELECTION_COLOR] = 'none';
-        style[mxConstants.STYLE_FILLCOLOR] = 'none';
-        style[mxConstants.STYLE_STROKECOLOR] = 'none';
         style[mxConstants.STYLE_IMAGE] = this.displayIcon;
         style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_IMAGE;
-        style[mxConstants.STYLE_PERIMETER] = mxPerimeter.HexagonPerimeter;
+        style[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
         style[mxConstants.STYLE_LABEL_BACKGROUNDCOLOR] = '#000000';
         style[mxConstants.STYLE_LABEL_PADDING] = 8;
         style[mxConstants.STYLE_SPACING_TOP] = -50;
         style[mxConstants.STYLE_PERIMETER_SPACING] = 8;
         style[mxConstants.STYLE_VERTICAL_LABEL_POSITION] = mxConstants.ALIGN_BOTTOM;
 
+
         canvas.getStylesheet()
             .putCellStyle(
-                'registry-service-style',
+                this.slug + '-registry-service-style',
                 style
             );
     }
@@ -70,10 +68,11 @@ export class RegistryElementFactory extends DefaultElementFactory {
 export class RegistryElement extends Vertex {
     labelVisible = true;
 
-    style: string = "registry-service-style";
+    style: string = "-registry-service-style";
 
-    constructor(label: string, x: number, y: number) {
+    constructor(label: string, slug: string, x: number, y: number) {
         super(label, x, y, 70, 70);
+        this.style = slug + this.style;
     }
 
     addTo(canvas: Canvas): boolean {

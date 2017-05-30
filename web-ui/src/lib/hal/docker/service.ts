@@ -78,6 +78,18 @@ export class DockerRegistryService implements Service<DockerRegistry> {
         return fetcheroo.fetch(path)
             .then(t => t.json() as any)
             .then(t => t.summaries.map(u => new DockerContainer(u)));
+        // return this.bind(id)
+        //     .then(registry => {
+        //         return fetcheroo.fetch(registry.url, {
+        //
+        //         })
+        //             .then(t => t.json() as any)
+        //             .then(t => {
+        //                 console.log(t);
+        //                 return null;
+        //                 // return t.summaries.map(u => new DockerContainer(u));
+        //             });
+        //     });
     }
 
 }
