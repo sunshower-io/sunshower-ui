@@ -94,7 +94,7 @@ export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFa
         style[mxConstants.STYLE_PERIMETER] = mxPerimeter.HexagonPerimeter;
         style[mxConstants.STYLE_LABEL_BACKGROUNDCOLOR] = '#000000';
         style[mxConstants.STYLE_LABEL_PADDING] = 8;
-        style[mxConstants.STYLE_SPACING_TOP] = -64;
+        style[mxConstants.STYLE_SPACING_TOP] = -30;
         style[mxConstants.STYLE_PERIMETER_SPACING] = 8;
         style[mxConstants.STYLE_VERTICAL_LABEL_POSITION] = mxConstants.ALIGN_BOTTOM;
         canvas.getStylesheet()

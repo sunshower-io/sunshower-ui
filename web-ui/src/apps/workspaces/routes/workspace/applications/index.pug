@@ -13,7 +13,7 @@ template
                     a(href="#anotherHolder")
                         | A Different Tab
                         span.badge 1
-            a.btn-floating.waves-effect(href="#testModal")
+            a.btn-floating.waves-effect(title="Add application" href="#testModal")
                 i.material-icons.mdi.mdi-plus
         .body-tab-holder(id="tempCardHolder")
             .card
@@ -24,8 +24,9 @@ template
                     .card-button
                         a.btn.waves-effect Deploy
                 .card-action
-                    .chip.state-good Release
-                    .version Version 1.0.23
+                    .action.left
+                        .chip.state-good Release
+                    .action.right.version Version 1.0.23
             .card
                 .card-content
                     .card-icon
@@ -34,8 +35,9 @@ template
                     .card-button
                         a.btn.waves-effect Deploy
                 .card-action
-                    .chip.state-good Release
-                    .version Version 1.0.23
+                    .action.left
+                        .chip.state-good Release
+                    .action.right.version Version 1.0.23
         .body-tab-holder(id="anotherHolder")
             .card
                 .card-content
@@ -45,8 +47,9 @@ template
                     .card-button
                         a.btn.waves-effect Deploy
                 .card-action
-                    .chip.state-pending Pending
-                    .version Version 1
+                    .action.left
+                        .chip.state-pending Pending
+                    .action.right.version Version 1
 
         .modal(id="testModal" ref="createModal")
             .modal-header Create Application Template

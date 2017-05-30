@@ -12,11 +12,12 @@ import {
 
 
 export class InfrastructureFactoryProvider implements ElementFactoryProvider {
+
+    icon: string = "mdi-chip";
+
     resolveElementLoader(key: string): ElementLoader {
         return undefined;
     }
-
-    icon: string = "mdi-chip";
 
     load(): Promise<ElementFactory[]> {
         return Promise.resolve([

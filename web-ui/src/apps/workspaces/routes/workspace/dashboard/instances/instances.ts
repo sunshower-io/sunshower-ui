@@ -1,4 +1,4 @@
-import {autoinject} from "aurelia-framework";
+import {autoinject, bindable} from "aurelia-framework";
 import {WorkspaceService} from "apps/workspaces/lib/model/core/workspace";
 import {NavigationAware} from "apps/workspaces/resources/custom-elements/navigator";
 
@@ -6,9 +6,16 @@ import {NavigationAware} from "apps/workspaces/resources/custom-elements/navigat
 @NavigationAware
 export class WorkspaceDashboardInstances {
 
+    @bindable
+    private loading : boolean;
+
     private instances: any[];
 
     constructor(private workspaceService: WorkspaceService) {
+    }
+
+    attached() {
+        this.loading = true;
         this.instances = [
             {
                 name: 'Fake Instance',
@@ -27,6 +34,7 @@ export class WorkspaceDashboardInstances {
                 version: '1.0.23'
             }
         ];
+        this.loading = false;
     }
 
 }

@@ -1,6 +1,6 @@
 template
-    //todo make component & slotify once we know what's actually going in here
-    .card(repeat.for="instance of instances")
+    loader(if.bind="loading")
+    .card(if.bind="!loading" repeat.for="instance of instances")
         .card-content
             .card-icon
                 summary-icon(text="${instance.name}" size="90")
