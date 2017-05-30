@@ -54,7 +54,6 @@ try {
                     sh "docker push $hasliImage"
 
                     sh "docker rmi $hasliImage:$version"
-                    sh "docker rmi $hasliImage"
                 }
 
                 stage('Production') {
