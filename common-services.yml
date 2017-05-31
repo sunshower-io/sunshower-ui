@@ -1,0 +1,53 @@
+version: '2.1'
+
+services:
+
+  proxy:
+    image: nginx:1.11.1
+    volumes:
+      - ./resources/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./resources/nginx/certs/hasli.io.crt:/etc/nginx/hasli.io.crt:ro
+      - ./resources/nginx/certs/hasli.io.key:/etc/nginx/hasli.io.key:ro
+
+
+  ui:
+    build: .
+    image: "hasli/ui:${UI_VERSION}"
+
+
+  web-services:
+    image: "hasli/web-services"
+
+
+  db:
+    image: "postgres:9.6"
+
+
+  build-env:
+    build:
+      context: .
+      dockerfile: Dockerfile.build
+    image: hasli/ui-build-env
+
+
+
+  build-war:
+    extends:
+      service: build-env
+    volumes:
+      - ./:/usr/src/
+      - ~/.jspm:/root/.jspm
+      - ~/.gradle/wrapper:/root/.gradle/wrapper
+      - ~/.gradle/gradle.properties:/root/.gradle/gradle.properties
+    working_dir: /usr/src/web-ui
+    command: bash -c "npm install && jspm install -y && npm rebuild node-sass && cd .. && chmod +x gradlew && ./gradlew clean build"
+
+
+  gulp-test:
+    extends:
+      service: build-env
+    volumes:
+      - ./:/usr/src/
+      - ~/.jspm:/root/.jspm
+    working_dir: /usr/src/web-ui
+    command: bash -c "npm install && jspm install -y && npm rebuild node-sass && gulp build"

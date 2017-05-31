@@ -1,7 +1,0 @@
-FROM openjdk:8-jre-alpine
-
-ADD ./libs/web-site*.war /web-site.war
-
-EXPOSE 8081
-
-CMD ["java", "-jar", "web-site.war"]

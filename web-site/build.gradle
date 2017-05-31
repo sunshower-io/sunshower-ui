@@ -1,6 +1,5 @@
 apply plugin: 'war'
 apply plugin: 'application'
-apply plugin: 'maven-publish'
 
 repositories {
     mavenCentral()
@@ -41,16 +40,6 @@ task extractUi(type: Copy) {
 }
 
 compileJava.dependsOn extractUi
-
-
-
-//publishing {
-//    publications {
-//        mavenWeb(MavenPublication) {
-//            from components.ui
-//        }
-//    }
-//}
 
 bootRepackage {
     mainClass = 'io.hasli.ui.UiConfiguration'
