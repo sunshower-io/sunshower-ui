@@ -58,6 +58,7 @@ try {
 
                 stage('Production') {
                     sh "scp -i ~/.ssh/aws-docker-swarm.pem docker-compose-stack.yml docker@52.53.220.216:/home/docker/docker-compose-stack.yml"
+                    sh "scp -i ~/.ssh/aws-docker-swarm.pem -r resources docker@52.53.220.216:/home/docker/resources"
                     sh "ssh -i ~/.ssh/aws-docker-swarm.pem docker@52.53.220.216 'docker stack deploy -c docker-compose-stack.yml hasli --with-registry-auth'"
                 }
             }
