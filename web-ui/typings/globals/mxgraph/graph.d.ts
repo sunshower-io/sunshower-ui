@@ -44,11 +44,15 @@ declare module 'mxgraph' {
         currentRoot: Layer;
         translate: mxGraphBounds;
 
+        getTranslate() : mxGraphBounds;
+
         addListener(l:string, m:any) : void;
 
         getCanvas(): Element;
 
         getGraphBounds(): mxRectangle;
+
+        setGraphBounds(bounds: mxRectangle) : void;
 
         getBounds(cells:Layer[]) : any;
 
@@ -165,6 +169,39 @@ declare module 'mxgraph' {
         mouseListeners                      : {[name: string]: any};
 
         maximumGraphBounds                  : mxGraphBounds;
+
+        autoSizeCell(cell:Layer, recurse:boolean) : void;
+
+        setAutoSizeCells(b: boolean) : void;
+
+        /**
+         *
+         * @param b
+         */
+        setDisconnectOnMove(b: boolean) : void;
+
+        /**
+         *
+         * @param b
+         */
+        setAllowDanglingEdges(b:boolean) : void;
+
+        /**
+         *
+         * @param cell
+         */
+        getCellContainmentArea(cell:Layer) : mxRectangle;
+
+        /**
+         *
+         * @param extend
+         */
+        setExtendParents(extend: boolean) : void;
+
+        /**
+         *
+         * @param cell
+         */
 
         canImportCell(cell:Layer) : boolean;
         /**
@@ -514,6 +551,13 @@ declare module 'mxgraph' {
          */
 
         setConnectable(connectable: boolean);
+
+
+        /**
+         *
+         * @param p
+         */
+        removeCellsFromParent(cells:Layer[]) : void;
 
         /**
          *

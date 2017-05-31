@@ -1,10 +1,13 @@
-import {autoinject} from "aurelia-framework";
+import {autoinject, bindable} from "aurelia-framework";
 import {UUID} from "lib/common/lang/uuid";
 import {WorkspaceService} from "apps/workspaces/lib/model/core/workspace";
 import * as Plotly from "plotly/plotly.js";
 
 @autoinject
 export class WorkspaceDashboardCharts {
+
+    @bindable
+    private loading : boolean;
 
     //cause plotly
     private chart1id : string = UUID.random();
@@ -18,10 +21,12 @@ export class WorkspaceDashboardCharts {
     }
 
     attached() {
+        this.loading = true;
         this.chart(this.chart1id);
         this.chart(this.chart2id);
         this.chart(this.chart3id);
         this.chart(this.chart4id);
+        this.loading = false;
 
     }
 

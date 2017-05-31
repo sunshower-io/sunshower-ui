@@ -3,7 +3,7 @@ import {
     mxClient,
     mxUndoManager,
     mxEvent,
-    mxUtils, Layer
+    mxUtils, Layer, mxGraphHandler, mxCellState, mxVertexHandler, mxRectangle, mxConstants
 } from "mxgraph";
 import {Grid} from 'lib/designer/core';
 import {CanvasModel} from 'lib/designer/model';
@@ -11,18 +11,38 @@ import {KeyHandler} from "./key-handler";
 import {Chord} from "./chord";
 import {Action} from "./action";
 import {RenderableElement} from "../model/elements";
+import {
+    ElementFactory, ElementLoader,
+} from "./palette";
+import "rxjs/add/operator/filter";
+import {Subject} from "rxjs/Subject";
+import {Observable} from "rxjs/Observable";
+import {GraphHandler} from "./graph-handler";
+import {VertexHandler} from "./vertex-handler";
 
+
+export interface CanvasEvent<T> {
+    data: T;
+    type: string;
+}
+
+export interface CanvasEventListener {
+    on<T>(e: CanvasEvent<T>);
+}
 
 
 export class Canvas extends mxGraph {
 
 
-    private grids                   : Grid[];
-    private undoListener            : any;
+    private grids: Grid[];
+    private undoListener: any;
+
+    private providers: ElementFactory[];
+    private subject: Subject<CanvasEvent<any>>;
 
 
-    private keyHandler              : KeyHandler;
-    readonly historyManager         : mxUndoManager;
+    private keyHandler: KeyHandler;
+    readonly historyManager: mxUndoManager;
 
     constructor(public readonly container: HTMLElement,
                 model: CanvasModel) {
@@ -34,17 +54,41 @@ export class Canvas extends mxGraph {
             );
         }
         this.foldingEnabled = false;
-
-        this.keyHandler =  this.createKeyHandler();
+        this.subject = new Subject();
+        this.setConnectable(true);
+        this.setAllowDanglingEdges(false);
+        this.setDisconnectOnMove(false);
+        this.keyHandler = this.createKeyHandler();
         this.historyManager = this.createUndoManager();
-
     }
 
-    public register(chord: Chord, action: Action) : void {
+    public createGraphHandler() : mxGraphHandler {
+        return new GraphHandler(this);
+    }
+
+
+    public fire(key: string) : void {
+        this.keyHandler.resolve(key).run(this);
+    }
+
+
+    cellsMoved(cells: Layer[], dx: number, dy: number, disconnect?: boolean, constrain?: boolean, extend?: boolean): void {
+        super.cellsMoved(cells, dx, dy, false, false, true);
+    }
+
+    public listen<T>(key: string): Observable<CanvasEvent<T>> {
+        return this.subject.filter((v: CanvasEvent<any>, i: number) => v.type === key);
+    }
+
+    public dispatch<T>(e: CanvasEvent<T>): void {
+        this.subject.next(e);
+    }
+
+    public register(chord: Chord, action: Action): void {
         this.keyHandler.bind(chord, action);
     }
 
-    public unregister(chord: Chord) : void {
+    public unregister(chord: Chord): void {
         this.keyHandler.unbind(chord);
 
     }
@@ -53,15 +97,32 @@ export class Canvas extends mxGraph {
         this.keyHandler.stop();
     }
 
-    activate() : void {
+    activate(): void {
 
     }
 
+    resolveElementLoader(key: string): ElementLoader {
+        for (let provider of this.providers) {
+            if (provider.handles(key)) {
+                return provider.resolveElementLoader(key);
+            }
+        }
+        throw new Error("This canvas cannot handle any elements keyed by: " + key);
 
-    getLabel(a:Layer) : HTMLElement {
-        if(a instanceof RenderableElement) {
+    }
+
+    registerProvider(provider: ElementFactory): void {
+        if (!this.providers) {
+            this.providers = [];
+        }
+        this.providers.push(provider);
+    }
+
+
+    getLabel(a: Layer): HTMLElement {
+        if (a instanceof RenderableElement) {
             let re = <RenderableElement> a;
-            if(re.labelVisible) {
+            if (re.labelVisible) {
                 let label = super.getLabel(a);
                 return $(`<div class="default-label">${label}</div>`).get(0);
             }
@@ -92,7 +153,7 @@ export class Canvas extends mxGraph {
         return this.model;
     }
 
-    protected createKeyHandler() : KeyHandler {
+    protected createKeyHandler(): KeyHandler {
         let kh = new KeyHandler(this);
         return kh;
     }
@@ -132,7 +193,8 @@ export class Canvas extends mxGraph {
 
 }
 
-export class CanvasOptions {
 
-
+interface ParentGrouping {
+    root: Layer;
+    children: Layer[];
 }

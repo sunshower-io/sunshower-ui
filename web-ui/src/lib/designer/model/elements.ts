@@ -5,7 +5,7 @@ import {
 } from 'mxgraph';
 
 import {Canvas} from "lib/designer/canvas";
-import {UUID} from "lib/common/lang";
+import {Identifier} from "lib/common/lang/identifier";
 
 
 
@@ -41,7 +41,7 @@ export abstract class RenderableElement extends mxCell implements Drawable {
     }
 
     getLabel() : string {
-        return UUID.random();
+        return Identifier.newId();
     }
 
 
@@ -75,6 +75,17 @@ export abstract class RenderableElement extends mxCell implements Drawable {
     }
 }
 
+export abstract class Edge extends mxCell {
+    constructor(
+        public source: RenderableVertex,
+        public target: RenderableVertex
+    ) {
+        super();
+        this.id = Identifier.newId();
+    }
+
+}
+
 
 export abstract class RenderableVertex extends RenderableElement {
 
@@ -87,5 +98,6 @@ export abstract class RenderableVertex extends RenderableElement {
     ) {
         super(label, x, y, width, height);
         this.setVertex(true);
+        this.id = Identifier.newId();
     }
 }

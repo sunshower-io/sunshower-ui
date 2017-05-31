@@ -20,6 +20,8 @@ $designer-button-height: 100px;
     text-align: center;
     font-size: 9px;
     letter-spacing: 1px;
+    padding: 0 5px;
+    box-sizing: border-box;
   }
 
   .canvas {
@@ -57,13 +59,13 @@ $designer-button-height: 100px;
       overflow: hidden;
     }
 
-    .__panel-body {
-      //calculate height; assumes header
+    .designer-panel-panel-holder {
       height: -moz-calc(100% - #{$designer-header-height});
       height: -webkit-calc(100% - #{$designer-header-height});
       height: calc(100% - #{$designer-header-height});
       overflow-y: auto;
       overflow-x: hidden;
+      position: relative;
     }
 
     .designer-panel-header {
@@ -127,6 +129,27 @@ $designer-button-height: 100px;
     padding: $standard-padding/2 $standard-padding;
     font-size: 12px;
     color: $midgrey;
+
+    form {
+      padding: 0;
+
+      input {
+        margin-bottom: 0;
+        height: 2rem;
+      }
+
+      label {
+        font-size: .8rem;
+      }
+
+      label.active {
+        transform: translateY(-120%);
+      }
+
+      .button-holder {
+        padding-top: 0;
+      }
+    }
 
     .input-field.locking {
       position: relative;

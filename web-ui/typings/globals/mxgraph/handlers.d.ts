@@ -41,9 +41,11 @@ declare module 'mxgraph' {
     }
 
 
-    export class mxVertexHandler extends mxGraphHandler {
+    export class mxVertexHandler {
 
         graph:mxGraph;
+
+        constrainGroupByChildren: boolean;
 
 
         constructor(state:mxCellState);

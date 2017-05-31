@@ -197,6 +197,7 @@ $workspace-card-icon-size: 80px;
     .card-icon {
       width: 90px;
       float: left;
+      cursor: pointer;
 
       @media #{$medium-and-down} {
         width: auto;

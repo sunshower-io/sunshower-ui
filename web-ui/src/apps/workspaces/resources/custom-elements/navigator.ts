@@ -81,7 +81,7 @@ export type ActivateFunction = (p: any, r: RouteConfig, n: NavigationInstruction
 
 function onActivation(activate: ActivateFunction, self: any): ActivateFunction {
     return (p: any, r: RouteConfig, n: NavigationInstruction) => {
-        console.log('n', n);
+        // console.log('n', n);
         if(n) {
             NavigatorManager.bind(n.router);
         }

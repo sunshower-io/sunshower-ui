@@ -33,6 +33,9 @@ export class Panel {
     @bindable
     private model               : any;
 
+    @bindable
+    public icon                 : string;
+
 
     private currentViewModel    : PanelAware;
 

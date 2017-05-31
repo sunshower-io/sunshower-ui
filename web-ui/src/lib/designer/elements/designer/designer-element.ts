@@ -29,7 +29,15 @@ export class DesignerElement {
     }
 
 
+    activate() : void {
+        console.log("Activate");
+        this.designerManager.setCurrent(this.designer);
+    }
+
+    deactivate() : void {
+    }
     attached() : void {
+        console.log("attached");
         let designer = new Designer(this.element),
             canvas = designer.getCanvas();
         this.setCanvas(canvas);

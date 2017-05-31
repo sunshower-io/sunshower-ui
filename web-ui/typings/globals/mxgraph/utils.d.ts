@@ -14,8 +14,27 @@ declare module 'mxgraph' {
 
     export module mxUtils {
 
+        function getPrettyXml(x:any) : string;
+
         function bind(a: any, b:any) : void;
 
+        function getXml(a:any) : any;
+
+        /**
+         *
+         * @param el
+         */
+        function getTextContent(el:HTMLElement) : string;
+
+        /**
+         *
+         * @param el
+         * @param str
+         */
+        function setTextContent(
+            el:HTMLElement,
+            str:string
+        ) : void;
 
         function indexOf(cells:Layer[], parent:Layer) : number;
         /**

@@ -5,9 +5,12 @@ declare module 'mxgraph' {
     export class mxPerimeter {
         static RectanglePerimeter                : string;
         static HexagonPerimeter                  : string;
+        static EllipsePerimeter                  : string;
     }
 
     export class mxConstants {
+
+        static STYLE_AUTOSIZE                   : number;
         static STYLE_PERIMETER_SPACING          : string;
         static STYLE_SPACING_TOP                : string;
         static STYLE_LABEL_PADDING              : string;
@@ -19,7 +22,9 @@ declare module 'mxgraph' {
         static STYLE_STROKECOLOR                : string;
         static STYLE_SHAPE                      : string;
         static SHAPE_IMAGE                      : string;
+        static SHAPE_CIRCLE                     : string;
         static STYLE_PERIMETER                  : string;
+        static STYLE_ROUNDED                    : string;
         static STYLE_IMAGE                      : string;
         static STYLE_FONTCOLOR                  : string;
         static NS_XLINK                         : string;

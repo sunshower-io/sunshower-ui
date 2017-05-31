@@ -3,14 +3,19 @@ declare module 'mxgraph' {
 
 
     export interface Layer {
-        parent          :Layer;
-        id              :string;
-        value           :any;
-        geometry        :mxGeometry;
-        style           :string;
-        shape           :mxShape;
 
-        children        :Layer[];
+        source          : Layer,
+        target          : Layer,
+        parent          : Layer;
+        id              : string;
+        value           : any;
+        geometry        : mxGeometry;
+        style           : string;
+        shape           : mxShape;
+
+        edges           : Layer[];
+
+        children        : Layer[];
 
 
         /**
@@ -125,6 +130,7 @@ declare module 'mxgraph' {
         getChildAt(index:number) : Layer;
 
         clone() : Layer;
+
 
     }
 
