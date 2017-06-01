@@ -3,7 +3,6 @@ import {HttpClient} from "aurelia-fetch-client";
 import {inject} from "aurelia-dependency-injection";
 import {Principal} from "lib/common/security";
 import {LocalStorage} from "lib/common/storage";
-import * as materialize from 'materialize-css';
 
 import {
     Aurelia,
@@ -16,8 +15,7 @@ import {
     AuthenticationContextHolder
 } from "lib/common/security";
 import {Router} from "aurelia-router";
-import {UUID} from 'lib/common/lang';
-import {Generated} from "lib/common/lang/uuid";
+import {UUID} from "lib/common/lang/uuid";
 
 @inject(
     Aurelia,
@@ -30,9 +28,9 @@ import {Generated} from "lib/common/lang/uuid";
 )
 export class Login {
 
-    @Generated
-    private usernameId: string;
-    private passwordId: string       =  UUID.random();
+    private usernameId: string = UUID.random();
+
+    private passwordId: string = UUID.random();
 
     @bindable
     private remember: boolean = true;

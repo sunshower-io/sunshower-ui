@@ -1,7 +1,4 @@
 import {range} from "lib/common/lang";
-export function Generated(target, key?: any, descriptor?: any) {
-    target[key] = UUID.random();
-}
 
 
 export class UUID {
