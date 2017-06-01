@@ -3,6 +3,7 @@ declare module 'mxgraph' {
     export class mxEvent {
 
         static readonly CELLS_ADDED             : string;
+        static readonly CELLS_REMOVED           : string;
         static readonly UNDO                    : string;
         static readonly ADD                     : string;
         static readonly CLEAR                   : string;

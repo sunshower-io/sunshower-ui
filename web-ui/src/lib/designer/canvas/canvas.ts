@@ -60,7 +60,18 @@ export class Canvas extends mxGraph {
         this.setDisconnectOnMove(false);
         this.keyHandler = this.createKeyHandler();
         this.historyManager = this.createUndoManager();
+        this.addListener(mxEvent.CELLS_ADDED, this.graphChanged);
+        this.addListener(mxEvent.CELLS_REMOVED, this.graphChanged);
     }
+
+
+
+    private graphChanged = (sender:any, e:any) => {
+        this.dispatch({
+            type: 'graph-changed',
+            data: this.getChildVertices(this.getDefaultParent())
+        });
+    };
 
     public createGraphHandler() : mxGraphHandler {
         return new GraphHandler(this);
@@ -70,6 +81,7 @@ export class Canvas extends mxGraph {
     public fire(key: string) : void {
         this.keyHandler.resolve(key).run(this);
     }
+
 
 
     cellsMoved(cells: Layer[], dx: number, dy: number, disconnect?: boolean, constrain?: boolean, extend?: boolean): void {
