@@ -7,7 +7,7 @@ import {
 import {ElementLoader} from "lib/designer/canvas/palette";
 import {Vertex as TaskVertex} from 'lib/designer/model/graph';
 import {Canvas} from "lib/designer/canvas/canvas";
-import {NomadOrchestrationTemplateProviderElement} from "./nomad-orchestration-template";
+import {mxCell} from "mxgraph";
 
 export function nomadInitialLayout(x: number, y: number): Vertex {
     let parent = new NomadOrchestrationTemplateProviderElement('', x - 160, y),
@@ -18,6 +18,31 @@ export function nomadInitialLayout(x: number, y: number): Vertex {
     return parent;
 }
 
+export class NomadOrchestrationTemplateProviderElement extends Vertex {
+    labelVisible = false;
+    style: string = 'nomad-group-style';
+
+    constructor(label: string, x: number, y: number) {
+        super(label, x, y, 380, 100);
+    }
+
+    addTo(canvas: Canvas): boolean {
+        let a = super.addTo(canvas);
+        return a;
+    }
+
+    protected doInsert(canvas: Canvas): void {
+        canvas.addCell(this, null);
+        let edge = new mxCell(),
+            server = this.children[0],
+            client = this.children[1];
+
+        let e = canvas.insertEdge(this, '', '', client, server, 'strokeColor=#0087c9;dashed=1;strokeWidth=2');
+        e.setEdge(true);
+
+    }
+
+}
 
 export class NomadNode extends Vertex {
     style: string = 'nomad-node-style';

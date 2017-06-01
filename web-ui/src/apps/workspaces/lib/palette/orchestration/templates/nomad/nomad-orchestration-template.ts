@@ -20,31 +20,6 @@ import {Role} from "lib/common/security/model/user";
 import {mxCell} from "mxgraph";
 import {nomadInitialLayout, NomadServerElementLoader} from "./nomad-nodes";
 
-export class NomadOrchestrationTemplateProviderElement extends Vertex {
-    labelVisible = false;
-    style: string = 'nomad-group-style';
-
-    constructor(label: string, x: number, y: number) {
-        super(label, x, y, 380, 100);
-    }
-
-    addTo(canvas: Canvas): boolean {
-        let a = super.addTo(canvas);
-        return a;
-    }
-
-    protected doInsert(canvas: Canvas): void {
-        canvas.addCell(this, null);
-        let edge = new mxCell(),
-            server = this.children[0],
-            client = this.children[1];
-
-        let e = canvas.insertEdge(this, '', '', client, server, 'strokeColor=#0087c9;dashed=1;strokeWidth=2');
-        e.setEdge(true);
-
-    }
-
-}
 
 export class NomadOrchestrationTemplateProviderFactory extends DefaultElementFactory {
     rolesAllowed        : Role[] = [new Role('admin')];
