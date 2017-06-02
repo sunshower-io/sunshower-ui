@@ -7,18 +7,20 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 import {autoinject} from "aurelia-framework";
 import {VelocityAnimator} from "aurelia-animator-velocity";
 import {Router, NavigationInstruction} from "aurelia-router";
-import {UUID} from 'lib/common/lang';
+import {UUID} from 'lib/common/lang/uuid';
 import {bindable} from "aurelia-framework";
+import {Breadcrumb} from "./breadcrumb";
+
 import {SideNavEvents} from "apps/workspaces/resources/custom-elements/events";
 import {NavigatorManager} from "apps/workspaces/resources/custom-elements/navigator";
-import {Breadcrumb} from "./breadcrumb";
+
 
 @autoinject
 export class Navbar {
 
     @bindable
+    private smallddId                : string       =  UUID.random();
     private dropdownId               : string       =  UUID.random();
-    private smallddId                : string       = UUID.random();
     private profileDD               : HTMLElement;
     private smallDD                 : HTMLElement;
     private brandLogo               : HTMLElement;

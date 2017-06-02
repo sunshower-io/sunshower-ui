@@ -25,6 +25,7 @@ export class ServiceManager {
 
 
     register(key:string, service:Service<any>) : void {
+
         this.serviceBindings.set(key, service);
     }
 }
