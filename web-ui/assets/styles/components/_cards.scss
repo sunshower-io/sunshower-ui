@@ -6,11 +6,14 @@ $card-border-style: $card-border-width solid $border-color;
 $workspace-card-icon-size: 80px;
 
 
+.chart-card-holder {
+  text-align: center;
+}
 
 .chart-card {
   width:220px;
   margin: $standard-padding $standard-padding/4 0 $standard-padding/4;
-  float: left;
+  display: inline-block;
   border: $card-border-style;
   box-sizing: border-box;
 
