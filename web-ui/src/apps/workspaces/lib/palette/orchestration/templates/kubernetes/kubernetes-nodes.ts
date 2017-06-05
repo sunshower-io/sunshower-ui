@@ -8,8 +8,32 @@ import {ElementLoader} from "lib/designer/canvas/palette";
 import {Vertex as TaskVertex} from 'lib/designer/model/graph';
 import {Canvas} from "lib/designer/canvas/canvas";
 import {mxCell} from "mxgraph";
-import {KubernetesOrchestrationTemplateProviderElement} from "./kubernetes-orchestration-template";
 
+export class KubernetesOrchestrationTemplateProviderElement extends Vertex {
+    labelVisible = false;
+    label: string = "Kubernetes Orchestration";
+    style: string = 'kubernetes-group-style';
+
+    constructor(label: string, x: number, y: number) {
+        super(label, x, y, 380, 100);
+    }
+
+    addTo(canvas: Canvas): boolean {
+        let a = super.addTo(canvas);
+        return a;
+    }
+
+    protected doInsert(canvas: Canvas): void {
+        canvas.addCell(this, null);
+        let edge = new mxCell(),
+            master = this.children[0],
+            node = this.children[1];
+
+        let e = canvas.insertEdge(this, '', '', node, master, 'strokeColor=#0087c9;dashed=1;strokeWidth=2');
+        e.setEdge(true);
+    }
+
+}
 
 export function kubernetesInitialLayout(x: number, y: number): Vertex {
     let parent = new KubernetesOrchestrationTemplateProviderElement('', x - 160, y),
@@ -26,11 +50,11 @@ export class KubernetesNode extends Vertex {
 }
 
 export class KubernetesMasterNode extends KubernetesNode {
-
+    label: string = "Master";
 }
 
 export class KubernetesNodeNode extends KubernetesNode {
-
+    label: string = "Node";
 }
 
 export class MasterToNodeConnection extends Edge {
@@ -40,11 +64,12 @@ export class MasterToNodeConnection extends Edge {
 }
 
 export class KubernetesMasterElementLoader implements ElementLoader {
+
     static readonly types = {
         'KubernetesNodeNode': KubernetesNodeNode,
         'KubernetesMasterNode': KubernetesMasterNode,
         'KubernetesOrchestrationTemplateProviderElement': KubernetesOrchestrationTemplateProviderElement
-    }
+    };
 
     load(canvas: Canvas, v: TaskVertex): Drawable {
         let ctor = KubernetesMasterElementLoader.types[v.type];

@@ -22,7 +22,7 @@ export function dockerInitialLayout(x: number, y: number): Vertex {
 export class DockerOrchestrationTemplateProviderElement extends Vertex {
 
     labelVisible = false;
-
+    label = "Docker Orchestration";
     style: string = "docker-group-style";
 
     constructor(label: string, x: number, y: number) {
@@ -55,12 +55,12 @@ export class DockerNode extends Vertex {
 
 
 export class DockerManagerNode extends DockerNode {
-
+    label: string = "Manager";
 }
 
 
 export class DockerWorkerNode extends DockerNode {
-
+    label: string = "Worker";
 }
 
 

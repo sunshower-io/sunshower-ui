@@ -20,6 +20,7 @@ export function nomadInitialLayout(x: number, y: number): Vertex {
 
 export class NomadOrchestrationTemplateProviderElement extends Vertex {
     labelVisible = false;
+    label: string = 'Nomad Orchestration';
     style: string = 'nomad-group-style';
 
     constructor(label: string, x: number, y: number) {
@@ -50,11 +51,11 @@ export class NomadNode extends Vertex {
 }
 
 export class NomadServerNode extends NomadNode {
-
+    label: string = 'Server';
 }
 
 export class NomadClientNode extends NomadNode {
-
+    label: string = 'Client';
 }
 
 export class ServerToClientConnection extends Edge {

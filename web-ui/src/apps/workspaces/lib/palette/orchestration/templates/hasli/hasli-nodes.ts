@@ -21,6 +21,7 @@ export function hasliInitialLayout(x: number, y: number): Vertex {
 export class HasliOrchestrationTemplateProviderElement extends Vertex {
     labelVisible = false;
     style: string = 'hasli-group-style';
+    label: string = 'Hasli Orchestration';
 
     constructor(label: string, x: number, y: number) {
         super(label, x, y, 380, 100);
@@ -53,11 +54,11 @@ export class HasliNode extends Vertex {
 }
 
 export class HasliInitiatorNode extends HasliNode {
-
+    label: string = "Initiator";
 }
 
 export class HasliAgentNode extends HasliNode {
-
+    label: string = "Agent";
 }
 
 export class InitiatorToAgentConnection extends Edge {

@@ -42,25 +42,13 @@ export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFa
         canvas.registerProvider(this);
     }
 
-
     handles(key: string): boolean {
         return DockerManagerElementLoader.types[key];
     }
 
-
     resolveElementLoader(key: string): ElementLoader {
         return new DockerManagerElementLoader();
     }
-
-    /**
-     *
-     * @param x
-     * @param y
-     * @param event
-     * @param canvas
-     * @param target
-     * @returns {SecurityGroupElement}
-     */
 
     newElement(x: number,
                y: number,

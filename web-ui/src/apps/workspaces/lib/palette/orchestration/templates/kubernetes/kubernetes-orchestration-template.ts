@@ -23,38 +23,11 @@ import {
 import {mxCell} from "mxgraph";
 import {kubernetesInitialLayout, KubernetesMasterElementLoader} from "./kubernetes-nodes";
 
-export class KubernetesOrchestrationTemplateProviderElement extends Vertex {
-    labelVisible = false;
-    style: string = 'kubernetes-group-style';
-
-    constructor(label: string, x: number, y: number) {
-        super(label, x, y, 380, 100);
-    }
-
-    addTo(canvas: Canvas): boolean {
-        let a = super.addTo(canvas);
-        return a;
-    }
-
-    protected doInsert(canvas: Canvas): void {
-    canvas.addCell(this, null);
-    let edge = new mxCell(),
-        master = this.children[0],
-        node = this.children[1];
-
-    let e = canvas.insertEdge(this, '', '', node, master, 'strokeColor=#0087c9;dashed=1;strokeWidth=2');
-    e.setEdge(true);
-    }
-
-}
-
 export class KubernetesOrchestrationTemplateProviderFactory extends DefaultElementFactory {
     rolesAllowed        : Role[] = [new Role('admin')];
     elementName         : string = 'Kubernetes';
     displayIcon         : string = 'assets/icons/hal/orchestration/providers/kubernetes-single.svg';
     paletteIcon         : string = 'assets/icons/hal/orchestration/providers/kubernetes-swarm.svg';
-
-
 
 
     initialize(canvas: Canvas, element: HTMLElement): void {
@@ -70,16 +43,6 @@ export class KubernetesOrchestrationTemplateProviderFactory extends DefaultEleme
     resolveElementLoader(key: string): ElementLoader {
         return new KubernetesMasterElementLoader();
     }
-
-    /**
-     *
-     * @param x
-     * @param y
-     * @param event
-     * @param canvas
-     * @param target
-     * @returns {SecurityGroupElement}
-     */
 
     newElement(
         x: number,
@@ -104,7 +67,6 @@ export class KubernetesOrchestrationTemplateProviderFactory extends DefaultEleme
                 'kubernetes-group-style',
                 style
             );
-        console.log('looking at canvas stylesheet', canvas);
 
         this.createKubernetesNodeStyle(canvas);
     }
