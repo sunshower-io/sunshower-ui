@@ -50,6 +50,11 @@ export class LayerPanel {
         return null;
     }
 
+    select(event: Event) {
+        let node = (event as any).detail;
+        this.designerManager.getCurrentCanvas().getSelectionModel().addCell(node);
+    }
+
 }
 
 

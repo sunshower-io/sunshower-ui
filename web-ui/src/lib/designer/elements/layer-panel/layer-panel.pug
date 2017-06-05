@@ -3,6 +3,6 @@ template
     .designer-panel-header
         h2 Layers
         a.material-icons.mdi.mdi-plus(style="cursor:pointer;" title="Incomplete Feature")
-    .designer-panel-body(ref="layerPanelCollapsible")
+    .designer-panel-body(ref="layerPanelCollapsible" layerselected.delegate="select($event)")
         ul.collapsible.layer-collapsible(data-collapsible="expandable")
             layer-collapsible(nodes.bind="layers" holder.bind="layerPanelCollapsible")

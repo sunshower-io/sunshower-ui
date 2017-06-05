@@ -21,8 +21,9 @@ export class LayerCollapsible {
     }
 
     select(node: LayerNode, event: Event) {
-        let target = event.target;
-        //todo create event with createEvent
+        let target = event.target,
+            createdEvent = createEvent('layerselected', node.self);
+        target.dispatchEvent(createdEvent);
     }
 
 

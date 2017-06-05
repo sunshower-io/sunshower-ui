@@ -27,6 +27,7 @@ declare module 'mxgraph' {
          * @param fireElement
          */
         addListener(t:string, fireElement:(a:mxGraphSelectionModel, b:mxEventObject) => void);
+        addCell(n: mxCell);
 
     }
 

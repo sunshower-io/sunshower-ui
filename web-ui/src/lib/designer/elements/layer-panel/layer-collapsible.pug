@@ -1,8 +1,8 @@
 template
     li(repeat.for="node of nodes" class.bind="node.children && node.children.length != 0 ? 'has-collapsible' : ''")
-        .collapsible-header
+        .collapsible-header(click.delegate="select(node, $event)")
             i.material-icons.mdi.mdi-chevron-right.dropdown-icon(if.bind="node.children && node.children.length != 0 ? 'has-collapsible' : ''")
-            span(click.delegate="select(node, $event)")
+            span
                 img.layer-image(if.bind="node.icon" src.bind="node.icon")
                 | ${node.title}
             i.material-icons.mdi.mdi-eye-outline.visibility-icon(title="IncompleteFeature")
