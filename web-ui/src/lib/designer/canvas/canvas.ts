@@ -114,8 +114,6 @@ export class Canvas extends mxGraph {
     }
 
     resolveElementLoader(key: string): ElementLoader {
-        console.log('key', key);
-        console.log('providers', this.providers);
         for (let provider of this.providers) {
             if (provider.handles(key)) {
                 return provider.resolveElementLoader(key);
@@ -126,7 +124,6 @@ export class Canvas extends mxGraph {
     }
 
     registerProvider(provider: ElementFactory): void {
-        console.log('provider', provider);
         if (!this.providers) {
             this.providers = [];
         }
@@ -200,6 +197,7 @@ export class Canvas extends mxGraph {
                 }
             }
             this.setSelectionCells(cells);
+            this.graphChanged(sender, evt);
         };
         undoMgr.addListener(mxEvent.UNDO, undoHandler);
         undoMgr.addListener(mxEvent.REDO, undoHandler);
