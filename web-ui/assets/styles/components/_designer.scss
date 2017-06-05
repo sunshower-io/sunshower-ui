@@ -253,6 +253,12 @@ $designer-button-height: 100px;
         }
       }
 
+      img.layer-image {
+        height: 15px;
+        vertical-align:middle;
+        margin: -4px .5em 0 .5em;
+      }
+
     }
 
     li.has-collapsible > .collapsible-body {

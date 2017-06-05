@@ -1,0 +1,11 @@
+template
+    li(repeat.for="node of nodes" class.bind="node.children && node.children.length != 0 ? 'has-collapsible' : ''")
+        .collapsible-header
+            i.material-icons.mdi.mdi-chevron-right.dropdown-icon(if.bind="node.children && node.children.length != 0 ? 'has-collapsible' : ''")
+            span(click.delegate="select(node, $event)")
+                img.layer-image(if.bind="node.icon" src.bind="node.icon")
+                | ${node.title}
+            i.material-icons.mdi.mdi-eye-outline.visibility-icon(title="IncompleteFeature")
+        .collapsible-body(if.bind="node.children && node.children.length != 0 ? 'has-collapsible' : ''")
+            ul.collapsible(data-collapsible="expandable")
+                layer-collapsible(nodes.bind="node.children" holder.bind="holder")
