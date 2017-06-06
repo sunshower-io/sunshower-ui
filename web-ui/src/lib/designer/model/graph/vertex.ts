@@ -1,6 +1,6 @@
 import {Layout} from './layout';
 import {UUID} from "lib/common/lang/uuid";
-import {Entity} from "lib/designer/model/entity";
+import {Entity, Property} from "lib/designer/model/entity";
 
 export class Vertex {
     id                  : string;
@@ -11,5 +11,16 @@ export class Vertex {
 
     constructor() {
         this.id = UUID.random();
+
+        // let testEntity = new Entity();
+        // testEntity.title = "Test Entity";
+        // testEntity.id = UUID.random();
+        // let testProperty = new Property();
+        // testProperty.type = "text";
+        // testProperty.label = "Test Property";
+        // testProperty.id = UUID.random();
+        // testEntity.properties = [testProperty];
+        //
+        // this.entities = [testEntity];
     }
 }

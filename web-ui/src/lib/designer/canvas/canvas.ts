@@ -62,6 +62,9 @@ export class Canvas extends mxGraph {
         this.historyManager = this.createUndoManager();
         this.addListener(mxEvent.CELLS_ADDED, this.graphChanged);
         this.addListener(mxEvent.CELLS_REMOVED, this.graphChanged);
+
+        this.getSelectionModel().addListener(mxEvent.CHANGE, this.cellSelected);
+
     }
 
 
@@ -70,6 +73,13 @@ export class Canvas extends mxGraph {
         this.dispatch({
             type: 'graph-changed',
             data: this.getChildVertices(this.getDefaultParent())
+        });
+    };
+
+    private cellSelected = (sender:any, e:any) => {
+        this.dispatch({
+           type: 'selection-changed',
+            data: this.getSelectionModel()
         });
     };
 
