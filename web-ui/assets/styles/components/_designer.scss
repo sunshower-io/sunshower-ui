@@ -122,7 +122,6 @@ $designer-button-height: 100px;
 }
 
 .designer-panel-body {
-  //todo set height? would require a header everywhere;
   overflow-y: auto;
 
   .designer-form {
@@ -132,24 +131,24 @@ $designer-button-height: 100px;
 
     form {
       padding: 0;
-
-      input {
-        margin-bottom: 0;
-        height: 2rem;
-      }
-
-      label {
-        font-size: .8rem;
-      }
-
-      label.active {
-        transform: translateY(-120%);
-      }
-
-      .button-holder {
-        padding-top: 0;
-      }
     }
+
+    //input {
+    //  margin-bottom: 0;
+    //  height: 2rem;
+    //}
+    //
+    //label {
+    //  font-size: .8rem;
+    //}
+    //
+    //label.active {
+    //  transform: translateY(-140%);
+    //}
+    //
+    //.button-holder {
+    //  padding-top: 0;
+    //}
 
     .input-field.locking {
       position: relative;
@@ -160,7 +159,6 @@ $designer-button-height: 100px;
 
       input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea, select {
         width: 90%;
-        height: 2.5rem;
       }
 
       .locking-icon {
@@ -214,6 +212,10 @@ $designer-button-height: 100px;
       }
 
     }
+  }
+
+  .collapsible.property-collapsible .collapsible-body {
+    margin-bottom: 1rem;
   }
 
   .collapsible.layer-collapsible {

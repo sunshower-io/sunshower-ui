@@ -1,0 +1,10 @@
+template
+    .input-field.locking
+        input(type="${property.type}" id="${rowId}")
+        label(for="${rowId}"
+            value.bind="property.value"
+            ) ${property.label}
+        i.materialize-icon.mdi.mdi-lock-outline.locking-icon(
+            class.bind="property.isPrivate ? 'active' : ''"
+            title="Incomplete Feature"
+            )
