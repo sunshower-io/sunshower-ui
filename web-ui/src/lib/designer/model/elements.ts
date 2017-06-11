@@ -6,6 +6,7 @@ import {
 
 import {Canvas} from "lib/designer/canvas";
 import {Identifier} from "lib/common/lang/identifier";
+import {Vertex} from "./graph/vertex";
 
 
 
@@ -89,6 +90,8 @@ export abstract class Edge extends mxCell {
 
 export abstract class RenderableVertex extends RenderableElement {
 
+    graph_vertex: Vertex;
+
     constructor(
         label: string,
         x:number,
@@ -99,5 +102,7 @@ export abstract class RenderableVertex extends RenderableElement {
         super(label, x, y, width, height);
         this.setVertex(true);
         this.id = Identifier.newId();
+
+        this.graph_vertex = new Vertex();
     }
 }

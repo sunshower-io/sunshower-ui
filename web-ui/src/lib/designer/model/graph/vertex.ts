@@ -12,15 +12,15 @@ export class Vertex {
     constructor() {
         this.id = UUID.random();
 
-        // let testEntity = new Entity();
-        // testEntity.title = "Test Entity";
-        // testEntity.id = UUID.random();
-        // let testProperty = new Property();
-        // testProperty.type = "text";
-        // testProperty.label = "Test Property";
-        // testProperty.id = UUID.random();
-        // testEntity.properties = [testProperty];
-        //
-        // this.entities = [testEntity];
+        let testEntity = new Entity();
+        testEntity.title = "Test Entity";
+        testEntity.id = UUID.random();
+        let testProperty = new Property();
+        testProperty.type = "text";
+        testProperty.label = "Test Property";
+        testProperty.id = UUID.random();
+        testEntity.properties = [testProperty];
+
+        this.entities = [testEntity];
     }
 }

@@ -20,8 +20,16 @@ export class PropertyPanel {
 
         this.designerManager.getCurrentCanvas().listen('selection-changed').forEach(t => {
             this.entities = [];
+            let mxcells = (t.data as any).cells;
 
-            console.log((t.data as any).cells);
+            for (let i = 0; i < mxcells.length; i++ ) {
+                let entities = ((mxcells[i] as any).graph_vertex as any).entities;
+                for (let j = 0; j < entities.length; j++) {
+                    this.entities.push(entities[j]);
+                }
+            }
+
+            console.log(this.entities);
 
             $(this.propertyCollapsible).collapsible();
             setTimeout(() => {
