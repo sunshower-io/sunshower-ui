@@ -9,6 +9,8 @@ export class Vertex {
 
     entities            : Entity[];
 
+    properties          : Property[];
+
     constructor() {
         this.id = UUID.random();
 
@@ -21,6 +23,12 @@ export class Vertex {
         testProperty.id = UUID.random();
         testEntity.properties = [testProperty];
 
+        let otherProperty = new Property();
+        otherProperty.type = "text";
+        otherProperty.label = "Test Property on Vertex";
+        otherProperty.id = UUID.random();
+
+        this.properties = [otherProperty];
         this.entities = [testEntity];
     }
 }

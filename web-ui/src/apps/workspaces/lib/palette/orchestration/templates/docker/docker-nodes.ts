@@ -25,8 +25,8 @@ export class DockerOrchestrationTemplateProviderElement extends Vertex {
     label = "Docker Orchestration";
     style: string = "docker-group-style";
 
-    constructor(label: string, x: number, y: number) {
-        super(label, x, y, 380, 100);
+    constructor(label: string, x: number, y: number, v ?: TaskVertex) {
+        super(label, x, y, 380, 100, v);
     }
 
 
@@ -83,15 +83,6 @@ export class DockerManagerElementLoader implements ElementLoader {
 
     load(canvas: Canvas, v: TaskVertex): Drawable {
         let ctor = DockerManagerElementLoader.types[v.type];
-        return new ctor('whatever', v.layout.x, v.layout.y, v.layout.width, v.layout.height);
-
-        // let node = new DockerManagerNode(
-        //     'manager',
-        //     v.layout.x,
-        //     v.layout.y,
-        //     v.layout.width,
-        //     v.layout.height
-        // );
-        // return node;
+        return new ctor('whatever', v.layout.x, v.layout.y, v.layout.width, v.layout.height, v);
     }
 }

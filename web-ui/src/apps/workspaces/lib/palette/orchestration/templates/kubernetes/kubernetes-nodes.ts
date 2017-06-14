@@ -14,8 +14,8 @@ export class KubernetesOrchestrationTemplateProviderElement extends Vertex {
     label: string = "Kubernetes Orchestration";
     style: string = 'kubernetes-group-style';
 
-    constructor(label: string, x: number, y: number) {
-        super(label, x, y, 380, 100);
+    constructor(label: string, x: number, y: number, v ?: TaskVertex) {
+        super(label, x, y, 380, 100, v);
     }
 
     addTo(canvas: Canvas): boolean {
@@ -73,6 +73,6 @@ export class KubernetesMasterElementLoader implements ElementLoader {
 
     load(canvas: Canvas, v: TaskVertex): Drawable {
         let ctor = KubernetesMasterElementLoader.types[v.type];
-        return new ctor('whatever', v.layout.x, v.layout.y, v.layout.width, v.layout.height);
+        return new ctor('whatever', v.layout.x, v.layout.y, v.layout.width, v.layout.height, v);
     }
 }

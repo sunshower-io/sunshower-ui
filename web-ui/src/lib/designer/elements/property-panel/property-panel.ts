@@ -1,6 +1,8 @@
 import {bindable, customElement, containerless} from "aurelia-framework";
 import {Entity, Property} from "lib/designer/model/entity";
 import {DesignerManager} from "lib/designer/core/designer-manager";
+import {Vertex} from "../../model/graph/vertex";
+import {RenderableVertex} from "../../model/elements";
 
 @containerless
 @customElement('property-panel')
@@ -21,11 +23,12 @@ export class PropertyPanel {
         this.designerManager.getCurrentCanvas().listen('selection-changed').forEach(t => {
             this.entities = [];
             let mxcells = (t.data as any).cells;
-
             for (let i = 0; i < mxcells.length; i++ ) {
-                let mxcell = (mxcells[i] as any);
+                let mxcell = (mxcells[i] as RenderableVertex);
                 this.add_properties(mxcell);
             }
+
+            //todo handle properties being directly on Vertex
 
             $(this.propertyCollapsible).collapsible();
             setTimeout(() => {
@@ -37,8 +40,11 @@ export class PropertyPanel {
 
     add_properties(mxcell: any) {
         if (mxcell.isVertex()) {
-            let entities = (mxcell.graph_vertex as any).entities;
-            this.push_entities(entities);
+            console.log(mxcell.vertex);
+            let entities = mxcell.vertex.entities;
+            if (entities) {
+                this.push_entities(entities);
+            }
             if (mxcell.children) {
                 this.push_children(mxcell);
             }
