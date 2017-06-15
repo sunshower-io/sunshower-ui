@@ -26,6 +26,7 @@ export class PropertyPanel {
             for (let i = 0; i < mxcells.length; i++ ) {
                 let mxcell = (mxcells[i] as RenderableVertex);
                 this.add_cell(mxcell);
+                console.log(mxcell);
             }
 
             setTimeout(() => {

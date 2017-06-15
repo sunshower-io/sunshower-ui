@@ -10,14 +10,16 @@ export class Entity {
         this.properties = [];
         if (data) {
             this.name = data.name;
-            let props = data.properties,
-                keys = Object.keys(props) as any;
-            for (let i = 0; i < keys; i++) {
-                let property = new Property(data.properties[keys[i]]);
-                this.properties.push(property);
+            if (data.properties) {
+                let props = Object.keys(data.properties);
+
+                for (let i = 0; i < props.length; i++) {
+                    let key = props[i],
+                     property = new Property(props[i], data.properties[key]);
+                    this.properties.push(property);
+                }
             }
         }
-        this.id = UUID.random();
     }
 
 }
@@ -30,14 +32,11 @@ export class Property {
     value               : string;
     isPrivate           : boolean;
 
-    constructor(data ?: any) {
-        if (data) {
-            this.label = Object.keys(data)[0];
-            this.value = data[this.label];
-        }
+    constructor(label: string, value: string) {
+        this.label = label;
+        this.value = value;
         this.type = "text";
         this.isPrivate = false;
-        this.id = UUID.random();
     }
 
 }

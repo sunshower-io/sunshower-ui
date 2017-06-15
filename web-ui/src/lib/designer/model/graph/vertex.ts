@@ -13,26 +13,47 @@ export class Vertex {
 
     properties          : Property[];
 
-    constructor() {
-        this.id = UUID.random();
+    constructor(data ?: any) {
+        console.log(data);
 
-        this.name = "Test Title";
+        Object.assign(this, data);
+        this.properties = [];
+        this.entities = [];
 
-        let testEntity = new Entity();
-        testEntity.name = "Test Entity";
-        testEntity.id = UUID.random();
-        let testProperty = new Property();
-        testProperty.type = "text";
-        testProperty.label = "Test Property";
-        testProperty.id = UUID.random();
-        testEntity.properties = [testProperty];
+        if (data.properties) {
+            let props = Object.keys(data.properties);
+            for (let i = 0; i < props.length; i++) {
+                let key = props[i],
+                    property = new Property(props[i], data.properties[key]);
+                this.properties.push(property);
+            }
+        }
+        if (data.entities) {
+            for (let i = 0; i < data.entities.length; i++) {
+                let entity = new Entity(data.entities[i]);
+                this.entities.push(entity);
+            }
+        }
+        if (!this.id) {
+            this.id = UUID.random();
+        }
 
-        let otherProperty = new Property();
-        otherProperty.type = "text";
-        otherProperty.label = "Test Property on Vertex";
-        otherProperty.id = UUID.random();
-
-        this.properties = [otherProperty];
-        this.entities = [testEntity];
+        // this.id = UUID.random();
+        // let testEntity = new Entity();
+        // testEntity.name = "Test Entity";
+        // testEntity.id = UUID.random();
+        // let testProperty = new Property();
+        // testProperty.type = "text";
+        // testProperty.label = "Test Property";
+        // testProperty.id = UUID.random();
+        // testEntity.properties = [testProperty];
+        //
+        // let otherProperty = new Property();
+        // otherProperty.type = "text";
+        // otherProperty.label = "Test Property on Vertex";
+        // otherProperty.id = UUID.random();
+        //
+        // this.properties = [otherProperty];
+        // this.entities = [testEntity];
     }
 }

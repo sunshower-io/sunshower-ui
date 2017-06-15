@@ -22,6 +22,13 @@ export class TaskGraph {
 
     constructor(o?: any) {
         Object.assign(this, o);
+        this.vertices = [];
+
+        if (o.vertices) {
+            for (let i = 0; i < o.vertices.length; i++) {
+                this.vertices.push(new Vertex(o.vertices[i]))
+            }
+        }
     }
 
 
