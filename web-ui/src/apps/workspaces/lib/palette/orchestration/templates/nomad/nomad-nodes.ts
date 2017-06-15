@@ -74,7 +74,7 @@ export class NomadServerElementLoader implements ElementLoader {
 
     load(canvas: Canvas, v: TaskVertex): Drawable {
         let ctor = NomadServerElementLoader.types[v.type];
-        return new ctor('whatever', v.layout.x, v.layout.y, v.layout.width, v.layout.height, v);
+        return new ctor(v.name, v.layout.x, v.layout.y, v.layout.width, v.layout.height, v);
     }
 
 }

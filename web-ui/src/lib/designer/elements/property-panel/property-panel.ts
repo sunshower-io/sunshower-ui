@@ -26,7 +26,6 @@ export class PropertyPanel {
             for (let i = 0; i < mxcells.length; i++ ) {
                 let mxcell = (mxcells[i] as RenderableVertex);
                 this.add_cell(mxcell);
-                console.log(mxcell);
             }
 
             setTimeout(() => {
@@ -39,7 +38,10 @@ export class PropertyPanel {
 
     add_cell(mxcell: RenderableVertex) {
         if (mxcell.isVertex()) {
-            this.cells.push(mxcell.vertex);
+            let vertex = mxcell.vertex;
+            if ((vertex.entities && vertex.entities.length) || (vertex.properties && vertex.properties.length)) {
+                this.cells.push(mxcell.vertex);
+            }
             if (mxcell.children) {
                 for (let i = 0; i < mxcell.children.length; i++) {
                     let cell = (mxcell.children[i] as RenderableVertex);

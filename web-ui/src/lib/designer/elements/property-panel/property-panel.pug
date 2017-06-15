@@ -8,6 +8,7 @@ template
                 li(repeat.for="cell of cells")
                     .collapsible-header
                         | ${cell.name} Properties
+                        i.material-icons.mdi.mdi-chevron-right.dropdown-icon
                     .collapsible-body
                         property-row(repeat.for="property of cell.properties"
                             property.bind="property")
@@ -16,6 +17,7 @@ template
                             li(repeat.for="entity of cell.entities")
                                 .collapsible-header
                                     | ${entity.name} Properties
+                                    i.material-icons.mdi.mdi-chevron-right.dropdown-icon
                                 .collapsible-body
                                     property-row(repeat.for="property of entity.properties"
                                         property.bind="property")
