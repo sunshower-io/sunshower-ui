@@ -3,13 +3,13 @@ import {UUID} from "lib/common/lang/uuid";
 export class Entity {
 
     id                  : string;
-    title               : string;
+    name                : string;
     properties          : Property[];
 
     constructor(data ?: any) {
         this.properties = [];
         if (data) {
-            this.title = data.name;
+            this.name = data.name;
             let props = data.properties,
                 keys = Object.keys(props) as any;
             for (let i = 0; i < keys; i++) {

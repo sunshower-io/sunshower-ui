@@ -11,60 +11,41 @@ export class PropertyPanel {
     @bindable
     propertyCollapsible: HTMLElement;
 
-    entities: Entity[];
+    cells: Vertex[];
 
     constructor(private readonly designerManager: DesignerManager) {
 
     }
 
     attached() {
-        this.entities = [];
+        this.cells = [];
 
         this.designerManager.getCurrentCanvas().listen('selection-changed').forEach(t => {
-            this.entities = [];
+            this.cells = [];
             let mxcells = (t.data as any).cells;
             for (let i = 0; i < mxcells.length; i++ ) {
                 let mxcell = (mxcells[i] as RenderableVertex);
-                this.add_properties(mxcell);
+                this.add_cell(mxcell);
             }
 
-            //todo handle properties being directly on Vertex
-
-            $(this.propertyCollapsible).collapsible();
             setTimeout(() => {
+                $(this.propertyCollapsible).find('.collapsible').collapsible();
                 Materialize.updateTextFields();
             }, 100);
         });
 
     }
 
-    add_properties(mxcell: any) {
+    add_cell(mxcell: RenderableVertex) {
         if (mxcell.isVertex()) {
-            console.log(mxcell.vertex);
-            let entities = mxcell.vertex.entities;
-            if (entities) {
-                this.push_entities(entities);
-            }
+            this.cells.push(mxcell.vertex);
             if (mxcell.children) {
-                this.push_children(mxcell);
+                for (let i = 0; i < mxcell.children.length; i++) {
+                    let cell = (mxcell.children[i] as RenderableVertex);
+                    this.add_cell(cell);
+                }
             }
         }
     }
-
-    push_entities(entities: Entity[]) {
-        for (let j = 0; j < entities.length; j++) {
-            this.entities.push(entities[j]);
-        }
-    }
-
-    push_children(cell: any) {
-        if (cell.isVertex && cell.children) {
-            for (let i = 0; i < cell.children.length; i++) {
-                let mxcell = (cell.children[i] as any);
-                this.add_properties(mxcell);
-            }
-        }
-    }
-
 
 }

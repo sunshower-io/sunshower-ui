@@ -3,13 +3,19 @@ template
     .designer-panel-header
         h2 Properties
     .designer-panel-body
-        .designer-form
-            ul.collapsible.property-collapsible(ref="propertyCollapsible" data-collapsible="expandable")
-                li(repeat.for="entity of entities")
+        .designer-form(ref="propertyCollapsible")
+            ul.collapsible.property-collapsible(data-collapsible="expandable")
+                li(repeat.for="cell of cells")
                     .collapsible-header
-                        | ${entity.title} Properties
-                        i.material-icons.mdi.mdi-chevron-right.dropdown-icon
+                        | ${cell.name} Properties
                     .collapsible-body
-                        property-row(repeat.for="property of entity.properties"
-                            property.bind="property"
-                            entity.bind="entity")
+                        property-row(repeat.for="property of cell.properties"
+                            property.bind="property")
+                        ul.collapsible(if.bind="cell.entities && cell.entities.length > 0"
+                            data-collapsible="expandable")
+                            li(repeat.for="entity of cell.entities")
+                                .collapsible-header
+                                    | ${entity.name} Properties
+                                .collapsible-body
+                                    property-row(repeat.for="property of entity.properties"
+                                        property.bind="property")

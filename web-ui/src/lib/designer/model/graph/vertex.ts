@@ -7,6 +7,8 @@ export class Vertex {
     type                : string;
     layout              : Layout;
 
+    name                : string;
+
     entities            : Entity[];
 
     properties          : Property[];
@@ -14,8 +16,10 @@ export class Vertex {
     constructor() {
         this.id = UUID.random();
 
+        this.name = "Test Title";
+
         let testEntity = new Entity();
-        testEntity.title = "Test Entity";
+        testEntity.name = "Test Entity";
         testEntity.id = UUID.random();
         let testProperty = new Property();
         testProperty.type = "text";
