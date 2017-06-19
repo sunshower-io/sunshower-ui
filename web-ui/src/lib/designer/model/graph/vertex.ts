@@ -14,28 +14,30 @@ export class Vertex {
     properties          : Property[];
 
     constructor(data ?: any) {
-        console.log(data);
+
 
         Object.assign(this, data);
         this.properties = [];
         this.entities = [];
 
-        if (data.properties) {
-            let props = Object.keys(data.properties);
-            for (let i = 0; i < props.length; i++) {
-                let key = props[i],
-                    property = new Property(props[i], data.properties[key]);
-                this.properties.push(property);
+        if(data) {
+            if (data.properties) {
+                let props = Object.keys(data.properties);
+                for (let i = 0; i < props.length; i++) {
+                    let key = props[i],
+                        property = new Property(props[i], data.properties[key]);
+                    this.properties.push(property);
+                }
             }
-        }
-        if (data.entities) {
-            for (let i = 0; i < data.entities.length; i++) {
-                let entity = new Entity(data.entities[i]);
-                this.entities.push(entity);
+            if (data.entities) {
+                for (let i = 0; i < data.entities.length; i++) {
+                    let entity = new Entity(data.entities[i]);
+                    this.entities.push(entity);
+                }
             }
-        }
-        if (!this.id) {
-            this.id = UUID.random();
+            if (!this.id) {
+                this.id = UUID.random();
+            }
         }
 
         // this.id = UUID.random();
