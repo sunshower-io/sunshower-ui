@@ -1,5 +1,9 @@
 .auth-side {
-  background: $almostblack;
+  background-image: url("/assets/icons/art.jpg");
+  //background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  //background: url("/assets/icons/art.jpg")no-repeat cover;
   width: 35%;
   top:0;
   left:0;

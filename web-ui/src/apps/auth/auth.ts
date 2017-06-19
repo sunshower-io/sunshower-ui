@@ -13,7 +13,7 @@ export class Auth {
     }
 
     public configureRouter(config: RouterConfiguration, router: Router) {
-        config.title = 'Hasli';
+        config.title = 'Sunshower';
         config.map([
             {
                 route: ['', 'login'],

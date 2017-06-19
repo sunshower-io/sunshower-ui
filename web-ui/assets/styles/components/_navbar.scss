@@ -4,7 +4,7 @@
 nav {
   background-color: $offwhite;
   position:absolute;
-  left:$small-nav-width;
+  left:0;
   top:0;
   right:0;
   border-bottom: $default-border;
@@ -21,57 +21,64 @@ nav {
 
   .brand-logo {
     height: $navbar-height;
-    line-height: $navbar-height;
+    line-height: $navbar-height - $standard-padding;
     box-sizing: border-box;
-    padding-left: $standard-padding;
+    padding: $standard-padding/2;
     font-weight: 300;
+    color: $logoblue;
+    font-size: 1.8rem;
 
     @media #{$medium-and-down} {
       left: auto;
       transform: none;
     }
 
-    .breadcrumb {
-      font-size: 1rem;
+    img {
+      height: $navbar-height - $standard-padding;
+      margin-right: $standard-padding/2;
       vertical-align: middle;
-      color: $midgrey;
-
-      @media #{$small-and-down} {
-        display: none;
-      }
-
-      &:first-child {
-        font-size: 1.25rem;
-        color: $midgrey !important;
-      }
-
-      &:last-child {
-        color: $primary-color;
-      }
-
-      &:before {
-        font: inherit;
-        content: "/";
-        font-size: 20px;
-        margin: -3px 0 0 0 !important;
-        padding: 0 .25em;
-        color: $midgrey !important;
-        vertical-align:middle;
-      }
     }
+
+    //.breadcrumb {
+    //  font-size: 1rem;
+    //  vertical-align: middle;
+    //  color: $midgrey;
+    //
+    //  @media #{$small-and-down} {
+    //    display: none;
+    //  }
+    //
+    //  &:first-child {
+    //    font-size: 1.25rem;
+    //    color: $midgrey !important;
+    //  }
+    //
+    //  &:last-child {
+    //    color: $primary-color;
+    //  }
+    //
+    //  &:before {
+    //    font: inherit;
+    //    content: "/";
+    //    font-size: 20px;
+    //    margin: -3px 0 0 0 !important;
+    //    padding: 0 .25em;
+    //    color: $midgrey !important;
+    //    vertical-align:middle;
+    //  }
+    //}
 
   }
 
   ul.user-menu {
     width: $body-panel-width;
-    margin-right: $navbar-height; //fixes weirdness with float
 
-    @media #{$medium-only} {
-      width: $body-panel-width - $navbar-height;
-    }
-    @media #{$small-and-down} {
-      width: auto;
-    }
+    //@media #{$medium-only} {
+    //  width: $body-panel-width - $navbar-height;
+    //}
+    //@media #{$small-and-down} {
+    //  width: auto;
+    //}
 
 
     & > li {
@@ -82,40 +89,41 @@ nav {
       text-align: center;
 
       &.dropdown-tab {
-        width: $body-panel-width - ($navbar-height*2);
-        background: $primary-color;
+        //width: $body-panel-width - ($navbar-height*2);
+        width: 100%;
+        background: $secondary-color;
 
-        @media #{$small-and-down} {
-          width: $navbar-height*2;
-        }
+        //@media #{$small-and-down} {
+        //  width: $navbar-height*2;
+        //}
 
         i.material-icons.profile-image {
           display: none;
 
-          @media #{$small-and-down} {
-            display: inline;
-          }
+          //@media #{$small-and-down} {
+          //  display: inline;
+          //}
         }
 
-        span {
-          @media #{$small-and-down} {
-            display: none;
-          }
-        }
+        //span {
+        //  @media #{$small-and-down} {
+        //    display: none;
+        //  }
+        //}
 
       }
 
-      &.alert-tab, &.user-tab {
-        width: $navbar-height;
-        text-align: center;
-        background: $primary-color-dark;
-      }
+      //&.alert-tab, &.user-tab {
+      //  width: $navbar-height;
+      //  text-align: center;
+      //  background: $primary-color-dark;
+      //}
 
-      &.user-tab {
-        @media #{$medium-and-down} {
-          display: none;
-        }
-      }
+      //&.user-tab {
+      //  @media #{$medium-and-down} {
+      //    display: none;
+      //  }
+      //}
 
       i.material-icons {
         vertical-align: middle;
@@ -125,7 +133,7 @@ nav {
 
     ul.dropdown-content {
       @media #{$small-and-down} {
-        width: $navbar-height*3 !important;
+        width: $body-panel-width !important;
         left: auto !important;
         right: 0 !important;
       }

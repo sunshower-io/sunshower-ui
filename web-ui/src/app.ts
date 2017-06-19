@@ -50,7 +50,7 @@ export class App {
 
     public configureRouter(config: RouterConfiguration,
                            router: Router) {
-        config.title = 'Hasli.io';
+        config.title = 'Sunshower.io';
 
 
         config.addPipelineStep('authorize', new SecurityStep(this.tokenHolder));

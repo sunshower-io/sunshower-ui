@@ -1,18 +1,21 @@
 template
     nav
         .nav-wrapper
-            .brand-logo(
-                ref="brandLogo"
-                anim-enter="slideOver"
-                anim-leave="slideBack"
-                )
-                a.breadcrumb(repeat.for="breadcrumb of breadcrumbs"
-                    href="${breadcrumb.href}"
-                      )
-                    | ${breadcrumb.title}
+            //.brand-logo(
+            //    ref="brandLogo"
+            //    anim-enter="slideOver"
+            //    anim-leave="slideBack"
+            //    )
+            .brand-logo
+                img(src="assets/icons/sunshower-logo.svg")
+                span Sunshower.io
+                //a.breadcrumb(repeat.for="breadcrumb of breadcrumbs"
+                //    href="${breadcrumb.href}"
+                //      )
+                //    | ${breadcrumb.title}
             ul.right.user-menu
-                li.alert-tab
-                    i.material-icons.mdi.mdi-bell
+                //li.alert-tab
+                //    i.material-icons.mdi.mdi-bell
                     // activity-monitor-dropdown
                 li.dropdown-tab(
                 class="dropdown-button"
@@ -26,6 +29,7 @@ template
                     span ${user.username}
                     i.material-icons.mdi.mdi-menu-down
                 ul(id="${dropdownId}" class="dropdown-content")
+                    //TODO add content
                     //li
                     //    i.material-icons.mdi.mdi-account-circle
                     //    | ${user.username}
@@ -43,8 +47,8 @@ template
                     li(click.delegate="logout()")
                         i.material-icons.mdi.mdi-logout-variant
                         | Sign Out
-                li.user-tab
-                    template(if.bind="user.image")
-                        img(src="${user.image}")
-                    template(if.bind="!user.image")
-                        i.material-icons.mdi.mdi-account-circle
+                //li.user-tab
+                //    template(if.bind="user.image")
+                //        img(src="${user.image}")
+                //    template(if.bind="!user.image")
+                //        i.material-icons.mdi.mdi-account-circle

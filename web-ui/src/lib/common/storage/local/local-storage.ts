@@ -29,7 +29,7 @@ export class LocalStorage implements Map<string, string> {
         if(typeof(Storage) == undefined) {
             throw new Error("This browser " +
                 "does not support web storage.  This is likely a " +
-                "defect in Hasli.  Please use Cookie storage instead");
+                "defect in Sunshower.  Please use Cookie storage instead");
         }
     }
 

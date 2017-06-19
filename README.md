@@ -1,15 +1,15 @@
-# hasli-ui
+# sunshower-ui
 
 
 
 ## Building
 
-The recommended way to build and deploy hasli-ui is to use [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose/).  
+The recommended way to build and deploy sunshower-ui is to use [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose/).  
 
 
 
-### Steps to build for developing on hasli-ui
-1. cd into the hasli-ui respository and run: 
+### Steps to build for developing on sunshower-ui
+1. cd into the sunshower-ui respository and run: 
 
     `docker-compose -f common-services.yml build build-env`
     
@@ -30,7 +30,7 @@ If everything successfully built, you should have a running environment ready fo
     3. web-services
     4. db
     
-You can view the service statuses by running `docker-compose -f docker-compose-dev.yml -p dev ps`. The ui service loads the hasli-ui src and executes `npm install && jspm install -y && gulp` for you, which is all that is required to spin up the ui.  Any changes at this point made to the src will be picked up and loaded automatically with gulp.
+You can view the service statuses by running `docker-compose -f docker-compose-dev.yml -p dev ps`. The ui service loads the sunshower-ui src and executes `npm install && jspm install -y && gulp` for you, which is all that is required to spin up the ui.  Any changes at this point made to the src will be picked up and loaded automatically with gulp.
  
 If everything built without errors, you can pull up a browser and navigate to: [http://localhost:32770/](http://localhost:32770/)
 
