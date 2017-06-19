@@ -1,8 +1,0 @@
-template
-    .header Operating System
-    .content
-        .ui.link.centered.four.cards
-            .card(repeat.for="os of osService.list()" click.delegate="save(os)")
-                .content
-                    img.ui.huge.avatar.image(src="${os.icon}")
-                    | ${os.name}
