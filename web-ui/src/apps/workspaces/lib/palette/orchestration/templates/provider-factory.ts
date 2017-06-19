@@ -6,7 +6,7 @@ import {
 
 
 
-import {HasliOrchestrationTemplateProviderFactory} from "./hasli/hasli-orchestration-template";
+import {HasliOrchestrationTemplateProviderFactory} from "./sunshower/sunshower-orchestration-template";
 import {NomadOrchestrationTemplateProviderFactory} from "./nomad/nomad-orchestration-template";
 import {KubernetesOrchestrationTemplateProviderFactory} from "./kubernetes/kubernetes-orchestration-template";
 import {DockerOrchestrationTemplateProviderFactory} from "./docker/docker-orchestration-template";

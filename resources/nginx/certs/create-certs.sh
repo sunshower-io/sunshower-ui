@@ -3,26 +3,26 @@
 openssl req -x509 -nodes \
     -days 365 \
     -newkey rsa:2048 \
-    -keyout hasli.io.key \
-    -out hasli.io.pem
+    -keyout sunshower.io.key \
+    -out sunshower.io.pem
 
 openssl req -new \
-    -key hasli.io.key \
-    -out hasli.io.csr
+    -key sunshower.io.key \
+    -out sunshower.io.csr
 
 openssl x509 -req -days 365 \
-    -in hasli.io.csr \
-    -signkey hasli.io.key \
-    -out hasli.io.crt
+    -in sunshower.io.csr \
+    -signkey sunshower.io.key \
+    -out sunshower.io.crt
 
 openssl pkcs12 -export \
-    -in hasli.io.crt \
-    -inkey hasli.io.key \
-    -chain -CAfile hasli.io.crt \
-    -name "hasli.io" \
-    -out hasli.io.p12
+    -in sunshower.io.crt \
+    -inkey sunshower.io.key \
+    -chain -CAfile sunshower.io.crt \
+    -name "sunshower.io" \
+    -out sunshower.io.p12
 
 keytool -importkeystore \
-    -destkeystore hasli.io.jks \
-    -srckeystore hasli.io.p12 \
+    -destkeystore sunshower.io.jks \
+    -srckeystore sunshower.io.p12 \
     -srcstoretype PKCS12

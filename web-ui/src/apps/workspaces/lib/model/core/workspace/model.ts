@@ -41,7 +41,7 @@ export class Workspace {
             "name": this.name
         };
     }
-    //"type": "io.hasli.sdk.v1.ext.hasli.model.WorkspaceElement"
+    //"type": "io.sunshower.sdk.v1.ext.sunshower.model.WorkspaceElement"
 
 }
 

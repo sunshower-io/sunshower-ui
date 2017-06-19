@@ -16,7 +16,7 @@ export class IncompleteFeature {
             text: 'This feature has not yet been implemented',
             shadow: false,
             icon: false,
-            addclass: 'hasli-incomplete'
+            addclass: 'sunshower-incomplete'
         });
         notice.get().click(() => {
             notice.remove();

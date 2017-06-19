@@ -195,7 +195,7 @@ function configureHttpClient(http: HttpClient) {
     http.configure(config => {
         config
             .useStandardConfiguration()
-            .withBaseUrl('/hasli/api/v1/')
+            .withBaseUrl('/sunshower/api/v1/')
             .withDefaults({
                 headers: {
                     'Accept': 'application/json',
@@ -210,7 +210,7 @@ function configureAuthenticatedClient(authenticatedClient: HttpClient, container
     authenticatedClient.configure(config => {
         config
             .useStandardConfiguration()
-            .withBaseUrl('/hasli/api/v1/')
+            .withBaseUrl('/sunshower/api/v1/')
             .withDefaults({
                 headers: {
                     'Accept': 'application/json',
@@ -225,7 +225,7 @@ function configureAuthenticatedClient(authenticatedClient: HttpClient, container
 function configureBasicClient(basicClient: BasicHttpClient, container: Container, token: string) {
 
     basicClient.configure(config => {
-            config.withBaseUrl('/hasli/api/v1/')
+            config.withBaseUrl('/sunshower/api/v1/')
                 .withHeader('X-AUTH-TOKEN', token);
         }
     );

@@ -1,5 +1,5 @@
 {
-  "name": "hasli.io",
+  "name": "sunshower.io",
   "version": "1.0.2",
   "description": "Hasli.io",
   "keywords": [
@@ -9,7 +9,7 @@
     "typescript",
     "vscode"
   ],
-  "homepage": "http://app.hasli.io",
+  "homepage": "http://app.sunshower.io",
   "bugs": {
     "url": "https://github.com/aurelia/skeleton-navigation-typescript/issues"
   },
@@ -18,7 +18,7 @@
   "main": "dist/main.js",
   "repository": {
     "type": "git",
-    "url": "http://github.com/hasli-projects/hasli.io"
+    "url": "http://github.com/sunshower-projects/sunshower.io"
   },
   "scripts": {
     "prepublish": "./node_modules/.bin/typings install",

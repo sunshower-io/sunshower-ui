@@ -4,9 +4,9 @@ server:
   context-path: /
   use-forward-headers: true
   ssl:
-    key-alias: hasli.io
-    key-store: classpath:hasli.io.jks
+    key-alias: sunshower.io
+    key-store: classpath:sunshower.io.jks
     key-store-type: JKS
-    key-store-path: classpath:hasli.io.jks
+    key-store-path: classpath:sunshower.io.jks
     key-store-password: h4s1!43v3r!
     key-password: h4s1!43v3r!
