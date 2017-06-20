@@ -2,7 +2,8 @@
   background: none;
 
   form {
-    padding: $standard-padding;
+    padding: 0;
+    box-shadow: none;
   }
 
   .modal-header {
@@ -20,6 +21,6 @@
     padding: $standard-padding*2;
   }
 
-  @extend .z-depth-0;
+  //@extend .z-depth-0;
 
 }

@@ -85,13 +85,13 @@ nav {
       box-sizing: border-box;
       height: $navbar-height;
       cursor: pointer;
-      color: white;
+      color: $almostblack;
       text-align: center;
 
       &.dropdown-tab {
         //width: $body-panel-width - ($navbar-height*2);
         width: 100%;
-        background: $secondary-color;
+        background: $lightgreen;
 
         //@media #{$small-and-down} {
         //  width: $navbar-height*2;
