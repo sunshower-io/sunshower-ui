@@ -31,54 +31,58 @@ export class WorkspaceContext {
     configureRouter(config: RouterConfiguration,
                     router: Router) {
         config.options.breadcrumb = true;
+        // config.map([{
+        //     route: ['', 'dashboard'],
+        //     moduleId: './dashboard/index',
+        //     name: 'dashboard',
+        //     nav: true,
+        //     title: 'Dashboard',
+        //     settings: {
+        //         icon: 'mdi-web',
+        //         contextComponent: {
+        //             reference: 'apps/workspaces/routes/workspace/dashboard/context-menu'
+        //         }
+        //     }
+        // }, {
+        //     route: 'applications',
+        //     moduleId: './applications/index',
+        //     name: 'applications',
+        //     nav: true,
+        //     title: 'Applications',
+        //     settings: {
+        //         icon: 'mdi-apps',
+        //         contextComponent: {
+        //             reference: 'apps/workspaces/routes/workspace/applications/context-menu'
+        //         }
+        //     }
+        // }, {
+        //     route: 'infrastructure',
+        //     moduleId: './infrastructure/index',
+        //     name: 'infrastructure',
+        //     nav: true,
+        //     title: 'Infrastructure',
+        //     settings: {
+        //         icon: 'mdi-cloud-outline',
+        //         contextComponent: {
+        //             reference: 'apps/workspaces/routes/workspace/infrastructure/context-menu'
+        //         }
+        //     }
+        // }, {
+        //     route: 'orchestration',
+        //     moduleId: './orchestration/index',
+        //     name: 'orchestration',
+        //     nav: true,
+        //     title: 'Orchestration',
+        //     settings: {
+        //         icon: 'mdi-android-studio',
+        //         contextComponent: {
+        //             reference: 'apps/workspaces/routes/workspace/orchestration/context-menu'
+        //         }
+        //     }
+        // }]);
         config.map([{
-            route: ['', 'dashboard'],
-            moduleId: './dashboard/index',
-            name: 'dashboard',
-            nav: true,
-            title: 'Dashboard',
-            settings: {
-                icon: 'mdi-web',
-                contextComponent: {
-                    reference: 'apps/workspaces/routes/workspace/dashboard/context-menu'
-                }
-            }
-        }, {
-            route: 'applications',
-            moduleId: './applications/index',
-            name: 'applications',
-            nav: true,
-            title: 'Applications',
-            settings: {
-                icon: 'mdi-apps',
-                contextComponent: {
-                    reference: 'apps/workspaces/routes/workspace/applications/context-menu'
-                }
-            }
-        }, {
-            route: 'infrastructure',
-            moduleId: './infrastructure/index',
-            name: 'infrastructure',
-            nav: true,
-            title: 'Infrastructure',
-            settings: {
-                icon: 'mdi-cloud-outline',
-                contextComponent: {
-                    reference: 'apps/workspaces/routes/workspace/infrastructure/context-menu'
-                }
-            }
-        }, {
-            route: 'orchestration',
-            moduleId: './orchestration/index',
-            name: 'orchestration',
-            nav: true,
-            title: 'Orchestration',
-            settings: {
-                icon: 'mdi-android-studio',
-                contextComponent: {
-                    reference: 'apps/workspaces/routes/workspace/orchestration/context-menu'
-                }
-            }
+            route: 'designer',
+            moduleId: './orchestration/designer'
         }]);
     }
 

@@ -40,7 +40,8 @@ export class CreateWorkspace {
             .then(result => {
                 if(result) {
                     this.complete();
-                    this.router.navigate(`workspaces/${result.value}/dashboard`)
+                    // this.router.navigate(`workspaces/${result.value}/dashboard`)
+                    this.router.navigate(`workspaces/${result.value}/designer`);
                 }
             });
     }

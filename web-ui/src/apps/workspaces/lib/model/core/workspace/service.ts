@@ -21,9 +21,13 @@ export class WorkspaceService implements Service<Workspace> {
 
     public workspace: Workspace;
 
+    public template: OrchestrationTemplate;
+
     static readonly paramName: string = 'workspaceId';
 
     private currentId: string;
+
+    private currentTemplateId: string;
 
     private subject: Subject<Workspace>;
 
@@ -48,14 +52,17 @@ export class WorkspaceService implements Service<Workspace> {
             return Promise.resolve(ws);
         } else {
             return this.client.fetch(`workspaces/${this.currentId}`)
-                .then(t => t.json() as any)
-                .then(t => {
-                    this.workspace = new Workspace(t);
-                    this.subject.next(this.workspace);
-                    return this.workspace;
+                .then(w => w.json() as any)
+                .then(w => {
+                    this.getTemplates(this.currentId).then(t => {
+                        this.template = t[0];
+                        this.currentTemplateId = this.template.id;
+                        this.workspace = new Workspace(w);
+                        this.subject.next(this.workspace);
+                        return this.workspace;
+                    });
                 });
         }
-
     }
 
 
@@ -81,7 +88,12 @@ export class WorkspaceService implements Service<Workspace> {
             body: JSON.stringify(workspaceRequest)
         }).then(w => w.json() as any)
             .then(w => {
-                return new Identifier(w.value);
+                let template = new OrchestrationTemplate();
+                template.name = workspaceRequest.name;
+                template.key = workspaceRequest.name;
+                this.addTemplate(w.value, template).then(t => {
+                    return new Identifier(w.value);
+                });
             });
     }
 

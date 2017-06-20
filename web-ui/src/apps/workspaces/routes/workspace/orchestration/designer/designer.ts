@@ -11,6 +11,7 @@ import {DesignerManager} from "lib/designer/core/designer-manager";
 import {OrchestrationTemplate} from "apps/workspaces/lib/model/core/orchestration-template/model";
 import {RouteConfig} from "aurelia-router";
 import {Materialize} from 'materialize-css';
+import {WorkspaceService} from "../../../../lib/model/core/workspace/service";
 
 @autoinject
 @customElement('orchestration-designer')
@@ -29,23 +30,17 @@ export default class OrchestrationDesigner {
     constructor(
         elementFactory: OrchestrationProviderFactory,
         private orchestrationService: OrchestrationTemplateService,
+        private workspaceService: WorkspaceService,
         private designerManager: DesignerManager
     ) {
         this.elementFactory = elementFactory;
         this.registryFactory = new RegistryProviderFactory();
     }
 
-    activate(params:string, routeConfig:RouteConfig) {
-        //why would this work without NavigationAware but not work with?
-        this.orchestrationService.current().then(orch => {
-            routeConfig.navModel.setTitle(orch.name);
-        });
-
-    }
-
     attached() : void {
         this.designerManager.toggleLoading();
-        this.orchestration = this.orchestrationService.orchestrationTemplate;
+        this.orchestration = this.workspaceService.template;
+        // this.orchestration = this.orchestrationService.orchestrationTemplate;
         this.orchestrationService.currentGraph().then(t => {
             let canvas = this.designerManager.getCurrentCanvas();
             this.designerManager.getCurrent().setGraph(t);
