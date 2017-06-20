@@ -81,8 +81,9 @@ export class WorkspaceContext {
         //     }
         // }]);
         config.map([{
-            route: 'designer',
-            moduleId: './orchestration/designer'
+            route: ['', 'designer'],
+            moduleId: './orchestration/designer/designer',
+            name: 'designer'
         }]);
     }
 

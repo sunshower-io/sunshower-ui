@@ -32,21 +32,12 @@ template
                     required="required")
                 label(for="${emailId}") Email
             .col.m6.input-field
-                input(type='tel'
-                    id="${phoneId}"
-                    class="${phoneValidationClass}"
-                    value.bind='user.phoneNumber'
+                input(type="text"
+                    id="${usernameId}"
+                    value.bind="user.username"
                     class="validate"
-                    required="required"
-                    keyup.delegate="checkPhoneNumber()")
-                label(for="${phoneId}") Phone Number
-        .input-field
-            input(type="text"
-                id="${usernameId}"
-                value.bind="user.username"
-                class="validate"
-                required="required")
-            label(for="${usernameId}") Username
+                    required="required")
+                label(for="${usernameId}") Username
         .row
             .col.m6.input-field
                 input(ref="passwordInput"

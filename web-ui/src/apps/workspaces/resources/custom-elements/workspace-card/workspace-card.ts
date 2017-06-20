@@ -22,7 +22,7 @@ export class WorkspaceCard {
     }
 
     open(id:string) : void {
-        this.router.navigate(`${id}/dashboard`);
+        this.router.navigate(`${id}/designer`);
     }
 
     destroy(id: string) : void {
