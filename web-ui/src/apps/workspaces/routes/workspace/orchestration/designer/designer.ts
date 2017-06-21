@@ -39,18 +39,21 @@ export default class OrchestrationDesigner {
 
     attached() : void {
         this.designerManager.toggleLoading();
-        this.orchestration = this.workspaceService.template;
-        // this.orchestration = this.orchestrationService.orchestrationTemplate;
-        this.orchestrationService.currentGraph().then(t => {
-            let canvas = this.designerManager.getCurrentCanvas();
-            this.designerManager.getCurrent().setGraph(t);
-            canvas.listen('canvas-saved').forEach(t => {
-                this.orchestrationService.saveGraph(t.data)
-                    .then(t => {
-                        Materialize.toast(`Successfully saved designer`, 2000);
+        this.workspaceService.current().then(w => {
+            this.orchestration = this.workspaceService.template;
+            this.orchestrationService.bind(this.orchestration.id).then(t => {
+                this.orchestrationService.currentGraph().then(t => {
+                    let canvas = this.designerManager.getCurrentCanvas();
+                    this.designerManager.getCurrent().setGraph(t);
+                    canvas.listen('canvas-saved').forEach(t => {
+                        this.orchestrationService.saveGraph(t.data)
+                            .then(t => {
+                                Materialize.toast(`Successfully saved designer`, 2000);
+                            });
                     });
-            });
-            this.designerManager.toggleLoading();
+                    this.designerManager.toggleLoading();
+                });
+            })
         });
     }
 

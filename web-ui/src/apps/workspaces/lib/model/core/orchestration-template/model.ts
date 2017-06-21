@@ -65,10 +65,10 @@ export class OrchestrationTemplate extends VersionedItem {
 }
 
 export class Version {
-    major       ?: number;
-    minor       ?: number;
-    minorMinor  ?: number;
-    extension   ?: string;
+    major       ?: number = 1;
+    minor       ?: number = 0;
+    minorMinor  ?: number = 0;
+    extension   ?: string = "DRAFT";
     id          ?: string;
 
     constructor(data ?: any) {

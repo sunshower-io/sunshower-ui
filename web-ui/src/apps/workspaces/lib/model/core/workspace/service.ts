@@ -13,7 +13,7 @@ import {
 
 import {Identifier} from "lib/common/lang/identifier";
 import {Subject} from "rxjs/Subject";
-import {OrchestrationTemplate} from "../orchestration-template/model";
+import {OrchestrationTemplate, Version} from "../orchestration-template/model";
 
 
 @autoinject
@@ -88,11 +88,13 @@ export class WorkspaceService implements Service<Workspace> {
             body: JSON.stringify(workspaceRequest)
         }).then(w => w.json() as any)
             .then(w => {
-                console.log('workspace', w);
-                let template = new OrchestrationTemplate();
+                let template = new OrchestrationTemplate(),
+                    version = new Version();
                 template.name = workspaceRequest.name;
                 template.key = workspaceRequest.name;
-                this.addTemplate(w.value, template).then(t => {
+                template.version = version;
+                return this.addTemplate(w.value, template).then(t => {
+                    console.log('w.value', w.value);
                     return new Identifier(w.value);
                 });
             });
