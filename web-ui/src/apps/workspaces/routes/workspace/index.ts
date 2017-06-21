@@ -31,6 +31,11 @@ export class WorkspaceContext {
     configureRouter(config: RouterConfiguration,
                     router: Router) {
         config.options.breadcrumb = true;
+        config.map([{
+            route: ['', 'designer'],
+            moduleId: './orchestration/designer/designer',
+            name: 'designer'
+        }]);
         // config.map([{
         //     route: ['', 'dashboard'],
         //     moduleId: './dashboard/index',
@@ -80,11 +85,6 @@ export class WorkspaceContext {
         //         }
         //     }
         // }]);
-        config.map([{
-            route: ['', 'designer'],
-            moduleId: './orchestration/designer/designer',
-            name: 'designer'
-        }]);
     }
 
 
