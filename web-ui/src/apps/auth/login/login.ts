@@ -76,9 +76,12 @@ export class Login {
             .then(data => {
                 if (this.remember) {
                     this.storage.put('X-AUTH-TOKEN', data.token.value);
+                    window.location.href = "#/workspaces";
                     window.location.reload(true);
+
                 } else {
                     this.setParam("token", data.token.value);
+                    window.location.href = "#/workspaces";
                     window.location.reload(true);
                 }
             }).catch(e => {

@@ -4,7 +4,8 @@ template
         | Already have an account?
         a.btn-flat(click.delegate="signIn()") Sign In
 
-    h1 Create Sunshower.io account
+    h1 Create account for &#32;
+        a(href="http://sunshower.io") Sunshower.io
 
     form(if.bind="!showSuccess" submit.delegate="signup()")
         .form-message.error(if.bind="showError") ${error}

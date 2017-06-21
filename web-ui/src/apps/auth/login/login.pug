@@ -4,7 +4,8 @@ template
         | Don't have an account yet?
         a.btn-flat(click.delegate="signUp()") Sign Up
 
-    h1 Sign in to Sunshower.io
+    h1 Sign in to &#32;
+        a(href="http://sunshower.io") Sunshower.io
 
     form(submit.delegate="login()")
         .form-message.error(if.bind="credentialsInvalid") ${error}
