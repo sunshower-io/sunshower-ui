@@ -136,8 +136,13 @@ body {
     z-index: 2000;
     background: $offwhite;
     opacity: .75;
-    padding: 25% 25% 0 25%;
+    padding: 10% 30% 0 30%;
     text-align: center;
+
+    img {
+      width: 100px;
+    }
+
   }
 }
 

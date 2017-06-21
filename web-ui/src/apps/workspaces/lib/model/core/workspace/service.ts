@@ -88,6 +88,7 @@ export class WorkspaceService implements Service<Workspace> {
             body: JSON.stringify(workspaceRequest)
         }).then(w => w.json() as any)
             .then(w => {
+                console.log('workspace', w);
                 let template = new OrchestrationTemplate();
                 template.name = workspaceRequest.name;
                 template.key = workspaceRequest.name;
