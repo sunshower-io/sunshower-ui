@@ -24,6 +24,10 @@ export class DockerCredential {
     }
 }
 
+export interface Icon {
+    url         : string;
+}
+
 export class DockerContainer {
 
     id                      ?: string;
@@ -37,7 +41,7 @@ export class DockerContainer {
     popularity              ?: number;
     categories              ?: DockerCategory[];
     operating_systems       ?: DockerOS[];
-    logo_url                ?: DockerImg;
+    icon                    ?: Icon;
     certification_status    ?: string;
 
 

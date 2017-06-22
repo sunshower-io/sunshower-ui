@@ -25,7 +25,6 @@ import {
 
 import {Canvas} from "lib/designer/canvas/canvas";
 import {Edge} from "lib/designer/model/graph/edge";
-import {Drawable} from "../model/elements";
 
 
 export interface Encoder<T> {
@@ -40,6 +39,7 @@ export class DefaultEncoder implements Encoder<any> {
 
         return {
             id: t.id,
+            name: (n as any).label,
             type: getClass(t.data).name,
             layout: {
                 x: geo.x,

@@ -27,7 +27,7 @@ export class DockerRegistryService implements Service<DockerRegistry> {
     }
 
     list(): Promise<DockerRegistry[]> {
-        return this.client.fetch('registries/docker')
+        return this.client.fetch('docker/registries')
             .then(t => t.json() as any)
             .then(t => t.map(u => new DockerRegistry(u)));
     }
@@ -37,7 +37,7 @@ export class DockerRegistryService implements Service<DockerRegistry> {
         if (dr && dr.id == this.currentId) {
             return Promise.resolve(dr);
         } else {
-            return this.client.fetch(`registries/docker/${this.currentId}`)
+            return this.client.fetch(`docker/registries/${this.currentId}`)
                 .then(t => t.json() as any)
                 .then(t => {
                     this.dockerRegistry = new DockerRegistry(t);
@@ -57,13 +57,13 @@ export class DockerRegistryService implements Service<DockerRegistry> {
     }
 
     public destroy(id: string): Promise<any> {
-        return this.client.fetch(`registries/docker/${id}`, {
+        return this.client.fetch(`docker/registries/${id}`, {
             method: 'delete'
         }).then(t => t.json() as any);
     }
 
     public save(dockerRegistry: DockerRegistry): Promise<Identifier> {
-        return this.client.fetch('registries/docker', {
+        return this.client.fetch('docker/registries', {
             method: 'put',
             body: JSON.stringify(dockerRegistry)
         }).then(t => t.json() as any)
@@ -73,23 +73,9 @@ export class DockerRegistryService implements Service<DockerRegistry> {
     }
 
     public getContainers(id: string): Promise<DockerContainer[]> {
-        let path = "/ws/hal/docker-containers.json",
-            fetcheroo = new HttpClient();
-        return fetcheroo.fetch(path)
+        return this.client.fetch(`docker/registries/${id}/images`)
             .then(t => t.json() as any)
-            .then(t => t.summaries.map(u => new DockerContainer(u)));
-        // return this.bind(id)
-        //     .then(registry => {
-        //         return fetcheroo.fetch(registry.url, {
-        //
-        //         })
-        //             .then(t => t.json() as any)
-        //             .then(t => {
-        //                 console.log(t);
-        //                 return null;
-        //                 // return t.summaries.map(u => new DockerContainer(u));
-        //             });
-        //     });
+            .then(t => t.map(u => new DockerContainer(u)));
     }
 
 }

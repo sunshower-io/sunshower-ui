@@ -46,7 +46,7 @@ template
                         label(for="${passwordId}") Registry Password
                 .button-holder
                     button.waves-effect.btn(type="submit") Add Registry
-        .designer-cards(if.bind="activeRegistry && !loading")
+        .designer-cards
             palette-icon(
                 repeat.for="factory of factories"
                 factory.bind="factory"
