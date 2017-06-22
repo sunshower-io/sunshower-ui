@@ -28,8 +28,8 @@ export class SummaryIcon {
 
     constructor() {
         this.size = 50;
-        this.stroke = "#239ae8";
-        this.textcolor = "#239ae8";
+        this.stroke = "#4b738d";
+        this.textcolor = "#4b738d";
         this.fill = "none";
     }
 
