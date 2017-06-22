@@ -4,7 +4,11 @@ declare module 'mxgraph' {
 
         gridEnabled             : boolean;
 
+
+        mouseMove() : void;
+
         setGuidesEnabled(enabled:boolean) : void;
+
 
 
     }

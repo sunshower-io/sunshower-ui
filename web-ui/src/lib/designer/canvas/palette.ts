@@ -1,13 +1,16 @@
 import {Canvas} from './canvas';
 import {
-    ImportFunction,
+    ImportFunction, mxDragSource,
     mxUtils
 } from 'mxgraph';
 import {Drawable} from "lib/designer/elements";
 
 import 'velocity-ui';
-import {ProtectedObject, Role} from "lib/common/security/model/user";
-import {Vertex} from "../model/graph/vertex";
+import {Vertex} from "lib/designer/model/graph/vertex";
+import {
+    ProtectedObject,
+    Role
+} from "lib/common/security/model/user";
 
 
 export interface ElementLoader {
@@ -77,8 +80,6 @@ export let DefaultCellFactory: CellFactory = (factory: ElementFactory) => {
             canvas.setSelectionCell(renderable);
         }
     };
-
-
 };
 
 
@@ -124,6 +125,8 @@ export abstract class DefaultElementFactory implements
             image
         );
 
+        this.createDragTracker(image, canvas, dragSource);
+
         const [fst, snd] = this.createAnimation();
         (dragSource as any).createDragElement = () => {
             let i = image.cloneNode(true);
@@ -133,7 +136,17 @@ export abstract class DefaultElementFactory implements
     }
 
 
+    createDragTracker(h:HTMLElement, c: Canvas, d: mxDragSource) : void {
+        let overridden = (d as any).mouseMove;
+        (d as any).mouseMove = (e:any) => {
+            if(e) {
+                overridden.apply(d, [e]);
+            }
+        };
+    }
+
     createInitialImage() : HTMLElement {
+
 
         let image: HTMLImageElement = document.createElement('img');
         image.src = this.paletteIcon;

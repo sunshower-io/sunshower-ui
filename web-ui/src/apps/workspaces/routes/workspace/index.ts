@@ -23,9 +23,9 @@ export class WorkspaceContext {
 
     activate(params: any) {
         //todo fix
-        this.workspaceService.current().then(t => {
-            (this.router as any).title = t.name;
-        });
+        // this.workspaceService.current().then(t => {
+        //     (this.router as any).title = t.name;
+        // });
     }
 
 
