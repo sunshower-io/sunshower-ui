@@ -29,7 +29,7 @@ export class KubernetesOrchestrationTemplateProviderElement extends Vertex {
             master = this.children[0],
             node = this.children[1];
 
-        let e = canvas.insertEdge(this, '', '', node, master, 'strokeColor=#0087c9;dashed=1;strokeWidth=2');
+        let e = canvas.insertEdge(this, '', '', node, master, 'strokeColor=#4b738d;dashed=1;strokeWidth=2');
         e.setEdge(true);
     }
 

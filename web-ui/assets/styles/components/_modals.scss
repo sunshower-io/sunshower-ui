@@ -19,6 +19,13 @@
   .modal-content {
     background: $offwhite;
     padding: $standard-padding*2;
+
+
+    &.editor {
+      background: $almostblack;
+      padding: $standard-padding/2;
+      color: $offwhite;
+    }
   }
 
   //@extend .z-depth-0;

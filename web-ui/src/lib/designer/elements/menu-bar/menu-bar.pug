@@ -16,11 +16,11 @@ template
 
         ul.tab-menu
             li.tab.active
-                a.material-icons.mdi.mdi-checkbox-multiple-blank(title="Incomplete Feature")
+                a.material-icons.mdi.mdi-checkbox-multiple-blank
             li.tab
                 a.material-icons.mdi.mdi-source-branch(title="Incomplete Feature")
         .utilities
-            i.material-icons.mdi.mdi-content-save(click.delegate="save()")
-            i.material-icons.mdi.mdi-undo-variant(click.delegate="undo()")
-            i.material-icons.mdi.mdi-redo-variant(click.delegate="redo()")
-            //only adding these for now since we know we'll use them
+            i.material-icons.mdi.mdi-file(click.delegate="configureFile()" title="Open Configuration File")
+            i.material-icons.mdi.mdi-content-save(click.delegate="save()" title="Save")
+            i.material-icons.mdi.mdi-undo-variant(click.delegate="undo()" title="Undo")
+            i.material-icons.mdi.mdi-redo-variant(click.delegate="redo()" title="Redo")

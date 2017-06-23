@@ -38,7 +38,7 @@ export class NomadOrchestrationTemplateProviderElement extends Vertex {
             server = this.children[0],
             client = this.children[1];
 
-        let e = canvas.insertEdge(this, '', '', client, server, 'strokeColor=#0087c9;dashed=1;strokeWidth=2');
+        let e = canvas.insertEdge(this, '', '', client, server, 'strokeColor=#4b738d;dashed=1;strokeWidth=2');
         e.setEdge(true);
 
     }
