@@ -42,13 +42,17 @@ export class DragSource extends mxDragSource {
 
     getDropTarget(c:mxGraph, x:number, y: number, e:mxEvent) : Layer {
         let p = c.getDefaultParent(),
+            pgeom = p.geometry,
+            px = pgeom && pgeom.x || 0,
+            py = pgeom && pgeom.y || 0,
+
             d = Number.MAX_SAFE_INTEGER,
-            [, val] = this.findDropTarget(p, x, y, d);
+            [, val] = this.findDropTarget(p, x, y, d, px, py);
         return val;
     }
 
     //if this gets slow we can implement KD or BS partitioning.
-    private findDropTarget(p: Layer, x:number, y: number, m:number): [number, Layer] {
+    private findDropTarget(p: Layer, x:number, y: number, m:number, pox:number, poy: number): [number, Layer] {
         let min = null,
             rn = m;
         if(p && p.children && p.children.length) {
@@ -56,15 +60,17 @@ export class DragSource extends mxDragSource {
                 let drawable = CanvasUtilities.asDrawable(c);
                 if(this.factory.isHostableBy(drawable)) {
                     let geo = drawable.geometry,
-                        gx = geo.x,
-                        gy = geo.y,
+                        gx = geo.x + pox,
+                        gy = geo.y + poy,
                         dx = Math.sqrt(Math.pow(x - gx, 2) + Math.pow(y - gy, 2));
                     if(dx < rn) {
                         rn = dx;
                         min = drawable;
                     }
                 }
-                let [cd, cval] = this.findDropTarget(c, x, y, Number.MAX_SAFE_INTEGER);
+                let
+                    pgeo = c.geometry,
+                    [cd, cval] = this.findDropTarget(c, x, y, m, pgeo.x + pox, pgeo.y + poy);
                 if(cd < rn) {
                     rn = cd;
                     min = cval;
