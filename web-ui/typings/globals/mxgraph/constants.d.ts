@@ -10,6 +10,7 @@ declare module 'mxgraph' {
 
     export class mxConstants {
 
+        static TOOLTIP_VERTICAL_OFFSET          : number;
         static STYLE_AUTOSIZE                   : number;
         static STYLE_PERIMETER_SPACING          : string;
         static STYLE_SPACING_TOP                : string;

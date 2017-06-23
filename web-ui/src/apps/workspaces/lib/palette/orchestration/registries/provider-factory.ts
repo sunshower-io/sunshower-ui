@@ -7,8 +7,12 @@ import {
 } from 'lib/designer/model';
 import {
     mxPerimeter,
-    mxConstants, mxEdge, mxCell
+    mxConstants,
 } from "mxgraph";
+import {
+    DockerManagerNode,
+    DockerWorkerNode
+} from "apps/workspaces/lib/palette/orchestration/templates/docker/docker-nodes";
 
 export class RegistryProviderFactory implements ElementFactoryProvider {
     icon : string = 'mdi-apps';
@@ -34,6 +38,11 @@ export class RegistryElementFactory extends DefaultElementFactory {
         this.displayIcon = icon;
         this.paletteIcon = icon;
     }
+
+    isHostableBy(e: Drawable): boolean {
+        return e instanceof DockerManagerNode || e instanceof DockerWorkerNode;
+    }
+
 
     initialize(canvas: Canvas, element: HTMLElement): void {
         super.initialize(canvas, element);

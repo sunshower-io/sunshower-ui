@@ -3,7 +3,9 @@ import {
     mxClient,
     mxUndoManager,
     mxEvent,
-    mxUtils, Layer, mxGraphHandler, mxCellState, mxVertexHandler, mxRectangle, mxConstants
+    mxUtils,
+    Layer,
+    mxGraphHandler
 } from "mxgraph";
 import {Grid} from 'lib/designer/core';
 import {CanvasModel} from 'lib/designer/model';
@@ -18,7 +20,6 @@ import "rxjs/add/operator/filter";
 import {Subject} from "rxjs/Subject";
 import {Observable} from "rxjs/Observable";
 import {GraphHandler} from "./graph-handler";
-import {VertexHandler} from "./vertex-handler";
 
 
 export interface CanvasEvent<T> {
@@ -121,6 +122,21 @@ export class Canvas extends mxGraph {
 
     activate(): void {
 
+    }
+
+    isDropEnabled() : boolean {
+        return true;
+    }
+
+    getDropTarget(cells:Layer[], event:mxEvent, cell:Layer, clone:boolean) : Layer {
+        console.log("Drop t");
+        return null;
+    }
+
+
+    isValidDropTarget(cell:Layer, cells:Layer[], event: mxEvent) : boolean {
+        console.log("isValid?");
+        return false;
     }
 
     resolveElementLoader(key: string): ElementLoader {

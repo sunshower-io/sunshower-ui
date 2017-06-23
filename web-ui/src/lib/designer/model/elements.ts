@@ -16,17 +16,23 @@ export class Overlay extends mxCellOverlay {
 
 export interface Drawable extends Layer {
 
-    labelVisible : boolean;
-    labelClass   : string;
+    drawable                : boolean;
+    labelVisible            : boolean;
+    labelClass              : string;
 
-    getLabel() : string;
-    overlays() : Overlay[];
-    addTo(canvas: Canvas) : boolean;
+    dropTarget              : boolean;
+
+    getLabel()              : string;
+    overlays()              : Overlay[];
+    addTo(canvas: Canvas)   : boolean;
 }
 
 
 
 export abstract class RenderableElement extends mxCell implements Drawable {
+
+    drawable                : boolean;
+    dropTarget              : boolean;
 
     labelVisible            : boolean  = true;
     labelClass              : string = 'default-label';
@@ -39,14 +45,13 @@ export abstract class RenderableElement extends mxCell implements Drawable {
         height:number
     ) {
         super(label, new mxGeometry(x, y, width, height));
+        this.drawable = true;
+        this.dropTarget = false;
     }
 
     getLabel() : string {
         return Identifier.newId();
     }
-
-
-
 
     overlays() : Overlay[] {
         return [];

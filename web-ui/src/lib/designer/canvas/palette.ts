@@ -11,22 +11,21 @@ import {
     ProtectedObject,
     Role
 } from "lib/common/security/model/user";
+import {CanvasUtilities} from "lib/designer/canvas/utils";
 
 
 export interface ElementLoader {
 
-    load(model:Canvas, v: Vertex) : Drawable;
+    load(model: Canvas, v: Vertex): Drawable;
 
 
 }
 
 export interface ElementFactoryProvider {
 
-    icon : string;
+    icon: string;
 
     load(): Promise<ElementFactory[]>;
-
-
 
 
 }
@@ -34,16 +33,16 @@ export interface ElementFactoryProvider {
 
 export interface ElementFactory extends ProtectedObject {
 
-    rolesDenied             : Role[];
-    rolesAllowed            : Role[];
-    elementName             : string;
-    displayIcon             : string;
-    paletteIcon             : string;
-    importFunction          : ImportFunction;
+    rolesDenied: Role[];
+    rolesAllowed: Role[];
+    elementName: string;
+    displayIcon: string;
+    paletteIcon: string;
+    importFunction: ImportFunction;
 
-    resolveElementLoader(key: string) : ElementLoader;
+    resolveElementLoader(key: string): ElementLoader;
 
-    handles(key: string) : boolean;
+    handles(key: string): boolean;
 
 
     initialize(canvas: Canvas, element: HTMLElement): void;
@@ -52,9 +51,10 @@ export interface ElementFactory extends ProtectedObject {
                y: number,
                event: Event,
                canvas: Canvas,
-               target: any
-    ): Drawable;
+               target: any): Drawable;
 
+
+    isHostableBy(c:Drawable) : boolean;
 
 }
 
@@ -83,24 +83,25 @@ export let DefaultCellFactory: CellFactory = (factory: ElementFactory) => {
 };
 
 
-export abstract class DefaultElementFactory implements
-    ElementFactory,
-    ProtectedObject
-{
-    elementName                : string;
-    displayIcon                : string;
-    paletteIcon                : string;
-    rolesAllowed               : Role[] = [];
-    rolesDenied                : Role[] = [];
+export abstract class DefaultElementFactory implements ElementFactory,
+    ProtectedObject {
+    elementName         : string;
+    displayIcon         : string;
+    paletteIcon         : string;
+    rolesAllowed        : Role[] = [];
+    rolesDenied         : Role[] = [];
 
-    importFunction             : ImportFunction;
+    importFunction      : ImportFunction;
 
     constructor() {
         this.importFunction = DefaultCellFactory(this);
     }
 
+    isHostableBy(c:Drawable) : boolean {
+        return false;
+    }
 
-    handles(key: string) : boolean {
+    handles(key: string): boolean {
         return false;
     }
 
@@ -118,14 +119,13 @@ export abstract class DefaultElementFactory implements
     initialize(canvas: Canvas, element: HTMLElement): void {
         let
             image = this.createInitialImage(),
-            dragSource = mxUtils.makeDraggable(
-            element,
-            canvas,
-            this.importFunction,
-            image
-        );
+            dragSource = CanvasUtilities.makeDraggable(
+                element,
+                canvas,
+                this,
+                image
+            );
 
-        this.createDragTracker(image, canvas, dragSource);
 
         const [fst, snd] = this.createAnimation();
         (dragSource as any).createDragElement = () => {
@@ -136,18 +136,7 @@ export abstract class DefaultElementFactory implements
     }
 
 
-    createDragTracker(h:HTMLElement, c: Canvas, d: mxDragSource) : void {
-        let overridden = (d as any).mouseMove;
-        (d as any).mouseMove = (e:any) => {
-            if(e) {
-                overridden.apply(d, [e]);
-            }
-        };
-    }
-
-    createInitialImage() : HTMLElement {
-
-
+    createInitialImage(): HTMLElement {
         let image: HTMLImageElement = document.createElement('img');
         image.src = this.paletteIcon;
         image.width = 37;
@@ -155,7 +144,7 @@ export abstract class DefaultElementFactory implements
         return image;
     }
 
-    createAnimation() : [any, any]{
+    createAnimation(): [any, any] {
         return [{
             scale: 10,
         }, {
@@ -164,7 +153,6 @@ export abstract class DefaultElementFactory implements
         }]
     }
 }
-
 
 
 export class Palette {

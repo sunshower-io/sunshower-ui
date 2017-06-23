@@ -29,6 +29,9 @@ export class KubernetesOrchestrationTemplateProviderFactory extends DefaultEleme
     displayIcon         : string = 'assets/icons/hal/orchestration/providers/kubernetes-single.svg';
     paletteIcon         : string = 'assets/icons/hal/orchestration/providers/kubernetes-swarm.svg';
 
+    isHostableBy(e: Drawable): boolean {
+        return false;
+    }
 
     initialize(canvas: Canvas, element: HTMLElement): void {
         super.initialize(canvas, element);

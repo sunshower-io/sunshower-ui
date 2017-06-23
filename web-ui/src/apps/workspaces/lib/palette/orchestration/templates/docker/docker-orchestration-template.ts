@@ -42,6 +42,11 @@ export class DockerOrchestrationTemplateProviderFactory extends DefaultElementFa
         canvas.registerProvider(this);
     }
 
+
+    isHostableBy(e: Drawable): boolean {
+        return false;
+    }
+
     handles(key: string): boolean {
         return DockerManagerElementLoader.types[key];
     }

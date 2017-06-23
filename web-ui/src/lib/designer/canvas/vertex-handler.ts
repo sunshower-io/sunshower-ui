@@ -1,6 +1,5 @@
 import {
     mxCellState,
-    mxGraph,
     mxVertexHandler
 } from "mxgraph";
 export class VertexHandler extends mxVertexHandler {

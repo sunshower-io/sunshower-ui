@@ -28,6 +28,9 @@ export class NomadOrchestrationTemplateProviderFactory extends DefaultElementFac
     paletteIcon         : string = 'assets/icons/hal/orchestration/providers/nomad-swarm.svg';
 
 
+    isHostableBy(e: Drawable): boolean {
+        return false;
+    }
 
 
     initialize(canvas: Canvas, element: HTMLElement): void {
