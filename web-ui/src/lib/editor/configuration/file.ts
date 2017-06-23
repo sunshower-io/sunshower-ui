@@ -12,6 +12,10 @@ export class ConfigurationFileEditor {
 
     }
 
+    activate(model: VersionedItem) {
+        this.model = model;
+    }
+
     complete() : void {
         this.controller.ok();
     }
