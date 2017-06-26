@@ -42,5 +42,5 @@ task extractUi(type: Copy) {
 compileJava.dependsOn extractUi
 
 bootRepackage {
-    mainClass = 'io.sunshower.ui.UiConfiguration'
+    mainClass = 'io.sunshower.ui.SunshowerUiConfiguration'
 }
