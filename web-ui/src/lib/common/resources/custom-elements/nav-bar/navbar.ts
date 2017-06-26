@@ -83,6 +83,7 @@ export class Navbar {
 
     logout() {
         this.authHolder.clear();
+        window.location.href = "#/";
         window.location.reload();
     }
 

@@ -7,8 +7,11 @@ import {
 import {UUID} from 'lib/common/lang';
 import {DesignerManager} from "lib/designer/core";
 import {VersionedItem, Version} from "apps/workspaces/lib/model/core/orchestration-template/model";
+import {DialogService} from "aurelia-dialog";
+import {ConfigurationFileEditor} from "lib/editor/configuration/file";
 
 @containerless
+@autoinject
 @customElement('menu-bar')
 export class MenuBar {
     @bindable
@@ -20,7 +23,7 @@ export class MenuBar {
     @bindable
     private model                           : VersionedItem;
 
-    constructor(private manager:DesignerManager) {
+    constructor(private manager:DesignerManager, private dialogService: DialogService) {
         this.controlId = UUID.randomUUID().value;
     }
 
@@ -42,6 +45,17 @@ export class MenuBar {
 
     redo() : void {
         this.manager.redo();
+    }
+
+    configureFile() : void {
+        // console.log("hook me up, pl0x");
+        this.dialogService.open({
+            viewModel: ConfigurationFileEditor,
+            model: this.model
+        }).then(t => {
+            console.log(t);
+            // this.open(t.id);
+        });
     }
 
 }

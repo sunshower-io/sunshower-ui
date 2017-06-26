@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 21.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 93 93" style="enable-background:new 0 0 93 93;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#4b738d;}
-	.st1{fill:#326CE5;}
-	.st2{fill:#FFFFFF;stroke:#FFFFFF;stroke-width:0.25;}
-</style>
-<desc>Created with Sketch.</desc>
 <g>
-	<path class="st0" d="M46.5,2.2L91,24.5v44L46.5,90.8L2,68.5v-44L46.5,2.2 M46.5,0L0,23.3v46.5L46.5,93L93,69.8V23.3L46.5,0L46.5,0z
+	<path fill="#4b738d" d="M46.5,2.2L91,24.5v44L46.5,90.8L2,68.5v-44L46.5,2.2 M46.5,0L0,23.3v46.5L46.5,93L93,69.8V23.3L46.5,0L46.5,0z
 		"/>
 </g>
-<g id="layer1" transform="translate(-6.3260942,-174.7524)" inkscape:groupmode="layer" inkscape:label="Layer 1">
-	<g id="g3052">
+<g transform="translate(-6.3260942,-174.7524)">
+	<g>
 		
-			<path id="path3055" inkscape:connector-curvature="0" inkscape:export-filename="new.png" inkscape:export-xdpi="250.55" inkscape:export-ydpi="250.55" class="st1" d="
+			<path fill="#326CE5" d="
 			M53.1,192.6c-0.5,0-1.1,0.2-1.5,0.4l-20.9,10c-1.1,0.5-1.9,1.5-2.2,2.7l-5.1,22.4c-0.2,1,0,2.1,0.5,3c0.1,0.1,0.1,0.2,0.2,0.3
 			l14.4,18c0.8,0.9,1.9,1.5,3.1,1.5l23.2,0c1.2,0,2.4-0.5,3.1-1.5l14.4-18c0.8-0.9,1-2.2,0.8-3.3l-5.2-22.4
 			c-0.3-1.2-1.1-2.2-2.2-2.7l-20.9-10C54.5,192.7,53.8,192.6,53.1,192.6z"/>
 		
-			<path id="path3059" inkscape:connector-curvature="0" inkscape:export-filename="./path3059.png" inkscape:export-xdpi="250.55" inkscape:export-ydpi="250.55" sodipodi:nodetypes="ccccccccsccccscssccsccccccccscccsccccccccccccccscccscsccsccccscscsccccccccscccscsccccsccccscscscccccccccccccccscccsccccccccccccscccccscccccccccccccccccccccccscccscccccccccscccscccc" class="st2" d="
+			<path fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.25" d="
 			M53.3,200.3c-0.7,0-1.2,0.6-1.2,1.4c0,0,0,0,0,0c0,0.1,0,0.2,0,0.3c0,0.4,0.1,0.8,0.2,1.2c0.1,0.9,0.2,1.6,0.1,2.3
 			c-0.1,0.3-0.2,0.5-0.4,0.6l0,0.5c-0.7,0.1-1.5,0.2-2.3,0.3c-3.2,0.7-6,2.4-8.2,4.7c-0.1-0.1-0.4-0.3-0.5-0.3
 			c-0.2,0-0.4,0.1-0.7-0.1c-0.6-0.4-1.1-0.9-1.7-1.5c-0.3-0.3-0.5-0.6-0.8-0.9c-0.1-0.1-0.2-0.2-0.3-0.2c-0.3-0.2-0.6-0.3-0.9-0.3
@@ -53,7 +47,7 @@
 	</g>
 </g>
 <g>
-	<path class="st0" d="M46.5,3.6l43.1,21.6v42.6L46.5,89.4L3.4,67.8V25.2L46.5,3.6 M46.5,1.5L1.5,24v45l45,22.5l45-22.5V24L46.5,1.5
+	<path fill="#4b738d" d="M46.5,3.6l43.1,21.6v42.6L46.5,89.4L3.4,67.8V25.2L46.5,3.6 M46.5,1.5L1.5,24v45l45,22.5l45-22.5V24L46.5,1.5
 		L46.5,1.5z"/>
 </g>
 </svg>
