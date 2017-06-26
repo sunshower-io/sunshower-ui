@@ -2,21 +2,23 @@ import {Point2D} from "lib/common/math";
 import {Canvas} from 'lib/designer/canvas';
 import {CanvasModel} from 'lib/designer/model';
 import {CanvasSelector} from "./selector";
-import {DeleteSelectionAction} from "../canvas/actions/delete-action";
-import {UndoAction} from "../canvas/actions/undo-action";
-import {RedoAction} from "../canvas/actions/redo-action";
-import {SaveAction} from "../canvas/actions/save-action";
-import {TaskGraph} from "../model/graph/graph-element";
+import {UndoAction} from "lib/designer/canvas/actions/undo-action";
+import {RedoAction} from "lib/designer/canvas/actions/redo-action";
+import {SaveAction} from "lib/designer/canvas/actions/save-action";
+import {TaskGraph} from "lib/designer/model/graph/graph-element";
 import {DesignerLoader} from "./loader";
-import {JsonCodec} from "../codec/json-codec";
+import {Codec} from 'lib/designer/codec';
+import {JsonCodec} from "lib/designer/codec/json-codec";
+import {DeleteSelectionAction} from "lib/designer/canvas/actions/delete-action";
 
 export class Designer {
 
-    private loading: boolean;
+    private codec       : Codec;
+    private canvas      : Canvas;
+    private loading     : boolean;
 
     private loader: DesignerLoader;
 
-    private canvas : Canvas;
 
     constructor(
         private readonly container: HTMLElement,
@@ -54,6 +56,10 @@ export class Designer {
         }, new RedoAction());
     }
 
+    setCodec(c: Codec) {
+        this.codec = c;
+    }
+
     activate() : void {
         this.canvas.activate();
     }
@@ -66,7 +72,10 @@ export class Designer {
 
 
     setGraph(graph: TaskGraph) : void {
-        new JsonCodec().import(this.canvas, graph);
+        if(!this.codec) {
+            throw new Error("No codec provided");
+        }
+        this.codec.import(this.canvas, graph);
     }
 
 

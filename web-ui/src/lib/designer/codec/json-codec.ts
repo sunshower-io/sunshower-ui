@@ -25,6 +25,8 @@ import {
 
 import {Canvas} from "lib/designer/canvas/canvas";
 import {Edge} from "lib/designer/model/graph/edge";
+import {ElementFactoryProvider, ElementLoader} from "lib/designer/canvas/palette";
+import {Codec} from "./codec";
 
 
 export interface Encoder<T> {
@@ -52,11 +54,13 @@ export class DefaultEncoder implements Encoder<any> {
 
 }
 
-export class JsonCodec {
+export class JsonCodec implements Codec {
 
-    encoders: Map<Class<any>, Encoder<any>>;
+    factories                   : Map<string, ElementFactoryProvider>;
+    loaders                     : Map<string, ElementLoader>;
+    encoders                    : Map<Class<any>, Encoder<any>>;
 
-    private defaultEncoder: Encoder<any>;
+    private defaultEncoder      : Encoder<any>;
 
     constructor() {
         this.encoders = new Map<Class<any>, Encoder<any>>();
@@ -71,13 +75,39 @@ export class JsonCodec {
         this.encoders.set(type, encoder);
     }
 
+    registerProviderFactory(
+        key: string,
+        factory:ElementFactoryProvider
+    ) : void {
+        if(!this.factories) {
+            this.factories = new Map<string, ElementFactoryProvider>();
+        }
+        this.factories.set(key, factory);
+    }
+
+    registerLoader(key: string, loader:ElementLoader) : void {
+        if(!this.loaders) {
+            this.loaders = new Map<string, ElementLoader>();
+        }
+        this.loaders.set(key, loader);
+    }
+
+
+    resolveElementLoader(key:string, canvas: Canvas) : ElementLoader {
+        if(this.loaders && this.loaders.has(key)) {
+            return this.loaders.get(key);
+        }
+        return canvas.resolveElementLoader(key);
+    }
+
 
     resolveRoots(g: TaskGraph, canvas: Canvas): Layer[] {
         let nodes = _.reduce(g.vertices, (m, v) => {
                 if (!m[v.id]) {
-                    let e = canvas
-                        .resolveElementLoader(v.type)
-                        .load(canvas, v);
+                    let e = this.resolveElementLoader(
+                        v.type,
+                        canvas
+                    ).load(canvas, v);
                     (e as any).id = v.id;
                     m[v.id] = {id: v.id, value: e}
                 }

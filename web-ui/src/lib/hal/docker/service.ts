@@ -26,6 +26,12 @@ export class DockerRegistryService implements Service<DockerRegistry> {
 
     }
 
+    getImages(id: string) : Promise<DockerContainer> {
+        return this.client.fetch(`docker/registries/${this.currentId}/images/${id}`)
+            .then(r => r.json())
+            .then(r => new DockerContainer(r));
+    }
+
     list(): Promise<DockerRegistry[]> {
         return this.client.fetch('docker/registries')
             .then(t => t.json() as any)

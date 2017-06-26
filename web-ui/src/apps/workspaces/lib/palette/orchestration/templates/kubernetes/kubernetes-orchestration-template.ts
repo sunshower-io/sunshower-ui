@@ -20,8 +20,12 @@ import {
 import {
     Role
 } from "lib/common/security/model/user";
-import {mxCell} from "mxgraph";
-import {kubernetesInitialLayout, KubernetesMasterElementLoader} from "./kubernetes-nodes";
+import {
+    kubernetesInitialLayout,
+    KubernetesMasterElementLoader
+} from "./kubernetes-nodes";
+
+
 
 export class KubernetesOrchestrationTemplateProviderFactory extends DefaultElementFactory {
     rolesAllowed        : Role[] = [new Role('admin')];

@@ -12,6 +12,7 @@ import {
 import {
     CanvasUtilities
 } from "lib/designer/canvas/utils/canvas-utilities";
+import {Drawable} from "lib/designer/model/elements";
 
 
 
@@ -48,6 +49,10 @@ export class DragSource extends mxDragSource {
 
             d = Number.MAX_SAFE_INTEGER,
             [, val] = this.findDropTarget(p, x, y, d, px, py);
+
+        if(val) {
+            this.factory.setDropTarget(val as Drawable);
+        }
         return val;
     }
 

@@ -4,14 +4,27 @@ import {
     customElement,
     bindable
 } from "aurelia-framework";
-import {OrchestrationProviderFactory} from "apps/workspaces/lib/palette/orchestration/templates/provider-factory";
-import {OrchestrationTemplateService} from "apps/workspaces/lib/model/core/orchestration-template";
-import {RegistryProviderFactory} from "apps/workspaces/lib/palette/orchestration/registries/provider-factory";
+import {
+    OrchestrationProviderFactory
+} from "apps/workspaces/lib/palette/orchestration/templates/provider-factory";
+import {
+    OrchestrationTemplateService
+} from "apps/workspaces/lib/model/core/orchestration-template";
+import {
+    RegistryElement,
+    RegistryProviderFactory
+} from "apps/workspaces/lib/palette/orchestration/registries/provider-factory";
 import {DesignerManager} from "lib/designer/core/designer-manager";
-import {OrchestrationTemplate} from "apps/workspaces/lib/model/core/orchestration-template/model";
-import {RouteConfig} from "aurelia-router";
 import {Materialize} from 'materialize-css';
-import {WorkspaceService} from "../../../../lib/model/core/workspace/service";
+import {WorkspaceService} from "apps/workspaces/lib/model/core/workspace/service";
+import {Codec} from "lib/designer/codec/codec";
+import {JsonCodec} from "lib/designer/codec/json-codec";
+import {
+    OrchestrationTemplate
+} from "apps/workspaces/lib/model/core/orchestration-template/model";
+import {
+    RegistryElementLoader
+} from "apps/workspaces/lib/palette/orchestration/registries/registry-element-loader";
 
 @autoinject
 @customElement('orchestration-designer')
@@ -23,6 +36,7 @@ export default class OrchestrationDesigner {
     @bindable
     private orchestration: OrchestrationTemplate;
 
+    private codec           : Codec;
 
     @bindable
     private elementFactory: OrchestrationProviderFactory;
@@ -31,11 +45,16 @@ export default class OrchestrationDesigner {
         elementFactory: OrchestrationProviderFactory,
         private orchestrationService: OrchestrationTemplateService,
         private workspaceService: WorkspaceService,
-        private designerManager: DesignerManager
+        private designerManager: DesignerManager,
+        registryElementLoader: RegistryElementLoader
     ) {
+        this.codec = new JsonCodec();
         this.elementFactory = elementFactory;
         this.registryFactory = new RegistryProviderFactory();
+        this.codec.registerLoader("RegistryElement", registryElementLoader);
+        this.codec.register(RegistryElement, new RegistryElement )
     }
+
 
     attached() : void {
         this.designerManager.toggleLoading();
@@ -43,8 +62,11 @@ export default class OrchestrationDesigner {
             this.orchestration = this.workspaceService.template;
             this.orchestrationService.bind(this.orchestration.id).then(t => {
                 this.orchestrationService.currentGraph().then(t => {
-                    let canvas = this.designerManager.getCurrentCanvas();
-                    this.designerManager.getCurrent().setGraph(t);
+                    let canvas = this.designerManager.getCurrentCanvas(),
+                        designer = this.designerManager.getCurrent();
+
+                    designer.setCodec(this.codec);
+                    designer.setGraph(t);
                     canvas.listen('canvas-saved').forEach(t => {
                         this.orchestrationService.saveGraph(t.data)
                             .then(t => {

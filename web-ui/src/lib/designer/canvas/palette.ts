@@ -1,8 +1,9 @@
 import {Canvas} from './canvas';
 import {
-    ImportFunction, mxDragSource,
-    mxUtils
+    ImportFunction,
 } from 'mxgraph';
+
+
 import {Drawable} from "lib/designer/elements";
 
 import 'velocity-ui';
@@ -11,7 +12,9 @@ import {
     ProtectedObject,
     Role
 } from "lib/common/security/model/user";
-import {CanvasUtilities} from "lib/designer/canvas/utils";
+import {
+    CanvasUtilities
+} from "lib/designer/canvas/utils";
 
 
 export interface ElementLoader {
@@ -33,12 +36,13 @@ export interface ElementFactoryProvider {
 
 export interface ElementFactory extends ProtectedObject {
 
-    rolesDenied: Role[];
-    rolesAllowed: Role[];
-    elementName: string;
-    displayIcon: string;
-    paletteIcon: string;
-    importFunction: ImportFunction;
+    rolesDenied             : Role[];
+    rolesAllowed            : Role[];
+    elementName             : string;
+    displayIcon             : string;
+    paletteIcon             : string;
+    currentDropTarget       : Drawable;
+    importFunction          : ImportFunction;
 
     resolveElementLoader(key: string): ElementLoader;
 
@@ -53,6 +57,8 @@ export interface ElementFactory extends ProtectedObject {
                canvas: Canvas,
                target: any): Drawable;
 
+
+    setDropTarget(l: Drawable) : void;
 
     isHostableBy(c:Drawable) : boolean;
 
@@ -91,10 +97,18 @@ export abstract class DefaultElementFactory implements ElementFactory,
     rolesAllowed        : Role[] = [];
     rolesDenied         : Role[] = [];
 
+    currentDropTarget   : Drawable;
+
+
+
     importFunction      : ImportFunction;
 
     constructor() {
         this.importFunction = DefaultCellFactory(this);
+    }
+
+    setDropTarget(t: Drawable) : void {
+        this.currentDropTarget = t;
     }
 
     isHostableBy(c:Drawable) : boolean {

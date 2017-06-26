@@ -229,11 +229,6 @@ export class Canvas extends mxGraph {
         undoMgr.addListener(mxEvent.REDO, undoHandler);
         return undoMgr;
     }
-
 }
 
 
-interface ParentGrouping {
-    root: Layer;
-    children: Layer[];
-}

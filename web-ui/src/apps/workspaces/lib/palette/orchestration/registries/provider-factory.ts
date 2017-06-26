@@ -1,4 +1,7 @@
-import {ElementFactoryProvider, ElementFactory, DefaultElementFactory} from "lib/designer/canvas/palette";
+import {
+    ElementFactoryProvider, ElementFactory, DefaultElementFactory,
+    ElementLoader
+} from "lib/designer/canvas/palette";
 import {Role} from "lib/common/security/model/user";
 import {Canvas} from "lib/designer/canvas/canvas";
 import {
@@ -46,11 +49,22 @@ export class RegistryElementFactory extends DefaultElementFactory {
 
     initialize(canvas: Canvas, element: HTMLElement): void {
         super.initialize(canvas, element);
+        canvas.registerProvider(this);
         this.createStyle(canvas);
     }
 
     newElement(x: number, y: number, event: Event, canvas: Canvas, target: any): Drawable {
-        return new RegistryElement(this.elementName, this.slug, x, y);
+        let
+            dt = this.currentDropTarget,
+            element = new RegistryElement(this.elementName, this.slug, x, y);
+
+        if(dt) {
+
+            let e = canvas.insertEdge(dt.getParent(), '', '', element, dt, 'strokeColor=#0087c9;dashed=1;strokeWidth=2');
+            e.setEdge(true);
+            return element;
+        }
+        return null;
     }
 
     protected createStyle(canvas: Canvas) : void {
