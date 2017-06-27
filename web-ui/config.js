@@ -1124,7 +1124,7 @@ System.config({
       "lib/common/lang/uuid"
     ],
     "apps/auth/signup/signup.js": [
-      "lib/common/lang",
+      "lib/common/lang/uuid",
       "aurelia-router",
       "aurelia-framework",
       "lib/common/security/service/signup",
@@ -1546,7 +1546,7 @@ System.config({
     ],
     "lib/designer/elements/menu-bar/menu-bar.js": [
       "aurelia-framework",
-      "lib/common/lang",
+      "lib/common/lang/uuid",
       "lib/designer/core",
       "apps/workspaces/lib/model/core/orchestration-template/model",
       "aurelia-dialog",

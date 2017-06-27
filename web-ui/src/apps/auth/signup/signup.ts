@@ -1,4 +1,4 @@
-import {UUID} from "lib/common/lang";
+import {UUID} from "lib/common/lang/uuid";
 import {Router} from "aurelia-router";
 import {bindable, autoinject} from "aurelia-framework";
 import {SignupService} from "lib/common/security/service/signup";

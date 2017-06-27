@@ -1,6 +1,5 @@
 import {
     autoinject,
-    containerless,
     customElement,
     bindable
 } from "aurelia-framework";

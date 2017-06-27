@@ -1,4 +1,3 @@
-import {UUID} from 'lib/common/lang';
 import {
     bindable,
     autoinject,

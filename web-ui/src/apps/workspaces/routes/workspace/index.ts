@@ -9,7 +9,6 @@ import {
 import {
     WorkspaceService
 } from "apps/workspaces/lib/model/core/workspace/service";
-import {NavigationAware} from "../../resources/custom-elements/navigator";
 
 @autoinject
 export class WorkspaceContext {

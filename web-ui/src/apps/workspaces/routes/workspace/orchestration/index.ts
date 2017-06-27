@@ -1,4 +1,4 @@
-import {autoinject, bindable} from "aurelia-framework";
+import {autoinject} from "aurelia-framework";
 import {NavigationAware, NavigatorManager} from "apps/workspaces/resources/custom-elements/navigator";
 import {Router} from "aurelia-router";
 import {RouterConfiguration} from "aurelia-router";

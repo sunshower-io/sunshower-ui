@@ -4,7 +4,7 @@ import {
     autoinject,
     containerless
 } from "aurelia-framework";
-import {UUID} from 'lib/common/lang';
+import {UUID} from 'lib/common/lang/uuid';
 import {DesignerManager} from "lib/designer/core";
 import {VersionedItem, Version} from "apps/workspaces/lib/model/core/orchestration-template/model";
 import {DialogService} from "aurelia-dialog";
