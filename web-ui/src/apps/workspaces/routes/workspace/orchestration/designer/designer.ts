@@ -52,7 +52,7 @@ export default class OrchestrationDesigner {
         this.elementFactory = elementFactory;
         this.registryFactory = new RegistryProviderFactory();
         this.codec.registerLoader("RegistryElement", registryElementLoader);
-        this.codec.register(RegistryElement, new RegistryElement )
+        // this.codec.register(RegistryElement, new RegistryElementLoader())
     }
 
 

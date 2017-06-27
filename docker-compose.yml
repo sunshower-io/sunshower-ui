@@ -15,7 +15,11 @@ services:
 
 
   ui:
-    image: "hasli/ui:${UI_VERSION}"
+    image: "sunshower/ui:${UI_VERSION}"
+    environment: 
+      - KEYSTORE_PASSWORD=mzlapQ123
+    volumes: 
+      - ./resources/nginx/certs:/keys
 
 
   web-services:
@@ -24,6 +28,10 @@ services:
       service: web-services
     links:
       - db
+    environment: 
+      - KEYSTORE_PASSWORD=mzlapQ123
+    volumes: 
+      - ./resources/nginx/certs:/keys
 
 
   db:

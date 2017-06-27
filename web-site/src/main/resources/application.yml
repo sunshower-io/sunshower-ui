@@ -4,9 +4,10 @@ server:
   context-path: /
   use-forward-headers: true
   ssl:
-    key-alias: sunshower.io
-    key-store: classpath:sunshower.io.jks
+    protocol: TLS
+    key-alias: keystore
+#    key-store: classpath:sunshower.io.jks
     key-store-type: JKS
-    key-store-path: classpath:sunshower.io.jks
-    key-store-password: h4s1!43v3r!
-    key-password: h4s1!43v3r!
+#    key-store-path: classpath:sunshower.io.jks
+#    key-store-password: h4s1!43v3r!
+#    key-password: h4s1!43v3r!

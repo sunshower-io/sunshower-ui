@@ -883,57 +883,764 @@ System.config({
     ],
     "app-build.js": [
       "app.html!github:systemjs/plugin-text@0.0.9.js",
+      "app.js",
       "apps/404/index.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/404/index.js",
       "apps/admin/approvals/approvals.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/admin/approvals/approvals.js",
       "apps/auth/auth.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/auth/auth.js",
       "apps/auth/login/login.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/auth/login/login.js",
       "apps/auth/signup/signup.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/auth/signup/signup.js",
       "apps/workspaces/index.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/workspaces/index.js",
+      "apps/workspaces/lib/model/core/orchestration-template.js",
+      "apps/workspaces/lib/model/core/orchestration-template/model.js",
+      "apps/workspaces/lib/model/core/orchestration-template/service.js",
+      "apps/workspaces/lib/model/core/workspace.js",
+      "apps/workspaces/lib/model/core/workspace/model.js",
+      "apps/workspaces/lib/model/core/workspace/service.js",
+      "apps/workspaces/lib/palette/core/element.js",
+      "apps/workspaces/lib/palette/infrastructure/compute-node-template.js",
+      "apps/workspaces/lib/palette/infrastructure/infrastructure-palette.js",
+      "apps/workspaces/lib/palette/infrastructure/security-group.js",
+      "apps/workspaces/lib/palette/orchestration/registries/provider-factory.js",
+      "apps/workspaces/lib/palette/orchestration/registries/registry-element-loader.js",
+      "apps/workspaces/lib/palette/orchestration/templates/docker/docker-nodes.js",
+      "apps/workspaces/lib/palette/orchestration/templates/docker/docker-orchestration-template.js",
+      "apps/workspaces/lib/palette/orchestration/templates/kubernetes/kubernetes-nodes.js",
+      "apps/workspaces/lib/palette/orchestration/templates/kubernetes/kubernetes-orchestration-template.js",
+      "apps/workspaces/lib/palette/orchestration/templates/nomad/nomad-nodes.js",
+      "apps/workspaces/lib/palette/orchestration/templates/nomad/nomad-orchestration-template.js",
+      "apps/workspaces/lib/palette/orchestration/templates/provider-factory.js",
+      "apps/workspaces/lib/palette/security/security-group.js",
+      "apps/workspaces/resources/custom-elements/events.js",
+      "apps/workspaces/resources/custom-elements/navigator.js",
       "apps/workspaces/resources/custom-elements/navigator/navigator.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/workspaces/resources/custom-elements/navigator/navigator.js",
       "apps/workspaces/resources/custom-elements/workspace-card/workspace-card.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/workspaces/resources/custom-elements/workspace-card/workspace-card.js",
       "apps/workspaces/routes/workspace/applications/context-menu.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/workspaces/routes/workspace/applications/context-menu.js",
       "apps/workspaces/routes/workspace/applications/index.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/workspaces/routes/workspace/applications/index.js",
       "apps/workspaces/routes/workspace/create/create.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/workspaces/routes/workspace/create/create.js",
       "apps/workspaces/routes/workspace/dashboard/context-menu.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/workspaces/routes/workspace/dashboard/context-menu.js",
       "apps/workspaces/routes/workspace/dashboard/dashboard/dashboard.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/workspaces/routes/workspace/dashboard/dashboard/dashboard.js",
       "apps/workspaces/routes/workspace/dashboard/index.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/workspaces/routes/workspace/dashboard/index.js",
       "apps/workspaces/routes/workspace/dashboard/instances/instances.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/workspaces/routes/workspace/dashboard/instances/instances.js",
       "apps/workspaces/routes/workspace/index.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/workspaces/routes/workspace/index.js",
       "apps/workspaces/routes/workspace/infrastructure/context-menu.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/workspaces/routes/workspace/infrastructure/context-menu.js",
       "apps/workspaces/routes/workspace/infrastructure/designer/infrastructure-designer.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/workspaces/routes/workspace/infrastructure/designer/infrastructure-designer.js",
       "apps/workspaces/routes/workspace/infrastructure/index.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/workspaces/routes/workspace/infrastructure/index.js",
       "apps/workspaces/routes/workspace/orchestration/context-menu.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/workspaces/routes/workspace/orchestration/context-menu.js",
       "apps/workspaces/routes/workspace/orchestration/create/create.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/workspaces/routes/workspace/orchestration/create/create.js",
       "apps/workspaces/routes/workspace/orchestration/dashboard/dashboard.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/workspaces/routes/workspace/orchestration/dashboard/dashboard.js",
       "apps/workspaces/routes/workspace/orchestration/designer/designer.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/workspaces/routes/workspace/orchestration/designer/designer.js",
       "apps/workspaces/routes/workspace/orchestration/index.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/workspaces/routes/workspace/orchestration/index.js",
       "apps/workspaces/routes/workspaces.html!github:systemjs/plugin-text@0.0.9.js",
+      "apps/workspaces/routes/workspaces.js",
       "css/styles.min.css!github:systemjs/plugin-text@0.0.9.js",
+      "lib/common/algorithms/graph.js",
+      "lib/common/algorithms/graph/graph.js",
+      "lib/common/algorithms/graph/scheduling.js",
+      "lib/common/algorithms/graph/tarjans.js",
+      "lib/common/dom.js",
+      "lib/common/dom/events.js",
+      "lib/common/edit/command.js",
+      "lib/common/edit/command/command.js",
+      "lib/common/lang.js",
+      "lib/common/lang/class.js",
+      "lib/common/lang/enum.js",
+      "lib/common/lang/identifier.js",
+      "lib/common/lang/lang.js",
+      "lib/common/lang/uuid.js",
+      "lib/common/math.js",
+      "lib/common/pipeline.js",
+      "lib/common/resources/custom-attributes/roles-allowed.js",
       "lib/common/resources/custom-elements/body-panel/body-panel.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/common/resources/custom-elements/body-panel/body-panel.js",
+      "lib/common/resources/custom-elements/materialize-renderer.js",
+      "lib/common/resources/custom-elements/nav-bar/breadcrumb.js",
       "lib/common/resources/custom-elements/nav-bar/navbar.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/common/resources/custom-elements/nav-bar/navbar.js",
       "lib/common/resources/custom-elements/summary-icon/summary-icon.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/common/resources/custom-elements/summary-icon/summary-icon.js",
+      "lib/common/security.js",
+      "lib/common/security/model.js",
+      "lib/common/security/model/token.js",
+      "lib/common/security/model/user.js",
+      "lib/common/security/service/signup.js",
+      "lib/common/service.js",
+      "lib/common/service/context-resolver.js",
+      "lib/common/service/service-manager.js",
+      "lib/common/service/service.js",
+      "lib/common/storage.js",
+      "lib/common/storage/application-state.js",
+      "lib/common/storage/local.js",
+      "lib/common/storage/local/local-storage.js",
+      "lib/common/util.js",
+      "lib/common/util/base58.js",
+      "lib/common/util/json-utils.js",
+      "lib/common/util/stack.js",
+      "lib/designer/canvas.js",
+      "lib/designer/canvas/action.js",
+      "lib/designer/canvas/actions/delete-action.js",
+      "lib/designer/canvas/actions/redo-action.js",
+      "lib/designer/canvas/actions/save-action.js",
+      "lib/designer/canvas/actions/undo-action.js",
+      "lib/designer/canvas/canvas.js",
+      "lib/designer/canvas/chord.js",
+      "lib/designer/canvas/graph-handler.js",
+      "lib/designer/canvas/key-handler.js",
+      "lib/designer/canvas/palette.js",
+      "lib/designer/canvas/utils.js",
+      "lib/designer/canvas/utils/canvas-utilities.js",
+      "lib/designer/canvas/vertex-handler.js",
+      "lib/designer/codec.js",
+      "lib/designer/codec/codec.js",
+      "lib/designer/codec/json-codec.js",
+      "lib/designer/core.js",
+      "lib/designer/core/designer-manager.js",
+      "lib/designer/core/designer.js",
+      "lib/designer/core/drag-source.js",
+      "lib/designer/core/grid.js",
+      "lib/designer/core/loader.js",
+      "lib/designer/core/selector.js",
+      "lib/designer/elements.js",
+      "lib/designer/elements/designer/abstract-panel.js",
       "lib/designer/elements/designer/action-button.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/designer/elements/designer/action-button.js",
       "lib/designer/elements/designer/designer-element.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/designer/elements/designer/designer-element.js",
       "lib/designer/elements/designer/left-panel.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/designer/elements/designer/left-panel.js",
       "lib/designer/elements/designer/right-panel.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/designer/elements/designer/right-panel.js",
       "lib/designer/elements/element-panel/element-panel.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/designer/elements/element-panel/element-panel.js",
       "lib/designer/elements/element-panel/palette-icon.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/designer/elements/element-panel/palette-icon.js",
       "lib/designer/elements/layer-panel/layer-collapsible.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/designer/elements/layer-panel/layer-collapsible.js",
       "lib/designer/elements/layer-panel/layer-panel.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/designer/elements/layer-panel/layer-panel.js",
       "lib/designer/elements/menu-bar/menu-bar.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/designer/elements/menu-bar/menu-bar.js",
       "lib/designer/elements/panel.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/designer/elements/panel.js",
       "lib/designer/elements/panels.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/designer/elements/panels.js",
       "lib/designer/elements/property-panel/property-panel.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/designer/elements/property-panel/property-panel.js",
       "lib/designer/elements/property-panel/property-row.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/designer/elements/property-panel/property-row.js",
       "lib/designer/elements/registry-panel/registry-panel.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/designer/elements/registry-panel/registry-panel.js",
       "lib/designer/elements/views/left-view.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/designer/elements/views/left-view.js",
       "lib/designer/elements/views/right-view.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/designer/elements/views/right-view.js",
+      "lib/designer/elements/views/view.js",
+      "lib/designer/model.js",
+      "lib/designer/model/elements.js",
+      "lib/designer/model/entity.js",
+      "lib/designer/model/graph.js",
+      "lib/designer/model/graph/edge.js",
+      "lib/designer/model/graph/graph-element.js",
+      "lib/designer/model/graph/layout.js",
+      "lib/designer/model/graph/vertex.js",
+      "lib/designer/model/model.js",
+      "lib/designer/model/overlays.js",
       "lib/editor/configuration/file.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/editor/configuration/file.js",
+      "lib/hal/core.js",
+      "lib/hal/docker/model.js",
+      "lib/hal/docker/service.js",
+      "lib/hal/infrastructure/compute.js",
+      "lib/hal/infrastructure/compute/infrastructure-node-template.js",
+      "lib/hal/infrastructure/security.js",
+      "lib/hal/infrastructure/security/security-group.js",
       "lib/resources/custom-elements/loader/loader.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/resources/custom-elements/loader/loader.js",
       "lib/resources/custom-elements/misc/bottom-element.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/resources/custom-elements/misc/bottom-element.js",
       "lib/resources/custom-elements/misc/full-element.html!github:systemjs/plugin-text@0.0.9.js",
-      "lib/resources/custom-elements/misc/top-element.html!github:systemjs/plugin-text@0.0.9.js"
+      "lib/resources/custom-elements/misc/full-element.js",
+      "lib/resources/custom-elements/misc/top-element.html!github:systemjs/plugin-text@0.0.9.js",
+      "lib/resources/custom-elements/misc/top-element.js",
+      "main.js"
     ]
   },
-  depCache: {}
+  depCache: {
+    "app.js": [
+      "aurelia-framework",
+      "aurelia-router",
+      "lib/common/security",
+      "aurelia-templating",
+      "aurelia-dependency-injection",
+      "lib/common/pipeline",
+      "lib/common/storage/application-state",
+      "aurelia-binding",
+      "./apps/workspaces/resources/custom-elements/navigator",
+      "jquery"
+    ],
+    "apps/404/index.js": [
+      "aurelia-dependency-injection"
+    ],
+    "apps/admin/approvals/approvals.js": [
+      "aurelia-framework",
+      "lib/common/security/service/signup"
+    ],
+    "apps/auth/auth.js": [
+      "aurelia-framework",
+      "aurelia-dependency-injection",
+      "jquery"
+    ],
+    "apps/auth/login/login.js": [
+      "aurelia-framework",
+      "aurelia-fetch-client",
+      "aurelia-dependency-injection",
+      "lib/common/security",
+      "lib/common/storage",
+      "apps/auth/auth",
+      "aurelia-router",
+      "lib/common/lang/uuid"
+    ],
+    "apps/auth/signup/signup.js": [
+      "lib/common/lang",
+      "aurelia-router",
+      "aurelia-framework",
+      "lib/common/security/service/signup",
+      "lib/common/security/model/user"
+    ],
+    "apps/workspaces/index.js": [
+      "aurelia-framework",
+      "materialize-css",
+      "apps/workspaces/resources/custom-elements/navigator"
+    ],
+    "apps/workspaces/lib/model/core/orchestration-template.js": [
+      "./orchestration-template/model",
+      "./orchestration-template/service"
+    ],
+    "apps/workspaces/lib/model/core/orchestration-template/service.js": [
+      "lib/common/service",
+      "aurelia-fetch-client",
+      "./model",
+      "lib/common/lang/identifier",
+      "rxjs/Subject",
+      "aurelia-framework",
+      "lib/designer/model/graph/graph-element"
+    ],
+    "apps/workspaces/lib/model/core/workspace.js": [
+      "./workspace/model",
+      "./workspace/service"
+    ],
+    "apps/workspaces/lib/model/core/workspace/service.js": [
+      "aurelia-http-client",
+      "aurelia-fetch-client",
+      "./model",
+      "aurelia-framework",
+      "lib/common/service",
+      "lib/common/lang/identifier",
+      "rxjs/Subject",
+      "../orchestration-template/model"
+    ],
+    "apps/workspaces/lib/palette/infrastructure/compute-node-template.js": [
+      "lib/designer/canvas/palette",
+      "lib/designer/model",
+      "mxgraph"
+    ],
+    "apps/workspaces/lib/palette/infrastructure/infrastructure-palette.js": [
+      "./compute-node-template",
+      "./security-group"
+    ],
+    "apps/workspaces/lib/palette/infrastructure/security-group.js": [
+      "lib/designer/canvas/palette",
+      "lib/designer/model",
+      "mxgraph"
+    ],
+    "apps/workspaces/lib/palette/orchestration/registries/provider-factory.js": [
+      "lib/designer/canvas/palette",
+      "lib/common/security/model/user",
+      "lib/designer/model",
+      "mxgraph",
+      "apps/workspaces/lib/palette/orchestration/templates/docker/docker-nodes"
+    ],
+    "apps/workspaces/lib/palette/orchestration/registries/registry-element-loader.js": [
+      "aurelia-dependency-injection",
+      "lib/hal/docker/service",
+      "./provider-factory"
+    ],
+    "apps/workspaces/lib/palette/orchestration/templates/docker/docker-nodes.js": [
+      "lib/designer/model",
+      "mxgraph"
+    ],
+    "apps/workspaces/lib/palette/orchestration/templates/docker/docker-orchestration-template.js": [
+      "lib/designer/canvas/palette",
+      "mxgraph",
+      "./docker-nodes",
+      "lib/common/security/model/user"
+    ],
+    "apps/workspaces/lib/palette/orchestration/templates/kubernetes/kubernetes-nodes.js": [
+      "lib/designer/model",
+      "mxgraph"
+    ],
+    "apps/workspaces/lib/palette/orchestration/templates/kubernetes/kubernetes-orchestration-template.js": [
+      "lib/designer/canvas/palette",
+      "mxgraph",
+      "lib/common/security/model/user",
+      "./kubernetes-nodes"
+    ],
+    "apps/workspaces/lib/palette/orchestration/templates/nomad/nomad-nodes.js": [
+      "lib/designer/model",
+      "mxgraph"
+    ],
+    "apps/workspaces/lib/palette/orchestration/templates/nomad/nomad-orchestration-template.js": [
+      "lib/designer/canvas/palette",
+      "mxgraph",
+      "lib/common/security/model/user",
+      "./nomad-nodes"
+    ],
+    "apps/workspaces/lib/palette/orchestration/templates/provider-factory.js": [
+      "./nomad/nomad-orchestration-template",
+      "./kubernetes/kubernetes-orchestration-template",
+      "./docker/docker-orchestration-template"
+    ],
+    "apps/workspaces/resources/custom-elements/navigator.js": [
+      "aurelia-framework",
+      "aurelia-router",
+      "aurelia-binding",
+      "lib/common/storage/application-state"
+    ],
+    "apps/workspaces/resources/custom-elements/navigator/navigator.js": [
+      "aurelia-framework",
+      "apps/workspaces/resources/custom-elements/navigator",
+      "aurelia-animator-velocity",
+      "lib/common/storage/application-state",
+      "aurelia-event-aggregator",
+      "../events",
+      "materialize-css",
+      "mdi/css/materialdesignicons.css!"
+    ],
+    "apps/workspaces/resources/custom-elements/workspace-card/workspace-card.js": [
+      "aurelia-framework",
+      "apps/workspaces/lib/model/core/workspace",
+      "aurelia-router",
+      "aurelia-event-aggregator",
+      "../events"
+    ],
+    "apps/workspaces/routes/workspace/applications/index.js": [
+      "aurelia-framework"
+    ],
+    "apps/workspaces/routes/workspace/create/create.js": [
+      "lib/common/lang/uuid",
+      "aurelia-framework",
+      "apps/workspaces/lib/model/core/workspace",
+      "aurelia-dialog",
+      "apps/workspaces/lib/model/core/workspace/model",
+      "aurelia-router"
+    ],
+    "apps/workspaces/routes/workspace/dashboard/dashboard/dashboard.js": [
+      "aurelia-framework",
+      "lib/common/lang/uuid",
+      "apps/workspaces/lib/model/core/workspace",
+      "plotly/plotly.js"
+    ],
+    "apps/workspaces/routes/workspace/dashboard/index.js": [
+      "aurelia-framework",
+      "apps/workspaces/lib/model/core/workspace",
+      "apps/workspaces/resources/custom-elements/navigator",
+      "aurelia-dialog",
+      "apps/workspaces/routes/workspace/orchestration/create/create"
+    ],
+    "apps/workspaces/routes/workspace/dashboard/instances/instances.js": [
+      "aurelia-framework",
+      "apps/workspaces/lib/model/core/workspace",
+      "apps/workspaces/resources/custom-elements/navigator"
+    ],
+    "apps/workspaces/routes/workspace/index.js": [
+      "aurelia-framework",
+      "aurelia-router",
+      "apps/workspaces/lib/model/core/workspace/service"
+    ],
+    "apps/workspaces/routes/workspace/infrastructure/designer/infrastructure-designer.js": [
+      "aurelia-framework",
+      "apps/workspaces/lib/palette/orchestration/templates/provider-factory"
+    ],
+    "apps/workspaces/routes/workspace/orchestration/create/create.js": [
+      "lodash",
+      "lib/common/lang/uuid",
+      "aurelia-framework",
+      "aurelia-dialog",
+      "aurelia-router",
+      "apps/workspaces/lib/model/core/orchestration-template",
+      "apps/workspaces/lib/model/core/workspace/service"
+    ],
+    "apps/workspaces/routes/workspace/orchestration/dashboard/dashboard.js": [
+      "aurelia-dialog",
+      "apps/workspaces/lib/model/core/orchestration-template",
+      "apps/workspaces/lib/model/core/workspace",
+      "aurelia-framework",
+      "../create/create",
+      "aurelia-router"
+    ],
+    "apps/workspaces/routes/workspace/orchestration/designer/designer.js": [
+      "aurelia-framework",
+      "apps/workspaces/lib/palette/orchestration/templates/provider-factory",
+      "apps/workspaces/lib/model/core/orchestration-template",
+      "apps/workspaces/lib/palette/orchestration/registries/provider-factory",
+      "lib/designer/core/designer-manager",
+      "materialize-css",
+      "apps/workspaces/lib/model/core/workspace/service",
+      "lib/designer/codec/json-codec",
+      "apps/workspaces/lib/model/core/orchestration-template/model",
+      "apps/workspaces/lib/palette/orchestration/registries/registry-element-loader"
+    ],
+    "apps/workspaces/routes/workspace/orchestration/index.js": [
+      "aurelia-framework",
+      "apps/workspaces/resources/custom-elements/navigator",
+      "apps/workspaces/lib/model/core/orchestration-template/service"
+    ],
+    "apps/workspaces/routes/workspaces.js": [
+      "aurelia-framework",
+      "apps/workspaces/lib/model/core/workspace",
+      "aurelia-router",
+      "aurelia-dialog",
+      "./workspace/create/create",
+      "aurelia-event-aggregator",
+      "../resources/custom-elements/events"
+    ],
+    "lib/common/algorithms/graph.js": [
+      "./graph/graph",
+      "./graph/scheduling",
+      "./graph/tarjans"
+    ],
+    "lib/common/algorithms/graph/scheduling.js": [
+      "./graph",
+      "lodash"
+    ],
+    "lib/common/algorithms/graph/tarjans.js": [
+      "lodash"
+    ],
+    "lib/common/dom.js": [
+      "./dom/events"
+    ],
+    "lib/common/edit/command.js": [
+      "./command/command"
+    ],
+    "lib/common/lang.js": [
+      "./lang/uuid",
+      "./lang/class",
+      "./lang/enum",
+      "./lang/identifier"
+    ],
+    "lib/common/lang/identifier.js": [
+      "./uuid",
+      "lib/common/util/base58"
+    ],
+    "lib/common/lang/uuid.js": [
+      "lib/common/lang"
+    ],
+    "lib/common/pipeline.js": [
+      "./service/context-resolver"
+    ],
+    "lib/common/resources/custom-attributes/roles-allowed.js": [
+      "aurelia-framework",
+      "lib/common/security/model"
+    ],
+    "lib/common/resources/custom-elements/body-panel/body-panel.js": [
+      "aurelia-framework"
+    ],
+    "lib/common/resources/custom-elements/materialize-renderer.js": [
+      "aurelia-pal"
+    ],
+    "lib/common/resources/custom-elements/nav-bar/navbar.js": [
+      "lib/common/security",
+      "aurelia-event-aggregator",
+      "aurelia-framework",
+      "aurelia-animator-velocity",
+      "aurelia-router",
+      "lib/common/lang/uuid",
+      "./breadcrumb",
+      "apps/workspaces/resources/custom-elements/events",
+      "apps/workspaces/resources/custom-elements/navigator",
+      "jquery"
+    ],
+    "lib/common/resources/custom-elements/summary-icon/summary-icon.js": [
+      "aurelia-framework"
+    ],
+    "lib/common/security.js": [
+      "./security/model"
+    ],
+    "lib/common/security/model.js": [
+      "./model/token",
+      "./model/user"
+    ],
+    "lib/common/security/model/token.js": [
+      "aurelia-framework",
+      "lib/common/storage",
+      "./user",
+      "aurelia-fetch-client"
+    ],
+    "lib/common/security/model/user.js": [
+      "./token"
+    ],
+    "lib/common/security/service/signup.js": [
+      "aurelia-fetch-client",
+      "aurelia-framework",
+      "lib/common/service",
+      "lib/common/security/model/user"
+    ],
+    "lib/common/service.js": [
+      "./service/service-manager",
+      "./service/service"
+    ],
+    "lib/common/service/context-resolver.js": [
+      "./service-manager",
+      "../storage/application-state"
+    ],
+    "lib/common/service/service-manager.js": [
+      "lodash"
+    ],
+    "lib/common/storage.js": [
+      "./storage/local",
+      "./storage/application-state",
+      "./storage/local/local-storage"
+    ],
+    "lib/common/storage/application-state.js": [
+      "./local",
+      "aurelia-framework"
+    ],
+    "lib/common/storage/local.js": [
+      "./local/local-storage"
+    ],
+    "lib/common/util.js": [
+      "./util/stack"
+    ],
+    "lib/designer/canvas.js": [
+      "./canvas/canvas"
+    ],
+    "lib/designer/canvas/actions/save-action.js": [
+      "lib/designer/codec/json-codec"
+    ],
+    "lib/designer/canvas/canvas.js": [
+      "mxgraph",
+      "./key-handler",
+      "../model/elements",
+      "rxjs/Subject",
+      "./graph-handler",
+      "rxjs/add/operator/filter"
+    ],
+    "lib/designer/canvas/graph-handler.js": [
+      "mxgraph"
+    ],
+    "lib/designer/canvas/key-handler.js": [
+      "keypress"
+    ],
+    "lib/designer/canvas/palette.js": [
+      "lib/designer/canvas/utils",
+      "velocity-ui"
+    ],
+    "lib/designer/canvas/utils.js": [
+      "./utils/canvas-utilities"
+    ],
+    "lib/designer/canvas/utils/canvas-utilities.js": [
+      "mxgraph",
+      "lib/designer/core/drag-source"
+    ],
+    "lib/designer/canvas/vertex-handler.js": [
+      "mxgraph"
+    ],
+    "lib/designer/codec.js": [
+      "./codec/json-codec"
+    ],
+    "lib/designer/codec/json-codec.js": [
+      "lodash",
+      "lib/common/algorithms/graph/graph",
+      "lib/common/lang",
+      "lib/common/algorithms/graph/scheduling"
+    ],
+    "lib/designer/core.js": [
+      "./core/grid",
+      "./core/selector",
+      "./core/designer",
+      "./core/designer-manager"
+    ],
+    "lib/designer/core/designer-manager.js": [
+      "aurelia-framework"
+    ],
+    "lib/designer/core/designer.js": [
+      "lib/designer/canvas",
+      "lib/designer/model",
+      "./selector",
+      "lib/designer/canvas/actions/undo-action",
+      "lib/designer/canvas/actions/redo-action",
+      "lib/designer/canvas/actions/save-action",
+      "./loader",
+      "lib/designer/canvas/actions/delete-action"
+    ],
+    "lib/designer/core/drag-source.js": [
+      "mxgraph",
+      "lib/designer/canvas/utils/canvas-utilities"
+    ],
+    "lib/designer/core/grid.js": [
+      "mxgraph"
+    ],
+    "lib/designer/core/loader.js": [
+      "lib/common/lang/uuid"
+    ],
+    "lib/designer/core/selector.js": [
+      "mxgraph"
+    ],
+    "lib/designer/elements.js": [
+      "./model/elements"
+    ],
+    "lib/designer/elements/designer/action-button.js": [
+      "aurelia-framework"
+    ],
+    "lib/designer/elements/designer/designer-element.js": [
+      "aurelia-framework",
+      "lib/designer/core"
+    ],
+    "lib/designer/elements/designer/left-panel.js": [
+      "aurelia-framework",
+      "./abstract-panel"
+    ],
+    "lib/designer/elements/designer/right-panel.js": [
+      "aurelia-framework"
+    ],
+    "lib/designer/elements/element-panel/element-panel.js": [
+      "aurelia-framework",
+      "lib/designer/core"
+    ],
+    "lib/designer/elements/element-panel/palette-icon.js": [
+      "aurelia-framework",
+      "aurelia-templating",
+      "lib/designer/canvas/canvas",
+      "lib/common/security/model/token"
+    ],
+    "lib/designer/elements/layer-panel/layer-collapsible.js": [
+      "aurelia-framework",
+      "lib/common/dom"
+    ],
+    "lib/designer/elements/layer-panel/layer-panel.js": [
+      "aurelia-framework",
+      "lib/designer/core/designer-manager"
+    ],
+    "lib/designer/elements/menu-bar/menu-bar.js": [
+      "aurelia-framework",
+      "lib/common/lang",
+      "lib/designer/core",
+      "apps/workspaces/lib/model/core/orchestration-template/model",
+      "aurelia-dialog",
+      "lib/editor/configuration/file"
+    ],
+    "lib/designer/elements/panel.js": [
+      "aurelia-framework",
+      "lib/common/lang",
+      "aurelia-templating-resources"
+    ],
+    "lib/designer/elements/panels.js": [
+      "aurelia-framework"
+    ],
+    "lib/designer/elements/property-panel/property-panel.js": [
+      "aurelia-framework",
+      "lib/designer/core/designer-manager"
+    ],
+    "lib/designer/elements/property-panel/property-row.js": [
+      "aurelia-framework",
+      "lib/designer/model/entity",
+      "../../../common/lang/uuid"
+    ],
+    "lib/designer/elements/registry-panel/registry-panel.js": [
+      "aurelia-framework",
+      "lib/common/lang/uuid",
+      "lib/hal/docker/model",
+      "lib/designer/core",
+      "lib/hal/docker/service",
+      "apps/workspaces/lib/palette/orchestration/registries/provider-factory",
+      "materialize-css"
+    ],
+    "lib/designer/model.js": [
+      "./model/model",
+      "./model/elements"
+    ],
+    "lib/designer/model/elements.js": [
+      "mxgraph",
+      "lib/common/lang/identifier",
+      "./graph/vertex"
+    ],
+    "lib/designer/model/graph.js": [
+      "./graph/edge",
+      "./graph/vertex",
+      "./graph/layout",
+      "./graph/graph-element"
+    ],
+    "lib/designer/model/graph/graph-element.js": [
+      "./vertex"
+    ],
+    "lib/designer/model/graph/vertex.js": [
+      "lib/common/lang/uuid",
+      "lib/designer/model/entity"
+    ],
+    "lib/designer/model/model.js": [
+      "mxgraph"
+    ],
+    "lib/designer/model/overlays.js": [
+      "mxgraph",
+      "lib/common/lang"
+    ],
+    "lib/editor/configuration/file.js": [
+      "aurelia-dialog",
+      "aurelia-framework",
+      "apps/workspaces/lib/model/core/orchestration-template/model"
+    ],
+    "lib/hal/docker/service.js": [
+      "aurelia-framework",
+      "./model",
+      "lib/common/service",
+      "rxjs/Subject",
+      "aurelia-fetch-client",
+      "lib/common/lang/identifier"
+    ],
+    "lib/resources/custom-elements/loader/loader.js": [
+      "aurelia-templating"
+    ],
+    "lib/resources/custom-elements/misc/bottom-element.js": [
+      "aurelia-framework"
+    ],
+    "lib/resources/custom-elements/misc/full-element.js": [
+      "aurelia-framework"
+    ],
+    "lib/resources/custom-elements/misc/top-element.js": [
+      "aurelia-framework"
+    ],
+    "main.js": [
+      "aurelia-fetch-client",
+      "aurelia-http-client",
+      "lib/common/storage",
+      "lib/common/security",
+      "./lib/common/resources/custom-elements/materialize-renderer",
+      "jquery",
+      "fetch",
+      "materialize-css"
+    ]
+  }
 });

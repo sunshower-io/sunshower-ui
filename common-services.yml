@@ -6,17 +6,24 @@ services:
     image: nginx:1.11.1
     volumes:
       - ./resources/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./resources/nginx/certs/hasli.io.crt:/etc/nginx/hasli.io.crt:ro
-      - ./resources/nginx/certs/hasli.io.key:/etc/nginx/hasli.io.key:ro
+      - ./resources/nginx/certs/keystore.crt:/etc/nginx/keystore.crt:ro
+      - ./resources/nginx/certs/keystore.key:/etc/nginx/keystore.key:ro
 
 
   ui:
     build: .
-    image: "hasli/ui:${UI_VERSION}"
-
+    image: "sunshower/ui:${UI_VERSION}"
+    environment: 
+      - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
+    volumes:
+      - ./resources/nginx/certs:/keys
 
   web-services:
-    image: "hasli/web-services"
+    image: "sunshower/web-services:${WEB_VERSION}"
+    environment: 
+      - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
+    volumes:
+      - ./resources/nginx/certs:/keys
 
 
   db:
@@ -27,7 +34,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.build
-    image: hasli/ui-build-env
+    image: sunshower/ui-build-env
 
 
 

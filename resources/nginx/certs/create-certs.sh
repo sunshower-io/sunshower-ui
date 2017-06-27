@@ -1,28 +1,35 @@
 #!/bin/bash
 
+PREFIX="keystore"
+
+
+echo "Creating certificates with prefix $PREFIX";
+
+
 openssl req -x509 -nodes \
     -days 365 \
     -newkey rsa:2048 \
-    -keyout sunshower.io.key \
-    -out sunshower.io.pem
+    -keyout ${PREFIX}.key \
+    -out ${PREFIX}.pem
 
 openssl req -new \
-    -key sunshower.io.key \
-    -out sunshower.io.csr
+    -key ${PREFIX}.key \
+    -out ${PREFIX}.csr
 
 openssl x509 -req -days 365 \
-    -in sunshower.io.csr \
-    -signkey sunshower.io.key \
-    -out sunshower.io.crt
+    -in ${PREFIX}.csr \
+    -signkey ${PREFIX}.key \
+    -out ${PREFIX}.crt
 
 openssl pkcs12 -export \
-    -in sunshower.io.crt \
-    -inkey sunshower.io.key \
-    -chain -CAfile sunshower.io.crt \
-    -name "sunshower.io" \
-    -out sunshower.io.p12
+    -in ${PREFIX}.crt \
+    -inkey ${PREFIX}.key \
+    -chain -CAfile ${PREFIX}.crt \
+    -name "${PREFIX}" \
+    -out ${PREFIX}.p12
 
 keytool -importkeystore \
-    -destkeystore sunshower.io.jks \
-    -srckeystore sunshower.io.p12 \
+    -destkeystore ${PREFIX}.jks \
+    -srckeystore ${PREFIX}.p12 \
     -srcstoretype PKCS12
+

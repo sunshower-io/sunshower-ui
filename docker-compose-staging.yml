@@ -15,7 +15,7 @@ services:
 
 
   ui:
-    image: "hasli/ui:${UI_VERSION}"
+    image: "sunshower/ui:${UI_VERSION}"
 
 
   web-services:
