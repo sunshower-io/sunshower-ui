@@ -6,8 +6,8 @@ services:
     image: nginx:1.11.1
     volumes:
       - ./resources/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./resources/nginx/certs/keystore.crt:/etc/nginx/keystore.crt:ro
-      - ./resources/nginx/certs/keystore.key:/etc/nginx/keystore.key:ro
+      - ./resources/nginx/certs/server.crt:/etc/nginx/server.crt:ro
+      - ./resources/nginx/certs/server.key:/etc/nginx/server.key:ro
 
 
   ui:
