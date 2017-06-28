@@ -4,10 +4,16 @@ import {
     autoinject,
     containerless
 } from "aurelia-framework";
+
+
 import {UUID} from 'lib/common/lang/uuid';
-import {DesignerManager} from "lib/designer/core";
-import {VersionedItem, Version} from "apps/workspaces/lib/model/core/orchestration-template/model";
 import {DialogService} from "aurelia-dialog";
+import {DesignerManager} from "lib/designer/core";
+
+import {
+    VersionedItem
+} from "apps/workspaces/lib/model/core/orchestration-template/model";
+
 import {ConfigurationFileEditor} from "lib/editor/configuration/file";
 
 @containerless
@@ -23,7 +29,10 @@ export class MenuBar {
     @bindable
     private model                           : VersionedItem;
 
-    constructor(private manager:DesignerManager, private dialogService: DialogService) {
+    constructor(
+        private manager:DesignerManager,
+        private dialogService: DialogService
+    ) {
         this.controlId = UUID.randomUUID().value;
     }
 

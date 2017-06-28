@@ -1547,14 +1547,14 @@ System.config({
     "lib/designer/elements/menu-bar/menu-bar.js": [
       "aurelia-framework",
       "lib/common/lang/uuid",
+      "aurelia-dialog",
       "lib/designer/core",
       "apps/workspaces/lib/model/core/orchestration-template/model",
-      "aurelia-dialog",
       "lib/editor/configuration/file"
     ],
     "lib/designer/elements/panel.js": [
       "aurelia-framework",
-      "lib/common/lang",
+      "lib/common/lang/uuid",
       "aurelia-templating-resources"
     ],
     "lib/designer/elements/panels.js": [

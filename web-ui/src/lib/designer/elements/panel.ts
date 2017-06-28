@@ -1,14 +1,11 @@
 
 
 import {
-    child,
     bindable,
-    customElement,
-    containerless,
     autoinject,
-    customAttribute
+    customElement
 } from "aurelia-framework";
-import {UUID} from "lib/common/lang";
+import {UUID} from "lib/common/lang/uuid";
 import {Compose} from "aurelia-templating-resources";
 
 @autoinject

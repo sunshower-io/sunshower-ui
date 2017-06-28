@@ -5,7 +5,6 @@ server:
   use-forward-headers: true
   ssl:
     protocol: TLS
-    key-alias: keystore
 #    key-store: classpath:sunshower.io.jks
     key-store-type: JKS
 #    key-store-path: classpath:sunshower.io.jks
