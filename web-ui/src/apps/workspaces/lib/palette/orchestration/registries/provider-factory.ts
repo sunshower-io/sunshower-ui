@@ -60,10 +60,15 @@ export class RegistryElementFactory extends DefaultElementFactory {
 
         if(dt) {
 
-            let e = canvas.insertEdge(dt.getParent(), '', '', element, dt, 'strokeColor=#0087c9;dashed=1;strokeWidth=2');
+            let e = canvas.insertEdge(dt.getParent(), '', '', element, dt, 'strokeColor=#4b738d;dashed=1;strokeWidth=2');
             e.setEdge(true);
             return element;
         }
+        canvas.dispatch({
+            type    : 'no-drop-target',
+            data    : this
+        });
+        //todo make element go away
         return null;
     }
 

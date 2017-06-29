@@ -67,11 +67,15 @@ export default class OrchestrationDesigner {
                     designer.setCodec(this.codec);
                     designer.setGraph(t);
                     canvas.listen('canvas-saved').forEach(t => {
+                        console.log(t.data);
                         this.orchestrationService.saveGraph(t.data)
                             .then(t => {
                                 Materialize.toast(`Successfully saved designer`, 2000);
                             });
                     });
+                    canvas.listen('no-drop-target').forEach(t => {
+                        Materialize.toast(`No place to put ${(t.data as any).elementName}. Be sure to add an orchestration provider`, 5000)
+                    })
                     this.designerManager.toggleLoading();
                 });
             })

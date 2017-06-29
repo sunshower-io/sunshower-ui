@@ -21,32 +21,28 @@ template
                         value.bind="newRegistry.name"
                         class="validate"
                         required="required")
-                    label(for="${nameId}") Registry Name
+                    label(for="${nameId}") Name
                 .input-field
                     input(type="text"
                         id="${urlId}"
                         value.bind="newRegistry.url"
                         class="validate"
                         required="required")
-                    label(for="${urlId}") Registry Url
+                    label(for="${urlId}") Url
                 .row
                     .col.m6.input-field
                         input(type="text"
                             id="${usernameId}"
-                            value.bind="credential.username"
-                            class="validate"
-                            required="required")
-                        label(for="${usernameId}") Registry Username
+                            value.bind="credential.username")
+                        label(for="${usernameId}") Username
                     .col.m6.input-field
                         input(type="password"
                             id="${passwordId}"
-                            value.bind="credential.password"
-                            class="validate"
-                            required="required")
-                        label(for="${passwordId}") Registry Password
+                            value.bind="credential.password")
+                        label(for="${passwordId}") Password
                 .button-holder
                     button.waves-effect.btn(type="submit") Add Registry
-        .designer-cards
+        .designer-cards(if.bind="factories.length > 0")
             palette-icon(
                 repeat.for="factory of factories"
                 factory.bind="factory"

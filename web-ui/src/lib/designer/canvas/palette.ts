@@ -78,7 +78,9 @@ export let DefaultCellFactory: CellFactory = (factory: ElementFactory) => {
             let renderable: Drawable = null;
             try {
                 renderable = factory.newElement(x, y, event, canvas, target);
-                renderable.addTo(canvas);
+                if (renderable) {
+                    renderable.addTo(canvas);
+                }
             }
             finally {
                 canvas.getModel().endUpdate();

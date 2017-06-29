@@ -133,22 +133,22 @@ $designer-button-height: 100px;
       padding: 0;
     }
 
-    //input {
-    //  margin-bottom: 0;
-    //  height: 2rem;
-    //}
-    //
-    //label {
-    //  font-size: .8rem;
-    //}
-    //
-    //label.active {
-    //  transform: translateY(-140%);
-    //}
-    //
-    //.button-holder {
-    //  padding-top: 0;
-    //}
+    input {
+      margin-bottom: 0;
+      height: 2rem;
+    }
+
+    label {
+      font-size: .8rem;
+    }
+
+    label.active {
+      transform: translateY(-140%);
+    }
+
+    .button-holder {
+      padding-top: 0;
+    }
 
     .input-field.locking {
       position: relative;
@@ -297,7 +297,11 @@ $designer-button-height: 100px;
   }
 
   .designer-cards {
-    padding: $standard-padding 0;
+    padding: $standard-padding/2 0;
+
+    &:first-child {
+      padding-top: $standard-padding;
+    }
 
     .designer-card {
       display: inline-block;
@@ -315,7 +319,7 @@ $designer-button-height: 100px;
       }
 
       img {
-        width: 50%;
+        width: 55%;
       }
 
       span {
@@ -460,4 +464,10 @@ $designer-button-height: 100px;
     }
 
   }
+}
+
+.designer-graf {
+  padding: $standard-padding;
+  color: $midgrey;
+  font-size: .85em;
 }
