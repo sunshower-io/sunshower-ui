@@ -23,8 +23,25 @@
 
     &.editor {
       background: $almostblack;
-      padding: $standard-padding/2;
+      padding: 0;
       color: $offwhite;
+
+      .modal-tab-menu {
+        border-bottom: 1px solid $darkblue;
+
+        .tabs {
+          background-color: transparent;
+
+          a.active {
+            color: $offwhite;
+          }
+        }
+
+      }
+
+      .modal-tab-holder {
+        padding: $standard-padding/2;
+      }
     }
   }
 

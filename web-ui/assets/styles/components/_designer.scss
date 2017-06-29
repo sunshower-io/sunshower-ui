@@ -28,8 +28,8 @@ $designer-button-height: 100px;
     position:absolute;
     top:$designer-header-height;
     bottom:0;
-    right:0;
-    left:0;
+    right:$body-panel-width;
+    left: $body-panel-width;
     box-sizing: border-box;
     z-index: 99;
   }
@@ -297,11 +297,11 @@ $designer-button-height: 100px;
   }
 
   .designer-cards {
-    padding: $standard-padding/2 $standard-padding;
+    padding: $standard-padding 0;
 
     .designer-card {
       display: inline-block;
-      padding: 0 $standard-padding/2 $standard-padding/2;
+      padding: $standard-padding/2 $standard-padding/4;
       box-sizing: border-box;
       width: 49%;
       text-align: center;

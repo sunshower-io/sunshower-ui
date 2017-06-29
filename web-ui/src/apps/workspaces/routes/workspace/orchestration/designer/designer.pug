@@ -3,19 +3,19 @@ template
         menu-bar(model.bind="orchestration")
         left-panel
             top
-                layer-panel
-            bottom
                 panels
                     panel(
-                        icon.bind="elementFactory.icon",
-                        model.bind="elementFactory",
-                        view-model="lib/designer/elements/element-panel/element-panel"
+                    icon.bind="elementFactory.icon",
+                    model.bind="elementFactory",
+                    view-model="lib/designer/elements/element-panel/element-panel"
                     )
                     panel(
-                        icon.bind="registryFactory.icon",
-                        model.bind="registryFactory",
-                        view-model="lib/designer/elements/registry-panel/registry-panel"
+                    icon.bind="registryFactory.icon",
+                    model.bind="registryFactory",
+                    view-model="lib/designer/elements/registry-panel/registry-panel"
                     )
+            bottom
+                layer-panel
         right-panel
             full
                 property-panel
