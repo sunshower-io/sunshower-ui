@@ -115,7 +115,6 @@ export class RegistryPanel {
         this.loading = true;
         this.dockerRegistryService.getContainers(id).then(cs => {
             this.factories = cs.map(c => {
-                console.log(c);
                 return new RegistryElementFactory(
                     c.id,
                     c.name,

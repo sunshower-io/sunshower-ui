@@ -75,7 +75,7 @@ export default class OrchestrationDesigner {
                     });
                     canvas.listen('no-drop-target').forEach(t => {
                         Materialize.toast(`No place to put ${(t.data as any).elementName}. Be sure to add an orchestration provider`, 5000)
-                    })
+                    });
                     this.designerManager.toggleLoading();
                 });
             })

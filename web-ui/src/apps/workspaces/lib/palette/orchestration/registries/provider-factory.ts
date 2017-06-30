@@ -72,6 +72,15 @@ export class RegistryElementFactory extends DefaultElementFactory {
         return null;
     }
 
+    createAnimation(): [any, any] {
+        return [{
+            scale: 2.5,
+        }, {
+            duration: 300,
+            delay: 250
+        }]
+    }
+
     protected createStyle(canvas: Canvas) : void {
         let style = {};
         style[mxConstants.STYLE_IMAGE] = this.displayIcon;
