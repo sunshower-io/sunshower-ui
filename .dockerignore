@@ -1,0 +1,3 @@
+**
+!web-site/build/libs/*.war
+!resources/
