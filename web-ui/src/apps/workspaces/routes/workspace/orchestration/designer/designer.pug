@@ -1,6 +1,6 @@
 template
     designer
-        menu-bar(model.bind="orchestration")
+        menu-bar(model.bind="orchestration" router.bind="router")
         left-panel
             top
                 panels
@@ -14,7 +14,6 @@ template
                         model.bind="registryFactory",
                         view-model="lib/designer/elements/registry-panel/registry-panel"
                     )
-                    
                     panel(
                         icon.bind="templateProviderFactory.icon",
                         model.bind="templateProviderFactory",
@@ -25,5 +24,5 @@ template
         right-panel
             full
                 property-panel
-        action-button
+        action-button(router.bind="router")
 

@@ -61,7 +61,7 @@ export class OrchestrationTemplateService implements Service<OrchestrationTempla
         }).then(t => true);
     }
     
-    saveContent()
+    // saveContent()
 
     save(orchestrationTemplate: OrchestrationTemplate) : Promise<Identifier> {
         return this.client.fetch('templates/orchestrations', {
