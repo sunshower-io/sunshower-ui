@@ -1,0 +1,58 @@
+template
+    nav
+        .nav-wrapper
+            //.brand-logo(
+            //    ref="brandLogo"
+            //    anim-enter="slideOver"
+            //    anim-leave="slideBack"
+            //    )
+            a.brand-logo(href="#/")
+                img(src="assets/icons/cb.png")
+                span CloudBees Orchestration Mgr
+                //a.breadcrumb(repeat.for="breadcrumb of breadcrumbs"
+                //    href="${breadcrumb.href}"
+                //      )
+                //    | ${breadcrumb.title}
+            ul.right.user-menu
+                //li.alert-tab
+                //    i.material-icons.mdi.mdi-bell
+                    // activity-monitor-dropdown
+                li.dropdown-tab(
+                    class="dropdown-button"
+                    data-hover="true"
+                    data-beloworigin="true"
+                    data-activates="${dropdownId}"
+                    data-constrainwidth="true"
+                    ref="profileDD"
+                )
+                    i.material-icons.mdi.mdi-account-circle.profile-image
+                    span ${user.username}
+                    i.material-icons.mdi.mdi-menu-down
+                ul(id="${dropdownId}" class="dropdown-content")
+                    //TODO add content
+                    //li
+                    //    i.material-icons.mdi.mdi-account-circle
+                    //    | ${user.username}
+                    //li.divider
+                    //li(click.delegate="openSettings()")
+                    //    i.material-icons.mdi.mdi-account-settings-variant
+                    //    | Account Settings
+                    //li(click.delegate="incompleteFeature.notify($event)")
+                    //    i.material-icons.mdi.mdi-help-circle
+                    //    | Help
+                    li(roles-allowed="admin" click.delegate="approvals()")
+                        i.material-icons.mdi.mdi-account-check
+                        | Approvals
+                    
+                    li(roles-allowed="admin" click.delegate="settings()")
+                        i.material-icons.mdi.mdi-settings
+                        | Settings 
+                    //li.divider
+                    li(click.delegate="logout()")
+                        i.material-icons.mdi.mdi-logout-variant
+                        | Sign Out
+                //li.user-tab
+                //    template(if.bind="user.image")
+                //        img(src="${user.image}")
+                //    template(if.bind="!user.image")
+                //        i.material-icons.mdi.mdi-account-circle

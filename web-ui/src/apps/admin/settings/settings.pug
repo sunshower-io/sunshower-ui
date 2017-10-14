@@ -1,0 +1,10 @@
+template
+    navbar
+    .body
+        .body-content
+            ul.tabs(id="admin-tabs")
+                li.tab(repeat.for="route of router.navigation") 
+                    a(href.bind="route.href" class.bind="route.isActive ? 'active' : ''") 
+                        | ${route.title}
+            router-view    
+       

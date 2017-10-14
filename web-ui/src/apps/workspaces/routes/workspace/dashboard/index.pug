@@ -1,0 +1,19 @@
+template
+    //require(from="lib/common/resources/custom-elements/body-panel/body-panel")
+    .body-content.with-tabs(ref="content")
+        h1 Dashboard
+
+        .body-tab-menu
+            .tabs(ref="tabHolder")
+                li.tab(repeat.for="route of router.navigation")
+                    a(href.bind='route.href' class.bind="route.isActive ? 'active' : ''")
+                        | ${route.title}
+                        span.badge(if.bind="route.settings.badge")
+                            | ${route.settings.badge}
+            a.btn-floating.waves-effect(click.delegate="createOrchestration()")
+                i.material-icons.mdi.mdi-plus
+
+        .body-tab-holder
+            router-view
+
+    //body-panel(active.bind="panelActive" sections.bind="true" content.bind="content")

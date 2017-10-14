@@ -1,0 +1,1 @@
+export * from './compute/infrastructure-node-template';

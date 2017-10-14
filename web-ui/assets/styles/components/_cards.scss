@@ -1,0 +1,316 @@
+$card-margin-left: 20px;
+$card-margin-right: 40px;
+$card-content-height: 100px;
+$card-border-width: 1px;
+$card-border-style: $card-border-width solid $border-color;
+$workspace-card-icon-size: 80px;
+
+
+.chart-card-holder {
+  text-align: center;
+}
+
+.chart-card {
+  width:220px;
+  margin: $standard-padding $standard-padding/4 0 $standard-padding/4;
+  display: inline-block;
+  border: $card-border-style;
+  box-sizing: border-box;
+
+  @media #{$small-and-down} {
+    width: 100%;
+    margin: 0;
+  }
+
+  .card-header {
+    padding: 0 $standard-padding/2;
+    line-height: 30px;
+    height: 30px;
+    background: $primary-color;
+    color: white;
+    border-bottom: $card-border-style;
+
+    i.material-icons {
+      float: right;
+    }
+  }
+  .card-content {
+    background-color: #eceff1; //blue-grey lighten-5
+    padding: $standard-padding/2;
+
+    .chart {
+      background: white;
+      height: 220px - $standard-padding;
+      box-sizing: border-box;
+    }
+    .extra-info {
+      background: white;
+      margin-top: $standard-padding/2;
+      padding: $standard-padding;
+    }
+  }
+}
+
+.workspace-card {
+  width: $body-panel-width;
+  margin: $workspace-card-icon-size/2 $standard-padding $standard-padding*2 $standard-padding;
+  float: left;
+  border: $card-border-style;
+  position:relative;
+  box-sizing: border-box;
+  background-color: $card-bg-color;
+  transition: box-shadow .25s;
+
+  @extend .z-depth-0;
+
+  .card-content {
+    padding: $workspace-card-icon-size/2 $standard-padding $standard-padding $standard-padding;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .summary-icon {
+    //size: 100
+    position: absolute;
+    left: $body-panel-width/2 - $workspace-card-icon-size/2;
+    top: -$workspace-card-icon-size/2;
+  }
+
+  .card-title {
+    font-weight:300;
+    font-size: 1.4rem;
+    margin: 0;
+    padding: $standard-padding 0;
+    box-sizing: border-box;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .card-updated {
+    color: $midgrey;
+    text-align: center;
+    font-size: .8rem;
+  }
+
+  .card-action {
+    padding: $standard-padding/2;
+    text-align: center;
+    border-top: $default-border;
+
+    a {
+      color: $midgrey;
+      padding: 0 $standard-padding/2;
+      font-size: 20px;
+      cursor: pointer;
+
+      &:hover {
+        color: $lightgrey;
+      }
+    }
+  }
+}
+
+.card {
+  border: $card-border-style;
+  border-radius:0;
+  position:relative;
+  box-sizing: border-box;
+  margin: $standard-padding 0;
+
+  @extend .z-depth-0;
+
+  //.summary-icon {
+  //  position: absolute;
+  //  left: -$card-margin-left;
+  //  top: ($card-content-height/2) - $card-margin-left;
+  //}
+  //
+  //h2 {
+  //  font-size: 1.5rem;
+  //  line-height: 1rem;
+  //  margin: 0 0 .5rem 0;
+  //}
+  //
+  //.card-content, .card-extra {
+  //  height: $card-content-height;
+  //  box-sizing: border-box;
+  //}
+  //
+  //.card-content {
+  //  padding: $card-margin-left $card-margin-left $card-margin-left ($card-margin-left*2);
+  //}
+  //
+  //.card-extra {
+  //  display: none;
+  //  border-top: $card-border-style;
+  //  padding: $card-margin-left ($card-margin-left + $card-margin-right) $card-margin-left $card-margin-left;
+  //  position: relative;
+  //
+  //  &.active {
+  //    display: block;
+  //  }
+  //
+  //}
+  //
+  //.card-expand, .card-contract {
+  //  position: absolute;
+  //  width: $card-margin-right;
+  //
+  //  i.material-icons {
+  //    font-size:25px;
+  //    position: absolute;
+  //    left: $card-margin-right/5;
+  //  }
+  //}
+  //
+  //.card-expand {
+  //  background: $lightgrey;
+  //  top: -$card-border-width;
+  //  height: $card-content-height + ($card-border-width*2);
+  //  right: -$card-margin-right;
+  //
+  //  i.material-icons {
+  //    color: white;
+  //    top: ($card-content-height + ($card-border-width*2))/2.75;
+  //  }
+  //}
+  //
+  //.card-contract {
+  //  background: $offwhite;
+  //  height: $card-content-height - $card-border-width;
+  //  top: 0;
+  //  right: 0;
+  //
+  //  i.material-icons {
+  //    color: $lightgrey;
+  //    top: $card-content-height/2.75;
+  //  }
+  //}
+
+  //todo handle side panel open
+
+  .card-content {
+    padding: $standard-padding;
+    //position: relative;
+    min-height: 90px + $standard-padding*2;
+
+    .card-icon {
+      width: 90px;
+      float: left;
+      cursor: pointer;
+
+      @media #{$medium-and-down} {
+        width: auto;
+        float: none;
+        text-align: center;
+      }
+    }
+
+    .card-title {
+      font-weight:400;
+      margin: 0;
+      float: left;
+      padding: 30px $standard-padding 0 $standard-padding;
+      box-sizing: border-box;
+      width: -webkit-calc(100% - 180px);
+      width: -moz-calc(100% - 180px);
+      width: calc(100% - 180px);
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+
+      @media #{$medium-and-down} {
+        width: 100%;
+        float: none;
+        text-align: center;
+        padding: $standard-padding;
+      }
+    }
+
+    .card-button {
+      width: 90px;
+      float: right;
+      padding-top: 30px;
+
+      @media #{$medium-and-down} {
+        width: 100%;
+        float: none;
+        padding-top: 0;
+      }
+
+      .btn {
+        border-radius:0;
+        font-size:.75rem;
+        height:30px;
+        line-height:30px;
+        padding: 0 1.5rem;
+        background: $primary-color;
+
+        @extend .z-depth-0;
+
+        @media #{$medium-and-down} {
+          display: block;
+          width: 100%;
+        }
+
+      }
+    }
+  }
+
+
+  .card-action {
+    border-top: $default-border;
+    background-color: #eceff1; //blue-grey lighten-5
+    color: #90a4ae; //blue-grey lighten-2
+    padding: 10px 0;
+    font-size: .75rem;
+    position: relative;
+
+    @extend %clearfix;
+
+    .action {
+      display: inline-block;
+      line-height: 20px;
+      padding: 0 $standard-padding;
+
+      &.left {
+        float: left;
+      }
+
+      &.right {
+        float: right;
+      }
+    }
+
+    .chip {
+      margin: 0;
+      height: 20px;
+      line-height: 20px;
+      font-size: 10px;
+      color: white;
+      border-radius: 5px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      width: 90px;
+      text-align: center;
+
+      &.state-good {
+        @extend .light-green
+      }
+
+      &.state-pending {
+        @extend .amber
+      }
+
+      &.state-bad {
+        @extend .red, .darken-4
+      }
+    }
+
+
+  }
+
+}

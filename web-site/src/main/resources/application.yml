@@ -1,0 +1,12 @@
+server:
+  port: 8443
+  servlet-path: /
+  context-path: /
+  use-forward-headers: true
+  ssl:
+    protocol: TLS
+#    key-store: classpath:sunshower.io.jks
+    key-store-type: JKS
+#    key-store-path: classpath:sunshower.io.jks
+#    key-store-password: h4s1!43v3r!
+#    key-password: h4s1!43v3r!

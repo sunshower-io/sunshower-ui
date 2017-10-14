@@ -1,0 +1,50 @@
+template
+    require(from='lib/designer/elements/element-panel/palette-icon')
+    .designer-panel-body
+        loader(if.bind="loading")
+        .designer-form(if.bind="!loading")
+            template(if.bind="!addingRegistry")
+                label Registries
+                select.browser-default(value.bind="activeRegistryId" change.delegate="setActive()")
+                    option(value='') Choose a registry
+                    option(repeat.for="registry of registries" value="${registry.id}") ${registry.name}
+                a.create-link(click.delegate="addRegistry()" if.bind="!addingRegistry")
+                    i.material-icons.mdi.mdi-plus-circle-outline
+                    | Add Registry
+            form(submit.delegate="saveRegistry()" if.bind="addingRegistry")
+                a.create-link(click.delegate="unaddRegistry()")
+                    i.material-icons.mdi.mdi-keyboard-backspace
+                    | Back to Registries
+                .input-field
+                    input(type="text"
+                        id="${nameId}"
+                        value.bind="newRegistry.name"
+                        class="validate"
+                        required="required")
+                    label(for="${nameId}") Name
+                .input-field
+                    input(type="text"
+                        id="${urlId}"
+                        value.bind="newRegistry.url"
+                        class="validate"
+                        required="required")
+                    label(for="${urlId}") Url
+                .row
+                    .col.m6.input-field
+                        input(type="text"
+                            id="${usernameId}"
+                            value.bind="credential.username")
+                        label(for="${usernameId}") Username
+                    .col.m6.input-field
+                        input(type="password"
+                            id="${passwordId}"
+                            value.bind="credential.password")
+                        label(for="${passwordId}") Password
+                .button-holder
+                    button.waves-effect.btn(type="submit") Add Registry
+        .designer-cards(if.bind="factories.length > 0")
+            palette-icon(
+                repeat.for="factory of factories"
+                factory.bind="factory"
+                canvas.bind="canvas"
+            )

@@ -1,0 +1,64 @@
+.auth-side {
+  background-image: url("/assets/icons/cb.png");
+  //background-repeat: no-repeat;
+  background-position: top left;
+  background-size: contain;
+  //background: url("/assets/icons/art.jpg")no-repeat cover;
+  width: 200px;
+  top:50px;
+  left:50px;
+  bottom:0;
+  position:absolute;
+  box-sizing:border-box;
+  background-repeat:no-repeat;
+
+  @media #{$medium-and-down} {
+    width:10%;
+  }
+}
+
+.auth-main {
+  padding: 50px;
+  box-sizing:border-box;
+  width:65%;
+  top:0;
+  right:0;
+  bottom:0;
+  position:absolute;
+  overflow-y: auto;
+
+  form {
+    background: transparent;
+    padding: 0;
+  }
+
+  .button-holder {
+    padding-top: $standard-padding*2;
+  }
+
+  .row {
+    margin-bottom: 0;
+  }
+
+  h1 {
+    margin: $standard-padding*3 0 $standard-padding 0;
+    font-size: 3rem;
+  }
+
+  @media #{$medium-and-down} {
+    width:90%;
+    padding:50px;
+  }
+
+  @media #{$extra-large-and-up} {
+    padding: 50px 100px;
+  }
+}
+
+.auth-toggle {
+  text-align: right;
+
+  .btn-flat {
+    margin-left: 1em;
+  }
+}

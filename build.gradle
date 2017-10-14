@@ -1,0 +1,49 @@
+/**
+ * Buildscript Plugins Section
+ *
+ * @author haswell
+ */
+buildscript {
+    apply from: 'gradle/buildscript.gradle', to: buildscript
+}
+
+plugins {
+    id 'org.springframework.boot' version '1.5.3.RELEASE'
+}
+
+allprojects {
+    apply plugin: 'java'
+}
+
+apply from: "$rootDir/gradle/docker.gradle"
+
+
+/**
+ * Subproject configurations
+ */
+
+subprojects {
+    version = rootProject.version
+
+    apply plugin: 'java'
+    apply plugin: 'nebula.optional-base'
+    
+    apply from: "$rootDir/gradle/dependencies.gradle"
+    apply from: "$rootDir/gradle/idea.gradle"
+    apply from: "$rootDir/gradle/jacoco.gradle"
+    apply from: "$rootDir/gradle/publishing.gradle"
+    apply from: "$rootDir/gradle/test.gradle"
+}
+configure(allprojects - project(':web-ui')) {
+    apply plugin: 'org.springframework.boot'
+}
+
+
+bootRepackage {
+    enabled = false
+}
+task wrapper(type: Wrapper) {
+    gradleVersion = gradleWrapperVersion
+}
+
+defaultTasks "clean", "build"

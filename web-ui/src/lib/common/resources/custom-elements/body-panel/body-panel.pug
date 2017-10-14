@@ -1,0 +1,8 @@
+template
+    .body-panel(if.bind="active")
+        template(if.bind="sections")
+            .body-panel-top
+            .body-panel-bottom
+    .fixed-action-btn
+        .btn-floating.btn-large(click.delegate="togglePanel()")
+            i.material-icons.large.mdi(class="${active ? 'mdi-close' : 'mdi-menu'}")

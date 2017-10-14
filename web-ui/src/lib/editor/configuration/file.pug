@@ -1,0 +1,13 @@
+template
+    .modal-header ${model.name} Configuration File
+    .modal-content.editor
+        .modal-tab-menu
+            .tabs(ref="tabHolder")
+                li.tab
+                    a.active(href="#docker") Docker
+                li.tab
+                    a(href="#nomad") Nomad
+        .modal-tab-holder(id="docker")
+            | Docker Boops
+        .modal-tab-holder(id="nomad")
+            | Nomad Boops

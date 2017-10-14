@@ -1,0 +1,19 @@
+template
+    require(from='./palette-icon')
+    .designer-panel-body
+        //.designer-form
+        //    label Type
+        //    select.browser-default
+        //        option(value='', disabled='', selected='') Choose your option
+        //        option(value='1') Option 1
+        //        option(value='2') Option 2
+        //        option(value='3') Option 3
+        //    a.create-link(title="Incomplete Feature")
+        //        i.material-icons.mdi.mdi-plus-circle-outline
+        //        | Create
+        .designer-cards
+            palette-icon(
+                repeat.for="factory of factories"
+                factory.bind="factory"
+                canvas.bind="canvas"
+            )

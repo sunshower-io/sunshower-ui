@@ -1,0 +1,21 @@
+template
+    //require(from="lib/common/resources/custom-elements/body-panel/body-panel")
+    require(from="apps/workspaces/resources/custom-elements/workspace-card/workspace-card")
+    .body-content(ref="content")
+        .btn-floating.btn-floating-add(ref="createBtn" click.delegate="create()" title="Create a New Workspace")
+            i.material-icons.large.mdi.mdi-plus
+        //h1 Workspaces
+        loader(if.bind="loading")
+        template(if.bind="workspaces.length > 0")
+            workspace-card(if.bind="!loading" repeat.for="workspace of workspaces" workspace.bind="workspace")
+        template(if.bind="workspaces.length == 0")
+            .workspace-card
+                .card-content(click.delegate="create()")
+                    summary-icon(stroke="none" fill="#335061" textColor="white" text="H I" size="80")
+                    h2.card-title Make a Workspace
+                    .card-updated Just Click Here
+                //.card-action
+                    //a.material-icons.mdi.mdi-web(click.delegate="open(workspace.id)")
+                    //a.material-icons.mdi.mdi-delete(click.delegate="destroy(workspace.id)")
+            //p You have no workspaces. What are you doing? Go boop that plus button and make one!
+    //body-panel(active.bind="panelActive" sections.bind="true" content.bind="content" button.bind="createBtn")

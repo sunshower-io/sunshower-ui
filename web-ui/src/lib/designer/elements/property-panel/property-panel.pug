@@ -1,0 +1,23 @@
+template
+    require(from="lib/designer/elements/property-panel/property-row")
+    .designer-panel-header
+        h2 Properties
+    .designer-panel-body
+        .designer-form(ref="propertyCollapsible")
+            ul.collapsible.property-collapsible(data-collapsible="expandable")
+                li(repeat.for="cell of cells")
+                    .collapsible-header
+                        | ${cell.name} Properties
+                        i.material-icons.mdi.mdi-chevron-right.dropdown-icon
+                    .collapsible-body
+                        property-row(repeat.for="property of cell.properties"
+                            property.bind="property")
+                        ul.collapsible(if.bind="cell.entities && cell.entities.length > 0"
+                            data-collapsible="expandable")
+                            li(repeat.for="entity of cell.entities")
+                                .collapsible-header
+                                    | ${entity.name} Properties
+                                    i.material-icons.mdi.mdi-chevron-right.dropdown-icon
+                                .collapsible-body
+                                    property-row(repeat.for="property of entity.properties"
+                                        property.bind="property")

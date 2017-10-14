@@ -1,0 +1,63 @@
+$almostblack: #071727;
+//$logoblue: #4b738d;
+$logoblue: #0097b4;
+//$midgrey: #{map-get($grey, "base")};
+$midgrey: #9e9e9e;
+//$lightgrey: #e0e0e0;
+$lightgrey: #EEEEEE;
+//$offwhite: #f5f5f5; //grey lighten-4
+$offwhite:#FEFEFA;
+$brightgreen: #39D4EA;
+$lightgreen: lighten($brightgreen, 20%);
+$darkblue: darken($logoblue, 10%);
+$softorange: #fcc797;
+
+/* sunshowergreen: #6FD186 */
+/* sunshowerblue: #4b738d */
+/* sunshowerorange: #fcc797 */
+/* sunshowerblack: #071727 */
+
+
+$primary-color: $logoblue;
+$secondary-color: $brightgreen;
+$primary-color-dark: $darkblue;
+$link-color: $primary-color;
+
+$success-color: $brightgreen;
+$error-color: #a21318; //darken-3
+$progress-bar-color: $primary-color;
+$table-striped-color: $lightgrey;
+$table-border-color: $lightgrey;
+
+$navbar-height: 50px;
+$navbar-height-mobile: $navbar-height;
+$small-nav-width: 0;
+$body-panel-width: 250px;
+$side-nav-width: 0;
+
+$border-color: $lightgrey;
+$default-border: 1px solid $border-color;
+$collapsible-border-color: $border-color;
+$input-border-color: $midgrey;
+
+$standard-padding: 20px;
+
+$button-height: 36px;
+$button-raised-background: $secondary-color;
+$button-flat-color: $primary-color;
+$button-radius: 0;// $button-height/4;
+
+$placeholder-text-color: $midgrey;
+
+$input-focus-color: $primary-color;
+
+$sidenav-bg-color: $almostblack;
+$sidenav-font-color: white;
+
+$default-icon-size: 24px;
+
+$default-background-color: $lightgrey;
+
+$navbar-font-color: $midgrey;
+
+$navbar-font-size: 14px;

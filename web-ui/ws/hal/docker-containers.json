@@ -1,0 +1,3062 @@
+[
+  {
+    "type": "docker",
+    "id": "4rUzU8wrGm5VMsLbnVSAzp",
+    "name": "composer",
+    "popularity": 0,
+    "description": "Composer is a dependency manager written in and for PHP.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/composer.png"
+    },
+    "providerCoordinate": {
+      "id": "32c9b296-5a43-4970-ad35-6a60bbe05549",
+      "name": "composer"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "7DvESpUNX8ZcgKbnR2mDNS",
+    "name": "ibmjava",
+    "popularity": 0,
+    "description": "Official IBM® SDK, Java™ Technology Edition Docker Image.",
+    "icon": {},
+    "providerCoordinate": {
+      "id": "b3cf61b2-0c8d-4b09-be77-09f9cc4cd557",
+      "name": "ibmjava"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Xa5VjNcCBUba72Sinhs9hB",
+    "name": "GitLab Enterprise Edition",
+    "popularity": 0,
+    "description": "GitLab unifies issues, code review, CI and CD into a single UI",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/d488c571-a343-4110-bf38-f40a7dd056be-46d5159a-d96d-4cb2-99d4-1d9858eada6f-d4d94db2-2c90-427f-accc-f912061086e2-logo-large.png"
+    },
+    "providerCoordinate": {
+      "id": "17d3e8e0-3e15-418a-a8d6-3dc5e4c21654",
+      "name": "GitLab Enterprise Edition"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "2HTBGDtJLiRM9csFczy7xW",
+    "name": "Sysdig Cloud Monitoring Agent-Commercial",
+    "popularity": 0,
+    "description": "Sysdig Cloud is a commercial tool that provides docker monitoring and kubernetes monitoring for container-native apps",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/sysdig.png"
+    },
+    "providerCoordinate": {
+      "id": "a0b9cd9d-283a-41c5-b14a-6cec6d3afd5a",
+      "name": "Sysdig Cloud Monitoring Agent-Commercial"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "56YiC4Xqg61xMRCE4avQAp",
+    "name": "haskell",
+    "popularity": 0,
+    "description": "Haskell is an advanced purely-functional programming language.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/8dd9679a-9dbc-42a3-b5da-4ff5ad97bc63-haskell.png"
+    },
+    "providerCoordinate": {
+      "id": "74b1a6b9-c84a-4221-891d-18d28f1798e5",
+      "name": "haskell"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "FUNiN5ATx3JSx9SfpkRVMN",
+    "name": "hylang",
+    "popularity": 0,
+    "description": "Hy is a Lisp dialect that translates expressions into Python's abstract syntax tree.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/63a7c2e3-24e0-4992-b658-cf38fe91209a-hylang.png"
+    },
+    "providerCoordinate": {
+      "id": "62cb43d8-bf5b-4115-8408-ff1412ead82e",
+      "name": "hylang"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "RWeNKNPaDMxzshtfyu3pGr",
+    "name": "Microservice Firewall",
+    "popularity": 0,
+    "description": "We're always moving so you won't have to",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/54ab6bec-8581-4358-b010-a5d99e4844e3Polyverse%20Logo%20300px%20square.png"
+    },
+    "providerCoordinate": {
+      "id": "600db9de-b6b9-470b-9ee0-ca4644d92210",
+      "name": "Microservice Firewall"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "LkurfJHQPV5FgeXRF7Qf2L",
+    "name": "Oracle Instant Client",
+    "popularity": 0,
+    "description": "Oracle Database 12c Instant Client",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/54dc00cd-6d77-4cb0-93aa-8d3e16089630O_Database_clr.png"
+    },
+    "providerCoordinate": {
+      "id": "ba5efb14-eb23-4805-8651-a8af55e35cf5",
+      "name": "Oracle Instant Client"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "GGXUgZoUaQGv4MoynrJMJa",
+    "name": "percona",
+    "popularity": 0,
+    "description": "Percona Server is a fork of the MySQL relational database management system created by Percona.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/db001106-c84b-46f7-8278-cd60431479f0-percona.png"
+    },
+    "providerCoordinate": {
+      "id": "176b92e3-b122-422c-96f0-d518bffe9bd5",
+      "name": "percona"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "DC2YKXqBpHmqP8eAVqYt5X",
+    "name": "ros",
+    "popularity": 0,
+    "description": "The Robot Operating System (ROS) is an open source project for building robot applications.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/a4caf03a-82f9-4f5b-89da-5acf39b60b4d-ros.png"
+    },
+    "providerCoordinate": {
+      "id": "4e84c2be-5bb3-40f8-8854-8901e496d576",
+      "name": "ros"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "HqrhgNQa4FAwEvDxYsUgwr",
+    "name": "spiped",
+    "popularity": 0,
+    "description": "Spiped is a utility for creating symmetrically encrypted and authenticated pipes between sockets.",
+    "icon": {},
+    "providerCoordinate": {
+      "id": "8377de9a-ea4a-4bc2-937e-55a25cbdcd20",
+      "name": "spiped"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "3ZN8RzdhQjJHSSkiB5H3ia",
+    "name": "Sonatype Nexus",
+    "popularity": 0,
+    "description": "Sonatype Nexus Repository Manager, the world’s only repository manager with free support for all popular formats.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/d8c256cc-e1bf-4e78-83e8-6aeaefce3231-af8ee71d-b511-4bbc-8ff0-c453a24018cd-3645febb-f64d-42ba-8324-7dd2ea2df7fe-logo-large.png"
+    },
+    "providerCoordinate": {
+      "id": "4d7a0280-8103-47f4-b871-296a409faf73",
+      "name": "Sonatype Nexus"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "WK5dTm1cAEK27FtKhebVG7",
+    "name": "Docker Community Edition for Fedora",
+    "popularity": 0,
+    "description": "The best way to run Docker on Fedora",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/icons/docker-edition-fedora6.png"
+    },
+    "providerCoordinate": {
+      "id": "docker-ce-server-fedora",
+      "name": "Docker Community Edition for Fedora"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Rb48up21em7zQk1gQsyAz2",
+    "name": "tomee",
+    "popularity": 0,
+    "description": "Apache TomEE is an all-Apache Java EE certified stack where Apache Tomcat is top dog.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/7c177fe9-61ba-43a7-8b48-3367a7d43d72-tomee.png"
+    },
+    "providerCoordinate": {
+      "id": "afc9cbe9-8325-4609-ad48-cc891f1e0002",
+      "name": "tomee"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "DdSYNKUVk6d3DH3Fw5bFkB",
+    "name": "julia",
+    "popularity": 0,
+    "description": "Julia is a high-level, high-performance dynamic programming language for technical computing.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/f8b7f040-d26a-42bf-877c-d9906dcc25ec-julia.png"
+    },
+    "providerCoordinate": {
+      "id": "b228ffc7-3d8c-46c5-9e2d-4101e2b9629a",
+      "name": "julia"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "5V7SQbgaYFQXKLoTXxZJ5z",
+    "name": "Splunk Universal Forwarder",
+    "popularity": 0,
+    "description": "Collect data and send it to your Splunk instance.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/6b79abf3-d226-4dc4-9657-785c75ca832d-vicorl2u.png"
+    },
+    "providerCoordinate": {
+      "id": "3584c8de-d1de-4224-8e70-78bbf85f699e",
+      "name": "Splunk Universal Forwarder"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "UMznhVuWU3riRhBn5Uw9UN",
+    "name": "Sematext Agent",
+    "popularity": 0,
+    "description": "Container Monitoring and Log Management",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/52ac2dfe-5113-469a-96ed-fb403d25b5b2-octi.png"
+    },
+    "providerCoordinate": {
+      "id": "69dc74fd-faa4-4ce2-a0e4-08a483870b78",
+      "name": "Sematext Agent"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "PcPiLj7qSu2WPAhiQBQv8A",
+    "name": "Docker Community Edition for Debian",
+    "popularity": 0,
+    "description": "The best way to run Docker on Debian",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/icons/docker-edition-debian6.png"
+    },
+    "providerCoordinate": {
+      "id": "docker-ce-server-debian",
+      "name": "Docker Community Edition for Debian"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "7Soz5Zfmopugmdga9P9gvx",
+    "name": "New Relic MySQL Plugin",
+    "popularity": 0,
+    "description": "New Relic Plugin for monitoring MySQL databases",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/7fe079cd-2a1c-48c7-997e-ad42826c36de-83d7585a-11dc-492b-a7d2-13bccda7e05c-logo-large.png"
+    },
+    "providerCoordinate": {
+      "id": "05641f43-fd54-46bc-9fdd-80388312d576",
+      "name": "New Relic MySQL Plugin"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "7RC2qz92mKNfakT7FXW86M",
+    "name": "neurodebian",
+    "popularity": 0,
+    "description": "NeuroDebian provides neuroscience research software for Debian, Ubuntu, and other derivatives.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/ebcc53fb-7361-4c86-9a08-9e2d8ce3d927-neurodebian.png"
+    },
+    "providerCoordinate": {
+      "id": "63dbd2e1-f29e-498b-8b16-1477770ae733",
+      "name": "neurodebian"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "KHyQ7XKA76zD8eLExQvYKK",
+    "name": "Avi Vantage Platform",
+    "popularity": 0,
+    "description": "Software-defined Application Services such as LoadBalancing, Autoscaling, App Insights, Service Discovery, and Microsegmentation ",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/0db85718-8c1f-4613-b38f-95358eb5f4b5-favicon-96x96.png"
+    },
+    "providerCoordinate": {
+      "id": "1d288909-209d-4c21-b8b0-7d1ea3ae5093",
+      "name": "Avi Vantage Platform"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "7NBXp3d6ArvHHBbkYPpk8r",
+    "name": "NetScaler CPX Express Rel 12.0",
+    "popularity": 0,
+    "description": "Free, Full-featured, microservice aware, load balancer in a Docker container",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/ba90d999-b62d-4071-aa00-0fcf5c9e6763-citrix-logo-circle-small.png"
+    },
+    "providerCoordinate": {
+      "id": "71dc6b34-39ec-40aa-a1cf-df2e828f6649",
+      "name": "NetScaler CPX Express Rel 12.0"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "HdgF5j2jwuJgbFTjDVZkiy",
+    "name": "StorageOS Node",
+    "popularity": 0,
+    "description": "Converged storage for containers",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/edd1b9d1-7304-4034-ba9f-42d3b1c1cda1StorageOS_Vertical_Logo_RGB_square.png"
+    },
+    "providerCoordinate": {
+      "id": "715850c9-e72f-4d1d-add7-9dee43331f2d",
+      "name": "StorageOS Node"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "VnuPnUzamcgn95ZxA2HYHJ",
+    "name": "Aerospike",
+    "popularity": 0,
+    "description": "Aerospike – the reliable, high performance, distributed database optimized for flash and RAM.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/c59ad037-0e53-4b0d-bee5-766397f3b40e-949b9260-e34e-4964-ba74-bfbd18607b71-ac72c493-71fb-44fb-89ac-f296cd8cef43-logo-large.png"
+    },
+    "providerCoordinate": {
+      "id": "eb0cc57c-af95-4a7a-a6f4-7eaf17ff9d7e",
+      "name": "Aerospike"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "M6WtE39bToWwMtwB22pWHk",
+    "name": "redis",
+    "popularity": 0,
+    "description": "Redis is an open source key-value store that functions as a data structure server.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/89e5782a-76ea-4b94-a561-39e331c281a5-redis.png"
+    },
+    "providerCoordinate": {
+      "id": "1f6ef28b-3e48-4da1-b838-5bd8710a2053",
+      "name": "redis"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "N72QBxqWSnAWqsG67c6kHh",
+    "name": "rethinkdb",
+    "popularity": 0,
+    "description": "RethinkDB is an open-source, document database that makes it easy to build and scale realtime apps.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/84c2f851-5508-4556-9d34-8114c9725693-rethinkdb.png"
+    },
+    "providerCoordinate": {
+      "id": "6e5e7f5d-52fa-4598-a8fc-f1911a873ac0",
+      "name": "rethinkdb"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Czjo79W5mhifSvgCCixChH",
+    "name": "Docker Community Edition for Ubuntu",
+    "popularity": 0,
+    "description": "The best way to run Docker on Ubuntu",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/icons/docker-edition-ubuntu6.png"
+    },
+    "providerCoordinate": {
+      "id": "docker-ce-server-ubuntu",
+      "name": "Docker Community Edition for Ubuntu"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "JLLFngT8iu4asaHJqTavSC",
+    "name": "Sysdig Open Source Visibility Tool",
+    "popularity": 0,
+    "description": "Sysdig is the first and only solution that can natively monitor any infrastructure and app, including container-based ones. ",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/sysdig.png"
+    },
+    "providerCoordinate": {
+      "id": "8d1845e2-f4b4-4e36-a2bf-4b1223be2f94",
+      "name": "Sysdig Open Source Visibility Tool"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "6deMRPDQN5e8ZWUczfuZFs",
+    "name": "REX-Ray for S3FS",
+    "popularity": 0,
+    "description": "A object volume plugin connecting your containers to any s3-compatible storage platform",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/50a9e4e7-451f-44bb-9e12-ef7c23c9781899%20EMC_REX%20TX%20Solo.jpg"
+    },
+    "providerCoordinate": {
+      "id": "30ef9729-2d74-4ba9-b049-1491bc31b510",
+      "name": "REX-Ray for S3FS"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "8mCV6dA2a9gDxSVGmwz7BE",
+    "name": "Percona Server",
+    "popularity": 0,
+    "description": "Percona Server is optimized for cloud computing, NoSQL access, and modern hardware.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/b53d1fa9-977d-4aa5-a12c-b0bec98e7692-percona-serverlogovert-cmyk-2.png"
+    },
+    "providerCoordinate": {
+      "id": "2faf868d-ef87-4ecd-b25a-f9ad03354442",
+      "name": "Percona Server"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "6fvRsiCqzX6N9DxLxWXH4d",
+    "name": "Crate",
+    "popularity": 0,
+    "description": "Crate - the fast, scalable, easy to use SQL database.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/4866f1d2-12fe-476d-9e16-b63f881ab1f3-765a709b-755c-403a-b9a6-a93cb91c8c2d-9e13af36-433d-4456-84c6-02ec9be5ce71-logo-large.png"
+    },
+    "providerCoordinate": {
+      "id": "dfac6fed-98d7-4c5d-b338-fb6930c62c69",
+      "name": "Crate"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "YCATd6GPjCDDKxf874iAYC",
+    "name": "gradle",
+    "popularity": 0,
+    "description": "Gradle is a build tool with a focus on build automation and support for multi-language development.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/gradle.png"
+    },
+    "providerCoordinate": {
+      "id": "f0fb11fe-ce89-42b7-acc9-c613631d28ac",
+      "name": "gradle"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "C4qMXngomy8GJaQgKDV2kg",
+    "name": "HPE Docker Volume Plugin for 3PAR and StoreVirtual Array",
+    "popularity": 0,
+    "description": "HPE Docker Volume Plugin for 3PAR and StoreVirtual Storage Array",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/75c0e5e0-9fea-4825-9d84-b684b36a3217-hpesm-pri-grn-pos-rgbsmall.svg"
+    },
+    "providerCoordinate": {
+      "id": "04756b0a-c5b7-4c1c-94b6-601c95a5ad49",
+      "name": "HPE Docker Volume Plugin for 3PAR and StoreVirtual Array"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "5SCkkHSk3KFnSV2NF9Vri8",
+    "name": "Kaazing Gateway",
+    "popularity": 0,
+    "description": "Official build of Kaazing Gateway",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/267d22c3-0170-44b2-8697-1e986c3f7666-539a485c-2fbe-4b62-b1d5-f703156eee73-85b8c7ff-186b-425f-ab3b-a49eb3ef56c6-logo-large.png"
+    },
+    "providerCoordinate": {
+      "id": "1b8bb2c8-63f6-4960-95af-c4d3c61c296b",
+      "name": "Kaazing Gateway"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "ko2GGBZB7QAHpPWQK2wkH",
+    "name": "gazebo",
+    "popularity": 0,
+    "description": "Gazebo is an open source project for simulating robots, offering robust physics and rendering.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/6fbb02f0-71c4-4639-b574-91ed4cc70c59-gazebo.png"
+    },
+    "providerCoordinate": {
+      "id": "e42e1e00-1168-4815-b951-6ee5bae86d58",
+      "name": "gazebo"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "95oLELJLka9xYEKTpjjHYR",
+    "name": "Docker Enterprise Edition for AWS",
+    "popularity": 0,
+    "description": "A one click template to quickly deploy Docker on Amazon EC2.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/icons/docker-edition-aws6.png"
+    },
+    "providerCoordinate": {
+      "id": "docker-ee-aws",
+      "name": "Docker Enterprise Edition for AWS"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "6zWvrZ375FwW1Yw22oYLLH",
+    "name": "StorageOS Plugin",
+    "popularity": 0,
+    "description": "Converged storage as a Docker volume plugin",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/7164fb44-e28b-4ad6-aae0-d1f92988737aStorageOS_Vertical_Logo_RGB_square.png"
+    },
+    "providerCoordinate": {
+      "id": "28908296-e348-4fc8-85a7-29b3dba06a41",
+      "name": "StorageOS Plugin"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "B7fhCbai4E43BuQKbTc9SC",
+    "name": "cirros",
+    "popularity": 0,
+    "description": "CirrOS is a Tiny OS that specializes in running on a cloud.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/b650be51-f13c-4b30-a71f-6a3df08d81f7-cirros.png"
+    },
+    "providerCoordinate": {
+      "id": "e3d3b771-35d3-45fe-92af-3f8bbd56cb40",
+      "name": "cirros"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "JbeTdkanc7osfx66VC9Hww",
+    "name": "REX-Ray for Isilon",
+    "popularity": 0,
+    "description": "A file volume plugin connecting your containers to a scalable and high performance networked storage platform in your data center",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/eeb1a153-afe0-4121-a10c-46422f0472f299%20EMC_REX%20TX%20Solo.jpg"
+    },
+    "providerCoordinate": {
+      "id": "fc38117b-5010-4f07-9c09-439e50bf9094",
+      "name": "REX-Ray for Isilon"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "6ZBBHek4YDBRQcY8i5gbdE",
+    "name": "elasticsearch",
+    "popularity": 0,
+    "description": "Elasticsearch is a powerful open source search and analytics engine that makes data easy to explore.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/d21622d7-2cf2-49d6-acae-a8d04a5b64a9-elasticsearch.png"
+    },
+    "providerCoordinate": {
+      "id": "1090e442-627e-4bf2-b29a-555f57a64ecd",
+      "name": "elasticsearch"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "P4ARhDLQmBfDLUGFqEXVdS",
+    "name": "tomcat",
+    "popularity": 0,
+    "description": "Apache Tomcat is an open source implementation of the Java Servlet and JavaServer Pages technologies",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/56c8514a-eb15-4cc5-8e5e-3b89e7a408fa-tomcat.png"
+    },
+    "providerCoordinate": {
+      "id": "3d5f71ad-2cc0-467f-ab6a-351e7adf404e",
+      "name": "tomcat"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "UDMEnZw1KvCYUSDpc6oRcn",
+    "name": "php",
+    "popularity": 0,
+    "description": "While designed for web development, the PHP scripting language also provides general-purpose use.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/6e8f9c4e-df5a-4832-803f-7949fc7e199c-php.png"
+    },
+    "providerCoordinate": {
+      "id": "9c2c5426-0cca-4a30-a450-b2961541c6dc",
+      "name": "php"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "UHgQj21kbqAe2dCP6f4MVz",
+    "name": "mongo-express",
+    "popularity": 0,
+    "description": "Web-based MongoDB admin interface, written with Node.js and express",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/f80f66d3-d812-48e5-8d6f-e248b25e3dce-mongo-express.png"
+    },
+    "providerCoordinate": {
+      "id": "e89a86ce-9988-4ee1-ada9-228925730018",
+      "name": "mongo-express"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "PTUieUKGSqjw6eS2yyqZ1m",
+    "name": "Datadog Agent",
+    "popularity": 0,
+    "description": "The Datadog Agent provides real-time performance tracking and visualization of your operating system and application metrics.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/534c744e-af56-4942-b298-871bcc3281a3-2423a0f6-deea-4e9e-8508-a177b8e047e0-ade3af2e-d54e-41ef-affd-f5c849c1128e-large.png"
+    },
+    "providerCoordinate": {
+      "id": "64bfe83d-4cbf-4c92-9012-3e1525170c0f",
+      "name": "Datadog Agent"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "CfRsGGHoPJcsYhvA529Kby",
+    "name": "drupal",
+    "popularity": 0,
+    "description": "Drupal is an open source content management platform powering millions of websites and applications.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/0e028fcb-e7b7-4f24-9362-bd98442c60cf-drupal.png"
+    },
+    "providerCoordinate": {
+      "id": "680b2b97-bc91-44fc-9437-73748b0a8f0a",
+      "name": "drupal"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "F8ZVx7JsMC3L3mixcGdxuZ",
+    "name": "jenkins",
+    "popularity": 0,
+    "description": "Official Jenkins Docker image",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/f5326186-8ae7-425c-a78d-7192dabf75be-jenkins.png"
+    },
+    "providerCoordinate": {
+      "id": "d55eda09-d7f0-47b0-8780-3407f2f9142c",
+      "name": "jenkins"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "3GsnCfTQo3thLWaAgDac76",
+    "name": "Weave Net",
+    "popularity": 0,
+    "description": "Simple, resilient multi-host Docker networking and more.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/5a3da579-43d8-45a4-a315-cc84147574f3weave-logo-512.png"
+    },
+    "providerCoordinate": {
+      "id": "d9be1173-f691-4f9e-a96a-32bce263053d",
+      "name": "Weave Net"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "XQLzChicLoDnbJCLGAxiFN",
+    "name": "Eclipse Che",
+    "popularity": 0,
+    "description": "Eclipse Che is a developer workspace server and cloud IDE.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/d9c23185-a4d0-4e26-b797-4cac782ddd9f-img-comm-highlights-eclipseche2x.png"
+    },
+    "providerCoordinate": {
+      "id": "b328d574-2053-4343-a2ce-0d483feebba1",
+      "name": "Eclipse Che"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "C9HAb9vpK8LSb911yEwy8i",
+    "name": "Docker Enterprise Edition for Windows Server 2016",
+    "popularity": 0,
+    "description": "Native Docker containers on Windows Server 2016",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/icons/docker-edition-microsoft-server6.png"
+    },
+    "providerCoordinate": {
+      "id": "docker-ee-server-windows",
+      "name": "Docker Enterprise Edition for Windows Server 2016"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "7DqRBwAcLLgtsEPwKWNaQv",
+    "name": "Buildkite Pty Ltd",
+    "popularity": 0,
+    "description": "The buildkite-agent is a small, reliable, and cross-platform build runner that makes it easy to run automated builds on your own infrastructure. It’s main responsibilities are polling buildkite.com for work, running build jobs, reporting back the status code and output log of the job, and uploading the job's artifacts.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/35838e15-999b-4317-82fb-972bbe894466-c676d5d9-a342-4a8d-aad2-f19c1023bb9c-50007ee8-6c1c-4afe-a181-e77b53f0e682-logo-large.png"
+    },
+    "providerCoordinate": {
+      "id": "71e0fb5e-d7f7-4bde-a942-a4b19fc5a501",
+      "name": "Buildkite Pty Ltd"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "XjVYHNYiDPnvVDJbFFFazm",
+    "name": "Semaphore CI",
+    "popularity": 0,
+    "description": "The power of on-premise continuous delivery with the convenience of a hosted, easy-to-use web UI.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/3b29cac7-5605-4743-8fdc-1987bc883d95-semaphore-gear-large.png"
+    },
+    "providerCoordinate": {
+      "id": "10b3d855-0235-4af7-b237-8b80ef829dc8",
+      "name": "Semaphore CI"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "FGVtvmnp18PniVabhZRT71",
+    "name": "piwik",
+    "popularity": 0,
+    "description": "Piwik is the leading open-source analytics platform that gives you more than powerful analytics.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/6736f825-539b-4a0d-9bff-613036fc75e5-piwik.png"
+    },
+    "providerCoordinate": {
+      "id": "40157634-cee7-462f-9927-27d734de3a28",
+      "name": "piwik"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "2Ma29A2kxquGouEpVFemoU",
+    "name": "docker",
+    "popularity": 0,
+    "description": "Docker in Docker!",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/75765bad-5683-40e7-b4cb-cdd4f7cc9b9e-docker.png"
+    },
+    "providerCoordinate": {
+      "id": "995677a1-1f6a-4e2e-929a-fde926abbd95",
+      "name": "docker"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "3cDo7f5AA3R9HHsDwHueQm",
+    "name": "eclipse-mosquitto",
+    "popularity": 0,
+    "description": "Eclipse Mosquitto is an open source message broker which implements MQTT version 3.1 and 3.1.1",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/eclipse-mosquitto.png"
+    },
+    "providerCoordinate": {
+      "id": "3555c958-681b-4cef-bf9d-537d3ce8795a",
+      "name": "eclipse-mosquitto"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "FDp1JdpxXK7oe3qcSbmxBv",
+    "name": "FullArmor HAPI File Share Mount",
+    "popularity": 0,
+    "description": "Fullarmor/hapi-fs allows users to securely authenticate and mount internal Active Directory file shares as a system volume using Active Directory credentials.",
+    "icon": {
+      "url": ""
+    },
+    "providerCoordinate": {
+      "id": "c5090212-f329-4e73-b169-3e4e4b25c1cb",
+      "name": "FullArmor HAPI File Share Mount"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "aZNS3S1FaePyjFxxXLCyU",
+    "name": "Gitlab Community Edition",
+    "popularity": 0,
+    "description": "GitLab includes Git repository management, issue tracking, code review, an IDE, activity streams, wikis, and more.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/27e1b264-71be-4027-963e-c8e8a35354d4-46d5159a-d96d-4cb2-99d4-1d9858eada6f-d4d94db2-2c90-427f-accc-f912061086e2-logo-large.png"
+    },
+    "providerCoordinate": {
+      "id": "252cc2ea-82ae-4a06-b6fb-c722bf645843",
+      "name": "Gitlab Community Edition"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "BTwCC88a74BvXDEdMuVR88",
+    "name": "REX-Ray for ScaleIO",
+    "popularity": 0,
+    "description": "A block volume plugin connecting your containers to a scalable and high performance software-based storage platform in your data center",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/19dbf96a-2048-4794-9727-1db4a12f32be99%20EMC_REX%20TX%20Solo.jpg"
+    },
+    "providerCoordinate": {
+      "id": "df27c8d0-ede6-4543-a29b-bf2c4ac8b7b2",
+      "name": "REX-Ray for ScaleIO"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "QS8YHjPxW95R8Rb6RKCyZV",
+    "name": "Docker Community Edition for Mac",
+    "popularity": 0,
+    "description": "The fastest and easiest way to get started with Docker on Mac",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/icons/docker-edition-apple6.png"
+    },
+    "providerCoordinate": {
+      "id": "docker-ce-desktop-mac",
+      "name": "Docker Community Edition for Mac"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "7TzszcH3zJQjtisKiLbPgA",
+    "name": "Docker Enterprise Edition for Oracle Linux",
+    "popularity": 0,
+    "description": "The best way to run Docker on Oracle Linux",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/icons/docker-edition-oraclelinux2.png"
+    },
+    "providerCoordinate": {
+      "id": "docker-ee-server-oraclelinux",
+      "name": "Docker Enterprise Edition for Oracle Linux"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "V54qTDJti5PF9EWEhZppbx",
+    "name": "registry",
+    "popularity": 0,
+    "description": "The Docker Registry 2.0 implementation for storing and distributing Docker images",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/644d2f15-c5db-4731-a353-ace6235841fa-registry.png"
+    },
+    "providerCoordinate": {
+      "id": "d93c7069-a612-4019-ade6-8c3b0a73acd9",
+      "name": "registry"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "CHPYFiWK1md5MMz4mWkWR8",
+    "name": "Sitescope",
+    "popularity": 0,
+    "description": "Agentless Application Performance Monitoring",
+    "icon": {
+      "url": "https://lh3.googleusercontent.com/XSwk97hmYUhlVcW4lTzxE6mol_cvmztFz7uXJBsS5oEjgz6R1Oc_z6NL_FTaN3UHLw0=w300"
+    },
+    "providerCoordinate": {
+      "id": "575e674d-148f-4dc5-936f-77fe838c1e29",
+      "name": "Sitescope"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "29rwrCVr2Gzkop3zuj3QBG",
+    "name": "opensuse",
+    "popularity": 0,
+    "description": "This project contains the stable releases of the openSUSE distribution.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/fb4a3d37-a732-4c87-9798-65667a1018f6-opensuse.png"
+    },
+    "providerCoordinate": {
+      "id": "99f9bd45-4c65-4e45-aa36-234e9150efc6",
+      "name": "opensuse"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "7dp9sAenfLQssemuEkPGZe",
+    "name": "nanoserver",
+    "popularity": 0,
+    "description": "Windows Server 2016 Nano Server base OS image for Windows containers",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/microsoft.png"
+    },
+    "providerCoordinate": {
+      "id": "2f0355ab-178e-4045-9ac3-3d7b7e967e65",
+      "name": "nanoserver"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "DRsVY7sq6gLF6NwoLt5new",
+    "name": "Scality S3 Server",
+    "popularity": 0,
+    "description": "Standalone AWS S3 protocol server that can be used for dev, testing and live deployments.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/d2421a3b-996b-440f-a106-cde42d40e1e9-32a75ba0-f4a9-4f85-bdcd-4dbaacac99a0-1e321c4b-039b-463b-9d8c-78cb91917355-logo-large.png"
+    },
+    "providerCoordinate": {
+      "id": "b9bdd26c-c871-42ea-8846-44998b1f1948",
+      "name": "Scality S3 Server"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "PW9XnAVBFs8aY4opypEsPf",
+    "name": "telegraf",
+    "popularity": 0,
+    "description": "Telegraf is an agent for collecting metrics and writing them to InfluxDB or other outputs.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/a466675f-20cc-458c-9383-94f284ef3d9d-telegraf.png"
+    },
+    "providerCoordinate": {
+      "id": "f031f47c-6f88-4c21-a31a-20be46809d37",
+      "name": "telegraf"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "JphNamEYgzkAt9HvDxrHfs",
+    "name": "golang",
+    "popularity": 0,
+    "description": "Go (golang) is a general purpose, higher-level, imperative programming language.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/81630ec2-d253-4eb2-b36c-eb54072cb8d6-golang.png"
+    },
+    "providerCoordinate": {
+      "id": "3e4f3e51-3930-4dd8-975c-517705d9d4e7",
+      "name": "golang"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "EiSkwu8xfAQAZBqsTZHrSE",
+    "name": "Splunk",
+    "popularity": 0,
+    "description": "Take an analytics-driven approach to container performance monitoring.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/53c3d8cd-d8bc-458d-b009-dc9b4dc46c1b-vicorl2u.png"
+    },
+    "providerCoordinate": {
+      "id": "0fa2ec9c-567b-4a18-b42a-fa616e36fe56",
+      "name": "Splunk"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "BAF7f3Tco3nYGdgCxU5DXc",
+    "name": "FileCloud",
+    "popularity": 0,
+    "description": "Self-hosted file sharing, sync and mobile access for businesses",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/555b9034-b8d8-482c-a2c4-b0a4473171df-c2d567f1-4e3f-4041-a049-e74868f5bb17-cda6805f-ec18-468f-93f2-2741499ed211-logo-large.png"
+    },
+    "providerCoordinate": {
+      "id": "aceb8b2c-4c63-4961-bfa2-84076631f138",
+      "name": "FileCloud"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "4ASEA7TVgrcXtQC9ARKNqN",
+    "name": "Blackfire",
+    "popularity": 0,
+    "description": "Blackfire empowers devs and ops to continuously check and improve their app’s performance throughout its lifecycle",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/f4dfe9e4-1ffb-44d5-b541-9d94ebe03c60blackfire-io_secondary_square.svg"
+    },
+    "providerCoordinate": {
+      "id": "ce79f546-7ffb-432f-a1aa-5db8aa8f860d",
+      "name": "Blackfire"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "6HoHTtKyjPmFbcRS3L6xqZ",
+    "name": "irssi",
+    "popularity": 0,
+    "description": "irssi - The IRC client of the future",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/87a3226c-d223-4d76-bbaa-ff35999a5d61-irssi.png"
+    },
+    "providerCoordinate": {
+      "id": "cb02bc13-349b-4aad-9b2e-6045c16d9c4c",
+      "name": "irssi"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Np5NqZ3YSY1sTS44sevU7D",
+    "name": "Codecov Enterprise",
+    "popularity": 0,
+    "description": "Code coverage done right.®",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/06f94fdb-5ab4-4f03-9d50-0a9a90fdbbdc-8226205"
+    },
+    "providerCoordinate": {
+      "id": "ba08bd82-f83c-42bd-be9d-68974637dea5",
+      "name": "Codecov Enterprise"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "BzEUEAq7dqBHCFV6Q1EUwE",
+    "name": "mongo",
+    "popularity": 0,
+    "description": "MongoDB document databases provide high availability and easy scalability.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/56777183-336b-4c18-8bb9-187f71df6ec0-mongo.png"
+    },
+    "providerCoordinate": {
+      "id": "9147d1b7-a686-4e38-8ecd-94a47f5da9cf",
+      "name": "mongo"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "PhNe2eXKgLekcDzrU5jLpd",
+    "name": "Docker Community Edition for AWS",
+    "popularity": 0,
+    "description": "A one click template to quickly deploy Docker on Amazon EC2",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/icons/docker-edition-aws6.png"
+    },
+    "providerCoordinate": {
+      "id": "docker-ce-aws",
+      "name": "Docker Community Edition for AWS"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "CAefgJUQPqvdP3MxYXPDwX",
+    "name": "Virtuozzo Storage",
+    "popularity": 0,
+    "description": "Container-friendly Storage for Production-ready Environments",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/f8586c37-7d66-4865-8b1e-b4349b055e90-vz-storage-log.png"
+    },
+    "providerCoordinate": {
+      "id": "1fff044a-901c-4fd4-a8d2-763c4cffc683",
+      "name": "Virtuozzo Storage"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "BCLMQraxZ2xyHGKK3gMaPs",
+    "name": "amazonlinux",
+    "popularity": 0,
+    "description": "Amazon Linux is an execution environment for running applications on Amazon EC2.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/0f948395-8b79-4788-a10c-cc5ffe1a559d-amazon.png"
+    },
+    "providerCoordinate": {
+      "id": "df10a484-7e75-47b4-b5a8-bb29260dc525",
+      "name": "amazonlinux"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Lmhna6jdfCSGh72WsFLHD7",
+    "name": "redmine",
+    "popularity": 0,
+    "description": "Redmine is a flexible project management web application written using Ruby on Rails framework",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/92de5ad2-abdf-4f93-928f-a29d422e36b1-redmine.png"
+    },
+    "providerCoordinate": {
+      "id": "dfd4330b-0b3a-479c-8bbc-8b4cad6235b8",
+      "name": "redmine"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "TTwXh4tLRUurdHG7jVaed6",
+    "name": "Fluid BPM",
+    "popularity": 0,
+    "description": "Fluid - Business Solution Platform. Workflow, Electronic Form, Content Storage, Integration and MUCH MORE!",
+    "icon": {
+      "url": "https://secure.gravatar.com/blavatar/5064ca17aa7d588dec2d92930dccda07?s=256&ts=1484023150"
+    },
+    "providerCoordinate": {
+      "id": "6bdc6446-c6ce-4d7b-b91f-143e317c5b60",
+      "name": "Fluid BPM"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "ERyMWYCqpwVmv3gAq7H3ry",
+    "name": "r-base",
+    "popularity": 0,
+    "description": "R is a system for statistical computation and graphics.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/87571b58-883f-427b-a52b-b2784a035c6a-r-base.png"
+    },
+    "providerCoordinate": {
+      "id": "f2e50720-cada-432f-85a5-1ade438d537b",
+      "name": "r-base"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "BLuYsfwDTb7asZ79WwQQfZ",
+    "name": "windowsservercore",
+    "popularity": 0,
+    "description": "Windows Server 2016 Server Core base OS image for Windows containers",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/microsoft.png"
+    },
+    "providerCoordinate": {
+      "id": "49a8bc05-c135-4f9e-b850-1703908c23bd",
+      "name": "windowsservercore"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "HsDpjYshVAicDjhoYnGMZm",
+    "name": "Oracle Database Enterprise Edition",
+    "popularity": 0,
+    "description": "Oracle Database 12c Enterprise Edition",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/5bcd5843-553f-4478-8673-a085b002f0c4O_Database_clr.png"
+    },
+    "providerCoordinate": {
+      "id": "146e0159-6c55-4ed3-9564-029a806c2834",
+      "name": "Oracle Database Enterprise Edition"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "wN3ykTrugotxrZbMNZtt4",
+    "name": "HPE Operations Bridge Agent",
+    "popularity": 0,
+    "description": "HPE Operations Bridge Agent",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/914277ab-481a-4f30-a220-256ddd41f8c2-monitoring-16.png"
+    },
+    "providerCoordinate": {
+      "id": "3bb3450b-2b23-4081-a8d0-0e4ff567ae17",
+      "name": "HPE Operations Bridge Agent"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Lbxgs1JhhA4XyWGhpAx2VL",
+    "name": "Dockbix - Zabbix agent",
+    "popularity": 0,
+    "description": "Dockbix Agent XXL - Zabbix Agent with Docker and OS Linux host monitoring support",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/33918be2-5683-4054-bc53-835999442785-11898393"
+    },
+    "providerCoordinate": {
+      "id": "d01b16a8-596b-4e30-8892-7cd64781ca98",
+      "name": "Dockbix - Zabbix agent"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "7FPugkU1KjsdCqFJcJu8bt",
+    "name": "fedora",
+    "popularity": 0,
+    "description": "Official Docker builds of Fedora",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/9dd6e1eb-07b5-4b36-951e-4c311d330013-fedora.png"
+    },
+    "providerCoordinate": {
+      "id": "a5648d34-aacd-4599-ab72-79662aa09df2",
+      "name": "fedora"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "F5YG36SYTkSwH4jjddhx8M",
+    "name": "elixir",
+    "popularity": 0,
+    "description": "Elixir is a dynamic, functional language for building scalable and maintainable applications.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/cb773227-1c2c-42a4-a527-12e6f827c1d2-elixir.png"
+    },
+    "providerCoordinate": {
+      "id": "4e418a43-2be9-44fd-8640-9dbb82c369a2",
+      "name": "elixir"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "XLDYmFTGYCGnHyyCq8d6NT",
+    "name": "Anaconda",
+    "popularity": 0,
+    "description": "Anaconda is the leading open data science platform powered by Python.\n",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/43643b61-f7dc-47cf-86be-7b447eb5aba2-827f418a-8743-497e-b678-1b99cfcb608c-47d14ed0-381d-441a-af74-2a1e187b9bbb-logo-large.png"
+    },
+    "providerCoordinate": {
+      "id": "1bfc5b71-0285-476b-a232-b51bd42d0a33",
+      "name": "Anaconda"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "3jvckev1sdu8MiNXcEEjvB",
+    "name": "backdrop",
+    "popularity": 0,
+    "description": "The comprehensive CMS for small to medium sized businesses and non-profits.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/550cff7c-5df4-4183-864f-3b379516398c-backdrop.png"
+    },
+    "providerCoordinate": {
+      "id": "aa66b4ed-fd75-4a87-87a7-c173c740a42f",
+      "name": "backdrop"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "SSESZKcnCiYu278XJoGr14",
+    "name": "FullArmor HAPI WebSSL",
+    "popularity": 0,
+    "description": "A sample web application using FullArmor HAPI",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/60614994-3bb7-4e96-8a09-24800af8a2c5-bcb73b19-b8be-41cb-abb6-614d1f82e26a-49506a81-4eb4-4c8f-b53d-0a6537287dbb-logo-large.png"
+    },
+    "providerCoordinate": {
+      "id": "2f2195c2-5a87-4caf-841e-a10c86622974",
+      "name": "FullArmor HAPI WebSSL"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "MT6oPJcpm3Atn34FAVqpMd",
+    "name": "Docker Community Edition for Azure",
+    "popularity": 0,
+    "description": "A one click template to quickly deploy Docker on Azure",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/icons/docker-edition-azure6.png"
+    },
+    "providerCoordinate": {
+      "id": "docker-ce-azure",
+      "name": "Docker Community Edition for Azure"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Q1JNnALSijfXGtig1Et4hu",
+    "name": "vault",
+    "popularity": 0,
+    "description": "Vault is a tool for securely accessing secrets via a unified interface and tight access control.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/vault.png"
+    },
+    "providerCoordinate": {
+      "id": "8413a709-e419-43f4-a72c-6bdaf32350fe",
+      "name": "vault"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "AehNi4ZBfYTtn6Ww391gM7",
+    "name": "bash",
+    "popularity": 0,
+    "description": "Bash is the GNU Project's Bourne Again SHell",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/bash.png"
+    },
+    "providerCoordinate": {
+      "id": "2560ebac-3524-43b2-a379-70e02acb6491",
+      "name": "bash"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "VpoWSnWgsmZq7EyEXEps3M",
+    "name": "solr",
+    "popularity": 0,
+    "description": "Solr is the popular, blazing-fast, open source enterprise search platform built on Apache Lucene™.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/eaa67506-b2ef-4452-a3bf-01c4e1761a6e-solr.png"
+    },
+    "providerCoordinate": {
+      "id": "f4e3929d-d8bc-491e-860c-310d3f40fff2",
+      "name": "solr"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "H8wakLwaJqPHdXo2KHYebc",
+    "name": "Docker Enterprise Edition for SUSE Linux Enterprise Server",
+    "popularity": 0,
+    "description": "The best way to run Docker on SUSE Linux Enterprise Server",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/icons/docker-edition-suse6.png"
+    },
+    "providerCoordinate": {
+      "id": "docker-ee-server-sles",
+      "name": "Docker Enterprise Edition for SUSE Linux Enterprise Server"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "7Vkz17kGrhsdP3U7fSkiXh",
+    "name": "eggdrop",
+    "popularity": 0,
+    "description": "The official Docker image of Eggdrop- IRC's oldest actively-developed bot!",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/eggdrop.png"
+    },
+    "providerCoordinate": {
+      "id": "d021fcec-5954-4506-b8d2-ee85760e281e",
+      "name": "eggdrop"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "KYrdcXewZp43qhTgBkDQxq",
+    "name": "NetScaler CPX Express Rel 11.1",
+    "popularity": 0,
+    "description": "Free, Full-featured, microservice aware, load balancer in a Docker container",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/ea62bcfc-d399-44f0-adc5-cdc34df70928-citrix-logo-circle-small.png"
+    },
+    "providerCoordinate": {
+      "id": "01919dbb-39af-4574-ba86-99ebac326eee",
+      "name": "NetScaler CPX Express Rel 11.1"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "EKcL8xCrQE7kvMeW5R3Ed",
+    "name": "nginx",
+    "popularity": 0,
+    "description": "Official build of Nginx.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/fa443219-42e0-4886-96b4-8733de694b72-c641a5d6-1ebf-44ee-9607-aef9b4ca1a3b-logo_large.png"
+    },
+    "providerCoordinate": {
+      "id": "37b1dde7-a3e7-463a-a0e3-d8be2b136292",
+      "name": "nginx"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "ETJVZANs3Wr26YrAySz6cP",
+    "name": "Oracle Java 8 SE (Server JRE)",
+    "popularity": 0,
+    "description": "Oracle Java 8 SE (Server JRE)",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/a1301081-c40e-489c-b9f1-f31273a5584f-java-logo.png"
+    },
+    "providerCoordinate": {
+      "id": "ff4eb64b-1dea-4d0b-9746-7346ddf9a843",
+      "name": "Oracle Java 8 SE (Server JRE)"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "UmqR9FNuqkTUHiKykuxhYo",
+    "name": "postgres",
+    "popularity": 0,
+    "description": "The PostgreSQL object-relational database system provides reliability and data integrity.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/a28dcd12-094d-4248-bfcc-f6fb954c7ab8-postgres.png"
+    },
+    "providerCoordinate": {
+      "id": "022689bf-dfd8-408f-9e1c-19acac32e57b",
+      "name": "postgres"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "VRH9od8xtKJRuAjHsbdik9",
+    "name": "maven",
+    "popularity": 0,
+    "description": "Apache Maven is a software project management and comprehension tool.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/b14d466e-356f-4b00-bc4e-af5e8284a1bd-maven.png"
+    },
+    "providerCoordinate": {
+      "id": "3e44be96-02cf-427e-bdbe-f108ec3be831",
+      "name": "maven"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "9DyJtDUzEyAkc5JgeBYmzH",
+    "name": "REX-Ray for AWS EFS",
+    "popularity": 0,
+    "description": "A file volume plugin connecting your containers to AWS EFS storage",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/2f345e57-c720-42d1-87a9-77cf3afaf6e399%20EMC_REX%20TX%20Solo.jpg"
+    },
+    "providerCoordinate": {
+      "id": "752aaf66-1df1-4089-a9e0-71a603b8d5e8",
+      "name": "REX-Ray for AWS EFS"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "FxZXC7MGiw5EuDRfK9YRCr",
+    "name": "clearlinux",
+    "popularity": 0,
+    "description": "Official docker build of Clear Linux OS for Intel Architecture",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/clearlinux.png"
+    },
+    "providerCoordinate": {
+      "id": "b4bd8357-3000-4996-a452-bcd8b13f4a34",
+      "name": "clearlinux"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "VEeDPyLURzmJSqNUFnzfRH",
+    "name": "Rocket.Chat",
+    "popularity": 0,
+    "description": "Rocket.Chat is the ultimate Free Open Source Solution for team communications.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/2ecc43f3-32d1-4a2c-a4c8-07985096e83f-b226cf22-5393-43b2-999d-51f3a03c9952-0dd7ed31-6f21-4137-89d3-49a207a2392c-logo-large.png"
+    },
+    "providerCoordinate": {
+      "id": "d5c684d0-9e82-410e-8147-19e8e5e074e8",
+      "name": "Rocket.Chat"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "HvgEPeqgth2E6kqgrexcag",
+    "name": "Docker Community Edition for CentOS",
+    "popularity": 0,
+    "description": "The best way to run Docker on CentOS",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/icons/docker-edition-centos6.png"
+    },
+    "providerCoordinate": {
+      "id": "docker-ce-server-centos",
+      "name": "Docker Community Edition for CentOS"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "TVxSkvJQhv5pt2GvCGaCH9",
+    "name": "ghost",
+    "popularity": 0,
+    "description": "Ghost is a free and open source blogging platform written in JavaScript",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/4b220cf1-eb6f-4843-8c95-c135e9d8dd7d-ghost.png"
+    },
+    "providerCoordinate": {
+      "id": "57aa97f1-9868-4936-906c-b83d78cfaf4f",
+      "name": "ghost"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "AjoGnXczScRdPRdLGQdhh8",
+    "name": "nextcloud",
+    "popularity": 0,
+    "description": "A safe home for all your data",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/nextcloud.png"
+    },
+    "providerCoordinate": {
+      "id": "f3b331c9-755d-4d32-8ddf-4b43328a4e18",
+      "name": "nextcloud"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "RX8YZTmUpRaTRzUunAr8Cm",
+    "name": "arangodb",
+    "popularity": 0,
+    "description": "ArangoDB - a distributed database with a flexible data model for documents, graphs, and key-values.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/079744b5-2546-47ea-ac53-7eb350c59e2e-arangodb.png"
+    },
+    "providerCoordinate": {
+      "id": "806abe10-8cee-451b-856b-57bcf0fdf6d0",
+      "name": "arangodb"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "GmprhqXzvhTTff8hMZhN34",
+    "name": "known",
+    "popularity": 0,
+    "description": "Blogging, meet social. Known is a social publishing platform.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/known.png"
+    },
+    "providerCoordinate": {
+      "id": "9abe9194-bca1-4ec2-bf1e-b0abad3a1ec4",
+      "name": "known"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "PNpPQzqPecpmCaeASxpMsH",
+    "name": "Bleemeo",
+    "popularity": 0,
+    "description": "Bleemeo is an easy to deploy Cloud based monitoring solution for DevOps Teams.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/efa6cf5d-137a-44d3-ad42-31e9aeb205d5-bleemeo-icon-512px.png"
+    },
+    "providerCoordinate": {
+      "id": "51936b31-42d5-4e08-ba00-ba7d88c7a8e7",
+      "name": "Bleemeo"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "StJYi3Xjgw85PKGQyHgqfr",
+    "name": "memcached",
+    "popularity": 0,
+    "description": "Free & open source, high-performance, distributed memory object caching system.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/de041504-0ddb-43f6-b89e-fe04403cca8d-memcached.png"
+    },
+    "providerCoordinate": {
+      "id": "deec12eb-5792-49d2-919e-0b861bb910cd",
+      "name": "memcached"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Nwrwxv8apyBaKJNj5n6D4y",
+    "name": "groovy",
+    "popularity": 0,
+    "description": "Apache Groovy is a multi-faceted language for the Java platform.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/groovy.png"
+    },
+    "providerCoordinate": {
+      "id": "c78955be-8694-44fc-a350-c4f08ae016cd",
+      "name": "groovy"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "8HPQYg8L2Ern7Kvf5Kcf1G",
+    "name": "Docker Enterprise Edition for Azure",
+    "popularity": 0,
+    "description": "A one click template to quickly deploy Docker on Microsoft Azure",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/icons/docker-edition-azure6.png"
+    },
+    "providerCoordinate": {
+      "id": "docker-ee-azure",
+      "name": "Docker Enterprise Edition for Azure"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "F64sVoBsK8Hp9GKCK8D6sA",
+    "name": "Cloudera Quickstart",
+    "popularity": 0,
+    "description": "Everything you need to quickly get hands-on with Cloudera’s data management and analytics platform built on Apache Hadoop.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/9895a91c-5e27-43d4-be5f-999c7269bc14-42f4c57a-85c0-4d07-89d6-b9cfca9ed13a-c0ebd3df-88d9-457b-8f4f-a16e4ca3f1e7-logo-large.png"
+    },
+    "providerCoordinate": {
+      "id": "9063198d-bfbe-4600-8c5d-efa27b6889fd",
+      "name": "Cloudera Quickstart"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "PooqS9uuazr3PgzuXJckjE",
+    "name": "sonarqube",
+    "popularity": 0,
+    "description": "SonarQube is an open source platform for continuous inspection of code quality.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/182edbf8-40a5-4bdb-804d-58c41995645c-sonarqube.png"
+    },
+    "providerCoordinate": {
+      "id": "3f8fc4ce-eb8e-40ad-88ba-69e97299c64f",
+      "name": "sonarqube"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "URWnVxi96QkHbeqV5k32ZR",
+    "name": "NexentaStor Docker NFS Volume Plug-In",
+    "popularity": 0,
+    "description": "NFS Storage Volume Plug-In for Nexenta’s Scale-Up Enterprise Grade Unified File & Block Solution",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/736fb73a-f6c4-4c5b-9327-9c538c8ce363Stor-NoStroke.png"
+    },
+    "providerCoordinate": {
+      "id": "56ac2a12-30ac-46cd-a331-ef7c2398561e",
+      "name": "NexentaStor Docker NFS Volume Plug-In"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "UPMTGfDRNySFe1Zb3SQigV",
+    "name": "rapidoid",
+    "popularity": 0,
+    "description": "Rapidoid is a high-performance HTTP server and modern Java web framework / application container.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/rapidoid.png"
+    },
+    "providerCoordinate": {
+      "id": "8fef65f3-7e12-422a-b999-d6f95829b826",
+      "name": "rapidoid"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "EhsnGERceDS8VUpppgJy2H",
+    "name": "chronograf",
+    "popularity": 0,
+    "description": "Chronograf is a visualization tool for time series data in InfluxDB.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/fb07f2e4-9168-4a12-a26d-dd421c876e02-chronograf.png"
+    },
+    "providerCoordinate": {
+      "id": "c3749997-031b-4ced-9f0b-cb4d15b6a6a1",
+      "name": "chronograf"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "2m4zrnGPU3yHPNVYHHnFwx",
+    "name": "xwiki",
+    "popularity": 0,
+    "description": "XWiki: The Advanced Open Source Enterprise Wiki.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/xwiki.png"
+    },
+    "providerCoordinate": {
+      "id": "79afb24d-0050-479f-a996-30cd75d4889b",
+      "name": "xwiki"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "N7z7K2C7LZvGrpH8oPwFUp",
+    "name": "debian",
+    "popularity": 0,
+    "description": "Debian is a Linux distribution that's composed entirely of free and open-source software.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/4a4d002e-a9a7-4bbe-b51d-9d780daf8f41-debian.png"
+    },
+    "providerCoordinate": {
+      "id": "40efd176-3c0a-4460-9f94-fc98ca92362f",
+      "name": "debian"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "LCjHQZLbnoYfjga4Zads32",
+    "name": "nuxeo",
+    "popularity": 0,
+    "description": "Nuxeo is an open source Content Management Platform that is completely customizable.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/e15a817d-793d-4c80-bab6-0f68afde4c65-nuxeo.png"
+    },
+    "providerCoordinate": {
+      "id": "139c1693-dc39-42cd-8104-cdf838504954",
+      "name": "nuxeo"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "9EWNqtP95MZeiEriU9yp1z",
+    "name": "vSphere Docker Volume Service",
+    "popularity": 0,
+    "description": "vSphere Docker Volume Service enables you to run stateful containerized applications on top of VMware vSphere.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/f4e5f22d-c8b0-43c8-8b8e-583bd885139aDockerStoreLogo.png"
+    },
+    "providerCoordinate": {
+      "id": "e15dc9d5-e20e-4fb8-8876-9615e6e6e852",
+      "name": "vSphere Docker Volume Service"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "5qDuSeLSpz3QS5i1bDcPmq",
+    "name": "hello-world",
+    "popularity": 0,
+    "description": "Hello World! (an example of minimal Dockerization)",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/5431a80b-9ab9-486c-906a-e3d4b5ccaa96-hello-world.png"
+    },
+    "providerCoordinate": {
+      "id": "f35b81c7-b96a-45d3-809d-99eef381e71f",
+      "name": "hello-world"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Q5AnfqdN7NvRmbS9TPTFho",
+    "name": "Docker Community Edition for Windows",
+    "popularity": 0,
+    "description": "The fastest and easiest way to get started with Docker on Windows PC",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/icons/docker-edition-windows6.png"
+    },
+    "providerCoordinate": {
+      "id": "docker-ce-desktop-windows",
+      "name": "Docker Community Edition for Windows"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "5RSjiLLmJDeVMtMJUMr176",
+    "name": "cassandra",
+    "popularity": 0,
+    "description": "Apache Cassandra is an open-source distributed storage system.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/7b4c1bb0-6912-43d4-898f-79d485173c55-cassandra.png"
+    },
+    "providerCoordinate": {
+      "id": "53ad54dd-9bd8-48cd-89b4-fc1d5fdfa6cc",
+      "name": "cassandra"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "62UZSkz5XxKxWaJ379QvQX",
+    "name": "node",
+    "popularity": 0,
+    "description": "Node.js is a JavaScript-based platform for server-side and networking applications.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/a8957077-bbcd-41cc-b6d0-2924a1492e99-node.png"
+    },
+    "providerCoordinate": {
+      "id": "e6658267-cc55-421e-b5be-5e69460fb0d1",
+      "name": "node"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "MMTFavjWJaYS5TSkQjFtdJ",
+    "name": "dotnet",
+    "popularity": 0,
+    "description": "Official images for .NET Core for Linux and Windows Server 2016 Nano Server",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/microsoft.png"
+    },
+    "providerCoordinate": {
+      "id": "6c038a68-be47-4d7e-bfd2-33a6fe75b9ac",
+      "name": "dotnet"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Cez2g1oS3a8dg7ghh1wut5",
+    "name": "NexentaEdge Docker NFS Volume Plug-In",
+    "popularity": 0,
+    "description": "NFS Storage Volume Plug-In for Nexenta’s Scale-Out High Performance Multi-Service Solution with Cluster-Wide Deduplication and Compression",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/349aaaa8-e85b-48a7-9d00-2e8601655505Edge-NoStroke_1.png"
+    },
+    "providerCoordinate": {
+      "id": "478975b6-eb2c-4576-b400-629dad65a6e7",
+      "name": "NexentaEdge Docker NFS Volume Plug-In"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "8ovZcC9yBewnjFpJubCQbS",
+    "name": "erlang",
+    "popularity": 0,
+    "description": "Erlang is a programming language used to build massively scalable systems with high availability.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/9be08467-a890-460f-8a96-4b098a368fb7-erlang.png"
+    },
+    "providerCoordinate": {
+      "id": "06fabd5a-6420-4209-a756-3d3355b3c672",
+      "name": "erlang"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "JEyT4sWaMgGMjK8jbHb5F4",
+    "name": "Docker Enterprise Edition for Ubuntu",
+    "popularity": 0,
+    "description": "The best way to run Docker on Ubuntu",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/icons/docker-edition-ubuntu6.png"
+    },
+    "providerCoordinate": {
+      "id": "docker-ee-server-ubuntu",
+      "name": "Docker Enterprise Edition for Ubuntu"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "2gt2PJaFrHxAoEJ7mJGVWw",
+    "name": "photon",
+    "popularity": 0,
+    "description": "Photon OS is a technology preview of a minimal Linux container host.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/61cc9636-1177-4404-bba7-a95667e09a08-photon.png"
+    },
+    "providerCoordinate": {
+      "id": "45053cf9-0044-46cc-9748-d6d01a548dd3",
+      "name": "photon"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Pt9NfVPAa8XQGkS8fsinvb",
+    "name": "convertigo",
+    "popularity": 0,
+    "description": "Convertigo is an open source MBaaS/MADP platform for mobile application development and back-end.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/convertigo.png"
+    },
+    "providerCoordinate": {
+      "id": "e89f7a8a-5905-470c-a77e-244ed495419d",
+      "name": "convertigo"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "QBAsxUQGZJkCY1K25y2ify",
+    "name": "httpd",
+    "popularity": 0,
+    "description": "The Apache HTTP Server Project",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/b078c572-d43d-46e0-9fa2-8e2d31cb5ce2-httpd.png"
+    },
+    "providerCoordinate": {
+      "id": "3574ef8c-86e4-40ed-a705-3a52d9786bde",
+      "name": "httpd"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "YGXwvkW1bohhJWo2VHJJyR",
+    "name": "REX-Ray for AWS EBS",
+    "popularity": 0,
+    "description": "A block volume plugin connecting your containers in AWS EC2 to the EBS storage service",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/f55bfa06-b38c-4779-b326-a99e60716d3399%20EMC_REX%20TX%20Solo.jpg"
+    },
+    "providerCoordinate": {
+      "id": "ac5bd1a6-4029-4983-b458-2f7f936954c8",
+      "name": "REX-Ray for AWS EBS"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Qfp4r65XfrNp6qcLgNB8GQ",
+    "name": "nats",
+    "popularity": 0,
+    "description": "NATS is an open-source, high-performance, cloud native messaging system.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/eba063d9-5a8f-42ed-9807-82d73acccb04-51d1b7a6-60cf-4a57-927a-fdfc3dfaab2f-4cf04214-ad47-4f54-ad62-99cf271a82b3-logo-large.png"
+    },
+    "providerCoordinate": {
+      "id": "7394b2be-8548-47d0-ab09-e9393cec4dfb",
+      "name": "nats"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "VjhT9jnxDMyyBpGoP9QaFr",
+    "name": "Docker Docs",
+    "popularity": 0,
+    "description": "The official repo for images of Docker's documentation",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/e5c9e246-cb5f-4867-85a5-e7910675db60-v9mhfbd.png"
+    },
+    "providerCoordinate": {
+      "id": "2da460df-efc6-4e3c-8bb9-52c8ef5df75f",
+      "name": "Docker Docs"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Uf5X9MNirhv2278mSAJ1Af",
+    "name": "consul",
+    "popularity": 0,
+    "description": "Consul is a datacenter runtime that provides service discovery, configuration, and orchestration.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/consul.svg"
+    },
+    "providerCoordinate": {
+      "id": "fec1f6b9-0a26-49b7-990b-d001a3496cc6",
+      "name": "consul"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "8SyDUDitzVptL87Hk9TjHR",
+    "name": "Pure Storage Docker Volume Plugin",
+    "popularity": 0,
+    "description": "Docker Volume Plugin for Pure Storage",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/b49cd4a1-e198-4ea3-82f7-c2eb526074b5-pslogo.jpg"
+    },
+    "providerCoordinate": {
+      "id": "d6938bd2-26ae-4567-bf80-e31cdf914694",
+      "name": "Pure Storage Docker Volume Plugin"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "CV6ZLWRtXnRssWCMJmNTzG",
+    "name": "Blockbridge Volume Plugin",
+    "popularity": 0,
+    "description": "The Blockbridge Volume Plugin provides access to high-performance storage with advanced security, mobility, backup and restore capabilities.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/e0b5b75b-dab4-4f40-b2d0-56fedda0ffc4bb-real-container-512x512.png"
+    },
+    "providerCoordinate": {
+      "id": "4b1002a8-8d21-4c7d-b38b-49f1ac818783",
+      "name": "Blockbridge Volume Plugin"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "RXMCctNWmqZwnVkxQupZnm",
+    "name": "mariadb",
+    "popularity": 0,
+    "description": "MariaDB is a community-developed fork of MySQL intended to remain free under the GNU GPL.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/d8cef0f8-8a8f-4d8f-8efb-e6d40560fc82-mariadb.png"
+    },
+    "providerCoordinate": {
+      "id": "1712cb54-62e1-405b-a973-1492552c9bb9",
+      "name": "mariadb"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "GGjgXfcZJqe8k64xAEeFkA",
+    "name": "iis",
+    "popularity": 0,
+    "description": "Internet Information Services (IIS) installed in a Windows Server Core based container",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/microsoft.png"
+    },
+    "providerCoordinate": {
+      "id": "a29239fc-8f25-48bb-b04f-f33fb5d49922",
+      "name": "iis"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "CvoDKLRaKGT4dpAqB61SRX",
+    "name": "celery",
+    "popularity": 0,
+    "description": "Celery is an open source asynchronous task queue/job queue based on distributed message passing.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/b0b66785-c2db-4cf4-94b0-de0240633060-celery.png"
+    },
+    "providerCoordinate": {
+      "id": "4a239159-e3cf-42b1-b16f-6a9a8555285f",
+      "name": "celery"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "RuPFBagGCGf2UgZwJvdWPi",
+    "name": "streams",
+    "popularity": 0,
+    "description": "Realtime Streaming with Elasticsearch",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/37b77226-8f53-4bff-9298-aa6352a1744cDeveloperPage_Appbase-37.png"
+    },
+    "providerCoordinate": {
+      "id": "5bfa2e5f-f70c-4d34-bff5-076c43801bc3",
+      "name": "streams"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "X7A2X8LXTr5qVe6k1HxehN",
+    "name": "thrift",
+    "popularity": 0,
+    "description": "Thrift is a framework for generating client and services from an IDL.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/96b2a262-f368-44b5-ad28-702f6d6e90de-thrift.png"
+    },
+    "providerCoordinate": {
+      "id": "579aa075-9d28-4ae5-9966-357b96f70550",
+      "name": "thrift"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "8qDQhUpK29zt3jXqMDMSaE",
+    "name": "kapacitor",
+    "popularity": 0,
+    "description": "Kapacitor is an open source framework for processing, monitoring, and alerting on time series data.",
+    "icon": {
+      "url": "https://hub.docker.com/public/images/official/kapacitor.png"
+    },
+    "providerCoordinate": {
+      "id": "f310b81d-5c23-4936-880d-027ffe296557",
+      "name": "kapacitor"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "NbF75L81KTrea8j25rzweJ",
+    "name": "openjdk",
+    "popularity": 0,
+    "description": "OpenJDK is an open-source implementation of the Java Platform, Standard Edition",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/openjdk2.png"
+    },
+    "providerCoordinate": {
+      "id": "78424556-6847-4348-9168-721eee59369a",
+      "name": "openjdk"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Eh9iNGi6aLc4UFzoNDBNsT",
+    "name": "BlobCity DB",
+    "popularity": 0,
+    "description": "A real-time analytics database",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/5f83243a-c062-403a-85bb-69f5610e0e40-blobcity-logo-bg-white.png"
+    },
+    "providerCoordinate": {
+      "id": "2d63d1f7-f09d-4a3f-8e54-bfe829903c65",
+      "name": "BlobCity DB"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Pn5LWnHgszvCFCV3RhUbC6",
+    "name": "NetApp Docker Volume Plugin (nDVP)",
+    "popularity": 0,
+    "description": "Data has mass, but you can defy gravity with agile persistence from your NetApp platforms using this volume plugin",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/8d54553c-7f4a-4f70-bd0f-0086ea7db9c1na_logo_vrt_2c_rgb_lrg.png"
+    },
+    "providerCoordinate": {
+      "id": "f00abfba-533f-42c2-bfdf-58015fe504b7",
+      "name": "NetApp Docker Volume Plugin (nDVP)"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Gv3tvGouTs3H3SkzuPySss",
+    "name": "haproxy",
+    "popularity": 0,
+    "description": "HAProxy - The Reliable, High Performance TCP/HTTP Load Balancer",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/74753c28-31a5-46fa-88c1-5336bdb2e989-haproxy.png"
+    },
+    "providerCoordinate": {
+      "id": "85c386ff-85a7-4d61-b309-5901f625c36f",
+      "name": "haproxy"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "NUEkA4Waq56cP2Gz9GyuGf",
+    "name": "zookeeper",
+    "popularity": 0,
+    "description": "Apache ZooKeeper is an open-source server which enables highly reliable distributed coordination.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/zookeeper.png"
+    },
+    "providerCoordinate": {
+      "id": "15be0d63-c738-47e1-9cc7-d73d0977734b",
+      "name": "zookeeper"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "HEH98iD6jL1iRBpuRmKgVT",
+    "name": "sourcemage",
+    "popularity": 0,
+    "description": "Source Mage is a source-based GNU/Linux distribution with maximum flexibility in customization.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/a29196d1-a6c6-46d6-b1f2-2c36c0f158fb-sourcemage.png"
+    },
+    "providerCoordinate": {
+      "id": "983e7005-65f1-4ff0-833e-a2edce972d88",
+      "name": "sourcemage"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "5xYxFf4tUbULchtTsSkaXX",
+    "name": "Docker Enterprise Edition for Red Hat Enterprise Linux",
+    "popularity": 0,
+    "description": "The best way to run Docker on Red Hat Enterprise Linux",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/icons/docker-edition-redhat2.png"
+    },
+    "providerCoordinate": {
+      "id": "docker-ee-server-rhel",
+      "name": "Docker Enterprise Edition for Red Hat Enterprise Linux"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "GCuUMagzFobe9rATMo12Z1",
+    "name": "Nutanix DVP (Docker Volume Plug-in)",
+    "popularity": 0,
+    "description": "Nutanix Container Volume Plug-in enables Docker Containers to use storage persistently",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/ntnx-logo.png"
+    },
+    "providerCoordinate": {
+      "id": "b0cd9eca-edca-4024-8c98-f2bd6500ae54",
+      "name": "Nutanix DVP (Docker Volume Plug-in)"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "RxFKwzfGFKnPq29ExLxkVp",
+    "name": "centos",
+    "popularity": 0,
+    "description": "The official build of CentOS.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/4fae2c05-6d9d-422a-a317-f501cd0ffd3c-centos.png"
+    },
+    "providerCoordinate": {
+      "id": "d5052416-4069-4619-8597-ba61df35ba6f",
+      "name": "centos"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "UuwDoXpzVCJTSa2aGCYUYF",
+    "name": "odoo",
+    "popularity": 0,
+    "description": "Odoo (formerly known as OpenERP) is a suite of open-source business apps.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/b73cfa1a-20c0-45a8-98fc-9f5e8ddfb4cb-odoo.png"
+    },
+    "providerCoordinate": {
+      "id": "f351cb39-4574-44e7-afa6-b3cc87390041",
+      "name": "odoo"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "H5XoVW3YxvZg8Vw2Mem7Rd",
+    "name": "haxe",
+    "popularity": 0,
+    "description": "Haxe is a modern, high level, static typed programming language with multiple compilation targets.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/haxe.png"
+    },
+    "providerCoordinate": {
+      "id": "38b75191-48d0-48ff-a150-0664065c5dff",
+      "name": "haxe"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "QrMFaVfFxrcVxU1mJhLbJT",
+    "name": "perl",
+    "popularity": 0,
+    "description": "Perl is a high-level, general-purpose, interpreted, dynamic programming language.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/a340274a-760a-4dd3-b7a6-1a8299d9388c-perl.png"
+    },
+    "providerCoordinate": {
+      "id": "5241d150-6793-4ca8-a392-51098722f672",
+      "name": "perl"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "JZotgZWB9BNggjiAQqCWrf",
+    "name": "Dynatrace",
+    "popularity": 0,
+    "description": "Monitoring dockerized applications and Docker clusters out of the box",
+    "icon": {
+      "url": "https://d3fzhvprqmsab7.cloudfront.net/wp-content/uploads/2016/10/Signet_Logo_RGB_CP_512x512px.png"
+    },
+    "providerCoordinate": {
+      "id": "48612c24-542e-4f7c-87a8-2780a192880f",
+      "name": "Dynatrace"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "2DCgfiFprsmNpm5zv4knnJ",
+    "name": "mysql",
+    "popularity": 0,
+    "description": "MySQL is a widely used, open-source relational database management system (RDBMS).",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/0dd7193f-e747-4a15-b797-818b9fac3656-mysql.png"
+    },
+    "providerCoordinate": {
+      "id": "3083290a-203f-4c04-b2de-cc057959d2c9",
+      "name": "mysql"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Nnx8cdGBT2t9FDXH2HymC9",
+    "name": "fsharp",
+    "popularity": 0,
+    "description": "F# is a multi-paradigm language encompassing functional, imperative, and object-oriented styles",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/fsharp.png"
+    },
+    "providerCoordinate": {
+      "id": "de6120d2-4d9b-4bfc-ad12-ba6e9ebdde7e",
+      "name": "fsharp"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Tk47nYaaMLDmg7umz1EyEo",
+    "name": "orientdb",
+    "popularity": 0,
+    "description": "OrientDB a Multi-Model Open Source NoSQL DBMS that combines graphs and documents.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/415b9a71-2317-40ca-a410-ef0715caccc2-orientdb.png"
+    },
+    "providerCoordinate": {
+      "id": "7a741b7c-b96a-44ce-b64d-d0b59e6a7803",
+      "name": "orientdb"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "MvEw7hX5QZQcsNa6cnG72S",
+    "name": "Contiv Network Plugin",
+    "popularity": 0,
+    "description": "The Most Powerful  Open Source Container Networking",
+    "icon": {
+      "url": "http://contiv.github.io/assets/images/logo3-a96fcb82.png"
+    },
+    "providerCoordinate": {
+      "id": "803eecee-0780-401a-a454-e9523ccf86b3",
+      "name": "Contiv Network Plugin"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "CLGW8KeAqb5HtioLd8UJw4",
+    "name": "Docker Enterprise Edition for CentOS",
+    "popularity": 0,
+    "description": "The best way to run Docker on CentOS",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/icons/docker-edition-centos6.png"
+    },
+    "providerCoordinate": {
+      "id": "docker-ee-server-centos",
+      "name": "Docker Enterprise Edition for CentOS"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "M4H6Ls27yPZaTGSbbssZhA",
+    "name": "alpine",
+    "popularity": 0,
+    "description": "A minimal Docker image based on Alpine Linux with a complete package index and only 5 MB in size!",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/2ebdc784-9c22-4b27-adb7-b56079682762-alpine.png"
+    },
+    "providerCoordinate": {
+      "id": "e7e5dbc4-2103-4b7c-9409-b0ca32ce3d83",
+      "name": "alpine"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "MtTrwCA8g1XTyq4GLiCJF7",
+    "name": "storm",
+    "popularity": 0,
+    "description": "Apache Storm is a free and open source distributed realtime computation system.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/storm.png"
+    },
+    "providerCoordinate": {
+      "id": "54237702-1584-4b5e-8e9e-b7644e787cc6",
+      "name": "storm"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "35P89dsghh94ZVvXRUNdTz",
+    "name": "python",
+    "popularity": 0,
+    "description": "Python is an interpreted, interactive, object-oriented, open-source programming language.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/6bd224a8-e827-4593-b5b4-483338e9999e-python.png"
+    },
+    "providerCoordinate": {
+      "id": "1ae86987-df14-4741-9433-d9602a4da995",
+      "name": "python"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "H15LCVNSdt8nFm4t33XxCG",
+    "name": "F5 Application Services Proxy",
+    "popularity": 0,
+    "description": "The F5 Application Services Proxy (ASP) is an application delivery controller (ADC) for container environments.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/d3a48cbb-9abc-41d4-9ada-2579e7d3e2d5-apple-touch-icon.png"
+    },
+    "providerCoordinate": {
+      "id": "b51d1a98-d062-487a-a6ae-ce0667c010b5",
+      "name": "F5 Application Services Proxy"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "BsiynLkieSTvK7pz3G3nJZ",
+    "name": "Hedvig Docker Volume Plugin",
+    "popularity": 0,
+    "description": "Software-Defined Storage for Containers",
+    "icon": {
+      "url": "http://www.hedviginc.com/hubfs/Website_Pictures/hedvig-logo-tall3.png"
+    },
+    "providerCoordinate": {
+      "id": "43f148d5-03f5-4f8c-b585-89ccffdf324e",
+      "name": "Hedvig Docker Volume Plugin"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "6nmTSH4SjZjsFVrKTEYkDL",
+    "name": "clojure",
+    "popularity": 0,
+    "description": "Clojure is a dialect of Lisp that runs on the JVM.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/7db3bbd6-5bc5-40a8-8104-03818a8d37f5-clojure.png"
+    },
+    "providerCoordinate": {
+      "id": "800b3c7e-3b83-4af5-ab84-b57086887339",
+      "name": "clojure"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "2Dg4UvMNJf56aFZ8aRoN9d",
+    "name": "jetty",
+    "popularity": 0,
+    "description": "Jetty provides a Web server and javax.servlet container.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/54a932ad-6239-475a-a967-1a817a7318b6-jetty.png"
+    },
+    "providerCoordinate": {
+      "id": "d88c12a5-0ca7-4358-aef0-c759b0e5290a",
+      "name": "jetty"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "GfgtzJJKSns2YXA44gCAAW",
+    "name": "joomla",
+    "popularity": 0,
+    "description": "Joomla! is an open source content management system.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/72fef364-fef8-468e-8427-4f76c9d3cb4e-joomla.png"
+    },
+    "providerCoordinate": {
+      "id": "e17a7172-1f32-4191-83ba-606f354cce16",
+      "name": "joomla"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "W53BPYVm1zAwnzYjV9T5YX",
+    "name": "buildpack-deps",
+    "popularity": 0,
+    "description": "A collection of common build dependencies used for installing various modules, e.g., gems.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/adaa4ee6-2f85-4264-aa4f-730f5a31baaa-buildpack-deps.png"
+    },
+    "providerCoordinate": {
+      "id": "9e56c286-5b40-4838-89fe-fd513c9c3bd6",
+      "name": "buildpack-deps"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "BaE5NhVsPSyH7wj8bkZztC",
+    "name": "gcc",
+    "popularity": 0,
+    "description": "The GNU Compiler Collection is a compiling system that supports several languages.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/faba6167-f278-45a1-8ca0-cd141c02ea32-gcc.png"
+    },
+    "providerCoordinate": {
+      "id": "06ad851d-f666-47d3-9ef3-e90535c141ec",
+      "name": "gcc"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "RkEEsj1uSZdGKNnztdApJ",
+    "name": "InfluxDB",
+    "popularity": 0,
+    "description": "InfluxDB is an open source time-series database built from the ground up to handle high write and query loads.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/a5ad0963-a6ed-4631-b783-b6666a7ce017-square-influxdb.jpg"
+    },
+    "providerCoordinate": {
+      "id": "b73317a3-8fd9-44f4-8348-0f9a1988598b",
+      "name": "InfluxDB"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "T14kTAMZmFsUiu7KkGV9E5",
+    "name": "ubuntu",
+    "popularity": 0,
+    "description": "Ubuntu is a Debian-based Linux operating system based on free software.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/2ee79de2-ebfe-4b84-8eae-3c302a275b88-ubuntu.png"
+    },
+    "providerCoordinate": {
+      "id": "414e13de-f1ba-40d0-9867-08f2e5884b3f",
+      "name": "ubuntu"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "5fDtv6NYZsqsnKmv7BrVtN",
+    "name": "busybox",
+    "popularity": 0,
+    "description": "Busybox base image.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/9e7c9993-b0d0-4f24-a12a-1fb7ef7638f0-busybox.png"
+    },
+    "providerCoordinate": {
+      "id": "061eb9c1-aeec-4ec8-8c4b-ba30ae1d5b47",
+      "name": "busybox"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "A8q1nQNyKBxSzfWziV4k1d",
+    "name": "neo4j",
+    "popularity": 0,
+    "description": "Neo4j is a highly scalable, robust native graph database.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/2cd4f81a-e285-4ede-9d9f-99c2349bdd4b-neo4j.png"
+    },
+    "providerCoordinate": {
+      "id": "5f0be9a7-f5d7-4974-9c0e-78c33484e79c",
+      "name": "neo4j"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "SYKd2mkUdyw9p1hNysWv6J",
+    "name": "MemSQL",
+    "popularity": 0,
+    "description": "Docker image for testing MemSQL + MemSQL Ops (cluster-in-a-box).",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/bd006d1e-6430-47ac-9206-bacbd5e8199e-da0b825d-67fa-4ce5-9ba7-bb8a315df240-43aba419-3bbc-4bfd-a4f9-fc17aaa7119b-logo-large.png"
+    },
+    "providerCoordinate": {
+      "id": "c596f4d0-f09f-4ee6-b1bf-af44ea472e2a",
+      "name": "MemSQL"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Dk1D8c2gpnkpC42pWtV4Ya",
+    "name": "silverpeas",
+    "popularity": 0,
+    "description": "Silverpeas is a turnkey and open-source Collaborative and Social-Networking Portal.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/silverpeas.png"
+    },
+    "providerCoordinate": {
+      "id": "5c15261e-234f-48dd-9666-91016e42810d",
+      "name": "silverpeas"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "FVDWWRYtYzM4766C7j4Crg",
+    "name": "swarm",
+    "popularity": 0,
+    "description": "Swarm: a Docker-native clustering system.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/3a29d766-ea80-400c-b981-7f6c02d36fd8-swarm.png"
+    },
+    "providerCoordinate": {
+      "id": "8ea4fd22-82ac-4ec8-b89d-018cb0944d72",
+      "name": "swarm"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "HPnH6d2jnybPwsq2mAAY7N",
+    "name": "jruby",
+    "popularity": 0,
+    "description": "JRuby (http://www.jruby.org) is an implementation of Ruby (http://www.ruby-lang.org) on the JVM.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/e724338f-518a-4a07-bf45-56deff98c2ab-jruby.png"
+    },
+    "providerCoordinate": {
+      "id": "c90a0b81-88c5-437a-87b2-38c9a398451e",
+      "name": "jruby"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "sPE38TYUG9292oQ1VMnxh",
+    "name": "pypy",
+    "popularity": 0,
+    "description": "PyPy is a fast, compliant alternative implementation of the Python language.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/1d2ebdfc-9d47-472d-b8b5-91db0ec78297-pypy.png"
+    },
+    "providerCoordinate": {
+      "id": "91db8014-64b0-4417-9429-e8128e04191c",
+      "name": "pypy"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "3PRvz2iYN58oyRyjm67aR5",
+    "name": "swift",
+    "popularity": 0,
+    "description": "Swift is a general-purpose programming language using a modern approach to safety and performance.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/swift.png"
+    },
+    "providerCoordinate": {
+      "id": "28e0bfc0-5d7c-4670-9bd6-6492e8b67901",
+      "name": "swift"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "GiN79bE4eGFALkwdMeh4Tw",
+    "name": "traefik",
+    "popularity": 0,
+    "description": "Træfɪk, a modern reverse proxy",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/fc7881bf-43a8-45dc-b3da-c4c4a8f29494-traefik.png"
+    },
+    "providerCoordinate": {
+      "id": "0319de97-4b7f-4a74-a260-5d027ec8cee0",
+      "name": "traefik"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "aUpCKJrTYDkR9kHJpLvUC",
+    "name": "Oracle WebLogic Server",
+    "popularity": 0,
+    "description": "Oracle WebLogic Server",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/3b9f1b0b-2f9c-4d6a-ab5b-6a7c8b8bacc8O_FM_WebLogicServer_clr.png"
+    },
+    "providerCoordinate": {
+      "id": "b00e4eff-830c-4322-89c3-94e3d71fc28e",
+      "name": "Oracle WebLogic Server"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "KvVuhgZ5fNqCs7g2KM3bUh",
+    "name": "rakudo-star",
+    "popularity": 0,
+    "description": "Rakudo Perl 6, or simply Rakudo, is a compiler for the Perl 6 programming language.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/242b4b1f-cafe-4a72-aee1-8e91b15d31f1-rakudo-star.png"
+    },
+    "providerCoordinate": {
+      "id": "2a6a7106-f60e-495a-b085-e0496e23b72e",
+      "name": "rakudo-star"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "6wiiTY22RUgd9s1jcB66Tp",
+    "name": "Weave Cloud Agent",
+    "popularity": 0,
+    "description": "Weave Cloud is a fast and simple way to visualize, manage and monitor Docker containers, enabling developers to focus on writing code.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/52c94534-ded8-4768-93f7-a6312c0d4cc3-weave-logo-512.png"
+    },
+    "providerCoordinate": {
+      "id": "f18f278a-54c1-4f25-b252-6e11112776c5",
+      "name": "Weave Cloud Agent"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "9crcHUxFFBhP49UbDbJwxT",
+    "name": "Sentry",
+    "popularity": 0,
+    "description": "Sentry’s real-time error tracking gives you insight into production deployments and information to reproduce and fix crashes—before your users contact you.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/e44508c2-fb59-4d75-97d3-5037ba51f4c1-c194f95f-ea31-4cd7-ad87-6318d5a2de08-a539ba64-646e-4342-adbc-d06654064e02-logo-large.png"
+    },
+    "providerCoordinate": {
+      "id": "788f45b7-2701-4244-90e4-3f85aef116d8",
+      "name": "Sentry"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "YA18Yy6D4LP2uNdRtcjVuS",
+    "name": "Neo4j Community",
+    "popularity": 0,
+    "description": "Neo4j is a highly scalable, robust, native graph database. It is used in mission-critical apps by thousands of leading startups, enterprises, and governments around the world. \n",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/664e2fd3-8d96-411b-8d3b-5c9df8c163cf1063bc5b-59f3-4cb1-b666-59854f1359c4-10142e10-af7b-425e-b216-7965d1cf041f-logo_large.png"
+    },
+    "providerCoordinate": {
+      "id": "ca48a48f-7664-405d-a8ff-02464ffd756e",
+      "name": "Neo4j Community"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "UHydCx7hia6iDiz8uKc9eT",
+    "name": "wordpress",
+    "popularity": 0,
+    "description": "The WordPress rich content management system can utilize plugins, widgets, and themes.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/fcbd05b8-ec7e-4191-80f6-dae8ec3d9d25-wordpress.png"
+    },
+    "providerCoordinate": {
+      "id": "c14a56d6-07e4-464b-b71c-4b24dc7f1836",
+      "name": "wordpress"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "7oQwh5uj51uCi2up3Sf1FE",
+    "name": "aspnet",
+    "popularity": 0,
+    "description": "ASP.NET is an open source server-side Web application framework",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/microsoft.png"
+    },
+    "providerCoordinate": {
+      "id": "6202036d-f3b1-45cd-b2c6-b4ed882fdf93",
+      "name": "aspnet"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "TCEVzqHebasnA26MfSrRGn",
+    "name": "adminer",
+    "popularity": 0,
+    "description": "Database management in a single PHP file.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/adminer.png"
+    },
+    "providerCoordinate": {
+      "id": "891be30a-6955-4790-ab9e-93e2863a76d9",
+      "name": "adminer"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "6geLTri92WkbweJ1NfpVSf",
+    "name": "Puppet Agent Ubuntu",
+    "popularity": 0,
+    "description": "Puppet is a server automation framework that can be used to manage the configuration of your infrastructure.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/7a731459-932a-48c4-90be-5ed1a866a494-puppet-icon.png"
+    },
+    "providerCoordinate": {
+      "id": "76cafd34-0355-49fd-8f73-0b8004986aca",
+      "name": "Puppet Agent Ubuntu"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "RNMSPoSKkYh7ptCgCjhhDG",
+    "name": "REX-Ray for GCE Persistent Disks",
+    "popularity": 0,
+    "description": "A block volume plugin connecting your containers to GCE's Persistent Disks",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/0826c5c8-dc99-4769-9a4c-f5e7936952f299%20EMC_REX%20TX%20Solo.jpg"
+    },
+    "providerCoordinate": {
+      "id": "90486418-f4d6-498b-a71f-57bb5c8672eb",
+      "name": "REX-Ray for GCE Persistent Disks"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "2SiKrew1fArU1br69h7219",
+    "name": "couchdb",
+    "popularity": 0,
+    "description": "CouchDB is a database that uses JSON for documents, JavaScript for MapReduce and HTTP for its API.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/4b3c9393-d8cb-4ef7-ab22-35d625b7b1ed-couchdb.png"
+    },
+    "providerCoordinate": {
+      "id": "263ad544-d7c7-4892-8244-fe78b6231265",
+      "name": "couchdb"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "UU23NmuXnGeMR86VUwNvDm",
+    "name": "Kaazing Enterprise Gateway",
+    "popularity": 0,
+    "description": "A high performance, scalable, secure robust real-time platform for reactive event-driven web and mobile applications",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/d3aa9d8d-5758-40a5-bf54-00c0fc0f9fea-kaazing-square-2color.png"
+    },
+    "providerCoordinate": {
+      "id": "d9f28e78-325f-4cd1-9a1a-e0360ce06d80",
+      "name": "Kaazing Enterprise Gateway"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "UzXfmeWhFYJTeWaK8F6NhS",
+    "name": "znc",
+    "popularity": 0,
+    "description": "ZNC - An advanced IRC bouncer",
+    "icon": {},
+    "providerCoordinate": {
+      "id": "36e0289e-08b4-45f5-953a-3e3e01bb9cc8",
+      "name": "znc"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "9eVftqvyvarRwnWju7Ttc5",
+    "name": "influxdb",
+    "popularity": 0,
+    "description": "InfluxDB is an open source time series database for recording metrics, events, and analytics.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/867a4269-0838-456b-9db8-1ab1465f9706-influxdb.png"
+    },
+    "providerCoordinate": {
+      "id": "2053499a-fe59-495d-a024-518311223f3f",
+      "name": "influxdb"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Emo6KXgp2nh1XBca1fzLcg",
+    "name": "Discourse",
+    "popularity": 0,
+    "description": "Discourse is the 100% open source discussion platform built for the next decade of the Internet.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/5c474d63-e44e-460c-9045-04ae12566da7-9656e575-1a96-4459-8a56-cce06fc065ef-bebd1756-7cd7-4fc9-b4d9-b2459d9e007c-logo-large.png"
+    },
+    "providerCoordinate": {
+      "id": "ea310082-a64f-44e2-9531-6b741f1d83b7",
+      "name": "Discourse"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Qs4vYDf8WhFiDvKE6LmUHk",
+    "name": "rabbitmq",
+    "popularity": 0,
+    "description": "RabbitMQ is an open source multi-protocol messaging broker.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/d50b96ee-666d-43ce-8d91-d0cbb6f93ffb-rabbitmq.png"
+    },
+    "providerCoordinate": {
+      "id": "fa7625b4-fdca-4b48-b078-692f6451965a",
+      "name": "rabbitmq"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "9nVim1ahzJ6kRjDsL4QDzx",
+    "name": "websphere-liberty",
+    "popularity": 0,
+    "description": "Official IBM WebSphere Application Server for Developers Liberty image.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/c44c0d40-2d1c-4789-af97-c02a50cbbed5-websphere-liberty.png"
+    },
+    "providerCoordinate": {
+      "id": "cacdc40b-0fed-4221-952a-18b0b8a3500b",
+      "name": "websphere-liberty"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "FG4ktC4nyLf49uW59Cixd6",
+    "name": "mssql-server-linux",
+    "popularity": 0,
+    "description": "Official images for Microsoft SQL Server on Linux for Docker Engine.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/microsoft.png"
+    },
+    "providerCoordinate": {
+      "id": "6fee8cba-7b74-4159-992b-5e14937ad132",
+      "name": "mssql-server-linux"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "FqotGPG4RSRdLuwJvdkt28",
+    "name": "ruby",
+    "popularity": 0,
+    "description": "Ruby is a dynamic, reflective, object-oriented, general-purpose, open-source programming language.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/c21ccc13-b1e4-4523-b0af-af41f8a3bd7c-ruby.png"
+    },
+    "providerCoordinate": {
+      "id": "0f900dcb-7e32-45e4-b095-6dfa2f5b597b",
+      "name": "ruby"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "CKNXroP3Upfti16qFGuksv",
+    "name": "oraclelinux",
+    "popularity": 0,
+    "description": "Oracle Linux is an open-source operating system suitable for general purpose or Oracle workloads.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/96dcddde-c289-4e7e-b4b4-5f897e0eb17c-oraclelinux.png"
+    },
+    "providerCoordinate": {
+      "id": "505eac14-101f-44de-b80f-d79743a2288d",
+      "name": "oraclelinux"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "GMEw4cau7TdNDK9jaHp6Wo",
+    "name": "geonetwork",
+    "popularity": 0,
+    "description": "GeoNetwork is a FOSS catalog for spatially referenced resources.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/geonetwork.png"
+    },
+    "providerCoordinate": {
+      "id": "4788450b-6c22-473b-b7ea-c312c0d9486e",
+      "name": "geonetwork"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "MvmTMyEczfTewM9HbQXMBV",
+    "name": "bonita",
+    "popularity": 0,
+    "description": "Bonita BPM is an open-source business process management and workflow suite",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/d807a120-9714-4a01-b5ec-9747474260bf-bonita.png"
+    },
+    "providerCoordinate": {
+      "id": "c37b224a-dec9-4dbe-b18a-5f1789766409",
+      "name": "bonita"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "HY46tfoPt15kqfYNfDfs4T",
+    "name": "HyperCloud Block Storage Volume Plugin",
+    "popularity": 0,
+    "description": "Enables automated provisioning and mounting of high performance block devices to provide persistent storage for containers",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/e0a1a77b-15d0-49b5-bdda-4954c55a186fAAEAAQAAAAAAAAhJAAAAJDBmMzFjNzFkLWQ2Y2MtNGYwOC1hNzRjLWU2YTBiMTUyNDI3NQ.png"
+    },
+    "providerCoordinate": {
+      "id": "294324e9-c835-428c-8381-224c6db74036",
+      "name": "HyperCloud Block Storage Volume Plugin"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Tg9sXk2nDmTggGUN4UuraJ",
+    "name": "kong",
+    "popularity": 0,
+    "description": "Open-source Microservice & API Management layer built on top of NGINX.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/kong2.png"
+    },
+    "providerCoordinate": {
+      "id": "041afde1-d2ee-49ea-b68e-ffb4168b19b6",
+      "name": "kong"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "95L82cSHHz1wjjtd12zZRz",
+    "name": "Oracle Coherence",
+    "popularity": 0,
+    "description": "Oracle Coherence",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/90a63650-122d-4701-bff9-5311640aaf1cO_FM_Middleware_Coherence.png"
+    },
+    "providerCoordinate": {
+      "id": "a68daf44-e0db-41ac-9c80-73aca7cfd860",
+      "name": "Oracle Coherence"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Pqpna9DUQbzZ6CzPKadm4W",
+    "name": "Couchbase",
+    "popularity": 0,
+    "description": "Couchbase delivers the database for the Digital Economy. Developers around the world choose Couchbase for its advantages in data model flexibility, elastic scalability, performance, and 24x365 availability to build enterprise web, mobile, and IoT applications.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/0d32108f-9feb-4fd8-9af3-5ae6baff0090-67b8fe05-d2d0-4e4d-8224-22cfd7ae4f73-baf18caf-b63c-427f-970c-5c5aac7b2f99-logo-large.png"
+    },
+    "providerCoordinate": {
+      "id": "881296c9-606f-4861-91b6-26a31ef52618",
+      "name": "Couchbase"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "WdbG4BNcr5D8JhGdCa9jhY",
+    "name": "notary",
+    "popularity": 0,
+    "description": "Notary server and signer cooperatively handle signing and distribution of notary repositories.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/ae7ef4b7-157b-45ec-8a6b-6b6783c21d9c-notary.png"
+    },
+    "providerCoordinate": {
+      "id": "7cb50ac7-d119-4ec7-a276-cad5154fb67e",
+      "name": "notary"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "KhbAQD5jMuhZjiYEPEzFWh",
+    "name": "plone",
+    "popularity": 0,
+    "description": "Plone is a free and open source content management system built on top of Zope.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/plone.png"
+    },
+    "providerCoordinate": {
+      "id": "e852e31d-b5ca-45fb-be25-40863f5a496f",
+      "name": "plone"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "WpjT9VpBGXwrP8R2DKo4mq",
+    "name": "logstash",
+    "popularity": 0,
+    "description": "Logstash is a tool for managing events and logs.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/0ab7e1e6-e670-4d05-a8e6-82a944fbf709-logstash.png"
+    },
+    "providerCoordinate": {
+      "id": "6464c97c-8e9c-492c-8a35-27620300a6cc",
+      "name": "logstash"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "XWZtZfNuEnSxf8pdHpBFN7",
+    "name": "Unison",
+    "popularity": 0,
+    "description": "Cloud Native Identity Management",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/1c8d3d94-88cb-48d0-a9b7-21f603dd416b-unison-dockerhub-logo.png"
+    },
+    "providerCoordinate": {
+      "id": "d5b698e7-292c-4695-bf22-a7fd2cde41ae",
+      "name": "Unison"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "C7xcu6SoW9g8yVc8dkauZ9",
+    "name": "CoScale agent",
+    "popularity": 0,
+    "description": "Production monitoring of Dockerized applications, powered by anomaly detection.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/16d46224-e356-4972-b215-fe6cca3cc8c3-cosc-logo-design-vert.jpg"
+    },
+    "providerCoordinate": {
+      "id": "52f42cc6-99de-485d-920a-05a5924b8557",
+      "name": "CoScale agent"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "Wy7NPqCwKgHXiGjvqdV6Ts",
+    "name": "mono",
+    "popularity": 0,
+    "description": "Mono is an open source implementation of Microsoft's .NET Framework",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/51cc4ee1-0aee-43bc-a238-ffa4273f5ae7-mono.png"
+    },
+    "providerCoordinate": {
+      "id": "4234a761-444b-4dea-a6b3-31bda725c427",
+      "name": "mono"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "GdRjWsXRYKjbvN6vPX6JK3",
+    "name": "owncloud",
+    "popularity": 0,
+    "description": "ownCloud is a self-hosted file sync and share server.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/24f2a51f-4b42-4dea-98c5-6bb9603c1b4e-owncloud.png"
+    },
+    "providerCoordinate": {
+      "id": "a66e9029-57d7-4aef-89b0-a98987e8dbf2",
+      "name": "owncloud"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "FJQW2ZQmtEyFMe1KdaWRse",
+    "name": "mageia",
+    "popularity": 0,
+    "description": "Official Mageia base image",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/2d0fab82-0c33-42aa-9f2e-db22b558d48d-mageia.png"
+    },
+    "providerCoordinate": {
+      "id": "179f8859-4966-4750-a2a9-5cd203556556",
+      "name": "mageia"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "7GWJ9X5Fo1KnujoBJZvJ1A",
+    "name": "mssql-server-windows-express",
+    "popularity": 0,
+    "description": "Official Microsoft SQL Server Express Edition images for Windows Containers",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/microsoft.png"
+    },
+    "providerCoordinate": {
+      "id": "1bc596e5-6961-4d12-8465-c0e7c3cad4bb",
+      "name": "mssql-server-windows-express"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "RsH6xEzyPUTtS6rR366zvH",
+    "name": "Nimble Storage Docker Volume Plugin",
+    "popularity": 0,
+    "description": "Make persistent data as easy to move, copy, & control as containers: use this driver to create & manage Docker volumes on your Nimble array",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/92755f63-dd37-438f-baa1-896608c0781bNS_521_sq.png"
+    },
+    "providerCoordinate": {
+      "id": "63552bd0-f4cb-4f03-a4b3-6b4247acb157",
+      "name": "Nimble Storage Docker Volume Plugin"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "XZYEdvCTF9j4CzfuzPht6G",
+    "name": "lightstreamer",
+    "popularity": 0,
+    "description": "Lightstreamer is a real-time messaging server optimized for the Internet.",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/d7bf2730-a1ec-40e4-a803-e36da6d24c4f-lightstreamer.png"
+    },
+    "providerCoordinate": {
+      "id": "b0766515-2ca5-4ea2-9120-713cab78d0f7",
+      "name": "lightstreamer"
+    }
+  },
+  {
+    "type": "docker",
+    "id": "NuwJbSA3bUXXeZX7eQe45A",
+    "name": "Portworx PX-Developer",
+    "popularity": 0,
+    "description": "Data Services for Containers",
+    "icon": {
+      "url": "https://d1q6f0aelx0por.cloudfront.net/product-logos/06b763e8-62de-4a5d-ac4c-e410de1cb134-portworx-logo-u30-w86.png"
+    },
+    "providerCoordinate": {
+      "id": "c253f12e-cd9b-4398-a4b0-1b7bdab20f3e",
+      "name": "Portworx PX-Developer"
+    }
+  }
+]

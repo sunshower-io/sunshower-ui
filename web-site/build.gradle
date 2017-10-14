@@ -1,0 +1,46 @@
+apply plugin: 'war'
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+configurations {
+    ui
+}
+
+dependencies {
+
+    ui project(path: ':web-ui', configuration: 'uiPackage')
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-undertow"
+}
+
+
+war {
+    from "${project.buildDir}/generated/static"
+}
+
+
+task extractUi(type: Copy) {
+
+    dependsOn configurations.ui
+    includeEmptyDirs = false
+
+    into "${project.buildDir}/generated/static"
+    from {
+        configurations.ui.collect {
+            zipTree(it)
+        }
+    }
+    eachFile {
+        it.path = it.path - "assembly/"
+    }
+}
+
+compileJava.dependsOn extractUi
+
+bootRepackage {
+    mainClass = 'io.sunshower.ui.SunshowerUiConfiguration'
+}

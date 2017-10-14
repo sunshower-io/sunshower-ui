@@ -1,0 +1,50 @@
+.modal {
+  background: none;
+
+  form {
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .modal-header {
+    background: $primary-color;
+    color: white;
+    font-weight: 400;
+    height: 50px;
+    padding: 0 $standard-padding;
+    line-height: 50px;
+    font-size: 1.25rem;
+  }
+
+  .modal-content {
+    background: $offwhite;
+    padding: $standard-padding*2;
+
+
+    &.editor {
+      background: $almostblack;
+      padding: 0;
+      color: $offwhite;
+
+      .modal-tab-menu {
+        border-bottom: 1px solid $darkblue;
+
+        .tabs {
+          background-color: transparent;
+
+          a.active {
+            color: $offwhite;
+          }
+        }
+
+      }
+
+      .modal-tab-holder {
+        padding: $standard-padding/2;
+      }
+    }
+  }
+
+  //@extend .z-depth-0;
+
+}

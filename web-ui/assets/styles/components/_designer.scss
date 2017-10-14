@@ -1,0 +1,473 @@
+$designer-header-height: 36px;
+$designer-collapsible-padding: $standard-padding;
+$designer-button-height: 100px;
+
+.designer-container {
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  box-sizing: border-box;
+
+  .default-label {
+    background: $lightgrey;
+    color: darken($midgrey, 10%);
+    height: 16px;
+    line-height: 16px;
+    border-radius:8px;
+    min-width: 70px;
+    text-align: center;
+    font-size: 9px;
+    letter-spacing: 1px;
+    padding: 0 5px;
+    box-sizing: border-box;
+  }
+
+  .canvas {
+    position:absolute;
+    top:$designer-header-height;
+    bottom:0;
+    right:$body-panel-width;
+    left: $body-panel-width;
+    box-sizing: border-box;
+    z-index: 99;
+  }
+
+
+  .panel {
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: $body-panel-width;
+    box-sizing: border-box;
+    background: white;
+
+    &.right {
+      border-left: $default-border;
+      right: 0;
+    }
+
+    &.left {
+      border-right: $default-border;
+      left: 0;
+    }
+
+    .__panel {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .designer-panel-panel-holder {
+      height: -moz-calc(100% - #{$designer-header-height});
+      height: -webkit-calc(100% - #{$designer-header-height});
+      height: calc(100% - #{$designer-header-height});
+      overflow-y: auto;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .designer-panel-header {
+      height: $designer-header-height;
+      box-sizing: border-box;
+      line-height: $designer-header-height;
+      border-bottom: $default-border;
+      padding: 0 $standard-padding;
+      position: relative;
+
+      h1, h2, h3, h4, h5, h6 {
+        color: $almostblack;
+        line-height: $designer-header-height;
+        font-weight: 400;
+        margin: 0;
+        font-size: 12px;
+      }
+
+      .material-icons.mdi-plus {
+        color: $secondary-color;
+        position: absolute;
+        right: $designer-collapsible-padding - 5px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      &.icon-menu {
+        text-align: center;
+
+        .tabs, .tab {
+          line-height: $designer-header-height - 1px;
+          height: $designer-header-height - 1px;
+
+          a {
+            padding: 0;
+          }
+        }
+
+        .material-icons {
+          padding: 0 .25em;
+          color: $almostblack;
+          font-size: 20px;
+        }
+
+        a.active .material-icons {
+          color: $primary-color;
+        }
+      }
+
+    }
+
+  }
+
+}
+
+.designer-panel-body {
+  overflow-y: auto;
+
+  .designer-form {
+    padding: $standard-padding/2 $standard-padding;
+    font-size: 12px;
+    color: $midgrey;
+
+    form {
+      padding: 0;
+    }
+
+    input {
+      margin-bottom: 0;
+      height: 2rem;
+    }
+
+    label {
+      font-size: .8rem;
+    }
+
+    label.active {
+      transform: translateY(-140%);
+    }
+
+    .button-holder {
+      padding-top: 0;
+    }
+
+    .input-field.locking {
+      position: relative;
+
+      label {
+        font-size: 12px;
+      }
+
+      input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea, select {
+        width: 90%;
+      }
+
+      .locking-icon {
+        position: absolute;
+        right: 0;
+        top: 25%;
+        font-size: 17px;
+
+        &.active {
+          color: $primary-color;
+        }
+      }
+
+    }
+
+    select {
+      color: $midgrey;
+      height: 2rem;
+      font-size: 12px;
+    }
+
+    .collapsible {
+
+      .collapsible-body {
+        border-bottom: none;
+        padding: 0 0 1rem 0;
+      }
+
+      .collapsible-header {
+        color: $primary-color;
+        font-size: 12px;
+        font-weight: 400;
+        padding: 0;
+        position: relative;
+        line-height: 2rem;
+        min-height: 2rem;
+        border-bottom: none;
+
+        .dropdown-icon {
+          color: $midgrey;
+          font-size: 15px;
+          line-height: 2rem;
+          margin: 0;
+          float: none;
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          text-align: right;
+        }
+      }
+
+    }
+  }
+
+  .collapsible.property-collapsible .collapsible-body {
+    margin-bottom: 1rem;
+  }
+
+  .collapsible.layer-collapsible {
+    font-size: 12px;
+    color: $midgrey;
+
+    .collapsible-header, .collapsible-body {
+      min-height: 2rem;
+      line-height: 2rem;
+      box-sizing: border-box;
+    }
+
+    .collapsible-header {
+      position: relative;
+      padding: 0 $designer-collapsible-padding*2 0 $designer-collapsible-padding;
+
+      i.material-icons {
+        color: $lightgrey;
+        font-size: 15px;
+        line-height: 2rem;
+        margin: 0;
+        float: none;
+        text-align:inherit;
+
+        &.visibility-icon {
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+        &.dropdown-icon {
+          position: relative;
+          display: inline;
+          color: $midgrey;
+          width: 15px;
+          margin-left: -15px;
+        }
+      }
+
+      img.layer-image {
+        height: 15px;
+        vertical-align:middle;
+        margin: -4px .5em 0 .5em;
+      }
+
+    }
+
+    li.has-collapsible > .collapsible-body {
+      padding: 0;
+      border-bottom: none;
+    }
+
+    .collapsible-body {
+      padding: 0 $designer-collapsible-padding;
+    }
+
+    //yes, this looks terrible
+
+    .collapsible-body .collapsible-header, .collapsible-body .collapsible-body {
+      padding-left: $designer-collapsible-padding*2;
+    }
+
+    .collapsible-body .collapsible-body .collapsible-header, .collapsible-body .collapsible-body .collapsible-body {
+      padding-left: $designer-collapsible-padding*3;
+    }
+
+    .collapsible-body .collapsible-body .collapsible-body .collapsible-header, .collapsible-body .collapsible-body .collapsible-body .collapsible-body {
+      padding-left: $designer-collapsible-padding*4;
+    }
+
+    .collapsible-body .collapsible-body .collapsible-body .collapsible-body .collapsible-header, .collapsible-body .collapsible-body .collapsible-body .collapsible-body .collapsible-body {
+      padding-left: $designer-collapsible-padding*5;
+    }
+
+    .collapsible-body .collapsible-body .collapsible-body .collapsible-body .collapsible-body .collapsible-header, .collapsible-body .collapsible-body .collapsible-body .collapsible-body .collapsible-body .collapsible-body {
+      padding-left: $designer-collapsible-padding*6;
+    }
+
+  }
+
+  .designer-cards {
+    padding: $standard-padding/2 0;
+
+    &:first-child {
+      padding-top: $standard-padding;
+    }
+
+    .designer-card {
+      display: inline-block;
+      padding: $standard-padding/2 $standard-padding/4;
+      box-sizing: border-box;
+      width: 49%;
+      text-align: center;
+      cursor: move;
+
+      &.disabled {
+        cursor: not-allowed;
+        & > img {
+          filter: grayscale(100%);
+        }
+      }
+
+      img {
+        width: 55%;
+      }
+
+      span {
+        display: block;
+        text-align: center;
+        font-weight: 500;
+        color: $midgrey;
+        font-size: 11px;
+      }
+    }
+  }
+
+}
+
+.designer-menu-bar {
+  background: white;
+  position: absolute;
+  top: 0;
+  right: $body-panel-width;
+  left: $body-panel-width;
+  height: $designer-header-height;
+  box-sizing: border-box;
+  border-bottom: $default-border;
+  line-height: $designer-header-height;
+
+  &.right-panel-closed {
+    right: 0;
+  }
+
+  &.left-panel-closed {
+    left: 0;
+  }
+
+  .template-info {
+    position: absolute;
+    top: 0;
+    left: $standard-padding;
+    bottom: 0;
+    color: $almostblack;
+    cursor: pointer;
+    font-size: 12px;
+
+    .version {
+      color: $midgrey;
+      letter-spacing: 1px;
+      display: inline;
+      margin-left: 1em;
+    }
+
+    .dropdown-button.active  > .dropdown-icon {
+      -ms-transform: rotate(90deg); /* IE 9 */
+      -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+      transform: rotate(90deg);
+    }
+  }
+
+  .tab-menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin:0;
+    .tab {
+      width: $designer-header-height;
+      border-bottom: $default-border;
+      height: $designer-header-height;
+      box-sizing: border-box;
+      text-align: center;
+      display: inline-block;
+      margin:0 .5em;
+      cursor: pointer;
+      &.active {
+        border-bottom: 2px solid $primary-color;
+        .material-icons {
+          color: $primary-color;
+        }
+      }
+      .material-icons {
+        font-size: 30px;
+        color: $midgrey;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+
+  .utilities {
+    position: absolute;
+    top: 0;
+    right: $standard-padding;
+    bottom: 0;
+    .material-icons {
+      color: $lightgrey;
+      font-size: 25px;
+      padding-left: 5px;
+      cursor: pointer;
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+
+}
+
+.designer-button {
+  right: 23px + $body-panel-width;
+
+  &.right-panel-closed {
+    right: 23px;
+  }
+
+  .btn-floating {
+    box-sizing: border-box;
+    width: $designer-button-height;
+    height: $designer-button-height;
+    line-height: $designer-button-height;
+    background: $midgrey;
+    border: none;
+    //text-align: center;
+
+    &.active {
+      background: $secondary-color;
+    }
+
+    span {
+      display: inline;
+      line-height: $designer-button-height;
+      letter-spacing: 2px;
+      font-size: 10px;
+      color: white;
+      text-transform: uppercase;
+      margin-left: 25px;
+    }
+
+    i.material-icons {
+      display: inline;
+      width: auto;
+      vertical-align: middle;
+      line-height: $designer-button-height;
+      color: white;
+    }
+
+  }
+}
+
+.designer-graf {
+  padding: $standard-padding;
+  color: $midgrey;
+  font-size: .85em;
+}

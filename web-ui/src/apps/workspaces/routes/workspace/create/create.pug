@@ -1,0 +1,19 @@
+template
+    .modal-header Create New Workspace
+    .modal-content
+        form(submit.delegate="save()")
+            .input-field
+                input(type='text'
+                    id="${nameId}"
+                    value.bind='workspace.name'
+                    class="validate"
+                    required="required")
+                label(for="${nameId}") Name
+            .input-field
+                textarea(id="${descriptionId}"
+                    value.bind='workspace.description'
+                    class="materialize-textarea")
+                label(for="${descriptionId}") Description
+            .form-message.error(if.bind="showError") ${error}
+            .button-holder
+                button.waves-effect.btn(type="submit") Create

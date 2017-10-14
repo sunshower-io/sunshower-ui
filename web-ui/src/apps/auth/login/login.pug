@@ -1,0 +1,32 @@
+template
+
+    .auth-toggle
+        | Don't have an account yet?
+        a.btn-flat(click.delegate="signUp()") Sign Up
+
+    h1 Sign in to &#32;
+        a(href="http://sunshower.io") CloudBees Mgr Whatever 
+
+    form(submit.delegate="login()")
+        .form-message.error(if.bind="credentialsInvalid") ${error}
+        .input-field
+            input(type="text" id="${usernameId}" value.bind='user.username')
+            label(for="${usernameId}") Username
+        .input-field
+            input(type="password" id="${passwordId}" value.bind='user.password')
+            label(for="${passwordId}") Password
+
+        .button-holder
+            button.waves-effect.btn(type="submit") Log In
+
+
+    //            .ui.error.message.left(show.bind="credentialsInvalid" style="margin-top:10px")
+    //                p Username/password combination was not recognized
+    //
+    //            button.ui.field.button.fluid.primary(type='submit', click.delegate="login()") Sign In
+    //            .field
+    //                .ui.checkbox.pull-left
+    //                    input(type='checkbox', value.bind='remember')
+    //                    label Remember me
+    //
+

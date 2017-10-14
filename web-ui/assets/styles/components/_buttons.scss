@@ -1,0 +1,22 @@
+.fixed-action-btn .btn-floating {
+  background: $primary-color;
+}
+
+.btn-flat {
+  border: 1px solid $button-flat-color;
+}
+
+.btn-floating-add.btn-floating {
+  background: $primary-color;
+  position: absolute;
+  top: $standard-padding;
+  right: $standard-padding;
+
+  &.body-panel-open {
+    right: $body-panel-width + $standard-padding;
+  }
+}
+
+.btn {
+  cursor: pointer;
+}

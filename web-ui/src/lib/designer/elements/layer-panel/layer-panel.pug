@@ -1,0 +1,9 @@
+template
+    require(from="lib/designer/elements/layer-panel/layer-collapsible")
+    .designer-panel-header
+        h2 Layers
+        //a.material-icons.mdi.mdi-plus(style="cursor:pointer;" title="Incomplete Feature")
+    .designer-panel-body(ref="layerPanelCollapsible" layerselected.delegate="select($event)")
+        .designer-graf(if.bind="layers.length == 0") Add a provider to the draftboard to get started.
+        ul.collapsible.layer-collapsible(data-collapsible="expandable")
+            layer-collapsible(nodes.bind="layers" holder.bind="layerPanelCollapsible")

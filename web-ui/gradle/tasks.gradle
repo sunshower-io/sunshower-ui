@@ -1,0 +1,125 @@
+
+import org.apache.tools.ant.taskdefs.condition.Os;
+
+apply plugin: 'java'
+
+def isWindows()  {
+     return (Os.isFamily(Os.FAMILY_WINDOWS))
+}
+
+
+def fast() {
+    final boolean fast = System.getProperty("fast") != null
+    if(fast) {
+        logger.info("Running in fast mode (will not bundle UI)")
+    }
+    return fast
+}
+
+task installGulp(type:Exec) {
+    if(!fast()) {
+        if (isWindows()) {
+            commandLine 'cmd', '/c', 'npm', 'install', 'gulp', '-g'
+        } else {
+            commandLine 'npm', 'install', 'gulp', '-g'
+        }
+    } else {
+        commandLine "echo", "'not running gulp'"
+
+    }
+}
+
+task installJspm(type:Exec) {
+    if(!fast()) {
+        if(isWindows()) {
+            commandLine 'cmd', 'c', 'npm', 'install', 'jspm', '-g'
+        } else {
+            commandLine 'npm', 'install', 'jspm', '-g'
+        }
+    } else {
+        commandLine "echo", "'not running npm deps'"
+    }
+}
+
+task installNpmDeps(type:Exec) {
+    if(!fast()) {
+        if (isWindows()) {
+            commandLine 'cmd', '/c', 'npm', 'install', '-y'
+        } else {
+            commandLine 'npm', 'install', '-y'
+        }
+    } else {
+        commandLine "echo", "'not running npm deps'"
+    }
+}
+
+task installJspmDeps(type:Exec) {
+    if(!fast()) {
+        if (isWindows()) {
+            commandLine 'cmd', '/c', 'jspm', 'install', '-y'
+        } else {
+            commandLine 'jspm', 'install', '-y'
+        }
+    } else {
+
+        commandLine "echo", "'not running jspm'"
+    }
+}
+
+task cleanAll(type:Delete) {
+    delete 'dist', 'export'
+}
+
+task bundle(type:Exec) {
+    if(!fast()) {
+        if (isWindows()) {
+            commandLine 'cmd', '/c', 'gulp', 'export'
+        } else {
+            commandLine 'gulp', 'export'
+        }
+    } else {
+        commandLine "echo", "'not running bundle'"
+    }
+}
+
+
+task installEnvironment(dependsOn:[
+        'installGulp',
+        'installJspm',
+        'installNpmDeps',
+        'installJspmDeps'
+])
+
+
+task copyStyles(type:Copy, dependsOn:'bundle') {
+    if(!fast()) {
+        from(fileTree("styles")) {
+            include "**/*"
+        }
+        into("export/styles")
+    }
+}
+
+task copyMx(type:Copy, dependsOn:'bundle') {
+    if(!fast()) {
+        from(fileTree('mx')) {
+            include '**/*'
+        }
+        into('export/mx')
+    }
+}
+
+task assembleAll(type:Zip, dependsOn: [
+        'copyStyles',
+        'copyMx',
+        'bundle'
+]) {
+    if(!fast()) {
+        from(fileTree('export'))
+        into "assembly"
+        classifier = "package"
+    }
+}
+
+clean.dependsOn cleanAll
+build.dependsOn assembleAll

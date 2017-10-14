@@ -1,0 +1,16 @@
+template
+    designer
+        left-panel
+            top
+                layer-panel
+            bottom
+                panels
+                    panel(
+                        model.bind="infrastructureElementFactory",
+                        view-model="lib/designer/elements/element-panel/element-panel"
+                    )
+        right-panel
+            full
+                property-panel
+        action-button
+

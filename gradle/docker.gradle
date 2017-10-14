@@ -1,0 +1,5 @@
+task buildProdImage(type: Exec) {
+    group "Docker"
+    dependsOn ':web-site:build'
+    commandLine 'docker-compose', '-f', "$projectDir/common-services.yml", 'build', 'ui'
+}

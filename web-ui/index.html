@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sunshower.io</title>
+    <link rel="stylesheet" href="dist/css/styles.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script type="text/javascript">
+        mxBasePath = 'jspm_packages/github/jgraph/mxgraph-js@master/javascript/src';
+    </script>
+</head>
+
+<body aurelia-app="main">
+<div class="fullscreen loader">
+    <img src="assets/icons/cb.png" width="400px" />
+    <div class="progress">
+        <div class="indeterminate"></div>
+    </div>
+    <h1>Loading...</h1>
+</div>
+
+<script src="jspm_packages/npm/jquery@2.2.4/dist/jquery.js"></script>
+<script src="jspm_packages/npm/materialize-css@0.98.1/bin/materialize.js"></script>
+
+<script src="jspm_packages/system.js"></script>
+<script src="config.js"></script>
+<script>
+    System.import('aurelia-bootstrapper');
+</script>
+</body>
+
+</html>

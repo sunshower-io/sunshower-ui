@@ -1,0 +1,65 @@
+template
+
+    .auth-toggle
+        | Already have an account?
+        a.btn-flat(click.delegate="signIn()") Sign In
+
+    h1 Create account for &#32;
+        a(href="http://sunshower.io") Sunshower.io
+
+    form(if.bind="!showSuccess" submit.delegate="signup()")
+        .form-message.error(if.bind="showError") ${error}
+        .row
+            .col.m6.input-field
+                input(type='text'
+                    id="${firstnameId}"
+                    value.bind='user.firstName'
+                    class="validate"
+                    required="required")
+                label(for="${firstnameId}") First Name
+            .col.m6.input-field
+                input(type='text'
+                    id="${lastnameId}"
+                    value.bind="user.lastName"
+                    class="validate"
+                    required="required")
+                label(for="${lastnameId}") Last Name
+        .row
+            .col.m6.input-field
+                input(type='email'
+                    id="${emailId}"
+                    value.bind='user.emailAddress'
+                    class="validate"
+                    required="required")
+                label(for="${emailId}") Email
+            .col.m6.input-field
+                input(type="text"
+                    id="${usernameId}"
+                    value.bind="user.username"
+                    class="validate"
+                    required="required")
+                label(for="${usernameId}") Username
+        .row
+            .col.m6.input-field
+                input(ref="passwordInput"
+                    type='password'
+                    class="${validationClass}"
+                    id="${passwordId}"
+                    value.bind='password'
+                    required="required"
+                    keyup.delegate="checkPasswords()")
+                label(for="${passwordId}") Password
+            .col.m6.input-field
+                input(ref="confirmPasswordInput"
+                    type='password'
+                    class="${validationClass}"
+                    id="${confirmId}"
+                    value.bind='confirmPassword'
+                    required="required"
+                    keyup.delegate="checkPasswords()")
+                label(for="${confirmId}") Confirm Password
+        .button-holder
+            button.waves-effect.btn(type="submit") Sign Up
+    .form-message.success(if.bind="showSuccess")
+        h2 Thanks for signing up!
+        p We'll be in touch once you're approved.

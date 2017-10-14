@@ -1,0 +1,16 @@
+.summary-icon text {
+  font-weight:100;
+}
+
+.summary-holder {
+  text-align:center;
+}
+
+.summary-icon {
+  max-width:100%;
+  display:inline-block;
+
+  svg {
+    max-width:100%;
+  }
+}

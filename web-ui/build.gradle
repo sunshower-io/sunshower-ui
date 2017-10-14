@@ -1,0 +1,11 @@
+apply from: 'gradle/tasks.gradle'
+
+configurations {
+    uiPackage
+}
+
+artifacts {
+    uiPackage assembleAll
+}
+
+build.dependsOn assembleAll
