@@ -5,11 +5,8 @@ body {
 }
 
 .body {
-  position: absolute;
-  left: 0;
-  right: 0;
+  @extend %expand;
   top: $navbar-height;
-  bottom: 0;
   overflow-y: auto;
 
   @media #{$medium-and-down} {
@@ -125,11 +122,7 @@ body {
 }
 
 .fullscreen{
-  position:absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  @extend %expand;
   box-sizing: border-box;
 
   &.loader {

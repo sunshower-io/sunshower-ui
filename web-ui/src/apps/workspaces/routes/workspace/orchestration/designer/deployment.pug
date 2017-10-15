@@ -1,3 +1,7 @@
 template
-    designer
+    .designer-container
         menu-bar(model.bind="orchestration" router.bind="router")
+        .panel.full.top
+            deployment-panel
+        .panel.full.bottom
+            terminal-panel

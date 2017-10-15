@@ -3,11 +3,7 @@ $designer-collapsible-padding: $standard-padding;
 $designer-button-height: 100px;
 
 .designer-container {
-  position:absolute;
-  top:0;
-  left:0;
-  bottom:0;
-  right:0;
+  @extend %expand;
   box-sizing: border-box;
 
   .default-label {
@@ -38,11 +34,30 @@ $designer-button-height: 100px;
   .panel {
     z-index: 100;
     position: absolute;
-    top: 0;
-    bottom: 0;
-    width: $body-panel-width;
     box-sizing: border-box;
     background: white;
+
+    &.side {
+      top: 0;
+      bottom: 0;
+      width: $body-panel-width;
+    }
+
+    &.full {
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 50%;
+    }
+
+    &.top {
+      top: 0;
+      border-bottom: $default-border;
+    }
+
+    &.bottom {
+      bottom: 0;
+    }
 
     &.right {
       border-left: $default-border;
@@ -480,4 +495,11 @@ $designer-button-height: 100px;
   padding: $standard-padding;
   color: $midgrey;
   font-size: .85em;
+}
+
+
+.terminal {
+  background: $almostblack;
+
+  @extend %expand;
 }
