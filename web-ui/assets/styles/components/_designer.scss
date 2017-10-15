@@ -338,25 +338,35 @@ $designer-button-height: 100px;
   background: white;
   position: absolute;
   top: 0;
-  right: $body-panel-width;
-  left: $body-panel-width;
+  right: 0;
+  left: 0;
+  padding-right: $body-panel-width;
+  padding-left: $body-panel-width;
   height: $designer-header-height;
   box-sizing: border-box;
   border-bottom: $default-border;
   line-height: $designer-header-height;
 
-  &.right-panel-closed {
-    right: 0;
+  &.left-panel-closed {
+    padding-left: 0;
+
+    .template-info {
+      left: $standard-padding;
+    }
   }
 
-  &.left-panel-closed {
-    left: 0;
+  &.right-panel-closed {
+    padding-right: 0;
+
+    .utilities {
+      right: $standard-padding;
+    }
   }
 
   .template-info {
     position: absolute;
     top: 0;
-    left: $standard-padding;
+    left: $standard-padding + $body-panel-width;
     bottom: 0;
     color: $almostblack;
     cursor: pointer;
@@ -410,7 +420,7 @@ $designer-button-height: 100px;
   .utilities {
     position: absolute;
     top: 0;
-    right: $standard-padding;
+    right: $standard-padding + $body-panel-width;
     bottom: 0;
     .material-icons {
       color: $lightgrey;

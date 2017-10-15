@@ -1,4 +1,5 @@
 template
+    //todo restyle menu bar so it's full width on deployment side
     .designer-menu-bar(slot="menu-bar")
         .template-info
             .dropdown-button(
@@ -15,10 +16,12 @@ template
                 li Last Released
 
         ul.tab-menu
-            li.tab.active
-                a.material-icons.mdi.mdi-checkbox-multiple-blank
-            li.tab
-                a.material-icons.mdi.mdi-source-branch(title="Incomplete Feature")
+            li.tab(repeat.for="route of router.navigation"
+                class.bind="route.isActive ? 'active' : ''")
+                a.material-icons.mdi(class.bind="route.settings.icon"
+                    title.bind="route.title"
+                    href.bind="route.href"
+                )
         .utilities
             i.material-icons.mdi.mdi-file(click.delegate="configureFile()" title="Open Configuration File")
             i.material-icons.mdi.mdi-content-save(click.delegate="save()" title="Save")

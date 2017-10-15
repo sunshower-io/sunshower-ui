@@ -27,6 +27,7 @@ import {
 import {HALTemplateProviderFactory} from "apps/workspaces/lib/palette/orchestration/hal-templates/hal-template-provider-factory";
 import {Canvas} from "lib/designer/canvas/canvas";
 import {Designer} from "lib/designer/core/designer";
+import {Router} from "aurelia-router";
 
 @autoinject
 @customElement('orchestration-designer')
@@ -49,7 +50,8 @@ export default class OrchestrationDesigner {
         private workspaceService: WorkspaceService,
         private designerManager: DesignerManager,
         registryElementLoader: RegistryElementLoader,
-        private templateProviderFactory : HALTemplateProviderFactory
+        private templateProviderFactory : HALTemplateProviderFactory,
+        private router: Router
     ) {
         this.codec = new JsonCodec();
         this.elementFactory = elementFactory;

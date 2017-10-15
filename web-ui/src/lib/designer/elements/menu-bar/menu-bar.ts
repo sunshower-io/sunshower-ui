@@ -15,6 +15,7 @@ import {
 } from "apps/workspaces/lib/model/core/orchestration-template/model";
 
 import {ConfigurationFileEditor} from "lib/editor/configuration/file";
+import {Router} from "aurelia-router";
 
 @containerless
 @autoinject
@@ -29,15 +30,16 @@ export class MenuBar {
     @bindable
     private model                           : VersionedItem;
 
+
     constructor(
         private manager:DesignerManager,
-        private dialogService: DialogService
+        private dialogService: DialogService,
+        private router: Router
     ) {
         this.controlId = UUID.randomUUID().value;
     }
 
     activate() {
-
     }
 
     attached() {

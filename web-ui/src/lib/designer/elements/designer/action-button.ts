@@ -7,17 +7,20 @@ import {
     containerless,
     useShadowDOM
 } from "aurelia-framework";
+import {Router} from "aurelia-router";
 
 @containerless
 @customElement("action-button")
 export class DesignerActionButton {
 
     @bindable
-    active: boolean;
+    active: boolean = true;
 
-    attached() {
+    constructor(private router: Router) {
+    }
 
-        this.active = true;
+    deploy() : void {
+        this.router.navigate('deployment');
     }
 
 }

@@ -6,7 +6,7 @@ import {OrchestrationTemplateService} from "apps/workspaces/lib/model/core/orche
 
 @autoinject
 @NavigationAware
-export class WorkspaceOrchestrations {
+export class Draftboard {
 
     private router: Router;
 
@@ -18,26 +18,23 @@ export class WorkspaceOrchestrations {
     configureRouter(config: RouterConfiguration, router: Router) {
         config.options.breadcrumb = true;
         config.map([{
-            route: ['', 'dashboard'],
-            moduleId: './dashboard/dashboard',
-            name: 'dashboard',
-            nav: false,
-            title: 'Orchestration Dashboard',
+            route: ['', 'designer'],
+            moduleId: './designer',
+            name: 'designer',
+            nav: true,
+            title: 'Designer',
             settings: {
-                hideInBreadcrumb: true
+                icon: 'mdi-checkbox-multiple-blank'
             }
         }, {
-           route: 'create',
-            moduleId: './create/create',
-            name: 'create',
-            nav: false,
-            title: 'Create New Orchestration'
-        }, {
-            route: ':orchestrationTemplateId',
-            moduleId: './designer/index',
-            name: 'draftboard',
-            nav: false,
-            title: 'Orchestration Draftboard'
+            route: 'deployment',
+            moduleId: './deployment',
+            name: 'deployment',
+            nav: true,
+            title: 'Deployment',
+            settings: {
+                icon: 'mdi-source-branch'
+            }
         }]);
 
         this.router = router;
