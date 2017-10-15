@@ -18,78 +18,90 @@ import {
     mxPerimeter,
     mxConstants, mxEvent
 } from "mxgraph";
-import {Vertex as TaskVertex} from 'lib/designer/model/graph';
 import {Role} from "lib/common/security/model/user";
+
+import {Vertex as TaskVertex} from 'lib/designer/model/graph';
 import {ApplicationContextHolder} from "lib/common/application-context";
 import {DialogService} from "aurelia-dialog";
 import {SyntaxAwareTextEditor} from "lib/editor/text/syntax-aware-text-editor";
 
+export class ScriptTemplateElement extends Vertex implements ComputeNodeTemplate {
 
-export class TemplateClusterTemplate extends Vertex implements ComputeNodeTemplate {
+    style: string = 'script-template-element-style';
 
-    style: string = 'template-cluster-template-style';
 
-    onDoubleClick(sender, event:mxEvent) : void {
+    onDoubleClick(sender: any, event: any): void {
         let container = ApplicationContextHolder.getContainer(),
             dialogService = container.get(DialogService) as DialogService;
         dialogService.open({
             model: {
                 vertex: event.getProperty('cell'),
                 handlers: [{
-                    type: 'json',
-                    handler: 'node-handlers::markup::json'
+                    type: 'bash',
+                    handler: 'node-handlers::script::bash'
                 }, {
-                    type: 'yml',
-                    handler: 'node-handlers::markup::yaml'
-                }], 
+                    type: 'ruby',
+                    handler: 'node-handlers::script::ruby'
+                }, {
+                    type: 'python',
+                    handler: 'node-handlers::script::python'
+                }, {
+                    type: 'groovy',
+                    handler: 'node-handlers::script::groovy'
+                }],
+
                 mappings: [
-                    {key: 'node-handlers::markup::json', value: 'ace/mode/json'},
-                    {key: 'node-handlers::markup::yaml', value: 'ace/mode/yaml'}
-                ]
+                    {key: 'node-handlers::script::bash', value: 'ace/mode/sh'},
+                    {key: 'node-handlers::script::ruby', value: 'ace/mode/ruby'},
+                    {key: 'node-handlers::script::python', value: 'ace/mode/python'},
+                    {key: 'node-handlers::script::groovy', value: 'ace/mode/groovy'}
+                ],
             },
+
             viewModel: SyntaxAwareTextEditor
-        }).then(t => {})
+        }).then(t => {
+        })
     }
+
 }
 
 
-export class ClusterTemplateElementFactory extends DefaultElementFactory implements ElementLoader{
+export class ScriptTemplateElementFactory extends DefaultElementFactory implements ElementLoader {
 
 
-    rolesAllowed        : Role[] = [new Role('admin')];
-    elementName         : string = 'Template';
-    displayIcon         : string = 'assets/icons/designer/virtual-cluster.svg';
-    paletteIcon         : string = 'assets/icons/designer/virtual-cluster.svg';
+    rolesAllowed: Role[] = [new Role('admin')];
+    elementName: string = 'Node Template';
+    displayIcon: string = 'assets/icons/plugins/script/script.svg';
+    paletteIcon: string = 'assets/icons/plugins/script/script.svg';
 
-
-    initialize(canvas: Canvas, element: HTMLElement): void {
-        super.initialize(canvas, element);
+    preInitialize(canvas: Canvas): void {
         this.createStyle(canvas);
     }
 
+    initialize(canvas: Canvas, element: HTMLElement): void {
+        super.initialize(canvas, element);
+    }
+
+
+    newElement(x: number, y: number, event: Event, canvas: Canvas, target: any): Drawable {
+        return new ScriptTemplateElement('node', x, y, 74, 74);
+    }
+
+
     load(model: Canvas, v: TaskVertex): Drawable {
-        return new TemplateClusterTemplate(
-            v.name, 
-            v.layout.x, 
-            v.layout.y, 
-            v.layout.width, 
-            v.layout.height, 
+        return new ScriptTemplateElement(
+            v.name,
+            v.layout.x,
+            v.layout.y,
+            v.layout.width,
+            v.layout.height,
             v
         );
     }
 
 
-
-    newElement(x: number, y: number, event: Event, canvas: Canvas, target: any): Drawable {
-        return new TemplateClusterTemplate('template cluster', x, y, 74, 74);
-    }
-
     isHostableBy(e: Drawable): boolean {
         return true;
-    }
-    
-    onDoubleClick(sender, e) : void {
-        alert("Sup");
     }
 
 
@@ -98,12 +110,9 @@ export class ClusterTemplateElementFactory extends DefaultElementFactory impleme
     }
 
     handles(key: string): boolean {
-        return "TemplateClusterTemplate" === key; 
+        return ScriptTemplateElement.name === key;
     }
 
-    preInitialize(canvas: Canvas) : void {
-        this.createStyle(canvas);
-    }
     /**
      *
      * @param x
@@ -115,7 +124,8 @@ export class ClusterTemplateElementFactory extends DefaultElementFactory impleme
      */
 
 
-    protected createStyle(canvas:Canvas) : void {
+
+    protected createStyle(canvas: Canvas): void {
         let style = {};
         style[mxConstants.STYLE_FONTCOLOR] = '#FFFFFF';
         style[mxConstants.STYLE_IMAGE] = this.displayIcon;
@@ -125,7 +135,7 @@ export class ClusterTemplateElementFactory extends DefaultElementFactory impleme
         canvas
             .getStylesheet()
             .putCellStyle(
-                'template-cluster-template-style',
+                'script-template-element-style',
                 style
             );
     }

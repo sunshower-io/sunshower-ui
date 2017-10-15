@@ -17,6 +17,10 @@ import {
 } from "apps/workspaces/lib/palette/cje/cje-template-element";
 import {Canvas} from "lib/designer/canvas/canvas";
 
+import {
+    ScriptTemplateElementFactory
+} from "apps/workspaces/lib/palette/orchestration/scripts/scripts";
+
 
 
 export class HALTemplateProviderFactory implements ElementFactoryProvider {
@@ -27,7 +31,8 @@ export class HALTemplateProviderFactory implements ElementFactoryProvider {
         return Promise.resolve([
             new CJETemplateElementFactory(),
             new ClusterTemplateElementFactory(),
-            new ComputeNodeTemplateElementFactory()
+            new ComputeNodeTemplateElementFactory(),
+            new ScriptTemplateElementFactory(),
         ]);
     }
     

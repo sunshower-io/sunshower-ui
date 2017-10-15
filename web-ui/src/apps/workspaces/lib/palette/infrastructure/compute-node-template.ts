@@ -43,10 +43,12 @@ export class ComputeNodeTemplateElementFactory extends DefaultElementFactory imp
     displayIcon         : string = 'assets/icons/designer/vm.svg';
     paletteIcon         : string = 'assets/icons/designer/vm.svg';
 
+    preInitialize(c : Canvas) {
+        this.createStyle(c);
+    }
 
     initialize(canvas: Canvas, element: HTMLElement): void {
         super.initialize(canvas, element);
-        this.createStyle(canvas);
     }
 
 

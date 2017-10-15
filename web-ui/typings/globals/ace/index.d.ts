@@ -506,7 +506,7 @@ declare namespace AceAjax {
         **/
         setValue(text: string): void;
 
-        setMode(mode: string): void;
+        setMode(mode: string | any): void;
 
         /**
          * Returns the current [[Document `Document`]] as a string.

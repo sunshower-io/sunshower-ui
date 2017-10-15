@@ -1,17 +1,21 @@
 template
     .modal-header Cluster Definition 
     .modal-content
-        //.dialog-editor
-        //    .preloader-wrapper.big.active(if.bind="loading")
-        //        .spinner-layer.spinner-blue-only
-        //            .circle-clipper.left
-        //                .circle
-        //            .gap-patch
-        //                .circle
-        //            .circle-clipper.right
-        //                .circle
+        .dialog-editor(if.bind="loading")
+            .preloader-wrapper.big.active
+                .spinner-layer.spinner-blue-only
+                    .circle-clipper.left
+                        .circle
+                    .gap-patch
+                        .circle
+                    .circle-clipper.right
+                        .circle
 
         form(submit.delegate="save()" )
-            div.dialog-editor(ref="editor")
+            a.dropdown-button.btn(data-activates="content-type-dropdown") Script Type 
+            ul#content-type-dropdown.dropdown-content
+                li(repeat.for="definition of contentDefinitions")
+                    a(click.delegate="setContentType(definition)") ${definition.type}
+            div.dialog-editor(ref="editor" show.bind="!loading")
             .button-holder
                 button.waves-effect.btn(type="submit") Save 
