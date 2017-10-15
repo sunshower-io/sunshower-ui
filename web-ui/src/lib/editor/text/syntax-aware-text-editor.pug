@@ -1,7 +1,17 @@
 template
     .modal-header Cluster Definition 
     .modal-content
-        form(submit.delegate="save()")
+        //.dialog-editor
+        //    .preloader-wrapper.big.active(if.bind="loading")
+        //        .spinner-layer.spinner-blue-only
+        //            .circle-clipper.left
+        //                .circle
+        //            .gap-patch
+        //                .circle
+        //            .circle-clipper.right
+        //                .circle
+
+        form(submit.delegate="save()" )
             div.dialog-editor(ref="editor")
             .button-holder
                 button.waves-effect.btn(type="submit") Save 

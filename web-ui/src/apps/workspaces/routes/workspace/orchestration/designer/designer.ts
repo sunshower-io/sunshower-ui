@@ -57,6 +57,11 @@ export default class OrchestrationDesigner {
         this.codec.registerLoader("RegistryElement", registryElementLoader);
         // this.codec.register(RegistryElement, new RegistryElementLoader())
     }
+    
+    
+    getCodec() : Codec {
+        return this.codec;
+    }
 
 
     attached() : void {

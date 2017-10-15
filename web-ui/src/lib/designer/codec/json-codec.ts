@@ -48,6 +48,10 @@ export class DefaultEncoder implements Encoder<any> {
                 y: geo.y,
                 width: geo.width,
                 height: geo.height
+            }, 
+            content: {
+                type: 'reference',
+                reference: 'definition'
             }
         }
     }

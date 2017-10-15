@@ -60,8 +60,26 @@ export class OrchestrationTemplateService implements Service<OrchestrationTempla
             body: JSON.stringify(e)
         }).then(t => true);
     }
+
+
+    getContent(id: string) : Promise<string> {
+        return this.client.fetch(`graph/${this.currentId}/${id}/content?type=orchestration-template`, {
+            method: 'get',
+            headers: {
+                'accept': 'text/plain',
+            }
+        }).then(t => t.text());
+    }
     
-    saveContent()
+    saveContent(id: string, content:string) : Promise<any> {
+        return this.client.fetch(`graph/${this.currentId}/${id}/content?type=orchestration-template`, {
+            method: 'put',
+            body: content,
+            headers: {
+                'content-type': 'text/plain'
+            }
+        });
+    }
 
     save(orchestrationTemplate: OrchestrationTemplate) : Promise<Identifier> {
         return this.client.fetch('templates/orchestrations', {

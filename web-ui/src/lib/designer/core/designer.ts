@@ -8,7 +8,6 @@ import {SaveAction} from "lib/designer/canvas/actions/save-action";
 import {TaskGraph} from "lib/designer/model/graph/graph-element";
 import {DesignerLoader} from "./loader";
 import {Codec} from 'lib/designer/codec';
-import {JsonCodec} from "lib/designer/codec/json-codec";
 import {DeleteSelectionAction} from "lib/designer/canvas/actions/delete-action";
 
 export class Designer {

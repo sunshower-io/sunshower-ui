@@ -16,7 +16,7 @@ import {
 } from 'lib/hal/infrastructure/compute';
 import {
     mxPerimeter,
-    mxConstants
+    mxConstants, mxEvent
 } from "mxgraph";
 import {Vertex as TaskVertex} from 'lib/designer/model/graph';
 import {Role} from "lib/common/security/model/user";
@@ -29,10 +29,11 @@ export class TemplateClusterTemplate extends Vertex implements ComputeNodeTempla
 
     style: string = 'template-cluster-template-style';
 
-    onDoubleClick(sender, e) : void {
+    onDoubleClick(sender, e:mxEvent) : void {
         let container = ApplicationContextHolder.getContainer(),
             dialogService = container.get(DialogService) as DialogService;
         dialogService.open({
+            model: e.getProperty('cell'),
             viewModel: SyntaxAwareTextEditor
         }).then(t => {})
     }
