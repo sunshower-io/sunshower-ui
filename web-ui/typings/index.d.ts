@@ -44,3 +44,4 @@
 /// <reference path="modules/aurelia-templating/index.d.ts" />
 /// <reference path="modules/aurelia-validation/index.d.ts" />
 /// <reference path="modules/lodash/index.d.ts" />
+/// <reference path="modules/terminal-js/terminal-js.d.ts" />

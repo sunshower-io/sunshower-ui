@@ -500,6 +500,7 @@ $designer-button-height: 100px;
 
 .terminal {
   background: $almostblack;
+  padding: $standard-padding;
 
   @extend %expand;
 }

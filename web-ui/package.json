@@ -153,7 +153,7 @@
       "pnotify": "github:sciactive/pnotify@^3.0.0",
       "rxjs": "npm:rxjs@^5.2.0",
       "showdown": "npm:showdown@^1.6.4",
-      "terminal-js": "npm:terminal-js@^1.0.2",
+      "terminal-js": "npm:terminal-js@1.0.2/dist/terminal.js",
       "text": "github:systemjs/plugin-text@^0.0.9",
       "topojson/topojson": "github:topojson/topojson@^2.2.0",
       "velocity": "github:julianshapiro/velocity@^1.4.1",
@@ -164,6 +164,7 @@
       "npm:chart.js@2.5.0": {
         "main": "dist/Chart.min.js"
       },
+
       "npm:lodash@4.17.4": {
         "main": "lodash.js"
       },
