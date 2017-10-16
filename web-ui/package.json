@@ -93,6 +93,9 @@
     "yargs": "^4.8.1"
   },
   "jspm": {
+    "map": {
+      "css": "node_modules/system-js-plugin-css/css.js"
+    },
     "dependencies": {
       "ace": "github:ajaxorg/ace-builds@^1.2.6",
       "aurelia-animator-css": "npm:aurelia-animator-css@^1.0.2",
@@ -124,7 +127,7 @@
       "bootstrap": "github:twbs/bootstrap@^3.3.6",
       "canvg/canvg": "github:canvg/canvg@master",
       "chart.js": "npm:chart.js@^2.5.0",
-      "css": "github:systemjs/plugin-css@^0.1.33",
+      "css": "github:systemjs/plugin-css@^0.1.36",
       "cytoscape": "npm:cytoscape@^2.7.11",
       "cytoscape-edgehandles": "npm:cytoscape-edgehandles@^2.6.3",
       "cytoscape-grid-guide": "npm:cytoscape-grid-guide@^1.0.3",
@@ -157,15 +160,12 @@
       "text": "github:systemjs/plugin-text@^0.0.9",
       "topojson/topojson": "github:topojson/topojson@^2.2.0",
       "velocity": "github:julianshapiro/velocity@^1.4.1",
-      "xterm": "npm:xterm@^2.4.0"
+      "xterm": "github:sourcelair/xterm.js@^2.9.2"
     },
     "devDependencies": {},
     "overrides": {
       "npm:chart.js@2.5.0": {
         "main": "dist/Chart.min.js"
-      },
-      "npm:terminal-js@1.0.2": {
-        "main": "dist/terminal.js"
       },
       "npm:lodash@4.17.4": {
         "main": "lodash.js"
@@ -190,5 +190,13 @@
     "aurelia-validation": "^1.0.0-beta.1.0.1",
     "cytoscape": "^2.7.11",
     "whatwg-fetch": "^2.0.2"
+  },
+  "map": {
+    "css": "node_modules/system-js-plugin-css/css.js"
+  },
+  "meta": {
+    "*.css": {
+      "loader": "css"
+    }
   }
 }

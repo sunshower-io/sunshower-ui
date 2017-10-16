@@ -67,7 +67,7 @@ System.config({
     "canvg": "github:canvg/canvg@master",
     "canvg/canvg": "github:canvg/canvg@master",
     "chart.js": "npm:chart.js@2.5.0",
-    "css": "github:systemjs/plugin-css@0.1.33",
+    "css": "github:systemjs/plugin-css@0.1.36",
     "cytoscape": "npm:cytoscape@2.7.13",
     "cytoscape-edgehandles": "npm:cytoscape-edgehandles@2.7.1",
     "cytoscape-grid-guide": "npm:cytoscape-grid-guide@1.0.4",
@@ -111,7 +111,8 @@ System.config({
     "topojson/topojson": "github:topojson/topojson@2.2.0",
     "velocity": "github:julianshapiro/velocity@1.4.1",
     "velocity-ui": "github:julianshapiro/velocity@1.4.1/velocity.ui.js",
-    "xterm": "npm:xterm@2.4.0",
+    "xterm": "github:sourcelair/xterm.js@2.9.2",
+    "xtermjs": "github:sourcelair/xterm.js@2.9.2",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.4.1"
     },
@@ -403,7 +404,7 @@ System.config({
       "pinkie-promise": "npm:pinkie-promise@2.0.1"
     },
     "npm:font-awesome@4.6.3": {
-      "css": "github:systemjs/plugin-css@0.1.33"
+      "css": "github:systemjs/plugin-css@0.1.36"
     },
     "npm:fs.realpath@1.0.0": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
@@ -707,12 +708,6 @@ System.config({
     "npm:wrap-ansi@2.1.0": {
       "string-width": "npm:string-width@1.0.2",
       "strip-ansi": "npm:strip-ansi@3.0.1"
-    },
-    "npm:xterm@2.4.0": {
-      "buffer": "github:jspm/nodelibs-buffer@0.1.1",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "os": "github:jspm/nodelibs-os@0.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:y18n@3.2.1": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
