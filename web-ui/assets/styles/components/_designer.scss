@@ -47,11 +47,13 @@ $designer-button-height: 100px;
       left: 0;
       right: 0;
       width: 100%;
-      height: 50%;
+      height: -webkit-calc(50% - #{$designer-header-height/2});
+      height: -moz-calc(50% - #{$designer-header-height/2});
+      height: calc(50% - #{$designer-header-height/2});
     }
 
     &.top {
-      top: 0;
+      top: $designer-header-height;
       border-bottom: $default-border;
     }
 
@@ -506,4 +508,8 @@ $designer-button-height: 100px;
   padding: $standard-padding;
 
   @extend %expand;
+
+  .terminal, .terminal .xterm-viewport {
+    background: transparent !important;
+  }
 }
