@@ -14,8 +14,7 @@ template
         form(submit.delegate="save()" )
             a.dropdown-button.btn(data-activates="content-type-dropdown") Script Type 
             ul#content-type-dropdown.dropdown-content
-                li(repeat.for="definition of contentDefinitions")
-                    a(click.delegate="setContentType(definition)") ${definition.type}
+                li(repeat.for="definition of contentDefinitions" click.delegate="setContentType(definition)") ${definition.type}
             div.dialog-editor(ref="editor" show.bind="!loading")
             .button-holder
                 button.waves-effect.btn(type="submit") Save 

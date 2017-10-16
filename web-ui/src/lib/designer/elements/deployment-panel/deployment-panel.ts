@@ -23,7 +23,6 @@ export class DeploymentPanel {
 
     attached() {
         this.getData();
-        this.setUp();
     }
 
 
@@ -95,7 +94,8 @@ export class DeploymentPanel {
                     }
                 ]
             }
-        }
+        };
+        this.setUp();
     }
 
     setUp() : void {
