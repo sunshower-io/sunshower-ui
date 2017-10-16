@@ -497,8 +497,11 @@ $designer-button-height: 100px;
   font-size: .85em;
 }
 
+.d3-panel {
+  @extend %expand;
+}
 
-.terminal {
+.terminal-panel {
   background: $almostblack;
   padding: $standard-padding;
 
