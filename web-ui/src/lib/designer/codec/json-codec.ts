@@ -8,7 +8,7 @@ import {
 
 
 import {
-    Layer,
+    Layer, mxCell, mxEdge,
     mxGraph,
     mxGraphModel
 } from "mxgraph";
@@ -122,6 +122,7 @@ export class JsonCodec implements Codec {
                 let e = edge as Edge,
                     parent = nodes[e.source].value,
                     child = nodes[e.target] .value;
+                
                 parent.addChild(child);
                 r.children[child.id] = true;
                 return r;
@@ -139,13 +140,27 @@ export class JsonCodec implements Codec {
         let defaultParent = canvas.getDefaultParent();
         try {
             let roots = this.resolveRoots(graph, canvas);
+            let rootIds = new Map<string, mxCell>();
             for(let root of roots) {
                 let r = root as any;
+                rootIds.set(root.id, root);
                 if(r.addTo) {
                     r.addTo(canvas);
                 } else {
                     canvas.addCell(r, defaultParent);
                 }
+            }
+            
+            let edges = graph.edges;
+            for(let edge of edges) {
+                let source = rootIds.get(edge.source),
+                    target = rootIds.get(edge.target)
+                console.log("Source", source, "target", target);
+                canvas.addEdge(
+                    new mxCell(), 
+                    canvas.getDefaultParent(),
+                    source, target
+                );
             }
         } finally {
             canvas.getModel().endUpdate();

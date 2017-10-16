@@ -23,7 +23,6 @@ export class TerminalPanel {
         let a = new Terminal();
         // (Terminal as any).loadAddon('fit');
         a.open(this.element);
-        a.writeln("Frapper");
         (a as any).fit();
         // a.write('Hello from \033[1;3;31mxterm.js\033[0m $ ')
     }

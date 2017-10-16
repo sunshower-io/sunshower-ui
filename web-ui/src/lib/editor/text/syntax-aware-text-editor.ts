@@ -38,7 +38,6 @@ export class SyntaxAwareTextEditor {
     
     setContentType(definition: ContentDefinition) {
         let mode = this.handlerMappings.lookup(definition.handler);
-        console.log("MODE", mode);
         this.initialized
             .getSession()
             .setMode({
