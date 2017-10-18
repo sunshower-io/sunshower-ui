@@ -1,0 +1,14 @@
+template
+    .col.s12.m6
+        .card
+            .card-tabs
+                ul.tabs.tabs-fixed-width
+                    li.tab
+                        a.active(href='#${id}-topology') Topology 
+                    li.tab
+                        a(href='#${id}-details') Details 
+            .card-content.white
+                div(id="${id}-topology" ref="graph" style="height:300px; margin-left:-24px")
+                div(id="${id}-details" style="height:300px;")
+                    a(href="http://js1-ds-wvbite4-elb-1ilxw9ct6c9j7-104159464.us-east-2.elb.amazonaws.com.elb.cloudbees.net/cjoc/login?from=%2Fcjoc%2F") CJOC
+    

@@ -2929,6 +2929,9 @@ namespace d3 {
             gravity(): number;
             gravity(gravity: number): Force<Link, Node>;
 
+            distance(): number;
+            distance(gravity: number): Force<Link, Node>;
+
             nodes(): Node[];
             nodes(nodes: Node[]): Force<Link, Node>;
 

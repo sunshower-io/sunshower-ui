@@ -73,13 +73,13 @@ export class SyntaxAwareTextEditor {
         this.contentDefinitions = model.handlers;
         this.vertex = vertex;
         this.handlerMappings.configure(model.mappings);
-        // this.templateService.getContent(vertex.id)
-        //     .then(t => {
-        //         this.initialized.setValue(t);
+        this.templateService.getContent(vertex.id)
+            .then(t => {
+                this.initialized.setValue(t);
                 this.loading = false;
-        //         this.initialized.resize(true);
-        //         this.initialized.renderer.updateFull(true);
-        //     });
+                this.initialized.resize(true);
+                this.initialized.renderer.updateFull(true);
+            });
     }
 
     save(): void {

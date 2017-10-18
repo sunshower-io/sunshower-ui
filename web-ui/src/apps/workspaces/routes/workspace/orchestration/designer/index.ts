@@ -10,8 +10,8 @@ export class Draftboard {
 
     private router: Router;
 
-    constructor(private navigatorManager:NavigatorManager,
-                private orchestrationService:OrchestrationTemplateService) {
+    constructor(private navigatorManager: NavigatorManager,
+                private orchestrationService: OrchestrationTemplateService) {
 
     }
 
@@ -35,9 +35,20 @@ export class Draftboard {
             settings: {
                 icon: 'mdi-source-branch'
             }
+        }, {
+
+            route: 'deployments',
+            moduleId: './deployments',
+            name: 'deployment',
+            nav: true,
+            title: 'Deployment',
+            settings: {
+                icon: 'mdi-vector-circle'
+            }
         }]);
 
-        this.router = router;
+        this
+            .router = router;
     }
 
 }

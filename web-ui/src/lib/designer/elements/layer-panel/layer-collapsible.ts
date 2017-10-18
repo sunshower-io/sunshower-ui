@@ -20,6 +20,7 @@ export class LayerCollapsible {
         $(this.holder).find('.collapsible').collapsible();
     }
 
+    
     select(node: LayerNode, event: Event) {
         let target = event.target,
             createdEvent = createEvent('layerselected', node.self);

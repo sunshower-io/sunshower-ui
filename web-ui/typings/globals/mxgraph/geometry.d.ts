@@ -18,6 +18,7 @@ declare module 'mxgraph' {
         children        : Layer[];
 
 
+        setValue(label:string) : void;
         /**
          *
          * @param geo

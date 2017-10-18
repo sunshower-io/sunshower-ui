@@ -80,7 +80,7 @@ export class RegistryPanel {
                 this.loadRegistries();
                 this.newRegistry = null;
                 this.addingRegistry = false;
-                this.activeRegistryId = t.value;
+                this.activeRegistryId = t.id;
                 this.makeActive();
             }).catch(err => console.log(err));
     }

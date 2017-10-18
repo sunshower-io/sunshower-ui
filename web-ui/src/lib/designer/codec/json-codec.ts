@@ -41,7 +41,7 @@ export class DefaultEncoder implements Encoder<any> {
 
         return {
             id: t.id,
-            name: (n as any).label,
+            name: (n as any).value,
             type: getClass(t.data).name,
             layout: {
                 x: geo.x,
@@ -120,11 +120,18 @@ export class JsonCodec implements Codec {
             parentEdges = (g.edges || []).filter(t => t.relationship === 'parent'),
             sets = _.reduce(_.values(parentEdges), (r, edge) => {
                 let e = edge as Edge,
-                    parent = nodes[e.source].value,
-                    child = nodes[e.target] .value;
+                    pnode = nodes[e.source],
+                    cnode = nodes[e.target],
+                    parent = pnode ? pnode.value : null,
+                    child = cnode ? cnode.value : null;
                 
-                parent.addChild(child);
-                r.children[child.id] = true;
+               
+                if(parent) {
+                    parent.addChild(child);
+                }
+                if(child) {
+                    r.children[child.id] = true;
+                }
                 return r;
             }, {children:{}}),
             rootKeys = _.difference(
@@ -152,15 +159,12 @@ export class JsonCodec implements Codec {
             }
             
             let edges = graph.edges;
-            for(let edge of edges) {
-                let source = rootIds.get(edge.source),
-                    target = rootIds.get(edge.target)
-                console.log("Source", source, "target", target);
-                canvas.addEdge(
-                    new mxCell(), 
-                    canvas.getDefaultParent(),
-                    source, target
-                );
+            if(edges) {
+                for (let edge of edges) {
+                    let source = rootIds.get(edge.source),
+                        target = rootIds.get(edge.target);
+                    let e = canvas.insertEdge(canvas.getDefaultParent(), '', '', source, target, 'strokeColor=#4b738d;dashed=0;strokeWidth=1');
+                }
             }
         } finally {
             canvas.getModel().endUpdate();

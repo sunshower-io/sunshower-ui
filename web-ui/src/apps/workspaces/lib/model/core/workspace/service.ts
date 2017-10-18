@@ -48,7 +48,6 @@ export class WorkspaceService implements Service<Workspace> {
 
     current(): Promise<Workspace> {
         let ws = this.workspace;
-        console.log("CURRENT", ws, this.currentId);
         if (ws && ws.id === this.currentId) {
             return Promise.resolve(ws);
         } else {
@@ -68,10 +67,8 @@ export class WorkspaceService implements Service<Workspace> {
 
 
     bind(key: string): Promise<Workspace> {
-        console.log("BIND", key);
         if (Identifier.isIdentifier(key)) {
             this.currentId = key;
-            console.log("BIND2", key);
             return this.current();
         } else {
             return Promise.resolve(this.workspace);
@@ -96,9 +93,8 @@ export class WorkspaceService implements Service<Workspace> {
                 template.name = workspaceRequest.name;
                 template.key = workspaceRequest.name;
                 template.version = version;
-                return this.addTemplate(w.value, template).then(t => {
-                    console.log('w.value', w.value);
-                    return new Identifier(w.value);
+                return this.addTemplate(w.id, template).then(t => {
+                    return new Identifier(w.id);
                 });
             });
     }
@@ -115,7 +111,7 @@ export class WorkspaceService implements Service<Workspace> {
             body: JSON.stringify(orchestrationTemplate.toJSON())
         }).then(t => t.json() as any)
             .then(t => {
-                return new Identifier(t.value);
+                return new Identifier(t.id);
             });
     }
 

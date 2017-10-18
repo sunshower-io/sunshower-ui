@@ -32,7 +32,7 @@ export class LayerPanel {
     parseNode(node: Layer) : LayerNode {
         if (node && node.isVertex()) {
             let layerNode = new LayerNode();
-            layerNode.title = (node as any).label;
+            layerNode.title = (node as any).label || (node as any).getValue();
             layerNode.icon = (node as any).displayIcon;
             layerNode.self = node;
 

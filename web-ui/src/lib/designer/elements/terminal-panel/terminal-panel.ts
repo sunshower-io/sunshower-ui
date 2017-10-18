@@ -24,7 +24,7 @@ export class TerminalPanel {
         // (Terminal as any).loadAddon('fit');
         a.open(this.element);
         (a as any).fit();
-        // a.write('Hello from \033[1;3;31mxterm.js\033[0m $ ')
+        a.write('No terminal service available at ws://plugins/remotessh/channel (is terminal service installed?)')
     }
 
 

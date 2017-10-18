@@ -1,0 +1,22 @@
+template 
+    .modal-header Deployment Properties 
+    .modal-content
+        p Not all properties were set on deployment.  Cannot continue until the properties below are satisifed
+        .row
+            form.col.s12
+                .row
+                    .input-field.col.s12
+                        input#project_name.validate(type='text')
+                        label(for='project_name') Project Name 
+                .row
+                    .input-field.col.s12
+                        input#access_key.validate(type='password')
+                        label(for='access_key') Access Key 
+                .row
+                    .input-field.col.s12
+                        input#access_id.validate(type='text')
+                        label(for='access_id') Access ID
+
+
+        form(submit.delegate="save()" )
+            button.waves-effect.btn(type="submit") Save 

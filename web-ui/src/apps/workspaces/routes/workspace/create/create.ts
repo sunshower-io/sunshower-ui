@@ -34,17 +34,15 @@ export class CreateWorkspace {
     save() {
         this.workspaceService.save(this.workspace)
             .catch(err => {
-                console.log(err);
                 this.showError = true;
                 this.error = err.statusText;
             })
             .then(result => {
-                console.log('result', result);
                 if (result) {
                     //test
                     this.complete();
                     // this.router.navigate(`workspaces/${result.value}/dashboard`)
-                    this.router.navigate(`workspaces/${result.value}/designer`);
+                    this.router.navigate(`workspaces/${result.id}/designer`);
                 }
             });
     }

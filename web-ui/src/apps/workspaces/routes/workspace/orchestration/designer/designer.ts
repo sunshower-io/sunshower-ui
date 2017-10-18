@@ -90,6 +90,7 @@ export default class OrchestrationDesigner {
             designer.setCodec(this.codec);
             designer.setGraph(t);
             canvas.listen('canvas-saved').forEach(t => {
+                console.log("Canvas");
                 console.log(t.data);
                 this.orchestrationService.saveGraph(t.data)
                     .then(t => {

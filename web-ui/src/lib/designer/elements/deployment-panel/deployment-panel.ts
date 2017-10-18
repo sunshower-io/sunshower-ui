@@ -1,6 +1,7 @@
 import {autoinject, customElement} from "aurelia-framework";
 import {containerless} from "aurelia-templating";
 import * as d3 from 'd3';
+import {Router} from "aurelia-router";
 
 @autoinject
 @containerless
@@ -17,8 +18,9 @@ export class DeploymentPanel {
     private svg : any;
     private i : number;
     private duration : number;
+    loading: boolean = true;
 
-    constructor() {}
+    constructor(private router:Router) {}
 
 
     attached() {
@@ -27,198 +29,151 @@ export class DeploymentPanel {
 
 
     getData() : void {
-        this.data = {
-            "id": "S8WiiG4SqCpqjT9K5DEmxp",
-            "levels": {
-                "level": [
-                    {
-                        "level": 0,
-                        "tasks": {
-                            "task": [
-                                {
-                                    "order": 0,
-                                    "name": "5",
-                                    "taskId": "PnsiW8hQmxuCu1t7HicL9X"
-                                },
-                                {
-                                    "order": 1,
-                                    "name": "7",
-                                    "taskId": "KKYFfV85mb9msz7FZYuMvd"
-                                },
-                                {
-                                    "order": 2,
-                                    "name": "3",
-                                    "taskId": "T7N8Tr9TGKhVFMMvH5YT72"
-                                }
-                            ]
-                        }
-                    },
-                    {
-                        "level": 1,
-                        "tasks": {
-                            "task": [
-                                {
-                                    "order": 0,
-                                    "name": "11",
-                                    "taskId": "7dzhoReAyz2hp2Vz7FgTVN"
-                                },
-                                {
-                                    "order": 1,
-                                    "name": "8",
-                                    "taskId": "4pStktPb9fLo8mTS4EtwHT"
-                                }
-                            ]
-                        }
-                    },
-                    {
-                        "level": 2,
-                        "tasks": {
-                            "task": [
-                                {
-                                    "order": 0,
-                                    "name": "10",
-                                    "taskId": "DJ7MEFW6is2PPMz8Ei8Mpi"
-                                },
-                                {
-                                    "order": 1,
-                                    "name": "2",
-                                    "taskId": "V7nkQBJTFqfdUdpsuhsDH5"
-                                },
-                                {
-                                    "order": 2,
-                                    "name": "9",
-                                    "taskId": "Az7gP4PQSVfP11voh3piYq"
-                                }
-                            ]
-                        }
-                    }
-                ]
-            }
-        };
-        this.setUp();
+        setTimeout(() => {
+            this.loading = false;
+            this.setUp();
+        }, 3000);
     }
 
     setUp() : void {
-        let margin = {top: 20, right: 20, bottom: 20, left: 20},
-            width = this.d3Holder.clientWidth - margin.right - margin.left,
-            height = this.d3Holder.clientHeight - margin.top - margin.bottom;
+        var treeData = [
+            {
+                "name": "Install CJE Cluster",
+                "parent": "null",
+                "id": "install-cje-cluster",
+                "value": 10,
+                "type": "black",
+                "level": "red",
+                "children": [
+                    {
+                        "name": "Deploy Bastion Host",
+                        "parent": "install-cje-cluster",
+                        "value": 15,
+                        "type": "grey",
+                        "level": "red",
+                        "children": [
+                            {
+                                "name": "Install PIP",
+                                "parent": "install-cje-cluster",
+                                "value": 5,
+                                "type": "steelblue",
+                                "level": "orange",
+                                "children": [{
+                                    "name": "install CJE",
+                                    "parent": "install-cje-cluster",
+                                    "value": 8,
+                                    "type": "steelblue",
+                                    "level": "red",
+                                    "children": [{
+                                        "name": "Configure AWS CLI",
+                                        "parent": "install-cje-cluster",
+                                        "value": 8,
+                                        "type": "steelblue",
+                                        "level": "red",
+                                        "children": [{
+                                            "name": "Create Project",
+                                            "parent": "install-cje-cluster",
+                                            "value": 8,
+                                            "type": "steelblue",
+                                            "level": "red",
+                                            "children": [{
+                                                "name": "Apply Project",
+                                                "parent": "install-cje-cluster",
+                                                "value": 8,
+                                                "type": "steelblue",
+                                                "level": "red",
+                                            }]
+                                        }]
+                                    }]
+                                }]
+                            },
+                            {
+                                "name": "install bind-utils",
+                                "parent": "install-cje-cluster",
+                                "value": 8,
+                                "type": "steelblue",
+                                "level": "red",
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
 
-        this.duration = 750;
-        this.i = 0;
-        this.tree = d3.layout.tree()
+// ************** Generate the tree diagram	 *****************
+        var margin = {top: 20, right: 120, bottom: 20, left: 120},
+            width = 960 - margin.right - margin.left,
+            height = 500 - margin.top - margin.bottom;
+
+        var i = 0;
+
+        var tree = d3.layout.tree()
             .size([height, width]);
 
-        this.diagonal = d3.svg.diagonal()
+        var diagonal = d3.svg.diagonal()
             .projection(function(d) { return [d.y, d.x]; });
 
-        this.svg = d3.select(this.d3Holder).append("svg")
-            .attr("width", width + margin.right + margin.left)
+        var svg = d3.select(this.d3Holder).append("svg")
+            .attr("width", "100%")
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        this.data.x0 = height / 2;
-        this.data.y0 = height / 2;
+        let root = treeData[0];
 
-        this.update(this.data);
-    }
+        update(root);
 
+        function update(source) {
 
-    update(source : any) {
+            // Compute the new tree layout.
+            var nodes = tree.nodes(root).reverse(),
+                links = tree.links(nodes);
 
-        let nodes = this.tree.nodes(source).reverse(),
-            links = this.tree.links(nodes);
+            // Normalize for fixed-depth.
+            nodes.forEach(function(d) { d.y = d.depth * 180; });
 
-        // Normalize for fixed-depth.
-        nodes.forEach(function(d) { d.y = d.depth * 180; });
+            // Declare the nodes…
+            var node = svg.selectAll("g.node")
+                .data(nodes, function(d:any) { return d.id || (d.id = ++i); });
 
-        // Update the nodes…
-        let node = this.svg.selectAll("g.node")
-            .data(nodes, function(d) { return d.id || (d.id = ++this.i); });
+            // Enter the nodes.
+            var nodeEnter = node.enter().append("g")
+                .attr("class", "node")
+                .attr("transform", function(d) {
+                    return "translate(" + d.y + "," + d.x + ")"; });
 
-        // Enter any new nodes at the parent's previous position.
-        let nodeEnter = node.enter().append("g")
-            .attr("class", "node")
-            .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-            .on("click", this.click);
+            nodeEnter.append("circle")
+                .attr("r", function(d:any) { return d.value; })
+                .style("stroke", function(d:any) { return d.type; })
+                .style("fill", function(d:any) { return d.level; });
 
-        nodeEnter.append("circle")
-            .attr("r", 1e-6)
-            .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+            nodeEnter.append("text")
+                .attr("x", function(d:any) {
+                    return d.children || d._children ?
+                        (d.value + 4) * -1 : d.value + 4 })
+                .attr("dy", ".35em")
+                .attr("text-anchor", function(d:any) {
+                    return d.children || d._children ? "end" : "start"; })
+                .text(function(d:any) { return d.name; })
+                .style("fill-opacity", 1);
 
-        nodeEnter.append("text")
-            .attr("x", function(d) { return d.children || d._children ? -13 : 13; })
-            .attr("dy", ".35em")
-            .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-            .text(function(d) { return d.name; })
-            .style("fill-opacity", 1e-6);
+            // Declare the links…
+            var link = svg.selectAll("path.link")
+                .data(links, (d:any) => { return d.target.id; });
 
-        // Transition nodes to their new position.
-        var nodeUpdate = node.transition()
-            .duration(this.duration)
-            .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+            // Enter the links.
+            link.enter().insert("path", "g")
+                .attr("class", "link")
+                .style("stroke", function(d:any) { return d.target.level; })
+                .attr("d", diagonal);
 
-        nodeUpdate.select("circle")
-            .attr("r", 10)
-            .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
-
-        nodeUpdate.select("text")
-            .style("fill-opacity", 1);
-
-        // Transition exiting nodes to the parent's new position.
-        var nodeExit = node.exit().transition()
-            .duration(this.duration)
-            .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
-            .remove();
-
-        nodeExit.select("circle")
-            .attr("r", 1e-6);
-
-        nodeExit.select("text")
-            .style("fill-opacity", 1e-6);
-
-        // Update the links…
-        var link = this.svg.selectAll("path.link")
-            .data(links, function(d) { return d.target.id; });
-
-        // Enter any new links at the parent's previous position.
-        link.enter().insert("path", "g")
-            .attr("class", "link")
-            .attr("d", function(d) {
-                var o = {x: source.x0, y: source.y0};
-                return this.diagonal({source: o, target: o});
-            });
-
-        // Transition links to their new position.
-        link.transition()
-            .duration(this.duration)
-            .attr("d", this.diagonal);
-
-        // Transition exiting nodes to the parent's new position.
-        link.exit().transition()
-            .duration(this.duration)
-            .attr("d", function(d) {
-                var o = {x: source.x, y: source.y};
-                return this.diagonal({source: o, target: o});
-            })
-            .remove();
-
-        // Stash the old positions for transition.
-        nodes.forEach(function(d) {
-            d.x0 = d.x;
-            d.y0 = d.y;
-        });
-    }
-
-    click(d : any) {
-        if (d.children) {
-            d._children = d.children;
-            d.children = null;
-        } else {
-            d.children = d._children;
-            d._children = null;
         }
-        this.update(d);
+        
+        setTimeout(() => {
+            this.router.navigate('deployments');
+        }, 1000 * 60 * 10);
+        
     }
+
 
 }

@@ -1,2 +1,3 @@
 template
-    .d3-panel(ref="d3Holder")
+    loader(if.bind="loading" message.bind="'Computing Task Execution Plan...'")
+    .d3-panel(ref="d3Holder" show.bind="!loading")

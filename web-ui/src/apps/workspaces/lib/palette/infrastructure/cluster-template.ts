@@ -27,7 +27,8 @@ import {SyntaxAwareTextEditor} from "lib/editor/text/syntax-aware-text-editor";
 
 export class TemplateClusterTemplate extends Vertex implements ComputeNodeTemplate {
 
-    style: string = 'template-cluster-template-style';
+    displayIcon         : string = 'assets/icons/designer/virtual-cluster.svg';
+    style               : string = 'template-cluster-template-style';
 
     onDoubleClick(sender, event:mxEvent) : void {
         let container = ApplicationContextHolder.getContainer(),
@@ -69,7 +70,7 @@ export class ClusterTemplateElementFactory extends DefaultElementFactory impleme
 
     load(model: Canvas, v: TaskVertex): Drawable {
         return new TemplateClusterTemplate(
-            v.name, 
+            v.name || 'template cluster', 
             v.layout.x, 
             v.layout.y, 
             v.layout.width, 

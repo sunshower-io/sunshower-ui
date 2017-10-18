@@ -2,7 +2,7 @@ import {UUID} from "./uuid";
 import {Base58} from "lib/common/util/base58";
 
 export class Identifier {
-    constructor(public readonly value: string) {
+    constructor(public readonly id: string) {
     }
 }
 export module Identifier {

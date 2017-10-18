@@ -69,7 +69,7 @@ export class Canvas extends mxGraph {
         this.getSelectionModel().addListener(mxEvent.CHANGE, this.cellSelected);
         
         this.addListener(mxEvent.CLICK, this.clickListener);
-        this.addListener(mxEvent.CLICK, this.doubleClickListener);
+        this.addListener(mxEvent.DOUBLE_CLICK, this.doubleClickListener);
     }
 
     protected clickListener = (sender:any, e:any) => {

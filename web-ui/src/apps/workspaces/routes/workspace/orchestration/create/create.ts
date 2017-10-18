@@ -105,7 +105,7 @@ export class CreateOrchestration {
                 }).then(result => {
                     if(result) {
                         this.complete();
-                        this.router.navigate(`workspaces/${this.workspaceService.workspace.id}/orchestration/${result.value}`)
+                        this.router.navigate(`workspaces/${this.workspaceService.workspace.id}/orchestration/${result.id}`)
                     }
             });
         } else {

@@ -29,6 +29,7 @@ export class ScriptTemplateElement extends Vertex implements ComputeNodeTemplate
 
     style: string = 'script-template-element-style';
 
+    displayIcon: string = 'assets/icons/plugins/script/script.svg';
 
     onDoubleClick(sender: any, event: any): void {
         let container = ApplicationContextHolder.getContainer(),

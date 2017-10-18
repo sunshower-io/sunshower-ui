@@ -1,0 +1,26 @@
+{
+  "nodes":[
+    {
+      "name":"bastion host",
+      "group":1,
+      "ip": "52.15.44.245",
+      "dns": "ec2-52-15-44-245.us-east-2.compute.amazonaws.com"
+    },
+    {
+      "name":"worker",
+      "group":2, 
+      "ip": "18.221.57.61",
+      "dns": "ec2-18-221-57-61.us-east-2.compute.amazonaws.com"
+    },
+    {
+      "name":"manager",
+      "group":2,
+      "ip": "18.216.22.223",
+      "dns": "ec2-18-216-22-223.us-east-2.compute.amazonaws.com"
+    }
+  ],
+  "links":[
+    {"source":2,"target":1,"weight":1},
+    {"source":0,"target":1,"weight":3}
+  ]
+}

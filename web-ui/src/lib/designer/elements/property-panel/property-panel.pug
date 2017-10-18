@@ -4,6 +4,20 @@ template
         h2 Properties
     .designer-panel-body
         .designer-form(ref="propertyCollapsible")
+
+            ul.collapsible.property-collapsible(data-collapsible="expandable" if.bind="cells && cells.length")
+                li
+                    .collapsible-header
+                        | Node 
+                        i.material-icons.mdi.mdi-chevron-right.dropdown-icon
+                    .collapsible-body
+                        
+                        .input-field.locking
+                            input(type="text" id="${id}" ref="cellName" keyup.delegate="updateName()")
+                            label(for="${id}" value.bind="property.value") ${property.label}
+                            i.materialize-icon.mdi.mdi-lock-outline.locking-icon(
+                                class.bind="property.isPrivate ? 'active' : ''"
+                            )
             ul.collapsible.property-collapsible(data-collapsible="expandable")
                 li(repeat.for="cell of cells")
                     .collapsible-header

@@ -26,6 +26,7 @@ export class ComputeNodeTemplateElement extends Vertex implements ComputeNodeTem
 
     style: string = 'compute-node-template-style';
 
+    displayIcon         : string = 'assets/icons/designer/vm.svg';
 
     onClick(sender:any, event:any) : void {
         

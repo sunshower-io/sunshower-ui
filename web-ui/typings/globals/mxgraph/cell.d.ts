@@ -63,6 +63,7 @@ declare module 'mxgraph' {
         constructor(label?:string, geometry?:mxGeometry);
 
 
+        setValue(label:string) : void;
         /**
          *
          * @param geo
