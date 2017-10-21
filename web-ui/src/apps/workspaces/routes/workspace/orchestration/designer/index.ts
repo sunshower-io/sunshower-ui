@@ -47,8 +47,7 @@ export class Draftboard {
             }
         }]);
 
-        this
-            .router = router;
+        this.router = router;
     }
 
 }

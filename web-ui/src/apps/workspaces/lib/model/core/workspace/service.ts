@@ -54,13 +54,14 @@ export class WorkspaceService implements Service<Workspace> {
             return this.client.fetch(`workspaces/${this.currentId}`)
                 .then(w => w.json() as any)
                 .then(w => {
-                    this.getTemplates(this.currentId).then(t => {
-                        this.template = t[0];
-                        this.currentTemplateId = this.template.id;
-                        this.workspace = new Workspace(w);
-                        this.subject.next(this.workspace);
-                        return this.workspace;
-                    });
+                    return new Workspace(w);
+                    // this.getTemplates(this.currentId).then(t => {
+                    //     this.template = t[0];
+                    //     this.currentTemplateId = this.template.id;
+                    //     this.workspace = new Workspace(w);
+                    //     this.subject.next(this.workspace);
+                    //     return this.workspace;
+                    // });
                 });
         }
     }
@@ -86,17 +87,21 @@ export class WorkspaceService implements Service<Workspace> {
         return this.client.fetch('workspaces', {
             method: 'put',
             body: JSON.stringify(workspaceRequest)
-        }).then(w => w.json() as any)
-            .then(w => {
-                let template = new OrchestrationTemplate(),
-                    version = new Version();
-                template.name = workspaceRequest.name;
-                template.key = workspaceRequest.name;
-                template.version = version;
-                return this.addTemplate(w.id, template).then(t => {
-                    return new Identifier(w.id);
-                });
-            });
+        }).then(w => w.json() as any).then(w => new Identifier(w.id));
+            // .then(w => {
+            //     let template = new OrchestrationTemplate(),
+            //         version = new Version();
+            //     template.name = workspaceRequest.name;
+            //     template.key = workspaceRequest.name;
+            //     template.version = version;
+            //     return this.addTemplate(w.id, template).then(t => {
+            //         return new Identifier(w.id);
+            //     });
+            // });
+    }
+    
+    public getTemplatesForCurrent() : Promise<OrchestrationTemplate[]> {
+        return this.current().then(t => this.getTemplates(t.id));
     }
 
     public getTemplates(workspaceId: string) : Promise<OrchestrationTemplate[]> {

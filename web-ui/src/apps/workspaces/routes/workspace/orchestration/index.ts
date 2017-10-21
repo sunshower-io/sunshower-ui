@@ -18,11 +18,11 @@ export class WorkspaceOrchestrations {
     configureRouter(config: RouterConfiguration, router: Router) {
         config.options.breadcrumb = true;
         config.map([{
-            route: ['', 'dashboard'],
-            moduleId: './dashboard/dashboard',
-            name: 'dashboard',
+            route: ['', 'templates'],
+            moduleId: './templates/templates',
+            name: 'templates',
             nav: false,
-            title: 'Orchestration Dashboard',
+            title: 'Templates',
             settings: {
                 hideInBreadcrumb: true
             }

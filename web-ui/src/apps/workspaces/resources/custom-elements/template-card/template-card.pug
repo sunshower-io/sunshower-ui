@@ -1,0 +1,12 @@
+template 
+    .workspace-card
+        .card-content(click.delegate="open()")
+            summary-icon(stroke="none" fill="#335061" textColor="white" text="${template.name}" size="80")
+            h2.card-title ${template.name}
+            .card-updated Last Updated ${template.modified}
+            .card-updated Version ${template.version.major} ${template.version.minor} ${template.version.minorMinor}-${template.version.extension}
+        .card-action
+            a.material-icons.mdi.mdi-web(click.delegate="open(template.id)")
+            a.material-icons.mdi.mdi-content-copy(click.delegate="open(template.id)")
+            a.material-icons.mdi.mdi-link(click.delegate="open(template.id)")
+            a.material-icons.mdi.mdi-delete(click.delegate="destroy(template.id)")

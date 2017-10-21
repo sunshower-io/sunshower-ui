@@ -32,9 +32,9 @@ export class WorkspaceContext {
                     router: Router) {
         config.options.breadcrumb = true;
         config.map([{
-            route: ['', 'draftboard'],
-            moduleId: './orchestration/designer/index',
-            name: 'draftboard'
+            route: ['', 'templates'],
+            moduleId: './orchestration/index',
+            name: 'templates'
         }]);
         // config.map([{
         //     route: ['', 'dashboard'],

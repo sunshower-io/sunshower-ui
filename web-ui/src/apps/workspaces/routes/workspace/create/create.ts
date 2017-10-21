@@ -42,7 +42,7 @@ export class CreateWorkspace {
                     //test
                     this.complete();
                     // this.router.navigate(`workspaces/${result.value}/dashboard`)
-                    this.router.navigate(`workspaces/${result.id}/designer`);
+                    this.router.navigate(`workspaces/${result.id}/templates`);
                 }
             });
     }

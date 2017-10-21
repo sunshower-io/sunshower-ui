@@ -11,7 +11,11 @@ export class WorkspaceCard {
     @bindable
     private workspace: Workspace;
 
-    constructor(private router: Router, private workspaceService: WorkspaceService, private ea:EventAggregator) {
+    constructor(
+        private router: Router, 
+        private workspaceService: WorkspaceService, 
+        private ea:EventAggregator
+    ) {
 
     }
 
@@ -22,7 +26,7 @@ export class WorkspaceCard {
     }
 
     open(id:string) : void {
-        this.router.navigate(`${id}/draftboard`);
+        this.router.navigate(`${id}/templates`);
     }
 
     destroy(id: string) : void {

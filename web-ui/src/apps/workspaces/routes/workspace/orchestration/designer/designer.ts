@@ -39,7 +39,8 @@ export default class OrchestrationDesigner {
     @bindable
     private orchestration: OrchestrationTemplate;
 
-    private codec           : Codec;
+    private codec                   : Codec;
+    private orchestrationId         : string;
 
     @bindable
     private elementFactory: OrchestrationProviderFactory;
@@ -65,6 +66,10 @@ export default class OrchestrationDesigner {
         return this.codec;
     }
 
+    
+    activate(params:any) : void {
+        this.orchestrationId = params.orchestrationId;
+    }
 
     attached() : void {
         this.designerManager.toggleLoading();
@@ -74,7 +79,7 @@ export default class OrchestrationDesigner {
     private configure() {
         this.workspaceService.current().then(w => {
             this.orchestration = this.workspaceService.template;
-            this.orchestrationService.bind(this.orchestration.id).then(t => {
+            this.orchestrationService.bind(this.orchestrationId).then(t => {
                 this.orchestrationService.currentGraph().then(t => {
                     let canvas = this.designerManager.getCurrentCanvas(),
                         designer = this.designerManager.getCurrent();

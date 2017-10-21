@@ -1,17 +1,17 @@
-template
-    .modal-header Create New Project 
+template 
+    .modal-header Create New Template 
     .modal-content
         form(submit.delegate="save()")
             .input-field
                 input(type='text'
                     id="${nameId}"
-                    value.bind='workspace.name'
+                    value.bind='template.name'
                     class="validate"
                     required="required")
                 label(for="${nameId}") Name
             .input-field
                 textarea(id="${descriptionId}"
-                    value.bind='workspace.description'
+                    value.bind='template.description'
                     class="materialize-textarea")
                 label(for="${descriptionId}") Description
             .form-message.error(if.bind="showError") ${error}
