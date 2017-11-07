@@ -22,9 +22,11 @@
 
   .modal-content {
     background: $offwhite;
-    padding: 0;
-    //padding: $standard-padding*2;
+    padding: $standard-padding*2;
 
+    &.row {
+      padding: 0;
+    }
 
     &.editor {
       background: $almostblack;

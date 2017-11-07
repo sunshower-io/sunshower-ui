@@ -41,6 +41,14 @@ $designer-button-height: 100px;
       top: 0;
       bottom: 0;
       width: $body-panel-width;
+
+      &.large {
+        width: $body-panel-width*2; //totally arbitrary
+      }
+
+      &.small {
+        width: $body-panel-width/2; //also totally arbitrary
+      }
     }
 
     &.full {
@@ -367,7 +375,7 @@ $designer-button-height: 100px;
   &.left-panel-closed {
     padding-left: 0;
 
-    .template-info {
+    .utilities {
       left: $standard-padding;
     }
   }
@@ -375,9 +383,9 @@ $designer-button-height: 100px;
   &.right-panel-closed {
     padding-right: 0;
 
-    .utilities {
-      right: $standard-padding;
-    }
+    //.utilities {
+    //  right: $standard-padding;
+    //}
   }
 
   .template-info {
@@ -437,7 +445,7 @@ $designer-button-height: 100px;
   .utilities {
     position: absolute;
     top: 0;
-    right: $standard-padding + $body-panel-width;
+    left: $standard-padding + $body-panel-width;
     bottom: 0;
     .material-icons {
       color: $lightgrey;
@@ -453,10 +461,10 @@ $designer-button-height: 100px;
 }
 
 .designer-button {
-  right: 23px + $body-panel-width;
+  left: 23px + $body-panel-width;
 
-  &.right-panel-closed {
-    right: 23px;
+  &.left-panel-closed {
+    left: 23px;
   }
 
   .btn-floating {
