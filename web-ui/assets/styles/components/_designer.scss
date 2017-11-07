@@ -30,6 +30,17 @@ $designer-button-height: 100px;
     z-index: 99;
   }
 
+  .panel-toggle {
+    z-index:100;
+    position:absolute;
+    box-sizing: border-box;
+    width: 20px;
+    background: $midgrey;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
+  }
 
   .panel {
     z-index: 100;
@@ -41,14 +52,6 @@ $designer-button-height: 100px;
       top: 0;
       bottom: 0;
       width: $body-panel-width;
-
-      &.large {
-        width: $body-panel-width*2; //totally arbitrary
-      }
-
-      &.small {
-        width: $body-panel-width/2; //also totally arbitrary
-      }
     }
 
     &.full {
@@ -70,8 +73,14 @@ $designer-button-height: 100px;
     }
 
     &.right {
-      border-left: $default-border;
+      border-left: none;
       right: 0;
+      border-left: $default-border;
+      width: $body-panel-width*2; //totally arbitrary
+
+      &.closed {
+        display: none;
+      }
     }
 
     &.left {

@@ -10,8 +10,14 @@ import {
 export class DesignerRightPanel {
 
 
+    panelClosed     : boolean;
+
+
     attached() {
 
+    }
 
+    togglePanel() {
+        this.panelClosed = !this.panelClosed;
     }
 }

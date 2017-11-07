@@ -1,5 +1,6 @@
 .modal {
   background: none;
+  @extend .z-depth-0;
 
   form {
     padding: 0;
