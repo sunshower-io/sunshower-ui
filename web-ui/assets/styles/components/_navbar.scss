@@ -71,7 +71,7 @@ nav {
   }
 
   ul.user-menu {
-    width: $body-panel-width;
+    //width: $body-panel-width;
 
     //@media #{$medium-only} {
     //  width: $body-panel-width - $navbar-height;
@@ -89,41 +89,10 @@ nav {
       text-align: center;
 
       &.dropdown-tab {
-        //width: $body-panel-width - ($navbar-height*2);
-        width: 100%;
-        //background: $lightgreen;
-
-        //@media #{$small-and-down} {
-        //  width: $navbar-height*2;
-        //}
-
-        i.material-icons.profile-image {
-          display: none;
-
-          //@media #{$small-and-down} {
-          //  display: inline;
-          //}
-        }
-
-        //span {
-        //  @media #{$small-and-down} {
-        //    display: none;
-        //  }
-        //}
+        padding-left: 1em;
 
       }
 
-      //&.alert-tab, &.user-tab {
-      //  width: $navbar-height;
-      //  text-align: center;
-      //  background: $primary-color-dark;
-      //}
-
-      //&.user-tab {
-      //  @media #{$medium-and-down} {
-      //    display: none;
-      //  }
-      //}
 
       i.material-icons {
         vertical-align: middle;
