@@ -23,6 +23,7 @@ import "rxjs/add/operator/filter";
 import {Subject} from "rxjs/Subject";
 import {Observable} from "rxjs/Observable";
 import {GraphHandler} from "./graph-handler";
+import {TaskGraph} from "lib/designer/model/graph/graph-element";
 
 
 export interface CanvasEvent<T> {
@@ -38,15 +39,14 @@ export interface CanvasEventListener {
 export class Canvas extends mxGraph {
 
 
-    private grids: Grid[];
-    private undoListener: any;
+    private grids               : Grid[];
+    private undoListener        : any;
 
-    private providers: ElementFactory[];
-    private subject: Subject<CanvasEvent<any>>;
+    private providers           : ElementFactory[];
+    private subject             : Subject<CanvasEvent<any>>;
 
-
-    private keyHandler: KeyHandler;
-    readonly historyManager: mxUndoManager;
+    private keyHandler          : KeyHandler;
+    readonly historyManager     : mxUndoManager;
 
     constructor(public readonly container: HTMLElement,
                 model: CanvasModel) {
@@ -76,7 +76,7 @@ export class Canvas extends mxGraph {
         let cell = e.getProperty('cell');
         if(cell && cell.onClick) {
             let vert = cell as Drawable;
-            (vert as any).onClick(sender, e)
+            (vert as any).onClick(sender, e, this)
         }
     };
     
@@ -84,10 +84,11 @@ export class Canvas extends mxGraph {
         let cell = e.getProperty('cell');
         if(cell && cell.onDoubleClick) {
             let vert = cell as Drawable;
-            (vert as any).onDoubleClick(sender, e)
+            (vert as any).onDoubleClick(sender, e, this)
         }
         
     };
+    
 
     private graphChanged = (sender:any, e:any) => {
         this.dispatch({
@@ -157,6 +158,7 @@ export class Canvas extends mxGraph {
     }
 
     resolveElementLoader(key: string): ElementLoader {
+        console.log("KEY", key);
         for (let provider of this.providers) {
             if (provider.handles(key)) {
                 return provider.resolveElementLoader(key);

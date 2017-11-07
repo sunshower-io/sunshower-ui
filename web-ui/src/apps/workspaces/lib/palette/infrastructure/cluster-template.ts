@@ -30,11 +30,12 @@ export class TemplateClusterTemplate extends Vertex implements ComputeNodeTempla
     displayIcon         : string = 'assets/icons/designer/virtual-cluster.svg';
     style               : string = 'template-cluster-template-style';
 
-    onDoubleClick(sender, event:mxEvent) : void {
+    onDoubleClick(sender, event:mxEvent, canvas:Canvas) : void {
         let container = ApplicationContextHolder.getContainer(),
             dialogService = container.get(DialogService) as DialogService;
         dialogService.open({
             model: {
+                canvas: canvas,
                 vertex: event.getProperty('cell'),
                 handlers: [{
                     type: 'json',
@@ -75,7 +76,8 @@ export class ClusterTemplateElementFactory extends DefaultElementFactory impleme
             v.layout.y, 
             v.layout.width, 
             v.layout.height, 
-            v
+            v,
+            v.id
         );
     }
 

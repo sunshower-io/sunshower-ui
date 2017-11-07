@@ -40,6 +40,7 @@ export class CJETemplateElementFactory extends DefaultElementFactory implements 
 
     preInitialize(canvas: Canvas) {
         this.createStyle(canvas);
+        canvas.registerProvider(this);
     }
 
     newElement(x: number, y: number, event: Event, canvas: Canvas, target: any): Drawable {
@@ -77,7 +78,8 @@ export class CJETemplateElementFactory extends DefaultElementFactory implements 
             v.layout.y,
             v.layout.width,
             v.layout.height,
-            v
+            v,
+            v.id
         );
     }
 

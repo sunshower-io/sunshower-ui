@@ -112,8 +112,8 @@ export class RegistryElement extends Vertex {
 
     style: string = "-registry-service-style";
 
-    constructor(label: string, slug: string, x: number, y: number) {
-        super(label, x, y, 70, 70);
+    constructor(label: string, slug: string, x: number, y: number, id?: string) {
+        super(label, x, y, 70, 70, null, id);
         this.style = slug + this.style;
     }
 

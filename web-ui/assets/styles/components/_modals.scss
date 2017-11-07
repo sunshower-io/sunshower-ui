@@ -15,10 +15,15 @@
     line-height: 50px;
     font-size: 1.25rem;
   }
+  
+  .modal-nav {
+    background: $offwhite;
+  }
 
   .modal-content {
     background: $offwhite;
-    padding: $standard-padding*2;
+    padding: 0;
+    //padding: $standard-padding*2;
 
 
     &.editor {

@@ -7,7 +7,12 @@ template
         //h1 Workspaces
         loader(if.bind="loading")
         template(if.bind="templates.length > 0")
-            template-card(if.bind="!loading" repeat.for="template of templates" template.bind="template")
+            template-card(
+                if.bind="!loading" 
+                repeat.for="template of templates" 
+                template.bind="template", 
+                link.delegate="create(template.id)"
+            )
         template(if.bind="templates.length == 0")
             .workspace-card
                 .card-content(click.delegate="create()")

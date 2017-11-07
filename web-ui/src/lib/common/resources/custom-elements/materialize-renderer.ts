@@ -7,10 +7,10 @@ export module MaterializeRenderer {
 
 export class MaterializeRenderer {
 
-    private anchor: Element;
-    private modalContainer: HTMLElement;
-    private modalOverlay: HTMLElement;
-    dialogControllers: DialogController[];
+    private anchor                  : Element;
+    private modalContainer          : HTMLElement;
+    private modalOverlay            : HTMLElement;
+    dialogControllers               : DialogController[];
 
     private stopPropagation: (e: any) => void;
     private closeModalClick: (e: any) => void;

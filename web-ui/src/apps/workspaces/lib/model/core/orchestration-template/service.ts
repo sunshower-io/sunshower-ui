@@ -9,16 +9,16 @@ import {TaskGraph} from "lib/designer/model/graph/graph-element";
 @autoinject
 export class OrchestrationTemplateService implements Service<OrchestrationTemplate> {
 
-    public orchestrationTemplate    : OrchestrationTemplate;
+    public orchestrationTemplate: OrchestrationTemplate;
 
-    static readonly paramName       : string = 'orchestrationTemplateId';
+    static readonly paramName: string = 'orchestrationTemplateId';
 
-    private currentId               : string;
+    private currentId: string;
 
-    private subject                 : Subject<OrchestrationTemplate>;
+    private subject: Subject<OrchestrationTemplate>;
 
     constructor(private client: HttpClient,
-        private serviceManager: ServiceManager) {
+                private serviceManager: ServiceManager) {
         serviceManager.register(OrchestrationTemplateService.paramName, this);
         this.subject = new Subject();
     }
@@ -47,14 +47,26 @@ export class OrchestrationTemplateService implements Service<OrchestrationTempla
         }
     }
 
-    currentGraph() : Promise<TaskGraph> {
-        return this.client.fetch(`graph/orchestration-template/${this.currentId}`)
-            .then(t => t.json())
-            .then(t => new TaskGraph(t))
+    public async link(id: string,
+               template: OrchestrationTemplate
+    ): Promise<OrchestrationTemplate> {
+        return this.client.fetch(`templates/orchestrations/${id}/link`, {
+                method: 'put',
+                body: JSON.stringify(template.toJSON())
+            }).then(t => t.json()).then(t => new OrchestrationTemplate(t));
     }
 
-    saveGraph(e: any) : Promise<boolean> {
-        e.type = 'orchestration-template';
+    currentGraph(): Promise<TaskGraph> {
+        return this.client.fetch(`graph/orchestration-template/${this.currentId}`)
+            .then(t => t.json())
+            .then(t => {
+                return new TaskGraph(t)
+            })
+    }
+
+    saveGraph(e: any): Promise<boolean> {
+        e.type = 'io.sunshower.sdk.v1.graph.model.GraphElement';
+        e['graph-type'] = 'orchestration-template';
         return this.client.fetch(`graph/${this.currentId}`, {
             method: 'put',
             body: JSON.stringify(e)
@@ -62,7 +74,7 @@ export class OrchestrationTemplateService implements Service<OrchestrationTempla
     }
 
 
-    getContent(id: string) : Promise<string> {
+    getContent(id: string): Promise<string> {
         return this.client.fetch(`graph/${this.currentId}/${id}/content?type=orchestration-template`, {
             method: 'get',
             headers: {
@@ -70,8 +82,8 @@ export class OrchestrationTemplateService implements Service<OrchestrationTempla
             }
         }).then(t => t.text());
     }
-    
-    saveContent(id: string, content:string) : Promise<any> {
+
+    saveContent(id: string, content: string): Promise<any> {
         return this.client.fetch(`graph/${this.currentId}/${id}/content?type=orchestration-template`, {
             method: 'put',
             body: content,
@@ -81,7 +93,7 @@ export class OrchestrationTemplateService implements Service<OrchestrationTempla
         });
     }
 
-    save(orchestrationTemplate: OrchestrationTemplate) : Promise<Identifier> {
+    save(orchestrationTemplate: OrchestrationTemplate): Promise<Identifier> {
         return this.client.fetch('templates/orchestrations', {
             method: 'put',
             body: JSON.stringify(orchestrationTemplate.toJSON())
@@ -91,7 +103,7 @@ export class OrchestrationTemplateService implements Service<OrchestrationTempla
             });
     }
 
-    destroy(templateId: string) : Promise<any> {
+    destroy(templateId: string): Promise<any> {
         return this.client.fetch(`templates/orchestrations/${templateId}`, {
             method: 'delete'
         }).then(t => t.json() as any);

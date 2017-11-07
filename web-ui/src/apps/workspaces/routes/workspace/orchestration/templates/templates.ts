@@ -4,43 +4,48 @@ import {OrchestrationTemplate} from "apps/workspaces/lib/model/core/orchestratio
 import {DialogService} from "aurelia-dialog";
 import {Workspace} from "apps/workspaces/lib/model/core/workspace/model";
 import {CreateTemplateDialog} from "./create-template";
+import {Router} from "aurelia-router";
 
 @autoinject
 export class TemplateList {
 
     private workspace: Workspace;
     private templates: OrchestrationTemplate[];
-    
-    constructor(
-        private dialogService: DialogService,
-        private workspaceService:WorkspaceService
-    ) {
-        
+
+    constructor(private router:Router, 
+                private dialogService: DialogService,
+                private workspaceService: WorkspaceService) {
+
     }
-    
-    attached() : void {
+
+    attached(): void {
         this.load();
     }
-    
-    
+
+
     async load() {
         this.setLoading(true);
         this.workspace = await this.workspaceService.current();
         this.templates = await this.workspaceService.getTemplates(this.workspace.id);
         this.setLoading(false);
     }
-    
 
-    private setLoading(loading:boolean) : void {
-        
-        
+
+    private setLoading(loading: boolean): void {
+
+
     }
-    
-    private create() : void {
+
+    private async create(templateId: string): Promise<void> {
         this.dialogService.open({
-            model       : this.workspace,
-            viewModel   : CreateTemplateDialog,
+            model: {
+                workspace: this.workspace,
+                templateId: templateId,
+                link: !!templateId,
+                router: this.router
+            },
+            viewModel: CreateTemplateDialog,
         });
     }
-    
+
 }

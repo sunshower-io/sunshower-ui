@@ -27,14 +27,15 @@ import {DialogConfiguration} from "aurelia-dialog";
 import {Container} from "aurelia-dependency-injection";
 import {MaterializeRenderer} from "./lib/common/resources/custom-elements/materialize-renderer";
 import {ApplicationContextHolder} from "./lib/common/application-context";
+import Identifiers from "./lib/common/util/identifier";
 
 
 export function param(name) {
     return decodeURIComponent((new RegExp(
-            '[?|&]' +
-            name +
-            '=' +
-            '([^&;]+?)(&|#|;|$)')
+        '[?|&]' +
+        name +
+        '=' +
+        '([^&;]+?)(&|#|;|$)')
             .exec(location.search) ||
         [null, ''])[1].replace(/\+/g, '%20')) || null;
 }
@@ -64,8 +65,8 @@ export function configure(aurelia: Aurelia) {
     // http.fetch('initialize/active')
     //     .then(data => data.json() as any)
     //     .then(data => {
-            doConfigure(true, http, container, aurelia, storage, tokenHolder);
-        // });
+    doConfigure(true, http, container, aurelia, storage, tokenHolder);
+    // });
 }
 
 
@@ -166,15 +167,16 @@ function doConfigure(data: any,
         let token = storage.get('X-AUTH-TOKEN') || param('token');
         tokenHolder.validate(token).then(context => {
 
-                let user = context.user,
+            let user = context.user,
                 token = context.token;
 
-            container.registerInstance(Principal , user);
+            container.registerInstance(Principal, user);
             container.registerInstance(Authentication, context);
             http.defaults.headers['X-AUTH-TOKEN'] = token;
             let authenticatedClient = new HttpClient(),
                 basicClient = new BasicHttpClient();
 
+            Identifiers.initialize(http);
 
             configureBasicClient(basicClient, container, token.value);
 

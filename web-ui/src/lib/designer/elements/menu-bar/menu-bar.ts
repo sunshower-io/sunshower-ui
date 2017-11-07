@@ -40,6 +40,7 @@ export class MenuBar {
     }
 
     activate() {
+        
     }
 
     attached() {

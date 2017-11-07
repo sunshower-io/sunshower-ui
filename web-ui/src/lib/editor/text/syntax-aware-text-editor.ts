@@ -8,41 +8,44 @@ import {
     ContentDefinition,
     EditorModel, HandlerMappings
 } from "./editor-model";
+import {JsonCodec} from "lib/designer/codec/json-codec";
 
 @autoinject
 export class SyntaxAwareTextEditor {
 
-    private vertex      : Vertex;
+    private vertex                  : Vertex;
 
-    private editor      : HTMLElement;
-    private initialized : Editor;
-    loading             : boolean = true;
-    private value       : string;
-    contentDefinitions  : ContentDefinition[];
-    
-    contentDropdown     : HTMLElement;
-    
-    handlerMappings     : HandlerMappings;
-    
+    private editor                  : HTMLElement;
+    private initialized             : Editor;
+    loading                         : boolean = true;
+    private value                   : string;
+    contentDefinitions              : ContentDefinition[];
+
+    private editorVisible           : boolean;
+    private propertiesVisible       : boolean;
+
+    contentDropdown                 : HTMLElement;
+    handlerMappings                 : HandlerMappings;
+
     constructor(private dialogController: DialogController,
                 private templateService: OrchestrationTemplateService) {
         (ace as any).config.set('basePath', 'jspm_packages/github/ajaxorg/ace-builds@1.2.6');
         this.handlerMappings = new HandlerMappings();
     }
-    
-    showContentTypes() : void {
-        
-        
+
+    showContentTypes(): void {
+
+
     }
 
-    
+
     setContentType(definition: ContentDefinition) {
         let mode = this.handlerMappings.lookup(definition.handler);
         this.initialized
             .getSession()
             .setMode({
                 path: mode,
-                v : Date.now(),
+                v: Date.now(),
             });
     }
 
@@ -52,8 +55,8 @@ export class SyntaxAwareTextEditor {
         editor.resize(true);
         editor.renderer.updateFull(true);
         this.initialized = editor;
-        
-       
+
+
         setTimeout(() => {
             $('.dropdown-button').dropdown({
                 inDuration: 300,
@@ -69,18 +72,29 @@ export class SyntaxAwareTextEditor {
     }
 
     activate(model: EditorModel): void {
-        let vertex = model.vertex;
-        this.contentDefinitions = model.handlers;
-        this.vertex = vertex;
-        this.handlerMappings.configure(model.mappings);
-        this.templateService.getContent(vertex.id)
-            .then(t => {
-                this.initialized.setValue(t);
-                this.loading = false;
-                this.initialized.resize(true);
-                this.initialized.renderer.updateFull(true);
+        this.loading = true;
+        let canvas = model.canvas,
+            g = new JsonCodec().export(canvas.getModel(), canvas);
+        this.templateService.saveGraph(g).then(t => {
+            let vertex = model.vertex;
+            this.contentDefinitions = model.handlers;
+            this.vertex = vertex;
+            this.handlerMappings.configure(model.mappings);
+            this.templateService.getContent(vertex.id)
+                .then(t => {
+                    this.initialized.setValue(t);
+                    this.loading = false;
+                    this.initialized.resize(true);
+                    this.initialized.renderer.updateFull(true);
+                    this.showEditor();
+                }).catch(t => {
+                    this.loading = false;
+                    this.initialized.resize(true);
+                    this.initialized.renderer.updateFull(true);
             });
+        });
     }
+
 
     save(): void {
         this.templateService.saveContent(
@@ -88,4 +102,16 @@ export class SyntaxAwareTextEditor {
             this.initialized.getValue()
         ).then(t => this.dialogController.ok())
     }
+
+    private showEditor(): void {
+        this.editorVisible = true
+        this.propertiesVisible = false;
+    }
+
+    private showProperties(): void {
+        this.propertiesVisible = true
+        this.editorVisible = false;
+    }
+
+
 }

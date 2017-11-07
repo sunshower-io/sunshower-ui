@@ -1,6 +1,7 @@
 
 
 import {Vertex} from "lib/designer/model/graph/vertex";
+import {Canvas} from "lib/designer/canvas/canvas";
 
 export class ContentDefinition {
     type        : string;
@@ -36,6 +37,7 @@ export class HandlerMappings {
 
 
 export class EditorModel {
+    canvas      : Canvas;
     vertex      : Vertex;
     mappings    : Mapping[];
     handlers    : ContentDefinition[]

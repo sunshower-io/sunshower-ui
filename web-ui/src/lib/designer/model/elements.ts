@@ -7,6 +7,7 @@ import {
 import {Canvas} from "lib/designer/canvas";
 import {Identifier} from "lib/common/lang/identifier";
 import {Vertex} from "./graph/vertex";
+import Identifiers from "lib/common/util/identifier";
 
 
 
@@ -113,12 +114,18 @@ export abstract class RenderableVertex extends RenderableElement {
         y:number,
         width:number,
         height:number,
-        vertex ?: Vertex
+        vertex ?: Vertex, 
+        id?: string
     ) {
         super(label, x, y, width, height);
         this.setVertex(true);
-        this.id = Identifier.newId();
         this.vertex = vertex ? vertex : new Vertex();
+        if(!id) {
+            Identifiers.create().then(t => {
+                this.id = t.id;
+                this.vertex.id = t.id;
+            });
+        }
     }
     
     

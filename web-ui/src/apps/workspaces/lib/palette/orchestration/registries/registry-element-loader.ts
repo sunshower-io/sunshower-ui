@@ -17,7 +17,7 @@ export class RegistryElementLoader implements ElementLoader {
     }
 
     load(model: Canvas, v: Vertex): Drawable {
-        return new RegistryElement('hello', 'world', v.layout.x, v.layout.y);
+        return new RegistryElement('hello', 'world', v.layout.x, v.layout.y, v.id);
     }
 
 }

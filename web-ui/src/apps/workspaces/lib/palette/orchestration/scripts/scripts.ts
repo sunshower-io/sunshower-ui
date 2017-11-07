@@ -96,7 +96,8 @@ export class ScriptTemplateElementFactory extends DefaultElementFactory implemen
             v.layout.y,
             v.layout.width,
             v.layout.height,
-            v
+            v,
+            v.id
         );
     }
 

@@ -1,8 +1,14 @@
 template
-    .modal-header Cluster Definition 
-    .modal-content
-        .dialog-editor(if.bind="loading")
-            .preloader-wrapper.big.active
+    .modal-header Cluster Definition
+    .row.modal-content
+        .modal-nav.col.s12.m4.l3
+            ul 
+                li 
+                    a(click.delegate="showEditor()") Editor
+                li
+                    a(click.delegate="showProperties()") Properties
+        .modal-main
+            .preloader-wrapper.big.active(show.bind="loading")
                 .spinner-layer.spinner-blue-only
                     .circle-clipper.left
                         .circle
@@ -10,11 +16,13 @@ template
                         .circle
                     .circle-clipper.right
                         .circle
-
-        form(submit.delegate="save()" )
-            a.dropdown-button.btn(data-activates="content-type-dropdown") Script Type 
-            ul#content-type-dropdown.dropdown-content
-                li(repeat.for="definition of contentDefinitions" click.delegate="setContentType(definition)") ${definition.type}
-            div.dialog-editor(ref="editor" show.bind="!loading")
-            .button-holder
-                button.waves-effect.btn(type="submit") Save 
+            .dialog-editor                
+                form(submit.delegate="save()" show.bind="editorVisible")
+                    ul#content-type-dropdown.dropdown-content
+                        li(repeat.for="definition of contentDefinitions" click.delegate="setContentType(definition)") ${definition.type}
+                    div.dialog-editor(ref="editor" show.bind="!loading")
+                    .button-holder
+                        button.waves-effect.btn(type="submit") Save 
+            div.properties(show.bind="propertiesVisible")
+                .button-holder
+                    button.waves-effect.btn(type="submit") Save 

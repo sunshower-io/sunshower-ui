@@ -61,7 +61,6 @@ export class WorkspacesOverview {
         this.dialogService.open({
             viewModel: CreateWorkspace
         }).then(t => {
-            console.log(t);
             // this.open(t.id);
         });
     }

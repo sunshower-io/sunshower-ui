@@ -88,26 +88,17 @@ export class WorkspaceService implements Service<Workspace> {
             method: 'put',
             body: JSON.stringify(workspaceRequest)
         }).then(w => w.json() as any).then(w => new Identifier(w.id));
-            // .then(w => {
-            //     let template = new OrchestrationTemplate(),
-            //         version = new Version();
-            //     template.name = workspaceRequest.name;
-            //     template.key = workspaceRequest.name;
-            //     template.version = version;
-            //     return this.addTemplate(w.id, template).then(t => {
-            //         return new Identifier(w.id);
-            //     });
-            // });
     }
     
-    public getTemplatesForCurrent() : Promise<OrchestrationTemplate[]> {
-        return this.current().then(t => this.getTemplates(t.id));
+    public async getTemplatesForCurrent() : Promise<OrchestrationTemplate[]> {
+        let current = await this.current();
+        return this.getTemplates(current.id) ;
     }
 
-    public getTemplates(workspaceId: string) : Promise<OrchestrationTemplate[]> {
-        return this.client.fetch(`workspaces/${workspaceId}/templates`)
-            .then(t => t.json() as any)
-            .then(t => t.map(u => new OrchestrationTemplate(u)));
+    public async getTemplates(workspaceId: string) : Promise<OrchestrationTemplate[]> {
+        let result = await this.client.fetch(`workspaces/${workspaceId}/templates`),
+            json = await result.json();
+        return json.map(t => new OrchestrationTemplate(t));
     }
 
     public addTemplate(workspaceId: string, orchestrationTemplate: OrchestrationTemplate): Promise<Identifier> {

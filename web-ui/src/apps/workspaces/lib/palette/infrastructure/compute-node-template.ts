@@ -65,7 +65,8 @@ export class ComputeNodeTemplateElementFactory extends DefaultElementFactory imp
             v.layout.y,
             v.layout.width,
             v.layout.height,
-            v
+            v,
+            v.id
         );
     }
 

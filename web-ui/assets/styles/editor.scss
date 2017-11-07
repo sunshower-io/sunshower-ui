@@ -1,4 +1,13 @@
 .dialog-editor {
-  height: 350px;
+  min-height:375px;
+  min-width:550px;
 }
 
+
+.row.modal-content {
+  margin-bottom:0;
+  
+  .button-holder {
+    padding:0;
+  }
+}

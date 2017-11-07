@@ -40,9 +40,10 @@ export class DefaultEncoder implements Encoder<any> {
             geo = n.geometry;
 
         return {
-            id: t.id,
+            id: n.id,
             name: (n as any).value,
-            type: getClass(t.data).name,
+            type: 'io.sunshower.sdk.v1.graph.model.VertexElement',
+            'task-reference': getClass(t.data).name,
             layout: {
                 x: geo.x,
                 y: geo.y,
@@ -109,9 +110,10 @@ export class JsonCodec implements Codec {
         let nodes = _.reduce(g.vertices, (m, v) => {
                 if (!m[v.id]) {
                     let e = this.resolveElementLoader(
-                        v.type,
+                        v['task-reference'],
                         canvas
                     ).load(canvas, v);
+                    
                     (e as any).id = v.id;
                     m[v.id] = {id: v.id, value: e}
                 }
@@ -195,7 +197,8 @@ export class JsonCodec implements Codec {
                 e = {
                     "source": edge.source.id,
                     "target": edge.target.id,
-                    "relationship": edge.relationship
+                    "relationship": edge.relationship,
+                    "type": 'io.sunshower.sdk.v1.graph.model.EdgeElement',
                 };
             es.push(e);
         }

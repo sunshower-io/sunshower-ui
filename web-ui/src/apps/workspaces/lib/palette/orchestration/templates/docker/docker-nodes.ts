@@ -26,7 +26,7 @@ export class DockerOrchestrationTemplateProviderElement extends Vertex {
     style: string = "docker-group-style";
 
     constructor(label: string, x: number, y: number, v ?: TaskVertex) {
-        super(label, x, y, 380, 100, v);
+        super(label, x, y, 380, 100, v, v && v.id);
     }
 
 
