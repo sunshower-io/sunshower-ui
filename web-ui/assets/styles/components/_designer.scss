@@ -40,6 +40,11 @@ $designer-button-height: 100px;
     bottom: 0;
     right: 0;
     cursor: pointer;
+    text-align: center;
+
+    .mdi {
+      color: $offwhite;
+    }
   }
 
   .panel {
