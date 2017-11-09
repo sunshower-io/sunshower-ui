@@ -58,6 +58,8 @@ export class SyntaxAwareTextEditor {
 
 
         setTimeout(() => {
+            $('select').material_select();
+
             $('.dropdown-button').dropdown({
                 inDuration: 300,
                 outDuration: 225,

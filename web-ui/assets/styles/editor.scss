@@ -7,7 +7,14 @@
 .row.modal-content {
   margin-bottom:0;
   
-  .button-holder {
-    padding:0;
+  .col-button-holder {
+    text-align: right;
+    padding-top:1em;
+  }
+
+  .dropdown-content li > a, .dropdown-content li > span {
+    height: 3rem;
+    line-height: 3rem;
+    padding: 0;
   }
 }

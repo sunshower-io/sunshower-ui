@@ -21,8 +21,18 @@ template
                     ul#content-type-dropdown.dropdown-content
                         li(repeat.for="definition of contentDefinitions" click.delegate="setContentType(definition)") ${definition.type}
                     div.dialog-editor(ref="editor" show.bind="!loading")
-                    .button-holder
-                        button.waves-effect.btn(type="submit") Save 
+                    .button-holder.row
+                        .input-field.col.s4
+                            select
+                                option bash
+                                option ruby
+                                option javascript
+                            label Type
+                        .input-field.col.s4
+                            input(type="text")
+                            label Name
+                        .col-button-holder.col.s4
+                            button.waves-effect.btn(type="submit") Save
             div.properties(show.bind="propertiesVisible")
                 .button-holder
                     button.waves-effect.btn(type="submit") Save 
