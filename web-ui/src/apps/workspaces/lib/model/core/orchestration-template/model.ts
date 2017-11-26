@@ -4,14 +4,19 @@ export class VersionedItem {
     version ?: Version
 }
 
+
 export class OrchestrationTemplate extends VersionedItem {
-    id ?: string;
-    key ?: string;
-    name ?: string;
-    description ?: string;
-    modified ?: string;
-    created ?: string;
+    public static type            : string = 'io.sunshower.sdk.v1.ext.sunshower.model.OrchestrationTemplateElement';
+    
+    
+    id              ?: string;
+    key             ?: string;
+    name            ?: string;
+    description     ?: string;
+    modified        ?: string;
+    created         ?: string;
     workspace       ?: Workspace;
+    type            : string;
 
     constructor(data?: any) {
         super();
@@ -33,6 +38,7 @@ export class OrchestrationTemplate extends VersionedItem {
                 created.getFullYear().toString();
             this.version = new Version(data["version"]);
         }
+        this.type = OrchestrationTemplate.type;
     }
 
     toJSON() {
@@ -40,6 +46,7 @@ export class OrchestrationTemplate extends VersionedItem {
             "id": this.id,
             "key": this.key,
             "name": this.name,
+            "type": OrchestrationTemplate.type,
             "description": this.description,
             "version": this.version.toJSON()
         }
@@ -65,6 +72,9 @@ export class OrchestrationTemplate extends VersionedItem {
 }
 
 export class Version {
+
+    static type : string = 'io.sunshower.sdk.v1.ext.sunshower.model.VersionElement';
+    
     major       ?: number = 1;
     minor       ?: number = 0;
     minorMinor  ?: number = 0;
@@ -92,7 +102,8 @@ export class Version {
             "minor": this.minor,
             "minor-minor": this.minorMinor,
             "extension": this.extension,
-            "id": this.id
+            "id": this.id,
+            "type": Version.type,
         }
     }
 

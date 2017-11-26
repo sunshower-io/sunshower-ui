@@ -13,5 +13,11 @@
 @import 'components/designer';
 @import 'components/modals';
 @import 'components/charts';
+@import 'components/tabs';
 @import 'editor';
 
+
+html, body {
+  height:100%;
+  margin:0;
+}

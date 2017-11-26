@@ -1,0 +1,52 @@
+.tab-button {
+  border:1px solid $midgrey;
+  width:24px;
+  height:24px;
+  float:right;
+  display:inline-block;
+  margin-top:12px;
+  margin-right:12px;
+  border-radius: 4px;
+  padding-left:4px;
+  &:hover {
+    background-color: lighten($midgrey, 0.8);
+  }
+}
+
+
+.dialog {
+  padding:0px;
+  border-left: 1px solid $midgrey;
+}
+
+.tabs-with-control {
+  .tab-holder {
+    display:inline-block;
+    width:calc(100% - 40px);
+  }
+  .control-holder {
+    float:right;
+    display:inline-block;
+    width:40px;
+    margin: auto;
+  }
+}
+
+.dropdown-content li {
+    padding:0;
+}
+
+.tab-add-panel {
+  width: 300px;
+  margin-left:-280px;
+  height:200px;
+  margin-top:30px;
+  position:fixed;
+
+  z-index: 1004;
+  .card-action {
+    > a {
+      padding-left:8px;
+    }
+  }
+}

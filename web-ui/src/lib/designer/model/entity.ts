@@ -12,12 +12,12 @@ export class Entity {
             this.name = data.name;
             if (data.properties) {
                 let props = Object.keys(data.properties);
-
-                for (let i = 0; i < props.length; i++) {
-                    let key = props[i],
-                     property = new Property(props[i], data.properties[key]);
-                    this.properties.push(property);
-                }
+                //
+                // for (let i = 0; i < props.length; i++) {
+                //     let key = props[i],
+                //      // property = new Property(props[i], data.properties[key]);
+                //     // this.properties.push(property);
+                // }
             }
         }
     }
@@ -31,11 +31,10 @@ export class Property {
     value               : string;
     isPrivate           : boolean;
 
-    constructor(label: string, value: string) {
-        this.label = label;
-        this.value = value;
-        this.type = "text";
-        this.isPrivate = false;
+    constructor(data?:any) {
+        if(data) {
+            Object.assign(this, data);
+        }
     }
 
 }

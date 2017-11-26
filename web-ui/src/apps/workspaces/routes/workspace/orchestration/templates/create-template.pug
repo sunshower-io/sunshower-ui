@@ -15,5 +15,5 @@ template
                     class="materialize-textarea")
                 label(for="${descriptionId}") Description
             .form-message.error(if.bind="showError") ${error}
-            .button-holder
-                button.waves-effect.btn(type="submit") Create
+    .modal-footer
+        button.waves-effect.btn-flat(type="submit", click.delegate="save()") Create

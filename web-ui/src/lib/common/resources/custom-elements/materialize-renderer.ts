@@ -12,8 +12,8 @@ export class MaterializeRenderer {
     private modalOverlay            : HTMLElement;
     dialogControllers               : DialogController[];
 
-    private stopPropagation: (e: any) => void;
-    private closeModalClick: (e: any) => void;
+    private stopPropagation         : (e: any) => void;
+    private closeModalClick         : (e: any) => void;
 
     private escapeKeyEventHandler = (e) => {
         if (e.keyCode === 27) {

@@ -2,6 +2,24 @@ import {Layout} from './layout';
 import {UUID} from "lib/common/lang/uuid";
 import {Entity, Property} from "lib/designer/model/entity";
 
+type ContentType = 'file' | 'reference';
+
+export class Content {
+    id?: string
+
+    reference           ?: string;
+    value               ?: string;
+    mediaType           ?: string;
+    contentType         ?: ContentType;
+    name                ?: string
+
+    constructor(data?: any) {
+        if(data) {
+            Object.assign(this,data);
+        }
+        this.id = UUID.random();
+    }
+}
 export class Vertex {
     id                  : string;
     type                : string;
@@ -22,12 +40,12 @@ export class Vertex {
 
         if(data) {
             if (data.properties) {
-                let props = Object.keys(data.properties);
-                for (let i = 0; i < props.length; i++) {
-                    let key = props[i],
-                        property = new Property(props[i], data.properties[key]);
-                    this.properties.push(property);
-                }
+                // let props = Object.keys(data.properties);
+                // for (let i = 0; i < props.length; i++) {
+                //     let key = props[i],
+                //         property = new Property(props[i], data.properties[key]);
+                //     this.properties.push(property);
+                // }
             }
             if (data.entities) {
                 for (let i = 0; i < data.entities.length; i++) {

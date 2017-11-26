@@ -158,7 +158,6 @@ export class Canvas extends mxGraph {
     }
 
     resolveElementLoader(key: string): ElementLoader {
-        console.log("KEY", key);
         for (let provider of this.providers) {
             if (provider.handles(key)) {
                 return provider.resolveElementLoader(key);

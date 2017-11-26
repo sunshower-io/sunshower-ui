@@ -1,13 +1,7 @@
 template
     .modal-header Cluster Definition
     .row.modal-content
-        .modal-nav.col.s12.m4.l3
-            ul 
-                li 
-                    a(click.delegate="showEditor()") Editor
-                li
-                    a(click.delegate="showProperties()") Properties
-        .modal-main.col.s12.m8.l9
+        .modal-main.col.s12.m8.l9(style="padding:0px; border-left:1px solid gray" ref="contentArea")
             .preloader-wrapper.big.active(show.bind="loading")
                 .spinner-layer.spinner-blue-only
                     .circle-clipper.left
@@ -16,13 +10,50 @@ template
                         .circle
                     .circle-clipper.right
                         .circle
-            .dialog-editor                
-                form(submit.delegate="save()" show.bind="editorVisible")
-                    ul#content-type-dropdown.dropdown-content
-                        li(repeat.for="definition of contentDefinitions" click.delegate="setContentType(definition)") ${definition.type}
-                    div.dialog-editor(ref="editor" show.bind="!loading")
-                    .button-holder
-                        button.waves-effect.btn(type="submit") Save 
-            div.properties(show.bind="propertiesVisible")
-                .button-holder
-                    button.waves-effect.btn(type="submit") Save 
+            .dialog-editor
+                .row(style="margin-bottom:0px")
+                    .col.s12(style="padding:0")
+                        div.tabs-with-control
+                            .tab-holder
+                                ul.tabs(ref="element")
+                                    li.tab
+                                        a(href="${contentEditorId}" click.delegate="showEditor()") Editor
+                                    li.tab    
+                                        a(href="${propertyViewerId}" click.delegate="showProperties()") Properties 
+                div(style="min-height:350px; width:100%;" id="${contentEditorId}" show.bind="modeIsEditing")
+                    
+                div(style="min-height:350px; width:100%;" id="${propertyViewerId}" show.bind="!modeIsEditing")
+                    ul 
+                        li(repeat.for="property of properties") ${property.key} (${property.value})
+                    
+        .modal-nav.col.s12.m4.l3
+            .control-holder
+                div.tab-button
+                    .tab-add-panel(ref="addPanel"  show.bind="addPanelShowing")
+                        .card(style='margin:0; border-radius:4px')
+                            .card-content
+                                form
+                                    .input-field.col.s6.inline
+                                        input(id.bind="scriptId").validate(type='text', value.bind="scriptName")
+                                        label(for.bind="scriptId") Script Name 
+                                    .input-field.col.s6.s6.inline
+                                        select.icons(ref="scriptType")
+                                            option.small(value='', disabled='', selected='') Type 
+                                            option.small(value="application/bash") Shell
+                                            option.small(value="application/ruby") Ruby 
+                                            option.small(value="application/groovy") Groovy 
+                                            option.small(value="application/swell") Swell 
+                                        label Script Type 
+                            .card-action
+                                a(click.trigger="saveNew()" href="javascript:void(0)") Save 
+                                a(click.trigger="toggleAdd()" href="javascript:void(0)") Cancel 
+                    i.material-icons.mdi.mdi-plus(click.trigger="toggleAdd($event)")
+            ul
+                li(repeat.for="content of contents")
+                    a(click.delegate="openContent(content)" href="javascript:void(0)" style="${currentContent.id == content.id ? 'font-weight:bold' : ''}") ${content.name}
+
+    .modal-footer            
+        a.modal-action.modal-close.waves-effect.waves-green.btn-flat(click.delegate="saveCurrent()") Save
+        a.modal-action.modal-close.waves-effect.waves-red.btn-flat Cancel 
+            
+            

@@ -55,13 +55,6 @@ export class WorkspaceService implements Service<Workspace> {
                 .then(w => w.json() as any)
                 .then(w => {
                     return new Workspace(w);
-                    // this.getTemplates(this.currentId).then(t => {
-                    //     this.template = t[0];
-                    //     this.currentTemplateId = this.template.id;
-                    //     this.workspace = new Workspace(w);
-                    //     this.subject.next(this.workspace);
-                    //     return this.workspace;
-                    // });
                 });
         }
     }
@@ -104,7 +97,7 @@ export class WorkspaceService implements Service<Workspace> {
     public addTemplate(workspaceId: string, orchestrationTemplate: OrchestrationTemplate): Promise<Identifier> {
         return this.client.fetch(`workspaces/${workspaceId}/templates`, {
             method: 'put',
-            body: JSON.stringify(orchestrationTemplate.toJSON())
+            body: JSON.stringify(orchestrationTemplate)
         }).then(t => t.json() as any)
             .then(t => {
                 return new Identifier(t.id);

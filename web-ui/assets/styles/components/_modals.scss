@@ -2,6 +2,7 @@
   background: none;
   @extend .z-depth-0;
 
+  overflow-y: hidden;
   form {
     padding: 0;
     box-shadow: none;
@@ -15,6 +16,12 @@
     padding: 0 $standard-padding;
     line-height: 50px;
     font-size: 1.25rem;
+  }
+  
+  .modal-footer {
+    .btn-flat {
+      margin-right:6px;
+    }
   }
   
   .modal-nav {

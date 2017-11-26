@@ -1,5 +1,9 @@
-export class Workspace {
 
+
+export class Workspace {
+    public static type         : string = 'io.sunshower.sdk.v1.ext.sunshower.model.WorkspaceElement';
+
+    
     id          ?: string;
     key         ?: string;
     name        ?: string;
@@ -38,7 +42,8 @@ export class Workspace {
         return {
             "id": this.id,
             "key": this.key,
-            "name": this.name
+            "name": this.name,
+            "type": Workspace.type
         };
     }
     //"type": "io.sunshower.sdk.v1.ext.sunshower.model.WorkspaceElement"
@@ -75,6 +80,7 @@ export class SaveWorkspaceRequest extends ImageDataProvider {
     key         : string;
     name        : string;
     description : string;
+    type        : string = Workspace.type;
     file        ?: File;
 
     constructor(data?:any) {
@@ -88,6 +94,7 @@ export class SaveWorkspaceRequest extends ImageDataProvider {
         formData.append('name', this.name || '');
         formData.append('key', this.key || this.name || '');
         formData.append('description', this.description || '');
+        formData.append('type', Workspace.type);
         return formData;
     }
 
