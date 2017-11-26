@@ -1,0 +1,15 @@
+template
+    .input-field(if.bind="property.type != 'boolean'")
+        //.locking
+        input(type="${property.type}" id="${id}" value.bind="property.value")
+        label.active(for="${id}") ${property.label}
+        //i.materialize-icon.mdi.mdi-lock-outline.locking-icon(
+        //    class.bind="property.isPrivate ? 'active' : ''"
+        //    )
+    .input-field(if.bind="property.type == 'boolean'")
+        .switch
+            label
+                | ${property.label}
+                input(type="checkbox")
+                //todo bind value
+                span.lever

@@ -151,7 +151,7 @@ export class SyntaxAwareTextEditor {
                 populatedContent.value = this.currentEditor.getValue();
             }
             let c = await this.templateService.getProperties(populatedContent);
-            this.properties = c;
+            this.currentContent.properties = c;
         }
     }
 

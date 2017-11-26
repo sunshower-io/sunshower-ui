@@ -1,4 +1,5 @@
 template
+    require(from="lib/resources/custom-elements/properties/property-panel")
     .modal-header Cluster Definition
     .row.modal-content
         .modal-main.col.s12.m8.l9(style="padding:0px; border-left:1px solid gray" ref="contentArea")
@@ -23,9 +24,7 @@ template
                 div(style="min-height:350px; width:100%;" id="${contentEditorId}" show.bind="modeIsEditing")
                     
                 div(style="min-height:350px; width:100%;" id="${propertyViewerId}" show.bind="!modeIsEditing")
-                    ul 
-                        li(repeat.for="property of properties") ${property.key} (${property.value})
-                    
+                    property-panel(object.bind="currentContent")
         .modal-nav.col.s12.m4.l3
             .control-holder
                 div.tab-button
@@ -34,7 +33,7 @@ template
                             .card-content
                                 form
                                     .input-field.col.s6.inline
-                                        input(id.bind="scriptId").validate(type='text', value.bind="scriptName")
+                                        input.validate(id.bind="scriptId" type='text', value.bind="scriptName")
                                         label(for.bind="scriptId") Script Name 
                                     .input-field.col.s6.s6.inline
                                         select.icons(ref="scriptType")

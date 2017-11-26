@@ -4,8 +4,14 @@ import {Entity, Property} from "lib/designer/model/entity";
 
 type ContentType = 'file' | 'reference';
 
-export class Content {
-    id?: string
+export class PropertyAwareObject {
+    properties          ?: Property[];
+
+    constructor() {}
+}
+
+export class Content extends PropertyAwareObject {
+    id?: string;
 
     reference           ?: string;
     value               ?: string;
@@ -14,6 +20,7 @@ export class Content {
     name                ?: string
 
     constructor(data?: any) {
+        super();
         if(data) {
             Object.assign(this,data);
         }
